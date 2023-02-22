@@ -9,16 +9,15 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations
 {
-    public class PermissionConfigurations : IEntityTypeConfiguration<Permission>
+    public class PermissionConfigurations : IEntityTypeConfiguration<SPermission>
     {
-        public void Configure(EntityTypeBuilder<Permission> builder)
+        public void Configure(EntityTypeBuilder<SPermission> builder)
         {
-            builder.ToTable("RolePermission");
+            builder.ToTable("SPermissions");
+
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(100);
             builder.Property(x => x.Name).HasMaxLength(500);
-
-            builder.HasMany<RolePermission>().WithOne().HasForeignKey(ut => ut.PermissionId).OnDelete(DeleteBehavior.Restrict).IsRequired();
         }
     }
 }

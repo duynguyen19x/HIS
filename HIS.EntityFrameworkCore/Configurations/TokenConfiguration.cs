@@ -9,16 +9,14 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations
 {
-    public class TokenConfiguration : IEntityTypeConfiguration<Token>
+    public class TokenConfiguration : IEntityTypeConfiguration<SToken>
     {
-        public void Configure(EntityTypeBuilder<Token> builder)
+        public void Configure(EntityTypeBuilder<SToken> builder)
         {
-            builder.ToTable("Tokens");
+            builder.ToTable("STokens");
 
-            // Composite primary key consisting of the UserId, LoginProvider and Name
             builder.HasKey(x => x.Id);
 
-            // Limit the size of the composite key columns due to common DB restrictions
             builder.Property(x => x.TokenValue);
             builder.Property(x => x.Jti).HasMaxLength(125);
 

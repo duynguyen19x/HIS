@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Categories
 {
-    public class User : Entity<Guid>
+    public class SUser : Entity<Guid>
     {
         public string? UserName { get; set; }
         public string? Password { get; set; }
@@ -25,10 +25,10 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public Guid? District { get; set; }
         public Guid? WardsId { get; set; }
 
-        public Gender? Gender { get; set; }
+        public SGender? Gender { get; set; }
 
-        public List<UserRole>? UserRoles { get; set; }
+        public IList<SUserRole>? UserRoles { get; set; }
 
-        public List<Token>? UserTokens { get; set; }
+        public IList<SToken>? UserTokens { get; set; }
     }
 }

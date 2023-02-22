@@ -11,9 +11,9 @@ namespace MedicalSolutions.EntityFrameworkCore.SeedWork
 
     public class UnitOfWork : Disposable, IUnitOfWork, IDisposable
     {
-        private readonly MedicalSolutionsDbContext _dbContext;
+        private readonly HIS_DbContext _dbContext;
 
-        public UnitOfWork(MedicalSolutionsDbContext dbContext)
+        public UnitOfWork(HIS_DbContext dbContext)
         {
             _dbContext = dbContext;
         }

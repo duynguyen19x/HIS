@@ -9,13 +9,15 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations
 {
-    public class GenderConfiguration : IEntityTypeConfiguration<SGender>
+    public class BranchConfiguration : IEntityTypeConfiguration<SBranch>
     {
-        public void Configure(EntityTypeBuilder<SGender> builder)
+        public void Configure(EntityTypeBuilder<SBranch> builder)
         {
-            builder.ToTable("SGenders");
+            builder.ToTable("SBranchs");
+
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Name).HasMaxLength(50);
+            builder.Property(x => x.Code).HasMaxLength(50);
+            builder.Property(x => x.Name).HasMaxLength(500);
         }
     }
 }

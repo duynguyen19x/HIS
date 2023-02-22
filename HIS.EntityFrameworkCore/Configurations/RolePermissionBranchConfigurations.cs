@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations
 {
-    public class RolePermissionConfigurations : IEntityTypeConfiguration<RolePermission>
+    public class RolePermissionBranchConfigurations : IEntityTypeConfiguration<SRolePermissionBranch>
     {
-        public void Configure(EntityTypeBuilder<RolePermission> builder)
+        public void Configure(EntityTypeBuilder<SRolePermissionBranch> builder)
         {
-            builder.ToTable("RolePermission");
+            builder.ToTable("SRolePermissionBranchs");
             builder.HasKey(t => new { t.RoleId, t.PermissionId });
 
             builder.HasOne(t => t.Role).WithMany(pc => pc.RolePermissions)
@@ -21,6 +21,9 @@ namespace HIS.EntityFrameworkCore.Configurations
 
             builder.HasOne(t => t.Permission).WithMany(pc => pc.RolePermissions)
               .HasForeignKey(pc => pc.PermissionId);
+
+            builder.HasOne(t => t.Branch).WithMany(pc => pc.RolePermissions)
+             .HasForeignKey(pc => pc.BranchId);
         }
     }
 }

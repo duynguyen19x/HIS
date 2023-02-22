@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Categories
 {
-    public class Token : Entity<Guid>
+    public class SToken : Entity<Guid>
     {
         public Guid? UserId { get; set; }
         public string? TokenValue { get; set; }
@@ -18,6 +18,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public DateTime IssueAt { get; set; }
         public DateTime ExpiredAt { get; set; }
 
-        public User? User { get; set; }
+        public SUser? User { get; set; }
     }
 }

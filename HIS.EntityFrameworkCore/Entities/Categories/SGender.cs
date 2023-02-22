@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Categories
 {
-    public class Gender : Entity<Guid>
+    public class SGender : Entity<Guid>
     {
         public GenderTypes Code { get; set; }
         public string? Name { get; set; }
 
-        public List<User>? Users { get; set; }
+        public IList<SUser>? Users { get; set; }
     }
 }

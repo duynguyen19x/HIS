@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Categories
 {
-    public class UserRole 
+    public class SUserRole 
     {
         public Guid? UserId { get; set; }
         public Guid? RoleId { get; set; }
 
-        public User? User { get; set; }
-        public Role? Role { get; set; }
+        public SUser? User { get; set; }
+        public SRole? Role { get; set; }
     }
 }

@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.DbContexts
 {
-    public class MedicalSolutionsDbContextFatory : IDesignTimeDbContextFactory<MedicalSolutionsDbContext>
+    public class HIS_DbContextFatory : IDesignTimeDbContextFactory<HIS_DbContext>
     {
-        public MedicalSolutionsDbContext CreateDbContext(string[] args)
+        public HIS_DbContext CreateDbContext(string[] args)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -20,10 +20,10 @@ namespace HIS.EntityFrameworkCore.DbContexts
 
             var connectionString = configuration.GetConnectionString("HIS");
 
-            var optionsBuilder = new DbContextOptionsBuilder<MedicalSolutionsDbContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<HIS_DbContext>();
             optionsBuilder.UseSqlServer(connectionString);
 
-            return new MedicalSolutionsDbContext(optionsBuilder.Options);
+            return new HIS_DbContext(optionsBuilder.Options);
         }
     }
 }

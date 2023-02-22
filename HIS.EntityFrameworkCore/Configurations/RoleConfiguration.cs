@@ -7,11 +7,11 @@ using System.Text;
 
 namespace HIS.EntityFrameworkCore.Configurations
 {
-    public class RoleConfiguration : IEntityTypeConfiguration<Role>
+    public class RoleConfiguration : IEntityTypeConfiguration<SRole>
     {
-        public void Configure(EntityTypeBuilder<Role> builder)
+        public void Configure(EntityTypeBuilder<SRole> builder)
         {
-            builder.ToTable("Roles");
+            builder.ToTable("SRoles");
 
             // Primary key
             builder.HasKey(r => r.Id);

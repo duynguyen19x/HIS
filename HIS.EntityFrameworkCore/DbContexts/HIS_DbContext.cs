@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.DbContexts
 {
-    public class MedicalSolutionsDbContext : DbContext //IdentityDbContext<User, Role, Guid> 
+    public class HIS_DbContext : DbContext
     {
-        public MedicalSolutionsDbContext(DbContextOptions options) : base(options)
+        public HIS_DbContext(DbContextOptions options) : base(options)
         {
 
         }
@@ -27,17 +27,20 @@ namespace HIS.EntityFrameworkCore.DbContexts
             modelBuilder.ApplyConfiguration(new TokenConfiguration());
             modelBuilder.ApplyConfiguration(new GenderConfiguration());
             modelBuilder.ApplyConfiguration(new PermissionConfigurations());
-            modelBuilder.ApplyConfiguration(new RolePermissionConfigurations());
+            modelBuilder.ApplyConfiguration(new BranchConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
+            modelBuilder.ApplyConfiguration(new RolePermissionBranchConfigurations());
 
             modelBuilder.Seed();
         }
-
-        public DbSet<User> Users { get; set; }
-        public DbSet<UserRole> UserRoles { get; set; }
-        public DbSet<Token> Tokens { get; set; }
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<Gender> Genders { get; set; }
-        public DbSet<RolePermission> RolePermissions { get; set; }
-        public DbSet<Permission> Permissions { get; set; }
+        
+        public DbSet<SGender> Genders { get; set; }
+        public DbSet<SUser> Users { get; set; }
+        public DbSet<SRole> Roles { get; set; }
+        public DbSet<SUserRole> UserRoles { get; set; }
+        public DbSet<SToken> Tokens { get; set; }
+        public DbSet<SPermission> Permissions { get; set; }
+        public DbSet<SBranch> Branchs { get; set; }
+        public DbSet<SRolePermissionBranch> RolePermissionBranchs { get; set; }
     }
 }

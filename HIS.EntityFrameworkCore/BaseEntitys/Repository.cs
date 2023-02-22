@@ -67,10 +67,10 @@ namespace HIS.EntityFrameworkCore.BaseEntitys
 
     public class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class
     {
-        private MedicalSolutionsDbContext _dbContext;
+        private HIS_DbContext _dbContext;
         private readonly DbSet<TEntity> _dbSet;
 
-        public Repository(MedicalSolutionsDbContext dbContext)
+        public Repository(HIS_DbContext dbContext)
         {
             _dbContext = dbContext;
             _dbSet = _dbContext.Set<TEntity>();

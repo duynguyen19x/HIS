@@ -13,7 +13,7 @@ namespace HIS.EntityFrameworkCore.Data
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasData(new User()
+            modelBuilder.Entity<SUser>().HasData(new SUser()
             {
                 Id = Guid.NewGuid(),
                 UserName = "Administrator",
@@ -24,6 +24,26 @@ namespace HIS.EntityFrameworkCore.Data
                 UseType = Utilities.Enums.UseTypes.Admin,
                 Status = Utilities.Enums.UserStatusTypes.Active,
             });
+
+            modelBuilder.Entity<SGender>().HasData(
+                new SGender()
+                {
+                    Id = Guid.NewGuid(),
+                    Code = Utilities.Enums.GenderTypes.None,
+                    Name = "Chưa xác định"
+                },
+                new SGender()
+                {
+                    Id = Guid.NewGuid(),
+                    Code = Utilities.Enums.GenderTypes.Male,
+                    Name = "Nam"
+                },
+                new SGender()
+                {
+                    Id = Guid.NewGuid(),
+                    Code = Utilities.Enums.GenderTypes.Female,
+                    Name = "Nữ"
+                });
         }
     }
 }

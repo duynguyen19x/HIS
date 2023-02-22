@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Categories
 {
-    public class RolePermission
+    public class SPermission : Entity<Guid>
     {
-        public Guid RoleId { get; set; }
-        public Guid PermissionId { get; set; }
+        public string? Code { get; set; }
+        public string? Name { get; set; }
 
-        public Role Role { get; set; }
-        public Permission Permission { get; set; }
+        public List<SRolePermissionBranch>? RolePermissions { get; set; }
     }
 }

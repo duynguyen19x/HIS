@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. SolutionItems", "0. SolutionItems", "{0B192351-E63D-4E94-9034-CFA174A2D5FE}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Infrastructures", "1. Infrastructures", "{DDC355DD-FDA5-4EC2-BFF5-85A97D7DD09C}"
 EndProject
@@ -11,17 +15,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Domains", "2. Domains", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Hosts", "3. Hosts", "{D4E6FCDD-C6BD-48AB-836D-B514E816C9D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HIS.BackendApi", "HIS.BackendApi\HIS.BackendApi.csproj", "{005BA888-9EE2-42E0-8AB5-AA58288AA766}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HIS.BackendApi", "HIS.BackendApi\HIS.BackendApi.csproj", "{005BA888-9EE2-42E0-8AB5-AA58288AA766}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HIS.EntityFrameworkCore", "HIS.EntityFrameworkCore\HIS.EntityFrameworkCore.csproj", "{4E31E4E8-D9F6-4077-B258-461ABF1099EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HIS.EntityFrameworkCore", "HIS.EntityFrameworkCore\HIS.EntityFrameworkCore.csproj", "{4E31E4E8-D9F6-4077-B258-461ABF1099EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HIS.ApplicationService", "HIS.ApplicationService\HIS.ApplicationService.csproj", "{02C678E8-007D-45B6-9E98-0C5B2E918D26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HIS.ApplicationService", "HIS.ApplicationService\HIS.ApplicationService.csproj", "{02C678E8-007D-45B6-9E98-0C5B2E918D26}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HIS.Utilities", "HIS.Utilities\HIS.Utilities.csproj", "{4D5FF7A1-420A-4FFD-99B2-4551B49F2BC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HIS.Utilities", "HIS.Utilities\HIS.Utilities.csproj", "{4D5FF7A1-420A-4FFD-99B2-4551B49F2BC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HIS.Models", "HIS.Models\HIS.Models.csproj", "{B8D4F982-0FBF-48EC-9D99-6DF151A994F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HIS.Models", "HIS.Models\HIS.Models.csproj", "{B8D4F982-0FBF-48EC-9D99-6DF151A994F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HIS.AutoMappers", "HIS.AutoMappers\HIS.AutoMappers.csproj", "{929C0277-9909-4E83-88F5-AE3C8010F58A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HIS.AutoMappers", "HIS.AutoMappers\HIS.AutoMappers.csproj", "{929C0277-9909-4E83-88F5-AE3C8010F58A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
