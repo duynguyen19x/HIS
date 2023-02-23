@@ -34,13 +34,13 @@ namespace HIS.EntityFrameworkCore.DbContexts
             modelBuilder.Seed();
         }
         
-        public DbSet<SGender> Genders { get; set; }
-        public DbSet<SUser> Users { get; set; }
-        public DbSet<SRole> Roles { get; set; }
-        public DbSet<SUserRole> UserRoles { get; set; }
-        public DbSet<SToken> Tokens { get; set; }
-        public DbSet<SPermission> Permissions { get; set; }
-        public DbSet<SBranch> Branchs { get; set; }
-        public DbSet<SRolePermissionBranch> RolePermissionBranchs { get; set; }
+        public DbSet<SGender> SGenders { get; set; }
+        public DbSet<SUser> SUsers { get; set; }
+        public DbSet<SRole> SRoles { get; set; }
+        public DbSet<SUserRole> SUserRoles { get; set; }
+        public DbSet<SToken> STokens { get; set; }
+        public DbSet<SPermission> SPermissions { get; set; }
+        public DbSet<SBranch> SBranchs { get; set; }
+        public DbSet<SRolePermissionBranch> SRolePermissionBranchs { get; set; }
     }
 }
