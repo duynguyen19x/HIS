@@ -1,6 +1,7 @@
 ﻿using HIS.EntityFrameworkCore.Configurations;
 using HIS.EntityFrameworkCore.Data;
 using HIS.EntityFrameworkCore.Entities.Categories;
+using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,9 @@ namespace HIS.EntityFrameworkCore.DbContexts
             modelBuilder.ApplyConfiguration(new BranchConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new RolePermissionBranchConfigurations());
+            modelBuilder.ApplyConfiguration(new ServiceUnitConfigurations());
+            modelBuilder.ApplyConfiguration(new ServiceTypeConfigurations());
+            modelBuilder.ApplyConfiguration(new ServiceConfigurations());
 
             modelBuilder.Seed();
         }
@@ -42,5 +46,8 @@ namespace HIS.EntityFrameworkCore.DbContexts
         public DbSet<SPermission> SPermissions { get; set; }
         public DbSet<SBranch> SBranchs { get; set; }
         public DbSet<SRolePermissionBranch> SRolePermissionBranchs { get; set; }
+        public DbSet<SService> SServices { get; set; }
+        public DbSet<SServiceType> SServiceTypes { get; set; }
+        public DbSet<SServiceUnit> SServiceUnits { get; set; }
     }
 }

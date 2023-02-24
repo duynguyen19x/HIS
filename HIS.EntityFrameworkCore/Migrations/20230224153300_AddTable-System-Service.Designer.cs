@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(HIS_DbContext))]
-    [Migration("20230222141105_AddTable")]
-    partial class AddTable
+    [Migration("20230224153300_AddTable-System-Service")]
+    partial class AddTableSystemService
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,19 +70,19 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2b7e4605-4b1a-4a04-9ac4-b31b3e114b96"),
+                            Id = new Guid("ba324b8d-aa2f-495c-ac62-2ce761211513"),
                             Code = 0,
                             Name = "Chưa xác định"
                         },
                         new
                         {
-                            Id = new Guid("b8fd66fd-43b5-47e6-8a42-868b7a71374a"),
+                            Id = new Guid("97044b5a-70f9-4074-8f38-4fe2b6f7c713"),
                             Code = 1,
                             Name = "Nam"
                         },
                         new
                         {
-                            Id = new Guid("d95360fe-5c42-4b2e-bfc3-f3b0a4b1ec3b"),
+                            Id = new Guid("a6d95cfd-6beb-4286-98a2-5f702c068589"),
                             Code = 2,
                             Name = "Nữ"
                         });
@@ -144,6 +144,107 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasIndex("PermissionId");
 
                     b.ToTable("SRolePermissionBranchs", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SService", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeleteBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeleteDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ServiceCode")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("ServiceName")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<Guid?>("ServiceTypeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ServiceUnitId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("SoftOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceTypeId");
+
+                    b.HasIndex("ServiceUnitId");
+
+                    b.ToTable("SServices", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SServiceType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeleteBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeleteDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ServiceTypeCode")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("ServiceTypeName")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<Guid?>("ServiceUnitId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("SoftOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ServiceUnitId");
+
+                    b.ToTable("SServiceTypes", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SToken", b =>
@@ -248,7 +349,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9ad5bcc0-28d4-4adc-9829-e8504c8f742c"),
+                            Id = new Guid("89224c3f-22e1-40ee-b917-366563d0cf0b"),
                             Email = "administrator@gmail.com",
                             FirstName = "Admin",
                             LastName = "Administrator",
@@ -274,6 +375,31 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.ToTable("SUserRoles", (string)null);
                 });
 
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SServiceUnit", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ServiceUnitCode")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("ServiceUnitName")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int?>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SServiceUnits", (string)null);
+                });
+
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SRolePermissionBranch", b =>
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SBranch", "Branch")
@@ -297,6 +423,32 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("Permission");
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SService", b =>
+                {
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SServiceType", "SServiceType")
+                        .WithMany("SServices")
+                        .HasForeignKey("ServiceTypeId");
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Services.SServiceUnit", "SServiceUnit")
+                        .WithMany("SServices")
+                        .HasForeignKey("ServiceUnitId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("SServiceType");
+
+                    b.Navigation("SServiceUnit");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SServiceType", b =>
+                {
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Services.SServiceUnit", "SServiceUnit")
+                        .WithMany("SServiceTypes")
+                        .HasForeignKey("ServiceUnitId");
+
+                    b.Navigation("SServiceUnit");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SToken", b =>
@@ -358,11 +510,23 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("UserRoles");
                 });
 
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SServiceType", b =>
+                {
+                    b.Navigation("SServices");
+                });
+
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SUser", b =>
                 {
                     b.Navigation("UserRoles");
 
                     b.Navigation("UserTokens");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SServiceUnit", b =>
+                {
+                    b.Navigation("SServiceTypes");
+
+                    b.Navigation("SServices");
                 });
 #pragma warning restore 612, 618
         }

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     /// <inheritdoc />
-    public partial class AddTable : Migration
+    public partial class AddTableSystemService : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -65,6 +65,21 @@ namespace HIS.EntityFrameworkCore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SRoles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SServiceUnits",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    ServiceUnitCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ServiceUnitName = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    SortOrder = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SServiceUnits", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -128,6 +143,33 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SServiceTypes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ServiceTypeCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ServiceTypeName = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    SoftOrder = table.Column<int>(type: "int", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: true),
+                    ServiceUnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SServiceTypes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SServiceTypes_SServiceUnits_ServiceUnitId",
+                        column: x => x.ServiceUnitId,
+                        principalTable: "SServiceUnits",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "STokens",
                 columns: table => new
                 {
@@ -174,20 +216,54 @@ namespace HIS.EntityFrameworkCore.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "SServices",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ServiceCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    ServiceName = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    SoftOrder = table.Column<int>(type: "int", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: true),
+                    ServiceTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ServiceUnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SServices", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SServices_SServiceTypes_ServiceTypeId",
+                        column: x => x.ServiceTypeId,
+                        principalTable: "SServiceTypes",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_SServices_SServiceUnits_ServiceUnitId",
+                        column: x => x.ServiceUnitId,
+                        principalTable: "SServiceUnits",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "SGenders",
                 columns: new[] { "Id", "Code", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("2b7e4605-4b1a-4a04-9ac4-b31b3e114b96"), 0, "Chưa xác định" },
-                    { new Guid("b8fd66fd-43b5-47e6-8a42-868b7a71374a"), 1, "Nam" },
-                    { new Guid("d95360fe-5c42-4b2e-bfc3-f3b0a4b1ec3b"), 2, "Nữ" }
+                    { new Guid("97044b5a-70f9-4074-8f38-4fe2b6f7c713"), 1, "Nam" },
+                    { new Guid("a6d95cfd-6beb-4286-98a2-5f702c068589"), 2, "Nữ" },
+                    { new Guid("ba324b8d-aa2f-495c-ac62-2ce761211513"), 0, "Chưa xác định" }
                 });
 
             migrationBuilder.InsertData(
                 table: "SUsers",
                 columns: new[] { "Id", "Address", "District", "Dob", "Email", "FirstName", "GenderId", "LastName", "Password", "PhoneNumber", "ProvinceId", "Status", "UseType", "UserName", "WardsId" },
-                values: new object[] { new Guid("9ad5bcc0-28d4-4adc-9829-e8504c8f742c"), null, null, null, "administrator@gmail.com", "Admin", null, "Administrator", "79956B61E1B250869A6716CE37EFD6E6", null, null, 1, 0, "Administrator", null });
+                values: new object[] { new Guid("89224c3f-22e1-40ee-b917-366563d0cf0b"), null, null, null, "administrator@gmail.com", "Admin", null, "Administrator", "79956B61E1B250869A6716CE37EFD6E6", null, null, 1, 0, "Administrator", null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_SRolePermissionBranchs_BranchId",
@@ -198,6 +274,21 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "IX_SRolePermissionBranchs_PermissionId",
                 table: "SRolePermissionBranchs",
                 column: "PermissionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SServices_ServiceTypeId",
+                table: "SServices",
+                column: "ServiceTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SServices_ServiceUnitId",
+                table: "SServices",
+                column: "ServiceUnitId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SServiceTypes_ServiceUnitId",
+                table: "SServiceTypes",
+                column: "ServiceUnitId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_STokens_UserId",
@@ -222,6 +313,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SRolePermissionBranchs");
 
             migrationBuilder.DropTable(
+                name: "SServices");
+
+            migrationBuilder.DropTable(
                 name: "STokens");
 
             migrationBuilder.DropTable(
@@ -234,10 +328,16 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SPermissions");
 
             migrationBuilder.DropTable(
+                name: "SServiceTypes");
+
+            migrationBuilder.DropTable(
                 name: "SRoles");
 
             migrationBuilder.DropTable(
                 name: "SUsers");
+
+            migrationBuilder.DropTable(
+                name: "SServiceUnits");
 
             migrationBuilder.DropTable(
                 name: "SGenders");
