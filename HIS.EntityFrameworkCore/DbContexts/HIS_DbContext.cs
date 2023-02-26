@@ -1,7 +1,6 @@
 ﻿using HIS.EntityFrameworkCore.Configurations;
 using HIS.EntityFrameworkCore.Data;
 using HIS.EntityFrameworkCore.Entities.Categories;
-using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -34,6 +33,12 @@ namespace HIS.EntityFrameworkCore.DbContexts
             modelBuilder.ApplyConfiguration(new ServiceUnitConfigurations());
             modelBuilder.ApplyConfiguration(new ServiceTypeConfigurations());
             modelBuilder.ApplyConfiguration(new ServiceConfigurations());
+            modelBuilder.ApplyConfiguration(new MedicineConfiguration());
+            modelBuilder.ApplyConfiguration(new MedicineGroupConfiguration());
+            modelBuilder.ApplyConfiguration(new MedicineLineConfiguration());
+            modelBuilder.ApplyConfiguration(new MedicineTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new MaterialTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new MaterialConfiguration());
 
             modelBuilder.Seed();
         }
@@ -49,5 +54,11 @@ namespace HIS.EntityFrameworkCore.DbContexts
         public DbSet<SService> SServices { get; set; }
         public DbSet<SServiceType> SServiceTypes { get; set; }
         public DbSet<SServiceUnit> SServiceUnits { get; set; }
+        public DbSet<SMedicine> SMedicines { get; set; }
+        public DbSet<SMedicineGroup> SMedicineGroups { get; set; }
+        public DbSet<SMedicineLine> SMedicineLines { get; set; }
+        public DbSet<SMedicineType> SMedicineTypes { get; set; }
+        public DbSet<SMaterial> SMaterials { get; set; }
+        public DbSet<SMaterialType> SMaterialTypes { get; set; }
     }
 }

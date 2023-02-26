@@ -1,4 +1,4 @@
-﻿using HIS.EntityFrameworkCore.Entities.Categories.Services;
+﻿using HIS.EntityFrameworkCore.Entities.Categories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
