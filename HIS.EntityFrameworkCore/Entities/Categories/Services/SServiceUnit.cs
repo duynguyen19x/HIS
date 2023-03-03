@@ -11,10 +11,10 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
     public class SServiceUnit : Entity<Guid>
     {
         [Description("Mã ĐVT")]
-        public string? ServiceUnitCode { get; set; }
+        public string? Code { get; set; }
 
         [Description("Tên ĐVT")]
-        public string? ServiceUnitName { get; set; }
+        public string? Name { get; set; }
 
         [Description("Thứ tự sắp xếp")]
         public int? SoftOrder { get; set; }

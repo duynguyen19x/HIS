@@ -11,10 +11,10 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
     public class SService : FullAuditingEntity<Guid>
     {
         [Description("Mã dịch vụ")]
-        public string? ServiceCode { get; set; }
+        public string? Code { get; set; }
 
         [Description("Tên dịch vụ")]
-        public string? ServiceName { get; set; }
+        public string? Name { get; set; }
 
         [Description("Thứ tự sắp xếp")]
         public int? SoftOrder { get; set; }
@@ -24,9 +24,12 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
 
         public Guid? ServiceTypeId { get; set; }
         public Guid ServiceUnitId { get; set; }
+        public Guid ServiceGroupId { get; set; }
 
         public SServiceUnit? SServiceUnit { get; set; }
         public SServiceType? SServiceType { get; set; }
+        public SServiceGroup? SServiceGroup { get; set; }
+
         public IList<SMedicineType>? SMedicineTypes { get; set; }
         public IList<SMedicine>? SMedicines { get; set; }
 

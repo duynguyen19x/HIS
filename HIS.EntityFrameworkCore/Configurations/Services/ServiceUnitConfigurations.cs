@@ -16,8 +16,8 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.ToTable("SServiceUnits");
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.ServiceUnitCode).HasMaxLength(50);
-            builder.Property(x => x.ServiceUnitName).HasMaxLength(500);
+            builder.Property(x => x.Code).HasMaxLength(50);
+            builder.Property(x => x.Name).HasMaxLength(500);
         }
     }
 }

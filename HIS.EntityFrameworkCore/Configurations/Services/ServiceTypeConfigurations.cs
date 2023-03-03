@@ -16,8 +16,8 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.ToTable("SServiceTypes");
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.ServiceTypeCode).HasMaxLength(50);
-            builder.Property(x => x.ServiceTypeName).HasMaxLength(500);
+            builder.Property(x => x.Code).HasMaxLength(50);
+            builder.Property(x => x.Name).HasMaxLength(500);
 
             builder.HasOne(t => t.SServiceUnit).WithMany(pc => pc.SServiceTypes).HasForeignKey(pc => pc.ServiceUnitId);
         }

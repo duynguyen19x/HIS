@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     /// <inheritdoc />
-    public partial class AddTables : Migration
+    public partial class AddTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -96,12 +96,25 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SServiceGroup",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SServiceGroup", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SServiceUnits",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ServiceUnitCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    ServiceUnitName = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     SoftOrder = table.Column<int>(type: "int", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: true)
                 },
@@ -175,8 +188,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ServiceTypeCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    ServiceTypeName = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     SoftOrder = table.Column<int>(type: "int", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: true),
                     ServiceUnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -249,12 +262,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ServiceCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    ServiceName = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     SoftOrder = table.Column<int>(type: "int", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: true),
                     ServiceTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ServiceUnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ServiceGroupId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -265,6 +279,12 @@ namespace HIS.EntityFrameworkCore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SServices", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SServices_SServiceGroup_ServiceGroupId",
+                        column: x => x.ServiceGroupId,
+                        principalTable: "SServiceGroup",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_SServices_SServiceTypes_ServiceTypeId",
                         column: x => x.ServiceTypeId,
@@ -478,15 +498,38 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("0fb94c3b-e780-4e2f-853f-878acf24f90d"), 1, "Nam" },
-                    { new Guid("1a0c6582-97ba-4e60-9edd-368c77805439"), 0, "Chưa xác định" },
-                    { new Guid("de234cd4-f0b9-43c4-bd04-4e79cd0f71e5"), 2, "Nữ" }
+                    { new Guid("45a046f7-0395-4bb8-b645-49a8084ee460"), 1, "Nam" },
+                    { new Guid("8cc27af9-07ac-44a8-aa02-e24302053fbc"), 0, "Chưa xác định" },
+                    { new Guid("8f6966e7-ca6c-48c2-9b73-3d70170ca0c5"), 2, "Nữ" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SServiceGroup",
+                columns: new[] { "Id", "Code", "Name" },
+                values: new object[,]
+                {
+                    { new Guid("0f08f4b1-14f6-4613-879a-a20dd357257c"), "CL", "Khác" },
+                    { new Guid("2af36950-33db-44a6-8b93-30c9c876243e"), "NS", "Nội soi" },
+                    { new Guid("4247e4a2-e237-435b-9b8e-35c5acd78a9a"), "VT", "Vật tư" },
+                    { new Guid("61b35954-8094-4ec2-8a78-618adfe09e66"), "GB", "Giải phẫu bệnh lý" },
+                    { new Guid("79563163-4793-47c1-8ba2-c75dacb9acb0"), "TT", "Thủ thuật" },
+                    { new Guid("8eda0220-4889-4b48-ae16-e8afb386bc00"), "PH", "Phục hồi chức năng" },
+                    { new Guid("a68bd532-fe5f-40af-9487-3d928d8be7ba"), "HA", "Chẩn đoán hình ảnh" },
+                    { new Guid("be6ed8cc-238b-4f31-8ff2-f237e81dd898"), "AN", "Suất ăn" },
+                    { new Guid("c7d12ab1-0445-4b16-8798-ae4188061ae2"), "XN", "Xét nghiệm" },
+                    { new Guid("cba9a1e0-c052-4cc4-bd64-19c2e3fd632b"), "TH", "Thuốc" },
+                    { new Guid("cd7e942d-58e7-4a3b-81b6-bb7687db536e"), "SA", "Siêu âm" },
+                    { new Guid("d2654574-2d4f-4de4-b326-86e61636633f"), "MA", "Máu" },
+                    { new Guid("d2e07284-fc7e-4b69-8c8f-48cb8543928a"), "CN", "Thăm dò chức năng" },
+                    { new Guid("d6f29865-2121-405b-b66f-14aa00d67714"), "PT", "Phẫu thuật" },
+                    { new Guid("e22cc7fb-1304-40cc-b1a6-b8519e69e9d4"), "GI", "Giường" },
+                    { new Guid("fe1bc9c9-455f-43a8-85e8-12a55d7d54e4"), "KH", "Khám" }
                 });
 
             migrationBuilder.InsertData(
                 table: "SUsers",
                 columns: new[] { "Id", "Address", "District", "Dob", "Email", "FirstName", "GenderId", "LastName", "Password", "PhoneNumber", "ProvinceId", "Status", "UseType", "UserName", "WardsId" },
-                values: new object[] { new Guid("6f179bc3-8f0e-4515-8c75-4dab88cb3e00"), null, null, null, "administrator@gmail.com", "Admin", null, "Administrator", "79956B61E1B250869A6716CE37EFD6E6", null, null, 1, 0, "Administrator", null });
+                values: new object[] { new Guid("4174e87d-d380-4fcd-9d26-70542af5c863"), null, null, null, "administrator@gmail.com", "Admin", null, "Administrator", "79956B61E1B250869A6716CE37EFD6E6", null, null, 1, 0, "Administrator", null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_SMaterials_MaterialTypeId",
@@ -562,6 +605,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "IX_SRolePermissionBranchs_PermissionId",
                 table: "SRolePermissionBranchs",
                 column: "PermissionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SServices_ServiceGroupId",
+                table: "SServices",
+                column: "ServiceGroupId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SServices_ServiceTypeId",
@@ -641,6 +689,9 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "SGenders");
+
+            migrationBuilder.DropTable(
+                name: "SServiceGroup");
 
             migrationBuilder.DropTable(
                 name: "SServiceTypes");
