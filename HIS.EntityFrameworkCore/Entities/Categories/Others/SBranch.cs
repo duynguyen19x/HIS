@@ -10,8 +10,8 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
 {
     public class SBranch : Entity<Guid>
     {
-        public string? Code { get; set; }
-        public string? Name { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
         public StatusTypes Status { get; set; }
         public Guid? ParentId { get; set; }
 

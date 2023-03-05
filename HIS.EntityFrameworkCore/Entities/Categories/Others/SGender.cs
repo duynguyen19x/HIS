@@ -11,7 +11,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
     public class SGender : Entity<Guid>
     {
         public GenderTypes Code { get; set; }
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         public IList<SUser>? Users { get; set; }
     }

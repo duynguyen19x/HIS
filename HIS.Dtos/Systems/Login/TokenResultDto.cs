@@ -8,7 +8,7 @@ namespace HIS.Dtos.Systems.Login
 {
     public class TokenResultDto
     {
-        public string? AcceptToken { get; set; }
-        public string? RefreshToken { get; set; }
+        public string AcceptToken { get; set; }
+        public string RefreshToken { get; set; }
     }
 }

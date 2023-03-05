@@ -1,5 +1,4 @@
 ﻿using HIS.Dtos.Systems.Login;
-using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.Models.Commons;
 using System;
 using System.Collections.Generic;

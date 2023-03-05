@@ -11,10 +11,10 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
     public class SMedicineLine : Entity<Guid>
     {
         [Description("Mã đường dùng thuốc")]
-        public string? Code { get; set; }
+        public string Code { get; set; }
 
         [Description("Tên đường dùng thuốc")]
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         [Description("Thứ tự sắp xếp")]
         public int? SoftOrder { get; set; }

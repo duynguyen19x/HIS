@@ -11,10 +11,10 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
     public class SMedicineType : FullAuditingEntity<Guid>
     {
         [Description("Mã loại thuốc")]
-        public string? Code { get; set; }
+        public string Code { get; set; }
 
         [Description("Tên loại thuốc")]
-        public string? Name { get; set; }
+        public string Name { get; set; }
 
         [Description("Id service")]
         public Guid? ServiceId { get; set; }
@@ -35,7 +35,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public Guid? ServiceUnitId { get; set; }
 
         [Description("Hướng dẫn")]
-        public string? Tutorial { get; set; }
+        public string Tutorial { get; set; }
 
         [Description("Nước sản xuất")]
         public Guid? NationalId { get; set; }
@@ -50,7 +50,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public decimal? InternalPrice { get; set; }
 
         [Description("Diễn giải")]
-        public string? Description { get; set; }
+        public string Description { get; set; }
 
         [Description("Đang sử dụng")]
         public bool? IsActive { get; set; }

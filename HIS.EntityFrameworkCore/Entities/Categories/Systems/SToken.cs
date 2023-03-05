@@ -11,8 +11,8 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
     public class SToken : Entity<Guid>
     {
         public Guid? UserId { get; set; }
-        public string? TokenValue { get; set; }
-        public string? Jti { get; set; }
+        public string TokenValue { get; set; }
+        public string Jti { get; set; }
         public bool IsUsed { get; set; }
         public bool IsRevoked { get; set; }
         public DateTime IssueAt { get; set; }

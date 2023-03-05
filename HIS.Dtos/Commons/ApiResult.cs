@@ -10,8 +10,8 @@ namespace HIS.Models.Commons
     {
         public bool IsSuccessed { get; set; }
 
-        public string? Message { get; set; }
+        public string Message { get; set; }
 
-        public T? Result { get; set; }
+        public T Result { get; set; }
     }
 }

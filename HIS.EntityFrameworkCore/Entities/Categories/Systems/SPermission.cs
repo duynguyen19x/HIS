@@ -9,8 +9,8 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
 {
     public class SPermission : Entity<Guid>
     {
-        public string? Code { get; set; }
-        public string? Name { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
 
         public List<SRolePermissionBranch>? RolePermissions { get; set; }
     }
