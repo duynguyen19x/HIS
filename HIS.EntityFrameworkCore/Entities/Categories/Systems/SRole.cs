@@ -12,7 +12,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public IList<SRolePermissionBranch>? RolePermissions { get; set; }
-        public IList<SUserRole>? UserRoles { get; set; }
+        public IList<SRolePermissionBranch> RolePermissions { get; set; }
+        public IList<SUserRole> UserRoles { get; set; }
     }
 }

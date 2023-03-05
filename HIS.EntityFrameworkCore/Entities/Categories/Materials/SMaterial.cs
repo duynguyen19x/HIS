@@ -55,8 +55,8 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Đang sử dụng")]
         public bool? IsActive { get; set; }
 
-        public SService? SService { get; set; }
-        public SMaterialType? SMaterialType { get; set; }
-        public SServiceUnit? SServiceUnit { get; set; }
+        public SService SService { get; set; }
+        public SMaterialType SMaterialType { get; set; }
+        public SServiceUnit SServiceUnit { get; set; }
     }
 }

@@ -25,10 +25,8 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public Guid? District { get; set; }
         public Guid? WardsId { get; set; }
 
-        public SGender? Gender { get; set; }
-
-        public IList<SUserRole>? UserRoles { get; set; }
-
-        public IList<SToken>? UserTokens { get; set; }
+        public SGender Gender { get; set; }
+        public IList<SUserRole> UserRoles { get; set; }
+        public IList<SToken> UserTokens { get; set; }
     }
 }

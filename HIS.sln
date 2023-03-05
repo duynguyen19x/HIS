@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. SolutionItems", "0. Solu
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		DescriptionOfDataTable.xlsx = DescriptionOfDataTable.xlsx
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Infrastructures", "1. Infrastructures", "{DDC355DD-FDA5-4EC2-BFF5-85A97D7DD09C}"

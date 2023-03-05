@@ -16,7 +16,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
 
         public Guid? ServiceUnitId { get; set; }
 
-        public SServiceUnit? SServiceUnit { get; set; }
-        public IList<SService>? SServices { get; set; }
+        public SServiceUnit SServiceUnit { get; set; }
+        public IList<SService> SServices { get; set; }
     }
 }

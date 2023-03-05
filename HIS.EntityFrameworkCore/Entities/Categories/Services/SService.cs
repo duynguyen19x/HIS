@@ -26,14 +26,14 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public Guid ServiceUnitId { get; set; }
         public Guid ServiceGroupId { get; set; }
 
-        public SServiceUnit? SServiceUnit { get; set; }
-        public SServiceType? SServiceType { get; set; }
-        public SServiceGroup? SServiceGroup { get; set; }
+        public SServiceUnit SServiceUnit { get; set; }
+        public SServiceType SServiceType { get; set; }
+        public SServiceGroup SServiceGroup { get; set; }
 
-        public IList<SMedicineType>? SMedicineTypes { get; set; }
-        public IList<SMedicine>? SMedicines { get; set; }
+        public IList<SMedicineType> SMedicineTypes { get; set; }
+        public IList<SMedicine> SMedicines { get; set; }
 
-        public IList<SMaterial>? SMaterials { get; set; }
-        public IList<SMaterialType>? SMaterialTypes { get; set; }
+        public IList<SMaterial> SMaterials { get; set; }
+        public IList<SMaterialType> SMaterialTypes { get; set; }
     }
 }

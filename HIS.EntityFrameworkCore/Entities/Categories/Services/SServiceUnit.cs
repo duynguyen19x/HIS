@@ -22,12 +22,12 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Đang sử dụng")]
         public bool? IsActive { get; set; }
 
-        public IList<SServiceType>? SServiceTypes { get; set; }
-        public IList<SService>? SServices { get; set; }
-        public IList<SMedicineType>? SMedicineTypes { get; set; }
-        public IList<SMedicine>? SMedicines { get; set; }
+        public IList<SServiceType> SServiceTypes { get; set; }
+        public IList<SService> SServices { get; set; }
+        public IList<SMedicineType> SMedicineTypes { get; set; }
+        public IList<SMedicine> SMedicines { get; set; }
 
-        public IList<SMaterial>? SMaterials { get; set; }
-        public IList<SMaterialType>? SMaterialTypes { get; set; }
+        public IList<SMaterial> SMaterials { get; set; }
+        public IList<SMaterialType> SMaterialTypes { get; set; }
     }
 }

@@ -15,6 +15,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public StatusTypes Status { get; set; }
         public Guid? ParentId { get; set; }
 
-        public IList<SRolePermissionBranch>? RolePermissions { get; set; }
+        public IList<SRolePermissionBranch> RolePermissions { get; set; }
     }
 }

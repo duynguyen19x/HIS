@@ -13,8 +13,8 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public Guid? PermissionId { get; set; }
         public Guid? BranchId { get; set; }
 
-        public SRole? Role { get; set; }
-        public SPermission? Permission { get; set; }
-        public SBranch? Branch { get; set; }
+        public SRole Role { get; set; }
+        public SPermission Permission { get; set; }
+        public SBranch Branch { get; set; }
     }
 }

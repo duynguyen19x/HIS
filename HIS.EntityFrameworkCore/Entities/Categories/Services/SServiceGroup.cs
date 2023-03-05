@@ -12,6 +12,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public string Code { get; set; }
         public string Name { get; set; }
 
-        public List<SService>? SServices { get; set; }
+        public List<SService> SServices { get; set; }
     }
 }

@@ -18,6 +18,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public DateTime IssueAt { get; set; }
         public DateTime ExpiredAt { get; set; }
 
-        public SUser? User { get; set; }
+        public SUser User { get; set; }
     }
 }

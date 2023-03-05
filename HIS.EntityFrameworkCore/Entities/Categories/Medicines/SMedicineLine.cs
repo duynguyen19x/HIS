@@ -19,7 +19,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Thứ tự sắp xếp")]
         public int? SoftOrder { get; set; }
 
-        public IList<SMedicineType>? SMedicineTypes { get; set; }
-        public IList<SMedicine>? SMedicines { get; set; }
+        public IList<SMedicineType> SMedicineTypes { get; set; }
+        public IList<SMedicine> SMedicines { get; set; }
     }
 }

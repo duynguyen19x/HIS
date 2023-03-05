@@ -13,6 +13,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public GenderTypes Code { get; set; }
         public string Name { get; set; }
 
-        public IList<SUser>? Users { get; set; }
+        public IList<SUser> Users { get; set; }
     }
 }

@@ -64,9 +64,9 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Đang sử dụng")]
         public bool? IsActive { get; set; }
 
-        public SService? SService { get; set; }
-        public SMedicineType? SMedicineType { get; set; }
-        public SServiceUnit? SServiceUnit { get; set; }
-        public SMedicineLine? SMedicineLine { get; set; }
+        public SService SService { get; set; }
+        public SMedicineType SMedicineType { get; set; }
+        public SServiceUnit SServiceUnit { get; set; }
+        public SMedicineLine SMedicineLine { get; set; }
     }
 }

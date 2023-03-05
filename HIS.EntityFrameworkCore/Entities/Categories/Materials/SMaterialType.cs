@@ -10,10 +10,10 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
 {
     public class SMaterialType : FullAuditingEntity<Guid>
     {
-        [Description("Mã loại thuốc")]
+        [Description("Mã loại VT")]
         public string Code { get; set; }
 
-        [Description("Tên loại thuốc")]
+        [Description("Tên loại VT")]
         public string Name { get; set; }
 
         [Description("Id service")]
@@ -49,8 +49,8 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Đang sử dụng")]
         public bool? IsActive { get; set; }
 
-        public SService? SService { get; set; }
-        public SServiceUnit? SServiceUnit { get; set; }
-        public IList<SMaterial>? SMaterials { get; set; }
+        public SService SService { get; set; }
+        public SServiceUnit SServiceUnit { get; set; }
+        public IList<SMaterial> SMaterials { get; set; }
     }
 }
