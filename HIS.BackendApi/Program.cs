@@ -10,9 +10,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<HIS_DbContext>(options =>
     options.UseSqlServer(builder.Configuration["ConnectionStrings:HIS"]));
 
-builder.Services.AddCors(options =>
-    options.AddDefaultPolicy(policy =>
-        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
+//builder.Services.AddCors(options =>
+//    options.AddDefaultPolicy(policy =>
+//        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
+
+builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
+{
+    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+}));
 
 builder.Services.ServiceCollection();
 
@@ -88,6 +93,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("CorsPolicy");
 
 app.UseAuthentication();
 
