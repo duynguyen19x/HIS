@@ -36,7 +36,7 @@ namespace HIS.ApplicationService.Systems.Login
             {
                 try
                 {
-                    var user = _dbContext.SUsers.Where(w => w.UserName == request.UserName && w.Password == request.Password).FirstOrDefault();
+                    var user = _dbContext.SUsers.Where(w => w.UserName == request.UserName && w.Password.ToUpper() == request.Password.ToUpper()).FirstOrDefault();
                     if (user == null)
                     {
                         apiResult.IsSuccessed = false;
@@ -75,6 +75,7 @@ namespace HIS.ApplicationService.Systems.Login
                 }
                 catch (Exception)
                 {
+                    apiResult.IsSuccessed = false;
                     transaction.Dispose();
                 }
             }
