@@ -1,7 +1,9 @@
 ﻿using HIS.EntityFrameworkCore.Configurations;
+using HIS.EntityFrameworkCore.Configurations.Others;
 using HIS.EntityFrameworkCore.Configurations.Patients;
 using HIS.EntityFrameworkCore.Data;
 using HIS.EntityFrameworkCore.Entities.Categories;
+using HIS.EntityFrameworkCore.Entities.Categories.Others;
 using HIS.EntityFrameworkCore.Entities.Categories.Patients;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -43,6 +45,10 @@ namespace HIS.EntityFrameworkCore.DbContexts
             modelBuilder.ApplyConfiguration(new MaterialConfiguration());
             modelBuilder.ApplyConfiguration(new PatientConfiguration());
             modelBuilder.ApplyConfiguration(new PatientTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new NationalConfiguration());
+            modelBuilder.ApplyConfiguration(new ProvinceConfiguration());
+            modelBuilder.ApplyConfiguration(new DistrictConfiguration());
+            modelBuilder.ApplyConfiguration(new CommuneConfiguration());
 
             modelBuilder.Seed();
         }
@@ -66,5 +72,9 @@ namespace HIS.EntityFrameworkCore.DbContexts
         public DbSet<SMaterialType> SMaterialTypes { get; set; }
         public DbSet<SPatient> SPatients { get; set; }
         public DbSet<SPatientType> SPatientTypes { get; set; }
+        public DbSet<SNational> SNationals { get; set; }
+        public DbSet<SProvince> SProvinces { get; set; }
+        public DbSet<SDistrict> SDistricts { get; set; }
+        public DbSet<SCommune> SCommunes { get; set; }
     }
 }
