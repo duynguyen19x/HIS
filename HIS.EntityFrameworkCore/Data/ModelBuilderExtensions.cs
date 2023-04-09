@@ -1,4 +1,5 @@
 ﻿using HIS.EntityFrameworkCore.Entities.Categories;
+using HIS.EntityFrameworkCore.Entities.Categories.Patients;
 using HIS.Utilities.Commons;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -142,6 +143,30 @@ namespace HIS.EntityFrameworkCore.Data
                     Code = "GI",
                     Name = "Giường"
                 });
+
+            modelBuilder.Entity<SPatientType>().HasData(
+                new SPatientType()
+                {
+                    Id = Guid.NewGuid(),
+                    Code = "BHYT",
+                    Name = "Bảo hiểm y tế",
+                    IsActive = true,
+                },
+                new SPatientType()
+                {
+                    Id = Guid.NewGuid(),
+                    Code = "VP",
+                    Name = "Viện phí",
+                    IsActive = true,
+                },
+                new SPatientType()
+                {
+                    Id = Guid.NewGuid(),
+                    Code = "DV",
+                    Name = "Dịch vụ",
+                    IsActive = true,
+                }
+            );
         }
     }
 }
