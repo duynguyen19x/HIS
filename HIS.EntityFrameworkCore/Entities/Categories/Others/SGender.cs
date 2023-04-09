@@ -1,4 +1,5 @@
 ﻿using HIS.EntityFrameworkCore.BaseEntitys;
+using HIS.EntityFrameworkCore.Entities.Categories.Patients;
 using HIS.Utilities.Enums;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public string Name { get; set; }
 
         public IList<SUser> Users { get; set; }
+        public IList<SPatient> Patients { get; set; }
     }
 }

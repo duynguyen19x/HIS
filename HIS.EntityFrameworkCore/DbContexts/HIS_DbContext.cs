@@ -1,6 +1,8 @@
 ﻿using HIS.EntityFrameworkCore.Configurations;
+using HIS.EntityFrameworkCore.Configurations.Patients;
 using HIS.EntityFrameworkCore.Data;
 using HIS.EntityFrameworkCore.Entities.Categories;
+using HIS.EntityFrameworkCore.Entities.Categories.Patients;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -39,10 +41,12 @@ namespace HIS.EntityFrameworkCore.DbContexts
             modelBuilder.ApplyConfiguration(new MedicineTypeConfiguration());
             modelBuilder.ApplyConfiguration(new MaterialTypeConfiguration());
             modelBuilder.ApplyConfiguration(new MaterialConfiguration());
+            modelBuilder.ApplyConfiguration(new PatientConfiguration());
+            modelBuilder.ApplyConfiguration(new PatientTypeConfiguration());
 
             modelBuilder.Seed();
         }
-        
+
         public DbSet<SGender> SGenders { get; set; }
         public DbSet<SUser> SUsers { get; set; }
         public DbSet<SRole> SRoles { get; set; }
@@ -60,5 +64,7 @@ namespace HIS.EntityFrameworkCore.DbContexts
         public DbSet<SMedicineType> SMedicineTypes { get; set; }
         public DbSet<SMaterial> SMaterials { get; set; }
         public DbSet<SMaterialType> SMaterialTypes { get; set; }
+        public DbSet<SPatient> SPatients { get; set; }
+        public DbSet<SPatientType> SPatientTypes { get; set; }
     }
 }
