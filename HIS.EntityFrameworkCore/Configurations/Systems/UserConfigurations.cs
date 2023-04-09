@@ -21,8 +21,8 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.Property(x => x.Dob).IsRequired(false);
             builder.Property(x => x.GenderId).IsRequired(false);
             builder.Property(x => x.ProvinceId).IsRequired(false);
-            builder.Property(x => x.District).IsRequired(false);
-            builder.Property(x => x.WardsId).IsRequired(false);
+            builder.Property(x => x.DistrictId).IsRequired(false);
+            builder.Property(x => x.WardId).IsRequired(false);
             builder.Property(x => x.UseType).IsRequired();
             builder.Property(x => x.Address).IsRequired(false).HasMaxLength(500);
             builder.Property(x => x.PhoneNumber).IsRequired(false).HasMaxLength(25);

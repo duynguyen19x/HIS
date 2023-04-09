@@ -22,8 +22,8 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public UserStatusTypes Status { get; set; }
         public Guid? GenderId { get; set; }
         public Guid? ProvinceId { get; set; }
-        public Guid? District { get; set; }
-        public Guid? WardsId { get; set; }
+        public Guid? DistrictId { get; set; }
+        public Guid? WardId { get; set; }
 
         public SGender Gender { get; set; }
         public IList<SUserRole> UserRoles { get; set; }

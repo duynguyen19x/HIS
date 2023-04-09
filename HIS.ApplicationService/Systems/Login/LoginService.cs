@@ -126,8 +126,8 @@ namespace HIS.ApplicationService.Systems.Login
                         Status = request.Status,
                         GenderId = request.GenderId,
                         ProvinceId = request.ProvinceId,
-                        District = request.District,
-                        WardsId = request.WardsId,
+                        DistrictId = request.District,
+                        WardId = request.WardsId,
                     };
                     var result = _dbContext.SUsers.Add(userSave);
                     if (result != null)
