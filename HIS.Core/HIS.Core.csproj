@@ -3,16 +3,11 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Categories\" />
-    <Folder Include="Base\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\HIS.Utilities\HIS.Utilities.csproj" />
+    <Folder Include="Systems\" />
   </ItemGroup>
 
 </Project>
