@@ -2,6 +2,7 @@
 using HIS.Dtos.Commons;
 using HIS.Dtos.Systems.Role;
 using HIS.Models.Commons;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.InteropServices;
@@ -19,17 +20,28 @@ namespace HIS.BackendApi.Controllers.Systems.Role
             _roleService = roleService;
         }
 
-        [HttpGet]
-        public async Task<ApiResultList<SRoleDto>> GetAll(GetAllSRoleInputDto input)
+        [HttpGet("GetAll")]
+        public async Task<ApiResultList<SRoleDto>> GetAll([FromQuery] GetAllSRoleInput input)
         {
             return await _roleService.GetAll(input);
         }
 
-        [HttpGet]
+        [HttpGet("GetById")]
         public async Task<ApiResult<SRoleDto>> GetById(Guid id)
         {
             return await _roleService.GetById(id);
         }
 
+        [HttpPost("CreateOrEdit")]
+        public async Task<ApiResult<SRoleDto>> CreateOrEdit(SRoleDto input)
+        {
+            return await _roleService.CreateOrEdit(input);
+        }
+
+        [HttpPost("Delete")]
+        public async Task<ApiResult<SRoleDto>> Delete(Guid input)
+        {
+            return await _roleService.Delete(input);
+        }
     }
 }

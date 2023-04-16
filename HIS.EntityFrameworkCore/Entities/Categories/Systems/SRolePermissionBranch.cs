@@ -1,4 +1,5 @@
 ﻿using HIS.EntityFrameworkCore.BaseEntitys;
+using HIS.EntityFrameworkCore.Entities.Categories.Dictionaries;
 using System;
 using System.Collections.Generic;
 using System.Linq;

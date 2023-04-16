@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Systems.Role
+namespace HIS.Dtos.Dictionaries.Branch
 {
-    public class GetAllSRoleInputDto
+    public class GetAllSBranchInput
     {
-        public Guid? IdFilter { get; set; }
         public string CodeFilter { get; set; }
         public string NameFilter { get; set; }
         public bool? InactiveFilter { get; set; }
