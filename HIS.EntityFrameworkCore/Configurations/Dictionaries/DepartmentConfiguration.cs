@@ -1,4 +1,4 @@
-﻿using HIS.EntityFrameworkCore.Entities.Categories.Dictionaries;
+﻿using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -20,7 +20,10 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.Property(x => x.Name).HasMaxLength(512);
             builder.Property(x => x.Description).HasMaxLength(512);
 
-            builder.HasOne(t => t.SBranch).WithMany(p => p.Departments).HasForeignKey(p => p.BranchId);
+            builder.HasOne(t => t.SBranch)
+                .WithMany(p => p.Departments)
+                .HasForeignKey(p => p.BranchId)
+                .IsRequired();
         }
     }
 }

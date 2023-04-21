@@ -10,9 +10,7 @@ using System.Threading.Tasks;
 
 namespace HIS.ApplicationService
 {
-    public abstract class BaseSerivce<T, U> : IBaseService<T, U>
-        where T : class
-        where U : class
+    public abstract class BaseSerivce
     {
         public readonly HIS_DbContext _dbContext;
         public readonly IConfiguration _config;
@@ -21,26 +19,6 @@ namespace HIS.ApplicationService
         {
             _dbContext = dbContext;
             _config = config;
-        }
-
-        public virtual Task<ApiResultList<T>> GetAll(U input)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual Task<ApiResult<T>> GetById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual Task<ApiResult<T>> CreateOrEdit(T input)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual Task<ApiResult<T>> Delete(Guid id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

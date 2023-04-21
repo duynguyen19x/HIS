@@ -11,11 +11,11 @@ namespace HIS.BackendApi.Controllers.Dictionaries
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BranchController : ControllerBase
+    public class SBranchController : ControllerBase
     {
-        private readonly IBranchService _branchService;
+        private readonly ISBranchService _branchService;
 
-        public BranchController(IBranchService branchService)
+        public SBranchController(ISBranchService branchService)
         {
             _branchService = branchService;
         }

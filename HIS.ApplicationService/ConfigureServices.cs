@@ -1,4 +1,6 @@
 ﻿using HIS.ApplicationService.Dictionaries.Branch;
+using HIS.ApplicationService.Dictionaries.Department;
+using HIS.ApplicationService.Dictionaries.Room;
 using HIS.ApplicationService.Systems.Login;
 using HIS.ApplicationService.Systems.Role;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +19,9 @@ namespace HIS.ApplicationService
             services.AddTransient<ILoginService, LoginService>();
             services.AddTransient<IRoleService, RoleService>();
 
-            services.AddTransient<IBranchService, BranchService>();
+            services.AddTransient<ISBranchService, SBranchService>();
+            services.AddTransient<ISDepartmentService, SDepartmentService>();
+            services.AddTransient<ISRoomService, SRoomService>();
         }
     }
 }
