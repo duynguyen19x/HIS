@@ -166,6 +166,7 @@ namespace HIS.ApplicationService.Dictionaries.Branch
             var branch = _dbContext.SBranchs.SingleOrDefault(s => s.Id == id);
             if (branch != null)
             {
+                result.IsSuccessed = true;
                 result.Result = new SBranchDto()
                 {
                     Id = branch.Id,

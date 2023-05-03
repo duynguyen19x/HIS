@@ -54,6 +54,7 @@ namespace HIS.ApplicationService.Systems.Login
                         RefreshToken = new JwtSecurityTokenHandler().WriteToken(refreshToken),
                     };
 
+                    apiResult.IsSuccessed = true;
                     apiResult.Result = token;
 
                     // Save token
