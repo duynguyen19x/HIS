@@ -1,11 +1,11 @@
-﻿using HIS.EntityFrameworkCore.Entities.Categories.Dictionaries;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
@@ -20,7 +20,10 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.Property(x => x.Name).HasMaxLength(512);
             builder.Property(x => x.Description).HasMaxLength(512);
 
-            builder.HasOne(t => t.Department).WithMany(p => p.Rooms).HasForeignKey(p => p.DepartmentId);
+            builder.HasOne(t => t.Department)
+                .WithMany(p => p.Rooms)
+                .HasForeignKey(p => p.DepartmentId)
+                .IsRequired();
         }
     }
 }

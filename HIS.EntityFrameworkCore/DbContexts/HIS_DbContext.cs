@@ -4,9 +4,9 @@ using HIS.EntityFrameworkCore.Configurations.Others;
 using HIS.EntityFrameworkCore.Configurations.Patients;
 using HIS.EntityFrameworkCore.Data;
 using HIS.EntityFrameworkCore.Entities.Categories;
-using HIS.EntityFrameworkCore.Entities.Categories.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.Categories.Others;
 using HIS.EntityFrameworkCore.Entities.Categories.Patients;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using Microsoft.EntityFrameworkCore;
 
 namespace HIS.EntityFrameworkCore.DbContexts
@@ -60,7 +60,7 @@ namespace HIS.EntityFrameworkCore.DbContexts
         public DbSet<SPermission> SPermissions { get; set; }
         public DbSet<SBranch> SBranchs { get; set; }
         public DbSet<SDepartment> SDepartments { get; set; }
-        public DbSet<SRoom> Rooms { get; set; }
+        public DbSet<SRoom> SRooms { get; set; }
         public DbSet<SRolePermissionBranch> SRolePermissionBranchs { get; set; }
         public DbSet<SService> SServices { get; set; }
         public DbSet<SServiceType> SServiceTypes { get; set; }
