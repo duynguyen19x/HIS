@@ -1,23 +1,24 @@
 ﻿using HIS.EntityFrameworkCore.BaseEntitys;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Categories
+namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
-    public class SRole : Entity<Guid>
+    /// <summary>
+    /// Chi nhánh
+    /// </summary>
+    public class SBranch : FullAuditingEntity<Guid>
     {
         public string Code { get; set; }
         public string Name { get; set; }
+        public string Address { get; set; }
         public string Description { get; set; }
         public bool Inactive { get; set; }
-        public bool IsSystem { get; set; }
 
-        public IList<SRolePermissionBranch> RolePermissions { get; set; }
-        public IList<SUserRole> UserRoles { get; set; }
+
+        public IList<SDepartment> Departments { get; set; }
     }
 }

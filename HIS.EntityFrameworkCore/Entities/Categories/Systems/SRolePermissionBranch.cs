@@ -1,9 +1,4 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HIS.EntityFrameworkCore.Entities.Dictionaries;
 
 namespace HIS.EntityFrameworkCore.Entities.Categories
 {

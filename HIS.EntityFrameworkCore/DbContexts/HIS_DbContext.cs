@@ -1,16 +1,13 @@
 ﻿using HIS.EntityFrameworkCore.Configurations;
+using HIS.EntityFrameworkCore.Configurations.Dictionaries;
 using HIS.EntityFrameworkCore.Configurations.Others;
 using HIS.EntityFrameworkCore.Configurations.Patients;
 using HIS.EntityFrameworkCore.Data;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Others;
 using HIS.EntityFrameworkCore.Entities.Categories.Patients;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.DbContexts
 {
@@ -32,6 +29,8 @@ namespace HIS.EntityFrameworkCore.DbContexts
             modelBuilder.ApplyConfiguration(new GenderConfiguration());
             modelBuilder.ApplyConfiguration(new PermissionConfigurations());
             modelBuilder.ApplyConfiguration(new BranchConfiguration());
+            modelBuilder.ApplyConfiguration(new DepartmentConfiguration());
+            modelBuilder.ApplyConfiguration(new RoomConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new RolePermissionBranchConfigurations());
             modelBuilder.ApplyConfiguration(new ServiceUnitConfigurations());
@@ -60,6 +59,8 @@ namespace HIS.EntityFrameworkCore.DbContexts
         public DbSet<SToken> STokens { get; set; }
         public DbSet<SPermission> SPermissions { get; set; }
         public DbSet<SBranch> SBranchs { get; set; }
+        public DbSet<SDepartment> SDepartments { get; set; }
+        public DbSet<SRoom> SRooms { get; set; }
         public DbSet<SRolePermissionBranch> SRolePermissionBranchs { get; set; }
         public DbSet<SService> SServices { get; set; }
         public DbSet<SServiceType> SServiceTypes { get; set; }

@@ -4,6 +4,7 @@ using HIS.EntityFrameworkCore.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(HIS_DbContext))]
-    partial class HIS_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20230409105724_Update_table_SRole")]
+    partial class Update_table_SRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,143 +24,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Dictionaries.SBranch", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Address")
-                        .HasMaxLength(1024)
-                        .HasColumnType("nvarchar(1024)");
-
-                    b.Property<string>("Code")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("DeleteBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("DeleteDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<Guid?>("ParentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SBranchs", (string)null);
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Dictionaries.SDepartment", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("BranchId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BranchId");
-
-                    b.ToTable("SDepartments", (string)null);
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Dictionaries.SRoom", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("DepartmentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.ToTable("SRooms", (string)null);
-                });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Others.SCommune", b =>
                 {
@@ -440,25 +306,50 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5fbb19f5-b646-4e9e-a687-e16778758112"),
+                            Id = new Guid("e7004b6b-df94-4acf-8e71-c2df0e50c62a"),
                             Code = "BHYT",
                             IsActive = true,
                             Name = "Bảo hiểm y tế"
                         },
                         new
                         {
-                            Id = new Guid("e894cb1f-0ec8-4f9d-bdf7-56da98251326"),
+                            Id = new Guid("30810954-5c1b-442f-a83c-a682a6dc8498"),
                             Code = "VP",
                             IsActive = true,
                             Name = "Viện phí"
                         },
                         new
                         {
-                            Id = new Guid("bdf20a66-54f6-41d0-bffd-fdefe2457d49"),
+                            Id = new Guid("707ac102-34c0-4bcf-92a8-d94b8aa815ff"),
                             Code = "DV",
                             IsActive = true,
                             Name = "Dịch vụ"
                         });
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SBranch", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SBranchs", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SGender", b =>
@@ -481,19 +372,19 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b9206eb6-ff36-4c65-96b2-7b26162a37d4"),
+                            Id = new Guid("a1840dc1-7d55-4495-a6cd-9a2392a67949"),
                             Code = 0,
                             Name = "Chưa xác định"
                         },
                         new
                         {
-                            Id = new Guid("e2b94dec-3da7-40d9-8b4e-f81fcfad3a7d"),
+                            Id = new Guid("ca4e701b-c41a-4ea0-bdb4-3a36ae5f256c"),
                             Code = 1,
                             Name = "Nam"
                         },
                         new
                         {
-                            Id = new Guid("e63155bf-2085-48bf-b276-eadb3a5127a2"),
+                            Id = new Guid("12566b62-4210-464c-89a7-7fa5493297e6"),
                             Code = 2,
                             Name = "Nữ"
                         });
@@ -923,9 +814,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsSystem")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(256)
@@ -1033,97 +921,97 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("133ebb95-6eeb-4f94-acad-64333470e992"),
+                            Id = new Guid("21716f6d-6204-493d-87c2-a326a8258dca"),
                             Code = "GB",
                             Name = "Giải phẫu bệnh lý"
                         },
                         new
                         {
-                            Id = new Guid("ebf88193-13cc-4c4e-8382-cc2e056136f7"),
+                            Id = new Guid("9e2c9d3d-8767-47e9-82b1-b992d61daced"),
                             Code = "PT",
                             Name = "Phẫu thuật"
                         },
                         new
                         {
-                            Id = new Guid("f4b3bcf8-7732-4e8c-a99c-997c72d4f190"),
+                            Id = new Guid("3df98174-2790-4a43-b13b-7989304b2265"),
                             Code = "KH",
                             Name = "Khám"
                         },
                         new
                         {
-                            Id = new Guid("e43151db-f8f6-4357-baf0-b059ed3ba807"),
+                            Id = new Guid("d4b4927b-f3dd-4f7d-9b5c-2c9da42c80f2"),
                             Code = "CN",
                             Name = "Thăm dò chức năng"
                         },
                         new
                         {
-                            Id = new Guid("9cd08668-c664-4a73-852d-176a1283add2"),
+                            Id = new Guid("04c0fe0e-11a0-4497-a392-3c8736e354ad"),
                             Code = "PH",
                             Name = "Phục hồi chức năng"
                         },
                         new
                         {
-                            Id = new Guid("c6ad2ded-2913-47fd-96fb-a1485177427a"),
+                            Id = new Guid("47d2afe0-ee01-4c3e-a724-f74357959036"),
                             Code = "NS",
                             Name = "Nội soi"
                         },
                         new
                         {
-                            Id = new Guid("d6d0924e-466c-4b17-8e45-36cb3bb087c4"),
+                            Id = new Guid("0688de81-4c47-44ec-8cfb-9c211aa2c7bd"),
                             Code = "HA",
                             Name = "Chẩn đoán hình ảnh"
                         },
                         new
                         {
-                            Id = new Guid("a1ac22d3-9e80-4e5d-942d-fe86d98b0373"),
+                            Id = new Guid("bfa51101-9dc6-4700-8bc8-a1d742b3091d"),
                             Code = "XN",
                             Name = "Xét nghiệm"
                         },
                         new
                         {
-                            Id = new Guid("87850f5a-7abf-4e86-a21a-7739296c7b00"),
+                            Id = new Guid("4b16d4a6-4915-4edd-ad72-bd43e3bf8ed6"),
                             Code = "TT",
                             Name = "Thủ thuật"
                         },
                         new
                         {
-                            Id = new Guid("2cc09146-0d50-458c-9872-cb4022c5d619"),
+                            Id = new Guid("1d8cb668-4c88-4c44-bdc2-c10ceb877ec7"),
                             Code = "SA",
                             Name = "Siêu âm"
                         },
                         new
                         {
-                            Id = new Guid("e66c69cf-d20f-4847-9c1e-2f248d405e8a"),
+                            Id = new Guid("206fe63d-22e5-4aeb-a969-4fffffbd2908"),
                             Code = "AN",
                             Name = "Suất ăn"
                         },
                         new
                         {
-                            Id = new Guid("b58ff86d-34e5-4f6d-aab1-2c7a840ca380"),
+                            Id = new Guid("57edd9c8-c8b1-4b13-ae31-f1a36e1f33aa"),
                             Code = "MA",
                             Name = "Máu"
                         },
                         new
                         {
-                            Id = new Guid("a8230d26-f24d-4cab-8505-454bd2341988"),
+                            Id = new Guid("a6c0aa77-541a-42a5-8165-72a0ca66239f"),
                             Code = "VT",
                             Name = "Vật tư"
                         },
                         new
                         {
-                            Id = new Guid("c148a010-4d5f-4358-9a6e-e73ff9c9b201"),
+                            Id = new Guid("d72834dd-8331-4965-ab12-651490811a4f"),
                             Code = "CL",
                             Name = "Khác"
                         },
                         new
                         {
-                            Id = new Guid("3f5f8065-594e-4f37-884d-21583487f88d"),
+                            Id = new Guid("be33598a-6379-4c4e-81c5-370b708ae7f5"),
                             Code = "TH",
                             Name = "Thuốc"
                         },
                         new
                         {
-                            Id = new Guid("3c0b7793-cccd-4d90-a6c4-f2ecbbc792b0"),
+                            Id = new Guid("d23ec670-2560-445d-87e8-f07293dcbb77"),
                             Code = "GI",
                             Name = "Giường"
                         });
@@ -1304,7 +1192,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0fa357a4-8204-446a-981f-2f216531c058"),
+                            Id = new Guid("01a6016f-96a8-4b3e-a17d-3f8df4014933"),
                             Email = "administrator@gmail.com",
                             FirstName = "Admin",
                             LastName = "Administrator",
@@ -1328,28 +1216,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("SUserRoles", (string)null);
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Dictionaries.SDepartment", b =>
-                {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Dictionaries.SBranch", "SBranch")
-                        .WithMany("Departments")
-                        .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("SBranch");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Dictionaries.SRoom", b =>
-                {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Dictionaries.SDepartment", "Department")
-                        .WithMany("Rooms")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Others.SCommune", b =>
@@ -1504,8 +1370,8 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SRolePermissionBranch", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Dictionaries.SBranch", "Branch")
-                        .WithMany()
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SBranch", "Branch")
+                        .WithMany("RolePermissions")
                         .HasForeignKey("BranchId");
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SPermission", "Permission")
@@ -1598,16 +1464,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Dictionaries.SBranch", b =>
-                {
-                    b.Navigation("Departments");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Dictionaries.SDepartment", b =>
-                {
-                    b.Navigation("Rooms");
-                });
-
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Others.SDistrict", b =>
                 {
                     b.Navigation("Communes");
@@ -1632,6 +1488,11 @@ namespace HIS.EntityFrameworkCore.Migrations
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Patients.SPatientType", b =>
                 {
                     b.Navigation("SPatients");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SBranch", b =>
+                {
+                    b.Navigation("RolePermissions");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SGender", b =>

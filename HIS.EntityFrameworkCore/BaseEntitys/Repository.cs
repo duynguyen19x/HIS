@@ -22,17 +22,17 @@ namespace HIS.EntityFrameworkCore.BaseEntitys
 
         public IQueryable<TEntity> Gets();
 
-        public IQueryable<TEntity> Gets(Expression<Func<TEntity, bool>>? where = null);
+        public IQueryable<TEntity> Gets(Expression<Func<TEntity, bool>> where = null);
 
         public int Count(Expression<Func<TEntity, bool>> where);
 
-        public IQueryable<TEntity> Gets(string[]? includes = null);
+        public IQueryable<TEntity> Gets(string[] includes = null);
 
-        public TEntity GetByCondition(Expression<Func<TEntity, bool>> expression, string[]? includes = null);
+        public TEntity GetByCondition(Expression<Func<TEntity, bool>> expression, string[] includes = null);
 
-        public IEnumerable<TEntity> Gets(Expression<Func<TEntity, bool>> predicate, string[]? includes = null);
+        public IEnumerable<TEntity> Gets(Expression<Func<TEntity, bool>> predicate, string[] includes = null);
 
-        public IEnumerable<TEntity> GetsPaging(Expression<Func<TEntity, bool>> predicate, out int total, int index = 0, int size = 20, string[]? includes = null);
+        public IEnumerable<TEntity> GetsPaging(Expression<Func<TEntity, bool>> predicate, out int total, int index = 0, int size = 20, string[] includes = null);
 
         public bool CheckContains(Expression<Func<TEntity, bool>> predicate);
 
@@ -50,15 +50,15 @@ namespace HIS.EntityFrameworkCore.BaseEntitys
 
         public Task<IQueryable<TEntity>> GetsAsync();
 
-        public Task<IQueryable<TEntity>> GetsAsync(Expression<Func<TEntity, bool>>? where = null);
+        public Task<IQueryable<TEntity>> GetsAsync(Expression<Func<TEntity, bool>> where = null);
 
         public Task<int> CountAsync(Expression<Func<TEntity, bool>> where);
 
-        public Task<IQueryable<TEntity>> GetsAsync(string[]? includes = null);
+        public Task<IQueryable<TEntity>> GetsAsync(string[] includes = null);
 
-        public Task<TEntity> GetByConditionAsync(Expression<Func<TEntity, bool>> expression, string[]? includes = null);
+        public Task<TEntity> GetByConditionAsync(Expression<Func<TEntity, bool>> expression, string[] includes = null);
 
-        public Task<IEnumerable<TEntity>> GetsAsync(Expression<Func<TEntity, bool>> predicate, string[]? includes = null);
+        public Task<IEnumerable<TEntity>> GetsAsync(Expression<Func<TEntity, bool>> predicate, string[] includes = null);
 
         public Task<bool> CheckContainsAsync(Expression<Func<TEntity, bool>> predicate);
 
@@ -67,7 +67,7 @@ namespace HIS.EntityFrameworkCore.BaseEntitys
 
     public class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class
     {
-        private HIS_DbContext _dbContext;
+        private readonly HIS_DbContext _dbContext;
         private readonly DbSet<TEntity> _dbSet;
 
         public Repository(HIS_DbContext dbContext)
@@ -126,7 +126,7 @@ namespace HIS.EntityFrameworkCore.BaseEntitys
             return _dbSet;
         }
 
-        public IQueryable<TEntity> Gets(Expression<Func<TEntity, bool>>? where = null)
+        public IQueryable<TEntity> Gets(Expression<Func<TEntity, bool>> where = null)
         {
             if (where == null)
                 return _dbSet;
@@ -139,10 +139,10 @@ namespace HIS.EntityFrameworkCore.BaseEntitys
             return _dbSet.Count(where);
         }
 
-        public IQueryable<TEntity> Gets(string[]? includes = null)
+        public IQueryable<TEntity> Gets(string[] includes = null)
         {
             //HANDLE INCLUDES FOR ASSOCIATED OBJECTS IF APPLICABLE
-            if (includes != null && includes.Count() > 0)
+            if (includes != null && includes.Length > 0)
             {
                 var query = _dbContext.Set<TEntity>().Include(includes.First());
                 foreach (var include in includes.Skip(1))
@@ -153,9 +153,9 @@ namespace HIS.EntityFrameworkCore.BaseEntitys
             return _dbContext.Set<TEntity>().AsQueryable();
         }
 
-        public TEntity GetByCondition(Expression<Func<TEntity, bool>> expression, string[]? includes = null)
+        public TEntity GetByCondition(Expression<Func<TEntity, bool>> expression, string[] includes = null)
         {
-            if (includes != null && includes.Count() > 0)
+            if (includes != null && includes.Length > 0)
             {
                 var query = _dbContext.Set<TEntity>().Include(includes.First());
                 foreach (var include in includes.Skip(1))
@@ -169,10 +169,10 @@ namespace HIS.EntityFrameworkCore.BaseEntitys
 #pragma warning restore CS8603 // Possible null reference return.
         }
 
-        public IEnumerable<TEntity> Gets(Expression<Func<TEntity, bool>> predicate, string[]? includes = null)
+        public IEnumerable<TEntity> Gets(Expression<Func<TEntity, bool>> predicate, string[] includes = null)
         {
             //HANDLE INCLUDES FOR ASSOCIATED OBJECTS IF APPLICABLE
-            if (includes != null && includes.Count() > 0)
+            if (includes != null && includes.Length > 0)
             {
                 var query = _dbContext.Set<TEntity>().Include(includes.First());
                 foreach (var include in includes.Skip(1))
@@ -183,13 +183,13 @@ namespace HIS.EntityFrameworkCore.BaseEntitys
             return _dbContext.Set<TEntity>().Where<TEntity>(predicate).AsQueryable<TEntity>();
         }
 
-        public IEnumerable<TEntity> GetsPaging(Expression<Func<TEntity, bool>> predicate, out int total, int index = 0, int size = 20, string[]? includes = null)
+        public IEnumerable<TEntity> GetsPaging(Expression<Func<TEntity, bool>> predicate, out int total, int index = 0, int size = 20, string[] includes = null)
         {
             int skipCount = index * size;
             IQueryable<TEntity> _resetSet;
 
             //HANDLE INCLUDES FOR ASSOCIATED OBJECTS IF APPLICABLE
-            if (includes != null && includes.Count() > 0)
+            if (includes != null && includes.Length > 0)
             {
                 var query = _dbContext.Set<TEntity>().Include(includes.First());
                 foreach (var include in includes.Skip(1))
@@ -207,7 +207,7 @@ namespace HIS.EntityFrameworkCore.BaseEntitys
 
         public bool CheckContains(Expression<Func<TEntity, bool>> predicate)
         {
-            return _dbContext.Set<TEntity>().Count<TEntity>(predicate) > 0;
+            return _dbContext.Set<TEntity>().Any<TEntity>(predicate);
         }
 
         public async Task<TEntity> InsertAsync(TEntity entity)
@@ -256,7 +256,7 @@ namespace HIS.EntityFrameworkCore.BaseEntitys
             return await Task.FromResult(_dbSet);
         }
 
-        public async Task<IQueryable<TEntity>> GetsAsync(Expression<Func<TEntity, bool>>? where = null)
+        public async Task<IQueryable<TEntity>> GetsAsync(Expression<Func<TEntity, bool>> where = null)
         {
             if (where == null)
                 return await Task.FromResult(_dbSet);
@@ -269,10 +269,10 @@ namespace HIS.EntityFrameworkCore.BaseEntitys
             return await Task.FromResult(_dbSet.Count(where));
         }
 
-        public async Task<IQueryable<TEntity>> GetsAsync(string[]? includes = null)
+        public async Task<IQueryable<TEntity>> GetsAsync(string[] includes = null)
         {
             //HANDLE INCLUDES FOR ASSOCIATED OBJECTS IF APPLICABLE
-            if (includes != null && includes.Count() > 0)
+            if (includes != null && includes.Length > 0)
             {
                 var query = _dbContext.Set<TEntity>().Include(includes.First());
                 foreach (var include in includes.Skip(1))
@@ -284,9 +284,9 @@ namespace HIS.EntityFrameworkCore.BaseEntitys
             return await Task.FromResult(_dbContext.Set<TEntity>().AsQueryable());
         }
 
-        public async Task<TEntity> GetByConditionAsync(Expression<Func<TEntity, bool>> expression, string[]? includes = null)
+        public async Task<TEntity> GetByConditionAsync(Expression<Func<TEntity, bool>> expression, string[] includes = null)
         {
-            if (includes != null && includes.Count() > 0)
+            if (includes != null && includes.Length > 0)
             {
                 var query = _dbContext.Set<TEntity>().Include(includes.First());
                 foreach (var include in includes.Skip(1))
@@ -297,10 +297,10 @@ namespace HIS.EntityFrameworkCore.BaseEntitys
             return await Task.FromResult(_dbContext.Set<TEntity>().FirstOrDefault(expression));
         }
 
-        public async Task<IEnumerable<TEntity>> GetsAsync(Expression<Func<TEntity, bool>> predicate, string[]? includes = null)
+        public async Task<IEnumerable<TEntity>> GetsAsync(Expression<Func<TEntity, bool>> predicate, string[] includes = null)
         {
             //HANDLE INCLUDES FOR ASSOCIATED OBJECTS IF APPLICABLE
-            if (includes != null && includes.Count() > 0)
+            if (includes != null && includes.Length > 0)
             {
                 var query = _dbContext.Set<TEntity>().Include(includes.First());
                 foreach (var include in includes.Skip(1))
@@ -314,7 +314,7 @@ namespace HIS.EntityFrameworkCore.BaseEntitys
 
         public async Task<bool> CheckContainsAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            return await Task.FromResult(_dbSet.Count(predicate) > 0);
+            return await Task.FromResult(_dbSet.Any(predicate));
         }
 
         #endregion

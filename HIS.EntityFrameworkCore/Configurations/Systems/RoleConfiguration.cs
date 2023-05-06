@@ -17,7 +17,8 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.HasKey(r => r.Id);
 
             // Limit the size of columns to use efficient database types
-            builder.Property(u => u.Name).HasMaxLength(256);
+            builder.Property(r => r.Code).IsRequired().HasMaxLength(20);
+            builder.Property(u => u.Name).IsRequired().HasMaxLength(256);
             builder.Property(u => u.Description).HasMaxLength(256);
         }
     }

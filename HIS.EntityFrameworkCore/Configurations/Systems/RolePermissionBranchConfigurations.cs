@@ -22,8 +22,8 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.HasOne(t => t.Permission).WithMany(pc => pc.RolePermissions)
               .HasForeignKey(pc => pc.PermissionId);
 
-            builder.HasOne(t => t.Branch).WithMany(pc => pc.RolePermissions)
-             .HasForeignKey(pc => pc.BranchId);
+            //builder.HasOne(t => t.Branch).WithMany(pc => pc.RolePermissions)
+            // .HasForeignKey(pc => pc.BranchId);
         }
     }
 }
