@@ -39,9 +39,9 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpPost("Delete")]
-        public async Task<ApiResult<SRoomDto>> Delete(Guid input)
+        public async Task<ApiResult<SRoomDto>> Delete(Guid id)
         {
-            return await _roomService.Delete(input);
+            return await _roomService.Delete(id);
         }
     }
 }

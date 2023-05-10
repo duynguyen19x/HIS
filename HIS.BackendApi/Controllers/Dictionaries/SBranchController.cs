@@ -39,9 +39,9 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpPost("Delete")]
-        public async Task<ApiResult<SBranchDto>> Delete(Guid input)
+        public async Task<ApiResult<SBranchDto>> Delete(Guid id)
         {
-            return await _branchService.Delete(input);
+            return await _branchService.Delete(id);
         }
     }
 }
