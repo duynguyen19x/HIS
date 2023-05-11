@@ -16,9 +16,9 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.ToTable("SIcds");
 
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Code).HasMaxLength(50);
+            builder.Property(x => x.Code).HasMaxLength(50).IsRequired();
             builder.Property(x => x.MohReportCode).HasMaxLength(50);
-            builder.Property(x => x.Name).HasMaxLength(512);
+            builder.Property(x => x.Name).HasMaxLength(512).IsRequired();
             builder.Property(x => x.NameEnglish).HasMaxLength(512);
             builder.Property(x => x.NameCommon).HasMaxLength(512);
 

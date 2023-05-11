@@ -60,6 +60,7 @@ namespace HIS.EntityFrameworkCore.DbContexts
         public DbSet<SPermission> SPermissions { get; set; }
         public DbSet<SBranch> SBranchs { get; set; }
         public DbSet<SDepartment> SDepartments { get; set; }
+        public DbSet<SEthnic> SEthnics { get; set; }
         public DbSet<SRoom> SRooms { get; set; }
         public DbSet<SJob> SJobs { get; set; }
         public DbSet<SHospital> SHospitals { get; set; }

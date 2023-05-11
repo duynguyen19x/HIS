@@ -204,7 +204,7 @@ namespace HIS.ApplicationService.Dictionaries.Icd
                                      TypeCode = r.TypeCode,
                                      TypeName = r.TypeName,
                                      TypeNameEnglish = r.TypeNameEnglish
-                                 }).ToList();
+                                 }).OrderBy(o => o.Code).ToList();
                 result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)

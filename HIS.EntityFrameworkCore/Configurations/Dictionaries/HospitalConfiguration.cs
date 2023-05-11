@@ -16,9 +16,9 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.ToTable("SHospitals");
 
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Code).HasMaxLength(50);
+            builder.Property(x => x.Code).HasMaxLength(50).IsRequired(); ;
             builder.Property(x => x.MohCode).HasMaxLength(50);
-            builder.Property(x => x.Name).HasMaxLength(512);
+            builder.Property(x => x.Name).HasMaxLength(512).IsRequired(); ;
             builder.Property(x => x.Grade).HasMaxLength(50);
             builder.Property(x => x.Line).HasMaxLength(50);
             builder.Property(x => x.Address).HasMaxLength(512);

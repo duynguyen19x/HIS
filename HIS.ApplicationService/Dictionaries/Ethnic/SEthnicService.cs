@@ -1,21 +1,21 @@
 ﻿using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.Job;
+using HIS.Dtos.Dictionaries.Ethnic;
 using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
 
-namespace HIS.ApplicationService.Dictionaries.Job
+namespace HIS.ApplicationService.Dictionaries.Ethnic
 {
-    public class SJobService : BaseSerivce, ISJobService
+    public class SEthnicService : BaseSerivce, ISEthnicService
     {
-        public SJobService(HIS_DbContext dbContext, IConfiguration config)
+        public SEthnicService(HIS_DbContext dbContext, IConfiguration config)
             : base(dbContext, config)
         {
 
         }
 
-        public async Task<ApiResult<SJobDto>> CreateOrEdit(SJobDto input)
+        public async Task<ApiResult<SEthnicDto>> CreateOrEdit(SEthnicDto input)
         {
             if (input.Id == null)
                 return await Create(input);
@@ -23,15 +23,15 @@ namespace HIS.ApplicationService.Dictionaries.Job
                 return await Update(input);
         }
 
-        public async Task<ApiResult<SJobDto>> Create(SJobDto input)
+        public async Task<ApiResult<SEthnicDto>> Create(SEthnicDto input)
         {
-            var result = new ApiResult<SJobDto>();
+            var result = new ApiResult<SEthnicDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var branch = new SJob()
+                    var branch = new SEthnic()
                     {
                         Id = input.Id.GetValueOrDefault(),
                         Code = input.Code,
@@ -39,7 +39,7 @@ namespace HIS.ApplicationService.Dictionaries.Job
                         Description = input.Description,
                         Inactive = input.Inactive
                     };
-                    _dbContext.SJobs.Add(branch);
+                    _dbContext.SEthnics.Add(branch);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -60,14 +60,14 @@ namespace HIS.ApplicationService.Dictionaries.Job
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SJobDto>> Update(SJobDto input)
+        public async Task<ApiResult<SEthnicDto>> Update(SEthnicDto input)
         {
-            var result = new ApiResult<SJobDto>();
+            var result = new ApiResult<SEthnicDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
-                    var job = new SJob()
+                    var ethnic = new SEthnic()
                     {
                         Id = input.Id.GetValueOrDefault(),
                         Code = input.Code,
@@ -75,7 +75,7 @@ namespace HIS.ApplicationService.Dictionaries.Job
                         Description = input.Description,
                         Inactive = input.Inactive
                     };
-                    _dbContext.SJobs.Update(job);
+                    _dbContext.SEthnics.Update(ethnic);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -96,17 +96,17 @@ namespace HIS.ApplicationService.Dictionaries.Job
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SJobDto>> Delete(Guid id)
+        public async Task<ApiResult<SEthnicDto>> Delete(Guid id)
         {
-            var result = new ApiResult<SJobDto>();
+            var result = new ApiResult<SEthnicDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
-                    var job = _dbContext.SJobs.SingleOrDefault(x => x.Id == id);
-                    if (job != null)
+                    var ethnic = _dbContext.SEthnics.SingleOrDefault(x => x.Id == id);
+                    if (ethnic != null)
                     {
-                        _dbContext.SJobs.Remove(job);
+                        _dbContext.SEthnics.Remove(ethnic);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -126,17 +126,17 @@ namespace HIS.ApplicationService.Dictionaries.Job
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<SJobDto>> GetAll(GetAllSJobInput input)
+        public async Task<ApiResultList<SEthnicDto>> GetAll(GetAllSEthnicInput input)
         {
-            var result = new ApiResultList<SJobDto>();
+            var result = new ApiResultList<SEthnicDto>();
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SJobs
+                result.Result = (from r in _dbContext.SEthnics
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
-                                 select new SJobDto()
+                                 select new SEthnicDto()
                                  {
                                      Id = r.Id,
                                      Code = r.Code,
@@ -155,21 +155,21 @@ namespace HIS.ApplicationService.Dictionaries.Job
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SJobDto>> GetById(Guid id)
+        public async Task<ApiResult<SEthnicDto>> GetById(Guid id)
         {
-            var result = new ApiResult<SJobDto>();
+            var result = new ApiResult<SEthnicDto>();
 
-            var branch = _dbContext.SJobs.SingleOrDefault(s => s.Id == id);
-            if (branch != null)
+            var ethnic = _dbContext.SEthnics.SingleOrDefault(s => s.Id == id);
+            if (ethnic != null)
             {
                 result.IsSuccessed = true;
-                result.Result = new SJobDto()
+                result.Result = new SEthnicDto()
                 {
-                    Id = branch.Id,
-                    Code = branch.Code,
-                    Name = branch.Name,
-                    Description = branch.Description,
-                    Inactive = branch.Inactive
+                    Id = ethnic.Id,
+                    Code = ethnic.Code,
+                    Name = ethnic.Name,
+                    Description = ethnic.Description,
+                    Inactive = ethnic.Inactive
                 };
             }
 
