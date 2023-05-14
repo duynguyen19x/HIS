@@ -43,6 +43,7 @@ namespace HIS.ApplicationService.Dictionaries.Department
                     {
                         Id = input.Id.GetValueOrDefault(),
                         Code = input.Code,
+                        MohCode = input.MohCode,
                         Name = input.Name,
                         Description = input.Description,
                         BranchId = input.BranchId,
@@ -80,6 +81,7 @@ namespace HIS.ApplicationService.Dictionaries.Department
                     {
                         Id = input.Id.GetValueOrDefault(),
                         Code = input.Code,
+                        MohCode = input.MohCode,
                         Name = input.Name,
                         Description = input.Description,
                         BranchId = input.BranchId,
@@ -142,19 +144,23 @@ namespace HIS.ApplicationService.Dictionaries.Department
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SDepartments
-                                 where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
-                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
-                                     && (input.BranchIdFilter == null || r.BranchId == input.BranchIdFilter)
-                                     && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
+                result.Result = (from d in _dbContext.SDepartments
+                                 join b in _dbContext.SBranchs on d.BranchId equals b.Id 
+                                 where (string.IsNullOrEmpty(input.NameFilter) || d.Name == input.NameFilter)
+                                     && (string.IsNullOrEmpty(input.CodeFilter) || d.Code == input.CodeFilter)
+                                     && (input.BranchIdFilter == null || d.BranchId == input.BranchIdFilter)
+                                     && (input.InactiveFilter == null || d.Inactive == input.InactiveFilter)
                                  select new SDepartmentDto()
                                  {
-                                     Id = r.Id,
-                                     Code = r.Code,
-                                     Name = r.Name,
-                                     Description = r.Description,
-                                     BranchId = r.BranchId,
-                                     Inactive = r.Inactive
+                                     Id = d.Id,
+                                     Code = d.Code,
+                                     MohCode = d.MohCode,
+                                     Name = d.Name,
+                                     Description = d.Description,
+                                     BranchId = d.BranchId,
+                                     BranchCode = b.Code,
+                                     BranchName = b.Name,
+                                     Inactive = d.Inactive
                                  }).ToList();
                 result.TotalCount = result.Result.Count;
             }
@@ -178,9 +184,12 @@ namespace HIS.ApplicationService.Dictionaries.Department
                 {
                     Id = department.Id,
                     Code = department.Code,
+                    MohCode = department.MohCode,
                     Name = department.Name,
                     Description = department.Description,
                     BranchId = department.BranchId,
+                    BranchCode = department.Code,
+                    BranchName = department.Name,
                     Inactive = department.Inactive
                 };
             }

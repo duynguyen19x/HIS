@@ -4,14 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Dictionaries.Room
+namespace HIS.Dtos.Dictionaries.District
 {
-    public class GetAllSRoomInput
+    public class GetAllSDistrictInput
     {
         public string CodeFilter { get; set; }
         public string NameFilter { get; set; }
-        public int? RoomTypeIdFilter { get; set; }
-        public Guid? DepartmentIdFilter { get; set; }
         public bool? InactiveFilter { get; set; }
     }
 }

@@ -1,6 +1,7 @@
-﻿using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.Department;
-using HIS.Dtos.Dictionaries.Room;
+﻿using HIS.ApplicationService.Dictionaries.Country;
+using HIS.Dtos.Commons;
+using HIS.Dtos.Dictionaries.Country;
+using HIS.Dtos.Dictionaries.Province;
 using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Models.Commons;
@@ -11,17 +12,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.ApplicationService.Dictionaries.Room
+namespace HIS.ApplicationService.Dictionaries.Province
 {
-    internal class SRoomService : BaseSerivce, ISRoomService
+    public class SProvinceService : BaseSerivce, ISProvinceService
     {
-        public SRoomService(HIS_DbContext dbContext, IConfiguration config)
+        public SProvinceService(HIS_DbContext dbContext, IConfiguration config)
             : base(dbContext, config)
         {
 
         }
 
-        public async Task<ApiResult<SRoomDto>> CreateOrEdit(SRoomDto input)
+        public async Task<ApiResult<SProvinceDto>> CreateOrEdit(SProvinceDto input)
         {
             if (input.Id == null)
                 return await Create(input);
@@ -29,25 +30,23 @@ namespace HIS.ApplicationService.Dictionaries.Room
                 return await Update(input);
         }
 
-        public async Task<ApiResult<SRoomDto>> Create(SRoomDto input)
+        public async Task<ApiResult<SProvinceDto>> Create(SProvinceDto input)
         {
-            var result = new ApiResult<SRoomDto>();
+            var result = new ApiResult<SProvinceDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var department = new SRoom()
+                    var branch = new SProvince()
                     {
                         Id = input.Id.GetValueOrDefault(),
                         Code = input.Code,
                         Name = input.Name,
-                        RoomTypeId = input.RoomTypeId,
                         Description = input.Description,
-                        DepartmentId = input.DepartmentId,
                         Inactive = input.Inactive
                     };
-                    _dbContext.SRooms.Add(department);
+                    _dbContext.SProvinces.Add(branch);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -68,24 +67,22 @@ namespace HIS.ApplicationService.Dictionaries.Room
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SRoomDto>> Update(SRoomDto input)
+        public async Task<ApiResult<SProvinceDto>> Update(SProvinceDto input)
         {
-            var result = new ApiResult<SRoomDto>();
+            var result = new ApiResult<SProvinceDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
-                    var department = new SRoom()
+                    var job = new SProvince()
                     {
                         Id = input.Id.GetValueOrDefault(),
                         Code = input.Code,
                         Name = input.Name,
-                        RoomTypeId = input.RoomTypeId,
                         Description = input.Description,
-                        DepartmentId = input.DepartmentId,
                         Inactive = input.Inactive
                     };
-                    _dbContext.SRooms.Update(department);
+                    _dbContext.SProvinces.Update(job);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -106,17 +103,17 @@ namespace HIS.ApplicationService.Dictionaries.Room
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SRoomDto>> Delete(Guid id)
+        public async Task<ApiResult<SProvinceDto>> Delete(Guid id)
         {
-            var result = new ApiResult<SRoomDto>();
+            var result = new ApiResult<SProvinceDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
-                    var department = _dbContext.SRooms.SingleOrDefault(x => x.Id == id);
-                    if (department != null)
+                    var job = _dbContext.SProvinces.SingleOrDefault(x => x.Id == id);
+                    if (job != null)
                     {
-                        _dbContext.SRooms.Remove(department);
+                        _dbContext.SProvinces.Remove(job);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -136,33 +133,24 @@ namespace HIS.ApplicationService.Dictionaries.Room
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<SRoomDto>> GetAll(GetAllSRoomInput input)
+        public async Task<ApiResultList<SProvinceDto>> GetAll(GetAllSProvinceInput input)
         {
-            var result = new ApiResultList<SRoomDto>();
+            var result = new ApiResultList<SProvinceDto>();
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SRooms
-                                 join d in _dbContext.SDepartments on r.DepartmentId equals d.Id 
+                result.Result = (from r in _dbContext.SProvinces
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
-                                     && (input.DepartmentIdFilter == null || r.DepartmentId == input.DepartmentIdFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
-                                 select new SRoomDto()
+                                 select new SProvinceDto()
                                  {
                                      Id = r.Id,
                                      Code = r.Code,
                                      Name = r.Name,
-                                     RoomTypeId = r.RoomTypeId,
                                      Description = r.Description,
-                                     DepartmentId = r.DepartmentId,
-                                     DepartmentCode = d.Code,
-                                     DepartmentName = d.Name,
                                      Inactive = r.Inactive
-                                 })
-                                 .OrderBy(o => o.DepartmentId)
-                                 .ThenBy(o => o.Code)
-                                 .ToList();
+                                 }).OrderBy(o => o.Code).ToList();
                 result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
@@ -174,22 +162,21 @@ namespace HIS.ApplicationService.Dictionaries.Room
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SRoomDto>> GetById(Guid id)
+        public async Task<ApiResult<SProvinceDto>> GetById(Guid id)
         {
-            var result = new ApiResult<SRoomDto>();
-            var department = _dbContext.SRooms.SingleOrDefault(s => s.Id == id);
-            if (department != null)
+            var result = new ApiResult<SProvinceDto>();
+
+            var branch = _dbContext.SProvinces.SingleOrDefault(s => s.Id == id);
+            if (branch != null)
             {
                 result.IsSuccessed = true;
-                result.Result = new SRoomDto()
+                result.Result = new SProvinceDto()
                 {
-                    Id = department.Id,
-                    Code = department.Code,
-                    Name = department.Name,
-                    RoomTypeId = department.RoomTypeId,
-                    Description = department.Description,
-                    DepartmentId = department.DepartmentId,
-                    Inactive = department.Inactive
+                    Id = branch.Id,
+                    Code = branch.Code,
+                    Name = branch.Name,
+                    Description = branch.Description,
+                    Inactive = branch.Inactive
                 };
             }
 
