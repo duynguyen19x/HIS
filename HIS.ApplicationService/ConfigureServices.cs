@@ -5,7 +5,7 @@ using HIS.ApplicationService.Dictionaries.District;
 using HIS.ApplicationService.Dictionaries.Ethnic;
 using HIS.ApplicationService.Dictionaries.Hospital;
 using HIS.ApplicationService.Dictionaries.Icd;
-using HIS.ApplicationService.Dictionaries.Job;
+using HIS.ApplicationService.Dictionaries.Career;
 using HIS.ApplicationService.Dictionaries.Province;
 using HIS.ApplicationService.Dictionaries.Room;
 using HIS.ApplicationService.Dictionaries.Ward;
@@ -28,6 +28,7 @@ namespace HIS.ApplicationService
             services.AddTransient<IRoleService, RoleService>();
 
             services.AddTransient<ISBranchService, SBranchService>();
+            services.AddTransient<ISCareerService, SCareerService>();
             services.AddTransient<ISCountryService, SCountryService>();
             services.AddTransient<ISDepartmentService, SDepartmentService>();
             services.AddTransient<ISDistrictService, SDistrictService>();
@@ -35,7 +36,6 @@ namespace HIS.ApplicationService
             services.AddTransient<ISRoomService, SRoomService>();
             services.AddTransient<ISHospitalService, SHospitalService>();
             services.AddTransient<ISIcdService, SIcdService>();
-            services.AddTransient<ISJobService, SJobService>();
             services.AddTransient<ISProvinceService, SProvinceService>();
             services.AddTransient<ISWardService, SWardService>();
         }

@@ -4,6 +4,7 @@ using HIS.EntityFrameworkCore.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(HIS_DbContext))]
-    partial class HIS_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20230514145203_Alter_table_Alter_table_Career")]
+    partial class Alter_table_Career
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

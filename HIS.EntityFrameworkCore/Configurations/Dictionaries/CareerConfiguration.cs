@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class JobConfiguration : IEntityTypeConfiguration<SJob>
+    public class CareerConfiguration : IEntityTypeConfiguration<SCareer>
     {
-        public void Configure(EntityTypeBuilder<SJob> builder)
+        public void Configure(EntityTypeBuilder<SCareer> builder)
         {
-            builder.ToTable("SJobs");
+            builder.ToTable("SCareers");
 
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Code).HasMaxLength(50).IsRequired(); ;
-            builder.Property(x => x.Name).HasMaxLength(512).IsRequired(); ;
+            builder.Property(x => x.Code).HasMaxLength(50).IsRequired();
+            builder.Property(x => x.Name).HasMaxLength(512).IsRequired();
             builder.Property(x => x.Description).HasMaxLength(512);
         }
     }

@@ -1,16 +1,13 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
+﻿using HIS.Dtos.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionaries
+namespace HIS.Dtos.Dictionaries.Career
 {
-    /// <summary>
-    /// Nghề nghiệp
-    /// </summary>
-    public class SJob : FullAuditingEntity<Guid>
+    public class SCareerDto : EntityDto<Guid?>
     {
         public string Code { get; set; }
         public string Name { get; set; }

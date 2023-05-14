@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Dictionaries.Job
+namespace HIS.Dtos.Dictionaries.Career
 {
-    public class GetAllSJobInput
+    public class GetAllSCareerInput
     {
         public string CodeFilter { get; set; }
         public string NameFilter { get; set; }

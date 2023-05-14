@@ -4,6 +4,7 @@ using HIS.EntityFrameworkCore.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(HIS_DbContext))]
-    partial class HIS_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20230514144140_Alter_table_Job_to_Career")]
+    partial class Alter_table_Job_to_Career
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -185,21 +188,21 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f0d4c17a-9ec3-4bd5-a680-cdd1563a9269"),
+                            Id = new Guid("cb4c2b2c-48ee-4e06-90ee-812671df56b9"),
                             Code = "BHYT",
                             IsActive = true,
                             Name = "Bảo hiểm y tế"
                         },
                         new
                         {
-                            Id = new Guid("fbe3f357-562e-4b3d-a0db-39772b4ffc34"),
+                            Id = new Guid("a5bde015-3a01-461d-944f-489f96eb1899"),
                             Code = "VP",
                             IsActive = true,
                             Name = "Viện phí"
                         },
                         new
                         {
-                            Id = new Guid("c678ad0c-5796-4662-b147-b09a10881205"),
+                            Id = new Guid("6f9cf43e-fd34-4512-bb25-d504c28ae817"),
                             Code = "DV",
                             IsActive = true,
                             Name = "Dịch vụ"
@@ -226,19 +229,19 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9260f520-9e08-4e42-b8ae-2d1907397bd6"),
+                            Id = new Guid("5b16efcb-1060-4f9f-9d18-dcdcd075c86d"),
                             Code = 0,
                             Name = "Chưa xác định"
                         },
                         new
                         {
-                            Id = new Guid("a15c24d8-f3d3-420d-b305-e5bb77662da8"),
+                            Id = new Guid("facfadbf-22ce-4072-bbda-01a923e2e253"),
                             Code = 1,
                             Name = "Nam"
                         },
                         new
                         {
-                            Id = new Guid("0d4b0893-9280-46d7-96e5-c944e20c46ed"),
+                            Id = new Guid("170b6244-f4df-465e-a9ea-44c4ca9524e0"),
                             Code = 2,
                             Name = "Nữ"
                         });
@@ -778,97 +781,97 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("352d4f0c-abc5-470e-ad5a-5d1b626f3019"),
+                            Id = new Guid("14822dc5-de68-420e-8f99-862a6ecb9584"),
                             Code = "GB",
                             Name = "Giải phẫu bệnh lý"
                         },
                         new
                         {
-                            Id = new Guid("1e4092a9-fa62-4e4a-82b8-b63c3dc4ec88"),
+                            Id = new Guid("1c7aab18-f1d0-4af7-aad9-9c9b02fcfe8b"),
                             Code = "PT",
                             Name = "Phẫu thuật"
                         },
                         new
                         {
-                            Id = new Guid("1d4eb8f6-944b-45e9-9562-2bedb81b0220"),
+                            Id = new Guid("8a560ca6-19f9-457d-86b2-93c9e1153939"),
                             Code = "KH",
                             Name = "Khám"
                         },
                         new
                         {
-                            Id = new Guid("4a4a1a7e-3ab1-433c-89a5-193ffd283862"),
+                            Id = new Guid("0b1bfc59-e9a3-498b-9a85-e8b9c3ca4ea6"),
                             Code = "CN",
                             Name = "Thăm dò chức năng"
                         },
                         new
                         {
-                            Id = new Guid("29364bd7-88f7-4eab-9ff6-8f9a10f5fead"),
+                            Id = new Guid("fb880147-f2b8-47de-bca9-9ceb439964d9"),
                             Code = "PH",
                             Name = "Phục hồi chức năng"
                         },
                         new
                         {
-                            Id = new Guid("c053c05f-2979-44cc-99dd-a53d8481366b"),
+                            Id = new Guid("b82d10f1-96c1-499b-97be-f444835f3c8b"),
                             Code = "NS",
                             Name = "Nội soi"
                         },
                         new
                         {
-                            Id = new Guid("9688c586-3368-4e25-b2fc-38b2f5400475"),
+                            Id = new Guid("ada58d4d-923b-4153-a084-64427ed638c5"),
                             Code = "HA",
                             Name = "Chẩn đoán hình ảnh"
                         },
                         new
                         {
-                            Id = new Guid("53c01555-d3ff-4ac5-aa75-632bc31302b3"),
+                            Id = new Guid("9b1ebf8e-e0ef-4b85-a09d-226ec8156c51"),
                             Code = "XN",
                             Name = "Xét nghiệm"
                         },
                         new
                         {
-                            Id = new Guid("29f568e7-49de-47a0-86c3-1007348045f3"),
+                            Id = new Guid("b91db5c8-0a06-4953-bc68-ba1877ab3751"),
                             Code = "TT",
                             Name = "Thủ thuật"
                         },
                         new
                         {
-                            Id = new Guid("5bf94a61-3ef4-477a-9ef0-b6ab41cf0df0"),
+                            Id = new Guid("3cc3ef8b-3ea1-466d-8913-7ebb67fb547f"),
                             Code = "SA",
                             Name = "Siêu âm"
                         },
                         new
                         {
-                            Id = new Guid("8d1c9571-ae22-4af1-af18-8a2c5f9e687a"),
+                            Id = new Guid("c159f9fd-f8e8-40eb-a302-6b5bfeaa9947"),
                             Code = "AN",
                             Name = "Suất ăn"
                         },
                         new
                         {
-                            Id = new Guid("e411d05b-a53a-45f4-8e32-435ef5e926e0"),
+                            Id = new Guid("9b899ec8-0496-4874-89d3-af9cc9ce7301"),
                             Code = "MA",
                             Name = "Máu"
                         },
                         new
                         {
-                            Id = new Guid("fdb190e7-0818-4392-943a-119c1715ab4b"),
+                            Id = new Guid("fc0fff47-99d3-43c4-b976-ddbea276d130"),
                             Code = "VT",
                             Name = "Vật tư"
                         },
                         new
                         {
-                            Id = new Guid("145c85c8-c6ac-4492-88d9-18f735dbbb13"),
+                            Id = new Guid("ab9f7bca-d77b-4f43-8cc2-d068528bb13f"),
                             Code = "CL",
                             Name = "Khác"
                         },
                         new
                         {
-                            Id = new Guid("1027b1e0-42fc-4ac1-b88e-1e3edc595d22"),
+                            Id = new Guid("84603b63-71c4-4b3d-a4a9-f6c03f2c137e"),
                             Code = "TH",
                             Name = "Thuốc"
                         },
                         new
                         {
-                            Id = new Guid("8fd815e5-02be-4218-83de-5e43826573dc"),
+                            Id = new Guid("b655575f-9d77-4950-afdd-ec8924ac6cf4"),
                             Code = "GI",
                             Name = "Giường"
                         });
@@ -1049,7 +1052,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("45a3660b-71a2-431d-ad08-ccbe123df94e"),
+                            Id = new Guid("84c9f5ee-4042-4583-a4d5-7b607cbf08fc"),
                             Email = "administrator@gmail.com",
                             FirstName = "Admin",
                             LastName = "Administrator",
@@ -1132,28 +1135,20 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<int?>("SortOrder")
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("SCareers", (string)null);
+                    b.ToTable("SCareers");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SCountry", b =>

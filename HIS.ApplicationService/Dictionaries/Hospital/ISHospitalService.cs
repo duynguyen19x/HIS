@@ -1,6 +1,6 @@
 ﻿using HIS.ApplicationService.Base;
 using HIS.Dtos.Dictionaries.Hospital;
-using HIS.Dtos.Dictionaries.Job;
+using HIS.Dtos.Dictionaries.Career;
 using System;
 using System.Collections.Generic;
 using System.Linq;

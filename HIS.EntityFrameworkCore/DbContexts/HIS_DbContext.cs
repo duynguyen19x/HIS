@@ -27,6 +27,7 @@ namespace HIS.EntityFrameworkCore.DbContexts
             modelBuilder.ApplyConfiguration(new GenderConfiguration());
             modelBuilder.ApplyConfiguration(new PermissionConfigurations());
             modelBuilder.ApplyConfiguration(new BranchConfiguration());
+            modelBuilder.ApplyConfiguration(new CareerConfiguration());
             modelBuilder.ApplyConfiguration(new DepartmentConfiguration());
             modelBuilder.ApplyConfiguration(new RoomConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
@@ -60,7 +61,7 @@ namespace HIS.EntityFrameworkCore.DbContexts
         public DbSet<SDepartment> SDepartments { get; set; }
         public DbSet<SEthnic> SEthnics { get; set; }
         public DbSet<SRoom> SRooms { get; set; }
-        public DbSet<SJob> SJobs { get; set; }
+        public DbSet<SCareer> SCareers { get; set; }
         public DbSet<SHospital> SHospitals { get; set; }
         public DbSet<SIcd> SIcds { get; set; }
 

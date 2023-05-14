@@ -1,21 +1,21 @@
-﻿using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.Job;
+﻿using AutoMapper;
+using HIS.Dtos.Commons;
+using HIS.Dtos.Dictionaries.Career;
 using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
 
-namespace HIS.ApplicationService.Dictionaries.Job
+namespace HIS.ApplicationService.Dictionaries.Career
 {
-    public class SJobService : BaseSerivce, ISJobService
+    public class SCareerService : BaseSerivce, ISCareerService
     {
-        public SJobService(HIS_DbContext dbContext, IConfiguration config)
-            : base(dbContext, config)
+        public SCareerService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper)
+            : base(dbContext, config, mapper)
         {
-
         }
 
-        public async Task<ApiResult<SJobDto>> CreateOrEdit(SJobDto input)
+        public async Task<ApiResult<SCareerDto>> CreateOrEdit(SCareerDto input)
         {
             if (input.Id == null)
                 return await Create(input);
@@ -23,23 +23,16 @@ namespace HIS.ApplicationService.Dictionaries.Job
                 return await Update(input);
         }
 
-        public async Task<ApiResult<SJobDto>> Create(SJobDto input)
+        public async Task<ApiResult<SCareerDto>> Create(SCareerDto input)
         {
-            var result = new ApiResult<SJobDto>();
+            var result = new ApiResult<SCareerDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var branch = new SJob()
-                    {
-                        Id = input.Id.GetValueOrDefault(),
-                        Code = input.Code,
-                        Name = input.Name,
-                        Description = input.Description,
-                        Inactive = input.Inactive
-                    };
-                    _dbContext.SJobs.Add(branch);
+                    var data = _mapper.Map<SCareer>(input);
+                    _dbContext.SCareers.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -60,22 +53,15 @@ namespace HIS.ApplicationService.Dictionaries.Job
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SJobDto>> Update(SJobDto input)
+        public async Task<ApiResult<SCareerDto>> Update(SCareerDto input)
         {
-            var result = new ApiResult<SJobDto>();
+            var result = new ApiResult<SCareerDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
-                    var job = new SJob()
-                    {
-                        Id = input.Id.GetValueOrDefault(),
-                        Code = input.Code,
-                        Name = input.Name,
-                        Description = input.Description,
-                        Inactive = input.Inactive
-                    };
-                    _dbContext.SJobs.Update(job);
+                    var data = _mapper.Map<SCareer>(input);
+                    _dbContext.SCareers.Update(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -96,17 +82,17 @@ namespace HIS.ApplicationService.Dictionaries.Job
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SJobDto>> Delete(Guid id)
+        public async Task<ApiResult<SCareerDto>> Delete(Guid id)
         {
-            var result = new ApiResult<SJobDto>();
+            var result = new ApiResult<SCareerDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
-                    var job = _dbContext.SJobs.SingleOrDefault(x => x.Id == id);
-                    if (job != null)
+                    var data = _dbContext.SCareers.SingleOrDefault(x => x.Id == id);
+                    if (data != null)
                     {
-                        _dbContext.SJobs.Remove(job);
+                        _dbContext.SCareers.Remove(data);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -126,17 +112,17 @@ namespace HIS.ApplicationService.Dictionaries.Job
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<SJobDto>> GetAll(GetAllSJobInput input)
+        public async Task<ApiResultList<SCareerDto>> GetAll(GetAllSCareerInput input)
         {
-            var result = new ApiResultList<SJobDto>();
+            var result = new ApiResultList<SCareerDto>();
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SJobs
+                result.Result = (from r in _dbContext.SCareers
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
-                                 select new SJobDto()
+                                 select new SCareerDto()
                                  {
                                      Id = r.Id,
                                      Code = r.Code,
@@ -155,22 +141,15 @@ namespace HIS.ApplicationService.Dictionaries.Job
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SJobDto>> GetById(Guid id)
+        public async Task<ApiResult<SCareerDto>> GetById(Guid id)
         {
-            var result = new ApiResult<SJobDto>();
+            var result = new ApiResult<SCareerDto>();
 
-            var branch = _dbContext.SJobs.SingleOrDefault(s => s.Id == id);
-            if (branch != null)
+            var data = _dbContext.SCareers.SingleOrDefault(s => s.Id == id);
+            if (data != null)
             {
                 result.IsSuccessed = true;
-                result.Result = new SJobDto()
-                {
-                    Id = branch.Id,
-                    Code = branch.Code,
-                    Name = branch.Name,
-                    Description = branch.Description,
-                    Inactive = branch.Inactive
-                };
+                result.Result = _mapper.Map<SCareerDto>(data);
             }
 
             return await Task.FromResult(result);

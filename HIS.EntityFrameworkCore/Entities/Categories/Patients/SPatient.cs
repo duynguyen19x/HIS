@@ -72,7 +72,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories.Patients
         /// <summary>
         /// NGhề nghiệp
         /// </summary>
-        public Guid? JobId { get; set; }
+        public Guid? CareerId { get; set; }
         /// <summary>
         /// Chi nhánh
         /// </summary>
