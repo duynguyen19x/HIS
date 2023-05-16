@@ -1,11 +1,12 @@
 ﻿using HIS.EntityFrameworkCore.BaseEntitys;
+using HIS.EntityFrameworkCore.Entities.Categories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Categories.Patients
+namespace HIS.EntityFrameworkCore.Entities.Business.Patients
 {
     public class SPatient : FullAuditingEntity<Guid>
     {
@@ -117,7 +118,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories.Patients
         /// <summary>
         /// Số hộ chiếu
         /// </summary>
-        public string  PassPortNumber { get; set; }
+        public string PassPortNumber { get; set; }
         /// <summary>
         /// Ngày cấp hộ chiếu
         /// </summary>
@@ -128,6 +129,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories.Patients
         public string PassPortIssuedBy { get; set; }
 
         public SPatientType PatientType { get; set; }
-        public SGender  Gender { get; set; }
+        public SGender Gender { get; set; }
     }
 }

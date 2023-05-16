@@ -1,4 +1,5 @@
-﻿using HIS.Dtos.Commons;
+﻿using AutoMapper;
+using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Branch;
 using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
@@ -9,8 +10,8 @@ namespace HIS.ApplicationService.Dictionaries.Branch
 {
     public class SBranchService : BaseSerivce, ISBranchService
     {
-        public SBranchService(HIS_DbContext dbContext, IConfiguration config)
-            : base(dbContext, config)
+        public SBranchService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper)
+            : base(dbContext, config, mapper)
         {
 
         }
@@ -32,15 +33,7 @@ namespace HIS.ApplicationService.Dictionaries.Branch
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var branch = new SBranch()
-                    {
-                        Id = input.Id.GetValueOrDefault(),
-                        Code = input.Code,
-                        Name = input.Name,
-                        Address = input.Address,
-                        Description = input.Description,
-                        Inactive = input.Inactive
-                    };
+                    var branch = _mapper.Map<SBranch>(input);
                     _dbContext.SBranchs.Add(branch);
                     await _dbContext.SaveChangesAsync();
 
@@ -69,15 +62,7 @@ namespace HIS.ApplicationService.Dictionaries.Branch
             {
                 try
                 {
-                    var branch = new SBranch()
-                    {
-                        Id = input.Id.GetValueOrDefault(),
-                        Code = input.Code,
-                        Name = input.Name,
-                        Address = input.Address,
-                        Description = input.Description,
-                        Inactive = input.Inactive
-                    };
+                    var branch = _mapper.Map<SBranch>(input);
                     _dbContext.SBranchs.Update(branch);
                     await _dbContext.SaveChangesAsync();
 
@@ -167,15 +152,7 @@ namespace HIS.ApplicationService.Dictionaries.Branch
             if (branch != null)
             {
                 result.IsSuccessed = true;
-                result.Result = new SBranchDto()
-                {
-                    Id = branch.Id,
-                    Code = branch.Code,
-                    Name = branch.Name,
-                    Address = branch.Address,
-                    Description = branch.Description,
-                    Inactive = branch.Inactive
-                };
+                result.Result = _mapper.Map<SBranchDto>(branch);
             }
 
             return await Task.FromResult(result);

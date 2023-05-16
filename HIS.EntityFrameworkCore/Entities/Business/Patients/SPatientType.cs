@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Categories.Patients
+namespace HIS.EntityFrameworkCore.Entities.Business.Patients
 {
     public class SPatientType : Entity<Guid>
     {

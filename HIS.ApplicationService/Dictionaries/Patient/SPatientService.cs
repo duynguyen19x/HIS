@@ -1,5 +1,5 @@
-﻿using HIS.Dtos.Business.Patient;
-using HIS.Dtos.Commons;
+﻿using HIS.Dtos.Commons;
+using HIS.Dtos.Dictionaries.Patient;
 using HIS.EntityFrameworkCore.DbContexts;
 using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.ApplicationService.Business.Patient
+namespace HIS.ApplicationService.Dictionaries.Patient
 {
     public class SPatientService : BaseSerivce, ISPatientService
     {

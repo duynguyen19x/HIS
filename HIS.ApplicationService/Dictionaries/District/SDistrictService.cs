@@ -1,4 +1,5 @@
-﻿using HIS.ApplicationService.Dictionaries.Country;
+﻿using AutoMapper;
+using HIS.ApplicationService.Dictionaries.Country;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Country;
 using HIS.Dtos.Dictionaries.District;

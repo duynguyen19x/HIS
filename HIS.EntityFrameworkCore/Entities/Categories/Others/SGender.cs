@@ -1,5 +1,5 @@
 ﻿using HIS.EntityFrameworkCore.BaseEntitys;
-using HIS.EntityFrameworkCore.Entities.Categories.Patients;
+using HIS.EntityFrameworkCore.Entities.Business.Patients;
 using HIS.Utilities.Enums;
 using System;
 using System.Collections.Generic;

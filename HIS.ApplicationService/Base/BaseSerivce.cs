@@ -17,16 +17,17 @@ namespace HIS.ApplicationService
         public readonly IMapper _mapper;
         public readonly IConfiguration _config;
 
-        public BaseSerivce(HIS_DbContext dbContext, IConfiguration config)
-        {
-            _dbContext = dbContext;
-            _config = config;
-        }
         public BaseSerivce(HIS_DbContext dbContext, IConfiguration config, IMapper mapper)
         {
             _dbContext = dbContext;
             _config = config;
             _mapper = mapper;
+        }
+
+        public BaseSerivce(HIS_DbContext dbContext, IConfiguration config)
+        {
+            _dbContext = dbContext;
+            _config = config;
         }
     }
 }

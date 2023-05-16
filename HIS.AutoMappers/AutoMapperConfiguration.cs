@@ -1,5 +1,15 @@
 ﻿using AutoMapper;
+using HIS.Dtos.Dictionaries.Branch;
 using HIS.Dtos.Dictionaries.Career;
+using HIS.Dtos.Dictionaries.Country;
+using HIS.Dtos.Dictionaries.Department;
+using HIS.Dtos.Dictionaries.District;
+using HIS.Dtos.Dictionaries.Ethnic;
+using HIS.Dtos.Dictionaries.Hospital;
+using HIS.Dtos.Dictionaries.Icd;
+using HIS.Dtos.Dictionaries.Province;
+using HIS.Dtos.Dictionaries.Ward;
+using HIS.Dtos.Systems.Role;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 
 namespace HIS.AutoMappers
@@ -8,7 +18,17 @@ namespace HIS.AutoMappers
     {
         public AutoMapperConfiguration()
         {
+            CreateMap<SBranch, SBranchDto>().ReverseMap();
             CreateMap<SCareer, SCareerDto>().ReverseMap();
+            CreateMap<SCountry, SCountryDto>().ReverseMap();
+            CreateMap<SDepartment, SDepartmentDto>().ReverseMap();
+            CreateMap<SDistrict, SDistrictDto>().ReverseMap();
+            CreateMap<SEthnic, SEthnicDto>().ReverseMap();
+            CreateMap<SHospital, SHospitalDto>().ReverseMap();
+            CreateMap<SIcd, SIcdDto>().ReverseMap();
+            CreateMap<SProvince, SProvinceDto>().ReverseMap();
+            CreateMap<SRoom, SRoleDto>().ReverseMap();
+            CreateMap<SWard, SWardDto>().ReverseMap();
         }
     }
 }

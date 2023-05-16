@@ -1,4 +1,4 @@
-﻿using HIS.EntityFrameworkCore.Entities.Categories.Patients;
+﻿using HIS.EntityFrameworkCore.Entities.Business.Patients;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

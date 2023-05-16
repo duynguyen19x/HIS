@@ -11,13 +11,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace HIS.ApplicationService.Dictionaries.Country
 {
     public class SCountryService : BaseSerivce, ISCountryService
     {
-        public SCountryService(HIS_DbContext dbContext, IConfiguration config)
-            : base(dbContext, config)
+        public SCountryService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper)
+            : base(dbContext, config, mapper)
         {
 
         }
@@ -38,15 +39,8 @@ namespace HIS.ApplicationService.Dictionaries.Country
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var branch = new SCountry()
-                    {
-                        Id = input.Id.GetValueOrDefault(),
-                        Code = input.Code,
-                        Name = input.Name,
-                        Description = input.Description,
-                        Inactive = input.Inactive
-                    };
-                    _dbContext.SCountries.Add(branch);
+                    var data = _mapper.Map<SCountry>(input); 
+                    _dbContext.SCountries.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -74,15 +68,8 @@ namespace HIS.ApplicationService.Dictionaries.Country
             {
                 try
                 {
-                    var job = new SCountry()
-                    {
-                        Id = input.Id.GetValueOrDefault(),
-                        Code = input.Code,
-                        Name = input.Name,
-                        Description = input.Description,
-                        Inactive = input.Inactive
-                    };
-                    _dbContext.SCountries.Update(job);
+                    var data = _mapper.Map<SCountry>(input);
+                    _dbContext.SCountries.Update(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -166,18 +153,11 @@ namespace HIS.ApplicationService.Dictionaries.Country
         {
             var result = new ApiResult<SCountryDto>();
 
-            var branch = _dbContext.SCountries.SingleOrDefault(s => s.Id == id);
-            if (branch != null)
+            var data = _dbContext.SCountries.SingleOrDefault(s => s.Id == id);
+            if (data != null)
             {
                 result.IsSuccessed = true;
-                result.Result = new SCountryDto()
-                {
-                    Id = branch.Id,
-                    Code = branch.Code,
-                    Name = branch.Name,
-                    Description = branch.Description,
-                    Inactive = branch.Inactive
-                };
+                result.Result = _mapper.Map<SCountryDto>(data);
             }
 
             return await Task.FromResult(result);

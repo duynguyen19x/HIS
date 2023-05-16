@@ -2,8 +2,8 @@
 using HIS.EntityFrameworkCore.Configurations.Dictionaries;
 using HIS.EntityFrameworkCore.Configurations.Patients;
 using HIS.EntityFrameworkCore.Data;
+using HIS.EntityFrameworkCore.Entities.Business.Patients;
 using HIS.EntityFrameworkCore.Entities.Categories;
-using HIS.EntityFrameworkCore.Entities.Categories.Patients;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using Microsoft.EntityFrameworkCore;
 
