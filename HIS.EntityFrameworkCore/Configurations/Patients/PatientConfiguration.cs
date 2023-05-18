@@ -22,11 +22,10 @@ namespace HIS.EntityFrameworkCore.Configurations.Patients
             builder.Property(x => x.LastName).HasMaxLength(50);
             builder.Property(x => x.Address).HasMaxLength(50);
             builder.Property(x => x.Mobile).HasMaxLength(20);
-            builder.Property(x => x.Phone).HasMaxLength(20);
-            builder.Property(x => x.Phone).HasMaxLength(20);
+            builder.Property(x => x.PhoneNumber).HasMaxLength(20);
             builder.Property(x => x.Email).HasMaxLength(50);
-            builder.Property(x => x.CitizenIdNumber).HasMaxLength(50);
-            builder.Property(x => x.CitizenIdIssuedBy).HasMaxLength(250);
+            builder.Property(x => x.IdentificationNumber).HasMaxLength(50);
+            builder.Property(x => x.IdentificationNumberIssuedBy).HasMaxLength(250);
             builder.Property(x => x.TaxCode).HasMaxLength(50);
             builder.Property(x => x.PatientFather).HasMaxLength(150);
             builder.Property(x => x.FatherEducationalLevel).HasMaxLength(150);
@@ -35,11 +34,8 @@ namespace HIS.EntityFrameworkCore.Configurations.Patients
             builder.Property(x => x.PassPortNumber).HasMaxLength(50);
             builder.Property(x => x.PassPortIssuedBy).HasMaxLength(250);
 
-            builder.HasOne(t => t.Gender).WithMany(pc => pc.Patients)
-                .HasForeignKey(pc => pc.GenderId);
-
-            builder.HasOne(t => t.PatientType).WithMany(pc => pc.SPatients)
-                .HasForeignKey(pc => pc.PatientTypeId);
+            builder.HasOne(t => t.Gender).WithMany(pc => pc.SPatients).HasForeignKey(pc => pc.GenderId);
+            builder.HasOne(t => t.PatientType).WithMany(pc => pc.SPatients).HasForeignKey(pc => pc.PatientTypeId);
         }
     }
 }

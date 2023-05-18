@@ -3,6 +3,7 @@ using HIS.EntityFrameworkCore.Configurations.Dictionaries;
 using HIS.EntityFrameworkCore.Configurations.Patients;
 using HIS.EntityFrameworkCore.Data;
 using HIS.EntityFrameworkCore.Entities.Business.Patients;
+using HIS.EntityFrameworkCore.Entities.Business.Treatment;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using Microsoft.EntityFrameworkCore;
@@ -76,6 +77,7 @@ namespace HIS.EntityFrameworkCore.DbContexts
         public DbSet<SMaterial> SMaterials { get; set; }
         public DbSet<SMaterialType> SMaterialTypes { get; set; }
         public DbSet<SPatient> SPatients { get; set; }
+        public DbSet<STreatment> STreatments { get; set; }
         public DbSet<SPatientType> SPatientTypes { get; set; }
         public DbSet<SCountry> SCountries { get; set; }
         public DbSet<SProvince> SProvinces { get; set; }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Dictionaries.Patient
+namespace HIS.Dtos.Business.Treatment
 {
-    public class GetAllSPatientInput
+    public class GetAllSTreatmentInput
     {
     }
 }

@@ -1,6 +1,7 @@
-﻿using HIS.ApplicationService.Dictionaries.Patient;
+﻿using HIS.ApplicationService.Business.Patient;
+using HIS.Dtos.Business.Patient;
+using HIS.Dtos.Business.Treatment;
 using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.Patient;
 using HIS.Models.Commons;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,11 +9,11 @@ namespace HIS.BackendApi.Controllers.Business.Patient
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PatientController : ControllerBase
+    public class SPatientController : ControllerBase
     {
         private readonly ISPatientService _patientService;
 
-        public PatientController(ISPatientService patientService)
+        public SPatientController(ISPatientService patientService)
         {
             _patientService = patientService;
         }
@@ -39,6 +40,12 @@ namespace HIS.BackendApi.Controllers.Business.Patient
         public async Task<ApiResult<SPatientDto>> Delete(Guid id)
         {
             return await _patientService.Delete(id);
+        }
+
+        [HttpPost("RegisterOrEdit")]
+        public async Task<ApiResult<STreatmentDto>> RegisterOrEdit(STreatmentDto input)
+        {
+            return await _patientService.RegisterOrEdit(input);
         }
     }
 }

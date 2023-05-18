@@ -17,6 +17,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HIS.ApplicationService.Business.Patient;
+using HIS.ApplicationService.Dictionaries.Gender;
 
 namespace HIS.ApplicationService
 {
@@ -33,11 +35,14 @@ namespace HIS.ApplicationService
             services.AddTransient<ISDepartmentService, SDepartmentService>();
             services.AddTransient<ISDistrictService, SDistrictService>();
             services.AddTransient<ISEthnicService, SEthnicService>();
+            services.AddTransient<ISGenderService, SGenderService>();
             services.AddTransient<ISRoomService, SRoomService>();
             services.AddTransient<ISHospitalService, SHospitalService>();
             services.AddTransient<ISIcdService, SIcdService>();
             services.AddTransient<ISProvinceService, SProvinceService>();
             services.AddTransient<ISWardService, SWardService>();
+
+            services.AddTransient<ISPatientService, SPatientService>();
         }
     }
 }

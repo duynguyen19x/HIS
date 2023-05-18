@@ -1,4 +1,5 @@
 ﻿using HIS.EntityFrameworkCore.BaseEntitys;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Utilities.Enums;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public Guid? DistrictId { get; set; }
         public Guid? WardId { get; set; }
 
-        public SGender Gender { get; set; }
         public IList<SUserRole> UserRoles { get; set; }
         public IList<SToken> UserTokens { get; set; }
     }

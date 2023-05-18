@@ -1,29 +1,22 @@
 ﻿using AutoMapper;
-using HIS.ApplicationService.Dictionaries.Country;
 using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.Country;
-using HIS.Dtos.Dictionaries.District;
+using HIS.Dtos.Dictionaries.Gender;
 using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HIS.ApplicationService.Dictionaries.District
+namespace HIS.ApplicationService.Dictionaries.Gender
 {
-    public class SDistrictService : BaseSerivce, ISDistrictService
+    public class SGenderService : BaseSerivce, ISGenderService
     {
-        public SDistrictService(HIS_DbContext dbContext, IConfiguration config)
-            : base(dbContext, config)
+        public SGenderService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper)
+            : base(dbContext, config, mapper)
         {
 
         }
 
-        public async Task<ApiResult<SDistrictDto>> CreateOrEdit(SDistrictDto input)
+        public async Task<ApiResult<SGenderDto>> CreateOrEdit(SGenderDto input)
         {
             if (input.Id == null)
                 return await Create(input);
@@ -31,23 +24,16 @@ namespace HIS.ApplicationService.Dictionaries.District
                 return await Update(input);
         }
 
-        public async Task<ApiResult<SDistrictDto>> Create(SDistrictDto input)
+        public async Task<ApiResult<SGenderDto>> Create(SGenderDto input)
         {
-            var result = new ApiResult<SDistrictDto>();
+            var result = new ApiResult<SGenderDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = new SDistrict()
-                    {
-                        Id = input.Id.GetValueOrDefault(),
-                        Code = input.Code,
-                        Name = input.Name,
-                        Description = input.Description,
-                        Inactive = input.Inactive
-                    };
-                    _dbContext.SDistricts.Add(data);
+                    var data = _mapper.Map<SGender>(input);
+                    _dbContext.SGenders.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -68,22 +54,15 @@ namespace HIS.ApplicationService.Dictionaries.District
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SDistrictDto>> Update(SDistrictDto input)
+        public async Task<ApiResult<SGenderDto>> Update(SGenderDto input)
         {
-            var result = new ApiResult<SDistrictDto>();
+            var result = new ApiResult<SGenderDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
-                    var job = new SDistrict()
-                    {
-                        Id = input.Id.GetValueOrDefault(),
-                        Code = input.Code,
-                        Name = input.Name,
-                        Description = input.Description,
-                        Inactive = input.Inactive
-                    };
-                    _dbContext.SDistricts.Update(job);
+                    var data = _mapper.Map<SGender>(input);
+                    _dbContext.SGenders.Update(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -104,17 +83,17 @@ namespace HIS.ApplicationService.Dictionaries.District
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SDistrictDto>> Delete(Guid id)
+        public async Task<ApiResult<SGenderDto>> Delete(Guid id)
         {
-            var result = new ApiResult<SDistrictDto>();
+            var result = new ApiResult<SGenderDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
-                    var job = _dbContext.SDistricts.SingleOrDefault(x => x.Id == id);
-                    if (job != null)
+                    var data = _dbContext.SGenders.SingleOrDefault(x => x.Id == id);
+                    if (data != null)
                     {
-                        _dbContext.SDistricts.Remove(job);
+                        _dbContext.SGenders.Remove(data);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -134,24 +113,27 @@ namespace HIS.ApplicationService.Dictionaries.District
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<SDistrictDto>> GetAll(GetAllSDistrictInput input)
+        public async Task<ApiResultList<SGenderDto>> GetAll(GetAllSGenderInput input)
         {
-            var result = new ApiResultList<SDistrictDto>();
+            var result = new ApiResultList<SGenderDto>();
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SDistricts
+                result.Result = (from r in _dbContext.SGenders
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
-                                 select new SDistrictDto()
+                                 select new SGenderDto()
                                  {
                                      Id = r.Id,
                                      Code = r.Code,
                                      Name = r.Name,
                                      Description = r.Description,
-                                     Inactive = r.Inactive
-                                 }).OrderBy(o => o.Code).ToList();
+                                     Inactive = r.Inactive,
+                                     SortOrder = r.SortOrder
+                                 })
+                                 .OrderBy(x => x.SortOrder)
+                                 .ToList();
                 result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
@@ -163,25 +145,27 @@ namespace HIS.ApplicationService.Dictionaries.District
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SDistrictDto>> GetById(Guid id)
+        public async Task<ApiResult<SGenderDto>> GetById(Guid id)
         {
-            var result = new ApiResult<SDistrictDto>();
+            var result = new ApiResult<SGenderDto>();
 
-            var branch = _dbContext.SDistricts.SingleOrDefault(s => s.Id == id);
-            if (branch != null)
+            var data = _dbContext.SGenders.SingleOrDefault(s => s.Id == id);
+            if (data != null)
             {
                 result.IsSuccessed = true;
-                result.Result = new SDistrictDto()
+                result.Result = new SGenderDto()
                 {
-                    Id = branch.Id,
-                    Code = branch.Code,
-                    Name = branch.Name,
-                    Description = branch.Description,
-                    Inactive = branch.Inactive
+                    Id = data.Id,
+                    Code = data.Code,
+                    Name = data.Name,
+                    Description = data.Description,
+                    SortOrder = data.SortOrder,
+                    Inactive = data.Inactive
                 };
             }
 
             return await Task.FromResult(result);
         }
+
     }
 }

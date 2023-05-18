@@ -21,17 +21,17 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Treatment
         public DateTime? OutTime { get; set; } // thời gian ra viện
         public Guid GenderId { get; set; }
         public Guid? CareerId { get; set; }
-        public Guid EthnicId { get; set; }
-        public Guid CountryId { get; set; }
+        public Guid? EthnicId { get; set; }
+        public Guid? CountryId { get; set; }
         public Guid? ProvinceId { get; set; }
         public Guid? DistrictId { get; set; }
         public Guid? WardId { get; set; }
         public string Address { get; set; }
-        public string IdentificationNumber { get; set; }
-        public string PhoneNumber { get; set; }
-        public string RelateName { get; set; }
-        public string RelateAddress { get; set; }
-        public string RelateIdentificationNumber { get; set; }
-        public string RelatePhoneNumbar { get; set; }
+        //public string IdentificationNumber { get; set; }
+        //public string PhoneNumber { get; set; }
+        //public string RelateName { get; set; }
+        //public string RelateAddress { get; set; }
+        //public string RelateIdentificationNumber { get; set; }
+        //public string RelatePhoneNumbar { get; set; }
     }
 }

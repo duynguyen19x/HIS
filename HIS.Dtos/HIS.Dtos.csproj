@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Business\" />
-    <Folder Include="Categories\" />
+    <Compile Remove="Categories\**" />
+    <EmbeddedResource Remove="Categories\**" />
+    <None Remove="Categories\**" />
   </ItemGroup>
 
   <ItemGroup>

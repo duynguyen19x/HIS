@@ -1,5 +1,5 @@
 ﻿using HIS.EntityFrameworkCore.BaseEntitys;
-using HIS.EntityFrameworkCore.Entities.Categories;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,11 +37,19 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Patients
         /// <summary>
         /// Ngày sinh
         /// </summary>
-        public DateTime DOB { get; set; }
+        public DateTime? DOB { get; set; }
+        /// <summary>
+        /// Năm sinh (bắt buộc)
+        /// </summary>
+        public int Year { get; set; }
+        /// <summary>
+        /// Dân tộc
+        /// </summary>
+        public Guid? EthnicId { get; set; }
         /// <summary>
         /// Quốc tịch
         /// </summary>
-        public Guid? NationalId { get; set; }
+        public Guid? CountryId { get; set; }
         /// <summary>
         /// Tỉnh/Thành phố
         /// </summary>
@@ -53,7 +61,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Patients
         /// <summary>
         /// Xã/Phường
         /// </summary>
-        public Guid? CommuneId { get; set; }
+        public Guid? WardId { get; set; }
         /// <summary>
         /// Địa chỉ
         /// </summary>
@@ -65,7 +73,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Patients
         /// <summary>
         /// Điện thoại cố định
         /// </summary>
-        public string Phone { get; set; }
+        public string PhoneNumber { get; set; }
         /// <summary>
         /// Thư điện tử
         /// </summary>
@@ -81,15 +89,31 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Patients
         /// <summary>
         /// Căn cước công dân
         /// </summary>
-        public string CitizenIdNumber { get; set; }
+        public string IdentificationNumber { get; set; }
         /// <summary>
         /// Nơi cấp
         /// </summary>
-        public string CitizenIdIssuedBy { get; set; }
+        public string IdentificationNumberIssuedBy { get; set; }
         /// <summary>
-        /// Ngày cấp CCCD
+        /// Ngày cấp
         /// </summary>
-        public DateTime? CitizenIdDate { get; set; }
+        public DateTime? IdentificationNumberIssuedDate { get; set; }
+        /// <summary>
+        /// Tên người nhà
+        /// </summary>
+        public string RelativeName { get; set; }
+        /// <summary>
+        /// Địa chỉ người nhà
+        /// </summary>
+        public string RelativeAddress { get; set; }
+        /// <summary>
+        /// Số CMND/CCCD người nhà
+        /// </summary>
+        public string RelativeIdentificationNumber { get; set; }
+        /// <summary>
+        /// Số điện thaoij người nhà
+        /// </summary>
+        public string RelativePhoneNumbar { get; set; }
         /// <summary>
         /// Thẻ BHYT
         /// </summary>

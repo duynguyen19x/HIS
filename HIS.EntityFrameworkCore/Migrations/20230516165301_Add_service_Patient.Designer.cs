@@ -4,6 +4,7 @@ using HIS.EntityFrameworkCore.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(HIS_DbContext))]
-    partial class HIS_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20230516165301_Add_service_Patient")]
+    partial class Add_service_Patient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -203,21 +206,21 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("e390340c-8453-43f7-86e7-00730515aa58"),
+                            Id = new Guid("a6331da2-d50e-4665-b66e-247ce2d90e0b"),
                             Code = "BHYT",
                             IsActive = true,
                             Name = "Bảo hiểm y tế"
                         },
                         new
                         {
-                            Id = new Guid("081d52b3-d809-4ce1-82a1-5584b55b9a10"),
+                            Id = new Guid("f06fd769-fceb-461e-9020-83ddc81afad9"),
                             Code = "VP",
                             IsActive = true,
                             Name = "Viện phí"
                         },
                         new
                         {
-                            Id = new Guid("6bac540b-50a1-44b9-b24b-04cfd72b5cf8"),
+                            Id = new Guid("92d334af-4bec-45c4-83fe-4522bddd9bc6"),
                             Code = "DV",
                             IsActive = true,
                             Name = "Dịch vụ"
@@ -296,6 +299,44 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("STreatments");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SGender", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Code")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SGenders", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c0aed2c8-22ee-4efa-b965-fa1098934a24"),
+                            Code = 0,
+                            Name = "Chưa xác định"
+                        },
+                        new
+                        {
+                            Id = new Guid("1b3ef3f7-eb71-4b9e-80e8-142dac943c45"),
+                            Code = 1,
+                            Name = "Nam"
+                        },
+                        new
+                        {
+                            Id = new Guid("9a3067c2-9f4c-471d-96b4-5f22acd4c868"),
+                            Code = 2,
+                            Name = "Nữ"
+                        });
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMaterial", b =>
@@ -832,97 +873,97 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2baf4933-d0e7-4227-b426-9bdb20856dcb"),
+                            Id = new Guid("ed56ecb7-3548-4b26-9052-ca5a23f14b69"),
                             Code = "GB",
                             Name = "Giải phẫu bệnh lý"
                         },
                         new
                         {
-                            Id = new Guid("3567ee76-fbfe-4216-9121-470bf3562083"),
+                            Id = new Guid("32ade4bc-08cf-43b5-8e95-0fa9ad4d7fb9"),
                             Code = "PT",
                             Name = "Phẫu thuật"
                         },
                         new
                         {
-                            Id = new Guid("d31703b3-92f0-486b-88f6-1941c6a0fd6a"),
+                            Id = new Guid("d8125a7d-b072-4413-9885-74179ec1e423"),
                             Code = "KH",
                             Name = "Khám"
                         },
                         new
                         {
-                            Id = new Guid("ed17ff0d-7e6d-4bdf-b88f-bb12cd9a1eb9"),
+                            Id = new Guid("3a559b5d-66c5-4485-ae54-3c38a2562814"),
                             Code = "CN",
                             Name = "Thăm dò chức năng"
                         },
                         new
                         {
-                            Id = new Guid("cf0513be-2da0-429d-8fe3-5baecba48c73"),
+                            Id = new Guid("9117cec2-39c4-477c-9d94-77066f565337"),
                             Code = "PH",
                             Name = "Phục hồi chức năng"
                         },
                         new
                         {
-                            Id = new Guid("9b6feea1-0a46-4dff-ba79-ec14d787201e"),
+                            Id = new Guid("86c50b9c-c2c7-4bb6-bdbd-d6228ad2bc61"),
                             Code = "NS",
                             Name = "Nội soi"
                         },
                         new
                         {
-                            Id = new Guid("4f4b5d00-cd93-4a19-898a-1f21195c857f"),
+                            Id = new Guid("b51e4358-6add-42b9-a0a6-48fef3329215"),
                             Code = "HA",
                             Name = "Chẩn đoán hình ảnh"
                         },
                         new
                         {
-                            Id = new Guid("013156e1-e051-4fd8-a7e0-a036bc414530"),
+                            Id = new Guid("f14d6c60-6004-4de3-891f-b6d2f30ce2c9"),
                             Code = "XN",
                             Name = "Xét nghiệm"
                         },
                         new
                         {
-                            Id = new Guid("6fb4583f-ad3f-4613-8bc4-9b5173444b1c"),
+                            Id = new Guid("ed304128-352d-4217-9918-4de64e0bc61d"),
                             Code = "TT",
                             Name = "Thủ thuật"
                         },
                         new
                         {
-                            Id = new Guid("e1445290-7514-4390-a8be-efa79f85b293"),
+                            Id = new Guid("9625b3ce-45b0-4f8b-abf0-b544c891d5e4"),
                             Code = "SA",
                             Name = "Siêu âm"
                         },
                         new
                         {
-                            Id = new Guid("973c61cd-9de6-495d-a751-d39df606436d"),
+                            Id = new Guid("c1c8a692-13c5-448f-8b47-f50cbf0fa618"),
                             Code = "AN",
                             Name = "Suất ăn"
                         },
                         new
                         {
-                            Id = new Guid("17b34b73-77c4-46b2-b59c-594abf18c181"),
+                            Id = new Guid("95195990-b367-4a76-9989-965b490c33e7"),
                             Code = "MA",
                             Name = "Máu"
                         },
                         new
                         {
-                            Id = new Guid("1f95ac99-4271-4579-ad14-f24a6960d6ac"),
+                            Id = new Guid("814b3eee-5479-4120-8d24-c6ed06f9b746"),
                             Code = "VT",
                             Name = "Vật tư"
                         },
                         new
                         {
-                            Id = new Guid("77ac08c2-124c-44ac-92fb-b56f6e6a6275"),
+                            Id = new Guid("36503926-dbbd-460c-84ad-715e71b48861"),
                             Code = "CL",
                             Name = "Khác"
                         },
                         new
                         {
-                            Id = new Guid("8a90899a-99cd-4785-bbe9-d5b0569962cf"),
+                            Id = new Guid("a3d0a754-1180-426e-b341-f2a046d5d0a5"),
                             Code = "TH",
                             Name = "Thuốc"
                         },
                         new
                         {
-                            Id = new Guid("ee26d855-5745-4956-993f-eb3c876a283b"),
+                            Id = new Guid("d22129f3-8bfa-4457-8bdc-ebf4cbb2c412"),
                             Code = "GI",
                             Name = "Giường"
                         });
@@ -1096,12 +1137,14 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("GenderId");
+
                     b.ToTable("SUsers", (string)null);
 
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9e57092b-d1bb-4061-81d0-c34dd152c21e"),
+                            Id = new Guid("1b591bfd-a3e0-4497-8820-4c0fe16c6c63"),
                             Email = "administrator@gmail.com",
                             FirstName = "Admin",
                             LastName = "Administrator",
@@ -1392,49 +1435,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SEthnics");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SGender", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<int?>("SortOrder")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SGenders", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SHospital", b =>
@@ -1728,8 +1728,8 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Patients.SPatient", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SGender", "Gender")
-                        .WithMany("SPatients")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SGender", "Gender")
+                        .WithMany("Patients")
                         .HasForeignKey("GenderId");
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Patients.SPatientType", "PatientType")
@@ -1899,6 +1899,15 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SUser", b =>
+                {
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SGender", "Gender")
+                        .WithMany("Users")
+                        .HasForeignKey("GenderId");
+
+                    b.Navigation("Gender");
+                });
+
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SUserRole", b =>
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SRole", "Role")
@@ -1976,6 +1985,13 @@ namespace HIS.EntityFrameworkCore.Migrations
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Patients.SPatientType", b =>
                 {
                     b.Navigation("SPatients");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SGender", b =>
+                {
+                    b.Navigation("Patients");
+
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMaterialType", b =>
@@ -2073,11 +2089,6 @@ namespace HIS.EntityFrameworkCore.Migrations
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SDistrict", b =>
                 {
                     b.Navigation("Wards");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SGender", b =>
-                {
-                    b.Navigation("SPatients");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SProvince", b =>
