@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HIS.ApplicationService\HIS.ApplicationService.csproj" />
+    <ProjectReference Include="..\HIS.AutoMappers\HIS.AutoMappers.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Categories\" />
+    <Compile Remove="Categories\**" />
+    <EmbeddedResource Remove="Categories\**" />
+    <None Remove="Categories\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Systems\Permistion\" />
   </ItemGroup>
 
@@ -16,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HIS.AutoMappers\HIS.AutoMappers.csproj" />
     <ProjectReference Include="..\HIS.Dtos\HIS.Dtos.csproj" />
     <ProjectReference Include="..\HIS.EntityFrameworkCore\HIS.EntityFrameworkCore.csproj" />
   </ItemGroup>

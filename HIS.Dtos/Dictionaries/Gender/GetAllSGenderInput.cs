@@ -1,13 +1,12 @@
-﻿using HIS.Dtos.Base;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Dictionaries.Job
+namespace HIS.Dtos.Dictionaries.Gender
 {
-    public class GetAllSJobInput
+    public class GetAllSGenderInput
     {
         public string CodeFilter { get; set; }
         public string NameFilter { get; set; }

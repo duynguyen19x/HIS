@@ -2,8 +2,9 @@
 using HIS.EntityFrameworkCore.Configurations.Dictionaries;
 using HIS.EntityFrameworkCore.Configurations.Patients;
 using HIS.EntityFrameworkCore.Data;
+using HIS.EntityFrameworkCore.Entities.Business.Patients;
+using HIS.EntityFrameworkCore.Entities.Business.Treatment;
 using HIS.EntityFrameworkCore.Entities.Categories;
-using HIS.EntityFrameworkCore.Entities.Categories.Patients;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,6 +28,7 @@ namespace HIS.EntityFrameworkCore.DbContexts
             modelBuilder.ApplyConfiguration(new GenderConfiguration());
             modelBuilder.ApplyConfiguration(new PermissionConfigurations());
             modelBuilder.ApplyConfiguration(new BranchConfiguration());
+            modelBuilder.ApplyConfiguration(new CareerConfiguration());
             modelBuilder.ApplyConfiguration(new DepartmentConfiguration());
             modelBuilder.ApplyConfiguration(new RoomConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
@@ -60,7 +62,7 @@ namespace HIS.EntityFrameworkCore.DbContexts
         public DbSet<SDepartment> SDepartments { get; set; }
         public DbSet<SEthnic> SEthnics { get; set; }
         public DbSet<SRoom> SRooms { get; set; }
-        public DbSet<SJob> SJobs { get; set; }
+        public DbSet<SCareer> SCareers { get; set; }
         public DbSet<SHospital> SHospitals { get; set; }
         public DbSet<SIcd> SIcds { get; set; }
 
@@ -75,6 +77,7 @@ namespace HIS.EntityFrameworkCore.DbContexts
         public DbSet<SMaterial> SMaterials { get; set; }
         public DbSet<SMaterialType> SMaterialTypes { get; set; }
         public DbSet<SPatient> SPatients { get; set; }
+        public DbSet<STreatment> STreatments { get; set; }
         public DbSet<SPatientType> SPatientTypes { get; set; }
         public DbSet<SCountry> SCountries { get; set; }
         public DbSet<SProvince> SProvinces { get; set; }

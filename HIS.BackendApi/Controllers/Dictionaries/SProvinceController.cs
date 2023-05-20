@@ -1,7 +1,7 @@
-﻿using HIS.ApplicationService.Dictionaries.Job;
+﻿using HIS.ApplicationService.Dictionaries.Career;
 using HIS.ApplicationService.Dictionaries.Province;
 using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.Job;
+using HIS.Dtos.Dictionaries.Career;
 using HIS.Dtos.Dictionaries.Province;
 using HIS.Models.Commons;
 using Microsoft.AspNetCore.Http;

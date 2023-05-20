@@ -1,10 +1,12 @@
-﻿using HIS.ApplicationService.Dictionaries.Branch;
+﻿using AutoMapper;
+using HIS.ApplicationService.Dictionaries.Branch;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Branch;
 using HIS.Dtos.Dictionaries.Department;
 using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Models.Commons;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -17,8 +19,8 @@ namespace HIS.ApplicationService.Dictionaries.Department
 {
     public class SDepartmentService : BaseSerivce, ISDepartmentService
     {
-        public SDepartmentService(HIS_DbContext dbContext, IConfiguration config)
-            : base(dbContext, config)
+        public SDepartmentService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper)
+            : base(dbContext, config, mapper)
         {
 
         }
@@ -39,17 +41,8 @@ namespace HIS.ApplicationService.Dictionaries.Department
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var department = new SDepartment()
-                    {
-                        Id = input.Id.GetValueOrDefault(),
-                        Code = input.Code,
-                        MohCode = input.MohCode,
-                        Name = input.Name,
-                        Description = input.Description,
-                        BranchId = input.BranchId,
-                        Inactive = input.Inactive
-                    };
-                    _dbContext.SDepartments.Add(department);
+                    var data = _mapper.Map<SDepartment>(input);
+                    _dbContext.SDepartments.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -77,17 +70,8 @@ namespace HIS.ApplicationService.Dictionaries.Department
             {
                 try
                 {
-                    var department = new SDepartment()
-                    {
-                        Id = input.Id.GetValueOrDefault(),
-                        Code = input.Code,
-                        MohCode = input.MohCode,
-                        Name = input.Name,
-                        Description = input.Description,
-                        BranchId = input.BranchId,
-                        Inactive = input.Inactive
-                    };
-                    _dbContext.SDepartments.Update(department);
+                    var data = _mapper.Map<SDepartment>(input);
+                    _dbContext.SDepartments.Update(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -176,22 +160,27 @@ namespace HIS.ApplicationService.Dictionaries.Department
         public async Task<ApiResult<SDepartmentDto>> GetById(Guid id)
         {
             var result = new ApiResult<SDepartmentDto>();
-            var department = _dbContext.SDepartments.SingleOrDefault(s => s.Id == id);
+            var department = await (from d in _dbContext.SDepartments
+                                    join b in _dbContext.SBranchs on d.BranchId equals b.Id
+                                    where d.Id == id
+                                    select new SDepartmentDto()
+                                    {
+                                        Id = d.Id,
+                                        Code = d.Code,
+                                        MohCode = d.MohCode,
+                                        Name = d.Name,
+                                        Description = d.Description,
+                                        BranchId = d.BranchId,
+                                        BranchCode = b.Code,
+                                        BranchName = b.Name,
+                                        Inactive = d.Inactive
+                                    }).SingleOrDefaultAsync();
+
+
             if (department != null)
             {
                 result.IsSuccessed = true;
-                result.Result = new SDepartmentDto()
-                {
-                    Id = department.Id,
-                    Code = department.Code,
-                    MohCode = department.MohCode,
-                    Name = department.Name,
-                    Description = department.Description,
-                    BranchId = department.BranchId,
-                    BranchCode = department.Code,
-                    BranchName = department.Name,
-                    Inactive = department.Inactive
-                };
+                result.Result = department;
             }
 
             return await Task.FromResult(result);

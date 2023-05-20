@@ -1,4 +1,5 @@
-﻿using HIS.ApplicationService.Dictionaries.Country;
+﻿using AutoMapper;
+using HIS.ApplicationService.Dictionaries.Country;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Country;
 using HIS.Dtos.Dictionaries.District;
@@ -38,7 +39,7 @@ namespace HIS.ApplicationService.Dictionaries.District
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var branch = new SDistrict()
+                    var data = new SDistrict()
                     {
                         Id = input.Id.GetValueOrDefault(),
                         Code = input.Code,
@@ -46,7 +47,7 @@ namespace HIS.ApplicationService.Dictionaries.District
                         Description = input.Description,
                         Inactive = input.Inactive
                     };
-                    _dbContext.SDistricts.Add(branch);
+                    _dbContext.SDistricts.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;

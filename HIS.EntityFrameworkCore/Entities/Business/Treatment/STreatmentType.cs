@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Categories.Treatment
+namespace HIS.EntityFrameworkCore.Entities.Business.Treatment
 {
     /// <summary>
     /// Loại điều trị.

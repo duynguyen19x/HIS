@@ -1,17 +1,21 @@
-﻿using HIS.Dtos.Base;
+﻿using HIS.EntityFrameworkCore.BaseEntitys;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Dictionaries.Job
+namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
-    public class SJobDto : EntityDto<Guid?>
-    {
+    /// <summary>
+    /// Đối tượng bệnh nhân.
+    /// </summary>
+    public class SPatientType2 : AuditingEntity<Guid>
+    { 
         public string Code { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public int? SortOrder { get; set; }
         public bool Inactive { get; set; }
     }
 }

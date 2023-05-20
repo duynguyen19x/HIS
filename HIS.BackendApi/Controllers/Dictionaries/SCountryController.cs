@@ -1,8 +1,8 @@
 ﻿using HIS.ApplicationService.Dictionaries.Country;
-using HIS.ApplicationService.Dictionaries.Job;
+using HIS.ApplicationService.Dictionaries.Career;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Country;
-using HIS.Dtos.Dictionaries.Job;
+using HIS.Dtos.Dictionaries.Career;
 using HIS.Models.Commons;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

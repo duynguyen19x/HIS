@@ -28,9 +28,6 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.Property(x => x.PhoneNumber).IsRequired(false).HasMaxLength(25);
             builder.Property(x => x.Email).IsRequired(false).HasMaxLength(256);
             builder.Property(x => x.Password).IsRequired(false).HasMaxLength(1020);
-
-            builder.HasOne(t => t.Gender).WithMany(pc => pc.Users)
-              .HasForeignKey(pc => pc.GenderId);
         }
     }
 }
