@@ -1,29 +1,29 @@
 ﻿using AutoMapper;
 using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.Department;
-using HIS.Dtos.Dictionaries.Room;
+using HIS.Dtos.Dictionaries.DepartmentType;
+using HIS.Dtos.Dictionaries.RoomType;
 using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Models.Commons;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.ApplicationService.Dictionaries.Room
+namespace HIS.ApplicationService.Dictionaries.DepartmentType
 {
-    internal class SRoomService : BaseSerivce, ISRoomService
+    public class SDepartmentTypeService : BaseSerivce, ISDepartmentTypeService
     {
-        public SRoomService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper)
+        public SDepartmentTypeService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper)
             : base(dbContext, config, mapper)
         {
 
         }
 
-        public async Task<ApiResult<SRoomDto>> CreateOrEdit(SRoomDto input)
+        public async Task<ApiResult<SDepartmentTypeDto>> CreateOrEdit(SDepartmentTypeDto input)
         {
             if (input.Id == null)
                 return await Create(input);
@@ -31,16 +31,16 @@ namespace HIS.ApplicationService.Dictionaries.Room
                 return await Update(input);
         }
 
-        public async Task<ApiResult<SRoomDto>> Create(SRoomDto input)
+        public async Task<ApiResult<SDepartmentTypeDto>> Create(SDepartmentTypeDto input)
         {
-            var result = new ApiResult<SRoomDto>();
+            var result = new ApiResult<SDepartmentTypeDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = _mapper.Map<SRoom>(input);
-                    _dbContext.SRooms.Add(data);
+                    var data = _mapper.Map<SDepartmentType>(input);
+                    _dbContext.SDepartmentTypes.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -61,15 +61,15 @@ namespace HIS.ApplicationService.Dictionaries.Room
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SRoomDto>> Update(SRoomDto input)
+        public async Task<ApiResult<SDepartmentTypeDto>> Update(SDepartmentTypeDto input)
         {
-            var result = new ApiResult<SRoomDto>();
+            var result = new ApiResult<SDepartmentTypeDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
-                    var data = _mapper.Map<SRoom>(input);
-                    _dbContext.SRooms.Update(data);
+                    var data = _mapper.Map<SDepartmentType>(input);
+                    _dbContext.SDepartmentTypes.Update(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -90,20 +90,20 @@ namespace HIS.ApplicationService.Dictionaries.Room
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SRoomDto>> Delete(Guid id)
+        public async Task<ApiResult<SDepartmentTypeDto>> Delete(Guid id)
         {
-            var result = new ApiResult<SRoomDto>();
+            var result = new ApiResult<SDepartmentTypeDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
-                    var department = _dbContext.SRooms.SingleOrDefault(x => x.Id == id);
-                    if (department != null)
+                    var data = _dbContext.SDepartmentTypes.SingleOrDefault(x => x.Id == id);
+                    if (data != null)
                     {
-                        _dbContext.SRooms.Remove(department);
+                        _dbContext.SDepartmentTypes.Remove(data);
                         await _dbContext.SaveChangesAsync();
-                        result.IsSuccessed = true;
 
+                        result.IsSuccessed = true;
                         transaction.Commit();
                     }
                 }
@@ -120,31 +120,21 @@ namespace HIS.ApplicationService.Dictionaries.Room
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<SRoomDto>> GetAll(GetAllSRoomInput input)
+        public async Task<ApiResultList<SDepartmentTypeDto>> GetAll(GetAllSDepartmentTypeInput input)
         {
-            var result = new ApiResultList<SRoomDto>();
+            var result = new ApiResultList<SDepartmentTypeDto>();
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SRooms
-                                 join t in _dbContext.SRoomTypes on r.RoomTypeId equals t.Id
-                                 join d in _dbContext.SDepartments on r.DepartmentId equals d.Id 
+                result.Result = (from r in _dbContext.SDepartmentTypes
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
-                                     && (input.DepartmentIdFilter == null || r.DepartmentId == input.DepartmentIdFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
-                                 select new SRoomDto()
+                                 select new SDepartmentTypeDto()
                                  {
                                      Id = r.Id,
                                      Code = r.Code,
-                                     MohCode = r.MohCode,
                                      Name = r.Name,
-                                     RoomTypeId = r.RoomTypeId,
-                                     RoomTypeCode = t.Code,
-                                     RoomTypeName = t.Name,
-                                     DepartmentId = r.DepartmentId,
-                                     DepartmentCode = d.Code,
-                                     DepartmentName = d.Name,
                                      Description = r.Description,
                                      SortOrder = r.SortOrder,
                                      Inactive = r.Inactive
@@ -163,37 +153,22 @@ namespace HIS.ApplicationService.Dictionaries.Room
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SRoomDto>> GetById(Guid id)
+        public async Task<ApiResult<SDepartmentTypeDto>> GetById(Guid id)
         {
-            var result = new ApiResult<SRoomDto>();
-            try
+            var result = new ApiResult<SDepartmentTypeDto>();
+            var data = _dbContext.SDepartmentTypes.SingleOrDefault(s => s.Id == id);
+            if (data != null)
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SRooms
-                                 join t in _dbContext.SRoomTypes on r.RoomTypeId equals t.Id
-                                 join d in _dbContext.SDepartments on r.DepartmentId equals d.Id
-                                 where r.Id == id
-                                 select new SRoomDto()
-                                 {
-                                     Id = r.Id,
-                                     Code = r.Code,
-                                     MohCode = r.MohCode,
-                                     Name = r.Name,
-                                     RoomTypeId = r.RoomTypeId,
-                                     RoomTypeCode = t.Code,
-                                     RoomTypeName = t.Name,
-                                     DepartmentId = r.DepartmentId,
-                                     DepartmentCode = d.Code,
-                                     DepartmentName = d.Name,
-                                     Description = r.Description,
-                                     SortOrder = r.SortOrder,
-                                     Inactive = r.Inactive
-                                 })
-                                 .SingleOrDefault();
-            }
-            catch (Exception ex)
-            {
-                result.Message = ex.Message;
+                result.Result = new SDepartmentTypeDto()
+                {
+                    Id = data.Id,
+                    Code = data.Code,
+                    Name = data.Name,
+                    Description = data.Description,
+                    SortOrder = data.SortOrder,
+                    Inactive = data.Inactive
+                };
             }
 
             return await Task.FromResult(result);
