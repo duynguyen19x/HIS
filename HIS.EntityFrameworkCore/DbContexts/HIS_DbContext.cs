@@ -30,7 +30,9 @@ namespace HIS.EntityFrameworkCore.DbContexts
             modelBuilder.ApplyConfiguration(new BranchConfiguration());
             modelBuilder.ApplyConfiguration(new CareerConfiguration());
             modelBuilder.ApplyConfiguration(new DepartmentConfiguration());
+            modelBuilder.ApplyConfiguration(new DepartmentTypeConfiguration());
             modelBuilder.ApplyConfiguration(new RoomConfiguration());
+            modelBuilder.ApplyConfiguration(new RoomTypeConfiguration());
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new RolePermissionBranchConfigurations());
             modelBuilder.ApplyConfiguration(new ServiceUnitConfigurations());
@@ -60,8 +62,10 @@ namespace HIS.EntityFrameworkCore.DbContexts
         public DbSet<SPermission> SPermissions { get; set; }
         public DbSet<SBranch> SBranchs { get; set; }
         public DbSet<SDepartment> SDepartments { get; set; }
+        public DbSet<SDepartmentType> SDepartmentTypes { get; set; }
         public DbSet<SEthnic> SEthnics { get; set; }
         public DbSet<SRoom> SRooms { get; set; }
+        public DbSet<SRoomType> SRoomTypes { get; set; }
         public DbSet<SCareer> SCareers { get; set; }
         public DbSet<SHospital> SHospitals { get; set; }
         public DbSet<SIcd> SIcds { get; set; }

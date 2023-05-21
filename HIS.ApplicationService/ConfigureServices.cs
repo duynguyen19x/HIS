@@ -19,6 +19,8 @@ using System.Text;
 using System.Threading.Tasks;
 using HIS.ApplicationService.Business.Patient;
 using HIS.ApplicationService.Dictionaries.Gender;
+using HIS.ApplicationService.Dictionaries.DepartmentType;
+using HIS.ApplicationService.Dictionaries.RoomType;
 
 namespace HIS.ApplicationService
 {
@@ -33,10 +35,12 @@ namespace HIS.ApplicationService
             services.AddTransient<ISCareerService, SCareerService>();
             services.AddTransient<ISCountryService, SCountryService>();
             services.AddTransient<ISDepartmentService, SDepartmentService>();
+            services.AddTransient<ISDepartmentTypeService, SDepartmentTypeService>();
             services.AddTransient<ISDistrictService, SDistrictService>();
             services.AddTransient<ISEthnicService, SEthnicService>();
             services.AddTransient<ISGenderService, SGenderService>();
             services.AddTransient<ISRoomService, SRoomService>();
+            services.AddTransient<ISRoomTypeService, SRoomTypeService>();
             services.AddTransient<ISHospitalService, SHospitalService>();
             services.AddTransient<ISIcdService, SIcdService>();
             services.AddTransient<ISProvinceService, SProvinceService>();
