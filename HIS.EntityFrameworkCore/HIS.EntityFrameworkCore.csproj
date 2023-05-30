@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Configurations\Others\**" />
+    <EmbeddedResource Remove="Configurations\Others\**" />
+    <None Remove="Configurations\Others\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -22,10 +28,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HIS.Utilities\HIS.Utilities.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Configurations\Others\" />
   </ItemGroup>
 
 </Project>

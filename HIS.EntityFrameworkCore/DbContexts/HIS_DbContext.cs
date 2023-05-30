@@ -1,6 +1,7 @@
 ﻿using HIS.EntityFrameworkCore.Configurations;
 using HIS.EntityFrameworkCore.Configurations.Dictionaries;
 using HIS.EntityFrameworkCore.Configurations.Patients;
+using HIS.EntityFrameworkCore.Configurations.Services;
 using HIS.EntityFrameworkCore.Data;
 using HIS.EntityFrameworkCore.Entities.Business.Patients;
 using HIS.EntityFrameworkCore.Entities.Business.Treatment;
@@ -50,6 +51,8 @@ namespace HIS.EntityFrameworkCore.DbContexts
             modelBuilder.ApplyConfiguration(new ProvinceConfiguration());
             modelBuilder.ApplyConfiguration(new DistrictConfiguration());
             modelBuilder.ApplyConfiguration(new WardConfiguration());
+            modelBuilder.ApplyConfiguration(new PricePolicyConfigurations());
+            modelBuilder.ApplyConfiguration(new ServicePricePolicyConfigurations());
 
             modelBuilder.Seed();
         }
