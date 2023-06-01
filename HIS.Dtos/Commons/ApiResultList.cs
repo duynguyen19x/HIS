@@ -8,7 +8,7 @@ namespace HIS.Dtos.Commons
 {
     public class ApiResultList<T>
     {
-        public bool IsSuccessed { get; set; }
+        public bool IsSuccessed { get; set; } = true;
 
         public string Message { get; set; }
 

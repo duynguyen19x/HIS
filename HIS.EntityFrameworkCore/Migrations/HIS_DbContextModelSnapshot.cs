@@ -681,46 +681,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.ToTable("SPermissions", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SPricePolicy", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("DeleteBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("DeleteDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SPricePolicies", (string)null);
-                });
-
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SRole", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1069,7 +1029,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<decimal?>("OldUnitPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid?>("PricePolicyId")
+                    b.Property<Guid?>("PatientTypeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("ServiceId")
@@ -1077,7 +1037,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PricePolicyId");
+                    b.HasIndex("PatientTypeId");
 
                     b.HasIndex("ServiceId");
 
@@ -1979,15 +1939,15 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SServicePricePolicy", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SPricePolicy", "PricePolicy")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Patients.SPatientType", "PatientType")
                         .WithMany("SServicePricePolicies")
-                        .HasForeignKey("PricePolicyId");
+                        .HasForeignKey("PatientTypeId");
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SService", "SService")
                         .WithMany("SServicePricePolicies")
                         .HasForeignKey("ServiceId");
 
-                    b.Navigation("PricePolicy");
+                    b.Navigation("PatientType");
 
                     b.Navigation("SService");
                 });
@@ -2066,6 +2026,8 @@ namespace HIS.EntityFrameworkCore.Migrations
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Patients.SPatientType", b =>
                 {
                     b.Navigation("SPatients");
+
+                    b.Navigation("SServicePricePolicies");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMaterialType", b =>
@@ -2093,11 +2055,6 @@ namespace HIS.EntityFrameworkCore.Migrations
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SPermission", b =>
                 {
                     b.Navigation("RolePermissions");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SPricePolicy", b =>
-                {
-                    b.Navigation("SServicePricePolicies");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SRole", b =>

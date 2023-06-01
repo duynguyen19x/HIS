@@ -8,5 +8,6 @@ namespace HIS.Dtos.Business.Patient
 {
     public class GetAllSPatientInput
     {
+
     }
 }
