@@ -18,10 +18,13 @@ namespace HIS.EntityFrameworkCore.Configurations
 
             builder.Property(x => x.Code).HasMaxLength(50);
             builder.Property(x => x.Name).HasMaxLength(500);
+            builder.Property(x => x.HeInCode).HasMaxLength(50);
+            builder.Property(x => x.HeInName).HasMaxLength(500);
 
             builder.HasOne(t => t.SServiceUnit).WithMany(pc => pc.SServices).HasForeignKey(pc => pc.ServiceUnitId);
             builder.HasOne(t => t.SServiceType).WithMany(pc => pc.SServices).HasForeignKey(pc => pc.ServiceTypeId);
             builder.HasOne(t => t.SServiceGroup).WithMany(pc => pc.SServices).HasForeignKey(pc => pc.ServiceGroupId);
+            builder.HasOne(t => t.SSurgicalProcedureType).WithMany(pc => pc.SServices).HasForeignKey(pc => pc.SurgicalProcedureTypeId);
         }
     }
 }

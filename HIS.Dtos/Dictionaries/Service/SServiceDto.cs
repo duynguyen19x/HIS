@@ -19,6 +19,11 @@ namespace HIS.Dtos.Dictionaries.Service
 
         public bool? IsActive { get; set; }
 
+        public Guid? ServiceTypeId { get; set; }
+        public Guid? ServiceUnitId { get; set; }
+        public Guid? ServiceGroupId { get; set; }
+        public Guid? SurgicalProcedureTypeId { get; set; }
+
         public IList<SServicePricePolicyDto> SServicePricePolicies { get; set; } 
     }
 }

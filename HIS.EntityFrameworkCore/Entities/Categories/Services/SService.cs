@@ -14,22 +14,30 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Mã dịch vụ")]
         public string Code { get; set; }
 
+        [Description("Mã BHYT")]
+        public string HeInCode { get; set; }
+
         [Description("Tên dịch vụ")]
         public string Name { get; set; }
 
+        [Description("Tên BHYT")]
+        public string HeInName { get; set; }
+
         [Description("Thứ tự sắp xếp")]
-        public int? SoftOrder { get; set; }
+        public int? SortOrder { get; set; }
 
         [Description("Đang sử dụng")]
         public bool? IsActive { get; set; }
 
         public Guid? ServiceTypeId { get; set; }
-        public Guid ServiceUnitId { get; set; }
-        public Guid ServiceGroupId { get; set; }
+        public Guid? ServiceUnitId { get; set; }
+        public Guid? ServiceGroupId { get; set; }
+        public Guid? SurgicalProcedureTypeId { get; set; }
 
         public SServiceUnit SServiceUnit { get; set; }
         public SServiceType SServiceType { get; set; }
         public SServiceGroup SServiceGroup { get; set; }
+        public SSurgicalProcedureType SSurgicalProcedureType { get; set; }
 
         public IList<SMedicineType> SMedicineTypes { get; set; }
         public IList<SMedicine> SMedicines { get; set; }

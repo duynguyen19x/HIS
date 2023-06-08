@@ -17,7 +17,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public string Name { get; set; }
 
         [Description("Thứ tự sắp xếp")]
-        public int? SoftOrder { get; set; }
+        public int? SortOrder { get; set; }
 
         [Description("Đang sử dụng")]
         public bool? IsActive { get; set; }

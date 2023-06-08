@@ -53,6 +53,7 @@ namespace HIS.EntityFrameworkCore.DbContexts
             modelBuilder.ApplyConfiguration(new DistrictConfiguration());
             modelBuilder.ApplyConfiguration(new WardConfiguration());
             modelBuilder.ApplyConfiguration(new ServicePricePolicyConfigurations());
+            modelBuilder.ApplyConfiguration(new SurgicalProcedureTypeConfigurations());
 
             modelBuilder.Seed();
         }
@@ -92,5 +93,6 @@ namespace HIS.EntityFrameworkCore.DbContexts
         public DbSet<SWard> SWards { get; set; }
 
         public DbSet<SServicePricePolicy> SServicePricePolicies { get; set; }
+        public DbSet<SSurgicalProcedureType> SSurgicalProcedureTypes { get; set; }
     }
 }

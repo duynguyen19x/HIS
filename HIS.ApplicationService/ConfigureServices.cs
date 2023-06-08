@@ -12,6 +12,7 @@ using HIS.ApplicationService.Dictionaries.Icd;
 using HIS.ApplicationService.Dictionaries.Province;
 using HIS.ApplicationService.Dictionaries.Room;
 using HIS.ApplicationService.Dictionaries.RoomType;
+using HIS.ApplicationService.Dictionaries.Service;
 using HIS.ApplicationService.Dictionaries.ServicePricePolicy;
 using HIS.ApplicationService.Dictionaries.Ward;
 using HIS.ApplicationService.Systems.Login;
@@ -42,6 +43,7 @@ namespace HIS.ApplicationService
             services.AddTransient<ISProvinceService, SProvinceService>();
             services.AddTransient<ISWardService, SWardService>();
             services.AddTransient<ISServicePricePolicyService, SServicePricePolicyService>();
+            services.AddTransient<IServiceService, ServiceService>();
 
             services.AddTransient<ISPatientService, SPatientService>();
         }

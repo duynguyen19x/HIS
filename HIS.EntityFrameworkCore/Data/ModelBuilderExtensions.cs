@@ -10,6 +10,7 @@ namespace HIS.EntityFrameworkCore.Data
             //UserBuilder.Seed(modelBuilder);
             //ServiceGroupBuilder.Seed(modelBuilder);
             //PatientTypeBuilder.Seed(modelBuilder);
+            //SurgicalProcedureTypeBuilder.Seed(modelBuilder);
         }
     }
 }

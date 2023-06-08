@@ -5,18 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Categories
+namespace HIS.EntityFrameworkCore.Entities.Categories.Services
 {
-    public class SServiceType : FullAuditingEntity<Guid>
+    /// <summary>
+    /// Loại phẫu thuật thủ thuật
+    /// </summary>
+    public class SSurgicalProcedureType : FullAuditingEntity<Guid>
     {
         public string Code { get; set; }
         public string Name { get; set; }
         public int? SortOrder { get; set; }
-        public bool? IsActive { get; set; }
 
-        public Guid? ServiceUnitId { get; set; }
-
-        public SServiceUnit SServiceUnit { get; set; }
         public IList<SService> SServices { get; set; }
     }
 }
