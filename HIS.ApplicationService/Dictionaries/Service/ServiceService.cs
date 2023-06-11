@@ -6,7 +6,9 @@ using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Models.Commons;
+using HIS.Utilities.Helpers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -24,6 +26,14 @@ namespace HIS.ApplicationService.Dictionaries.Service
 
         public async Task<ApiResult<SServiceDto>> CreateOrEdit(SServiceDto input)
         {
+            if (GuidHelper.IsNullOrEmpty(input.Id))
+                return await Create(input);
+            else
+                return await Update(input);
+        }
+
+        private async Task<ApiResult<SServiceDto>> Create(SServiceDto input)
+        {
             var result = new ApiResult<SServiceDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
@@ -32,7 +42,40 @@ namespace HIS.ApplicationService.Dictionaries.Service
                     input.Id = Guid.NewGuid();
 
                     var data = _mapper.Map<SService>(input);
+                    data.CreatedDate = DateTime.Now;
+
                     _dbContext.SServices.Add(data);
+                    await _dbContext.SaveChangesAsync();
+
+                    result.IsSuccessed = true;
+                    result.Result = input;
+
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    result.IsSuccessed = false;
+                    result.Message = ex.Message;
+                }
+                finally
+                {
+                    transaction.Dispose();
+                }
+            }
+            return await Task.FromResult(result);
+        }
+
+        private async Task<ApiResult<SServiceDto>> Update(SServiceDto input)
+        {
+            var result = new ApiResult<SServiceDto>();
+            using (var transaction = _dbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    var sService = _dbContext.SServices.FirstOrDefault(f => f.Id == input.Id);
+                    if (sService == null)
+                        _mapper.Map(input, sService);
+
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -93,6 +136,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                  where (input.InactiveFilter == null || r.Inactive == !input.InactiveFilter)
                                  select new SServiceDto()
                                  {
+                                     Id = r.Id,
                                      Code = r.Code,
                                      Name = r.Name,
                                      Inactive = r.Inactive,
@@ -113,9 +157,22 @@ namespace HIS.ApplicationService.Dictionaries.Service
             return await Task.FromResult(result);
         }
 
-        public Task<ApiResult<SServiceDto>> GetById(Guid id)
+        public async Task<ApiResult<SServiceDto>> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            var result = new ApiResult<SServiceDto>();
+
+            try
+            {
+                var service = _dbContext.SServices.FirstOrDefault(s => s.Id == id);
+                result.Result = _mapper.Map<SServiceDto>(service);
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccessed = false;
+                result.Message = ex.Message;
+            }
+
+            return await Task.FromResult(result);
         }
     }
 }

@@ -1,7 +1,10 @@
 ﻿using HIS.Dtos.Commons;
+using HIS.Dtos.Dictionaries.Service;
 using HIS.Dtos.Dictionaries.ServiceGroup;
 using HIS.EntityFrameworkCore.DbContexts;
+using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.Models.Commons;
+using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -17,25 +20,150 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroup
         {
         }
 
-
-        public Task<ApiResult<SServiceGroupDto>> CreateOrEdit(SServiceGroupDto input)
+        public async Task<ApiResult<SServiceGroupDto>> CreateOrEdit(SServiceGroupDto input)
         {
-            throw new NotImplementedException();
+            if (GuidHelper.IsNullOrEmpty(input.Id))
+                return await Create(input);
+            else
+                return await Update(input);
         }
 
-        public Task<ApiResult<SServiceGroupDto>> Delete(Guid id)
+        private async Task<ApiResult<SServiceGroupDto>> Create(SServiceGroupDto input)
         {
-            throw new NotImplementedException();
+            var result = new ApiResult<SServiceGroupDto>();
+            using (var transaction = _dbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    input.Id = Guid.NewGuid();
+
+                    var data = _mapper.Map<SServiceGroup>(input);
+
+                    _dbContext.SServiceGroups.Add(data);
+                    await _dbContext.SaveChangesAsync();
+
+                    result.IsSuccessed = true;
+                    result.Result = input;
+
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    result.IsSuccessed = false;
+                    result.Message = ex.Message;
+                }
+                finally
+                {
+                    transaction.Dispose();
+                }
+            }
+            return await Task.FromResult(result);
         }
 
-        public Task<ApiResultList<SServiceGroupDto>> GetAll(GetAllSServiceGroupInput input)
+        private async Task<ApiResult<SServiceGroupDto>> Update(SServiceGroupDto input)
         {
-            throw new NotImplementedException();
+            var result = new ApiResult<SServiceGroupDto>();
+            using (var transaction = _dbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    var sServiceGroup = _dbContext.SServiceGroups.FirstOrDefault(f => f.Id == input.Id);
+                    if (sServiceGroup == null)
+                        _mapper.Map(input, sServiceGroup);
+
+                    await _dbContext.SaveChangesAsync();
+
+                    result.IsSuccessed = true;
+                    result.Result = input;
+
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    result.IsSuccessed = false;
+                    result.Message = ex.Message;
+                }
+                finally
+                {
+                    transaction.Dispose();
+                }
+            }
+            return await Task.FromResult(result);
         }
 
-        public Task<ApiResult<SServiceGroupDto>> GetById(Guid id)
+        public async Task<ApiResult<SServiceGroupDto>> Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var result = new ApiResult<SServiceGroupDto>();
+            using (var transaction = _dbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    var serviceGroup = _dbContext.SServiceGroups.SingleOrDefault(x => x.Id == id);
+                    if (serviceGroup != null)
+                    {
+                        _dbContext.SServiceGroups.Remove(serviceGroup);
+                        await _dbContext.SaveChangesAsync();
+                        result.IsSuccessed = true;
+
+                        transaction.Commit();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    result.IsSuccessed = false;
+                    result.Message = ex.Message;
+                }
+                finally
+                {
+                    transaction.Dispose();
+                }
+            }
+            return await Task.FromResult(result);
+        }
+
+        public async Task<ApiResultList<SServiceGroupDto>> GetAll(GetAllSServiceGroupInput input)
+        {
+            var result = new ApiResultList<SServiceGroupDto>();
+
+            try
+            {
+                result.Result = (from r in _dbContext.SServiceGroups
+                                 where (input.InactiveFilter == null || r.Inactive == !input.InactiveFilter)
+                                 select new SServiceGroupDto()
+                                 {
+                                     Id = r.Id,
+                                     Code = r.Code,
+                                     Name = r.Name,
+                                     Inactive = r.Inactive,
+                                 }).OrderBy(o => o.Code).ToList();
+
+                result.TotalCount = result.Result.Count;
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccessed = false;
+                result.Message = ex.Message;
+            }
+
+            return await Task.FromResult(result);
+        }
+
+        public async Task<ApiResult<SServiceGroupDto>> GetById(Guid id)
+        {
+            var result = new ApiResult<SServiceGroupDto>();
+
+            try
+            {
+                var service = _dbContext.SServiceGroups.FirstOrDefault(s => s.Id == id);
+                result.Result = _mapper.Map<SServiceGroupDto>(service);
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccessed = false;
+                result.Message = ex.Message;
+            }
+
+            return await Task.FromResult(result);
         }
     }
 }

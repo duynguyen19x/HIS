@@ -13,6 +13,7 @@ using HIS.ApplicationService.Dictionaries.Province;
 using HIS.ApplicationService.Dictionaries.Room;
 using HIS.ApplicationService.Dictionaries.RoomType;
 using HIS.ApplicationService.Dictionaries.Service;
+using HIS.ApplicationService.Dictionaries.ServiceGroup;
 using HIS.ApplicationService.Dictionaries.ServicePricePolicy;
 using HIS.ApplicationService.Dictionaries.SurgicalProcedureType;
 using HIS.ApplicationService.Dictionaries.Ward;
@@ -46,6 +47,7 @@ namespace HIS.ApplicationService
             services.AddTransient<ISServicePricePolicyService, SServicePricePolicyService>();
             services.AddTransient<IServiceService, ServiceService>();
             services.AddTransient<ISurgicalProcedureTypeService, SurgicalProcedureTypeService>();
+            services.AddTransient<IServiceGroupService, ServiceGroupService>();
 
             services.AddTransient<ISPatientService, SPatientService>();
         }

@@ -82,6 +82,7 @@ namespace HIS.EntityFrameworkCore.DbContexts
 
         public DbSet<SRolePermissionBranch> SRolePermissionBranchs { get; set; }
         public DbSet<SService> SServices { get; set; }
+        public DbSet<SServiceGroup> SServiceGroups { get; set; }
         public DbSet<SServiceType> SServiceTypes { get; set; }
         public DbSet<SServiceUnit> SServiceUnits { get; set; }
         public DbSet<SMedicine> SMedicines { get; set; }
