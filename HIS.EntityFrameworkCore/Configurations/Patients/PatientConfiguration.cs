@@ -33,6 +33,10 @@ namespace HIS.EntityFrameworkCore.Configurations.Patients
             builder.Property(x => x.MotherEducationalLevel).HasMaxLength(150);
             builder.Property(x => x.PassPortNumber).HasMaxLength(50);
             builder.Property(x => x.PassPortIssuedBy).HasMaxLength(250);
+            builder.Property(x => x.RelativeName).HasMaxLength(250);
+            builder.Property(x => x.RelativeAddress).HasMaxLength(512);
+            builder.Property(x => x.RelativeIdentificationNumber).HasMaxLength(128);
+            builder.Property(x => x.RelativePhoneNumbar).HasMaxLength(56);
 
             builder.HasOne(t => t.Gender).WithMany(pc => pc.SPatients).HasForeignKey(pc => pc.GenderId);
             builder.HasOne(t => t.PatientType).WithMany(pc => pc.SPatients).HasForeignKey(pc => pc.PatientTypeId);

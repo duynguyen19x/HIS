@@ -1,4 +1,5 @@
 ﻿using HIS.EntityFrameworkCore.Configurations;
+using HIS.EntityFrameworkCore.Configurations.Business;
 using HIS.EntityFrameworkCore.Configurations.Dictionaries;
 using HIS.EntityFrameworkCore.Configurations.Patients;
 using HIS.EntityFrameworkCore.Configurations.Services;
@@ -23,7 +24,6 @@ namespace HIS.EntityFrameworkCore.DbContexts
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration(new GenderConfiguration());
             modelBuilder.ApplyConfiguration(new UserConfigurations());
             modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
             modelBuilder.ApplyConfiguration(new TokenConfiguration());
@@ -52,8 +52,14 @@ namespace HIS.EntityFrameworkCore.DbContexts
             modelBuilder.ApplyConfiguration(new ProvinceConfiguration());
             modelBuilder.ApplyConfiguration(new DistrictConfiguration());
             modelBuilder.ApplyConfiguration(new WardConfiguration());
+            modelBuilder.ApplyConfiguration(new IcdConfiguration());
             modelBuilder.ApplyConfiguration(new ServicePricePolicyConfigurations());
             modelBuilder.ApplyConfiguration(new SurgicalProcedureTypeConfigurations());
+            modelBuilder.ApplyConfiguration(new EthnicConfiguration());
+            modelBuilder.ApplyConfiguration(new HospitalConfiguration());
+            modelBuilder.ApplyConfiguration(new ServiceGroupConfigurations());
+
+            modelBuilder.ApplyConfiguration(new TreatmentConfiguration());
 
             modelBuilder.Seed();
         }

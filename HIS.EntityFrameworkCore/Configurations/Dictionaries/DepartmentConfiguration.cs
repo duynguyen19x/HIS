@@ -16,8 +16,9 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.ToTable("SDepartments");
 
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Code).HasMaxLength(50).IsRequired(); ;
-            builder.Property(x => x.Name).HasMaxLength(512).IsRequired(); ;
+            builder.Property(x => x.Code).HasMaxLength(50).IsRequired(); 
+            builder.Property(x => x.MohCode).HasMaxLength(50).IsRequired();
+            builder.Property(x => x.Name).HasMaxLength(512).IsRequired();
             builder.Property(x => x.Description).HasMaxLength(512);
 
             builder.HasOne(t => t.SDepartmentType).WithMany(p => p.SDepartments).HasForeignKey(p => p.DepartmentTypeId).IsRequired();

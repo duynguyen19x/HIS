@@ -17,7 +17,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Patients
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Code).HasMaxLength(50);
-            builder.Property(x => x.Code).HasMaxLength(250);
+            builder.Property(x => x.Name).HasMaxLength(250);
         }
     }
 }
