@@ -18,21 +18,21 @@ namespace HIS.EntityFrameworkCore.Data
                     Id = Guid.NewGuid(),
                     Code = "BHYT",
                     Name = "Bảo hiểm y tế",
-                    IsActive = true,
+                    Inactive = false,
                 },
                 new SPatientType()
                 {
                     Id = Guid.NewGuid(),
                     Code = "VP",
                     Name = "Viện phí",
-                    IsActive = true,
+                    Inactive = false,
                 },
                 new SPatientType()
                 {
                     Id = Guid.NewGuid(),
                     Code = "DV",
                     Name = "Dịch vụ",
-                    IsActive = true,
+                    Inactive = false,
                 }
             );
         }

@@ -90,12 +90,12 @@ namespace HIS.ApplicationService.Dictionaries.Service
             try
             {
                 result.Result = (from r in _dbContext.SServices
-                                 where (input.IsActiveFilter == null || r.IsActive == !input.IsActiveFilter)
+                                 where (input.InactiveFilter == null || r.Inactive == !input.InactiveFilter)
                                  select new SServiceDto()
                                  {
                                      Code = r.Code,
                                      Name = r.Name,
-                                     IsActive = r.IsActive,
+                                     Inactive = r.Inactive,
                                      ServiceGroupId = r.ServiceGroupId,
                                      ServiceUnitId = r.ServiceUnitId,
                                      ServiceTypeId = r.ServiceTypeId,

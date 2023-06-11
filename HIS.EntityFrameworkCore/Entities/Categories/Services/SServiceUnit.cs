@@ -19,8 +19,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Thứ tự sắp xếp")]
         public int? SortOrder { get; set; }
 
-        [Description("Đang sử dụng")]
-        public bool? IsActive { get; set; }
+        public bool Inactive { get; set; }
 
         public IList<SServiceType> SServiceTypes { get; set; }
         public IList<SService> SServices { get; set; }

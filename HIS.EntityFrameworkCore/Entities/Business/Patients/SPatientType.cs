@@ -21,7 +21,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Patients
         /// <summary>
         /// Trạng thái
         /// </summary>
-        public bool IsActive { get; set; }
+        public bool Inactive { get; set; }
 
         public IList<SPatient> SPatients { get; set; }
 

@@ -10,6 +10,6 @@ namespace HIS.Dtos.Dictionaries.Service
     {
         public string CodeFilter { get; set; }
         public string NameFilter { get; set; }
-        public bool? IsActiveFilter { get; set; }
+        public bool? InactiveFilter { get; set; }
     }
 }

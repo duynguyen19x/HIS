@@ -52,8 +52,8 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Diễn giải")]
         public string Description { get; set; }
 
-        [Description("Đang sử dụng")]
-        public bool? IsActive { get; set; }
+        [Description("Ngưng sử dụng")]
+        public bool Inactive { get; set; }
 
         public SService SService { get; set; }
         public SServiceUnit SServiceUnit { get; set; }

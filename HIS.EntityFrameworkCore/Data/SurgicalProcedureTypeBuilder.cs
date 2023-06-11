@@ -19,48 +19,56 @@ namespace HIS.EntityFrameworkCore.Data
                      {
                          Id = Guid.NewGuid(),
                          Code = "PT-DB",
-                         Name = "Phẫu thuật đặc biệt"
+                         Name = "Phẫu thuật đặc biệt",
+                         SortOrder = 1
                      },
                      new SSurgicalProcedureType()
                      {
                          Id = Guid.NewGuid(),
                          Code = "PT-1",
-                         Name = "Phẫu thuật loại 1"
+                         Name = "Phẫu thuật loại 1",
+                         SortOrder = 2
                      },
                      new SSurgicalProcedureType()
                      {
                          Id = Guid.NewGuid(),
                          Code = "PT-2",
-                         Name = "Phẫu thuật loại 2"
+                         Name = "Phẫu thuật loại 2",
+                         SortOrder = 3
                      },
                      new SSurgicalProcedureType()
                      {
                          Id = Guid.NewGuid(),
                          Code = "PT-3",
-                         Name = "Phẫu thuật loại 3"
+                         Name = "Phẫu thuật loại 3",
+                         SortOrder = 4
                      }, new SSurgicalProcedureType()
                      {
                          Id = Guid.NewGuid(),
                          Code = "TT-DB",
-                         Name = "Thủ thuật đặc biệt"
+                         Name = "Thủ thuật đặc biệt",
+                         SortOrder = 5
                      },
                      new SSurgicalProcedureType()
                      {
                          Id = Guid.NewGuid(),
                          Code = "TT-1",
-                         Name = "Thủ thuật loại 1"
+                         Name = "Thủ thuật loại 1",
+                         SortOrder = 6
                      },
                      new SSurgicalProcedureType()
                      {
                          Id = Guid.NewGuid(),
                          Code = "TT-2",
-                         Name = "Thủ thuật loại 2"
+                         Name = "Thủ thuật loại 2",
+                         SortOrder = 7
                      },
                      new SSurgicalProcedureType()
                      {
                          Id = Guid.NewGuid(),
                          Code = "TT-3",
-                         Name = "Thủ thuật loại 3"
+                         Name = "Thủ thuật loại 3",
+                         SortOrder = 8
                      });
         }
     }

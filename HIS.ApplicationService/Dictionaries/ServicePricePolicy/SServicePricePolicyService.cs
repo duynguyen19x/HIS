@@ -31,7 +31,7 @@ namespace HIS.ApplicationService.Dictionaries.ServicePricePolicy
             try
             {
                 result.Result = (from r in _dbContext.SPatientTypes
-                                 where (input.InactiveFilter == null || r.IsActive == !input.InactiveFilter)
+                                 where (input.InactiveFilter == null || r.Inactive == !input.InactiveFilter)
                                  select new SServicePricePolicyDto()
                                  {
                                      PatientTypeId = r.Id,

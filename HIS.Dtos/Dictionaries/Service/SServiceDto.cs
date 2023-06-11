@@ -17,7 +17,7 @@ namespace HIS.Dtos.Dictionaries.Service
 
         public int? SoftOrder { get; set; }
 
-        public bool? IsActive { get; set; }
+        public bool? Inactive { get; set; }
 
         public Guid? ServiceTypeId { get; set; }
         public Guid? ServiceUnitId { get; set; }

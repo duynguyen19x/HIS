@@ -27,7 +27,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public int? SortOrder { get; set; }
 
         [Description("Đang sử dụng")]
-        public bool? IsActive { get; set; }
+        public bool Inactive { get; set; }
 
         public Guid? ServiceTypeId { get; set; }
         public Guid? ServiceUnitId { get; set; }
