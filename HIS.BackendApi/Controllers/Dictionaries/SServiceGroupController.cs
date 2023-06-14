@@ -1,10 +1,7 @@
-﻿using HIS.ApplicationService.Dictionaries.Service;
-using HIS.ApplicationService.Dictionaries.ServiceGroup;
+﻿using HIS.ApplicationService.Dictionaries.ServiceGroup;
 using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.Service;
 using HIS.Dtos.Dictionaries.ServiceGroup;
 using HIS.Models.Commons;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Dictionaries

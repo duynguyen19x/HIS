@@ -24,6 +24,7 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.HasOne(t => t.SServiceUnit).WithMany(pc => pc.SServices).HasForeignKey(pc => pc.ServiceUnitId);
             builder.HasOne(t => t.SServiceType).WithMany(pc => pc.SServices).HasForeignKey(pc => pc.ServiceTypeId);
             builder.HasOne(t => t.SServiceGroup).WithMany(pc => pc.SServices).HasForeignKey(pc => pc.ServiceGroupId);
+            builder.HasOne(t => t.SServiceGroupHeIn).WithMany(pc => pc.SServices).HasForeignKey(pc => pc.ServiceGroupHeInId);
             builder.HasOne(t => t.SSurgicalProcedureType).WithMany(pc => pc.SServices).HasForeignKey(pc => pc.SurgicalProcedureTypeId);
         }
     }

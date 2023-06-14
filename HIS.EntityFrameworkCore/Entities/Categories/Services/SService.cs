@@ -32,11 +32,13 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public Guid? ServiceTypeId { get; set; }
         public Guid? ServiceUnitId { get; set; }
         public Guid? ServiceGroupId { get; set; }
+        public Guid? ServiceGroupHeInId { get; set; }
         public Guid? SurgicalProcedureTypeId { get; set; }
 
         public SServiceUnit SServiceUnit { get; set; }
         public SServiceType SServiceType { get; set; }
         public SServiceGroup SServiceGroup { get; set; }
+        public SServiceGroupHeIn SServiceGroupHeIn { get; set; }
         public SSurgicalProcedureType SSurgicalProcedureType { get; set; }
 
         public IList<SMedicineType> SMedicineTypes { get; set; }

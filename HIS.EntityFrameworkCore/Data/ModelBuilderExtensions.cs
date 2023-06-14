@@ -9,6 +9,8 @@ namespace HIS.EntityFrameworkCore.Data
             GenderBuilder.Seed(modelBuilder);
             UserBuilder.Seed(modelBuilder);
             ServiceGroupBuilder.Seed(modelBuilder);
+            ServiceGroupHeInBuilder.Seed(modelBuilder);
+            ServiceUnitBuilder.Seed(modelBuilder);
             PatientTypeBuilder.Seed(modelBuilder);
             SurgicalProcedureTypeBuilder.Seed(modelBuilder);
         }

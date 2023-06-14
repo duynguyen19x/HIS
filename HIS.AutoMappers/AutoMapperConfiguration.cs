@@ -15,11 +15,14 @@ using HIS.Dtos.Dictionaries.Room;
 using HIS.Dtos.Dictionaries.RoomType;
 using HIS.Dtos.Dictionaries.Service;
 using HIS.Dtos.Dictionaries.ServiceGroup;
+using HIS.Dtos.Dictionaries.ServiceGroupHeIn;
+using HIS.Dtos.Dictionaries.ServiceUnit;
 using HIS.Dtos.Dictionaries.Ward;
 using HIS.Dtos.Systems.Role;
 using HIS.EntityFrameworkCore.Entities.Business.Patients;
 using HIS.EntityFrameworkCore.Entities.Business.Treatment;
 using HIS.EntityFrameworkCore.Entities.Categories;
+using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 
 namespace HIS.AutoMappers
@@ -46,6 +49,8 @@ namespace HIS.AutoMappers
             CreateMap<SRoomType, SRoomTypeDto>().ReverseMap();
             CreateMap<SWard, SWardDto>().ReverseMap();
             CreateMap<SServiceGroup, SServiceGroupDto>().ReverseMap();
+            CreateMap<SServiceGroupHeIn, SServiceGroupHeInDto>().ReverseMap();
+            CreateMap<SServiceUnit, SServiceUnitDto>().ReverseMap();
             CreateMap<SService, SServiceDto>().ReverseMap();
         }
     }
