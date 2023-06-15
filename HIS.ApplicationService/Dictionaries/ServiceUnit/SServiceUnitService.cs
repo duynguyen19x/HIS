@@ -1,4 +1,5 @@
-﻿using HIS.Dtos.Commons;
+﻿using AutoMapper;
+using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ServiceGroup;
 using HIS.Dtos.Dictionaries.ServiceUnit;
 using HIS.EntityFrameworkCore.DbContexts;
@@ -16,7 +17,7 @@ namespace HIS.ApplicationService.Dictionaries.ServiceUnit
 {
     public class SServiceUnitService : BaseSerivce, ISServiceUnitService
     {
-        public SServiceUnitService(HIS_DbContext dbContext, IConfiguration config) : base(dbContext, config)
+        public SServiceUnitService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper) : base(dbContext, config, mapper)
         {
         }
 

@@ -20,7 +20,7 @@ namespace HIS.BackendApi.Controllers.Dictionaries
             _sServiceUnitService = sServiceUnitService;
         }
 
-        [HttpGet("CreateOrEdit")]
+        [HttpPost("CreateOrEdit")]
         public async Task<ApiResult<SServiceUnitDto>> CreateOrEdit(SServiceUnitDto input)
         {
             return await _sServiceUnitService.CreateOrEdit(input);
@@ -32,7 +32,7 @@ namespace HIS.BackendApi.Controllers.Dictionaries
             return await _sServiceUnitService.GetAll(input);
         }
 
-        [HttpDelete("GetById")]
+        [HttpGet("GetById")]
         public async Task<ApiResult<SServiceUnitDto>> GetById(Guid id)
         {
             return await _sServiceUnitService.GetById(id);

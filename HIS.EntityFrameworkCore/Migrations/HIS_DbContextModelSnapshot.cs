@@ -99,6 +99,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("IdentificationNumberIssuedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool?>("IsDelete")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("Join5Year")
                         .HasColumnType("datetime2");
 
@@ -208,21 +211,21 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("cc705d0b-3587-49dc-8108-1f5e6db0bb71"),
+                            Id = new Guid("c94ab6ba-5955-4c21-9d9d-416588117a94"),
                             Code = "BHYT",
                             Inactive = false,
                             Name = "Bảo hiểm y tế"
                         },
                         new
                         {
-                            Id = new Guid("c2f9ef6a-8bc6-4001-b874-cb014db68195"),
+                            Id = new Guid("d78bc647-2d40-41b2-b330-5385bfbe4229"),
                             Code = "VP",
                             Inactive = false,
                             Name = "Viện phí"
                         },
                         new
                         {
-                            Id = new Guid("4a86b81b-848d-45da-8723-bd1b456d5a80"),
+                            Id = new Guid("0251c635-dcc4-40a6-8023-d4bda5cb1f79"),
                             Code = "DV",
                             Inactive = false,
                             Name = "Dịch vụ"
@@ -279,6 +282,9 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Property<DateTime>("InTimeClinical")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool?>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
@@ -346,6 +352,9 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Property<decimal?>("InternalPrice")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool?>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<Guid?>("MaterialTypeId")
                         .HasColumnType("uniqueidentifier");
@@ -426,6 +435,9 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Property<decimal?>("InternalPrice")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool?>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
@@ -510,6 +522,9 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Property<decimal?>("InternalPrice")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool?>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<Guid?>("MedicineGroupId")
                         .HasColumnType("uniqueidentifier");
@@ -646,6 +661,9 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Property<decimal?>("InternalPrice")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool?>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<Guid?>("MedicineGroupId")
                         .HasColumnType("uniqueidentifier");
@@ -796,6 +814,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
 
+                    b.Property<bool?>("IsDelete")
+                        .HasColumnType("bit");
+
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
@@ -866,7 +887,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c5dc7f68-d3f5-45f1-b023-a970d0153991"),
+                            Id = new Guid("6433596a-f71a-4483-b1d6-72ef4710c7f9"),
                             Code = "XN-HH",
                             Inactive = false,
                             Name = "Xét nghiệm huyết học",
@@ -874,7 +895,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("be32d32b-8d52-40f9-ad85-f6cc1d001991"),
+                            Id = new Guid("6bd5b40c-1142-4881-9e65-2bb12c887d2f"),
                             Code = "XN-SH",
                             Inactive = false,
                             Name = "Xét nghiệm sinh hóa",
@@ -882,7 +903,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8153ff3d-28b3-4d2b-b279-aae277383e65"),
+                            Id = new Guid("aa435015-00ac-4063-b9d8-25b8afc8bd65"),
                             Code = "XN-VS",
                             Inactive = false,
                             Name = "Xét nghiệm vi sinh",
@@ -890,7 +911,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9a1033fc-830d-4030-a3cb-d43ebf0c9eeb"),
+                            Id = new Guid("2c81894b-b029-40d2-ba11-1781b9400fa9"),
                             Code = "XN-NT",
                             Inactive = false,
                             Name = "Xét nghiệm nước tiểu",
@@ -898,7 +919,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4e840b14-6538-4cfb-8314-537b35587bd0"),
+                            Id = new Guid("62c9898b-c3fb-45f9-9a3a-64ba915c4d25"),
                             Code = "XN-DCD",
                             Inactive = false,
                             Name = "Dịch chọc dò",
@@ -906,7 +927,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e4c84720-49b7-4c8d-a1a1-630fa21bd862"),
+                            Id = new Guid("e4b10d90-b939-43ce-9465-37d7e4064ef2"),
                             Code = "GB",
                             Inactive = false,
                             Name = "Giải phẫu bệnh lý",
@@ -914,7 +935,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("34a32d8e-5b97-403c-9368-da016c5d81d1"),
+                            Id = new Guid("7a0bc683-6e7e-480f-89b6-1b633bc4a5d7"),
                             Code = "PT",
                             Inactive = false,
                             Name = "Phẫu thuật",
@@ -922,7 +943,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("860be689-460f-43a4-afe6-93920e3b3581"),
+                            Id = new Guid("4e5cddfa-af78-4c73-b7b1-8ed30058b0fb"),
                             Code = "KH",
                             Inactive = false,
                             Name = "Khám",
@@ -930,7 +951,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b266c577-a512-49df-8340-cc1d3a0f24c4"),
+                            Id = new Guid("b11abc28-7dbc-4add-8d49-726c7572d824"),
                             Code = "TDCN-DND",
                             Inactive = false,
                             Name = "Điện não đồ",
@@ -938,7 +959,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2df64541-cc30-4215-88c2-f8749425d886"),
+                            Id = new Guid("e3971ab1-210f-4663-9ed3-dab4b1efed01"),
                             Code = "TDCN-TTD",
                             Inactive = false,
                             Name = "Điện tâm đồ",
@@ -946,7 +967,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("eeee92c2-5d8c-4437-ad12-acb5fb173c0a"),
+                            Id = new Guid("780e750f-5bc8-4f0d-bc86-4cc0116a5351"),
                             Code = "PH",
                             Inactive = false,
                             Name = "Phục hồi chức năng",
@@ -954,7 +975,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("77a694ab-6344-4e1d-a93d-6a43dd3cc69e"),
+                            Id = new Guid("ce7f2711-3874-44f5-92ef-32eda93da8bc"),
                             Code = "TT",
                             Inactive = false,
                             Name = "Thủ thuật",
@@ -962,7 +983,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d140e0ac-3daf-483b-a908-7516f7ebb21c"),
+                            Id = new Guid("dc4ba36b-56fa-4271-ad45-4e658120ba62"),
                             Code = "CDHA-NS",
                             Inactive = false,
                             Name = "Nội soi",
@@ -970,7 +991,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("133a6b9d-27db-41d7-9f1d-f71d1e3c078d"),
+                            Id = new Guid("ccbfde50-f639-4a69-a479-c78b11f0b499"),
                             Code = "CDHA-XQ",
                             Inactive = false,
                             Name = "XQuang thường",
@@ -978,7 +999,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("79df013a-eb44-47d8-b54a-7a245650c77f"),
+                            Id = new Guid("72a09264-64eb-47b8-a3c8-cac3f2a31193"),
                             Code = "CDHA-XQ-KTS",
                             Inactive = false,
                             Name = "XQuang kỹ thuật số",
@@ -986,7 +1007,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4a6769f0-d039-4029-a1a0-cd410f04a705"),
+                            Id = new Guid("4b6fcc13-6143-4a0e-962e-53844bd60686"),
                             Code = "CDHA-MRI",
                             Inactive = false,
                             Name = "Cộng hưởng từ",
@@ -994,14 +1015,14 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("58c0bc46-c11c-494f-a03f-1942f812a8aa"),
+                            Id = new Guid("4dbd730c-7aee-4e3c-bc6c-fc1918880bf5"),
                             Code = "CDHA-CT",
                             Inactive = false,
                             Name = "Cắt lớp vi tính"
                         },
                         new
                         {
-                            Id = new Guid("0cb3dfb7-1a7c-4be0-8b6d-0c64badf98d5"),
+                            Id = new Guid("52cb9264-8d47-4435-8014-6eba0bc3b89d"),
                             Code = "CDHA-SA",
                             Inactive = false,
                             Name = "Siêu âm thường",
@@ -1009,7 +1030,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b87042f2-cf8d-494a-94b5-b9e022036428"),
+                            Id = new Guid("726b8c63-bfc9-405f-89ae-2d950f303f6e"),
                             Code = "CDHA-SA-M",
                             Inactive = false,
                             Name = "Siêu âm màu",
@@ -1017,7 +1038,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b5615e7e-5980-46c6-a65f-04ae2a0d2075"),
+                            Id = new Guid("735946f5-8c00-483b-8d23-384abc27030c"),
                             Code = "AN",
                             Inactive = false,
                             Name = "Suất ăn",
@@ -1025,7 +1046,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("7ac67b2c-0927-4502-b649-949e9f469f0e"),
+                            Id = new Guid("665b13f2-00cc-45f5-a3ad-e2074f7c8df0"),
                             Code = "MA",
                             Inactive = false,
                             Name = "Máu",
@@ -1033,7 +1054,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("0963b290-08a9-4901-8d49-6a42b0ac0687"),
+                            Id = new Guid("39085951-2171-4e1a-87f1-938c11eb6151"),
                             Code = "VT",
                             Inactive = false,
                             Name = "Vật tư",
@@ -1041,7 +1062,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("bbc81f00-1aa6-45c3-b3f5-faca3c2bfc8c"),
+                            Id = new Guid("66732353-c68f-4b72-aa19-bd908167f5b0"),
                             Code = "TH",
                             Inactive = false,
                             Name = "Thuốc",
@@ -1049,7 +1070,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("57d62901-76c2-4b01-a33d-a757c0e139b2"),
+                            Id = new Guid("fa491c1c-9e01-42c3-94fe-082b516accbe"),
                             Code = "GI",
                             Inactive = false,
                             Name = "Giường",
@@ -1057,7 +1078,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("db2ccb57-33b5-416b-bee0-159dffcdfb7b"),
+                            Id = new Guid("aa525f71-8af5-428a-b222-7b8b4e4ff4b2"),
                             Code = "VC",
                             Inactive = false,
                             Name = "Vận chuyển",
@@ -1065,7 +1086,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2e0924f2-c8c3-4395-aa70-23de4b3bd3da"),
+                            Id = new Guid("fe78f957-8977-43f4-9640-015eb4ddf1b3"),
                             Code = "CL",
                             Inactive = false,
                             Name = "Khác",
@@ -1096,6 +1117,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<Guid?>("ModifiedBy")
@@ -1148,7 +1172,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c4cff684-d7eb-45e9-8001-30ae4e4d4f9d"),
+                            Id = new Guid("97951608-4915-4e34-a578-f5fc79e505ad"),
                             Code = "01",
                             Inactive = false,
                             Name = "Viên",
@@ -1156,7 +1180,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a1ddef16-d3b8-44fd-9aea-06d9d094dd06"),
+                            Id = new Guid("e8439932-47e6-487e-898e-8631dbd45dea"),
                             Code = "02",
                             Inactive = false,
                             Name = "Lần",
@@ -1164,7 +1188,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3ea18a44-7ac0-41ab-a981-789ca90e25b7"),
+                            Id = new Guid("30fd6a09-2fc5-4046-9c3d-7058b3aff4d5"),
                             Code = "03",
                             Inactive = false,
                             Name = "Lọ",
@@ -1172,7 +1196,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("1ccefbd7-2e38-4ccc-bac5-f983854e5eb1"),
+                            Id = new Guid("1188ca0e-9ac3-44e3-817c-847a26999a0b"),
                             Code = "04",
                             Inactive = false,
                             Name = "Tuýt",
@@ -1180,7 +1204,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("82849c79-d079-4959-99d7-b96729de51f4"),
+                            Id = new Guid("7b227bb3-7c04-49ce-b0c6-f3919382fa8c"),
                             Code = "05",
                             Inactive = false,
                             Name = "Ống",
@@ -1188,7 +1212,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9e076427-766a-4bbf-8ff0-3bf3d79e0ff1"),
+                            Id = new Guid("4efbf8ae-bdd8-45da-8bb3-14c9f0f91e6e"),
                             Code = "06",
                             Inactive = false,
                             Name = "Hộp",
@@ -1196,7 +1220,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("42a5c137-27b1-4e5e-8c74-7c1b4466d438"),
+                            Id = new Guid("c8120273-3dda-404c-a447-cc5cabb30d33"),
                             Code = "07",
                             Inactive = false,
                             Name = "Tub",
@@ -1204,7 +1228,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6f169102-b3a5-48e8-8079-0305fe498bec"),
+                            Id = new Guid("66846338-0d57-428c-9933-4e734b26f31c"),
                             Code = "08",
                             Inactive = false,
                             Name = "Gói",
@@ -1212,7 +1236,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("59bd8d9d-8a92-4f40-98ee-c796e248a26e"),
+                            Id = new Guid("6957fe26-fd27-4acb-b27d-a6c803e8c4e6"),
                             Code = "09",
                             Inactive = false,
                             Name = "Cuộn",
@@ -1220,7 +1244,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9192b5fb-4f3b-46ca-8c85-4e30d82d6cad"),
+                            Id = new Guid("bcdca037-2e5d-423a-9952-67fc521b365e"),
                             Code = "10",
                             Inactive = false,
                             Name = "ml",
@@ -1228,7 +1252,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e69537ff-8788-4122-9b8a-138ce20eee0f"),
+                            Id = new Guid("1eef2b35-8cc5-4f8b-9118-018203fd3c03"),
                             Code = "11",
                             Inactive = false,
                             Name = "Lít",
@@ -1236,7 +1260,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f0f5f23b-72be-460d-b017-05a80eb51bcd"),
+                            Id = new Guid("c3a08ab9-663a-4eb3-b112-babb59a64601"),
                             Code = "12",
                             Inactive = false,
                             Name = "Gam",
@@ -1244,7 +1268,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("43430f79-d0cf-46c5-8517-51ea519b2191"),
+                            Id = new Guid("f4e6ee3a-3164-4c2a-a1cd-71e860f049bf"),
                             Code = "13",
                             Inactive = false,
                             Name = "Kg",
@@ -1252,7 +1276,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("afe3afd6-eee8-4f2e-9a35-cc6f1274dcb5"),
+                            Id = new Guid("2a8869fd-0cea-47e2-b48f-7c2cb8b20d1c"),
                             Code = "14",
                             Inactive = false,
                             Name = "Met",
@@ -1260,7 +1284,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b11a07c5-2b1f-410b-aa69-11a6014f17a8"),
+                            Id = new Guid("e83b24d6-c2bb-4735-8cc2-f6c2cca8748f"),
                             Code = "15",
                             Inactive = false,
                             Name = "Minimet",
@@ -1368,7 +1392,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("cb4df8c5-ea21-4877-ac4b-bf031f04e5a5"),
+                            Id = new Guid("4d5bdea5-4a2c-4e6e-b6b4-58a1d78b1050"),
                             Email = "administrator@gmail.com",
                             FirstName = "Admin",
                             LastName = "Administrator",
@@ -1421,7 +1445,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("93e94efa-da70-4aa3-8802-bf6bbdaac6c0"),
+                            Id = new Guid("81786062-3b8f-4916-bca6-bd98eb3d3ade"),
                             Code = "1",
                             Inactive = false,
                             Name = "Xét nghiệm",
@@ -1429,7 +1453,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("2207222f-6ece-40a5-8bb7-92f608f0b40d"),
+                            Id = new Guid("ba56d5cc-c5c8-422b-8973-30e07a60ca57"),
                             Code = "2",
                             Inactive = false,
                             Name = "Chẩn đoán hình ảnh",
@@ -1437,7 +1461,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("f9a3d5b2-5cdd-4cee-9aff-0239622b523a"),
+                            Id = new Guid("1521895a-753a-4468-aa45-f7c5d4d2e2ca"),
                             Code = "3",
                             Inactive = false,
                             Name = "Thăm dò chức năng",
@@ -1445,7 +1469,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("675dcf81-69a7-417a-b2a4-13b966b3c786"),
+                            Id = new Guid("b85aeffc-cd8c-41b7-84f9-9b4b54433686"),
                             Code = "4",
                             Inactive = false,
                             Name = "Thuốc trong danh mục BHYT",
@@ -1453,7 +1477,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("38285272-1b88-48bc-93dc-0f9456b4028b"),
+                            Id = new Guid("f79303e8-570f-4c55-be1b-6aa6b8d88206"),
                             Code = "5",
                             Inactive = false,
                             Name = "Thuốc điều trị ung thư, chống thải ghép ngoài danh mục",
@@ -1461,7 +1485,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("cc2c6277-ac1f-4c41-89fa-8a0c81e8d9f1"),
+                            Id = new Guid("5f649cce-a6c4-4131-8e18-ad6db3e93a1a"),
                             Code = "6",
                             Inactive = false,
                             Name = "Thuốc thanh toán theo tỷ lệ",
@@ -1469,7 +1493,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5b68bb67-e1a7-419c-9f58-8407eed544be"),
+                            Id = new Guid("19b25bfc-87c6-4128-8006-e12d328e50fd"),
                             Code = "7",
                             Inactive = false,
                             Name = "Máu và chế phẩm máu",
@@ -1477,7 +1501,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("959eb703-735c-4350-b388-ea396a7c9517"),
+                            Id = new Guid("2f358448-3962-4640-82e8-8bc71e6607f7"),
                             Code = "8",
                             Inactive = false,
                             Name = "Phẫu thuật",
@@ -1485,7 +1509,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5021d5b0-37d8-404c-bbef-2cbe89ed4a37"),
+                            Id = new Guid("2cff84c3-b2ca-4a3e-8f4a-7d9b3b34a7e6"),
                             Code = "9",
                             Inactive = false,
                             Name = "DVKT thanh toán theo tỷ lệ",
@@ -1493,7 +1517,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("59b5b62f-2bd0-4aef-8459-453ca7acd648"),
+                            Id = new Guid("66cf0414-eac4-4988-a6fc-dd6a69c37648"),
                             Code = "10",
                             Inactive = false,
                             Name = "Vật tư y tế trong danh mục BHYT",
@@ -1501,7 +1525,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6de9e629-4c75-4041-a482-6fc2c9755f6b"),
+                            Id = new Guid("3a050e31-f1c5-49ef-9a47-1ac6785737c6"),
                             Code = "11",
                             Inactive = false,
                             Name = "VTYT thanh toán theo tỷ lệ",
@@ -1509,7 +1533,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("854d0154-99dd-4e8e-b62a-a52236f06b72"),
+                            Id = new Guid("9dff4b9d-b250-44c0-ab09-f8d8e9351555"),
                             Code = "12",
                             Inactive = false,
                             Name = "Vận chuyển",
@@ -1517,7 +1541,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5473a06a-852e-42b4-9ce3-be9208a1637e"),
+                            Id = new Guid("1a5ee1b9-3a90-4ed8-9266-06702df072f6"),
                             Code = "13",
                             Inactive = false,
                             Name = "Khám bệnh",
@@ -1525,7 +1549,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("3767a973-6ae2-4a7c-8535-e45017eb6c76"),
+                            Id = new Guid("2189b983-2064-4487-a99c-6bb78afcc0fa"),
                             Code = "14",
                             Inactive = false,
                             Name = "Giường điều trị ngoại trú",
@@ -1533,7 +1557,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4f4a52c7-b17a-4d91-8c19-eb27bd5a8311"),
+                            Id = new Guid("c32790a5-9f63-4594-9950-2949b6201835"),
                             Code = "15",
                             Inactive = false,
                             Name = "Giường điều trị nội trú",
@@ -1541,7 +1565,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("b8b22ea0-bf99-443a-910f-3d39d35916d2"),
+                            Id = new Guid("97b47f59-98c6-4700-a892-4990511ccec3"),
                             Code = "16",
                             Inactive = false,
                             Name = "Ngày giường lưu",
@@ -1549,7 +1573,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d518f8b8-4ac8-490a-919d-b3fab176e7e6"),
+                            Id = new Guid("b0756f95-ec78-47ff-8d76-6bbaa8f1f1bf"),
                             Code = "17",
                             Inactive = false,
                             Name = "Chế phẩm máu",
@@ -1557,7 +1581,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("a634278e-bf8e-41d4-a352-8b49aafdea22"),
+                            Id = new Guid("f7b495fc-a3a7-48df-a23b-c18bcd244f26"),
                             Code = "18",
                             Inactive = false,
                             Name = "Thủ thuật",
@@ -1588,6 +1612,9 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Property<DateTime?>("ExecutionTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool?>("IsDelete")
+                        .HasColumnType("bit");
 
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
@@ -1638,6 +1665,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("DeleteDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool?>("IsDelete")
+                        .HasColumnType("bit");
+
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
@@ -1658,56 +1688,56 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("73e38d45-c8fa-4337-ad9f-635c0942f083"),
+                            Id = new Guid("d6dcfa41-1a20-4e57-9b7b-e88195172b37"),
                             Code = "PT-DB",
                             Name = "Phẫu thuật đặc biệt",
                             SortOrder = 1
                         },
                         new
                         {
-                            Id = new Guid("fc20955a-36b4-49f4-b5b5-a87856f572d2"),
+                            Id = new Guid("68373bbc-ddf6-4094-b1ba-53835c4d278b"),
                             Code = "PT-1",
                             Name = "Phẫu thuật loại 1",
                             SortOrder = 2
                         },
                         new
                         {
-                            Id = new Guid("1ba6d7d0-e1d3-4732-a950-da4bd0dca6bb"),
+                            Id = new Guid("ecfa4b60-2a32-4997-a00d-2292a8c3b513"),
                             Code = "PT-2",
                             Name = "Phẫu thuật loại 2",
                             SortOrder = 3
                         },
                         new
                         {
-                            Id = new Guid("8b1fbdf4-12aa-4201-8a92-ef8757e72bd7"),
+                            Id = new Guid("2f5bd512-57ea-4c7d-9432-7983ba5eb93b"),
                             Code = "PT-3",
                             Name = "Phẫu thuật loại 3",
                             SortOrder = 4
                         },
                         new
                         {
-                            Id = new Guid("366ca7ee-f586-4ed7-9d24-cc9a124f8bd2"),
+                            Id = new Guid("ce5ac5b9-39ea-4aeb-abf5-ccb9b39104db"),
                             Code = "TT-DB",
                             Name = "Thủ thuật đặc biệt",
                             SortOrder = 5
                         },
                         new
                         {
-                            Id = new Guid("c6ae58a9-b5af-432c-8815-8e337b83b365"),
+                            Id = new Guid("a0d68c86-c0b0-4c51-acf3-ceb201cf12bb"),
                             Code = "TT-1",
                             Name = "Thủ thuật loại 1",
                             SortOrder = 6
                         },
                         new
                         {
-                            Id = new Guid("50877cc0-1df5-41fd-a541-30ee8de1ed94"),
+                            Id = new Guid("d38dc24b-464d-40b0-8e5f-73f68f37861e"),
                             Code = "TT-2",
                             Name = "Thủ thuật loại 2",
                             SortOrder = 7
                         },
                         new
                         {
-                            Id = new Guid("a4b2b85e-002a-4669-b222-2024524a6ae5"),
+                            Id = new Guid("6d35af6f-9833-42ca-9345-e9a7aad7d9e1"),
                             Code = "TT-3",
                             Name = "Thủ thuật loại 3",
                             SortOrder = 8
@@ -1746,6 +1776,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("nvarchar(512)");
 
                     b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<Guid?>("ModifiedBy")
@@ -1826,6 +1859,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("nvarchar(512)");
 
                     b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<Guid?>("ModifiedBy")
@@ -1975,6 +2011,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
 
+                    b.Property<bool?>("IsDelete")
+                        .HasColumnType("bit");
+
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
@@ -2024,6 +2063,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("nvarchar(512)");
 
                     b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<Guid?>("ModifiedBy")
@@ -2087,21 +2129,21 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("87b1f84d-60fc-405a-a717-5a1773494b40"),
+                            Id = new Guid("3f8b0cbc-7b89-467c-9950-303bc2c5b6b8"),
                             Code = "None",
                             Inactive = false,
                             Name = "Chưa xác định"
                         },
                         new
                         {
-                            Id = new Guid("d9ef7b78-d6b3-412b-a91e-f04f84bbc9fc"),
+                            Id = new Guid("3addca6b-aeb4-4833-8bf1-e04980b0ab9b"),
                             Code = "Male",
                             Inactive = false,
                             Name = "Nam"
                         },
                         new
                         {
-                            Id = new Guid("e7c760b6-81bd-4e47-8199-6b7b377a5bf2"),
+                            Id = new Guid("ecf8d468-b917-49ab-ba5b-def5b0773db0"),
                             Code = "Female",
                             Inactive = false,
                             Name = "Nữ"
@@ -2309,6 +2351,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
 
+                    b.Property<bool?>("IsDelete")
+                        .HasColumnType("bit");
+
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
@@ -2459,6 +2504,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<Guid?>("ModifiedBy")

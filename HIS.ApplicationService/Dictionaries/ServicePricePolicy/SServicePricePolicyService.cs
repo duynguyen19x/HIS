@@ -1,4 +1,5 @@
-﻿using HIS.Dtos.Commons;
+﻿using AutoMapper;
+using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ServicePricePolicy;
 using HIS.EntityFrameworkCore.DbContexts;
 using HIS.Models.Commons;
@@ -9,7 +10,7 @@ namespace HIS.ApplicationService.Dictionaries.ServicePricePolicy
 {
     public class SServicePricePolicyService : BaseSerivce, ISServicePricePolicyService
     {
-        public SServicePricePolicyService(HIS_DbContext dbContext, IConfiguration config) : base(dbContext, config)
+        public SServicePricePolicyService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper) : base(dbContext, config, mapper)
         {
 
         }

@@ -2,6 +2,7 @@
 using HIS.ApplicationService.Dictionaries.ServicePricePolicy;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Service;
+using HIS.Dtos.Dictionaries.ServiceGroup;
 using HIS.Dtos.Dictionaries.ServicePricePolicy;
 using HIS.Models.Commons;
 using Microsoft.AspNetCore.Http;
@@ -20,7 +21,7 @@ namespace HIS.BackendApi.Controllers.Dictionaries
             _serviceService = serviceService;
         }
 
-        [HttpGet("CreateOrEdit")]
+        [HttpPost("CreateOrEdit")]
         public async Task<ApiResult<SServiceDto>> CreateOrEdit(SServiceDto input)
         {
             return await _serviceService.CreateOrEdit(input);
@@ -30,6 +31,12 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         public async Task<ApiResultList<SServiceDto>> GetAll([FromQuery] GetAllSServiceInput input)
         {
             return await _serviceService.GetAll(input);
+        }
+
+        [HttpGet("GetById")]
+        public async Task<ApiResult<SServiceDto>> GetById(Guid id)
+        {
+            return await _serviceService.GetById(id);
         }
 
         [HttpDelete("Delete")]

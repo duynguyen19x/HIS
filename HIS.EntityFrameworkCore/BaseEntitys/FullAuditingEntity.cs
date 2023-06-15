@@ -35,5 +35,7 @@ namespace HIS.EntityFrameworkCore.BaseEntitys
         public DateTime? DeleteDate { get; set; }
 
         public Guid? DeleteBy { get; set; }
+
+        public bool? IsDelete { get; set; }
     }
 }

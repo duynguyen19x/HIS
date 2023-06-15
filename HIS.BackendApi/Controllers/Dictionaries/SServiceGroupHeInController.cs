@@ -20,7 +20,7 @@ namespace HIS.BackendApi.Controllers.Dictionaries
             _serviceGroupHeImService = serviceGroupHeImService;
         }
 
-        [HttpGet("CreateOrEdit")]
+        [HttpPost("CreateOrEdit")]
         public async Task<ApiResult<SServiceGroupHeInDto>> CreateOrEdit(SServiceGroupHeInDto input)
         {
             return await _serviceGroupHeImService.CreateOrEdit(input);
@@ -32,7 +32,7 @@ namespace HIS.BackendApi.Controllers.Dictionaries
             return await _serviceGroupHeImService.GetAll(input);
         }
 
-        [HttpDelete("GetById")]
+        [HttpGet("GetById")]
         public async Task<ApiResult<SServiceGroupHeInDto>> GetById(Guid id)
         {
             return await _serviceGroupHeImService.GetById(id);

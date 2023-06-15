@@ -29,7 +29,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -66,7 +67,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -107,7 +109,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -343,7 +346,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -375,7 +379,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -422,7 +427,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -516,7 +522,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -579,7 +586,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -653,7 +661,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -722,7 +731,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -769,7 +779,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -806,7 +817,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -853,7 +865,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -891,7 +904,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -933,7 +947,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -983,7 +998,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1015,9 +1031,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("87b1f84d-60fc-405a-a717-5a1773494b40"), "None", null, null, null, false, null, null, "Chưa xác định", null },
-                    { new Guid("d9ef7b78-d6b3-412b-a91e-f04f84bbc9fc"), "Male", null, null, null, false, null, null, "Nam", null },
-                    { new Guid("e7c760b6-81bd-4e47-8199-6b7b377a5bf2"), "Female", null, null, null, false, null, null, "Nữ", null }
+                    { new Guid("3addca6b-aeb4-4833-8bf1-e04980b0ab9b"), "Male", null, null, null, false, null, null, "Nam", null },
+                    { new Guid("3f8b0cbc-7b89-467c-9950-303bc2c5b6b8"), "None", null, null, null, false, null, null, "Chưa xác định", null },
+                    { new Guid("ecf8d468-b917-49ab-ba5b-def5b0773db0"), "Female", null, null, null, false, null, null, "Nữ", null }
                 });
 
             migrationBuilder.InsertData(
@@ -1025,9 +1041,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "Inactive", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("4a86b81b-848d-45da-8723-bd1b456d5a80"), "DV", false, "Dịch vụ" },
-                    { new Guid("c2f9ef6a-8bc6-4001-b874-cb014db68195"), "VP", false, "Viện phí" },
-                    { new Guid("cc705d0b-3587-49dc-8108-1f5e6db0bb71"), "BHYT", false, "Bảo hiểm y tế" }
+                    { new Guid("0251c635-dcc4-40a6-8023-d4bda5cb1f79"), "DV", false, "Dịch vụ" },
+                    { new Guid("c94ab6ba-5955-4c21-9d9d-416588117a94"), "BHYT", false, "Bảo hiểm y tế" },
+                    { new Guid("d78bc647-2d40-41b2-b330-5385bfbe4229"), "VP", false, "Viện phí" }
                 });
 
             migrationBuilder.InsertData(
@@ -1035,24 +1051,24 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "Inactive", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("2207222f-6ece-40a5-8bb7-92f608f0b40d"), "2", false, "Chẩn đoán hình ảnh", 2 },
-                    { new Guid("3767a973-6ae2-4a7c-8535-e45017eb6c76"), "14", false, "Giường điều trị ngoại trú", 14 },
-                    { new Guid("38285272-1b88-48bc-93dc-0f9456b4028b"), "5", false, "Thuốc điều trị ung thư, chống thải ghép ngoài danh mục", 5 },
-                    { new Guid("4f4a52c7-b17a-4d91-8c19-eb27bd5a8311"), "15", false, "Giường điều trị nội trú", 15 },
-                    { new Guid("5021d5b0-37d8-404c-bbef-2cbe89ed4a37"), "9", false, "DVKT thanh toán theo tỷ lệ", 9 },
-                    { new Guid("5473a06a-852e-42b4-9ce3-be9208a1637e"), "13", false, "Khám bệnh", 13 },
-                    { new Guid("59b5b62f-2bd0-4aef-8459-453ca7acd648"), "10", false, "Vật tư y tế trong danh mục BHYT", 10 },
-                    { new Guid("5b68bb67-e1a7-419c-9f58-8407eed544be"), "7", false, "Máu và chế phẩm máu", 7 },
-                    { new Guid("675dcf81-69a7-417a-b2a4-13b966b3c786"), "4", false, "Thuốc trong danh mục BHYT", 4 },
-                    { new Guid("6de9e629-4c75-4041-a482-6fc2c9755f6b"), "11", false, "VTYT thanh toán theo tỷ lệ", 11 },
-                    { new Guid("854d0154-99dd-4e8e-b62a-a52236f06b72"), "12", false, "Vận chuyển", 12 },
-                    { new Guid("93e94efa-da70-4aa3-8802-bf6bbdaac6c0"), "1", false, "Xét nghiệm", 1 },
-                    { new Guid("959eb703-735c-4350-b388-ea396a7c9517"), "8", false, "Phẫu thuật", 8 },
-                    { new Guid("a634278e-bf8e-41d4-a352-8b49aafdea22"), "18", false, "Thủ thuật", 18 },
-                    { new Guid("b8b22ea0-bf99-443a-910f-3d39d35916d2"), "16", false, "Ngày giường lưu", 16 },
-                    { new Guid("cc2c6277-ac1f-4c41-89fa-8a0c81e8d9f1"), "6", false, "Thuốc thanh toán theo tỷ lệ", 6 },
-                    { new Guid("d518f8b8-4ac8-490a-919d-b3fab176e7e6"), "17", false, "Chế phẩm máu", 17 },
-                    { new Guid("f9a3d5b2-5cdd-4cee-9aff-0239622b523a"), "3", false, "Thăm dò chức năng", 3 }
+                    { new Guid("1521895a-753a-4468-aa45-f7c5d4d2e2ca"), "3", false, "Thăm dò chức năng", 3 },
+                    { new Guid("19b25bfc-87c6-4128-8006-e12d328e50fd"), "7", false, "Máu và chế phẩm máu", 7 },
+                    { new Guid("1a5ee1b9-3a90-4ed8-9266-06702df072f6"), "13", false, "Khám bệnh", 13 },
+                    { new Guid("2189b983-2064-4487-a99c-6bb78afcc0fa"), "14", false, "Giường điều trị ngoại trú", 14 },
+                    { new Guid("2cff84c3-b2ca-4a3e-8f4a-7d9b3b34a7e6"), "9", false, "DVKT thanh toán theo tỷ lệ", 9 },
+                    { new Guid("2f358448-3962-4640-82e8-8bc71e6607f7"), "8", false, "Phẫu thuật", 8 },
+                    { new Guid("3a050e31-f1c5-49ef-9a47-1ac6785737c6"), "11", false, "VTYT thanh toán theo tỷ lệ", 11 },
+                    { new Guid("5f649cce-a6c4-4131-8e18-ad6db3e93a1a"), "6", false, "Thuốc thanh toán theo tỷ lệ", 6 },
+                    { new Guid("66cf0414-eac4-4988-a6fc-dd6a69c37648"), "10", false, "Vật tư y tế trong danh mục BHYT", 10 },
+                    { new Guid("81786062-3b8f-4916-bca6-bd98eb3d3ade"), "1", false, "Xét nghiệm", 1 },
+                    { new Guid("97b47f59-98c6-4700-a892-4990511ccec3"), "16", false, "Ngày giường lưu", 16 },
+                    { new Guid("9dff4b9d-b250-44c0-ab09-f8d8e9351555"), "12", false, "Vận chuyển", 12 },
+                    { new Guid("b0756f95-ec78-47ff-8d76-6bbaa8f1f1bf"), "17", false, "Chế phẩm máu", 17 },
+                    { new Guid("b85aeffc-cd8c-41b7-84f9-9b4b54433686"), "4", false, "Thuốc trong danh mục BHYT", 4 },
+                    { new Guid("ba56d5cc-c5c8-422b-8973-30e07a60ca57"), "2", false, "Chẩn đoán hình ảnh", 2 },
+                    { new Guid("c32790a5-9f63-4594-9950-2949b6201835"), "15", false, "Giường điều trị nội trú", 15 },
+                    { new Guid("f79303e8-570f-4c55-be1b-6aa6b8d88206"), "5", false, "Thuốc điều trị ung thư, chống thải ghép ngoài danh mục", 5 },
+                    { new Guid("f7b495fc-a3a7-48df-a23b-c18bcd244f26"), "18", false, "Thủ thuật", 18 }
                 });
 
             migrationBuilder.InsertData(
@@ -1060,32 +1076,32 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "Inactive", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("0963b290-08a9-4901-8d49-6a42b0ac0687"), "VT", false, "Vật tư", 21 },
-                    { new Guid("0cb3dfb7-1a7c-4be0-8b6d-0c64badf98d5"), "CDHA-SA", false, "Siêu âm thường", 17 },
-                    { new Guid("133a6b9d-27db-41d7-9f1d-f71d1e3c078d"), "CDHA-XQ", false, "XQuang thường", 14 },
-                    { new Guid("2df64541-cc30-4215-88c2-f8749425d886"), "TDCN-TTD", false, "Điện tâm đồ", 10 },
-                    { new Guid("2e0924f2-c8c3-4395-aa70-23de4b3bd3da"), "CL", false, "Khác", 25 },
-                    { new Guid("34a32d8e-5b97-403c-9368-da016c5d81d1"), "PT", false, "Phẫu thuật", 7 },
-                    { new Guid("4a6769f0-d039-4029-a1a0-cd410f04a705"), "CDHA-MRI", false, "Cộng hưởng từ", 16 },
-                    { new Guid("4e840b14-6538-4cfb-8314-537b35587bd0"), "XN-DCD", false, "Dịch chọc dò", 5 },
-                    { new Guid("57d62901-76c2-4b01-a33d-a757c0e139b2"), "GI", false, "Giường", 23 },
-                    { new Guid("58c0bc46-c11c-494f-a03f-1942f812a8aa"), "CDHA-CT", false, "Cắt lớp vi tính", null },
-                    { new Guid("77a694ab-6344-4e1d-a93d-6a43dd3cc69e"), "TT", false, "Thủ thuật", 12 },
-                    { new Guid("79df013a-eb44-47d8-b54a-7a245650c77f"), "CDHA-XQ-KTS", false, "XQuang kỹ thuật số", 15 },
-                    { new Guid("7ac67b2c-0927-4502-b649-949e9f469f0e"), "MA", false, "Máu", 20 },
-                    { new Guid("8153ff3d-28b3-4d2b-b279-aae277383e65"), "XN-VS", false, "Xét nghiệm vi sinh", 3 },
-                    { new Guid("860be689-460f-43a4-afe6-93920e3b3581"), "KH", false, "Khám", 8 },
-                    { new Guid("9a1033fc-830d-4030-a3cb-d43ebf0c9eeb"), "XN-NT", false, "Xét nghiệm nước tiểu", 4 },
-                    { new Guid("b266c577-a512-49df-8340-cc1d3a0f24c4"), "TDCN-DND", false, "Điện não đồ", 9 },
-                    { new Guid("b5615e7e-5980-46c6-a65f-04ae2a0d2075"), "AN", false, "Suất ăn", 19 },
-                    { new Guid("b87042f2-cf8d-494a-94b5-b9e022036428"), "CDHA-SA-M", false, "Siêu âm màu", 18 },
-                    { new Guid("bbc81f00-1aa6-45c3-b3f5-faca3c2bfc8c"), "TH", false, "Thuốc", 22 },
-                    { new Guid("be32d32b-8d52-40f9-ad85-f6cc1d001991"), "XN-SH", false, "Xét nghiệm sinh hóa", 2 },
-                    { new Guid("c5dc7f68-d3f5-45f1-b023-a970d0153991"), "XN-HH", false, "Xét nghiệm huyết học", 1 },
-                    { new Guid("d140e0ac-3daf-483b-a908-7516f7ebb21c"), "CDHA-NS", false, "Nội soi", 13 },
-                    { new Guid("db2ccb57-33b5-416b-bee0-159dffcdfb7b"), "VC", false, "Vận chuyển", 24 },
-                    { new Guid("e4c84720-49b7-4c8d-a1a1-630fa21bd862"), "GB", false, "Giải phẫu bệnh lý", 6 },
-                    { new Guid("eeee92c2-5d8c-4437-ad12-acb5fb173c0a"), "PH", false, "Phục hồi chức năng", 11 }
+                    { new Guid("2c81894b-b029-40d2-ba11-1781b9400fa9"), "XN-NT", false, "Xét nghiệm nước tiểu", 4 },
+                    { new Guid("39085951-2171-4e1a-87f1-938c11eb6151"), "VT", false, "Vật tư", 21 },
+                    { new Guid("4b6fcc13-6143-4a0e-962e-53844bd60686"), "CDHA-MRI", false, "Cộng hưởng từ", 16 },
+                    { new Guid("4dbd730c-7aee-4e3c-bc6c-fc1918880bf5"), "CDHA-CT", false, "Cắt lớp vi tính", null },
+                    { new Guid("4e5cddfa-af78-4c73-b7b1-8ed30058b0fb"), "KH", false, "Khám", 8 },
+                    { new Guid("52cb9264-8d47-4435-8014-6eba0bc3b89d"), "CDHA-SA", false, "Siêu âm thường", 17 },
+                    { new Guid("62c9898b-c3fb-45f9-9a3a-64ba915c4d25"), "XN-DCD", false, "Dịch chọc dò", 5 },
+                    { new Guid("6433596a-f71a-4483-b1d6-72ef4710c7f9"), "XN-HH", false, "Xét nghiệm huyết học", 1 },
+                    { new Guid("665b13f2-00cc-45f5-a3ad-e2074f7c8df0"), "MA", false, "Máu", 20 },
+                    { new Guid("66732353-c68f-4b72-aa19-bd908167f5b0"), "TH", false, "Thuốc", 22 },
+                    { new Guid("6bd5b40c-1142-4881-9e65-2bb12c887d2f"), "XN-SH", false, "Xét nghiệm sinh hóa", 2 },
+                    { new Guid("726b8c63-bfc9-405f-89ae-2d950f303f6e"), "CDHA-SA-M", false, "Siêu âm màu", 18 },
+                    { new Guid("72a09264-64eb-47b8-a3c8-cac3f2a31193"), "CDHA-XQ-KTS", false, "XQuang kỹ thuật số", 15 },
+                    { new Guid("735946f5-8c00-483b-8d23-384abc27030c"), "AN", false, "Suất ăn", 19 },
+                    { new Guid("780e750f-5bc8-4f0d-bc86-4cc0116a5351"), "PH", false, "Phục hồi chức năng", 11 },
+                    { new Guid("7a0bc683-6e7e-480f-89b6-1b633bc4a5d7"), "PT", false, "Phẫu thuật", 7 },
+                    { new Guid("aa435015-00ac-4063-b9d8-25b8afc8bd65"), "XN-VS", false, "Xét nghiệm vi sinh", 3 },
+                    { new Guid("aa525f71-8af5-428a-b222-7b8b4e4ff4b2"), "VC", false, "Vận chuyển", 24 },
+                    { new Guid("b11abc28-7dbc-4add-8d49-726c7572d824"), "TDCN-DND", false, "Điện não đồ", 9 },
+                    { new Guid("ccbfde50-f639-4a69-a479-c78b11f0b499"), "CDHA-XQ", false, "XQuang thường", 14 },
+                    { new Guid("ce7f2711-3874-44f5-92ef-32eda93da8bc"), "TT", false, "Thủ thuật", 12 },
+                    { new Guid("dc4ba36b-56fa-4271-ad45-4e658120ba62"), "CDHA-NS", false, "Nội soi", 13 },
+                    { new Guid("e3971ab1-210f-4663-9ed3-dab4b1efed01"), "TDCN-TTD", false, "Điện tâm đồ", 10 },
+                    { new Guid("e4b10d90-b939-43ce-9465-37d7e4064ef2"), "GB", false, "Giải phẫu bệnh lý", 6 },
+                    { new Guid("fa491c1c-9e01-42c3-94fe-082b516accbe"), "GI", false, "Giường", 23 },
+                    { new Guid("fe78f957-8977-43f4-9640-015eb4ddf1b3"), "CL", false, "Khác", 25 }
                 });
 
             migrationBuilder.InsertData(
@@ -1093,42 +1109,42 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "Inactive", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("1ccefbd7-2e38-4ccc-bac5-f983854e5eb1"), "04", false, "Tuýt", 4 },
-                    { new Guid("3ea18a44-7ac0-41ab-a981-789ca90e25b7"), "03", false, "Lọ", 3 },
-                    { new Guid("42a5c137-27b1-4e5e-8c74-7c1b4466d438"), "07", false, "Tub", 7 },
-                    { new Guid("43430f79-d0cf-46c5-8517-51ea519b2191"), "13", false, "Kg", 13 },
-                    { new Guid("59bd8d9d-8a92-4f40-98ee-c796e248a26e"), "09", false, "Cuộn", 9 },
-                    { new Guid("6f169102-b3a5-48e8-8079-0305fe498bec"), "08", false, "Gói", 8 },
-                    { new Guid("82849c79-d079-4959-99d7-b96729de51f4"), "05", false, "Ống", 5 },
-                    { new Guid("9192b5fb-4f3b-46ca-8c85-4e30d82d6cad"), "10", false, "ml", 10 },
-                    { new Guid("9e076427-766a-4bbf-8ff0-3bf3d79e0ff1"), "06", false, "Hộp", 6 },
-                    { new Guid("a1ddef16-d3b8-44fd-9aea-06d9d094dd06"), "02", false, "Lần", 2 },
-                    { new Guid("afe3afd6-eee8-4f2e-9a35-cc6f1274dcb5"), "14", false, "Met", 14 },
-                    { new Guid("b11a07c5-2b1f-410b-aa69-11a6014f17a8"), "15", false, "Minimet", 9 },
-                    { new Guid("c4cff684-d7eb-45e9-8001-30ae4e4d4f9d"), "01", false, "Viên", 1 },
-                    { new Guid("e69537ff-8788-4122-9b8a-138ce20eee0f"), "11", false, "Lít", 11 },
-                    { new Guid("f0f5f23b-72be-460d-b017-05a80eb51bcd"), "12", false, "Gam", 12 }
+                    { new Guid("1188ca0e-9ac3-44e3-817c-847a26999a0b"), "04", false, "Tuýt", 4 },
+                    { new Guid("1eef2b35-8cc5-4f8b-9118-018203fd3c03"), "11", false, "Lít", 11 },
+                    { new Guid("2a8869fd-0cea-47e2-b48f-7c2cb8b20d1c"), "14", false, "Met", 14 },
+                    { new Guid("30fd6a09-2fc5-4046-9c3d-7058b3aff4d5"), "03", false, "Lọ", 3 },
+                    { new Guid("4efbf8ae-bdd8-45da-8bb3-14c9f0f91e6e"), "06", false, "Hộp", 6 },
+                    { new Guid("66846338-0d57-428c-9933-4e734b26f31c"), "08", false, "Gói", 8 },
+                    { new Guid("6957fe26-fd27-4acb-b27d-a6c803e8c4e6"), "09", false, "Cuộn", 9 },
+                    { new Guid("7b227bb3-7c04-49ce-b0c6-f3919382fa8c"), "05", false, "Ống", 5 },
+                    { new Guid("97951608-4915-4e34-a578-f5fc79e505ad"), "01", false, "Viên", 1 },
+                    { new Guid("bcdca037-2e5d-423a-9952-67fc521b365e"), "10", false, "ml", 10 },
+                    { new Guid("c3a08ab9-663a-4eb3-b112-babb59a64601"), "12", false, "Gam", 12 },
+                    { new Guid("c8120273-3dda-404c-a447-cc5cabb30d33"), "07", false, "Tub", 7 },
+                    { new Guid("e83b24d6-c2bb-4735-8cc2-f6c2cca8748f"), "15", false, "Minimet", 9 },
+                    { new Guid("e8439932-47e6-487e-898e-8631dbd45dea"), "02", false, "Lần", 2 },
+                    { new Guid("f4e6ee3a-3164-4c2a-a1cd-71e860f049bf"), "13", false, "Kg", 13 }
                 });
 
             migrationBuilder.InsertData(
                 table: "SSurgicalProcedureTypes",
-                columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "DeleteBy", "DeleteDate", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
+                columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "DeleteBy", "DeleteDate", "IsDelete", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("1ba6d7d0-e1d3-4732-a950-da4bd0dca6bb"), "PT-2", null, null, null, null, null, null, "Phẫu thuật loại 2", 3 },
-                    { new Guid("366ca7ee-f586-4ed7-9d24-cc9a124f8bd2"), "TT-DB", null, null, null, null, null, null, "Thủ thuật đặc biệt", 5 },
-                    { new Guid("50877cc0-1df5-41fd-a541-30ee8de1ed94"), "TT-2", null, null, null, null, null, null, "Thủ thuật loại 2", 7 },
-                    { new Guid("73e38d45-c8fa-4337-ad9f-635c0942f083"), "PT-DB", null, null, null, null, null, null, "Phẫu thuật đặc biệt", 1 },
-                    { new Guid("8b1fbdf4-12aa-4201-8a92-ef8757e72bd7"), "PT-3", null, null, null, null, null, null, "Phẫu thuật loại 3", 4 },
-                    { new Guid("a4b2b85e-002a-4669-b222-2024524a6ae5"), "TT-3", null, null, null, null, null, null, "Thủ thuật loại 3", 8 },
-                    { new Guid("c6ae58a9-b5af-432c-8815-8e337b83b365"), "TT-1", null, null, null, null, null, null, "Thủ thuật loại 1", 6 },
-                    { new Guid("fc20955a-36b4-49f4-b5b5-a87856f572d2"), "PT-1", null, null, null, null, null, null, "Phẫu thuật loại 1", 2 }
+                    { new Guid("2f5bd512-57ea-4c7d-9432-7983ba5eb93b"), "PT-3", null, null, null, null, null, null, null, "Phẫu thuật loại 3", 4 },
+                    { new Guid("68373bbc-ddf6-4094-b1ba-53835c4d278b"), "PT-1", null, null, null, null, null, null, null, "Phẫu thuật loại 1", 2 },
+                    { new Guid("6d35af6f-9833-42ca-9345-e9a7aad7d9e1"), "TT-3", null, null, null, null, null, null, null, "Thủ thuật loại 3", 8 },
+                    { new Guid("a0d68c86-c0b0-4c51-acf3-ceb201cf12bb"), "TT-1", null, null, null, null, null, null, null, "Thủ thuật loại 1", 6 },
+                    { new Guid("ce5ac5b9-39ea-4aeb-abf5-ccb9b39104db"), "TT-DB", null, null, null, null, null, null, null, "Thủ thuật đặc biệt", 5 },
+                    { new Guid("d38dc24b-464d-40b0-8e5f-73f68f37861e"), "TT-2", null, null, null, null, null, null, null, "Thủ thuật loại 2", 7 },
+                    { new Guid("d6dcfa41-1a20-4e57-9b7b-e88195172b37"), "PT-DB", null, null, null, null, null, null, null, "Phẫu thuật đặc biệt", 1 },
+                    { new Guid("ecfa4b60-2a32-4997-a00d-2292a8c3b513"), "PT-2", null, null, null, null, null, null, null, "Phẫu thuật loại 2", 3 }
                 });
 
             migrationBuilder.InsertData(
                 table: "SUsers",
                 columns: new[] { "Id", "Address", "DistrictId", "Dob", "Email", "FirstName", "GenderId", "LastName", "Password", "PhoneNumber", "ProvinceId", "Status", "UseType", "UserName", "WardId" },
-                values: new object[] { new Guid("cb4df8c5-ea21-4877-ac4b-bf031f04e5a5"), null, null, null, "administrator@gmail.com", "Admin", null, "Administrator", "79956B61E1B250869A6716CE37EFD6E6", null, null, 1, 0, "Administrator", null });
+                values: new object[] { new Guid("4d5bdea5-4a2c-4e6e-b6b4-58a1d78b1050"), null, null, null, "administrator@gmail.com", "Admin", null, "Administrator", "79956B61E1B250869A6716CE37EFD6E6", null, null, 1, 0, "Administrator", null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_SDepartments_BranchId",
