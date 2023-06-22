@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HIS.Dtos.Commons;
+using HIS.Dtos.Dictionaries.ExecutionRoom;
 using HIS.Dtos.Dictionaries.Room;
 using HIS.Dtos.Dictionaries.Service;
 using HIS.Dtos.Dictionaries.ServicePricePolicy;
@@ -14,6 +15,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,7 +49,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                     var data = _mapper.Map<SService>(input);
                     data.CreatedDate = timeNow;
 
-                    var sServicePricePolicys = _mapper.Map<List<SServicePricePolicy>>(input.SServicePricePolicies);
+                    var sServicePricePolicys = _mapper.Map<List<SServicePricePolicy>>(input.ServicePricePolicies);
                     if (sServicePricePolicys != null)
                     {
                         foreach (var sServicePricePolicy in sServicePricePolicys)
@@ -98,7 +100,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                     {
                         _mapper.Map(input, sService);
 
-                        var sServicePricePolicys = _mapper.Map<List<SServicePricePolicy>>(input.SServicePricePolicies);
+                        var sServicePricePolicys = _mapper.Map<List<SServicePricePolicy>>(input.ServicePricePolicies);
                         if (sServicePricePolicys != null)
                         {
                             foreach (var sServicePricePolicy in sServicePricePolicys)
@@ -213,10 +215,86 @@ namespace HIS.ApplicationService.Dictionaries.Service
         {
             var result = new ApiResult<SServiceDto>();
 
+            var serviceDto = new SServiceDto();
+
             try
             {
-                var service = _dbContext.SServices.FirstOrDefault(s => s.Id == id && (s.IsDelete == null || s.IsDelete == false));
-                result.Result = _mapper.Map<SServiceDto>(service);
+                if (!GuidHelper.IsNullOrEmpty(id))
+                {
+                    var service = _dbContext.SServices.FirstOrDefault(s => s.Id == id && (s.IsDelete == null || s.IsDelete == false));
+                    var sServicePricePolicys = (from ser in _dbContext.SServicePricePolicies
+                                                join pa in _dbContext.SPatientTypes on ser.PatientTypeId equals pa.Id
+                                                where ser.ServiceId == id
+                                                select new SServicePricePolicyDto()
+                                                {
+                                                    Id = ser.Id,
+                                                    ServiceId = ser.ServiceId,
+                                                    PatientTypeId = ser.PatientTypeId,
+                                                    OldUnitPrice = ser.OldUnitPrice,
+                                                    NewUnitPrice = ser.NewUnitPrice,
+                                                    CeilingPrice = ser.CeilingPrice,
+                                                    ExecutionTime = ser.ExecutionTime,
+                                                    PatientTypeCode = pa.Code,
+                                                    PatientTypeName = pa.Name
+                                                }).ToList();
+
+                    var sExecutionRooms = (from exec in _dbContext.SExecutionRooms
+                                           join room in _dbContext.SRooms on exec.RoomId equals room.Id
+                                           where exec.ServiceId == id
+                                           select new SExecutionRoomDto()
+                                           {
+                                               Id = exec.Id,
+                                               RoomId = exec.RoomId,
+                                               ServiceId = exec.ServiceId,
+                                               RoomCode = room.Code,
+                                               RoomName = room.Name,
+                                               IsMain = exec.IsMain,
+                                               IsCheck = true,
+                                           }).ToList();
+
+                    serviceDto = _mapper.Map<SServiceDto>(service);
+                    serviceDto.ServicePricePolicies = sServicePricePolicys;
+                }
+                else
+                {
+                    var sServicePricePolicys = (from r in _dbContext.SPatientTypes
+                                                where r.Inactive == false
+                                                select new SServicePricePolicyDto()
+                                                {
+                                                    PatientTypeId = r.Id,
+                                                    PatientTypeCode = r.Code,
+                                                    PatientTypeName = r.Name,
+                                                }).OrderBy(o => o.PatientTypeCode).ToList();
+
+                    var sExecutionRooms = (from room in _dbContext.SRooms
+                                           select new SExecutionRoomDto()
+                                           {
+                                               RoomId = room.Id,
+                                               RoomCode = room.Code,
+                                               RoomName = room.Name,
+                                           }).ToList();
+
+                    //var sExecutionRooms = new List<SExecutionRoomDto>()
+                    //{
+                    //    new SExecutionRoomDto()
+                    //    {
+                    //        RoomId = Guid.Empty,
+                    //        RoomCode = "Code",
+                    //        RoomName = "Tên phòng",
+                    //    },
+                    //    new SExecutionRoomDto()
+                    //    {
+                    //        RoomId = Guid.Empty,
+                    //        RoomCode = "Code",
+                    //        RoomName = "Tên phòng",
+                    //    }
+                    //};
+
+                    serviceDto.ServicePricePolicies = sServicePricePolicys;
+                    serviceDto.ExecutionRooms = sExecutionRooms;
+                }
+
+                result.Result = serviceDto;
             }
             catch (Exception ex)
             {

@@ -7,6 +7,7 @@ using HIS.Dtos.Dictionaries.Department;
 using HIS.Dtos.Dictionaries.DepartmentType;
 using HIS.Dtos.Dictionaries.District;
 using HIS.Dtos.Dictionaries.Ethnic;
+using HIS.Dtos.Dictionaries.ExecutionRoom;
 using HIS.Dtos.Dictionaries.Gender;
 using HIS.Dtos.Dictionaries.Hospital;
 using HIS.Dtos.Dictionaries.Icd;
@@ -16,6 +17,7 @@ using HIS.Dtos.Dictionaries.RoomType;
 using HIS.Dtos.Dictionaries.Service;
 using HIS.Dtos.Dictionaries.ServiceGroup;
 using HIS.Dtos.Dictionaries.ServiceGroupHeIn;
+using HIS.Dtos.Dictionaries.ServicePricePolicy;
 using HIS.Dtos.Dictionaries.ServiceUnit;
 using HIS.Dtos.Dictionaries.Ward;
 using HIS.Dtos.Systems.Role;
@@ -52,6 +54,8 @@ namespace HIS.AutoMappers
             CreateMap<SServiceGroupHeIn, SServiceGroupHeInDto>().ReverseMap();
             CreateMap<SServiceUnit, SServiceUnitDto>().ReverseMap();
             CreateMap<SService, SServiceDto>().ReverseMap();
+            CreateMap<SServicePricePolicy, SServicePricePolicyDto>().ReverseMap();
+            CreateMap<SExecutionRoom, SExecutionRoomDto>().ReverseMap();
         }
     }
 }

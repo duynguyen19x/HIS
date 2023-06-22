@@ -10,7 +10,7 @@ using HIS.EntityFrameworkCore.Entities.Categories.Services;
 
 namespace HIS.EntityFrameworkCore.Configurations.Services
 {
-    public  class SServiceGroupHeInConfigurations : IEntityTypeConfiguration<SServiceGroupHeIn>
+    public  class ServiceGroupHeInConfigurations : IEntityTypeConfiguration<SServiceGroupHeIn>
     {
         public void Configure(EntityTypeBuilder<SServiceGroupHeIn> builder)
         {

@@ -10,7 +10,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// <summary>
     /// Chi nhánh
     /// </summary>
-    public class SBranch : FullAuditingEntity<Guid>
+    public class SBranch : Entity<Guid>
     {
         public string Code { get; set; }
         public string Name { get; set; }

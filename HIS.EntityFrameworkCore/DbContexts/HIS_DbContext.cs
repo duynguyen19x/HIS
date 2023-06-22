@@ -58,7 +58,8 @@ namespace HIS.EntityFrameworkCore.DbContexts
             modelBuilder.ApplyConfiguration(new EthnicConfiguration());
             modelBuilder.ApplyConfiguration(new HospitalConfiguration());
             modelBuilder.ApplyConfiguration(new ServiceGroupConfigurations());
-            modelBuilder.ApplyConfiguration(new SServiceGroupHeInConfigurations());
+            modelBuilder.ApplyConfiguration(new ServiceGroupHeInConfigurations());
+            modelBuilder.ApplyConfiguration(new ExecutionRoomConfiguration());
 
             modelBuilder.ApplyConfiguration(new TreatmentConfiguration());
 
@@ -103,5 +104,6 @@ namespace HIS.EntityFrameworkCore.DbContexts
 
         public DbSet<SServicePricePolicy> SServicePricePolicies { get; set; }
         public DbSet<SSurgicalProcedureType> SSurgicalProcedureTypes { get; set; }
+        public DbSet<SExecutionRoom> SExecutionRooms { get; set; }
     }
 }

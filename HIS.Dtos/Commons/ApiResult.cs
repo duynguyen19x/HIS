@@ -8,7 +8,7 @@ namespace HIS.Models.Commons
 {
     public class ApiResult<T>
     {
-        public bool IsSuccessed { get; set; }
+        public bool IsSuccessed { get; set; } = true;
 
         public string Message { get; set; }
 

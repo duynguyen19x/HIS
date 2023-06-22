@@ -1,5 +1,6 @@
 ﻿using HIS.EntityFrameworkCore.BaseEntitys;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -48,5 +49,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public IList<SMaterialType> SMaterialTypes { get; set; }
 
         public IList<SServicePricePolicy> SServicePricePolicies { get; set; }
+
+        public IList<SExecutionRoom> ExecutionRooms { get; set; }
     }
 }
