@@ -130,70 +130,71 @@ namespace HIS.EntityFrameworkCore.Data
                 {
                     Id = new Guid("4BE0AD49-AC80-4A2B-9A92-03B3FFD4F3B6"),
                     Code = "CDHA-CT",
-                    Name = "Cắt lớp vi tính"
+                    Name = "Cắt lớp vi tính",
+                    SortOrder = 17
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("914B8E89-4C56-4998-9707-DEF10FD23FBB"),
                     Code = "CDHA-SA",
                     Name = "Siêu âm thường",
-                    SortOrder = 17
+                    SortOrder = 18
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("E43040FC-0E85-436C-8537-5C18E29F61DA"),
                     Code = "CDHA-SA-M",
                     Name = "Siêu âm màu",
-                    SortOrder = 18
+                    SortOrder = 19
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("12105142-6179-41C2-A56C-5364A2B852F5"),
                     Code = "AN",
                     Name = "Suất ăn",
-                    SortOrder = 19
+                    SortOrder = 20
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("1FD09E01-450A-43CE-8BF4-C32AEE87753D"),
                     Code = "MA",
                     Name = "Máu",
-                    SortOrder = 20
+                    SortOrder = 21
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("964200B8-4AE6-434D-A461-909391444B40"),
                     Code = "VT",
                     Name = "Vật tư",
-                    SortOrder = 21
+                    SortOrder = 22
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("B4573FB1-32A6-45E3-9782-07066D090A5C"),
                     Code = "TH",
                     Name = "Thuốc",
-                    SortOrder = 22
+                    SortOrder = 23
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("998836B2-3B5B-4C1C-9B4B-7F6CC1E52B74"),
                     Code = "GI",
                     Name = "Giường",
-                    SortOrder = 23
+                    SortOrder = 24
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("3B082A29-237D-4926-8209-F2876D292189"),
                     Code = "VC",
                     Name = "Vận chuyển",
-                    SortOrder = 24
+                    SortOrder = 25
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("0A5A8DC0-67A7-41E9-8FB3-1F5E6F8D874D"),
                     Code = "CL",
                     Name = "Khác",
-                    SortOrder = 25
+                    SortOrder = 26
                 });
         }
     }
