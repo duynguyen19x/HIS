@@ -137,7 +137,7 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroup
                                      Name = r.Name,
                                      Inactive = r.Inactive,
                                      SortOrder = r.SortOrder,
-                                 }).OrderBy(o => o.Code).ToList();
+                                 }).OrderBy(o => o.SortOrder).ToList();
 
                 result.TotalCount = result.Result.Count;
             }

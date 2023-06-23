@@ -63,7 +63,7 @@ namespace HIS.EntityFrameworkCore.DbContexts
 
             modelBuilder.ApplyConfiguration(new TreatmentConfiguration());
 
-            //modelBuilder.Seed();
+            modelBuilder.Seed();
         }
 
         public DbSet<SGender> SGenders { get; set; }

@@ -16,19 +16,19 @@ namespace HIS.EntityFrameworkCore.Data
             modelBuilder.Entity<SGender>().HasData(
                 new SGender()
                 {
-                    Id = Guid.NewGuid(),
+                    Id = new Guid("97AC7FD8-EDFA-4243-97FC-98468F492DF1"),
                     Code = GenderTypes.None.ToString(),
                     Name = "Chưa xác định"
                 },
                 new SGender()
                 {
-                    Id = Guid.NewGuid(),
+                    Id = new Guid("FC153433-BF89-4E95-8523-DF3D8CEC8676"),
                     Code = GenderTypes.Male.ToString(),
                     Name = "Nam"
                 },
                 new SGender()
                 {
-                    Id = Guid.NewGuid(),
+                    Id = new Guid("E9497984-D355-41AF-B917-091500956BE9"),
                     Code = GenderTypes.Female.ToString(),
                     Name = "Nữ"
                 });

@@ -15,7 +15,7 @@ namespace HIS.EntityFrameworkCore.Data
         {
             modelBuilder.Entity<SUser>().HasData(new SUser()
             {
-                Id = Guid.NewGuid(),
+                Id = new Guid("3382BE1C-2836-4246-99DB-C4E1C781E868"),
                 UserName = "Administrator",
                 Password = Security.EncryptMd5("Ihs123456a@"),
                 FirstName = "Admin",

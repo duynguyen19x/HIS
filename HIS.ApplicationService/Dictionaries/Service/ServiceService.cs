@@ -266,29 +266,29 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                                     PatientTypeName = r.Name,
                                                 }).OrderBy(o => o.PatientTypeCode).ToList();
 
-                    var sExecutionRooms = (from room in _dbContext.SRooms
-                                           select new SExecutionRoomDto()
-                                           {
-                                               RoomId = room.Id,
-                                               RoomCode = room.Code,
-                                               RoomName = room.Name,
-                                           }).ToList();
+                    //var sExecutionRooms = (from room in _dbContext.SRooms
+                    //                       select new SExecutionRoomDto()
+                    //                       {
+                    //                           RoomId = room.Id,
+                    //                           RoomCode = room.Code,
+                    //                           RoomName = room.Name,
+                    //                       }).ToList();
 
-                    //var sExecutionRooms = new List<SExecutionRoomDto>()
-                    //{
-                    //    new SExecutionRoomDto()
-                    //    {
-                    //        RoomId = Guid.Empty,
-                    //        RoomCode = "Code",
-                    //        RoomName = "Tên phòng",
-                    //    },
-                    //    new SExecutionRoomDto()
-                    //    {
-                    //        RoomId = Guid.Empty,
-                    //        RoomCode = "Code",
-                    //        RoomName = "Tên phòng",
-                    //    }
-                    //};
+                    var sExecutionRooms = new List<SExecutionRoomDto>()
+                    {
+                        new SExecutionRoomDto()
+                        {
+                            RoomId = Guid.Empty,
+                            RoomCode = "Code",
+                            RoomName = "Tên phòng",
+                        },
+                        new SExecutionRoomDto()
+                        {
+                            RoomId = Guid.Empty,
+                            RoomCode = "Code",
+                            RoomName = "Tên phòng",
+                        }
+                    };
 
                     serviceDto.ServicePricePolicies = sServicePricePolicys;
                     serviceDto.ExecutionRooms = sExecutionRooms;
