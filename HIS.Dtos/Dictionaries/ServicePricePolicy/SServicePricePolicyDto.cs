@@ -14,6 +14,7 @@ namespace HIS.Dtos.Dictionaries.ServicePricePolicy
         public decimal? OldUnitPrice { get; set; }
         public decimal? NewUnitPrice { get; set; }
         public decimal? CeilingPrice { get; set; }
+        public decimal? PaymentRate { get; set; }
         public DateTime? ExecutionTime { get; set; }
 
         public string PatientTypeCode { get; set; }

@@ -29,6 +29,11 @@ namespace HIS.EntityFrameworkCore.Entities.Categories.Services
         public decimal? CeilingPrice { get; set; }
 
         /// <summary>
+        /// Tỷ lệ thanh toán
+        /// </summary>
+        public decimal? PaymentRate { get; set; }
+
+        /// <summary>
         /// Ngày áp dụng giá mới
         /// </summary>
         public DateTime? ExecutionTime { get; set; }

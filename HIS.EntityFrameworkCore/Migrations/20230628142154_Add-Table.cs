@@ -23,14 +23,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Address = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
                     Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: true),
-                    Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: true)
+                    Inactive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -794,6 +787,30 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SExecutionRooms",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    RoomId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsMain = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SExecutionRooms", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SExecutionRooms_SRooms_RoomId",
+                        column: x => x.RoomId,
+                        principalTable: "SRooms",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_SExecutionRooms_SServices_ServiceId",
+                        column: x => x.ServiceId,
+                        principalTable: "SServices",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SMaterialTypes",
                 columns: table => new
                 {
@@ -898,6 +915,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     OldUnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     NewUnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     CeilingPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    PaymentRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     ExecutionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -1031,9 +1049,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("3addca6b-aeb4-4833-8bf1-e04980b0ab9b"), "Male", null, null, null, false, null, null, "Nam", null },
-                    { new Guid("3f8b0cbc-7b89-467c-9950-303bc2c5b6b8"), "None", null, null, null, false, null, null, "Chưa xác định", null },
-                    { new Guid("ecf8d468-b917-49ab-ba5b-def5b0773db0"), "Female", null, null, null, false, null, null, "Nữ", null }
+                    { new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"), "0", null, null, null, false, null, null, "Chưa xác định", 1 },
+                    { new Guid("e9497984-d355-41af-b917-091500956be9"), "2", null, null, null, false, null, null, "Nữ", 3 },
+                    { new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"), "1", null, null, null, false, null, null, "Nam", 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -1041,9 +1059,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "Inactive", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("0251c635-dcc4-40a6-8023-d4bda5cb1f79"), "DV", false, "Dịch vụ" },
-                    { new Guid("c94ab6ba-5955-4c21-9d9d-416588117a94"), "BHYT", false, "Bảo hiểm y tế" },
-                    { new Guid("d78bc647-2d40-41b2-b330-5385bfbe4229"), "VP", false, "Viện phí" }
+                    { new Guid("447fe0b2-6f08-4e1a-b456-ebc0ddb6feed"), "DV", false, "Dịch vụ" },
+                    { new Guid("8522aa82-5b5e-4d46-a001-26bad813db10"), "VP", false, "Viện phí" },
+                    { new Guid("a080ecaa-6cd6-459d-a450-d89351e0904d"), "BHYT", false, "Bảo hiểm y tế" }
                 });
 
             migrationBuilder.InsertData(
@@ -1051,24 +1069,24 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "Inactive", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("1521895a-753a-4468-aa45-f7c5d4d2e2ca"), "3", false, "Thăm dò chức năng", 3 },
-                    { new Guid("19b25bfc-87c6-4128-8006-e12d328e50fd"), "7", false, "Máu và chế phẩm máu", 7 },
-                    { new Guid("1a5ee1b9-3a90-4ed8-9266-06702df072f6"), "13", false, "Khám bệnh", 13 },
-                    { new Guid("2189b983-2064-4487-a99c-6bb78afcc0fa"), "14", false, "Giường điều trị ngoại trú", 14 },
-                    { new Guid("2cff84c3-b2ca-4a3e-8f4a-7d9b3b34a7e6"), "9", false, "DVKT thanh toán theo tỷ lệ", 9 },
-                    { new Guid("2f358448-3962-4640-82e8-8bc71e6607f7"), "8", false, "Phẫu thuật", 8 },
-                    { new Guid("3a050e31-f1c5-49ef-9a47-1ac6785737c6"), "11", false, "VTYT thanh toán theo tỷ lệ", 11 },
-                    { new Guid("5f649cce-a6c4-4131-8e18-ad6db3e93a1a"), "6", false, "Thuốc thanh toán theo tỷ lệ", 6 },
-                    { new Guid("66cf0414-eac4-4988-a6fc-dd6a69c37648"), "10", false, "Vật tư y tế trong danh mục BHYT", 10 },
-                    { new Guid("81786062-3b8f-4916-bca6-bd98eb3d3ade"), "1", false, "Xét nghiệm", 1 },
-                    { new Guid("97b47f59-98c6-4700-a892-4990511ccec3"), "16", false, "Ngày giường lưu", 16 },
-                    { new Guid("9dff4b9d-b250-44c0-ab09-f8d8e9351555"), "12", false, "Vận chuyển", 12 },
-                    { new Guid("b0756f95-ec78-47ff-8d76-6bbaa8f1f1bf"), "17", false, "Chế phẩm máu", 17 },
-                    { new Guid("b85aeffc-cd8c-41b7-84f9-9b4b54433686"), "4", false, "Thuốc trong danh mục BHYT", 4 },
-                    { new Guid("ba56d5cc-c5c8-422b-8973-30e07a60ca57"), "2", false, "Chẩn đoán hình ảnh", 2 },
-                    { new Guid("c32790a5-9f63-4594-9950-2949b6201835"), "15", false, "Giường điều trị nội trú", 15 },
-                    { new Guid("f79303e8-570f-4c55-be1b-6aa6b8d88206"), "5", false, "Thuốc điều trị ung thư, chống thải ghép ngoài danh mục", 5 },
-                    { new Guid("f7b495fc-a3a7-48df-a23b-c18bcd244f26"), "18", false, "Thủ thuật", 18 }
+                    { new Guid("156ec951-453d-4e3f-800e-33f850942874"), "15", false, "Giường điều trị nội trú", 15 },
+                    { new Guid("199b0c88-0ef5-475c-a426-c0547cd13443"), "18", false, "Thủ thuật", 18 },
+                    { new Guid("22048fa7-a9e4-4ac7-89a6-e9e34e4811b4"), "16", false, "Ngày giường lưu", 16 },
+                    { new Guid("45e3f5de-4096-4944-a6b6-69b829b0f61f"), "1", false, "Xét nghiệm", 1 },
+                    { new Guid("53bf47c7-1414-47cf-8c88-5ba96aa2c978"), "6", false, "Thuốc thanh toán theo tỷ lệ", 6 },
+                    { new Guid("675d16db-cd35-4229-b042-82aef4718aff"), "14", false, "Giường điều trị ngoại trú", 14 },
+                    { new Guid("75b2f46f-f841-4cbe-9513-93c44306e78e"), "13", false, "Khám bệnh", 13 },
+                    { new Guid("7802d629-9e6a-48a7-825c-c91f530785ac"), "17", false, "Chế phẩm máu", 17 },
+                    { new Guid("7a871ff7-c167-4fc8-b652-0aa2ecd72444"), "3", false, "Thăm dò chức năng", 3 },
+                    { new Guid("7c84bd56-f322-477c-b64d-50655cbc06e5"), "9", false, "DVKT thanh toán theo tỷ lệ", 9 },
+                    { new Guid("7d39f21a-3f78-4c5a-b288-02532a9769d7"), "4", false, "Thuốc trong danh mục BHYT", 4 },
+                    { new Guid("81a882db-d465-402f-a391-d3726d698950"), "12", false, "Vận chuyển", 12 },
+                    { new Guid("8868dfd1-fbc7-40c2-83b1-cb0f894cf566"), "11", false, "VTYT thanh toán theo tỷ lệ", 11 },
+                    { new Guid("8a360961-1c49-4382-a7ce-ce70358ae25a"), "10", false, "Vật tư y tế trong danh mục BHYT", 10 },
+                    { new Guid("8a6eee59-ecb3-4bea-89cd-1a83b2d8edd6"), "7", false, "Máu và chế phẩm máu", 7 },
+                    { new Guid("8c7964ad-f476-4009-a630-a14de7f982d6"), "8", false, "Phẫu thuật", 8 },
+                    { new Guid("90adcfc5-7518-46e2-995f-d304c31583b5"), "5", false, "Thuốc điều trị ung thư, chống thải ghép ngoài danh mục", 5 },
+                    { new Guid("b2e25f8f-ea5b-4255-b2d8-379bd50a5160"), "2", false, "Chẩn đoán hình ảnh", 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -1076,32 +1094,32 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "Inactive", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("2c81894b-b029-40d2-ba11-1781b9400fa9"), "XN-NT", false, "Xét nghiệm nước tiểu", 4 },
-                    { new Guid("39085951-2171-4e1a-87f1-938c11eb6151"), "VT", false, "Vật tư", 21 },
-                    { new Guid("4b6fcc13-6143-4a0e-962e-53844bd60686"), "CDHA-MRI", false, "Cộng hưởng từ", 16 },
-                    { new Guid("4dbd730c-7aee-4e3c-bc6c-fc1918880bf5"), "CDHA-CT", false, "Cắt lớp vi tính", null },
-                    { new Guid("4e5cddfa-af78-4c73-b7b1-8ed30058b0fb"), "KH", false, "Khám", 8 },
-                    { new Guid("52cb9264-8d47-4435-8014-6eba0bc3b89d"), "CDHA-SA", false, "Siêu âm thường", 17 },
-                    { new Guid("62c9898b-c3fb-45f9-9a3a-64ba915c4d25"), "XN-DCD", false, "Dịch chọc dò", 5 },
-                    { new Guid("6433596a-f71a-4483-b1d6-72ef4710c7f9"), "XN-HH", false, "Xét nghiệm huyết học", 1 },
-                    { new Guid("665b13f2-00cc-45f5-a3ad-e2074f7c8df0"), "MA", false, "Máu", 20 },
-                    { new Guid("66732353-c68f-4b72-aa19-bd908167f5b0"), "TH", false, "Thuốc", 22 },
-                    { new Guid("6bd5b40c-1142-4881-9e65-2bb12c887d2f"), "XN-SH", false, "Xét nghiệm sinh hóa", 2 },
-                    { new Guid("726b8c63-bfc9-405f-89ae-2d950f303f6e"), "CDHA-SA-M", false, "Siêu âm màu", 18 },
-                    { new Guid("72a09264-64eb-47b8-a3c8-cac3f2a31193"), "CDHA-XQ-KTS", false, "XQuang kỹ thuật số", 15 },
-                    { new Guid("735946f5-8c00-483b-8d23-384abc27030c"), "AN", false, "Suất ăn", 19 },
-                    { new Guid("780e750f-5bc8-4f0d-bc86-4cc0116a5351"), "PH", false, "Phục hồi chức năng", 11 },
-                    { new Guid("7a0bc683-6e7e-480f-89b6-1b633bc4a5d7"), "PT", false, "Phẫu thuật", 7 },
-                    { new Guid("aa435015-00ac-4063-b9d8-25b8afc8bd65"), "XN-VS", false, "Xét nghiệm vi sinh", 3 },
-                    { new Guid("aa525f71-8af5-428a-b222-7b8b4e4ff4b2"), "VC", false, "Vận chuyển", 24 },
-                    { new Guid("b11abc28-7dbc-4add-8d49-726c7572d824"), "TDCN-DND", false, "Điện não đồ", 9 },
-                    { new Guid("ccbfde50-f639-4a69-a479-c78b11f0b499"), "CDHA-XQ", false, "XQuang thường", 14 },
-                    { new Guid("ce7f2711-3874-44f5-92ef-32eda93da8bc"), "TT", false, "Thủ thuật", 12 },
-                    { new Guid("dc4ba36b-56fa-4271-ad45-4e658120ba62"), "CDHA-NS", false, "Nội soi", 13 },
-                    { new Guid("e3971ab1-210f-4663-9ed3-dab4b1efed01"), "TDCN-TTD", false, "Điện tâm đồ", 10 },
-                    { new Guid("e4b10d90-b939-43ce-9465-37d7e4064ef2"), "GB", false, "Giải phẫu bệnh lý", 6 },
-                    { new Guid("fa491c1c-9e01-42c3-94fe-082b516accbe"), "GI", false, "Giường", 23 },
-                    { new Guid("fe78f957-8977-43f4-9640-015eb4ddf1b3"), "CL", false, "Khác", 25 }
+                    { new Guid("0711132b-d3a9-46d1-9ee1-74154facef37"), "CDHA-MRI", false, "Cộng hưởng từ", 16 },
+                    { new Guid("0a5a8dc0-67a7-41e9-8fb3-1f5e6f8d874d"), "CL", false, "Khác", 26 },
+                    { new Guid("0ddd75be-a32c-47f2-b5f1-5138b5997791"), "TT", false, "Thủ thuật", 12 },
+                    { new Guid("12105142-6179-41c2-a56c-5364a2b852f5"), "AN", false, "Suất ăn", 20 },
+                    { new Guid("1219fe7a-cecb-4a94-8fdc-2f6d0f48fbc9"), "TDCN-DND", false, "Điện não đồ", 9 },
+                    { new Guid("17819944-bc22-47c5-afc3-108881fd5714"), "CDHA-XQ", false, "XQuang thường", 14 },
+                    { new Guid("1fd09e01-450a-43ce-8bf4-c32aee87753d"), "MA", false, "Máu", 21 },
+                    { new Guid("33dd59d7-ab44-47fe-8b21-8500bf6e6cee"), "XN-SH", false, "Xét nghiệm sinh hóa", 2 },
+                    { new Guid("3b082a29-237d-4926-8209-f2876d292189"), "VC", false, "Vận chuyển", 25 },
+                    { new Guid("3b3ded9e-71ab-4d31-868c-a704d0604509"), "PH", false, "Phục hồi chức năng", 11 },
+                    { new Guid("401dbb33-3eb1-44ae-8b3f-51e25996c311"), "KH", false, "Khám", 8 },
+                    { new Guid("4be0ad49-ac80-4a2b-9a92-03b3ffd4f3b6"), "CDHA-CT", false, "Cắt lớp vi tính", 17 },
+                    { new Guid("8878fb20-578e-46a6-8f61-62789c234bde"), "XN-NT", false, "Xét nghiệm nước tiểu", 4 },
+                    { new Guid("906307b7-f7e2-457a-a3d1-62a10ba9daa3"), "TDCN-TTD", false, "Điện tâm đồ", 10 },
+                    { new Guid("914b8e89-4c56-4998-9707-def10fd23fbb"), "CDHA-SA", false, "Siêu âm thường", 18 },
+                    { new Guid("9414782a-9194-4801-91a0-253963a605eb"), "XN-DCD", false, "Dịch chọc dò", 5 },
+                    { new Guid("964200b8-4ae6-434d-a461-909391444b40"), "VT", false, "Vật tư", 22 },
+                    { new Guid("998836b2-3b5b-4c1c-9b4b-7f6cc1e52b74"), "GI", false, "Giường", 24 },
+                    { new Guid("9f474388-e722-4ad2-b194-8a7d8def97fd"), "CDHA-NS", false, "Nội soi", 13 },
+                    { new Guid("a080ecaa-6cd6-459d-a450-d89351e0904d"), "XN-HH", false, "Xét nghiệm huyết học", 1 },
+                    { new Guid("a13fa2cd-851c-4e89-a8ca-bdacee567757"), "XN-VS", false, "Xét nghiệm vi sinh", 3 },
+                    { new Guid("b4573fb1-32a6-45e3-9782-07066d090a5c"), "TH", false, "Thuốc", 23 },
+                    { new Guid("d4837941-9cc1-4f53-84f7-3e99edc8f508"), "GB", false, "Giải phẫu bệnh lý", 6 },
+                    { new Guid("e43040fc-0e85-436c-8537-5c18e29f61da"), "CDHA-SA-M", false, "Siêu âm màu", 19 },
+                    { new Guid("e70f016c-39e7-4ded-aa20-9bffd9fadd59"), "PT", false, "Phẫu thuật", 7 },
+                    { new Guid("ff0073ef-be7c-46e1-adc3-99e58871f5c6"), "CDHA-XQ-KTS", false, "XQuang kỹ thuật số", 15 }
                 });
 
             migrationBuilder.InsertData(
@@ -1109,21 +1127,21 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "Inactive", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("1188ca0e-9ac3-44e3-817c-847a26999a0b"), "04", false, "Tuýt", 4 },
-                    { new Guid("1eef2b35-8cc5-4f8b-9118-018203fd3c03"), "11", false, "Lít", 11 },
-                    { new Guid("2a8869fd-0cea-47e2-b48f-7c2cb8b20d1c"), "14", false, "Met", 14 },
-                    { new Guid("30fd6a09-2fc5-4046-9c3d-7058b3aff4d5"), "03", false, "Lọ", 3 },
-                    { new Guid("4efbf8ae-bdd8-45da-8bb3-14c9f0f91e6e"), "06", false, "Hộp", 6 },
-                    { new Guid("66846338-0d57-428c-9933-4e734b26f31c"), "08", false, "Gói", 8 },
-                    { new Guid("6957fe26-fd27-4acb-b27d-a6c803e8c4e6"), "09", false, "Cuộn", 9 },
-                    { new Guid("7b227bb3-7c04-49ce-b0c6-f3919382fa8c"), "05", false, "Ống", 5 },
-                    { new Guid("97951608-4915-4e34-a578-f5fc79e505ad"), "01", false, "Viên", 1 },
-                    { new Guid("bcdca037-2e5d-423a-9952-67fc521b365e"), "10", false, "ml", 10 },
-                    { new Guid("c3a08ab9-663a-4eb3-b112-babb59a64601"), "12", false, "Gam", 12 },
-                    { new Guid("c8120273-3dda-404c-a447-cc5cabb30d33"), "07", false, "Tub", 7 },
-                    { new Guid("e83b24d6-c2bb-4735-8cc2-f6c2cca8748f"), "15", false, "Minimet", 9 },
-                    { new Guid("e8439932-47e6-487e-898e-8631dbd45dea"), "02", false, "Lần", 2 },
-                    { new Guid("f4e6ee3a-3164-4c2a-a1cd-71e860f049bf"), "13", false, "Kg", 13 }
+                    { new Guid("0762aebf-cbb8-4102-b923-a30df490f75d"), "06", false, "Hộp", 6 },
+                    { new Guid("2198d1c0-57fa-453f-b605-9cef55929067"), "09", false, "Cuộn", 9 },
+                    { new Guid("3be8bc27-3940-451c-87f5-c062df716872"), "12", false, "Gam", 12 },
+                    { new Guid("44ab6ffc-f1a9-47d0-90ab-9f09d767c286"), "05", false, "Ống", 5 },
+                    { new Guid("49793db4-c0ce-43c1-b439-eacd554fa06e"), "14", false, "Met", 14 },
+                    { new Guid("6cc9258a-5f48-4c22-8cd6-61c0795f5405"), "02", false, "Lần", 2 },
+                    { new Guid("7a0fed4a-e62a-4e9f-8e92-7332127ca248"), "07", false, "Tub", 7 },
+                    { new Guid("9e12370e-b3ce-4862-8e7d-83d8f7ec56d1"), "11", false, "Lít", 11 },
+                    { new Guid("9ff4f404-68bd-4780-99bc-1033227cbe3d"), "08", false, "Gói", 8 },
+                    { new Guid("a7e37e54-47b8-4716-b493-b657d4981e35"), "15", false, "Minimet", 9 },
+                    { new Guid("ae0ece26-bb4c-4b23-95cb-1a5d66114634"), "03", false, "Lọ", 3 },
+                    { new Guid("bf42cbf7-b5ac-4503-b73d-d91f4051fa8f"), "10", false, "ml", 10 },
+                    { new Guid("c587599c-a6a6-454f-8e30-2a92dac6f588"), "01", false, "Viên", 1 },
+                    { new Guid("cc8713c1-536a-4835-bd7e-187603566f95"), "13", false, "Kg", 13 },
+                    { new Guid("da514a31-4dfc-4445-99bd-4ae29359ad48"), "04", false, "Tuýt", 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -1131,20 +1149,20 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "DeleteBy", "DeleteDate", "IsDelete", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("2f5bd512-57ea-4c7d-9432-7983ba5eb93b"), "PT-3", null, null, null, null, null, null, null, "Phẫu thuật loại 3", 4 },
-                    { new Guid("68373bbc-ddf6-4094-b1ba-53835c4d278b"), "PT-1", null, null, null, null, null, null, null, "Phẫu thuật loại 1", 2 },
-                    { new Guid("6d35af6f-9833-42ca-9345-e9a7aad7d9e1"), "TT-3", null, null, null, null, null, null, null, "Thủ thuật loại 3", 8 },
-                    { new Guid("a0d68c86-c0b0-4c51-acf3-ceb201cf12bb"), "TT-1", null, null, null, null, null, null, null, "Thủ thuật loại 1", 6 },
-                    { new Guid("ce5ac5b9-39ea-4aeb-abf5-ccb9b39104db"), "TT-DB", null, null, null, null, null, null, null, "Thủ thuật đặc biệt", 5 },
-                    { new Guid("d38dc24b-464d-40b0-8e5f-73f68f37861e"), "TT-2", null, null, null, null, null, null, null, "Thủ thuật loại 2", 7 },
-                    { new Guid("d6dcfa41-1a20-4e57-9b7b-e88195172b37"), "PT-DB", null, null, null, null, null, null, null, "Phẫu thuật đặc biệt", 1 },
-                    { new Guid("ecfa4b60-2a32-4997-a00d-2292a8c3b513"), "PT-2", null, null, null, null, null, null, null, "Phẫu thuật loại 2", 3 }
+                    { new Guid("080d3c9d-2dab-4e12-b4bc-dc9819e2295f"), "TT-2", null, null, null, null, null, null, null, "Thủ thuật loại 2", 7 },
+                    { new Guid("19409b13-e324-49e1-aa24-e091a143a7ed"), "PT-2", null, null, null, null, null, null, null, "Phẫu thuật loại 2", 3 },
+                    { new Guid("50e4deb7-35c0-4d71-81a2-00098a0213f9"), "PT-3", null, null, null, null, null, null, null, "Phẫu thuật loại 3", 4 },
+                    { new Guid("afd4dbfe-7205-407d-b538-6492b10a8425"), "TT-DB", null, null, null, null, null, null, null, "Thủ thuật đặc biệt", 5 },
+                    { new Guid("b169c6e5-fcf4-4170-ab03-9b150e34e478"), "PT-DB", null, null, null, null, null, null, null, "Phẫu thuật đặc biệt", 1 },
+                    { new Guid("b5990c08-5e3c-44fc-83b5-14829d3b8f3c"), "PT-1", null, null, null, null, null, null, null, "Phẫu thuật loại 1", 2 },
+                    { new Guid("c3971f03-469f-4156-b0f7-89251f424523"), "TT-1", null, null, null, null, null, null, null, "Thủ thuật loại 1", 6 },
+                    { new Guid("dec5adcc-d665-4ab3-95e5-4dc29694090c"), "TT-3", null, null, null, null, null, null, null, "Thủ thuật loại 3", 8 }
                 });
 
             migrationBuilder.InsertData(
                 table: "SUsers",
                 columns: new[] { "Id", "Address", "DistrictId", "Dob", "Email", "FirstName", "GenderId", "LastName", "Password", "PhoneNumber", "ProvinceId", "Status", "UseType", "UserName", "WardId" },
-                values: new object[] { new Guid("4d5bdea5-4a2c-4e6e-b6b4-58a1d78b1050"), null, null, null, "administrator@gmail.com", "Admin", null, "Administrator", "79956B61E1B250869A6716CE37EFD6E6", null, null, 1, 0, "Administrator", null });
+                values: new object[] { new Guid("3382be1c-2836-4246-99db-c4e1c781e868"), null, null, null, "administrator@gmail.com", "Admin", null, "Administrator", "79956B61E1B250869A6716CE37EFD6E6", null, null, 1, 0, "Administrator", null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_SDepartments_BranchId",
@@ -1160,6 +1178,16 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "IX_SDistricts_ProvinceId",
                 table: "SDistricts",
                 column: "ProvinceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SExecutionRooms_RoomId",
+                table: "SExecutionRooms",
+                column: "RoomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SExecutionRooms_ServiceId",
+                table: "SExecutionRooms",
+                column: "ServiceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SMaterials_MaterialTypeId",
@@ -1327,6 +1355,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SEthnics");
 
             migrationBuilder.DropTable(
+                name: "SExecutionRooms");
+
+            migrationBuilder.DropTable(
                 name: "SHospitals");
 
             migrationBuilder.DropTable(
@@ -1345,9 +1376,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SRolePermissionBranchs");
 
             migrationBuilder.DropTable(
-                name: "SRooms");
-
-            migrationBuilder.DropTable(
                 name: "SServicePricePolicies");
 
             migrationBuilder.DropTable(
@@ -1363,6 +1391,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SWards");
 
             migrationBuilder.DropTable(
+                name: "SRooms");
+
+            migrationBuilder.DropTable(
                 name: "SMaterialTypes");
 
             migrationBuilder.DropTable(
@@ -1373,12 +1404,6 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "SPermissions");
-
-            migrationBuilder.DropTable(
-                name: "SDepartments");
-
-            migrationBuilder.DropTable(
-                name: "SRoomTypes");
 
             migrationBuilder.DropTable(
                 name: "SPatientTypes");
@@ -1393,6 +1418,12 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SDistricts");
 
             migrationBuilder.DropTable(
+                name: "SDepartments");
+
+            migrationBuilder.DropTable(
+                name: "SRoomTypes");
+
+            migrationBuilder.DropTable(
                 name: "SMedicineGroups");
 
             migrationBuilder.DropTable(
@@ -1402,13 +1433,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SServices");
 
             migrationBuilder.DropTable(
+                name: "SProvinces");
+
+            migrationBuilder.DropTable(
                 name: "SBranchs");
 
             migrationBuilder.DropTable(
                 name: "SDepartmentTypes");
-
-            migrationBuilder.DropTable(
-                name: "SProvinces");
 
             migrationBuilder.DropTable(
                 name: "SServiceGroupHeIns");

@@ -163,38 +163,45 @@ namespace HIS.EntityFrameworkCore.Data
                 },
                 new SServiceGroup()
                 {
+                    Id = new Guid("DA2F4B6D-FD50-4CAB-BEBD-319458064222"),
+                    Code = "MA",
+                    Name = "Chế phẩm máu",
+                    SortOrder = 22
+                },
+                new SServiceGroup()
+                {
                     Id = new Guid("964200B8-4AE6-434D-A461-909391444B40"),
                     Code = "VT",
                     Name = "Vật tư",
-                    SortOrder = 22
+                    SortOrder = 23
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("B4573FB1-32A6-45E3-9782-07066D090A5C"),
                     Code = "TH",
                     Name = "Thuốc",
-                    SortOrder = 23
+                    SortOrder = 24
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("998836B2-3B5B-4C1C-9B4B-7F6CC1E52B74"),
                     Code = "GI",
                     Name = "Giường",
-                    SortOrder = 24
+                    SortOrder = 25
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("3B082A29-237D-4926-8209-F2876D292189"),
                     Code = "VC",
                     Name = "Vận chuyển",
-                    SortOrder = 25
+                    SortOrder = 26
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("0A5A8DC0-67A7-41E9-8FB3-1F5E6F8D874D"),
                     Code = "CL",
                     Name = "Khác",
-                    SortOrder = 26
+                    SortOrder = 27
                 });
         }
     }

@@ -16,7 +16,6 @@ namespace HIS.ApplicationService.Dictionaries.Branch
 
         }
 
-
         public async Task<ApiResult<SBranchDto>> CreateOrEdit(SBranchDto input)
         {
             if (input.Id == null)

@@ -233,6 +233,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                                     OldUnitPrice = ser.OldUnitPrice,
                                                     NewUnitPrice = ser.NewUnitPrice,
                                                     CeilingPrice = ser.CeilingPrice,
+                                                    PaymentRate = ser.PaymentRate,
                                                     ExecutionTime = ser.ExecutionTime,
                                                     PatientTypeCode = pa.Code,
                                                     PatientTypeName = pa.Name
