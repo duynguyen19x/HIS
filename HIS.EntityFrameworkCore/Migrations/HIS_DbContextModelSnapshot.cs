@@ -888,7 +888,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("a080ecaa-6cd6-459d-a450-d89351e0904d"),
-                            Code = "XN-HH",
+                            Code = "1",
                             Inactive = false,
                             Name = "Xét nghiệm huyết học",
                             SortOrder = 1
@@ -896,7 +896,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("33dd59d7-ab44-47fe-8b21-8500bf6e6cee"),
-                            Code = "XN-SH",
+                            Code = "2",
                             Inactive = false,
                             Name = "Xét nghiệm sinh hóa",
                             SortOrder = 2
@@ -904,7 +904,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("a13fa2cd-851c-4e89-a8ca-bdacee567757"),
-                            Code = "XN-VS",
+                            Code = "3",
                             Inactive = false,
                             Name = "Xét nghiệm vi sinh",
                             SortOrder = 3
@@ -912,7 +912,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("8878fb20-578e-46a6-8f61-62789c234bde"),
-                            Code = "XN-NT",
+                            Code = "4",
                             Inactive = false,
                             Name = "Xét nghiệm nước tiểu",
                             SortOrder = 4
@@ -920,7 +920,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("9414782a-9194-4801-91a0-253963a605eb"),
-                            Code = "XN-DCD",
+                            Code = "5",
                             Inactive = false,
                             Name = "Dịch chọc dò",
                             SortOrder = 5
@@ -928,7 +928,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("d4837941-9cc1-4f53-84f7-3e99edc8f508"),
-                            Code = "GB",
+                            Code = "6",
                             Inactive = false,
                             Name = "Giải phẫu bệnh lý",
                             SortOrder = 6
@@ -936,7 +936,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("e70f016c-39e7-4ded-aa20-9bffd9fadd59"),
-                            Code = "PT",
+                            Code = "7",
                             Inactive = false,
                             Name = "Phẫu thuật",
                             SortOrder = 7
@@ -944,7 +944,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("401dbb33-3eb1-44ae-8b3f-51e25996c311"),
-                            Code = "KH",
+                            Code = "8",
                             Inactive = false,
                             Name = "Khám",
                             SortOrder = 8
@@ -952,7 +952,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("1219fe7a-cecb-4a94-8fdc-2f6d0f48fbc9"),
-                            Code = "TDCN-DND",
+                            Code = "9",
                             Inactive = false,
                             Name = "Điện não đồ",
                             SortOrder = 9
@@ -960,7 +960,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("906307b7-f7e2-457a-a3d1-62a10ba9daa3"),
-                            Code = "TDCN-TTD",
+                            Code = "10",
                             Inactive = false,
                             Name = "Điện tâm đồ",
                             SortOrder = 10
@@ -968,7 +968,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("3b3ded9e-71ab-4d31-868c-a704d0604509"),
-                            Code = "PH",
+                            Code = "11",
                             Inactive = false,
                             Name = "Phục hồi chức năng",
                             SortOrder = 11
@@ -976,7 +976,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("0ddd75be-a32c-47f2-b5f1-5138b5997791"),
-                            Code = "TT",
+                            Code = "12",
                             Inactive = false,
                             Name = "Thủ thuật",
                             SortOrder = 12
@@ -984,7 +984,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("9f474388-e722-4ad2-b194-8a7d8def97fd"),
-                            Code = "CDHA-NS",
+                            Code = "13",
                             Inactive = false,
                             Name = "Nội soi",
                             SortOrder = 13
@@ -992,7 +992,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("17819944-bc22-47c5-afc3-108881fd5714"),
-                            Code = "CDHA-XQ",
+                            Code = "14",
                             Inactive = false,
                             Name = "XQuang thường",
                             SortOrder = 14
@@ -1000,7 +1000,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("ff0073ef-be7c-46e1-adc3-99e58871f5c6"),
-                            Code = "CDHA-XQ-KTS",
+                            Code = "15",
                             Inactive = false,
                             Name = "XQuang kỹ thuật số",
                             SortOrder = 15
@@ -1008,7 +1008,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("0711132b-d3a9-46d1-9ee1-74154facef37"),
-                            Code = "CDHA-MRI",
+                            Code = "16",
                             Inactive = false,
                             Name = "Cộng hưởng từ",
                             SortOrder = 16
@@ -1016,7 +1016,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("4be0ad49-ac80-4a2b-9a92-03b3ffd4f3b6"),
-                            Code = "CDHA-CT",
+                            Code = "17",
                             Inactive = false,
                             Name = "Cắt lớp vi tính",
                             SortOrder = 17
@@ -1024,7 +1024,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("914b8e89-4c56-4998-9707-def10fd23fbb"),
-                            Code = "CDHA-SA",
+                            Code = "18",
                             Inactive = false,
                             Name = "Siêu âm thường",
                             SortOrder = 18
@@ -1032,7 +1032,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("e43040fc-0e85-436c-8537-5c18e29f61da"),
-                            Code = "CDHA-SA-M",
+                            Code = "19",
                             Inactive = false,
                             Name = "Siêu âm màu",
                             SortOrder = 19
@@ -1040,7 +1040,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("12105142-6179-41c2-a56c-5364a2b852f5"),
-                            Code = "AN",
+                            Code = "20",
                             Inactive = false,
                             Name = "Suất ăn",
                             SortOrder = 20
@@ -1048,50 +1048,58 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("1fd09e01-450a-43ce-8bf4-c32aee87753d"),
-                            Code = "MA",
+                            Code = "21",
                             Inactive = false,
                             Name = "Máu",
                             SortOrder = 21
                         },
                         new
                         {
-                            Id = new Guid("964200b8-4ae6-434d-a461-909391444b40"),
-                            Code = "VT",
+                            Id = new Guid("da2f4b6d-fd50-4cab-bebd-319458064222"),
+                            Code = "22",
                             Inactive = false,
-                            Name = "Vật tư",
+                            Name = "Chế phẩm máu",
                             SortOrder = 22
                         },
                         new
                         {
-                            Id = new Guid("b4573fb1-32a6-45e3-9782-07066d090a5c"),
-                            Code = "TH",
+                            Id = new Guid("964200b8-4ae6-434d-a461-909391444b40"),
+                            Code = "23",
                             Inactive = false,
-                            Name = "Thuốc",
+                            Name = "Vật tư",
                             SortOrder = 23
                         },
                         new
                         {
-                            Id = new Guid("998836b2-3b5b-4c1c-9b4b-7f6cc1e52b74"),
-                            Code = "GI",
+                            Id = new Guid("b4573fb1-32a6-45e3-9782-07066d090a5c"),
+                            Code = "24",
                             Inactive = false,
-                            Name = "Giường",
+                            Name = "Thuốc",
                             SortOrder = 24
                         },
                         new
                         {
-                            Id = new Guid("3b082a29-237d-4926-8209-f2876d292189"),
-                            Code = "VC",
+                            Id = new Guid("998836b2-3b5b-4c1c-9b4b-7f6cc1e52b74"),
+                            Code = "25",
                             Inactive = false,
-                            Name = "Vận chuyển",
+                            Name = "Giường",
                             SortOrder = 25
                         },
                         new
                         {
+                            Id = new Guid("3b082a29-237d-4926-8209-f2876d292189"),
+                            Code = "26",
+                            Inactive = false,
+                            Name = "Vận chuyển",
+                            SortOrder = 26
+                        },
+                        new
+                        {
                             Id = new Guid("0a5a8dc0-67a7-41e9-8fb3-1f5e6f8d874d"),
-                            Code = "CL",
+                            Code = "27",
                             Inactive = false,
                             Name = "Khác",
-                            SortOrder = 26
+                            SortOrder = 27
                         });
                 });
 
@@ -1174,7 +1182,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("c587599c-a6a6-454f-8e30-2a92dac6f588"),
-                            Code = "01",
+                            Code = "1",
                             Inactive = false,
                             Name = "Viên",
                             SortOrder = 1
@@ -1182,7 +1190,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("6cc9258a-5f48-4c22-8cd6-61c0795f5405"),
-                            Code = "02",
+                            Code = "2",
                             Inactive = false,
                             Name = "Lần",
                             SortOrder = 2
@@ -1190,7 +1198,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("ae0ece26-bb4c-4b23-95cb-1a5d66114634"),
-                            Code = "03",
+                            Code = "3",
                             Inactive = false,
                             Name = "Lọ",
                             SortOrder = 3
@@ -1198,7 +1206,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("da514a31-4dfc-4445-99bd-4ae29359ad48"),
-                            Code = "04",
+                            Code = "4",
                             Inactive = false,
                             Name = "Tuýt",
                             SortOrder = 4
@@ -1206,7 +1214,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("44ab6ffc-f1a9-47d0-90ab-9f09d767c286"),
-                            Code = "05",
+                            Code = "5",
                             Inactive = false,
                             Name = "Ống",
                             SortOrder = 5
@@ -1214,7 +1222,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("0762aebf-cbb8-4102-b923-a30df490f75d"),
-                            Code = "06",
+                            Code = "6",
                             Inactive = false,
                             Name = "Hộp",
                             SortOrder = 6
@@ -1222,7 +1230,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("7a0fed4a-e62a-4e9f-8e92-7332127ca248"),
-                            Code = "07",
+                            Code = "7",
                             Inactive = false,
                             Name = "Tub",
                             SortOrder = 7
@@ -1230,7 +1238,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("9ff4f404-68bd-4780-99bc-1033227cbe3d"),
-                            Code = "08",
+                            Code = "8",
                             Inactive = false,
                             Name = "Gói",
                             SortOrder = 8
@@ -1238,7 +1246,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("2198d1c0-57fa-453f-b605-9cef55929067"),
-                            Code = "09",
+                            Code = "9",
                             Inactive = false,
                             Name = "Cuộn",
                             SortOrder = 9
@@ -1587,6 +1595,14 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Inactive = false,
                             Name = "Thủ thuật",
                             SortOrder = 18
+                        },
+                        new
+                        {
+                            Id = new Guid("dc75e4bb-6e85-4a90-ae29-112b7d2873f9"),
+                            Code = "19",
+                            Inactive = false,
+                            Name = "Vật tư y tế ngoài danh mục BHYT",
+                            SortOrder = 19
                         });
                 });
 
@@ -1693,58 +1709,58 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("b169c6e5-fcf4-4170-ab03-9b150e34e478"),
-                            Code = "PT-DB",
+                            Code = "1",
                             Name = "Phẫu thuật đặc biệt",
                             SortOrder = 1
                         },
                         new
                         {
                             Id = new Guid("b5990c08-5e3c-44fc-83b5-14829d3b8f3c"),
-                            Code = "PT-1",
+                            Code = "2",
                             Name = "Phẫu thuật loại 1",
                             SortOrder = 2
                         },
                         new
                         {
                             Id = new Guid("19409b13-e324-49e1-aa24-e091a143a7ed"),
-                            Code = "PT-2",
+                            Code = "3",
                             Name = "Phẫu thuật loại 2",
                             SortOrder = 3
                         },
                         new
                         {
                             Id = new Guid("50e4deb7-35c0-4d71-81a2-00098a0213f9"),
-                            Code = "PT-3",
+                            Code = "4",
                             Name = "Phẫu thuật loại 3",
                             SortOrder = 4
                         },
                         new
                         {
                             Id = new Guid("afd4dbfe-7205-407d-b538-6492b10a8425"),
-                            Code = "TT-DB",
+                            Code = "5",
                             Name = "Thủ thuật đặc biệt",
                             SortOrder = 5
                         },
                         new
                         {
                             Id = new Guid("c3971f03-469f-4156-b0f7-89251f424523"),
-                            Code = "TT-1",
+                            Code = "2",
                             Name = "Thủ thuật loại 1",
-                            SortOrder = 6
+                            SortOrder = 2
                         },
                         new
                         {
                             Id = new Guid("080d3c9d-2dab-4e12-b4bc-dc9819e2295f"),
-                            Code = "TT-2",
+                            Code = "3",
                             Name = "Thủ thuật loại 2",
-                            SortOrder = 7
+                            SortOrder = 3
                         },
                         new
                         {
                             Id = new Guid("dec5adcc-d665-4ab3-95e5-4dc29694090c"),
-                            Code = "TT-3",
+                            Code = "4",
                             Name = "Thủ thuật loại 3",
-                            SortOrder = 8
+                            SortOrder = 4
                         });
                 });
 
@@ -2140,7 +2156,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Code = "0",
                             Inactive = false,
                             Name = "Chưa xác định",
-                            SortOrder = 1
+                            SortOrder = 0
                         },
                         new
                         {
@@ -2148,7 +2164,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Code = "1",
                             Inactive = false,
                             Name = "Nam",
-                            SortOrder = 2
+                            SortOrder = 1
                         },
                         new
                         {
@@ -2156,7 +2172,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Code = "2",
                             Inactive = false,
                             Name = "Nữ",
-                            SortOrder = 3
+                            SortOrder = 2
                         });
                 });
 
