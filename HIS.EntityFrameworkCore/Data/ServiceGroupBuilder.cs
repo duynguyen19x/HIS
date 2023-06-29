@@ -1,4 +1,5 @@
 ﻿using HIS.EntityFrameworkCore.Entities.Categories;
+using HIS.Utilities.Enums;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -17,191 +18,191 @@ namespace HIS.EntityFrameworkCore.Data
                 new SServiceGroup()
                 {
                     Id = new Guid("A080ECAA-6CD6-459D-A450-D89351E0904D"),
-                    Code = "XN-HH",
+                    Code = ((int)ServiceGroupTypes.BloodTest).ToString(),
                     Name = "Xét nghiệm huyết học",
-                    SortOrder = 1
+                    SortOrder = (int)ServiceGroupTypes.BloodTest
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("33DD59D7-AB44-47FE-8B21-8500BF6E6CEE"),
-                    Code = "XN-SH",
+                    Code = ((int)ServiceGroupTypes.BiochemicalTest).ToString(),
                     Name = "Xét nghiệm sinh hóa",
-                    SortOrder = 2
+                    SortOrder = (int)ServiceGroupTypes.BiochemicalTest
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("A13FA2CD-851C-4E89-A8CA-BDACEE567757"),
-                    Code = "XN-VS",
+                    Code = ((int)ServiceGroupTypes.MicrobiologicalTest).ToString(),
                     Name = "Xét nghiệm vi sinh",
                     SortOrder = 3
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("8878FB20-578E-46A6-8F61-62789C234BDE"),
-                    Code = "XN-NT",
+                    Code = ((int)ServiceGroupTypes.UrineTest).ToString(),
                     Name = "Xét nghiệm nước tiểu",
-                    SortOrder = 4
+                    SortOrder = (int)ServiceGroupTypes.UrineTest
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("9414782A-9194-4801-91A0-253963A605EB"),
-                    Code = "XN-DCD",
+                    Code = ((int)ServiceGroupTypes.DiagnosticPuncture).ToString(),
                     Name = "Dịch chọc dò",
-                    SortOrder = 5
+                    SortOrder = (int)ServiceGroupTypes.DiagnosticPuncture
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("D4837941-9CC1-4F53-84F7-3E99EDC8F508"),
-                    Code = "GB",
+                    Code = ((int)ServiceGroupTypes.PathologicalAnatomy).ToString(),
                     Name = "Giải phẫu bệnh lý",
                     SortOrder = 6
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("E70F016C-39E7-4DED-AA20-9BFFD9FADD59"),
-                    Code = "PT",
+                    Code = ((int)ServiceGroupTypes.Surgery).ToString(),
                     Name = "Phẫu thuật",
-                    SortOrder = 7
+                    SortOrder = (int)ServiceGroupTypes.Surgery
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("401DBB33-3EB1-44AE-8B3F-51E25996C311"),
-                    Code = "KH",
+                    Code = ((int)ServiceGroupTypes.MedicalExamination).ToString(),
                     Name = "Khám",
-                    SortOrder = 8
+                    SortOrder = (int)ServiceGroupTypes.MedicalExamination
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("1219FE7A-CECB-4A94-8FDC-2F6D0F48FBC9"),
-                    Code = "TDCN-DND",
+                    Code = ((int)ServiceGroupTypes.EEG).ToString(),
                     Name = "Điện não đồ",
                     SortOrder = 9
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("906307B7-F7E2-457A-A3D1-62A10BA9DAA3"),
-                    Code = "TDCN-TTD",
+                    Code = ((int)ServiceGroupTypes.ECG).ToString(),
                     Name = "Điện tâm đồ",
-                    SortOrder = 10
+                    SortOrder = (int)ServiceGroupTypes.ECG
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("3B3DED9E-71AB-4D31-868C-A704D0604509"),
-                    Code = "PH",
+                    Code = ((int)ServiceGroupTypes.FunctionalRecovery).ToString(),
                     Name = "Phục hồi chức năng",
-                    SortOrder = 11
+                    SortOrder = (int)ServiceGroupTypes.FunctionalRecovery
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("0DDD75BE-A32C-47F2-B5F1-5138B5997791"),
-                    Code = "TT",
+                    Code = ((int)ServiceGroupTypes.SurgicalIntervention).ToString(),
                     Name = "Thủ thuật",
                     SortOrder = 12
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("9F474388-E722-4AD2-B194-8A7D8DEF97FD"),
-                    Code = "CDHA-NS",
+                    Code = ((int)ServiceGroupTypes.Endoscopy).ToString(),
                     Name = "Nội soi",
-                    SortOrder = 13
+                    SortOrder = (int)ServiceGroupTypes.Endoscopy
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("17819944-BC22-47C5-AFC3-108881FD5714"),
-                    Code = "CDHA-XQ",
+                    Code = ((int)ServiceGroupTypes.Xray).ToString(),
                     Name = "XQuang thường",
-                    SortOrder = 14
+                    SortOrder = (int)ServiceGroupTypes.Xray
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("FF0073EF-BE7C-46E1-ADC3-99E58871F5C6"),
-                    Code = "CDHA-XQ-KTS",
+                    Code = ((int)ServiceGroupTypes.XrayDigital).ToString(),
                     Name = "XQuang kỹ thuật số",
-                    SortOrder = 15
+                    SortOrder = (int)ServiceGroupTypes.XrayDigital
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("0711132B-D3A9-46D1-9EE1-74154FACEF37"),
-                    Code = "CDHA-MRI",
+                    Code = ((int)ServiceGroupTypes.MRI).ToString(),
                     Name = "Cộng hưởng từ",
                     SortOrder = 16
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("4BE0AD49-AC80-4A2B-9A92-03B3FFD4F3B6"),
-                    Code = "CDHA-CT",
+                    Code = ((int)ServiceGroupTypes.CTScan).ToString(),
                     Name = "Cắt lớp vi tính",
-                    SortOrder = 17
+                    SortOrder = (int)ServiceGroupTypes.CTScan
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("914B8E89-4C56-4998-9707-DEF10FD23FBB"),
-                    Code = "CDHA-SA",
+                    Code = ((int)ServiceGroupTypes.Ultrasound).ToString(),
                     Name = "Siêu âm thường",
-                    SortOrder = 18
+                    SortOrder = (int)ServiceGroupTypes.Ultrasound
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("E43040FC-0E85-436C-8537-5C18E29F61DA"),
-                    Code = "CDHA-SA-M",
+                    Code = ((int)ServiceGroupTypes.Doppler).ToString(),
                     Name = "Siêu âm màu",
                     SortOrder = 19
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("12105142-6179-41C2-A56C-5364A2B852F5"),
-                    Code = "AN",
+                    Code = ((int)ServiceGroupTypes.MealPortion).ToString(),
                     Name = "Suất ăn",
                     SortOrder = 20
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("1FD09E01-450A-43CE-8BF4-C32AEE87753D"),
-                    Code = "MA",
+                    Code = ((int)ServiceGroupTypes.Blood).ToString(),
                     Name = "Máu",
-                    SortOrder = 21
+                    SortOrder = (int)ServiceGroupTypes.Blood
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("DA2F4B6D-FD50-4CAB-BEBD-319458064222"),
-                    Code = "MA",
+                    Code = ((int)ServiceGroupTypes.BloodProduct).ToString(),
                     Name = "Chế phẩm máu",
-                    SortOrder = 22
+                    SortOrder = (int)ServiceGroupTypes.BloodProduct
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("964200B8-4AE6-434D-A461-909391444B40"),
-                    Code = "VT",
+                    Code = ((int)ServiceGroupTypes.Material).ToString(),
                     Name = "Vật tư",
-                    SortOrder = 23
+                    SortOrder = (int)ServiceGroupTypes.Material
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("B4573FB1-32A6-45E3-9782-07066D090A5C"),
-                    Code = "TH",
+                    Code = ((int)ServiceGroupTypes.Medicine).ToString(),
                     Name = "Thuốc",
-                    SortOrder = 24
+                    SortOrder = (int)ServiceGroupTypes.Medicine
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("998836B2-3B5B-4C1C-9B4B-7F6CC1E52B74"),
-                    Code = "GI",
+                    Code = ((int)ServiceGroupTypes.Bed).ToString(),
                     Name = "Giường",
-                    SortOrder = 25
+                    SortOrder = (int)ServiceGroupTypes.Bed
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("3B082A29-237D-4926-8209-F2876D292189"),
-                    Code = "VC",
+                    Code = ((int)ServiceGroupTypes.Transportation).ToString(),
                     Name = "Vận chuyển",
-                    SortOrder = 26
+                    SortOrder = (int)ServiceGroupTypes.Transportation
                 },
                 new SServiceGroup()
                 {
                     Id = new Guid("0A5A8DC0-67A7-41E9-8FB3-1F5E6F8D874D"),
-                    Code = "CL",
+                    Code = ((int)ServiceGroupTypes.Other).ToString(),
                     Name = "Khác",
-                    SortOrder = 27
+                    SortOrder = (int)ServiceGroupTypes.Other
                 });
         }
     }

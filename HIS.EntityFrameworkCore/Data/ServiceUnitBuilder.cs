@@ -18,63 +18,63 @@ namespace HIS.EntityFrameworkCore.Data
                new SServiceUnit()
                {
                    Id = new Guid("C587599C-A6A6-454F-8E30-2A92DAC6F588"),
-                   Code = "01",
+                   Code = "1",
                    Name = "Viên",
                    SortOrder = 1
                },
                new SServiceUnit()
                {
                    Id = new Guid("6CC9258A-5F48-4C22-8CD6-61C0795F5405"),
-                   Code = "02",
+                   Code = "2",
                    Name = "Lần",
                    SortOrder = 2
                },
                new SServiceUnit()
                {
                    Id = new Guid("AE0ECE26-BB4C-4B23-95CB-1A5D66114634"),
-                   Code = "03",
+                   Code = "3",
                    Name = "Lọ",
                    SortOrder = 3
                },
                new SServiceUnit()
                {
                    Id = new Guid("DA514A31-4DFC-4445-99BD-4AE29359AD48"),
-                   Code = "04",
+                   Code = "4",
                    Name = "Tuýt",
                    SortOrder = 4
                },
                new SServiceUnit()
                {
                    Id = new Guid("44AB6FFC-F1A9-47D0-90AB-9F09D767C286"),
-                   Code = "05",
+                   Code = "5",
                    Name = "Ống",
                    SortOrder = 5
                },
                new SServiceUnit()
                {
                    Id = new Guid("0762AEBF-CBB8-4102-B923-A30DF490F75D"),
-                   Code = "06",
+                   Code = "6",
                    Name = "Hộp",
                    SortOrder = 06
                },
                new SServiceUnit()
                {
                    Id = new Guid("7A0FED4A-E62A-4E9F-8E92-7332127CA248"),
-                   Code = "07",
+                   Code = "7",
                    Name = "Tub",
                    SortOrder = 07
                },
                new SServiceUnit()
                {
                    Id = new Guid("9FF4F404-68BD-4780-99BC-1033227CBE3D"),
-                   Code = "08",
+                   Code = "8",
                    Name = "Gói",
                    SortOrder = 8
                },
                new SServiceUnit()
                {
                    Id = new Guid("2198D1C0-57FA-453F-B605-9CEF55929067"),
-                   Code = "09",
+                   Code = "9",
                    Name = "Cuộn",
                    SortOrder = 9
                },
