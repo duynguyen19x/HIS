@@ -12,10 +12,10 @@ namespace HIS.Dtos.Dictionaries.Department
         public string Code { get; set; }
         public string MohCode { get; set; }
         public string Name { get; set; }
-        public Guid DepartmentTypeId { get; set; }
+        public Guid? DepartmentTypeId { get; set; }
         public string DepartmentTypeCode { get; set; }
         public string DepartmentTypeName { get; set; }
-        public Guid BranchId { get; set; }
+        public Guid? BranchId { get; set; }
         public string BranchCode { get; set; }
         public string BranchName { get; set; }
         public string Description { get; set; }

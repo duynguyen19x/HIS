@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(HIS_DbContext))]
-    [Migration("20230629113313_Add-table")]
+    [Migration("20230630160642_Add-table")]
     partial class Addtable
     {
         /// <inheritdoc />
@@ -1888,7 +1888,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("BranchId")
+                    b.Property<Guid?>("BranchId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Code")
@@ -1902,7 +1902,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("DepartmentTypeId")
+                    b.Property<Guid?>("DepartmentTypeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
@@ -1981,6 +1981,40 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SDepartmentTypes", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("31471839-6881-4790-ac25-ebd775776dd0"),
+                            Code = "1",
+                            Inactive = false,
+                            Name = "Khoa lâm sàng",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("a32fac82-1e9c-4b36-b8e5-c3b5d9fb3c6d"),
+                            Code = "2",
+                            Inactive = false,
+                            Name = "Khoa cận lâm sàng",
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("06c44348-2449-4bd7-8b5d-e32f4ed77972"),
+                            Code = "3",
+                            Inactive = false,
+                            Name = "Khoa dược",
+                            SortOrder = 3
+                        },
+                        new
+                        {
+                            Id = new Guid("97ff5291-a914-4ae4-9bd6-1b79b7976598"),
+                            Code = "4",
+                            Inactive = false,
+                            Name = "Kế hoạch tổng hợp",
+                            SortOrder = 4
+                        });
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SDistrict", b =>
@@ -2027,7 +2061,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
 
-                    b.Property<Guid>("ProvinceId")
+                    b.Property<Guid?>("ProvinceId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -2358,7 +2392,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<Guid>("CountryId")
+                    b.Property<Guid?>("CountryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CreatedBy")
@@ -2418,7 +2452,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("DepartmentId")
+                    b.Property<Guid?>("DepartmentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
@@ -2444,7 +2478,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
 
-                    b.Property<Guid>("RoomTypeId")
+                    b.Property<Guid?>("RoomTypeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int?>("SortOrder")
@@ -2500,6 +2534,112 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SRoomTypes", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("060982d3-e1db-49c2-a8d0-10260f8134d6"),
+                            Code = "1",
+                            Inactive = false,
+                            Name = "Tiếp đón",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("8c024a8d-801e-4c47-8ea3-1787c4427faa"),
+                            Code = "2",
+                            Inactive = false,
+                            Name = "Hành chính",
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("41d3fac7-c06d-4cc3-ae5d-b53dda3f0b98"),
+                            Code = "3",
+                            Inactive = false,
+                            Name = "Khám bệnh",
+                            SortOrder = 3
+                        },
+                        new
+                        {
+                            Id = new Guid("741cca23-aeb0-49a3-a8fa-d81415cd6824"),
+                            Code = "4",
+                            Inactive = false,
+                            Name = "Nội trú",
+                            SortOrder = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("56c7c054-6713-4421-9acb-e57c911e0051"),
+                            Code = "5",
+                            Inactive = false,
+                            Name = "Ngoại trú",
+                            SortOrder = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("305eee25-13c6-408a-9235-af56fa091d28"),
+                            Code = "6",
+                            Inactive = false,
+                            Name = "Xét nghiệm",
+                            SortOrder = 6
+                        },
+                        new
+                        {
+                            Id = new Guid("9d87caf2-7dbb-4f40-b989-a2fbd982eafe"),
+                            Code = "7",
+                            Inactive = false,
+                            Name = "Chẩn đoán hình ảnh",
+                            SortOrder = 7
+                        },
+                        new
+                        {
+                            Id = new Guid("c64ebd18-4652-4fd9-bc54-9940de7d7bd9"),
+                            Code = "8",
+                            Inactive = false,
+                            Name = "Kho tổng",
+                            SortOrder = 8
+                        },
+                        new
+                        {
+                            Id = new Guid("fe5fc851-b118-46f7-8e06-e907fe7e6454"),
+                            Code = "9",
+                            Inactive = false,
+                            Name = "Kho ngoại trú",
+                            SortOrder = 9
+                        },
+                        new
+                        {
+                            Id = new Guid("eae8827b-9fb8-4f90-b920-272523ed772b"),
+                            Code = "10",
+                            Inactive = false,
+                            Name = "Kho nội trú",
+                            SortOrder = 10
+                        },
+                        new
+                        {
+                            Id = new Guid("5d27feb2-7419-4853-bfec-f93a1b59d47e"),
+                            Code = "11",
+                            Inactive = false,
+                            Name = "Tủ trực",
+                            SortOrder = 11
+                        },
+                        new
+                        {
+                            Id = new Guid("b1d4af6d-98ab-4a64-b362-60e857923e89"),
+                            Code = "12",
+                            Inactive = false,
+                            Name = "Quản lý thuốc",
+                            SortOrder = 12
+                        },
+                        new
+                        {
+                            Id = new Guid("90a7d9d8-3c16-457d-81be-47fd30940be6"),
+                            Code = "13",
+                            Inactive = false,
+                            Name = "Quản lý vật tư",
+                            SortOrder = 13
+                        });
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SWard", b =>
@@ -2529,7 +2669,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
 
-                    b.Property<Guid>("DistrictId")
+                    b.Property<Guid?>("DistrictId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Inactive")
@@ -2775,15 +2915,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SBranch", "SBranch")
                         .WithMany("Departments")
-                        .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BranchId");
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SDepartmentType", "SDepartmentType")
                         .WithMany("SDepartments")
-                        .HasForeignKey("DepartmentTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DepartmentTypeId");
 
                     b.Navigation("SBranch");
 
@@ -2794,9 +2930,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SProvince", "Province")
                         .WithMany("Districts")
-                        .HasForeignKey("ProvinceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ProvinceId");
 
                     b.Navigation("Province");
                 });
@@ -2820,9 +2954,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SCountry", "Country")
                         .WithMany("Provinces")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CountryId");
 
                     b.Navigation("Country");
                 });
@@ -2831,15 +2963,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SDepartment", "SDepartment")
                         .WithMany("SRooms")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DepartmentId");
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoomType", "SRoomType")
                         .WithMany("SRooms")
-                        .HasForeignKey("RoomTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RoomTypeId");
 
                     b.Navigation("SDepartment");
 
@@ -2850,9 +2978,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SDistrict", "District")
                         .WithMany("Wards")
-                        .HasForeignKey("DistrictId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DistrictId");
 
                     b.Navigation("District");
                 });

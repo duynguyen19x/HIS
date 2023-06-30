@@ -13,6 +13,8 @@ namespace HIS.EntityFrameworkCore.Data
             ServiceUnitBuilder.Seed(modelBuilder);
             PatientTypeBuilder.Seed(modelBuilder);
             SurgicalProcedureTypeBuilder.Seed(modelBuilder);
+            DepartmentTypeBuilder.Seed(modelBuilder);
+            RoomTypeBuilder.Seed(modelBuilder);
         }
     }
 }

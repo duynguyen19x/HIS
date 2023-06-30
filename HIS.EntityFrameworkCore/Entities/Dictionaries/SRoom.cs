@@ -12,8 +12,8 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public string Code { get; set; }
         public string MohCode { get; set; }
         public string Name { get; set; }
-        public Guid RoomTypeId { get; set; }
-        public Guid DepartmentId { get; set; }
+        public Guid? RoomTypeId { get; set; }
+        public Guid? DepartmentId { get; set; }
         public string Description { get; set; }
         public int? SortOrder { get; set; }
         public bool Inactive { get; set; }

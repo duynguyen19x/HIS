@@ -1,6 +1,7 @@
 ﻿using HIS.ApplicationService.Dictionaries.Service;
 using HIS.ApplicationService.Dictionaries.ServicePricePolicy;
 using HIS.Dtos.Commons;
+using HIS.Dtos.Dictionaries.ExecutionRoom;
 using HIS.Dtos.Dictionaries.Service;
 using HIS.Dtos.Dictionaries.ServiceGroup;
 using HIS.Dtos.Dictionaries.ServicePricePolicy;
@@ -43,6 +44,12 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         public async Task<ApiResult<SServiceDto>> Delete(Guid id)
         {
             return await _serviceService.Delete(id);
+        }
+
+        [HttpGet("GetExecutionRoomByGroupHeIn")]
+        public async Task<ApiResult<IList<SExecutionRoomDto>>> GetExecutionRoomByGroupHeIn(Guid id)
+        {
+            return await _serviceService.GetExecutionRoomByGroupHeIn(id);
         }
     }
 }

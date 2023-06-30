@@ -9,6 +9,7 @@ using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Models.Commons;
+using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
@@ -219,6 +220,12 @@ namespace HIS.ApplicationService.Dictionaries.Service
 
             try
             {
+                var rommTypes = new List<string>()
+                {
+                    ((int)RoomTypes.LaboratoryTesting).ToString(),
+                    ((int)RoomTypes.DiagnosticImaging).ToString(),
+                };
+
                 if (!GuidHelper.IsNullOrEmpty(id))
                 {
                     var service = _dbContext.SServices.FirstOrDefault(s => s.Id == id && (s.IsDelete == null || s.IsDelete == false));
@@ -268,6 +275,8 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                                 }).OrderBy(o => o.PatientTypeCode).ToList();
 
                     //var sExecutionRooms = (from room in _dbContext.SRooms
+                    //                       where room.Inactive == false
+                    //                            && rommTypes.Contains(room.Code)
                     //                       select new SExecutionRoomDto()
                     //                       {
                     //                           RoomId = room.Id,
@@ -275,27 +284,67 @@ namespace HIS.ApplicationService.Dictionaries.Service
                     //                           RoomName = room.Name,
                     //                       }).ToList();
 
-                    var sExecutionRooms = new List<SExecutionRoomDto>()
-                    {
-                        new SExecutionRoomDto()
-                        {
-                            RoomId = Guid.Empty,
-                            RoomCode = "Code",
-                            RoomName = "Tên phòng",
-                        },
-                        new SExecutionRoomDto()
-                        {
-                            RoomId = Guid.Empty,
-                            RoomCode = "Code",
-                            RoomName = "Tên phòng",
-                        }
-                    };
+                    //var sExecutionRooms = new List<SExecutionRoomDto>()
+                    //{
+                    //    new SExecutionRoomDto()
+                    //    {
+                    //        RoomId = Guid.Empty,
+                    //        RoomCode = "Code",
+                    //        RoomName = "Tên phòng",
+                    //    },
+                    //    new SExecutionRoomDto()
+                    //    {
+                    //        RoomId = Guid.Empty,
+                    //        RoomCode = "Code",
+                    //        RoomName = "Tên phòng",
+                    //    }
+                    //};
 
                     serviceDto.ServicePricePolicies = sServicePricePolicys;
-                    serviceDto.ExecutionRooms = sExecutionRooms;
+                    //serviceDto.ExecutionRooms = sExecutionRooms;
                 }
 
                 result.Result = serviceDto;
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccessed = false;
+                result.Message = ex.Message;
+            }
+
+            return await Task.FromResult(result);
+        }
+
+        public async Task<ApiResult<IList<SExecutionRoomDto>>> GetExecutionRoomByGroupHeIn(Guid serviceGroupHeInId)
+        {
+            var result = new ApiResult<IList<SExecutionRoomDto>>();
+
+            try
+            {
+                var rommTypes = new List<string>()
+                {
+                    ((int)RoomTypes.LaboratoryTesting).ToString(),
+                    ((int)RoomTypes.DiagnosticImaging).ToString(),
+                };
+
+                var serviceGroupHeIn = _dbContext.SServiceGroupHeIns.FirstOrDefault(f => f.Id == serviceGroupHeInId);
+                if (serviceGroupHeIn == null)
+                {
+                    var sExecutionRooms = (from room in _dbContext.SRooms
+                                           where room.Inactive == false
+                                           where rommTypes.Contains(room.Code)
+                                           select new SExecutionRoomDto()
+                                           {
+                                               RoomId = room.Id,
+                                               RoomCode = room.Code,
+                                               RoomName = room.Name,
+                                           }).ToList();
+
+                    if (serviceGroupHeIn.Code == ((int)ServiceGroupHeInTypes.LaboratoryTesting).ToString())
+                    {
+                        //result.Result = sExecutionRooms.Where(w=>w.);
+                    }
+                }
             }
             catch (Exception ex)
             {

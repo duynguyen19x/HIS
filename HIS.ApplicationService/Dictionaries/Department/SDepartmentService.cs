@@ -141,10 +141,12 @@ namespace HIS.ApplicationService.Dictionaries.Department
                                      MohCode = d.MohCode,
                                      Name = d.Name,
                                      Description = d.Description,
+                                     DepartmentTypeId = d.DepartmentTypeId,
                                      BranchId = d.BranchId,
                                      BranchCode = b.Code,
                                      BranchName = b.Name,
-                                     Inactive = d.Inactive
+                                     Inactive = d.Inactive,
+                                     SortOrder = d.SortOrder,
                                  }).ToList();
                 result.TotalCount = result.Result.Count;
             }
@@ -170,10 +172,12 @@ namespace HIS.ApplicationService.Dictionaries.Department
                                         MohCode = d.MohCode,
                                         Name = d.Name,
                                         Description = d.Description,
+                                        DepartmentTypeId = d.DepartmentTypeId,
                                         BranchId = d.BranchId,
                                         BranchCode = b.Code,
                                         BranchName = b.Name,
-                                        Inactive = d.Inactive
+                                        Inactive = d.Inactive,
+                                        SortOrder = d.SortOrder,
                                     }).SingleOrDefaultAsync();
 
 
