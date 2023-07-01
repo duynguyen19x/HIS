@@ -13,6 +13,5 @@ namespace HIS.ApplicationService.Dictionaries.Service
 {
     public interface IServiceService : IBaseDictionaryService<SServiceDto, GetAllSServiceInput>
     {
-        Task<ApiResult<IList<SExecutionRoomDto>>> GetExecutionRoomByGroupHeIn(Guid serviceGroupHeInId);
     }
 }

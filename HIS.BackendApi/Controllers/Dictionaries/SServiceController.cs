@@ -45,11 +45,5 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         {
             return await _serviceService.Delete(id);
         }
-
-        [HttpGet("GetExecutionRoomByGroupHeIn")]
-        public async Task<ApiResult<IList<SExecutionRoomDto>>> GetExecutionRoomByGroupHeIn(Guid id)
-        {
-            return await _serviceService.GetExecutionRoomByGroupHeIn(id);
-        }
     }
 }

@@ -63,6 +63,30 @@ namespace HIS.ApplicationService.Dictionaries.Service
                         _dbContext.SServicePricePolicies.AddRange(sServicePricePolicys);
                     }
 
+                    if (!GuidHelper.IsNullOrEmpty(input.ServiceGroupHeInId))
+                    {
+                        var serviceGroupHeInTypes = new List<string>()
+                        {
+                            ((int)ServiceGroupHeInTypes.LaboratoryTesting).ToString(),
+                            ((int)ServiceGroupHeInTypes.DiagnosticImaging).ToString(),
+                            ((int)ServiceGroupHeInTypes.FunctionalEvaluation).ToString(),
+                        };
+
+                        var serviceGroupHeIn = _dbContext.SServiceGroupHeIns.FirstOrDefault(f => f.Id == input.ServiceGroupHeInId);
+                        if (serviceGroupHeIn != null && serviceGroupHeInTypes.Any(a => a == serviceGroupHeIn.Code))
+                        {
+                            var executionRoomDtos = input.ExecutionRooms.Where(w => w.IsCheck).ToList();
+                            var executionRooms = _mapper.Map<List<SExecutionRoom>>(executionRoomDtos);
+                            foreach (var executionRoom in executionRooms)
+                            {
+                                executionRoom.Id = Guid.NewGuid();
+                                executionRoom.ServiceId = data.Id;
+                            }
+
+                            _dbContext.SExecutionRooms.AddRange(executionRooms);
+                        }
+                    }
+
                     _dbContext.SServices.Add(data);
                     await _dbContext.SaveChangesAsync();
 
@@ -113,6 +137,38 @@ namespace HIS.ApplicationService.Dictionaries.Service
                             }
 
                             _dbContext.SServicePricePolicies.AddRange(sServicePricePolicys);
+                        }
+
+                        if (!GuidHelper.IsNullOrEmpty(input.ServiceGroupHeInId))
+                        {
+                            var serviceGroupHeInTypes = new List<string>()
+                            {
+                                ((int)ServiceGroupHeInTypes.LaboratoryTesting).ToString(),
+                                ((int)ServiceGroupHeInTypes.DiagnosticImaging).ToString(),
+                                ((int)ServiceGroupHeInTypes.FunctionalEvaluation).ToString(),
+                            };
+
+                            var serviceGroupHeIn = _dbContext.SServiceGroupHeIns.FirstOrDefault(f => f.Id == input.ServiceGroupHeInId);
+                            if (serviceGroupHeIn != null && serviceGroupHeInTypes.Any(a => a == serviceGroupHeIn.Code))
+                            {
+                                var executionRoomOlds = _dbContext.SExecutionRooms.Where(w => w.ServiceId == sService.Id).ToList();
+                                if (executionRoomOlds != null)
+                                {
+                                    await _dbContext.SaveChangesAsync();
+                                }
+
+                                var executionRoomDtos = input.ExecutionRooms.Where(w => w.IsCheck).ToList();
+                                var executionRooms = _mapper.Map<List<SExecutionRoom>>(executionRoomDtos);
+                                foreach (var executionRoom in executionRooms)
+                                {
+                                    if (GuidHelper.IsNullOrEmpty(executionRoom.Id))
+                                        executionRoom.Id = Guid.NewGuid();
+
+                                    executionRoom.ServiceId = sService.Id;
+                                }
+
+                                _dbContext.SExecutionRooms.AddRange(executionRooms);
+                            }
                         }
                     }
 
@@ -246,22 +302,25 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                                     PatientTypeName = pa.Name
                                                 }).ToList();
 
-                    var sExecutionRooms = (from exec in _dbContext.SExecutionRooms
-                                           join room in _dbContext.SRooms on exec.RoomId equals room.Id
-                                           where exec.ServiceId == id
+                    var sExecutionRooms = (from room in _dbContext.SRooms
+                                           join roomType in _dbContext.SRoomTypes on room.RoomTypeId equals roomType.Id
+                                           join exec in _dbContext.SExecutionRooms.Where(w => w.ServiceId == id) on room.Id equals exec.RoomId into SExecutionRooms
+                                           from s in SExecutionRooms.DefaultIfEmpty()
+                                           where rommTypes.Contains(roomType.Code)
                                            select new SExecutionRoomDto()
                                            {
-                                               Id = exec.Id,
-                                               RoomId = exec.RoomId,
-                                               ServiceId = exec.ServiceId,
+                                               Id = s != null ? s.Id : null,
+                                               RoomId = room.Id,
+                                               ServiceId = s != null ? s.ServiceId : null,
                                                RoomCode = room.Code,
                                                RoomName = room.Name,
-                                               IsMain = exec.IsMain,
-                                               IsCheck = true,
+                                               IsMain = s != null ? s.IsMain : false,
+                                               IsCheck = s != null ? true : false,
                                            }).ToList();
 
                     serviceDto = _mapper.Map<SServiceDto>(service);
                     serviceDto.ServicePricePolicies = sServicePricePolicys;
+                    serviceDto.ExecutionRooms = sExecutionRooms;
                 }
                 else
                 {
@@ -274,65 +333,10 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                                     PatientTypeName = r.Name,
                                                 }).OrderBy(o => o.PatientTypeCode).ToList();
 
-                    //var sExecutionRooms = (from room in _dbContext.SRooms
-                    //                       where room.Inactive == false
-                    //                            && rommTypes.Contains(room.Code)
-                    //                       select new SExecutionRoomDto()
-                    //                       {
-                    //                           RoomId = room.Id,
-                    //                           RoomCode = room.Code,
-                    //                           RoomName = room.Name,
-                    //                       }).ToList();
-
-                    //var sExecutionRooms = new List<SExecutionRoomDto>()
-                    //{
-                    //    new SExecutionRoomDto()
-                    //    {
-                    //        RoomId = Guid.Empty,
-                    //        RoomCode = "Code",
-                    //        RoomName = "Tên phòng",
-                    //    },
-                    //    new SExecutionRoomDto()
-                    //    {
-                    //        RoomId = Guid.Empty,
-                    //        RoomCode = "Code",
-                    //        RoomName = "Tên phòng",
-                    //    }
-                    //};
-
-                    serviceDto.ServicePricePolicies = sServicePricePolicys;
-                    //serviceDto.ExecutionRooms = sExecutionRooms;
-                }
-
-                result.Result = serviceDto;
-            }
-            catch (Exception ex)
-            {
-                result.IsSuccessed = false;
-                result.Message = ex.Message;
-            }
-
-            return await Task.FromResult(result);
-        }
-
-        public async Task<ApiResult<IList<SExecutionRoomDto>>> GetExecutionRoomByGroupHeIn(Guid serviceGroupHeInId)
-        {
-            var result = new ApiResult<IList<SExecutionRoomDto>>();
-
-            try
-            {
-                var rommTypes = new List<string>()
-                {
-                    ((int)RoomTypes.LaboratoryTesting).ToString(),
-                    ((int)RoomTypes.DiagnosticImaging).ToString(),
-                };
-
-                var serviceGroupHeIn = _dbContext.SServiceGroupHeIns.FirstOrDefault(f => f.Id == serviceGroupHeInId);
-                if (serviceGroupHeIn == null)
-                {
                     var sExecutionRooms = (from room in _dbContext.SRooms
+                                           join roomType in _dbContext.SRoomTypes on room.RoomTypeId equals roomType.Id
                                            where room.Inactive == false
-                                           where rommTypes.Contains(room.Code)
+                                                && rommTypes.Contains(roomType.Code)
                                            select new SExecutionRoomDto()
                                            {
                                                RoomId = room.Id,
@@ -340,11 +344,11 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                                RoomName = room.Name,
                                            }).ToList();
 
-                    if (serviceGroupHeIn.Code == ((int)ServiceGroupHeInTypes.LaboratoryTesting).ToString())
-                    {
-                        //result.Result = sExecutionRooms.Where(w=>w.);
-                    }
+                    serviceDto.ServicePricePolicies = sServicePricePolicys;
+                    serviceDto.ExecutionRooms = sExecutionRooms;
                 }
+
+                result.Result = serviceDto;
             }
             catch (Exception ex)
             {
