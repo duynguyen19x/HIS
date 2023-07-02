@@ -38,8 +38,8 @@ namespace HIS.EntityFrameworkCore.Configurations.Patients
             builder.Property(x => x.RelativeIdentificationNumber).HasMaxLength(128);
             builder.Property(x => x.RelativePhoneNumbar).HasMaxLength(56);
 
-            builder.HasOne(t => t.Gender).WithMany(pc => pc.SPatients).HasForeignKey(pc => pc.GenderId);
-            builder.HasOne(t => t.PatientType).WithMany(pc => pc.SPatients).HasForeignKey(pc => pc.PatientTypeId);
+            builder.HasOne(t => t.Gender).WithMany(pc => pc.SPatients).HasForeignKey(pc => pc.GenderId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(t => t.PatientType).WithMany(pc => pc.SPatients).HasForeignKey(pc => pc.PatientTypeId).OnDelete(DeleteBehavior.Restrict); 
         }
     }
 }

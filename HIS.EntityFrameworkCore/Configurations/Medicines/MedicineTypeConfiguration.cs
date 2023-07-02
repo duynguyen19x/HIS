@@ -22,13 +22,13 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.Property(x => x.Description).HasMaxLength(500);
 
             builder.HasOne(t => t.SService).WithMany(pc => pc.SMedicineTypes)
-                .HasForeignKey(pc => pc.ServiceId);
+                .HasForeignKey(pc => pc.ServiceId).OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(t => t.SServiceUnit).WithMany(pc => pc.SMedicineTypes)
-                .HasForeignKey(pc => pc.ServiceUnitId);
+                .HasForeignKey(pc => pc.ServiceUnitId).OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(t => t.SMedicineLine).WithMany(pc => pc.SMedicineTypes)
-                .HasForeignKey(pc => pc.MedicineLineId);
+                .HasForeignKey(pc => pc.MedicineLineId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -1,6 +1,7 @@
 using HIS.ApplicationService;
 using HIS.AutoMappers;
 using HIS.EntityFrameworkCore.DbContexts;
+using HIS.EntityFrameworkCore.Entities.Categories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -11,9 +12,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<HIS_DbContext>(options =>
     options.UseSqlServer(builder.Configuration["ConnectionStrings:HIS"]));
 
-//builder.Services.AddCors(options =>
-//    options.AddDefaultPolicy(policy =>
-//        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowCredentials()));
 builder.Services.AddAutoMapper(typeof(AutoMapperConfiguration).Assembly);
 
 builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>

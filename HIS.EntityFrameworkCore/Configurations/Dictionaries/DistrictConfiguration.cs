@@ -15,7 +15,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.Property(x => x.Name).HasMaxLength(512).IsRequired();
             builder.Property(x => x.Description).HasMaxLength(512);
 
-            builder.HasOne(t => t.Province).WithMany(pc => pc.Districts).HasForeignKey(pc => pc.ProvinceId);
+            builder.HasOne(t => t.Province).WithMany(pc => pc.Districts).HasForeignKey(pc => pc.ProvinceId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

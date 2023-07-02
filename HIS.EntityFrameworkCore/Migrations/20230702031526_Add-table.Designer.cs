@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(HIS_DbContext))]
-    [Migration("20230630160642_Add-table")]
+    [Migration("20230702031526_Add-table")]
     partial class Addtable
     {
         /// <inheritdoc />
@@ -2700,12 +2700,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SGender", "Gender")
                         .WithMany("SPatients")
-                        .HasForeignKey("GenderId");
+                        .HasForeignKey("GenderId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Patients.SPatientType", "PatientType")
                         .WithMany("SPatients")
                         .HasForeignKey("PatientTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Gender");
@@ -2717,15 +2718,18 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMaterialType", "SMaterialType")
                         .WithMany("SMaterials")
-                        .HasForeignKey("MaterialTypeId");
+                        .HasForeignKey("MaterialTypeId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SService", "SService")
                         .WithMany("SMaterials")
-                        .HasForeignKey("ServiceId");
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SServiceUnit", "SServiceUnit")
                         .WithMany("SMaterials")
-                        .HasForeignKey("ServiceUnitId");
+                        .HasForeignKey("ServiceUnitId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("SMaterialType");
 
@@ -2742,11 +2746,13 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SService", "SService")
                         .WithMany("SMaterialTypes")
-                        .HasForeignKey("ServiceId");
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SServiceUnit", "SServiceUnit")
                         .WithMany("SMaterialTypes")
-                        .HasForeignKey("ServiceUnitId");
+                        .HasForeignKey("ServiceUnitId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("SService");
 
@@ -2757,19 +2763,23 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicineLine", "SMedicineLine")
                         .WithMany("SMedicines")
-                        .HasForeignKey("MedicineLineId");
+                        .HasForeignKey("MedicineLineId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicineType", "SMedicineType")
                         .WithMany("SMedicines")
-                        .HasForeignKey("MedicineTypeId");
+                        .HasForeignKey("MedicineTypeId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SService", "SService")
                         .WithMany("SMedicines")
-                        .HasForeignKey("ServiceId");
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SServiceUnit", "SServiceUnit")
                         .WithMany("SMedicines")
-                        .HasForeignKey("ServiceUnitId");
+                        .HasForeignKey("ServiceUnitId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("SMedicineLine");
 
@@ -2784,15 +2794,18 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicineLine", "SMedicineLine")
                         .WithMany("SMedicineTypes")
-                        .HasForeignKey("MedicineLineId");
+                        .HasForeignKey("MedicineLineId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SService", "SService")
                         .WithMany("SMedicineTypes")
-                        .HasForeignKey("ServiceId");
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SServiceUnit", "SServiceUnit")
                         .WithMany("SMedicineTypes")
-                        .HasForeignKey("ServiceUnitId");
+                        .HasForeignKey("ServiceUnitId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("SMedicineLine");
 
@@ -2810,13 +2823,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SPermission", "Permission")
                         .WithMany("RolePermissions")
                         .HasForeignKey("PermissionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SRole", "Role")
                         .WithMany("RolePermissions")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Branch");
@@ -2830,23 +2843,28 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Services.SServiceGroupHeIn", "SServiceGroupHeIn")
                         .WithMany("SServices")
-                        .HasForeignKey("ServiceGroupHeInId");
+                        .HasForeignKey("ServiceGroupHeInId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SServiceGroup", "SServiceGroup")
                         .WithMany("SServices")
-                        .HasForeignKey("ServiceGroupId");
+                        .HasForeignKey("ServiceGroupId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SServiceType", "SServiceType")
                         .WithMany("SServices")
-                        .HasForeignKey("ServiceTypeId");
+                        .HasForeignKey("ServiceTypeId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SServiceUnit", "SServiceUnit")
                         .WithMany("SServices")
-                        .HasForeignKey("ServiceUnitId");
+                        .HasForeignKey("ServiceUnitId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Services.SSurgicalProcedureType", "SSurgicalProcedureType")
                         .WithMany("SServices")
-                        .HasForeignKey("SurgicalProcedureTypeId");
+                        .HasForeignKey("SurgicalProcedureTypeId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("SServiceGroup");
 
@@ -2863,7 +2881,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SServiceUnit", "SServiceUnit")
                         .WithMany("SServiceTypes")
-                        .HasForeignKey("ServiceUnitId");
+                        .HasForeignKey("ServiceUnitId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("SServiceUnit");
                 });
@@ -2872,7 +2891,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SUser", "User")
                         .WithMany("UserTokens")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("User");
                 });
@@ -2882,13 +2902,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SRole", "Role")
                         .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SUser", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Role");
@@ -2900,11 +2920,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Patients.SPatientType", "PatientType")
                         .WithMany("SServicePricePolicies")
-                        .HasForeignKey("PatientTypeId");
+                        .HasForeignKey("PatientTypeId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SService", "SService")
                         .WithMany("SServicePricePolicies")
-                        .HasForeignKey("ServiceId");
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("PatientType");
 
@@ -2915,11 +2937,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SBranch", "SBranch")
                         .WithMany("Departments")
-                        .HasForeignKey("BranchId");
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SDepartmentType", "SDepartmentType")
                         .WithMany("SDepartments")
-                        .HasForeignKey("DepartmentTypeId");
+                        .HasForeignKey("DepartmentTypeId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("SBranch");
 
@@ -2930,7 +2954,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SProvince", "Province")
                         .WithMany("Districts")
-                        .HasForeignKey("ProvinceId");
+                        .HasForeignKey("ProvinceId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Province");
                 });
@@ -2939,11 +2964,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "Room")
                         .WithMany("ExecutionRooms")
-                        .HasForeignKey("RoomId");
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SService", "Service")
                         .WithMany("ExecutionRooms")
-                        .HasForeignKey("ServiceId");
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Room");
 
@@ -2954,7 +2981,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SCountry", "Country")
                         .WithMany("Provinces")
-                        .HasForeignKey("CountryId");
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Country");
                 });
@@ -2963,11 +2991,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SDepartment", "SDepartment")
                         .WithMany("SRooms")
-                        .HasForeignKey("DepartmentId");
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoomType", "SRoomType")
                         .WithMany("SRooms")
-                        .HasForeignKey("RoomTypeId");
+                        .HasForeignKey("RoomTypeId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("SDepartment");
 
@@ -2978,7 +3008,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SDistrict", "District")
                         .WithMany("Wards")
-                        .HasForeignKey("DistrictId");
+                        .HasForeignKey("DistrictId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("District");
                 });

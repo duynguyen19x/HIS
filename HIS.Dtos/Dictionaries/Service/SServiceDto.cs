@@ -24,7 +24,7 @@ namespace HIS.Dtos.Dictionaries.Service
 
         public bool? Inactive { get; set; }
 
-        public Guid? ServiceTypeId { get; set; }
+        //public Guid? ServiceTypeId { get; set; }
         public Guid? ServiceUnitId { get; set; }
         public Guid? ServiceGroupId { get; set; }
         public Guid? ServiceGroupHeInId { get; set; }
@@ -34,6 +34,9 @@ namespace HIS.Dtos.Dictionaries.Service
         public string ServiceUnitName { get; set; }
         public string ServiceGroupCode { get; set; }
         public string ServiceGroupName { get; set; }
+
+        public string ServiceGroupHeInCode { get; set; }
+        public string ServiceGroupHeInName { get; set; }
 
         public IList<SServicePricePolicyDto> ServicePricePolicies { get; set; } 
         public IList<SExecutionRoomDto> ExecutionRooms { get; set; } 

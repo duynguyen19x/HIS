@@ -49,6 +49,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
 
                     var data = _mapper.Map<SService>(input);
                     data.CreatedDate = timeNow;
+                    _dbContext.SServices.Add(data);
 
                     var sServicePricePolicys = _mapper.Map<List<SServicePricePolicy>>(input.ServicePricePolicies);
                     if (sServicePricePolicys != null)
@@ -58,6 +59,9 @@ namespace HIS.ApplicationService.Dictionaries.Service
                             sServicePricePolicy.Id = Guid.NewGuid();
                             sServicePricePolicy.CreatedDate = timeNow;
                             sServicePricePolicy.ServiceId = data.Id;
+
+                            sServicePricePolicy.PatientType = null;
+                            sServicePricePolicy.SService = null;
                         }
 
                         _dbContext.SServicePricePolicies.AddRange(sServicePricePolicys);
@@ -73,7 +77,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                         };
 
                         var serviceGroupHeIn = _dbContext.SServiceGroupHeIns.FirstOrDefault(f => f.Id == input.ServiceGroupHeInId);
-                        if (serviceGroupHeIn != null && serviceGroupHeInTypes.Any(a => a == serviceGroupHeIn.Code))
+                        if (serviceGroupHeIn != null && serviceGroupHeInTypes.Any(a => a == serviceGroupHeIn.Code) && input.ExecutionRooms != null)
                         {
                             var executionRoomDtos = input.ExecutionRooms.Where(w => w.IsCheck).ToList();
                             var executionRooms = _mapper.Map<List<SExecutionRoom>>(executionRoomDtos);
@@ -87,7 +91,6 @@ namespace HIS.ApplicationService.Dictionaries.Service
                         }
                     }
 
-                    _dbContext.SServices.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -118,7 +121,9 @@ namespace HIS.ApplicationService.Dictionaries.Service
                     var timeNow = DateTime.Now;
 
                     var sServicePricePolicyOlds = _dbContext.SServicePricePolicies.Where(w => w.ServiceId == input.Id).ToList();
+                    var sExecutionRoomOlds = _dbContext.SExecutionRooms.Where(w => w.ServiceId == input.Id).ToList();
                     _dbContext.SServicePricePolicies.RemoveRange(sServicePricePolicyOlds);
+                    _dbContext.SExecutionRooms.RemoveRange(sExecutionRoomOlds);
 
                     var sService = _dbContext.SServices.FirstOrDefault(f => f.Id == input.Id);
                     if (sService != null)
@@ -130,7 +135,8 @@ namespace HIS.ApplicationService.Dictionaries.Service
                         {
                             foreach (var sServicePricePolicy in sServicePricePolicys)
                             {
-                                sServicePricePolicy.Id = Guid.NewGuid();
+                                if (GuidHelper.IsNullOrEmpty(sServicePricePolicy.Id))
+                                    sServicePricePolicy.Id = Guid.NewGuid();
                                 sServicePricePolicy.CreatedDate = timeNow;
                                 sServicePricePolicy.ModifiedDate = timeNow;
                                 sServicePricePolicy.ServiceId = sService.Id;
@@ -151,12 +157,6 @@ namespace HIS.ApplicationService.Dictionaries.Service
                             var serviceGroupHeIn = _dbContext.SServiceGroupHeIns.FirstOrDefault(f => f.Id == input.ServiceGroupHeInId);
                             if (serviceGroupHeIn != null && serviceGroupHeInTypes.Any(a => a == serviceGroupHeIn.Code))
                             {
-                                var executionRoomOlds = _dbContext.SExecutionRooms.Where(w => w.ServiceId == sService.Id).ToList();
-                                if (executionRoomOlds != null)
-                                {
-                                    await _dbContext.SaveChangesAsync();
-                                }
-
                                 var executionRoomDtos = input.ExecutionRooms.Where(w => w.IsCheck).ToList();
                                 var executionRooms = _mapper.Map<List<SExecutionRoom>>(executionRoomDtos);
                                 foreach (var executionRoom in executionRooms)
@@ -172,7 +172,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                         }
                     }
 
-                    await _dbContext.SaveChangesAsync();
+                    _dbContext.SaveChanges();
 
                     result.IsSuccessed = true;
                     result.Result = input;
@@ -235,6 +235,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
 
                                  join r1 in _dbContext.SServiceUnits on r.ServiceUnitId equals r1.Id
                                  join r2 in _dbContext.SServiceGroups on r.ServiceGroupId equals r2.Id
+                                 join r3 in _dbContext.SServiceGroupHeIns on r.ServiceGroupHeInId equals r3.Id
 
                                  where (input.InactiveFilter == null || r.Inactive == !input.InactiveFilter)
                                  where (r.IsDelete == false || r.IsDelete == (bool?)default)
@@ -247,14 +248,17 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                      HeInName = r.HeInName,
                                      Inactive = r.Inactive,
                                      ServiceGroupId = r.ServiceGroupId,
+                                     ServiceGroupHeInId = r.ServiceGroupId,
                                      ServiceUnitId = r.ServiceUnitId,
-                                     ServiceTypeId = r.ServiceTypeId,
+                                     //ServiceTypeId = r.ServiceTypeId,
                                      SurgicalProcedureTypeId = r.SurgicalProcedureTypeId,
 
                                      ServiceUnitCode = r1.Code,
                                      ServiceUnitName = r1.Name,
                                      ServiceGroupCode = r2.Code,
                                      ServiceGroupName = r2.Name,
+                                     ServiceGroupHeInCode = r3.Name,
+                                     ServiceGroupHeInName = r3.Name,
                                  }).OrderBy(o => o.Code).ToList();
 
                 result.TotalCount = result.Result.Count;
@@ -299,8 +303,9 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                                     PaymentRate = ser.PaymentRate,
                                                     ExecutionTime = ser.ExecutionTime,
                                                     PatientTypeCode = pa.Code,
-                                                    PatientTypeName = pa.Name
-                                                }).ToList();
+                                                    PatientTypeName = pa.Name,
+                                                    IsHeIn = pa.Code == PatientTypes.BHYT ? true : false,
+                                                }).OrderBy(s => s.PatientTypeCode).ToList();
 
                     var sExecutionRooms = (from room in _dbContext.SRooms
                                            join roomType in _dbContext.SRoomTypes on room.RoomTypeId equals roomType.Id
@@ -316,7 +321,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                                RoomName = room.Name,
                                                IsMain = s != null ? s.IsMain : false,
                                                IsCheck = s != null ? true : false,
-                                           }).ToList();
+                                           }).OrderBy(s => s.RoomCode).ToList();
 
                     serviceDto = _mapper.Map<SServiceDto>(service);
                     serviceDto.ServicePricePolicies = sServicePricePolicys;
@@ -331,6 +336,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                                     PatientTypeId = r.Id,
                                                     PatientTypeCode = r.Code,
                                                     PatientTypeName = r.Name,
+                                                    IsHeIn = r.Code == PatientTypes.BHYT ? true : false,
                                                 }).OrderBy(o => o.PatientTypeCode).ToList();
 
                     var sExecutionRooms = (from room in _dbContext.SRooms
@@ -342,7 +348,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                                RoomId = room.Id,
                                                RoomCode = room.Code,
                                                RoomName = room.Name,
-                                           }).ToList();
+                                           }).OrderBy(s => s.RoomCode).ToList();
 
                     serviceDto.ServicePricePolicies = sServicePricePolicys;
                     serviceDto.ExecutionRooms = sExecutionRooms;

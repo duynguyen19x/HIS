@@ -430,7 +430,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_SProvinces_SCountries_CountryId",
                         column: x => x.CountryId,
                         principalTable: "SCountries",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -458,12 +459,14 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_SDepartments_SBranchs_BranchId",
                         column: x => x.BranchId,
                         principalTable: "SBranchs",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SDepartments_SDepartmentTypes_DepartmentTypeId",
                         column: x => x.DepartmentTypeId,
                         principalTable: "SDepartmentTypes",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -522,13 +525,14 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_SPatients_SGenders_GenderId",
                         column: x => x.GenderId,
                         principalTable: "SGenders",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SPatients_SPatientTypes_PatientTypeId",
                         column: x => x.PatientTypeId,
                         principalTable: "SPatientTypes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -552,13 +556,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                         column: x => x.PermissionId,
                         principalTable: "SPermissions",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SRolePermissionBranchs_SRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "SRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -586,7 +590,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_SServiceTypes_SServiceUnits_ServiceUnitId",
                         column: x => x.ServiceUnitId,
                         principalTable: "SServiceUnits",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -609,7 +614,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_STokens_SUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "SUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -627,13 +633,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                         column: x => x.RoleId,
                         principalTable: "SRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SUserRoles_SUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "SUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -661,7 +667,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_SDistricts_SProvinces_ProvinceId",
                         column: x => x.ProvinceId,
                         principalTable: "SProvinces",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -689,12 +696,14 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_SRooms_SDepartments_DepartmentId",
                         column: x => x.DepartmentId,
                         principalTable: "SDepartments",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SRooms_SRoomTypes_RoomTypeId",
                         column: x => x.RoomTypeId,
                         principalTable: "SRoomTypes",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -728,27 +737,32 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_SServices_SServiceGroupHeIns_ServiceGroupHeInId",
                         column: x => x.ServiceGroupHeInId,
                         principalTable: "SServiceGroupHeIns",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SServices_SServiceGroups_ServiceGroupId",
                         column: x => x.ServiceGroupId,
                         principalTable: "SServiceGroups",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SServices_SServiceTypes_ServiceTypeId",
                         column: x => x.ServiceTypeId,
                         principalTable: "SServiceTypes",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SServices_SServiceUnits_ServiceUnitId",
                         column: x => x.ServiceUnitId,
                         principalTable: "SServiceUnits",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SServices_SSurgicalProcedureTypes_SurgicalProcedureTypeId",
                         column: x => x.SurgicalProcedureTypeId,
                         principalTable: "SSurgicalProcedureTypes",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -776,7 +790,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_SWards_SDistricts_DistrictId",
                         column: x => x.DistrictId,
                         principalTable: "SDistricts",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -795,12 +810,14 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_SExecutionRooms_SRooms_RoomId",
                         column: x => x.RoomId,
                         principalTable: "SRooms",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SExecutionRooms_SServices_ServiceId",
                         column: x => x.ServiceId,
                         principalTable: "SServices",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -842,12 +859,14 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_SMaterialTypes_SServiceUnits_ServiceUnitId",
                         column: x => x.ServiceUnitId,
                         principalTable: "SServiceUnits",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SMaterialTypes_SServices_ServiceId",
                         column: x => x.ServiceId,
                         principalTable: "SServices",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -885,17 +904,20 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_SMedicineTypes_SMedicineLines_MedicineLineId",
                         column: x => x.MedicineLineId,
                         principalTable: "SMedicineLines",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SMedicineTypes_SServiceUnits_ServiceUnitId",
                         column: x => x.ServiceUnitId,
                         principalTable: "SServiceUnits",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SMedicineTypes_SServices_ServiceId",
                         column: x => x.ServiceId,
                         principalTable: "SServices",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -925,12 +947,14 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_SServicePricePolicies_SPatientTypes_PatientTypeId",
                         column: x => x.PatientTypeId,
                         principalTable: "SPatientTypes",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SServicePricePolicies_SServices_ServiceId",
                         column: x => x.ServiceId,
                         principalTable: "SServices",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -968,17 +992,20 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_SMaterials_SMaterialTypes_MaterialTypeId",
                         column: x => x.MaterialTypeId,
                         principalTable: "SMaterialTypes",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SMaterials_SServiceUnits_ServiceUnitId",
                         column: x => x.ServiceUnitId,
                         principalTable: "SServiceUnits",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SMaterials_SServices_ServiceId",
                         column: x => x.ServiceId,
                         principalTable: "SServices",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -1019,22 +1046,26 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_SMedicines_SMedicineLines_MedicineLineId",
                         column: x => x.MedicineLineId,
                         principalTable: "SMedicineLines",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SMedicines_SMedicineTypes_MedicineTypeId",
                         column: x => x.MedicineTypeId,
                         principalTable: "SMedicineTypes",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SMedicines_SServiceUnits_ServiceUnitId",
                         column: x => x.ServiceUnitId,
                         principalTable: "SServiceUnits",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SMedicines_SServices_ServiceId",
                         column: x => x.ServiceId,
                         principalTable: "SServices",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.InsertData(

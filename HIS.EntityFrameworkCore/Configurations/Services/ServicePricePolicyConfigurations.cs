@@ -17,11 +17,15 @@ namespace HIS.EntityFrameworkCore.Configurations.Services
             builder.ToTable("SServicePricePolicies");
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(t => t.PatientType).WithMany(pc => pc.SServicePricePolicies)
-             .HasForeignKey(pc => pc.PatientTypeId);
+            builder.HasOne(t => t.PatientType)
+                .WithMany(pc => pc.SServicePricePolicies)
+                .HasForeignKey(pc => pc.PatientTypeId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(t => t.SService).WithMany(pc => pc.SServicePricePolicies)
-              .HasForeignKey(pc => pc.ServiceId);
+            builder.HasOne(t => t.SService)
+                .WithMany(pc => pc.SServicePricePolicies)
+                .HasForeignKey(pc => pc.ServiceId)
+                .OnDelete(DeleteBehavior.Restrict); 
         }
     }
 }

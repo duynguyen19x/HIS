@@ -38,7 +38,7 @@ namespace HIS.EntityFrameworkCore.DbContexts
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new RolePermissionBranchConfigurations());
             modelBuilder.ApplyConfiguration(new ServiceUnitConfigurations());
-            modelBuilder.ApplyConfiguration(new ServiceTypeConfigurations());
+            //modelBuilder.ApplyConfiguration(new ServiceTypeConfigurations());
             modelBuilder.ApplyConfiguration(new ServiceConfigurations());
             modelBuilder.ApplyConfiguration(new MedicineConfiguration());
             modelBuilder.ApplyConfiguration(new MedicineGroupConfiguration());
@@ -86,7 +86,7 @@ namespace HIS.EntityFrameworkCore.DbContexts
         public DbSet<SService> SServices { get; set; }
         public DbSet<SServiceGroup> SServiceGroups { get; set; }
         public DbSet<SServiceGroupHeIn> SServiceGroupHeIns { get; set; }
-        public DbSet<SServiceType> SServiceTypes { get; set; }
+        //public DbSet<SServiceType> SServiceTypes { get; set; }
         public DbSet<SServiceUnit> SServiceUnits { get; set; }
         public DbSet<SMedicine> SMedicines { get; set; }
         public DbSet<SMedicineGroup> SMedicineGroups { get; set; }

@@ -19,7 +19,7 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.Property(x => x.Code).HasMaxLength(50);
             builder.Property(x => x.Name).HasMaxLength(500);
 
-            builder.HasOne(t => t.SServiceUnit).WithMany(pc => pc.SServiceTypes).HasForeignKey(pc => pc.ServiceUnitId);
+            builder.HasOne(t => t.SServiceUnit).WithMany(pc => pc.SServiceTypes).HasForeignKey(pc => pc.ServiceUnitId).OnDelete(DeleteBehavior.Restrict); ;
         }
     }
 }
