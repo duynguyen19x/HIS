@@ -13,5 +13,6 @@ namespace HIS.ApplicationService.Dictionaries.Service
 {
     public interface IServiceService : IBaseDictionaryService<SServiceDto, GetAllSServiceInput>
     {
+        Task<ApiResult<bool>> Import(IList<SServiceImportExcelDto> input);
     }
 }

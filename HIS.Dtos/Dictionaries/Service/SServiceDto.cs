@@ -20,9 +20,10 @@ namespace HIS.Dtos.Dictionaries.Service
 
         public string HeInName { get; set; }
 
-        public int? SoftOrder { get; set; }
+        public int? SortOrder { get; set; }
 
-        public bool? Inactive { get; set; }
+
+        public bool Inactive { get; set; }
 
         //public Guid? ServiceTypeId { get; set; }
         public Guid? ServiceUnitId { get; set; }
@@ -37,6 +38,7 @@ namespace HIS.Dtos.Dictionaries.Service
 
         public string ServiceGroupHeInCode { get; set; }
         public string ServiceGroupHeInName { get; set; }
+        public string SurgicalProcedureTypeCode { get; set; }
 
         public IList<SServicePricePolicyDto> ServicePricePolicies { get; set; } 
         public IList<SExecutionRoomDto> ExecutionRooms { get; set; } 

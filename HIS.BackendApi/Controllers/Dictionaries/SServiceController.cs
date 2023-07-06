@@ -45,5 +45,11 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         {
             return await _serviceService.Delete(id);
         }
+
+        [HttpPost("Import")]
+        public async Task<ApiResult<bool>> Import(IList<SServiceImportExcelDto> input)
+        {
+            return await _serviceService.Import(input);
+        }
     }
 }

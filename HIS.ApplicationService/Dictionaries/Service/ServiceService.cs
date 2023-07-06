@@ -11,6 +11,7 @@ using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Models.Commons;
 using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.Extensions.Configuration;
@@ -362,6 +363,136 @@ namespace HIS.ApplicationService.Dictionaries.Service
                 result.Message = ex.Message;
             }
 
+            return await Task.FromResult(result);
+        }
+
+        public async Task<ApiResult<bool>> Import(IList<SServiceImportExcelDto> input)
+        {
+            var result = new ApiResult<bool>();
+
+            using (var transaction = _dbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    var sServiceUnits = _dbContext.SServiceUnits.ToList();
+                    var sServiceGroupHeIns = _dbContext.SServiceGroupHeIns.ToList();
+                    var sServiceGroups = _dbContext.SServiceGroups.ToList();
+                    var sSurgicalProcedureTypes = _dbContext.SSurgicalProcedureTypes.ToList();
+                    var sPatientTypes = _dbContext.SPatientTypes.ToList();
+                    var sRooms = _dbContext.SRooms.ToList();
+
+                    var sServiceDtos = new List<SServiceDto>();
+
+                    foreach (var serviceImport in input)
+                    {
+                        var serviceDto = (SServiceDto)serviceImport;
+                        serviceDto.Id = Guid.NewGuid();
+
+                        serviceDto.ServicePricePolicies = new List<SServicePricePolicyDto>()
+                        {
+                            new SServicePricePolicyDto()
+                            {
+                                Id = Guid.NewGuid(),
+                                ServiceId = serviceDto.Id,
+                                OldUnitPrice = serviceImport.HeInPrice,
+                                PatientTypeCode = PatientTypes.BHYT,
+                                PaymentRate = serviceImport.PaymentRate,
+                                CeilingPrice = serviceImport.CeilingPrice,
+                                ExecutionTime = serviceImport.ExecutionTime
+                            },
+                            new SServicePricePolicyDto()
+                            {
+                                Id = Guid.NewGuid(),
+                                ServiceId = serviceDto.Id,
+                                OldUnitPrice = serviceImport.ServicePrice,
+                                PatientTypeCode = PatientTypes.DV,
+                                      ExecutionTime = serviceImport.ExecutionTime
+                            },
+                            new SServicePricePolicyDto()
+                            {
+                                Id = Guid.NewGuid(),
+                                ServiceId = serviceDto.Id,
+                                OldUnitPrice = serviceImport.PeoplePrice,
+                                PatientTypeCode = PatientTypes.VP,
+                                      ExecutionTime = serviceImport.ExecutionTime
+                            }
+                        };
+
+                        serviceDto.ExecutionRooms = new List<SExecutionRoomDto>()
+                        {
+                            new SExecutionRoomDto()
+                            {
+                                Id = Guid.NewGuid(),
+                                ServiceId = serviceDto.Id,
+                                RoomCode = serviceImport.ExecutionRoomCode,
+                                IsCheck = true,
+                                IsMain = true,
+                            }
+                        };
+
+                        sServiceDtos.Add(serviceDto);
+                    }
+
+                    var sServices = (from serviceDto in sServiceDtos
+                                     join sServiceUnit in sServiceUnits on serviceDto.ServiceUnitCode equals sServiceUnit.Code
+                                     join sServiceGroupHeIn in sServiceGroupHeIns on serviceDto.ServiceGroupHeInCode equals sServiceGroupHeIn.Code
+                                     join sServiceGroup in sServiceGroups on serviceDto.ServiceGroupCode equals sServiceGroup.Code
+                                     join sSurgicalProcedureType in sSurgicalProcedureTypes on serviceDto.SurgicalProcedureTypeCode equals sSurgicalProcedureType.Code into sSurgicalProcedureTypeTems
+                                     from surg in sSurgicalProcedureTypeTems.DefaultIfEmpty()
+                                     select new SService()
+                                     {
+                                         Id = serviceDto.Id.GetValueOrDefault(),
+                                         Code = serviceDto.Code,
+                                         Name = serviceDto.Name,
+                                         HeInCode = serviceDto.HeInCode,
+                                         HeInName = serviceDto.HeInName,
+                                         SortOrder = serviceDto.SortOrder,
+                                         Inactive = serviceDto.Inactive,
+                                         ServiceUnitId = sServiceUnit.Id,
+                                         ServiceGroupId = sServiceGroup.Id,
+                                         ServiceGroupHeInId = sServiceGroupHeIn.Id,
+                                         SurgicalProcedureTypeId = surg == null ? null : surg.Id,
+                                     }).ToList();
+
+                    var servicePricePolicieDtos = sServiceDtos.SelectMany(s => s.ServicePricePolicies).ToList();
+                    var servicePricePolicie = (from servicePricePolicy in servicePricePolicieDtos
+                                               join sPatientType in sPatientTypes on servicePricePolicy.PatientTypeCode equals sPatientType.Code
+                                               select new SServicePricePolicy()
+                                               {
+                                                   Id = servicePricePolicy.Id.GetValueOrDefault(),
+                                                   PatientTypeId = sPatientType.Id,
+                                                   ServiceId = servicePricePolicy.ServiceId,
+                                                   OldUnitPrice = servicePricePolicy.OldUnitPrice,
+                                                   NewUnitPrice = servicePricePolicy.NewUnitPrice,
+                                                   PaymentRate = servicePricePolicy.PaymentRate,
+                                                   CeilingPrice = servicePricePolicy.CeilingPrice,
+                                                   ExecutionTime = servicePricePolicy.ExecutionTime,
+                                               }).ToList();
+
+                    var executionRoomDtos = sServiceDtos.SelectMany(s => s.ExecutionRooms).ToList();
+                    var executionRooms = (from executionRoom in executionRoomDtos
+                                          join sRoom in sRooms on executionRoom.RoomCode equals sRoom.Code
+                                          select new SExecutionRoom()
+                                          {
+                                              Id = executionRoom.Id.GetValueOrDefault(),
+                                              ServiceId = executionRoom.ServiceId,
+                                              RoomId = sRoom.Id,
+                                              IsMain = executionRoom.IsMain,
+                                          }).ToList();
+
+                    _dbContext.SServices.AddRange(sServices);
+                    _dbContext.SServicePricePolicies.AddRange(servicePricePolicie);
+                    _dbContext.SExecutionRooms.AddRange(executionRooms);
+
+                    _dbContext.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    result.IsSuccessed = false;
+                    result.Message = ex.Message;
+                }
+                finally { transaction.Commit(); }
+            }
             return await Task.FromResult(result);
         }
     }
