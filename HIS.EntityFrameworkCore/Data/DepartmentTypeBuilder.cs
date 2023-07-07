@@ -16,29 +16,29 @@ namespace HIS.EntityFrameworkCore.Data
             modelBuilder.Entity<SDepartmentType>().HasData(
                 new SDepartmentType()
                 {
-                    Id = new Guid("31471839-6881-4790-AC25-EBD775776DD0"),
-                    Code = ((int)DepartmentTypes.ClinicalDepartment).ToString(),
+                    Id = (int)DepartmentTypes.ClinicalDepartment,
+                    Code = "ClDe",
                     Name = "Khoa lâm sàng",
                     SortOrder = (int)DepartmentTypes.ClinicalDepartment
                 },
                 new SDepartmentType()
                 {
-                    Id = new Guid("A32FAC82-1E9C-4B36-B8E5-C3B5D9FB3C6D"),
-                    Code = ((int)DepartmentTypes.ClinicalLaboratoryDepartment).ToString(),
+                    Id = (int)DepartmentTypes.ClinicalLaboratoryDepartment,
+                    Code = "LaDe",
                     Name = "Khoa cận lâm sàng",
                     SortOrder = (int)DepartmentTypes.ClinicalLaboratoryDepartment
                 },
                 new SDepartmentType()
                 {
-                    Id = new Guid("06C44348-2449-4BD7-8B5D-E32F4ED77972"),
-                    Code = ((int)DepartmentTypes.PharmacyDepartment).ToString(),
+                    Id = (int)DepartmentTypes.PharmacyDepartment,
+                    Code = "PhDe",
                     Name = "Khoa dược",
                     SortOrder = (int)DepartmentTypes.PharmacyDepartment
                 },
                 new SDepartmentType()
                 {
-                    Id = new Guid("97FF5291-A914-4AE4-9BD6-1B79B7976598"),
-                    Code = ((int)DepartmentTypes.ComprehensivePlan).ToString(),
+                    Id = (int)DepartmentTypes.ComprehensivePlan,
+                    Code = "CoPl",
                     Name = "Kế hoạch tổng hợp",
                     SortOrder = (int)DepartmentTypes.ComprehensivePlan
                 });

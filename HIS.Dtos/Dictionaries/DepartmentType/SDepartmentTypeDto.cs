@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HIS.Dtos.Dictionaries.DepartmentType
 {
-    public class SDepartmentTypeDto : EntityDto<Guid?>
+    public class SDepartmentTypeDto : EntityDto<int?>
     {
         public string Code { get; set; }
         public string Name { get; set; }

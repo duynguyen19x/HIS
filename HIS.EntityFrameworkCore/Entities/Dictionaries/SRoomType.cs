@@ -10,7 +10,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// <summary>
     /// Loại phòng, buồng.
     /// </summary>
-    public class SRoomType : AuditingEntity<Guid>
+    public class SRoomType : Entity<int>
     {
         public string Code { get; set; }
         public string Name { get; set; }

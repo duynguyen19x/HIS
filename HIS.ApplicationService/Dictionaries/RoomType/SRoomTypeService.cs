@@ -37,7 +37,7 @@ namespace HIS.ApplicationService.Dictionaries.RoomType
             {
                 try
                 {
-                    input.Id = Guid.NewGuid();
+                    //input.Id = Guid.NewGuid();
                     var data = _mapper.Map<SRoomType>(input);
                     _dbContext.SRoomTypes.Add(data);
                     await _dbContext.SaveChangesAsync();
@@ -89,7 +89,7 @@ namespace HIS.ApplicationService.Dictionaries.RoomType
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SRoomTypeDto>> Delete(Guid id)
+        public async Task<ApiResult<SRoomTypeDto>> Delete(int id)
         {
             var result = new ApiResult<SRoomTypeDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
@@ -152,7 +152,7 @@ namespace HIS.ApplicationService.Dictionaries.RoomType
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SRoomTypeDto>> GetById(Guid id)
+        public async Task<ApiResult<SRoomTypeDto>> GetById(int id)
         {
             var result = new ApiResult<SRoomTypeDto>();
             try

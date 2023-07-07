@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Dictionaries.SurgicalProcedureType
 {
-    public interface ISurgicalProcedureTypeService : IBaseDictionaryService<SSurgicalProcedureTypeDto, GetAllSSurgicalProcedureTypeInput>
+    public interface ISurgicalProcedureTypeService : IBaseDictionaryService<SSurgicalProcedureTypeDto, GetAllSSurgicalProcedureTypeInput, int>
     {
     }
 }

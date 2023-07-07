@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(HIS_DbContext))]
-    [Migration("20230702031526_Add-table")]
+    [Migration("20230707152820_Add-table")]
     partial class Addtable
     {
         /// <inheritdoc />
@@ -845,16 +845,14 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<int?>("SortOrder")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("SurgicalProcedureTypeId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("SurgicalProcedureTypeId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ServiceGroupHeInId");
 
                     b.HasIndex("ServiceGroupId");
-
-                    b.HasIndex("ServiceTypeId");
 
                     b.HasIndex("ServiceUnitId");
 
@@ -1104,57 +1102,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Name = "Khác",
                             SortOrder = 27
                         });
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SServiceType", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("DeleteBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("DeleteDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool?>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<Guid?>("ServiceUnitId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("SortOrder")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ServiceUnitId");
-
-                    b.ToTable("SServiceTypes", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SServiceUnit", b =>
@@ -1668,34 +1615,15 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SSurgicalProcedureType", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Code")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("DeleteBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("DeleteDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool?>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasMaxLength(500)
@@ -1711,59 +1639,59 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b169c6e5-fcf4-4170-ab03-9b150e34e478"),
-                            Code = "1",
+                            Id = 1,
+                            Code = "PTDB",
                             Name = "Phẫu thuật đặc biệt",
                             SortOrder = 1
                         },
                         new
                         {
-                            Id = new Guid("b5990c08-5e3c-44fc-83b5-14829d3b8f3c"),
-                            Code = "2",
+                            Id = 2,
+                            Code = "PT01",
                             Name = "Phẫu thuật loại 1",
                             SortOrder = 2
                         },
                         new
                         {
-                            Id = new Guid("19409b13-e324-49e1-aa24-e091a143a7ed"),
-                            Code = "3",
+                            Id = 3,
+                            Code = "PT02",
                             Name = "Phẫu thuật loại 2",
                             SortOrder = 3
                         },
                         new
                         {
-                            Id = new Guid("50e4deb7-35c0-4d71-81a2-00098a0213f9"),
-                            Code = "4",
+                            Id = 4,
+                            Code = "PT03",
                             Name = "Phẫu thuật loại 3",
                             SortOrder = 4
                         },
                         new
                         {
-                            Id = new Guid("afd4dbfe-7205-407d-b538-6492b10a8425"),
-                            Code = "5",
+                            Id = 5,
+                            Code = "TTDB",
                             Name = "Thủ thuật đặc biệt",
                             SortOrder = 5
                         },
                         new
                         {
-                            Id = new Guid("c3971f03-469f-4156-b0f7-89251f424523"),
-                            Code = "2",
+                            Id = 6,
+                            Code = "TT01",
                             Name = "Thủ thuật loại 1",
-                            SortOrder = 2
+                            SortOrder = 6
                         },
                         new
                         {
-                            Id = new Guid("080d3c9d-2dab-4e12-b4bc-dc9819e2295f"),
-                            Code = "3",
+                            Id = 7,
+                            Code = "TT02",
                             Name = "Thủ thuật loại 2",
-                            SortOrder = 3
+                            SortOrder = 7
                         },
                         new
                         {
-                            Id = new Guid("dec5adcc-d665-4ab3-95e5-4dc29694090c"),
-                            Code = "4",
+                            Id = 8,
+                            Code = "TT03",
                             Name = "Thủ thuật loại 3",
-                            SortOrder = 4
+                            SortOrder = 8
                         });
                 });
 
@@ -1902,8 +1830,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("DepartmentTypeId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("DepartmentTypeId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .HasMaxLength(512)
@@ -1942,20 +1870,16 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SDepartmentType", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasMaxLength(512)
@@ -1963,12 +1887,6 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1985,32 +1903,32 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("31471839-6881-4790-ac25-ebd775776dd0"),
-                            Code = "1",
+                            Id = 1,
+                            Code = "ClDe",
                             Inactive = false,
                             Name = "Khoa lâm sàng",
                             SortOrder = 1
                         },
                         new
                         {
-                            Id = new Guid("a32fac82-1e9c-4b36-b8e5-c3b5d9fb3c6d"),
-                            Code = "2",
+                            Id = 2,
+                            Code = "LaDe",
                             Inactive = false,
                             Name = "Khoa cận lâm sàng",
                             SortOrder = 2
                         },
                         new
                         {
-                            Id = new Guid("06c44348-2449-4bd7-8b5d-e32f4ed77972"),
-                            Code = "3",
+                            Id = 3,
+                            Code = "PhDe",
                             Inactive = false,
                             Name = "Khoa dược",
                             SortOrder = 3
                         },
                         new
                         {
-                            Id = new Guid("97ff5291-a914-4ae4-9bd6-1b79b7976598"),
-                            Code = "4",
+                            Id = 4,
+                            Code = "CoPl",
                             Inactive = false,
                             Name = "Kế hoạch tổng hợp",
                             SortOrder = 4
@@ -2478,8 +2396,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
 
-                    b.Property<Guid?>("RoomTypeId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("RoomTypeId")
+                        .HasColumnType("int");
 
                     b.Property<int?>("SortOrder")
                         .HasColumnType("int");
@@ -2495,20 +2413,16 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoomType", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasMaxLength(512)
@@ -2516,12 +2430,6 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -2538,104 +2446,104 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("060982d3-e1db-49c2-a8d0-10260f8134d6"),
-                            Code = "1",
+                            Id = 1,
+                            Code = "Rept",
                             Inactive = false,
                             Name = "Tiếp đón",
                             SortOrder = 1
                         },
                         new
                         {
-                            Id = new Guid("8c024a8d-801e-4c47-8ea3-1787c4427faa"),
-                            Code = "2",
+                            Id = 2,
+                            Code = "Admin",
                             Inactive = false,
                             Name = "Hành chính",
                             SortOrder = 2
                         },
                         new
                         {
-                            Id = new Guid("41d3fac7-c06d-4cc3-ae5d-b53dda3f0b98"),
-                            Code = "3",
+                            Id = 3,
+                            Code = "Exam",
                             Inactive = false,
                             Name = "Khám bệnh",
                             SortOrder = 3
                         },
                         new
                         {
-                            Id = new Guid("741cca23-aeb0-49a3-a8fa-d81415cd6824"),
-                            Code = "4",
+                            Id = 4,
+                            Code = "InTr",
                             Inactive = false,
                             Name = "Nội trú",
                             SortOrder = 4
                         },
                         new
                         {
-                            Id = new Guid("56c7c054-6713-4421-9acb-e57c911e0051"),
-                            Code = "5",
+                            Id = 5,
+                            Code = "OuTr",
                             Inactive = false,
                             Name = "Ngoại trú",
                             SortOrder = 5
                         },
                         new
                         {
-                            Id = new Guid("305eee25-13c6-408a-9235-af56fa091d28"),
-                            Code = "6",
+                            Id = 6,
+                            Code = "Test",
                             Inactive = false,
                             Name = "Xét nghiệm",
                             SortOrder = 6
                         },
                         new
                         {
-                            Id = new Guid("9d87caf2-7dbb-4f40-b989-a2fbd982eafe"),
-                            Code = "7",
+                            Id = 7,
+                            Code = "DiIm",
                             Inactive = false,
                             Name = "Chẩn đoán hình ảnh",
                             SortOrder = 7
                         },
                         new
                         {
-                            Id = new Guid("c64ebd18-4652-4fd9-bc54-9940de7d7bd9"),
-                            Code = "8",
+                            Id = 8,
+                            Code = "Cent",
                             Inactive = false,
                             Name = "Kho tổng",
                             SortOrder = 8
                         },
                         new
                         {
-                            Id = new Guid("fe5fc851-b118-46f7-8e06-e907fe7e6454"),
-                            Code = "9",
+                            Id = 9,
+                            Code = "OuPh",
                             Inactive = false,
                             Name = "Kho ngoại trú",
                             SortOrder = 9
                         },
                         new
                         {
-                            Id = new Guid("eae8827b-9fb8-4f90-b920-272523ed772b"),
-                            Code = "10",
+                            Id = 10,
+                            Code = "InPh",
                             Inactive = false,
                             Name = "Kho nội trú",
                             SortOrder = 10
                         },
                         new
                         {
-                            Id = new Guid("5d27feb2-7419-4853-bfec-f93a1b59d47e"),
-                            Code = "11",
+                            Id = 11,
+                            Code = "EmCa",
                             Inactive = false,
                             Name = "Tủ trực",
                             SortOrder = 11
                         },
                         new
                         {
-                            Id = new Guid("b1d4af6d-98ab-4a64-b362-60e857923e89"),
-                            Code = "12",
+                            Id = 12,
+                            Code = "MeMa",
                             Inactive = false,
                             Name = "Quản lý thuốc",
                             SortOrder = 12
                         },
                         new
                         {
-                            Id = new Guid("90a7d9d8-3c16-457d-81be-47fd30940be6"),
-                            Code = "13",
+                            Id = 13,
+                            Code = "MaMa",
                             Inactive = false,
                             Name = "Quản lý vật tư",
                             SortOrder = 13
@@ -2851,11 +2759,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasForeignKey("ServiceGroupId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SServiceType", "SServiceType")
-                        .WithMany("SServices")
-                        .HasForeignKey("ServiceTypeId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SServiceUnit", "SServiceUnit")
                         .WithMany("SServices")
                         .HasForeignKey("ServiceUnitId")
@@ -2870,21 +2773,9 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Navigation("SServiceGroupHeIn");
 
-                    b.Navigation("SServiceType");
-
                     b.Navigation("SServiceUnit");
 
                     b.Navigation("SSurgicalProcedureType");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SServiceType", b =>
-                {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SServiceUnit", "SServiceUnit")
-                        .WithMany("SServiceTypes")
-                        .HasForeignKey("ServiceUnitId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("SServiceUnit");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SToken", b =>
@@ -3075,11 +2966,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("SServices");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SServiceType", b =>
-                {
-                    b.Navigation("SServices");
-                });
-
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SServiceUnit", b =>
                 {
                     b.Navigation("SMaterialTypes");
@@ -3089,8 +2975,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("SMedicineTypes");
 
                     b.Navigation("SMedicines");
-
-                    b.Navigation("SServiceTypes");
 
                     b.Navigation("SServices");
                 });

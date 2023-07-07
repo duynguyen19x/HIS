@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HIS.Dtos.Dictionaries.RoomType
 {
-    public class SRoomTypeDto : EntityDto<Guid?>
+    public class SRoomTypeDto : EntityDto<int?>
     {
         public string Code { get; set; }
         public string Name { get; set; }

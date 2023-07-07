@@ -10,7 +10,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// <summary>
     /// Loại khoa.
     /// </summary>
-    public class SDepartmentType : AuditingEntity<Guid>
+    public class SDepartmentType : Entity<int>
     {
         public string Code { get; set; }
         public string Name { get; set; }

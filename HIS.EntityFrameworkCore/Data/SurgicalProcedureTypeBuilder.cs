@@ -17,58 +17,58 @@ namespace HIS.EntityFrameworkCore.Data
             modelBuilder.Entity<SSurgicalProcedureType>().HasData(
                      new SSurgicalProcedureType()
                      {
-                         Id = new Guid("B169C6E5-FCF4-4170-AB03-9B150E34E478"),
-                         Code = ((int)SurgicalProcedureTypes.SpecialSurgery).ToString(),
+                         Id = (int)SurgicalProcedureTypes.SpecialSurgery,
+                         Code = "PTDB",
                          Name = "Phẫu thuật đặc biệt",
                          SortOrder = (int)SurgicalProcedureTypes.SpecialSurgery
                      },
                      new SSurgicalProcedureType()
                      {
-                         Id = new Guid("B5990C08-5E3C-44FC-83B5-14829D3B8F3C"),
-                         Code = ((int)SurgicalProcedureTypes.TypeSurgery1).ToString(),
+                         Id = (int)SurgicalProcedureTypes.TypeSurgery1,
+                         Code = "PT01",
                          Name = "Phẫu thuật loại 1",
                          SortOrder = (int)SurgicalProcedureTypes.TypeSurgery1
                      },
                      new SSurgicalProcedureType()
                      {
-                         Id = new Guid("19409B13-E324-49E1-AA24-E091A143A7ED"),
-                         Code = ((int)SurgicalProcedureTypes.TypeSurgery2).ToString(),
+                         Id = (int)SurgicalProcedureTypes.TypeSurgery2,
+                         Code = "PT02",
                          Name = "Phẫu thuật loại 2",
                          SortOrder = (int)SurgicalProcedureTypes.TypeSurgery2
                      },
                      new SSurgicalProcedureType()
                      {
-                         Id = new Guid("50E4DEB7-35C0-4D71-81A2-00098A0213F9"),
-                         Code = ((int)SurgicalProcedureTypes.TypeSurgery3).ToString(),
+                         Id = (int)SurgicalProcedureTypes.TypeSurgery3,
+                         Code = "PT03",
                          Name = "Phẫu thuật loại 3",
                          SortOrder = (int)SurgicalProcedureTypes.TypeSurgery3
                      }, new SSurgicalProcedureType()
                      {
-                         Id = new Guid("AFD4DBFE-7205-407D-B538-6492B10A8425"),
-                         Code = ((int)SurgicalProcedureTypes.SpecialTrick).ToString(),
+                         Id = (int)SurgicalProcedureTypes.SpecialTrick,
+                         Code = "TTDB",
                          Name = "Thủ thuật đặc biệt",
                          SortOrder = (int)SurgicalProcedureTypes.SpecialTrick
                      },
                      new SSurgicalProcedureType()
                      {
-                         Id = new Guid("C3971F03-469F-4156-B0F7-89251F424523"),
-                         Code = ((int)SurgicalProcedureTypes.TypeSurgery1).ToString(),
+                         Id = (int)SurgicalProcedureTypes.TypeTrick1,
+                         Code = "TT01",
                          Name = "Thủ thuật loại 1",
-                         SortOrder = (int)SurgicalProcedureTypes.TypeSurgery1
+                         SortOrder = (int)SurgicalProcedureTypes.TypeTrick1
                      },
                      new SSurgicalProcedureType()
                      {
-                         Id = new Guid("080D3C9D-2DAB-4E12-B4BC-DC9819E2295F"),
-                         Code = ((int)SurgicalProcedureTypes.TypeSurgery2).ToString(),
+                         Id = (int)SurgicalProcedureTypes.TypeTrick2,
+                         Code = "TT02",
                          Name = "Thủ thuật loại 2",
-                         SortOrder = (int)SurgicalProcedureTypes.TypeSurgery2
+                         SortOrder = (int)SurgicalProcedureTypes.TypeTrick2
                      },
                      new SSurgicalProcedureType()
                      {
-                         Id = new Guid("DEC5ADCC-D665-4AB3-95E5-4DC29694090C"),
-                         Code = ((int)SurgicalProcedureTypes.TypeSurgery3).ToString(),
+                         Id = (int)SurgicalProcedureTypes.TypeTrick3,
+                         Code = "TT03",
                          Name = "Thủ thuật loại 3",
-                         SortOrder = (int)SurgicalProcedureTypes.TypeSurgery3
+                         SortOrder = (int)SurgicalProcedureTypes.TypeTrick3
                      });
         }
     }

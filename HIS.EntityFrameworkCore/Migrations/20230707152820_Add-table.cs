@@ -72,16 +72,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SDepartmentTypes",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: true),
-                    Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    Inactive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -265,16 +262,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SRoomTypes",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: true),
-                    Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    Inactive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -330,17 +324,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SSurgicalProcedureTypes",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Name = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    SortOrder = table.Column<int>(type: "int", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: true)
+                    SortOrder = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -443,7 +431,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     MohCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    DepartmentTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DepartmentTypeId = table.Column<int>(type: "int", nullable: true),
                     BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: true),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
@@ -566,15 +554,21 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SServiceTypes",
+                name: "SServices",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    HeInCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Name = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    HeInName = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: true),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
+                    ServiceTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ServiceUnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ServiceGroupId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ServiceGroupHeInId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    SurgicalProcedureTypeId = table.Column<int>(type: "int", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -585,11 +579,29 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SServiceTypes", x => x.Id);
+                    table.PrimaryKey("PK_SServices", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SServiceTypes_SServiceUnits_ServiceUnitId",
+                        name: "FK_SServices_SServiceGroupHeIns_ServiceGroupHeInId",
+                        column: x => x.ServiceGroupHeInId,
+                        principalTable: "SServiceGroupHeIns",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_SServices_SServiceGroups_ServiceGroupId",
+                        column: x => x.ServiceGroupId,
+                        principalTable: "SServiceGroups",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_SServices_SServiceUnits_ServiceUnitId",
                         column: x => x.ServiceUnitId,
                         principalTable: "SServiceUnits",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_SServices_SSurgicalProcedureTypes_SurgicalProcedureTypeId",
+                        column: x => x.SurgicalProcedureTypeId,
+                        principalTable: "SSurgicalProcedureTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -679,7 +691,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     MohCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
-                    RoomTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    RoomTypeId = table.Column<int>(type: "int", nullable: true),
                     DepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: true),
@@ -702,120 +714,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_SRooms_SRoomTypes_RoomTypeId",
                         column: x => x.RoomTypeId,
                         principalTable: "SRoomTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SServices",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    HeInCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    HeInName = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    SortOrder = table.Column<int>(type: "int", nullable: true),
-                    Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    ServiceTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ServiceUnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ServiceGroupId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ServiceGroupHeInId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    SurgicalProcedureTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SServices", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SServices_SServiceGroupHeIns_ServiceGroupHeInId",
-                        column: x => x.ServiceGroupHeInId,
-                        principalTable: "SServiceGroupHeIns",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_SServices_SServiceGroups_ServiceGroupId",
-                        column: x => x.ServiceGroupId,
-                        principalTable: "SServiceGroups",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_SServices_SServiceTypes_ServiceTypeId",
-                        column: x => x.ServiceTypeId,
-                        principalTable: "SServiceTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_SServices_SServiceUnits_ServiceUnitId",
-                        column: x => x.ServiceUnitId,
-                        principalTable: "SServiceUnits",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_SServices_SSurgicalProcedureTypes_SurgicalProcedureTypeId",
-                        column: x => x.SurgicalProcedureTypeId,
-                        principalTable: "SSurgicalProcedureTypes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SWards",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
-                    DistrictId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SWards", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SWards_SDistricts_DistrictId",
-                        column: x => x.DistrictId,
-                        principalTable: "SDistricts",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SExecutionRooms",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    RoomId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsMain = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SExecutionRooms", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SExecutionRooms_SRooms_RoomId",
-                        column: x => x.RoomId,
-                        principalTable: "SRooms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_SExecutionRooms_SServices_ServiceId",
-                        column: x => x.ServiceId,
-                        principalTable: "SServices",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -958,6 +856,61 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SWards",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
+                    DistrictId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    Inactive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDelete = table.Column<bool>(type: "bit", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SWards", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SWards_SDistricts_DistrictId",
+                        column: x => x.DistrictId,
+                        principalTable: "SDistricts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SExecutionRooms",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    RoomId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsMain = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SExecutionRooms", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SExecutionRooms_SRooms_RoomId",
+                        column: x => x.RoomId,
+                        principalTable: "SRooms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_SExecutionRooms_SServices_ServiceId",
+                        column: x => x.ServiceId,
+                        principalTable: "SServices",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SMaterials",
                 columns: table => new
                 {
@@ -1070,13 +1023,13 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             migrationBuilder.InsertData(
                 table: "SDepartmentTypes",
-                columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
+                columns: new[] { "Id", "Code", "Description", "Inactive", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("06c44348-2449-4bd7-8b5d-e32f4ed77972"), "3", null, null, null, false, null, null, "Khoa dược", 3 },
-                    { new Guid("31471839-6881-4790-ac25-ebd775776dd0"), "1", null, null, null, false, null, null, "Khoa lâm sàng", 1 },
-                    { new Guid("97ff5291-a914-4ae4-9bd6-1b79b7976598"), "4", null, null, null, false, null, null, "Kế hoạch tổng hợp", 4 },
-                    { new Guid("a32fac82-1e9c-4b36-b8e5-c3b5d9fb3c6d"), "2", null, null, null, false, null, null, "Khoa cận lâm sàng", 2 }
+                    { 1, "ClDe", null, false, "Khoa lâm sàng", 1 },
+                    { 2, "LaDe", null, false, "Khoa cận lâm sàng", 2 },
+                    { 3, "PhDe", null, false, "Khoa dược", 3 },
+                    { 4, "CoPl", null, false, "Kế hoạch tổng hợp", 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -1101,22 +1054,22 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             migrationBuilder.InsertData(
                 table: "SRoomTypes",
-                columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
+                columns: new[] { "Id", "Code", "Description", "Inactive", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("060982d3-e1db-49c2-a8d0-10260f8134d6"), "1", null, null, null, false, null, null, "Tiếp đón", 1 },
-                    { new Guid("305eee25-13c6-408a-9235-af56fa091d28"), "6", null, null, null, false, null, null, "Xét nghiệm", 6 },
-                    { new Guid("41d3fac7-c06d-4cc3-ae5d-b53dda3f0b98"), "3", null, null, null, false, null, null, "Khám bệnh", 3 },
-                    { new Guid("56c7c054-6713-4421-9acb-e57c911e0051"), "5", null, null, null, false, null, null, "Ngoại trú", 5 },
-                    { new Guid("5d27feb2-7419-4853-bfec-f93a1b59d47e"), "11", null, null, null, false, null, null, "Tủ trực", 11 },
-                    { new Guid("741cca23-aeb0-49a3-a8fa-d81415cd6824"), "4", null, null, null, false, null, null, "Nội trú", 4 },
-                    { new Guid("8c024a8d-801e-4c47-8ea3-1787c4427faa"), "2", null, null, null, false, null, null, "Hành chính", 2 },
-                    { new Guid("90a7d9d8-3c16-457d-81be-47fd30940be6"), "13", null, null, null, false, null, null, "Quản lý vật tư", 13 },
-                    { new Guid("9d87caf2-7dbb-4f40-b989-a2fbd982eafe"), "7", null, null, null, false, null, null, "Chẩn đoán hình ảnh", 7 },
-                    { new Guid("b1d4af6d-98ab-4a64-b362-60e857923e89"), "12", null, null, null, false, null, null, "Quản lý thuốc", 12 },
-                    { new Guid("c64ebd18-4652-4fd9-bc54-9940de7d7bd9"), "8", null, null, null, false, null, null, "Kho tổng", 8 },
-                    { new Guid("eae8827b-9fb8-4f90-b920-272523ed772b"), "10", null, null, null, false, null, null, "Kho nội trú", 10 },
-                    { new Guid("fe5fc851-b118-46f7-8e06-e907fe7e6454"), "9", null, null, null, false, null, null, "Kho ngoại trú", 9 }
+                    { 1, "Rept", null, false, "Tiếp đón", 1 },
+                    { 2, "Admin", null, false, "Hành chính", 2 },
+                    { 3, "Exam", null, false, "Khám bệnh", 3 },
+                    { 4, "InTr", null, false, "Nội trú", 4 },
+                    { 5, "OuTr", null, false, "Ngoại trú", 5 },
+                    { 6, "Test", null, false, "Xét nghiệm", 6 },
+                    { 7, "DiIm", null, false, "Chẩn đoán hình ảnh", 7 },
+                    { 8, "Cent", null, false, "Kho tổng", 8 },
+                    { 9, "OuPh", null, false, "Kho ngoại trú", 9 },
+                    { 10, "InPh", null, false, "Kho nội trú", 10 },
+                    { 11, "EmCa", null, false, "Tủ trực", 11 },
+                    { 12, "MeMa", null, false, "Quản lý thuốc", 12 },
+                    { 13, "MaMa", null, false, "Quản lý vật tư", 13 }
                 });
 
             migrationBuilder.InsertData(
@@ -1203,17 +1156,17 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             migrationBuilder.InsertData(
                 table: "SSurgicalProcedureTypes",
-                columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "DeleteBy", "DeleteDate", "IsDelete", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
+                columns: new[] { "Id", "Code", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("080d3c9d-2dab-4e12-b4bc-dc9819e2295f"), "3", null, null, null, null, null, null, null, "Thủ thuật loại 2", 3 },
-                    { new Guid("19409b13-e324-49e1-aa24-e091a143a7ed"), "3", null, null, null, null, null, null, null, "Phẫu thuật loại 2", 3 },
-                    { new Guid("50e4deb7-35c0-4d71-81a2-00098a0213f9"), "4", null, null, null, null, null, null, null, "Phẫu thuật loại 3", 4 },
-                    { new Guid("afd4dbfe-7205-407d-b538-6492b10a8425"), "5", null, null, null, null, null, null, null, "Thủ thuật đặc biệt", 5 },
-                    { new Guid("b169c6e5-fcf4-4170-ab03-9b150e34e478"), "1", null, null, null, null, null, null, null, "Phẫu thuật đặc biệt", 1 },
-                    { new Guid("b5990c08-5e3c-44fc-83b5-14829d3b8f3c"), "2", null, null, null, null, null, null, null, "Phẫu thuật loại 1", 2 },
-                    { new Guid("c3971f03-469f-4156-b0f7-89251f424523"), "2", null, null, null, null, null, null, null, "Thủ thuật loại 1", 2 },
-                    { new Guid("dec5adcc-d665-4ab3-95e5-4dc29694090c"), "4", null, null, null, null, null, null, null, "Thủ thuật loại 3", 4 }
+                    { 1, "PTDB", "Phẫu thuật đặc biệt", 1 },
+                    { 2, "PT01", "Phẫu thuật loại 1", 2 },
+                    { 3, "PT02", "Phẫu thuật loại 2", 3 },
+                    { 4, "PT03", "Phẫu thuật loại 3", 4 },
+                    { 5, "TTDB", "Thủ thuật đặc biệt", 5 },
+                    { 6, "TT01", "Thủ thuật loại 1", 6 },
+                    { 7, "TT02", "Thủ thuật loại 2", 7 },
+                    { 8, "TT03", "Thủ thuật loại 3", 8 }
                 });
 
             migrationBuilder.InsertData(
@@ -1367,11 +1320,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                 column: "ServiceGroupId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SServices_ServiceTypeId",
-                table: "SServices",
-                column: "ServiceTypeId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_SServices_ServiceUnitId",
                 table: "SServices",
                 column: "ServiceUnitId");
@@ -1380,11 +1328,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "IX_SServices_SurgicalProcedureTypeId",
                 table: "SServices",
                 column: "SurgicalProcedureTypeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SServiceTypes_ServiceUnitId",
-                table: "SServiceTypes",
-                column: "ServiceUnitId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_STokens_UserId",
@@ -1505,16 +1448,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SServiceGroups");
 
             migrationBuilder.DropTable(
-                name: "SServiceTypes");
+                name: "SServiceUnits");
 
             migrationBuilder.DropTable(
                 name: "SSurgicalProcedureTypes");
 
             migrationBuilder.DropTable(
                 name: "SCountries");
-
-            migrationBuilder.DropTable(
-                name: "SServiceUnits");
         }
     }
 }

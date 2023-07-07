@@ -14,7 +14,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public string MohCode { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public Guid? DepartmentTypeId { get; set; }
+        public int? DepartmentTypeId { get; set; }
         public Guid? BranchId { get; set; }
         public int? SortOrder { get; set; }
         public bool Inactive { get; set; }

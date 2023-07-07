@@ -27,7 +27,7 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpGet("GetById")]
-        public async Task<ApiResult<SRoomTypeDto>> GetById(Guid id)
+        public async Task<ApiResult<SRoomTypeDto>> GetById(int id)
         {
             return await _roomTypeService.GetById(id);
         }
@@ -39,7 +39,7 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpPost("Delete")]
-        public async Task<ApiResult<SRoomTypeDto>> Delete(Guid id)
+        public async Task<ApiResult<SRoomTypeDto>> Delete(int id)
         {
             return await _roomTypeService.Delete(id);
         }

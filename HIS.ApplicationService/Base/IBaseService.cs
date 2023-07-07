@@ -18,4 +18,14 @@ namespace HIS.ApplicationService
         Task<ApiResult<T>> CreateOrEdit(T input);
         Task<ApiResult<T>> Delete(Guid id);
     }
+
+    public interface IBaseService<T, U, TEntity>
+        where T : class
+        where U : class
+    {
+        Task<ApiResultList<T>> GetAll(U input);
+        Task<ApiResult<T>> GetById(TEntity id);
+        Task<ApiResult<T>> CreateOrEdit(T input);
+        Task<ApiResult<T>> Delete(TEntity id);
+    }
 }

@@ -11,6 +11,11 @@ namespace HIS.ApplicationService.Base
         where T : class
         where U : class
     {
-        //Task<ApiResult<T>> CheckCodeExists();
+    }
+
+    public interface IBaseDictionaryService<T, U, TEntity> : IBaseService<T, U, TEntity>
+      where T : class
+      where U : class
+    {
     }
 }

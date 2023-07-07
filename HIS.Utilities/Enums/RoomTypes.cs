@@ -43,9 +43,9 @@ namespace HIS.Utilities.Enums
         EmergencyCabinet,
 
         [Description("Quản lý thuốc")]
-        MedicationManagement,
+        MedicineManagement,
 
         [Description("Quản lý vật tư")]
-        MedicalManagement,
+        MaterialManagement,
     }
 }

@@ -38,7 +38,7 @@ namespace HIS.ApplicationService.Dictionaries.DepartmentType
             {
                 try
                 {
-                    input.Id = Guid.NewGuid();
+                    //input.Id = Guid.NewGuid();
                     var data = _mapper.Map<SDepartmentType>(input);
                     _dbContext.SDepartmentTypes.Add(data);
                     await _dbContext.SaveChangesAsync();
@@ -90,7 +90,7 @@ namespace HIS.ApplicationService.Dictionaries.DepartmentType
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SDepartmentTypeDto>> Delete(Guid id)
+        public async Task<ApiResult<SDepartmentTypeDto>> Delete(int id)
         {
             var result = new ApiResult<SDepartmentTypeDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
@@ -153,7 +153,7 @@ namespace HIS.ApplicationService.Dictionaries.DepartmentType
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SDepartmentTypeDto>> GetById(Guid id)
+        public async Task<ApiResult<SDepartmentTypeDto>> GetById(int id)
         {
             var result = new ApiResult<SDepartmentTypeDto>();
             var data = _dbContext.SDepartmentTypes.SingleOrDefault(s => s.Id == id);

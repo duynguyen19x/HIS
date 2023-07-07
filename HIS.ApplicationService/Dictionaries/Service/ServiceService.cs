@@ -281,10 +281,10 @@ namespace HIS.ApplicationService.Dictionaries.Service
 
             try
             {
-                var rommTypes = new List<string>()
+                var rommTypes = new List<int?>()
                 {
-                    ((int)RoomTypes.LaboratoryTesting).ToString(),
-                    ((int)RoomTypes.DiagnosticImaging).ToString(),
+                    (int?)RoomTypes.LaboratoryTesting,
+                    (int?)RoomTypes.DiagnosticImaging,
                 };
 
                 if (!GuidHelper.IsNullOrEmpty(id))
@@ -309,10 +309,10 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                                 }).OrderBy(s => s.PatientTypeCode).ToList();
 
                     var sExecutionRooms = (from room in _dbContext.SRooms
-                                           join roomType in _dbContext.SRoomTypes on room.RoomTypeId equals roomType.Id
+                                           //join roomType in _dbContext.SRoomTypes on room.RoomTypeId equals roomType.Id
                                            join exec in _dbContext.SExecutionRooms.Where(w => w.ServiceId == id) on room.Id equals exec.RoomId into SExecutionRooms
                                            from s in SExecutionRooms.DefaultIfEmpty()
-                                           where rommTypes.Contains(roomType.Code)
+                                           where rommTypes.Contains(room.RoomTypeId)
                                            select new SExecutionRoomDto()
                                            {
                                                Id = s != null ? s.Id : null,
@@ -341,9 +341,9 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                                 }).OrderBy(o => o.PatientTypeCode).ToList();
 
                     var sExecutionRooms = (from room in _dbContext.SRooms
-                                           join roomType in _dbContext.SRoomTypes on room.RoomTypeId equals roomType.Id
+                                           //join roomType in _dbContext.SRoomTypes on room.RoomTypeId equals roomType.Id
                                            where room.Inactive == false
-                                                && rommTypes.Contains(roomType.Code)
+                                                && rommTypes.Contains(room.RoomTypeId)
                                            select new SExecutionRoomDto()
                                            {
                                                RoomId = room.Id,

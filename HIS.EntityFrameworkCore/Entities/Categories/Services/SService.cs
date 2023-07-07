@@ -34,7 +34,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public Guid? ServiceUnitId { get; set; }
         public Guid? ServiceGroupId { get; set; }
         public Guid? ServiceGroupHeInId { get; set; }
-        public Guid? SurgicalProcedureTypeId { get; set; }
+        public int? SurgicalProcedureTypeId { get; set; }
 
         public SServiceUnit SServiceUnit { get; set; }
         //public SServiceType SServiceType { get; set; }

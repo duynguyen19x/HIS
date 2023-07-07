@@ -10,7 +10,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories.Services
     /// <summary>
     /// Loại phẫu thuật thủ thuật
     /// </summary>
-    public class SSurgicalProcedureType : FullAuditingEntity<Guid>
+    public class SSurgicalProcedureType : Entity<int>
     {
         public string Code { get; set; }
         public string Name { get; set; }

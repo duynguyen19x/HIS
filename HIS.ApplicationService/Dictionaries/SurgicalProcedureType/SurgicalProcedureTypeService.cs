@@ -25,7 +25,7 @@ namespace HIS.ApplicationService.Dictionaries.SurgicalProcedureType
             throw new NotImplementedException();
         }
 
-        public Task<ApiResult<SSurgicalProcedureTypeDto>> Delete(Guid id)
+        public Task<ApiResult<SSurgicalProcedureTypeDto>> Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -56,7 +56,7 @@ namespace HIS.ApplicationService.Dictionaries.SurgicalProcedureType
             return await Task.FromResult(result);
         }
 
-        public Task<ApiResult<SSurgicalProcedureTypeDto>> GetById(Guid id)
+        public Task<ApiResult<SSurgicalProcedureTypeDto>> GetById(int id)
         {
             throw new NotImplementedException();
         }

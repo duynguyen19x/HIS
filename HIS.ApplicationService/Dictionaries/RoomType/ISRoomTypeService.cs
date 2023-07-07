@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Dictionaries.RoomType
 {
-    public interface ISRoomTypeService : IBaseDictionaryService<SRoomTypeDto, GetAllSRoomTypeInput>
+    public interface ISRoomTypeService : IBaseDictionaryService<SRoomTypeDto, GetAllSRoomTypeInput, int>
     {
     }
 }

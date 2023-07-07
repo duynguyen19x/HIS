@@ -27,7 +27,7 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpGet("GetById")]
-        public async Task<ApiResult<SDepartmentTypeDto>> GetById(Guid id)
+        public async Task<ApiResult<SDepartmentTypeDto>> GetById(int id)
         {
             return await _departmentTypeService.GetById(id);
         }
@@ -39,7 +39,7 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpPost("Delete")]
-        public async Task<ApiResult<SDepartmentTypeDto>> Delete(Guid id)
+        public async Task<ApiResult<SDepartmentTypeDto>> Delete(int id)
         {
             return await _departmentTypeService.Delete(id);
         }

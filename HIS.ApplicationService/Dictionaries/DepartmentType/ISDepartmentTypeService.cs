@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Dictionaries.DepartmentType
 {
-    public interface ISDepartmentTypeService : IBaseDictionaryService<SDepartmentTypeDto, GetAllSDepartmentTypeInput>
+    public interface ISDepartmentTypeService : IBaseDictionaryService<SDepartmentTypeDto, GetAllSDepartmentTypeInput, int>
     {
     }
 }

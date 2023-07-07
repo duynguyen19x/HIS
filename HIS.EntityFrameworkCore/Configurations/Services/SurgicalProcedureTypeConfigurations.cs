@@ -16,6 +16,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Services
         {
             builder.ToTable("SSurgicalProcedureTypes");
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
 
             builder.Property(x => x.Code).HasMaxLength(50);
             builder.Property(x => x.Name).HasMaxLength(500);

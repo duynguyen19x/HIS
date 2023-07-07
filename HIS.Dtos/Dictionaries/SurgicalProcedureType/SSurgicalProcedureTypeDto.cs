@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HIS.Dtos.Dictionaries.SurgicalProcedureType
 {
-    public class SSurgicalProcedureTypeDto : EntityDto<Guid?>
+    public class SSurgicalProcedureTypeDto : EntityDto<int?>
     {
         public string Code { get; set; }
         public string Name { get; set; }

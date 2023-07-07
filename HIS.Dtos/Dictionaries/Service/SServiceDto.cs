@@ -25,11 +25,10 @@ namespace HIS.Dtos.Dictionaries.Service
 
         public bool Inactive { get; set; }
 
-        //public Guid? ServiceTypeId { get; set; }
         public Guid? ServiceUnitId { get; set; }
         public Guid? ServiceGroupId { get; set; }
         public Guid? ServiceGroupHeInId { get; set; }
-        public Guid? SurgicalProcedureTypeId { get; set; }
+        public int? SurgicalProcedureTypeId { get; set; }
 
         public string ServiceUnitCode { get; set; }
         public string ServiceUnitName { get; set; }
