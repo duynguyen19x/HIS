@@ -17,91 +17,91 @@ namespace HIS.EntityFrameworkCore.Data
                 new SRoomType()
                 {
                     Id = (int)RoomTypes.Reception,
-                    Code = "Rept",
+                    Code = "TD",
                     Name = "Tiếp đón",
                     SortOrder = (int)RoomTypes.Reception
                 },
                 new SRoomType()
                 {
                     Id = (int)RoomTypes.Administration,
-                    Code = "Admin",
+                    Code = "HC",
                     Name = "Hành chính",
                     SortOrder = (int)RoomTypes.Administration
                 },
                 new SRoomType()
                 {
                     Id = (int)RoomTypes.MedicalExamination,
-                    Code = "Exam",
+                    Code = "KHAM",
                     Name = "Khám bệnh",
                     SortOrder = (int)RoomTypes.MedicalExamination
                 },
                 new SRoomType()
                 {
                     Id = (int)RoomTypes.InpatientTreatment,
-                    Code = "InTr",
+                    Code = "NT",
                     Name = "Nội trú",
                     SortOrder = (int)RoomTypes.InpatientTreatment
                 },
                 new SRoomType()
                 {
                     Id = (int)RoomTypes.Outpatient,
-                    Code = "OuTr",
+                    Code = "NgT",
                     Name = "Ngoại trú",
                     SortOrder = (int)RoomTypes.Outpatient
                 },
                 new SRoomType()
                 {
                     Id = (int)RoomTypes.LaboratoryTesting,
-                    Code = "Test",
+                    Code = "XN",
                     Name = "Xét nghiệm",
                     SortOrder = (int)RoomTypes.LaboratoryTesting
                 },
                 new SRoomType()
                 {
                     Id = (int)RoomTypes.DiagnosticImaging,
-                    Code = "DiIm",
+                    Code = "CDHA",
                     Name = "Chẩn đoán hình ảnh",
                     SortOrder = (int)RoomTypes.DiagnosticImaging
                 },
                 new SRoomType()
                 {
                     Id = (int)RoomTypes.CentralWarehouse,
-                    Code = "Cent",
+                    Code = "KHO-TONG",
                     Name = "Kho tổng",
                     SortOrder = (int)RoomTypes.CentralWarehouse
                 },
                 new SRoomType()
                 {
                     Id = (int)RoomTypes.OutpatientPharmacy,
-                    Code = "OuPh",
+                    Code = "KHO-NgT",
                     Name = "Kho ngoại trú",
                     SortOrder = (int)RoomTypes.OutpatientPharmacy
                 },
                 new SRoomType()
                 {
                     Id = (int)RoomTypes.InpatientPharmacy,
-                    Code = "InPh",
+                    Code = "KHO-NT",
                     Name = "Kho nội trú",
                     SortOrder = (int)RoomTypes.InpatientPharmacy
                 },
                 new SRoomType()
                 {
                     Id = (int)RoomTypes.EmergencyCabinet,
-                    Code = "EmCa",
+                    Code = "TT",
                     Name = "Tủ trực",
                     SortOrder = (int)RoomTypes.EmergencyCabinet
                 },
                 new SRoomType()
                 {
                     Id = (int)RoomTypes.MedicineManagement,
-                    Code = "MeMa",
+                    Code = "QLT",
                     Name = "Quản lý thuốc",
                     SortOrder = (int)RoomTypes.MedicineManagement
                 },
                 new SRoomType()
                 {
                     Id = (int)RoomTypes.MaterialManagement,
-                    Code = "MaMa",
+                    Code = "QLVT",
                     Name = "Quản lý vật tư",
                     SortOrder = (int)RoomTypes.MaterialManagement
                 });

@@ -27,6 +27,9 @@ namespace HIS.Utilities.Enums
         [Description("Giải phẫu bệnh lý")]
         PathologicalAnatomy,
 
+        [Description("Xét nghiệm khác")]
+        TestOther,
+
         [Description("Phẫu thuật")]
         Surgery,
 

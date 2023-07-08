@@ -251,7 +251,6 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                      ServiceGroupId = r.ServiceGroupId,
                                      ServiceGroupHeInId = r.ServiceGroupId,
                                      ServiceUnitId = r.ServiceUnitId,
-                                     //ServiceTypeId = r.ServiceTypeId,
                                      SurgicalProcedureTypeId = r.SurgicalProcedureTypeId,
 
                                      ServiceUnitCode = r1.Code,

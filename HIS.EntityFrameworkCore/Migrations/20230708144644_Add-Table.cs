@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     /// <inheritdoc />
-    public partial class Addtable : Migration
+    public partial class AddTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -1026,10 +1026,10 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "Description", "Inactive", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { 1, "ClDe", null, false, "Khoa lâm sàng", 1 },
-                    { 2, "LaDe", null, false, "Khoa cận lâm sàng", 2 },
-                    { 3, "PhDe", null, false, "Khoa dược", 3 },
-                    { 4, "CoPl", null, false, "Kế hoạch tổng hợp", 4 }
+                    { 1, "LS", null, false, "Khoa lâm sàng", 1 },
+                    { 2, "CLS", null, false, "Khoa cận lâm sàng", 2 },
+                    { 3, "DUOC", null, false, "Khoa dược", 3 },
+                    { 4, "KHTH", null, false, "Kế hoạch tổng hợp", 4 }
                 });
 
             migrationBuilder.InsertData(
@@ -1037,9 +1037,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"), "0", null, null, null, false, null, null, "Chưa xác định", 0 },
-                    { new Guid("e9497984-d355-41af-b917-091500956be9"), "2", null, null, null, false, null, null, "Nữ", 2 },
-                    { new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"), "1", null, null, null, false, null, null, "Nam", 1 }
+                    { new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"), "KXD", null, null, null, false, null, null, "Chưa xác định", 0 },
+                    { new Guid("e9497984-d355-41af-b917-091500956be9"), "NU", null, null, null, false, null, null, "Nữ", 2 },
+                    { new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"), "NAM", null, null, null, false, null, null, "Nam", 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -1057,19 +1057,19 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "Description", "Inactive", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { 1, "Rept", null, false, "Tiếp đón", 1 },
-                    { 2, "Admin", null, false, "Hành chính", 2 },
-                    { 3, "Exam", null, false, "Khám bệnh", 3 },
-                    { 4, "InTr", null, false, "Nội trú", 4 },
-                    { 5, "OuTr", null, false, "Ngoại trú", 5 },
-                    { 6, "Test", null, false, "Xét nghiệm", 6 },
-                    { 7, "DiIm", null, false, "Chẩn đoán hình ảnh", 7 },
-                    { 8, "Cent", null, false, "Kho tổng", 8 },
-                    { 9, "OuPh", null, false, "Kho ngoại trú", 9 },
-                    { 10, "InPh", null, false, "Kho nội trú", 10 },
-                    { 11, "EmCa", null, false, "Tủ trực", 11 },
-                    { 12, "MeMa", null, false, "Quản lý thuốc", 12 },
-                    { 13, "MaMa", null, false, "Quản lý vật tư", 13 }
+                    { 1, "TD", null, false, "Tiếp đón", 1 },
+                    { 2, "HC", null, false, "Hành chính", 2 },
+                    { 3, "KHAM", null, false, "Khám bệnh", 3 },
+                    { 4, "NT", null, false, "Nội trú", 4 },
+                    { 5, "NgT", null, false, "Ngoại trú", 5 },
+                    { 6, "XN", null, false, "Xét nghiệm", 6 },
+                    { 7, "CDHA", null, false, "Chẩn đoán hình ảnh", 7 },
+                    { 8, "KHO-TONG", null, false, "Kho tổng", 8 },
+                    { 9, "KHO-NgT", null, false, "Kho ngoại trú", 9 },
+                    { 10, "KHO-NT", null, false, "Kho nội trú", 10 },
+                    { 11, "TT", null, false, "Tủ trực", 11 },
+                    { 12, "QLT", null, false, "Quản lý thuốc", 12 },
+                    { 13, "QLVT", null, false, "Quản lý vật tư", 13 }
                 });
 
             migrationBuilder.InsertData(
@@ -1077,25 +1077,25 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "Inactive", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("156ec951-453d-4e3f-800e-33f850942874"), "15", false, "Giường điều trị nội trú", 15 },
-                    { new Guid("199b0c88-0ef5-475c-a426-c0547cd13443"), "18", false, "Thủ thuật", 18 },
-                    { new Guid("22048fa7-a9e4-4ac7-89a6-e9e34e4811b4"), "16", false, "Ngày giường lưu", 16 },
-                    { new Guid("45e3f5de-4096-4944-a6b6-69b829b0f61f"), "1", false, "Xét nghiệm", 1 },
-                    { new Guid("53bf47c7-1414-47cf-8c88-5ba96aa2c978"), "6", false, "Thuốc thanh toán theo tỷ lệ", 6 },
+                    { new Guid("156ec951-453d-4e3f-800e-33f850942874"), "GI-NT", false, "Giường điều trị nội trú", 15 },
+                    { new Guid("199b0c88-0ef5-475c-a426-c0547cd13443"), "TT", false, "Thủ thuật", 18 },
+                    { new Guid("22048fa7-a9e4-4ac7-89a6-e9e34e4811b4"), "GI-LUU", false, "Ngày giường lưu", 16 },
+                    { new Guid("45e3f5de-4096-4944-a6b6-69b829b0f61f"), "XN", false, "Xét nghiệm", 1 },
+                    { new Guid("53bf47c7-1414-47cf-8c88-5ba96aa2c978"), "THUOC-TT", false, "Thuốc thanh toán theo tỷ lệ", 6 },
                     { new Guid("675d16db-cd35-4229-b042-82aef4718aff"), "14", false, "Giường điều trị ngoại trú", 14 },
-                    { new Guid("75b2f46f-f841-4cbe-9513-93c44306e78e"), "13", false, "Khám bệnh", 13 },
-                    { new Guid("7802d629-9e6a-48a7-825c-c91f530785ac"), "17", false, "Chế phẩm máu", 17 },
-                    { new Guid("7a871ff7-c167-4fc8-b652-0aa2ecd72444"), "3", false, "Thăm dò chức năng", 3 },
-                    { new Guid("7c84bd56-f322-477c-b64d-50655cbc06e5"), "9", false, "DVKT thanh toán theo tỷ lệ", 9 },
-                    { new Guid("7d39f21a-3f78-4c5a-b288-02532a9769d7"), "4", false, "Thuốc trong danh mục BHYT", 4 },
-                    { new Guid("81a882db-d465-402f-a391-d3726d698950"), "12", false, "Vận chuyển", 12 },
-                    { new Guid("8868dfd1-fbc7-40c2-83b1-cb0f894cf566"), "11", false, "VTYT thanh toán theo tỷ lệ", 11 },
-                    { new Guid("8a360961-1c49-4382-a7ce-ce70358ae25a"), "10", false, "Vật tư y tế trong danh mục BHYT", 10 },
-                    { new Guid("8a6eee59-ecb3-4bea-89cd-1a83b2d8edd6"), "7", false, "Máu và chế phẩm máu", 7 },
-                    { new Guid("8c7964ad-f476-4009-a630-a14de7f982d6"), "8", false, "Phẫu thuật", 8 },
-                    { new Guid("90adcfc5-7518-46e2-995f-d304c31583b5"), "5", false, "Thuốc điều trị ung thư, chống thải ghép ngoài danh mục", 5 },
-                    { new Guid("b2e25f8f-ea5b-4255-b2d8-379bd50a5160"), "2", false, "Chẩn đoán hình ảnh", 2 },
-                    { new Guid("dc75e4bb-6e85-4a90-ae29-112b7d2873f9"), "19", false, "Vật tư y tế ngoài danh mục BHYT", 19 }
+                    { new Guid("75b2f46f-f841-4cbe-9513-93c44306e78e"), "KHAM", false, "Khám bệnh", 13 },
+                    { new Guid("7802d629-9e6a-48a7-825c-c91f530785ac"), "CPM", false, "Chế phẩm máu", 17 },
+                    { new Guid("7a871ff7-c167-4fc8-b652-0aa2ecd72444"), "TDCN", false, "Thăm dò chức năng", 3 },
+                    { new Guid("7c84bd56-f322-477c-b64d-50655cbc06e5"), "DVKT-TL", false, "DVKT thanh toán theo tỷ lệ", 9 },
+                    { new Guid("7d39f21a-3f78-4c5a-b288-02532a9769d7"), "THUOC-BHYT", false, "Thuốc trong danh mục BHYT", 4 },
+                    { new Guid("81a882db-d465-402f-a391-d3726d698950"), "VC", false, "Vận chuyển", 12 },
+                    { new Guid("8868dfd1-fbc7-40c2-83b1-cb0f894cf566"), "VTYT-TT", false, "VTYT thanh toán theo tỷ lệ", 11 },
+                    { new Guid("8a360961-1c49-4382-a7ce-ce70358ae25a"), "VTYT-BHYT", false, "Vật tư y tế trong danh mục BHYT", 10 },
+                    { new Guid("8a6eee59-ecb3-4bea-89cd-1a83b2d8edd6"), "MAU", false, "Máu", 7 },
+                    { new Guid("8c7964ad-f476-4009-a630-a14de7f982d6"), "PT", false, "Phẫu thuật", 8 },
+                    { new Guid("90adcfc5-7518-46e2-995f-d304c31583b5"), "THUOC-NgBHYT", false, "Thuốc điều trị ung thư, chống thải ghép ngoài danh mục", 5 },
+                    { new Guid("b2e25f8f-ea5b-4255-b2d8-379bd50a5160"), "CDHA", false, "Chẩn đoán hình ảnh", 2 },
+                    { new Guid("dc75e4bb-6e85-4a90-ae29-112b7d2873f9"), "VTYT-NgBHYT", false, "Vật tư y tế ngoài danh mục BHYT", 19 }
                 });
 
             migrationBuilder.InsertData(
@@ -1103,33 +1103,34 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "Inactive", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("0711132b-d3a9-46d1-9ee1-74154facef37"), "16", false, "Cộng hưởng từ", 16 },
-                    { new Guid("0a5a8dc0-67a7-41e9-8fb3-1f5e6f8d874d"), "27", false, "Khác", 27 },
-                    { new Guid("0ddd75be-a32c-47f2-b5f1-5138b5997791"), "12", false, "Thủ thuật", 12 },
-                    { new Guid("12105142-6179-41c2-a56c-5364a2b852f5"), "20", false, "Suất ăn", 20 },
-                    { new Guid("1219fe7a-cecb-4a94-8fdc-2f6d0f48fbc9"), "9", false, "Điện não đồ", 9 },
-                    { new Guid("17819944-bc22-47c5-afc3-108881fd5714"), "14", false, "XQuang thường", 14 },
-                    { new Guid("1fd09e01-450a-43ce-8bf4-c32aee87753d"), "21", false, "Máu", 21 },
-                    { new Guid("33dd59d7-ab44-47fe-8b21-8500bf6e6cee"), "2", false, "Xét nghiệm sinh hóa", 2 },
-                    { new Guid("3b082a29-237d-4926-8209-f2876d292189"), "26", false, "Vận chuyển", 26 },
-                    { new Guid("3b3ded9e-71ab-4d31-868c-a704d0604509"), "11", false, "Phục hồi chức năng", 11 },
-                    { new Guid("401dbb33-3eb1-44ae-8b3f-51e25996c311"), "8", false, "Khám", 8 },
-                    { new Guid("4be0ad49-ac80-4a2b-9a92-03b3ffd4f3b6"), "17", false, "Cắt lớp vi tính", 17 },
-                    { new Guid("8878fb20-578e-46a6-8f61-62789c234bde"), "4", false, "Xét nghiệm nước tiểu", 4 },
-                    { new Guid("906307b7-f7e2-457a-a3d1-62a10ba9daa3"), "10", false, "Điện tâm đồ", 10 },
-                    { new Guid("914b8e89-4c56-4998-9707-def10fd23fbb"), "18", false, "Siêu âm thường", 18 },
-                    { new Guid("9414782a-9194-4801-91a0-253963a605eb"), "5", false, "Dịch chọc dò", 5 },
-                    { new Guid("964200b8-4ae6-434d-a461-909391444b40"), "23", false, "Vật tư", 23 },
-                    { new Guid("998836b2-3b5b-4c1c-9b4b-7f6cc1e52b74"), "25", false, "Giường", 25 },
-                    { new Guid("9f474388-e722-4ad2-b194-8a7d8def97fd"), "13", false, "Nội soi", 13 },
-                    { new Guid("a080ecaa-6cd6-459d-a450-d89351e0904d"), "1", false, "Xét nghiệm huyết học", 1 },
-                    { new Guid("a13fa2cd-851c-4e89-a8ca-bdacee567757"), "3", false, "Xét nghiệm vi sinh", 3 },
-                    { new Guid("b4573fb1-32a6-45e3-9782-07066d090a5c"), "24", false, "Thuốc", 24 },
-                    { new Guid("d4837941-9cc1-4f53-84f7-3e99edc8f508"), "6", false, "Giải phẫu bệnh lý", 6 },
-                    { new Guid("da2f4b6d-fd50-4cab-bebd-319458064222"), "22", false, "Chế phẩm máu", 22 },
-                    { new Guid("e43040fc-0e85-436c-8537-5c18e29f61da"), "19", false, "Siêu âm màu", 19 },
-                    { new Guid("e70f016c-39e7-4ded-aa20-9bffd9fadd59"), "7", false, "Phẫu thuật", 7 },
-                    { new Guid("ff0073ef-be7c-46e1-adc3-99e58871f5c6"), "15", false, "XQuang kỹ thuật số", 15 }
+                    { new Guid("0711132b-d3a9-46d1-9ee1-74154facef37"), "CDHA-MRI", false, "Cộng hưởng từ", 17 },
+                    { new Guid("0a5a8dc0-67a7-41e9-8fb3-1f5e6f8d874d"), "KHAC", false, "Khác", 28 },
+                    { new Guid("0ddd75be-a32c-47f2-b5f1-5138b5997791"), "TT", false, "Thủ thuật", 13 },
+                    { new Guid("12105142-6179-41c2-a56c-5364a2b852f5"), "SA", false, "Suất ăn", 21 },
+                    { new Guid("1219fe7a-cecb-4a94-8fdc-2f6d0f48fbc9"), "TDCN-DND", false, "Điện não đồ", 10 },
+                    { new Guid("17819944-bc22-47c5-afc3-108881fd5714"), "CDHA-XQ", false, "XQuang thường", 15 },
+                    { new Guid("1fd09e01-450a-43ce-8bf4-c32aee87753d"), "MAU", false, "Máu", 22 },
+                    { new Guid("33dd59d7-ab44-47fe-8b21-8500bf6e6cee"), "XN-HS", false, "Xét nghiệm hóa sinh", 2 },
+                    { new Guid("3b082a29-237d-4926-8209-f2876d292189"), "VC", false, "Vận chuyển", 27 },
+                    { new Guid("3b3ded9e-71ab-4d31-868c-a704d0604509"), "TDCN", false, "Phục hồi chức năng", 12 },
+                    { new Guid("401dbb33-3eb1-44ae-8b3f-51e25996c311"), "KH", false, "Khám", 9 },
+                    { new Guid("4be0ad49-ac80-4a2b-9a92-03b3ffd4f3b6"), "CDHA-CT", false, "Cắt lớp vi tính", 18 },
+                    { new Guid("8878fb20-578e-46a6-8f61-62789c234bde"), "XN-NT", false, "Xét nghiệm nước tiểu", 4 },
+                    { new Guid("906307b7-f7e2-457a-a3d1-62a10ba9daa3"), "TDCN-DTD", false, "Điện tâm đồ", 11 },
+                    { new Guid("914b8e89-4c56-4998-9707-def10fd23fbb"), "CDHA-SA", false, "Siêu âm thường", 19 },
+                    { new Guid("9414782a-9194-4801-91a0-253963a605eb"), "XN-DCD", false, "Dịch chọc dò", 5 },
+                    { new Guid("964200b8-4ae6-434d-a461-909391444b40"), "VTYT", false, "Vật tư", 24 },
+                    { new Guid("998836b2-3b5b-4c1c-9b4b-7f6cc1e52b74"), "GI", false, "Giường", 26 },
+                    { new Guid("9b9dfabb-abf9-4fea-b17a-6b5f2c3c01b1"), "7", false, "Xét nghiệm khác", 7 },
+                    { new Guid("9f474388-e722-4ad2-b194-8a7d8def97fd"), "CDHA-NS", false, "Nội soi", 14 },
+                    { new Guid("a080ecaa-6cd6-459d-a450-d89351e0904d"), "XN-HH", false, "Xét nghiệm huyết học", 1 },
+                    { new Guid("a13fa2cd-851c-4e89-a8ca-bdacee567757"), "XN-VS", false, "Xét nghiệm vi sinh", 3 },
+                    { new Guid("b4573fb1-32a6-45e3-9782-07066d090a5c"), "THUOC", false, "Thuốc", 25 },
+                    { new Guid("d4837941-9cc1-4f53-84f7-3e99edc8f508"), "XN-GPB", false, "Giải phẫu bệnh lý", 6 },
+                    { new Guid("da2f4b6d-fd50-4cab-bebd-319458064222"), "CPM", false, "Chế phẩm máu", 23 },
+                    { new Guid("e43040fc-0e85-436c-8537-5c18e29f61da"), "CDHA-Doppler", false, "Siêu âm màu", 20 },
+                    { new Guid("e70f016c-39e7-4ded-aa20-9bffd9fadd59"), "PT", false, "Phẫu thuật", 8 },
+                    { new Guid("ff0073ef-be7c-46e1-adc3-99e58871f5c6"), "CDHA-KTS", false, "XQuang kỹ thuật số", 16 }
                 });
 
             migrationBuilder.InsertData(
@@ -1138,20 +1139,20 @@ namespace HIS.EntityFrameworkCore.Migrations
                 values: new object[,]
                 {
                     { new Guid("0762aebf-cbb8-4102-b923-a30df490f75d"), "6", false, "Hộp", 6 },
-                    { new Guid("2198d1c0-57fa-453f-b605-9cef55929067"), "9", false, "Cuộn", 9 },
-                    { new Guid("3be8bc27-3940-451c-87f5-c062df716872"), "12", false, "Gam", 12 },
-                    { new Guid("44ab6ffc-f1a9-47d0-90ab-9f09d767c286"), "5", false, "Ống", 5 },
-                    { new Guid("49793db4-c0ce-43c1-b439-eacd554fa06e"), "14", false, "Met", 14 },
-                    { new Guid("6cc9258a-5f48-4c22-8cd6-61c0795f5405"), "2", false, "Lần", 2 },
-                    { new Guid("7a0fed4a-e62a-4e9f-8e92-7332127ca248"), "7", false, "Tub", 7 },
+                    { new Guid("2198d1c0-57fa-453f-b605-9cef55929067"), "CUON", false, "Cuộn", 9 },
+                    { new Guid("3be8bc27-3940-451c-87f5-c062df716872"), "GAM", false, "Gam", 12 },
+                    { new Guid("44ab6ffc-f1a9-47d0-90ab-9f09d767c286"), "ONG", false, "Ống", 5 },
+                    { new Guid("49793db4-c0ce-43c1-b439-eacd554fa06e"), "MET", false, "Met", 14 },
+                    { new Guid("6cc9258a-5f48-4c22-8cd6-61c0795f5405"), "LAN", false, "Lần", 2 },
+                    { new Guid("7a0fed4a-e62a-4e9f-8e92-7332127ca248"), "TUB", false, "Tub", 7 },
                     { new Guid("9e12370e-b3ce-4862-8e7d-83d8f7ec56d1"), "11", false, "Lít", 11 },
-                    { new Guid("9ff4f404-68bd-4780-99bc-1033227cbe3d"), "8", false, "Gói", 8 },
-                    { new Guid("a7e37e54-47b8-4716-b493-b657d4981e35"), "15", false, "Minimet", 9 },
-                    { new Guid("ae0ece26-bb4c-4b23-95cb-1a5d66114634"), "3", false, "Lọ", 3 },
-                    { new Guid("bf42cbf7-b5ac-4503-b73d-d91f4051fa8f"), "10", false, "ml", 10 },
-                    { new Guid("c587599c-a6a6-454f-8e30-2a92dac6f588"), "1", false, "Viên", 1 },
-                    { new Guid("cc8713c1-536a-4835-bd7e-187603566f95"), "13", false, "Kg", 13 },
-                    { new Guid("da514a31-4dfc-4445-99bd-4ae29359ad48"), "4", false, "Tuýt", 4 }
+                    { new Guid("9ff4f404-68bd-4780-99bc-1033227cbe3d"), "GOI", false, "Gói", 8 },
+                    { new Guid("a7e37e54-47b8-4716-b493-b657d4981e35"), "MINI", false, "Minimet", 15 },
+                    { new Guid("ae0ece26-bb4c-4b23-95cb-1a5d66114634"), "LO", false, "Lọ", 3 },
+                    { new Guid("bf42cbf7-b5ac-4503-b73d-d91f4051fa8f"), "ML", false, "ml", 10 },
+                    { new Guid("c587599c-a6a6-454f-8e30-2a92dac6f588"), "VIEN", false, "Viên", 1 },
+                    { new Guid("cc8713c1-536a-4835-bd7e-187603566f95"), "KG", false, "Kg", 13 },
+                    { new Guid("da514a31-4dfc-4445-99bd-4ae29359ad48"), "TUYT", false, "Tuýt", 4 }
                 });
 
             migrationBuilder.InsertData(
