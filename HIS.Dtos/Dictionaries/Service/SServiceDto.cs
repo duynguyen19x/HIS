@@ -1,6 +1,7 @@
 ﻿using HIS.Dtos.Base;
 using HIS.Dtos.Dictionaries.ExecutionRoom;
 using HIS.Dtos.Dictionaries.ServicePricePolicy;
+using HIS.Dtos.Dictionaries.ServiceResultIndex;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,7 +40,8 @@ namespace HIS.Dtos.Dictionaries.Service
         public string ServiceGroupHeInName { get; set; }
         public string SurgicalProcedureTypeCode { get; set; }
 
-        public IList<SServicePricePolicyDto> ServicePricePolicies { get; set; } 
-        public IList<SExecutionRoomDto> ExecutionRooms { get; set; } 
+        public IList<SServicePricePolicyDto> SServicePricePolicies { get; set; }
+        public IList<SExecutionRoomDto> SExecutionRooms { get; set; }
+        public IList<SServiceResultIndiceDto> SServiceResultIndices { get; set; }
     }
 }

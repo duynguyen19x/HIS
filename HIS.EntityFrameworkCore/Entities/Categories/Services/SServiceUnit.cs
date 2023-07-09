@@ -21,7 +21,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
 
         public bool Inactive { get; set; }
 
-        //public IList<SServiceType> SServiceTypes { get; set; }
         public IList<SService> SServices { get; set; }
         public IList<SMedicineType> SMedicineTypes { get; set; }
         public IList<SMedicine> SMedicines { get; set; }

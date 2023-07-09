@@ -4,6 +4,7 @@ using HIS.EntityFrameworkCore.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(HIS_DbContext))]
-    partial class HIS_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20230709060404_Update-Table")]
+    partial class UpdateTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1615,52 +1618,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.ToTable("SServicePricePolicies", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SServiceResultIndice", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<decimal?>("FemaleFrom")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal?>("FemaleTo")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal?>("MaleFrom")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal?>("MaleTo")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("SServiceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ServiceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("SortOrder")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Unit")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SServiceId");
-
-                    b.ToTable("SServiceResultIndices");
-                });
-
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SSurgicalProcedureType", b =>
                 {
                     b.Property<int>("Id")
@@ -2872,15 +2829,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("SService");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SServiceResultIndice", b =>
-                {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SService", "SService")
-                        .WithMany("SServiceResultIndices")
-                        .HasForeignKey("SServiceId");
-
-                    b.Navigation("SService");
-                });
-
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SDepartment", b =>
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SBranch", "SBranch")
@@ -3016,8 +2964,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("SMedicines");
 
                     b.Navigation("SServicePricePolicies");
-
-                    b.Navigation("SServiceResultIndices");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SServiceGroup", b =>

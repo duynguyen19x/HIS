@@ -18,6 +18,7 @@ using HIS.Dtos.Dictionaries.Service;
 using HIS.Dtos.Dictionaries.ServiceGroup;
 using HIS.Dtos.Dictionaries.ServiceGroupHeIn;
 using HIS.Dtos.Dictionaries.ServicePricePolicy;
+using HIS.Dtos.Dictionaries.ServiceResultIndex;
 using HIS.Dtos.Dictionaries.ServiceUnit;
 using HIS.Dtos.Dictionaries.Ward;
 using HIS.Dtos.Systems.Role;
@@ -50,7 +51,7 @@ namespace HIS.AutoMappers
             CreateMap<SRoomDto, SRoom>()
                 .ForMember(dest => dest.SRoomType, opt => opt.Ignore())
                 .ForMember(dest => dest.SDepartment, opt => opt.Ignore())
-                .ForMember(dest => dest.ExecutionRooms, opt => opt.Ignore())
+                .ForMember(dest => dest.SExecutionRooms, opt => opt.Ignore())
                 .ReverseMap();
             CreateMap<SRoomTypeDto, SRoomType>()
                 .ForMember(dest => dest.SRooms, opt => opt.Ignore())
@@ -66,7 +67,6 @@ namespace HIS.AutoMappers
                 .ReverseMap();
             CreateMap<SServiceDto, SService>()
                  .ForMember(dest => dest.SServiceUnit, opt => opt.Ignore())
-                 //.ForMember(dest => dest.SServiceType, opt => opt.Ignore())
                  .ForMember(dest => dest.SServiceGroup, opt => opt.Ignore())
                  .ForMember(dest => dest.SSurgicalProcedureType, opt => opt.Ignore())
                  .ForMember(dest => dest.SMedicineTypes, opt => opt.Ignore())
@@ -74,17 +74,22 @@ namespace HIS.AutoMappers
                  .ForMember(dest => dest.SMaterials, opt => opt.Ignore())
                  .ForMember(dest => dest.SMaterialTypes, opt => opt.Ignore())
                  .ForMember(dest => dest.SServicePricePolicies, opt => opt.Ignore())
-                 .ForMember(dest => dest.ExecutionRooms, opt => opt.Ignore())
+                 .ForMember(dest => dest.SExecutionRooms, opt => opt.Ignore())
+                 .ForMember(dest => dest.SServiceResultIndices, opt => opt.Ignore())
                 .ReverseMap();
             CreateMap<SServicePricePolicyDto, SServicePricePolicy>()
-                .ForMember(dest => dest.PatientType, opt => opt.Ignore())
+                .ForMember(dest => dest.SPatientType, opt => opt.Ignore())
                 .ForMember(dest => dest.SService, opt => opt.Ignore())
                 .ReverseMap();
 
             CreateMap<SExecutionRoomDto, SExecutionRoom>()
-                .ForMember(dest => dest.Service, opt => opt.Ignore())
-                .ForMember(dest => dest.Room, opt => opt.Ignore())
+                .ForMember(dest => dest.SService, opt => opt.Ignore())
+                .ForMember(dest => dest.SRoom, opt => opt.Ignore())
                 .ReverseMap();
+
+            CreateMap<SServiceResultIndiceDto, SServiceResultIndice>()
+             .ForMember(dest => dest.SService, opt => opt.Ignore())
+             .ReverseMap();
         }
     }
 }

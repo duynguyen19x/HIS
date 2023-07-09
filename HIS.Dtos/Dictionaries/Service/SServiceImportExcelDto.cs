@@ -13,7 +13,7 @@ namespace HIS.Dtos.Dictionaries.Service
         public decimal PeoplePrice { get; set; }
         public decimal PaymentRate { get; set; }
         public decimal CeilingPrice { get; set; }
-        public DateTime? ExecutionTime { get; set; }
+        public string ExecutionTimeString { get; set; }
         public string ExecutionRoomCode { get; set; }
     }
 }

@@ -36,6 +36,6 @@ namespace HIS.EntityFrameworkCore.BaseEntitys
 
         public Guid? DeleteBy { get; set; }
 
-        public bool? IsDelete { get; set; }
+        public bool IsDelete { get; set; }
     }
 }

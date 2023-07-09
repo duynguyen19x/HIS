@@ -17,7 +17,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Services
             builder.ToTable("SServicePricePolicies");
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(t => t.PatientType)
+            builder.HasOne(t => t.SPatientType)
                 .WithMany(pc => pc.SServicePricePolicies)
                 .HasForeignKey(pc => pc.PatientTypeId)
                 .OnDelete(DeleteBehavior.Restrict);

@@ -86,7 +86,6 @@ namespace HIS.EntityFrameworkCore.DbContexts
         public DbSet<SService> SServices { get; set; }
         public DbSet<SServiceGroup> SServiceGroups { get; set; }
         public DbSet<SServiceGroupHeIn> SServiceGroupHeIns { get; set; }
-        //public DbSet<SServiceType> SServiceTypes { get; set; }
         public DbSet<SServiceUnit> SServiceUnits { get; set; }
         public DbSet<SMedicine> SMedicines { get; set; }
         public DbSet<SMedicineGroup> SMedicineGroups { get; set; }
@@ -105,5 +104,6 @@ namespace HIS.EntityFrameworkCore.DbContexts
         public DbSet<SServicePricePolicy> SServicePricePolicies { get; set; }
         public DbSet<SSurgicalProcedureType> SSurgicalProcedureTypes { get; set; }
         public DbSet<SExecutionRoom> SExecutionRooms { get; set; }
+        public DbSet<SServiceResultIndice> SServiceResultIndices { get; set; }
     }
 }

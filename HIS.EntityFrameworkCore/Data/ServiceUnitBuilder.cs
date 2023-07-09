@@ -1,12 +1,5 @@
 ﻿using HIS.EntityFrameworkCore.Entities.Categories;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.Utilities.Enums;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Data
 {
@@ -88,7 +81,7 @@ namespace HIS.EntityFrameworkCore.Data
                new SServiceUnit()
                {
                    Id = new Guid("9E12370E-B3CE-4862-8E7D-83D8F7EC56D1"),
-                   Code = "11",
+                   Code = "LIT",
                    Name = "Lít",
                    SortOrder = 11
                },
@@ -120,6 +113,7 @@ namespace HIS.EntityFrameworkCore.Data
                    Name = "Minimet",
                    SortOrder = 15
                });
+
         }
     }
 }

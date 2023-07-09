@@ -61,7 +61,7 @@ namespace HIS.EntityFrameworkCore.Data
                 new SServiceGroup()
                 {
                     Id = new Guid("9B9DFABB-ABF9-4FEA-B17A-6B5F2C3C01B1"),
-                    Code = ((int)ServiceGroupTypes.TestOther).ToString(),
+                    Code = "XN-KHAC",
                     Name = "Xét nghiệm khác",
                     SortOrder = (int)ServiceGroupTypes.TestOther
                 },

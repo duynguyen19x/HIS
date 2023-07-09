@@ -21,11 +21,10 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.Property(x => x.HeInCode).HasMaxLength(50);
             builder.Property(x => x.HeInName).HasMaxLength(500);
 
-            builder.HasOne(t => t.SServiceUnit).WithMany(pc => pc.SServices).HasForeignKey(pc => pc.ServiceUnitId).OnDelete(DeleteBehavior.Restrict); ;
-            //builder.HasOne(t => t.SServiceType).WithMany(pc => pc.SServices).HasForeignKey(pc => pc.ServiceTypeId).OnDelete(DeleteBehavior.Restrict); ;
-            builder.HasOne(t => t.SServiceGroup).WithMany(pc => pc.SServices).HasForeignKey(pc => pc.ServiceGroupId).OnDelete(DeleteBehavior.Restrict); ;
-            builder.HasOne(t => t.SServiceGroupHeIn).WithMany(pc => pc.SServices).HasForeignKey(pc => pc.ServiceGroupHeInId).OnDelete(DeleteBehavior.Restrict); ;
-            builder.HasOne(t => t.SSurgicalProcedureType).WithMany(pc => pc.SServices).HasForeignKey(pc => pc.SurgicalProcedureTypeId).OnDelete(DeleteBehavior.Restrict); ;
+            builder.HasOne(t => t.SServiceUnit).WithMany(pc => pc.SServices).HasForeignKey(pc => pc.ServiceUnitId).OnDelete(DeleteBehavior.Restrict); 
+            builder.HasOne(t => t.SServiceGroup).WithMany(pc => pc.SServices).HasForeignKey(pc => pc.ServiceGroupId).OnDelete(DeleteBehavior.Restrict); 
+            builder.HasOne(t => t.SServiceGroupHeIn).WithMany(pc => pc.SServices).HasForeignKey(pc => pc.ServiceGroupHeInId).OnDelete(DeleteBehavior.Restrict); 
+            builder.HasOne(t => t.SSurgicalProcedureType).WithMany(pc => pc.SServices).HasForeignKey(pc => pc.SurgicalProcedureTypeId).OnDelete(DeleteBehavior.Restrict); 
         }
     }
 }

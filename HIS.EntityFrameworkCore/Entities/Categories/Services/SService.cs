@@ -30,7 +30,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Đang sử dụng")]
         public bool Inactive { get; set; }
 
-        public Guid? ServiceTypeId { get; set; }
         public Guid? ServiceUnitId { get; set; }
         public Guid? ServiceGroupId { get; set; }
         public Guid? ServiceGroupHeInId { get; set; }
@@ -43,12 +42,10 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
 
         public IList<SMedicineType> SMedicineTypes { get; set; }
         public IList<SMedicine> SMedicines { get; set; }
-
         public IList<SMaterial> SMaterials { get; set; }
         public IList<SMaterialType> SMaterialTypes { get; set; }
-
         public IList<SServicePricePolicy> SServicePricePolicies { get; set; }
-
-        public IList<SExecutionRoom> ExecutionRooms { get; set; }
+        public IList<SExecutionRoom> SExecutionRooms { get; set; }
+        public IList<SServiceResultIndice> SServiceResultIndices { get; set; }
     }
 }

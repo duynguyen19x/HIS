@@ -5,6 +5,7 @@ using HIS.Dtos.Dictionaries.ExecutionRoom;
 using HIS.Dtos.Dictionaries.Service;
 using HIS.Dtos.Dictionaries.ServiceGroup;
 using HIS.Dtos.Dictionaries.ServicePricePolicy;
+using HIS.Dtos.Dictionaries.ServiceResultIndex;
 using HIS.Models.Commons;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -50,6 +51,12 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         public async Task<ApiResult<bool>> Import(IList<SServiceImportExcelDto> input)
         {
             return await _serviceService.Import(input);
+        }
+
+        [HttpPost("ImportServiceResultIndices")]
+        public async Task<ApiResult<bool>> ImportServiceResultIndices(IList<SServiceResultIndiceDto> sServiceResultIndexs)
+        {
+            return await _serviceService.ImportServiceResultIndices(sServiceResultIndexs);
         }
     }
 }

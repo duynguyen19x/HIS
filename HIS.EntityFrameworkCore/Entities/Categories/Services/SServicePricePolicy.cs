@@ -39,6 +39,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories.Services
         public DateTime? ExecutionTime { get; set; }
 
         public SService SService { get; set; }
-        public SPatientType PatientType { get; set; }
+        public SPatientType SPatientType { get; set; }
     }
 }

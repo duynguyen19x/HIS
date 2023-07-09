@@ -21,7 +21,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         /// </summary>
         public bool IsMain { get; set; }
 
-        public SService Service { get; set; }
-        public SRoom Room { get; set; }
+        public SService SService { get; set; }
+        public SRoom SRoom { get; set; }
     }
 }

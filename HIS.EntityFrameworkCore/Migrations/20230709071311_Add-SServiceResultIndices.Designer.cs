@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(HIS_DbContext))]
-    [Migration("20230708144644_Add-Table")]
-    partial class AddTable
+    [Migration("20230709071311_Add-SServiceResultIndices")]
+    partial class AddSServiceResultIndices
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -102,7 +102,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("IdentificationNumberIssuedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("IsDelete")
+                    b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<DateTime?>("Join5Year")
@@ -286,7 +286,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime>("InTimeClinical")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("IsDelete")
+                    b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<Guid?>("ModifiedBy")
@@ -356,7 +356,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<decimal?>("InternalPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<bool?>("IsDelete")
+                    b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<Guid?>("MaterialTypeId")
@@ -439,7 +439,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<decimal?>("InternalPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<bool?>("IsDelete")
+                    b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<Guid?>("ModifiedBy")
@@ -526,7 +526,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<decimal?>("InternalPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<bool?>("IsDelete")
+                    b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<Guid?>("MedicineGroupId")
@@ -665,7 +665,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<decimal?>("InternalPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<bool?>("IsDelete")
+                    b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<Guid?>("MedicineGroupId")
@@ -817,7 +817,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
 
-                    b.Property<bool?>("IsDelete")
+                    b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<Guid?>("ModifiedBy")
@@ -834,9 +834,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("ServiceGroupId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ServiceTypeId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("ServiceUnitId")
@@ -937,7 +934,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("9b9dfabb-abf9-4fea-b17a-6b5f2c3c01b1"),
-                            Code = "7",
+                            Code = "XN-KHAC",
                             Inactive = false,
                             Name = "Xét nghiệm khác",
                             SortOrder = 7
@@ -1220,7 +1217,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("9e12370e-b3ce-4862-8e7d-83d8f7ec56d1"),
-                            Code = "11",
+                            Code = "LIT",
                             Inactive = false,
                             Name = "Lít",
                             SortOrder = 11
@@ -1588,7 +1585,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("ExecutionTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool?>("IsDelete")
+                    b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<Guid?>("ModifiedBy")
@@ -1619,6 +1616,52 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasIndex("ServiceId");
 
                     b.ToTable("SServicePricePolicies", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SServiceResultIndice", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal?>("FemaleFrom")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("FemaleTo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<decimal?>("MaleFrom")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("MaleTo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("SServiceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ServiceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Unit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SServiceId");
+
+                    b.ToTable("SServiceResultIndices");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SSurgicalProcedureType", b =>
@@ -1799,7 +1842,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
 
-                    b.Property<bool?>("IsDelete")
+                    b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<Guid?>("ModifiedBy")
@@ -1973,7 +2016,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
 
-                    b.Property<bool?>("IsDelete")
+                    b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<Guid?>("ModifiedBy")
@@ -2027,7 +2070,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
 
-                    b.Property<bool?>("IsDelete")
+                    b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<Guid?>("ModifiedBy")
@@ -2340,7 +2383,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
 
-                    b.Property<bool?>("IsDelete")
+                    b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<Guid?>("ModifiedBy")
@@ -2591,7 +2634,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
 
-                    b.Property<bool?>("IsDelete")
+                    b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
                     b.Property<Guid?>("ModifiedBy")
@@ -2817,7 +2860,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SServicePricePolicy", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Patients.SPatientType", "PatientType")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Patients.SPatientType", "SPatientType")
                         .WithMany("SServicePricePolicies")
                         .HasForeignKey("PatientTypeId")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -2827,7 +2870,16 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.Navigation("PatientType");
+                    b.Navigation("SPatientType");
+
+                    b.Navigation("SService");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SServiceResultIndice", b =>
+                {
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SService", "SService")
+                        .WithMany("SServiceResultIndices")
+                        .HasForeignKey("SServiceId");
 
                     b.Navigation("SService");
                 });
@@ -2861,19 +2913,19 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SExecutionRoom", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "Room")
-                        .WithMany("ExecutionRooms")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "SRoom")
+                        .WithMany("SExecutionRooms")
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SService", "Service")
-                        .WithMany("ExecutionRooms")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SService", "SService")
+                        .WithMany("SExecutionRooms")
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.Navigation("Room");
+                    b.Navigation("SRoom");
 
-                    b.Navigation("Service");
+                    b.Navigation("SService");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SProvince", b =>
@@ -2956,7 +3008,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SService", b =>
                 {
-                    b.Navigation("ExecutionRooms");
+                    b.Navigation("SExecutionRooms");
 
                     b.Navigation("SMaterialTypes");
 
@@ -2967,6 +3019,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("SMedicines");
 
                     b.Navigation("SServicePricePolicies");
+
+                    b.Navigation("SServiceResultIndices");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SServiceGroup", b =>
@@ -3041,7 +3095,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", b =>
                 {
-                    b.Navigation("ExecutionRooms");
+                    b.Navigation("SExecutionRooms");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoomType", b =>
