@@ -28,6 +28,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HIS.AutoMappers", "HIS.Auto
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HIS.Dtos", "HIS.Dtos\HIS.Dtos.csproj", "{C43080AB-3DD3-4F12-9C17-5C3D6C58AE44}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Imports", "Imports", "{01F7FE15-82AF-43C1-9A96-F25E5710FB39}"
+	ProjectSection(SolutionItems) = preProject
+		C:\Users\duyng\Desktop\Import\ServiceResultIndexTemplate.xlsx = C:\Users\duyng\Desktop\Import\ServiceResultIndexTemplate.xlsx
+		C:\Users\duyng\Desktop\Import\ServiceTemplate.xlsx = C:\Users\duyng\Desktop\Import\ServiceTemplate.xlsx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +75,7 @@ Global
 		{4D5FF7A1-420A-4FFD-99B2-4551B49F2BC9} = {DDC355DD-FDA5-4EC2-BFF5-85A97D7DD09C}
 		{929C0277-9909-4E83-88F5-AE3C8010F58A} = {DDC355DD-FDA5-4EC2-BFF5-85A97D7DD09C}
 		{C43080AB-3DD3-4F12-9C17-5C3D6C58AE44} = {DDC355DD-FDA5-4EC2-BFF5-85A97D7DD09C}
+		{01F7FE15-82AF-43C1-9A96-F25E5710FB39} = {0B192351-E63D-4E94-9034-CFA174A2D5FE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C830B4FA-8B15-4172-8651-ED9456CC7C76}

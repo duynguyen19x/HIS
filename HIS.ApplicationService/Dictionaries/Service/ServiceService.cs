@@ -599,6 +599,20 @@ namespace HIS.ApplicationService.Dictionaries.Service
                     errs.Add(string.Format("Mã BHYT [{0}] đã tồn tại trên hệ thống!", input.HeInName));
                 }
 
+                if (input.SServiceResultIndices != null && input.SServiceResultIndices.Count > 0)
+                {
+                    var listCode = input.SServiceResultIndices.GroupBy(g => g.Code).Select(s => new
+                    {
+                        Code = s.Key,
+                        Count = s.Count()
+                    }).Where(w => w.Count > 1).ToList();
+
+                    if (listCode != null && listCode.Count > 0)
+                    {
+                        errs.Add(string.Format("Mã trị số [{0}] đã trùng!", string.Join(", ", listCode.Select(s => s.Code).ToArray())));
+                    }
+                }
+
                 if (errs.Count > 0)
                 {
                     result.IsSuccessed = false;
