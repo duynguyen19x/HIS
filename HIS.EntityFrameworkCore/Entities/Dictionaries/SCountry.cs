@@ -1,4 +1,5 @@
 ﻿using HIS.EntityFrameworkCore.BaseEntitys;
+using HIS.EntityFrameworkCore.Entities.Categories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,5 +19,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public bool Inactive { get; set; }
 
         public virtual IList<SProvince> Provinces { get; set; }
+        public virtual IList<SMedicine> SMedicines { get; set; }
+        public virtual IList<SMedicineType> SMedicineTypes { get; set; }
     }
 }

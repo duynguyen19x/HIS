@@ -1,4 +1,5 @@
 ﻿using HIS.EntityFrameworkCore.BaseEntitys;
+using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Patients
         public bool Inactive { get; set; }
 
         public IList<SPatient> SPatients { get; set; }
-
         public IList<SServicePricePolicy> SServicePricePolicies { get; set; }
+        public IList<SMedicinePricePolicy> SMedicinePricePolicies { get; set; }
     }
 }

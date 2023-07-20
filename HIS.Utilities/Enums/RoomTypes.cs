@@ -33,14 +33,23 @@ namespace HIS.Utilities.Enums
         [Description("Kho tổng")]
         CentralWarehouse,
 
-        [Description("Kho ngoại trú")]
+        [Description("Kho thuốc ngoại trú")]
         OutpatientPharmacy,
 
-        [Description("Kho nội trú")]
+        [Description("Kho thuốc nội trú")]
         InpatientPharmacy,
 
-        [Description("Tủ trực")]
+        [Description("Tủ trực thuốc")]
         EmergencyCabinet,
+
+        [Description("Kho VTYT ngoại trú")]
+        OutpatientInventory,
+
+        [Description("Kho VTYT nội trú")]
+        InpatientInventory,
+
+        [Description("Tủ trực VTYT")]
+        InventoryCabinet,
 
         [Description("Quản lý thuốc")]
         MedicineManagement,

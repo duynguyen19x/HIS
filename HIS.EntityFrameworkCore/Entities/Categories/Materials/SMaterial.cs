@@ -1,4 +1,5 @@
 ﻿using HIS.EntityFrameworkCore.BaseEntitys;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,7 +30,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public Guid? MaterialTypeId { get; set; }
 
         [Description("Đơn vị tính")]
-        public Guid? ServiceUnitId { get; set; }
+        public Guid? UnitId { get; set; }
 
         [Description("Nước sản xuất")]
         public Guid? NationalId { get; set; }
@@ -57,6 +58,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
 
         public SService SService { get; set; }
         public SMaterialType SMaterialType { get; set; }
-        public SServiceUnit SServiceUnit { get; set; }
+        public SUnit SUnit { get; set; }
     }
 }

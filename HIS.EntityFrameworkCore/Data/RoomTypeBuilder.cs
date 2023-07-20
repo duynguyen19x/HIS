@@ -74,22 +74,43 @@ namespace HIS.EntityFrameworkCore.Data
                 {
                     Id = (int)RoomTypes.OutpatientPharmacy,
                     Code = "KHO-NgT",
-                    Name = "Kho ngoại trú",
+                    Name = "Kho thuốc ngoại trú",
                     SortOrder = (int)RoomTypes.OutpatientPharmacy
                 },
                 new SRoomType()
                 {
                     Id = (int)RoomTypes.InpatientPharmacy,
                     Code = "KHO-NT",
-                    Name = "Kho nội trú",
+                    Name = "Kho thuốc nội trú",
                     SortOrder = (int)RoomTypes.InpatientPharmacy
                 },
                 new SRoomType()
                 {
                     Id = (int)RoomTypes.EmergencyCabinet,
-                    Code = "TT",
-                    Name = "Tủ trực",
+                    Code = "TT-TH",
+                    Name = "Tủ trực thuốc",
                     SortOrder = (int)RoomTypes.EmergencyCabinet
+                },
+                new SRoomType()
+                {
+                    Id = (int)RoomTypes.OutpatientInventory,
+                    Code = "KHO-VT-NgT",
+                    Name = "Kho VTYT ngoại trú",
+                    SortOrder = (int)RoomTypes.OutpatientInventory
+                },
+                new SRoomType()
+                {
+                    Id = (int)RoomTypes.InpatientInventory,
+                    Code = "KHO-VT-NT",
+                    Name = "Kho VTYT nội trú",
+                    SortOrder = (int)RoomTypes.InpatientInventory
+                },
+                new SRoomType()
+                {
+                    Id = (int)RoomTypes.InventoryCabinet,
+                    Code = "TT-VT",
+                    Name = "Tủ trực VTYT",
+                    SortOrder = (int)RoomTypes.InventoryCabinet
                 },
                 new SRoomType()
                 {

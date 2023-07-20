@@ -1,4 +1,7 @@
 ﻿using HIS.EntityFrameworkCore.BaseEntitys;
+using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
+using HIS.EntityFrameworkCore.Entities.Categories.Services;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,11 +19,11 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Tên thuốc")]
         public string Name { get; set; }
 
-        [Description("Id service")]
-        public Guid? ServiceId { get; set; }
+        //[Description("Id service")]
+        //public Guid? ServiceId { get; set; }
 
-        [Description("Id cha")]
-        public Guid? ParentId { get; set; }
+        //[Description("Id cha")]
+        //public Guid? ParentId { get; set; }
 
         [Description("Thứ tự sắp xếp")]
         public int? SoftOrder { get; set; }
@@ -35,13 +38,13 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public Guid? MedicineTypeId { get; set; }
 
         [Description("Đơn vị tính")]
-        public Guid? ServiceUnitId { get; set; }
+        public Guid? UnitId { get; set; }
 
         [Description("Hướng dẫn")]
         public string Tutorial { get; set; }
 
         [Description("Nước sản xuất")]
-        public Guid? NationalId { get; set; }
+        public Guid? CountryId { get; set; }
 
         [Description("Giá nhập")]
         public decimal? ImpPrice { get; set; }
@@ -61,12 +64,32 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Diễn giải")]
         public string Description { get; set; }
 
+        [Description("Hoạt chất")]
+        public string ActiveSubstance { get; set; }
+
+        [Description("Nồng độ")]
+        public string Concentration { get; set; }
+
+        [Description("Hàm lượng")]
+        public string Content { get; set; }
+
+        [Description("Hãng sản xuất")]
+        public string Manufacturer { get; set; }
+
+        [Description("Quy cách đóng gói")]
+        public string PackagingSpecifications { get; set; }
+
+        [Description("Liều dùng")]
+        public string Dosage { get; set; }
+
         [Description("Ngưng sử dụng")]
         public bool Inactive { get; set; }
 
-        public SService SService { get; set; }
+        //public SService SService { get; set; }
         public SMedicineType SMedicineType { get; set; }
-        public SServiceUnit SServiceUnit { get; set; }
+        public SUnit SUnit { get; set; }
         public SMedicineLine SMedicineLine { get; set; }
+        public SCountry SCountry { get; set; }
+        public IList<SMedicinePricePolicy> SMedicinePricePolicies { get; set; }
     }
 }

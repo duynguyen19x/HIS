@@ -1,4 +1,4 @@
-﻿using HIS.EntityFrameworkCore.Entities.Categories;
+﻿using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Configurations
+namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class ServiceUnitConfigurations : IEntityTypeConfiguration<SServiceUnit>
+    public class UnitConfigurations : IEntityTypeConfiguration<SUnit>
     {
-        public void Configure(EntityTypeBuilder<SServiceUnit> builder)
+        public void Configure(EntityTypeBuilder<SUnit> builder)
         {
-            builder.ToTable("SServiceUnits");
+            builder.ToTable("SUnits");
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Code).HasMaxLength(50);

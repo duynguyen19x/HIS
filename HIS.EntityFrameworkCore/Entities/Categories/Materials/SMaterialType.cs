@@ -1,4 +1,5 @@
 ﻿using HIS.EntityFrameworkCore.BaseEntitys;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -50,7 +51,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public bool Inactive { get; set; }
 
         public SService SService { get; set; }
-        public SServiceUnit SServiceUnit { get; set; }
+        public SUnit SServiceUnit { get; set; }
         public IList<SMaterial> SMaterials { get; set; }
     }
 }

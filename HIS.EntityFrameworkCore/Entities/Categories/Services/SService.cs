@@ -30,12 +30,12 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Đang sử dụng")]
         public bool Inactive { get; set; }
 
-        public Guid? ServiceUnitId { get; set; }
+        public Guid? UnitId { get; set; }
         public Guid? ServiceGroupId { get; set; }
         public Guid? ServiceGroupHeInId { get; set; }
         public int? SurgicalProcedureTypeId { get; set; }
 
-        public SServiceUnit SServiceUnit { get; set; }
+        public SUnit SUnit { get; set; }
         public SServiceGroup SServiceGroup { get; set; }
         public SServiceGroupHeIn SServiceGroupHeIn { get; set; }
         public SSurgicalProcedureType SSurgicalProcedureType { get; set; }

@@ -268,7 +268,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
             {
                 result.Result = (from r in _dbContext.SServices
 
-                                 join r1 in _dbContext.SServiceUnits on r.ServiceUnitId equals r1.Id
+                                 join r1 in _dbContext.SServiceUnits on r.UnitId equals r1.Id
                                  join r2 in _dbContext.SServiceGroups on r.ServiceGroupId equals r2.Id
                                  join r3 in _dbContext.SServiceGroupHeIns on r.ServiceGroupHeInId equals r3.Id
 
@@ -284,7 +284,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                      Inactive = r.Inactive,
                                      ServiceGroupId = r.ServiceGroupId,
                                      ServiceGroupHeInId = r.ServiceGroupId,
-                                     ServiceUnitId = r.ServiceUnitId,
+                                     ServiceUnitId = r.UnitId,
                                      SurgicalProcedureTypeId = r.SurgicalProcedureTypeId,
 
                                      ServiceUnitCode = r1.Code,
@@ -485,7 +485,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                          HeInName = serviceDto.HeInName,
                                          SortOrder = serviceDto.SortOrder,
                                          Inactive = serviceDto.Inactive,
-                                         ServiceUnitId = sServiceUnit.Id,
+                                         UnitId = sServiceUnit.Id,
                                          ServiceGroupId = sServiceGroup.Id,
                                          ServiceGroupHeInId = sServiceGroupHeIn.Id,
                                          SurgicalProcedureTypeId = surg == null ? null : surg.Id,

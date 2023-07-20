@@ -1,4 +1,5 @@
 ﻿using HIS.EntityFrameworkCore.BaseEntitys;
+using HIS.EntityFrameworkCore.Entities.Categories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Categories
+namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
-    public class SServiceUnit : Entity<Guid>
+    public class SUnit : Entity<Guid>
     {
         [Description("Mã ĐVT")]
         public string Code { get; set; }
@@ -18,6 +19,8 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
 
         [Description("Thứ tự sắp xếp")]
         public int? SortOrder { get; set; }
+
+        public int UnitType { get; set; }
 
         public bool Inactive { get; set; }
 

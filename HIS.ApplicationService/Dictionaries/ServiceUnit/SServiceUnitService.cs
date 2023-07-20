@@ -3,7 +3,7 @@ using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ServiceGroup;
 using HIS.Dtos.Dictionaries.ServiceUnit;
 using HIS.EntityFrameworkCore.DbContexts;
-using HIS.EntityFrameworkCore.Entities.Categories;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Models.Commons;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
@@ -38,7 +38,7 @@ namespace HIS.ApplicationService.Dictionaries.ServiceUnit
                 {
                     input.Id = Guid.NewGuid();
 
-                    var data = _mapper.Map<SServiceUnit>(input);
+                    var data = _mapper.Map<SUnit>(input);
 
                     _dbContext.SServiceUnits.Add(data);
                     await _dbContext.SaveChangesAsync();

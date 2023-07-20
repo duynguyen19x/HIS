@@ -1,4 +1,5 @@
 ﻿using HIS.EntityFrameworkCore.BaseEntitys;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,8 +17,8 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Tên loại thuốc")]
         public string Name { get; set; }
 
-        [Description("Id service")]
-        public Guid? ServiceId { get; set; }
+        //[Description("Id service")]
+        //public Guid? ServiceId { get; set; }
 
         //[Description("Id cha")]
         //public Guid? ParentId { get; set; }
@@ -32,7 +33,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public Guid? MedicineGroupId { get; set; }
 
         [Description("Đơn vị tính")]
-        public Guid? ServiceUnitId { get; set; }
+        public Guid? UnitId { get; set; }
 
         [Description("Hướng dẫn")]
         public string Tutorial { get; set; }
@@ -47,7 +48,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public string Content { get; set; }
 
         [Description("Nước sản xuất")]
-        public Guid? NationalId { get; set; }
+        public Guid? CountryId { get; set; }
 
         [Description("Hãng sản xuất")]
         public string Manufacturer { get; set; }
@@ -73,9 +74,11 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Ngưng sử dụng")]
         public bool Inactive { get; set; }
 
-        public SService SService { get; set; }
-        public SServiceUnit SServiceUnit { get; set; }
+        //public SService SService { get; set; }
+        public SUnit SUnit { get; set; }
         public SMedicineLine SMedicineLine { get; set; }
+        public SMedicineGroup SMedicineGroup { get; set; }
+        public SCountry SCountry { get; set; }
         public IList<SMedicine> SMedicines { get; set; }
     }
 }

@@ -20,15 +20,24 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.Property(x => x.Name).HasMaxLength(500);
             builder.Property(x => x.Tutorial).HasMaxLength(500);
             builder.Property(x => x.Description).HasMaxLength(500);
+            builder.Property(x => x.ActiveSubstance).HasMaxLength(250);
+            builder.Property(x => x.Concentration).HasMaxLength(250);
+            builder.Property(x => x.Content).HasMaxLength(250);
+            builder.Property(x => x.Manufacturer).HasMaxLength(500);
+            builder.Property(x => x.PackagingSpecifications).HasMaxLength(500);
+            builder.Property(x => x.Dosage).HasMaxLength(500);
 
-            builder.HasOne(t => t.SService).WithMany(pc => pc.SMedicineTypes)
-                .HasForeignKey(pc => pc.ServiceId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(t => t.SMedicineGroup).WithMany(pc => pc.SMedicineTypes)
+                .HasForeignKey(pc => pc.MedicineGroupId).OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasOne(t => t.SServiceUnit).WithMany(pc => pc.SMedicineTypes)
-                .HasForeignKey(pc => pc.ServiceUnitId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(t => t.SUnit).WithMany(pc => pc.SMedicineTypes)
+                .HasForeignKey(pc => pc.UnitId).OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(t => t.SMedicineLine).WithMany(pc => pc.SMedicineTypes)
                 .HasForeignKey(pc => pc.MedicineLineId).OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(t => t.SCountry).WithMany(pc => pc.SMedicineTypes)
+                .HasForeignKey(pc => pc.CountryId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -63,10 +63,10 @@ namespace HIS.AutoMappers
             CreateMap<SServiceGroupHeInDto, SServiceGroupHeIn>()
                 .ForMember(dest => dest.SServices, opt => opt.Ignore())
                 .ReverseMap();
-            CreateMap<SServiceUnitDto, SServiceUnit>()
+            CreateMap<SServiceUnitDto, SUnit>()
                 .ReverseMap();
             CreateMap<SServiceDto, SService>()
-                 .ForMember(dest => dest.SServiceUnit, opt => opt.Ignore())
+                 .ForMember(dest => dest.SUnit, opt => opt.Ignore())
                  .ForMember(dest => dest.SServiceGroup, opt => opt.Ignore())
                  .ForMember(dest => dest.SSurgicalProcedureType, opt => opt.Ignore())
                  .ForMember(dest => dest.SMedicineTypes, opt => opt.Ignore())

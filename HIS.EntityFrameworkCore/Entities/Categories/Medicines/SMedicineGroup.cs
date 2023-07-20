@@ -19,6 +19,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Thứ tự sắp xếp")]
         public int? SoftOrder { get; set; }
 
-        public IList<SMaterialType> SMedicineTypes { get; set; }
+        public IList<SMedicineType> SMedicineTypes { get; set; }
     }
 }
