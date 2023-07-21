@@ -9,6 +9,7 @@ using HIS.ApplicationService.Dictionaries.Ethnic;
 using HIS.ApplicationService.Dictionaries.Gender;
 using HIS.ApplicationService.Dictionaries.Hospital;
 using HIS.ApplicationService.Dictionaries.Icd;
+using HIS.ApplicationService.Dictionaries.MedicineGroup;
 using HIS.ApplicationService.Dictionaries.Province;
 using HIS.ApplicationService.Dictionaries.Room;
 using HIS.ApplicationService.Dictionaries.RoomType;
@@ -43,6 +44,7 @@ namespace HIS.ApplicationService
             services.AddTransient<ISRoomService, SRoomService>();
             services.AddTransient<ISRoomTypeService, SRoomTypeService>();
             services.AddTransient<ISHospitalService, SHospitalService>();
+
             services.AddTransient<ISIcdService, SIcdService>();
             services.AddTransient<ISProvinceService, SProvinceService>();
             services.AddTransient<ISWardService, SWardService>();
@@ -52,6 +54,8 @@ namespace HIS.ApplicationService
             services.AddTransient<IServiceGroupService, ServiceGroupService>();
             services.AddTransient<IServiceGroupHeInService, ServiceGroupHeInService>();
             services.AddTransient<ISServiceUnitService, SServiceUnitService>();
+
+            services.AddTransient<ISMedicineGroupService, SMedicineGroupService>();
 
             services.AddTransient<ISPatientService, SPatientService>();
         }

@@ -587,13 +587,13 @@ namespace HIS.ApplicationService.Dictionaries.Service
             {
                 List<string> errs = new List<string>();
 
-                var sServices = _dbContext.SServices.FirstOrDefault(w => w.Code == input.Code && input.Id != input.Id);
+                var sServices = _dbContext.SServices.FirstOrDefault(w => w.Code == input.Code && w.Id != input.Id);
                 if (sServices != null)
                 {
                     errs.Add(string.Format("Mã dịch vụ [{0}] đã tồn tại trên hệ thống!", input.Code));
                 }
 
-                var sServiceHein = _dbContext.SServices.FirstOrDefault(w => w.Code == input.HeInCode && input.Id != input.Id);
+                var sServiceHein = _dbContext.SServices.FirstOrDefault(w => w.Code == input.HeInCode && w.Id != input.Id);
                 if (sServiceHein != null)
                 {
                     errs.Add(string.Format("Mã BHYT [{0}] đã tồn tại trên hệ thống!", input.HeInName));

@@ -11,6 +11,7 @@ using HIS.Dtos.Dictionaries.ExecutionRoom;
 using HIS.Dtos.Dictionaries.Gender;
 using HIS.Dtos.Dictionaries.Hospital;
 using HIS.Dtos.Dictionaries.Icd;
+using HIS.Dtos.Dictionaries.MedicineGroup;
 using HIS.Dtos.Dictionaries.Province;
 using HIS.Dtos.Dictionaries.Room;
 using HIS.Dtos.Dictionaries.RoomType;
@@ -90,6 +91,11 @@ namespace HIS.AutoMappers
             CreateMap<SServiceResultIndiceDto, SServiceResultIndice>()
              .ForMember(dest => dest.SService, opt => opt.Ignore())
              .ReverseMap();
+
+            CreateMap<SMedicineGroupDto, SMedicineGroup>()
+                .ForMember(dest => dest.SMedicineTypes, opt => opt.Ignore())
+                .ReverseMap();
+
         }
     }
 }
