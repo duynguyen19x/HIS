@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Dictionaries.ServiceUnit
 {
-    public  interface ISServiceUnitService : IBaseDictionaryService<SServiceUnitDto, GetAllSServiceUnitInput>
+    public  interface ISServiceUnitService : IBaseDictionaryService<SUnitDto, GetAllSUnitInput>
     {
     }
 }

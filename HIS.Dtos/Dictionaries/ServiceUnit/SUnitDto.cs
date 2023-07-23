@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HIS.Dtos.Dictionaries.ServiceUnit
 {
-    public  class SServiceUnitDto : EntityDto<Guid?>
+    public  class SUnitDto : EntityDto<Guid?>
     {
         public string Code { get; set; }
 

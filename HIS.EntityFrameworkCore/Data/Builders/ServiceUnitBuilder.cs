@@ -1,7 +1,7 @@
 ﻿using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using Microsoft.EntityFrameworkCore;
 
-namespace HIS.EntityFrameworkCore.Data
+namespace HIS.EntityFrameworkCore.Data.Builders
 {
     public static class ServiceUnitBuilder
     {

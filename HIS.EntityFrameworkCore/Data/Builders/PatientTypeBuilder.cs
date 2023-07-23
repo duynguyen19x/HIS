@@ -1,13 +1,8 @@
 ﻿using HIS.EntityFrameworkCore.Entities.Business.Patients;
 using HIS.Utilities.Enums;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Data
+namespace HIS.EntityFrameworkCore.Data.Builders
 {
     public static class PatientTypeBuilder
     {

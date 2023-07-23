@@ -21,7 +21,7 @@ namespace HIS.ApplicationService.Dictionaries.ServiceUnit
         {
         }
 
-        public async Task<ApiResult<SServiceUnitDto>> CreateOrEdit(SServiceUnitDto input)
+        public async Task<ApiResult<SUnitDto>> CreateOrEdit(SUnitDto input)
         {
             if (GuidHelper.IsNullOrEmpty(input.Id))
                 return await Create(input);
@@ -29,9 +29,9 @@ namespace HIS.ApplicationService.Dictionaries.ServiceUnit
                 return await Update(input);
         }
 
-        private async Task<ApiResult<SServiceUnitDto>> Create(SServiceUnitDto input)
+        private async Task<ApiResult<SUnitDto>> Create(SUnitDto input)
         {
-            var result = new ApiResult<SServiceUnitDto>();
+            var result = new ApiResult<SUnitDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
@@ -61,9 +61,9 @@ namespace HIS.ApplicationService.Dictionaries.ServiceUnit
             return await Task.FromResult(result);
         }
 
-        private async Task<ApiResult<SServiceUnitDto>> Update(SServiceUnitDto input)
+        private async Task<ApiResult<SUnitDto>> Update(SUnitDto input)
         {
-            var result = new ApiResult<SServiceUnitDto>();
+            var result = new ApiResult<SUnitDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
@@ -92,9 +92,9 @@ namespace HIS.ApplicationService.Dictionaries.ServiceUnit
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SServiceUnitDto>> Delete(Guid id)
+        public async Task<ApiResult<SUnitDto>> Delete(Guid id)
         {
-            var result = new ApiResult<SServiceUnitDto>();
+            var result = new ApiResult<SUnitDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
@@ -123,15 +123,15 @@ namespace HIS.ApplicationService.Dictionaries.ServiceUnit
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<SServiceUnitDto>> GetAll(GetAllSServiceUnitInput input)
+        public async Task<ApiResultList<SUnitDto>> GetAll(GetAllSUnitInput input)
         {
-            var result = new ApiResultList<SServiceUnitDto>();
+            var result = new ApiResultList<SUnitDto>();
 
             try
             {
                 result.Result = (from r in _dbContext.SServiceUnits
                                  where (input.InactiveFilter == null || r.Inactive == !input.InactiveFilter)
-                                 select new SServiceUnitDto()
+                                 select new SUnitDto()
                                  {
                                      Id = r.Id,
                                      Code = r.Code,
@@ -151,14 +151,14 @@ namespace HIS.ApplicationService.Dictionaries.ServiceUnit
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SServiceUnitDto>> GetById(Guid id)
+        public async Task<ApiResult<SUnitDto>> GetById(Guid id)
         {
-            var result = new ApiResult<SServiceUnitDto>();
+            var result = new ApiResult<SUnitDto>();
 
             try
             {
                 var service = _dbContext.SServiceGroups.FirstOrDefault(s => s.Id == id);
-                result.Result = _mapper.Map<SServiceUnitDto>(service);
+                result.Result = _mapper.Map<SUnitDto>(service);
             }
             catch (Exception ex)
             {

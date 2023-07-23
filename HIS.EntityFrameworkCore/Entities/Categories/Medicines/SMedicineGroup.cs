@@ -22,6 +22,9 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Ngưng sử dụng")]
         public bool Inactive { get; set; }
 
+        [Description("Dữ liệu gốc")]
+        public bool IsSystem { get; set; }
+
         public IList<SMedicineType> SMedicineTypes { get; set; }
     }
 }

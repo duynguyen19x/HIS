@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HIS.EntityFrameworkCore.Data.Builders;
+using Microsoft.EntityFrameworkCore;
 
 namespace HIS.EntityFrameworkCore.Data
 {
@@ -15,6 +16,7 @@ namespace HIS.EntityFrameworkCore.Data
             SurgicalProcedureTypeBuilder.Seed(modelBuilder);
             DepartmentTypeBuilder.Seed(modelBuilder);
             RoomTypeBuilder.Seed(modelBuilder);
+            MedicineGroupBuilder.Seed(modelBuilder);
         }
     }
 }

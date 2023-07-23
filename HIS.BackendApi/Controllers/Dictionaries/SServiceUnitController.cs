@@ -21,25 +21,25 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ApiResult<SServiceUnitDto>> CreateOrEdit(SServiceUnitDto input)
+        public async Task<ApiResult<SUnitDto>> CreateOrEdit(SUnitDto input)
         {
             return await _sServiceUnitService.CreateOrEdit(input);
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<SServiceUnitDto>> GetAll([FromQuery] GetAllSServiceUnitInput input)
+        public async Task<ApiResultList<SUnitDto>> GetAll([FromQuery] GetAllSUnitInput input)
         {
             return await _sServiceUnitService.GetAll(input);
         }
 
         [HttpGet("GetById")]
-        public async Task<ApiResult<SServiceUnitDto>> GetById(Guid id)
+        public async Task<ApiResult<SUnitDto>> GetById(Guid id)
         {
             return await _sServiceUnitService.GetById(id);
         }
 
         [HttpDelete("Delete")]
-        public async Task<ApiResult<SServiceUnitDto>> Delete(Guid id)
+        public async Task<ApiResult<SUnitDto>> Delete(Guid id)
         {
             return await _sServiceUnitService.Delete(id);
         }

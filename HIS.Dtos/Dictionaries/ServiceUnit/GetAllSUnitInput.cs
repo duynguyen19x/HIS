@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HIS.Dtos.Dictionaries.ServiceUnit
 {
-    public class GetAllSServiceUnitInput
+    public class GetAllSUnitInput
     {
         public string CodeFilter { get; set; }
         public string NameFilter { get; set; }

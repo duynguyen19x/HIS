@@ -2,6 +2,7 @@
 using HIS.ApplicationService.Base;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.MedicineGroup;
+using HIS.Dtos.Dictionaries.MedicineType;
 using HIS.Dtos.Dictionaries.Service;
 using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Categories;

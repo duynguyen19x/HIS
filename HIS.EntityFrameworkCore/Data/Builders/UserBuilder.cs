@@ -1,13 +1,8 @@
 ﻿using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.Utilities.Commons;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Data
+namespace HIS.EntityFrameworkCore.Data.Builders
 {
     public static class UserBuilder
     {

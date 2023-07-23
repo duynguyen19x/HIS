@@ -1,7 +1,4 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
-using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
-using HIS.EntityFrameworkCore.Entities.Categories.Services;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+﻿using HIS.Dtos.Dictionaries.MedicineType;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Categories
+namespace HIS.Dtos.Dictionaries.Medicine
 {
-    public class SMedicine : FullAuditingEntity<Guid>
+    public class SMedicineDto
     {
         [Description("Mã thuốc")]
         public string Code { get; set; }
@@ -23,7 +20,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public string Name { get; set; }
 
         [Description("Thứ tự sắp xếp")]
-        public int? SortOrder { get; set; }
+        public int? SoftOrder { get; set; }
 
         [Description("Đường dùng thuốc")]
         public Guid? MedicineLineId { get; set; }
@@ -79,10 +76,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Ngưng sử dụng")]
         public bool Inactive { get; set; }
 
-        public SMedicineType SMedicineType { get; set; }
-        public SUnit SUnit { get; set; }
-        public SMedicineLine SMedicineLine { get; set; }
-        public SCountry SCountry { get; set; }
-        public IList<SMedicinePricePolicy> SMedicinePricePolicies { get; set; }
+        //public IList<SMedicinePricePolicyDto> SMedicinePricePolicies { get; set; }
     }
 }

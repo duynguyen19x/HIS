@@ -14,17 +14,14 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Mã loại thuốc")]
         public string Code { get; set; }
 
+        [Description("Mã BH")]
+        public string HeInCode { get; set; }
+
         [Description("Tên loại thuốc")]
         public string Name { get; set; }
 
-        //[Description("Id service")]
-        //public Guid? ServiceId { get; set; }
-
-        //[Description("Id cha")]
-        //public Guid? ParentId { get; set; }
-
         [Description("Thứ tự sắp xếp")]
-        public int? SoftOrder { get; set; }
+        public int? SortOrder { get; set; }
 
         [Description("Đường dùng thuốc")]
         public Guid? MedicineLineId { get; set; }
@@ -56,25 +53,24 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Quy cách đóng gói")]
         public string PackagingSpecifications { get; set; }
 
-        [Description("Liều dùng")]
-        public string Dosage { get; set; }
+        [Description("Giá nhập")]
+        public decimal? ImpPrice { get; set; }
 
-        //[Description("Giá nhập")]
-        //public decimal? ImpPrice { get; set; }
+        [Description("Phần trăm vat giá nhập")]
+        public decimal? ImpVatRate { get; set; }
 
-        //[Description("Phần trăm vat giá nhập")]
-        //public decimal? ImpVatRate { get; set; }
-
-        //[Description("Giá nội bộ")]
-        //public decimal? InternalPrice { get; set; }
+        [Description("Phần trăm thuế")]
+        public decimal? TaxRate { get; set; }
 
         [Description("Diễn giải")]
         public string Description { get; set; }
 
+        [Description("Liều dùng")]
+        public string Dosage { get; set; }
+
         [Description("Ngưng sử dụng")]
         public bool Inactive { get; set; }
 
-        //public SService SService { get; set; }
         public SUnit SUnit { get; set; }
         public SMedicineLine SMedicineLine { get; set; }
         public SMedicineGroup SMedicineGroup { get; set; }
