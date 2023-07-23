@@ -1,4 +1,4 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
+﻿using HIS.Dtos.Base;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Categories
+namespace HIS.Dtos.Dictionaries.MedicineLine
 {
-    public class SMedicineLine : Entity<Guid>
+    public class MedicineLineDto : EntityDto<Guid?>
     {
         [Description("Mã đường dùng thuốc")]
         public string Code { get; set; }
@@ -21,8 +21,5 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
 
         [Description("Ngưng sử dụng")]
         public bool Inactive { get; set; }
-
-        public IList<SMedicineType> SMedicineTypes { get; set; }
-        public IList<SMedicine> SMedicines { get; set; }
     }
 }

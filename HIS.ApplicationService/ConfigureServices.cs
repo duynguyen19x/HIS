@@ -10,6 +10,7 @@ using HIS.ApplicationService.Dictionaries.Gender;
 using HIS.ApplicationService.Dictionaries.Hospital;
 using HIS.ApplicationService.Dictionaries.Icd;
 using HIS.ApplicationService.Dictionaries.MedicineGroup;
+using HIS.ApplicationService.Dictionaries.MedicineLine;
 using HIS.ApplicationService.Dictionaries.MedicineType;
 using HIS.ApplicationService.Dictionaries.Province;
 using HIS.ApplicationService.Dictionaries.Room;
@@ -58,6 +59,7 @@ namespace HIS.ApplicationService
 
             services.AddTransient<ISMedicineGroupService, SMedicineGroupService>();
             services.AddTransient<ISMedicineTypeService, SMedicineTypeService>();
+            services.AddTransient<ISMedicineLineService, SMedicineLineService>();
 
             services.AddTransient<ISPatientService, SPatientService>();
         }
