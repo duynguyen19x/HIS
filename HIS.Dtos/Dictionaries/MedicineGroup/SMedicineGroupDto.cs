@@ -19,6 +19,9 @@ namespace HIS.Dtos.Dictionaries.MedicineGroup
         [Description("Thứ tự sắp xếp")]
         public int? SortOrder { get; set; }
 
+        [Description("Dữ liệu gốc")]
+        public bool IsSystem { get; set; }
+
         [Description("Ngưng sử dụng")]
         public bool Inactive { get; set; }
     }

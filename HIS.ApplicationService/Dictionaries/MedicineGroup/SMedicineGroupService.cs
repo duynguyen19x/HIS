@@ -192,6 +192,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineGroup
                                      Code = r.Code,
                                      Name = r.Name,
                                      SortOrder = r.SortOrder,
+                                     IsSystem = r.IsSystem,
                                      Inactive = r.Inactive
                                  }).OrderBy(o => o.SortOrder).ToList();
 
