@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HIS.EntityFrameworkCore.Data.Builders
 {
-    public static class ServiceUnitBuilder
+    public static class UnitBuilder
     {
         public static void Seed(ModelBuilder modelBuilder)
         {
@@ -112,6 +112,48 @@ namespace HIS.EntityFrameworkCore.Data.Builders
                    Code = "MINI",
                    Name = "Minimet",
                    SortOrder = 15
+               },
+               new SUnit()
+               {
+                   Id = new Guid("FD96BAD9-B254-4B37-8EB9-ADA68FE7DADA"),
+                   Code = "CHAI",
+                   Name = "Chai",
+                   SortOrder = 16
+               },
+               new SUnit()
+               {
+                   Id = new Guid("8D7A7B33-F2ED-4B4B-A869-3AD32FD9D192"),
+                   Code = "TUI",
+                   Name = "Túi",
+                   SortOrder = 17
+               },
+               new SUnit()
+               {
+                   Id = new Guid("E04B1F07-6F05-403E-AC09-B999CAC0DF3E"),
+                   Code = "CAI",
+                   Name = "Cái",
+                   SortOrder = 18
+               },
+               new SUnit()
+               {
+                   Id = new Guid("E46826B4-76F9-4B32-84B3-B9730E732839"),
+                   Code = "CHIEC",
+                   Name = "Chiếc",
+                   SortOrder = 19
+               },
+               new SUnit()
+               {
+                   Id = new Guid("46EA45FF-BA5E-4F6F-BBC6-EBE65446EFE8"),
+                   Code = "GAM",
+                   Name = "Gam",
+                   SortOrder = 20
+               },
+               new SUnit()
+               {
+                   Id = new Guid("FC7ACF3A-2C10-4200-9448-C3180C0A4400"),
+                   Code = "MIENG",
+                   Name = "Miếng",
+                   SortOrder = 21
                });
 
         }

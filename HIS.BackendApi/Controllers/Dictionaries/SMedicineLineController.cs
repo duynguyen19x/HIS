@@ -1,10 +1,7 @@
-﻿using HIS.ApplicationService.Dictionaries.Branch;
-using HIS.ApplicationService.Dictionaries.MedicineLine;
+﻿using HIS.ApplicationService.Dictionaries.MedicineLine;
 using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.Branch;
 using HIS.Dtos.Dictionaries.MedicineLine;
 using HIS.Models.Commons;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Dictionaries

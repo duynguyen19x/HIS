@@ -11,12 +11,13 @@ namespace HIS.EntityFrameworkCore.Data
             UserBuilder.Seed(modelBuilder);
             ServiceGroupBuilder.Seed(modelBuilder);
             ServiceGroupHeInBuilder.Seed(modelBuilder);
-            ServiceUnitBuilder.Seed(modelBuilder);
+            UnitBuilder.Seed(modelBuilder);
             PatientTypeBuilder.Seed(modelBuilder);
             SurgicalProcedureTypeBuilder.Seed(modelBuilder);
             DepartmentTypeBuilder.Seed(modelBuilder);
             RoomTypeBuilder.Seed(modelBuilder);
             MedicineGroupBuilder.Seed(modelBuilder);
+            SCountryBuilder.Seed(modelBuilder);
         }
     }
 }
