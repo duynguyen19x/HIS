@@ -135,7 +135,6 @@ namespace HIS.ApplicationService.Dictionaries.Country
                                      Id = r.Id,
                                      Code = r.Code,
                                      Name = r.Name,
-                                     Description = r.Description,
                                      Inactive = r.Inactive
                                  }).OrderBy(o => o.Code).ToList();
                 result.TotalCount = result.Result.Count;

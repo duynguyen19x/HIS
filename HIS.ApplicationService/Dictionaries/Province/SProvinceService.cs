@@ -43,7 +43,6 @@ namespace HIS.ApplicationService.Dictionaries.Province
                         Id = input.Id.GetValueOrDefault(),
                         Code = input.Code,
                         Name = input.Name,
-                        Description = input.Description,
                         Inactive = input.Inactive
                     };
                     _dbContext.SProvinces.Add(branch);
@@ -79,7 +78,6 @@ namespace HIS.ApplicationService.Dictionaries.Province
                         Id = input.Id.GetValueOrDefault(),
                         Code = input.Code,
                         Name = input.Name,
-                        Description = input.Description,
                         Inactive = input.Inactive
                     };
                     _dbContext.SProvinces.Update(job);
@@ -148,7 +146,6 @@ namespace HIS.ApplicationService.Dictionaries.Province
                                      Id = r.Id,
                                      Code = r.Code,
                                      Name = r.Name,
-                                     Description = r.Description,
                                      Inactive = r.Inactive
                                  }).OrderBy(o => o.Code).ToList();
                 result.TotalCount = result.Result.Count;
@@ -175,7 +172,6 @@ namespace HIS.ApplicationService.Dictionaries.Province
                     Id = branch.Id,
                     Code = branch.Code,
                     Name = branch.Name,
-                    Description = branch.Description,
                     Inactive = branch.Inactive
                 };
             }
