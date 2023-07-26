@@ -26,6 +26,9 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Đường dùng thuốc")]
         public Guid? MedicineLineId { get; set; }
 
+        [Description("Nhóm BHYT")]
+        public Guid? ServiceGroupHeInId { get; set; }
+
         [Description("Nhóm thuốc")]
         public Guid? MedicineGroupId { get; set; }
 
@@ -64,9 +67,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
 
         [Description("Diễn giải")]
         public string Description { get; set; }
-
-        [Description("Liều dùng")]
-        public string Dosage { get; set; }
 
         [Description("Ngưng sử dụng")]
         public bool Inactive { get; set; }
@@ -133,7 +133,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public string ProcessingLossRate { get; set; }
 
         [Description("Chi phí khác")]
-        public string OtherExpenses { get; set; }
+        public decimal? OtherExpenses { get; set; }
 
         [Description("Phương pháp chế biến")]
         public string PreparationMethod { get; set; }

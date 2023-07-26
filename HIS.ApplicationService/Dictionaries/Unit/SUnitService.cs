@@ -13,11 +13,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.ApplicationService.Dictionaries.ServiceUnit
+namespace HIS.ApplicationService.Dictionaries.Unit
 {
-    public class SServiceUnitService : BaseSerivce, ISServiceUnitService
+    public class SUnitService : BaseSerivce, ISUnitService
     {
-        public SServiceUnitService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper) : base(dbContext, config, mapper)
+        public SUnitService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper) : base(dbContext, config, mapper)
         {
         }
 
@@ -130,7 +130,6 @@ namespace HIS.ApplicationService.Dictionaries.ServiceUnit
             try
             {
                 result.Result = (from r in _dbContext.SServiceUnits
-                                 where (input.InactiveFilter == null || r.Inactive == !input.InactiveFilter)
                                  select new SUnitDto()
                                  {
                                      Id = r.Id,
@@ -138,7 +137,7 @@ namespace HIS.ApplicationService.Dictionaries.ServiceUnit
                                      Name = r.Name,
                                      Inactive = r.Inactive,
                                      SortOrder = r.SortOrder,
-                                 }).OrderBy(o => o.SortOrder).ToList();
+                                 }).WhereIf(input.InactiveFilter != null, w => w.Inactive == input.InactiveFilter).OrderBy(o => o.SortOrder).ToList();
 
                 result.TotalCount = result.Result.Count;
             }

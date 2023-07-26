@@ -129,7 +129,6 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroup
             try
             {
                 result.Result = (from r in _dbContext.SServiceGroups
-                                 where (input.InactiveFilter == null || r.Inactive == !input.InactiveFilter)
                                  select new SServiceGroupDto()
                                  {
                                      Id = r.Id,
@@ -137,7 +136,9 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroup
                                      Name = r.Name,
                                      Inactive = r.Inactive,
                                      SortOrder = r.SortOrder,
-                                 }).OrderBy(o => o.SortOrder).ToList();
+                                 })
+                                 .WhereIf(input.InactiveFilter != null, r => r.Inactive == input.InactiveFilter)
+                                 .OrderBy(o => o.SortOrder).ToList();
 
                 result.TotalCount = result.Result.Count;
             }

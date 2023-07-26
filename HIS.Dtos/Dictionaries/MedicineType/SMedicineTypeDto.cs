@@ -23,6 +23,9 @@ namespace HIS.Dtos.Dictionaries.MedicineType
         [Description("Thứ tự sắp xếp")]
         public int? SortOrder { get; set; }
 
+        [Description("Nhóm BHYT")]
+        public Guid? ServiceGroupHeInId { get; set; }
+
         [Description("Đường dùng thuốc")]
         public Guid? MedicineLineId { get; set; }
 
@@ -65,11 +68,78 @@ namespace HIS.Dtos.Dictionaries.MedicineType
         [Description("Diễn giải")]
         public string Description { get; set; }
 
-        [Description("Liều dùng")]
-        public string Dosage { get; set; }
-
         [Description("Ngưng sử dụng")]
         public bool Inactive { get; set; }
+
+        [Description("Thuốc kháng sinh")]
+        public bool IsAntibiotics { get; set; }
+
+        [Description("Thuốc tân dược")]
+        public bool IsNewDrug { get; set; }
+
+        [Description("Thuốc kê đơn")]
+        public bool IsPrescriptionDrug { get; set; }
+
+        [Description("Dược phẩm chức năng")]
+        public bool IsNutraceutical { get; set; }
+
+        [Description("Thuốc Tài trợ")]
+        public bool IsSponsoredDrug { get; set; }
+
+        [Description("Thuốc khí dung")]
+        public bool IsInhalantDrug { get; set; }
+
+        [Description("Thuốc kê đơn trẻ em")]
+        public bool IsPrescriptionDrugForChildren { get; set; }
+
+        [Description("Vị thuốc YHCT")]
+        public bool IsTraditionalHerbalDrug { get; set; }
+
+        [Description("Chế phẩm YHCT")]
+        public bool IsTraditionalDrugFormulation { get; set; }
+
+        [Description("YC trả lại vỏ thuốc")]
+        public bool IsDrugContainerReturnRequest { get; set; }
+
+        [Description("Cho phép kê SL bằng 0")]
+        public bool IsAllowZeroQuantity { get; set; }
+
+        [Description("Thuốc phóng xạ")]
+        public bool IsRadiolabeledDrug { get; set; }
+
+        // Thông tin khác
+        [Description("Dạng bào chế")]
+        public string PharmaceuticalFormulation { get; set; }
+
+        [Description("Nguồn gốc")]
+        public string Origin { get; set; }
+
+        [Description("Tên khoa học vị thuốc")]
+        public string ScientificName { get; set; }
+
+        [Description("Tên KH của cây con, khoáng vật")]
+        public string ScientificNameChildren { get; set; }
+
+        [Description("Tình trạng dược liệu")]
+        public string DugStatus { get; set; }
+
+        [Description("Yêu cầu sử dụng dược liệu")]
+        public string RequirementUseDug { get; set; }
+
+        [Description("Bộ phận dược liệu sử dụng")]
+        public string PharmaceuticalDivision { get; set; }
+
+        [Description("Tỷ lệ hao hụt chế biến")]
+        public string ProcessingLossRate { get; set; }
+
+        [Description("Chi phí khác")]
+        public decimal? OtherExpenses { get; set; }
+
+        [Description("Phương pháp chế biến")]
+        public string PreparationMethod { get; set; }
+
+        [Description("Tiêu chuẩn chất lượng")]
+        public string QualityStandards { get; set; }
 
         public IList<SMedicineDto> SMedicines { get; set; }
     }

@@ -4,6 +4,7 @@ using HIS.EntityFrameworkCore.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(HIS_DbContext))]
-    partial class HIS_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20230726140057_Update-Table-01")]
+    partial class UpdateTable01
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -922,368 +925,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SMedicineLines", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("05a24915-0bed-4f61-b53d-b5e52482e44c"),
-                            Code = "1.01",
-                            Inactive = false,
-                            Name = "Uống",
-                            SortOrder = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("03bd1fdc-d2b8-4969-a029-5022ca68f31e"),
-                            Code = "1.02",
-                            Inactive = false,
-                            Name = "Ngậm",
-                            SortOrder = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("a29889f5-4943-4520-85fa-441c3ea9e979"),
-                            Code = "1.03",
-                            Inactive = false,
-                            Name = "Nhai",
-                            SortOrder = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("a26814e4-da59-4317-a297-5ca089ef2dad"),
-                            Code = "1.04",
-                            Inactive = false,
-                            Name = "Đặt dưới lưỡi",
-                            SortOrder = 4
-                        },
-                        new
-                        {
-                            Id = new Guid("5eada7db-843c-453b-8a44-3de2dacaa27b"),
-                            Code = "1.05",
-                            Inactive = false,
-                            Name = "Ngậm dưới lưỡi",
-                            SortOrder = 5
-                        },
-                        new
-                        {
-                            Id = new Guid("6f90ecfe-4ede-4241-918b-b18245208f56"),
-                            Code = "2.01",
-                            Inactive = false,
-                            Name = "Tiêm bặp",
-                            SortOrder = 6
-                        },
-                        new
-                        {
-                            Id = new Guid("5ef14843-323d-4fe9-a424-46ca3120fca9"),
-                            Code = "2.02",
-                            Inactive = false,
-                            Name = "Tiêm dưới da",
-                            SortOrder = 7
-                        },
-                        new
-                        {
-                            Id = new Guid("5d6b6689-0dc3-4f11-94ef-02d288cce18a"),
-                            Code = "2.03",
-                            Inactive = false,
-                            Name = "Tiêm trong da",
-                            SortOrder = 8
-                        },
-                        new
-                        {
-                            Id = new Guid("cae9f723-e795-48d5-9730-f19edceaa5b6"),
-                            Code = "2.04",
-                            Inactive = false,
-                            Name = "Tiêm tĩnh mạch",
-                            SortOrder = 9
-                        },
-                        new
-                        {
-                            Id = new Guid("febb52a6-15bc-4e28-bc84-e928b43b126b"),
-                            Code = "2.05",
-                            Inactive = false,
-                            Name = "Tiêm truyền tĩnh mạch",
-                            SortOrder = 10
-                        },
-                        new
-                        {
-                            Id = new Guid("d075055e-4ed2-4d37-82ae-c9c20cb4f08f"),
-                            Code = "2.06",
-                            Inactive = false,
-                            Name = "Tiêm vào ổ khớp",
-                            SortOrder = 11
-                        },
-                        new
-                        {
-                            Id = new Guid("d36d932c-00db-451d-9a02-a401dbd89408"),
-                            Code = "2.07",
-                            Inactive = false,
-                            Name = "Tiêm nội nhãn cầu",
-                            SortOrder = 12
-                        },
-                        new
-                        {
-                            Id = new Guid("e578f37b-9f1b-4098-8659-ac510ced491a"),
-                            Code = "2.08",
-                            Inactive = false,
-                            Name = "Tiêm trong dịch kích của mắt",
-                            SortOrder = 13
-                        },
-                        new
-                        {
-                            Id = new Guid("c6ffa735-8813-41ea-8984-5700dbee1ea7"),
-                            Code = "2.09",
-                            Inactive = false,
-                            Name = "Tiêm vào các khoang của cơ thế",
-                            SortOrder = 14
-                        },
-                        new
-                        {
-                            Id = new Guid("2f6e29a1-9a1f-44b0-8f9e-ea1c8716c23b"),
-                            Code = "2.10",
-                            Inactive = false,
-                            Name = "Tiêm",
-                            SortOrder = 15
-                        },
-                        new
-                        {
-                            Id = new Guid("65ca8fd8-fb9b-4dea-9c0e-c9a3b6b8fbd8"),
-                            Code = "2.11",
-                            Inactive = false,
-                            Name = "Tiêm động mạch khối u",
-                            SortOrder = 16
-                        },
-                        new
-                        {
-                            Id = new Guid("c0097373-f633-4bee-b670-2d2c35b5d172"),
-                            Code = "2.12",
-                            Inactive = false,
-                            Name = "Tiêm vào khoang tự nhiên",
-                            SortOrder = 17
-                        },
-                        new
-                        {
-                            Id = new Guid("13165217-8025-44e0-a92b-1f8318d56282"),
-                            Code = "2.13",
-                            Inactive = false,
-                            Name = "Tiêm vào khối u",
-                            SortOrder = 18
-                        },
-                        new
-                        {
-                            Id = new Guid("6edba7a9-20fe-49c0-9925-ba3b32ed32a0"),
-                            Code = "2.14",
-                            Inactive = false,
-                            Name = "Tiêm truyền tĩnh mạch",
-                            SortOrder = 19
-                        },
-                        new
-                        {
-                            Id = new Guid("41c24ffd-81f8-44f4-92f7-b3e5d418c8c7"),
-                            Code = "2.15",
-                            Inactive = false,
-                            Name = "Tiêm truyền",
-                            SortOrder = 20
-                        },
-                        new
-                        {
-                            Id = new Guid("2bd555b2-74ae-4b3f-9d27-de30e10bf16f"),
-                            Code = "3.01",
-                            Inactive = false,
-                            Name = "Bôi",
-                            SortOrder = 21
-                        },
-                        new
-                        {
-                            Id = new Guid("75017c25-2ad7-4cce-b206-38735fd3584d"),
-                            Code = "3.02",
-                            Inactive = false,
-                            Name = "Xoa ngoài",
-                            SortOrder = 22
-                        },
-                        new
-                        {
-                            Id = new Guid("71edc6f8-3db6-4375-9005-c5328627fa28"),
-                            Code = "3.03",
-                            Inactive = false,
-                            Name = "Dán trên da",
-                            SortOrder = 23
-                        },
-                        new
-                        {
-                            Id = new Guid("5a807206-9aef-481d-87b6-88f464e6fd46"),
-                            Code = "3.04",
-                            Inactive = false,
-                            Name = "Xịt ngoài da",
-                            SortOrder = 24
-                        },
-                        new
-                        {
-                            Id = new Guid("60f3158e-73f2-453f-af90-072b6b25c644"),
-                            Code = "3.05",
-                            Inactive = false,
-                            Name = "Dùng ngoài",
-                            SortOrder = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("cb51640d-bd7e-4cba-b64d-191d4162efa4"),
-                            Code = "4.01",
-                            Inactive = false,
-                            Name = "Đặt âm đạo",
-                            SortOrder = 25
-                        },
-                        new
-                        {
-                            Id = new Guid("3df25942-afc9-4ed5-88b3-a0ff7b0ad968"),
-                            Code = "4.02",
-                            Inactive = false,
-                            Name = "Đặt hậu môn",
-                            SortOrder = 26
-                        },
-                        new
-                        {
-                            Id = new Guid("49783593-80ca-4a9f-8ff9-5d359307498c"),
-                            Code = "4.03",
-                            Inactive = false,
-                            Name = "Thụt hậu môn - trực tràng",
-                            SortOrder = 27
-                        },
-                        new
-                        {
-                            Id = new Guid("d558492b-6628-40ca-aadf-5dda7701681a"),
-                            Code = "4.04",
-                            Inactive = false,
-                            Name = "Đặt",
-                            SortOrder = 28
-                        },
-                        new
-                        {
-                            Id = new Guid("7990c54f-dc34-4a62-a8da-201d22c1069d"),
-                            Code = "4.05",
-                            Inactive = false,
-                            Name = "Đặt tử cung",
-                            SortOrder = 29
-                        },
-                        new
-                        {
-                            Id = new Guid("8f65d7cf-bbd9-44f4-b556-20472aa4a5f0"),
-                            Code = "4.06",
-                            Inactive = false,
-                            Name = "Thụt",
-                            SortOrder = 30
-                        },
-                        new
-                        {
-                            Id = new Guid("229172a9-7464-4216-8b11-4e587e4c280c"),
-                            Code = "5.01",
-                            Inactive = false,
-                            Name = "Phun mù",
-                            SortOrder = 31
-                        },
-                        new
-                        {
-                            Id = new Guid("6cdf2301-9621-4f73-9c62-f48ab80245c8"),
-                            Code = "5.02",
-                            Inactive = false,
-                            Name = "Dạng hít",
-                            SortOrder = 32
-                        },
-                        new
-                        {
-                            Id = new Guid("0df82239-15dd-41ee-afc8-67cb51d5f3f6"),
-                            Code = "5.03",
-                            Inactive = false,
-                            Name = "Bột hít",
-                            SortOrder = 33
-                        },
-                        new
-                        {
-                            Id = new Guid("ca37423b-25c7-4a84-a32d-8767bf14352b"),
-                            Code = "5.04",
-                            Inactive = false,
-                            Name = "Xịt",
-                            SortOrder = 34
-                        },
-                        new
-                        {
-                            Id = new Guid("d81efde6-f750-4a66-adf3-a9092bb8ea9b"),
-                            Code = "5.05",
-                            Inactive = false,
-                            Name = "Khí dung",
-                            SortOrder = 35
-                        },
-                        new
-                        {
-                            Id = new Guid("b12f310c-c12a-4f8f-a9bd-ddd38b4eebcf"),
-                            Code = "5.06",
-                            Inactive = false,
-                            Name = "Đường hô hấp",
-                            SortOrder = 36
-                        },
-                        new
-                        {
-                            Id = new Guid("8d9cd0b1-2407-4cc3-9d94-314602e26508"),
-                            Code = "5.07",
-                            Inactive = false,
-                            Name = "Xịt mũi",
-                            SortOrder = 37
-                        },
-                        new
-                        {
-                            Id = new Guid("0c8ba522-0e4b-40a0-9d93-936f5350853e"),
-                            Code = "5.08",
-                            Inactive = false,
-                            Name = "Xịt họng",
-                            SortOrder = 38
-                        },
-                        new
-                        {
-                            Id = new Guid("7b3a86dc-9b0c-43f8-94a9-e4eec9916e30"),
-                            Code = "5.09",
-                            Inactive = false,
-                            Name = "Thuốc mũi",
-                            SortOrder = 39
-                        },
-                        new
-                        {
-                            Id = new Guid("1ef26d8f-57d7-423c-a8c6-e3a20a249b37"),
-                            Code = "6.01",
-                            Inactive = false,
-                            Name = "Nhỏ mũi",
-                            SortOrder = 40
-                        },
-                        new
-                        {
-                            Id = new Guid("e485d3cc-5a96-48c9-9ed3-8725bb0136ef"),
-                            Code = "6.02",
-                            Inactive = false,
-                            Name = "Nhỏ mắt",
-                            SortOrder = 41
-                        },
-                        new
-                        {
-                            Id = new Guid("379c8a46-145d-4956-af5d-2d48d9d55087"),
-                            Code = "6.03",
-                            Inactive = false,
-                            Name = "Tra mắt",
-                            SortOrder = 42
-                        },
-                        new
-                        {
-                            Id = new Guid("7d92b632-0ccf-4be5-a044-c3ee549fdb9f"),
-                            Code = "6.04",
-                            Inactive = false,
-                            Name = "Nhỏ tai",
-                            SortOrder = 43
-                        },
-                        new
-                        {
-                            Id = new Guid("08f7b3c2-09da-4b4a-9c98-75c8562807ee"),
-                            Code = "6.09",
-                            Inactive = false,
-                            Name = "Dung dịch",
-                            SortOrder = 44
-                        });
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMedicineType", b =>
@@ -1324,12 +965,15 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Dosage")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("DugStatus")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("HeInCode")
                         .HasMaxLength(50)
@@ -1384,8 +1028,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Manufacturer")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<Guid?>("MedicineGroupId")
                         .HasColumnType("uniqueidentifier");
@@ -1400,56 +1044,45 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Origin")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("OtherExpenses")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("OtherExpenses")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PackagingSpecifications")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("PharmaceuticalDivision")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PharmaceuticalFormulation")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PreparationMethod")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProcessingLossRate")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("QualityStandards")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RequirementUseDug")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("SServiceId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ScientificName")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ScientificNameChildren")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<Guid?>("ServiceGroupHeInId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("SortOrder")
                         .HasColumnType("int");
@@ -1458,8 +1091,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Tutorial")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<Guid?>("UnitId")
                         .HasColumnType("uniqueidentifier");

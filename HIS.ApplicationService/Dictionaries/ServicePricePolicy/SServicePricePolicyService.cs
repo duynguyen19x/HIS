@@ -32,13 +32,15 @@ namespace HIS.ApplicationService.Dictionaries.ServicePricePolicy
             try
             {
                 result.Result = (from r in _dbContext.SPatientTypes
-                                 where (input.InactiveFilter == null || r.Inactive == !input.InactiveFilter)
                                  select new SServicePricePolicyDto()
                                  {
                                      PatientTypeId = r.Id,
                                      PatientTypeCode = r.Code,
                                      PatientTypeName = r.Name,
-                                 }).OrderBy(o => o.PatientTypeCode).ToList();
+                                     Inactive = r.Inactive,
+                                 })
+                                 .WhereIf(input.InactiveFilter != null, w => w.Inactive == input.InactiveFilter)
+                                 .OrderBy(o => o.PatientTypeCode).ToList();
 
                 result.TotalCount = result.Result.Count;
             }

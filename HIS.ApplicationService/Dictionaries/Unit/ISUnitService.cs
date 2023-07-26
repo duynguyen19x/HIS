@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.ApplicationService.Dictionaries.ServiceUnit
+namespace HIS.ApplicationService.Dictionaries.Unit
 {
-    public  interface ISServiceUnitService : IBaseDictionaryService<SUnitDto, GetAllSUnitInput>
+    public  interface ISUnitService : IBaseDictionaryService<SUnitDto, GetAllSUnitInput>
     {
     }
 }

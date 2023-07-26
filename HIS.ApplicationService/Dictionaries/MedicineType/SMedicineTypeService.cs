@@ -6,10 +6,13 @@ using HIS.Dtos.Dictionaries.MedicineType;
 using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.Models.Commons;
+using HIS.Utilities.Helpers;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -44,6 +47,8 @@ namespace HIS.ApplicationService.Dictionaries.MedicineType
                 {
                     input.Id = Guid.NewGuid();
                     var medicineType = _mapper.Map<SMedicineType>(input);
+                    medicineType.CreatedDate = DateTime.Now;
+
                     _dbContext.SMedicineTypes.Add(medicineType);
                     await _dbContext.SaveChangesAsync();
 
@@ -196,15 +201,6 @@ namespace HIS.ApplicationService.Dictionaries.MedicineType
                 result.IsSuccessed = true;
                 result.Result = (from r in _dbContext.SMedicineTypes
                                  where r.IsDelete == false
-                                     && (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
-                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
-                                     && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
-                                     && ((input.MedicineLineIdFilter == null && input.MedicineLineIdFilter != Guid.Empty) || r.MedicineLineId == input.MedicineLineIdFilter)
-                                     && ((input.MedicineGroupIdFilter == null && input.MedicineGroupIdFilter != Guid.Empty) || r.MedicineGroupId == input.MedicineGroupIdFilter)
-                                     && ((input.UnitIdFilter == null && input.UnitIdFilter != Guid.Empty) || r.UnitId == input.UnitIdFilter)
-                                     && ((input.MedicineLineIdsFilter == null && input.MedicineLineIdsFilter.Count > 0) || input.MedicineLineIdsFilter.Contains(r.MedicineLineId))
-                                     && ((input.MedicineGroupIdsFilter == null && input.MedicineGroupIdsFilter.Count > 0) || input.MedicineGroupIdsFilter.Contains(r.MedicineGroupId))
-                                     && ((input.UnitIdsFilter == null && input.UnitIdsFilter.Count > 0) || input.UnitIdsFilter.Contains(r.UnitId))
                                  select new SMedicineTypeDto()
                                  {
                                      Id = r.Id,
@@ -212,23 +208,57 @@ namespace HIS.ApplicationService.Dictionaries.MedicineType
                                      HeInCode = r.HeInCode,
                                      Name = r.Name,
                                      SortOrder = r.SortOrder,
-                                     MedicineLineId = r.MedicineLineId,
-                                     MedicineGroupId = r.MedicineGroupId,
-                                     UnitId = r.UnitId,
-                                     Tutorial = r.Tutorial,
-                                     ActiveSubstance = r.ActiveSubstance,
-                                     Concentration = r.Concentration,
-                                     Content = r.Content,
-                                     CountryId = r.CountryId,
-                                     Manufacturer = r.Manufacturer,
-                                     PackagingSpecifications = r.PackagingSpecifications,
-                                     ImpPrice = r.ImpPrice,
-                                     ImpVatRate = r.ImpVatRate,
-                                     TaxRate = r.TaxRate,
                                      Description = r.Description,
-                                     Dosage = r.Dosage,
                                      Inactive = r.Inactive,
-                                 }).OrderBy(o => o.SortOrder).ToList();
+                                     MedicineLineId = r.MedicineLineId, //Đường dùng thuốc
+                                     MedicineGroupId = r.MedicineGroupId, // Nhóm thuốc
+                                     ServiceGroupHeInId = r.ServiceGroupHeInId, // Nhóm thuốc
+                                     UnitId = r.UnitId, // Đơn vị tính
+                                     Tutorial = r.Tutorial, // Hướng dẫn
+                                     ActiveSubstance = r.ActiveSubstance, // Hoạt chất
+                                     Concentration = r.Concentration, // Nồng độ
+                                     Content = r.Content, // Hàm lượng
+                                     CountryId = r.CountryId, // Nước sản xuất
+                                     Manufacturer = r.Manufacturer, // Hãng sản xuất
+                                     PackagingSpecifications = r.PackagingSpecifications, // Quy cách đóng gói
+                                     ImpPrice = r.ImpPrice, // Giá nhập
+                                     ImpVatRate = r.ImpVatRate, // Phần trăm vat giá nhập
+                                     TaxRate = r.TaxRate, // Phần trăm thuế
+                                     IsAntibiotics = r.IsAntibiotics, // Thuốc kháng sinh
+                                     IsNewDrug = r.IsNewDrug, // Thuốc tân dược
+                                     IsPrescriptionDrug = r.IsPrescriptionDrug, // Thuốc kê đơn
+                                     IsNutraceutical = r.IsNutraceutical, // Dược phẩm chức năng
+                                     IsSponsoredDrug = r.IsSponsoredDrug, // Thuốc Tài trợ
+                                     IsInhalantDrug = r.IsInhalantDrug, // Thuốc khí dung
+                                     IsPrescriptionDrugForChildren = r.IsPrescriptionDrugForChildren, // Thuốc kê đơn trẻ em
+                                     IsTraditionalHerbalDrug = r.IsTraditionalHerbalDrug, // Vị thuốc YHCT
+                                     IsTraditionalDrugFormulation = r.IsTraditionalDrugFormulation, // Chế phẩm YHCT
+                                     IsDrugContainerReturnRequest = r.IsDrugContainerReturnRequest, // YC trả lại vỏ thuốc
+                                     IsAllowZeroQuantity = r.IsAllowZeroQuantity, // Cho phép kê SL bằng 0
+                                     IsRadiolabeledDrug = r.IsRadiolabeledDrug, // Thuốc phóng xạ
+
+                                     // Thông tin khác
+                                     PharmaceuticalFormulation = r.PharmaceuticalFormulation, // Dạng bào chế
+                                     Origin = r.Origin, // Nguồn gốc
+                                     ScientificName = r.ScientificName, // Tên khoa học vị thuốc
+                                     ScientificNameChildren = r.ScientificNameChildren, // Tên KH của cây con, khoáng vật
+                                     DugStatus = r.DugStatus, // Tình trạng dược liệu
+                                     RequirementUseDug = r.RequirementUseDug, // Yêu cầu sử dụng dược liệu
+                                     PharmaceuticalDivision = r.PharmaceuticalDivision, // Bộ phận dược liệu sử dụng
+                                     ProcessingLossRate = r.ProcessingLossRate, // Tỷ lệ hao hụt chế biến
+                                     OtherExpenses = r.OtherExpenses, // Chi phí khác
+                                     PreparationMethod = r.PreparationMethod, // Phương pháp chế biến
+                                     QualityStandards = r.QualityStandards, // Tiêu chuẩn chất lượng
+                                 }).WhereIf(!string.IsNullOrEmpty(input.NameFilter), w => w.Name == input.NameFilter)
+                                 .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), w => w.Code == input.CodeFilter)
+                                 .WhereIf(input.InactiveFilter != null, w => w.Inactive == input.InactiveFilter)
+                                 .WhereIf(!GuidHelper.IsNullOrEmpty(input.MedicineLineIdFilter), w => w.MedicineLineId == input.MedicineLineIdFilter)
+                                 .WhereIf(!GuidHelper.IsNullOrEmpty(input.MedicineGroupIdFilter), w => w.MedicineGroupId == input.MedicineGroupIdFilter)
+                                 .WhereIf(!GuidHelper.IsNullOrEmpty(input.UnitIdFilter), w => w.UnitId == input.UnitIdFilter)
+                                 .WhereIf(input.MedicineLineIdsFilter != null && input.MedicineLineIdsFilter.Count > 0, w => input.MedicineLineIdsFilter.Contains(w.MedicineLineId))
+                                 .WhereIf(input.MedicineGroupIdsFilter != null && input.MedicineGroupIdsFilter.Count > 0, w => input.MedicineGroupIdsFilter.Contains(w.MedicineGroupId))
+                                 .WhereIf(input.UnitIdsFilter != null && input.UnitIdsFilter.Count > 0, w => input.UnitIdsFilter.Contains(w.UnitId))
+                                 .OrderBy(o => o.SortOrder).ToList();
 
                 result.TotalCount = result.Result.Count;
             }

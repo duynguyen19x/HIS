@@ -8,6 +8,7 @@ using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Models.Commons;
+using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -183,9 +184,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineGroup
             {
                 result.IsSuccessed = true;
                 result.Result = (from r in _dbContext.SMedicineGroups
-                                 where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
-                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
-                                     && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
+
                                  select new SMedicineGroupDto()
                                  {
                                      Id = r.Id,
@@ -194,7 +193,11 @@ namespace HIS.ApplicationService.Dictionaries.MedicineGroup
                                      SortOrder = r.SortOrder,
                                      IsSystem = r.IsSystem,
                                      Inactive = r.Inactive
-                                 }).OrderBy(o => o.SortOrder).ToList();
+                                 })
+                                 .WhereIf(!string.IsNullOrEmpty(input.NameFilter), r => r.Name == input.NameFilter)
+                                 .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), r => r.Code == input.CodeFilter)
+                                 .WhereIf(input.InactiveFilter != null, r => r.Inactive == input.InactiveFilter)
+                                 .OrderBy(o => o.SortOrder).ToList();
 
                 result.TotalCount = result.Result.Count;
             }

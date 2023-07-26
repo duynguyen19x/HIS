@@ -1,21 +1,18 @@
-﻿using HIS.ApplicationService.Dictionaries.ServiceGroupHeIn;
-using HIS.ApplicationService.Dictionaries.ServiceUnit;
+﻿using HIS.ApplicationService.Dictionaries.Unit;
 using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.ServiceGroupHeIn;
 using HIS.Dtos.Dictionaries.ServiceUnit;
 using HIS.Models.Commons;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SServiceUnitController : ControllerBase
+    public class SUnitController : ControllerBase
     {
-        private readonly ISServiceUnitService _sServiceUnitService;
+        private readonly ISUnitService _sServiceUnitService;
 
-        public SServiceUnitController(ISServiceUnitService sServiceUnitService)
+        public SUnitController(ISUnitService sServiceUnitService)
         {
             _sServiceUnitService = sServiceUnitService;
         }

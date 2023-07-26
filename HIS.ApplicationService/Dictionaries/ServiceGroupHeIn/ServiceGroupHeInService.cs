@@ -123,7 +123,6 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroupHeIn
             try
             {
                 result.Result = (from r in _dbContext.SServiceGroupHeIns
-                                 where (input.InactiveFilter == null || r.Inactive == !input.InactiveFilter)
                                  select new SServiceGroupHeInDto()
                                  {
                                      Id = r.Id,
@@ -131,7 +130,9 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroupHeIn
                                      Name = r.Name,
                                      Inactive = r.Inactive,
                                      SortOrder = r.SortOrder,
-                                 }).OrderBy(o => o.SortOrder).ToList();
+                                 })
+                                 .WhereIf(input.InactiveFilter != null, w => w.Inactive == input.InactiveFilter)
+                                 .OrderBy(o => o.SortOrder).ToList();
 
                 result.TotalCount = result.Result.Count;
             }

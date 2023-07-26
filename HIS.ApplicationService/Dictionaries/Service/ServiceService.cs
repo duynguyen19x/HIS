@@ -272,8 +272,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                  join r2 in _dbContext.SServiceGroups on r.ServiceGroupId equals r2.Id
                                  join r3 in _dbContext.SServiceGroupHeIns on r.ServiceGroupHeInId equals r3.Id
 
-                                 where (input.InactiveFilter == null || r.Inactive == !input.InactiveFilter)
-                                 where (r.IsDelete == false)
+                                 where r.IsDelete == false
                                  select new SServiceDto()
                                  {
                                      Id = r.Id,
@@ -284,7 +283,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                      Inactive = r.Inactive,
                                      ServiceGroupId = r.ServiceGroupId,
                                      ServiceGroupHeInId = r.ServiceGroupId,
-                                     ServiceUnitId = r.UnitId,
+                                     UnitId = r.UnitId,
                                      SurgicalProcedureTypeId = r.SurgicalProcedureTypeId,
 
                                      ServiceUnitCode = r1.Code,
@@ -293,7 +292,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                      ServiceGroupName = r2.Name,
                                      ServiceGroupHeInCode = r3.Name,
                                      ServiceGroupHeInName = r3.Name,
-                                 }).OrderBy(o => o.Code).ToList();
+                                 }).WhereIf(input.InactiveFilter != null, w => w.Inactive == input.InactiveFilter).OrderBy(o => o.Code).ToList();
 
                 result.TotalCount = result.Result.Count;
             }

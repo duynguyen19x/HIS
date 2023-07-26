@@ -17,6 +17,7 @@ namespace HIS.EntityFrameworkCore.Data
             DepartmentTypeBuilder.Seed(modelBuilder);
             RoomTypeBuilder.Seed(modelBuilder);
             MedicineGroupBuilder.Seed(modelBuilder);
+            MedicineLineBuilder.Seed(modelBuilder);
             SCountryBuilder.Seed(modelBuilder);
         }
     }

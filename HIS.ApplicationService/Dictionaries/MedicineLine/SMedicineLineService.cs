@@ -5,6 +5,7 @@ using HIS.Dtos.Dictionaries.MedicineType;
 using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.Models.Commons;
+using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -125,16 +126,18 @@ namespace HIS.ApplicationService.Dictionaries.MedicineLine
             try
             {
                 result.Result = (from r in _dbContext.SMedicineLines
-                                 where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
-                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
-                                     && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
                                  select new MedicineLineDto()
                                  {
                                      Id = r.Id,
                                      Code = r.Code,
                                      Name = r.Name,
-                                     Inactive = r.Inactive
-                                 }).ToList();
+                                     Inactive = r.Inactive,
+                                     SortOrder = r.SortOrder
+                                 })
+                                 .WhereIf(!string.IsNullOrEmpty(input.NameFilter), r => r.Name == input.NameFilter)
+                                 .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), r => r.Code == input.CodeFilter)
+                                 .WhereIf(input.InactiveFilter != null, r => r.Inactive == input.InactiveFilter)
+                                 .OrderBy(o => o.SortOrder).ToList();
 
                 result.TotalCount = result.Result.Count;
             }

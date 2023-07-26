@@ -21,5 +21,7 @@ namespace HIS.Dtos.Dictionaries.ServicePricePolicy
         public bool IsHeIn { get; set; }
         public string PatientTypeCode { get; set; }
         public string PatientTypeName { get; set; }
+
+        public bool Inactive { get; set; }
     }
 }
