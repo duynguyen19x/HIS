@@ -220,6 +220,8 @@ namespace HIS.ApplicationService.Dictionaries.MedicineType
                                      Content = r.Content, // Hàm lượng
                                      CountryId = r.CountryId, // Nước sản xuất
                                      Manufacturer = r.Manufacturer, // Hãng sản xuất
+                                     RegistrationNumber = r.RegistrationNumber, // Số đăng ký
+                                     ProprietaryDrug = r.ProprietaryDrug, // Biệt dược
                                      PackagingSpecifications = r.PackagingSpecifications, // Quy cách đóng gói
                                      ImpPrice = r.ImpPrice, // Giá nhập
                                      ImpVatRate = r.ImpVatRate, // Phần trăm vat giá nhập

@@ -25,6 +25,8 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.Property(x => x.Concentration).HasMaxLength(250);
             builder.Property(x => x.Content).HasMaxLength(250);
             builder.Property(x => x.Manufacturer).HasMaxLength(512);
+            builder.Property(x => x.RegistrationNumber).HasMaxLength(512);
+            builder.Property(x => x.ProprietaryDrug).HasMaxLength(512);
             builder.Property(x => x.PackagingSpecifications).HasMaxLength(512);
             builder.Property(x => x.Origin).HasMaxLength(512);
             builder.Property(x => x.ScientificName).HasMaxLength(512);

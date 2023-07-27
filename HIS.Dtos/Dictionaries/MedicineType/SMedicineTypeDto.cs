@@ -53,6 +53,12 @@ namespace HIS.Dtos.Dictionaries.MedicineType
         [Description("Hãng sản xuất")]
         public string Manufacturer { get; set; }
 
+        [Description("Số đăng ký")]
+        public string RegistrationNumber { get; set; }
+
+        [Description("Biệt dược")]
+        public string ProprietaryDrug { get; set; }
+
         [Description("Quy cách đóng gói")]
         public string PackagingSpecifications { get; set; }
 
