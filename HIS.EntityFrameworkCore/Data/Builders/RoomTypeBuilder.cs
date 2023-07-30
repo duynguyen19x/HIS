@@ -89,15 +89,15 @@ namespace HIS.EntityFrameworkCore.Data.Builders
                 new SRoomType()
                 {
                     Id = (int)RoomTypes.OutpatientInventory,
-                    Code = "KHO-VT-NgT",
-                    Name = "Kho VTYT ngoại trú",
+                    Code = "KHO-VTYT",
+                    Name = "Kho vật tự y tế",
                     SortOrder = (int)RoomTypes.OutpatientInventory
                 },
                 new SRoomType()
                 {
                     Id = (int)RoomTypes.InpatientInventory,
-                    Code = "KHO-VT-NT",
-                    Name = "Kho VTYT nội trú",
+                    Code = "KHO-MAU",
+                    Name = "Kho máu",
                     SortOrder = (int)RoomTypes.InpatientInventory
                 },
                 new SRoomType()

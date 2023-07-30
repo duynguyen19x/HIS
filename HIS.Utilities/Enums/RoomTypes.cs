@@ -42,11 +42,11 @@ namespace HIS.Utilities.Enums
         [Description("Tủ trực thuốc")]
         EmergencyCabinet,
 
-        [Description("Kho VTYT ngoại trú")]
+        [Description("Kho VTYT")]
         OutpatientInventory,
 
-        [Description("Kho VTYT nội trú")]
-        InpatientInventory,
+        [Description("Kho máu")]
+        BloodBack,
 
         [Description("Tủ trực VTYT")]
         InventoryCabinet,
