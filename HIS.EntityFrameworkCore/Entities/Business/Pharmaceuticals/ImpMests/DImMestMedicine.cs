@@ -1,7 +1,4 @@
 ﻿using HIS.EntityFrameworkCore.BaseEntitys;
-using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
-using HIS.EntityFrameworkCore.Entities.Categories.Services;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Categories
+namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
 {
-    public class SMedicine : FullAuditingEntity<Guid>
+    public class DImMestMedicine: Entity<Guid>
     {
         [Description("Mã thuốc")]
         public string Code { get; set; }
@@ -33,6 +30,9 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
 
         [Description("Nhóm thuốc")]
         public Guid? MedicineTypeId { get; set; }
+
+        [Description("Thuốc")]
+        public Guid? MedicineId { get; set; }
 
         [Description("Đơn vị tính")]
         public Guid? UnitId { get; set; }
@@ -73,9 +73,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Quy cách đóng gói")]
         public string PackagingSpecifications { get; set; }
 
-        [Description("Liều dùng")]
-        public string Dosage { get; set; }
-
         [Description("Lô")]
         public string Lot { get; set; }
 
@@ -92,15 +89,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public string TenderGroup { get; set; }
 
         [Description("Năm thầu")]
-        public int? TenderYear { get; set; }
-
-        [Description("Ngưng sử dụng")]
-        public bool Inactive { get; set; }
-
-        public SMedicineType SMedicineType { get; set; }
-        public SUnit SUnit { get; set; }
-        public SMedicineLine SMedicineLine { get; set; }
-        public SCountry SCountry { get; set; }
-        public IList<SMedicinePricePolicy> SMedicinePricePolicies { get; set; }
+        public string TenderYear { get; set; }
     }
 }

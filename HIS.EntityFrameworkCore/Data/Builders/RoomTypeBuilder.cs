@@ -95,10 +95,10 @@ namespace HIS.EntityFrameworkCore.Data.Builders
                 },
                 new SRoomType()
                 {
-                    Id = (int)RoomTypes.InpatientInventory,
+                    Id = (int)RoomTypes.BloodBack,
                     Code = "KHO-MAU",
                     Name = "Kho máu",
-                    SortOrder = (int)RoomTypes.InpatientInventory
+                    SortOrder = (int)RoomTypes.BloodBack
                 },
                 new SRoomType()
                 {

@@ -1,4 +1,8 @@
 ﻿using HIS.EntityFrameworkCore.BaseEntitys;
+using HIS.EntityFrameworkCore.Entities.Business.Patients;
+using HIS.EntityFrameworkCore.Entities.Business.Treatment;
+using HIS.EntityFrameworkCore.Entities.Categories;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Utilities.Enums;
 using System;
 using System.Collections.Generic;
@@ -70,5 +74,16 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
         /// NGười giao
         /// </summary>
         public string Deliverer { get; set; }
+
+        public SRoom ImStock { get; set; }
+        public SRoom ExStock { get; set; }
+        public DImExMestType DImExMestType { get; set; }
+        public SUser ReceiverUser { get; set; }
+        public SUser ApproverUser { get; set; }
+        public SRoom ReqRoom { get; set; }
+        public SDepartment ReqDepartment { get; set; }
+        public STreatment STreatment { get; set; }
+        public SPatient SPatient { get; set; }
+        public SSupplier SSupplier { get; set; }
     }
 }

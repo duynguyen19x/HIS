@@ -18,7 +18,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public string Name { get; set; }
         public bool Inactive { get; set; }
 
-        public virtual IList<SProvince> Provinces { get; set; }
+        public virtual IList<SProvince> SProvinces { get; set; }
         public virtual IList<SMedicine> SMedicines { get; set; }
         public virtual IList<SMedicineType> SMedicineTypes { get; set; }
     }

@@ -62,6 +62,8 @@ namespace HIS.EntityFrameworkCore.DbContexts
             modelBuilder.ApplyConfiguration(new ExecutionRoomConfiguration());
 
             modelBuilder.ApplyConfiguration(new TreatmentConfiguration());
+            modelBuilder.ApplyConfiguration(new ImExMestTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ImMestConfiguration());
 
             modelBuilder.Seed();
         }
