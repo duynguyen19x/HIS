@@ -1,13 +1,13 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
+﻿using HIS.Dtos.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionaries
+namespace HIS.Dtos.Dictionaries.Supplier
 {
-    public class SSupplier : FullAuditingEntity<Guid>
+    public class SSupplierDto : EntityDto<Guid?>
     {
         public string Code { get; set; }
         public string Name { get; set; }

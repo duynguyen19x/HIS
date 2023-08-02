@@ -19,6 +19,7 @@ using HIS.ApplicationService.Dictionaries.Service;
 using HIS.ApplicationService.Dictionaries.ServiceGroup;
 using HIS.ApplicationService.Dictionaries.ServiceGroupHeIn;
 using HIS.ApplicationService.Dictionaries.ServicePricePolicy;
+using HIS.ApplicationService.Dictionaries.Supplier;
 using HIS.ApplicationService.Dictionaries.SurgicalProcedureType;
 using HIS.ApplicationService.Dictionaries.Unit;
 using HIS.ApplicationService.Dictionaries.Ward;
@@ -56,6 +57,7 @@ namespace HIS.ApplicationService
             services.AddTransient<IServiceGroupService, ServiceGroupService>();
             services.AddTransient<IServiceGroupHeInService, ServiceGroupHeInService>();
             services.AddTransient<ISUnitService, SUnitService>();
+            services.AddTransient<ISSupplierService, SSupplierService>();
 
             services.AddTransient<ISMedicineGroupService, SMedicineGroupService>();
             services.AddTransient<ISMedicineTypeService, SMedicineTypeService>();

@@ -22,9 +22,11 @@ using HIS.Dtos.Dictionaries.ServiceGroupHeIn;
 using HIS.Dtos.Dictionaries.ServicePricePolicy;
 using HIS.Dtos.Dictionaries.ServiceResultIndex;
 using HIS.Dtos.Dictionaries.ServiceUnit;
+using HIS.Dtos.Dictionaries.Supplier;
 using HIS.Dtos.Dictionaries.Ward;
 using HIS.Dtos.Systems.Role;
 using HIS.EntityFrameworkCore.Entities.Business.Patients;
+using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
 using HIS.EntityFrameworkCore.Entities.Business.Treatment;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
@@ -108,6 +110,12 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.SCountry, opt => opt.Ignore())
                 .ForMember(dest => dest.SMedicines, opt => opt.Ignore())
                 .ReverseMap();
+
+            CreateMap<SSupplierDto, SSupplier>()
+                .ReverseMap();
+
+            //CreateMap<DImMest, DImMest>()
+            //    .ReverseMap();
         }
     }
 }

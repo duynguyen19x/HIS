@@ -102,6 +102,7 @@ namespace HIS.EntityFrameworkCore.DbContexts
         public DbSet<SProvince> SProvinces { get; set; }
         public DbSet<SDistrict> SDistricts { get; set; }
         public DbSet<SWard> SWards { get; set; }
+        public DbSet<SSupplier> SSuppliers { get; set; }
 
         public DbSet<SServicePricePolicy> SServicePricePolicies { get; set; }
         public DbSet<SSurgicalProcedureType> SSurgicalProcedureTypes { get; set; }
