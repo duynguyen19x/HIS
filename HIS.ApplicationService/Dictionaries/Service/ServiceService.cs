@@ -5,10 +5,10 @@ using HIS.Dtos.Dictionaries.Room;
 using HIS.Dtos.Dictionaries.Service;
 using HIS.Dtos.Dictionaries.ServicePricePolicy;
 using HIS.Dtos.Dictionaries.ServiceResultIndex;
-using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;
@@ -29,7 +29,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
 {
     public class ServiceService : BaseSerivce, IServiceService
     {
-        public ServiceService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper) : base(dbContext, config, mapper)
+        public ServiceService(HISDbContext dbContext, IConfiguration config, IMapper mapper) : base(dbContext, config, mapper)
         {
         }
 

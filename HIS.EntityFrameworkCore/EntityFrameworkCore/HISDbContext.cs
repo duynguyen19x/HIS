@@ -11,11 +11,11 @@ using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using Microsoft.EntityFrameworkCore;
 
-namespace HIS.EntityFrameworkCore.DbContexts
+namespace HIS.EntityFrameworkCore.EntityFrameworkCore
 {
-    public class HIS_DbContext : DbContext
+    public class HISDbContext : DbContext
     {
-        public HIS_DbContext(DbContextOptions options) : base(options)
+        public HISDbContext(DbContextOptions options) : base(options)
         {
 
         }

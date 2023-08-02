@@ -2,7 +2,6 @@
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Icd;
 using HIS.Dtos.Dictionaries.Career;
-using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
@@ -11,12 +10,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 
 namespace HIS.ApplicationService.Dictionaries.Icd
 {
     public class SIcdService : BaseSerivce, ISIcdService
     {
-        public SIcdService(HIS_DbContext dbContext, IConfiguration config)
+        public SIcdService(HISDbContext dbContext, IConfiguration config)
             : base(dbContext, config)
         {
 

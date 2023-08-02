@@ -24,6 +24,9 @@ using HIS.ApplicationService.Dictionaries.Unit;
 using HIS.ApplicationService.Dictionaries.Ward;
 using HIS.ApplicationService.Systems.Login;
 using HIS.ApplicationService.Systems.Role;
+using HIS.Core.Repositories;
+using HIS.EntityFrameworkCore.Entities.Business.Patients;
+using HIS.EntityFrameworkCore.EntityFrameworkCore.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HIS.ApplicationService
@@ -32,6 +35,8 @@ namespace HIS.ApplicationService
     {
         public static void ServiceCollection(this IServiceCollection services)
         {
+            services.AddTransient<IRepository<SPatient, Guid>, BaseRepository<SPatient, Guid>>();
+
             services.AddTransient<ILoginService, LoginService>();
             services.AddTransient<IRoleService, RoleService>();
 
@@ -61,7 +66,7 @@ namespace HIS.ApplicationService
             services.AddTransient<ISMedicineTypeService, SMedicineTypeService>();
             services.AddTransient<ISMedicineLineService, SMedicineLineService>();
 
-            services.AddTransient<ISPatientService, SPatientService>();
+            services.AddTransient<ISPatientService, SPatientAppService>();
         }
     }
 }

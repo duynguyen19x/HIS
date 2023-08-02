@@ -1,4 +1,4 @@
-﻿using HIS.EntityFrameworkCore.DbContexts;
+﻿using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -67,10 +67,10 @@ namespace HIS.EntityFrameworkCore.BaseEntitys
 
     public class Repository<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class
     {
-        private readonly HIS_DbContext _dbContext;
+        private readonly HISDbContext _dbContext;
         private readonly DbSet<TEntity> _dbSet;
 
-        public Repository(HIS_DbContext dbContext)
+        public Repository(HISDbContext dbContext)
         {
             _dbContext = dbContext;
             _dbSet = _dbContext.Set<TEntity>();

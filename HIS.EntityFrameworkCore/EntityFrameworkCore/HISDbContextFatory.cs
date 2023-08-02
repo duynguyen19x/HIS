@@ -7,11 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.DbContexts
+namespace HIS.EntityFrameworkCore.EntityFrameworkCore
 {
-    public class HIS_DbContextFatory : IDesignTimeDbContextFactory<HIS_DbContext>
+    public class HISDbContextFatory : IDesignTimeDbContextFactory<HISDbContext>
     {
-        public HIS_DbContext CreateDbContext(string[] args)
+        public HISDbContext CreateDbContext(string[] args)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
@@ -20,10 +20,10 @@ namespace HIS.EntityFrameworkCore.DbContexts
 
             var connectionString = configuration.GetConnectionString("HIS");
 
-            var optionsBuilder = new DbContextOptionsBuilder<HIS_DbContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<HISDbContext>();
             optionsBuilder.UseSqlServer(connectionString);
 
-            return new HIS_DbContext(optionsBuilder.Options);
+            return new HISDbContext(optionsBuilder.Options);
         }
     }
 }

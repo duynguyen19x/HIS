@@ -1,7 +1,7 @@
 ﻿using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Ethnic;
-using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
 
@@ -9,7 +9,7 @@ namespace HIS.ApplicationService.Dictionaries.Ethnic
 {
     public class SEthnicService : BaseSerivce, ISEthnicService
     {
-        public SEthnicService(HIS_DbContext dbContext, IConfiguration config)
+        public SEthnicService(HISDbContext dbContext, IConfiguration config)
             : base(dbContext, config)
         {
 

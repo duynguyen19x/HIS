@@ -1,6 +1,6 @@
 ﻿using HIS.Dtos.Commons;
 using HIS.Dtos.Systems.Role;
-using HIS.EntityFrameworkCore.DbContexts;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -13,10 +13,10 @@ namespace HIS.ApplicationService.Systems.Role
 {
     public class RoleService : IRoleService
     {
-        private readonly HIS_DbContext _dbContext;
+        private readonly HISDbContext _dbContext;
         private readonly IConfiguration _config;
 
-        public RoleService(HIS_DbContext dbContext, IConfiguration config)
+        public RoleService(HISDbContext dbContext, IConfiguration config)
         {
             _dbContext = dbContext;
             _config = config;

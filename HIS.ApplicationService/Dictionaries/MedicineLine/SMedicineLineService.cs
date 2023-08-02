@@ -2,8 +2,8 @@
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.MedicineLine;
 using HIS.Dtos.Dictionaries.MedicineType;
-using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Categories;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
@@ -17,7 +17,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineLine
 {
     public class SMedicineLineService : BaseSerivce, ISMedicineLineService
     {
-        public SMedicineLineService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper)
+        public SMedicineLineService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
           : base(dbContext, config, mapper)
         {
 

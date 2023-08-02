@@ -2,7 +2,6 @@
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Country;
 using HIS.Dtos.Dictionaries.Career;
-using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
@@ -12,12 +11,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 
 namespace HIS.ApplicationService.Dictionaries.Country
 {
     public class SCountryService : BaseSerivce, ISCountryService
     {
-        public SCountryService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper)
+        public SCountryService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
             : base(dbContext, config, mapper)
         {
 

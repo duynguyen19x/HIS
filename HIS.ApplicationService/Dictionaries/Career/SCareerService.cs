@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Career;
-using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
 
@@ -10,7 +10,7 @@ namespace HIS.ApplicationService.Dictionaries.Career
 {
     public class SCareerService : BaseSerivce, ISCareerService
     {
-        public SCareerService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper)
+        public SCareerService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
             : base(dbContext, config, mapper)
         {
         }
