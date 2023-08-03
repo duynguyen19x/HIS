@@ -5,6 +5,8 @@ using HIS.Dtos.Dictionaries.Room;
 using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Models.Commons;
+using HIS.Utilities.Enums;
+using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -193,6 +195,45 @@ namespace HIS.ApplicationService.Dictionaries.Room
             }
             catch (Exception ex)
             {
+                result.Message = ex.Message;
+            }
+
+            return await Task.FromResult(result);
+        }
+
+        public async Task<ApiResultList<SRoomDto>> GetByStocks()
+        {
+            var result = new ApiResultList<SRoomDto>();
+            try
+            {
+                result.Result = (from r in _dbContext.SRooms
+                                 join t in _dbContext.SRoomTypes on r.RoomTypeId equals t.Id
+                                 join d in _dbContext.SDepartments on r.DepartmentId equals d.Id
+                                 where d.DepartmentTypeId == (int)DepartmentTypes.PharmacyDepartment
+                                 select new SRoomDto()
+                                 {
+                                     Id = r.Id,
+                                     Code = r.Code,
+                                     MohCode = r.MohCode,
+                                     Name = r.Name,
+                                     RoomTypeId = r.RoomTypeId,
+                                     RoomTypeCode = t.Code,
+                                     RoomTypeName = t.Name,
+                                     DepartmentId = r.DepartmentId,
+                                     DepartmentCode = d.Code,
+                                     DepartmentName = d.Name,
+                                     Description = r.Description,
+                                     SortOrder = r.SortOrder,
+                                     Inactive = r.Inactive
+                                 })
+                                 .OrderBy(o => o.SortOrder)
+                                 .ThenBy(o => o.Code)
+                                 .ToList();
+                result.TotalCount = result.Result.Count;
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccessed = false;
                 result.Message = ex.Message;
             }
 

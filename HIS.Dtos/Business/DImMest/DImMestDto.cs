@@ -1,13 +1,10 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
-using HIS.EntityFrameworkCore.Entities.Business.Patients;
-using HIS.EntityFrameworkCore.Entities.Business.Treatment;
-using HIS.EntityFrameworkCore.Entities.Categories;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+﻿using HIS.Dtos.Base;
+using HIS.Dtos.Business.DImMestMedicine;
 using HIS.Utilities.Enums;
 
-namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
+namespace HIS.Dtos.Business.DImMest
 {
-    public class DImMest : FullAuditingEntity<Guid>
+    public class DImMestDto : EntityDto<Guid?>
     {
         public string Code { get; set; }
         public string Name { get; set; }
@@ -70,17 +67,6 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
         /// </summary>
         public string Deliverer { get; set; }
 
-        public SRoom ImStock { get; set; }
-        public SRoom ExStock { get; set; }
-        public DImExMestType DImExMestType { get; set; }
-        public SUser ReceiverUser { get; set; }
-        public SUser ApproverUser { get; set; }
-        public SRoom ReqRoom { get; set; }
-        public SDepartment ReqDepartment { get; set; }
-        public STreatment STreatment { get; set; }
-        public SPatient SPatient { get; set; }
-        public SSupplier SSupplier { get; set; }
-
-        public IList<DImMestMedicine> DImMestMedicines { get; set; }
+        public IList<DImMestMedicineDto> DImMestMedicines { get; set; }
     }
 }

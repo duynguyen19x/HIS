@@ -1,4 +1,5 @@
-﻿using HIS.Dtos.Dictionaries.MedicineType;
+﻿using HIS.Dtos.Base;
+using HIS.Dtos.Dictionaries.MedicineType;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HIS.Dtos.Dictionaries.Medicine
 {
-    public class SMedicineDto
+    public class SMedicineDto: EntityDto<Guid?>
     {
         [Description("Mã thuốc")]
         public string Code { get; set; }
@@ -20,7 +21,7 @@ namespace HIS.Dtos.Dictionaries.Medicine
         public string Name { get; set; }
 
         [Description("Thứ tự sắp xếp")]
-        public int? SoftOrder { get; set; }
+        public int? SortOrder { get; set; }
 
         [Description("Đường dùng thuốc")]
         public Guid? MedicineLineId { get; set; }
@@ -72,6 +73,24 @@ namespace HIS.Dtos.Dictionaries.Medicine
 
         [Description("Liều dùng")]
         public string Dosage { get; set; }
+
+        [Description("Lô")]
+        public string Lot { get; set; }
+
+        [Description("Hạn dùng")]
+        public DateTime? DueDate { get; set; }
+
+        [Description("Quyệt định thầu")]
+        public string TenderDecision { get; set; }
+
+        [Description("Gói thầu")]
+        public string TenderPackage { get; set; }
+
+        [Description("Nhóm thầu")]
+        public string TenderGroup { get; set; }
+
+        [Description("Năm thầu")]
+        public int? TenderYear { get; set; }
 
         [Description("Ngưng sử dụng")]
         public bool Inactive { get; set; }

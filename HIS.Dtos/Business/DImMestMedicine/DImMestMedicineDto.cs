@@ -1,10 +1,9 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
-using HIS.EntityFrameworkCore.Entities.Categories;
+﻿using HIS.Dtos.Base;
 using System.ComponentModel;
 
-namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
+namespace HIS.Dtos.Business.DImMestMedicine
 {
-    public class DImMestMedicine : Entity<Guid>
+    public class DImMestMedicineDto : EntityDto<Guid?>
     {
         [Description("Thứ tự sắp xếp")]
         public int? SortOrder { get; set; }
@@ -25,8 +24,5 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
         public decimal? TaxRate { get; set; }
 
         public Guid? ImMestId { get; set; }
-
-        public DImMest DImMest { get; set; }
-        public SMedicine SMedicine { get; set; }
     }
 }

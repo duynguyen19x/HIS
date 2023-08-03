@@ -43,5 +43,10 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         {
             return await _roomService.Delete(id);
         }
+
+        public async Task<ApiResultList<SRoomDto>> GetByStocks()
+        {
+            return await _roomService.GetByStocks();
+        }
     }
 }
