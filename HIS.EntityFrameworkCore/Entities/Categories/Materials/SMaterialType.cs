@@ -1,4 +1,4 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
+﻿using HIS.Core.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Categories
 {
-    public class SMaterialType : FullAuditingEntity<Guid>
+    public class SMaterialType : FullAuditedEntity<Guid>
     {
         [Description("Mã loại VT")]
         public string Code { get; set; }

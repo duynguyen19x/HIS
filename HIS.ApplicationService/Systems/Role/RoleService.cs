@@ -1,13 +1,9 @@
 ﻿using HIS.Dtos.Commons;
 using HIS.Dtos.Systems.Role;
+using HIS.EntityFrameworkCore.Entities.Systems;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Systems.Role
 {
@@ -82,7 +78,7 @@ namespace HIS.ApplicationService.Systems.Role
         private async Task<ApiResult<SRoleDto>> Create(SRoleDto input)
         {
             var result = new ApiResult<SRoleDto>();
-            await _dbContext.SRoles.AddAsync(new EntityFrameworkCore.Entities.Categories.SRole()
+            await _dbContext.SRoles.AddAsync(new SRole()
             {
 
             });

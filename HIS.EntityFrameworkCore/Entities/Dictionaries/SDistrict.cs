@@ -1,11 +1,11 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
+﻿using HIS.Core.Entities.Auditing;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
     /// Quận, huyện
     /// </summary>
-    public class SDistrict : FullAuditingEntity<Guid>
+    public class SDistrict : FullAuditedEntity<Guid>
     {
         public string Code { get; set; }
         public string Name { get; set; }

@@ -5,10 +5,10 @@ using HIS.EntityFrameworkCore.Configurations.Patients;
 using HIS.EntityFrameworkCore.Configurations.Services;
 using HIS.EntityFrameworkCore.Data;
 using HIS.EntityFrameworkCore.Entities.Business.Patients;
-using HIS.EntityFrameworkCore.Entities.Business.Treatment;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities.Systems;
 using Microsoft.EntityFrameworkCore;
 
 namespace HIS.EntityFrameworkCore.EntityFrameworkCore

@@ -1,5 +1,6 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
+﻿using HIS.Core.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Business.Patients;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Categories.Medicines
 {
-    public class SMedicinePricePolicy : FullAuditingEntity<Guid>
+    public class SMedicinePricePolicy : FullAuditedEntity<Guid>
     {
         public Guid? MedicineId { get; set; }
         public Guid? PatientTypeId { get; set; }

@@ -6,7 +6,6 @@ using HIS.Dtos.Business.Patient;
 using HIS.Dtos.Business.Treatment;
 using HIS.Dtos.Commons;
 using HIS.EntityFrameworkCore.Entities.Business.Patients;
-using HIS.EntityFrameworkCore.Entities.Business.Treatment;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using Microsoft.EntityFrameworkCore;
@@ -16,11 +15,11 @@ namespace HIS.ApplicationService.Business.Patient
 {
     public class SPatientAppService : BaseAppService, ISPatientService
     {
-        private readonly IRepository<SPatient, Guid> _patientRepository;
+        private readonly IRepository<EntityFrameworkCore.Entities.Business.Patients.SPatient, Guid> _patientRepository;
         private readonly HISDbContext _dbContext;
 
         public SPatientAppService(
-            IRepository<SPatient, Guid> patientRepository,
+            IRepository<EntityFrameworkCore.Entities.Business.Patients.SPatient, Guid> patientRepository,
             HISDbContext dbContext, 
             IConfiguration config, 
             IMapper mapper)
@@ -42,12 +41,11 @@ namespace HIS.ApplicationService.Business.Patient
 
         public async Task<ApiResultList<SPatientDto>> GetAll(GetAllSPatientInput input)
         {
-            var patient = new List<SPatient>() { new SPatient() { FirstName = "hihihih" } }; //await _patientRepository.GetAll().ToListAsync();
+            var patient = await _patientRepository.GetAll().ToListAsync();
 
-            //return new ApiResultList<SPatientDto>(ObjectMapper.Map<List<RoleListDto>>(roles));
-            var p = new ApiResultList<SPatientDto>();
-            p.Result = ObjectMapper.Map<List<SPatientDto>>(patient);
-            return p;
+            var result = new ApiResultList<SPatientDto>();
+            result.Result = ObjectMapper.Map<List<SPatientDto>>(patient);
+            return result;
         }
 
         public Task<ApiResult<SPatientDto>> GetById(Guid id)
@@ -79,10 +77,10 @@ namespace HIS.ApplicationService.Business.Patient
                         if (string.IsNullOrEmpty(input.PatientCode))
                             input.PatientCode = "BN0000001";
 
-                        var patient = ObjectMapper.Map<SPatient>(input);
+                        var patient = ObjectMapper.Map<EntityFrameworkCore.Entities.Business.Patients.SPatient>(input);
                         patient.Id = input.PatientId.Value;
                         patient.Code = input.PatientCode;
-                        patient.FullName = input.PatientName;
+                        //patient.FullName = input.PatientName;
 
                         _dbContext.SPatients.Add(patient);
                         await _dbContext.SaveChangesAsync();

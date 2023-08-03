@@ -10,7 +10,7 @@ namespace HIS.Dtos.Dictionaries.ServicePricePolicy
     public class SServicePricePolicyDto : EntityDto<Guid?>
     {
         public Guid? ServiceId { get; set; }
-        public Guid? PatientTypeId { get; set; }
+        public int? PatientTypeId { get; set; }
         public decimal? OldUnitPrice { get; set; }
         public decimal? NewUnitPrice { get; set; }
         public decimal? CeilingPrice { get; set; }
