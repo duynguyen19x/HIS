@@ -1,4 +1,4 @@
-﻿using HIS.EntityFrameworkCore.DbContexts;
+﻿using HIS.EntityFrameworkCore.EntityFrameworkCore;
 
 namespace MedicalSolutions.EntityFrameworkCore.SeedWork
 {
@@ -11,9 +11,9 @@ namespace MedicalSolutions.EntityFrameworkCore.SeedWork
 
     public class UnitOfWork : Disposable, IUnitOfWork, IDisposable
     {
-        private readonly HIS_DbContext _dbContext;
+        private readonly HISDbContext _dbContext;
 
-        public UnitOfWork(HIS_DbContext dbContext)
+        public UnitOfWork(HISDbContext dbContext)
         {
             _dbContext = dbContext;
         }

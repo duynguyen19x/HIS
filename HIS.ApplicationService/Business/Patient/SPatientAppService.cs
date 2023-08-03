@@ -1,29 +1,33 @@
 ﻿using AutoMapper;
-using HIS.ApplicationService.Dictionaries.Branch;
+using AutoMapper.Internal.Mappers;
+using HIS.ApplicationService.Base;
+using HIS.Core.Repositories;
 using HIS.Dtos.Business.Patient;
 using HIS.Dtos.Business.Treatment;
 using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.District;
-using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Business.Patients;
 using HIS.EntityFrameworkCore.Entities.Business.Treatment;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Business.Patient
 {
-    public class SPatientService : BaseSerivce, ISPatientService
+    public class SPatientAppService : BaseAppService, ISPatientService
     {
-        public SPatientService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper)
-            : base(dbContext, config, mapper)
+        private readonly IRepository<SPatient, Guid> _patientRepository;
+        private readonly HISDbContext _dbContext;
+
+        public SPatientAppService(
+            IRepository<SPatient, Guid> patientRepository,
+            HISDbContext dbContext, 
+            IConfiguration config, 
+            IMapper mapper)
+            //: base(dbContext, config, mapper)
         {
+            _dbContext = dbContext;
+            _patientRepository = patientRepository;
         }
 
         public Task<ApiResult<SPatientDto>> CreateOrEdit(SPatientDto input)
@@ -36,9 +40,14 @@ namespace HIS.ApplicationService.Business.Patient
             throw new NotImplementedException();
         }
 
-        public Task<ApiResultList<SPatientDto>> GetAll(GetAllSPatientInput input)
+        public async Task<ApiResultList<SPatientDto>> GetAll(GetAllSPatientInput input)
         {
-            throw new NotImplementedException();
+            var patient = new List<SPatient>() { new SPatient() { FirstName = "hihihih" } }; //await _patientRepository.GetAll().ToListAsync();
+
+            //return new ApiResultList<SPatientDto>(ObjectMapper.Map<List<RoleListDto>>(roles));
+            var p = new ApiResultList<SPatientDto>();
+            p.Result = ObjectMapper.Map<List<SPatientDto>>(patient);
+            return p;
         }
 
         public Task<ApiResult<SPatientDto>> GetById(Guid id)
@@ -70,7 +79,7 @@ namespace HIS.ApplicationService.Business.Patient
                         if (string.IsNullOrEmpty(input.PatientCode))
                             input.PatientCode = "BN0000001";
 
-                        var patient = _mapper.Map<SPatient>(input);
+                        var patient = ObjectMapper.Map<SPatient>(input);
                         patient.Id = input.PatientId.Value;
                         patient.Code = input.PatientCode;
                         patient.FullName = input.PatientName;
@@ -80,7 +89,7 @@ namespace HIS.ApplicationService.Business.Patient
                     }
 
                     input.Code = "DT00000001";
-                    var data = _mapper.Map<STreatment>(input);
+                    var data = ObjectMapper.Map<STreatment>(input);
                     _dbContext.STreatments.Add(data);
                     await _dbContext.SaveChangesAsync();
 

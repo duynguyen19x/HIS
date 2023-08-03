@@ -2,9 +2,9 @@
 using HIS.Dtos.Business.Treatment;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Room;
-using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Business.Patients;
 using HIS.EntityFrameworkCore.Entities.Business.Treatment;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -17,7 +17,7 @@ namespace HIS.ApplicationService.Business.Patient
 {
     public class STreatmentService : BaseSerivce, ISTreatmentService
     {
-        public STreatmentService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper)
+        public STreatmentService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
             : base(dbContext, config, mapper) { }
 
         public async Task<ApiResult<STreatmentDto>> CreateOrEdit(STreatmentDto input)

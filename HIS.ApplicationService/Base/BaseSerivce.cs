@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HIS.Dtos.Commons;
-using HIS.EntityFrameworkCore.DbContexts;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -13,18 +13,18 @@ namespace HIS.ApplicationService
 {
     public abstract class BaseSerivce
     {
-        public readonly HIS_DbContext _dbContext;
+        public readonly HISDbContext _dbContext;
         public readonly IMapper _mapper;
         public readonly IConfiguration _config;
 
-        public BaseSerivce(HIS_DbContext dbContext, IConfiguration config, IMapper mapper)
+        public BaseSerivce(HISDbContext dbContext, IConfiguration config, IMapper mapper)
         {
             _dbContext = dbContext;
             _config = config;
             _mapper = mapper;
         }
 
-        public BaseSerivce(HIS_DbContext dbContext, IConfiguration config)
+        public BaseSerivce(HISDbContext dbContext, IConfiguration config)
         {
             _dbContext = dbContext;
             _config = config;

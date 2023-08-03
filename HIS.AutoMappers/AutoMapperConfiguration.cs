@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HIS.Dtos.Business.Patient;
 using HIS.Dtos.Business.Treatment;
 using HIS.Dtos.Dictionaries.Branch;
 using HIS.Dtos.Dictionaries.Career;
@@ -38,6 +39,7 @@ namespace HIS.AutoMappers
         {
             CreateMap<STreatmentDto, STreatment>().ReverseMap();
             CreateMap<STreatmentDto, SPatient>().ReverseMap();
+            CreateMap<SPatientDto, SPatient>().ReverseMap();
 
             CreateMap<SBranch, SBranchDto>().ReverseMap();
             CreateMap<SCareer, SCareerDto>().ReverseMap();

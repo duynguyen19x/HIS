@@ -3,8 +3,8 @@ using HIS.ApplicationService.Dictionaries.Branch;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Branch;
 using HIS.Dtos.Dictionaries.Department;
-using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
@@ -19,7 +19,7 @@ namespace HIS.ApplicationService.Dictionaries.Department
 {
     public class SDepartmentService : BaseSerivce, ISDepartmentService
     {
-        public SDepartmentService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper)
+        public SDepartmentService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
             : base(dbContext, config, mapper)
         {
 

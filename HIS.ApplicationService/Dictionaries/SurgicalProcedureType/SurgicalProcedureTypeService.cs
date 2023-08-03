@@ -1,7 +1,7 @@
 ﻿using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ServicePricePolicy;
 using HIS.Dtos.Dictionaries.SurgicalProcedureType;
-using HIS.EntityFrameworkCore.DbContexts;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -15,7 +15,7 @@ namespace HIS.ApplicationService.Dictionaries.SurgicalProcedureType
 {
     public class SurgicalProcedureTypeService : BaseSerivce, ISurgicalProcedureTypeService
     {
-        public SurgicalProcedureTypeService(HIS_DbContext dbContext, IConfiguration config) : base(dbContext, config)
+        public SurgicalProcedureTypeService(HISDbContext dbContext, IConfiguration config) : base(dbContext, config)
         {
 
         }

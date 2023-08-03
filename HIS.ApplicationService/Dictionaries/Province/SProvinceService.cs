@@ -2,8 +2,8 @@
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Country;
 using HIS.Dtos.Dictionaries.Province;
-using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -16,7 +16,7 @@ namespace HIS.ApplicationService.Dictionaries.Province
 {
     public class SProvinceService : BaseSerivce, ISProvinceService
     {
-        public SProvinceService(HIS_DbContext dbContext, IConfiguration config)
+        public SProvinceService(HISDbContext dbContext, IConfiguration config)
             : base(dbContext, config)
         {
 
