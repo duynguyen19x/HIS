@@ -366,6 +366,48 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.ToTable("DImMests", (string)null);
                 });
 
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImMestMedicine", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("DImMestId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ImMestId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal?>("ImpPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("ImpQuantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("ImpVatRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("MedicineId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("SMedicineId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("TaxRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DImMestId");
+
+                    b.HasIndex("SMedicineId");
+
+                    b.ToTable("DImMestMedicine");
+                });
+
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Treatment.STreatment", b =>
                 {
                     b.Property<Guid>("Id")
@@ -5430,7 +5472,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SSupplier");
+                    b.ToTable("SSuppliers");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SUnit", b =>
@@ -5797,6 +5839,21 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("STreatment");
                 });
 
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImMestMedicine", b =>
+                {
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImMest", "DImMest")
+                        .WithMany("DImMestMedicines")
+                        .HasForeignKey("DImMestId");
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicine", "SMedicine")
+                        .WithMany()
+                        .HasForeignKey("SMedicineId");
+
+                    b.Navigation("DImMest");
+
+                    b.Navigation("SMedicine");
+                });
+
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Medicines.SMedicinePricePolicy", b =>
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicine", "SMedicine")
@@ -6122,6 +6179,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("SPatients");
 
                     b.Navigation("SServicePricePolicies");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImMest", b =>
+                {
+                    b.Navigation("DImMestMedicines");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMaterialType", b =>
