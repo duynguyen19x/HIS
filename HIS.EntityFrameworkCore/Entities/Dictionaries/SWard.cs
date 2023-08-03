@@ -1,11 +1,11 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
+﻿using HIS.Core.Entities.Auditing;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
     /// Xã, phường.
     /// </summary>
-    public class SWard : FullAuditingEntity<Guid>
+    public class SWard : FullAuditedEntity<Guid>
     {
         public string Code { get; set; }
         public string Name { get; set; }

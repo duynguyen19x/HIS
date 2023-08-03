@@ -1,4 +1,5 @@
 ﻿using HIS.EntityFrameworkCore.Entities.Business.Patients;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Utilities.Enums;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,24 +12,24 @@ namespace HIS.EntityFrameworkCore.Data.Builders
             modelBuilder.Entity<SPatientType>().HasData(
                 new SPatientType()
                 {
-                    Id = new Guid("A080ECAA-6CD6-459D-A450-D89351E0904D"),
+                    Id = 1,
                     Code = PatientTypes.BHYT,
                     Name = "Bảo hiểm y tế",
-                    Inactive = false,
+                    Inactive = false
                 },
                 new SPatientType()
                 {
-                    Id = new Guid("8522AA82-5B5E-4D46-A001-26BAD813DB10"),
+                    Id = 2,
                     Code = PatientTypes.VP,
                     Name = "Viện phí",
-                    Inactive = false,
+                    Inactive = false
                 },
                 new SPatientType()
                 {
-                    Id = new Guid("447FE0B2-6F08-4E1A-B456-EBC0DDB6FEED"),
+                    Id = 3,
                     Code = PatientTypes.DV,
                     Name = "Dịch vụ",
-                    Inactive = false,
+                    Inactive = false
                 }
             );
         }

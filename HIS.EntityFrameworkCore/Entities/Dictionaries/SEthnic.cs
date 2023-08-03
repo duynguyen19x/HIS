@@ -1,4 +1,4 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
+﻿using HIS.Core.Entities.Auditing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +10,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// <summary>
     /// Dân tộc
     /// </summary>
-    public class SEthnic : FullAuditingEntity<Guid>
+    public class SEthnic : FullAuditedEntity<Guid>
     {
         public string Code { get; set; }
         public string Name { get; set; }

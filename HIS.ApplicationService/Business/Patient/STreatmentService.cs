@@ -3,7 +3,6 @@ using HIS.Dtos.Business.Treatment;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Room;
 using HIS.EntityFrameworkCore.Entities.Business.Patients;
-using HIS.EntityFrameworkCore.Entities.Business.Treatment;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
@@ -44,10 +43,10 @@ namespace HIS.ApplicationService.Business.Patient
                         if (string.IsNullOrEmpty(input.PatientCode))
                             input.PatientCode = "BN0000001";
 
-                        var patient = _mapper.Map<SPatient>(input);
+                        var patient = _mapper.Map<EntityFrameworkCore.Entities.Business.Patients.SPatient>(input);
                         patient.Id = input.PatientId.Value;
                         patient.Code = input.PatientCode;
-                        patient.FullName = input.PatientName;
+                        //patient.FullName = input.PatientName;
 
                         _dbContext.SPatients.Add(patient);
                         await _dbContext.SaveChangesAsync();
@@ -143,7 +142,7 @@ namespace HIS.ApplicationService.Business.Patient
                 result.IsSuccessed = true;
                 result.Result = (from t in _dbContext.STreatments
                                  join p in _dbContext.SPatients on t.PatientId equals p.Id
-                                 where (string.IsNullOrEmpty(input.PatientCodeFilter) || p.FirstName == input.PatientNameFilter)
+                                 where (string.IsNullOrEmpty(input.PatientCodeFilter) || p.Name == input.PatientNameFilter)
                                     && (string.IsNullOrEmpty(input.PatientCodeFilter) || p.Code == input.PatientCodeFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || t.Code == input.CodeFilter)
                                      && (input.MaxInTimeClinicalFilter == null || t.InTimeClinical <= input.MaxInTimeClinicalFilter)
@@ -157,7 +156,7 @@ namespace HIS.ApplicationService.Business.Patient
                                      Id = t.Id,
                                      Code = t.Code,
                                      PatientCode = p.Code,
-                                     PatientName = p.FullName,
+                                     PatientName = p.Name,
                                      PatientId = t.PatientId,
                                      DOB = t.DOB,
                                      Year = t.Year,
@@ -166,13 +165,13 @@ namespace HIS.ApplicationService.Business.Patient
                                      CountryId = t.CountryId.Value,
                                      DistrictId = t.DistrictId.Value,
                                      WardId = t.WardId,
-                                     EthnicId = p.EthnicId.Value,
+                                     //EthnicId = p.EthnicId.Value,
                                      GenderId = t.GenderId,
-                                     IdentificationNumber = p.IdentificationNumber,
+                                     //IdentificationNumber = p.IdentificationNumber,
                                      InTime = t.InTime,
                                      InTimeClinical = t.InTimeClinical,
                                      OutTime = t.OutTime,
-                                     PatientTypeId = p.PatientTypeId
+                                     //PatientTypeId = p.PatientTypeId
                                  })
                                  .ToList();
                 result.TotalCount = result.Result.Count;
@@ -192,32 +191,32 @@ namespace HIS.ApplicationService.Business.Patient
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from t in _dbContext.STreatments
-                                 join p in _dbContext.SPatients on t.PatientId equals p.Id
-                                 where t.Id == id
-                                 select new STreatmentDto()
-                                 {
-                                     Id = t.Id,
-                                     Code = t.Code,
-                                     PatientCode = p.Code,
-                                     PatientName = p.FullName,
-                                     PatientId = t.PatientId,
-                                     DOB = t.DOB,
-                                     Year = t.Year,
-                                     Address = t.Address,
-                                     CareerId = t.CareerId,
-                                     CountryId = t.CountryId.Value,
-                                     DistrictId = t.DistrictId.Value,
-                                     WardId = t.WardId,
-                                     EthnicId = p.EthnicId.Value,
-                                     GenderId = t.GenderId,
-                                     IdentificationNumber = p.IdentificationNumber,
-                                     InTime = t.InTime,
-                                     InTimeClinical = t.InTimeClinical,
-                                     OutTime = t.OutTime,
-                                     PatientTypeId = p.PatientTypeId
-                                 })
-                                 .SingleOrDefault();
+                //result.Result = (from t in _dbContext.STreatments
+                //                 join p in _dbContext.SPatients on t.PatientId equals p.Id
+                //                 where t.Id == id
+                //                 select new STreatmentDto()
+                //                 {
+                //                     Id = t.Id,
+                //                     Code = t.Code,
+                //                     PatientCode = p.Code,
+                //                     PatientName = p.Name,
+                //                     PatientId = t.PatientId,
+                //                     DOB = t.DOB,
+                //                     Year = t.Year,
+                //                     Address = t.Address,
+                //                     CareerId = t.CareerId,
+                //                     CountryId = t.CountryId.Value,
+                //                     DistrictId = t.DistrictId.Value,
+                //                     WardId = t.WardId,
+                //                     EthnicId = p.EthnicId.Value,
+                //                     GenderId = t.GenderId,
+                //                     IdentificationNumber = p.IdentificationNumber,
+                //                     InTime = t.InTime,
+                //                     InTimeClinical = t.InTimeClinical,
+                //                     OutTime = t.OutTime,
+                //                     PatientTypeId = p.PatientTypeId
+                //                 })
+                //                 .SingleOrDefault();
             }
             catch (Exception ex)
             {

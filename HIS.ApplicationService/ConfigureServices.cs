@@ -35,8 +35,6 @@ namespace HIS.ApplicationService
     {
         public static void ServiceCollection(this IServiceCollection services)
         {
-            services.AddTransient<IRepository<SPatient, Guid>, BaseRepository<SPatient, Guid>>();
-
             services.AddTransient<ILoginService, LoginService>();
             services.AddTransient<IRoleService, RoleService>();
 

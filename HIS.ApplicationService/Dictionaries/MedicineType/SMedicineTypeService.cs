@@ -171,8 +171,8 @@ namespace HIS.ApplicationService.Dictionaries.MedicineType
                     var medicineType = _dbContext.SMedicineTypes.SingleOrDefault(x => x.Id == id);
                     if (medicineType != null)
                     {
-                        medicineType.IsDelete = true;
-                        medicineType.DeleteDate = DateTime.Now;
+                        medicineType.IsDeleted = true;
+                        medicineType.DeletedDate = DateTime.Now;
 
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
@@ -200,7 +200,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineType
             {
                 result.IsSuccessed = true;
                 result.Result = (from r in _dbContext.SMedicineTypes
-                                 where r.IsDelete == false
+                                 where r.IsDeleted == false
                                  select new SMedicineTypeDto()
                                  {
                                      Id = r.Id,

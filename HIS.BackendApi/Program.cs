@@ -2,6 +2,7 @@ using HIS.ApplicationService;
 using HIS.AutoMappers;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.EntityFrameworkCore.EntityFrameworkCore.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -20,6 +21,7 @@ builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
     builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
 }));
 
+builder.Services.AddRepository();
 builder.Services.ServiceCollection();
 
 string issuer = builder.Configuration.GetValue<string>("Tokens:Issuer");

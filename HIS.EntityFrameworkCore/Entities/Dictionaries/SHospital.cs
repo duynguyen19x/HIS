@@ -1,4 +1,4 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
+﻿using HIS.Core.Entities.Auditing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
-    public class SHospital : AuditingEntity<Guid>
+    public class SHospital : AuditedEntity<Guid>
     {
         public string Code { get; set; } // mã bệnh viện
         public string MohCode { get; set; } // mã đăng ký kcb ban đầu

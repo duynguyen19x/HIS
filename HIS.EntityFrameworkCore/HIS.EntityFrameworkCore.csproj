@@ -13,12 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="BaseEntitys\AuditingEntity.cs" />
-    <Compile Remove="BaseEntitys\Disposable.cs" />
-    <Compile Remove="BaseEntitys\Entity.cs" />
-    <Compile Remove="BaseEntitys\FullAuditingEntity.cs" />
-    <Compile Remove="BaseEntitys\Repository.cs" />
-    <Compile Remove="BaseEntitys\UnitOfWork.cs" />
     <Compile Remove="Configurations\Services\ServiceTypeConfigurations.cs" />
     <Compile Remove="Entities\Categories\Services\SServiceType.cs" />
   </ItemGroup>
@@ -43,8 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="BaseEntitys\" />
-    <Folder Include="EntityFrameworkCore\Seed\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

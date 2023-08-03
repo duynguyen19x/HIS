@@ -1,4 +1,4 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
+﻿using HIS.Core.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Business.Patients;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.Utilities.Enums;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
-    public class SGender : AuditingEntity<Guid>
+    public class SGender : AuditedEntity<Guid>
     {
         public string Code { get; set; }
         public string Name { get; set; }

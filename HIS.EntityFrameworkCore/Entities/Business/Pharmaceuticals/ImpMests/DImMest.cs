@@ -1,8 +1,7 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
+﻿using HIS.Core.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Business.Patients;
-using HIS.EntityFrameworkCore.Entities.Business.Treatment;
-using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities.Systems;
 using HIS.Utilities.Enums;
 using System;
 using System.Collections.Generic;
@@ -12,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
 {
-    public class DImMest : FullAuditingEntity<Guid>
+    public class DImMest : FullAuditedEntity<Guid>
     {
         public string Code { get; set; }
         public string Name { get; set; }
