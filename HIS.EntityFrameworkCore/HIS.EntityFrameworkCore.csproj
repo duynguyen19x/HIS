@@ -44,7 +44,6 @@
 
   <ItemGroup>
     <Folder Include="BaseEntitys\" />
-    <Folder Include="DbContexts\" />
     <Folder Include="EntityFrameworkCore\Seed\" />
   </ItemGroup>
 
