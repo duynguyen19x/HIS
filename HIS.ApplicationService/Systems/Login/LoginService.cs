@@ -1,6 +1,6 @@
 ﻿using HIS.Dtos.Systems.Login;
-using HIS.EntityFrameworkCore.DbContexts;
-using HIS.EntityFrameworkCore.Entities.Categories;
+using HIS.EntityFrameworkCore.Entities.Systems;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using HIS.Utilities.Commons;
 using HIS.Utilities.Enums;
@@ -18,10 +18,10 @@ namespace HIS.ApplicationService.Systems.Login
 {
     public class LoginService : ILoginService
     {
-        private readonly HIS_DbContext _dbContext;
+        private readonly HISDbContext _dbContext;
         private readonly IConfiguration _config;
 
-        public LoginService(HIS_DbContext dbContext,
+        public LoginService(HISDbContext dbContext,
             IConfiguration config)
         {
             _dbContext = dbContext;

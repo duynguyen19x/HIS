@@ -1,7 +1,7 @@
 ﻿using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ServiceGroupHeIn;
-using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
@@ -10,7 +10,7 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroupHeIn
 {
     public class ServiceGroupHeInService : BaseSerivce, IServiceGroupHeInService
     {
-        public ServiceGroupHeInService(HIS_DbContext dbContext, IConfiguration config) : base(dbContext, config)
+        public ServiceGroupHeInService(HISDbContext dbContext, IConfiguration config) : base(dbContext, config)
         {
         }
 

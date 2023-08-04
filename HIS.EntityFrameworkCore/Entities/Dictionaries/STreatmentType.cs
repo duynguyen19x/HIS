@@ -1,4 +1,4 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
+﻿using HIS.Core.Entities.Auditing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +10,12 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// <summary>
     /// Đối tượng điều trị.
     /// </summary>
-    public class STreatmentType : AuditingEntity<Guid>
+    public class STreatmentType : AuditedEntity<int>
     {
-        public string Code { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public int? SortOrder { get; set; }
-        public bool Inactive { get; set; }
+        public virtual string Code { get; set; }
+        public virtual string Name { get; set; }
+        public virtual string Description { get; set; }
+        public virtual int SortOrder { get; set; }
+        public virtual bool Inactive { get; set; }
     }
 }

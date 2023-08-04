@@ -1,17 +1,12 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
-using HIS.EntityFrameworkCore.Entities.Business.Patients;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HIS.Core.Entities.Auditing;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 
 namespace HIS.EntityFrameworkCore.Entities.Categories.Services
 {
-    public class SServicePricePolicy : FullAuditingEntity<Guid>
+    public class SServicePricePolicy : FullAuditedEntity<Guid>
     {
         public Guid? ServiceId { get; set; }
-        public Guid? PatientTypeId { get; set; }
+        public int? PatientTypeId { get; set; }
 
         /// <summary>
         /// Giá cữ

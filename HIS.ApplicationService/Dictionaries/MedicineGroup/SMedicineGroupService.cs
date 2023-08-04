@@ -4,9 +4,9 @@ using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.MedicineGroup;
 using HIS.Dtos.Dictionaries.MedicineType;
 using HIS.Dtos.Dictionaries.Service;
-using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
@@ -20,7 +20,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineGroup
 {
     public class SMedicineGroupService : BaseSerivce, ISMedicineGroupService
     {
-        public SMedicineGroupService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper)
+        public SMedicineGroupService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
            : base(dbContext, config, mapper)
         {
 

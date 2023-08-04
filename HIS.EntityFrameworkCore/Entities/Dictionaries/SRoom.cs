@@ -1,4 +1,4 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
+﻿using HIS.Core.Entities.Auditing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
-    public class SRoom : AuditingEntity<Guid>
+    public class SRoom : AuditedEntity<Guid>
     {
         public string Code { get; set; }
         public string MohCode { get; set; }

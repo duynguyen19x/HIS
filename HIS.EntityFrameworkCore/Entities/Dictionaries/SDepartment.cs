@@ -1,4 +1,4 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
+﻿using HIS.Core.Entities.Auditing;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
-    public class SDepartment : AuditingEntity<Guid>
+    public class SDepartment : AuditedEntity<Guid>
     {
         public string Code { get; set; }
         public string MohCode { get; set; }

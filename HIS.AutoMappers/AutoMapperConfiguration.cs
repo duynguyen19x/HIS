@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HIS.Dtos.Business.Patient;
 using HIS.Dtos.Business.Treatment;
 using HIS.Dtos.Dictionaries.Branch;
 using HIS.Dtos.Dictionaries.Career;
@@ -40,6 +41,7 @@ namespace HIS.AutoMappers
         {
             CreateMap<STreatmentDto, STreatment>().ReverseMap();
             CreateMap<STreatmentDto, SPatient>().ReverseMap();
+            CreateMap<SPatientDto, SPatient>().ReverseMap();
 
             CreateMap<SBranch, SBranchDto>().ReverseMap();
             CreateMap<SCareer, SCareerDto>().ReverseMap();
@@ -87,7 +89,7 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.SServiceResultIndices, opt => opt.Ignore())
                 .ReverseMap();
             CreateMap<SServicePricePolicyDto, SServicePricePolicy>()
-                .ForMember(dest => dest.SPatientType, opt => opt.Ignore())
+                //.ForMember(dest => dest.SPatientType, opt => opt.Ignore())
                 .ForMember(dest => dest.SService, opt => opt.Ignore())
                 .ReverseMap();
 

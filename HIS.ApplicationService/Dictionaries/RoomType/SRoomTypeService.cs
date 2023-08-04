@@ -2,8 +2,8 @@
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Room;
 using HIS.Dtos.Dictionaries.RoomType;
-using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -16,7 +16,7 @@ namespace HIS.ApplicationService.Dictionaries.RoomType
 {
     public class SRoomTypeService : BaseSerivce, ISRoomTypeService
     {
-        public SRoomTypeService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper)
+        public SRoomTypeService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
             : base(dbContext, config, mapper)
         {
 

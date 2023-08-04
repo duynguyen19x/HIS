@@ -1,4 +1,4 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
+﻿using HIS.Core.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using System;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Categories
 {
-    public class SService : FullAuditingEntity<Guid>
+    public class SService : FullAuditedEntity<Guid>
     {
         [Description("Mã dịch vụ")]
         public string Code { get; set; }

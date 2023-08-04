@@ -1,4 +1,4 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
+﻿using HIS.Core.Entities.Auditing;
 using System;
 using System.Collections.Generic;
 using System.Linq;

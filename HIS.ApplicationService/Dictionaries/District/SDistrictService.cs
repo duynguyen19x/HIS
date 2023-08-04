@@ -3,8 +3,8 @@ using HIS.ApplicationService.Dictionaries.Country;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Country;
 using HIS.Dtos.Dictionaries.District;
-using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -17,7 +17,7 @@ namespace HIS.ApplicationService.Dictionaries.District
 {
     public class SDistrictService : BaseSerivce, ISDistrictService
     {
-        public SDistrictService(HIS_DbContext dbContext, IConfiguration config)
+        public SDistrictService(HISDbContext dbContext, IConfiguration config)
             : base(dbContext, config)
         {
 

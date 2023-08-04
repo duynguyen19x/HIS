@@ -3,8 +3,8 @@ using HIS.ApplicationService.Dictionaries.MedicineGroup;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.MedicineGroup;
 using HIS.Dtos.Dictionaries.MedicineType;
-using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Categories;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using HIS.Utilities.Helpers;
 using Microsoft.Data.SqlClient;
@@ -20,7 +20,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineType
 {
     public class SMedicineTypeService : BaseSerivce, ISMedicineTypeService
     {
-        public SMedicineTypeService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper)
+        public SMedicineTypeService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
            : base(dbContext, config, mapper)
         {
 
@@ -171,8 +171,8 @@ namespace HIS.ApplicationService.Dictionaries.MedicineType
                     var medicineType = _dbContext.SMedicineTypes.SingleOrDefault(x => x.Id == id);
                     if (medicineType != null)
                     {
-                        medicineType.IsDelete = true;
-                        medicineType.DeleteDate = DateTime.Now;
+                        medicineType.IsDeleted = true;
+                        medicineType.DeletedDate = DateTime.Now;
 
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
@@ -200,7 +200,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineType
             {
                 result.IsSuccessed = true;
                 result.Result = (from r in _dbContext.SMedicineTypes
-                                 where r.IsDelete == false
+                                 where r.IsDeleted == false
                                  select new SMedicineTypeDto()
                                  {
                                      Id = r.Id,

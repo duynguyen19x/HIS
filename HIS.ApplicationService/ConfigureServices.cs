@@ -25,6 +25,9 @@ using HIS.ApplicationService.Dictionaries.Unit;
 using HIS.ApplicationService.Dictionaries.Ward;
 using HIS.ApplicationService.Systems.Login;
 using HIS.ApplicationService.Systems.Role;
+using HIS.Core.Repositories;
+using HIS.EntityFrameworkCore.Entities.Business.Patients;
+using HIS.EntityFrameworkCore.EntityFrameworkCore.Repositories;
 using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
 

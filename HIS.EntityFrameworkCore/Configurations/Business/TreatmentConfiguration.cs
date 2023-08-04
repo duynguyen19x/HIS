@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HIS.EntityFrameworkCore.Entities.Business.Treatment;
+using HIS.EntityFrameworkCore.Entities.Business.Patients;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business
 {

@@ -5,10 +5,10 @@ using HIS.Dtos.Dictionaries.Room;
 using HIS.Dtos.Dictionaries.Service;
 using HIS.Dtos.Dictionaries.ServicePricePolicy;
 using HIS.Dtos.Dictionaries.ServiceResultIndex;
-using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;
@@ -29,7 +29,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
 {
     public class ServiceService : BaseSerivce, IServiceService
     {
-        public ServiceService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper) : base(dbContext, config, mapper)
+        public ServiceService(HISDbContext dbContext, IConfiguration config, IMapper mapper) : base(dbContext, config, mapper)
         {
         }
 
@@ -237,8 +237,8 @@ namespace HIS.ApplicationService.Dictionaries.Service
                     var service = _dbContext.SServices.SingleOrDefault(x => x.Id == id);
                     if (service != null)
                     {
-                        service.DeleteDate = DateTime.Now;
-                        service.IsDelete = true;
+                        service.DeletedDate = DateTime.Now;
+                        service.IsDeleted = true;
                         _dbContext.SServices.Update(service);
 
                         await _dbContext.SaveChangesAsync();
@@ -272,7 +272,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                  join r2 in _dbContext.SServiceGroups on r.ServiceGroupId equals r2.Id
                                  join r3 in _dbContext.SServiceGroupHeIns on r.ServiceGroupHeInId equals r3.Id
 
-                                 where r.IsDelete == false
+                                 where r.IsDeleted == false
                                  select new SServiceDto()
                                  {
                                      Id = r.Id,
@@ -321,7 +321,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
 
                 if (!GuidHelper.IsNullOrEmpty(id))
                 {
-                    var service = _dbContext.SServices.FirstOrDefault(s => s.Id == id && s.IsDelete == false);
+                    var service = _dbContext.SServices.FirstOrDefault(s => s.Id == id && s.IsDeleted == false);
                     var sServicePricePolicyDtos = (from ser in _dbContext.SServicePricePolicies
                                                    join pa in _dbContext.SPatientTypes on ser.PatientTypeId equals pa.Id
                                                    where ser.ServiceId == id

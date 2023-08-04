@@ -2,8 +2,8 @@
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.DepartmentType;
 using HIS.Dtos.Dictionaries.RoomType;
-using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -17,7 +17,7 @@ namespace HIS.ApplicationService.Dictionaries.DepartmentType
 {
     public class SDepartmentTypeService : BaseSerivce, ISDepartmentTypeService
     {
-        public SDepartmentTypeService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper)
+        public SDepartmentTypeService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
             : base(dbContext, config, mapper)
         {
 
