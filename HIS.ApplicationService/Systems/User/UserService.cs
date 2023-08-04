@@ -1,23 +1,15 @@
 ﻿using AutoMapper;
 using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.MedicineType;
 using HIS.Dtos.Systems.User;
-using HIS.EntityFrameworkCore.DbContexts;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
-using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Systems.User
 {
     public class UserService : BaseSerivce, IUserService
     {
-        public UserService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper)
+        public UserService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
             : base(dbContext, config, mapper) { }
 
         public Task<ApiResult<SUserDto>> CreateOrEdit(SUserDto input)

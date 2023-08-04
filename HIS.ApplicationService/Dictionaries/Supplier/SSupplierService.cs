@@ -1,25 +1,17 @@
 ﻿using AutoMapper;
 using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.Icd;
-using HIS.Dtos.Dictionaries.ServicePricePolicy;
 using HIS.Dtos.Dictionaries.Supplier;
-using HIS.EntityFrameworkCore.DbContexts;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using HIS.Utilities.Helpers;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Dictionaries.Supplier
 {
     public class SSupplierService : BaseSerivce, ISSupplierService
     {
-        public SSupplierService(HIS_DbContext dbContext, IConfiguration config, IMapper mapper) : base(dbContext, config, mapper)
+        public SSupplierService(HISDbContext dbContext, IConfiguration config, IMapper mapper) : base(dbContext, config, mapper)
         {
 
         }

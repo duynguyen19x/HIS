@@ -15,11 +15,11 @@ namespace HIS.ApplicationService.Business.Patient
 {
     public class SPatientAppService : BaseAppService, ISPatientService
     {
-        private readonly IRepository<EntityFrameworkCore.Entities.Business.Patients.SPatient, Guid> _patientRepository;
+        private readonly IRepository<SPatient, Guid> _patientRepository;
         private readonly HISDbContext _dbContext;
 
         public SPatientAppService(
-            IRepository<EntityFrameworkCore.Entities.Business.Patients.SPatient, Guid> patientRepository,
+            IRepository<SPatient, Guid> patientRepository,
             HISDbContext dbContext, 
             IConfiguration config, 
             IMapper mapper)

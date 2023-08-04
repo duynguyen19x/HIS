@@ -37,6 +37,7 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.Property(x => x.ProcessingLossRate).HasMaxLength(512);
             builder.Property(x => x.PreparationMethod).HasMaxLength(512);
             builder.Property(x => x.QualityStandards).HasMaxLength(512);
+            builder.Property(x => x.PharmaceuticalFormulation).HasMaxLength(512);
 
             builder.HasOne(t => t.SMedicineGroup).WithMany(pc => pc.SMedicineTypes)
                 .HasForeignKey(pc => pc.MedicineGroupId).OnDelete(DeleteBehavior.Restrict);

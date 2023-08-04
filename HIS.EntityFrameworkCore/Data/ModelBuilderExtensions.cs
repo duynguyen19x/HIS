@@ -1,4 +1,5 @@
 ﻿using HIS.EntityFrameworkCore.Data.Builders;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using Microsoft.EntityFrameworkCore;
 
 namespace HIS.EntityFrameworkCore.Data

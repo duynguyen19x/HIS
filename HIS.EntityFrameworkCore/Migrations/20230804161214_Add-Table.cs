@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class AddTable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -67,7 +67,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    HeInCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HeInCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -106,15 +106,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20230803152031_Add-Table.cs
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
-========
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
->>>>>>>> master:HIS.EntityFrameworkCore/Migrations/20230803175024_Init.cs
                 },
                 constraints: table =>
                 {
@@ -240,7 +234,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Name = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -330,32 +324,15 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20230803152031_Add-Table.cs
                 name: "SSuppliers",
-========
-                name: "SSupplier",
->>>>>>>> master:HIS.EntityFrameworkCore/Migrations/20230803175024_Init.cs
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: true),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20230803152031_Add-Table.cs
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SSuppliers", x => x.Id);
-========
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -366,8 +343,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SSupplier", x => x.Id);
->>>>>>>> master:HIS.EntityFrameworkCore/Migrations/20230803175024_Init.cs
+                    table.PrimaryKey("PK_SSuppliers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -409,15 +385,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20230803152031_Add-Table.cs
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
-========
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
->>>>>>>> master:HIS.EntityFrameworkCore/Migrations/20230803175024_Init.cs
                 },
                 constraints: table =>
                 {
@@ -526,25 +496,19 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     BirthYear = table.Column<int>(type: "int", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     GenderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20230803152031_Add-Table.cs
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
-========
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
->>>>>>>> master:HIS.EntityFrameworkCore/Migrations/20230803175024_Init.cs
                 },
                 constraints: table =>
                 {
@@ -606,15 +570,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20230803152031_Add-Table.cs
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
-========
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
->>>>>>>> master:HIS.EntityFrameworkCore/Migrations/20230803175024_Init.cs
                 },
                 constraints: table =>
                 {
@@ -707,15 +665,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20230803152031_Add-Table.cs
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
-========
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
->>>>>>>> master:HIS.EntityFrameworkCore/Migrations/20230803175024_Init.cs
                 },
                 constraints: table =>
                 {
@@ -781,15 +733,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     InternalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20230803152031_Add-Table.cs
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
-========
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -797,7 +740,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
->>>>>>>> master:HIS.EntityFrameworkCore/Migrations/20230803175024_Init.cs
                 },
                 constraints: table =>
                 {
@@ -855,7 +797,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     IsDrugContainerReturnRequest = table.Column<bool>(type: "bit", nullable: false),
                     IsAllowZeroQuantity = table.Column<bool>(type: "bit", nullable: false),
                     IsRadiolabeledDrug = table.Column<bool>(type: "bit", nullable: false),
-                    PharmaceuticalFormulation = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PharmaceuticalFormulation = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     Origin = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     ScientificName = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     ScientificNameChildren = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
@@ -867,15 +809,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     PreparationMethod = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     QualityStandards = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     SServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20230803152031_Add-Table.cs
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
-========
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -883,7 +816,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
->>>>>>>> master:HIS.EntityFrameworkCore/Migrations/20230803175024_Init.cs
                 },
                 constraints: table =>
                 {
@@ -935,15 +867,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20230803152031_Add-Table.cs
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
-========
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
->>>>>>>> master:HIS.EntityFrameworkCore/Migrations/20230803175024_Init.cs
                 },
                 constraints: table =>
                 {
@@ -967,26 +893,26 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Unit = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    Unit = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     MaleFrom = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     MaleTo = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     FemaleFrom = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     FemaleTo = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: true),
-                    Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    SServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    Inactive = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SServiceResultIndices", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SServiceResultIndices_SServices_SServiceId",
-                        column: x => x.SServiceId,
+                        name: "FK_SServiceResultIndices_SServices_ServiceId",
+                        column: x => x.ServiceId,
                         principalTable: "SServices",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -1003,15 +929,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20230803152031_Add-Table.cs
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
-========
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
->>>>>>>> master:HIS.EntityFrameworkCore/Migrations/20230803175024_Init.cs
                 },
                 constraints: table =>
                 {
@@ -1047,15 +967,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     SupplierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     InvTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Deliverer = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20230803152031_Add-Table.cs
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
-========
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -1063,7 +974,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
->>>>>>>> master:HIS.EntityFrameworkCore/Migrations/20230803175024_Init.cs
                 },
                 constraints: table =>
                 {
@@ -1105,15 +1015,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20230803152031_Add-Table.cs
                         name: "FK_DImMests_SSuppliers_SupplierId",
                         column: x => x.SupplierId,
                         principalTable: "SSuppliers",
-========
-                        name: "FK_DImMests_SSupplier_SupplierId",
-                        column: x => x.SupplierId,
-                        principalTable: "SSupplier",
->>>>>>>> master:HIS.EntityFrameworkCore/Migrations/20230803175024_Init.cs
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -1186,15 +1090,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20230803152031_Add-Table.cs
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
-========
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
->>>>>>>> master:HIS.EntityFrameworkCore/Migrations/20230803175024_Init.cs
                 },
                 constraints: table =>
                 {
@@ -1253,15 +1151,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     TenderYear = table.Column<int>(type: "int", nullable: true),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
                     SServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20230803152031_Add-Table.cs
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
-========
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -1269,7 +1158,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
->>>>>>>> master:HIS.EntityFrameworkCore/Migrations/20230803175024_Init.cs
                 },
                 constraints: table =>
                 {
@@ -1306,7 +1194,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20230803152031_Add-Table.cs
                 name: "DImMestMedicine",
                 columns: table => new
                 {
@@ -1337,8 +1224,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-========
->>>>>>>> master:HIS.EntityFrameworkCore/Migrations/20230803175024_Init.cs
                 name: "SMedicinePricePolicy",
                 columns: table => new
                 {
@@ -1351,16 +1236,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     PaymentRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     ExecutionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     SMedicineId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20230803152031_Add-Table.cs
-                    SPatientTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeleteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeleteBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDelete = table.Column<bool>(type: "bit", nullable: false)
-========
                     SPatientTypeId = table.Column<int>(type: "int", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -1369,7 +1244,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false)
->>>>>>>> master:HIS.EntityFrameworkCore/Migrations/20230803175024_Init.cs
                 },
                 constraints: table =>
                 {
@@ -1662,91 +1536,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"), "KXD", null, new DateTime(2023, 8, 4, 0, 50, 23, 556, DateTimeKind.Local).AddTicks(631), null, false, null, null, "Chưa xác định", 0 },
-                    { new Guid("e9497984-d355-41af-b917-091500956be9"), "NU", null, new DateTime(2023, 8, 4, 0, 50, 23, 556, DateTimeKind.Local).AddTicks(665), null, false, null, null, "Nữ", 2 },
-                    { new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"), "NAM", null, new DateTime(2023, 8, 4, 0, 50, 23, 556, DateTimeKind.Local).AddTicks(662), null, false, null, null, "Nam", 1 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "SMedicineGroups",
-                columns: new[] { "Id", "Code", "Inactive", "IsSystem", "Name", "SortOrder" },
-                values: new object[,]
-                {
-                    { new Guid("00be783e-d679-4f1c-9ae2-a4f4c79de0ef"), "TKSV", false, true, "Thuốc kháng sinh viên", 4 },
-                    { new Guid("05a24915-0bed-4f61-b53d-b5e52482e44c"), "TK", false, true, "Thuốc khác", 21 },
-                    { new Guid("25454ce7-bff0-4fd5-a47a-069554c1535a"), "VC", false, true, "Vaccine", 19 },
-                    { new Guid("2f5148cb-8adf-45ec-88ee-f84530cfa164"), "THTT", false, true, "Thuốc hướng tâm thần", 10 },
-                    { new Guid("2fd41f93-ddb9-47dd-9833-4507ce71128c"), "TV", false, true, "Thuốc viên", 1 },
-                    { new Guid("3144745c-477c-4ce2-9c33-a38eb2153057"), "SP", false, true, "Sinh phẩm", 18 },
-                    { new Guid("31d26ca7-2b5f-4dfd-b961-f3609e6a0b69"), "TCO", false, true, "Nhóm thuốc corticoid", 12 },
-                    { new Guid("35df3868-8db6-440d-809f-f4c345d804a7"), "TS", false, true, "Thuốc siro", 6 },
-                    { new Guid("6375b8a1-b6e7-4724-a1b4-8cc3acc98e43"), "KCVI", false, true, "Khoáng chất và Vitamin", 5 },
-                    { new Guid("8590ae3d-351c-4438-bfe5-3f69dcf97349"), "TB", false, true, "Thuốc bột", 8 },
-                    { new Guid("914ca65d-6579-4590-b963-fee8a743bae1"), "DC", false, true, "Dịch truyền", 3 },
-                    { new Guid("9e144dff-29f6-47da-b7ed-b55abd1a2cd3"), "VTNT", false, true, "Vật tư nhà thuốc", 20 },
-                    { new Guid("a28fb46e-e9b9-410e-9c31-d8ebfd22015c"), "TKTT", false, true, "Thuốc kê tự túc", 16 },
-                    { new Guid("ae04abd7-d012-470d-9b8a-f38d9c5c94a8"), "TG", false, true, "Thuốc gói", 14 },
-                    { new Guid("b5f03233-d733-4349-93df-db562b7d4376"), "THD", false, true, "Thuốc hỗn dịch", 6 },
-                    { new Guid("c987b9d2-e599-49cc-99f3-d075d27cee7c"), "TDY", false, true, "Thuốc đông y", 5 },
-                    { new Guid("cc48bb40-fbf0-4054-818c-eb49545aaeea"), "TDN", false, true, "Thuốc dùng ngoài", 7 },
-                    { new Guid("cd5d7538-b1d2-448d-b6ff-c139c35f9dc7"), "TGTM", false, true, "Thuốc gây tê, mê", 13 },
-                    { new Guid("ddf105e8-6534-46e4-832b-598daa84c4d5"), "TGN", false, true, "Thuốc gây nghiện", 9 },
-                    { new Guid("e47ab5de-9ea5-4075-8da5-7ae9f36538e2"), "TUT", false, true, "Thuốc ung thư", 15 },
-                    { new Guid("e482e866-9243-49d8-8676-403377de353c"), "TKSO", false, true, "Thuốc kháng sinh ống", 11 },
-                    { new Guid("ea57a262-6647-4e88-880c-82bc4227e916"), "TNM", false, true, "Thuốc nhỏ mắt", 17 },
-                    { new Guid("ff9be71e-a958-4244-9df1-1582229c67d5"), "TU", false, true, "Thuốc uống", 2 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "SMedicineLines",
-                columns: new[] { "Id", "Code", "Inactive", "Name", "SortOrder" },
-                values: new object[,]
-                {
-                    { new Guid("03bd1fdc-d2b8-4969-a029-5022ca68f31e"), "1.02", false, "Ngậm", 2 },
-                    { new Guid("05a24915-0bed-4f61-b53d-b5e52482e44c"), "1.01", false, "Uống", 1 },
-                    { new Guid("08f7b3c2-09da-4b4a-9c98-75c8562807ee"), "6.09", false, "Dung dịch", 44 },
-                    { new Guid("0c8ba522-0e4b-40a0-9d93-936f5350853e"), "5.08", false, "Xịt họng", 38 },
-                    { new Guid("0df82239-15dd-41ee-afc8-67cb51d5f3f6"), "5.03", false, "Bột hít", 33 },
-                    { new Guid("13165217-8025-44e0-a92b-1f8318d56282"), "2.13", false, "Tiêm vào khối u", 18 },
-                    { new Guid("1ef26d8f-57d7-423c-a8c6-e3a20a249b37"), "6.01", false, "Nhỏ mũi", 40 },
-                    { new Guid("229172a9-7464-4216-8b11-4e587e4c280c"), "5.01", false, "Phun mù", 31 },
-                    { new Guid("2bd555b2-74ae-4b3f-9d27-de30e10bf16f"), "3.01", false, "Bôi", 21 },
-                    { new Guid("2f6e29a1-9a1f-44b0-8f9e-ea1c8716c23b"), "2.10", false, "Tiêm", 15 },
-                    { new Guid("379c8a46-145d-4956-af5d-2d48d9d55087"), "6.03", false, "Tra mắt", 42 },
-                    { new Guid("3df25942-afc9-4ed5-88b3-a0ff7b0ad968"), "4.02", false, "Đặt hậu môn", 26 },
-                    { new Guid("41c24ffd-81f8-44f4-92f7-b3e5d418c8c7"), "2.15", false, "Tiêm truyền", 20 },
-                    { new Guid("49783593-80ca-4a9f-8ff9-5d359307498c"), "4.03", false, "Thụt hậu môn - trực tràng", 27 },
-                    { new Guid("5a807206-9aef-481d-87b6-88f464e6fd46"), "3.04", false, "Xịt ngoài da", 24 },
-                    { new Guid("5d6b6689-0dc3-4f11-94ef-02d288cce18a"), "2.03", false, "Tiêm trong da", 8 },
-                    { new Guid("5eada7db-843c-453b-8a44-3de2dacaa27b"), "1.05", false, "Ngậm dưới lưỡi", 5 },
-                    { new Guid("5ef14843-323d-4fe9-a424-46ca3120fca9"), "2.02", false, "Tiêm dưới da", 7 },
-                    { new Guid("60f3158e-73f2-453f-af90-072b6b25c644"), "3.05", false, "Dùng ngoài", 1 },
-                    { new Guid("65ca8fd8-fb9b-4dea-9c0e-c9a3b6b8fbd8"), "2.11", false, "Tiêm động mạch khối u", 16 },
-                    { new Guid("6cdf2301-9621-4f73-9c62-f48ab80245c8"), "5.02", false, "Dạng hít", 32 },
-                    { new Guid("6edba7a9-20fe-49c0-9925-ba3b32ed32a0"), "2.14", false, "Tiêm truyền tĩnh mạch", 19 },
-                    { new Guid("6f90ecfe-4ede-4241-918b-b18245208f56"), "2.01", false, "Tiêm bặp", 6 },
-                    { new Guid("71edc6f8-3db6-4375-9005-c5328627fa28"), "3.03", false, "Dán trên da", 23 },
-                    { new Guid("75017c25-2ad7-4cce-b206-38735fd3584d"), "3.02", false, "Xoa ngoài", 22 },
-                    { new Guid("7990c54f-dc34-4a62-a8da-201d22c1069d"), "4.05", false, "Đặt tử cung", 29 },
-                    { new Guid("7b3a86dc-9b0c-43f8-94a9-e4eec9916e30"), "5.09", false, "Thuốc mũi", 39 },
-                    { new Guid("7d92b632-0ccf-4be5-a044-c3ee549fdb9f"), "6.04", false, "Nhỏ tai", 43 },
-                    { new Guid("8d9cd0b1-2407-4cc3-9d94-314602e26508"), "5.07", false, "Xịt mũi", 37 },
-                    { new Guid("8f65d7cf-bbd9-44f4-b556-20472aa4a5f0"), "4.06", false, "Thụt", 30 },
-                    { new Guid("a26814e4-da59-4317-a297-5ca089ef2dad"), "1.04", false, "Đặt dưới lưỡi", 4 },
-                    { new Guid("a29889f5-4943-4520-85fa-441c3ea9e979"), "1.03", false, "Nhai", 3 },
-                    { new Guid("b12f310c-c12a-4f8f-a9bd-ddd38b4eebcf"), "5.06", false, "Đường hô hấp", 36 },
-                    { new Guid("c0097373-f633-4bee-b670-2d2c35b5d172"), "2.12", false, "Tiêm vào khoang tự nhiên", 17 },
-                    { new Guid("c6ffa735-8813-41ea-8984-5700dbee1ea7"), "2.09", false, "Tiêm vào các khoang của cơ thế", 14 },
-                    { new Guid("ca37423b-25c7-4a84-a32d-8767bf14352b"), "5.04", false, "Xịt", 34 },
-                    { new Guid("cae9f723-e795-48d5-9730-f19edceaa5b6"), "2.04", false, "Tiêm tĩnh mạch", 9 },
-                    { new Guid("cb51640d-bd7e-4cba-b64d-191d4162efa4"), "4.01", false, "Đặt âm đạo", 25 },
-                    { new Guid("d075055e-4ed2-4d37-82ae-c9c20cb4f08f"), "2.06", false, "Tiêm vào ổ khớp", 11 },
-                    { new Guid("d36d932c-00db-451d-9a02-a401dbd89408"), "2.07", false, "Tiêm nội nhãn cầu", 12 },
-                    { new Guid("d558492b-6628-40ca-aadf-5dda7701681a"), "4.04", false, "Đặt", 28 },
-                    { new Guid("d81efde6-f750-4a66-adf3-a9092bb8ea9b"), "5.05", false, "Khí dung", 35 },
-                    { new Guid("e485d3cc-5a96-48c9-9ed3-8725bb0136ef"), "6.02", false, "Nhỏ mắt", 41 },
-                    { new Guid("e578f37b-9f1b-4098-8659-ac510ced491a"), "2.08", false, "Tiêm trong dịch kích của mắt", 13 },
-                    { new Guid("febb52a6-15bc-4e28-bc84-e928b43b126b"), "2.05", false, "Tiêm truyền tĩnh mạch", 10 }
+                    { new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"), "KXD", null, new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(5975), null, false, null, null, "Chưa xác định", 0 },
+                    { new Guid("e9497984-d355-41af-b917-091500956be9"), "NU", null, new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(6001), null, false, null, null, "Nữ", 2 },
+                    { new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"), "NAM", null, new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(5999), null, false, null, null, "Nam", 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -1836,9 +1628,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { 1, "BHYT", null, new DateTime(2023, 8, 4, 0, 50, 23, 556, DateTimeKind.Local).AddTicks(1938), null, false, null, null, "Bảo hiểm y tế", 0 },
-                    { 2, "VP", null, new DateTime(2023, 8, 4, 0, 50, 23, 556, DateTimeKind.Local).AddTicks(1942), null, false, null, null, "Viện phí", 0 },
-                    { 3, "DV", null, new DateTime(2023, 8, 4, 0, 50, 23, 556, DateTimeKind.Local).AddTicks(1943), null, false, null, null, "Dịch vụ", 0 }
+                    { 1, "BHYT", null, new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(7006), null, false, null, null, "Bảo hiểm y tế", 0 },
+                    { 2, "VP", null, new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(7011), null, false, null, null, "Viện phí", 0 },
+                    { 3, "DV", null, new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(7012), null, false, null, null, "Dịch vụ", 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -1974,7 +1766,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                 values: new object[] { new Guid("3382be1c-2836-4246-99db-c4e1c781e868"), null, null, null, "administrator@gmail.com", "Admin", null, "Administrator", "79956B61E1B250869A6716CE37EFD6E6", null, null, 1, 0, "Administrator", null });
 
             migrationBuilder.CreateIndex(
-<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20230803152031_Add-Table.cs
                 name: "IX_DImMestMedicine_DImMestId",
                 table: "DImMestMedicine",
                 column: "DImMestId");
@@ -1985,8 +1776,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                 column: "SMedicineId");
 
             migrationBuilder.CreateIndex(
-========
->>>>>>>> master:HIS.EntityFrameworkCore/Migrations/20230803175024_Init.cs
                 name: "IX_DImMests_ApproverUserId",
                 table: "DImMests",
                 column: "ApproverUserId");
@@ -2187,9 +1976,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 column: "ServiceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SServiceResultIndices_SServiceId",
+                name: "IX_SServiceResultIndices_ServiceId",
                 table: "SServiceResultIndices",
-                column: "SServiceId");
+                column: "ServiceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SServices_ServiceGroupHeInId",
@@ -2231,11 +2020,7 @@ namespace HIS.EntityFrameworkCore.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20230803152031_Add-Table.cs
                 name: "DImMestMedicine");
-========
-                name: "DImMests");
->>>>>>>> master:HIS.EntityFrameworkCore/Migrations/20230803175024_Init.cs
 
             migrationBuilder.DropTable(
                 name: "SCareers");
@@ -2277,23 +2062,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SWards");
 
             migrationBuilder.DropTable(
-<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20230803152031_Add-Table.cs
                 name: "DImMests");
-========
-                name: "DImExMestTypes");
-
-            migrationBuilder.DropTable(
-                name: "SPatients");
-
-            migrationBuilder.DropTable(
-                name: "SSupplier");
-
-            migrationBuilder.DropTable(
-                name: "STreatments");
-
-            migrationBuilder.DropTable(
-                name: "SRooms");
->>>>>>>> master:HIS.EntityFrameworkCore/Migrations/20230803175024_Init.cs
 
             migrationBuilder.DropTable(
                 name: "SMaterialTypes");
@@ -2303,6 +2072,9 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "SPermissions");
+
+            migrationBuilder.DropTable(
+                name: "SPatientTypes");
 
             migrationBuilder.DropTable(
                 name: "SRoles");
@@ -2338,28 +2110,10 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SGenders");
 
             migrationBuilder.DropTable(
-                name: "SPatientTypes");
-
-            migrationBuilder.DropTable(
-                name: "SGenders");
-
-            migrationBuilder.DropTable(
                 name: "SDepartments");
 
             migrationBuilder.DropTable(
                 name: "SRoomTypes");
-
-            migrationBuilder.DropTable(
-                name: "SMedicineTypes");
-
-            migrationBuilder.DropTable(
-                name: "SCountries");
-
-            migrationBuilder.DropTable(
-                name: "SBranchs");
-
-            migrationBuilder.DropTable(
-                name: "SDepartmentTypes");
 
             migrationBuilder.DropTable(
                 name: "SMedicineGroups");
@@ -2372,6 +2126,12 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "SCountries");
+
+            migrationBuilder.DropTable(
+                name: "SBranchs");
+
+            migrationBuilder.DropTable(
+                name: "SDepartmentTypes");
 
             migrationBuilder.DropTable(
                 name: "SServiceGroupHeIns");

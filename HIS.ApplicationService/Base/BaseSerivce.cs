@@ -1,13 +1,6 @@
 ﻿using AutoMapper;
-using HIS.Dtos.Commons;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
-using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService
 {

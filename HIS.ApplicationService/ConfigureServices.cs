@@ -67,7 +67,7 @@ namespace HIS.ApplicationService
             services.AddTransient<ISMedicineTypeService, SMedicineTypeService>();
             services.AddTransient<ISMedicineLineService, SMedicineLineService>();
 
-            services.AddTransient<ISPatientService, SPatientService>();
+            services.AddTransient<ISPatientService, SPatientAppService>();
 
             services.AddTransient<IUserService, UserService>();
         }

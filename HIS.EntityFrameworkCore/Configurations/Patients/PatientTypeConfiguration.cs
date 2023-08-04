@@ -13,6 +13,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Patients
 
             builder.Property(x => x.Code).HasMaxLength(50);
             builder.Property(x => x.Name).HasMaxLength(250);
+            builder.Property(x => x.Description).HasMaxLength(512);
         }
     }
 }

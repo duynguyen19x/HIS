@@ -10,7 +10,7 @@ using HIS.EntityFrameworkCore.Entities.Dictionaries;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class SupplierConfiguration
+    public class SupplierConfiguration : IEntityTypeConfiguration<SSupplier>
     {
         public void Configure(EntityTypeBuilder<SSupplier> builder)
         {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
-    public class SSupplier : FullAuditingEntity<Guid>
+    public class SSupplier : FullAuditedEntity<Guid>
     {
         public string Code { get; set; }
         public string Name { get; set; }

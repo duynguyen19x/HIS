@@ -38,7 +38,6 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
             modelBuilder.ApplyConfiguration(new RoleConfiguration());
             modelBuilder.ApplyConfiguration(new RolePermissionBranchConfigurations());
             modelBuilder.ApplyConfiguration(new UnitConfigurations());
-            //modelBuilder.ApplyConfiguration(new ServiceTypeConfigurations());
             modelBuilder.ApplyConfiguration(new ServiceConfigurations());
             modelBuilder.ApplyConfiguration(new MedicineConfiguration());
             modelBuilder.ApplyConfiguration(new MedicineGroupConfiguration());
@@ -59,7 +58,9 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
             modelBuilder.ApplyConfiguration(new HospitalConfiguration());
             modelBuilder.ApplyConfiguration(new ServiceGroupConfigurations());
             modelBuilder.ApplyConfiguration(new ServiceGroupHeInConfigurations());
+            modelBuilder.ApplyConfiguration(new ServiceResultIndexConfiguration());
             modelBuilder.ApplyConfiguration(new ExecutionRoomConfiguration());
+            modelBuilder.ApplyConfiguration(new SupplierConfiguration());
 
             modelBuilder.ApplyConfiguration(new TreatmentConfiguration());
             modelBuilder.ApplyConfiguration(new ImExMestTypeConfiguration());

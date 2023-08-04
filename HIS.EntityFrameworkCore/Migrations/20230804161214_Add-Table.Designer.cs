@@ -11,15 +11,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HIS.EntityFrameworkCore.Migrations
 {
-<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20230803152031_Add-Table.Designer.cs
-    [DbContext(typeof(HIS_DbContext))]
-    [Migration("20230803152031_Add-Table")]
-    partial class AddTable
-========
     [DbContext(typeof(HISDbContext))]
-    [Migration("20230803175024_Init")]
-    partial class Init
->>>>>>>> master:HIS.EntityFrameworkCore/Migrations/20230803175024_Init.Designer.cs
+    [Migration("20230804161214_Add-Table")]
+    partial class AddTable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,7 +32,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2");
@@ -47,7 +42,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
@@ -74,7 +70,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.HasKey("Id");
 
@@ -297,7 +294,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.ToTable("DImMests", (string)null);
                 });
 
-<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20230803152031_Add-Table.Designer.cs
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImMestMedicine", b =>
                 {
                     b.Property<Guid>("Id")
@@ -340,88 +336,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.ToTable("DImMestMedicine");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Treatment.STreatment", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Address")
-                        .HasMaxLength(1024)
-                        .HasColumnType("nvarchar(1024)");
-
-                    b.Property<Guid?>("CareerId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("CountryId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DOB")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("DeleteBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("DeleteDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("DistrictId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("EthnicId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("GenderId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("InTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("InTimeClinical")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("OutTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("PatientId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ProvinceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("WardId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Year")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("STreatments", (string)null);
-                });
-
-========
->>>>>>>> master:HIS.EntityFrameworkCore/Migrations/20230803175024_Init.Designer.cs
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Medicines.SMedicinePricePolicy", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1551,7 +1465,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("nvarchar(512)");
 
                     b.Property<string>("PharmaceuticalFormulation")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<string>("PreparationMethod")
                         .HasMaxLength(512)
@@ -2187,7 +2102,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal?>("FemaleFrom")
                         .HasColumnType("decimal(18,2)");
@@ -2205,10 +2121,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("SServiceId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<Guid?>("ServiceId")
                         .HasColumnType("uniqueidentifier");
@@ -2217,13 +2131,14 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Unit")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SServiceId");
+                    b.HasIndex("ServiceId");
 
-                    b.ToTable("SServiceResultIndices");
+                    b.ToTable("SServiceResultIndices", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SSurgicalProcedureType", b =>
@@ -2386,7 +2301,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("HeInCode")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
@@ -4726,7 +4643,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"),
                             Code = "KXD",
-                            CreatedDate = new DateTime(2023, 8, 4, 0, 50, 23, 556, DateTimeKind.Local).AddTicks(631),
+                            CreatedDate = new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(5975),
                             Inactive = false,
                             Name = "Chưa xác định",
                             SortOrder = 0
@@ -4735,7 +4652,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"),
                             Code = "NAM",
-                            CreatedDate = new DateTime(2023, 8, 4, 0, 50, 23, 556, DateTimeKind.Local).AddTicks(662),
+                            CreatedDate = new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(5999),
                             Inactive = false,
                             Name = "Nam",
                             SortOrder = 1
@@ -4744,7 +4661,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e9497984-d355-41af-b917-091500956be9"),
                             Code = "NU",
-                            CreatedDate = new DateTime(2023, 8, 4, 0, 50, 23, 556, DateTimeKind.Local).AddTicks(665),
+                            CreatedDate = new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(6001),
                             Inactive = false,
                             Name = "Nữ",
                             SortOrder = 2
@@ -4938,7 +4855,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
@@ -4965,7 +4883,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "BHYT",
-                            CreatedDate = new DateTime(2023, 8, 4, 0, 50, 23, 556, DateTimeKind.Local).AddTicks(1938),
+                            CreatedDate = new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(7006),
                             Inactive = false,
                             Name = "Bảo hiểm y tế",
                             SortOrder = 0
@@ -4974,7 +4892,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "VP",
-                            CreatedDate = new DateTime(2023, 8, 4, 0, 50, 23, 556, DateTimeKind.Local).AddTicks(1942),
+                            CreatedDate = new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(7011),
                             Inactive = false,
                             Name = "Viện phí",
                             SortOrder = 0
@@ -4983,7 +4901,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 3,
                             Code = "DV",
-                            CreatedDate = new DateTime(2023, 8, 4, 0, 50, 23, 556, DateTimeKind.Local).AddTicks(1943),
+                            CreatedDate = new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(7012),
                             Inactive = false,
                             Name = "Dịch vụ",
                             SortOrder = 0
@@ -5247,7 +5165,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
@@ -5262,7 +5181,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
@@ -5277,14 +5197,15 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<int?>("SortOrder")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("SSuppliers");
+                    b.ToTable("SSuppliers", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SUnit", b =>
@@ -6033,7 +5954,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SService", "SService")
                         .WithMany("SServiceResultIndices")
-                        .HasForeignKey("SServiceId");
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("SService");
                 });

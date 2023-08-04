@@ -25,10 +25,7 @@ using HIS.Dtos.Dictionaries.ServiceResultIndex;
 using HIS.Dtos.Dictionaries.ServiceUnit;
 using HIS.Dtos.Dictionaries.Supplier;
 using HIS.Dtos.Dictionaries.Ward;
-using HIS.Dtos.Systems.Role;
 using HIS.EntityFrameworkCore.Entities.Business.Patients;
-using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
-using HIS.EntityFrameworkCore.Entities.Business.Treatment;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
@@ -89,9 +86,9 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.SServiceResultIndices, opt => opt.Ignore())
                 .ReverseMap();
             CreateMap<SServicePricePolicyDto, SServicePricePolicy>()
-                //.ForMember(dest => dest.SPatientType, opt => opt.Ignore())
-                .ForMember(dest => dest.SService, opt => opt.Ignore())
-                .ReverseMap();
+               .ForMember(dest => dest.SPatientType, opt => opt.Ignore())
+               .ForMember(dest => dest.SService, opt => opt.Ignore())
+               .ReverseMap();
 
             CreateMap<SExecutionRoomDto, SExecutionRoom>()
                 .ForMember(dest => dest.SService, opt => opt.Ignore())
