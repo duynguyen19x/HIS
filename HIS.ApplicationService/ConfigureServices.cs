@@ -25,6 +25,7 @@ using HIS.ApplicationService.Dictionaries.Unit;
 using HIS.ApplicationService.Dictionaries.Ward;
 using HIS.ApplicationService.Systems.Login;
 using HIS.ApplicationService.Systems.Role;
+using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HIS.ApplicationService
@@ -64,6 +65,8 @@ namespace HIS.ApplicationService
             services.AddTransient<ISMedicineLineService, SMedicineLineService>();
 
             services.AddTransient<ISPatientService, SPatientService>();
+
+            services.AddTransient<IUserService, UserService>();
         }
     }
 }
