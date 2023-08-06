@@ -28,6 +28,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
 
         public async Task<ApiResult<DImpMestDto>> CreateOrEdit(DImpMestDto input)
         {
+
             if (GuidHelper.IsNullOrEmpty(input.Id))
             {
                 return await Create(input);
