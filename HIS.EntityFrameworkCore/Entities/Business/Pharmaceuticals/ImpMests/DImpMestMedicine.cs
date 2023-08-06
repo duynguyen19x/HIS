@@ -1,4 +1,4 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
+﻿using HIS.Core.Entities;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using System.ComponentModel;
 

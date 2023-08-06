@@ -1,4 +1,4 @@
-﻿using HIS.Dtos.Base;
+﻿using HIS.Core.Application.Services.Dto;
 using HIS.Dtos.Dictionaries.MedicineType;
 using System;
 using System.Collections.Generic;

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using AutoMapper.Internal.Mappers;
-using HIS.ApplicationService.Base;
+using HIS.Application.Core.Services;
+using HIS.Core.Linq;
 using HIS.Core.Repositories;
 using HIS.Dtos.Business.Patient;
 using HIS.Dtos.Business.Treatment;
@@ -15,18 +15,9 @@ namespace HIS.ApplicationService.Business.Patient
 {
     public class SPatientAppService : BaseAppService, ISPatientService
     {
-        private readonly IRepository<SPatient, Guid> _patientRepository;
-        private readonly HISDbContext _dbContext;
-
-        public SPatientAppService(
-            IRepository<SPatient, Guid> patientRepository,
-            HISDbContext dbContext, 
-            IConfiguration config, 
-            IMapper mapper)
-            //: base(dbContext, config, mapper)
+        public SPatientAppService(HISDbContext dbContext, IMapper mapper)
+            : base(dbContext, mapper)
         {
-            _dbContext = dbContext;
-            _patientRepository = patientRepository;
         }
 
         public Task<ApiResult<SPatientDto>> CreateOrEdit(SPatientDto input)
@@ -41,16 +32,20 @@ namespace HIS.ApplicationService.Business.Patient
 
         public async Task<ApiResultList<SPatientDto>> GetAll(GetAllSPatientInput input)
         {
-            var patient = await _patientRepository.GetAll().ToListAsync();
-
             var result = new ApiResultList<SPatientDto>();
-            result.Result = ObjectMapper.Map<List<SPatientDto>>(patient);
+            var patients = await Context.SPatients
+                .WhereIf(string.IsNullOrEmpty(input.PatientCodeFilter), x => x.Code == input.PatientCodeFilter)
+                .ToListAsync();
+            result.Result = Mapper.Map<List<SPatientDto>>(patients);
             return result;
         }
 
-        public Task<ApiResult<SPatientDto>> GetById(Guid id)
+        public async Task<ApiResult<SPatientDto>> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            var result = new ApiResult<SPatientDto>();
+            var patient = await Context.SPatients.FirstOrDefaultAsync(x => x.Id == id);
+            result.Result = Mapper.Map<SPatientDto>(patient);
+            return result;
         }
 
         public async Task<ApiResult<STreatmentDto>> RegisterOrEdit(STreatmentDto input)
@@ -64,37 +59,10 @@ namespace HIS.ApplicationService.Business.Patient
         public async Task<ApiResult<STreatmentDto>> Register(STreatmentDto input)
         {
             var result = new ApiResult<STreatmentDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            using (var transaction = Context.BeginTransaction())
             {
                 try
                 {
-                    input.Id = Guid.NewGuid();
-                    
-
-                    if (input.PatientId == null || input.PatientId == default(Guid))
-                    {
-                        input.PatientId = Guid.NewGuid();
-                        if (string.IsNullOrEmpty(input.PatientCode))
-                            input.PatientCode = "BN0000001";
-
-                        var patient = ObjectMapper.Map<EntityFrameworkCore.Entities.Business.Patients.SPatient>(input);
-                        patient.Id = input.PatientId.Value;
-                        patient.Code = input.PatientCode;
-                        //patient.FullName = input.PatientName;
-
-                        _dbContext.SPatients.Add(patient);
-                        await _dbContext.SaveChangesAsync();
-                    }
-
-                    input.Code = "DT00000001";
-                    var data = ObjectMapper.Map<STreatment>(input);
-                    _dbContext.STreatments.Add(data);
-                    await _dbContext.SaveChangesAsync();
-
-                    result.IsSuccessed = true;
-                    result.Result = input;
-
-                    transaction.Commit();
                 }
                 catch (Exception ex)
                 {

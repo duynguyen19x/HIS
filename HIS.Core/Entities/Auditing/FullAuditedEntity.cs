@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HIS.EntityFrameworkCore.BaseEntitys;
-
-namespace HIS.Core.Entities.Auditing
+﻿namespace HIS.Core.Entities.Auditing
 {
     [Serializable]
     public abstract class FullAuditedEntity<TPrimaryKey> : AuditedEntity<TPrimaryKey>, IFullAudited
