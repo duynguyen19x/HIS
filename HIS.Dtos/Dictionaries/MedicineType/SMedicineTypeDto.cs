@@ -1,11 +1,6 @@
 ﻿using HIS.Core.Application.Services.Dto;
 using HIS.Dtos.Dictionaries.Medicine;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.Dtos.Dictionaries.MedicineType
 {
@@ -34,6 +29,8 @@ namespace HIS.Dtos.Dictionaries.MedicineType
 
         [Description("Đơn vị tính")]
         public Guid? UnitId { get; set; }
+        public string UnitCode { get; set; }
+        public string UnitName { get; set; }
 
         [Description("Hướng dẫn")]
         public string Tutorial { get; set; }

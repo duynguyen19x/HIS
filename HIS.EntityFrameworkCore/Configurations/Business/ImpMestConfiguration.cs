@@ -11,11 +11,11 @@ using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business
 {
-    public  class ImMestConfiguration : IEntityTypeConfiguration<DImMest>
+    public  class ImpMestConfiguration : IEntityTypeConfiguration<DImpMest>
     {
-        public void Configure(EntityTypeBuilder<DImMest> builder)
+        public void Configure(EntityTypeBuilder<DImpMest> builder)
         {
-            builder.ToTable("DImMests");
+            builder.ToTable("DImpMests");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50);

@@ -6,11 +6,11 @@ using HIS.Utilities.Enums;
 
 namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
 {
-    public class DImMest : FullAuditedEntity<Guid>
+    public class DImpMest : FullAuditedEntity<Guid>
     {
         public string Code { get; set; }
         public string Name { get; set; }
-        public ImMestStatusType ImMestStatus { get; set; }
+        public ImpMestStatusType ImpMestStatus { get; set; }
         /// <summary>
         /// Kho nhập
         /// </summary>
@@ -71,7 +71,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
 
         public SRoom ImStock { get; set; }
         public SRoom ExStock { get; set; }
-        public DImExMestType DImExMestType { get; set; }
+        public DImpExMestType DImExMestType { get; set; }
         public SUser ReceiverUser { get; set; }
         public SUser ApproverUser { get; set; }
         public SRoom ReqRoom { get; set; }
@@ -80,6 +80,6 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
         public SPatient SPatient { get; set; }
         public SSupplier SSupplier { get; set; }
 
-        public IList<DImMestMedicine> DImMestMedicines { get; set; }
+        public IList<DImpMestMedicine> DImMestMedicines { get; set; }
     }
 }

@@ -30,6 +30,7 @@ using HIS.EntityFrameworkCore.Entities.Business.Patients;
 using HIS.EntityFrameworkCore.EntityFrameworkCore.Repositories;
 using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
+using HIS.ApplicationService.Business.Pharmaceuticals.ImpMests;
 
 namespace HIS.ApplicationService
 {
@@ -62,14 +63,14 @@ namespace HIS.ApplicationService
             services.AddTransient<IServiceGroupHeInService, ServiceGroupHeInService>();
             services.AddTransient<ISUnitService, SUnitService>();
             services.AddTransient<ISSupplierService, SSupplierService>();
+            services.AddTransient<IUserService, UserService>();
 
             services.AddTransient<ISMedicineGroupService, SMedicineGroupService>();
             services.AddTransient<ISMedicineTypeService, SMedicineTypeService>();
             services.AddTransient<ISMedicineLineService, SMedicineLineService>();
 
             services.AddTransient<ISPatientService, SPatientAppService>();
-
-            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IDImpMestService, DImpMestService>();
         }
     }
 }

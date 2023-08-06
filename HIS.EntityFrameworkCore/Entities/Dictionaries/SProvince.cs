@@ -1,4 +1,4 @@
-﻿using HIS.EntityFrameworkCore.BaseEntitys;
+﻿using HIS.Core.Entities;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {

@@ -5,6 +5,7 @@ using HIS.EntityFrameworkCore.Configurations.Patients;
 using HIS.EntityFrameworkCore.Configurations.Services;
 using HIS.EntityFrameworkCore.Data;
 using HIS.EntityFrameworkCore.Entities.Business.Patients;
+using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
@@ -64,8 +65,8 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
             modelBuilder.ApplyConfiguration(new SupplierConfiguration());
 
             modelBuilder.ApplyConfiguration(new TreatmentConfiguration());
-            modelBuilder.ApplyConfiguration(new ImExMestTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new ImMestConfiguration());
+            modelBuilder.ApplyConfiguration(new ImpExpMestTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ImpMestConfiguration());
 
             modelBuilder.Seed();
         }
@@ -95,7 +96,7 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<SService> SServices { get; set; }
         public DbSet<SServiceGroup> SServiceGroups { get; set; }
         public DbSet<SServiceGroupHeIn> SServiceGroupHeIns { get; set; }
-        public DbSet<SUnit> SServiceUnits { get; set; }
+        public DbSet<SUnit> SUnits { get; set; }
         public DbSet<SMedicine> SMedicines { get; set; }
         public DbSet<SMedicineGroup> SMedicineGroups { get; set; }
         public DbSet<SMedicineLine> SMedicineLines { get; set; }
@@ -115,5 +116,8 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<SSurgicalProcedureType> SSurgicalProcedureTypes { get; set; }
         public DbSet<SExecutionRoom> SExecutionRooms { get; set; }
         public DbSet<SServiceResultIndice> SServiceResultIndices { get; set; }
+
+        public DbSet<DImpMest> DImMests { get; set; }
+        public DbSet<DImpMestMedicine> DImMestMedicines { get; set; }
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(HISDbContext))]
-    [Migration("20230804161214_Add-Table")]
-    partial class AddTable
+    [Migration("20230806134827_Update-Table-01")]
+    partial class UpdateTable01
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -160,7 +160,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.ToTable("STreatments", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImExMestType", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpExMestType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -181,10 +181,10 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DImExMestTypes", (string)null);
+                    b.ToTable("DImpExpMestTypes", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImMest", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImpMest", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -226,11 +226,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<int?>("ImExMestTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ImMestStatus")
-                        .HasColumnType("int");
-
                     b.Property<Guid?>("ImStockId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("ImpMestStatus")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ImpTime")
                         .HasColumnType("datetime2");
@@ -291,10 +291,10 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("TreatmentId");
 
-                    b.ToTable("DImMests", (string)null);
+                    b.ToTable("DImpMests", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImMestMedicine", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImpMestMedicine", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -333,7 +333,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("SMedicineId");
 
-                    b.ToTable("DImMestMedicine");
+                    b.ToTable("DImMestMedicines");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Medicines.SMedicinePricePolicy", b =>
@@ -4643,7 +4643,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"),
                             Code = "KXD",
-                            CreatedDate = new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(5975),
+                            CreatedDate = new DateTime(2023, 8, 6, 20, 48, 26, 778, DateTimeKind.Local).AddTicks(4343),
                             Inactive = false,
                             Name = "Chưa xác định",
                             SortOrder = 0
@@ -4652,7 +4652,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"),
                             Code = "NAM",
-                            CreatedDate = new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(5999),
+                            CreatedDate = new DateTime(2023, 8, 6, 20, 48, 26, 778, DateTimeKind.Local).AddTicks(4369),
                             Inactive = false,
                             Name = "Nam",
                             SortOrder = 1
@@ -4661,7 +4661,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e9497984-d355-41af-b917-091500956be9"),
                             Code = "NU",
-                            CreatedDate = new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(6001),
+                            CreatedDate = new DateTime(2023, 8, 6, 20, 48, 26, 778, DateTimeKind.Local).AddTicks(4371),
                             Inactive = false,
                             Name = "Nữ",
                             SortOrder = 2
@@ -4883,7 +4883,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "BHYT",
-                            CreatedDate = new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(7006),
+                            CreatedDate = new DateTime(2023, 8, 6, 20, 48, 26, 778, DateTimeKind.Local).AddTicks(5402),
                             Inactive = false,
                             Name = "Bảo hiểm y tế",
                             SortOrder = 0
@@ -4892,7 +4892,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "VP",
-                            CreatedDate = new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(7011),
+                            CreatedDate = new DateTime(2023, 8, 6, 20, 48, 26, 778, DateTimeKind.Local).AddTicks(5406),
                             Inactive = false,
                             Name = "Viện phí",
                             SortOrder = 0
@@ -4901,7 +4901,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 3,
                             Code = "DV",
-                            CreatedDate = new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(7012),
+                            CreatedDate = new DateTime(2023, 8, 6, 20, 48, 26, 778, DateTimeKind.Local).AddTicks(5408),
                             Inactive = false,
                             Name = "Dịch vụ",
                             SortOrder = 0
@@ -5688,7 +5688,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("Gender");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImMest", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImpMest", b =>
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SUser", "ApproverUser")
                         .WithMany()
@@ -5700,7 +5700,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasForeignKey("ExStockId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImExMestType", "DImExMestType")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpExMestType", "DImExMestType")
                         .WithMany()
                         .HasForeignKey("ImExMestTypeId")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -5761,9 +5761,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("STreatment");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImMestMedicine", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImpMestMedicine", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImMest", "DImMest")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImpMest", "DImMest")
                         .WithMany("DImMestMedicines")
                         .HasForeignKey("DImMestId");
 
@@ -6095,7 +6095,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImMest", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImpMest", b =>
                 {
                     b.Navigation("DImMestMedicines");
                 });

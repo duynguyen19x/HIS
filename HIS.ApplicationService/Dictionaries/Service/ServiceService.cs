@@ -268,7 +268,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
             {
                 result.Result = (from r in _dbContext.SServices
 
-                                 join r1 in _dbContext.SServiceUnits on r.UnitId equals r1.Id
+                                 join r1 in _dbContext.SUnits on r.UnitId equals r1.Id
                                  join r2 in _dbContext.SServiceGroups on r.ServiceGroupId equals r2.Id
                                  join r3 in _dbContext.SServiceGroupHeIns on r.ServiceGroupHeInId equals r3.Id
 
@@ -410,7 +410,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
             {
                 try
                 {
-                    var sServiceUnits = _dbContext.SServiceUnits.ToList();
+                    var sServiceUnits = _dbContext.SUnits.ToList();
                     var sServiceGroupHeIns = _dbContext.SServiceGroupHeIns.ToList();
                     var sServiceGroups = _dbContext.SServiceGroups.ToList();
                     var sSurgicalProcedureTypes = _dbContext.SSurgicalProcedureTypes.ToList();
