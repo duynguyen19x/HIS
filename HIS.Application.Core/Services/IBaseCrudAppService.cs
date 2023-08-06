@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Base
+namespace HIS.Application.Core.Services
 {
-    public class EntityDto<TPrimaryKey>
+    public interface IBaseCrudAppService : IBaseAppService
     {
-        public TPrimaryKey Id { get; set; }
     }
 }

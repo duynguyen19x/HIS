@@ -1,4 +1,4 @@
-﻿using HIS.Dtos.Base;
+﻿using HIS.Core.Application.Services.Dto;
 using System.ComponentModel;
 
 namespace HIS.Dtos.Business.DImMestMedicine

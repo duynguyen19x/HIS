@@ -1,4 +1,4 @@
-﻿using HIS.Dtos.Base;
+﻿using HIS.Core.Application.Services.Dto;
 using HIS.Dtos.Business.DImMestMedicine;
 using HIS.Utilities.Enums;
 
