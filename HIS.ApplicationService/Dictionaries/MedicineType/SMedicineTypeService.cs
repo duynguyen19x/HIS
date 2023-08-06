@@ -198,60 +198,63 @@ namespace HIS.ApplicationService.Dictionaries.MedicineType
             var result = new ApiResultList<SMedicineTypeDto>();
             try
             {
-                result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SMedicineTypes
-                                 where r.IsDeleted == false
+                result.Result = (from medi in _dbContext.SMedicineTypes
+                                 join unit in _dbContext.SUnits on medi.UnitId equals unit.Id
+                                 where medi.IsDeleted == false
                                  select new SMedicineTypeDto()
                                  {
-                                     Id = r.Id,
-                                     Code = r.Code,
-                                     HeInCode = r.HeInCode,
-                                     Name = r.Name,
-                                     SortOrder = r.SortOrder,
-                                     Description = r.Description,
-                                     Inactive = r.Inactive,
-                                     MedicineLineId = r.MedicineLineId, //Đường dùng thuốc
-                                     MedicineGroupId = r.MedicineGroupId, // Nhóm thuốc
-                                     ServiceGroupHeInId = r.ServiceGroupHeInId, // Nhóm thuốc
-                                     UnitId = r.UnitId, // Đơn vị tính
-                                     Tutorial = r.Tutorial, // Hướng dẫn
-                                     ActiveSubstance = r.ActiveSubstance, // Hoạt chất
-                                     Concentration = r.Concentration, // Nồng độ
-                                     Content = r.Content, // Hàm lượng
-                                     CountryId = r.CountryId, // Nước sản xuất
-                                     Manufacturer = r.Manufacturer, // Hãng sản xuất
-                                     RegistrationNumber = r.RegistrationNumber, // Số đăng ký
-                                     ProprietaryDrug = r.ProprietaryDrug, // Biệt dược
-                                     PackagingSpecifications = r.PackagingSpecifications, // Quy cách đóng gói
-                                     ImpPrice = r.ImpPrice, // Giá nhập
-                                     ImpVatRate = r.ImpVatRate, // Phần trăm vat giá nhập
-                                     TaxRate = r.TaxRate, // Phần trăm thuế
-                                     IsAntibiotics = r.IsAntibiotics, // Thuốc kháng sinh
-                                     IsNewDrug = r.IsNewDrug, // Thuốc tân dược
-                                     IsPrescriptionDrug = r.IsPrescriptionDrug, // Thuốc kê đơn
-                                     IsNutraceutical = r.IsNutraceutical, // Dược phẩm chức năng
-                                     IsSponsoredDrug = r.IsSponsoredDrug, // Thuốc Tài trợ
-                                     IsInhalantDrug = r.IsInhalantDrug, // Thuốc khí dung
-                                     IsPrescriptionDrugForChildren = r.IsPrescriptionDrugForChildren, // Thuốc kê đơn trẻ em
-                                     IsTraditionalHerbalDrug = r.IsTraditionalHerbalDrug, // Vị thuốc YHCT
-                                     IsTraditionalDrugFormulation = r.IsTraditionalDrugFormulation, // Chế phẩm YHCT
-                                     IsDrugContainerReturnRequest = r.IsDrugContainerReturnRequest, // YC trả lại vỏ thuốc
-                                     IsAllowZeroQuantity = r.IsAllowZeroQuantity, // Cho phép kê SL bằng 0
-                                     IsRadiolabeledDrug = r.IsRadiolabeledDrug, // Thuốc phóng xạ
+                                     Id = medi.Id,
+                                     Code = medi.Code,
+                                     HeInCode = medi.HeInCode,
+                                     Name = medi.Name,
+                                     SortOrder = medi.SortOrder,
+                                     Description = medi.Description,
+                                     Inactive = medi.Inactive,
+                                     MedicineLineId = medi.MedicineLineId, // Đường dùng thuốc
+                                     MedicineGroupId = medi.MedicineGroupId, // Nhóm thuốc
+                                     ServiceGroupHeInId = medi.ServiceGroupHeInId, // Nhóm thuốc
+                                     UnitId = medi.UnitId, // Đơn vị tính
+                                     UnitCode = unit.Code, // Đơn vị tính
+                                     UnitName = unit.Name, // Đơn vị tính
+                                     Tutorial = medi.Tutorial, // Hướng dẫn
+                                     ActiveSubstance = medi.ActiveSubstance, // Hoạt chất
+                                     Concentration = medi.Concentration, // Nồng độ
+                                     Content = medi.Content, // Hàm lượng
+                                     CountryId = medi.CountryId, // Nước sản xuất
+                                     Manufacturer = medi.Manufacturer, // Hãng sản xuất
+                                     RegistrationNumber = medi.RegistrationNumber, // Số đăng ký
+                                     ProprietaryDrug = medi.ProprietaryDrug, // Biệt dược
+                                     PackagingSpecifications = medi.PackagingSpecifications, // Quy cách đóng gói
+                                     ImpPrice = medi.ImpPrice, // Giá nhập
+                                     ImpVatRate = medi.ImpVatRate, // Phần trăm vat giá nhập
+                                     TaxRate = medi.TaxRate, // Phần trăm thuế
+                                     IsAntibiotics = medi.IsAntibiotics, // Thuốc kháng sinh
+                                     IsNewDrug = medi.IsNewDrug, // Thuốc tân dược
+                                     IsPrescriptionDrug = medi.IsPrescriptionDrug, // Thuốc kê đơn
+                                     IsNutraceutical = medi.IsNutraceutical, // Dược phẩm chức năng
+                                     IsSponsoredDrug = medi.IsSponsoredDrug, // Thuốc Tài trợ
+                                     IsInhalantDrug = medi.IsInhalantDrug, // Thuốc khí dung
+                                     IsPrescriptionDrugForChildren = medi.IsPrescriptionDrugForChildren, // Thuốc kê đơn trẻ em
+                                     IsTraditionalHerbalDrug = medi.IsTraditionalHerbalDrug, // Vị thuốc YHCT
+                                     IsTraditionalDrugFormulation = medi.IsTraditionalDrugFormulation, // Chế phẩm YHCT
+                                     IsDrugContainerReturnRequest = medi.IsDrugContainerReturnRequest, // YC trả lại vỏ thuốc
+                                     IsAllowZeroQuantity = medi.IsAllowZeroQuantity, // Cho phép kê SL bằng 0
+                                     IsRadiolabeledDrug = medi.IsRadiolabeledDrug, // Thuốc phóng xạ
 
                                      // Thông tin khác
-                                     PharmaceuticalFormulation = r.PharmaceuticalFormulation, // Dạng bào chế
-                                     Origin = r.Origin, // Nguồn gốc
-                                     ScientificName = r.ScientificName, // Tên khoa học vị thuốc
-                                     ScientificNameChildren = r.ScientificNameChildren, // Tên KH của cây con, khoáng vật
-                                     DugStatus = r.DugStatus, // Tình trạng dược liệu
-                                     RequirementUseDug = r.RequirementUseDug, // Yêu cầu sử dụng dược liệu
-                                     PharmaceuticalDivision = r.PharmaceuticalDivision, // Bộ phận dược liệu sử dụng
-                                     ProcessingLossRate = r.ProcessingLossRate, // Tỷ lệ hao hụt chế biến
-                                     OtherExpenses = r.OtherExpenses, // Chi phí khác
-                                     PreparationMethod = r.PreparationMethod, // Phương pháp chế biến
-                                     QualityStandards = r.QualityStandards, // Tiêu chuẩn chất lượng
-                                 }).WhereIf(!string.IsNullOrEmpty(input.NameFilter), w => w.Name == input.NameFilter)
+                                     PharmaceuticalFormulation = medi.PharmaceuticalFormulation, // Dạng bào chế
+                                     Origin = medi.Origin, // Nguồn gốc
+                                     ScientificName = medi.ScientificName, // Tên khoa học vị thuốc
+                                     ScientificNameChildren = medi.ScientificNameChildren, // Tên KH của cây con, khoáng vật
+                                     DugStatus = medi.DugStatus, // Tình trạng dược liệu
+                                     RequirementUseDug = medi.RequirementUseDug, // Yêu cầu sử dụng dược liệu
+                                     PharmaceuticalDivision = medi.PharmaceuticalDivision, // Bộ phận dược liệu sử dụng
+                                     ProcessingLossRate = medi.ProcessingLossRate, // Tỷ lệ hao hụt chế biến
+                                     OtherExpenses = medi.OtherExpenses, // Chi phí khác
+                                     PreparationMethod = medi.PreparationMethod, // Phương pháp chế biến
+                                     QualityStandards = medi.QualityStandards, // Tiêu chuẩn chất lượng
+                                 })
+                                 .WhereIf(!string.IsNullOrEmpty(input.NameFilter), w => w.Name == input.NameFilter)
                                  .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), w => w.Code == input.CodeFilter)
                                  .WhereIf(input.InactiveFilter != null, w => w.Inactive == input.InactiveFilter)
                                  .WhereIf(!GuidHelper.IsNullOrEmpty(input.MedicineLineIdFilter), w => w.MedicineLineId == input.MedicineLineIdFilter)

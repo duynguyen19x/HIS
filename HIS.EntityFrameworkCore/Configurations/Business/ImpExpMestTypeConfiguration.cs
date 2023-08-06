@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business
 {
-    public class ImExMestTypeConfiguration : IEntityTypeConfiguration<DImExMestType>
+    public class ImpExpMestTypeConfiguration : IEntityTypeConfiguration<DImpExMestType>
     {
-        public void Configure(EntityTypeBuilder<DImExMestType> builder)
+        public void Configure(EntityTypeBuilder<DImpExMestType> builder)
         {
-            builder.ToTable("DImExMestTypes");
+            builder.ToTable("DImpExpMestTypes");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();

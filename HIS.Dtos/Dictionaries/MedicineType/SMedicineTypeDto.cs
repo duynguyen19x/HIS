@@ -34,6 +34,8 @@ namespace HIS.Dtos.Dictionaries.MedicineType
 
         [Description("Đơn vị tính")]
         public Guid? UnitId { get; set; }
+        public string UnitCode { get; set; }
+        public string UnitName { get; set; }
 
         [Description("Hướng dẫn")]
         public string Tutorial { get; set; }

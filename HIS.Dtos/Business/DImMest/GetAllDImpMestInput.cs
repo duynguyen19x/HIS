@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HIS.Dtos.Business.DImMest
 {
-    public class GetAllDImMestInput
+    public class GetAllDImpMestInput
     {
         public string CodeFilter { get; set; }
         public string NameFilter { get; set; }

@@ -4,6 +4,7 @@ using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(HISDbContext))]
-    partial class HISDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230806111900_Add-Table")]
+    partial class AddTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -223,11 +226,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<int?>("ImExMestTypeId")
                         .HasColumnType("int");
 
+                    b.Property<int>("ImMestStatus")
+                        .HasColumnType("int");
+
                     b.Property<Guid?>("ImStockId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("ImpMestStatus")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ImpTime")
                         .HasColumnType("datetime2");
@@ -4640,7 +4643,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"),
                             Code = "KXD",
-                            CreatedDate = new DateTime(2023, 8, 6, 20, 48, 26, 778, DateTimeKind.Local).AddTicks(4343),
+                            CreatedDate = new DateTime(2023, 8, 6, 18, 18, 59, 808, DateTimeKind.Local).AddTicks(3547),
                             Inactive = false,
                             Name = "Chưa xác định",
                             SortOrder = 0
@@ -4649,7 +4652,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"),
                             Code = "NAM",
-                            CreatedDate = new DateTime(2023, 8, 6, 20, 48, 26, 778, DateTimeKind.Local).AddTicks(4369),
+                            CreatedDate = new DateTime(2023, 8, 6, 18, 18, 59, 808, DateTimeKind.Local).AddTicks(3580),
                             Inactive = false,
                             Name = "Nam",
                             SortOrder = 1
@@ -4658,7 +4661,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e9497984-d355-41af-b917-091500956be9"),
                             Code = "NU",
-                            CreatedDate = new DateTime(2023, 8, 6, 20, 48, 26, 778, DateTimeKind.Local).AddTicks(4371),
+                            CreatedDate = new DateTime(2023, 8, 6, 18, 18, 59, 808, DateTimeKind.Local).AddTicks(3582),
                             Inactive = false,
                             Name = "Nữ",
                             SortOrder = 2
@@ -4880,7 +4883,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "BHYT",
-                            CreatedDate = new DateTime(2023, 8, 6, 20, 48, 26, 778, DateTimeKind.Local).AddTicks(5402),
+                            CreatedDate = new DateTime(2023, 8, 6, 18, 18, 59, 808, DateTimeKind.Local).AddTicks(4613),
                             Inactive = false,
                             Name = "Bảo hiểm y tế",
                             SortOrder = 0
@@ -4889,7 +4892,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "VP",
-                            CreatedDate = new DateTime(2023, 8, 6, 20, 48, 26, 778, DateTimeKind.Local).AddTicks(5406),
+                            CreatedDate = new DateTime(2023, 8, 6, 18, 18, 59, 808, DateTimeKind.Local).AddTicks(4618),
                             Inactive = false,
                             Name = "Viện phí",
                             SortOrder = 0
@@ -4898,7 +4901,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 3,
                             Code = "DV",
-                            CreatedDate = new DateTime(2023, 8, 6, 20, 48, 26, 778, DateTimeKind.Local).AddTicks(5408),
+                            CreatedDate = new DateTime(2023, 8, 6, 18, 18, 59, 808, DateTimeKind.Local).AddTicks(4619),
                             Inactive = false,
                             Name = "Dịch vụ",
                             SortOrder = 0

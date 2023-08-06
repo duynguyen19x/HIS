@@ -14,7 +14,7 @@ namespace HIS.EntityFrameworkCore.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "DImExMestTypes",
+                name: "DImpExpMestTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -25,7 +25,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DImExMestTypes", x => x.Id);
+                    table.PrimaryKey("PK_DImpExpMestTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -945,7 +945,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DImMests",
+                name: "DImpMests",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -977,63 +977,63 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DImMests", x => x.Id);
+                    table.PrimaryKey("PK_DImpMests", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DImMests_DImExMestTypes_ImExMestTypeId",
+                        name: "FK_DImpMests_DImpExpMestTypes_ImExMestTypeId",
                         column: x => x.ImExMestTypeId,
-                        principalTable: "DImExMestTypes",
+                        principalTable: "DImpExpMestTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_DImMests_SDepartments_ReqDepartmentId",
+                        name: "FK_DImpMests_SDepartments_ReqDepartmentId",
                         column: x => x.ReqDepartmentId,
                         principalTable: "SDepartments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_DImMests_SPatients_PatientId",
+                        name: "FK_DImpMests_SPatients_PatientId",
                         column: x => x.PatientId,
                         principalTable: "SPatients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_DImMests_SRooms_ExStockId",
+                        name: "FK_DImpMests_SRooms_ExStockId",
                         column: x => x.ExStockId,
                         principalTable: "SRooms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_DImMests_SRooms_ImStockId",
+                        name: "FK_DImpMests_SRooms_ImStockId",
                         column: x => x.ImStockId,
                         principalTable: "SRooms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_DImMests_SRooms_ReqRoomId",
+                        name: "FK_DImpMests_SRooms_ReqRoomId",
                         column: x => x.ReqRoomId,
                         principalTable: "SRooms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_DImMests_SSuppliers_SupplierId",
+                        name: "FK_DImpMests_SSuppliers_SupplierId",
                         column: x => x.SupplierId,
                         principalTable: "SSuppliers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_DImMests_STreatments_TreatmentId",
+                        name: "FK_DImpMests_STreatments_TreatmentId",
                         column: x => x.TreatmentId,
                         principalTable: "STreatments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_DImMests_SUsers_ApproverUserId",
+                        name: "FK_DImpMests_SUsers_ApproverUserId",
                         column: x => x.ApproverUserId,
                         principalTable: "SUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_DImMests_SUsers_ReceiverUserId",
+                        name: "FK_DImpMests_SUsers_ReceiverUserId",
                         column: x => x.ReceiverUserId,
                         principalTable: "SUsers",
                         principalColumn: "Id",
@@ -1194,7 +1194,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DImMestMedicine",
+                name: "DImMestMedicines",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -1210,14 +1210,14 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DImMestMedicine", x => x.Id);
+                    table.PrimaryKey("PK_DImMestMedicines", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DImMestMedicine_DImMests_DImMestId",
+                        name: "FK_DImMestMedicines_DImpMests_DImMestId",
                         column: x => x.DImMestId,
-                        principalTable: "DImMests",
+                        principalTable: "DImpMests",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_DImMestMedicine_SMedicines_SMedicineId",
+                        name: "FK_DImMestMedicines_SMedicines_SMedicineId",
                         column: x => x.SMedicineId,
                         principalTable: "SMedicines",
                         principalColumn: "Id");
@@ -1536,9 +1536,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"), "KXD", null, new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(5975), null, false, null, null, "Chưa xác định", 0 },
-                    { new Guid("e9497984-d355-41af-b917-091500956be9"), "NU", null, new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(6001), null, false, null, null, "Nữ", 2 },
-                    { new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"), "NAM", null, new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(5999), null, false, null, null, "Nam", 1 }
+                    { new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"), "KXD", null, new DateTime(2023, 8, 6, 18, 18, 59, 808, DateTimeKind.Local).AddTicks(3547), null, false, null, null, "Chưa xác định", 0 },
+                    { new Guid("e9497984-d355-41af-b917-091500956be9"), "NU", null, new DateTime(2023, 8, 6, 18, 18, 59, 808, DateTimeKind.Local).AddTicks(3582), null, false, null, null, "Nữ", 2 },
+                    { new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"), "NAM", null, new DateTime(2023, 8, 6, 18, 18, 59, 808, DateTimeKind.Local).AddTicks(3580), null, false, null, null, "Nam", 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -1628,9 +1628,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { 1, "BHYT", null, new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(7006), null, false, null, null, "Bảo hiểm y tế", 0 },
-                    { 2, "VP", null, new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(7011), null, false, null, null, "Viện phí", 0 },
-                    { 3, "DV", null, new DateTime(2023, 8, 4, 23, 12, 13, 401, DateTimeKind.Local).AddTicks(7012), null, false, null, null, "Dịch vụ", 0 }
+                    { 1, "BHYT", null, new DateTime(2023, 8, 6, 18, 18, 59, 808, DateTimeKind.Local).AddTicks(4613), null, false, null, null, "Bảo hiểm y tế", 0 },
+                    { 2, "VP", null, new DateTime(2023, 8, 6, 18, 18, 59, 808, DateTimeKind.Local).AddTicks(4618), null, false, null, null, "Viện phí", 0 },
+                    { 3, "DV", null, new DateTime(2023, 8, 6, 18, 18, 59, 808, DateTimeKind.Local).AddTicks(4619), null, false, null, null, "Dịch vụ", 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -1766,63 +1766,63 @@ namespace HIS.EntityFrameworkCore.Migrations
                 values: new object[] { new Guid("3382be1c-2836-4246-99db-c4e1c781e868"), null, null, null, "administrator@gmail.com", "Admin", null, "Administrator", "79956B61E1B250869A6716CE37EFD6E6", null, null, 1, 0, "Administrator", null });
 
             migrationBuilder.CreateIndex(
-                name: "IX_DImMestMedicine_DImMestId",
-                table: "DImMestMedicine",
+                name: "IX_DImMestMedicines_DImMestId",
+                table: "DImMestMedicines",
                 column: "DImMestId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DImMestMedicine_SMedicineId",
-                table: "DImMestMedicine",
+                name: "IX_DImMestMedicines_SMedicineId",
+                table: "DImMestMedicines",
                 column: "SMedicineId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DImMests_ApproverUserId",
-                table: "DImMests",
+                name: "IX_DImpMests_ApproverUserId",
+                table: "DImpMests",
                 column: "ApproverUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DImMests_ExStockId",
-                table: "DImMests",
+                name: "IX_DImpMests_ExStockId",
+                table: "DImpMests",
                 column: "ExStockId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DImMests_ImExMestTypeId",
-                table: "DImMests",
+                name: "IX_DImpMests_ImExMestTypeId",
+                table: "DImpMests",
                 column: "ImExMestTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DImMests_ImStockId",
-                table: "DImMests",
+                name: "IX_DImpMests_ImStockId",
+                table: "DImpMests",
                 column: "ImStockId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DImMests_PatientId",
-                table: "DImMests",
+                name: "IX_DImpMests_PatientId",
+                table: "DImpMests",
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DImMests_ReceiverUserId",
-                table: "DImMests",
+                name: "IX_DImpMests_ReceiverUserId",
+                table: "DImpMests",
                 column: "ReceiverUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DImMests_ReqDepartmentId",
-                table: "DImMests",
+                name: "IX_DImpMests_ReqDepartmentId",
+                table: "DImpMests",
                 column: "ReqDepartmentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DImMests_ReqRoomId",
-                table: "DImMests",
+                name: "IX_DImpMests_ReqRoomId",
+                table: "DImpMests",
                 column: "ReqRoomId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DImMests_SupplierId",
-                table: "DImMests",
+                name: "IX_DImpMests_SupplierId",
+                table: "DImpMests",
                 column: "SupplierId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DImMests_TreatmentId",
-                table: "DImMests",
+                name: "IX_DImpMests_TreatmentId",
+                table: "DImpMests",
                 column: "TreatmentId");
 
             migrationBuilder.CreateIndex(
@@ -2020,7 +2020,7 @@ namespace HIS.EntityFrameworkCore.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "DImMestMedicine");
+                name: "DImMestMedicines");
 
             migrationBuilder.DropTable(
                 name: "SCareers");
@@ -2062,7 +2062,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SWards");
 
             migrationBuilder.DropTable(
-                name: "DImMests");
+                name: "DImpMests");
 
             migrationBuilder.DropTable(
                 name: "SMaterialTypes");
@@ -2083,7 +2083,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SDistricts");
 
             migrationBuilder.DropTable(
-                name: "DImExMestTypes");
+                name: "DImpExpMestTypes");
 
             migrationBuilder.DropTable(
                 name: "SPatients");

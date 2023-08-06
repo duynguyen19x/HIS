@@ -34,7 +34,7 @@ namespace HIS.ApplicationService.Dictionaries.Unit
 
                     var data = _mapper.Map<SUnit>(input);
 
-                    _dbContext.SServiceUnits.Add(data);
+                    _dbContext.SUnits.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -62,7 +62,7 @@ namespace HIS.ApplicationService.Dictionaries.Unit
             {
                 try
                 {
-                    var sServiceUnit = _dbContext.SServiceUnits.FirstOrDefault(f => f.Id == input.Id);
+                    var sServiceUnit = _dbContext.SUnits.FirstOrDefault(f => f.Id == input.Id);
                     if (sServiceUnit == null)
                         _mapper.Map(input, sServiceUnit);
 
@@ -93,10 +93,10 @@ namespace HIS.ApplicationService.Dictionaries.Unit
             {
                 try
                 {
-                    var sServiceUnit = _dbContext.SServiceUnits.SingleOrDefault(x => x.Id == id);
+                    var sServiceUnit = _dbContext.SUnits.SingleOrDefault(x => x.Id == id);
                     if (sServiceUnit != null)
                     {
-                        _dbContext.SServiceUnits.Remove(sServiceUnit);
+                        _dbContext.SUnits.Remove(sServiceUnit);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -123,7 +123,7 @@ namespace HIS.ApplicationService.Dictionaries.Unit
 
             try
             {
-                result.Result = (from r in _dbContext.SServiceUnits
+                result.Result = (from r in _dbContext.SUnits
                                  select new SUnitDto()
                                  {
                                      Id = r.Id,

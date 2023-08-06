@@ -15,7 +15,10 @@ namespace HIS.Core.Entities.Auditing
 
         public CreationAuditedEntity()
         {
-            CreatedDate = DateTime.Now;
+            if (CreatedDate == (DateTime)default)
+            {
+                CreatedDate = DateTime.Now;
+            }
         }
     }
 }
