@@ -20,7 +20,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Patients
             builder.Property(x => x.Name).HasMaxLength(512);
             builder.Property(x => x.Address).HasMaxLength(512);
 
-            builder.HasOne(t => t.Gender).WithMany(pc => pc.SPatients).HasForeignKey(pc => pc.GenderId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(t => t.Gender).WithMany(pc => pc.SPatients).HasForeignKey(pc => pc.GenderId).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

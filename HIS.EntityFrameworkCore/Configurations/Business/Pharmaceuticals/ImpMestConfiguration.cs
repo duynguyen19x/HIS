@@ -26,57 +26,57 @@ namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
             builder.HasOne(e => e.ImStock)
                 .WithMany()
                 .HasForeignKey(e => e.ImStockId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(e => e.ExStock)
                 .WithMany()
                 .HasForeignKey(e => e.ExStockId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(e => e.DImExMestType)
                 .WithMany()
                 .HasForeignKey(e => e.ImExMestTypeId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(e => e.ReceiverUser)
                 .WithMany()
                 .HasForeignKey(e => e.ReceiverUserId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(e => e.ApproverUser)
                 .WithMany()
                 .HasForeignKey(e => e.ApproverUserId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(e => e.StockReceiptUser)
                 .WithMany()
                 .HasForeignKey(e => e.StockReceiptUserId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(e => e.ReqRoom)
                 .WithMany()
                 .HasForeignKey(e => e.ReqRoomId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(e => e.ReqDepartment)
                 .WithMany()
                 .HasForeignKey(e => e.ReqDepartmentId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(e => e.STreatment)
                 .WithMany()
                 .HasForeignKey(e => e.TreatmentId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(e => e.SPatient)
                 .WithMany()
                 .HasForeignKey(e => e.PatientId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(e => e.SSupplier)
                 .WithMany()
                 .HasForeignKey(e => e.SupplierId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

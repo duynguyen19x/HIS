@@ -113,6 +113,6 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<SServiceResultIndice> SServiceResultIndices { get; set; }
 
         public DbSet<DImpMest> DImMests { get; set; }
-        public DbSet<DImpMestMedicine> DImMestMedicines { get; set; }
+        public DbSet<DImpMestMedicine> DImpMestMedicines { get; set; }
     }
 }

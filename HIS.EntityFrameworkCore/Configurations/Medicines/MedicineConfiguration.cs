@@ -33,16 +33,16 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.Property(x => x.TenderGroup).HasMaxLength(256);
 
             builder.HasOne(t => t.SUnit).WithMany(pc => pc.SMedicines)
-                .HasForeignKey(pc => pc.UnitId).OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(pc => pc.UnitId).OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(t => t.SMedicineType).WithMany(pc => pc.SMedicines)
-                .HasForeignKey(pc => pc.MedicineTypeId).OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(pc => pc.MedicineTypeId).OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(t => t.SMedicineLine).WithMany(pc => pc.SMedicines)
-                .HasForeignKey(pc => pc.MedicineLineId).OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(pc => pc.MedicineLineId).OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(t => t.SCountry).WithMany(pc => pc.SMedicines)
-                .HasForeignKey(pc => pc.CountryId).OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(pc => pc.CountryId).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

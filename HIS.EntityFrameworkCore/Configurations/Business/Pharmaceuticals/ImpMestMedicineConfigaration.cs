@@ -11,13 +11,13 @@ namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
             builder.ToTable("DImpMestMedicines");
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(t => t.DImMest).WithMany(pc => pc.DImMestMedicines)
-              .HasForeignKey(pc => pc.ImMestId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(t => t.DImMest)
+                .WithMany(pc => pc.DImMestMedicines)
+                .HasForeignKey(pc => pc.ImpMestId);
 
             builder.HasOne(e => e.SMedicine)
-               .WithMany()
-               .HasForeignKey(e => e.MedicineId)
-               .OnDelete(DeleteBehavior.Restrict);
+               .WithMany(e => e.DImpMestMedicines)
+               .HasForeignKey(e => e.MedicineId);
         }
     }
 }

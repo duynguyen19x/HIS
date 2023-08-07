@@ -20,12 +20,12 @@ namespace HIS.EntityFrameworkCore.Configurations.Medicines
             builder.HasOne(t => t.SPatientType)
                 .WithMany(pc => pc.SMedicinePricePolicies)
                 .HasForeignKey(pc => pc.PatientTypeId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(t => t.SMedicine)
                 .WithMany(pc => pc.SMedicinePricePolicies)
                 .HasForeignKey(pc => pc.MedicineId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

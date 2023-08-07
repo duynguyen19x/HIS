@@ -24,7 +24,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
         [Description("Phần trăm thuế")]
         public decimal? TaxRate { get; set; }
 
-        public Guid? ImMestId { get; set; }
+        public Guid? ImpMestId { get; set; }
 
         public DImpMest DImMest { get; set; }
         public SMedicine SMedicine { get; set; }

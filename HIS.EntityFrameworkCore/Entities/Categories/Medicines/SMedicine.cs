@@ -1,4 +1,5 @@
 ﻿using HIS.Core.Entities.Auditing;
+using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
 using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
@@ -102,5 +103,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public SMedicineLine SMedicineLine { get; set; }
         public SCountry SCountry { get; set; }
         public IList<SMedicinePricePolicy> SMedicinePricePolicies { get; set; }
+        public IList<DImpMestMedicine> DImpMestMedicines { get; set; }
     }
 }

@@ -54,6 +54,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
                     dImMest.Id = id;
                     dImMest.CreatedDate = dateNow;
 
+                    dImMest.ImpTime = dImMest.ImpTime.UtcToLocal();
+                    dImMest.InvTime = dImMest.InvTime.UtcToLocal();
+                    dImMest.ApproverTime = dImMest.ApproverTime.UtcToLocal();
+                    dImMest.StockReceiptTime = dImMest.StockReceiptTime.UtcToLocal();
+
                     // Đánh số tự động
                     if (string.IsNullOrEmpty(dImMest.Code))
                     {
@@ -74,7 +79,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
 
                             var dImMestMedicine = _mapper.Map<DImpMestMedicine>(dImMestMedicineDto);
                             dImMestMedicine.Id = Guid.NewGuid();
-                            dImMestMedicine.ImMestId = id;
+                            dImMestMedicine.ImpMestId = id;
                             dImMestMedicine.MedicineId = sMedicine.Id;
 
                             sMedicines.Add(sMedicine);
@@ -82,7 +87,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
                         }
 
                         _dbContext.SMedicines.AddRange(sMedicines);
-                        _dbContext.DImMestMedicines.AddRange(dImMestMedicines);
+                        _dbContext.DImpMestMedicines.AddRange(dImMestMedicines);
                     }
 
                     _dbContext.DImMests.Add(dImMest);
@@ -128,7 +133,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
                     if (input.ImExMestTypeId == 1)
                     {
                         // Xóa bản ghi cũ
-                        var dImMestMedicineOlds = _dbContext.DImMestMedicines.Where(s => s.ImMestId == input.Id).ToList();
+                        var dImMestMedicineOlds = _dbContext.DImpMestMedicines.Where(s => s.ImpMestId == input.Id).ToList();
                         var sMedicineOldIds = dImMestMedicineOlds.Select(s => s.MedicineId).ToList();
                         var sMedicineOlds = _dbContext.SMedicines.Where(w => sMedicineOldIds.Contains(w.Id)).ToList();
 
@@ -141,7 +146,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
                             }
 
                             _dbContext.SMedicines.UpdateRange(sMedicineOlds);
-                            _dbContext.DImMestMedicines.RemoveRange(dImMestMedicineOlds);
+                            _dbContext.DImpMestMedicines.RemoveRange(dImMestMedicineOlds);
                         }
 
                         var dImMestMedicines = new List<DImpMestMedicine>();
@@ -160,13 +165,13 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
                             if (GuidHelper.IsNullOrEmpty(dImMestMedicine.Id))
                                 dImMestMedicine.Id = Guid.NewGuid();
                             dImMestMedicine.MedicineId = sMedicine.Id;
-                            dImMestMedicine.ImMestId = input.Id;
+                            dImMestMedicine.ImpMestId = input.Id;
 
                             dImMestMedicines.Add(dImMestMedicine);
                         }
 
                         _dbContext.SMedicines.AddRange(sMedicines);
-                        _dbContext.DImMestMedicines.AddRange(dImMestMedicines);
+                        _dbContext.DImpMestMedicines.AddRange(dImMestMedicines);
                     }
 
                     _dbContext.DImMests.Add(dImMest);
