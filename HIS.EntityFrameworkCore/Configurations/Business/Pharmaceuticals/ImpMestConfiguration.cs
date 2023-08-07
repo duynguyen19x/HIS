@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals;
 
-namespace HIS.EntityFrameworkCore.Configurations.Business
+namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
 {
-    public  class ImpMestConfiguration : IEntityTypeConfiguration<DImpMest>
+    public class ImpMestConfiguration : IEntityTypeConfiguration<DImpMest>
     {
         public void Configure(EntityTypeBuilder<DImpMest> builder)
         {
@@ -46,6 +46,11 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
             builder.HasOne(e => e.ApproverUser)
                 .WithMany()
                 .HasForeignKey(e => e.ApproverUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(e => e.StockReceiptUser)
+                .WithMany()
+                .HasForeignKey(e => e.StockReceiptUserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(e => e.ReqRoom)

@@ -1,5 +1,6 @@
 ﻿using HIS.EntityFrameworkCore.Configurations;
 using HIS.EntityFrameworkCore.Configurations.Business;
+using HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals;
 using HIS.EntityFrameworkCore.Configurations.Dictionaries;
 using HIS.EntityFrameworkCore.Configurations.Patients;
 using HIS.EntityFrameworkCore.Configurations.Services;

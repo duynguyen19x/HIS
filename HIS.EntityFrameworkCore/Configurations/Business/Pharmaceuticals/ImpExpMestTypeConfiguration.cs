@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Configurations.Business
+namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
 {
     public class ImpExpMestTypeConfiguration : IEntityTypeConfiguration<DImpExMestType>
     {

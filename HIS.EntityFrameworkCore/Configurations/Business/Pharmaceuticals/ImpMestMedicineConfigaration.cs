@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace HIS.EntityFrameworkCore.Configurations.Business
+namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
 {
     public class ImpMestMedicineConfigaration : IEntityTypeConfiguration<DImpMestMedicine>
     {

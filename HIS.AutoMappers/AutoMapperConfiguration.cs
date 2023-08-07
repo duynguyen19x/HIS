@@ -122,6 +122,7 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.DImExMestType, opt => opt.Ignore())
                 .ForMember(dest => dest.ReceiverUser, opt => opt.Ignore())
                 .ForMember(dest => dest.ApproverUser, opt => opt.Ignore())
+                .ForMember(dest => dest.StockReceiptUser, opt => opt.Ignore())
                 .ForMember(dest => dest.ReqRoom, opt => opt.Ignore())
                 .ForMember(dest => dest.ReqDepartment, opt => opt.Ignore())
                 .ForMember(dest => dest.STreatment, opt => opt.Ignore())
