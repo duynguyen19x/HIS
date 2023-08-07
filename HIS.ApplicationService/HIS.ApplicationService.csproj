@@ -8,12 +8,11 @@
 
   <ItemGroup>
     <Compile Remove="Categories\**" />
+    <Compile Remove="Systems\Permistion\**" />
     <EmbeddedResource Remove="Categories\**" />
+    <EmbeddedResource Remove="Systems\Permistion\**" />
     <None Remove="Categories\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Systems\Permistion\" />
+    <None Remove="Systems\Permistion\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HIS.Application.Core\HIS.Application.Core.csproj" />
     <ProjectReference Include="..\HIS.AutoMappers\HIS.AutoMappers.csproj" />
     <ProjectReference Include="..\HIS.Dtos\HIS.Dtos.csproj" />
     <ProjectReference Include="..\HIS.EntityFrameworkCore\HIS.EntityFrameworkCore.csproj" />

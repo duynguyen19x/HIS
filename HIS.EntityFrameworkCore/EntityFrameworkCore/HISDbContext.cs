@@ -12,6 +12,7 @@ using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.Systems;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace HIS.EntityFrameworkCore.EntityFrameworkCore
 {
@@ -69,6 +70,11 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
             modelBuilder.ApplyConfiguration(new ImpMestConfiguration());
 
             modelBuilder.Seed();
+        }
+
+        public virtual IDbContextTransaction BeginTransaction()
+        {
+            return Database.BeginTransaction();
         }
 
         public DbSet<SGender> SGenders { get; set; }

@@ -1,4 +1,4 @@
-﻿using HIS.Dtos.Base;
+﻿using HIS.Core.Application.Services.Dto;
 using HIS.Dtos.Dictionaries.ExecutionRoom;
 using HIS.Dtos.Dictionaries.ServicePricePolicy;
 using HIS.Dtos.Dictionaries.ServiceResultIndex;

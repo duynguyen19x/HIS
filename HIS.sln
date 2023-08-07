@@ -38,7 +38,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{
 		DescriptionOfDataTable.xlsx = DescriptionOfDataTable.xlsx
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HIS.Core", "HIS.Core\HIS.Core.csproj", "{D035BCB5-F416-4998-BB91-E87A6C281DE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HIS.Core", "HIS.Core\HIS.Core.csproj", "{D035BCB5-F416-4998-BB91-E87A6C281DE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HIS.Application.Core", "HIS.Application.Core\HIS.Application.Core.csproj", "{04BCD64B-EEE8-442E-B055-8FC3E7495B1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -74,6 +76,10 @@ Global
 		{D035BCB5-F416-4998-BB91-E87A6C281DE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D035BCB5-F416-4998-BB91-E87A6C281DE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D035BCB5-F416-4998-BB91-E87A6C281DE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04BCD64B-EEE8-442E-B055-8FC3E7495B1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04BCD64B-EEE8-442E-B055-8FC3E7495B1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04BCD64B-EEE8-442E-B055-8FC3E7495B1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04BCD64B-EEE8-442E-B055-8FC3E7495B1A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +94,7 @@ Global
 		{2305BFCF-EFA5-48EB-BE7E-3753FA0E3A21} = {0B192351-E63D-4E94-9034-CFA174A2D5FE}
 		{1CE2D392-5509-4C8D-9752-B24CF029A44D} = {0B192351-E63D-4E94-9034-CFA174A2D5FE}
 		{D035BCB5-F416-4998-BB91-E87A6C281DE7} = {83AEEA22-285D-4E5B-A6F1-32B3A8A4F114}
+		{04BCD64B-EEE8-442E-B055-8FC3E7495B1A} = {83AEEA22-285D-4E5B-A6F1-32B3A8A4F114}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C830B4FA-8B15-4172-8651-ED9456CC7C76}

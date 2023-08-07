@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.BaseEntitys
+namespace HIS.Core.Entities
 {
     [Serializable]
     public abstract class Entity<TPrimaryKey> : IEntity<TPrimaryKey>

@@ -1,5 +1,6 @@
 using HIS.ApplicationService;
 using HIS.AutoMappers;
+using HIS.Core.Repositories;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.EntityFrameworkCore.Repositories;
@@ -9,67 +10,79 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+ConfigureService();
+var app = builder.Build();
+Configure();
+app.Run();
 
-builder.Services.AddDbContext<HISDbContext>(options =>
-    options.UseSqlServer(builder.Configuration["ConnectionStrings:HIS"]));
-
-builder.Services.AddAutoMapper(typeof(AutoMapperConfiguration).Assembly);
-ObjectMapper.Configure();
-
-builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
+void ConfigureService()
 {
-    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-}));
+    builder.Services.AddDbContext<HISDbContext>(options 
+        => options.UseSqlServer(builder.Configuration["ConnectionStrings:HIS"]));
+    
+    // auto mapper
+    builder.Services.AddAutoMapper(typeof(AutoMapperConfiguration).Assembly);
+    //HIS.Application.Core.ObjectMapping.ObjectMapper.Configure(
+    //    new AutoMapper.MapperConfiguration(cfg =>
+    //    {
+    //        cfg.AddProfile<AutoMapperConfiguration>();
+    //        // Add more profiles and other mapping
+    //    })
+    //);
 
-builder.Services.AddRepository();
-builder.Services.ServiceCollection();
-
-string issuer = builder.Configuration.GetValue<string>("Tokens:Issuer");
-string signingKey = builder.Configuration.GetValue<string>("Tokens:Key");
-byte[] signingKeyBytes = System.Text.Encoding.UTF8.GetBytes(signingKey);
-
-builder.Services.AddAuthentication(opt =>
-{
-    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-    options.RequireHttpsMetadata = false;
-    options.SaveToken = true;
-    options.TokenValidationParameters = new TokenValidationParameters()
+    builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
     {
-        ValidateIssuer = true,
-        ValidIssuer = issuer,
-        ValidateAudience = true,
-        ValidAudience = issuer,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        ClockSkew = System.TimeSpan.Zero,
-        IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes)
-    };
-});
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+    }));
 
-// Add services to the container.
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddTransient(typeof(IRepository<,>), typeof(HISRepository<,>));
+    builder.Services.ServiceCollection();
 
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger eShop Solution", Version = "v1" });
+    string issuer = builder.Configuration.GetValue<string>("Tokens:Issuer");
+    string signingKey = builder.Configuration.GetValue<string>("Tokens:Key");
+    byte[] signingKeyBytes = System.Text.Encoding.UTF8.GetBytes(signingKey);
 
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    builder.Services.AddAuthentication(opt =>
     {
-        Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n
+        opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    }).AddJwtBearer(options =>
+    {
+        options.RequireHttpsMetadata = false;
+        options.SaveToken = true;
+        options.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidateIssuer = true,
+            ValidIssuer = issuer,
+            ValidateAudience = true,
+            ValidAudience = issuer,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ClockSkew = System.TimeSpan.Zero,
+            IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes)
+        };
+    });
+    // Add services to the container.
+    builder.Services.AddControllers();
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    builder.Services.AddEndpointsApiExplorer();
+
+    builder.Services.AddSwaggerGen(c =>
+    {
+        c.SwaggerDoc("v1", new OpenApiInfo { Title = "Hospital Infomation System", Version = "v1" });
+
+        c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+        {
+            Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n
                       Enter 'Bearer' [space] and then your token in the text input below.
                       \r\n\r\nExample: 'Bearer 12345abcdef'",
-        Name = "Authorization",
-        In = ParameterLocation.Header,
-        Type = SecuritySchemeType.ApiKey,
-        Scheme = "Bearer"
-    });
+            Name = "Authorization",
+            In = ParameterLocation.Header,
+            Type = SecuritySchemeType.ApiKey,
+            Scheme = "Bearer"
+        });
 
-    c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+        c.AddSecurityRequirement(new OpenApiSecurityRequirement()
     {
         {
             new OpenApiSecurityScheme
@@ -86,26 +99,22 @@ builder.Services.AddSwaggerGen(c =>
             new List<string>()
         }
     });
-});
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    });
 }
 
-app.UseCors("CorsPolicy");
+void Configure()
+{
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
 
-app.UseAuthentication();
-//app.UseAuthorization();
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
+    app.UseCors("CorsPolicy");
+    app.UseAuthentication();
+    //app.UseAuthorization();
+    app.UseHttpsRedirection();
+    app.UseAuthorization();
+    app.MapControllers();
+}
