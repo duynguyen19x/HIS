@@ -57,7 +57,6 @@ namespace HIS.AutoMappers
             CreateMap<SRoomDto, SRoom>()
                 .ForMember(dest => dest.SRoomType, opt => opt.Ignore())
                 .ForMember(dest => dest.SDepartment, opt => opt.Ignore())
-                .ForMember(dest => dest.SExecutionRooms, opt => opt.Ignore())
                 .ReverseMap();
             CreateMap<SRoomTypeDto, SRoomType>()
                 .ForMember(dest => dest.SRooms, opt => opt.Ignore())
@@ -80,13 +79,6 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.SUnit, opt => opt.Ignore())
                 .ForMember(dest => dest.SServiceGroup, opt => opt.Ignore())
                 .ForMember(dest => dest.SSurgicalProcedureType, opt => opt.Ignore())
-                .ForMember(dest => dest.SMedicineTypes, opt => opt.Ignore())
-                .ForMember(dest => dest.SMedicines, opt => opt.Ignore())
-                .ForMember(dest => dest.SMaterials, opt => opt.Ignore())
-                .ForMember(dest => dest.SMaterialTypes, opt => opt.Ignore())
-                .ForMember(dest => dest.SServicePricePolicies, opt => opt.Ignore())
-                .ForMember(dest => dest.SExecutionRooms, opt => opt.Ignore())
-                .ForMember(dest => dest.SServiceResultIndices, opt => opt.Ignore())
                 .ReverseMap();
             CreateMap<SServicePricePolicyDto, SServicePricePolicy>()
                .ForMember(dest => dest.SPatientType, opt => opt.Ignore())
@@ -128,7 +120,6 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.STreatment, opt => opt.Ignore())
                 .ForMember(dest => dest.SPatient, opt => opt.Ignore())
                 .ForMember(dest => dest.SSupplier, opt => opt.Ignore())
-                .ForMember(dest => dest.DImMestMedicines, opt => opt.Ignore())
                 .ReverseMap();
 
             CreateMap<DImpMestMedicineDto, SMedicine>()
@@ -136,7 +127,6 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.SUnit, opt => opt.Ignore())
                 .ForMember(dest => dest.SMedicineLine, opt => opt.Ignore())
                 .ForMember(dest => dest.SCountry, opt => opt.Ignore())
-                .ForMember(dest => dest.SMedicinePricePolicies, opt => opt.Ignore())
                 .ReverseMap();
 
             CreateMap<DImpMestMedicineDto, DImpMestMedicine>()

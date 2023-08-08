@@ -20,7 +20,5 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 
         public virtual SRoomType SRoomType { get; set; }
         public virtual SDepartment SDepartment { get; set; }
-
-        public IList<SExecutionRoom> SExecutionRooms { get; set; }
     }
 }

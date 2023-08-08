@@ -17,10 +17,10 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.ToTable("SExecutionRooms");
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(t => t.SService).WithMany(pc => pc.SExecutionRooms)
+            builder.HasOne(t => t.SService).WithMany()
               .HasForeignKey(pc => pc.ServiceId).OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(t => t.SRoom).WithMany(pc => pc.SExecutionRooms)
+            builder.HasOne(t => t.SRoom).WithMany()
               .HasForeignKey(pc => pc.RoomId).OnDelete(DeleteBehavior.NoAction);
         }
     }

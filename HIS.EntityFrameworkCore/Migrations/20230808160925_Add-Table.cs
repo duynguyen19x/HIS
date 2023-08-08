@@ -546,6 +546,124 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SMaterialTypes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    ParentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    SoftOrder = table.Column<int>(type: "int", nullable: true),
+                    ServiceUnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Tutorial = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    NationalId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ImpPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    ImpVatRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    InternalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    Inactive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SMaterialTypes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SMaterialTypes_SUnits_ServiceUnitId",
+                        column: x => x.ServiceUnitId,
+                        principalTable: "SUnits",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SMedicineTypes",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    HeInCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    SortOrder = table.Column<int>(type: "int", nullable: true),
+                    MedicineLineId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ServiceGroupHeInId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    MedicineGroupId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    UnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Tutorial = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    ActiveSubstance = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Concentration = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    CountryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Manufacturer = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    RegistrationNumber = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    ProprietaryDrug = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    PackagingSpecifications = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    ImpPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    ImpVatRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    TaxRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    Inactive = table.Column<bool>(type: "bit", nullable: false),
+                    IsAntibiotics = table.Column<bool>(type: "bit", nullable: false),
+                    IsNewDrug = table.Column<bool>(type: "bit", nullable: false),
+                    IsPrescriptionDrug = table.Column<bool>(type: "bit", nullable: false),
+                    IsNutraceutical = table.Column<bool>(type: "bit", nullable: false),
+                    IsSponsoredDrug = table.Column<bool>(type: "bit", nullable: false),
+                    IsInhalantDrug = table.Column<bool>(type: "bit", nullable: false),
+                    IsPrescriptionDrugForChildren = table.Column<bool>(type: "bit", nullable: false),
+                    IsTraditionalHerbalDrug = table.Column<bool>(type: "bit", nullable: false),
+                    IsTraditionalDrugFormulation = table.Column<bool>(type: "bit", nullable: false),
+                    IsDrugContainerReturnRequest = table.Column<bool>(type: "bit", nullable: false),
+                    IsAllowZeroQuantity = table.Column<bool>(type: "bit", nullable: false),
+                    IsRadiolabeledDrug = table.Column<bool>(type: "bit", nullable: false),
+                    PharmaceuticalFormulation = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    Origin = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    ScientificName = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    ScientificNameChildren = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    DugStatus = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    RequirementUseDug = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    PharmaceuticalDivision = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    ProcessingLossRate = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    OtherExpenses = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    PreparationMethod = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    QualityStandards = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SMedicineTypes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SMedicineTypes_SCountries_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "SCountries",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_SMedicineTypes_SMedicineGroups_MedicineGroupId",
+                        column: x => x.MedicineGroupId,
+                        principalTable: "SMedicineGroups",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_SMedicineTypes_SMedicineLines_MedicineLineId",
+                        column: x => x.MedicineLineId,
+                        principalTable: "SMedicineLines",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_SMedicineTypes_SUnits_UnitId",
+                        column: x => x.UnitId,
+                        principalTable: "SUnits",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SServices",
                 columns: table => new
                 {
@@ -700,20 +818,21 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SMaterialTypes",
+                name: "SMaterials",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Name = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ParentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     SoftOrder = table.Column<int>(type: "int", nullable: true),
-                    ServiceUnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Tutorial = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    MaterialTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    UnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     NationalId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ImpPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    ImpQuantity = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     ImpVatRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    TaxRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     InternalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
@@ -727,21 +846,21 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SMaterialTypes", x => x.Id);
+                    table.PrimaryKey("PK_SMaterials", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SMaterialTypes_SServices_ServiceId",
-                        column: x => x.ServiceId,
-                        principalTable: "SServices",
+                        name: "FK_SMaterials_SMaterialTypes_MaterialTypeId",
+                        column: x => x.MaterialTypeId,
+                        principalTable: "SMaterialTypes",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_SMaterialTypes_SUnits_ServiceUnitId",
-                        column: x => x.ServiceUnitId,
+                        name: "FK_SMaterials_SUnits_UnitId",
+                        column: x => x.UnitId,
                         principalTable: "SUnits",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "SMedicineTypes",
+                name: "SMedicines",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -750,46 +869,29 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Name = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: true),
                     MedicineLineId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ServiceGroupHeInId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     MedicineGroupId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    MedicineTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     UnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Tutorial = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    ActiveSubstance = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
-                    Concentration = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
-                    Content = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     CountryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Manufacturer = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    RegistrationNumber = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    ProprietaryDrug = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    PackagingSpecifications = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     ImpPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    ImpQuantity = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     ImpVatRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     TaxRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    ActiveSubstance = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Concentration = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Manufacturer = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    PackagingSpecifications = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    Dosage = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    Lot = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    DueDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    TenderDecision = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    TenderPackage = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    TenderGroup = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    TenderYear = table.Column<int>(type: "int", nullable: true),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    IsAntibiotics = table.Column<bool>(type: "bit", nullable: false),
-                    IsNewDrug = table.Column<bool>(type: "bit", nullable: false),
-                    IsPrescriptionDrug = table.Column<bool>(type: "bit", nullable: false),
-                    IsNutraceutical = table.Column<bool>(type: "bit", nullable: false),
-                    IsSponsoredDrug = table.Column<bool>(type: "bit", nullable: false),
-                    IsInhalantDrug = table.Column<bool>(type: "bit", nullable: false),
-                    IsPrescriptionDrugForChildren = table.Column<bool>(type: "bit", nullable: false),
-                    IsTraditionalHerbalDrug = table.Column<bool>(type: "bit", nullable: false),
-                    IsTraditionalDrugFormulation = table.Column<bool>(type: "bit", nullable: false),
-                    IsDrugContainerReturnRequest = table.Column<bool>(type: "bit", nullable: false),
-                    IsAllowZeroQuantity = table.Column<bool>(type: "bit", nullable: false),
-                    IsRadiolabeledDrug = table.Column<bool>(type: "bit", nullable: false),
-                    PharmaceuticalFormulation = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    Origin = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    ScientificName = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    ScientificNameChildren = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    DugStatus = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    RequirementUseDug = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    PharmaceuticalDivision = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    ProcessingLossRate = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    OtherExpenses = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    PreparationMethod = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    QualityStandards = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -800,24 +902,24 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SMedicineTypes", x => x.Id);
+                    table.PrimaryKey("PK_SMedicines", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SMedicineTypes_SCountries_CountryId",
+                        name: "FK_SMedicines_SCountries_CountryId",
                         column: x => x.CountryId,
                         principalTable: "SCountries",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_SMedicineTypes_SMedicineGroups_MedicineGroupId",
-                        column: x => x.MedicineGroupId,
-                        principalTable: "SMedicineGroups",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_SMedicineTypes_SMedicineLines_MedicineLineId",
+                        name: "FK_SMedicines_SMedicineLines_MedicineLineId",
                         column: x => x.MedicineLineId,
                         principalTable: "SMedicineLines",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_SMedicineTypes_SUnits_UnitId",
+                        name: "FK_SMedicines_SMedicineTypes_MedicineTypeId",
+                        column: x => x.MedicineTypeId,
+                        principalTable: "SMedicineTypes",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_SMedicines_SUnits_UnitId",
                         column: x => x.UnitId,
                         principalTable: "SUnits",
                         principalColumn: "Id");
@@ -1031,25 +1133,17 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SMaterials",
+                name: "SMedicinePricePolicies",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ParentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    SoftOrder = table.Column<int>(type: "int", nullable: true),
-                    MaterialTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    UnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    NationalId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ImpPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    ImpQuantity = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    ImpVatRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    TaxRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    InternalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    Inactive = table.Column<bool>(type: "bit", nullable: false),
+                    PatientTypeId = table.Column<int>(type: "int", nullable: true),
+                    OldUnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    NewUnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    CeilingPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    PaymentRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    ExecutionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    MedicineId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -1060,87 +1154,16 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SMaterials", x => x.Id);
+                    table.PrimaryKey("PK_SMedicinePricePolicies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SMaterials_SMaterialTypes_MaterialTypeId",
-                        column: x => x.MaterialTypeId,
-                        principalTable: "SMaterialTypes",
+                        name: "FK_SMedicinePricePolicies_SMedicines_MedicineId",
+                        column: x => x.MedicineId,
+                        principalTable: "SMedicines",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_SMaterials_SServices_ServiceId",
-                        column: x => x.ServiceId,
-                        principalTable: "SServices",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_SMaterials_SUnits_UnitId",
-                        column: x => x.UnitId,
-                        principalTable: "SUnits",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SMedicines",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    HeInCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    SortOrder = table.Column<int>(type: "int", nullable: true),
-                    MedicineLineId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    MedicineGroupId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    MedicineTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    UnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Tutorial = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    CountryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ImpPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    ImpQuantity = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    ImpVatRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    TaxRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    ActiveSubstance = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
-                    Concentration = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
-                    Content = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
-                    Manufacturer = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    PackagingSpecifications = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    Dosage = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    Lot = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
-                    DueDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    TenderDecision = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    TenderPackage = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    TenderGroup = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    TenderYear = table.Column<int>(type: "int", nullable: true),
-                    Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SMedicines", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SMedicines_SCountries_CountryId",
-                        column: x => x.CountryId,
-                        principalTable: "SCountries",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_SMedicines_SMedicineLines_MedicineLineId",
-                        column: x => x.MedicineLineId,
-                        principalTable: "SMedicineLines",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_SMedicines_SMedicineTypes_MedicineTypeId",
-                        column: x => x.MedicineTypeId,
-                        principalTable: "SMedicineTypes",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_SMedicines_SUnits_UnitId",
-                        column: x => x.UnitId,
-                        principalTable: "SUnits",
+                        name: "FK_SMedicinePricePolicies_SPatientTypes_PatientTypeId",
+                        column: x => x.PatientTypeId,
+                        principalTable: "SPatientTypes",
                         principalColumn: "Id");
                 });
 
@@ -1155,7 +1178,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ImpQuantity = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     ImpVatRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     TaxRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    ImpMestId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ImpMestId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -1169,42 +1192,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_DImpMestMedicines_SMedicines_MedicineId",
                         column: x => x.MedicineId,
                         principalTable: "SMedicines",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SMedicinePricePolicy",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MedicineId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    PatientTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    OldUnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    NewUnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    CeilingPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    PaymentRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    ExecutionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    SPatientTypeId = table.Column<int>(type: "int", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SMedicinePricePolicy", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SMedicinePricePolicy_SMedicines_MedicineId",
-                        column: x => x.MedicineId,
-                        principalTable: "SMedicines",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_SMedicinePricePolicy_SPatientTypes_SPatientTypeId",
-                        column: x => x.SPatientTypeId,
-                        principalTable: "SPatientTypes",
                         principalColumn: "Id");
                 });
 
@@ -1484,9 +1471,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"), "KXD", null, new DateTime(2023, 8, 7, 23, 48, 2, 42, DateTimeKind.Local).AddTicks(5004), null, false, null, null, "Chưa xác định", 0 },
-                    { new Guid("e9497984-d355-41af-b917-091500956be9"), "NU", null, new DateTime(2023, 8, 7, 23, 48, 2, 42, DateTimeKind.Local).AddTicks(5039), null, false, null, null, "Nữ", 2 },
-                    { new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"), "NAM", null, new DateTime(2023, 8, 7, 23, 48, 2, 42, DateTimeKind.Local).AddTicks(5036), null, false, null, null, "Nam", 1 }
+                    { new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"), "KXD", null, new DateTime(2023, 8, 8, 23, 9, 23, 785, DateTimeKind.Local).AddTicks(4420), null, false, null, null, "Chưa xác định", 0 },
+                    { new Guid("e9497984-d355-41af-b917-091500956be9"), "NU", null, new DateTime(2023, 8, 8, 23, 9, 23, 785, DateTimeKind.Local).AddTicks(4442), null, false, null, null, "Nữ", 2 },
+                    { new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"), "NAM", null, new DateTime(2023, 8, 8, 23, 9, 23, 785, DateTimeKind.Local).AddTicks(4440), null, false, null, null, "Nam", 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -1576,9 +1563,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { 1, "BHYT", null, new DateTime(2023, 8, 7, 23, 48, 2, 42, DateTimeKind.Local).AddTicks(6173), null, false, null, null, "Bảo hiểm y tế", 0 },
-                    { 2, "VP", null, new DateTime(2023, 8, 7, 23, 48, 2, 42, DateTimeKind.Local).AddTicks(6177), null, false, null, null, "Viện phí", 0 },
-                    { 3, "DV", null, new DateTime(2023, 8, 7, 23, 48, 2, 42, DateTimeKind.Local).AddTicks(6179), null, false, null, null, "Dịch vụ", 0 }
+                    { 1, "BHYT", null, new DateTime(2023, 8, 8, 23, 9, 23, 785, DateTimeKind.Local).AddTicks(5485), null, false, null, null, "Bảo hiểm y tế", 0 },
+                    { 2, "VP", null, new DateTime(2023, 8, 8, 23, 9, 23, 785, DateTimeKind.Local).AddTicks(5489), null, false, null, null, "Viện phí", 0 },
+                    { 3, "DV", null, new DateTime(2023, 8, 8, 23, 9, 23, 785, DateTimeKind.Local).AddTicks(5491), null, false, null, null, "Dịch vụ", 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -1809,19 +1796,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 column: "MaterialTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SMaterials_ServiceId",
-                table: "SMaterials",
-                column: "ServiceId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_SMaterials_UnitId",
                 table: "SMaterials",
                 column: "UnitId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_SMaterialTypes_ServiceId",
-                table: "SMaterialTypes",
-                column: "ServiceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SMaterialTypes_ServiceUnitId",
@@ -1829,14 +1806,14 @@ namespace HIS.EntityFrameworkCore.Migrations
                 column: "ServiceUnitId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SMedicinePricePolicy_MedicineId",
-                table: "SMedicinePricePolicy",
+                name: "IX_SMedicinePricePolicies_MedicineId",
+                table: "SMedicinePricePolicies",
                 column: "MedicineId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SMedicinePricePolicy_SPatientTypeId",
-                table: "SMedicinePricePolicy",
-                column: "SPatientTypeId");
+                name: "IX_SMedicinePricePolicies_PatientTypeId",
+                table: "SMedicinePricePolicies",
+                column: "PatientTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SMedicines_CountryId",
@@ -1984,7 +1961,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SMaterials");
 
             migrationBuilder.DropTable(
-                name: "SMedicinePricePolicy");
+                name: "SMedicinePricePolicies");
 
             migrationBuilder.DropTable(
                 name: "SRolePermissionBranchs");
@@ -2020,6 +1997,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SPatientTypes");
 
             migrationBuilder.DropTable(
+                name: "SServices");
+
+            migrationBuilder.DropTable(
                 name: "SRoles");
 
             migrationBuilder.DropTable(
@@ -2047,6 +2027,15 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SMedicineTypes");
 
             migrationBuilder.DropTable(
+                name: "SServiceGroupHeIns");
+
+            migrationBuilder.DropTable(
+                name: "SServiceGroups");
+
+            migrationBuilder.DropTable(
+                name: "SSurgicalProcedureTypes");
+
+            migrationBuilder.DropTable(
                 name: "SProvinces");
 
             migrationBuilder.DropTable(
@@ -2065,7 +2054,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SMedicineLines");
 
             migrationBuilder.DropTable(
-                name: "SServices");
+                name: "SUnits");
 
             migrationBuilder.DropTable(
                 name: "SCountries");
@@ -2075,18 +2064,6 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "SDepartmentTypes");
-
-            migrationBuilder.DropTable(
-                name: "SServiceGroupHeIns");
-
-            migrationBuilder.DropTable(
-                name: "SServiceGroups");
-
-            migrationBuilder.DropTable(
-                name: "SSurgicalProcedureTypes");
-
-            migrationBuilder.DropTable(
-                name: "SUnits");
         }
     }
 }

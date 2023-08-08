@@ -39,13 +39,5 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public SServiceGroup SServiceGroup { get; set; }
         public SServiceGroupHeIn SServiceGroupHeIn { get; set; }
         public SSurgicalProcedureType SSurgicalProcedureType { get; set; }
-
-        public IList<SMedicineType> SMedicineTypes { get; set; }
-        public IList<SMedicine> SMedicines { get; set; }
-        public IList<SMaterial> SMaterials { get; set; }
-        public IList<SMaterialType> SMaterialTypes { get; set; }
-        public IList<SServicePricePolicy> SServicePricePolicies { get; set; }
-        public IList<SExecutionRoom> SExecutionRooms { get; set; }
-        public IList<SServiceResultIndice> SServiceResultIndices { get; set; }
     }
 }

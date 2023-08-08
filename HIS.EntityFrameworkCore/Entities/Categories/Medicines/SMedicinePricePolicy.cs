@@ -11,8 +11,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories.Medicines
 {
     public class SMedicinePricePolicy : FullAuditedEntity<Guid>
     {
-        public Guid? MedicineId { get; set; }
-        public Guid? PatientTypeId { get; set; }
+        public int? PatientTypeId { get; set; }
 
         /// <summary>
         /// Giá cữ
@@ -38,6 +37,11 @@ namespace HIS.EntityFrameworkCore.Entities.Categories.Medicines
         /// Ngày áp dụng giá mới
         /// </summary>
         public DateTime? ExecutionTime { get; set; }
+
+        /// <summary>
+        /// Thuốc
+        /// </summary>
+        public Guid? MedicineId { get; set; }
 
         public SMedicine SMedicine { get; set; }
         public SPatientType SPatientType { get; set; }

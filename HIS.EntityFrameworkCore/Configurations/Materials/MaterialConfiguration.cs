@@ -25,9 +25,6 @@ namespace HIS.EntityFrameworkCore.Configurations
 
             builder.HasOne(t => t.SUnit).WithMany(pc => pc.SMaterials)
                 .HasForeignKey(pc => pc.UnitId).OnDelete(DeleteBehavior.NoAction);
-
-            builder.HasOne(t => t.SService).WithMany(pc => pc.SMaterials)
-                .HasForeignKey(pc => pc.ServiceId).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

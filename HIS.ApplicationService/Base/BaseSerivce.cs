@@ -22,5 +22,11 @@ namespace HIS.ApplicationService
             _dbContext = dbContext;
             _config = config;
         }
+
+        public BaseSerivce(HISDbContext dbContext, IMapper mapper)
+        {
+            _dbContext = dbContext;
+            _mapper = mapper;
+        }
     }
 }

@@ -102,7 +102,5 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public SUnit SUnit { get; set; }
         public SMedicineLine SMedicineLine { get; set; }
         public SCountry SCountry { get; set; }
-        public IList<SMedicinePricePolicy> SMedicinePricePolicies { get; set; }
-        public IList<DImpMestMedicine> DImpMestMedicines { get; set; }
     }
 }

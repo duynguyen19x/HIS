@@ -17,9 +17,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Tên VT")]
         public string Name { get; set; }
 
-        [Description("Id service")]
-        public Guid? ServiceId { get; set; }
-
         [Description("Id cha")]
         public Guid? ParentId { get; set; }
 
@@ -56,7 +53,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Ngưng sử dụng")]
         public bool Inactive { get; set; }
 
-        public SService SService { get; set; }
         public SMaterialType SMaterialType { get; set; }
         public SUnit SUnit { get; set; }
     }

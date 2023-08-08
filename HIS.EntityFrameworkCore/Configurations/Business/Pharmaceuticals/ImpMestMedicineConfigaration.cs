@@ -12,11 +12,11 @@ namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
             builder.HasKey(x => x.Id);
 
             builder.HasOne(t => t.DImMest)
-                .WithMany(pc => pc.DImMestMedicines)
-                .HasForeignKey(pc => pc.ImpMestId);
+                .WithMany()
+                .HasForeignKey(t => t.ImpMestId);
 
             builder.HasOne(e => e.SMedicine)
-               .WithMany(e => e.DImpMestMedicines)
+               .WithMany()
                .HasForeignKey(e => e.MedicineId);
         }
     }

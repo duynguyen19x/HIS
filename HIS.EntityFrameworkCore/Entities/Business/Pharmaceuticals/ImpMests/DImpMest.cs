@@ -110,7 +110,5 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
         public STreatment STreatment { get; set; }
         public SPatient SPatient { get; set; }
         public SSupplier SSupplier { get; set; }
-
-        public IList<DImpMestMedicine> DImMestMedicines { get; set; }
     }
 }

@@ -117,7 +117,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineType
                     emptys.Add("Mã thuốc");
                 }
 
-                if (string.IsNullOrEmpty(input.Code))
+                if (string.IsNullOrEmpty(input.HeInCode))
                 {
                     emptys.Add("Mã BHYT");
                 }
