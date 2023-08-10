@@ -1,20 +1,12 @@
 ﻿using AutoMapper;
-using HIS.ApplicationService.Dictionaries.MedicineGroup;
+using HIS.Core.Linq;
 using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.MedicineGroup;
 using HIS.Dtos.Dictionaries.MedicineType;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using HIS.Utilities.Helpers;
-using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Dictionaries.MedicineType
 {

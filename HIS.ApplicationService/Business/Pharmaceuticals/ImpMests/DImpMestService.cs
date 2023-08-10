@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HIS.Core.Linq;
 using HIS.Dtos.Business.DImMest;
 using HIS.Dtos.Business.Treatment;
 using HIS.Dtos.Commons;

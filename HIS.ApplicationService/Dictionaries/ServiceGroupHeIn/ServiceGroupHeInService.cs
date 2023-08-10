@@ -1,4 +1,5 @@
-﻿using HIS.Dtos.Commons;
+﻿using HIS.Core.Linq;
+using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ServiceGroupHeIn;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;

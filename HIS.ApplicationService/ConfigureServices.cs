@@ -32,6 +32,7 @@ using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
 using HIS.ApplicationService.Business.Pharmaceuticals.ImpMests;
 using HIS.ApplicationService.Business.DImpExpMestType;
+using HIS.ApplicationService.Dictionaries.MedicinePricePolicy;
 
 namespace HIS.ApplicationService
 {
@@ -69,6 +70,7 @@ namespace HIS.ApplicationService
             services.AddTransient<ISMedicineGroupService, SMedicineGroupService>();
             services.AddTransient<ISMedicineTypeService, SMedicineTypeService>();
             services.AddTransient<ISMedicineLineService, SMedicineLineService>();
+            services.AddTransient<ISMedicinePricePolicyService, SMedicinePricePolicyService>();
 
             services.AddTransient<ISPatientService, SPatientAppService>();
             services.AddTransient<IDImpMestService, DImpMestService>();

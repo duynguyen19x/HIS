@@ -1,16 +1,13 @@
-﻿using HIS.Core.Entities;
-using HIS.Core.Entities.Auditing;
-using HIS.EntityFrameworkCore.Entities.Business.Patients;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+﻿using HIS.Core.Application.Services.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Categories.Medicines
+namespace HIS.Dtos.Dictionaries.MedicinePricePolicy
 {
-    public class SMedicinePricePolicy : FullAuditedEntity<Guid>
+    public class SMedicinePricePolicyDto : EntityDto<Guid?>
     {
         public int? PatientTypeId { get; set; }
 
@@ -44,7 +41,10 @@ namespace HIS.EntityFrameworkCore.Entities.Categories.Medicines
         /// </summary>
         public Guid? MedicineId { get; set; }
 
-        public SMedicine SMedicine { get; set; }
-        public SPatientType SPatientType { get; set; }
+        public bool IsHeIn { get; set; }
+        public string PatientTypeCode { get; set; }
+        public string PatientTypeName { get; set; }
+
+        public bool Inactive { get; set; }
     }
 }
