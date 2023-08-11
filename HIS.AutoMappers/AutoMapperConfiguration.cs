@@ -5,6 +5,7 @@ using HIS.Dtos.Business.Patient;
 using HIS.Dtos.Business.Treatment;
 using HIS.Dtos.Dictionaries.Branch;
 using HIS.Dtos.Dictionaries.Career;
+using HIS.Dtos.Dictionaries.ChapterICD10;
 using HIS.Dtos.Dictionaries.Country;
 using HIS.Dtos.Dictionaries.Department;
 using HIS.Dtos.Dictionaries.DepartmentType;
@@ -48,6 +49,7 @@ namespace HIS.AutoMappers
             CreateMap<SCountry, SCountryDto>().ReverseMap();
             CreateMap<SDepartment, SDepartmentDto>().ReverseMap();
             CreateMap<SDepartmentType, SDepartmentTypeDto>().ReverseMap();
+            CreateMap<SChapterICD10Dto, SChapterICD10>().ReverseMap();
             CreateMap<SDistrict, SDistrictDto>().ReverseMap();
             CreateMap<SEthnic, SEthnicDto>().ReverseMap();
             CreateMap<SGender, SGenderDto>().ReverseMap();
