@@ -72,6 +72,7 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
             modelBuilder.ApplyConfiguration(new ImpExpMestTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ImpMestConfiguration());
             modelBuilder.ApplyConfiguration(new ImpMestMedicineConfigaration());
+            modelBuilder.ApplyConfiguration(new ChapterICD10Configurations());
 
             modelBuilder.Seed();
         }
@@ -108,6 +109,7 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<SDistrict> SDistricts { get; set; }
         public DbSet<SWard> SWards { get; set; }
         public DbSet<SSupplier> SSuppliers { get; set; }
+        public DbSet<SChapterICD10> SChapterICD10s { get; set; }
 
         public DbSet<SService> SServices { get; set; }
         public DbSet<SServiceGroup> SServiceGroups { get; set; }
