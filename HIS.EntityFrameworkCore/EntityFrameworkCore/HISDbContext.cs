@@ -30,49 +30,7 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration(new UserConfigurations());
-            modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
-            modelBuilder.ApplyConfiguration(new TokenConfiguration());
-            modelBuilder.ApplyConfiguration(new GenderConfiguration());
-            modelBuilder.ApplyConfiguration(new PermissionConfigurations());
-            modelBuilder.ApplyConfiguration(new BranchConfiguration());
-            modelBuilder.ApplyConfiguration(new CareerConfiguration());
-            modelBuilder.ApplyConfiguration(new DepartmentConfiguration());
-            modelBuilder.ApplyConfiguration(new DepartmentTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new RoomConfiguration());
-            modelBuilder.ApplyConfiguration(new RoomTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new RoleConfiguration());
-            modelBuilder.ApplyConfiguration(new RolePermissionBranchConfigurations());
-            modelBuilder.ApplyConfiguration(new UnitConfigurations());
-            modelBuilder.ApplyConfiguration(new ServiceConfigurations());
-            modelBuilder.ApplyConfiguration(new MedicineConfiguration());
-            modelBuilder.ApplyConfiguration(new MedicineGroupConfiguration());
-            modelBuilder.ApplyConfiguration(new MedicineLineConfiguration());
-            modelBuilder.ApplyConfiguration(new MedicineTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new MaterialTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new MaterialConfiguration());
-            modelBuilder.ApplyConfiguration(new PatientConfiguration());
-            modelBuilder.ApplyConfiguration(new PatientTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new CountryConfiguration());
-            modelBuilder.ApplyConfiguration(new ProvinceConfiguration());
-            modelBuilder.ApplyConfiguration(new DistrictConfiguration());
-            modelBuilder.ApplyConfiguration(new WardConfiguration());
-            modelBuilder.ApplyConfiguration(new IcdConfiguration());
-            modelBuilder.ApplyConfiguration(new ServicePricePolicyConfigurations());
-            modelBuilder.ApplyConfiguration(new MedicinePricePolicyConfigurations());
-            modelBuilder.ApplyConfiguration(new SurgicalProcedureTypeConfigurations());
-            modelBuilder.ApplyConfiguration(new EthnicConfiguration());
-            modelBuilder.ApplyConfiguration(new HospitalConfiguration());
-            modelBuilder.ApplyConfiguration(new ServiceGroupConfigurations());
-            modelBuilder.ApplyConfiguration(new ServiceGroupHeInConfigurations());
-            modelBuilder.ApplyConfiguration(new ServiceResultIndexConfiguration());
-            modelBuilder.ApplyConfiguration(new ExecutionRoomConfiguration());
-            modelBuilder.ApplyConfiguration(new SupplierConfiguration());
-            modelBuilder.ApplyConfiguration(new TreatmentConfiguration());
-            modelBuilder.ApplyConfiguration(new ImpExpMestTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new ImpMestConfiguration());
-            modelBuilder.ApplyConfiguration(new ImpMestMedicineConfigaration());
-
+            modelBuilder.ApplyConfiguration();
             modelBuilder.Seed();
         }
 
@@ -124,7 +82,8 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<SMedicinePricePolicy> SMedicinePricePolicies { get; set; }
 
         public DbSet<DImpExMestType> DImpExMestTypes { get; set; }
-        public DbSet<DImpMest> DImMests { get; set; }
+        public DbSet<DImpMest> DImpMests { get; set; }
         public DbSet<DImpMestMedicine> DImpMestMedicines { get; set; }
+        public DbSet<DMedicineStock> DMedicineStocks { get; set; }
     }
 }

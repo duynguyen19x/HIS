@@ -142,6 +142,9 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         [Description("Tiêu chuẩn chất lượng")]
         public string QualityStandards { get; set; }
 
+        [Description("Đánh số lô")]
+        public int AutoNumber { get; set; }
+
         public SUnit SUnit { get; set; }
         public SMedicineLine SMedicineLine { get; set; }
         public SMedicineGroup SMedicineGroup { get; set; }
