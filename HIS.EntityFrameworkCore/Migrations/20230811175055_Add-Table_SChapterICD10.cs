@@ -28,7 +28,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "SServiceGroups",
+                table: "SChapterICD10",
                 columns: new[] { "Id", "Code", "Name", "SortOrder", "Inactive" },
                 values: new object[,]
                 {
