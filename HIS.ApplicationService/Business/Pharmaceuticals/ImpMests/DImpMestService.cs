@@ -16,6 +16,8 @@ using HIS.Dtos.Business.DImMestMedicine;
 using HIS.Dtos.Dictionaries.ServicePricePolicy;
 using HIS.Utilities.Enums;
 using HIS.Dtos.Dictionaries.MedicinePricePolicy;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
+using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
 
 namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
 {
@@ -52,11 +54,6 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
                     dImMest.Id = id;
                     dImMest.CreatedDate = dateNow;
 
-                    dImMest.ImpTime = dImMest.ImpTime.UtcToLocal();
-                    dImMest.InvTime = dImMest.InvTime.UtcToLocal();
-                    dImMest.ApproverTime = dImMest.ApproverTime.UtcToLocal();
-                    dImMest.StockReceiptTime = dImMest.StockReceiptTime.UtcToLocal();
-
                     // Đánh số tự động
                     if (string.IsNullOrEmpty(dImMest.Code))
                     {
@@ -64,9 +61,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
                     }
 
                     // Nhập từ thuốc nhà cung cấp
-                    if (input.ImExMestTypeId == 1)
+                    if (input.ImpExpMestTypeId == 1)
                     {
-                        await ImportFromSupplier(input.Id, input, dateNow, DateTime.Now);
+                        await ImportFromSupplier(id, input, dateNow, DateTime.Now);
                     }
 
                     _dbContext.DImpMests.Add(dImMest);
@@ -110,7 +107,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
                     }
 
                     // Nhập từ thuốc nhà cung cấp
-                    if (input.ImExMestTypeId == 1)
+                    if (input.ImpExpMestTypeId == 1)
                     {
                         await ImportFromSupplier(input.Id, input, dateNow, dImMest.CreatedDate);
                     }
@@ -150,8 +147,12 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
                                  join exStock in _dbContext.SRooms on dImMest.ExStockId equals exStock.Id into exStockDefaults
                                  from exStockDefault in exStockDefaults.DefaultIfEmpty()
 
+                                 join impExpMestType in _dbContext.DImpExpMestTypes on dImMest.ImpExpMestTypeId equals impExpMestType.Id into impExpMestTypeDefaults
+                                 from impExpMestTypeDefault in impExpMestTypeDefaults.DefaultIfEmpty()
+
                                  select new DImpMestDto()
                                  {
+                                     Id = dImMest.Id,
                                      Code = dImMest.Code,
                                      Name = dImMest.Code,
                                      ImpMestStatus = dImMest.ImpMestStatus,
@@ -161,10 +162,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
                                      ExStockId = dImMest.ExStockId,
                                      ExStockCode = exStockDefault != null ? exStockDefault.Code : null,
                                      ExStockName = exStockDefault != null ? exStockDefault.Name : null,
-                                     ImExMestTypeId = dImMest.ImExMestTypeId,
+                                     ImpExpMestTypeId = dImMest.ImpExpMestTypeId,
+                                     ImpExpMestTypeName = impExpMestTypeDefault != null ? impExpMestTypeDefault.Name : null,
                                      ReceiverUserId = dImMest.ReceiverUserId,
                                      ApproverUserId = dImMest.ApproverUserId,
-                                     ImpTime = dImMest.ImpTime,
+                                     ImpTime = dImMest.ImpTime.Value,
                                      ImpUserId = dImMest.ImpUserId,
                                      StockReceiptUserId = dImMest.StockReceiptUserId,
                                      StockReceiptTime = dImMest.StockReceiptTime,
@@ -178,8 +180,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
                                      InvTime = dImMest.InvTime,
                                      Deliverer = dImMest.Deliverer
                                  })
-                                 .WhereIf(fromDateTime != (DateTime)default, w => w.InvTime >= fromDateTime)
-                                 .WhereIf(toDateTime != (DateTime)default, w => w.InvTime <= toDateTime)
+                                 .WhereIf(fromDateTime != (DateTime)default, w => w.ImpTime >= fromDateTime)
+                                 .WhereIf(toDateTime != (DateTime)default, w => w.ImpTime <= toDateTime)
                                  .WhereIf(!GuidHelper.IsNullOrEmpty(stockId), w => w.ImStockId == stockId || w.ExStockId == stockId)
                                  .ToList();
             }
@@ -189,6 +191,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
                 result.Message = ex.Message;
             }
 
+
             return await Task.FromResult(result);
         }
 
@@ -197,6 +200,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
             var dImMestMedicines = new List<DImpMestMedicine>();
             var sMedicines = new List<SMedicine>();
             var dMedicineStocks = new List<EntityFrameworkCore.Entities.Business.Pharmaceuticals.DMedicineStock>();
+            var sMedicinePricePolicies = new List<SMedicinePricePolicy>();
 
             if (GuidHelper.IsNullOrEmpty(input.Id))
             {
@@ -211,11 +215,28 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
                     dImMestMedicine.ImpMestId = id;
                     dImMestMedicine.MedicineId = sMedicine.Id;
 
+                    if (dImMestMedicineDto.SMedicinePricePolicies != null)
+                    {
+                        foreach (var sMedicinePricePolicyDto in dImMestMedicineDto.SMedicinePricePolicies)
+                        {
+                            var sMedicinePricePolicy = _mapper.Map<SMedicinePricePolicy>(sMedicinePricePolicyDto);
+
+                            if (GuidHelper.IsNullOrEmpty(sMedicinePricePolicy.Id))
+                                sMedicinePricePolicy.Id = Guid.NewGuid();
+
+                            sMedicinePricePolicy.CreatedDate = dateNow;
+                            sMedicinePricePolicy.MedicineId = sMedicine.Id;
+                            sMedicinePricePolicy.ExecutionTime = DatetimeHelper.UtcToLocal(sMedicinePricePolicy.ExecutionTime);
+
+                            sMedicinePricePolicies.Add(sMedicinePricePolicy);
+                        }
+                    }
+
                     sMedicines.Add(sMedicine);
                     dImMestMedicines.Add(dImMestMedicine);
 
                     // Trạng thái nhập kho mới thêm vào thuốc trong kho
-                    if (input.ImpMestStatus == Utilities.Enums.ImpMestStatusType.ReceivedInStock)
+                    if (input.ImpMestStatus == ImpMestStatusType.ReceivedInStock)
                     {
                         dMedicineStocks.Add(new EntityFrameworkCore.Entities.Business.Pharmaceuticals.DMedicineStock()
                         {
@@ -236,12 +257,14 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
                 var sMedicineOldIds = dImMestMedicineOlds.Select(s => s.MedicineId).ToList();
                 var sMedicineOlds = _dbContext.SMedicines.Where(w => sMedicineOldIds.Contains(w.Id)).ToList();
                 var dMedicineStockOlds = _dbContext.DMedicineStocks.Where(w => sMedicineOldIds.Contains(w.MedicineId)).ToList();
+                var sMedicinePricePolicyDtos = _dbContext.SMedicinePricePolicies.Where(w => sMedicineOldIds.Contains(w.MedicineId)).ToList();
 
                 if (dImMestMedicineOlds != null && sMedicineOlds != null)
                 {
                     _dbContext.SMedicines.RemoveRange(sMedicineOlds);
                     _dbContext.DImpMestMedicines.RemoveRange(dImMestMedicineOlds);
                     _dbContext.DMedicineStocks.RemoveRange(dMedicineStockOlds);
+                    _dbContext.SMedicinePricePolicies.RemoveRange(sMedicinePricePolicyDtos);
                 }
 
                 foreach (var dImMestMedicineDto in input.DImpMestMedicines)
@@ -266,6 +289,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
             await _dbContext.SMedicines.AddRangeAsync(sMedicines);
             await _dbContext.DImpMestMedicines.AddRangeAsync(dImMestMedicines);
             await _dbContext.DMedicineStocks.AddRangeAsync(dMedicineStocks);
+            await _dbContext.SMedicinePricePolicies.AddRangeAsync(sMedicinePricePolicies);
         }
 
         public async Task<ApiResult<DImpMestDto>> GetById(Guid id)
@@ -277,65 +301,72 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
                 var dImpMestDto = _mapper.Map<DImpMestDto>(_dbContext.DImpMests.FirstOrDefault(d => d.Id == id));
                 if (dImpMestDto != null)
                 {
-                    var dImpMestMedicineDtos = _mapper.Map<IList<DImpMestMedicineDto>>(_dbContext.DImpMestMedicines.Where(w => w.ImpMestId == id).ToList());
-                    var sMedicineIds = dImpMestMedicineDtos.Select(s => s.MedicineId).ToList();
-                    var sMedicineDtos = _mapper.Map<IList<SMedicine>>(_dbContext.SMedicines.Where(w => sMedicineIds.Contains(w.Id)).ToList());
-
-                    var sMedicinePricePolicyDtos = (from med in _dbContext.SMedicinePricePolicies
-                                                  join pa in _dbContext.SPatientTypes on med.PatientTypeId equals pa.Id
-                                                  select new SMedicinePricePolicyDto()
-                                                  {
-                                                      Id = med.Id,
-                                                      MedicineId = med.MedicineId,
-                                                      PatientTypeId = med.PatientTypeId,
-                                                      OldUnitPrice = med.OldUnitPrice,
-                                                      NewUnitPrice = med.NewUnitPrice,
-                                                      CeilingPrice = med.CeilingPrice,
-                                                      PaymentRate = med.PaymentRate,
-                                                      ExecutionTime = med.ExecutionTime,
-                                                      PatientTypeCode = pa.Code,
-                                                      PatientTypeName = pa.Name,
-                                                      IsHeIn = pa.Code == PatientTypes.BHYT ? true : false,
-                                                  })
-                                                  .WhereIf(sMedicineIds != null, w => sMedicineIds.Contains(w.MedicineId))
-                                                  .OrderBy(s => s.PatientTypeCode).ToList();
-
-                    foreach (var dImpMestMedicine in dImpMestMedicineDtos)
+                    // Nhập thuốc NCC
+                    if (dImpMestDto.ImpExpMestTypeId == 1)
                     {
-                        var sMedicine = sMedicineDtos.FirstOrDefault(f => f.Id == dImpMestMedicine.MedicineId);
+                        var dImpMestMedicineDtos = _mapper.Map<IList<DImpMestMedicineDto>>(_dbContext.DImpMestMedicines.Where(w => w.ImpMestId == id).ToList());
+                        var sMedicineIds = dImpMestMedicineDtos.Select(s => s.MedicineId).ToList();
+                        var sMedicineDtos = _mapper.Map<IList<SMedicine>>(_dbContext.SMedicines.Where(w => sMedicineIds.Contains(w.Id)).ToList());
 
-                        dImpMestMedicine.HeInCode = sMedicine.HeInCode;
-                        dImpMestMedicine.Name = sMedicine.Name;
-                        dImpMestMedicine.SortOrder = sMedicine.SortOrder;
-                        dImpMestMedicine.MedicineLineId = sMedicine.MedicineLineId;
-                        dImpMestMedicine.MedicineGroupId = sMedicine.MedicineGroupId;
-                        dImpMestMedicine.MedicineTypeId = sMedicine.MedicineTypeId;
-                        dImpMestMedicine.UnitId = sMedicine.UnitId;
-                        dImpMestMedicine.Tutorial = sMedicine.Tutorial;
-                        dImpMestMedicine.CountryId = sMedicine.CountryId;
-                        dImpMestMedicine.ImpPrice = sMedicine.ImpPrice;
-                        dImpMestMedicine.ImpQuantity = sMedicine.ImpQuantity;
-                        dImpMestMedicine.ImpVatRate = sMedicine.ImpVatRate;
-                        dImpMestMedicine.TaxRate = sMedicine.TaxRate;
-                        dImpMestMedicine.Description = sMedicine.Description;
-                        dImpMestMedicine.ActiveSubstance = sMedicine.ActiveSubstance;
-                        dImpMestMedicine.Concentration = sMedicine.Concentration;
-                        dImpMestMedicine.Content = sMedicine.Content;
-                        dImpMestMedicine.Manufacturer = sMedicine.Manufacturer;
-                        dImpMestMedicine.PackagingSpecifications = sMedicine.PackagingSpecifications;
-                        dImpMestMedicine.Dosage = sMedicine.Dosage;
-                        dImpMestMedicine.Lot = sMedicine.Lot;
-                        dImpMestMedicine.DueDate = sMedicine.DueDate;
-                        dImpMestMedicine.TenderDecision = sMedicine.TenderDecision;
-                        dImpMestMedicine.TenderPackage = sMedicine.TenderPackage;
-                        dImpMestMedicine.TenderGroup = sMedicine.TenderGroup;
-                        dImpMestMedicine.TenderYear = sMedicine.TenderYear;
+                        var sMedicinePricePolicyDtos = (from med in _dbContext.SMedicinePricePolicies
+                                                        join pa in _dbContext.SPatientTypes on med.PatientTypeId equals pa.Id
+                                                        select new SMedicinePricePolicyDto()
+                                                        {
+                                                            Id = med.Id,
+                                                            MedicineId = med.MedicineId,
+                                                            PatientTypeId = med.PatientTypeId,
+                                                            OldUnitPrice = med.OldUnitPrice,
+                                                            NewUnitPrice = med.NewUnitPrice,
+                                                            CeilingPrice = med.CeilingPrice,
+                                                            PaymentRate = med.PaymentRate,
+                                                            ExecutionTime = med.ExecutionTime,
+                                                            PatientTypeCode = pa.Code,
+                                                            PatientTypeName = pa.Name,
+                                                            IsHeIn = pa.Code == PatientTypes.BHYT ? true : false,
+                                                        })
+                                                      .WhereIf(sMedicineIds != null, w => sMedicineIds.Contains(w.MedicineId))
+                                                      .OrderBy(s => s.PatientTypeCode).ToList();
 
-                        dImpMestMedicine.SMedicinePricePolicies = sMedicinePricePolicyDtos.Where(w => w.MedicineId == dImpMestMedicine.MedicineId).ToList();
+                        foreach (var dImpMestMedicine in dImpMestMedicineDtos)
+                        {
+                            var sMedicine = sMedicineDtos.FirstOrDefault(f => f.Id == dImpMestMedicine.MedicineId);
+
+                            dImpMestMedicine.Code = sMedicine.Code;
+                            dImpMestMedicine.HeInCode = sMedicine.HeInCode;
+                            dImpMestMedicine.Name = sMedicine.Name;
+                            dImpMestMedicine.SortOrder = sMedicine.SortOrder;
+                            dImpMestMedicine.MedicineLineId = sMedicine.MedicineLineId;
+                            dImpMestMedicine.MedicineGroupId = sMedicine.MedicineGroupId;
+                            dImpMestMedicine.MedicineTypeId = sMedicine.MedicineTypeId;
+                            dImpMestMedicine.UnitId = sMedicine.UnitId;
+                            dImpMestMedicine.Tutorial = sMedicine.Tutorial;
+                            dImpMestMedicine.CountryId = sMedicine.CountryId;
+                            dImpMestMedicine.ImpPrice = sMedicine.ImpPrice;
+                            dImpMestMedicine.ImpQuantity = sMedicine.ImpQuantity;
+                            dImpMestMedicine.ImpVatRate = sMedicine.ImpVatRate;
+                            dImpMestMedicine.TaxRate = sMedicine.TaxRate;
+                            dImpMestMedicine.Description = sMedicine.Description;
+                            dImpMestMedicine.ActiveSubstance = sMedicine.ActiveSubstance;
+                            dImpMestMedicine.Concentration = sMedicine.Concentration;
+                            dImpMestMedicine.Content = sMedicine.Content;
+                            dImpMestMedicine.Manufacturer = sMedicine.Manufacturer;
+                            dImpMestMedicine.PackagingSpecifications = sMedicine.PackagingSpecifications;
+                            dImpMestMedicine.Dosage = sMedicine.Dosage;
+                            dImpMestMedicine.Lot = sMedicine.Lot;
+                            dImpMestMedicine.DueDate = sMedicine.DueDate;
+                            dImpMestMedicine.TenderDecision = sMedicine.TenderDecision;
+                            dImpMestMedicine.TenderPackage = sMedicine.TenderPackage;
+                            dImpMestMedicine.TenderGroup = sMedicine.TenderGroup;
+                            dImpMestMedicine.TenderYear = sMedicine.TenderYear;
+
+                            dImpMestMedicine.SMedicinePricePolicies = sMedicinePricePolicyDtos.Where(w => w.MedicineId == dImpMestMedicine.MedicineId).ToList();
+                        }
+
+                        dImpMestDto.DImpMestMedicines = dImpMestMedicineDtos;
                     }
-
-                    dImpMestDto.DImpMestMedicines = dImpMestMedicineDtos;
                 }
+
+                result.Result = dImpMestDto;
             }
             catch (Exception ex)
             {

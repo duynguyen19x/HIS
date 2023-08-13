@@ -1024,7 +1024,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ImpMestStatus = table.Column<int>(type: "int", nullable: false),
                     ImStockId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ExStockId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ImExMestTypeId = table.Column<int>(type: "int", nullable: true),
+                    ImpExpMestTypeId = table.Column<int>(type: "int", nullable: true),
                     ReceiverUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ApproverUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ApproverTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -1052,8 +1052,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     table.PrimaryKey("PK_DImpMests", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DImpMests_DImpExpMestTypes_ImExMestTypeId",
-                        column: x => x.ImExMestTypeId,
+                        name: "FK_DImpMests_DImpExpMestTypes_ImpExpMestTypeId",
+                        column: x => x.ImpExpMestTypeId,
                         principalTable: "DImpExpMestTypes",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -1721,9 +1721,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 column: "ExStockId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DImpMests_ImExMestTypeId",
+                name: "IX_DImpMests_ImpExpMestTypeId",
                 table: "DImpMests",
-                column: "ImExMestTypeId");
+                column: "ImpExpMestTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DImpMests_ImStockId",

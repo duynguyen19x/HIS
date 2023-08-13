@@ -32,5 +32,11 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
         {
             return await _dImpMestService.CreateOrEdit(input);
         }
+
+        [HttpGet("GetById")]
+        public async Task<ApiResult<DImpMestDto>> GetById(Guid id)
+        {
+            return await _dImpMestService.GetById(id);
+        }
     }
 }

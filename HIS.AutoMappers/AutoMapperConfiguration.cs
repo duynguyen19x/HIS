@@ -15,6 +15,7 @@ using HIS.Dtos.Dictionaries.Gender;
 using HIS.Dtos.Dictionaries.Hospital;
 using HIS.Dtos.Dictionaries.Icd;
 using HIS.Dtos.Dictionaries.MedicineGroup;
+using HIS.Dtos.Dictionaries.MedicinePricePolicy;
 using HIS.Dtos.Dictionaries.MedicineType;
 using HIS.Dtos.Dictionaries.Province;
 using HIS.Dtos.Dictionaries.Room;
@@ -30,6 +31,7 @@ using HIS.Dtos.Dictionaries.Ward;
 using HIS.EntityFrameworkCore.Entities.Business.Patients;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
 using HIS.EntityFrameworkCore.Entities.Categories;
+using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 
@@ -132,6 +134,11 @@ namespace HIS.AutoMappers
             CreateMap<DImpMestMedicineDto, DImpMestMedicine>()
                 .ForMember(dest => dest.DImMest, opt => opt.Ignore())
                 .ForMember(dest => dest.SMedicine, opt => opt.Ignore())
+                .ReverseMap();
+
+            CreateMap<SMedicinePricePolicyDto, SMedicinePricePolicy>()
+                .ForMember(dest => dest.SMedicine, opt => opt.Ignore())
+                .ForMember(dest => dest.SPatientType, opt => opt.Ignore())
                 .ReverseMap();
         }
     }

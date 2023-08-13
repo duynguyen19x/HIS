@@ -35,7 +35,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
 
             builder.HasOne(e => e.DImExMestType)
                 .WithMany()
-                .HasForeignKey(e => e.ImExMestTypeId)
+                .HasForeignKey(e => e.ImpExpMestTypeId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(e => e.ReceiverUser)

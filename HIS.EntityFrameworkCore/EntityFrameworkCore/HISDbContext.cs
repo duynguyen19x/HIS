@@ -81,7 +81,7 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<SMedicineType> SMedicineTypes { get; set; }
         public DbSet<SMedicinePricePolicy> SMedicinePricePolicies { get; set; }
 
-        public DbSet<DImpExMestType> DImpExMestTypes { get; set; }
+        public DbSet<DImpExpMestType> DImpExpMestTypes { get; set; }
         public DbSet<DImpMest> DImpMests { get; set; }
         public DbSet<DImpMestMedicine> DImpMestMedicines { get; set; }
         public DbSet<DMedicineStock> DMedicineStocks { get; set; }
