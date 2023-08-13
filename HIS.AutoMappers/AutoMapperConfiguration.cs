@@ -113,7 +113,7 @@ namespace HIS.AutoMappers
             CreateMap<DImpMestDto, DImpMest>()
                 .ForMember(dest => dest.ImStock, opt => opt.Ignore())
                 .ForMember(dest => dest.ExStock, opt => opt.Ignore())
-                .ForMember(dest => dest.DImExMestType, opt => opt.Ignore())
+                .ForMember(dest => dest.DImpExpMestType, opt => opt.Ignore())
                 .ForMember(dest => dest.ReceiverUser, opt => opt.Ignore())
                 .ForMember(dest => dest.ApproverUser, opt => opt.Ignore())
                 .ForMember(dest => dest.StockReceiptUser, opt => opt.Ignore())

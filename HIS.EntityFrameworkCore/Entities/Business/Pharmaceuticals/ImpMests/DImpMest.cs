@@ -101,7 +101,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
 
         public SRoom ImStock { get; set; }
         public SRoom ExStock { get; set; }
-        public DImpExpMestType DImExMestType { get; set; }
+        public DImpExpMestType DImpExpMestType { get; set; }
         public SUser ReceiverUser { get; set; }
         public SUser ApproverUser { get; set; }
         public SUser StockReceiptUser { get; set; }
