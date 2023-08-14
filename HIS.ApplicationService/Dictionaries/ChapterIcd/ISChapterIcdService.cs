@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Dictionaries.ChapterICD10
 {
-    public interface ISChapterICD10Service : IBaseDictionaryService<SChapterICD10Dto, GetAllSChapterICD10Input>
+    public interface ISChapterIcdService : IBaseDictionaryService<SChapterIcdDto, GetAllSChapterIcdInput>
     {
     }
 }

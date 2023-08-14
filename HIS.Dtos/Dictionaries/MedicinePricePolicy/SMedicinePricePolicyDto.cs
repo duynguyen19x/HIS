@@ -35,6 +35,7 @@ namespace HIS.Dtos.Dictionaries.MedicinePricePolicy
         /// Ngày áp dụng giá mới
         /// </summary>
         public DateTime? ExecutionTime { get; set; }
+        public string ExecutionTimeServer { get; set; }
 
         /// <summary>
         /// Thuốc

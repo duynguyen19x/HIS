@@ -33,9 +33,9 @@ namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
                 .HasForeignKey(e => e.ExStockId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(e => e.DImExMestType)
+            builder.HasOne(e => e.DImpExpMestType)
                 .WithMany()
-                .HasForeignKey(e => e.ImExMestTypeId)
+                .HasForeignKey(e => e.ImpExpMestTypeId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(e => e.ReceiverUser)

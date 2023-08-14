@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(HISDbContext))]
-    [Migration("20230811175055_Add-Table_SChapterICD10")]
-    partial class AddTable_SChapterICD10
+    [Migration("20230811042652_Add-Table-DMedicineStock")]
+    partial class AddTableDMedicineStock
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -182,6 +182,54 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DImpExpMestTypes", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DMedicineStock", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("AvailableQuantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("MedicineId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("StockId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicineId");
+
+                    b.HasIndex("StockId");
+
+                    b.ToTable("DMedicineStocks", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImpMest", b =>
@@ -1326,6 +1374,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
+                    b.Property<int>("AutoNumber")
+                        .HasColumnType("int");
+
                     b.Property<string>("Code")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -2266,31 +2317,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SCareers", (string)null);
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SChapterICD10", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<int?>("SortOrder")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SChapterICD10", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SCountry", b =>
@@ -4647,7 +4673,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"),
                             Code = "KXD",
-                            CreatedDate = new DateTime(2023, 8, 12, 0, 50, 54, 747, DateTimeKind.Local).AddTicks(2748),
+                            CreatedDate = new DateTime(2023, 8, 11, 11, 26, 51, 305, DateTimeKind.Local).AddTicks(667),
                             Inactive = false,
                             Name = "Chưa xác định",
                             SortOrder = 0
@@ -4656,7 +4682,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"),
                             Code = "NAM",
-                            CreatedDate = new DateTime(2023, 8, 12, 0, 50, 54, 747, DateTimeKind.Local).AddTicks(2763),
+                            CreatedDate = new DateTime(2023, 8, 11, 11, 26, 51, 305, DateTimeKind.Local).AddTicks(694),
                             Inactive = false,
                             Name = "Nam",
                             SortOrder = 1
@@ -4665,7 +4691,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e9497984-d355-41af-b917-091500956be9"),
                             Code = "NU",
-                            CreatedDate = new DateTime(2023, 8, 12, 0, 50, 54, 747, DateTimeKind.Local).AddTicks(2766),
+                            CreatedDate = new DateTime(2023, 8, 11, 11, 26, 51, 305, DateTimeKind.Local).AddTicks(696),
                             Inactive = false,
                             Name = "Nữ",
                             SortOrder = 2
@@ -4887,7 +4913,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "BHYT",
-                            CreatedDate = new DateTime(2023, 8, 12, 0, 50, 54, 747, DateTimeKind.Local).AddTicks(3558),
+                            CreatedDate = new DateTime(2023, 8, 11, 11, 26, 51, 305, DateTimeKind.Local).AddTicks(1711),
                             Inactive = false,
                             Name = "Bảo hiểm y tế",
                             SortOrder = 0
@@ -4896,7 +4922,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "VP",
-                            CreatedDate = new DateTime(2023, 8, 12, 0, 50, 54, 747, DateTimeKind.Local).AddTicks(3560),
+                            CreatedDate = new DateTime(2023, 8, 11, 11, 26, 51, 305, DateTimeKind.Local).AddTicks(1715),
                             Inactive = false,
                             Name = "Viện phí",
                             SortOrder = 0
@@ -4905,7 +4931,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 3,
                             Code = "DV",
-                            CreatedDate = new DateTime(2023, 8, 12, 0, 50, 54, 747, DateTimeKind.Local).AddTicks(3562),
+                            CreatedDate = new DateTime(2023, 8, 11, 11, 26, 51, 305, DateTimeKind.Local).AddTicks(1716),
                             Inactive = false,
                             Name = "Dịch vụ",
                             SortOrder = 0
@@ -5690,6 +5716,23 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .IsRequired();
 
                     b.Navigation("Gender");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DMedicineStock", b =>
+                {
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicine", "SMedicine")
+                        .WithMany()
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "SStock")
+                        .WithMany()
+                        .HasForeignKey("StockId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("SMedicine");
+
+                    b.Navigation("SStock");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImpMest", b =>

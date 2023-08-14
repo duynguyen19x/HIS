@@ -17,10 +17,36 @@ namespace HIS.Utilities.Helpers
             // Lấy giá trị chênh lệch so với giờ GMT tại thời điểm hiện tại
             TimeSpan gmtOffset = localTimeZone.GetUtcOffset(DateTime.Now);
 
-            if (dateTime == null) 
+            if (dateTime == null)
                 return null;
             else
                 return dateTime.Value.AddHours(gmtOffset.Hours);
+        }
+
+        public static string ToShortDateStringFormat(this DateTime? dateTime)
+        {
+            if (dateTime == null)
+                return null;
+            else
+                return dateTime.Value.ToString("yyyy-MM-dd");
+        }
+
+        public static string ToLongDateStringFormat(this DateTime? dateTime)
+        {
+            if (dateTime == null)
+                return null;
+            else
+                return dateTime.Value.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        public static string ToShortDateStringFormat(this DateTime dateTime)
+        {
+            return dateTime.ToString("yyyy-MM-dd");
+        }
+
+        public static string ToLongDateStringFormat(this DateTime dateTime)
+        {
+            return dateTime.ToString("yyyy-MM-dd HH:mm:ss");
         }
     }
 }

@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
 {
-    public class ImpExpMestTypeConfiguration : IEntityTypeConfiguration<DImpExMestType>
+    public class ImpExpMestTypeConfiguration : IEntityTypeConfiguration<DImpExpMestType>
     {
-        public void Configure(EntityTypeBuilder<DImpExMestType> builder)
+        public void Configure(EntityTypeBuilder<DImpExpMestType> builder)
         {
             builder.ToTable("DImpExpMestTypes");
 

@@ -21,22 +21,10 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
             _dImpMestService = dImpMestService;
         }
 
-        [HttpGet("GetAll")]
-        public async Task<ApiResultList<DImpMestDto>> GetAll([FromQuery] GetAllDImpMestInput input)
-        {
-            return await _dImpMestService.GetAll(input);
-        }
-
         [HttpGet("GetByStock")]
         public async Task<ApiResultList<DImpMestDto>> GetByStock(Guid stockId, string fromDate, string toDate)
         {
             return await _dImpMestService.GetByStock(stockId, fromDate, toDate);
-        }
-
-        [HttpGet("GetById")]
-        public async Task<ApiResult<DImpMestDto>> GetById(Guid id)
-        {
-            return await _dImpMestService.GetById(id);
         }
 
         [HttpPost("CreateOrEdit")]
@@ -45,10 +33,10 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
             return await _dImpMestService.CreateOrEdit(input);
         }
 
-        [HttpDelete("Delete")]
-        public async Task<ApiResult<DImpMestDto>> Delete(Guid id)
+        [HttpGet("GetById")]
+        public async Task<ApiResult<DImpMestDto>> GetById(Guid id)
         {
-            return await _dImpMestService.Delete(id);
+            return await _dImpMestService.GetById(id);
         }
     }
 }

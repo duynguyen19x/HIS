@@ -25,7 +25,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
         /// <summary>
         /// Loại phiếu nhập, xuất
         /// </summary>
-        public int? ImExMestTypeId { get; set; }
+        public int? ImpExpMestTypeId { get; set; }
 
         /// <summary>
         /// Người nhận
@@ -101,7 +101,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
 
         public SRoom ImStock { get; set; }
         public SRoom ExStock { get; set; }
-        public DImpExMestType DImExMestType { get; set; }
+        public DImpExpMestType DImpExpMestType { get; set; }
         public SUser ReceiverUser { get; set; }
         public SUser ApproverUser { get; set; }
         public SUser StockReceiptUser { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HIS.Dtos.Dictionaries.ChapterICD10
 {
-    public class GetAllSChapterICD10Input
+    public class GetAllSChapterIcdInput
     {
         public string CodeFilter { get; set; }
         public string NameFilter { get; set; }

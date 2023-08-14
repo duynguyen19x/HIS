@@ -27,7 +27,8 @@ namespace HIS.Dtos.Business.DImMest
         /// <summary>
         /// Loại phiếu nhập, xuất
         /// </summary>
-        public int? ImExMestTypeId { get; set; }
+        public int? ImpExpMestTypeId { get; set; }
+        public string ImpExpMestTypeName { get; set; }
 
         /// <summary>
         /// Người nhận
