@@ -1,10 +1,4 @@
 ﻿using HIS.EntityFrameworkCore.Configurations;
-using HIS.EntityFrameworkCore.Configurations.Business;
-using HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals;
-using HIS.EntityFrameworkCore.Configurations.Dictionaries;
-using HIS.EntityFrameworkCore.Configurations.Medicines;
-using HIS.EntityFrameworkCore.Configurations.Patients;
-using HIS.EntityFrameworkCore.Configurations.Services;
 using HIS.EntityFrameworkCore.Data;
 using HIS.EntityFrameworkCore.Entities.Business.Patients;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals;
@@ -54,6 +48,7 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<SCareer> SCareers { get; set; }
         public DbSet<SHospital> SHospitals { get; set; }
         public DbSet<SIcd> SIcds { get; set; }
+        public DbSet<SChapterIcd> SChapterIcds { get; set; }
         public DbSet<SRolePermissionBranch> SRolePermissionBranchs { get; set; }
         public DbSet<SUnit> SUnits { get; set; }
         public DbSet<SMaterial> SMaterials { get; set; }

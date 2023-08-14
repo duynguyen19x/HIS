@@ -51,7 +51,7 @@ namespace HIS.AutoMappers
             CreateMap<SCountry, SCountryDto>().ReverseMap();
             CreateMap<SDepartment, SDepartmentDto>().ReverseMap();
             CreateMap<SDepartmentType, SDepartmentTypeDto>().ReverseMap();
-            CreateMap<SChapterICD10Dto, SChapterICD10>().ReverseMap();
+            CreateMap<SChapterIcdDto, SChapterIcd>().ReverseMap();
             CreateMap<SDistrict, SDistrictDto>().ReverseMap();
             CreateMap<SEthnic, SEthnicDto>().ReverseMap();
             CreateMap<SGender, SGenderDto>().ReverseMap();

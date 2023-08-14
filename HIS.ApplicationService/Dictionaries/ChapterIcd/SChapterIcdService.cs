@@ -2,27 +2,21 @@
 using HIS.Core.Linq;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ChapterICD10;
-using HIS.Dtos.Dictionaries.ServiceUnit;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Dictionaries.ChapterICD10
 {
-    public class SChapterICD10Service : BaseSerivce, ISChapterICD10Service
+    public class SChapterIcdService : BaseSerivce, ISChapterIcdService
     {
-        public SChapterICD10Service(HISDbContext dbContext, IConfiguration config, IMapper mapper) : base(dbContext, config, mapper)
+        public SChapterIcdService(HISDbContext dbContext, IConfiguration config, IMapper mapper) : base(dbContext, config, mapper)
         {
         }
 
-        public async Task<ApiResult<SChapterICD10Dto>> CreateOrEdit(SChapterICD10Dto input)
+        public async Task<ApiResult<SChapterIcdDto>> CreateOrEdit(SChapterIcdDto input)
         {
             if (GuidHelper.IsNullOrEmpty(input.Id))
                 return await Create(input);
@@ -30,18 +24,18 @@ namespace HIS.ApplicationService.Dictionaries.ChapterICD10
                 return await Update(input);
         }
 
-        private async Task<ApiResult<SChapterICD10Dto>> Create(SChapterICD10Dto input)
+        private async Task<ApiResult<SChapterIcdDto>> Create(SChapterIcdDto input)
         {
-            var result = new ApiResult<SChapterICD10Dto>();
+            var result = new ApiResult<SChapterIcdDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
 
-                    var data = _mapper.Map<SChapterICD10>(input);
+                    var data = _mapper.Map<SChapterIcd>(input);
 
-                    _dbContext.SChapterICD10s.Add(data);
+                    _dbContext.SChapterIcds.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -62,14 +56,14 @@ namespace HIS.ApplicationService.Dictionaries.ChapterICD10
             return await Task.FromResult(result);
         }
 
-        private async Task<ApiResult<SChapterICD10Dto>> Update(SChapterICD10Dto input)
+        private async Task<ApiResult<SChapterIcdDto>> Update(SChapterIcdDto input)
         {
-            var result = new ApiResult<SChapterICD10Dto>();
+            var result = new ApiResult<SChapterIcdDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
-                    var sServiceChapterICD10 = _dbContext.SChapterICD10s.FirstOrDefault(f => f.Id == input.Id);
+                    var sServiceChapterICD10 = _dbContext.SChapterIcds.FirstOrDefault(f => f.Id == input.Id);
                     if (sServiceChapterICD10 == null)
                         _mapper.Map(input, sServiceChapterICD10);
 
@@ -93,17 +87,17 @@ namespace HIS.ApplicationService.Dictionaries.ChapterICD10
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SChapterICD10Dto>> Delete(Guid id)
+        public async Task<ApiResult<SChapterIcdDto>> Delete(Guid id)
         {
-            var result = new ApiResult<SChapterICD10Dto>();
+            var result = new ApiResult<SChapterIcdDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
-                    var sServiceChapterICD10 = _dbContext.SChapterICD10s.SingleOrDefault(x => x.Id == id);
+                    var sServiceChapterICD10 = _dbContext.SChapterIcds.SingleOrDefault(x => x.Id == id);
                     if (sServiceChapterICD10 != null)
                     {
-                        _dbContext.SChapterICD10s.Remove(sServiceChapterICD10);
+                        _dbContext.SChapterIcds.Remove(sServiceChapterICD10);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -124,14 +118,14 @@ namespace HIS.ApplicationService.Dictionaries.ChapterICD10
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<SChapterICD10Dto>> GetAll(GetAllSChapterICD10Input input)
+        public async Task<ApiResultList<SChapterIcdDto>> GetAll(GetAllSChapterIcdInput input)
         {
-            var result = new ApiResultList<SChapterICD10Dto>();
+            var result = new ApiResultList<SChapterIcdDto>();
 
             try
             {
-                result.Result = (from r in _dbContext.SChapterICD10s
-                                 select new SChapterICD10Dto()
+                result.Result = (from r in _dbContext.SChapterIcds
+                                 select new SChapterIcdDto()
                                  {
                                      Id = r.Id,
                                      Code = r.Code,
@@ -151,14 +145,14 @@ namespace HIS.ApplicationService.Dictionaries.ChapterICD10
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SChapterICD10Dto>> GetById(Guid id)
+        public async Task<ApiResult<SChapterIcdDto>> GetById(Guid id)
         {
-            var result = new ApiResult<SChapterICD10Dto>();
+            var result = new ApiResult<SChapterIcdDto>();
 
             try
             {
-                var service = _dbContext.SChapterICD10s.FirstOrDefault(s => s.Id == id);
-                result.Result = _mapper.Map<SChapterICD10Dto>(service);
+                var service = _dbContext.SChapterIcds.FirstOrDefault(s => s.Id == id);
+                result.Result = _mapper.Map<SChapterIcdDto>(service);
             }
             catch (Exception ex)
             {

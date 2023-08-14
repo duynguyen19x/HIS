@@ -1,4 +1,5 @@
-﻿using HIS.Core.Application.Services.Dto;
+﻿using HIS.Core.Entities;
+using HIS.EntityFrameworkCore.Entities.Categories;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -6,14 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Dictionaries.ChapterICD10
+namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
-    public  class SChapterICD10Dto : EntityDto<Guid?>
+    public class SChapterIcd : Entity<Guid>
     {
+        [Description("ID")]
         public string Code { get; set; }
 
+        [Description("Tên Chương")]
         public string Name { get; set; }
 
+        [Description("Thứ tự sắp xếp")]
         public int? SortOrder { get; set; }
 
         public bool Inactive { get; set; }

@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class ChapterICD10Configurations : IEntityTypeConfiguration<SChapterICD10>
+    public class ChapterIcdConfigurations : IEntityTypeConfiguration<SChapterIcd>
     {
-        public void Configure(EntityTypeBuilder<SChapterICD10> builder)
+        public void Configure(EntityTypeBuilder<SChapterIcd> builder)
         {
-            builder.ToTable("SChapterICD10");
+            builder.ToTable("SChapterIcds");
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Code).HasMaxLength(50);

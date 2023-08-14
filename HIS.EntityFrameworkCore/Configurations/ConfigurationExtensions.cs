@@ -45,6 +45,7 @@ namespace HIS.EntityFrameworkCore.Configurations
             modelBuilder.ApplyConfiguration(new DistrictConfiguration());
             modelBuilder.ApplyConfiguration(new WardConfiguration());
             modelBuilder.ApplyConfiguration(new IcdConfiguration());
+            modelBuilder.ApplyConfiguration(new ChapterIcdConfigurations());
             modelBuilder.ApplyConfiguration(new ServicePricePolicyConfigurations());
             modelBuilder.ApplyConfiguration(new MedicinePricePolicyConfigurations());
             modelBuilder.ApplyConfiguration(new SurgicalProcedureTypeConfigurations());
