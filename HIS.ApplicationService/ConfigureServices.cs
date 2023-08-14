@@ -34,6 +34,7 @@ using HIS.ApplicationService.Business.Pharmaceuticals.ImpMests;
 using HIS.ApplicationService.Business.DImpExpMestType;
 using HIS.ApplicationService.Dictionaries.MedicinePricePolicy;
 using HIS.ApplicationService.Business.Pharmaceuticals.DMedicineStock;
+using HIS.ApplicationService.Dictionaries.ChapterICD10;
 
 namespace HIS.ApplicationService
 {
@@ -65,6 +66,7 @@ namespace HIS.ApplicationService
             services.AddTransient<IServiceGroupService, ServiceGroupService>();
             services.AddTransient<IServiceGroupHeInService, ServiceGroupHeInService>();
             services.AddTransient<ISUnitService, SUnitService>();
+            services.AddTransient<ISChapterICD10Service, SChapterICD10Service>();
             services.AddTransient<ISSupplierService, SSupplierService>();
             services.AddTransient<IUserService, UserService>();
 
