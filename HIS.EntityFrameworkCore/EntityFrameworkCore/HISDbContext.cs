@@ -6,8 +6,10 @@ using HIS.EntityFrameworkCore.Configurations.Services;
 using HIS.EntityFrameworkCore.Configurations.Systems;
 using HIS.EntityFrameworkCore.Data;
 using HIS.EntityFrameworkCore.Entities.Business.Patients;
+using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
 using HIS.EntityFrameworkCore.Entities.Categories;
+using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.Systems;
@@ -27,52 +29,7 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.ApplyConfiguration(new UserConfigurations());
-            modelBuilder.ApplyConfiguration(new UserRoleConfiguration());
-            modelBuilder.ApplyConfiguration(new TokenConfiguration());
-            modelBuilder.ApplyConfiguration(new GenderConfiguration());
-            modelBuilder.ApplyConfiguration(new PermissionConfigurations());
-            modelBuilder.ApplyConfiguration(new BranchConfiguration());
-            modelBuilder.ApplyConfiguration(new CareerConfiguration());
-            modelBuilder.ApplyConfiguration(new DepartmentConfiguration());
-            modelBuilder.ApplyConfiguration(new DepartmentTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new RoomConfiguration());
-            modelBuilder.ApplyConfiguration(new RoomTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new RoleConfiguration());
-            modelBuilder.ApplyConfiguration(new RolePermissionBranchConfigurations());
-            modelBuilder.ApplyConfiguration(new UnitConfigurations());
-            modelBuilder.ApplyConfiguration(new ServiceConfigurations());
-            modelBuilder.ApplyConfiguration(new MedicineConfiguration());
-            modelBuilder.ApplyConfiguration(new MedicineGroupConfiguration());
-            modelBuilder.ApplyConfiguration(new MedicineLineConfiguration());
-            modelBuilder.ApplyConfiguration(new MedicineTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new MaterialTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new MaterialConfiguration());
-            modelBuilder.ApplyConfiguration(new PatientConfiguration());
-            modelBuilder.ApplyConfiguration(new PatientTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new CountryConfiguration());
-            modelBuilder.ApplyConfiguration(new ProvinceConfiguration());
-            modelBuilder.ApplyConfiguration(new DistrictConfiguration());
-            modelBuilder.ApplyConfiguration(new WardConfiguration());
-            modelBuilder.ApplyConfiguration(new IcdConfiguration());
-            modelBuilder.ApplyConfiguration(new ServicePricePolicyConfigurations());
-            modelBuilder.ApplyConfiguration(new SurgicalProcedureTypeConfigurations());
-            modelBuilder.ApplyConfiguration(new EthnicConfiguration());
-            modelBuilder.ApplyConfiguration(new HospitalConfiguration());
-            modelBuilder.ApplyConfiguration(new ServiceGroupConfigurations());
-            modelBuilder.ApplyConfiguration(new ServiceGroupHeInConfigurations());
-            modelBuilder.ApplyConfiguration(new ServiceResultIndexConfiguration());
-            modelBuilder.ApplyConfiguration(new ExecutionRoomConfiguration());
-            modelBuilder.ApplyConfiguration(new SupplierConfiguration());
-
-            modelBuilder.ApplyConfiguration(new TreatmentConfiguration());
-            modelBuilder.ApplyConfiguration(new ImpExpMestTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new ImpMestConfiguration());
-
-            modelBuilder.ApplyConfiguration(new SYSAutoNumberConfiguration());
-            modelBuilder.ApplyConfiguration(new SYSRefTypeCategoryConfiguration());
-            modelBuilder.ApplyConfiguration(new SYSRefTypeConfiguration());
-
+            modelBuilder.ApplyConfiguration();
             modelBuilder.Seed();
         }
 
@@ -96,16 +53,9 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<SCareer> SCareers { get; set; }
         public DbSet<SHospital> SHospitals { get; set; }
         public DbSet<SIcd> SIcds { get; set; }
-
+        public DbSet<SChapterIcd> SChapterIcds { get; set; }
         public DbSet<SRolePermissionBranch> SRolePermissionBranchs { get; set; }
-        public DbSet<SService> SServices { get; set; }
-        public DbSet<SServiceGroup> SServiceGroups { get; set; }
-        public DbSet<SServiceGroupHeIn> SServiceGroupHeIns { get; set; }
         public DbSet<SUnit> SUnits { get; set; }
-        public DbSet<SMedicine> SMedicines { get; set; }
-        public DbSet<SMedicineGroup> SMedicineGroups { get; set; }
-        public DbSet<SMedicineLine> SMedicineLines { get; set; }
-        public DbSet<SMedicineType> SMedicineTypes { get; set; }
         public DbSet<SMaterial> SMaterials { get; set; }
         public DbSet<SMaterialType> SMaterialTypes { get; set; }
         public DbSet<SPatient> SPatients { get; set; }
@@ -117,12 +67,23 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<SWard> SWards { get; set; }
         public DbSet<SSupplier> SSuppliers { get; set; }
 
+        public DbSet<SService> SServices { get; set; }
+        public DbSet<SServiceGroup> SServiceGroups { get; set; }
+        public DbSet<SServiceGroupHeIn> SServiceGroupHeIns { get; set; }
         public DbSet<SServicePricePolicy> SServicePricePolicies { get; set; }
         public DbSet<SSurgicalProcedureType> SSurgicalProcedureTypes { get; set; }
         public DbSet<SExecutionRoom> SExecutionRooms { get; set; }
         public DbSet<SServiceResultIndice> SServiceResultIndices { get; set; }
 
-        public DbSet<DImpMest> DImMests { get; set; }
-        public DbSet<DImpMestMedicine> DImMestMedicines { get; set; }
+        public DbSet<SMedicine> SMedicines { get; set; }
+        public DbSet<SMedicineGroup> SMedicineGroups { get; set; }
+        public DbSet<SMedicineLine> SMedicineLines { get; set; }
+        public DbSet<SMedicineType> SMedicineTypes { get; set; }
+        public DbSet<SMedicinePricePolicy> SMedicinePricePolicies { get; set; }
+
+        public DbSet<DImpExpMestType> DImpExpMestTypes { get; set; }
+        public DbSet<DImpMest> DImpMests { get; set; }
+        public DbSet<DImpMestMedicine> DImpMestMedicines { get; set; }
+        public DbSet<DMedicineStock> DMedicineStocks { get; set; }
     }
 }

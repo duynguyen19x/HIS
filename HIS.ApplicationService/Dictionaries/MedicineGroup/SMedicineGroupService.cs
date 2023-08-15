@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using HIS.ApplicationService.Base;
+using HIS.Core.Linq;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.MedicineGroup;
 using HIS.Dtos.Dictionaries.MedicineType;

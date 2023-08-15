@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(HISDbContext))]
-    [Migration("20230806111900_Add-Table")]
-    partial class AddTable
+    [Migration("20230811042652_Add-Table-DMedicineStock")]
+    partial class AddTableDMedicineStock
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -184,6 +184,54 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.ToTable("DImpExpMestTypes", (string)null);
                 });
 
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DMedicineStock", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("AvailableQuantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("MedicineId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("StockId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicineId");
+
+                    b.HasIndex("StockId");
+
+                    b.ToTable("DMedicineStocks", (string)null);
+                });
+
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImpMest", b =>
                 {
                     b.Property<Guid>("Id")
@@ -226,14 +274,17 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<int?>("ImExMestTypeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ImMestStatus")
-                        .HasColumnType("int");
-
                     b.Property<Guid?>("ImStockId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("ImpMestStatus")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("ImpTime")
                         .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("ImpUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("InvTime")
                         .HasColumnType("datetime2");
@@ -263,6 +314,12 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("ReqRoomId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime?>("StockReceiptTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("StockReceiptUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("SupplierId")
                         .HasColumnType("uniqueidentifier");
 
@@ -287,6 +344,8 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("ReqRoomId");
 
+                    b.HasIndex("StockReceiptUserId");
+
                     b.HasIndex("SupplierId");
 
                     b.HasIndex("TreatmentId");
@@ -300,10 +359,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("DImMestId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ImMestId")
+                    b.Property<Guid?>("ImpMestId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal?>("ImpPrice")
@@ -318,9 +374,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("MedicineId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("SMedicineId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int?>("SortOrder")
                         .HasColumnType("int");
 
@@ -329,11 +382,11 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DImMestId");
+                    b.HasIndex("ImpMestId");
 
-                    b.HasIndex("SMedicineId");
+                    b.HasIndex("MedicineId");
 
-                    b.ToTable("DImMestMedicines");
+                    b.ToTable("DImpMestMedicines", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Medicines.SMedicinePricePolicy", b =>
@@ -378,25 +431,19 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<decimal?>("OldUnitPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid?>("PatientTypeId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("PatientTypeId")
+                        .HasColumnType("int");
 
                     b.Property<decimal?>("PaymentRate")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid?>("SMedicineId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("SPatientTypeId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("SMedicineId");
+                    b.HasIndex("MedicineId");
 
-                    b.HasIndex("SPatientTypeId");
+                    b.HasIndex("PatientTypeId");
 
-                    b.ToTable("SMedicinePricePolicy");
+                    b.ToTable("SMedicinePricePolicies", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMaterial", b =>
@@ -462,9 +509,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("ParentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ServiceId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int?>("SoftOrder")
                         .HasColumnType("int");
 
@@ -477,8 +521,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("MaterialTypeId");
-
-                    b.HasIndex("ServiceId");
 
                     b.HasIndex("UnitId");
 
@@ -542,9 +584,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("ParentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ServiceId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid?>("ServiceUnitId")
                         .HasColumnType("uniqueidentifier");
 
@@ -556,8 +595,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("nvarchar(500)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ServiceId");
 
                     b.HasIndex("ServiceUnitId");
 
@@ -662,9 +699,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
 
-                    b.Property<Guid?>("SServiceId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<int?>("SortOrder")
                         .HasColumnType("int");
 
@@ -700,8 +734,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasIndex("MedicineLineId");
 
                     b.HasIndex("MedicineTypeId");
-
-                    b.HasIndex("SServiceId");
 
                     b.HasIndex("UnitId");
 
@@ -1342,6 +1374,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
+                    b.Property<int>("AutoNumber")
+                        .HasColumnType("int");
+
                     b.Property<string>("Code")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -1492,9 +1527,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
 
-                    b.Property<Guid?>("SServiceId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("ScientificName")
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
@@ -1526,8 +1558,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasIndex("MedicineGroupId");
 
                     b.HasIndex("MedicineLineId");
-
-                    b.HasIndex("SServiceId");
 
                     b.HasIndex("UnitId");
 
@@ -4643,7 +4673,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"),
                             Code = "KXD",
-                            CreatedDate = new DateTime(2023, 8, 6, 18, 18, 59, 808, DateTimeKind.Local).AddTicks(3547),
+                            CreatedDate = new DateTime(2023, 8, 11, 11, 26, 51, 305, DateTimeKind.Local).AddTicks(667),
                             Inactive = false,
                             Name = "Chưa xác định",
                             SortOrder = 0
@@ -4652,7 +4682,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"),
                             Code = "NAM",
-                            CreatedDate = new DateTime(2023, 8, 6, 18, 18, 59, 808, DateTimeKind.Local).AddTicks(3580),
+                            CreatedDate = new DateTime(2023, 8, 11, 11, 26, 51, 305, DateTimeKind.Local).AddTicks(694),
                             Inactive = false,
                             Name = "Nam",
                             SortOrder = 1
@@ -4661,7 +4691,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e9497984-d355-41af-b917-091500956be9"),
                             Code = "NU",
-                            CreatedDate = new DateTime(2023, 8, 6, 18, 18, 59, 808, DateTimeKind.Local).AddTicks(3582),
+                            CreatedDate = new DateTime(2023, 8, 11, 11, 26, 51, 305, DateTimeKind.Local).AddTicks(696),
                             Inactive = false,
                             Name = "Nữ",
                             SortOrder = 2
@@ -4883,7 +4913,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "BHYT",
-                            CreatedDate = new DateTime(2023, 8, 6, 18, 18, 59, 808, DateTimeKind.Local).AddTicks(4613),
+                            CreatedDate = new DateTime(2023, 8, 11, 11, 26, 51, 305, DateTimeKind.Local).AddTicks(1711),
                             Inactive = false,
                             Name = "Bảo hiểm y tế",
                             SortOrder = 0
@@ -4892,7 +4922,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "VP",
-                            CreatedDate = new DateTime(2023, 8, 6, 18, 18, 59, 808, DateTimeKind.Local).AddTicks(4618),
+                            CreatedDate = new DateTime(2023, 8, 11, 11, 26, 51, 305, DateTimeKind.Local).AddTicks(1715),
                             Inactive = false,
                             Name = "Viện phí",
                             SortOrder = 0
@@ -4901,7 +4931,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 3,
                             Code = "DV",
-                            CreatedDate = new DateTime(2023, 8, 6, 18, 18, 59, 808, DateTimeKind.Local).AddTicks(4619),
+                            CreatedDate = new DateTime(2023, 8, 11, 11, 26, 51, 305, DateTimeKind.Local).AddTicks(1716),
                             Inactive = false,
                             Name = "Dịch vụ",
                             SortOrder = 0
@@ -5682,10 +5712,27 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SGender", "Gender")
                         .WithMany("SPatients")
                         .HasForeignKey("GenderId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Gender");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DMedicineStock", b =>
+                {
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicine", "SMedicine")
+                        .WithMany()
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "SStock")
+                        .WithMany()
+                        .HasForeignKey("StockId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("SMedicine");
+
+                    b.Navigation("SStock");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImpMest", b =>
@@ -5693,52 +5740,57 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SUser", "ApproverUser")
                         .WithMany()
                         .HasForeignKey("ApproverUserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "ExStock")
                         .WithMany()
                         .HasForeignKey("ExStockId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpExMestType", "DImExMestType")
                         .WithMany()
                         .HasForeignKey("ImExMestTypeId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "ImStock")
                         .WithMany()
                         .HasForeignKey("ImStockId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Patients.SPatient", "SPatient")
                         .WithMany()
                         .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SUser", "ReceiverUser")
                         .WithMany()
                         .HasForeignKey("ReceiverUserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SDepartment", "ReqDepartment")
                         .WithMany()
                         .HasForeignKey("ReqDepartmentId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "ReqRoom")
                         .WithMany()
                         .HasForeignKey("ReqRoomId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SUser", "StockReceiptUser")
+                        .WithMany()
+                        .HasForeignKey("StockReceiptUserId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SSupplier", "SSupplier")
                         .WithMany()
                         .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Patients.STreatment", "STreatment")
                         .WithMany()
                         .HasForeignKey("TreatmentId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("ApproverUser");
 
@@ -5759,17 +5811,19 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("SSupplier");
 
                     b.Navigation("STreatment");
+
+                    b.Navigation("StockReceiptUser");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImpMestMedicine", b =>
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImpMest", "DImMest")
-                        .WithMany("DImMestMedicines")
-                        .HasForeignKey("DImMestId");
+                        .WithMany()
+                        .HasForeignKey("ImpMestId");
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicine", "SMedicine")
                         .WithMany()
-                        .HasForeignKey("SMedicineId");
+                        .HasForeignKey("MedicineId");
 
                     b.Navigation("DImMest");
 
@@ -5779,12 +5833,14 @@ namespace HIS.EntityFrameworkCore.Migrations
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Medicines.SMedicinePricePolicy", b =>
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicine", "SMedicine")
-                        .WithMany("SMedicinePricePolicies")
-                        .HasForeignKey("SMedicineId");
+                        .WithMany()
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SPatientType", "SPatientType")
-                        .WithMany("SMedicinePricePolicies")
-                        .HasForeignKey("SPatientTypeId");
+                        .WithMany()
+                        .HasForeignKey("PatientTypeId")
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("SMedicine");
 
@@ -5796,40 +5852,26 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMaterialType", "SMaterialType")
                         .WithMany("SMaterials")
                         .HasForeignKey("MaterialTypeId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SService", "SService")
-                        .WithMany("SMaterials")
-                        .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SUnit", "SUnit")
                         .WithMany("SMaterials")
                         .HasForeignKey("UnitId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("SMaterialType");
-
-                    b.Navigation("SService");
 
                     b.Navigation("SUnit");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMaterialType", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SService", "SService")
-                        .WithMany("SMaterialTypes")
-                        .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SUnit", "SServiceUnit")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SUnit", "SUnit")
                         .WithMany("SMaterialTypes")
                         .HasForeignKey("ServiceUnitId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("SService");
-
-                    b.Navigation("SServiceUnit");
+                    b.Navigation("SUnit");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMedicine", b =>
@@ -5837,26 +5879,22 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SCountry", "SCountry")
                         .WithMany("SMedicines")
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicineLine", "SMedicineLine")
                         .WithMany("SMedicines")
                         .HasForeignKey("MedicineLineId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicineType", "SMedicineType")
                         .WithMany("SMedicines")
                         .HasForeignKey("MedicineTypeId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SService", null)
-                        .WithMany("SMedicines")
-                        .HasForeignKey("SServiceId");
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SUnit", "SUnit")
                         .WithMany("SMedicines")
                         .HasForeignKey("UnitId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("SCountry");
 
@@ -5872,26 +5910,22 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SCountry", "SCountry")
                         .WithMany("SMedicineTypes")
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicineGroup", "SMedicineGroup")
                         .WithMany("SMedicineTypes")
                         .HasForeignKey("MedicineGroupId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicineLine", "SMedicineLine")
                         .WithMany("SMedicineTypes")
                         .HasForeignKey("MedicineLineId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SService", null)
-                        .WithMany("SMedicineTypes")
-                        .HasForeignKey("SServiceId");
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SUnit", "SUnit")
                         .WithMany("SMedicineTypes")
                         .HasForeignKey("UnitId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("SCountry");
 
@@ -5907,22 +5941,22 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Services.SServiceGroupHeIn", "SServiceGroupHeIn")
                         .WithMany("SServices")
                         .HasForeignKey("ServiceGroupHeInId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SServiceGroup", "SServiceGroup")
                         .WithMany("SServices")
                         .HasForeignKey("ServiceGroupId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Services.SSurgicalProcedureType", "SSurgicalProcedureType")
                         .WithMany("SServices")
                         .HasForeignKey("SurgicalProcedureTypeId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SUnit", "SUnit")
                         .WithMany("SServices")
                         .HasForeignKey("UnitId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("SServiceGroup");
 
@@ -5936,14 +5970,14 @@ namespace HIS.EntityFrameworkCore.Migrations
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SServicePricePolicy", b =>
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SPatientType", "SPatientType")
-                        .WithMany("SServicePricePolicies")
+                        .WithMany()
                         .HasForeignKey("PatientTypeId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SService", "SService")
-                        .WithMany("SServicePricePolicies")
+                        .WithMany()
                         .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("SPatientType");
 
@@ -5953,9 +5987,9 @@ namespace HIS.EntityFrameworkCore.Migrations
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SServiceResultIndice", b =>
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SService", "SService")
-                        .WithMany("SServiceResultIndices")
+                        .WithMany()
                         .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("SService");
                 });
@@ -5965,12 +5999,12 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SBranch", "SBranch")
                         .WithMany("Departments")
                         .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SDepartmentType", "SDepartmentType")
                         .WithMany("SDepartments")
                         .HasForeignKey("DepartmentTypeId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("SBranch");
 
@@ -5982,7 +6016,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SProvince", "Province")
                         .WithMany("Districts")
                         .HasForeignKey("ProvinceId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Province");
                 });
@@ -5990,14 +6024,14 @@ namespace HIS.EntityFrameworkCore.Migrations
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SExecutionRoom", b =>
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "SRoom")
-                        .WithMany("SExecutionRooms")
+                        .WithMany()
                         .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SService", "SService")
-                        .WithMany("SExecutionRooms")
+                        .WithMany()
                         .HasForeignKey("ServiceId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("SRoom");
 
@@ -6009,7 +6043,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SCountry", "Country")
                         .WithMany("SProvinces")
                         .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Country");
                 });
@@ -6019,12 +6053,12 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SDepartment", "SDepartment")
                         .WithMany("SRooms")
                         .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoomType", "SRoomType")
                         .WithMany("SRooms")
                         .HasForeignKey("RoomTypeId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("SDepartment");
 
@@ -6036,7 +6070,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SDistrict", "District")
                         .WithMany("Wards")
                         .HasForeignKey("DistrictId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("District");
                 });
@@ -6050,13 +6084,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SPermission", "Permission")
                         .WithMany("RolePermissions")
                         .HasForeignKey("PermissionId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SRole", "Role")
                         .WithMany("RolePermissions")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Branch");
@@ -6071,7 +6105,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SUser", "User")
                         .WithMany("UserTokens")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("User");
                 });
@@ -6081,13 +6115,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SRole", "Role")
                         .WithMany("UserRoles")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SUser", "User")
                         .WithMany("UserRoles")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Role");
@@ -6095,19 +6129,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImpMest", b =>
-                {
-                    b.Navigation("DImMestMedicines");
-                });
-
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMaterialType", b =>
                 {
                     b.Navigation("SMaterials");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMedicine", b =>
-                {
-                    b.Navigation("SMedicinePricePolicies");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMedicineGroup", b =>
@@ -6125,23 +6149,6 @@ namespace HIS.EntityFrameworkCore.Migrations
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMedicineType", b =>
                 {
                     b.Navigation("SMedicines");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SService", b =>
-                {
-                    b.Navigation("SExecutionRooms");
-
-                    b.Navigation("SMaterialTypes");
-
-                    b.Navigation("SMaterials");
-
-                    b.Navigation("SMedicineTypes");
-
-                    b.Navigation("SMedicines");
-
-                    b.Navigation("SServicePricePolicies");
-
-                    b.Navigation("SServiceResultIndices");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SServiceGroup", b =>
@@ -6193,21 +6200,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("SPatients");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SPatientType", b =>
-                {
-                    b.Navigation("SMedicinePricePolicies");
-
-                    b.Navigation("SServicePricePolicies");
-                });
-
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SProvince", b =>
                 {
                     b.Navigation("Districts");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", b =>
-                {
-                    b.Navigation("SExecutionRooms");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoomType", b =>

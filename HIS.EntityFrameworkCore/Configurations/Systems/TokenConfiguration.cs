@@ -21,7 +21,7 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.Property(x => x.Jti).HasMaxLength(125);
 
             builder.HasOne(t => t.User).WithMany(pc => pc.UserTokens)
-              .HasForeignKey(pc => pc.UserId).OnDelete(DeleteBehavior.Restrict);
+              .HasForeignKey(pc => pc.UserId).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

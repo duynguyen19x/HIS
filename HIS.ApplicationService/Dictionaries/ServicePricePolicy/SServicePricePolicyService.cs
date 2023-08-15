@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HIS.Core.Linq;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ServicePricePolicy;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;

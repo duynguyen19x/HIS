@@ -29,18 +29,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HIS.Dtos", "HIS.Dtos\HIS.Dt
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Imports", "Imports", "{2305BFCF-EFA5-48EB-BE7E-3753FA0E3A21}"
 	ProjectSection(SolutionItems) = preProject
-		C:\Users\duyng\Desktop\Import\ServiceResultIndexTemplate.xlsx = C:\Users\duyng\Desktop\Import\ServiceResultIndexTemplate.xlsx
-		C:\Users\duyng\Desktop\Import\ServiceTemplate.xlsx = C:\Users\duyng\Desktop\Import\ServiceTemplate.xlsx
+		Files\Imports\ServiceResultIndexTemplate.xlsx = Files\Imports\ServiceResultIndexTemplate.xlsx
+		Files\Imports\ServiceTemplate.xlsx = Files\Imports\ServiceTemplate.xlsx
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documents", "Documents", "{1CE2D392-5509-4C8D-9752-B24CF029A44D}"
 	ProjectSection(SolutionItems) = preProject
-		DescriptionOfDataTable.xlsx = DescriptionOfDataTable.xlsx
+		Files\Documents\DescriptionOfDataTable.xlsx = Files\Documents\DescriptionOfDataTable.xlsx
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HIS.Core", "HIS.Core\HIS.Core.csproj", "{D035BCB5-F416-4998-BB91-E87A6C281DE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HIS.Application.Core", "HIS.Application.Core\HIS.Application.Core.csproj", "{04BCD64B-EEE8-442E-B055-8FC3E7495B1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HIS.Application.Core", "HIS.Application.Core\HIS.Application.Core.csproj", "{04BCD64B-EEE8-442E-B055-8FC3E7495B1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

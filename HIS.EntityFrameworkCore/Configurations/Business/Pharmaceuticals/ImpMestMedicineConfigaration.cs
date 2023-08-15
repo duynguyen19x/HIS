@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace HIS.EntityFrameworkCore.Configurations.Business
+namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
 {
     public class ImpMestMedicineConfigaration : IEntityTypeConfiguration<DImpMestMedicine>
     {
@@ -11,13 +11,13 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
             builder.ToTable("DImpMestMedicines");
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(t => t.DImMest).WithMany(pc => pc.DImMestMedicines)
-              .HasForeignKey(pc => pc.ImMestId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(t => t.DImMest)
+                .WithMany()
+                .HasForeignKey(t => t.ImpMestId);
 
             builder.HasOne(e => e.SMedicine)
                .WithMany()
-               .HasForeignKey(e => e.MedicineId)
-               .OnDelete(DeleteBehavior.Restrict);
+               .HasForeignKey(e => e.MedicineId);
         }
     }
 }

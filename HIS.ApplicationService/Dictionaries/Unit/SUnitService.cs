@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HIS.Core.Linq;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ServiceUnit;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;

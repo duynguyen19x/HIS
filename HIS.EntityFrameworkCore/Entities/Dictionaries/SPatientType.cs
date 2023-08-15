@@ -22,9 +22,5 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public virtual string Description { get; set; }
         public virtual int SortOrder { get; set; }
         public virtual bool Inactive { get; set; }
-
-        //public virtual ICollection<SPatient> SPatients { get; set; }
-        public virtual ICollection<SServicePricePolicy> SServicePricePolicies { get; set; }
-        public virtual ICollection<SMedicinePricePolicy> SMedicinePricePolicies { get; set; }
     }
 }

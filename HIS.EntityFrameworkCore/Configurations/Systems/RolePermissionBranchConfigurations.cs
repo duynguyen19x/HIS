@@ -17,10 +17,10 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.HasKey(t => new { t.RoleId, t.PermissionId });
 
             builder.HasOne(t => t.Role).WithMany(pc => pc.RolePermissions)
-              .HasForeignKey(pc => pc.RoleId).OnDelete(DeleteBehavior.Restrict);
+              .HasForeignKey(pc => pc.RoleId).OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(t => t.Permission).WithMany(pc => pc.RolePermissions)
-              .HasForeignKey(pc => pc.PermissionId).OnDelete(DeleteBehavior.Restrict);
+              .HasForeignKey(pc => pc.PermissionId).OnDelete(DeleteBehavior.NoAction);
 
             //builder.HasOne(t => t.Branch).WithMany(pc => pc.RolePermissions)
             // .HasForeignKey(pc => pc.BranchId);

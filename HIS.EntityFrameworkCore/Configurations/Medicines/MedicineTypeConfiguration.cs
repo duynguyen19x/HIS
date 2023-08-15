@@ -40,16 +40,16 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.Property(x => x.PharmaceuticalFormulation).HasMaxLength(512);
 
             builder.HasOne(t => t.SMedicineGroup).WithMany(pc => pc.SMedicineTypes)
-                .HasForeignKey(pc => pc.MedicineGroupId).OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(pc => pc.MedicineGroupId).OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(t => t.SUnit).WithMany(pc => pc.SMedicineTypes)
-                .HasForeignKey(pc => pc.UnitId).OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(pc => pc.UnitId).OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(t => t.SMedicineLine).WithMany(pc => pc.SMedicineTypes)
-                .HasForeignKey(pc => pc.MedicineLineId).OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(pc => pc.MedicineLineId).OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(t => t.SCountry).WithMany(pc => pc.SMedicineTypes)
-                .HasForeignKey(pc => pc.CountryId).OnDelete(DeleteBehavior.Restrict);
+                .HasForeignKey(pc => pc.CountryId).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

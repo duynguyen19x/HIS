@@ -1,4 +1,5 @@
 ﻿using HIS.Core.Application.Services.Dto;
+using HIS.Dtos.Dictionaries.MedicinePricePolicy;
 using System.ComponentModel;
 
 namespace HIS.Dtos.Business.DImMestMedicine
@@ -89,5 +90,7 @@ namespace HIS.Dtos.Business.DImMestMedicine
         public Guid? MedicineId { get; set; }
 
         public Guid? ImMestId { get; set; }
+
+        public IList<SMedicinePricePolicyDto> SMedicinePricePolicies { get; set; }
     }
 }

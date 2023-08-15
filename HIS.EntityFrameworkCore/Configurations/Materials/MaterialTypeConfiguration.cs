@@ -21,11 +21,8 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.Property(x => x.Tutorial).HasMaxLength(500);
             builder.Property(x => x.Description).HasMaxLength(500);
 
-            builder.HasOne(t => t.SService).WithMany(pc => pc.SMaterialTypes)
-                .HasForeignKey(pc => pc.ServiceId).OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasOne(t => t.SServiceUnit).WithMany(pc => pc.SMaterialTypes)
-                .HasForeignKey(pc => pc.ServiceUnitId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(t => t.SUnit).WithMany(pc => pc.SMaterialTypes)
+                .HasForeignKey(pc => pc.ServiceUnitId).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
