@@ -15,5 +15,6 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
         public Task<ApiResult<DImpMestDto>> CreateOrEdit(DImpMestDto input);
         public Task<ApiResultList<DImpMestDto>> GetByStock(Guid stockId, string fromDate, string toDate);
         public Task<ApiResult<DImpMestDto>> GetById(Guid id);
+        public Task<ApiResult<bool>> Canceled(Guid id);
     }
 }

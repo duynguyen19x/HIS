@@ -38,5 +38,11 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
         {
             return await _dImpMestService.GetById(id);
         }
+
+        [HttpGet("Canceled")]
+        public async Task<ApiResult<bool>> Canceled(Guid id)
+        {
+            return await _dImpMestService.Canceled(id);
+        }
     }
 }

@@ -21,6 +21,7 @@ namespace HIS.EntityFrameworkCore.Data
             MedicineLineBuilder.Seed(modelBuilder);
             SCountryBuilder.Seed(modelBuilder);
             ChapterIcdBuilder.Seed(modelBuilder);
+            ImpExpMestTypeBuilder.Seed(modelBuilder);
         }
     }
 }
