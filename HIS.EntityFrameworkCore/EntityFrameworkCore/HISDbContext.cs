@@ -3,6 +3,7 @@ using HIS.EntityFrameworkCore.Configurations.Business;
 using HIS.EntityFrameworkCore.Configurations.Dictionaries;
 using HIS.EntityFrameworkCore.Configurations.Patients;
 using HIS.EntityFrameworkCore.Configurations.Services;
+using HIS.EntityFrameworkCore.Configurations.Systems;
 using HIS.EntityFrameworkCore.Data;
 using HIS.EntityFrameworkCore.Entities.Business.Patients;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
@@ -67,6 +68,10 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
             modelBuilder.ApplyConfiguration(new TreatmentConfiguration());
             modelBuilder.ApplyConfiguration(new ImpExpMestTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ImpMestConfiguration());
+
+            modelBuilder.ApplyConfiguration(new SYSAutoNumberConfiguration());
+            modelBuilder.ApplyConfiguration(new SYSRefTypeCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new SYSRefTypeConfiguration());
 
             modelBuilder.Seed();
         }

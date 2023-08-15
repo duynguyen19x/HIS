@@ -31,6 +31,7 @@ using HIS.EntityFrameworkCore.EntityFrameworkCore.Repositories;
 using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
 using HIS.ApplicationService.Business.Pharmaceuticals.ImpMests;
+using HIS.ApplicationService.Systems.SYSAutoNumber;
 
 namespace HIS.ApplicationService
 {
@@ -71,6 +72,8 @@ namespace HIS.ApplicationService
 
             services.AddTransient<ISPatientService, SPatientAppService>();
             services.AddTransient<IDImpMestService, DImpMestService>();
+
+            services.AddTransient<ISYSAutoNumberAppService, SYSAutoNumberAppService>();
         }
     }
 }
