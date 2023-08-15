@@ -28,7 +28,7 @@ namespace HIS.ApplicationService.Systems.Login
         {
             var apiResult = new ApiResult<TokenResultDto>();
 
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            using (var transaction = _dbContext.BeginTransaction())
             {
                 try
                 {
