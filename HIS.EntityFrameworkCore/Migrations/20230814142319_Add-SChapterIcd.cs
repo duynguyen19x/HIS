@@ -13,19 +13,19 @@ namespace HIS.EntityFrameworkCore.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_DImpMests_DImpExpMestTypes_ImExMestTypeId",
-                table: "DImpMests");
+            //migrationBuilder.DropForeignKey(
+            //    name: "FK_DImpMests_DImpExpMestTypes_ImpExpMestTypeId",
+            //    table: "DImpMests");
 
-            migrationBuilder.RenameColumn(
-                name: "ImExMestTypeId",
-                table: "DImpMests",
-                newName: "ImpExpMestTypeId");
+            //migrationBuilder.RenameColumn(
+            //    name: "ImExMestTypeId",
+            //    table: "DImpMests",
+            //    newName: "ImpExpMestTypeId");
 
-            migrationBuilder.RenameIndex(
-                name: "IX_DImpMests_ImExMestTypeId",
-                table: "DImpMests",
-                newName: "IX_DImpMests_ImpExpMestTypeId");
+            //migrationBuilder.RenameIndex(
+            //    name: "IX_DImpMests_ImExMestTypeId",
+            //    table: "DImpMests",
+            //    newName: "IX_DImpMests_ImpExpMestTypeId");
 
             migrationBuilder.CreateTable(
                 name: "SChapterIcds",
@@ -90,40 +90,40 @@ namespace HIS.EntityFrameworkCore.Migrations
                     { new Guid("ffa69c02-696f-4645-b72e-0f371b8cacfa"), "0", false, "Khác", 1 }
                 });
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_DImpMests_DImpExpMestTypes_ImpExpMestTypeId",
-                table: "DImpMests",
-                column: "ImpExpMestTypeId",
-                principalTable: "DImpExpMestTypes",
-                principalColumn: "Id");
+            //migrationBuilder.AddForeignKey(
+            //    name: "FK_DImpMests_DImpExpMestTypes_ImpExpMestTypeId",
+            //    table: "DImpMests",
+            //    column: "ImpExpMestTypeId",
+            //    principalTable: "DImpExpMestTypes",
+            //    principalColumn: "Id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_DImpMests_DImpExpMestTypes_ImpExpMestTypeId",
-                table: "DImpMests");
+            //migrationBuilder.DropForeignKey(
+            //    name: "FK_DImpMests_DImpExpMestTypes_ImpExpMestTypeId",
+            //    table: "DImpMests");
 
             migrationBuilder.DropTable(
                 name: "SChapterIcds");
 
-            migrationBuilder.RenameColumn(
-                name: "ImpExpMestTypeId",
-                table: "DImpMests",
-                newName: "ImExMestTypeId");
+            //migrationBuilder.RenameColumn(
+            //    name: "ImpExpMestTypeId",
+            //    table: "DImpMests",
+            //    newName: "ImExMestTypeId");
 
-            migrationBuilder.RenameIndex(
-                name: "IX_DImpMests_ImpExpMestTypeId",
-                table: "DImpMests",
-                newName: "IX_DImpMests_ImExMestTypeId");
+            //migrationBuilder.RenameIndex(
+            //    name: "IX_DImpMests_ImpExpMestTypeId",
+            //    table: "DImpMests",
+            //    newName: "IX_DImpMests_ImExMestTypeId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_DImpMests_DImpExpMestTypes_ImExMestTypeId",
-                table: "DImpMests",
-                column: "ImExMestTypeId",
-                principalTable: "DImpExpMestTypes",
-                principalColumn: "Id");
+            //migrationBuilder.AddForeignKey(
+            //    name: "FK_DImpMests_DImpExpMestTypes_ImExMestTypeId",
+            //    table: "DImpMests",
+            //    column: "ImExMestTypeId",
+            //    principalTable: "DImpExpMestTypes",
+            //    principalColumn: "Id");
         }
     }
 }
