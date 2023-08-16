@@ -12,9 +12,12 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
 {
     public interface IDImpMestService
     {
-        public Task<ApiResult<DImpMestDto>> CreateOrEdit(DImpMestDto input);
         public Task<ApiResultList<DImpMestDto>> GetByStock(Guid stockId, string fromDate, string toDate);
+
+        public Task<ApiResult<DImpMestDto>> ImportFromSupplierSaveAsDraft(DImpMestDto input);
+        public Task<ApiResult<DImpMestDto>> ImportFromSupplierStockIn(DImpMestDto input);
+        public Task<ApiResult<bool>> ImportFromSupplierCanceled(Guid id);
+
         public Task<ApiResult<DImpMestDto>> GetById(Guid id);
-        public Task<ApiResult<bool>> Canceled(Guid id);
     }
 }

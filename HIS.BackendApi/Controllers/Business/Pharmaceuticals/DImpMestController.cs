@@ -27,10 +27,16 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
             return await _dImpMestService.GetByStock(stockId, fromDate, toDate);
         }
 
-        [HttpPost("CreateOrEdit")]
-        public async Task<ApiResult<DImpMestDto>> CreateOrEdit(DImpMestDto input)
+        [HttpPost("ImportFromSupplierSaveAsDraft")]
+        public async Task<ApiResult<DImpMestDto>> ImportFromSupplierSaveAsDraft(DImpMestDto input)
         {
-            return await _dImpMestService.CreateOrEdit(input);
+            return await _dImpMestService.ImportFromSupplierSaveAsDraft(input);
+        }
+
+        [HttpPost("ImportFromSupplierStockIn")]
+        public async Task<ApiResult<DImpMestDto>> ImportFromSupplierStockIn(DImpMestDto input)
+        {
+            return await _dImpMestService.ImportFromSupplierStockIn(input);
         }
 
         [HttpGet("GetById")]
@@ -39,10 +45,10 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
             return await _dImpMestService.GetById(id);
         }
 
-        [HttpGet("Canceled")]
-        public async Task<ApiResult<bool>> Canceled(Guid id)
+        [HttpGet("ImportFromSupplierCanceled")]
+        public async Task<ApiResult<bool>> ImportFromSupplierCanceled(Guid id)
         {
-            return await _dImpMestService.Canceled(id);
+            return await _dImpMestService.ImportFromSupplierCanceled(id);
         }
     }
 }

@@ -4,6 +4,7 @@ using HIS.Dtos.Business.DImMest;
 using HIS.Dtos.Business.DImMestMedicine;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.MedicinePricePolicy;
+using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
@@ -11,6 +12,7 @@ using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;
+using HIS.Utilities.Sections;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.Extensions.Configuration;
 using System.Data;
@@ -22,19 +24,6 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
     {
         public DImpMestService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
            : base(dbContext, config, mapper) { }
-
-        public async Task<ApiResult<DImpMestDto>> CreateOrEdit(DImpMestDto input)
-        {
-
-            if (GuidHelper.IsNullOrEmpty(input.Id))
-            {
-                return await Create(input);
-            }
-            else
-            {
-                return await Update(input);
-            }
-        }
 
         public async Task<ApiResultList<DImpMestDto>> GetByStock(Guid stockId, string fromDate, string toDate)
         {
@@ -186,12 +175,14 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<bool>> Canceled(Guid id)
+        public async Task<ApiResult<bool>> ImportFromSupplierCanceled(Guid id)
         {
             var result = new ApiResult<bool>();
 
             try
             {
+                var timeNow = DateTime.Now;
+
                 var dImpMests = _dbContext.DImpMests.FirstOrDefault(w => w.Id == id);
 
                 // Nhập thuốc từ nhà cung cấp
@@ -226,13 +217,17 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
                         else
                         {
                             dImpMests.ImpMestStatus = ImpMestStatusType.Canceled;
-                            dImpMests.ModifiedDate = DateTime.Now;
+                            dImpMests.ModifiedDate = timeNow;
+                            dImpMests.ModifiedBy = SessionExtensions.Login?.Id;
 
                             foreach (var sMedicineStock in sMedicineStocks)
                             {
                                 var medicine = medicineOlds.FirstOrDefault(s => s.MedicineId == sMedicineStock.MedicineId && s.ImStockId == sMedicineStock.StockId);
                                 if (medicine != null)
                                 {
+                                    sMedicineStock.ModifiedDate = timeNow;
+                                    sMedicineStock.ModifiedBy = SessionExtensions.Login?.Id;
+
                                     sMedicineStock.Quantity -= medicine.ImpQuantity.GetValueOrDefault();
                                     sMedicineStock.AvailableQuantity -= medicine.ImpQuantity.GetValueOrDefault();
                                 }
@@ -252,7 +247,18 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
             return await Task.FromResult(result);
         }
 
-        private async Task<ApiResult<DImpMestDto>> Create(DImpMestDto input)
+        public async Task<ApiResult<DImpMestDto>> ImportFromSupplierSaveAsDraft(DImpMestDto input)
+        {
+            return await ImportFromSupplier(input);
+        }
+
+        public async Task<ApiResult<DImpMestDto>> ImportFromSupplierStockIn(DImpMestDto input)
+        {
+            input.ImpMestStatus = ImpMestStatusType.ReceivedInStock;
+            return await ImportFromSupplier(input);
+        }
+
+        private async Task<ApiResult<DImpMestDto>> ImportFromSupplier(DImpMestDto input)
         {
             var result = new ApiResult<DImpMestDto>();
 
@@ -260,28 +266,165 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
             {
                 try
                 {
-                    var id = Guid.NewGuid();
                     var dateNow = DateTime.Now;
+                    var id = Guid.NewGuid();
 
-                    var dImMest = _mapper.Map<DImpMest>(input);
-                    dImMest.Id = id;
-                    dImMest.CreatedDate = dateNow;
+                    var dImMestMedicines = new List<DImpMestMedicine>();
+                    var sMedicines = new List<SMedicine>();
+                    var dMedicineStocks = new List<EntityFrameworkCore.Entities.Business.Pharmaceuticals.DMedicineStock>();
+                    var sMedicinePricePolicies = new List<SMedicinePricePolicy>();
 
-                    // Đánh số tự động
-                    if (string.IsNullOrEmpty(dImMest.Code))
+                    if (GuidHelper.IsNullOrEmpty(input.Id))
                     {
+                        var dImMest = _mapper.Map<DImpMest>(input);
+                        dImMest.Id = id;
+                        dImMest.CreatedDate = dateNow;
 
+                        foreach (var dImMestMedicineDto in input.DImpMestMedicines)
+                        {
+                            var sMedicine = _mapper.Map<SMedicine>(dImMestMedicineDto);
+                            sMedicine.Id = Guid.NewGuid();
+                            sMedicine.CreatedDate = dateNow;
+                            sMedicine.CreatedBy = SessionExtensions.Login?.Id;
+
+                            var dImMestMedicine = _mapper.Map<DImpMestMedicine>(dImMestMedicineDto);
+                            dImMestMedicine.Id = Guid.NewGuid();
+                            dImMestMedicine.ImpMestId = id;
+                            dImMestMedicine.MedicineId = sMedicine.Id;
+
+                            if (dImMestMedicineDto.SMedicinePricePolicies != null)
+                            {
+                                foreach (var sMedicinePricePolicyDto in dImMestMedicineDto.SMedicinePricePolicies)
+                                {
+                                    var sMedicinePricePolicy = _mapper.Map<SMedicinePricePolicy>(sMedicinePricePolicyDto);
+
+                                    if (GuidHelper.IsNullOrEmpty(sMedicinePricePolicy.Id))
+                                        sMedicinePricePolicy.Id = Guid.NewGuid();
+
+                                    sMedicinePricePolicy.CreatedDate = dateNow;
+                                    sMedicinePricePolicy.CreatedBy = SessionExtensions.Login?.Id;
+                                    sMedicinePricePolicy.MedicineId = sMedicine.Id;
+
+                                    sMedicinePricePolicies.Add(sMedicinePricePolicy);
+                                }
+                            }
+
+                            // Trạng thái nhập kho mới thêm vào thuốc trong kho
+                            if (input.ImpMestStatus == ImpMestStatusType.ReceivedInStock)
+                            {
+                                dImMest.ApproverTime = dateNow;
+                                dImMest.ApproverUserId = SessionExtensions.Login?.Id;
+                                dImMest.StockReceiptTime = dateNow;
+                                dImMest.StockReceiptUserId = SessionExtensions.Login?.Id;
+
+                                dMedicineStocks.Add(new EntityFrameworkCore.Entities.Business.Pharmaceuticals.DMedicineStock()
+                                {
+                                    Id = Guid.NewGuid(),
+                                    CreatedDate = dateNow,
+                                    CreatedBy = SessionExtensions.Login?.Id,
+                                    AvailableQuantity = dImMestMedicineDto.ImpQuantity.GetValueOrDefault(),
+                                    Quantity = dImMestMedicineDto.ImpQuantity.GetValueOrDefault(),
+                                    StockId = input.ImStockId,
+                                    MedicineId = sMedicine.Id
+                                });
+                            }
+
+                            sMedicines.Add(sMedicine);
+                            dImMestMedicines.Add(dImMestMedicine);
+                        }
+
+                        _dbContext.DImpMests.Add(dImMest);
+                    }
+                    else
+                    {
+                        var dImMestOld = _dbContext.DImpMests.FirstOrDefault(d => d.Id == input.Id);
+
+                        // Xóa bản ghi cũ
+                        var dImMestMedicineOlds = _dbContext.DImpMestMedicines.Where(s => s.ImpMestId == input.Id).ToList();
+                        var sMedicineOldIds = dImMestMedicineOlds.Select(s => s.MedicineId).ToList();
+                        var sMedicineOlds = _dbContext.SMedicines.Where(w => sMedicineOldIds.Contains(w.Id)).ToList();
+                        var dMedicineStockOlds = _dbContext.DMedicineStocks.Where(w => sMedicineOldIds.Contains(w.MedicineId)).ToList();
+                        var sMedicinePricePolicyDtos = _dbContext.SMedicinePricePolicies.Where(w => sMedicineOldIds.Contains(w.MedicineId)).ToList();
+
+                        if (dImMestMedicineOlds != null && sMedicineOlds != null)
+                        {
+                            _dbContext.SMedicinePricePolicies.RemoveRange(sMedicinePricePolicyDtos);
+                            _dbContext.DMedicineStocks.RemoveRange(dMedicineStockOlds);
+                            _dbContext.DImpMestMedicines.RemoveRange(dImMestMedicineOlds);
+                            _dbContext.SMedicines.RemoveRange(sMedicineOlds);
+
+                            _dbContext.SaveChanges();
+                        }
+
+                        foreach (var dImMestMedicineDto in input.DImpMestMedicines)
+                        {
+                            var sMedicine = _mapper.Map<SMedicine>(dImMestMedicineDto);
+                            if (GuidHelper.IsNullOrEmpty(sMedicine.Id))
+                                sMedicine.Id = Guid.NewGuid();
+                            sMedicine.CreatedDate = dImMestOld.CreatedDate;
+                            sMedicine.CreatedBy = dImMestOld.CreatedBy;
+                            sMedicine.ModifiedDate = dateNow;
+                            sMedicine.ModifiedBy = SessionExtensions.Login?.Id;
+
+                            var dImMestMedicine = _mapper.Map<DImpMestMedicine>(dImMestMedicineDto);
+                            if (GuidHelper.IsNullOrEmpty(dImMestMedicine.Id))
+                                dImMestMedicine.Id = Guid.NewGuid();
+                            dImMestMedicine.MedicineId = sMedicine.Id;
+                            dImMestMedicine.ImpMestId = input.Id;
+
+                            if (dImMestMedicineDto.SMedicinePricePolicies != null)
+                            {
+                                foreach (var sMedicinePricePolicyDto in dImMestMedicineDto.SMedicinePricePolicies)
+                                {
+                                    var sMedicinePricePolicy = _mapper.Map<SMedicinePricePolicy>(sMedicinePricePolicyDto);
+
+                                    if (GuidHelper.IsNullOrEmpty(sMedicinePricePolicy.Id))
+                                        sMedicinePricePolicy.Id = Guid.NewGuid();
+
+                                    sMedicinePricePolicy.CreatedDate = dImMestOld.CreatedDate;
+                                    sMedicinePricePolicy.CreatedBy = dImMestOld.CreatedBy;
+                                    sMedicinePricePolicy.ModifiedDate = dateNow;
+                                    sMedicinePricePolicy.ModifiedBy = SessionExtensions.Login?.Id;
+                                    sMedicinePricePolicy.MedicineId = sMedicine.Id;
+
+                                    sMedicinePricePolicies.Add(sMedicinePricePolicy);
+                                }
+                            }
+
+                            // Trạng thái nhập kho mới thêm vào thuốc trong kho
+                            if (input.ImpMestStatus == ImpMestStatusType.ReceivedInStock)
+                            {
+                                dImMestOld.ApproverTime = dateNow;
+                                dImMestOld.ApproverUserId = SessionExtensions.Login?.Id;
+                                dImMestOld.StockReceiptTime = dateNow;
+                                dImMestOld.StockReceiptUserId = SessionExtensions.Login?.Id;
+
+                                dMedicineStocks.Add(new EntityFrameworkCore.Entities.Business.Pharmaceuticals.DMedicineStock()
+                                {
+                                    Id = Guid.NewGuid(),
+                                    CreatedDate = dateNow,
+                                    CreatedBy = SessionExtensions.Login?.Id,
+                                    AvailableQuantity = dImMestMedicineDto.ImpQuantity.GetValueOrDefault(),
+                                    Quantity = dImMestMedicineDto.ImpQuantity.GetValueOrDefault(),
+                                    StockId = input.ImStockId,
+                                    MedicineId = sMedicine.Id
+                                });
+                            }
+
+                            sMedicines.Add(sMedicine);
+                            dImMestMedicines.Add(dImMestMedicine);
+                        }
+
+                        _mapper.Map(input, dImMestOld);
+                        dImMestOld.ModifiedDate = dateNow;
                     }
 
-                    // Nhập từ thuốc nhà cung cấp
-                    if (input.ImpExpMestTypeId == 1)
-                    {
-                        await ImportFromSupplier(id, input, dateNow, DateTime.Now);
-                    }
+                    await _dbContext.SMedicines.AddRangeAsync(sMedicines);
+                    await _dbContext.DImpMestMedicines.AddRangeAsync(dImMestMedicines);
+                    await _dbContext.DMedicineStocks.AddRangeAsync(dMedicineStocks);
+                    await _dbContext.SMedicinePricePolicies.AddRangeAsync(sMedicinePricePolicies);
 
-                    _dbContext.DImpMests.Add(dImMest);
                     _dbContext.SaveChanges();
-
                     transaction.Commit();
                 }
                 catch (Exception ex)
@@ -296,180 +439,6 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
             }
 
             return await Task.FromResult(result);
-        }
-
-        private async Task<ApiResult<DImpMestDto>> Update(DImpMestDto input)
-        {
-            var result = new ApiResult<DImpMestDto>();
-
-            using (var transaction = _dbContext.Database.BeginTransaction())
-            {
-                try
-                {
-                    var id = Guid.NewGuid();
-                    var dateNow = DateTime.Now;
-
-                    var dImMestOld = _dbContext.DImpMests.FirstOrDefault(d => d.Id == input.Id);
-
-                    // Đánh số tự động
-                    if (string.IsNullOrEmpty(dImMestOld.Code))
-                    {
-
-                    }
-
-                    // Nhập từ thuốc nhà cung cấp
-                    if (input.ImpExpMestTypeId == 1)
-                    {
-                        await ImportFromSupplier(input.Id, input, dateNow, dImMestOld.CreatedDate);
-                    }
-
-                    _mapper.Map(input, dImMestOld);
-                    dImMestOld.ModifiedDate = dateNow;
-
-                    _dbContext.SaveChanges();
-                    transaction.Commit();
-                }
-                catch (Exception ex)
-                {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
-                }
-                finally
-                {
-                    transaction.Dispose();
-                }
-            }
-
-            return await Task.FromResult(result);
-        }
-
-        private async Task ImportFromSupplier(Guid? id, DImpMestDto input, DateTime dateNow, DateTime cretimeTime)
-        {
-            var dImMestMedicines = new List<DImpMestMedicine>();
-            var sMedicines = new List<SMedicine>();
-            var dMedicineStocks = new List<EntityFrameworkCore.Entities.Business.Pharmaceuticals.DMedicineStock>();
-            var sMedicinePricePolicies = new List<SMedicinePricePolicy>();
-
-            if (GuidHelper.IsNullOrEmpty(input.Id))
-            {
-                foreach (var dImMestMedicineDto in input.DImpMestMedicines)
-                {
-                    var sMedicine = _mapper.Map<SMedicine>(dImMestMedicineDto);
-                    sMedicine.Id = Guid.NewGuid();
-                    sMedicine.CreatedDate = dateNow;
-
-                    var dImMestMedicine = _mapper.Map<DImpMestMedicine>(dImMestMedicineDto);
-                    dImMestMedicine.Id = Guid.NewGuid();
-                    dImMestMedicine.ImpMestId = id;
-                    dImMestMedicine.MedicineId = sMedicine.Id;
-
-                    if (dImMestMedicineDto.SMedicinePricePolicies != null)
-                    {
-                        foreach (var sMedicinePricePolicyDto in dImMestMedicineDto.SMedicinePricePolicies)
-                        {
-                            var sMedicinePricePolicy = _mapper.Map<SMedicinePricePolicy>(sMedicinePricePolicyDto);
-
-                            if (GuidHelper.IsNullOrEmpty(sMedicinePricePolicy.Id))
-                                sMedicinePricePolicy.Id = Guid.NewGuid();
-
-                            sMedicinePricePolicy.CreatedDate = dateNow;
-                            sMedicinePricePolicy.MedicineId = sMedicine.Id;
-
-                            sMedicinePricePolicies.Add(sMedicinePricePolicy);
-                        }
-                    }
-
-                    // Trạng thái nhập kho mới thêm vào thuốc trong kho
-                    if (input.ImpMestStatus == ImpMestStatusType.ReceivedInStock)
-                    {
-                        dMedicineStocks.Add(new EntityFrameworkCore.Entities.Business.Pharmaceuticals.DMedicineStock()
-                        {
-                            Id = Guid.NewGuid(),
-                            CreatedDate = dateNow,
-                            AvailableQuantity = dImMestMedicineDto.ImpQuantity.GetValueOrDefault(),
-                            Quantity = dImMestMedicineDto.ImpQuantity.GetValueOrDefault(),
-                            StockId = input.ImStockId,
-                            MedicineId = sMedicine.Id
-                        });
-                    }
-
-                    sMedicines.Add(sMedicine);
-                    dImMestMedicines.Add(dImMestMedicine);
-                }
-            }
-            else
-            {
-                // Xóa bản ghi cũ
-                var dImMestMedicineOlds = _dbContext.DImpMestMedicines.Where(s => s.ImpMestId == input.Id).ToList();
-                var sMedicineOldIds = dImMestMedicineOlds.Select(s => s.MedicineId).ToList();
-                var sMedicineOlds = _dbContext.SMedicines.Where(w => sMedicineOldIds.Contains(w.Id)).ToList();
-                var dMedicineStockOlds = _dbContext.DMedicineStocks.Where(w => sMedicineOldIds.Contains(w.MedicineId)).ToList();
-                var sMedicinePricePolicyDtos = _dbContext.SMedicinePricePolicies.Where(w => sMedicineOldIds.Contains(w.MedicineId)).ToList();
-
-                if (dImMestMedicineOlds != null && sMedicineOlds != null)
-                {
-                    _dbContext.SMedicinePricePolicies.RemoveRange(sMedicinePricePolicyDtos);
-                    _dbContext.DMedicineStocks.RemoveRange(dMedicineStockOlds);
-                    _dbContext.DImpMestMedicines.RemoveRange(dImMestMedicineOlds);
-                    _dbContext.SMedicines.RemoveRange(sMedicineOlds);
-
-                    _dbContext.SaveChanges();
-                }
-
-                foreach (var dImMestMedicineDto in input.DImpMestMedicines)
-                {
-                    var sMedicine = _mapper.Map<SMedicine>(dImMestMedicineDto);
-                    if (GuidHelper.IsNullOrEmpty(sMedicine.Id))
-                        sMedicine.Id = Guid.NewGuid();
-                    sMedicine.CreatedDate = cretimeTime;
-                    sMedicine.ModifiedDate = dateNow;
-
-                    var dImMestMedicine = _mapper.Map<DImpMestMedicine>(dImMestMedicineDto);
-                    if (GuidHelper.IsNullOrEmpty(dImMestMedicine.Id))
-                        dImMestMedicine.Id = Guid.NewGuid();
-                    dImMestMedicine.MedicineId = sMedicine.Id;
-                    dImMestMedicine.ImpMestId = input.Id;
-
-                    if (dImMestMedicineDto.SMedicinePricePolicies != null)
-                    {
-                        foreach (var sMedicinePricePolicyDto in dImMestMedicineDto.SMedicinePricePolicies)
-                        {
-                            var sMedicinePricePolicy = _mapper.Map<SMedicinePricePolicy>(sMedicinePricePolicyDto);
-
-                            if (GuidHelper.IsNullOrEmpty(sMedicinePricePolicy.Id))
-                                sMedicinePricePolicy.Id = Guid.NewGuid();
-
-                            sMedicinePricePolicy.CreatedDate = cretimeTime;
-                            sMedicinePricePolicy.ModifiedDate = dateNow;
-                            sMedicinePricePolicy.MedicineId = sMedicine.Id;
-
-                            sMedicinePricePolicies.Add(sMedicinePricePolicy);
-                        }
-                    }
-
-                    // Trạng thái nhập kho mới thêm vào thuốc trong kho
-                    if (input.ImpMestStatus == ImpMestStatusType.ReceivedInStock)
-                    {
-                        dMedicineStocks.Add(new EntityFrameworkCore.Entities.Business.Pharmaceuticals.DMedicineStock()
-                        {
-                            Id = Guid.NewGuid(),
-                            CreatedDate = dateNow,
-                            AvailableQuantity = dImMestMedicineDto.ImpQuantity.GetValueOrDefault(),
-                            Quantity = dImMestMedicineDto.ImpQuantity.GetValueOrDefault(),
-                            StockId = input.ImStockId,
-                            MedicineId = sMedicine.Id
-                        });
-                    }
-
-                    sMedicines.Add(sMedicine);
-                    dImMestMedicines.Add(dImMestMedicine);
-                }
-            }
-
-            await _dbContext.SMedicines.AddRangeAsync(sMedicines);
-            await _dbContext.DImpMestMedicines.AddRangeAsync(dImMestMedicines);
-            await _dbContext.DMedicineStocks.AddRangeAsync(dMedicineStocks);
-            await _dbContext.SMedicinePricePolicies.AddRangeAsync(sMedicinePricePolicies);
         }
     }
 }

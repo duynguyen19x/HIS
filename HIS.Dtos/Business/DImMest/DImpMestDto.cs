@@ -98,6 +98,11 @@ namespace HIS.Dtos.Business.DImMest
         public DateTime? InvTime { get; set; }
 
         /// <summary>
+        /// Số hóa đơn
+        /// </summary>
+        public string InvNo { get; set; }
+
+        /// <summary>
         /// NGười giao
         /// </summary>
         public string Deliverer { get; set; }
