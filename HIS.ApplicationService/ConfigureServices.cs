@@ -32,6 +32,8 @@ using HIS.ApplicationService.Systems.Login;
 using HIS.ApplicationService.Systems.Role;
 using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
+using HIS.ApplicationService.Business.Pharmaceuticals.ImpMests;
+using HIS.ApplicationService.Systems.SYSAutoNumber;
 
 namespace HIS.ApplicationService
 {
@@ -76,6 +78,8 @@ namespace HIS.ApplicationService
             services.AddTransient<IDImpMestService, DImpMestService>();
             services.AddTransient<IDImpExpMestTypeService, DImpExpMestTypeService>();
             services.AddTransient<IDMedicineStockService, DMedicineStockService>();
+
+            services.AddTransient<ISYSAutoNumberAppService, SYSAutoNumberAppService>();
         }
     }
 }
