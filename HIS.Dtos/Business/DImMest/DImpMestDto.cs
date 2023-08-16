@@ -13,16 +13,16 @@ namespace HIS.Dtos.Business.DImMest
         /// <summary>
         /// Kho nhập
         /// </summary>
-        public Guid? ImStockId { get; set; }
-        public string ImStockCode { get; set; }
-        public string ImStockName { get; set; }
+        public Guid? ImpStockId { get; set; }
+        public string ImpStockCode { get; set; }
+        public string ImpStockName { get; set; }
 
         /// <summary>
         /// Kho xuất
         /// </summary>
-        public Guid? ExStockId { get; set; }
-        public string ExStockCode { get; set; }
-        public string ExStockName { get; set; }
+        public Guid? ExpStockId { get; set; }
+        public string ExpStockCode { get; set; }
+        public string ExpStockName { get; set; }
 
         /// <summary>
         /// Loại phiếu nhập, xuất

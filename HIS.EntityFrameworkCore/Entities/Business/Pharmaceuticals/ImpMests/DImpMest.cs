@@ -15,12 +15,12 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
         /// <summary>
         /// Kho nhập
         /// </summary>
-        public Guid? ImStockId { get; set; }
+        public Guid? ImpStockId { get; set; }
 
         /// <summary>
         /// Kho xuất
         /// </summary>
-        public Guid? ExStockId { get; set; }
+        public Guid? ExpStockId { get; set; }
 
         /// <summary>
         /// Loại phiếu nhập, xuất
@@ -104,8 +104,8 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
         /// </summary>
         public string Deliverer { get; set; }
 
-        public SRoom ImStock { get; set; }
-        public SRoom ExStock { get; set; }
+        public SRoom ImpStock { get; set; }
+        public SRoom ExpStock { get; set; }
         public DImpExpMestType DImpExpMestType { get; set; }
         public SUser ReceiverUser { get; set; }
         public SUser ApproverUser { get; set; }

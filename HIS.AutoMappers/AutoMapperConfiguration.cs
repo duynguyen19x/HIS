@@ -113,8 +113,8 @@ namespace HIS.AutoMappers
                 .ReverseMap();
 
             CreateMap<DImpMestDto, DImpMest>()
-                .ForMember(dest => dest.ImStock, opt => opt.Ignore())
-                .ForMember(dest => dest.ExStock, opt => opt.Ignore())
+                .ForMember(dest => dest.ImpStock, opt => opt.Ignore())
+                .ForMember(dest => dest.ExpStock, opt => opt.Ignore())
                 .ForMember(dest => dest.DImpExpMestType, opt => opt.Ignore())
                 .ForMember(dest => dest.ReceiverUser, opt => opt.Ignore())
                 .ForMember(dest => dest.ApproverUser, opt => opt.Ignore())
