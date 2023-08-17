@@ -23,14 +23,14 @@ namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
             builder.Property(x => x.Description).HasMaxLength(512);
             builder.Property(x => x.Deliverer).HasMaxLength(512);
 
-            builder.HasOne(e => e.ImStock)
+            builder.HasOne(e => e.ImpStock)
                 .WithMany()
-                .HasForeignKey(e => e.ImStockId)
+                .HasForeignKey(e => e.ImpStockId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(e => e.ExStock)
+            builder.HasOne(e => e.ExpStock)
                 .WithMany()
-                .HasForeignKey(e => e.ExStockId)
+                .HasForeignKey(e => e.ExpStockId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(e => e.DImpExpMestType)

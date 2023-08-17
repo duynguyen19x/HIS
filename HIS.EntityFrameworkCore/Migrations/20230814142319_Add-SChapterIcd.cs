@@ -13,20 +13,6 @@ namespace HIS.EntityFrameworkCore.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            //migrationBuilder.DropForeignKey(
-            //    name: "FK_DImpMests_DImpExpMestTypes_ImpExpMestTypeId",
-            //    table: "DImpMests");
-
-            //migrationBuilder.RenameColumn(
-            //    name: "ImExMestTypeId",
-            //    table: "DImpMests",
-            //    newName: "ImpExpMestTypeId");
-
-            //migrationBuilder.RenameIndex(
-            //    name: "IX_DImpMests_ImExMestTypeId",
-            //    table: "DImpMests",
-            //    newName: "IX_DImpMests_ImpExpMestTypeId");
-
             migrationBuilder.CreateTable(
                 name: "SChapterIcds",
                 columns: table => new
@@ -89,41 +75,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                     { new Guid("f9e407f1-0417-4067-9d25-dae91d19e1bf"), "35", false, "Chương XIII. Bệnh của hệ xương khớp và mô liên kết - U62", 36 },
                     { new Guid("ffa69c02-696f-4645-b72e-0f371b8cacfa"), "0", false, "Khác", 1 }
                 });
-
-            //migrationBuilder.AddForeignKey(
-            //    name: "FK_DImpMests_DImpExpMestTypes_ImpExpMestTypeId",
-            //    table: "DImpMests",
-            //    column: "ImpExpMestTypeId",
-            //    principalTable: "DImpExpMestTypes",
-            //    principalColumn: "Id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            //migrationBuilder.DropForeignKey(
-            //    name: "FK_DImpMests_DImpExpMestTypes_ImpExpMestTypeId",
-            //    table: "DImpMests");
-
             migrationBuilder.DropTable(
                 name: "SChapterIcds");
-
-            //migrationBuilder.RenameColumn(
-            //    name: "ImpExpMestTypeId",
-            //    table: "DImpMests",
-            //    newName: "ImExMestTypeId");
-
-            //migrationBuilder.RenameIndex(
-            //    name: "IX_DImpMests_ImpExpMestTypeId",
-            //    table: "DImpMests",
-            //    newName: "IX_DImpMests_ImExMestTypeId");
-
-            //migrationBuilder.AddForeignKey(
-            //    name: "FK_DImpMests_DImpExpMestTypes_ImExMestTypeId",
-            //    table: "DImpMests",
-            //    column: "ImExMestTypeId",
-            //    principalTable: "DImpExpMestTypes",
-            //    principalColumn: "Id");
         }
     }
 }

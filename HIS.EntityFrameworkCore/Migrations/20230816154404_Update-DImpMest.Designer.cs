@@ -4,6 +4,7 @@ using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(HISDbContext))]
-    partial class HISDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230816154404_Update-DImpMest")]
+    partial class UpdateDImpMest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -393,7 +396,10 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
 
-                    b.Property<Guid?>("ExpStockId")
+                    b.Property<Guid?>("ExStockId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ImStockId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int?>("ImpExpMestTypeId")
@@ -401,9 +407,6 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Property<int>("ImpMestStatus")
                         .HasColumnType("int");
-
-                    b.Property<Guid?>("ImpStockId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("ImpTime")
                         .HasColumnType("datetime2");
@@ -458,11 +461,11 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("ApproverUserId");
 
-                    b.HasIndex("ExpStockId");
+                    b.HasIndex("ExStockId");
+
+                    b.HasIndex("ImStockId");
 
                     b.HasIndex("ImpExpMestTypeId");
-
-                    b.HasIndex("ImpStockId");
 
                     b.HasIndex("PatientId");
 
@@ -5156,7 +5159,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"),
                             Code = "KXD",
-                            CreatedDate = new DateTime(2023, 8, 16, 23, 5, 6, 995, DateTimeKind.Local).AddTicks(2198),
+                            CreatedDate = new DateTime(2023, 8, 16, 22, 44, 3, 656, DateTimeKind.Local).AddTicks(2931),
                             Inactive = false,
                             Name = "Chưa xác định",
                             SortOrder = 0
@@ -5165,7 +5168,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"),
                             Code = "NAM",
-                            CreatedDate = new DateTime(2023, 8, 16, 23, 5, 6, 995, DateTimeKind.Local).AddTicks(2225),
+                            CreatedDate = new DateTime(2023, 8, 16, 22, 44, 3, 656, DateTimeKind.Local).AddTicks(2956),
                             Inactive = false,
                             Name = "Nam",
                             SortOrder = 1
@@ -5174,7 +5177,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e9497984-d355-41af-b917-091500956be9"),
                             Code = "NU",
-                            CreatedDate = new DateTime(2023, 8, 16, 23, 5, 6, 995, DateTimeKind.Local).AddTicks(2228),
+                            CreatedDate = new DateTime(2023, 8, 16, 22, 44, 3, 656, DateTimeKind.Local).AddTicks(2959),
                             Inactive = false,
                             Name = "Nữ",
                             SortOrder = 2
@@ -5396,7 +5399,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "BHYT",
-                            CreatedDate = new DateTime(2023, 8, 16, 23, 5, 6, 995, DateTimeKind.Local).AddTicks(3578),
+                            CreatedDate = new DateTime(2023, 8, 16, 22, 44, 3, 656, DateTimeKind.Local).AddTicks(4180),
                             Inactive = false,
                             Name = "Bảo hiểm y tế",
                             SortOrder = 0
@@ -5405,7 +5408,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "VP",
-                            CreatedDate = new DateTime(2023, 8, 16, 23, 5, 6, 995, DateTimeKind.Local).AddTicks(3584),
+                            CreatedDate = new DateTime(2023, 8, 16, 22, 44, 3, 656, DateTimeKind.Local).AddTicks(4184),
                             Inactive = false,
                             Name = "Viện phí",
                             SortOrder = 0
@@ -5414,7 +5417,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 3,
                             Code = "DV",
-                            CreatedDate = new DateTime(2023, 8, 16, 23, 5, 6, 995, DateTimeKind.Local).AddTicks(3587),
+                            CreatedDate = new DateTime(2023, 8, 16, 22, 44, 3, 656, DateTimeKind.Local).AddTicks(4186),
                             Inactive = false,
                             Name = "Dịch vụ",
                             SortOrder = 0
@@ -6225,19 +6228,19 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasForeignKey("ApproverUserId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "ExpStock")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "ExStock")
                         .WithMany()
-                        .HasForeignKey("ExpStockId")
+                        .HasForeignKey("ExStockId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "ImStock")
+                        .WithMany()
+                        .HasForeignKey("ImStockId")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpExpMestType", "DImpExpMestType")
                         .WithMany()
                         .HasForeignKey("ImpExpMestTypeId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "ImpStock")
-                        .WithMany()
-                        .HasForeignKey("ImpStockId")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Patients.SPatient", "SPatient")
@@ -6279,9 +6282,9 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Navigation("DImpExpMestType");
 
-                    b.Navigation("ExpStock");
+                    b.Navigation("ExStock");
 
-                    b.Navigation("ImpStock");
+                    b.Navigation("ImStock");
 
                     b.Navigation("ReceiverUser");
 
