@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigureService();
@@ -17,9 +18,15 @@ app.Run();
 
 void ConfigureService()
 {
-    builder.Services.AddDbContext<HISDbContext>(options 
+    builder.Services.AddDbContext<HISDbContext>(options
         => options.UseSqlServer(builder.Configuration["ConnectionStrings:HIS"]));
-    
+
+    //builder.Services.AddDbContext<HISDbContext>(options =>
+    //{
+    //    options.UseSqlServer(builder.Configuration["ConnectionStrings:HIS"]);
+    //    options.UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll);
+    //});
+
     // auto mapper
     builder.Services.AddAutoMapper(typeof(AutoMapperConfiguration).Assembly);
     //HIS.Application.Core.ObjectMapping.ObjectMapper.Configure(
