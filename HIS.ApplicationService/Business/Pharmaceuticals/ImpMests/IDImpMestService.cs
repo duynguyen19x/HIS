@@ -18,5 +18,6 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
         public Task<ApiResult<DImpMestDto>> ImportFromSupplierStockIn(DImpMestDto input);
         public Task<ApiResult<bool>> ImportFromSupplierCanceled(Guid id);
         public Task<ApiResult<DImpMestDto>> ImportFromSupplierGetById(Guid id);
+        Task<ApiResult<DImpMestDto>> GetById(Guid id);
     }
 }

@@ -509,6 +509,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
 
             return await Task.FromResult(result);
         }
+
+        public Task<ApiResult<DImpMestDto>> GetById(Guid id)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
 
         #region Nhập từ kho khác
