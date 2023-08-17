@@ -80,7 +80,7 @@ namespace HIS.Dtos.Business.DImMest
         /// <summary>
         /// Id điều trị
         /// </summary>
-        public Guid? TreatmentId { get; set; }
+        public Guid? PatientRecordId { get; set; }
 
         /// <summary>
         /// Id Bệnh nhân

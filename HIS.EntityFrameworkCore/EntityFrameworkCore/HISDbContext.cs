@@ -1,11 +1,6 @@
 ﻿using HIS.EntityFrameworkCore.Configurations;
-using HIS.EntityFrameworkCore.Configurations.Business;
-using HIS.EntityFrameworkCore.Configurations.Dictionaries;
-using HIS.EntityFrameworkCore.Configurations.Patients;
-using HIS.EntityFrameworkCore.Configurations.Services;
-using HIS.EntityFrameworkCore.Configurations.Systems;
 using HIS.EntityFrameworkCore.Data;
-using HIS.EntityFrameworkCore.Entities.Business.Patients;
+using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
 using HIS.EntityFrameworkCore.Entities.Categories;
@@ -58,8 +53,6 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<SUnit> SUnits { get; set; }
         public DbSet<SMaterial> SMaterials { get; set; }
         public DbSet<SMaterialType> SMaterialTypes { get; set; }
-        public DbSet<SPatient> SPatients { get; set; }
-        public DbSet<STreatment> STreatments { get; set; }
         public DbSet<SPatientType> SPatientTypes { get; set; }
         public DbSet<SCountry> SCountries { get; set; }
         public DbSet<SProvince> SProvinces { get; set; }
@@ -85,5 +78,16 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<DImpMest> DImpMests { get; set; }
         public DbSet<DImpMestMedicine> DImpMestMedicines { get; set; }
         public DbSet<DMedicineStock> DMedicineStocks { get; set; }
+
+        #region Patient
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<PatientRecord> PatientRecords { get; set; }
+        #endregion
+
+        #region System
+        public DbSet<SYSAutoNumber> SYSAutoNumbers { get; set; }
+        public DbSet<SYSRefType> SYSRefTypes { get; set; }
+        public DbSet<SYSRefTypeCategory> sYSRefTypeCategories { get; set; }
+        #endregion
     }
 }
