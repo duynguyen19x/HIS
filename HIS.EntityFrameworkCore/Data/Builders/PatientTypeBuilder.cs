@@ -1,5 +1,4 @@
-﻿using HIS.EntityFrameworkCore.Entities.Business.Patients;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+﻿using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Utilities.Enums;
 using Microsoft.EntityFrameworkCore;
 

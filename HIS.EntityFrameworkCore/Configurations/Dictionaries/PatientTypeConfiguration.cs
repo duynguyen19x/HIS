@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace HIS.EntityFrameworkCore.Configurations.Patients
+namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
     public class PatientTypeConfiguration : IEntityTypeConfiguration<SPatientType>
     {

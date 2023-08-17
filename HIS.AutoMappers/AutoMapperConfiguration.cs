@@ -29,7 +29,6 @@ using HIS.Dtos.Dictionaries.ServiceResultIndex;
 using HIS.Dtos.Dictionaries.ServiceUnit;
 using HIS.Dtos.Dictionaries.Supplier;
 using HIS.Dtos.Dictionaries.Ward;
-using HIS.EntityFrameworkCore.Entities.Business.Patients;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
@@ -42,10 +41,6 @@ namespace HIS.AutoMappers
     {
         public AutoMapperConfiguration()
         {
-            CreateMap<STreatmentDto, STreatment>().ReverseMap();
-            CreateMap<STreatmentDto, SPatient>().ReverseMap();
-            CreateMap<SPatientDto, SPatient>().ReverseMap();
-
             CreateMap<SBranch, SBranchDto>().ReverseMap();
             CreateMap<SCareer, SCareerDto>().ReverseMap();
             CreateMap<SCountry, SCountryDto>().ReverseMap();
@@ -121,8 +116,8 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.StockReceiptUser, opt => opt.Ignore())
                 .ForMember(dest => dest.ReqRoom, opt => opt.Ignore())
                 .ForMember(dest => dest.ReqDepartment, opt => opt.Ignore())
-                .ForMember(dest => dest.STreatment, opt => opt.Ignore())
-                .ForMember(dest => dest.SPatient, opt => opt.Ignore())
+                .ForMember(dest => dest.PatientRecord, opt => opt.Ignore())
+                .ForMember(dest => dest.Patient, opt => opt.Ignore())
                 .ForMember(dest => dest.SSupplier, opt => opt.Ignore())
                 .ReverseMap();
 
