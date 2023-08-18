@@ -16,6 +16,9 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
         {
             builder.ToTable("Patient");
             builder.HasKey(x => x.Id);
+            builder.Property(r => r.Code).IsRequired().HasMaxLength(50);
+            builder.Property(u => u.Name).IsRequired().HasMaxLength(500);
+            builder.Property(u => u.Description).HasMaxLength(500);
         }
     }
 }

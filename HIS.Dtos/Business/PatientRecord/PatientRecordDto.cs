@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Business.Patient
+namespace HIS.Dtos.Business.PatientRecord
 {
-    public class GetAllSPatientInput : PagedResultRequestDto
+    public class PatientRecordDto : EntityDto<Guid?>
     {
-        public string PatientCodeFilter { get; set; }
     }
 }

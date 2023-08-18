@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using HIS.Dtos.Business.DImMest;
 using HIS.Dtos.Business.DImMestMedicine;
-using HIS.Dtos.Business.Patient;
-using HIS.Dtos.Business.Treatment;
 using HIS.Dtos.Dictionaries.Branch;
 using HIS.Dtos.Dictionaries.Career;
 using HIS.Dtos.Dictionaries.ChapterICD10;

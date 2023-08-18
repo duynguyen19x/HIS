@@ -1,10 +1,4 @@
-﻿using HIS.Dtos.Business.Treatment;
-using HIS.Dtos.Systems.User;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HIS.Dtos.Systems.User;
 
 namespace HIS.ApplicationService.Systems.User
 {
