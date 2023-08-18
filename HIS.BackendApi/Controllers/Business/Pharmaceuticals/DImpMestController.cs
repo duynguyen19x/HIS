@@ -39,10 +39,10 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
             return await _dImpMestService.ImportFromSupplierStockIn(input);
         }
 
-        [HttpGet("GetById")]
-        public async Task<ApiResult<DImpMestDto>> GetById(Guid id)
+        [HttpGet("ImportFromSupplierGetById")]
+        public async Task<ApiResult<DImpMestDto>> ImportFromSupplierGetById(Guid id)
         {
-            return await _dImpMestService.GetById(id);
+            return await _dImpMestService.ImportFromSupplierGetById(id);
         }
 
         [HttpGet("ImportFromSupplierCanceled")]

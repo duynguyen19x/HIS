@@ -10,7 +10,16 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
     {
         public string Code { get; set; }
         public string Name { get; set; }
+
+        /// <summary>
+        /// Trạng thái phiếu nhập
+        /// </summary>
         public ImpMestStatusType ImpMestStatus { get; set; }
+
+        /// <summary>
+        /// Trang thái phiếu xuất
+        /// </summary>
+        public EmpMestStatusType EmpMestStatus { get; set; }
 
         /// <summary>
         /// Kho nhập

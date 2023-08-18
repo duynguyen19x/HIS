@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HIS.Utilities.Enums
 {
-    public enum ImpMestStatusType
+    public enum EmpMestStatusType
     {
         [Description("Mới tạo")]
         None = 0,
@@ -18,8 +18,8 @@ namespace HIS.Utilities.Enums
         [Description("Đã duyệt")]
         Approved,
 
-        [Description("Đã nhập kho")]
-        ReceivedInStock,
+        [Description("Đã xuất kho")]
+        ReceivedOutStock,
 
         [Description("Đã hủy")]
         Canceled
