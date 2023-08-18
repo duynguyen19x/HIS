@@ -1,12 +1,8 @@
 ﻿using AutoMapper.Configuration.Annotations;
 using HIS.Core.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using System;
-using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Business
 {
@@ -15,47 +11,107 @@ namespace HIS.EntityFrameworkCore.Entities.Business
     /// </summary>
     public class PatientRecord : FullAuditedEntity<Guid>
     {
+        [Required]
+        [MaxLength(50)]
         public virtual string Code { get; set; }
-        public virtual string Name { get; set; }
-        public virtual string Description { get; set; }
+
+        [Required]
         public virtual Guid PatientId { get; set; }
+
+        [Required]
+        [MaxLength(500)]
         public virtual string PatientName { get; set; }
+
         public DateTime? BirthDate { get; set; }
+
+        [Required]
         public int BirthYear { get; set; }
+
+        [MaxLength(500)]
         public string BirthPlace { get; set; }
+
+        [MaxLength(50)]
         public virtual string IdentificationNumber { get; set; } // số CMND / CCCD
+
         public virtual DateTime? IssueDate { get; set; } // ngày cấp
+
+        [MaxLength(500)]
         public virtual string IssueBy { get; set; } // nơi cấp
+
+        [Required]
         public virtual Guid GenderId { get; set; }
+
+        [Required]
         public virtual Guid EthnicityId { get; set; }
+
+        [Required]
         public virtual Guid CareerId { get; set; }
+
+        [Required]
         public virtual Guid CountryId { get; set; }
+
         public virtual Guid? ProvinceId { get; set; }
+
         public virtual Guid? DistrictId { get; set; }
+
         public virtual Guid? WardId { get; set; }
+
+        [MaxLength(500)]
         public virtual string Address { get; set; }
+
+        [MaxLength(50)]
         public virtual string Tel { get; set; }
+
+        [MaxLength(50)]
         public virtual string Mobile { get; set; }
+
+        [MaxLength(50)]
         public virtual string Fax { get; set; }
+
+        [MaxLength(50)]
         public virtual string Email { get; set; }
+
+        [Required]
         public virtual int PatientTypeId { get; set; }
+
+        [Required]
+        public virtual int PatientRecordTypeId { get; set; }
+
+        [MaxLength(500)]
+        public virtual string Description { get; set; }
+
         public virtual bool Inactive { get; set; }
 
         [Ignore]
-        public virtual Patient Patient { get; set; }
+        [ForeignKey(nameof(PatientId))]
+        public virtual Patient PatientFk { get; set; }
+
         [Ignore]
-        public virtual SGender SGender { get; set; }
+        [ForeignKey(nameof(GenderId))]
+        public virtual SGender SGenderFk { get; set; }
+
         [Ignore]
-        public virtual SEthnic SEthnic { get; set; }
+        [ForeignKey(nameof(EthnicityId))]
+        public virtual SEthnic SEthnicFk { get; set; }
+
         [Ignore]
-        public virtual SCareer SCareer { get; set; }
+        [ForeignKey(nameof(CareerId))]
+        public virtual SCareer SCareerFk { get; set; }
+
         [Ignore]
-        public virtual SCountry SCountry { get; set; }
+        [ForeignKey(nameof(CountryId))]
+        public virtual SCountry SCountryFk { get; set; }
+
         [Ignore]
-        public virtual SProvince SProvince { get; set; }
+        [ForeignKey(nameof(ProvinceId))]
+        public virtual SProvince SProvinceFk { get; set; }
+
         [Ignore]
-        public virtual SDistrict SDistrict { get; set; }
+        [ForeignKey(nameof(DistrictId))]
+        public virtual SDistrict SDistrictFk { get; set; }
+
         [Ignore]
-        public virtual SWard SWard { get; set; }
+        [ForeignKey(nameof(WardId))]
+        public virtual SWard SWardFk { get; set; }
     }
 }
