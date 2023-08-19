@@ -32,6 +32,8 @@ using HIS.ApplicationService.Systems.Role;
 using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
 using HIS.ApplicationService.Systems.SYSAutoNumber;
+using HIS.ApplicationService.Business.Patient;
+using HIS.ApplicationService.Business.PatientRecord;
 
 namespace HIS.ApplicationService
 {
@@ -76,7 +78,14 @@ namespace HIS.ApplicationService
             services.AddTransient<IDImpExpMestTypeService, DImpExpMestTypeService>();
             services.AddTransient<IDMedicineStockService, DMedicineStockService>();
 
+            #region Patient
+            services.AddTransient<IPatientAppService, PatientAppService>();
+            services.AddTransient<IPatientRecordAppService, PatientRecordAppService>();
+            #endregion
+
+            #region Sys
             services.AddTransient<ISYSAutoNumberAppService, SYSAutoNumberAppService>();
+            #endregion
         }
     }
 }

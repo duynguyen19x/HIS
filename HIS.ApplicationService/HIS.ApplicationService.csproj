@@ -8,10 +8,13 @@
 
   <ItemGroup>
     <Compile Remove="Categories\**" />
+    <Compile Remove="Patient\**" />
     <Compile Remove="Systems\Permistion\**" />
     <EmbeddedResource Remove="Categories\**" />
+    <EmbeddedResource Remove="Patient\**" />
     <EmbeddedResource Remove="Systems\Permistion\**" />
     <None Remove="Categories\**" />
+    <None Remove="Patient\**" />
     <None Remove="Systems\Permistion\**" />
   </ItemGroup>
 
@@ -24,10 +27,6 @@
     <ProjectReference Include="..\HIS.AutoMappers\HIS.AutoMappers.csproj" />
     <ProjectReference Include="..\HIS.Dtos\HIS.Dtos.csproj" />
     <ProjectReference Include="..\HIS.EntityFrameworkCore\HIS.EntityFrameworkCore.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Patient\" />
   </ItemGroup>
 
 </Project>

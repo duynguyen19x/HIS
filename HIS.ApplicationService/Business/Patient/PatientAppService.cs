@@ -2,6 +2,7 @@
 using HIS.Application.Core.Services;
 using HIS.Application.Core.Services.Dto;
 using HIS.Core.Application.Services.Dto;
+using HIS.Core.Extensions;
 using HIS.Core.Linq;
 using HIS.Dtos.Business.Patient;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
@@ -26,6 +27,7 @@ namespace HIS.ApplicationService.Business.Patient
                     .WhereIf(!string.IsNullOrEmpty(input.NameFilter), x => x.Name.ToUpper() == input.NameFilter.ToUpper())
                     .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
 
+                result.TotalCount = await filter.CountAsync();
                 result.Items = (from p in filter
                                 select new PatientDto()
                                 {
@@ -36,9 +38,8 @@ namespace HIS.ApplicationService.Business.Patient
                                     Inactive = p.Inactive
                                 })
                                 .PageBy(input)
+                                .OrderBy(x => x.Code)
                                 .ToList();
-
-                result.TotalCount = await filter.CountAsync();
             }
             catch (Exception ex)
             {
@@ -65,18 +66,24 @@ namespace HIS.ApplicationService.Business.Patient
             return result;
         }
 
+        public async Task<ResultDto<PatientDto>> CreateOrEdit(PatientDto input)
+        {
+            if (input.Id == null)
+                return await Create(input);
+            else
+                return await Update(input);
+        }
+
         public async Task<ResultDto<PatientDto>> Create(PatientDto input)
         {
             var result = new ResultDto<PatientDto>();
-            using (var transaction = Context.BeginTransaction())
+            await Context.TransactionAsync(async () =>
             {
                 try
                 {
-                    // kiểm tra dữ liệu tại đây
-
-                    // lấy mã bệnh nhân
+                    input.Id = Guid.NewGuid();
                     if (string.IsNullOrEmpty(input.Code))
-                        input.Code = "BN" + DateTime.Now.Year + Context.Patients.Count().ToString().PadLeft(5, '0');
+                        input.Code = "BN" + DateTime.Now.Year + (Context.Patients.Count() + 1).ToString().PadLeft(5, '0');
 
                     // map
                     var patient = Mapper.Map<EntityFrameworkCore.Entities.Business.Patient>(input);
@@ -85,18 +92,15 @@ namespace HIS.ApplicationService.Business.Patient
 
                     Context.Add(patient);
                     await Context.SaveChangesAsync();
-                    result.Item = input;
 
-                    transaction.Commit();
+                    result.Item = input;
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
-
-                    transaction.Rollback();
+                    result.Exception(ex);
                 }
-            }
+            });
+
             return result;
         }
 
