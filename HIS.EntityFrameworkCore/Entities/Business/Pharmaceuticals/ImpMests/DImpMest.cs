@@ -1,5 +1,6 @@
 ﻿using HIS.Core.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Business.Patients;
+using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ExpMests;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.Systems;
 using HIS.Utilities.Enums;
@@ -9,7 +10,6 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
     public class DImpMest : FullAuditedEntity<Guid>
     {
         public string Code { get; set; }
-        public string Name { get; set; }
 
         /// <summary>
         /// Trạng thái phiếu nhập
@@ -19,7 +19,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
         /// <summary>
         /// Trang thái phiếu xuất
         /// </summary>
-        public EmpMestStatusType EmpMestStatus { get; set; }
+        public EmpMestStatusType ExpMestStatus { get; set; }
 
         /// <summary>
         /// Kho nhập
@@ -64,12 +64,12 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
         /// <summary>
         /// Ngày nhập kho
         /// </summary>
-        public DateTime? StockReceiptTime { get; set; }
+        public DateTime? StockImpTime { get; set; }
 
         /// <summary>
         /// Người nhập kho
         /// </summary>
-        public Guid? StockReceiptUserId { get; set; }
+        public Guid? StockImpUserId { get; set; }
 
         public string Description { get; set; }
 
@@ -113,12 +113,18 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
         /// </summary>
         public string Deliverer { get; set; }
 
+        /// <summary>
+        /// Phiếu xuất
+        /// </summary>
+        public Guid? ExpMestId { get; set; }
+
+        public DExpMest DExpMest { get; set; }
         public SRoom ImpStock { get; set; }
         public SRoom ExpStock { get; set; }
         public DImpExpMestType DImpExpMestType { get; set; }
         public SUser ReceiverUser { get; set; }
         public SUser ApproverUser { get; set; }
-        public SUser StockReceiptUser { get; set; }
+        public SUser StockImpUser { get; set; }
         public SRoom ReqRoom { get; set; }
         public SDepartment ReqDepartment { get; set; }
         public STreatment STreatment { get; set; }

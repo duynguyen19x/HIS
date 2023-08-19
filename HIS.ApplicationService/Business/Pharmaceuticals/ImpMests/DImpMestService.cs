@@ -49,8 +49,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
                                  {
                                      Id = dImMest.Id,
                                      Code = dImMest.Code,
-                                     Name = dImMest.Code,
                                      ImpMestStatus = dImMest.ImpMestStatus,
+                                     ExpMestStatus = dImMest.ExpMestStatus,
                                      ImpStockId = dImMest.ImpStockId,
                                      ImpStockCode = imStockDefault != null ? imStockDefault.Code : null,
                                      ImpStockName = imStockDefault != null ? imStockDefault.Name : null,
@@ -63,8 +63,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
                                      ApproverUserId = dImMest.ApproverUserId,
                                      ImpTime = dImMest.ImpTime.Value,
                                      ImpUserId = dImMest.ImpUserId,
-                                     StockReceiptUserId = dImMest.StockReceiptUserId,
-                                     StockReceiptTime = dImMest.StockReceiptTime,
+                                     StockImpUserId = dImMest.StockImpUserId,
+                                     StockImpTime = dImMest.StockImpTime,
                                      ApproverTime = dImMest.ApproverTime,
                                      Description = dImMest.Description,
                                      ReqRoomId = dImMest.ReqRoomId,
@@ -325,8 +325,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
                             {
                                 dImMest.ApproverTime = dateNow;
                                 dImMest.ApproverUserId = SessionExtensions.Login?.Id;
-                                dImMest.StockReceiptTime = dateNow;
-                                dImMest.StockReceiptUserId = SessionExtensions.Login?.Id;
+                                dImMest.StockImpTime = dateNow;
+                                dImMest.StockImpUserId = SessionExtensions.Login?.Id;
 
                                 dMedicineStocks.Add(new EntityFrameworkCore.Entities.Business.Pharmaceuticals.DMedicineStock()
                                 {
@@ -407,10 +407,10 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
                             // Trạng thái nhập kho mới thêm vào thuốc trong kho
                             if (input.ImpMestStatus == ImpMestStatusType.ReceivedInStock)
                             {
-                                dImMestOld.ApproverTime = dateNow;
-                                dImMestOld.ApproverUserId = SessionExtensions.Login?.Id;
-                                dImMestOld.StockReceiptTime = dateNow;
-                                dImMestOld.StockReceiptUserId = SessionExtensions.Login?.Id;
+                                input.ApproverTime = dateNow;
+                                input.ApproverUserId = SessionExtensions.Login?.Id;
+                                input.StockImpTime = dateNow;
+                                input.StockImpUserId = SessionExtensions.Login?.Id;
 
                                 dMedicineStocks.Add(new EntityFrameworkCore.Entities.Business.Pharmaceuticals.DMedicineStock()
                                 {
@@ -427,9 +427,10 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
                             sMedicines.Add(sMedicine);
                             dImMestMedicines.Add(dImMestMedicine);
                         }
-
                         _mapper.Map(input, dImMestOld);
+
                         dImMestOld.ModifiedDate = dateNow;
+                        dImMestOld.ModifiedBy = SessionExtensions.Login?.Id;
                     }
 
                     _dbContext.SMedicines.AddRange(sMedicines);

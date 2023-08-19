@@ -11,7 +11,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
             builder.ToTable("DImpMestMedicines");
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(t => t.DImMest)
+            builder.HasOne(t => t.DImpMest)
                 .WithMany()
                 .HasForeignKey(t => t.ImpMestId);
 

@@ -1,10 +1,18 @@
-﻿using HIS.Core.Application.Services.Dto;
-using HIS.Dtos.Business.DImMestMedicine;
+﻿using HIS.Core.Entities.Auditing;
+using HIS.EntityFrameworkCore.Entities.Business.Patients;
+using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities.Systems;
 using HIS.Utilities.Enums;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace HIS.Dtos.Business.DImMest
+namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ExpMests
 {
-    public class DImpMestDto : EntityDto<Guid?>
+    public class DExpMest : FullAuditedEntity<Guid>
     {
         public string Code { get; set; }
 
@@ -22,26 +30,16 @@ namespace HIS.Dtos.Business.DImMest
         /// Kho nhập
         /// </summary>
         public Guid? ImpStockId { get; set; }
-        public string ImpStockCode { get; set; }
-        public string ImpStockName { get; set; }
 
         /// <summary>
         /// Kho xuất
         /// </summary>
         public Guid? ExpStockId { get; set; }
-        public string ExpStockCode { get; set; }
-        public string ExpStockName { get; set; }
 
         /// <summary>
         /// Loại phiếu nhập, xuất
         /// </summary>
         public int? ImpExpMestTypeId { get; set; }
-        public string ImpExpMestTypeName { get; set; }
-
-        /// <summary>
-        /// Người nhận
-        /// </summary>
-        public Guid? ReceiverUserId { get; set; }
 
         /// <summary>
         /// Người duyệt
@@ -54,25 +52,28 @@ namespace HIS.Dtos.Business.DImMest
         public DateTime? ApproverTime { get; set; }
 
         /// <summary>
-        /// Ngày tạo phiếu nhập
+        /// Ngày tạo phiếu xuất
         /// </summary>
-        public DateTime? ImpTime { get; set; }
+        public DateTime? ExpTime { get; set; }
 
         /// <summary>
         /// Người tạo phiếu nhập
         /// </summary>
-        public Guid? ImpUserId { get; set; }
+        public Guid? ExpUserId { get; set; }
 
         /// <summary>
         /// Ngày nhập kho
         /// </summary>
-        public DateTime? StockImpTime { get; set; }
+        public DateTime? StockExpTime { get; set; }
 
         /// <summary>
         /// Người nhập kho
         /// </summary>
-        public Guid? StockImpUserId { get; set; }
+        public Guid? StockExpUserId { get; set; }
 
+        /// <summary>
+        /// Nội dung
+        /// </summary>
         public string Description { get; set; }
 
         /// <summary>
@@ -100,21 +101,19 @@ namespace HIS.Dtos.Business.DImMest
         /// </summary>
         public Guid? SupplierId { get; set; }
 
-        /// <summary>
-        /// Ngày hóa đơn
-        /// </summary>
-        public DateTime? InvTime { get; set; }
+        public Guid? ImpMestId { get; set; }
 
-        /// <summary>
-        /// Số hóa đơn
-        /// </summary>
-        public string InvNo { get; set; }
-
-        /// <summary>
-        /// NGười giao
-        /// </summary>
-        public string Deliverer { get; set; }
-
-        public IList<DImpMestMedicineDto> DImpMestMedicines { get; set; }
+        public DImpMest DImpMest { get; set; }
+        public SRoom ImpStock { get; set; }
+        public SRoom ExpStock { get; set; }
+        public DImpExpMestType DImpExpMestType { get; set; }
+        public SUser ReceiverUser { get; set; }
+        public SUser ApproverUser { get; set; }
+        public SUser StockExpUser { get; set; }
+        public SRoom ReqRoom { get; set; }
+        public SDepartment ReqDepartment { get; set; }
+        public STreatment STreatment { get; set; }
+        public SPatient SPatient { get; set; }
+        public SSupplier SSupplier { get; set; }
     }
 }

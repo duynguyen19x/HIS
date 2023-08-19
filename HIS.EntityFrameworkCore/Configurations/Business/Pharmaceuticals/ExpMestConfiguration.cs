@@ -1,30 +1,28 @@
-﻿using HIS.EntityFrameworkCore.Entities.Categories;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ExpMests;
+using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
-using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
 {
-    public class ImpMestConfiguration : IEntityTypeConfiguration<DImpMest>
+    internal class ExpMestConfiguration : IEntityTypeConfiguration<DExpMest>
     {
-        public void Configure(EntityTypeBuilder<DImpMest> builder)
+        public void Configure(EntityTypeBuilder<DExpMest> builder)
         {
-            builder.ToTable("DImpMests");
+            builder.ToTable("DExpMests");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50);
             builder.Property(x => x.Description).HasMaxLength(512);
-            builder.Property(x => x.Deliverer).HasMaxLength(512);
 
-            builder.HasOne(e => e.DExpMest)
+            builder.HasOne(e => e.DImpMest)
                 .WithMany()
-                .HasForeignKey(e => e.ExpMestId)
+                .HasForeignKey(e => e.ImpMestId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(e => e.ImpStock)
@@ -42,19 +40,14 @@ namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
                 .HasForeignKey(e => e.ImpExpMestTypeId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(e => e.ReceiverUser)
-                .WithMany()
-                .HasForeignKey(e => e.ReceiverUserId)
-                .OnDelete(DeleteBehavior.NoAction);
-
             builder.HasOne(e => e.ApproverUser)
                 .WithMany()
                 .HasForeignKey(e => e.ApproverUserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(e => e.StockImpUser)
+            builder.HasOne(e => e.StockExpUser)
                 .WithMany()
-                .HasForeignKey(e => e.StockImpUserId)
+                .HasForeignKey(e => e.StockExpUserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(e => e.ReqRoom)

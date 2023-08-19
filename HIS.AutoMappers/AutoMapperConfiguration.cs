@@ -118,7 +118,7 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.DImpExpMestType, opt => opt.Ignore())
                 .ForMember(dest => dest.ReceiverUser, opt => opt.Ignore())
                 .ForMember(dest => dest.ApproverUser, opt => opt.Ignore())
-                .ForMember(dest => dest.StockReceiptUser, opt => opt.Ignore())
+                .ForMember(dest => dest.StockImpUser, opt => opt.Ignore())
                 .ForMember(dest => dest.ReqRoom, opt => opt.Ignore())
                 .ForMember(dest => dest.ReqDepartment, opt => opt.Ignore())
                 .ForMember(dest => dest.STreatment, opt => opt.Ignore())
@@ -134,7 +134,7 @@ namespace HIS.AutoMappers
                 .ReverseMap();
 
             CreateMap<DImpMestMedicineDto, DImpMestMedicine>()
-                .ForMember(dest => dest.DImMest, opt => opt.Ignore())
+                .ForMember(dest => dest.DImpMest, opt => opt.Ignore())
                 .ForMember(dest => dest.SMedicine, opt => opt.Ignore())
                 .ReverseMap();
 
