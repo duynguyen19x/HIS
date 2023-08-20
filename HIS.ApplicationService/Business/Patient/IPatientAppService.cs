@@ -1,10 +1,8 @@
 ﻿using HIS.Application.Core.Services;
 using HIS.Application.Core.Services.Dto;
-using HIS.Core.Application.Services.Dto;
-using HIS.Dtos.Business.Patient;
-using HIS.Models.Commons;
+using HIS.Dtos.Business;
 
-namespace HIS.ApplicationService.Business.Patient
+namespace HIS.ApplicationService.Business
 {
     public interface IPatientAppService : IBaseAppService
     {

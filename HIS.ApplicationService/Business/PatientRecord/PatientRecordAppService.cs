@@ -1,16 +1,14 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
 using HIS.Application.Core.Services.Dto;
-using HIS.ApplicationService.Business.Patient;
-using HIS.Core.Application.Services.Dto;
 using HIS.Core.Extensions;
 using HIS.Core.Linq;
-using HIS.Dtos.Business.Patient;
-using HIS.Dtos.Business.PatientRecord;
+using HIS.Dtos.Business;
+using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace HIS.ApplicationService.Business.PatientRecord
+namespace HIS.ApplicationService.Business
 {
     public class PatientRecordAppService : BaseCrudAppService, IPatientRecordAppService
     {
@@ -102,6 +100,14 @@ namespace HIS.ApplicationService.Business.PatientRecord
             return await Task.FromResult(result);
         }
 
+        public async Task<ResultDto<PatientRecordDto>> CreateOrEdit(PatientRecordDto input)
+        {
+            if (input.Id == null)
+                return await Create(input);
+            else
+                return await Update(input);
+        }
+
         public async Task<ResultDto<PatientRecordDto>> Create(PatientRecordDto input)
         {
             var result = new ResultDto<PatientRecordDto>();
@@ -121,7 +127,7 @@ namespace HIS.ApplicationService.Business.PatientRecord
                     input.Id = Guid.NewGuid();
                     if (string.IsNullOrEmpty(input.Code))
                         input.Code = "BA" + (Context.PatientRecords.Count() + 1).ToString().PadLeft(5, '0');
-                    var patientRecord = Mapper.Map<EntityFrameworkCore.Entities.Business.PatientRecord>(input);
+                    var patientRecord = Mapper.Map<EntityFrameworkCore.Entities.Business.HISPatientRecord>(input);
                     patientRecord.CreatedDate = DateTime.Now;
                     patientRecord.CreatedBy = Guid.NewGuid(); // giả lập tài khoản create
                     Context.Add(patientRecord);
@@ -136,14 +142,61 @@ namespace HIS.ApplicationService.Business.PatientRecord
             return result;
         }
 
-        public Task<ResultDto<PatientRecordDto>> Update(PatientRecordDto input)
+        public async Task<ResultDto<PatientRecordDto>> Update(PatientRecordDto input)
         {
-            throw new NotImplementedException();
+            return await Context.UsingTransactionAsync<ResultDto<PatientRecordDto>>(async result =>
+            {
+                try
+                {
+                    // kiểm tra dữ liệu 
+
+                    // 
+                    // thêm mới hoặc cập nhật thông tin bệnh nhân
+                    var patientResult = await _patientAppService.CreateOrEdit(Mapper.Map<PatientDto>(input));
+                    if (patientResult.IsSuccessed)
+                    {
+                        input.PatientId = patientResult.Item.Id;
+                        input.PatientCode = patientResult.Item.Code;
+                    }
+
+                    if (string.IsNullOrEmpty(input.Code))
+                        input.Code = "BA" + DateTime.Now.Year + Context.Patients.Count().ToString().PadLeft(5, '0');
+                    var patientRecord = Mapper.Map<HISPatientRecord>(input);
+                    patientRecord.ModifiedDate = DateTime.Now;
+                    patientRecord.ModifiedBy = Guid.NewGuid(); // giả lập tài khoản update
+                    Context.Update(patientRecord);
+
+                    await Context.SaveChangesAsync();
+                    result.Item = input;
+
+
+                    await Context.SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    result.Exception(ex);   
+                }
+            });
         }
 
-        public Task<ResultDto<PatientRecordDto>> Delete(Guid id)
+        public async Task<ResultDto<PatientRecordDto>> Delete(Guid id)
         {
-            throw new NotImplementedException();
+            return await Context.UsingTransactionAsync<ResultDto<PatientRecordDto>>(async result =>
+            {
+                try
+                {
+                    var patientRecord = Context.PatientRecords.SingleOrDefault(x => x.Id == id);
+                    if (patientRecord != null)
+                    {
+                        Context.Remove(patientRecord);
+                        await Context.SaveChangesAsync();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    result.Exception(ex);
+                }
+            });
         }
     }
 }

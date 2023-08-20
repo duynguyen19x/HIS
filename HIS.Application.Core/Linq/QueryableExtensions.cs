@@ -1,10 +1,5 @@
-﻿using HIS.Core.Application.Services.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using HIS.Application.Core.Services.Dto;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.Core.Linq
 {

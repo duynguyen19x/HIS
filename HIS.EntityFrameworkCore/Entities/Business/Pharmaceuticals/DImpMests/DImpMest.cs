@@ -128,7 +128,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests
         public SDepartment ReqDepartment { get; set; }
         public SSupplier SSupplier { get; set; }
 
-        public Patient Patient { get; set; }
-        public PatientRecord PatientRecord { get; set; }
+        public HISPatient Patient { get; set; }
+        public HISPatientRecord PatientRecord { get; set; }
     }
 }

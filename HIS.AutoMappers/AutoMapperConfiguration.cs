@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
+using HIS.Dtos.Business;
 using HIS.Dtos.Business.DImMestMedicine;
 using HIS.Dtos.Business.DImpMest;
-using HIS.Dtos.Business.Patient;
-using HIS.Dtos.Business.PatientRecord;
 using HIS.Dtos.Dictionaries.Branch;
 using HIS.Dtos.Dictionaries.Career;
 using HIS.Dtos.Dictionaries.ChapterICD10;
@@ -138,8 +137,8 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.SPatientType, opt => opt.Ignore())
                 .ReverseMap();
 
-            CreateMap<PatientDto, HIS.EntityFrameworkCore.Entities.Business.Patient>().ReverseMap();
-            CreateMap<PatientRecordDto, HIS.EntityFrameworkCore.Entities.Business.PatientRecord>().ReverseMap();
+            CreateMap<PatientDto, EntityFrameworkCore.Entities.Business.HISPatient>().ReverseMap();
+            CreateMap<PatientRecordDto, EntityFrameworkCore.Entities.Business.HISPatientRecord>().ReverseMap();
             CreateMap<PatientRecordDto, PatientDto>()
                 .ForMember(d => d.Id, o => o.MapFrom(s => s.PatientId))
                 .ForMember(d => d.Code, o => o.MapFrom(s => s.PatientCode))

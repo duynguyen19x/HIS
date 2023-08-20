@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.ApplicationService.Systems.SYSAutoNumber
+namespace HIS.ApplicationService.Systems.AutoNumber
 {
     public interface ISYSAutoNumberAppService : IBaseAppService
     {

@@ -1,7 +1,6 @@
-﻿using AutoMapper;
-using HIS.Core.Application.Services.Dto;
+﻿using HIS.Application.Core.Services.Dto;
 
-namespace HIS.Dtos.Business.Patient
+namespace HIS.Dtos.Business
 {
     public class PatientDto : EntityDto<Guid?>
     {

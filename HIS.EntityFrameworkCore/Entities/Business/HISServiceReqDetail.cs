@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Application.Core.Services.Dto
+namespace HIS.EntityFrameworkCore.Entities.Business
 {
-    public interface IPagedResult<T> : IListResult<T>
+    public class HISServiceReqDetail
     {
     }
 }

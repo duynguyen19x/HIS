@@ -31,10 +31,8 @@ using HIS.ApplicationService.Systems.Login;
 using HIS.ApplicationService.Systems.Role;
 using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
-using HIS.ApplicationService.Business.Pharmaceuticals.DImpMests;
-using HIS.ApplicationService.Systems.SYSAutoNumber;
-using HIS.ApplicationService.Business.Patient;
-using HIS.ApplicationService.Business.PatientRecord;
+using HIS.ApplicationService.Systems.AutoNumber;
+using HIS.ApplicationService.Business;
 
 namespace HIS.ApplicationService
 {

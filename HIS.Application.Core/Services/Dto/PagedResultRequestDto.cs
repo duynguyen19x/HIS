@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Core.Application.Services.Dto
+namespace HIS.Application.Core.Services.Dto
 {
     [Serializable]
     public abstract class PagedResultRequestDto : IPagedResultRequest
     {
-        public virtual string? Filter { get; set; }
+        public virtual string Filter { get; set; }
 
         public virtual int MaxResultCount { get; set; }
 

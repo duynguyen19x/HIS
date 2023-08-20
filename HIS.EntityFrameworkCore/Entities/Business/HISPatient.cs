@@ -11,7 +11,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
     /// <summary>
     /// Thông tin bệnh nhân.
     /// </summary>
-    public class Patient : FullAuditedEntity<Guid>
+    public class HISPatient : FullAuditedEntity<Guid>
     {
         [Required]
         [MaxLength(50)]

@@ -1,13 +1,6 @@
-﻿using AutoMapper;
-using HIS.Core.Application.Services.Dto;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HIS.Application.Core.Services.Dto;
 
-namespace HIS.Dtos.Business.PatientRecord
+namespace HIS.Dtos.Business
 {
     public class PatientRecordDto : EntityDto<Guid?>
     {
@@ -44,6 +37,8 @@ namespace HIS.Dtos.Business.PatientRecord
         public virtual Guid? DistrictId { get; set; }
 
         public virtual Guid? WardId { get; set; }
+
+        public virtual Guid BranchId { get; set; }
 
         public virtual string Address { get; set; }
 

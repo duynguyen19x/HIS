@@ -1,4 +1,4 @@
-﻿using HIS.Core.Application.Services.Dto;
+﻿using HIS.Application.Core.Services.Dto;
 using HIS.Utilities.Enums;
 using System;
 using System.Collections.Generic;

@@ -83,8 +83,8 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<DMedicineStock> DMedicineStocks { get; set; }
 
         #region Patient
-        public DbSet<Patient> Patients { get; set; }
-        public DbSet<PatientRecord> PatientRecords { get; set; }
+        public DbSet<HISPatient> Patients { get; set; }
+        public DbSet<HISPatientRecord> PatientRecords { get; set; }
         #endregion
 
         #region System
