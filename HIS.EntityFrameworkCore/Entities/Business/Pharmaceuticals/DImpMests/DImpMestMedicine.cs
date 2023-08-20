@@ -1,16 +1,10 @@
 ﻿using HIS.Core.Entities;
-using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
 using HIS.EntityFrameworkCore.Entities.Categories;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ExpMests
+namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests
 {
-    public class DExpMestMedicine : Entity<Guid>
+    public class DImpMestMedicine : Entity<Guid>
     {
         [Description("Thứ tự sắp xếp")]
         public int? SortOrder { get; set; }
@@ -33,9 +27,9 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ExpMests
         /// <summary>
         /// Phiếu nhập
         /// </summary>
-        public Guid? ExpMestId { get; set; }
+        public Guid? ImpMestId { get; set; }
 
-        public DImpMest DExpMest { get; set; }
+        public DImpMest DImpMest { get; set; }
         public SMedicine SMedicine { get; set; }
     }
 }

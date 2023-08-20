@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using HIS.Core.Linq;
-using HIS.Dtos.Business.DImMest;
+using HIS.Dtos.Business.DImpMest;
 using HIS.Dtos.Business.DImMestMedicine;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.MedicinePricePolicy;
-using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
+using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
@@ -18,7 +18,7 @@ using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Globalization;
 
-namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
+namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
 {
     public class DImpMestService : BaseSerivce, IDImpMestService
     {
@@ -91,6 +91,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
         }
 
         #region Nhập từ nhà cung cấp
+        /// <summary>
+        /// Lấy phiếu nhập NCC
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<ApiResult<DImpMestDto>> ImportFromSupplierGetById(Guid id)
         {
             var result = new ApiResult<DImpMestDto>();
@@ -132,6 +137,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
 
                             if (!string.IsNullOrEmpty(sMedicine.Code))
                                 dImpMestMedicine.Code = sMedicine.Code.Split('.')?[0];
+
                             dImpMestMedicine.HeInCode = sMedicine.HeInCode;
                             dImpMestMedicine.Name = sMedicine.Name;
                             dImpMestMedicine.SortOrder = sMedicine.SortOrder;
@@ -177,6 +183,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
             return await Task.FromResult(result);
         }
 
+        /// <summary>
+        /// Hủy nhập kho
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<ApiResult<bool>> ImportFromSupplierCanceled(Guid id)
         {
             var result = new ApiResult<bool>();
@@ -249,17 +260,32 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
             return await Task.FromResult(result);
         }
 
+        /// <summary>
+        /// Lưu phiếu tạm
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task<ApiResult<DImpMestDto>> ImportFromSupplierSaveAsDraft(DImpMestDto input)
         {
             return await ImportFromSupplier(input);
         }
 
+        /// <summary>
+        /// Nhập kho
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public async Task<ApiResult<DImpMestDto>> ImportFromSupplierStockIn(DImpMestDto input)
         {
             input.ImpMestStatus = ImpMestStatusType.ReceivedInStock;
             return await ImportFromSupplier(input);
         }
 
+        /// <summary>
+        /// Nhập thuốc từ NCC
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         private async Task<ApiResult<DImpMestDto>> ImportFromSupplier(DImpMestDto input)
         {
             var result = new ApiResult<DImpMestDto>();
@@ -455,6 +481,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ImpMests
             return await Task.FromResult(result);
         }
 
+        /// <summary>
+        /// Ktra trước khi lưu
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         private async Task<ApiResult<DImpMestDto>> ImportFromSupplierValid(DImpMestDto input)
         {
             var result = new ApiResult<DImpMestDto>();

@@ -1,6 +1,6 @@
 ﻿using HIS.Core.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Business.Patients;
-using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
+using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.Systems;
 using HIS.Utilities.Enums;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ExpMests
+namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests
 {
     public class DExpMest : FullAuditedEntity<Guid>
     {

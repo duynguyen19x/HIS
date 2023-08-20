@@ -1,5 +1,5 @@
-﻿using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ExpMests;
-using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
+﻿using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests;
+using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;

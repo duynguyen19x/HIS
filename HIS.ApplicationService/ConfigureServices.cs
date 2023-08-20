@@ -1,7 +1,7 @@
 ﻿using HIS.ApplicationService.Business.DImpExpMestType;
 using HIS.ApplicationService.Business.Patient;
 using HIS.ApplicationService.Business.Pharmaceuticals.DMedicineStock;
-using HIS.ApplicationService.Business.Pharmaceuticals.ImpMests;
+using HIS.ApplicationService.Business.Pharmaceuticals.DImpMests;
 using HIS.ApplicationService.Dictionaries.Branch;
 using HIS.ApplicationService.Dictionaries.Career;
 using HIS.ApplicationService.Dictionaries.ChapterICD10;
@@ -32,7 +32,7 @@ using HIS.ApplicationService.Systems.Login;
 using HIS.ApplicationService.Systems.Role;
 using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
-using HIS.ApplicationService.Business.Pharmaceuticals.ImpMests;
+using HIS.ApplicationService.Business.Pharmaceuticals.DImpMests;
 using HIS.ApplicationService.Systems.SYSAutoNumber;
 
 namespace HIS.ApplicationService

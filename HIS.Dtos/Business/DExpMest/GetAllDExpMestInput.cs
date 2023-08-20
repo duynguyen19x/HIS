@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Business.DImMest
+namespace HIS.Dtos.Business.DExpMest
 {
-    public class GetAllDImpMestInput
+    public class GetAllDExpMestInput
     {
         public string CodeFilter { get; set; }
-        public string NameFilter { get; set; }
         public bool? InactiveFilter { get; set; }
     }
 }

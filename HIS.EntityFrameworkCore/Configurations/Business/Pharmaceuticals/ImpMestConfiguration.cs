@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
+using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals

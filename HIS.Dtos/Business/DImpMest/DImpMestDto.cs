@@ -1,13 +1,10 @@
-﻿using HIS.Core.Entities.Auditing;
-using HIS.EntityFrameworkCore.Entities.Business.Patients;
-using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ExpMests;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.EntityFrameworkCore.Entities.Systems;
+﻿using HIS.Core.Application.Services.Dto;
+using HIS.Dtos.Business.DImMestMedicine;
 using HIS.Utilities.Enums;
 
-namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
+namespace HIS.Dtos.Business.DImpMest
 {
-    public class DImpMest : FullAuditedEntity<Guid>
+    public class DImpMestDto : EntityDto<Guid?>
     {
         public string Code { get; set; }
 
@@ -25,16 +22,21 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
         /// Kho nhập
         /// </summary>
         public Guid? ImpStockId { get; set; }
+        public string ImpStockCode { get; set; }
+        public string ImpStockName { get; set; }
 
         /// <summary>
         /// Kho xuất
         /// </summary>
         public Guid? ExpStockId { get; set; }
+        public string ExpStockCode { get; set; }
+        public string ExpStockName { get; set; }
 
         /// <summary>
         /// Loại phiếu nhập, xuất
         /// </summary>
         public int? ImpExpMestTypeId { get; set; }
+        public string ImpExpMestTypeName { get; set; }
 
         /// <summary>
         /// Người nhận
@@ -113,22 +115,6 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests
         /// </summary>
         public string Deliverer { get; set; }
 
-        /// <summary>
-        /// Phiếu xuất
-        /// </summary>
-        public Guid? ExpMestId { get; set; }
-
-        public DExpMest DExpMest { get; set; }
-        public SRoom ImpStock { get; set; }
-        public SRoom ExpStock { get; set; }
-        public DImpExpMestType DImpExpMestType { get; set; }
-        public SUser ReceiverUser { get; set; }
-        public SUser ApproverUser { get; set; }
-        public SUser StockImpUser { get; set; }
-        public SRoom ReqRoom { get; set; }
-        public SDepartment ReqDepartment { get; set; }
-        public STreatment STreatment { get; set; }
-        public SPatient SPatient { get; set; }
-        public SSupplier SSupplier { get; set; }
+        public IList<DImpMestMedicineDto> DImpMestMedicines { get; set; }
     }
 }

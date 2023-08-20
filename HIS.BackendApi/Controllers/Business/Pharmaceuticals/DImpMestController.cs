@@ -1,6 +1,6 @@
 ﻿using HIS.ApplicationService.Business.Patient;
-using HIS.ApplicationService.Business.Pharmaceuticals.ImpMests;
-using HIS.Dtos.Business.DImMest;
+using HIS.ApplicationService.Business.Pharmaceuticals.DImpMests;
+using HIS.Dtos.Business.DImpMest;
 using HIS.Dtos.Business.Patient;
 using HIS.Dtos.Business.Treatment;
 using HIS.Dtos.Commons;

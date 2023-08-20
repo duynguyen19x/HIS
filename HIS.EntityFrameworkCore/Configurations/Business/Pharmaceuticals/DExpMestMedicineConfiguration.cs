@@ -1,4 +1,4 @@
-﻿using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
+﻿using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ExpMests;
+using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
 {

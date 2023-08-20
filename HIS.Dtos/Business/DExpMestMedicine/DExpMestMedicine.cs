@@ -1,10 +1,15 @@
 ﻿using HIS.Core.Application.Services.Dto;
 using HIS.Dtos.Dictionaries.MedicinePricePolicy;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace HIS.Dtos.Business.DImMestMedicine
+namespace HIS.Dtos.Business.DExpMestMedicine
 {
-    public class DImpMestMedicineDto : EntityDto<Guid?>
+    public class DExpMestMedicine : EntityDto<Guid?>
     {
         [Description("Mã thuốc")]
         public string Code { get; set; }
@@ -102,8 +107,6 @@ namespace HIS.Dtos.Business.DImMestMedicine
 
         public Guid? MedicineId { get; set; }
 
-        public Guid? ImpMestId { get; set; }
-
-        public IList<SMedicinePricePolicyDto> SMedicinePricePolicies { get; set; }
+        public Guid? ExpMestId { get; set; }
     }
 }

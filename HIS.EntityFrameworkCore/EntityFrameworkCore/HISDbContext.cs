@@ -7,7 +7,7 @@ using HIS.EntityFrameworkCore.Configurations.Systems;
 using HIS.EntityFrameworkCore.Data;
 using HIS.EntityFrameworkCore.Entities.Business.Patients;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals;
-using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
+using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;

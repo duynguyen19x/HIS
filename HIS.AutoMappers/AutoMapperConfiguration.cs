@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using HIS.Dtos.Business.DImMest;
+using HIS.Dtos.Business.DImpMest;
 using HIS.Dtos.Business.DImMestMedicine;
 using HIS.Dtos.Business.Patient;
 using HIS.Dtos.Business.Treatment;
@@ -30,7 +30,7 @@ using HIS.Dtos.Dictionaries.ServiceUnit;
 using HIS.Dtos.Dictionaries.Supplier;
 using HIS.Dtos.Dictionaries.Ward;
 using HIS.EntityFrameworkCore.Entities.Business.Patients;
-using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
+using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
