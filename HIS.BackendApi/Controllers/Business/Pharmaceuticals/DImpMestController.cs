@@ -1,8 +1,5 @@
-﻿using HIS.ApplicationService.Business.Patient;
-using HIS.ApplicationService.Business.Pharmaceuticals.DImpMests;
+﻿using HIS.ApplicationService.Business.Pharmaceuticals.DImpMests;
 using HIS.Dtos.Business.DImpMest;
-using HIS.Dtos.Business.Patient;
-using HIS.Dtos.Business.Treatment;
 using HIS.Dtos.Commons;
 using HIS.Models.Commons;
 using Microsoft.AspNetCore.Mvc;

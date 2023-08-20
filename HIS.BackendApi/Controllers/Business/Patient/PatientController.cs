@@ -1,10 +1,7 @@
 ﻿using HIS.Application.Core.Services.Dto;
 using HIS.ApplicationService.Business.Patient;
 using HIS.Core.Application.Services.Dto;
-using HIS.Dtos.Business.DImpExpMestType;
 using HIS.Dtos.Business.Patient;
-using HIS.Dtos.Commons;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Business.Patient

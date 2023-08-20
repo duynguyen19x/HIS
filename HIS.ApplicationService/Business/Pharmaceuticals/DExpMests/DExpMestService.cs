@@ -58,7 +58,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DExpMests
                                      Description = dImMest.Description,
                                      ReqRoomId = dImMest.ReqRoomId,
                                      ReqDepartmentId = dImMest.ReqDepartmentId,
-                                     TreatmentId = dImMest.TreatmentId,
+                                     PatientRecordId = dImMest.PatientRecordId,
                                      PatientId = dImMest.PatientId,
                                      SupplierId = dImMest.SupplierId,
                                      InvTime = dImMest.InvTime,

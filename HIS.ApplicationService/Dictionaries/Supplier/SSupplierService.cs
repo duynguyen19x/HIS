@@ -123,11 +123,15 @@ namespace HIS.ApplicationService.Dictionaries.Supplier
             try
             {
                 result.Result = (from r in _dbContext.SSuppliers
+                                 where r.IsDeleted == false
                                  select new SSupplierDto()
                                  {
                                      Id = r.Id,
                                      Code = r.Code,
                                      Name = r.Name,
+                                     Address = r.Address,   
+                                     TaxCode = r.TaxCode,
+                                     SortOrder = r.SortOrder,
                                      Description = r.Description,
                                      Inactive = r.Inactive,
                                  })

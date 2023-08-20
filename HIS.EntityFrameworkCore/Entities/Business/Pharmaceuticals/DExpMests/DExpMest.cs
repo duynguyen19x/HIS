@@ -1,5 +1,4 @@
 ﻿using HIS.Core.Entities.Auditing;
-using HIS.EntityFrameworkCore.Entities.Business.Patients;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.Systems;
@@ -89,7 +88,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests
         /// <summary>
         /// Id điều trị
         /// </summary>
-        public Guid? TreatmentId { get; set; }
+        public Guid? PatientRecordId { get; set; }
 
         /// <summary>
         /// Id Bệnh nhân
@@ -112,8 +111,8 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests
         public SUser StockExpUser { get; set; }
         public SRoom ReqRoom { get; set; }
         public SDepartment ReqDepartment { get; set; }
-        public STreatment STreatment { get; set; }
-        public SPatient SPatient { get; set; }
+        public Patient Patient { get; set; }
+        public PatientRecord PatientRecord { get; set; }
         public SSupplier SSupplier { get; set; }
     }
 }

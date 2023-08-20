@@ -29,6 +29,28 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Patient",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    Inactive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Patient", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SBranchs",
                 columns: table => new
                 {
@@ -379,39 +401,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "STreatments",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    PatientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DOB = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Year = table.Column<int>(type: "int", nullable: false),
-                    InTimeClinical = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    InTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    OutTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    GenderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CareerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    EthnicId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CountryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ProvinceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DistrictId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    WardId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_STreatments", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "SUnits",
                 columns: table => new
                 {
@@ -450,6 +439,22 @@ namespace HIS.EntityFrameworkCore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "sYSRefTypeCategories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SortOrder = table.Column<int>(type: "int", nullable: false),
+                    Inactive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_sYSRefTypeCategories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -502,35 +507,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_SDepartments_SDepartmentTypes_DepartmentTypeId",
                         column: x => x.DepartmentTypeId,
                         principalTable: "SDepartmentTypes",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SPatients",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    BirthYear = table.Column<int>(type: "int", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    GenderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SPatients", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SPatients_SGenders_GenderId",
-                        column: x => x.GenderId,
-                        principalTable: "SGenders",
                         principalColumn: "Id");
                 });
 
@@ -775,6 +751,65 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SYSAutoNumbers",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Prefix = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Value = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    LengthOfValue = table.Column<int>(type: "int", nullable: false),
+                    Suffix = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RefTypeCategoryId = table.Column<int>(type: "int", nullable: false),
+                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SYSAutoNumbers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SYSAutoNumbers_SBranchs_BranchId",
+                        column: x => x.BranchId,
+                        principalTable: "SBranchs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_SYSAutoNumbers_sYSRefTypeCategories_RefTypeCategoryId",
+                        column: x => x.RefTypeCategoryId,
+                        principalTable: "sYSRefTypeCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SYSRefTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SortOrder = table.Column<int>(type: "int", nullable: false),
+                    RefTypeCategoryId = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SYSRefTypes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SYSRefTypes_sYSRefTypeCategories_RefTypeCategoryId",
+                        column: x => x.RefTypeCategoryId,
+                        principalTable: "sYSRefTypeCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SDistricts",
                 columns: table => new
                 {
@@ -944,38 +979,38 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.Sql(@"/****** Object:  Trigger [AfterInsertSMedicines]    Script Date: 20/08/2023 09:42:50 ******/
-IF  EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].[AfterInsertSMedicines]'))
-DROP TRIGGER [dbo].[AfterInsertSMedicines]
-GO
--- =============================================
--- Author:		DuyNV
--- Create date: 11/08/2023
--- Description:	Lấy mã thuốc theo lô
--- =============================================
-CREATE TRIGGER [dbo].[AfterInsertSMedicines]
-   ON  [dbo].[SMedicines] 
-   AFTER INSERT
-AS 
-BEGIN
-	DECLARE @MedicineTypeId uniqueidentifier;
-	DECLARE @MedicineId uniqueidentifier;
-
-	DECLARE @Code NVARCHAR(50);
-	DECLARE @AutoNumber INT;
-	
-	SELECT @MedicineTypeId = MedicineTypeId,
-		   @MedicineId = Id
-    FROM INSERTED;
-
-	SELECT @Code = Code, @AutoNumber = AutoNumber FROM SMedicineTypes WHERE Id = @MedicineTypeId;
-	SET @Code = @Code + '.' + CONVERT(NVARCHAR(50), @AutoNumber  + 1);
-
-	UPDATE SMedicines SET Code = @Code WHERE Id = @MedicineId;
-	UPDATE SMedicineTypes SET AutoNumber = @AutoNumber + 1 WHERE Id = @MedicineTypeId;
-END
-GO
-ALTER TABLE [dbo].[SMedicines] ENABLE TRIGGER [AfterInsertSMedicines]
-GO");
+                                    IF  EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].[AfterInsertSMedicines]'))
+                                    DROP TRIGGER [dbo].[AfterInsertSMedicines]
+                                    GO
+                                    -- =============================================
+                                    -- Author:		DuyNV
+                                    -- Create date: 11/08/2023
+                                    -- Description:	Lấy mã thuốc theo lô
+                                    -- =============================================
+                                    CREATE TRIGGER [dbo].[AfterInsertSMedicines]
+                                       ON  [dbo].[SMedicines] 
+                                       AFTER INSERT
+                                    AS 
+                                    BEGIN
+                                    	DECLARE @MedicineTypeId uniqueidentifier;
+                                    	DECLARE @MedicineId uniqueidentifier;
+                                    
+                                    	DECLARE @Code NVARCHAR(50);
+                                    	DECLARE @AutoNumber INT;
+                                    	
+                                    	SELECT @MedicineTypeId = MedicineTypeId,
+                                    		   @MedicineId = Id
+                                        FROM INSERTED;
+                                    
+                                    	SELECT @Code = Code, @AutoNumber = AutoNumber FROM SMedicineTypes WHERE Id = @MedicineTypeId;
+                                    	SET @Code = @Code + '.' + CONVERT(NVARCHAR(50), @AutoNumber  + 1);
+                                    
+                                    	UPDATE SMedicines SET Code = @Code WHERE Id = @MedicineId;
+                                    	UPDATE SMedicineTypes SET AutoNumber = @AutoNumber + 1 WHERE Id = @MedicineTypeId;
+                                    END
+                                    GO
+                                    ALTER TABLE [dbo].[SMedicines] ENABLE TRIGGER [AfterInsertSMedicines]
+                                    GO");
 
             migrationBuilder.CreateTable(
                 name: "SServicePricePolicies",
@@ -1158,6 +1193,94 @@ GO");
                 });
 
             migrationBuilder.CreateTable(
+                name: "PatientRecord",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    PatientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PatientName = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    BirthYear = table.Column<int>(type: "int", nullable: false),
+                    BirthPlace = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    IdentificationNumber = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    IssueDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IssueBy = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    GenderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EthnicityId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CareerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CountryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProvinceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DistrictId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    WardId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    Tel = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Mobile = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Fax = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    PatientTypeId = table.Column<int>(type: "int", nullable: false),
+                    PatientRecordTypeId = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    Inactive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PatientRecord", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PatientRecord_Patient_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "Patient",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PatientRecord_SCareers_CareerId",
+                        column: x => x.CareerId,
+                        principalTable: "SCareers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PatientRecord_SCountries_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "SCountries",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PatientRecord_SDistricts_DistrictId",
+                        column: x => x.DistrictId,
+                        principalTable: "SDistricts",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_PatientRecord_SEthnics_EthnicityId",
+                        column: x => x.EthnicityId,
+                        principalTable: "SEthnics",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PatientRecord_SGenders_GenderId",
+                        column: x => x.GenderId,
+                        principalTable: "SGenders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PatientRecord_SProvinces_ProvinceId",
+                        column: x => x.ProvinceId,
+                        principalTable: "SProvinces",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_PatientRecord_SWards_WardId",
+                        column: x => x.WardId,
+                        principalTable: "SWards",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DExpMestMedicines",
                 columns: table => new
                 {
@@ -1200,7 +1323,7 @@ GO");
                     Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     ReqRoomId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ReqDepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    TreatmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    PatientRecordId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     PatientId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     SupplierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ImpMestId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -1222,14 +1345,19 @@ GO");
                         principalTable: "DImpExpMestTypes",
                         principalColumn: "Id");
                     table.ForeignKey(
+                        name: "FK_DExpMests_PatientRecord_PatientRecordId",
+                        column: x => x.PatientRecordId,
+                        principalTable: "PatientRecord",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_DExpMests_Patient_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "Patient",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_DExpMests_SDepartments_ReqDepartmentId",
                         column: x => x.ReqDepartmentId,
                         principalTable: "SDepartments",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_DExpMests_SPatients_PatientId",
-                        column: x => x.PatientId,
-                        principalTable: "SPatients",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_DExpMests_SRooms_ExpStockId",
@@ -1250,11 +1378,6 @@ GO");
                         name: "FK_DExpMests_SSuppliers_SupplierId",
                         column: x => x.SupplierId,
                         principalTable: "SSuppliers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_DExpMests_STreatments_TreatmentId",
-                        column: x => x.TreatmentId,
-                        principalTable: "STreatments",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_DExpMests_SUsers_ApproverUserId",
@@ -1294,8 +1417,8 @@ GO");
                     Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     ReqRoomId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ReqDepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    TreatmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     PatientId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    PatientRecordId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     SupplierId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     InvTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     InvNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -1323,14 +1446,19 @@ GO");
                         principalTable: "DImpExpMestTypes",
                         principalColumn: "Id");
                     table.ForeignKey(
+                        name: "FK_DImpMests_PatientRecord_PatientRecordId",
+                        column: x => x.PatientRecordId,
+                        principalTable: "PatientRecord",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_DImpMests_Patient_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "Patient",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_DImpMests_SDepartments_ReqDepartmentId",
                         column: x => x.ReqDepartmentId,
                         principalTable: "SDepartments",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_DImpMests_SPatients_PatientId",
-                        column: x => x.PatientId,
-                        principalTable: "SPatients",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_DImpMests_SRooms_ExpStockId",
@@ -1351,11 +1479,6 @@ GO");
                         name: "FK_DImpMests_SSuppliers_SupplierId",
                         column: x => x.SupplierId,
                         principalTable: "SSuppliers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_DImpMests_STreatments_TreatmentId",
-                        column: x => x.TreatmentId,
-                        principalTable: "STreatments",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_DImpMests_SUsers_ApproverUserId",
@@ -1753,9 +1876,9 @@ GO");
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"), "KXD", null, new DateTime(2023, 8, 20, 9, 58, 0, 673, DateTimeKind.Local).AddTicks(9471), null, false, null, null, "Chưa xác định", 0 },
-                    { new Guid("e9497984-d355-41af-b917-091500956be9"), "NU", null, new DateTime(2023, 8, 20, 9, 58, 0, 673, DateTimeKind.Local).AddTicks(9492), null, false, null, null, "Nữ", 2 },
-                    { new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"), "NAM", null, new DateTime(2023, 8, 20, 9, 58, 0, 673, DateTimeKind.Local).AddTicks(9490), null, false, null, null, "Nam", 1 }
+                    { new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"), "KXD", null, new DateTime(2023, 8, 20, 10, 29, 47, 843, DateTimeKind.Local).AddTicks(9168), null, false, null, null, "Chưa xác định", 0 },
+                    { new Guid("e9497984-d355-41af-b917-091500956be9"), "NU", null, new DateTime(2023, 8, 20, 10, 29, 47, 843, DateTimeKind.Local).AddTicks(9193), null, false, null, null, "Nữ", 2 },
+                    { new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"), "NAM", null, new DateTime(2023, 8, 20, 10, 29, 47, 843, DateTimeKind.Local).AddTicks(9191), null, false, null, null, "Nam", 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -1845,9 +1968,9 @@ GO");
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { 1, "BHYT", null, new DateTime(2023, 8, 20, 9, 58, 0, 674, DateTimeKind.Local).AddTicks(756), null, false, null, null, "Bảo hiểm y tế", 0 },
-                    { 2, "VP", null, new DateTime(2023, 8, 20, 9, 58, 0, 674, DateTimeKind.Local).AddTicks(761), null, false, null, null, "Viện phí", 0 },
-                    { 3, "DV", null, new DateTime(2023, 8, 20, 9, 58, 0, 674, DateTimeKind.Local).AddTicks(762), null, false, null, null, "Dịch vụ", 0 }
+                    { 1, "BHYT", null, new DateTime(2023, 8, 20, 10, 29, 47, 844, DateTimeKind.Local).AddTicks(243), null, false, null, null, "Bảo hiểm y tế", 0 },
+                    { 2, "VP", null, new DateTime(2023, 8, 20, 10, 29, 47, 844, DateTimeKind.Local).AddTicks(248), null, false, null, null, "Viện phí", 0 },
+                    { 3, "DV", null, new DateTime(2023, 8, 20, 10, 29, 47, 844, DateTimeKind.Local).AddTicks(249), null, false, null, null, "Dịch vụ", 0 }
                 });
 
             migrationBuilder.InsertData(
@@ -2023,6 +2146,11 @@ GO");
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DExpMests_PatientRecordId",
+                table: "DExpMests",
+                column: "PatientRecordId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DExpMests_ReceiverUserId",
                 table: "DExpMests",
                 column: "ReceiverUserId");
@@ -2046,11 +2174,6 @@ GO");
                 name: "IX_DExpMests_SupplierId",
                 table: "DExpMests",
                 column: "SupplierId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DExpMests_TreatmentId",
-                table: "DExpMests",
-                column: "TreatmentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DImpMestMedicines_ImpMestId",
@@ -2093,6 +2216,11 @@ GO");
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DImpMests_PatientRecordId",
+                table: "DImpMests",
+                column: "PatientRecordId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DImpMests_ReceiverUserId",
                 table: "DImpMests",
                 column: "ReceiverUserId");
@@ -2118,11 +2246,6 @@ GO");
                 column: "SupplierId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DImpMests_TreatmentId",
-                table: "DImpMests",
-                column: "TreatmentId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_DMedicineStocks_MedicineId",
                 table: "DMedicineStocks",
                 column: "MedicineId");
@@ -2131,6 +2254,46 @@ GO");
                 name: "IX_DMedicineStocks_StockId",
                 table: "DMedicineStocks",
                 column: "StockId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PatientRecord_CareerId",
+                table: "PatientRecord",
+                column: "CareerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PatientRecord_CountryId",
+                table: "PatientRecord",
+                column: "CountryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PatientRecord_DistrictId",
+                table: "PatientRecord",
+                column: "DistrictId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PatientRecord_EthnicityId",
+                table: "PatientRecord",
+                column: "EthnicityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PatientRecord_GenderId",
+                table: "PatientRecord",
+                column: "GenderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PatientRecord_PatientId",
+                table: "PatientRecord",
+                column: "PatientId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PatientRecord_ProvinceId",
+                table: "PatientRecord",
+                column: "ProvinceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PatientRecord_WardId",
+                table: "PatientRecord",
+                column: "WardId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SDepartments_BranchId",
@@ -2223,11 +2386,6 @@ GO");
                 column: "UnitId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SPatients_GenderId",
-                table: "SPatients",
-                column: "GenderId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_SProvinces_CountryId",
                 table: "SProvinces",
                 column: "CountryId");
@@ -2302,6 +2460,21 @@ GO");
                 table: "SWards",
                 column: "DistrictId");
 
+            migrationBuilder.CreateIndex(
+                name: "IX_SYSAutoNumbers_BranchId",
+                table: "SYSAutoNumbers",
+                column: "BranchId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SYSAutoNumbers_RefTypeCategoryId",
+                table: "SYSAutoNumbers",
+                column: "RefTypeCategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SYSRefTypes_RefTypeCategoryId",
+                table: "SYSRefTypes",
+                column: "RefTypeCategoryId");
+
             migrationBuilder.AddForeignKey(
                 name: "FK_DExpMestMedicines_DImpMests_ExpMestId",
                 table: "DExpMestMedicines",
@@ -2334,13 +2507,7 @@ GO");
                 name: "DMedicineStocks");
 
             migrationBuilder.DropTable(
-                name: "SCareers");
-
-            migrationBuilder.DropTable(
                 name: "SChapterIcds");
-
-            migrationBuilder.DropTable(
-                name: "SEthnics");
 
             migrationBuilder.DropTable(
                 name: "SExecutionRooms");
@@ -2373,7 +2540,10 @@ GO");
                 name: "SUserRoles");
 
             migrationBuilder.DropTable(
-                name: "SWards");
+                name: "SYSAutoNumbers");
+
+            migrationBuilder.DropTable(
+                name: "SYSRefTypes");
 
             migrationBuilder.DropTable(
                 name: "SMaterialTypes");
@@ -2394,7 +2564,7 @@ GO");
                 name: "SRoles");
 
             migrationBuilder.DropTable(
-                name: "SDistricts");
+                name: "sYSRefTypeCategories");
 
             migrationBuilder.DropTable(
                 name: "SMedicineTypes");
@@ -2409,9 +2579,6 @@ GO");
                 name: "SSurgicalProcedureTypes");
 
             migrationBuilder.DropTable(
-                name: "SProvinces");
-
-            migrationBuilder.DropTable(
                 name: "SMedicineGroups");
 
             migrationBuilder.DropTable(
@@ -2419,9 +2586,6 @@ GO");
 
             migrationBuilder.DropTable(
                 name: "SUnits");
-
-            migrationBuilder.DropTable(
-                name: "SCountries");
 
             migrationBuilder.DropTable(
                 name: "DImpMests");
@@ -2433,7 +2597,7 @@ GO");
                 name: "DImpExpMestTypes");
 
             migrationBuilder.DropTable(
-                name: "SPatients");
+                name: "PatientRecord");
 
             migrationBuilder.DropTable(
                 name: "SRooms");
@@ -2442,13 +2606,22 @@ GO");
                 name: "SSuppliers");
 
             migrationBuilder.DropTable(
-                name: "STreatments");
-
-            migrationBuilder.DropTable(
                 name: "SUsers");
 
             migrationBuilder.DropTable(
+                name: "Patient");
+
+            migrationBuilder.DropTable(
+                name: "SCareers");
+
+            migrationBuilder.DropTable(
+                name: "SEthnics");
+
+            migrationBuilder.DropTable(
                 name: "SGenders");
+
+            migrationBuilder.DropTable(
+                name: "SWards");
 
             migrationBuilder.DropTable(
                 name: "SDepartments");
@@ -2457,10 +2630,19 @@ GO");
                 name: "SRoomTypes");
 
             migrationBuilder.DropTable(
+                name: "SDistricts");
+
+            migrationBuilder.DropTable(
                 name: "SBranchs");
 
             migrationBuilder.DropTable(
                 name: "SDepartmentTypes");
+
+            migrationBuilder.DropTable(
+                name: "SProvinces");
+
+            migrationBuilder.DropTable(
+                name: "SCountries");
         }
     }
 }
