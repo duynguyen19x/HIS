@@ -14,7 +14,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DExpMests
         public DExpMestService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
           : base(dbContext, config, mapper) { }
 
-        public async Task<ApiResultList<DImpMestDto>> GetByStock(Guid stockId, string fromDate, string toDate)
+        public async Task<ApiResultList<DImpMestDto>> GetByStocks(Guid stockId, string fromDate, string toDate)
         {
             var result = new ApiResultList<DImpMestDto>();
 

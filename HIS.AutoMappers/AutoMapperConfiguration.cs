@@ -2,6 +2,7 @@
 using HIS.Dtos.Business;
 using HIS.Dtos.Business.DImMestMedicine;
 using HIS.Dtos.Business.DImpMest;
+using HIS.Dtos.Business.DMedicineStock;
 using HIS.Dtos.Dictionaries.Branch;
 using HIS.Dtos.Dictionaries.Career;
 using HIS.Dtos.Dictionaries.ChapterICD10;
@@ -14,6 +15,7 @@ using HIS.Dtos.Dictionaries.ExecutionRoom;
 using HIS.Dtos.Dictionaries.Gender;
 using HIS.Dtos.Dictionaries.Hospital;
 using HIS.Dtos.Dictionaries.Icd;
+using HIS.Dtos.Dictionaries.Medicine;
 using HIS.Dtos.Dictionaries.MedicineGroup;
 using HIS.Dtos.Dictionaries.MedicinePricePolicy;
 using HIS.Dtos.Dictionaries.MedicineType;
@@ -28,6 +30,8 @@ using HIS.Dtos.Dictionaries.ServiceResultIndex;
 using HIS.Dtos.Dictionaries.ServiceUnit;
 using HIS.Dtos.Dictionaries.Supplier;
 using HIS.Dtos.Dictionaries.Ward;
+using HIS.EntityFrameworkCore.Entities.Business;
+using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
@@ -127,6 +131,13 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.SCountry, opt => opt.Ignore())
                 .ReverseMap();
 
+            CreateMap<SMedicineDto, SMedicine>()
+                .ForMember(dest => dest.SMedicineType, opt => opt.Ignore())
+                .ForMember(dest => dest.SUnit, opt => opt.Ignore())
+                .ForMember(dest => dest.SMedicineLine, opt => opt.Ignore())
+                .ForMember(dest => dest.SCountry, opt => opt.Ignore())
+                .ReverseMap();
+
             CreateMap<DImpMestMedicineDto, DImpMestMedicine>()
                 .ForMember(dest => dest.DImpMest, opt => opt.Ignore())
                 .ForMember(dest => dest.SMedicine, opt => opt.Ignore())
@@ -137,8 +148,13 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.SPatientType, opt => opt.Ignore())
                 .ReverseMap();
 
-            CreateMap<PatientDto, EntityFrameworkCore.Entities.Business.HISPatient>().ReverseMap();
-            CreateMap<PatientRecordDto, EntityFrameworkCore.Entities.Business.HISPatientRecord>().ReverseMap();
+            CreateMap<DMedicineStockDto, DMedicineStock>()
+                .ForMember(dest => dest.SMedicine, opt => opt.Ignore())
+                .ForMember(dest => dest.SStock, opt => opt.Ignore())
+                .ReverseMap();
+
+            CreateMap<PatientDto, HISPatient>().ReverseMap();
+            CreateMap<PatientRecordDto, HISPatientRecord>().ReverseMap();
             CreateMap<PatientRecordDto, PatientDto>()
                 .ForMember(d => d.Id, o => o.MapFrom(s => s.PatientId))
                 .ForMember(d => d.Code, o => o.MapFrom(s => s.PatientCode))

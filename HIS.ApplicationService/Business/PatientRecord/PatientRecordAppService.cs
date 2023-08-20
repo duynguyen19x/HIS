@@ -110,8 +110,7 @@ namespace HIS.ApplicationService.Business
 
         public async Task<ResultDto<PatientRecordDto>> Create(PatientRecordDto input)
         {
-            var result = new ResultDto<PatientRecordDto>();
-            await Context.TransactionAsync(async () =>
+            return await Context.UsingTransactionAsync<ResultDto<PatientRecordDto>>(async result =>
             {
                 try
                 {
@@ -139,7 +138,6 @@ namespace HIS.ApplicationService.Business
                     result.Exception(ex);
                 }
             });
-            return result;
         }
 
         public async Task<ResultDto<PatientRecordDto>> Update(PatientRecordDto input)
