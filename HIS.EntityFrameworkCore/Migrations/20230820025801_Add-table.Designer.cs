@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(HISDbContext))]
-    [Migration("20230808160925_Add-Table")]
-    partial class AddTable
+    [Migration("20230820025801_Add-table")]
+    partial class Addtable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -160,7 +160,161 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.ToTable("STreatments", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpExMestType", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests.DExpMest", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ApproverTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("ApproverUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<int>("ExpMestStatus")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("ExpStockId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ExpTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("ExpUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("ImpExpMestTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("ImpMestId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("ImpMestStatus")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("ImpStockId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("PatientId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ReceiverUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ReqDepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ReqRoomId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("StockExpTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("StockExpUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("SupplierId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("TreatmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApproverUserId");
+
+                    b.HasIndex("ExpStockId");
+
+                    b.HasIndex("ImpExpMestTypeId");
+
+                    b.HasIndex("ImpMestId");
+
+                    b.HasIndex("ImpStockId");
+
+                    b.HasIndex("PatientId");
+
+                    b.HasIndex("ReceiverUserId");
+
+                    b.HasIndex("ReqDepartmentId");
+
+                    b.HasIndex("ReqRoomId");
+
+                    b.HasIndex("StockExpUserId");
+
+                    b.HasIndex("SupplierId");
+
+                    b.HasIndex("TreatmentId");
+
+                    b.ToTable("DExpMests", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests.DExpMestMedicine", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ExpMestId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal?>("ImpPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("ImpQuantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("ImpVatRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("MedicineId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("TaxRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExpMestId");
+
+                    b.HasIndex("MedicineId");
+
+                    b.ToTable("DExpMestMedicines", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpExpMestType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -182,9 +336,151 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DImpExpMestTypes", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "01",
+                            Inactive = false,
+                            Name = "Nhập thuốc từ nhà cung cấp"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "02",
+                            Inactive = false,
+                            Name = "Xuất thuốc trả nhà cung cấp"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Code = "03",
+                            Inactive = false,
+                            Name = "Nhập từ kho khác"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Code = "04",
+                            Inactive = false,
+                            Name = "Xuất trả kho khác"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Code = "05",
+                            Inactive = false,
+                            Name = "Nhập bù"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Code = "06",
+                            Inactive = false,
+                            Name = "Xuất thanh lý"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Code = "07",
+                            Inactive = false,
+                            Name = "Xuất kiểm nghiệm"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Code = "08",
+                            Inactive = false,
+                            Name = "Xuất hủy (Mất, hỏng, vỡ)"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Code = "09",
+                            Inactive = false,
+                            Name = "Xuất hao phí phòng khám"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Code = "10",
+                            Inactive = false,
+                            Name = "Xuất sử dụng phòng"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Code = "11",
+                            Inactive = false,
+                            Name = "Xuất sử dụng khoa"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Code = "12",
+                            Inactive = false,
+                            Name = "Nhập bù cơ số tủ trực"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Code = "13",
+                            Inactive = false,
+                            Name = "Xuất bù cơ số tủ trực"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Code = "14",
+                            Inactive = false,
+                            Name = "Bổ sung cơ số tủ trực"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Code = "15",
+                            Inactive = false,
+                            Name = "Hoàn trả cơ số tủ trực"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Code = "16",
+                            Inactive = false,
+                            Name = "Xuất bản cho khách hàng"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Code = "17",
+                            Inactive = false,
+                            Name = "Nhập trả từ khách hàng"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Code = "18",
+                            Inactive = false,
+                            Name = "Nhập VTYT từ nhà cung cấp"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Code = "19",
+                            Inactive = false,
+                            Name = "Xuất VTYT trả nhà cung cấp"
+                        },
+                        new
+                        {
+                            Id = 99,
+                            Code = "99",
+                            Inactive = false,
+                            Name = "Xuất khác"
+                        });
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImpMest", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests.DImpMest", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -220,23 +516,32 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
 
-                    b.Property<Guid?>("ExStockId")
+                    b.Property<Guid?>("ExpMestId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("ImExMestTypeId")
+                    b.Property<int>("ExpMestStatus")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("ImStockId")
+                    b.Property<Guid?>("ExpStockId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("ImpExpMestTypeId")
+                        .HasColumnType("int");
 
                     b.Property<int>("ImpMestStatus")
                         .HasColumnType("int");
+
+                    b.Property<Guid?>("ImpStockId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("ImpTime")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("ImpUserId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("InvNo")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("InvTime")
                         .HasColumnType("datetime2");
@@ -250,10 +555,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
                     b.Property<Guid?>("PatientId")
                         .HasColumnType("uniqueidentifier");
 
@@ -266,10 +567,10 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("ReqRoomId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("StockReceiptTime")
+                    b.Property<DateTime?>("StockImpTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("StockReceiptUserId")
+                    b.Property<Guid?>("StockImpUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("SupplierId")
@@ -282,11 +583,13 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("ApproverUserId");
 
-                    b.HasIndex("ExStockId");
+                    b.HasIndex("ExpMestId");
 
-                    b.HasIndex("ImExMestTypeId");
+                    b.HasIndex("ExpStockId");
 
-                    b.HasIndex("ImStockId");
+                    b.HasIndex("ImpExpMestTypeId");
+
+                    b.HasIndex("ImpStockId");
 
                     b.HasIndex("PatientId");
 
@@ -296,7 +599,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("ReqRoomId");
 
-                    b.HasIndex("StockReceiptUserId");
+                    b.HasIndex("StockImpUserId");
 
                     b.HasIndex("SupplierId");
 
@@ -305,7 +608,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.ToTable("DImpMests", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImpMestMedicine", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests.DImpMestMedicine", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -339,6 +642,54 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasIndex("MedicineId");
 
                     b.ToTable("DImpMestMedicines", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DMedicineStock", b =>
+                {
+                    b.Property<Guid?>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal>("AvailableQuantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("MedicineId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Quantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("StockId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicineId");
+
+                    b.HasIndex("StockId");
+
+                    b.ToTable("DMedicineStocks", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Medicines.SMedicinePricePolicy", b =>
@@ -1326,6 +1677,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
 
+                    b.Property<int>("AutoNumber")
+                        .HasColumnType("int");
+
                     b.Property<string>("Code")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -2266,6 +2620,361 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SCareers", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SChapterIcd", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int?>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SChapterIcds", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("ffa69c02-696f-4645-b72e-0f371b8cacfa"),
+                            Code = "0",
+                            Inactive = false,
+                            Name = "Khác",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("dd087168-fb8b-451f-bddd-56adff7a91b3"),
+                            Code = "1",
+                            Inactive = false,
+                            Name = "1.Bệnh nhiễm trùng và ký sinh trùng",
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("c81585c5-e57d-468f-99f2-1b403317ffd9"),
+                            Code = "2",
+                            Inactive = false,
+                            Name = "2.Bướu tân sinh",
+                            SortOrder = 3
+                        },
+                        new
+                        {
+                            Id = new Guid("c1747ec7-094e-4516-bd96-3e41327a317d"),
+                            Code = "3",
+                            Inactive = false,
+                            Name = "3.Bệnh của máu, cơ quan tạo máu và các rối loạn liên quan đến cơ chế miễn dịch",
+                            SortOrder = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("0d2992cf-6fba-4871-97b3-a8a1229e86fd"),
+                            Code = "4",
+                            Inactive = false,
+                            Name = "4.Bệnh nội tiết, dinh dưỡng và chuyển hóa",
+                            SortOrder = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("e06c956c-1795-46a0-ba63-cb75f74ac431"),
+                            Code = "5",
+                            Inactive = false,
+                            Name = "5.Rối loạn tâm thần và hành vi",
+                            SortOrder = 6
+                        },
+                        new
+                        {
+                            Id = new Guid("4c8535f7-5852-435d-8b4d-66c198537fc4"),
+                            Code = "6",
+                            Inactive = false,
+                            Name = "6.Bệnh hệ thần kinh",
+                            SortOrder = 7
+                        },
+                        new
+                        {
+                            Id = new Guid("11baf250-7aed-4f3f-949b-82d8929d55ff"),
+                            Code = "7",
+                            Inactive = false,
+                            Name = "7.Bệnh mắt và phần phụ",
+                            SortOrder = 8
+                        },
+                        new
+                        {
+                            Id = new Guid("f3685b6e-8b27-4e8e-8a7d-b07ae695805f"),
+                            Code = "8",
+                            Inactive = false,
+                            Name = "8.Bệnh tai và xương chũm",
+                            SortOrder = 9
+                        },
+                        new
+                        {
+                            Id = new Guid("5a91f9a2-5a73-4dce-9a99-532c3b75518e"),
+                            Code = "9",
+                            Inactive = false,
+                            Name = "9.Bệnh tuần hoàn",
+                            SortOrder = 10
+                        },
+                        new
+                        {
+                            Id = new Guid("5ec5c91b-db70-491b-b1b5-a617d9a82549"),
+                            Code = "10",
+                            Inactive = false,
+                            Name = "10.Bệnh hô hấp",
+                            SortOrder = 11
+                        },
+                        new
+                        {
+                            Id = new Guid("6cd03dbd-dcbf-44d1-ab7a-3b32e71b3cb7"),
+                            Code = "11",
+                            Inactive = false,
+                            Name = "11.Bệnh tiêu hóa",
+                            SortOrder = 12
+                        },
+                        new
+                        {
+                            Id = new Guid("3a6de8c5-5bfd-4648-8225-42c79a224793"),
+                            Code = "12",
+                            Inactive = false,
+                            Name = "12.Bệnh da và mô dưới da",
+                            SortOrder = 13
+                        },
+                        new
+                        {
+                            Id = new Guid("f98e5ee7-4651-43fd-85fd-7e077785ad53"),
+                            Code = "13",
+                            Inactive = false,
+                            Name = "13.Bệnh của hệ xương khớp và mô liên kết",
+                            SortOrder = 14
+                        },
+                        new
+                        {
+                            Id = new Guid("93672f0e-4d83-4214-9576-d29113acea27"),
+                            Code = "14",
+                            Inactive = false,
+                            Name = "14.Bệnh hệ sinh dục - tiết niệu",
+                            SortOrder = 15
+                        },
+                        new
+                        {
+                            Id = new Guid("cb433c30-519a-40ad-aab8-479dfad013c3"),
+                            Code = "15",
+                            Inactive = false,
+                            Name = "15.Thai nghén, sinh đẻ và hậu sản",
+                            SortOrder = 16
+                        },
+                        new
+                        {
+                            Id = new Guid("bb4dd54d-2566-41be-a293-ed9398efeaa0"),
+                            Code = "16",
+                            Inactive = false,
+                            Name = "16.Bệnh lý xuất phát trong thời ký chu kỳ",
+                            SortOrder = 17
+                        },
+                        new
+                        {
+                            Id = new Guid("91c637c5-272c-488c-8489-98be3297d88e"),
+                            Code = "17",
+                            Inactive = false,
+                            Name = "17.Dị tật bẩm sinh, biến dạng và bất thường về nhiễm sắc thể",
+                            SortOrder = 18
+                        },
+                        new
+                        {
+                            Id = new Guid("5d500bff-32f6-46ee-ba7a-f89a43fdd5b1"),
+                            Code = "18",
+                            Inactive = false,
+                            Name = "18.Các triệu chứng, dấu hiệu và những biểu hiện lâm sàng bất thường, không phân loại ở phần khác",
+                            SortOrder = 19
+                        },
+                        new
+                        {
+                            Id = new Guid("dd240e2f-1434-4091-a691-12da1214424e"),
+                            Code = "19",
+                            Inactive = false,
+                            Name = "19.Vết thương, ngộ độc và hậu quả của một số nguyên nhân bên ngoài",
+                            SortOrder = 20
+                        },
+                        new
+                        {
+                            Id = new Guid("613e5901-9552-40f8-b865-f9fd6e91d7e8"),
+                            Code = "20",
+                            Inactive = false,
+                            Name = "20.Các nguyên nhân ngoại sinh của bệnh và tử vong",
+                            SortOrder = 21
+                        },
+                        new
+                        {
+                            Id = new Guid("08f6a2b3-d5e6-4fad-a022-5f29d0117801"),
+                            Code = "21",
+                            Inactive = false,
+                            Name = "21.Các yếu tố ảnh hưởng đến tình trạng sức khỏe và tiếp xúc dịch vụ y tế",
+                            SortOrder = 22
+                        },
+                        new
+                        {
+                            Id = new Guid("aaf07983-f9ed-43a5-8d9e-be42cdaa4044"),
+                            Code = "22",
+                            Inactive = false,
+                            Name = "22.Kháng các thuốc kháng sinh và chống ung thư",
+                            SortOrder = 23
+                        },
+                        new
+                        {
+                            Id = new Guid("134969e1-21e0-496c-8a7e-b40d5e52b4f4"),
+                            Code = "23",
+                            Inactive = false,
+                            Name = "Chương I. Bệnh nhiễm trùng và ký sinh trùng U50",
+                            SortOrder = 24
+                        },
+                        new
+                        {
+                            Id = new Guid("c27dbaeb-b11f-448b-bb63-be2f06d3e795"),
+                            Code = "24",
+                            Inactive = false,
+                            Name = "Chương II. Bướu tân sinh - U51",
+                            SortOrder = 25
+                        },
+                        new
+                        {
+                            Id = new Guid("f8811c3e-61e4-4344-b139-b583dc0d94a3"),
+                            Code = "25",
+                            Inactive = false,
+                            Name = "Chương III. Bệnh về máu, cơ quan tạo máu và các rối loạn liên quan đến cơ chế miễn dịch - U52",
+                            SortOrder = 26
+                        },
+                        new
+                        {
+                            Id = new Guid("30e5cab2-63d3-4b93-b430-042b04276e20"),
+                            Code = "26",
+                            Inactive = false,
+                            Name = "Chương IV. Bệnh nội tiết, dinh dưỡng và rối loạn chuyển hóa - U53",
+                            SortOrder = 27
+                        },
+                        new
+                        {
+                            Id = new Guid("e71c20e6-9f6c-4998-8867-c29b3f0da643"),
+                            Code = "27",
+                            Inactive = false,
+                            Name = "Chương V. Bệnh rối loạn tâm thần và hành vi - U54",
+                            SortOrder = 28
+                        },
+                        new
+                        {
+                            Id = new Guid("f2b02143-9c76-4717-a9a5-711ce23bf81c"),
+                            Code = "28",
+                            Inactive = false,
+                            Name = "Chương VI. Bệnh hệ thần kinh - U55",
+                            SortOrder = 29
+                        },
+                        new
+                        {
+                            Id = new Guid("f21cf99c-f691-43eb-92c7-d9cd595fc1b2"),
+                            Code = "29",
+                            Inactive = false,
+                            Name = "Chương VII. Bệnh về mắt và phần phụ - U56",
+                            SortOrder = 30
+                        },
+                        new
+                        {
+                            Id = new Guid("b4d1c297-0f9c-41d4-9aa9-b211ecf0cbee"),
+                            Code = "30",
+                            Inactive = false,
+                            Name = "Chương VIII. Bệnh của tai xương chũm - U57",
+                            SortOrder = 31
+                        },
+                        new
+                        {
+                            Id = new Guid("a0570373-f0ce-4051-93e7-3285476367cb"),
+                            Code = "31",
+                            Inactive = false,
+                            Name = "Chương IX. Bệnh hệ tuần hoàn - U58",
+                            SortOrder = 32
+                        },
+                        new
+                        {
+                            Id = new Guid("08b63907-e7b9-4e6a-b075-706cca99f29c"),
+                            Code = "32",
+                            Inactive = false,
+                            Name = "Chương X. Bệnh hệ hô hấp U59",
+                            SortOrder = 33
+                        },
+                        new
+                        {
+                            Id = new Guid("e96358f3-2f7c-4d6f-a4fa-0268039df244"),
+                            Code = "33",
+                            Inactive = false,
+                            Name = "Chương XI. Bệnh tiêu hóa - U60",
+                            SortOrder = 34
+                        },
+                        new
+                        {
+                            Id = new Guid("4104f31a-d1ad-4025-8756-4faddf40d453"),
+                            Code = "34",
+                            Inactive = false,
+                            Name = "Chương XII. Bệnh của da và mô dưới da - U61",
+                            SortOrder = 35
+                        },
+                        new
+                        {
+                            Id = new Guid("f9e407f1-0417-4067-9d25-dae91d19e1bf"),
+                            Code = "35",
+                            Inactive = false,
+                            Name = "Chương XIII. Bệnh của hệ xương khớp và mô liên kết - U62",
+                            SortOrder = 36
+                        },
+                        new
+                        {
+                            Id = new Guid("cd456287-b5aa-4d8c-b23d-7027c7676ce7"),
+                            Code = "36",
+                            Inactive = false,
+                            Name = "Chương XIV. Bệnh hệ sinh dục - Tiết niệu - U63",
+                            SortOrder = 37
+                        },
+                        new
+                        {
+                            Id = new Guid("a67315a8-8874-4a76-9d56-bb5103740e66"),
+                            Code = "37",
+                            Inactive = false,
+                            Name = "Chương XV. Thai nghén, sinh đẻ và hậu sản - U64",
+                            SortOrder = 38
+                        },
+                        new
+                        {
+                            Id = new Guid("0377427b-d6bd-4b58-99a9-d71789475bb2"),
+                            Code = "38",
+                            Inactive = false,
+                            Name = "Chương XVI. Dị tật bẩm, biến dạng và bất thường về nhiễm sắc thể - U65",
+                            SortOrder = 39
+                        },
+                        new
+                        {
+                            Id = new Guid("723b5a32-b7a2-4d46-9e19-c42d096839e2"),
+                            Code = "39",
+                            Inactive = false,
+                            Name = "Chương XVII. Các triệu chứng dấu hiệu và những biểu hiện lâm sàng bất thường, chưa được phân loại ở nơi khác - U66",
+                            SortOrder = 40
+                        },
+                        new
+                        {
+                            Id = new Guid("c3c34fe9-3d68-4f4c-98ab-abc10ec96ccc"),
+                            Code = "40",
+                            Inactive = false,
+                            Name = "Chương XVIII. Vết thương ngộ độc và hậu quả của một số nguyên nhân bên ngoài - U67",
+                            SortOrder = 41
+                        });
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SCountry", b =>
@@ -4622,7 +5331,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"),
                             Code = "KXD",
-                            CreatedDate = new DateTime(2023, 8, 8, 23, 9, 23, 785, DateTimeKind.Local).AddTicks(4420),
+                            CreatedDate = new DateTime(2023, 8, 20, 9, 58, 0, 673, DateTimeKind.Local).AddTicks(9471),
                             Inactive = false,
                             Name = "Chưa xác định",
                             SortOrder = 0
@@ -4631,7 +5340,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"),
                             Code = "NAM",
-                            CreatedDate = new DateTime(2023, 8, 8, 23, 9, 23, 785, DateTimeKind.Local).AddTicks(4440),
+                            CreatedDate = new DateTime(2023, 8, 20, 9, 58, 0, 673, DateTimeKind.Local).AddTicks(9490),
                             Inactive = false,
                             Name = "Nam",
                             SortOrder = 1
@@ -4640,7 +5349,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e9497984-d355-41af-b917-091500956be9"),
                             Code = "NU",
-                            CreatedDate = new DateTime(2023, 8, 8, 23, 9, 23, 785, DateTimeKind.Local).AddTicks(4442),
+                            CreatedDate = new DateTime(2023, 8, 20, 9, 58, 0, 673, DateTimeKind.Local).AddTicks(9492),
                             Inactive = false,
                             Name = "Nữ",
                             SortOrder = 2
@@ -4862,7 +5571,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "BHYT",
-                            CreatedDate = new DateTime(2023, 8, 8, 23, 9, 23, 785, DateTimeKind.Local).AddTicks(5485),
+                            CreatedDate = new DateTime(2023, 8, 20, 9, 58, 0, 674, DateTimeKind.Local).AddTicks(756),
                             Inactive = false,
                             Name = "Bảo hiểm y tế",
                             SortOrder = 0
@@ -4871,7 +5580,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "VP",
-                            CreatedDate = new DateTime(2023, 8, 8, 23, 9, 23, 785, DateTimeKind.Local).AddTicks(5489),
+                            CreatedDate = new DateTime(2023, 8, 20, 9, 58, 0, 674, DateTimeKind.Local).AddTicks(761),
                             Inactive = false,
                             Name = "Viện phí",
                             SortOrder = 0
@@ -4880,7 +5589,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 3,
                             Code = "DV",
-                            CreatedDate = new DateTime(2023, 8, 8, 23, 9, 23, 785, DateTimeKind.Local).AddTicks(5491),
+                            CreatedDate = new DateTime(2023, 8, 20, 9, 58, 0, 674, DateTimeKind.Local).AddTicks(762),
                             Inactive = false,
                             Name = "Dịch vụ",
                             SortOrder = 0
@@ -5143,6 +5852,10 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Address")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
                     b.Property<string>("Code")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -5181,6 +5894,10 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Property<int?>("SortOrder")
                         .HasColumnType("int");
+
+                    b.Property<string>("TaxCode")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.HasKey("Id");
 
@@ -5667,26 +6384,132 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("Gender");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImpMest", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests.DExpMest", b =>
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SUser", "ApproverUser")
                         .WithMany()
                         .HasForeignKey("ApproverUserId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "ExStock")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "ExpStock")
                         .WithMany()
-                        .HasForeignKey("ExStockId")
+                        .HasForeignKey("ExpStockId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpExMestType", "DImExMestType")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpExpMestType", "DImpExpMestType")
                         .WithMany()
-                        .HasForeignKey("ImExMestTypeId")
+                        .HasForeignKey("ImpExpMestTypeId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "ImStock")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests.DImpMest", "DImpMest")
                         .WithMany()
-                        .HasForeignKey("ImStockId")
+                        .HasForeignKey("ImpMestId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "ImpStock")
+                        .WithMany()
+                        .HasForeignKey("ImpStockId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Patients.SPatient", "SPatient")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SUser", "ReceiverUser")
+                        .WithMany()
+                        .HasForeignKey("ReceiverUserId");
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SDepartment", "ReqDepartment")
+                        .WithMany()
+                        .HasForeignKey("ReqDepartmentId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "ReqRoom")
+                        .WithMany()
+                        .HasForeignKey("ReqRoomId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SUser", "StockExpUser")
+                        .WithMany()
+                        .HasForeignKey("StockExpUserId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SSupplier", "SSupplier")
+                        .WithMany()
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Patients.STreatment", "STreatment")
+                        .WithMany()
+                        .HasForeignKey("TreatmentId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("ApproverUser");
+
+                    b.Navigation("DImpExpMestType");
+
+                    b.Navigation("DImpMest");
+
+                    b.Navigation("ExpStock");
+
+                    b.Navigation("ImpStock");
+
+                    b.Navigation("ReceiverUser");
+
+                    b.Navigation("ReqDepartment");
+
+                    b.Navigation("ReqRoom");
+
+                    b.Navigation("SPatient");
+
+                    b.Navigation("SSupplier");
+
+                    b.Navigation("STreatment");
+
+                    b.Navigation("StockExpUser");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests.DExpMestMedicine", b =>
+                {
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests.DImpMest", "DExpMest")
+                        .WithMany()
+                        .HasForeignKey("ExpMestId");
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicine", "SMedicine")
+                        .WithMany()
+                        .HasForeignKey("MedicineId");
+
+                    b.Navigation("DExpMest");
+
+                    b.Navigation("SMedicine");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests.DImpMest", b =>
+                {
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SUser", "ApproverUser")
+                        .WithMany()
+                        .HasForeignKey("ApproverUserId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests.DExpMest", "DExpMest")
+                        .WithMany()
+                        .HasForeignKey("ExpMestId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "ExpStock")
+                        .WithMany()
+                        .HasForeignKey("ExpStockId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpExpMestType", "DImpExpMestType")
+                        .WithMany()
+                        .HasForeignKey("ImpExpMestTypeId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "ImpStock")
+                        .WithMany()
+                        .HasForeignKey("ImpStockId")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Patients.SPatient", "SPatient")
@@ -5709,9 +6532,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasForeignKey("ReqRoomId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SUser", "StockReceiptUser")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SUser", "StockImpUser")
                         .WithMany()
-                        .HasForeignKey("StockReceiptUserId")
+                        .HasForeignKey("StockImpUserId")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SSupplier", "SSupplier")
@@ -5726,11 +6549,13 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Navigation("ApproverUser");
 
-                    b.Navigation("DImExMestType");
+                    b.Navigation("DExpMest");
 
-                    b.Navigation("ExStock");
+                    b.Navigation("DImpExpMestType");
 
-                    b.Navigation("ImStock");
+                    b.Navigation("ExpStock");
+
+                    b.Navigation("ImpStock");
 
                     b.Navigation("ReceiverUser");
 
@@ -5744,12 +6569,12 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Navigation("STreatment");
 
-                    b.Navigation("StockReceiptUser");
+                    b.Navigation("StockImpUser");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImpMestMedicine", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests.DImpMestMedicine", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests.DImpMest", "DImMest")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests.DImpMest", "DImpMest")
                         .WithMany()
                         .HasForeignKey("ImpMestId");
 
@@ -5757,9 +6582,26 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .WithMany()
                         .HasForeignKey("MedicineId");
 
-                    b.Navigation("DImMest");
+                    b.Navigation("DImpMest");
 
                     b.Navigation("SMedicine");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DMedicineStock", b =>
+                {
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicine", "SMedicine")
+                        .WithMany()
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "SStock")
+                        .WithMany()
+                        .HasForeignKey("StockId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("SMedicine");
+
+                    b.Navigation("SStock");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Medicines.SMedicinePricePolicy", b =>

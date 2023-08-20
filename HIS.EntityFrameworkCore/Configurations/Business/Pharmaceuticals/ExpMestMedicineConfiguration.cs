@@ -10,7 +10,7 @@ using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
 {
-    public class DExpMestMedicineConfiguration : IEntityTypeConfiguration<DExpMestMedicine>
+    public class ExpMestMedicineConfiguration : IEntityTypeConfiguration<DExpMestMedicine>
     {
         public void Configure(EntityTypeBuilder<DExpMestMedicine> builder)
         {

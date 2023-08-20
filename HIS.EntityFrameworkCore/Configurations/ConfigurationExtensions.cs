@@ -61,6 +61,8 @@ namespace HIS.EntityFrameworkCore.Configurations
             modelBuilder.ApplyConfiguration(new ImpMestConfiguration());
             modelBuilder.ApplyConfiguration(new ImpMestMedicineConfigaration());
             modelBuilder.ApplyConfiguration(new MedicineStockConfiguration());
+            modelBuilder.ApplyConfiguration(new ExpMestConfiguration());
+            modelBuilder.ApplyConfiguration(new ExpMestMedicineConfiguration());
         }
     }
 }

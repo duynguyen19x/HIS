@@ -11,11 +11,11 @@ namespace HIS.Utilities.Enums
         /// <summary>
         /// Nhập từ NCC
         /// </summary>
-        ImportFromSupplier = 1,
+        ImportMedicineFromSupplier = 1,
         /// <summary>
         /// Xuất trả NCC
         /// </summary>
-        ExportFormSupplier,
+        ExportMedicineFormSupplier,
         /// <summary>
         /// Nhập từ kho khác
         /// </summary>
@@ -77,8 +77,16 @@ namespace HIS.Utilities.Enums
         /// </summary>
         ReturnFromCustomer,
         /// <summary>
+        /// Nhập VT từ NCC
+        /// </summary>
+        ImportMaterialFromSupplier,
+        /// <summary>
+        /// Xuất VT trả NCC
+        /// </summary>
+        ExportMaterialFormSupplier,
+        /// <summary>
         /// Xuất khác
         /// </summary>
-        OtherIssue,
+        OtherIssue = 99,
     }
 }
