@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace HIS.EntityFrameworkCore.Entities.Business
 {
     /// <summary>
-    /// Mẫu kết quả.
+    /// Mẫu kết quả dịch vụ.
     /// </summary>
     public class HISServiceResultTemp : AuditedEntity<Guid>
     {

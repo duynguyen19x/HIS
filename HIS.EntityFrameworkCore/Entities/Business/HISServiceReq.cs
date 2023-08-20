@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Business
 {
+    /// <summary>
+    /// Phiếu chỉ định dịch vụ.
+    /// </summary>
     public class HISServiceReq : FullAuditedEntity<Guid>
     {
     }

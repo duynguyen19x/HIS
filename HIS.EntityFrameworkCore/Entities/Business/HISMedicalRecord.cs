@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace HIS.EntityFrameworkCore.Entities.Business
 {
     /// <summary>
-    /// Thông tin bệnh án
+    /// Thông tin bệnh án theo từng khoa/phòng.
     /// </summary>
     public class HISMedicalRecord : FullAuditedEntity<Guid>
     {
@@ -23,7 +23,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public virtual Guid BedId { get; set; }
         public int MedicalRecordStatusId { get; set; } // trạng thái bệnh án
         public int MedicalRecordTypeId { get; set; } // loại bệnh án
-        public int MedicalRecordEndTypeId { get; set; } // xử trí
+        public int MedicalRecordEndTypeId { get; set; } // xử trí 
         public virtual DateTime StartDate { get; set; }
         public virtual DateTime? EndDate { get; set; }
 

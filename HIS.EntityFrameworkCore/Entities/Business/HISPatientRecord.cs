@@ -82,7 +82,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         [Required]
         public virtual DateTime ReceiptionDate { get; set; } // thơi gian đăng ký, tiếp nhận
         public virtual Guid ReceiptionRoomId { get; set; } // phòng tiếp đón
-        public virtual Guid ReceiptionDepartmentId { get; set; }
+        public virtual Guid ReceiptionDepartmentId { get; set; } // khoa đón tiếp
 
         public virtual bool IsEmergency { get; set; } // cấp cứu
         public virtual string HospitalizationReason { get; set; } // lý do nhập viện

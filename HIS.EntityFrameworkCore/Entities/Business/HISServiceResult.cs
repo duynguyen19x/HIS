@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Business
 {
+    /// <summary>
+    /// Kết quả dịch vụ.
+    /// </summary>
     internal class HISServiceResult
     {
     }
