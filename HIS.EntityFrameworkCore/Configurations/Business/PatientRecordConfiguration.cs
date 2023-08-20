@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business
 {
-    public class PatientRecordConfiguration : IEntityTypeConfiguration<PatientRecord>
+    public class PatientRecordConfiguration : IEntityTypeConfiguration<HISPatientRecord>
     {
-        public void Configure(EntityTypeBuilder<PatientRecord> builder)
+        public void Configure(EntityTypeBuilder<HISPatientRecord> builder)
         {
             builder.ToTable("PatientRecord");
             builder.HasKey(x => x.Id);

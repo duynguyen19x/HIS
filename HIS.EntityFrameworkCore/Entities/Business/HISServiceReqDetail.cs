@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Systems.Room
+namespace HIS.EntityFrameworkCore.Entities.Business
 {
-    internal class SRoomDto
+    public class HISServiceReqDetail
     {
     }
 }

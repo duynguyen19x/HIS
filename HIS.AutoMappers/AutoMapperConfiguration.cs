@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
+using HIS.Dtos.Business;
 using HIS.Dtos.Business.DImMestMedicine;
 using HIS.Dtos.Business.DImpMest;
 using HIS.Dtos.Business.DMedicineStock;
-using HIS.Dtos.Business.Patient;
-using HIS.Dtos.Business.PatientRecord;
 using HIS.Dtos.Dictionaries.Branch;
 using HIS.Dtos.Dictionaries.Career;
 using HIS.Dtos.Dictionaries.ChapterICD10;
@@ -31,6 +30,7 @@ using HIS.Dtos.Dictionaries.ServiceResultIndex;
 using HIS.Dtos.Dictionaries.ServiceUnit;
 using HIS.Dtos.Dictionaries.Supplier;
 using HIS.Dtos.Dictionaries.Ward;
+using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests;
 using HIS.EntityFrameworkCore.Entities.Categories;
@@ -153,8 +153,8 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.SStock, opt => opt.Ignore())
                 .ReverseMap();
 
-            CreateMap<PatientDto, HIS.EntityFrameworkCore.Entities.Business.Patient>().ReverseMap();
-            CreateMap<PatientRecordDto, HIS.EntityFrameworkCore.Entities.Business.PatientRecord>().ReverseMap();
+            CreateMap<PatientDto, HISPatient>().ReverseMap();
+            CreateMap<PatientRecordDto, HISPatientRecord>().ReverseMap();
             CreateMap<PatientRecordDto, PatientDto>()
                 .ForMember(d => d.Id, o => o.MapFrom(s => s.PatientId))
                 .ForMember(d => d.Code, o => o.MapFrom(s => s.PatientCode))

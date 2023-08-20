@@ -10,9 +10,9 @@ namespace HIS.Application.Core.Services.Dto
     {
         public virtual bool IsSuccessed { get; set; }
 
-        public virtual string? Message { get; set; }
+        public virtual string Message { get; set; }
 
-        public virtual T? Item { get; set; }
+        public virtual T Item { get; set; }
 
         public IList<ResultErrorDto> Errors { get; set; }
 

@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
     /// <summary>
     /// Thông tin đợt điều trị của bệnh nhân.
     /// </summary>
-    public class PatientRecord : FullAuditedEntity<Guid>
+    public class HISPatientRecord : FullAuditedEntity<Guid>
     {
         [Required]
         [MaxLength(50)]
@@ -56,6 +56,8 @@ namespace HIS.EntityFrameworkCore.Entities.Business
 
         public virtual Guid? WardId { get; set; }
 
+        public virtual Guid BranchId { get; set; }
+
         [MaxLength(500)]
         public virtual string Address { get; set; }
 
@@ -77,6 +79,22 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         [Required]
         public virtual int PatientRecordTypeId { get; set; }
 
+        [Required]
+        public virtual DateTime ReceiptionDate { get; set; } // thơi gian đăng ký, tiếp nhận
+        public virtual Guid ReceiptionRoomId { get; set; } // phòng tiếp đón
+        public virtual Guid ReceiptionDepartmentId { get; set; } // khoa đón tiếp
+
+        public virtual bool IsEmergency { get; set; } // cấp cứu
+        public virtual string HospitalizationReason { get; set; } // lý do nhập viện
+
+        public virtual DateTime? StartDate { get; set; } // thời gian bắt đầu khám/ điều trị
+        public virtual Guid? StartRoomId { get; set; } // phòng bắt đầu khám / điều trị
+        public virtual Guid? StartDepartmentId { get; set; } // khoa bắt đầu khám / điều trị
+
+        public virtual DateTime? EndDate { get; set; } // thời gian kết thúc điều trị
+        public virtual Guid? EndRoomId { get; set; } // phòng kết thúc điều trị
+        public virtual Guid? EndDepartmentId { get; set; } // khoa kết thúc điều trị
+
         [MaxLength(500)]
         public virtual string Description { get; set; }
 
@@ -84,7 +102,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
 
         [Ignore]
         [ForeignKey(nameof(PatientId))]
-        public virtual Patient PatientFk { get; set; }
+        public virtual HISPatient PatientFk { get; set; }
 
         [Ignore]
         [ForeignKey(nameof(GenderId))]
@@ -113,5 +131,9 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         [Ignore]
         [ForeignKey(nameof(WardId))]
         public virtual SWard SWardFk { get; set; }
+
+        [Ignore]
+        [ForeignKey(nameof(BranchId))]
+        public virtual SBranch SBracnhFk { get; set; }
     }
 }

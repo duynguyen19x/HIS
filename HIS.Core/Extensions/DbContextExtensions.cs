@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,34 @@ namespace HIS.Core.Extensions
                     }
                 }
             }
+        }
+
+        public static async Task<TResult> UsingTransactionAsync<TResult>(this DbContext dbContext, Func<TResult, Task> func)
+            where TResult : class
+        {
+            var result = Activator.CreateInstance<TResult>();
+            if (dbContext.Database.CurrentTransaction != null)
+            {
+                await func(result);
+            }
+            else
+            {
+                using (var transaction = await dbContext.Database.BeginTransactionAsync())
+                {
+                    try
+                    {
+                        await func(result);
+                        await transaction.CommitAsync();
+                    }
+                    catch
+                    {
+                        await transaction.RollbackAsync();
+                        throw;
+                    }
+                }
+                
+            }
+            return result;
         }
     }
 }
