@@ -84,14 +84,14 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests
         public Guid? ReqDepartmentId { get; set; }
 
         /// <summary>
-        /// Id điều trị
-        /// </summary>
-        public Guid? TreatmentId { get; set; }
-
-        /// <summary>
         /// Id Bệnh nhân
         /// </summary>
         public Guid? PatientId { get; set; }
+
+        /// <summary>
+        /// Id điều trị
+        /// </summary>
+        public Guid? PatientRecordId { get; set; }
 
         /// <summary>
         /// Nhà cung cấp
@@ -127,8 +127,9 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests
         public SUser StockImpUser { get; set; }
         public SRoom ReqRoom { get; set; }
         public SDepartment ReqDepartment { get; set; }
-        public STreatment STreatment { get; set; }
-        public SPatient SPatient { get; set; }
         public SSupplier SSupplier { get; set; }
+
+        public Patient Patient { get; set; }
+        public PatientRecord PatientRecord { get; set; }
     }
 }

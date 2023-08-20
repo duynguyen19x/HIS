@@ -69,7 +69,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
                                      Description = dImMest.Description,
                                      ReqRoomId = dImMest.ReqRoomId,
                                      ReqDepartmentId = dImMest.ReqDepartmentId,
-                                     TreatmentId = dImMest.TreatmentId,
+                                     PatientRecordId = dImMest.PatientRecordId,
                                      PatientId = dImMest.PatientId,
                                      SupplierId = dImMest.SupplierId,
                                      InvTime = dImMest.InvTime,
@@ -540,6 +540,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
             }
 
             return await Task.FromResult(result);
+        }
+
+        public Task<ApiResult<DImpMestDto>> GetById(Guid id)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 

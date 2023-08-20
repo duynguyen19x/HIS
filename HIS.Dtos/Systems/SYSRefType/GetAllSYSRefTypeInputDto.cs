@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Patient
+namespace HIS.Dtos.Systems.SYSRefType
 {
-    public class PatientDto : EntityDto<Guid?>
+    public class GetAllSYSRefTypeInputDto : PagedResultRequestDto
     {
-         
+
     }
 }

@@ -24,6 +24,8 @@ namespace HIS.Core.Application.Services.Dto
                 _items = value;
             }
         }
+        public bool IsSuccessed { get; set; } = true;
+        public string Message { get; set; }
 
         public ListResultDto()
         {

@@ -67,15 +67,15 @@ namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
                 .HasForeignKey(e => e.ReqDepartmentId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(e => e.STreatment)
+            builder.HasOne(e => e.PatientRecord)
                 .WithMany()
-                .HasForeignKey(e => e.TreatmentId)
+                .HasForeignKey(e => e.PatientRecordId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(e => e.SPatient)
-                .WithMany()
-                .HasForeignKey(e => e.PatientId)
-                .OnDelete(DeleteBehavior.NoAction);
+            //builder.HasOne(e => e.MRPatient)
+            //    .WithMany()
+            //    .HasForeignKey(e => e.PatientId)
+            //    .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(e => e.SSupplier)
                 .WithMany()

@@ -1,5 +1,4 @@
 ﻿using HIS.ApplicationService.Business.DImpExpMestType;
-using HIS.ApplicationService.Business.Patient;
 using HIS.ApplicationService.Business.Pharmaceuticals.DMedicineStock;
 using HIS.ApplicationService.Business.Pharmaceuticals.DImpMests;
 using HIS.ApplicationService.Dictionaries.Branch;
@@ -34,6 +33,8 @@ using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
 using HIS.ApplicationService.Business.Pharmaceuticals.DImpMests;
 using HIS.ApplicationService.Systems.SYSAutoNumber;
+using HIS.ApplicationService.Business.Patient;
+using HIS.ApplicationService.Business.PatientRecord;
 
 namespace HIS.ApplicationService
 {
@@ -74,12 +75,18 @@ namespace HIS.ApplicationService
             services.AddTransient<ISMedicineLineService, SMedicineLineService>();
             services.AddTransient<ISMedicinePricePolicyService, SMedicinePricePolicyService>();
 
-            services.AddTransient<ISPatientService, SPatientAppService>();
             services.AddTransient<IDImpMestService, DImpMestService>();
             services.AddTransient<IDImpExpMestTypeService, DImpExpMestTypeService>();
             services.AddTransient<IDMedicineStockService, DMedicineStockService>();
 
+            #region Patient
+            services.AddTransient<IPatientAppService, PatientAppService>();
+            services.AddTransient<IPatientRecordAppService, PatientRecordAppService>();
+            #endregion
+
+            #region Sys
             services.AddTransient<ISYSAutoNumberAppService, SYSAutoNumberAppService>();
+            #endregion
         }
     }
 }

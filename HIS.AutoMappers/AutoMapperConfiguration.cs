@@ -2,7 +2,7 @@
 using HIS.Dtos.Business.DImpMest;
 using HIS.Dtos.Business.DImMestMedicine;
 using HIS.Dtos.Business.Patient;
-using HIS.Dtos.Business.Treatment;
+using HIS.Dtos.Business.PatientRecord;
 using HIS.Dtos.Dictionaries.Branch;
 using HIS.Dtos.Dictionaries.Career;
 using HIS.Dtos.Dictionaries.ChapterICD10;
@@ -42,10 +42,6 @@ namespace HIS.AutoMappers
     {
         public AutoMapperConfiguration()
         {
-            CreateMap<STreatmentDto, STreatment>().ReverseMap();
-            CreateMap<STreatmentDto, SPatient>().ReverseMap();
-            CreateMap<SPatientDto, SPatient>().ReverseMap();
-
             CreateMap<SBranch, SBranchDto>().ReverseMap();
             CreateMap<SCareer, SCareerDto>().ReverseMap();
             CreateMap<SCountry, SCountryDto>().ReverseMap();
@@ -121,8 +117,8 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.StockImpUser, opt => opt.Ignore())
                 .ForMember(dest => dest.ReqRoom, opt => opt.Ignore())
                 .ForMember(dest => dest.ReqDepartment, opt => opt.Ignore())
-                .ForMember(dest => dest.STreatment, opt => opt.Ignore())
-                .ForMember(dest => dest.SPatient, opt => opt.Ignore())
+                .ForMember(dest => dest.PatientRecord, opt => opt.Ignore())
+                .ForMember(dest => dest.Patient, opt => opt.Ignore())
                 .ForMember(dest => dest.SSupplier, opt => opt.Ignore())
                 .ReverseMap();
 
@@ -141,6 +137,14 @@ namespace HIS.AutoMappers
             CreateMap<SMedicinePricePolicyDto, SMedicinePricePolicy>()
                 .ForMember(dest => dest.SMedicine, opt => opt.Ignore())
                 .ForMember(dest => dest.SPatientType, opt => opt.Ignore())
+                .ReverseMap();
+
+            CreateMap<PatientDto, HIS.EntityFrameworkCore.Entities.Business.Patient>().ReverseMap();
+            CreateMap<PatientRecordDto, HIS.EntityFrameworkCore.Entities.Business.PatientRecord>().ReverseMap();
+            CreateMap<PatientRecordDto, PatientDto>()
+                .ForMember(d => d.Id, o => o.MapFrom(s => s.PatientId))
+                .ForMember(d => d.Code, o => o.MapFrom(s => s.PatientCode))
+                .ForMember(d => d.Name, o => o.MapFrom(s => s.PatientName))
                 .ReverseMap();
         }
     }

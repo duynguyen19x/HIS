@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.ApplicationService.Patient
+namespace HIS.Application.Core.Commons.Enums
 {
-    public interface IPatientAppService
+    public enum PatientTypeEnum
     {
+
     }
 }

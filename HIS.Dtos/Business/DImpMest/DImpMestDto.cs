@@ -88,7 +88,7 @@ namespace HIS.Dtos.Business.DImpMest
         /// <summary>
         /// Id điều trị
         /// </summary>
-        public Guid? TreatmentId { get; set; }
+        public Guid? PatientRecordId { get; set; }
 
         /// <summary>
         /// Id Bệnh nhân

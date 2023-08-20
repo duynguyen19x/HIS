@@ -1,15 +1,9 @@
-﻿using HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals;
-using HIS.EntityFrameworkCore.Configurations.Business;
+﻿using HIS.EntityFrameworkCore.Configurations.Business;
+using HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals;
 using HIS.EntityFrameworkCore.Configurations.Dictionaries;
 using HIS.EntityFrameworkCore.Configurations.Medicines;
-using HIS.EntityFrameworkCore.Configurations.Patients;
 using HIS.EntityFrameworkCore.Configurations.Services;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations
 {
@@ -38,7 +32,6 @@ namespace HIS.EntityFrameworkCore.Configurations
             modelBuilder.ApplyConfiguration(new MedicineTypeConfiguration());
             modelBuilder.ApplyConfiguration(new MaterialTypeConfiguration());
             modelBuilder.ApplyConfiguration(new MaterialConfiguration());
-            modelBuilder.ApplyConfiguration(new PatientConfiguration());
             modelBuilder.ApplyConfiguration(new PatientTypeConfiguration());
             modelBuilder.ApplyConfiguration(new CountryConfiguration());
             modelBuilder.ApplyConfiguration(new ProvinceConfiguration());
@@ -56,13 +49,15 @@ namespace HIS.EntityFrameworkCore.Configurations
             modelBuilder.ApplyConfiguration(new ServiceResultIndexConfiguration());
             modelBuilder.ApplyConfiguration(new ExecutionRoomConfiguration());
             modelBuilder.ApplyConfiguration(new SupplierConfiguration());
-            modelBuilder.ApplyConfiguration(new TreatmentConfiguration());
             modelBuilder.ApplyConfiguration(new ImpExpMestTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ImpMestConfiguration());
             modelBuilder.ApplyConfiguration(new ImpMestMedicineConfigaration());
             modelBuilder.ApplyConfiguration(new MedicineStockConfiguration());
             modelBuilder.ApplyConfiguration(new ExpMestConfiguration());
             modelBuilder.ApplyConfiguration(new ExpMestMedicineConfiguration());
+
+            modelBuilder.ApplyConfiguration(new PatientConfiguration());
+            modelBuilder.ApplyConfiguration(new PatientRecordConfiguration());
         }
     }
 }

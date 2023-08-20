@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace HIS.Dtos.Business.Patient
 {
-    public class GetAllSPatientInput : PagedResultRequestDto
+    public class GetAllPatientInputDto : PagedResultRequestDto
     {
-        public string PatientCodeFilter { get; set; }
+        public string CodeFilter { get; set; }
+        public string NameFilter { get; set; }
+        public bool? InactiveFilter { get; set; }
     }
 }
