@@ -1,4 +1,4 @@
-﻿using HIS.Core.Application.Services.Dto;
+﻿using HIS.Application.Core.Services.Dto;
 using HIS.Dtos.Dictionaries.MedicinePricePolicy;
 using System.ComponentModel;
 
@@ -48,6 +48,19 @@ namespace HIS.Dtos.Business.DImMestMedicine
         [Description("Phần trăm thuế")]
         public decimal? TaxRate { get; set; }
 
+        public decimal? ImpAmount
+        {
+            get
+            {
+                var impAmount = ImpQuantity.GetValueOrDefault() * ImpPrice.GetValueOrDefault();
+                var vatRate = ImpVatRate.GetValueOrDefault() / 100;
+                var taxRate = TaxRate.GetValueOrDefault() / 100;
+
+                return impAmount * (1 + vatRate + taxRate);
+            }
+            set { }
+        }
+
         [Description("Diễn giải")]
         public string Description { get; set; }
 
@@ -89,7 +102,7 @@ namespace HIS.Dtos.Business.DImMestMedicine
 
         public Guid? MedicineId { get; set; }
 
-        public Guid? ImMestId { get; set; }
+        public Guid? ImpMestId { get; set; }
 
         public IList<SMedicinePricePolicyDto> SMedicinePricePolicies { get; set; }
     }

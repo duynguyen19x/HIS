@@ -9,6 +9,11 @@ namespace HIS.Utilities.Helpers
 {
     public static class DatetimeHelper
     {
+        public static bool IsNullOrEmpty(DateTime? dateTime)
+        {
+            return dateTime == null || (dateTime != null && dateTime == (DateTime)default);
+        }
+
         public static DateTime? UtcToLocal(this DateTime? dateTime)
         {
             // Lấy múi giờ hiện tại của hệ thống

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Core.Application.Services.Dto
+namespace HIS.Application.Core.Services.Dto
 {
     [Serializable]
     public class ListResultDto<T> : IListResult<T>
@@ -24,6 +24,8 @@ namespace HIS.Core.Application.Services.Dto
                 _items = value;
             }
         }
+        public bool IsSuccessed { get; set; } = true;
+        public string Message { get; set; }
 
         public ListResultDto()
         {

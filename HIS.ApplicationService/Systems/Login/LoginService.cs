@@ -4,6 +4,8 @@ using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using HIS.Utilities.Commons;
 using HIS.Utilities.Enums;
+using HIS.Utilities.Sections;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -28,7 +30,7 @@ namespace HIS.ApplicationService.Systems.Login
         {
             var apiResult = new ApiResult<TokenResultDto>();
 
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            using (var transaction = _dbContext.BeginTransaction())
             {
                 try
                 {
@@ -67,6 +69,14 @@ namespace HIS.ApplicationService.Systems.Login
                     };
 
                     await _dbContext.STokens.AddAsync(sToken);
+                    _dbContext.SaveChanges();
+
+                    // Lưu thông tin đăng nhập
+                    SessionExtensions.Login = new LoginSecsion
+                    {
+                        Id = user.Id,
+                        UserName = user.UserName
+                    };
 
                     transaction.Commit();
                 }

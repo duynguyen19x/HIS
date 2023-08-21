@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.ImpMests;
+using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
@@ -19,18 +19,22 @@ namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50);
-            builder.Property(x => x.Name).HasMaxLength(512);
             builder.Property(x => x.Description).HasMaxLength(512);
             builder.Property(x => x.Deliverer).HasMaxLength(512);
 
-            builder.HasOne(e => e.ImStock)
+            builder.HasOne(e => e.DExpMest)
                 .WithMany()
-                .HasForeignKey(e => e.ImStockId)
+                .HasForeignKey(e => e.ExpMestId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(e => e.ExStock)
+            builder.HasOne(e => e.ImpStock)
                 .WithMany()
-                .HasForeignKey(e => e.ExStockId)
+                .HasForeignKey(e => e.ImpStockId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne(e => e.ExpStock)
+                .WithMany()
+                .HasForeignKey(e => e.ExpStockId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(e => e.DImpExpMestType)
@@ -48,9 +52,9 @@ namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
                 .HasForeignKey(e => e.ApproverUserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(e => e.StockReceiptUser)
+            builder.HasOne(e => e.StockImpUser)
                 .WithMany()
-                .HasForeignKey(e => e.StockReceiptUserId)
+                .HasForeignKey(e => e.StockImpUserId)
                 .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(e => e.ReqRoom)
@@ -63,15 +67,15 @@ namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
                 .HasForeignKey(e => e.ReqDepartmentId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(e => e.STreatment)
+            builder.HasOne(e => e.PatientRecord)
                 .WithMany()
-                .HasForeignKey(e => e.TreatmentId)
+                .HasForeignKey(e => e.PatientRecordId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(e => e.SPatient)
-                .WithMany()
-                .HasForeignKey(e => e.PatientId)
-                .OnDelete(DeleteBehavior.NoAction);
+            //builder.HasOne(e => e.MRPatient)
+            //    .WithMany()
+            //    .HasForeignKey(e => e.PatientId)
+            //    .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasOne(e => e.SSupplier)
                 .WithMany()

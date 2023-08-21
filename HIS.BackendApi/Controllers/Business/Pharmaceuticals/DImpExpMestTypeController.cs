@@ -1,5 +1,5 @@
 ﻿using HIS.ApplicationService.Business.DImpExpMestType;
-using HIS.Dtos.Business.DImMest;
+using HIS.Dtos.Business.DImpMest;
 using HIS.Dtos.Business.DImpExpMestType;
 using HIS.Dtos.Commons;
 using Microsoft.AspNetCore.Http;

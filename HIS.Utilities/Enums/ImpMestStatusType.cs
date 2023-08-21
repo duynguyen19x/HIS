@@ -21,9 +21,6 @@ namespace HIS.Utilities.Enums
         [Description("Đã nhập kho")]
         ReceivedInStock,
 
-        [Description("Đã xuất kho")]
-        ReceivedOutStock,
-
         [Description("Đã hủy")]
         Canceled
     }

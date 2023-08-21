@@ -1,13 +1,10 @@
-﻿using HIS.Core.Application.Services.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.Dtos.Dictionaries.Medicine;
+using HIS.Dtos.Dictionaries.Room;
 
 namespace HIS.Dtos.Business.DMedicineStock
 {
-    public class DMedicineStockDto: EntityDto<Guid?>
+    public class DMedicineStockDto : EntityDto<Guid?>
     {
         public Guid? StockId { get; set; }
         public Guid? MedicineId { get; set; }
@@ -27,5 +24,8 @@ namespace HIS.Dtos.Business.DMedicineStock
 
         public string MedicineCode { get; set; }
         public string MedicineName { get; set; }
+
+        public SMedicineDto SMedicine { get; set; }
+        public SRoomDto Stock { get; set; }
     }
 }
