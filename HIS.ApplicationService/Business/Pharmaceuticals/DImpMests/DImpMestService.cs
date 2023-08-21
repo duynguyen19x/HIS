@@ -78,7 +78,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
                                  })
                                  .WhereIf(fromDateTime != (DateTime)default, w => w.ImpTime >= fromDateTime)
                                  .WhereIf(toDateTime != (DateTime)default, w => w.ImpTime <= toDateTime)
-                                 .WhereIf(!GuidHelper.IsNullOrEmpty(stockId), w => w.ImpStockId == stockId || w.ExpStockId == stockId)
+                                 .WhereIf(!GuidHelper.IsNullOrEmpty(stockId), w => w.ImpStockId == stockId)
                                  .ToList();
             }
             catch (Exception ex)
@@ -648,7 +648,6 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
             return await Task.FromResult(result);
         }
 
-
         /// <summary>
         /// Lưu phiếu tạm
         /// </summary>
@@ -667,7 +666,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
         public async Task<ApiResult<DImpMestDto>> ImportFromAnotherStockRequest(DImpMestDto input)
         {
             input.ImpMestStatus = ImpMestStatusType.Request;
-            return await ImportFromSupplier(input);
+            return await ImportFromAnotherStock(input);
         }
 
         /// <summary>
@@ -850,6 +849,62 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
                 {
                     transaction.Dispose();
                 }
+            }
+
+            return await Task.FromResult(result);
+        }
+
+        private async Task<ApiResult<DImpMestDto>> ImportFromAnotherStockValid(DImpMestDto input)
+        {
+            var result = new ApiResult<DImpMestDto>();
+
+            try
+            {
+                var erros = new List<string>();
+
+                var erroMasters = new List<string>();
+
+                if (GuidHelper.IsNullOrEmpty(input.ImpStockId))
+                    erroMasters.Add("Kho nhập");
+                if (DatetimeHelper.IsNullOrEmpty(input.ImpTime))
+                    erroMasters.Add("Ngày lập");
+                if (DatetimeHelper.IsNullOrEmpty(input.InvTime))
+                    erroMasters.Add("Ngày HĐ");
+                if (GuidHelper.IsNullOrEmpty(input.SupplierId))
+                    erroMasters.Add("Nhà cung cấp");
+
+                if (erroMasters.Count > 0)
+                    erros.Add(string.Format("{0} không được bỏ trống!", string.Join(", ", erroMasters)));
+
+                if (input.DImpMestMedicines == null && input.DImpMestMedicines.Count == 0)
+                    erros.Add("Không có thuốc nào được chọn trong danh sách!");
+
+                foreach (var detail in input.DImpMestMedicines)
+                {
+                    var erroMedicines = new List<string>();
+
+                    if (detail.ImpQuantity == 0)
+                        erroMedicines.Add("Số lượng");
+                    if (DatetimeHelper.IsNullOrEmpty(detail.DueDate))
+                        erroMedicines.Add("Hạn dùng");
+
+                    if (erroMedicines.Count > 0)
+                    {
+                        var erro = string.Format("Mã thuốc {0}: {1} không được để trống!", detail.Code, string.Join(", ", erroMedicines));
+                        erros.Add(erro);
+                    }
+                }
+
+                if (erros.Count > 0)
+                {
+                    result.Message = string.Join(", ", erros);
+                    result.IsSuccessed = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccessed = false;
+                result.Message = ex.Message;
             }
 
             return await Task.FromResult(result);
