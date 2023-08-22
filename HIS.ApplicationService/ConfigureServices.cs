@@ -1,6 +1,9 @@
 ﻿using HIS.ApplicationService.Business.DImpExpMestType;
-using HIS.ApplicationService.Business.Pharmaceuticals.DMedicineStock;
+using HIS.ApplicationService.Business.Patient;
+using HIS.ApplicationService.Business.PatientRecord;
+using HIS.ApplicationService.Business.Pharmaceuticals.DExpMests;
 using HIS.ApplicationService.Business.Pharmaceuticals.DImpMests;
+using HIS.ApplicationService.Business.Pharmaceuticals.DMedicineStock;
 using HIS.ApplicationService.Dictionaries.Branch;
 using HIS.ApplicationService.Dictionaries.Career;
 using HIS.ApplicationService.Dictionaries.ChapterICD10;
@@ -29,12 +32,9 @@ using HIS.ApplicationService.Dictionaries.Unit;
 using HIS.ApplicationService.Dictionaries.Ward;
 using HIS.ApplicationService.Systems.Login;
 using HIS.ApplicationService.Systems.Role;
+using HIS.ApplicationService.Systems.SYSAutoNumber;
 using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
-using HIS.ApplicationService.Business.Pharmaceuticals.DImpMests;
-using HIS.ApplicationService.Systems.SYSAutoNumber;
-using HIS.ApplicationService.Business.Patient;
-using HIS.ApplicationService.Business.PatientRecord;
 
 namespace HIS.ApplicationService
 {
@@ -78,6 +78,8 @@ namespace HIS.ApplicationService
             services.AddTransient<IDImpMestService, DImpMestService>();
             services.AddTransient<IDImpExpMestTypeService, DImpExpMestTypeService>();
             services.AddTransient<IDMedicineStockService, DMedicineStockService>();
+
+            services.AddTransient<IDExpMestService, DExpMestService>();
 
             #region Patient
             services.AddTransient<IPatientAppService, PatientAppService>();

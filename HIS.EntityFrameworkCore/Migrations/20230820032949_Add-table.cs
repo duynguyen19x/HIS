@@ -978,39 +978,51 @@ namespace HIS.EntityFrameworkCore.Migrations
                         principalColumn: "Id");
                 });
 
-            migrationBuilder.Sql(@"/****** Object:  Trigger [AfterInsertSMedicines]    Script Date: 20/08/2023 09:42:50 ******/
-                                    IF  EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].[AfterInsertSMedicines]'))
-                                    DROP TRIGGER [dbo].[AfterInsertSMedicines]
-                                    GO
-                                    -- =============================================
-                                    -- Author:		DuyNV
-                                    -- Create date: 11/08/2023
-                                    -- Description:	Lấy mã thuốc theo lô
-                                    -- =============================================
-                                    CREATE TRIGGER [dbo].[AfterInsertSMedicines]
-                                       ON  [dbo].[SMedicines] 
-                                       AFTER INSERT
-                                    AS 
-                                    BEGIN
-                                    	DECLARE @MedicineTypeId uniqueidentifier;
-                                    	DECLARE @MedicineId uniqueidentifier;
-                                    
-                                    	DECLARE @Code NVARCHAR(50);
-                                    	DECLARE @AutoNumber INT;
-                                    	
-                                    	SELECT @MedicineTypeId = MedicineTypeId,
-                                    		   @MedicineId = Id
-                                        FROM INSERTED;
-                                    
-                                    	SELECT @Code = Code, @AutoNumber = AutoNumber FROM SMedicineTypes WHERE Id = @MedicineTypeId;
-                                    	SET @Code = @Code + '.' + CONVERT(NVARCHAR(50), @AutoNumber  + 1);
-                                    
-                                    	UPDATE SMedicines SET Code = @Code WHERE Id = @MedicineId;
-                                    	UPDATE SMedicineTypes SET AutoNumber = @AutoNumber + 1 WHERE Id = @MedicineTypeId;
-                                    END
-                                    GO
-                                    ALTER TABLE [dbo].[SMedicines] ENABLE TRIGGER [AfterInsertSMedicines]
-                                    GO");
+            migrationBuilder.Sql(@"IF  EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].[AfterInsertSMedicines]'))
+DROP TRIGGER [dbo].[AfterInsertSMedicines]
+GO
+-- =============================================
+-- Author:		DuyNV
+-- Create date: 11/08/2023
+-- Description:	Lấy mã thuốc theo lô
+-- =============================================
+CREATE TRIGGER [dbo].[AfterInsertSMedicines]
+   ON  [dbo].[SMedicines] 
+   AFTER INSERT
+AS 
+BEGIN
+	DECLARE @MedicineTypeId uniqueidentifier;
+	DECLARE @MedicineId uniqueidentifier;
+
+    DECLARE cursor_inserted CURSOR FOR
+
+	SELECT MedicineTypeId, Id
+    FROM INSERTED;
+
+    OPEN cursor_inserted
+
+    FETCH NEXT FROM cursor_inserted INTO @MedicineTypeId, @MedicineId
+
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+		DECLARE @Code NVARCHAR(50);
+		DECLARE @AutoNumber INT;
+		
+		SELECT @Code = Code, @AutoNumber = AutoNumber FROM SMedicineTypes WHERE Id = @MedicineTypeId;
+		SET @Code = @Code + '.' + CONVERT(NVARCHAR(50), @AutoNumber  + 1);
+
+        UPDATE SMedicines SET Code = @Code WHERE Id = @MedicineId;
+		UPDATE SMedicineTypes SET AutoNumber = @AutoNumber + 1 WHERE Id = @MedicineTypeId;
+
+        FETCH NEXT FROM cursor_inserted INTO @MedicineTypeId, @MedicineId
+    END
+
+    CLOSE cursor_inserted
+    DEALLOCATE cursor_inserted
+END
+GO
+ALTER TABLE [dbo].[SMedicines] ENABLE TRIGGER [AfterInsertSMedicines]
+GO");
 
             migrationBuilder.CreateTable(
                 name: "SServicePricePolicies",

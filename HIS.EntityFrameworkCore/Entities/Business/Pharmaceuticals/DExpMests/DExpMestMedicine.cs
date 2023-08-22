@@ -22,7 +22,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests
         public decimal? ImpPrice { get; set; }
 
         [Description("Số lượng nhập")]
-        public decimal? ImpQuantity { get; set; }
+        public decimal? ExpQuantity { get; set; }
 
         [Description("Phần trăm vat giá nhập")]
         public decimal? ImpVatRate { get; set; }

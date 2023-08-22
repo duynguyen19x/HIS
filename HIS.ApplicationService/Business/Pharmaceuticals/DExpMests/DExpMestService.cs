@@ -1,9 +1,14 @@
 ﻿using AutoMapper;
 using HIS.Core.Linq;
+using HIS.Dtos.Business.DExpMest;
 using HIS.Dtos.Business.DImpMest;
 using HIS.Dtos.Commons;
+using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests;
+using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.Models.Commons;
 using HIS.Utilities.Helpers;
+using HIS.Utilities.Sections;
 using Microsoft.Extensions.Configuration;
 using System.Globalization;
 
@@ -78,5 +83,107 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DExpMests
 
             return await Task.FromResult(result);
         }
+
+        #region Tạo phiếu xuất của phiếu Nhập từ kho khác
+        public async Task<ApiResult<DExpMest>> ImportFromAnotherStockCreateExpMest(DImpMest dImpMest, IList<DImpMestMedicine> dImpMestMedicines)
+        {
+            var result = new ApiResult<DExpMest>();
+
+
+            try
+            {
+                var dExpMest = new DExpMest();
+                var dExpMestMedicines = new List<DExpMestMedicine>();
+
+                if (GuidHelper.IsNullOrEmpty(dImpMest.ExpMestId))
+                {
+                    dExpMest = _mapper.Map<DExpMest>(dImpMest);
+
+                    dExpMest.Id = Guid.NewGuid();
+                    dExpMest.ExpTime = dImpMest.ImpTime;
+                    dExpMest.ExpUserId = SessionExtensions.Login?.Id;
+
+                    //var dExpMestMedicines = _mapper.Map<IList<DExpMestMedicine>>(dImpMestMedicines);
+                    foreach (var dImpMestMedicine in dImpMestMedicines)
+                    {
+                        var dExpMestMedicine = _mapper.Map<DExpMestMedicine>(dImpMestMedicine);
+
+                        dExpMestMedicine.Id = Guid.NewGuid();
+                        dExpMestMedicine.ExpMestId = dExpMest.Id;
+                        dExpMestMedicine.ExpQuantity = dImpMestMedicine.ImpQuantity;
+
+                        dExpMestMedicines.Add(dExpMestMedicine);
+                    }
+
+                    _dbContext.DExpMests.Add(dExpMest);
+                }
+                else
+                {
+                    dExpMest = _dbContext.DExpMests.FirstOrDefault(f => f.Id == dImpMest.ExpMestId);
+                    if (dExpMest != null)
+                    {
+                        var dExpMestMedicineOlds = _dbContext.DExpMestMedicines.Where(w => w.ExpMestId == dExpMest.Id).ToList();
+                        if (dExpMestMedicineOlds != null && dExpMestMedicineOlds.Count > 0)
+                        {
+                            var medicineIds = dExpMestMedicineOlds.Select(s => s.MedicineId).ToList();
+                            var dMeicineStocks = _dbContext.DMedicineStocks.Where(w => medicineIds.Contains(w.MedicineId) && w.StockId == dExpMest.ExpStockId).ToList();
+                            foreach (var dMeicineStock in dMeicineStocks)
+                            {
+                                var dExpMestMedicineOld = dExpMestMedicineOlds.FirstOrDefault(f => f.MedicineId == dMeicineStock.MedicineId);
+                                if (dExpMestMedicineOld != null)
+                                {
+                                    dMeicineStock.AvailableQuantity += dExpMestMedicineOld.ExpQuantity.GetValueOrDefault(); // Cộng số lượng khả dụng ở phiếu cũ vào kho
+                                }
+                            }
+
+                            _dbContext.DMedicineStocks.RemoveRange(dMeicineStocks);
+                        }
+
+                        // Thêm chi tiết xuất thuốc
+                        foreach (var dImpMestMedicine in dImpMestMedicines)
+                        {
+                            var dExpMestMedicine = _mapper.Map<DExpMestMedicine>(dImpMestMedicine);
+
+                            dExpMestMedicine.Id = Guid.NewGuid();
+                            dExpMestMedicine.ExpMestId = dExpMest.Id;
+                            dExpMestMedicine.ExpQuantity = dImpMestMedicine.ImpQuantity;
+
+                            dExpMestMedicines.Add(dExpMestMedicine);
+                        }
+
+                        // Trừ khả dụng của phiếu xuất mới
+                        if (dExpMestMedicines.Count > 0)
+                        {
+                            var medicineIds = dExpMestMedicines.Select(s => s.MedicineId).ToList();
+                            var dMeicineStocks = _dbContext.DMedicineStocks.Where(w => medicineIds.Contains(w.MedicineId) && w.StockId == dExpMest.ExpStockId).ToList();
+
+                            foreach (var dMeicineStock in dMeicineStocks)
+                            {
+                                var dExpMestMedicine = dExpMestMedicines.FirstOrDefault(f => f.MedicineId == dMeicineStock.MedicineId);
+                                if (dExpMestMedicine != null)
+                                {
+                                    dMeicineStock.AvailableQuantity -= dExpMestMedicine.ExpQuantity.GetValueOrDefault();
+                                }
+                            }
+                        }
+
+                        dExpMest.ImpMestStatus = dImpMest.ImpMestStatus;
+                        dExpMest.ExpMestStatus = Utilities.Enums.EmpMestStatusType.None;
+                    }
+                }
+
+                _dbContext.DExpMestMedicines.AddRange(dExpMestMedicines);
+                _dbContext.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                result.Message = ex.Message;
+                result.IsSuccessed = false;
+            }
+
+            return await Task.FromResult(result);
+        }
+        #endregion
     }
 }

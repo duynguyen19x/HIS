@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HIS.ApplicationService.Business.Pharmaceuticals.DExpMests;
 using HIS.Core.Linq;
 using HIS.Dtos.Business.DImMestMedicine;
 using HIS.Dtos.Business.DImpMest;
@@ -23,8 +24,13 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
 {
     public class DImpMestService : BaseSerivce, IDImpMestService
     {
-        public DImpMestService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
-           : base(dbContext, config, mapper) { }
+        private readonly IDExpMestService _dExpMestService;
+
+        public DImpMestService(HISDbContext dbContext, IConfiguration config, IMapper mapper, IDExpMestService dExpMestService)
+           : base(dbContext, config, mapper)
+        {
+            _dExpMestService = dExpMestService;
+        }
 
         public async Task<ApiResultList<DImpMestDto>> GetByStocks(Guid stockId, string fromDate, string toDate)
         {
@@ -543,6 +549,13 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
                 if (erroMasters.Count > 0)
                     erros.Add(string.Format("{0} không được bỏ trống!", string.Join(", ", erroMasters)));
 
+                if (!string.IsNullOrEmpty(input.Code))
+                {
+                    var any = _dbContext.DImpMests.Any(a => a.Id != input.Id && a.Code == input.Code);
+                    if (any)
+                        erros.Add(string.Format("Mã phiếu nhập [{0}] đã tồn tại trên hệ thống. Vui lòng kiểm tra lại!", input.Code));
+                }
+
                 if (input.DImpMestMedicines == null && input.DImpMestMedicines.Count == 0)
                     erros.Add("Không có thuốc nào được chọn trong danh sách!");
 
@@ -655,6 +668,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
         /// <returns></returns>
         public async Task<ApiResult<DImpMestDto>> ImportFromAnotherStockSaveAsDraft(DImpMestDto input)
         {
+            input.ImpMestStatus = ImpMestStatusType.None;
             return await ImportFromAnotherStock(input);
         }
 
@@ -689,11 +703,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
         {
             var result = new ApiResult<DImpMestDto>();
 
-            //result = await ImportFromSupplierValid(input);
-            //if (!result.IsSuccessed)
-            //{
-            //    return result;
-            //}
+            result = await ImportFromAnotherStockValid(input);
+            if (!result.IsSuccessed)
+            {
+                return result;
+            }
 
             using (var transaction = _dbContext.BeginTransaction())
             {
@@ -704,15 +718,16 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
 
                     input.ImpExpMestTypeId = 3;
 
+                    var dImpMest = new DImpMest();
                     var dImMestMedicines = new List<DImpMestMedicine>();
                     var dMedicineStocks = new List<EntityFrameworkCore.Entities.Business.Pharmaceuticals.DMedicineStock>();
 
                     if (GuidHelper.IsNullOrEmpty(input.Id))
                     {
-                        var dImMest = _mapper.Map<DImpMest>(input);
-                        dImMest.Id = id;
-                        dImMest.CreatedBy = SessionExtensions.Login?.Id;
-                        dImMest.CreatedDate = dateNow;
+                        dImpMest = _mapper.Map<DImpMest>(input);
+                        dImpMest.Id = id;
+                        dImpMest.CreatedBy = SessionExtensions.Login?.Id;
+                        dImpMest.CreatedDate = dateNow;
 
                         foreach (var dImMestMedicineDto in input.DImpMestMedicines)
                         {
@@ -726,13 +741,13 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
                         // Trạng thái nhập kho mới thêm vào thuốc trong kho
                         if (input.ImpMestStatus == ImpMestStatusType.ReceivedInStock)
                         {
-                            dImMest.StockImpTime = dateNow;
-                            dImMest.StockImpUserId = SessionExtensions.Login?.Id;
+                            dImpMest.StockImpTime = dateNow;
+                            dImpMest.StockImpUserId = SessionExtensions.Login?.Id;
 
                             var sMedicineIds = input.DImpMestMedicines.Select(s => s.MedicineId).ToList();
                             if (sMedicineIds != null && sMedicineIds.Count > 0)
                             {
-                                var dMedicineStockOlds = _dbContext.DMedicineStocks.Where(w => sMedicineIds.Contains(w.MedicineId) && w.StockId == dImMest.ImpStockId).ToList();
+                                var dMedicineStockOlds = _dbContext.DMedicineStocks.Where(w => sMedicineIds.Contains(w.MedicineId) && w.StockId == dImpMest.ImpStockId).ToList();
 
                                 foreach (var dImMestMedicineDto in input.DImpMestMedicines)
                                 {
@@ -763,11 +778,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
                             }
                         }
 
-                        _dbContext.DImpMests.Add(dImMest);
+                        _dbContext.DImpMests.Add(dImpMest);
                     }
                     else
                     {
-                        var dImMestOld = _dbContext.DImpMests.FirstOrDefault(d => d.Id == input.Id);
+                        dImpMest = _dbContext.DImpMests.FirstOrDefault(d => d.Id == input.Id);
 
                         // Xóa bản ghi cũ
                         var dImMestMedicineOlds = _dbContext.DImpMestMedicines.Where(s => s.ImpMestId == input.Id).ToList();
@@ -775,7 +790,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
                         if (dImMestMedicineOlds != null)
                         {
                             _dbContext.DImpMestMedicines.RemoveRange(dImMestMedicineOlds);
-                            _dbContext.SaveChanges();
+                            //_dbContext.SaveChanges();
                         }
 
                         foreach (var dImMestMedicineDto in input.DImpMestMedicines)
@@ -791,13 +806,13 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
                         // Trạng thái nhập kho mới thêm vào thuốc trong kho
                         if (input.ImpMestStatus == ImpMestStatusType.ReceivedInStock)
                         {
-                            dImMestOld.StockImpTime = dateNow;
-                            dImMestOld.StockImpUserId = SessionExtensions.Login?.Id;
+                            input.StockImpTime = dateNow;
+                            input.StockImpUserId = SessionExtensions.Login?.Id;
 
                             var sMedicineIds = input.DImpMestMedicines.Select(s => s.MedicineId).ToList();
                             if (sMedicineIds != null && sMedicineIds.Count > 0)
                             {
-                                var dMedicineStockOlds = _dbContext.DMedicineStocks.Where(w => sMedicineIds.Contains(w.MedicineId) && w.StockId == dImMestOld.ImpStockId).ToList();
+                                var dMedicineStockOlds = _dbContext.DMedicineStocks.Where(w => sMedicineIds.Contains(w.MedicineId) && w.StockId == dImpMest.ImpStockId).ToList();
 
                                 foreach (var dImMestMedicineDto in input.DImpMestMedicines)
                                 {
@@ -828,10 +843,18 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
                             }
                         }
 
-                        _mapper.Map(input, dImMestOld);
+                        _mapper.Map(input, dImpMest);
+                        dImpMest.ModifiedDate = dateNow;
+                        dImpMest.ModifiedBy = SessionExtensions.Login?.Id;
 
-                        dImMestOld.ModifiedDate = dateNow;
-                        dImMestOld.ModifiedBy = SessionExtensions.Login?.Id;
+                        // Tạo phiếu xuất kho từ phiếu nhập kho từ kho khác
+                        var dImpMestResultDto = await _dExpMestService.ImportFromAnotherStockCreateExpMest(dImpMest, dImMestMedicines);
+                        if (!dImpMestResultDto.IsSuccessed)
+                        {
+                            result.IsSuccessed = false;
+                            result.Message = dImpMestResultDto.Message;
+                            transaction.Dispose();
+                        }
                     }
 
                     _dbContext.DImpMestMedicines.AddRange(dImMestMedicines);
@@ -866,12 +889,12 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
 
                 if (GuidHelper.IsNullOrEmpty(input.ImpStockId))
                     erroMasters.Add("Kho nhập");
+                if (GuidHelper.IsNullOrEmpty(input.ExpStockId))
+                    erroMasters.Add("Kho Xuất");
                 if (DatetimeHelper.IsNullOrEmpty(input.ImpTime))
                     erroMasters.Add("Ngày lập");
-                if (DatetimeHelper.IsNullOrEmpty(input.InvTime))
-                    erroMasters.Add("Ngày HĐ");
-                if (GuidHelper.IsNullOrEmpty(input.SupplierId))
-                    erroMasters.Add("Nhà cung cấp");
+                if (GuidHelper.IsNullOrEmpty(input.ImpUserId))
+                    erroMasters.Add("Người lập");
 
                 if (erroMasters.Count > 0)
                     erros.Add(string.Format("{0} không được bỏ trống!", string.Join(", ", erroMasters)));
@@ -892,6 +915,31 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
                     {
                         var erro = string.Format("Mã thuốc {0}: {1} không được để trống!", detail.Code, string.Join(", ", erroMedicines));
                         erros.Add(erro);
+                    }
+                }
+
+                // Ktra SL tồn, khả dụng có đủ để xuất ko
+                var medicineIds = input.DImpMestMedicines.Select(s => s.MedicineId).ToList();
+                if (medicineIds != null && medicineIds.Count > 0)
+                {
+                    var medicineStocks = _dbContext.DMedicineStocks.Where(w => medicineIds.Contains(w.MedicineId) && w.StockId == input.ExpStockId).ToList();
+                    if (medicineStocks != null)
+                    {
+                        foreach (var item in input.DImpMestMedicines)
+                        {
+                            var medicineStock = medicineStocks.FirstOrDefault(f => f.MedicineId == item.MedicineId);
+                            if (medicineStock != null)
+                            {
+                                if (item.ImpQuantity > medicineStock.AvailableQuantity)
+                                {
+                                    erros.Add(string.Format("Mã thuốc [{0}]: Số lượng nhập phải nhỏ hơn số lượng tồn kho!", item.Code));
+                                }
+                            }
+                            else
+                            {
+                                erros.Add(string.Format("Mã thuốc [{0}] không tồn tại trong kho!", item.Code));
+                            }
+                        }
                     }
                 }
 

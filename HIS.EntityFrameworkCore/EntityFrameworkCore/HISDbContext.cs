@@ -2,6 +2,7 @@
 using HIS.EntityFrameworkCore.Data;
 using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals;
+using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
@@ -77,9 +78,13 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<SMedicineType> SMedicineTypes { get; set; }
         public DbSet<SMedicinePricePolicy> SMedicinePricePolicies { get; set; }
 
-        public DbSet<DImpExpMestType> DImpExpMestTypes { get; set; }
         public DbSet<DImpMest> DImpMests { get; set; }
         public DbSet<DImpMestMedicine> DImpMestMedicines { get; set; }
+
+        public DbSet<DExpMest> DExpMests { get; set; }
+        public DbSet<DExpMestMedicine> DExpMestMedicines { get; set; }
+
+        public DbSet<DImpExpMestType> DImpExpMestTypes { get; set; }
         public DbSet<DMedicineStock> DMedicineStocks { get; set; }
 
         #region Patient

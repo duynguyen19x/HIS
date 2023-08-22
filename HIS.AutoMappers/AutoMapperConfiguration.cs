@@ -32,11 +32,13 @@ using HIS.Dtos.Dictionaries.ServiceUnit;
 using HIS.Dtos.Dictionaries.Supplier;
 using HIS.Dtos.Dictionaries.Ward;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals;
+using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities.Systems;
 
 namespace HIS.AutoMappers
 {
@@ -152,6 +154,22 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.SMedicine, opt => opt.Ignore())
                 .ForMember(dest => dest.SStock, opt => opt.Ignore())
                 .ReverseMap();
+
+            CreateMap<DImpMest, DExpMest>()
+                //.ForMember(dest => dest.ExpTime, opt => opt.MapFrom(m => m.ImpTime))
+                //.ForMember(dest => dest.Id, opt => opt.MapFrom(m => m.ExpMestId))
+                .ForMember(dest => dest.DImpMest, opt => opt.Ignore())
+                .ForMember(dest => dest.ImpStock, opt => opt.Ignore())
+                .ForMember(dest => dest.ExpStock, opt => opt.Ignore())
+                .ForMember(dest => dest.DImpExpMestType, opt => opt.Ignore())
+                .ForMember(dest => dest.ReceiverUser, opt => opt.Ignore())
+                .ForMember(dest => dest.ApproverUser, opt => opt.Ignore())
+                .ForMember(dest => dest.ReqRoom, opt => opt.Ignore())
+                .ForMember(dest => dest.StockExpUser, opt => opt.Ignore())
+                .ForMember(dest => dest.ReqDepartment, opt => opt.Ignore())
+                .ForMember(dest => dest.PatientRecord, opt => opt.Ignore())
+                .ForMember(dest => dest.Patient, opt => opt.Ignore())
+                .ForMember(dest => dest.SSupplier, opt => opt.Ignore());
 
             CreateMap<PatientDto, HIS.EntityFrameworkCore.Entities.Business.Patient>().ReverseMap();
             CreateMap<PatientRecordDto, HIS.EntityFrameworkCore.Entities.Business.PatientRecord>().ReverseMap();

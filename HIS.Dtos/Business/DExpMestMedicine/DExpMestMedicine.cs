@@ -44,8 +44,8 @@ namespace HIS.Dtos.Business.DExpMestMedicine
         [Description("Giá nhập")]
         public decimal? ImpPrice { get; set; }
 
-        [Description("Số lượng nhập")]
-        public decimal? ImpQuantity { get; set; }
+        [Description("Số lượng xuất")]
+        public decimal? ExpQuantity { get; set; }
 
         [Description("Phần trăm vat giá nhập")]
         public decimal? ImpVatRate { get; set; }
@@ -53,15 +53,15 @@ namespace HIS.Dtos.Business.DExpMestMedicine
         [Description("Phần trăm thuế")]
         public decimal? TaxRate { get; set; }
 
-        public decimal? ImpAmount
+        public decimal? ExpAmount
         {
             get
             {
-                var impAmount = ImpQuantity.GetValueOrDefault() * ImpPrice.GetValueOrDefault();
+                var expAmount = ExpQuantity.GetValueOrDefault() * ImpPrice.GetValueOrDefault();
                 var vatRate = ImpVatRate.GetValueOrDefault() / 100;
                 var taxRate = TaxRate.GetValueOrDefault() / 100;
 
-                return impAmount * (1 + vatRate + taxRate);
+                return expAmount * (1 + vatRate + taxRate);
             }
             set { }
         }

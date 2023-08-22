@@ -56,7 +56,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests
         public DateTime? ExpTime { get; set; }
 
         /// <summary>
-        /// Người tạo phiếu nhập
+        /// Người tạo phiếu xuất
         /// </summary>
         public Guid? ExpUserId { get; set; }
 
