@@ -43,8 +43,8 @@ namespace HIS.ApplicationService.Systems.Login
                         return apiResult;
                     }
 
-                    var acceptToken = await CreateTokenAsync(await CreateClaimsAsync(user), TokenConsts.AcceptTokenExpiration);
-                    var refreshToken = await CreateTokenAsync(await CreateClaimsAsync(user, TokenTypes.RefreshToken), TokenConsts.RefreshTokenExpiration);
+                    var acceptToken = await CreateTokenAsync(await CreateClaimsAsync(user), AppConst.AcceptTokenExpiration);
+                    var refreshToken = await CreateTokenAsync(await CreateClaimsAsync(user, TokenTypes.RefreshToken), AppConst.RefreshTokenExpiration);
 
                     var token = new TokenResultDto()
                     {
@@ -314,7 +314,7 @@ namespace HIS.ApplicationService.Systems.Login
 
                     // Tạo token mới
                     var userById = _dbContext.SUsers.FirstOrDefault(f => f.Id == storedToken.UserId.GetValueOrDefault());
-                    var acceptToken = await CreateTokenAsync(await CreateClaimsAsync(userById), TokenConsts.AcceptTokenExpiration);
+                    var acceptToken = await CreateTokenAsync(await CreateClaimsAsync(userById), AppConst.AcceptTokenExpiration);
 
                     // Update token
                     storedToken.Jti = acceptToken.Id;
