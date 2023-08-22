@@ -1,11 +1,8 @@
-﻿using HIS.ApplicationService.Business.Patient;
-using HIS.ApplicationService.Business.Pharmaceuticals.ImpMests;
-using HIS.Dtos.Business.DImMest;
-using HIS.Dtos.Business.Patient;
-using HIS.Dtos.Business.Treatment;
+﻿using HIS.ApplicationService.Business.Pharmaceuticals.DImpMests;
+using HIS.Dtos.Business.DImpMest;
+using HIS.Dtos.Business.DMedicineStock;
 using HIS.Dtos.Commons;
 using HIS.Models.Commons;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
@@ -21,12 +18,19 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
             _dImpMestService = dImpMestService;
         }
 
-        [HttpGet("GetByStock")]
-        public async Task<ApiResultList<DImpMestDto>> GetByStock(Guid stockId, string fromDate, string toDate)
+        [HttpGet("GetByStocks")]
+        public async Task<ApiResultList<DImpMestDto>> GetByStocks(Guid stockId, string fromDate, string toDate)
         {
-            return await _dImpMestService.GetByStock(stockId, fromDate, toDate);
+            return await _dImpMestService.GetByStocks(stockId, fromDate, toDate);
         }
 
+        [HttpGet("GetMedicineByStocks")]
+        public async Task<ApiResultList<DMedicineStockDto>> GetMedicineByStocks(Guid stockId)
+        {
+            return await _dImpMestService.GetMedicineByStocks(stockId);
+        }
+
+        #region Nhập từ NCC
         [HttpPost("ImportFromSupplierSaveAsDraft")]
         public async Task<ApiResult<DImpMestDto>> ImportFromSupplierSaveAsDraft(DImpMestDto input)
         {
@@ -39,10 +43,10 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
             return await _dImpMestService.ImportFromSupplierStockIn(input);
         }
 
-        [HttpGet("GetById")]
-        public async Task<ApiResult<DImpMestDto>> GetById(Guid id)
+        [HttpGet("ImportFromSupplierGetById")]
+        public async Task<ApiResult<DImpMestDto>> ImportFromSupplierGetById(Guid id)
         {
-            return await _dImpMestService.GetById(id);
+            return await _dImpMestService.ImportFromSupplierGetById(id);
         }
 
         [HttpGet("ImportFromSupplierCanceled")]
@@ -50,5 +54,32 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
         {
             return await _dImpMestService.ImportFromSupplierCanceled(id);
         }
+        #endregion
+
+        #region Nhập từ kho khác
+        [HttpGet("ImportFromAnotherStockGetById")]
+        public async Task<ApiResult<DImpMestDto>> ImportFromAnotherStockGetById(Guid id)
+        {
+            return await _dImpMestService.ImportFromAnotherStockGetById(id);
+        }
+
+        [HttpPost("ImportFromAnotherStockSaveAsDraft")]
+        public async Task<ApiResult<DImpMestDto>> ImportFromAnotherStockSaveAsDraft(DImpMestDto input)
+        {
+            return await _dImpMestService.ImportFromAnotherStockSaveAsDraft(input);
+        }
+
+        [HttpPost("ImportFromAnotherStockRequest")]
+        public async Task<ApiResult<DImpMestDto>> ImportFromAnotherStockRequest(DImpMestDto input)
+        {
+            return await _dImpMestService.ImportFromAnotherStockRequest(input);
+        }
+
+        [HttpPost("ImportFromAnotherStockStockIn")]
+        public async Task<ApiResult<DImpMestDto>> ImportFromAnotherStockStockIn(DImpMestDto input)
+        {
+            return await _dImpMestService.ImportFromAnotherStockStockIn(input);
+        }
+        #endregion
     }
 }

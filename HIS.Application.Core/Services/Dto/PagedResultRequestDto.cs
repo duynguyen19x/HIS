@@ -7,14 +7,19 @@ using System.Threading.Tasks;
 
 namespace HIS.Core.Application.Services.Dto
 {
-    public class PagedResultRequestDto : IPagedResultRequest
+    [Serializable]
+    public abstract class PagedResultRequestDto : IPagedResultRequest
     {
-        [Range(1, int.MaxValue)]
-        public virtual int MaxResultCount { get; set; } = int.MaxValue;
+        public virtual string? Filter { get; set; }
 
-        [Range(0, int.MaxValue)]
+        public virtual int MaxResultCount { get; set; }
+
         public virtual int SkipCount { get; set; }
 
-        public virtual string Filter { get; set; }
+        public PagedResultRequestDto()
+        {
+            MaxResultCount = int.MaxValue;
+            SkipCount = 0;
+        }
     }
 }

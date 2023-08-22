@@ -1,14 +1,4 @@
-﻿using HIS.Core.Entities;
-using HIS.Core.Entities.Auditing;
-using HIS.EntityFrameworkCore.Entities.Business.Patients;
-using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
-using HIS.EntityFrameworkCore.Entities.Categories.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HIS.Core.Entities.Auditing;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {

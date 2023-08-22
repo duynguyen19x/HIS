@@ -8,10 +8,13 @@
 
   <ItemGroup>
     <Compile Remove="Categories\**" />
+    <Compile Remove="Patient\**" />
     <Compile Remove="Systems\Permistion\**" />
     <EmbeddedResource Remove="Categories\**" />
+    <EmbeddedResource Remove="Patient\**" />
     <EmbeddedResource Remove="Systems\Permistion\**" />
     <None Remove="Categories\**" />
+    <None Remove="Patient\**" />
     <None Remove="Systems\Permistion\**" />
   </ItemGroup>
 

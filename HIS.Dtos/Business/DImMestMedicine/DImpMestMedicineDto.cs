@@ -102,7 +102,7 @@ namespace HIS.Dtos.Business.DImMestMedicine
 
         public Guid? MedicineId { get; set; }
 
-        public Guid? ImMestId { get; set; }
+        public Guid? ImpMestId { get; set; }
 
         public IList<SMedicinePricePolicyDto> SMedicinePricePolicies { get; set; }
     }

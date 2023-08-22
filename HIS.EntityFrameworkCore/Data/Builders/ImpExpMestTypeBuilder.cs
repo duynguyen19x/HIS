@@ -1,12 +1,6 @@
 ﻿using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Utilities.Enums;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Data.Builders
 {
@@ -15,8 +9,8 @@ namespace HIS.EntityFrameworkCore.Data.Builders
         public static void Seed(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DImpExpMestType>().HasData(
-                new DImpExpMestType() { Id = (int)ImpExpMestType.ImportFromSupplier, Code = "01", Name = "Nhập hàng hóa từ nhà cung cấp", Inactive = false },
-                new DImpExpMestType() { Id = (int)ImpExpMestType.ExportFormSupplier, Code = "02", Name = "Xuất hàng hóa trả nhà cung cấp", Inactive = false },
+                new DImpExpMestType() { Id = (int)ImpExpMestType.ImportMedicineFromSupplier, Code = "01", Name = "Nhập thuốc từ nhà cung cấp", Inactive = false },
+                new DImpExpMestType() { Id = (int)ImpExpMestType.ExportMedicineFormSupplier, Code = "02", Name = "Xuất thuốc trả nhà cung cấp", Inactive = false },
                 new DImpExpMestType() { Id = (int)ImpExpMestType.ImportFromAnotherStock, Code = "03", Name = "Nhập từ kho khác", Inactive = false },
                 new DImpExpMestType() { Id = (int)ImpExpMestType.ExportFromAnotherStock, Code = "04", Name = "Xuất trả kho khác", Inactive = false },
                 new DImpExpMestType() { Id = (int)ImpExpMestType.Replenish, Code = "05", Name = "Nhập bù", Inactive = false },
@@ -32,7 +26,9 @@ namespace HIS.EntityFrameworkCore.Data.Builders
                 new DImpExpMestType() { Id = (int)ImpExpMestType.ReturnCabinetStock, Code = "15", Name = "Hoàn trả cơ số tủ trực", Inactive = false },
                 new DImpExpMestType() { Id = (int)ImpExpMestType.ReleaseToCustomers, Code = "16", Name = "Xuất bản cho khách hàng", Inactive = false },
                 new DImpExpMestType() { Id = (int)ImpExpMestType.ReturnFromCustomer, Code = "17", Name = "Nhập trả từ khách hàng", Inactive = false },
-                new DImpExpMestType() { Id = (int)ImpExpMestType.OtherIssue, Code = "18", Name = "Xuất khác", Inactive = false }
+                new DImpExpMestType() { Id = (int)ImpExpMestType.ImportMaterialFromSupplier, Code = "18", Name = "Nhập VTYT từ nhà cung cấp", Inactive = false },
+                new DImpExpMestType() { Id = (int)ImpExpMestType.ExportMaterialFormSupplier, Code = "19", Name = "Xuất VTYT trả nhà cung cấp", Inactive = false },
+                new DImpExpMestType() { Id = (int)ImpExpMestType.OtherIssue, Code = "99", Name = "Xuất khác", Inactive = false }
             );
         }
     }
