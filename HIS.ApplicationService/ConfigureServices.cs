@@ -1,6 +1,5 @@
-﻿using HIS.ApplicationService.Business.DImpExpMestType;
-using HIS.ApplicationService.Business.Patient;
-using HIS.ApplicationService.Business.PatientRecord;
+﻿using HIS.ApplicationService.Business;
+using HIS.ApplicationService.Business.DImpExpMestType;
 using HIS.ApplicationService.Business.Pharmaceuticals.DExpMests;
 using HIS.ApplicationService.Business.Pharmaceuticals.DImpMests;
 using HIS.ApplicationService.Business.Pharmaceuticals.DMedicineStock;
@@ -30,13 +29,11 @@ using HIS.ApplicationService.Dictionaries.Supplier;
 using HIS.ApplicationService.Dictionaries.SurgicalProcedureType;
 using HIS.ApplicationService.Dictionaries.Unit;
 using HIS.ApplicationService.Dictionaries.Ward;
+using HIS.ApplicationService.Systems.AutoNumber;
 using HIS.ApplicationService.Systems.Login;
 using HIS.ApplicationService.Systems.Role;
-using HIS.ApplicationService.Systems.SYSAutoNumber;
 using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
-using HIS.ApplicationService.Systems.AutoNumber;
-using HIS.ApplicationService.Business;
 
 namespace HIS.ApplicationService
 {
