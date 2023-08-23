@@ -3,6 +3,7 @@ using HIS.Core.Linq;
 using HIS.Dtos.Business.DImpMest;
 using HIS.Dtos.Business.DMedicineStock;
 using HIS.Dtos.Commons;
+using HIS.Dtos.Dictionaries.Medicine;
 using HIS.Dtos.Dictionaries.ServicePricePolicy;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Utilities.Helpers;
@@ -48,6 +49,38 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DMedicineStock
                                  .OrderBy(o => o.StockCode).ToList();
 
                 result.TotalCount = result.Result.Count;
+            }
+            catch (Exception ex)
+            {
+                result.IsSuccessed = false;
+                result.Message = ex.Message;
+            }
+
+            return await Task.FromResult(result);
+        }
+
+        public async Task<ApiResultList<DMedicineStockDto>> GetMedicineByStocks(Guid stockId)
+        {
+            var result = new ApiResultList<DMedicineStockDto>();
+
+            try
+            {
+                result.Result = (from dMedicineStock in _dbContext.DMedicineStocks
+                                 join sMedicine in _dbContext.SMedicines on dMedicineStock.MedicineId equals sMedicine.Id
+
+                                 where dMedicineStock.IsDeleted == false && dMedicineStock.AvailableQuantity > 0
+
+                                 select new DMedicineStockDto()
+                                 {
+                                     Id = dMedicineStock.Id,
+                                     MedicineCode = sMedicine.Code,
+                                     MedicineName = sMedicine.Name,
+                                     StockId = dMedicineStock.StockId,
+                                     MedicineId = dMedicineStock.MedicineId,
+                                     Quantity = dMedicineStock.Quantity,
+                                     AvailableQuantity = dMedicineStock.AvailableQuantity,
+                                     SMedicine = _mapper.Map<SMedicineDto>(sMedicine)
+                                 }).ToList();
             }
             catch (Exception ex)
             {

@@ -35,7 +35,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests
         /// </summary>
         public Guid? ExpMestId { get; set; }
 
-        public DImpMest DExpMest { get; set; }
+        public DExpMest DExpMest { get; set; }
         public SMedicine SMedicine { get; set; }
     }
 }

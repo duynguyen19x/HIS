@@ -24,12 +24,6 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
             return await _dImpMestService.GetByStocks(stockId, fromDate, toDate);
         }
 
-        [HttpGet("GetMedicineByStocks")]
-        public async Task<ApiResultList<DMedicineStockDto>> GetMedicineByStocks(Guid stockId)
-        {
-            return await _dImpMestService.GetMedicineByStocks(stockId);
-        }
-
         #region Nhập từ NCC
         [HttpPost("ImportFromSupplierSaveAsDraft")]
         public async Task<ApiResult<DImpMestDto>> ImportFromSupplierSaveAsDraft(DImpMestDto input)

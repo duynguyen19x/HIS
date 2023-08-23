@@ -171,6 +171,8 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.Patient, opt => opt.Ignore())
                 .ForMember(dest => dest.SSupplier, opt => opt.Ignore());
 
+            CreateMap<DImpMestMedicine, DExpMestMedicine>();
+
             CreateMap<PatientDto, HIS.EntityFrameworkCore.Entities.Business.Patient>().ReverseMap();
             CreateMap<PatientRecordDto, HIS.EntityFrameworkCore.Entities.Business.PatientRecord>().ReverseMap();
             CreateMap<PatientRecordDto, PatientDto>()

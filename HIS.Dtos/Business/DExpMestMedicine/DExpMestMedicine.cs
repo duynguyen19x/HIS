@@ -1,11 +1,5 @@
 ﻿using HIS.Core.Application.Services.Dto;
-using HIS.Dtos.Dictionaries.MedicinePricePolicy;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.Dtos.Business.DExpMestMedicine
 {

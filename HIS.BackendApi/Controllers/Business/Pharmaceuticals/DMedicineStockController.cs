@@ -22,5 +22,11 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
         {
             return await _dMedicineStockService.GetAll(input);
         }
+
+        [HttpGet("GetMedicineByStocks")]
+        public async Task<ApiResultList<DMedicineStockDto>> GetMedicineByStocks(Guid stockId)
+        {
+            return await _dMedicineStockService.GetMedicineByStocks(stockId);
+        }
     }
 }

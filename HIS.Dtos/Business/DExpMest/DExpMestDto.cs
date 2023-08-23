@@ -29,16 +29,21 @@ namespace HIS.Dtos.Business.DExpMest
         /// Kho nhập
         /// </summary>
         public Guid? ImpStockId { get; set; }
+        public string ImpStockCode { get; set; }
+        public string ImpStockName { get; set; }
 
         /// <summary>
         /// Kho xuất
         /// </summary>
         public Guid? ExpStockId { get; set; }
+        public string ExpStockCode { get; set; }
+        public string ExpStockName { get; set; }
 
         /// <summary>
         /// Loại phiếu nhập, xuất
         /// </summary>
         public int? ImpExpMestTypeId { get; set; }
+        public string ImpExpMestTypeName { get; set; }
 
         /// <summary>
         /// Người duyệt

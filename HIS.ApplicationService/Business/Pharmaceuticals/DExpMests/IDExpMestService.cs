@@ -1,4 +1,5 @@
 ﻿using HIS.Dtos.Business.DExpMest;
+using HIS.Dtos.Commons;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests;
 using HIS.Models.Commons;
@@ -12,6 +13,6 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DExpMests
 {
     public interface IDExpMestService
     {
-        public Task<ApiResult<DExpMest>> ImportFromAnotherStockCreateExpMest(DImpMest dImpMest, IList<DImpMestMedicine> dImpMestMedicines);
+        public Task<ApiResultList<DExpMestDto>> GetByStocks(Guid stockId, string fromDate, string toDate);
     }
 }
