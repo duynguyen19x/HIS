@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
 using HIS.Application.Core.Services.Dto;
-using HIS.Core.Application.Services.Dto;
 using HIS.Core.Extensions;
 using HIS.Core.Linq;
-using HIS.Dtos.Business.Patient;
+using HIS.Dtos.Business;
+using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace HIS.ApplicationService.Business.Patient
+namespace HIS.ApplicationService.Business
 {
     public class PatientAppService : BaseAppService, IPatientAppService
     {
@@ -76,8 +76,7 @@ namespace HIS.ApplicationService.Business.Patient
 
         public async Task<ResultDto<PatientDto>> Create(PatientDto input)
         {
-            var result = new ResultDto<PatientDto>();
-            await Context.TransactionAsync(async () =>
+            return await Context.UsingTransactionAsync<ResultDto<PatientDto>>(async result =>
             {
                 try
                 {
@@ -86,7 +85,7 @@ namespace HIS.ApplicationService.Business.Patient
                         input.Code = "BN" + DateTime.Now.Year + (Context.Patients.Count() + 1).ToString().PadLeft(5, '0');
 
                     // map
-                    var patient = Mapper.Map<EntityFrameworkCore.Entities.Business.Patient>(input);
+                    var patient = Mapper.Map<EntityFrameworkCore.Entities.Business.HISPatient>(input);
                     patient.CreatedDate = DateTime.Now;
                     patient.CreatedBy = Guid.NewGuid(); // giả lập tài khoản create
 
@@ -95,56 +94,39 @@ namespace HIS.ApplicationService.Business.Patient
 
                     result.Item = input;
                 }
+                catch (Exception ex) 
+                {
+                    result.Exception(ex);
+                }
+            });
+        }
+
+        public async Task<ResultDto<PatientDto>> Update(PatientDto input)
+        {
+            return await Context.UsingTransactionAsync<ResultDto<PatientDto>>(async result =>
+            {
+                try
+                {
+                    if (string.IsNullOrEmpty(input.Code))
+                        input.Code = "BN" + DateTime.Now.Year + Context.Patients.Count().ToString().PadLeft(5, '0');
+                    var patient = Mapper.Map<HISPatient>(input);
+                    patient.ModifiedDate = DateTime.Now;
+                    patient.ModifiedBy = Guid.NewGuid(); // giả lập tài khoản update
+                    Context.Update(patient);
+
+                    await Context.SaveChangesAsync();
+                    result.Item = input;
+                }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
                 }
             });
-
-            return result;
-        }
-
-        public async Task<ResultDto<PatientDto>> Update(PatientDto input)
-        {
-            var result = new ResultDto<PatientDto>();
-            using (var transaction = Context.BeginTransaction())
-            {
-                try
-                {
-                    // kiểm tra dữ liệu tại đây
-
-                    // mã bệnh nhân
-                    if (string.IsNullOrEmpty(input.Code))
-                        input.Code = "BN" + DateTime.Now.Year + Context.Patients.Count().ToString().PadLeft(5, '0');
-
-                    // map
-                    var patient = Mapper.Map<EntityFrameworkCore.Entities.Business.Patient>(input);
-                    patient.ModifiedDate = DateTime.Now;
-                    patient.ModifiedBy = Guid.NewGuid(); // giả lập tài khoản update
-
-                    Context.Update(patient);
-                    await Context.SaveChangesAsync();
-                    result.Item = input;
-
-                    transaction.Commit();
-                }
-                catch (Exception ex)
-                {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
-                }
-                finally
-                {
-                    transaction.Dispose();
-                }
-            }
-            return await Task.FromResult(result);
         }
 
         public async Task<ResultDto<PatientDto>> Delete(Guid id)
         {
-            var result = new ResultDto<PatientDto>();
-            using (var transaction = Context.BeginTransaction())
+            return await Context.UsingTransactionAsync<ResultDto<PatientDto>>(async result =>
             {
                 try
                 {
@@ -153,21 +135,13 @@ namespace HIS.ApplicationService.Business.Patient
                     {
                         Context.Remove(patient);
                         await Context.SaveChangesAsync();
-
-                        transaction.Commit();
                     }
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
-            }
-            return result;
+            });
         }
     }
 }

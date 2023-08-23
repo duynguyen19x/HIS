@@ -1,11 +1,6 @@
-﻿using HIS.Core.Application.Services.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HIS.Application.Core.Services.Dto;
 
-namespace HIS.Dtos.Business.Patient
+namespace HIS.Dtos.Business
 {
     public class GetAllPatientInputDto : PagedResultRequestDto
     {

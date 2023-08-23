@@ -1,7 +1,6 @@
 ﻿using HIS.Application.Core.Services.Dto;
-using HIS.ApplicationService.Business.PatientRecord;
-using HIS.Core.Application.Services.Dto;
-using HIS.Dtos.Business.PatientRecord;
+using HIS.ApplicationService.Business;
+using HIS.Dtos.Business;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Business.Patient
@@ -32,10 +31,7 @@ namespace HIS.BackendApi.Controllers.Business.Patient
         [HttpPost("CreateOrEdit")]
         public async Task<ResultDto<PatientRecordDto>> CreateOrEdit(PatientRecordDto input)
         {
-            if (input.Id == null)
-                return await PatientRecordAppService.Create(input);
-            else
-                return await PatientRecordAppService.Update(input);
+            return await PatientRecordAppService.CreateOrEdit(input);
         }
 
         [HttpDelete("Delete")]

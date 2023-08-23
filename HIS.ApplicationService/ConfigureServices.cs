@@ -35,6 +35,8 @@ using HIS.ApplicationService.Systems.Role;
 using HIS.ApplicationService.Systems.SYSAutoNumber;
 using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
+using HIS.ApplicationService.Systems.AutoNumber;
+using HIS.ApplicationService.Business;
 
 namespace HIS.ApplicationService
 {
