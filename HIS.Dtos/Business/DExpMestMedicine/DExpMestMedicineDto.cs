@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace HIS.Dtos.Business.DExpMestMedicine
 {
-    public class DExpMestMedicine : EntityDto<Guid?>
+    public class DExpMestMedicineDto : EntityDto<Guid?>
     {
         [Description("Mã thuốc")]
         public string Code { get; set; }
@@ -57,7 +57,6 @@ namespace HIS.Dtos.Business.DExpMestMedicine
 
                 return expAmount * (1 + vatRate + taxRate);
             }
-            set { }
         }
 
         [Description("Diễn giải")]

@@ -16,7 +16,7 @@ namespace HIS.Dtos.Business.DImpMest
         /// <summary>
         /// Trang thái phiếu xuất
         /// </summary>
-        public EmpMestStatusType ExpMestStatus { get; set; }
+        public ExpMestStatusType ExpMestStatus { get; set; }
 
         /// <summary>
         /// Kho nhập

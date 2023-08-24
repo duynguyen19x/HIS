@@ -3,9 +3,7 @@ using HIS.ApplicationService.Business.Pharmaceuticals.DExpMests;
 using HIS.Core.Linq;
 using HIS.Dtos.Business.DImMestMedicine;
 using HIS.Dtos.Business.DImpMest;
-using HIS.Dtos.Business.DMedicineStock;
 using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.Medicine;
 using HIS.Dtos.Dictionaries.MedicinePricePolicy;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests;
@@ -20,7 +18,6 @@ using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.Extensions.Configuration;
 using System.Data;
 using System.Globalization;
-using System.Linq;
 
 namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
 {
@@ -831,7 +828,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
                     }
                     else
                     {
-                        //dImpMest.ExpMestId = dImpMestResultDto.Result.Id;
+                        dImpMest.ExpMestId = dImpMestResultDto.Result.Id;
                     }
 
                     _dbContext.SaveChanges();
@@ -931,10 +928,10 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
                                 }
                             }
                         }
-
-                        dExpMest.ImpMestStatus = dImpMest.ImpMestStatus;
-                        dExpMest.ExpMestStatus = Utilities.Enums.EmpMestStatusType.None;
                     }
+
+                    dExpMest.ImpMestStatus = dImpMest.ImpMestStatus;
+                    dExpMest.ExpMestStatus = ExpMestStatusType.None;
                 }
 
                 _dbContext.DExpMestMedicines.AddRange(dExpMestMedicines);

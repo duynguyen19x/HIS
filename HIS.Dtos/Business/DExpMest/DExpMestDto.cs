@@ -1,4 +1,5 @@
 ﻿using HIS.Application.Core.Services.Dto;
+using HIS.Dtos.Business.DExpMestMedicine;
 using HIS.Utilities.Enums;
 
 namespace HIS.Dtos.Business.DExpMest
@@ -18,7 +19,7 @@ namespace HIS.Dtos.Business.DExpMest
         /// <summary>
         /// Trang thái phiếu xuất
         /// </summary>
-        public EmpMestStatusType ExpMestStatus { get; set; }
+        public ExpMestStatusType ExpMestStatus { get; set; }
 
         /// <summary>
         /// Kho nhập
@@ -104,5 +105,7 @@ namespace HIS.Dtos.Business.DExpMest
         /// Phiếu nhập
         /// </summary>
         public Guid? ImpMestId { get; set; }
+
+        public IList<DExpMestMedicineDto> DExpMestMedicines { get; set; }   
     }
 }

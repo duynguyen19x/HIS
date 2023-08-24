@@ -14,5 +14,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DExpMests
     public interface IDExpMestService
     {
         public Task<ApiResultList<DExpMestDto>> GetByStocks(Guid stockId, string fromDate, string toDate);
+
+        public Task<ApiResult<DExpMestDto>> ExpFromAnotherStockGetById(Guid id);
     }
 }
