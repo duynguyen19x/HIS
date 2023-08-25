@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HIS.Utilities.Enums
 {
-    public enum ImpExpMestType
+    public enum InOutStockType
     {
         /// <summary>
         /// Nhập từ NCC

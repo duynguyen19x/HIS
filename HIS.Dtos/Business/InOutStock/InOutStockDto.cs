@@ -6,17 +6,20 @@ namespace HIS.Dtos.Business.InOutStock
 {
     public class InOutStockDto : EntityDto<Guid?>
     {
+        /// <summary>
+        /// Mã phiếu
+        /// </summary>
         public string Code { get; set; }
 
         /// <summary>
-        /// Trạng thái phiếu nhập
+        /// Trạng thái phiếu
         /// </summary>
-        public ImpMestStatusType ImpMestStatus { get; set; }
+        public InOutStatusType Status { get; set; }
 
         /// <summary>
-        /// Trang thái phiếu xuất
+        /// Loại phiếu: 0 - Nhập, 1 - xuất
         /// </summary>
-        public ExpMestStatusType ExpMestStatus { get; set; }
+        public int Type { get; set; }
 
         /// <summary>
         /// Kho nhập
@@ -35,8 +38,8 @@ namespace HIS.Dtos.Business.InOutStock
         /// <summary>
         /// Loại phiếu nhập, xuất
         /// </summary>
-        public int? ImpExpMestTypeId { get; set; }
-        public string ImpExpMestTypeName { get; set; }
+        public int? InOutStockTypeId { get; set; }
+        public string InOutStockTypeName { get; set; }
 
         /// <summary>
         /// Người nhận
@@ -54,14 +57,14 @@ namespace HIS.Dtos.Business.InOutStock
         public DateTime? ApproverTime { get; set; }
 
         /// <summary>
-        /// Ngày tạo phiếu nhập
+        /// Ngày tạo phiếu, yêu cầu
         /// </summary>
-        public DateTime? ImpTime { get; set; }
+        public DateTime? ReqTime { get; set; }
 
         /// <summary>
         /// Người tạo phiếu nhập
         /// </summary>
-        public Guid? ImpUserId { get; set; }
+        public Guid? CreationUserId { get; set; }
 
         /// <summary>
         /// Ngày nhập kho
@@ -86,14 +89,14 @@ namespace HIS.Dtos.Business.InOutStock
         public Guid? ReqDepartmentId { get; set; }
 
         /// <summary>
-        /// Id điều trị
-        /// </summary>
-        public Guid? PatientRecordId { get; set; }
-
-        /// <summary>
         /// Id Bệnh nhân
         /// </summary>
         public Guid? PatientId { get; set; }
+
+        /// <summary>
+        /// Id điều trị
+        /// </summary>
+        public Guid? PatientRecordId { get; set; }
 
         /// <summary>
         /// Nhà cung cấp
@@ -115,6 +118,17 @@ namespace HIS.Dtos.Business.InOutStock
         /// </summary>
         public string Deliverer { get; set; }
 
-        public IList<InOutStockMedicineDto> InOutStockMedicine { get; set; }
+        /// <summary>
+        /// Ngày xuất kho
+        /// </summary>
+        public DateTime? StockExpTime { get; set; }
+
+        /// <summary>
+        /// Người xuất kho
+        /// </summary>
+        public Guid? StockExpUserId { get; set; }
+
+
+        public IList<InOutStockMedicineDto> InOutStockMedicines { get; set; }
     }
 }
