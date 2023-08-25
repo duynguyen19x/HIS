@@ -1,20 +1,14 @@
-﻿using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class SupplierConfiguration : IEntityTypeConfiguration<SSupplier>
+    public class SupplierConfiguration : IEntityTypeConfiguration<Supplier>
     {
-        public void Configure(EntityTypeBuilder<SSupplier> builder)
+        public void Configure(EntityTypeBuilder<Supplier> builder)
         {
-            builder.ToTable("SSuppliers");
+            builder.ToTable("Suppliers");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50);

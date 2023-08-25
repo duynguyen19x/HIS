@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    internal class IcdConfiguration : IEntityTypeConfiguration<SIcd>
+    internal class IcdConfiguration : IEntityTypeConfiguration<Icd>
     {
-        public void Configure(EntityTypeBuilder<SIcd> builder)
+        public void Configure(EntityTypeBuilder<Icd> builder)
         {
-            builder.ToTable("SIcds");
+            builder.ToTable("Icds");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50).IsRequired();
@@ -43,6 +43,9 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.Property(x => x.TypeNameEnglish).HasMaxLength(512);
 
             builder.Property(x => x.Description).HasMaxLength(512);
+
+            builder.HasOne(t => t.ChapterIcd).WithMany()
+              .HasForeignKey(pc => pc.ChapterIcdId).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

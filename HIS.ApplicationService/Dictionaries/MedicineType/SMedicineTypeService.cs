@@ -38,7 +38,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineType
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var medicineType = _mapper.Map<SMedicineType>(input);
+                    var medicineType = _mapper.Map<EntityFrameworkCore.Entities.Categories.MedicineType>(input);
                     medicineType.CreatedDate = DateTime.Now;
 
                     _dbContext.SMedicineTypes.Add(medicineType);
@@ -69,7 +69,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineType
             {
                 try
                 {
-                    var medicineType = _mapper.Map<SMedicineType>(input);
+                    var medicineType = _mapper.Map<EntityFrameworkCore.Entities.Categories.MedicineType>(input);
                     medicineType.ModifiedDate = DateTime.Now;
                     _dbContext.SMedicineTypes.Update(medicineType);
                     await _dbContext.SaveChangesAsync();

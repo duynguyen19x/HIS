@@ -30,7 +30,7 @@ namespace HIS.ApplicationService.Business.DImpExpMestType
 
             try
             {
-                result.Result = (from t in _dbContext.DImpExpMestTypes
+                result.Result = (from t in _dbContext.InOutStockType
                                  select new DImpExpMestTypeDto()
                                  {
                                      Id = t.Id,

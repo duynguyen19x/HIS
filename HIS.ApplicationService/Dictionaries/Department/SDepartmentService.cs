@@ -41,7 +41,7 @@ namespace HIS.ApplicationService.Dictionaries.Department
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = _mapper.Map<SDepartment>(input);
+                    var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Department>(input);
                     _dbContext.SDepartments.Add(data);
                     await _dbContext.SaveChangesAsync();
 
@@ -70,7 +70,7 @@ namespace HIS.ApplicationService.Dictionaries.Department
             {
                 try
                 {
-                    var data = _mapper.Map<SDepartment>(input);
+                    var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Department>(input);
                     _dbContext.SDepartments.Update(data);
                     await _dbContext.SaveChangesAsync();
 

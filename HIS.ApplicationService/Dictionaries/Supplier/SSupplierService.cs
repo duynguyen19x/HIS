@@ -33,7 +33,7 @@ namespace HIS.ApplicationService.Dictionaries.Supplier
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var sSupplier = _mapper.Map<SSupplier>(input);
+                    var sSupplier = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Supplier>(input);
                     _dbContext.SSuppliers.Add(sSupplier);
                     await _dbContext.SaveChangesAsync();
 
@@ -62,7 +62,7 @@ namespace HIS.ApplicationService.Dictionaries.Supplier
             {
                 try
                 {
-                    var sSupplier = _mapper.Map<SSupplier>(input);
+                    var sSupplier = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Supplier>(input);
                     _dbContext.SSuppliers.Update(sSupplier);
                     await _dbContext.SaveChangesAsync();
 

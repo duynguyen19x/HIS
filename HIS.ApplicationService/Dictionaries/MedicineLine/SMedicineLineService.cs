@@ -40,7 +40,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineLine
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var medicineLine = _mapper.Map<SMedicineLine>(input);
+                    var medicineLine = _mapper.Map<EntityFrameworkCore.Entities.Categories.MedicineLine>(input);
                     _dbContext.SMedicineLines.Add(medicineLine);
                     await _dbContext.SaveChangesAsync();
 
@@ -69,7 +69,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineLine
             {
                 try
                 {
-                    var medicineLine = _mapper.Map<SMedicineLine>(input);
+                    var medicineLine = _mapper.Map<EntityFrameworkCore.Entities.Categories.MedicineLine>(input);
                     _dbContext.SMedicineLines.Update(medicineLine);
                     await _dbContext.SaveChangesAsync();
 

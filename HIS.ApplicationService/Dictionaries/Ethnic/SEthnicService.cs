@@ -31,7 +31,7 @@ namespace HIS.ApplicationService.Dictionaries.Ethnic
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var branch = new SEthnic()
+                    var branch = new EntityFrameworkCore.Entities.Dictionaries.Ethnic()
                     {
                         Id = input.Id.GetValueOrDefault(),
                         Code = input.Code,
@@ -67,7 +67,7 @@ namespace HIS.ApplicationService.Dictionaries.Ethnic
             {
                 try
                 {
-                    var ethnic = new SEthnic()
+                    var ethnic = new EntityFrameworkCore.Entities.Dictionaries.Ethnic()
                     {
                         Id = input.Id.GetValueOrDefault(),
                         Code = input.Code,

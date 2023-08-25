@@ -47,7 +47,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineGroup
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var medicineGroup = _mapper.Map<SMedicineGroup>(input);
+                    var medicineGroup = _mapper.Map<EntityFrameworkCore.Entities.Categories.MedicineGroup>(input);
                     _dbContext.SMedicineGroups.Add(medicineGroup);
                     await _dbContext.SaveChangesAsync();
 
@@ -76,7 +76,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineGroup
             {
                 try
                 {
-                    var medicineGroup = _mapper.Map<SMedicineGroup>(input);
+                    var medicineGroup = _mapper.Map<EntityFrameworkCore.Entities.Categories.MedicineGroup>(input);
                     _dbContext.SMedicineGroups.Update(medicineGroup);
                     await _dbContext.SaveChangesAsync();
 

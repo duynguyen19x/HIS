@@ -8,22 +8,22 @@ namespace HIS.EntityFrameworkCore.Data.Builders
     {
         public static void Seed(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<SPatientType>().HasData(
-                new SPatientType()
+            modelBuilder.Entity<PatientType>().HasData(
+                new PatientType()
                 {
                     Id = 1,
                     Code = PatientTypes.BHYT,
                     Name = "Bảo hiểm y tế",
                     Inactive = false
                 },
-                new SPatientType()
+                new PatientType()
                 {
                     Id = 2,
                     Code = PatientTypes.VP,
                     Name = "Viện phí",
                     Inactive = false
                 },
-                new SPatientType()
+                new PatientType()
                 {
                     Id = 3,
                     Code = PatientTypes.DV,

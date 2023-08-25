@@ -106,27 +106,27 @@ namespace HIS.EntityFrameworkCore.Entities.Business
 
         [Ignore]
         [ForeignKey(nameof(GenderId))]
-        public virtual SGender SGenderFk { get; set; }
+        public virtual Gender SGenderFk { get; set; }
 
         [Ignore]
         [ForeignKey(nameof(EthnicityId))]
-        public virtual SEthnic SEthnicFk { get; set; }
+        public virtual Ethnic SEthnicFk { get; set; }
 
         [Ignore]
         [ForeignKey(nameof(CareerId))]
-        public virtual SCareer SCareerFk { get; set; }
+        public virtual Career SCareerFk { get; set; }
 
         [Ignore]
         [ForeignKey(nameof(CountryId))]
-        public virtual SCountry SCountryFk { get; set; }
+        public virtual Country SCountryFk { get; set; }
 
         [Ignore]
         [ForeignKey(nameof(ProvinceId))]
-        public virtual SProvince SProvinceFk { get; set; }
+        public virtual Province SProvinceFk { get; set; }
 
         [Ignore]
         [ForeignKey(nameof(DistrictId))]
-        public virtual SDistrict SDistrictFk { get; set; }
+        public virtual District SDistrictFk { get; set; }
 
         [Ignore]
         [ForeignKey(nameof(WardId))]
@@ -134,6 +134,6 @@ namespace HIS.EntityFrameworkCore.Entities.Business
 
         [Ignore]
         [ForeignKey(nameof(BranchId))]
-        public virtual SBranch SBracnhFk { get; set; }
+        public virtual Branch SBracnhFk { get; set; }
     }
 }

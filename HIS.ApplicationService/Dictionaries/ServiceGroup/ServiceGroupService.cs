@@ -39,7 +39,7 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroup
                 {
                     input.Id = Guid.NewGuid();
 
-                    var data = _mapper.Map<SServiceGroup>(input);
+                    var data = _mapper.Map<EntityFrameworkCore.Entities.Categories.ServiceGroup>(input);
 
                     _dbContext.SServiceGroups.Add(data);
                     await _dbContext.SaveChangesAsync();

@@ -38,7 +38,7 @@ namespace HIS.ApplicationService.Dictionaries.Icd
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = new SIcd()
+                    var data = new EntityFrameworkCore.Entities.Dictionaries.Icd()
                     {
                         Id = input.Id.GetValueOrDefault(),
                         Code = input.Code,
@@ -92,7 +92,7 @@ namespace HIS.ApplicationService.Dictionaries.Icd
             {
                 try
                 {
-                    var data = new SIcd()
+                    var data = new EntityFrameworkCore.Entities.Dictionaries.Icd()
                     {
                         Id = input.Id.GetValueOrDefault(),
                         Code = input.Code,

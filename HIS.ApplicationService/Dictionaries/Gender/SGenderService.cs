@@ -32,7 +32,7 @@ namespace HIS.ApplicationService.Dictionaries.Gender
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = _mapper.Map<SGender>(input);
+                    var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Gender>(input);
                     _dbContext.SGenders.Add(data);
                     await _dbContext.SaveChangesAsync();
 
@@ -61,7 +61,7 @@ namespace HIS.ApplicationService.Dictionaries.Gender
             {
                 try
                 {
-                    var data = _mapper.Map<SGender>(input);
+                    var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Gender>(input);
                     _dbContext.SGenders.Update(data);
                     await _dbContext.SaveChangesAsync();
 

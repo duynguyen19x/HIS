@@ -42,7 +42,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DExpMests
                                  join exStock in _dbContext.SRooms on dExpMest.ExpStockId equals exStock.Id into exStockDefaults
                                  from exStockDefault in exStockDefaults.DefaultIfEmpty()
 
-                                 join impExpMestType in _dbContext.DImpExpMestTypes on dExpMest.ImpExpMestTypeId equals impExpMestType.Id into impExpMestTypeDefaults
+                                 join impExpMestType in _dbContext.InOutStockType on dExpMest.ImpExpMestTypeId equals impExpMestType.Id into impExpMestTypeDefaults
                                  from impExpMestTypeDefault in impExpMestTypeDefaults.DefaultIfEmpty()
 
                                  select new DExpMestDto()

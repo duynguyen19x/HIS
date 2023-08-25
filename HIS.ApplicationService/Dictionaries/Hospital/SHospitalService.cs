@@ -31,7 +31,7 @@ namespace HIS.ApplicationService.Dictionaries.Hospital
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = new SHospital()
+                    var data = new EntityFrameworkCore.Entities.Dictionaries.Hospital()
                     {
                         Id = input.Id.GetValueOrDefault(),
                         Code = input.Code,
@@ -71,7 +71,7 @@ namespace HIS.ApplicationService.Dictionaries.Hospital
             {
                 try
                 {
-                    var data = new SHospital()
+                    var data = new EntityFrameworkCore.Entities.Dictionaries.Hospital()
                     {
                         Id = input.Id.GetValueOrDefault(),
                         Code = input.Code,

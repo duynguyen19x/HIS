@@ -33,7 +33,7 @@ namespace HIS.ApplicationService.Dictionaries.ChapterICD10
                 {
                     input.Id = Guid.NewGuid();
 
-                    var data = _mapper.Map<SChapterIcd>(input);
+                    var data = _mapper.Map<ChapterIcd>(input);
 
                     _dbContext.SChapterIcds.Add(data);
                     await _dbContext.SaveChangesAsync();

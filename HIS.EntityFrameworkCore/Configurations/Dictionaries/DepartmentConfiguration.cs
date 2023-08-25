@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class DepartmentConfiguration : IEntityTypeConfiguration<SDepartment>
+    public class DepartmentConfiguration : IEntityTypeConfiguration<Department>
     {
-        public void Configure(EntityTypeBuilder<SDepartment> builder)
+        public void Configure(EntityTypeBuilder<Department> builder)
         {
-            builder.ToTable("SDepartments");
+            builder.ToTable("Departments");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50).IsRequired(); 
@@ -21,8 +21,8 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.Property(x => x.Name).HasMaxLength(512).IsRequired();
             builder.Property(x => x.Description).HasMaxLength(512);
 
-            builder.HasOne(t => t.SDepartmentType).WithMany(p => p.SDepartments).HasForeignKey(p => p.DepartmentTypeId).OnDelete(DeleteBehavior.NoAction);
-            builder.HasOne(t => t.SBranch).WithMany(p => p.Departments).HasForeignKey(p => p.BranchId).OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(t => t.DepartmentType).WithMany().HasForeignKey(p => p.DepartmentTypeId).OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(t => t.Branch).WithMany().HasForeignKey(p => p.BranchId).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

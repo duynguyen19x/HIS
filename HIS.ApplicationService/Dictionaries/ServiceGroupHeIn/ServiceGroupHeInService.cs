@@ -32,7 +32,7 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroupHeIn
                 {
                     input.Id = Guid.NewGuid();
 
-                    var data = _mapper.Map<SServiceGroupHeIn>(input);
+                    var data = _mapper.Map<EntityFrameworkCore.Entities.Categories.Services.ServiceGroupHeIn>(input);
 
                     _dbContext.SServiceGroupHeIns.Add(data);
                     await _dbContext.SaveChangesAsync();

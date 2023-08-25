@@ -78,7 +78,7 @@ namespace HIS.ApplicationService.Systems.Role
         private async Task<ApiResult<SRoleDto>> Create(SRoleDto input)
         {
             var result = new ApiResult<SRoleDto>();
-            await _dbContext.SRoles.AddAsync(new SRole()
+            await _dbContext.SRoles.AddAsync(new EntityFrameworkCore.Entities.Systems.Role()
             {
 
             });

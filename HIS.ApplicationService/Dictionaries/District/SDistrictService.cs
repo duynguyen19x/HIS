@@ -39,7 +39,7 @@ namespace HIS.ApplicationService.Dictionaries.District
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = new SDistrict()
+                    var data = new EntityFrameworkCore.Entities.Dictionaries.District()
                     {
                         Id = input.Id.GetValueOrDefault(),
                         Code = input.Code,
@@ -75,7 +75,7 @@ namespace HIS.ApplicationService.Dictionaries.District
             {
                 try
                 {
-                    var job = new SDistrict()
+                    var job = new EntityFrameworkCore.Entities.Dictionaries.District()
                     {
                         Id = input.Id.GetValueOrDefault(),
                         Code = input.Code,

@@ -31,7 +31,7 @@ namespace HIS.ApplicationService.Dictionaries.Career
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = _mapper.Map<SCareer>(input);
+                    var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Career>(input);
                     _dbContext.SCareers.Add(data);
                     await _dbContext.SaveChangesAsync();
 
@@ -60,7 +60,7 @@ namespace HIS.ApplicationService.Dictionaries.Career
             {
                 try
                 {
-                    var data = _mapper.Map<SCareer>(input);
+                    var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Career>(input);
                     _dbContext.SCareers.Update(data);
                     await _dbContext.SaveChangesAsync();
 

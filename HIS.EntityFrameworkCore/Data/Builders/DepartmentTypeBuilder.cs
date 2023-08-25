@@ -8,29 +8,29 @@ namespace HIS.EntityFrameworkCore.Data.Builders
     {
         public static void Seed(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<SDepartmentType>().HasData(
-                new SDepartmentType()
+            modelBuilder.Entity<DepartmentType>().HasData(
+                new DepartmentType()
                 {
                     Id = (int)DepartmentTypes.ClinicalDepartment,
                     Code = "LS",
                     Name = "Khoa lâm sàng",
                     SortOrder = (int)DepartmentTypes.ClinicalDepartment
                 },
-                new SDepartmentType()
+                new DepartmentType()
                 {
                     Id = (int)DepartmentTypes.ClinicalLaboratoryDepartment,
                     Code = "CLS",
                     Name = "Khoa cận lâm sàng",
                     SortOrder = (int)DepartmentTypes.ClinicalLaboratoryDepartment
                 },
-                new SDepartmentType()
+                new DepartmentType()
                 {
                     Id = (int)DepartmentTypes.PharmacyDepartment,
                     Code = "DUOC",
                     Name = "Khoa dược",
                     SortOrder = (int)DepartmentTypes.PharmacyDepartment
                 },
-                new SDepartmentType()
+                new DepartmentType()
                 {
                     Id = (int)DepartmentTypes.ComprehensivePlan,
                     Code = "KHTH",

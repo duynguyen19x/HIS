@@ -9,11 +9,11 @@ using HIS.EntityFrameworkCore.Entities.Dictionaries;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class RoomConfiguration : IEntityTypeConfiguration<SRoom>
+    public class RoomConfiguration : IEntityTypeConfiguration<Room>
     {
-        public void Configure(EntityTypeBuilder<SRoom> builder)
+        public void Configure(EntityTypeBuilder<Room> builder)
         {
-            builder.ToTable("SRooms");
+            builder.ToTable("Rooms");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
@@ -22,8 +22,8 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.Property(x => x.Name).HasMaxLength(512).IsRequired();
             builder.Property(x => x.Description).HasMaxLength(512);
 
-            builder.HasOne(t => t.SRoomType).WithMany(p => p.SRooms).HasForeignKey(p => p.RoomTypeId).OnDelete(DeleteBehavior.NoAction);
-            builder.HasOne(t => t.SDepartment).WithMany(p => p.SRooms).HasForeignKey(p => p.DepartmentId).OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(t => t.RoomType).WithMany().HasForeignKey(p => p.RoomTypeId).OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(t => t.Department).WithMany().HasForeignKey(p => p.DepartmentId).OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

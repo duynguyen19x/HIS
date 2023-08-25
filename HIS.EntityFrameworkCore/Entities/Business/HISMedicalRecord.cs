@@ -37,14 +37,14 @@ namespace HIS.EntityFrameworkCore.Entities.Business
 
         [Ignore]
         [ForeignKey(nameof(BranchId))]
-        public virtual SBranch BranchFk { get; set; }
+        public virtual Branch BranchFk { get; set; }
 
         [Ignore]
         [ForeignKey(nameof(DepartmentId))]
-        public virtual SDepartment DepartmentFk { get; set; }
+        public virtual Department DepartmentFk { get; set; }
 
         [Ignore]
         [ForeignKey(nameof(RoomId))]
-        public virtual SRoom RoomFk { get; set; }
+        public virtual Room RoomFk { get; set; }
     }
 }

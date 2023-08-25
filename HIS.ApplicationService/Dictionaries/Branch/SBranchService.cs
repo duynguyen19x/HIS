@@ -32,7 +32,7 @@ namespace HIS.ApplicationService.Dictionaries.Branch
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var branch = _mapper.Map<SBranch>(input);
+                    var branch = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Branch>(input);
                     _dbContext.SBranchs.Add(branch);
                     await _dbContext.SaveChangesAsync();
 
@@ -61,7 +61,7 @@ namespace HIS.ApplicationService.Dictionaries.Branch
             {
                 try
                 {
-                    var branch = _mapper.Map<SBranch>(input);
+                    var branch = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Branch>(input);
                     _dbContext.SBranchs.Update(branch);
                     await _dbContext.SaveChangesAsync();
 

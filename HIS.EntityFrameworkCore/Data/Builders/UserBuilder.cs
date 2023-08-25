@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Data.Builders
     {
         public static void Seed(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<SUser>().HasData(new SUser()
+            modelBuilder.Entity<User>().HasData(new User()
             {
                 Id = new Guid("3382BE1C-2836-4246-99DB-C4E1C781E868"),
                 UserName = "Administrator",

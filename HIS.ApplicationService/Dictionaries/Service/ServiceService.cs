@@ -58,7 +58,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                     var timeNow = DateTime.Now;
                     input.Id = Guid.NewGuid();
 
-                    var data = _mapper.Map<SService>(input);
+                    var data = _mapper.Map<EntityFrameworkCore.Entities.Categories.Service>(input);
                     data.CreatedDate = timeNow;
                     _dbContext.SServices.Add(data);
 
@@ -69,7 +69,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                             sServicePricePolicy.ExecutionTime = string.IsNullOrEmpty(sServicePricePolicy.ExecutionTimeString) ? null : DateTime.ParseExact(sServicePricePolicy.ExecutionTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None);
                         }
 
-                        var sServicePricePolicys = _mapper.Map<List<SServicePricePolicy>>(input.SServicePricePolicies);
+                        var sServicePricePolicys = _mapper.Map<List<EntityFrameworkCore.Entities.Categories.Services.ServicePricePolicy>>(input.SServicePricePolicies);
                         foreach (var sServicePricePolicy in sServicePricePolicys)
                         {
                             sServicePricePolicy.Id = Guid.NewGuid();
@@ -88,7 +88,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                         if (serviceGroupHeIn != null && serviceGroupHeInTypes.Any(a => a == serviceGroupHeIn.Code) && input.SExecutionRooms != null)
                         {
                             var executionRoomDtos = input.SExecutionRooms.Where(w => w.IsCheck).ToList();
-                            var executionRooms = _mapper.Map<List<SExecutionRoom>>(executionRoomDtos);
+                            var executionRooms = _mapper.Map<List<ExecutionRoom>>(executionRoomDtos);
                             foreach (var executionRoom in executionRooms)
                             {
                                 executionRoom.Id = Guid.NewGuid();
@@ -101,7 +101,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
 
                     if (input.SServiceResultIndices != null)
                     {
-                        var serviceResultIndices = _mapper.Map<List<SServiceResultIndice>>(input.SServiceResultIndices);
+                        var serviceResultIndices = _mapper.Map<List<ServiceResultIndice>>(input.SServiceResultIndices);
                         foreach (var item in serviceResultIndices)
                         {
                             if (GuidHelper.IsNullOrEmpty(item.Id))
@@ -162,7 +162,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                 sServicePricePolicy.ExecutionTime = string.IsNullOrEmpty(sServicePricePolicy.ExecutionTimeString) ? null : DateTime.ParseExact(sServicePricePolicy.ExecutionTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None);
                             }
 
-                            var sServicePricePolicys = _mapper.Map<List<SServicePricePolicy>>(input.SServicePricePolicies);
+                            var sServicePricePolicys = _mapper.Map<List<EntityFrameworkCore.Entities.Categories.Services.ServicePricePolicy>>(input.SServicePricePolicies);
                             foreach (var sServicePricePolicy in sServicePricePolicys)
                             {
                                 if (GuidHelper.IsNullOrEmpty(sServicePricePolicy.Id))
@@ -183,7 +183,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                             if (serviceGroupHeIn != null && serviceGroupHeInTypes.Any(a => a == serviceGroupHeIn.Code))
                             {
                                 var executionRoomDtos = input.SExecutionRooms.Where(w => w.IsCheck).ToList();
-                                var executionRooms = _mapper.Map<List<SExecutionRoom>>(executionRoomDtos);
+                                var executionRooms = _mapper.Map<List<ExecutionRoom>>(executionRoomDtos);
                                 foreach (var executionRoom in executionRooms)
                                 {
                                     if (GuidHelper.IsNullOrEmpty(executionRoom.Id))
@@ -198,7 +198,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
 
                         if (input.SServiceResultIndices != null)
                         {
-                            var serviceResultIndices = _mapper.Map<List<SServiceResultIndice>>(input.SServiceResultIndices);
+                            var serviceResultIndices = _mapper.Map<List<ServiceResultIndice>>(input.SServiceResultIndices);
                             foreach (var item in serviceResultIndices)
                             {
                                 if (GuidHelper.IsNullOrEmpty(item.Id))
@@ -476,7 +476,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                      join sServiceGroup in sServiceGroups on serviceDto.ServiceGroupCode equals sServiceGroup.Code
                                      join sSurgicalProcedureType in sSurgicalProcedureTypes on serviceDto.SurgicalProcedureTypeCode equals sSurgicalProcedureType.Code into sSurgicalProcedureTypeTems
                                      from surg in sSurgicalProcedureTypeTems.DefaultIfEmpty()
-                                     select new SService()
+                                     select new EntityFrameworkCore.Entities.Categories.Service()
                                      {
                                          Id = serviceDto.Id.GetValueOrDefault(),
                                          Code = serviceDto.Code,
@@ -494,7 +494,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                     var servicePricePolicieDtos = sServiceDtos.SelectMany(s => s.SServicePricePolicies).ToList();
                     var servicePricePolicie = (from servicePricePolicy in servicePricePolicieDtos
                                                join sPatientType in sPatientTypes on servicePricePolicy.PatientTypeCode equals sPatientType.Code
-                                               select new SServicePricePolicy()
+                                               select new EntityFrameworkCore.Entities.Categories.Services.ServicePricePolicy()
                                                {
                                                    Id = servicePricePolicy.Id.GetValueOrDefault(),
                                                    PatientTypeId = sPatientType.Id,
@@ -509,7 +509,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                     var executionRoomDtos = sServiceDtos.SelectMany(s => s.SExecutionRooms).ToList();
                     var executionRooms = (from executionRoom in executionRoomDtos
                                           join sRoom in sRooms on executionRoom.RoomCode equals sRoom.Code
-                                          select new SExecutionRoom()
+                                          select new ExecutionRoom()
                                           {
                                               Id = executionRoom.Id.GetValueOrDefault(),
                                               ServiceId = executionRoom.ServiceId,
@@ -548,7 +548,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
 
                     var serviceResultIndexs = (from resultIndex in sServiceResultIndexs
                                                join service in services on resultIndex.ServiceCode equals service.Code
-                                               select new SServiceResultIndice()
+                                               select new ServiceResultIndice()
                                                {
                                                    Id = Guid.NewGuid(),
                                                    Code = resultIndex.Code,

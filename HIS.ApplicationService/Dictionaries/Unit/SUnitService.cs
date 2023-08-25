@@ -33,7 +33,7 @@ namespace HIS.ApplicationService.Dictionaries.Unit
                 {
                     input.Id = Guid.NewGuid();
 
-                    var data = _mapper.Map<SUnit>(input);
+                    var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Unit>(input);
 
                     _dbContext.SUnits.Add(data);
                     await _dbContext.SaveChangesAsync();

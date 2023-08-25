@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class CountryConfiguration : IEntityTypeConfiguration<SCountry>
+    public class CountryConfiguration : IEntityTypeConfiguration<Country>
     {
-        public void Configure(EntityTypeBuilder<SCountry> builder)
+        public void Configure(EntityTypeBuilder<Country> builder)
         {
-            builder.ToTable("SCountries");
+            builder.ToTable("Countries");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50).IsRequired();

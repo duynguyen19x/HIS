@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class PatientTypeConfiguration : IEntityTypeConfiguration<SPatientType>
+    public class PatientTypeConfiguration : IEntityTypeConfiguration<PatientType>
     {
-        public void Configure(EntityTypeBuilder<SPatientType> builder)
+        public void Configure(EntityTypeBuilder<PatientType> builder)
         {
             builder.ToTable("SPatientTypes");
             builder.HasKey(x => x.Id);

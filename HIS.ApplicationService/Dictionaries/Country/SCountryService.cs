@@ -39,7 +39,7 @@ namespace HIS.ApplicationService.Dictionaries.Country
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = _mapper.Map<SCountry>(input); 
+                    var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Country>(input); 
                     _dbContext.SCountries.Add(data);
                     await _dbContext.SaveChangesAsync();
 
@@ -68,7 +68,7 @@ namespace HIS.ApplicationService.Dictionaries.Country
             {
                 try
                 {
-                    var data = _mapper.Map<SCountry>(input);
+                    var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Country>(input);
                     _dbContext.SCountries.Update(data);
                     await _dbContext.SaveChangesAsync();
 

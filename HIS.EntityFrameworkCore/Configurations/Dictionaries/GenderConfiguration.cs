@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class GenderConfiguration : IEntityTypeConfiguration<SGender>
+    public class GenderConfiguration : IEntityTypeConfiguration<Gender>
     {
-        public void Configure(EntityTypeBuilder<SGender> builder)
+        public void Configure(EntityTypeBuilder<Gender> builder)
         {
-            builder.ToTable("SGenders");
+            builder.ToTable("Genders");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50).IsRequired();
             builder.Property(x => x.Name).HasMaxLength(512).IsRequired();

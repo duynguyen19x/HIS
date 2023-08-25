@@ -11,11 +11,11 @@ namespace HIS.Utilities.Enums
         /// <summary>
         /// Nhập từ NCC
         /// </summary>
-        ImportMedicineFromSupplier = 1,
+        ImportFromSupplier = 1,
         /// <summary>
         /// Xuất trả NCC
         /// </summary>
-        ExportMedicineFormSupplier,
+        ExportFormSupplier,
         /// <summary>
         /// Nhập từ kho khác
         /// </summary>

@@ -39,7 +39,7 @@ namespace HIS.ApplicationService.Dictionaries.DepartmentType
                 try
                 {
                     //input.Id = Guid.NewGuid();
-                    var data = _mapper.Map<SDepartmentType>(input);
+                    var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.DepartmentType>(input);
                     _dbContext.SDepartmentTypes.Add(data);
                     await _dbContext.SaveChangesAsync();
 
@@ -68,7 +68,7 @@ namespace HIS.ApplicationService.Dictionaries.DepartmentType
             {
                 try
                 {
-                    var data = _mapper.Map<SDepartmentType>(input);
+                    var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.DepartmentType>(input);
                     _dbContext.SDepartmentTypes.Update(data);
                     await _dbContext.SaveChangesAsync();
 

@@ -38,7 +38,7 @@ namespace HIS.ApplicationService.Dictionaries.Province
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var branch = new SProvince()
+                    var branch = new EntityFrameworkCore.Entities.Dictionaries.Province()
                     {
                         Id = input.Id.GetValueOrDefault(),
                         Code = input.Code,
@@ -73,7 +73,7 @@ namespace HIS.ApplicationService.Dictionaries.Province
             {
                 try
                 {
-                    var job = new SProvince()
+                    var job = new EntityFrameworkCore.Entities.Dictionaries.Province()
                     {
                         Id = input.Id.GetValueOrDefault(),
                         Code = input.Code,
