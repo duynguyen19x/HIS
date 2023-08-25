@@ -33,7 +33,7 @@ namespace HIS.ApplicationService.Dictionaries.Room
                 {
                     input.Id = Guid.NewGuid();
                     var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Room>(input);
-                    _dbContext.SRooms.Add(data);
+                    _dbContext.Rooms.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -62,7 +62,7 @@ namespace HIS.ApplicationService.Dictionaries.Room
                 try
                 {
                     var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Room>(input);
-                    _dbContext.SRooms.Update(data);
+                    _dbContext.Rooms.Update(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -90,10 +90,10 @@ namespace HIS.ApplicationService.Dictionaries.Room
             {
                 try
                 {
-                    var department = _dbContext.SRooms.SingleOrDefault(x => x.Id == id);
+                    var department = _dbContext.Rooms.SingleOrDefault(x => x.Id == id);
                     if (department != null)
                     {
-                        _dbContext.SRooms.Remove(department);
+                        _dbContext.Rooms.Remove(department);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -119,9 +119,9 @@ namespace HIS.ApplicationService.Dictionaries.Room
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SRooms
-                                 join t in _dbContext.SRoomTypes on r.RoomTypeId equals t.Id
-                                 join d in _dbContext.SDepartments on r.DepartmentId equals d.Id 
+                result.Result = (from r in _dbContext.Rooms
+                                 join t in _dbContext.RoomTypes on r.RoomTypeId equals t.Id
+                                 join d in _dbContext.Departments on r.DepartmentId equals d.Id 
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.DepartmentIdFilter == null || r.DepartmentId == input.DepartmentIdFilter)
@@ -162,9 +162,9 @@ namespace HIS.ApplicationService.Dictionaries.Room
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SRooms
-                                 join t in _dbContext.SRoomTypes on r.RoomTypeId equals t.Id
-                                 join d in _dbContext.SDepartments on r.DepartmentId equals d.Id
+                result.Result = (from r in _dbContext.Rooms
+                                 join t in _dbContext.RoomTypes on r.RoomTypeId equals t.Id
+                                 join d in _dbContext.Departments on r.DepartmentId equals d.Id
                                  where r.Id == id
                                  select new RoomDto()
                                  {
@@ -197,9 +197,9 @@ namespace HIS.ApplicationService.Dictionaries.Room
             var result = new ApiResultList<RoomDto>();
             try
             {
-                result.Result = (from r in _dbContext.SRooms
-                                 join t in _dbContext.SRoomTypes on r.RoomTypeId equals t.Id
-                                 join d in _dbContext.SDepartments on r.DepartmentId equals d.Id
+                result.Result = (from r in _dbContext.Rooms
+                                 join t in _dbContext.RoomTypes on r.RoomTypeId equals t.Id
+                                 join d in _dbContext.Departments on r.DepartmentId equals d.Id
                                  where d.DepartmentTypeId == (int)DepartmentTypes.PharmacyDepartment
                                  select new RoomDto()
                                  {

@@ -35,7 +35,7 @@ namespace HIS.ApplicationService.Dictionaries.ChapterICD10
 
                     var data = _mapper.Map<ChapterIcd>(input);
 
-                    _dbContext.SChapterIcds.Add(data);
+                    _dbContext.ChapterIcds.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -63,7 +63,7 @@ namespace HIS.ApplicationService.Dictionaries.ChapterICD10
             {
                 try
                 {
-                    var sServiceChapterICD10 = _dbContext.SChapterIcds.FirstOrDefault(f => f.Id == input.Id);
+                    var sServiceChapterICD10 = _dbContext.ChapterIcds.FirstOrDefault(f => f.Id == input.Id);
                     if (sServiceChapterICD10 == null)
                         _mapper.Map(input, sServiceChapterICD10);
 
@@ -94,10 +94,10 @@ namespace HIS.ApplicationService.Dictionaries.ChapterICD10
             {
                 try
                 {
-                    var sServiceChapterICD10 = _dbContext.SChapterIcds.SingleOrDefault(x => x.Id == id);
+                    var sServiceChapterICD10 = _dbContext.ChapterIcds.SingleOrDefault(x => x.Id == id);
                     if (sServiceChapterICD10 != null)
                     {
-                        _dbContext.SChapterIcds.Remove(sServiceChapterICD10);
+                        _dbContext.ChapterIcds.Remove(sServiceChapterICD10);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -124,7 +124,7 @@ namespace HIS.ApplicationService.Dictionaries.ChapterICD10
 
             try
             {
-                result.Result = (from r in _dbContext.SChapterIcds
+                result.Result = (from r in _dbContext.ChapterIcds
                                  select new ChapterIcdDto()
                                  {
                                      Id = r.Id,
@@ -151,7 +151,7 @@ namespace HIS.ApplicationService.Dictionaries.ChapterICD10
 
             try
             {
-                var service = _dbContext.SChapterIcds.FirstOrDefault(s => s.Id == id);
+                var service = _dbContext.ChapterIcds.FirstOrDefault(s => s.Id == id);
                 result.Result = _mapper.Map<ChapterIcdDto>(service);
             }
             catch (Exception ex)

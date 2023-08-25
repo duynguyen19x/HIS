@@ -40,7 +40,7 @@ namespace HIS.ApplicationService.Dictionaries.DepartmentType
                 {
                     //input.Id = Guid.NewGuid();
                     var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.DepartmentType>(input);
-                    _dbContext.SDepartmentTypes.Add(data);
+                    _dbContext.DepartmentTypes.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -69,7 +69,7 @@ namespace HIS.ApplicationService.Dictionaries.DepartmentType
                 try
                 {
                     var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.DepartmentType>(input);
-                    _dbContext.SDepartmentTypes.Update(data);
+                    _dbContext.DepartmentTypes.Update(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -97,10 +97,10 @@ namespace HIS.ApplicationService.Dictionaries.DepartmentType
             {
                 try
                 {
-                    var data = _dbContext.SDepartmentTypes.SingleOrDefault(x => x.Id == id);
+                    var data = _dbContext.DepartmentTypes.SingleOrDefault(x => x.Id == id);
                     if (data != null)
                     {
-                        _dbContext.SDepartmentTypes.Remove(data);
+                        _dbContext.DepartmentTypes.Remove(data);
                         await _dbContext.SaveChangesAsync();
 
                         result.IsSuccessed = true;
@@ -126,7 +126,7 @@ namespace HIS.ApplicationService.Dictionaries.DepartmentType
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SDepartmentTypes
+                result.Result = (from r in _dbContext.DepartmentTypes
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -156,7 +156,7 @@ namespace HIS.ApplicationService.Dictionaries.DepartmentType
         public async Task<ApiResult<DepartmentTypeDto>> GetById(int id)
         {
             var result = new ApiResult<DepartmentTypeDto>();
-            var data = _dbContext.SDepartmentTypes.SingleOrDefault(s => s.Id == id);
+            var data = _dbContext.DepartmentTypes.SingleOrDefault(s => s.Id == id);
             if (data != null)
             {
                 result.IsSuccessed = true;

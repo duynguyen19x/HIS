@@ -35,7 +35,7 @@ namespace HIS.BackendApi.Controllers.Dictionaries
             return await _icdService.CreateOrEdit(input);
         }
 
-        [HttpPost("Delete")]
+        [HttpDelete("Delete")]
         public async Task<ApiResult<IcdDto>> Delete(Guid id)
         {
             return await _icdService.Delete(id);

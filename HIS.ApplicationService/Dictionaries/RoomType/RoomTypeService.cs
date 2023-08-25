@@ -32,7 +32,7 @@ namespace HIS.ApplicationService.Dictionaries.RoomType
                 {
                     //input.Id = Guid.NewGuid();
                     var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.RoomType>(input);
-                    _dbContext.SRoomTypes.Add(data);
+                    _dbContext.RoomTypes.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -61,7 +61,7 @@ namespace HIS.ApplicationService.Dictionaries.RoomType
                 try
                 {
                     var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.RoomType>(input);
-                    _dbContext.SRoomTypes.Update(data);
+                    _dbContext.RoomTypes.Update(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -89,10 +89,10 @@ namespace HIS.ApplicationService.Dictionaries.RoomType
             {
                 try
                 {
-                    var data = _dbContext.SRoomTypes.SingleOrDefault(x => x.Id == id);
+                    var data = _dbContext.RoomTypes.SingleOrDefault(x => x.Id == id);
                     if (data != null)
                     {
-                        _dbContext.SRoomTypes.Remove(data);
+                        _dbContext.RoomTypes.Remove(data);
                         await _dbContext.SaveChangesAsync();
 
                         result.IsSuccessed = true;
@@ -118,7 +118,7 @@ namespace HIS.ApplicationService.Dictionaries.RoomType
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SRoomTypes
+                result.Result = (from r in _dbContext.RoomTypes
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -151,7 +151,7 @@ namespace HIS.ApplicationService.Dictionaries.RoomType
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SRoomTypes
+                result.Result = (from r in _dbContext.RoomTypes
                                  where r.Id == id
                                  select new RoomTypeDto()
                                  {

@@ -1,21 +1,18 @@
-﻿using HIS.ApplicationService.Dictionaries.Room;
-using HIS.ApplicationService.Systems.User;
+﻿using HIS.ApplicationService.Systems.User;
 using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.Room;
 using HIS.Dtos.Systems.User;
 using HIS.Models.Commons;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Systems
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SUserController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
 
-        public SUserController(IUserService userService)
+        public UserController(IUserService userService)
         {
             _userService = userService;
         }

@@ -32,7 +32,7 @@ namespace HIS.ApplicationService.Dictionaries.Supplier
                 {
                     input.Id = Guid.NewGuid();
                     var sSupplier = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Supplier>(input);
-                    _dbContext.SSuppliers.Add(sSupplier);
+                    _dbContext.Suppliers.Add(sSupplier);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -61,7 +61,7 @@ namespace HIS.ApplicationService.Dictionaries.Supplier
                 try
                 {
                     var sSupplier = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Supplier>(input);
-                    _dbContext.SSuppliers.Update(sSupplier);
+                    _dbContext.Suppliers.Update(sSupplier);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -90,10 +90,10 @@ namespace HIS.ApplicationService.Dictionaries.Supplier
             {
                 try
                 {
-                    var sSupplier = _dbContext.SSuppliers.SingleOrDefault(x => x.Id == id);
+                    var sSupplier = _dbContext.Suppliers.SingleOrDefault(x => x.Id == id);
                     if (sSupplier != null)
                     {
-                        _dbContext.SSuppliers.Remove(sSupplier);
+                        _dbContext.Suppliers.Remove(sSupplier);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -120,7 +120,7 @@ namespace HIS.ApplicationService.Dictionaries.Supplier
 
             try
             {
-                result.Result = (from r in _dbContext.SSuppliers
+                result.Result = (from r in _dbContext.Suppliers
                                  where r.IsDeleted == false
                                  select new SupplierDto()
                                  {
@@ -155,7 +155,7 @@ namespace HIS.ApplicationService.Dictionaries.Supplier
 
             try
             {
-                var sSuppliers = _dbContext.SSuppliers.FirstOrDefault(s => s.Id == id);
+                var sSuppliers = _dbContext.Suppliers.FirstOrDefault(s => s.Id == id);
                 if (sSuppliers != null)
                 {
                     result.Result = _mapper.Map<SupplierDto>(sSuppliers);

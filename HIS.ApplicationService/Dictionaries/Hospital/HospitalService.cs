@@ -43,7 +43,7 @@ namespace HIS.ApplicationService.Dictionaries.Hospital
                         Line = input.Line,
                         CreatedDate = DateTime.Now
                     };
-                    _dbContext.SHospitals.Add(data);
+                    _dbContext.Hospitals.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -84,7 +84,7 @@ namespace HIS.ApplicationService.Dictionaries.Hospital
                         MohCode = input.MohCode,
                         ModifiedDate = DateTime.Now
                     };
-                    _dbContext.SHospitals.Update(data);
+                    _dbContext.Hospitals.Update(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -112,10 +112,10 @@ namespace HIS.ApplicationService.Dictionaries.Hospital
             {
                 try
                 {
-                    var data = _dbContext.SHospitals.SingleOrDefault(x => x.Id == id);
+                    var data = _dbContext.Hospitals.SingleOrDefault(x => x.Id == id);
                     if (data != null)
                     {
-                        _dbContext.SHospitals.Remove(data);
+                        _dbContext.Hospitals.Remove(data);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -141,7 +141,7 @@ namespace HIS.ApplicationService.Dictionaries.Hospital
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SHospitals
+                result.Result = (from r in _dbContext.Hospitals
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -172,7 +172,7 @@ namespace HIS.ApplicationService.Dictionaries.Hospital
         {
             var result = new ApiResult<HospitalDto>();
 
-            var hospital = _dbContext.SHospitals.SingleOrDefault(s => s.Id == id);
+            var hospital = _dbContext.Hospitals.SingleOrDefault(s => s.Id == id);
             if (hospital != null)
             {
                 result.IsSuccessed = true;

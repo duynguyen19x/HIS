@@ -34,7 +34,7 @@ namespace HIS.ApplicationService.Dictionaries.Unit
 
                     var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Unit>(input);
 
-                    _dbContext.SUnits.Add(data);
+                    _dbContext.Units.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -62,7 +62,7 @@ namespace HIS.ApplicationService.Dictionaries.Unit
             {
                 try
                 {
-                    var sServiceUnit = _dbContext.SUnits.FirstOrDefault(f => f.Id == input.Id);
+                    var sServiceUnit = _dbContext.Units.FirstOrDefault(f => f.Id == input.Id);
                     if (sServiceUnit == null)
                         _mapper.Map(input, sServiceUnit);
 
@@ -93,10 +93,10 @@ namespace HIS.ApplicationService.Dictionaries.Unit
             {
                 try
                 {
-                    var sServiceUnit = _dbContext.SUnits.SingleOrDefault(x => x.Id == id);
+                    var sServiceUnit = _dbContext.Units.SingleOrDefault(x => x.Id == id);
                     if (sServiceUnit != null)
                     {
-                        _dbContext.SUnits.Remove(sServiceUnit);
+                        _dbContext.Units.Remove(sServiceUnit);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -123,7 +123,7 @@ namespace HIS.ApplicationService.Dictionaries.Unit
 
             try
             {
-                result.Result = (from r in _dbContext.SUnits
+                result.Result = (from r in _dbContext.Units
                                  select new UnitDto()
                                  {
                                      Id = r.Id,
@@ -150,7 +150,7 @@ namespace HIS.ApplicationService.Dictionaries.Unit
 
             try
             {
-                var service = _dbContext.SServiceGroups.FirstOrDefault(s => s.Id == id);
+                var service = _dbContext.ServiceGroups.FirstOrDefault(s => s.Id == id);
                 result.Result = _mapper.Map<UnitDto>(service);
             }
             catch (Exception ex)

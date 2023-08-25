@@ -34,7 +34,7 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroupHeIn
 
                     var data = _mapper.Map<EntityFrameworkCore.Entities.Categories.Services.ServiceGroupHeIn>(input);
 
-                    _dbContext.SServiceGroupHeIns.Add(data);
+                    _dbContext.ServiceGroupHeIns.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -62,7 +62,7 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroupHeIn
             {
                 try
                 {
-                    var sServiceGroupHeIn = _dbContext.SServiceGroupHeIns.FirstOrDefault(f => f.Id == input.Id);
+                    var sServiceGroupHeIn = _dbContext.ServiceGroupHeIns.FirstOrDefault(f => f.Id == input.Id);
                     if (sServiceGroupHeIn == null)
                         _mapper.Map(input, sServiceGroupHeIn);
 
@@ -93,10 +93,10 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroupHeIn
             {
                 try
                 {
-                    var sServiceGroupHeIn = _dbContext.SServiceGroupHeIns.SingleOrDefault(x => x.Id == id);
+                    var sServiceGroupHeIn = _dbContext.ServiceGroupHeIns.SingleOrDefault(x => x.Id == id);
                     if (sServiceGroupHeIn != null)
                     {
-                        _dbContext.SServiceGroupHeIns.Remove(sServiceGroupHeIn);
+                        _dbContext.ServiceGroupHeIns.Remove(sServiceGroupHeIn);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -123,7 +123,7 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroupHeIn
 
             try
             {
-                result.Result = (from r in _dbContext.SServiceGroupHeIns
+                result.Result = (from r in _dbContext.ServiceGroupHeIns
                                  select new ServiceGroupHeInDto()
                                  {
                                      Id = r.Id,
@@ -152,7 +152,7 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroupHeIn
 
             try
             {
-                var service = _dbContext.SServiceGroupHeIns.FirstOrDefault(s => s.Id == id);
+                var service = _dbContext.ServiceGroupHeIns.FirstOrDefault(s => s.Id == id);
                 result.Result = _mapper.Map<ServiceGroupHeInDto>(service);
             }
             catch (Exception ex)

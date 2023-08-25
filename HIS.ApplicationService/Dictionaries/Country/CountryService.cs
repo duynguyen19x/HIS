@@ -40,7 +40,7 @@ namespace HIS.ApplicationService.Dictionaries.Country
                 {
                     input.Id = Guid.NewGuid();
                     var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Country>(input); 
-                    _dbContext.SCountries.Add(data);
+                    _dbContext.Countries.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -69,7 +69,7 @@ namespace HIS.ApplicationService.Dictionaries.Country
                 try
                 {
                     var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Country>(input);
-                    _dbContext.SCountries.Update(data);
+                    _dbContext.Countries.Update(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -97,10 +97,10 @@ namespace HIS.ApplicationService.Dictionaries.Country
             {
                 try
                 {
-                    var job = _dbContext.SCountries.SingleOrDefault(x => x.Id == id);
+                    var job = _dbContext.Countries.SingleOrDefault(x => x.Id == id);
                     if (job != null)
                     {
-                        _dbContext.SCountries.Remove(job);
+                        _dbContext.Countries.Remove(job);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -126,7 +126,7 @@ namespace HIS.ApplicationService.Dictionaries.Country
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SCountries
+                result.Result = (from r in _dbContext.Countries
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -152,7 +152,7 @@ namespace HIS.ApplicationService.Dictionaries.Country
         {
             var result = new ApiResult<CountryDto>();
 
-            var data = _dbContext.SCountries.SingleOrDefault(s => s.Id == id);
+            var data = _dbContext.Countries.SingleOrDefault(s => s.Id == id);
             if (data != null)
             {
                 result.IsSuccessed = true;

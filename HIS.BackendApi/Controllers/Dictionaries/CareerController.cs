@@ -35,7 +35,7 @@ namespace HIS.BackendApi.Controllers.Dictionaries
             return await _jobService.CreateOrEdit(input);
         }
 
-        [HttpPost("Delete")]
+        [HttpDelete("Delete")]
         public async Task<ApiResult<CareerDto>> Delete(Guid id)
         {
             return await _jobService.Delete(id);

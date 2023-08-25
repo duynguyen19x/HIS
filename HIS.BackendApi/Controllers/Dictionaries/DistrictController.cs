@@ -35,7 +35,7 @@ namespace HIS.BackendApi.Controllers.Dictionaries
             return await _districtService.CreateOrEdit(input);
         }
 
-        [HttpPost("Delete")]
+        [HttpDelete("Delete")]
         public async Task<ApiResult<DistrictDto>> Delete(Guid id)
         {
             return await _districtService.Delete(id);

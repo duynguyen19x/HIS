@@ -38,7 +38,7 @@ namespace HIS.BackendApi.Controllers.Systems.Role
             return await _roleService.CreateOrEdit(input);
         }
 
-        [HttpPost("Delete")]
+        [HttpDelete("Delete")]
         public async Task<ApiResult<RoleDto>> Delete(Guid input)
         {
             return await _roleService.Delete(input);

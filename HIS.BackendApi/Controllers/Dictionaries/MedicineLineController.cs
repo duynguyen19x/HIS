@@ -35,7 +35,7 @@ namespace HIS.BackendApi.Controllers.Dictionaries
             return await _medicineLineService.CreateOrEdit(input);
         }
 
-        [HttpPost("Delete")]
+        [HttpDelete("Delete")]
         public async Task<ApiResult<MedicineLineDto>> Delete(Guid id)
         {
             return await _medicineLineService.Delete(id);

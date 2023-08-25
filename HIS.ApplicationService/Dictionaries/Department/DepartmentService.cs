@@ -42,7 +42,7 @@ namespace HIS.ApplicationService.Dictionaries.Department
                 {
                     input.Id = Guid.NewGuid();
                     var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Department>(input);
-                    _dbContext.SDepartments.Add(data);
+                    _dbContext.Departments.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -71,7 +71,7 @@ namespace HIS.ApplicationService.Dictionaries.Department
                 try
                 {
                     var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Department>(input);
-                    _dbContext.SDepartments.Update(data);
+                    _dbContext.Departments.Update(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -99,10 +99,10 @@ namespace HIS.ApplicationService.Dictionaries.Department
             {
                 try
                 {
-                    var department = _dbContext.SDepartments.SingleOrDefault(x => x.Id == id);
+                    var department = _dbContext.Departments.SingleOrDefault(x => x.Id == id);
                     if (department != null)
                     {
-                        _dbContext.SDepartments.Remove(department);
+                        _dbContext.Departments.Remove(department);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -128,8 +128,8 @@ namespace HIS.ApplicationService.Dictionaries.Department
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from d in _dbContext.SDepartments
-                                 join b in _dbContext.SBranchs on d.BranchId equals b.Id 
+                result.Result = (from d in _dbContext.Departments
+                                 join b in _dbContext.Branchs on d.BranchId equals b.Id 
                                  where (string.IsNullOrEmpty(input.NameFilter) || d.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || d.Code == input.CodeFilter)
                                      && (input.BranchIdFilter == null || d.BranchId == input.BranchIdFilter)
@@ -162,8 +162,8 @@ namespace HIS.ApplicationService.Dictionaries.Department
         public async Task<ApiResult<DepartmentDto>> GetById(Guid id)
         {
             var result = new ApiResult<DepartmentDto>();
-            var department = await (from d in _dbContext.SDepartments
-                                    join b in _dbContext.SBranchs on d.BranchId equals b.Id
+            var department = await (from d in _dbContext.Departments
+                                    join b in _dbContext.Branchs on d.BranchId equals b.Id
                                     where d.Id == id
                                     select new DepartmentDto()
                                     {

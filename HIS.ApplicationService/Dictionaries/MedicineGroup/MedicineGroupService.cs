@@ -48,7 +48,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineGroup
                 {
                     input.Id = Guid.NewGuid();
                     var medicineGroup = _mapper.Map<EntityFrameworkCore.Entities.Categories.MedicineGroup>(input);
-                    _dbContext.SMedicineGroups.Add(medicineGroup);
+                    _dbContext.MedicineGroups.Add(medicineGroup);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -77,7 +77,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineGroup
                 try
                 {
                     var medicineGroup = _mapper.Map<EntityFrameworkCore.Entities.Categories.MedicineGroup>(input);
-                    _dbContext.SMedicineGroups.Update(medicineGroup);
+                    _dbContext.MedicineGroups.Update(medicineGroup);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -127,7 +127,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineGroup
 
                 #endregion
 
-                var medicineGroup = _dbContext.SMedicineGroups.FirstOrDefault(w => w.Code == input.Code && w.Id != input.Id);
+                var medicineGroup = _dbContext.MedicineGroups.FirstOrDefault(w => w.Code == input.Code && w.Id != input.Id);
                 if (medicineGroup != null)
                 {
                     errs.Add(string.Format("Mã nhóm thuốc [{0}] đã tồn tại trên hệ thống!", input.Code));
@@ -155,10 +155,10 @@ namespace HIS.ApplicationService.Dictionaries.MedicineGroup
             {
                 try
                 {
-                    var medicineGroup = _dbContext.SMedicineGroups.SingleOrDefault(x => x.Id == id);
+                    var medicineGroup = _dbContext.MedicineGroups.SingleOrDefault(x => x.Id == id);
                     if (medicineGroup != null)
                     {
-                        _dbContext.SMedicineGroups.Remove(medicineGroup);
+                        _dbContext.MedicineGroups.Remove(medicineGroup);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -184,7 +184,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineGroup
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SMedicineGroups
+                result.Result = (from r in _dbContext.MedicineGroups
 
                                  select new MedicineGroupDto()
                                  {
@@ -215,7 +215,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineGroup
         {
             var result = new ApiResult<MedicineGroupDto>();
 
-            var medicineGroup = _dbContext.SMedicineGroups.SingleOrDefault(s => s.Id == id);
+            var medicineGroup = _dbContext.MedicineGroups.SingleOrDefault(s => s.Id == id);
             if (medicineGroup != null)
             {
                 result.IsSuccessed = true;

@@ -1,7 +1,6 @@
-﻿using HIS.ApplicationService.Business.Pharmaceuticals.DMedicineStock;
+﻿using HIS.ApplicationService.Business.Pharmaceuticals.MedicineStock;
 using HIS.Dtos.Business.MedicineStock;
 using HIS.Dtos.Commons;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals

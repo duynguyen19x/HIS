@@ -39,7 +39,7 @@ namespace HIS.ApplicationService.Dictionaries.Ethnic
                         Description = input.Description,
                         Inactive = input.Inactive
                     };
-                    _dbContext.SEthnics.Add(branch);
+                    _dbContext.Ethnics.Add(branch);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -75,7 +75,7 @@ namespace HIS.ApplicationService.Dictionaries.Ethnic
                         Description = input.Description,
                         Inactive = input.Inactive
                     };
-                    _dbContext.SEthnics.Update(ethnic);
+                    _dbContext.Ethnics.Update(ethnic);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -103,10 +103,10 @@ namespace HIS.ApplicationService.Dictionaries.Ethnic
             {
                 try
                 {
-                    var ethnic = _dbContext.SEthnics.SingleOrDefault(x => x.Id == id);
+                    var ethnic = _dbContext.Ethnics.SingleOrDefault(x => x.Id == id);
                     if (ethnic != null)
                     {
-                        _dbContext.SEthnics.Remove(ethnic);
+                        _dbContext.Ethnics.Remove(ethnic);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -132,7 +132,7 @@ namespace HIS.ApplicationService.Dictionaries.Ethnic
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SEthnics
+                result.Result = (from r in _dbContext.Ethnics
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -159,7 +159,7 @@ namespace HIS.ApplicationService.Dictionaries.Ethnic
         {
             var result = new ApiResult<EthnicDto>();
 
-            var ethnic = _dbContext.SEthnics.SingleOrDefault(s => s.Id == id);
+            var ethnic = _dbContext.Ethnics.SingleOrDefault(s => s.Id == id);
             if (ethnic != null)
             {
                 result.IsSuccessed = true;

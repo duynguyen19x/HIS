@@ -32,7 +32,7 @@ namespace HIS.ApplicationService.Dictionaries.Career
                 {
                     input.Id = Guid.NewGuid();
                     var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Career>(input);
-                    _dbContext.SCareers.Add(data);
+                    _dbContext.Careers.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -61,7 +61,7 @@ namespace HIS.ApplicationService.Dictionaries.Career
                 try
                 {
                     var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Career>(input);
-                    _dbContext.SCareers.Update(data);
+                    _dbContext.Careers.Update(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -89,10 +89,10 @@ namespace HIS.ApplicationService.Dictionaries.Career
             {
                 try
                 {
-                    var data = _dbContext.SCareers.SingleOrDefault(x => x.Id == id);
+                    var data = _dbContext.Careers.SingleOrDefault(x => x.Id == id);
                     if (data != null)
                     {
-                        _dbContext.SCareers.Remove(data);
+                        _dbContext.Careers.Remove(data);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -118,7 +118,7 @@ namespace HIS.ApplicationService.Dictionaries.Career
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SCareers
+                result.Result = (from r in _dbContext.Careers
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -145,7 +145,7 @@ namespace HIS.ApplicationService.Dictionaries.Career
         {
             var result = new ApiResult<CareerDto>();
 
-            var data = _dbContext.SCareers.SingleOrDefault(s => s.Id == id);
+            var data = _dbContext.Careers.SingleOrDefault(s => s.Id == id);
             if (data != null)
             {
                 result.IsSuccessed = true;

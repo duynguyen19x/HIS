@@ -28,7 +28,7 @@ namespace HIS.ApplicationService.Systems.User
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SUsers
+                result.Result = (from r in _dbContext.Users
                                  select new UserDto()
                                  {
                                      Id = r.Id,

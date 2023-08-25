@@ -41,7 +41,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicinePricePolicy
 
             try
             {
-                result.Result = (from r in _dbContext.SPatientTypes
+                result.Result = (from r in _dbContext.PatientTypes
                                  select new MedicinePricePolicyDto()
                                  {
                                      PatientTypeId = r.Id,

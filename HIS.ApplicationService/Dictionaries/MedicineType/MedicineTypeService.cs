@@ -41,7 +41,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineType
                     var medicineType = _mapper.Map<EntityFrameworkCore.Entities.Categories.MedicineType>(input);
                     medicineType.CreatedDate = DateTime.Now;
 
-                    _dbContext.SMedicineTypes.Add(medicineType);
+                    _dbContext.MedicineTypes.Add(medicineType);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -71,7 +71,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineType
                 {
                     var medicineType = _mapper.Map<EntityFrameworkCore.Entities.Categories.MedicineType>(input);
                     medicineType.ModifiedDate = DateTime.Now;
-                    _dbContext.SMedicineTypes.Update(medicineType);
+                    _dbContext.MedicineTypes.Update(medicineType);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -126,13 +126,13 @@ namespace HIS.ApplicationService.Dictionaries.MedicineType
 
                 #endregion
 
-                var medicineType = _dbContext.SMedicineTypes.FirstOrDefault(w => w.Code == input.Code && w.Id != input.Id);
+                var medicineType = _dbContext.MedicineTypes.FirstOrDefault(w => w.Code == input.Code && w.Id != input.Id);
                 if (medicineType != null)
                 {
                     errs.Add(string.Format("Mã thuốc [{0}] đã tồn tại trên hệ thống!", input.Code));
                 }
 
-                medicineType = _dbContext.SMedicineTypes.FirstOrDefault(w => w.HeInCode == input.HeInCode && w.Id != input.Id);
+                medicineType = _dbContext.MedicineTypes.FirstOrDefault(w => w.HeInCode == input.HeInCode && w.Id != input.Id);
                 if (medicineType != null)
                 {
                     errs.Add(string.Format("Mã BHYT [{0}] đã tồn tại trên hệ thống!", input.HeInCode));
@@ -160,7 +160,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineType
             {
                 try
                 {
-                    var medicineType = _dbContext.SMedicineTypes.SingleOrDefault(x => x.Id == id);
+                    var medicineType = _dbContext.MedicineTypes.SingleOrDefault(x => x.Id == id);
                     if (medicineType != null)
                     {
                         medicineType.IsDeleted = true;
@@ -190,8 +190,8 @@ namespace HIS.ApplicationService.Dictionaries.MedicineType
             var result = new ApiResultList<MedicineTypeDto>();
             try
             {
-                result.Result = (from medi in _dbContext.SMedicineTypes
-                                 join unit in _dbContext.SUnits on medi.UnitId equals unit.Id
+                result.Result = (from medi in _dbContext.MedicineTypes
+                                 join unit in _dbContext.Units on medi.UnitId equals unit.Id
                                  where medi.IsDeleted == false
                                  select new MedicineTypeDto()
                                  {
@@ -272,7 +272,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineType
         {
             var result = new ApiResult<MedicineTypeDto>();
 
-            var medicineType = _dbContext.SMedicineTypes.SingleOrDefault(s => s.Id == id);
+            var medicineType = _dbContext.MedicineTypes.SingleOrDefault(s => s.Id == id);
             if (medicineType != null)
             {
                 result.IsSuccessed = true;

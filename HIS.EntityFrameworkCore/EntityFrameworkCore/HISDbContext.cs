@@ -32,46 +32,46 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
             return Database.BeginTransaction();
         }
 
-        public DbSet<Gender> SGenders { get; set; }
-        public DbSet<User> SUsers { get; set; }
-        public DbSet<Role> SRoles { get; set; }
-        public DbSet<UserRole> SUserRoles { get; set; }
-        public DbSet<SToken> STokens { get; set; }
-        public DbSet<Permission> SPermissions { get; set; }
-        public DbSet<Branch> SBranchs { get; set; }
-        public DbSet<Department> SDepartments { get; set; }
-        public DbSet<DepartmentType> SDepartmentTypes { get; set; }
-        public DbSet<Ethnic> SEthnics { get; set; }
-        public DbSet<Room> SRooms { get; set; }
-        public DbSet<RoomType> SRoomTypes { get; set; }
-        public DbSet<Career> SCareers { get; set; }
-        public DbSet<Hospital> SHospitals { get; set; }
-        public DbSet<Icd> SIcds { get; set; }
-        public DbSet<ChapterIcd> SChapterIcds { get; set; }
-        public DbSet<RolePermissionBranch> SRolePermissionBranchs { get; set; }
-        public DbSet<Unit> SUnits { get; set; }
-        public DbSet<Material> SMaterials { get; set; }
-        public DbSet<MaterialType> SMaterialTypes { get; set; }
-        public DbSet<PatientType> SPatientTypes { get; set; }
-        public DbSet<Country> SCountries { get; set; }
-        public DbSet<Province> SProvinces { get; set; }
-        public DbSet<District> SDistricts { get; set; }
-        public DbSet<SWard> SWards { get; set; }
-        public DbSet<Supplier> SSuppliers { get; set; }
+        public DbSet<Gender> Genders { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<SToken> Tokens { get; set; }
+        public DbSet<Permission> Permissions { get; set; }
+        public DbSet<Branch> Branchs { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<DepartmentType> DepartmentTypes { get; set; }
+        public DbSet<Ethnic> Ethnics { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<RoomType> RoomTypes { get; set; }
+        public DbSet<Career> Careers { get; set; }
+        public DbSet<Hospital> Hospitals { get; set; }
+        public DbSet<Icd> Icds { get; set; }
+        public DbSet<ChapterIcd> ChapterIcds { get; set; }
+        public DbSet<RolePermissionBranch> RolePermissionBranchs { get; set; }
+        public DbSet<Unit> Units { get; set; }
+        public DbSet<Material> Materials { get; set; }
+        public DbSet<MaterialType> MaterialTypes { get; set; }
+        public DbSet<PatientType> PatientTypes { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<Province> Provinces { get; set; }
+        public DbSet<District> Districts { get; set; }
+        public DbSet<SWard> Wards { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
 
-        public DbSet<Service> SServices { get; set; }
-        public DbSet<ServiceGroup> SServiceGroups { get; set; }
-        public DbSet<ServiceGroupHeIn> SServiceGroupHeIns { get; set; }
-        public DbSet<ServicePricePolicy> SServicePricePolicies { get; set; }
-        public DbSet<SurgicalProcedureType> SSurgicalProcedureTypes { get; set; }
-        public DbSet<ExecutionRoom> SExecutionRooms { get; set; }
-        public DbSet<ServiceResultIndice> SServiceResultIndices { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<ServiceGroup> ServiceGroups { get; set; }
+        public DbSet<ServiceGroupHeIn> ServiceGroupHeIns { get; set; }
+        public DbSet<ServicePricePolicy> ServicePricePolicies { get; set; }
+        public DbSet<SurgicalProcedureType> SurgicalProcedureTypes { get; set; }
+        public DbSet<ExecutionRoom> ExecutionRooms { get; set; }
+        public DbSet<ServiceResultIndice> ServiceResultIndices { get; set; }
 
-        public DbSet<Medicine> SMedicines { get; set; }
-        public DbSet<MedicineGroup> SMedicineGroups { get; set; }
-        public DbSet<MedicineLine> SMedicineLines { get; set; }
-        public DbSet<MedicineType> SMedicineTypes { get; set; }
-        public DbSet<MedicinePricePolicy> SMedicinePricePolicies { get; set; }
+        public DbSet<Medicine> Medicines { get; set; }
+        public DbSet<MedicineGroup> MedicineGroups { get; set; }
+        public DbSet<MedicineLine> MedicineLines { get; set; }
+        public DbSet<MedicineType> MedicineTypes { get; set; }
+        public DbSet<MedicinePricePolicy> MedicinePricePolicies { get; set; }
 
         public DbSet<InOutStockType> InOutStockTypes { get; set; }
         public DbSet<MedicineStock> MedicineStocks { get; set; }
@@ -86,7 +86,7 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         #region System
         public DbSet<SYSAutoNumber> SYSAutoNumbers { get; set; }
         public DbSet<SYSRefType> SYSRefTypes { get; set; }
-        public DbSet<SYSRefTypeCategory> sYSRefTypeCategories { get; set; }
+        public DbSet<SYSRefTypeCategory> SYSRefTypeCategories { get; set; }
         #endregion
     }
 }

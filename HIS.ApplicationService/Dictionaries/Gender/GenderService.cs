@@ -33,7 +33,7 @@ namespace HIS.ApplicationService.Dictionaries.Gender
                 {
                     input.Id = Guid.NewGuid();
                     var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Gender>(input);
-                    _dbContext.SGenders.Add(data);
+                    _dbContext.Genders.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -62,7 +62,7 @@ namespace HIS.ApplicationService.Dictionaries.Gender
                 try
                 {
                     var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Gender>(input);
-                    _dbContext.SGenders.Update(data);
+                    _dbContext.Genders.Update(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -90,10 +90,10 @@ namespace HIS.ApplicationService.Dictionaries.Gender
             {
                 try
                 {
-                    var data = _dbContext.SGenders.SingleOrDefault(x => x.Id == id);
+                    var data = _dbContext.Genders.SingleOrDefault(x => x.Id == id);
                     if (data != null)
                     {
-                        _dbContext.SGenders.Remove(data);
+                        _dbContext.Genders.Remove(data);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -119,7 +119,7 @@ namespace HIS.ApplicationService.Dictionaries.Gender
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SGenders
+                result.Result = (from r in _dbContext.Genders
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -149,7 +149,7 @@ namespace HIS.ApplicationService.Dictionaries.Gender
         {
             var result = new ApiResult<GenderDto>();
 
-            var data = _dbContext.SGenders.SingleOrDefault(s => s.Id == id);
+            var data = _dbContext.Genders.SingleOrDefault(s => s.Id == id);
             if (data != null)
             {
                 result.IsSuccessed = true;

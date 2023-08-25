@@ -37,7 +37,7 @@ namespace HIS.ApplicationService.Dictionaries.Province
                         Name = input.Name,
                         Inactive = input.Inactive
                     };
-                    _dbContext.SProvinces.Add(branch);
+                    _dbContext.Provinces.Add(branch);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -72,7 +72,7 @@ namespace HIS.ApplicationService.Dictionaries.Province
                         Name = input.Name,
                         Inactive = input.Inactive
                     };
-                    _dbContext.SProvinces.Update(job);
+                    _dbContext.Provinces.Update(job);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -100,10 +100,10 @@ namespace HIS.ApplicationService.Dictionaries.Province
             {
                 try
                 {
-                    var job = _dbContext.SProvinces.SingleOrDefault(x => x.Id == id);
+                    var job = _dbContext.Provinces.SingleOrDefault(x => x.Id == id);
                     if (job != null)
                     {
-                        _dbContext.SProvinces.Remove(job);
+                        _dbContext.Provinces.Remove(job);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -129,7 +129,7 @@ namespace HIS.ApplicationService.Dictionaries.Province
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SProvinces
+                result.Result = (from r in _dbContext.Provinces
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -155,7 +155,7 @@ namespace HIS.ApplicationService.Dictionaries.Province
         {
             var result = new ApiResult<ProvinceDto>();
 
-            var branch = _dbContext.SProvinces.SingleOrDefault(s => s.Id == id);
+            var branch = _dbContext.Provinces.SingleOrDefault(s => s.Id == id);
             if (branch != null)
             {
                 result.IsSuccessed = true;

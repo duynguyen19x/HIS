@@ -41,7 +41,7 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroup
 
                     var data = _mapper.Map<EntityFrameworkCore.Entities.Categories.ServiceGroup>(input);
 
-                    _dbContext.SServiceGroups.Add(data);
+                    _dbContext.ServiceGroups.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -69,7 +69,7 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroup
             {
                 try
                 {
-                    var sServiceGroup = _dbContext.SServiceGroups.FirstOrDefault(f => f.Id == input.Id);
+                    var sServiceGroup = _dbContext.ServiceGroups.FirstOrDefault(f => f.Id == input.Id);
                     if (sServiceGroup == null)
                         _mapper.Map(input, sServiceGroup);
 
@@ -100,10 +100,10 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroup
             {
                 try
                 {
-                    var serviceGroup = _dbContext.SServiceGroups.SingleOrDefault(x => x.Id == id);
+                    var serviceGroup = _dbContext.ServiceGroups.SingleOrDefault(x => x.Id == id);
                     if (serviceGroup != null)
                     {
-                        _dbContext.SServiceGroups.Remove(serviceGroup);
+                        _dbContext.ServiceGroups.Remove(serviceGroup);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -129,7 +129,7 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroup
 
             try
             {
-                result.Result = (from r in _dbContext.SServiceGroups
+                result.Result = (from r in _dbContext.ServiceGroups
                                  select new ServiceGroupDto()
                                  {
                                      Id = r.Id,
@@ -158,7 +158,7 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroup
 
             try
             {
-                var service = _dbContext.SServiceGroups.FirstOrDefault(s => s.Id == id);
+                var service = _dbContext.ServiceGroups.FirstOrDefault(s => s.Id == id);
                 result.Result = _mapper.Map<ServiceGroupDto>(service);
             }
             catch (Exception ex)

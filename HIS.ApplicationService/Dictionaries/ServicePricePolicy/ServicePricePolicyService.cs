@@ -31,7 +31,7 @@ namespace HIS.ApplicationService.Dictionaries.ServicePricePolicy
 
             try
             {
-                result.Result = (from r in _dbContext.SPatientTypes
+                result.Result = (from r in _dbContext.PatientTypes
                                  select new ServicePricePolicyDto()
                                  {
                                      PatientTypeId = r.Id,

@@ -1,7 +1,7 @@
 ﻿using HIS.Dtos.Business.MedicineStock;
 using HIS.Dtos.Commons;
 
-namespace HIS.ApplicationService.Business.Pharmaceuticals.DMedicineStock
+namespace HIS.ApplicationService.Business.Pharmaceuticals.MedicineStock
 {
     public interface IMedicineStockService 
     {

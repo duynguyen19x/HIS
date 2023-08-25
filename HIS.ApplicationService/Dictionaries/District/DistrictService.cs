@@ -47,7 +47,7 @@ namespace HIS.ApplicationService.Dictionaries.District
                         Description = input.Description,
                         Inactive = input.Inactive
                     };
-                    _dbContext.SDistricts.Add(data);
+                    _dbContext.Districts.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -83,7 +83,7 @@ namespace HIS.ApplicationService.Dictionaries.District
                         Description = input.Description,
                         Inactive = input.Inactive
                     };
-                    _dbContext.SDistricts.Update(job);
+                    _dbContext.Districts.Update(job);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -111,10 +111,10 @@ namespace HIS.ApplicationService.Dictionaries.District
             {
                 try
                 {
-                    var job = _dbContext.SDistricts.SingleOrDefault(x => x.Id == id);
+                    var job = _dbContext.Districts.SingleOrDefault(x => x.Id == id);
                     if (job != null)
                     {
-                        _dbContext.SDistricts.Remove(job);
+                        _dbContext.Districts.Remove(job);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -140,7 +140,7 @@ namespace HIS.ApplicationService.Dictionaries.District
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SDistricts
+                result.Result = (from r in _dbContext.Districts
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -167,7 +167,7 @@ namespace HIS.ApplicationService.Dictionaries.District
         {
             var result = new ApiResult<DistrictDto>();
 
-            var branch = _dbContext.SDistricts.SingleOrDefault(s => s.Id == id);
+            var branch = _dbContext.Districts.SingleOrDefault(s => s.Id == id);
             if (branch != null)
             {
                 result.IsSuccessed = true;

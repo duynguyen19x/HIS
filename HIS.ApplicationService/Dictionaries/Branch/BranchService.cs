@@ -33,7 +33,7 @@ namespace HIS.ApplicationService.Dictionaries.Branch
                 {
                     input.Id = Guid.NewGuid();
                     var branch = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Branch>(input);
-                    _dbContext.SBranchs.Add(branch);
+                    _dbContext.Branchs.Add(branch);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -62,7 +62,7 @@ namespace HIS.ApplicationService.Dictionaries.Branch
                 try
                 {
                     var branch = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Branch>(input);
-                    _dbContext.SBranchs.Update(branch);
+                    _dbContext.Branchs.Update(branch);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -90,10 +90,10 @@ namespace HIS.ApplicationService.Dictionaries.Branch
             {
                 try
                 {
-                    var branch = _dbContext.SBranchs.SingleOrDefault(x => x.Id == id);
+                    var branch = _dbContext.Branchs.SingleOrDefault(x => x.Id == id);
                     if (branch != null)
                     {
-                        _dbContext.SBranchs.Remove(branch);
+                        _dbContext.Branchs.Remove(branch);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -119,7 +119,7 @@ namespace HIS.ApplicationService.Dictionaries.Branch
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SBranchs
+                result.Result = (from r in _dbContext.Branchs
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -147,7 +147,7 @@ namespace HIS.ApplicationService.Dictionaries.Branch
         {
             var result = new ApiResult<BranchDto>();
 
-            var branch = _dbContext.SBranchs.SingleOrDefault(s => s.Id == id);
+            var branch = _dbContext.Branchs.SingleOrDefault(s => s.Id == id);
             if (branch != null)
             {
                 result.IsSuccessed = true;

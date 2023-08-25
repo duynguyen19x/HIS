@@ -24,7 +24,7 @@ namespace HIS.ApplicationService.Systems.Role
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SRoles
+                result.Result = (from r in _dbContext.Roles
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -51,7 +51,7 @@ namespace HIS.ApplicationService.Systems.Role
         {
             var result = new ApiResult<RoleDto>();
 
-            var role = _dbContext.SRoles.SingleOrDefault(s => s.Id == id);
+            var role = _dbContext.Roles.SingleOrDefault(s => s.Id == id);
             if (role != null)
             {
                 result.Result = new RoleDto()
@@ -78,7 +78,7 @@ namespace HIS.ApplicationService.Systems.Role
         private async Task<ApiResult<RoleDto>> Create(RoleDto input)
         {
             var result = new ApiResult<RoleDto>();
-            await _dbContext.SRoles.AddAsync(new EntityFrameworkCore.Entities.Systems.Role()
+            await _dbContext.Roles.AddAsync(new EntityFrameworkCore.Entities.Systems.Role()
             {
 
             });

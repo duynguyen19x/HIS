@@ -39,7 +39,7 @@ namespace HIS.ApplicationService.Dictionaries.Ward
                         Description = input.Description,
                         Inactive = input.Inactive
                     };
-                    _dbContext.SWards.Add(branch);
+                    _dbContext.Wards.Add(branch);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -75,7 +75,7 @@ namespace HIS.ApplicationService.Dictionaries.Ward
                         Description = input.Description,
                         Inactive = input.Inactive
                     };
-                    _dbContext.SWards.Update(job);
+                    _dbContext.Wards.Update(job);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -103,10 +103,10 @@ namespace HIS.ApplicationService.Dictionaries.Ward
             {
                 try
                 {
-                    var job = _dbContext.SWards.SingleOrDefault(x => x.Id == id);
+                    var job = _dbContext.Wards.SingleOrDefault(x => x.Id == id);
                     if (job != null)
                     {
-                        _dbContext.SWards.Remove(job);
+                        _dbContext.Wards.Remove(job);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -132,7 +132,7 @@ namespace HIS.ApplicationService.Dictionaries.Ward
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SWards
+                result.Result = (from r in _dbContext.Wards
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -159,7 +159,7 @@ namespace HIS.ApplicationService.Dictionaries.Ward
         {
             var result = new ApiResult<WardDto>();
 
-            var branch = _dbContext.SWards.SingleOrDefault(s => s.Id == id);
+            var branch = _dbContext.Wards.SingleOrDefault(s => s.Id == id);
             if (branch != null)
             {
                 result.IsSuccessed = true;

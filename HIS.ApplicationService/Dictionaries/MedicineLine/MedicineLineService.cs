@@ -41,7 +41,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineLine
                 {
                     input.Id = Guid.NewGuid();
                     var medicineLine = _mapper.Map<EntityFrameworkCore.Entities.Categories.MedicineLine>(input);
-                    _dbContext.SMedicineLines.Add(medicineLine);
+                    _dbContext.MedicineLines.Add(medicineLine);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -70,7 +70,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineLine
                 try
                 {
                     var medicineLine = _mapper.Map<EntityFrameworkCore.Entities.Categories.MedicineLine>(input);
-                    _dbContext.SMedicineLines.Update(medicineLine);
+                    _dbContext.MedicineLines.Update(medicineLine);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -98,10 +98,10 @@ namespace HIS.ApplicationService.Dictionaries.MedicineLine
             {
                 try
                 {
-                    var medicineLine = _dbContext.SMedicineLines.SingleOrDefault(x => x.Id == id);
+                    var medicineLine = _dbContext.MedicineLines.SingleOrDefault(x => x.Id == id);
                     if (medicineLine != null)
                     {
-                        _dbContext.SMedicineLines.Remove(medicineLine);
+                        _dbContext.MedicineLines.Remove(medicineLine);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -126,7 +126,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineLine
             var result = new ApiResultList<MedicineLineDto>();
             try
             {
-                result.Result = (from r in _dbContext.SMedicineLines
+                result.Result = (from r in _dbContext.MedicineLines
                                  select new MedicineLineDto()
                                  {
                                      Id = r.Id,
@@ -155,7 +155,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineLine
         {
             var result = new ApiResult<MedicineLineDto>();
 
-            var medicineLine = _dbContext.SMedicineLines.SingleOrDefault(s => s.Id == id);
+            var medicineLine = _dbContext.MedicineLines.SingleOrDefault(s => s.Id == id);
             if (medicineLine != null)
             {
                 result.Result = _mapper.Map<MedicineLineDto>(medicineLine);

@@ -64,7 +64,7 @@ namespace HIS.ApplicationService.Dictionaries.Icd
                         TypeName = input.TypeName,
                         TypeNameEnglish = input.TypeNameEnglish,
                     };
-                    _dbContext.SIcds.Add(data);
+                    _dbContext.Icds.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -118,7 +118,7 @@ namespace HIS.ApplicationService.Dictionaries.Icd
                         TypeName = input.TypeName,
                         TypeNameEnglish = input.TypeNameEnglish,
                     };
-                    _dbContext.SIcds.Update(data);
+                    _dbContext.Icds.Update(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -146,10 +146,10 @@ namespace HIS.ApplicationService.Dictionaries.Icd
             {
                 try
                 {
-                    var icd = _dbContext.SIcds.SingleOrDefault(x => x.Id == id);
+                    var icd = _dbContext.Icds.SingleOrDefault(x => x.Id == id);
                     if (icd != null)
                     {
-                        _dbContext.SIcds.Remove(icd);
+                        _dbContext.Icds.Remove(icd);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -175,7 +175,7 @@ namespace HIS.ApplicationService.Dictionaries.Icd
             try
             {
                 result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.SIcds
+                result.Result = (from r in _dbContext.Icds
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -220,7 +220,7 @@ namespace HIS.ApplicationService.Dictionaries.Icd
         {
             var result = new ApiResult<IcdDto>();
 
-            var icd = _dbContext.SIcds.SingleOrDefault(s => s.Id == id);
+            var icd = _dbContext.Icds.SingleOrDefault(s => s.Id == id);
             if (icd != null)
             {
                 result.IsSuccessed = true;

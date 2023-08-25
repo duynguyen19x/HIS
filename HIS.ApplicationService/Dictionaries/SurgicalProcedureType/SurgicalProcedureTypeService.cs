@@ -29,7 +29,7 @@ namespace HIS.ApplicationService.Dictionaries.SurgicalProcedureType
 
             try
             {
-                result.Result = (from r in _dbContext.SSurgicalProcedureTypes
+                result.Result = (from r in _dbContext.SurgicalProcedureTypes
                                  select new SSurgicalProcedureTypeDto()
                                  {
                                      Id = r.Id,
