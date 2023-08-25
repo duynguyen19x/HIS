@@ -1,4 +1,5 @@
-﻿using HIS.Core.Entities.Auditing;
+﻿using AutoMapper.Configuration.Annotations;
+using HIS.Core.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.Systems;
 using HIS.Utilities.Enums;
@@ -124,19 +125,31 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals
         /// </summary>
         public Guid? StockExpUserId { get; set; }
 
+        [Ignore]
         public Room ImpStock { get; set; }
+        [Ignore]
         public Room ExpStock { get; set; }
+        [Ignore]
         public InOutStockType InOutStockType { get; set; }
+        [Ignore]
         public User CreationUser { get; set; }
+        [Ignore]
         public User ReceiverUser { get; set; }
+        [Ignore]
         public User ApproverUser { get; set; }
+        [Ignore]
         public User StockImpUser { get; set; }
+        [Ignore]
         public User StockExpUser { get; set; }
+        [Ignore]
         public Room ReqRoom { get; set; }
+        [Ignore]
         public Department ReqDepartment { get; set; }
+        [Ignore]
         public Supplier Supplier { get; set; }
-
+        [Ignore]
         public HISPatient Patient { get; set; }
+        [Ignore]
         public HISPatientRecord PatientRecord { get; set; }
     }
 }

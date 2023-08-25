@@ -153,8 +153,6 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
                             inOutStockMedicine.Tutorial = sMedicine.Tutorial;
                             inOutStockMedicine.CountryId = sMedicine.CountryId;
                             inOutStockMedicine.ImpPrice = sMedicine.ImpPrice;
-                            inOutStockMedicine.RequestQuantity = sMedicine.ImpQuantity;
-                            inOutStockMedicine.ApprovedQuantity = sMedicine.ImpQuantity;
                             inOutStockMedicine.ImpVatRate = sMedicine.ImpVatRate;
                             inOutStockMedicine.TaxRate = sMedicine.TaxRate;
                             inOutStockMedicine.Description = sMedicine.Description;
@@ -325,6 +323,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
 
                         foreach (var inOutStockMedicineDto in input.InOutStockMedicines)
                         {
+                            inOutStockMedicineDto.ApprovedQuantity = inOutStockMedicineDto.RequestQuantity;
+
                             var sMedicine = _mapper.Map<Medicine>(inOutStockMedicineDto);
                             if (!GuidHelper.IsNullOrEmpty(inOutStockMedicineDto.MedicineId))
                                 sMedicine.Id = inOutStockMedicineDto.MedicineId.GetValueOrDefault();
@@ -332,6 +332,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
                                 sMedicine.Id = Guid.NewGuid();
                             sMedicine.CreatedDate = dateNow;
                             sMedicine.CreatedBy = SessionExtensions.Login?.Id;
+                            sMedicine.ImpQuantity = inOutStockMedicineDto.RequestQuantity;
 
                             var inOutStockMedicine = _mapper.Map<InOutStockMedicine>(inOutStockMedicineDto);
                             inOutStockMedicine.Id = Guid.NewGuid();
@@ -398,25 +399,34 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
                             _dbContext.MedicineStocks.RemoveRange(medicineStockOlds);
                             _dbContext.InOutStockMedicines.RemoveRange(inOutStockMedicineOlds);
                             _dbContext.Medicines.RemoveRange(medicineOlds);
-
                             _dbContext.SaveChanges();
                         }
 
                         foreach (var inOutStockMedicineDto in input.InOutStockMedicines)
                         {
+                            inOutStockMedicineDto.ApprovedQuantity = inOutStockMedicineDto.RequestQuantity;
+
                             var sMedicine = _mapper.Map<Medicine>(inOutStockMedicineDto);
                             if (!GuidHelper.IsNullOrEmpty(inOutStockMedicineDto.MedicineId))
+                            {
                                 sMedicine.Id = inOutStockMedicineDto.MedicineId.GetValueOrDefault();
+
+                                var sMedicineOld = medicineOlds?.FirstOrDefault(w => w.Id == sMedicine.Id);
+                                if (sMedicineOld != null)
+                                    sMedicine.Code = sMedicineOld.Code;
+                            }
                             else
                                 sMedicine.Id = Guid.NewGuid();
                             sMedicine.CreatedDate = dImMestOld.CreatedDate;
                             sMedicine.CreatedBy = dImMestOld.CreatedBy;
                             sMedicine.ModifiedDate = dateNow;
                             sMedicine.ModifiedBy = SessionExtensions.Login?.Id;
+                            sMedicine.ImpQuantity = inOutStockMedicineDto.RequestQuantity;
 
                             var inOutStockMedicine = _mapper.Map<InOutStockMedicine>(inOutStockMedicineDto);
                             if (GuidHelper.IsNullOrEmpty(inOutStockMedicine.Id))
                                 inOutStockMedicine.Id = Guid.NewGuid();
+
                             inOutStockMedicine.MedicineId = sMedicine.Id;
                             inOutStockMedicine.InOutStockId = input.Id;
 

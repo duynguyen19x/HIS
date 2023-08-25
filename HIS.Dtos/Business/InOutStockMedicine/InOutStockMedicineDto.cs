@@ -105,7 +105,7 @@ namespace HIS.Dtos.Business.InOutStockMedicine
 
         public Guid? MedicineId { get; set; }
 
-        public Guid? ImpMestId { get; set; }
+        public Guid? InOutStockId { get; set; }
 
         public IList<MedicinePricePolicyDto> MedicinePricePolicies { get; set; }
     }
