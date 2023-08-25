@@ -2,21 +2,12 @@
 using HIS.Core.Linq;
 using HIS.Dtos.Business.DExpMest;
 using HIS.Dtos.Business.DExpMestMedicine;
-using HIS.Dtos.Business.DImMestMedicine;
-using HIS.Dtos.Business.DImpMest;
 using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.MedicinePricePolicy;
-using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests;
-using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests;
-using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
-using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;
-using HIS.Utilities.Sections;
 using Microsoft.Extensions.Configuration;
 using System.Globalization;
-using System.Linq;
 
 namespace HIS.ApplicationService.Business.Pharmaceuticals.DExpMests
 {
@@ -34,7 +25,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DExpMests
                 DateTime fromDateTime = DateTime.ParseExact(fromDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None);
                 DateTime toDateTime = DateTime.ParseExact(toDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None);
 
-                result.Result = (from dExpMest in _dbContext.DExpMests
+                result.Result = (from dExpMest in _dbContext.ExpMests
 
                                  join imStock in _dbContext.SRooms on dExpMest.ImpStockId equals imStock.Id into imStockDefaults
                                  from imStockDefault in imStockDefaults.DefaultIfEmpty()
