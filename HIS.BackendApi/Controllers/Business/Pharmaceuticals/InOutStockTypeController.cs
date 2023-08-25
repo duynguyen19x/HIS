@@ -7,11 +7,11 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DImpExpMestTypeController : ControllerBase
+    public class InOutStockTypeController : ControllerBase
     {
         private readonly IInOutStockTypeService _inOutStockTypeService;
 
-        public DImpExpMestTypeController(IInOutStockTypeService inOutStockTypeService)
+        public InOutStockTypeController(IInOutStockTypeService inOutStockTypeService)
         {
             _inOutStockTypeService = inOutStockTypeService;
         }

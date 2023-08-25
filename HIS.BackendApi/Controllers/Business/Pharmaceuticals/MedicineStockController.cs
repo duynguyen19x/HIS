@@ -8,11 +8,11 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DMedicineStockController : ControllerBase
+    public class MedicineStockController : ControllerBase
     {
         private readonly IDMedicineStockService _dMedicineStockService;
 
-        public DMedicineStockController(IDMedicineStockService dMedicineStockService)
+        public MedicineStockController(IDMedicineStockService dMedicineStockService)
         {
             _dMedicineStockService = dMedicineStockService;
         }
