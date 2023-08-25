@@ -1,37 +1,37 @@
 ﻿using AutoMapper;
 using HIS.Core.Linq;
-using HIS.Dtos.Business.DImpExpMestType;
+using HIS.Dtos.Business.InOutStockType;
 using HIS.Dtos.Commons;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 
-namespace HIS.ApplicationService.Business.DImpExpMestType
+namespace HIS.ApplicationService.Business.InOutStockType
 {
-    public class DImpExpMestTypeService : BaseSerivce, IDImpExpMestTypeService
+    public class InOutStockTypeService : BaseSerivce, IInOutStockTypeService
     {
-        public DImpExpMestTypeService(HISDbContext dbContext, IMapper mapper)
+        public InOutStockTypeService(HISDbContext dbContext, IMapper mapper)
             : base(dbContext, mapper)
         {
         }
 
-        public Task<ApiResult<DImpExpMestTypeDto>> CreateOrEdit(DImpExpMestTypeDto input)
+        public Task<ApiResult<InOutStockTypeDto>> CreateOrEdit(InOutStockTypeDto input)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ApiResult<DImpExpMestTypeDto>> Delete(Guid id)
+        public Task<ApiResult<InOutStockTypeDto>> Delete(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<ApiResultList<DImpExpMestTypeDto>> GetAll(GetAllDImpExpMestTypeInput input)
+        public async Task<ApiResultList<InOutStockTypeDto>> GetAll(GetAllInOutStockTypeInput input)
         {
-            var result = new ApiResultList<DImpExpMestTypeDto>();
+            var result = new ApiResultList<InOutStockTypeDto>();
 
             try
             {
-                result.Result = (from t in _dbContext.InOutStockType
-                                 select new DImpExpMestTypeDto()
+                result.Result = (from t in _dbContext.InOutStockTypes
+                                 select new InOutStockTypeDto()
                                  {
                                      Id = t.Id,
                                      Code = t.Code,
@@ -52,7 +52,7 @@ namespace HIS.ApplicationService.Business.DImpExpMestType
             return await Task.FromResult(result);
         }
 
-        public Task<ApiResult<DImpExpMestTypeDto>> GetById(Guid id)
+        public Task<ApiResult<InOutStockTypeDto>> GetById(Guid id)
         {
             throw new NotImplementedException();
         }

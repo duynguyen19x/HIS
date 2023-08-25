@@ -1,5 +1,6 @@
 ﻿using HIS.EntityFrameworkCore.Configurations;
 using HIS.EntityFrameworkCore.Data;
+using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
@@ -72,7 +73,20 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<MedicineType> SMedicineTypes { get; set; }
         public DbSet<MedicinePricePolicy> SMedicinePricePolicies { get; set; }
 
-        public DbSet<InOutStockType> InOutStockType { get; set; }
+        public DbSet<InOutStockType> InOutStockTypes { get; set; }
         public DbSet<MedicineStock> MedicineStocks { get; set; }
+        public DbSet<InOutStock> InOutStocks { get; set; }
+        public DbSet<InOutStockMedicine> InOutStockMedicines { get; set; }
+
+        #region Patient
+        public DbSet<HISPatient> Patients { get; set; }
+        public DbSet<HISPatientRecord> PatientRecords { get; set; }
+        #endregion
+
+        #region System
+        public DbSet<SYSAutoNumber> SYSAutoNumbers { get; set; }
+        public DbSet<SYSRefType> SYSRefTypes { get; set; }
+        public DbSet<SYSRefTypeCategory> sYSRefTypeCategories { get; set; }
+        #endregion
     }
 }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HIS.Core.Linq;
-using HIS.Dtos.Business.DImpMest;
+using HIS.Dtos.Business.InOutStock;
 using HIS.Dtos.Business.DMedicineStock;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Medicine;

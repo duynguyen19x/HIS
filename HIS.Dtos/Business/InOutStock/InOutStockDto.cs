@@ -1,10 +1,10 @@
 ﻿using HIS.Application.Core.Services.Dto;
-using HIS.Dtos.Business.DImMestMedicine;
+using HIS.Dtos.Business.InOutStockMedicine;
 using HIS.Utilities.Enums;
 
-namespace HIS.Dtos.Business.DImpMest
+namespace HIS.Dtos.Business.InOutStock
 {
-    public class DImpMestDto : EntityDto<Guid?>
+    public class InOutStockDto : EntityDto<Guid?>
     {
         public string Code { get; set; }
 
@@ -115,6 +115,6 @@ namespace HIS.Dtos.Business.DImpMest
         /// </summary>
         public string Deliverer { get; set; }
 
-        public IList<DImpMestMedicineDto> DImpMestMedicines { get; set; }
+        public IList<InOutStockMedicineDto> InOutStockMedicine { get; set; }
     }
 }

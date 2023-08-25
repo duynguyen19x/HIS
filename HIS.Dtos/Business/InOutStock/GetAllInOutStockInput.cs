@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Business.DExpMest
+namespace HIS.Dtos.Business.InOutStock
 {
-    public class GetAllDExpMestInput
+    public class GetAllInOutStockInput
     {
         public string CodeFilter { get; set; }
         public bool? InactiveFilter { get; set; }

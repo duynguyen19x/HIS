@@ -1,9 +1,10 @@
 ﻿using HIS.Application.Core.Services.Dto;
+using HIS.Dtos.Dictionaries.MedicinePricePolicy;
 using System.ComponentModel;
 
-namespace HIS.Dtos.Business.DExpMestMedicine
+namespace HIS.Dtos.Business.InOutStockMedicine
 {
-    public class DExpMestMedicineDto : EntityDto<Guid?>
+    public class InOutStockMedicineDto : EntityDto<Guid?>
     {
         [Description("Mã thuốc")]
         public string Code { get; set; }
@@ -38,8 +39,8 @@ namespace HIS.Dtos.Business.DExpMestMedicine
         [Description("Giá nhập")]
         public decimal? ImpPrice { get; set; }
 
-        [Description("Số lượng xuất")]
-        public decimal? ExpQuantity { get; set; }
+        [Description("Số lượng nhập")]
+        public decimal? ImpQuantity { get; set; }
 
         [Description("Phần trăm vat giá nhập")]
         public decimal? ImpVatRate { get; set; }
@@ -47,16 +48,17 @@ namespace HIS.Dtos.Business.DExpMestMedicine
         [Description("Phần trăm thuế")]
         public decimal? TaxRate { get; set; }
 
-        public decimal? ExpAmount
+        public decimal? ImpAmount
         {
             get
             {
-                var expAmount = ExpQuantity.GetValueOrDefault() * ImpPrice.GetValueOrDefault();
+                var impAmount = ImpQuantity.GetValueOrDefault() * ImpPrice.GetValueOrDefault();
                 var vatRate = ImpVatRate.GetValueOrDefault() / 100;
                 var taxRate = TaxRate.GetValueOrDefault() / 100;
 
-                return expAmount * (1 + vatRate + taxRate);
+                return impAmount * (1 + vatRate + taxRate);
             }
+            set { }
         }
 
         [Description("Diễn giải")]
@@ -100,6 +102,8 @@ namespace HIS.Dtos.Business.DExpMestMedicine
 
         public Guid? MedicineId { get; set; }
 
-        public Guid? ExpMestId { get; set; }
+        public Guid? ImpMestId { get; set; }
+
+        public IList<SMedicinePricePolicyDto> SMedicinePricePolicies { get; set; }
     }
 }

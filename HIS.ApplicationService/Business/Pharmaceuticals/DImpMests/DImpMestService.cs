@@ -1,12 +1,10 @@
 ﻿using AutoMapper;
 using HIS.ApplicationService.Business.Pharmaceuticals.DExpMests;
 using HIS.Core.Linq;
-using HIS.Dtos.Business.DImMestMedicine;
-using HIS.Dtos.Business.DImpMest;
+using HIS.Dtos.Business.InOutStock;
+using HIS.Dtos.Business.InOutStockMedicine;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.MedicinePricePolicy;
-using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests;
-using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
@@ -31,16 +29,16 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
             _dExpMestService = dExpMestService;
         }
 
-        public async Task<ApiResultList<DImpMestDto>> GetByStocks(Guid stockId, string fromDate, string toDate)
+        public async Task<ApiResultList<InOutStockDto>> GetByStocks(Guid stockId, string fromDate, string toDate)
         {
-            var result = new ApiResultList<DImpMestDto>();
+            var result = new ApiResultList<InOutStockDto>();
 
             try
             {
                 DateTime fromDateTime = DateTime.ParseExact(fromDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None);
                 DateTime toDateTime = DateTime.ParseExact(toDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None);
 
-                result.Result = (from dImMest in _dbContext.DImpMests
+                result.Result = (from dImMest in _dbContext.InOutStocks
 
                                  join imStock in _dbContext.SRooms on dImMest.ImpStockId equals imStock.Id into imStockDefaults
                                  from imStockDefault in imStockDefaults.DefaultIfEmpty()
@@ -48,10 +46,10 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
                                  join exStock in _dbContext.SRooms on dImMest.ExpStockId equals exStock.Id into exStockDefaults
                                  from exStockDefault in exStockDefaults.DefaultIfEmpty()
 
-                                 join impExpMestType in _dbContext.InOutStockType on dImMest.ImpExpMestTypeId equals impExpMestType.Id into impExpMestTypeDefaults
+                                 join impExpMestType in _dbContext.InOutStockTypes on dImMest.InOutStockTypeId equals impExpMestType.Id into impExpMestTypeDefaults
                                  from impExpMestTypeDefault in impExpMestTypeDefaults.DefaultIfEmpty()
 
-                                 select new DImpMestDto()
+                                 select new InOutStockDto()
                                  {
                                      Id = dImMest.Id,
                                      Code = dImMest.Code,
@@ -102,19 +100,19 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<ApiResult<DImpMestDto>> ImportFromSupplierGetById(Guid id)
+        public async Task<ApiResult<InOutStockDto>> ImportFromSupplierGetById(Guid id)
         {
-            var result = new ApiResult<DImpMestDto>();
+            var result = new ApiResult<InOutStockDto>();
 
             try
             {
-                var dImpMestDto = _mapper.Map<DImpMestDto>(_dbContext.DImpMests.FirstOrDefault(d => d.Id == id));
+                var dImpMestDto = _mapper.Map<InOutStockDto>(_dbContext.DImpMests.FirstOrDefault(d => d.Id == id));
                 if (dImpMestDto != null)
                 {
                     // Nhập thuốc NCC
                     if (dImpMestDto.ImpExpMestTypeId == 1)
                     {
-                        var dImpMestMedicineDtos = _mapper.Map<IList<DImpMestMedicineDto>>(_dbContext.DImpMestMedicines.Where(w => w.ImpMestId == id).ToList());
+                        var dImpMestMedicineDtos = _mapper.Map<IList<InOutStockMedicineDto>>(_dbContext.DImpMestMedicines.Where(w => w.ImpMestId == id).ToList());
                         var sMedicineIds = dImpMestMedicineDtos.Select(s => s.MedicineId).ToList();
                         var sMedicineDtos = _mapper.Map<IList<Medicine>>(_dbContext.SMedicines.Where(w => sMedicineIds.Contains(w.Id)).ToList());
 
@@ -271,7 +269,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<ApiResult<DImpMestDto>> ImportFromSupplierSaveAsDraft(DImpMestDto input)
+        public async Task<ApiResult<InOutStockDto>> ImportFromSupplierSaveAsDraft(InOutStockDto input)
         {
             return await ImportFromSupplier(input);
         }
@@ -281,7 +279,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<ApiResult<DImpMestDto>> ImportFromSupplierStockIn(DImpMestDto input)
+        public async Task<ApiResult<InOutStockDto>> ImportFromSupplierStockIn(InOutStockDto input)
         {
             input.ImpMestStatus = ImpMestStatusType.ReceivedInStock;
             return await ImportFromSupplier(input);
@@ -292,9 +290,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        private async Task<ApiResult<DImpMestDto>> ImportFromSupplier(DImpMestDto input)
+        private async Task<ApiResult<InOutStockDto>> ImportFromSupplier(InOutStockDto input)
         {
-            var result = new ApiResult<DImpMestDto>();
+            var result = new ApiResult<InOutStockDto>();
 
             result = await ImportFromSupplierValid(input);
             if (!result.IsSuccessed)
@@ -494,9 +492,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        private async Task<ApiResult<DImpMestDto>> ImportFromSupplierValid(DImpMestDto input)
+        private async Task<ApiResult<InOutStockDto>> ImportFromSupplierValid(InOutStockDto input)
         {
-            var result = new ApiResult<DImpMestDto>();
+            var result = new ApiResult<InOutStockDto>();
 
             try
             {
@@ -564,13 +562,13 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<ApiResult<DImpMestDto>> ImportFromAnotherStockGetById(Guid id)
+        public async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockGetById(Guid id)
         {
-            var result = new ApiResult<DImpMestDto>();
+            var result = new ApiResult<InOutStockDto>();
 
             try
             {
-                var dImpMestDto = _mapper.Map<DImpMestDto>(_dbContext.DImpMests.FirstOrDefault(d => d.Id == id));
+                var dImpMestDto = _mapper.Map<InOutStockDto>(_dbContext.DImpMests.FirstOrDefault(d => d.Id == id));
                 if (dImpMestDto != null)
                 {
                     // Nhập từ kho khác
@@ -579,7 +577,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
                         var dImpMestMedicineDtos = (from dImpMestMedicine in _dbContext.DImpMestMedicines
                                                     join sMedicine in _dbContext.SMedicines on dImpMestMedicine.MedicineId equals sMedicine.Id
                                                     where dImpMestMedicine.ImpMestId == id
-                                                    select new DImpMestMedicineDto()
+                                                    select new InOutStockMedicineDto()
                                                     {
                                                         Id = id,
                                                         Code = sMedicine.Code,
@@ -633,7 +631,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<ApiResult<DImpMestDto>> ImportFromAnotherStockSaveAsDraft(DImpMestDto input)
+        public async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockSaveAsDraft(InOutStockDto input)
         {
             input.ImpMestStatus = ImpMestStatusType.None;
             return await ImportFromAnotherStock(input);
@@ -644,7 +642,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<ApiResult<DImpMestDto>> ImportFromAnotherStockRequest(DImpMestDto input)
+        public async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockRequest(InOutStockDto input)
         {
             input.ImpMestStatus = ImpMestStatusType.Request;
             return await ImportFromAnotherStock(input);
@@ -655,7 +653,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<ApiResult<DImpMestDto>> ImportFromAnotherStockStockIn(DImpMestDto input)
+        public async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockStockIn(InOutStockDto input)
         {
             input.ImpMestStatus = ImpMestStatusType.ReceivedInStock;
             return await ImportFromSupplier(input);
@@ -666,9 +664,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        private async Task<ApiResult<DImpMestDto>> ImportFromAnotherStock(DImpMestDto input)
+        private async Task<ApiResult<InOutStockDto>> ImportFromAnotherStock(InOutStockDto input)
         {
-            var result = new ApiResult<DImpMestDto>();
+            var result = new ApiResult<InOutStockDto>();
 
             result = await ImportFromAnotherStockValid(input);
             if (!result.IsSuccessed)
@@ -946,9 +944,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.DImpMests
             return await Task.FromResult(result);
         }
 
-        private async Task<ApiResult<DImpMestDto>> ImportFromAnotherStockValid(DImpMestDto input)
+        private async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockValid(InOutStockDto input)
         {
-            var result = new ApiResult<DImpMestDto>();
+            var result = new ApiResult<InOutStockDto>();
 
             try
             {

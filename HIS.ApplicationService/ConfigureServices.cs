@@ -1,8 +1,5 @@
 ﻿using HIS.ApplicationService.Business;
-using HIS.ApplicationService.Business.DImpExpMestType;
-using HIS.ApplicationService.Business.Pharmaceuticals.DExpMests;
-using HIS.ApplicationService.Business.Pharmaceuticals.DImpMests;
-using HIS.ApplicationService.Business.Pharmaceuticals.DMedicineStock;
+using HIS.ApplicationService.Business.InOutStockType;
 using HIS.ApplicationService.Dictionaries.Branch;
 using HIS.ApplicationService.Dictionaries.Career;
 using HIS.ApplicationService.Dictionaries.ChapterICD10;
@@ -74,11 +71,7 @@ namespace HIS.ApplicationService
             services.AddTransient<ISMedicineLineService, SMedicineLineService>();
             services.AddTransient<ISMedicinePricePolicyService, SMedicinePricePolicyService>();
 
-            services.AddTransient<IDImpMestService, DImpMestService>();
-            services.AddTransient<IDImpExpMestTypeService, DImpExpMestTypeService>();
-            services.AddTransient<IDMedicineStockService, DMedicineStockService>();
-
-            services.AddTransient<IDExpMestService, DExpMestService>();
+            services.AddTransient<IInOutStockTypeService, InOutStockTypeService>();
 
             #region Patient
             services.AddTransient<IPatientAppService, PatientAppService>();

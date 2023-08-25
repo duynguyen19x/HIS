@@ -1,7 +1,7 @@
 ﻿using HIS.ApplicationService.Business.Pharmaceuticals.DExpMests;
 using HIS.ApplicationService.Business.Pharmaceuticals.DImpMests;
 using HIS.Dtos.Business.DExpMest;
-using HIS.Dtos.Business.DImpMest;
+using HIS.Dtos.Business.InOutStock;
 using HIS.Dtos.Commons;
 using HIS.Models.Commons;
 using Microsoft.AspNetCore.Http;

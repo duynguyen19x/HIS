@@ -1,8 +1,6 @@
-﻿using HIS.ApplicationService.Business.DImpExpMestType;
-using HIS.Dtos.Business.DImpMest;
-using HIS.Dtos.Business.DImpExpMestType;
+﻿using HIS.ApplicationService.Business.InOutStockType;
+using HIS.Dtos.Business.InOutStockType;
 using HIS.Dtos.Commons;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
@@ -11,17 +9,17 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
     [ApiController]
     public class DImpExpMestTypeController : ControllerBase
     {
-        private readonly IDImpExpMestTypeService _dImpExpMestTypeService;
+        private readonly IInOutStockTypeService _inOutStockTypeService;
 
-        public DImpExpMestTypeController(IDImpExpMestTypeService dImpExpMestTypeService)
+        public DImpExpMestTypeController(IInOutStockTypeService inOutStockTypeService)
         {
-            _dImpExpMestTypeService = dImpExpMestTypeService;
+            _inOutStockTypeService = inOutStockTypeService;
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<DImpExpMestTypeDto>> GetAll([FromQuery] GetAllDImpExpMestTypeInput input)
+        public async Task<ApiResultList<InOutStockTypeDto>> GetAll([FromQuery] GetAllInOutStockTypeInput input)
         {
-            return await _dImpExpMestTypeService.GetAll(input);
+            return await _inOutStockTypeService.GetAll(input);
         }
     }
 }

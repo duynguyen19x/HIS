@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using HIS.Dtos.Business;
-using HIS.Dtos.Business.DImMestMedicine;
-using HIS.Dtos.Business.DImpMest;
+using HIS.Dtos.Business.InOutStockMedicine;
+using HIS.Dtos.Business.InOutStock;
 using HIS.Dtos.Business.DMedicineStock;
 using HIS.Dtos.Dictionaries.Branch;
 using HIS.Dtos.Dictionaries.Career;
@@ -106,7 +106,7 @@ namespace HIS.AutoMappers
                 .ReverseMap();
 
 
-            CreateMap<DImpMestMedicineDto, Medicine>()
+            CreateMap<InOutStockMedicineDto, Medicine>()
                 .ForMember(dest => dest.MedicineType, opt => opt.Ignore())
                 .ForMember(dest => dest.Unit, opt => opt.Ignore())
                 .ForMember(dest => dest.MedicineLine, opt => opt.Ignore())
