@@ -12,24 +12,24 @@ namespace HIS.ApplicationService.Systems.User
         public UserService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
             : base(dbContext, config, mapper) { }
 
-        public Task<ApiResult<SUserDto>> CreateOrEdit(SUserDto input)
+        public Task<ApiResult<UserDto>> CreateOrEdit(UserDto input)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ApiResult<SUserDto>> Delete(Guid id)
+        public Task<ApiResult<UserDto>> Delete(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<ApiResultList<SUserDto>> GetAll(GetAllSUserInput input)
+        public async Task<ApiResultList<UserDto>> GetAll(GetAllUserInput input)
         {
-            var result = new ApiResultList<SUserDto>();
+            var result = new ApiResultList<UserDto>();
             try
             {
                 result.IsSuccessed = true;
                 result.Result = (from r in _dbContext.SUsers
-                                 select new SUserDto()
+                                 select new UserDto()
                                  {
                                      Id = r.Id,
                                      UserName = r.UserName,
@@ -59,7 +59,7 @@ namespace HIS.ApplicationService.Systems.User
             return await Task.FromResult(result);
         }
 
-        public Task<ApiResult<SUserDto>> GetById(Guid id)
+        public Task<ApiResult<UserDto>> GetById(Guid id)
         {
             throw new NotImplementedException();
         }

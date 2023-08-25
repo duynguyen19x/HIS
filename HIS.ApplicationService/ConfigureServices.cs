@@ -41,35 +41,35 @@ namespace HIS.ApplicationService
             services.AddTransient<ILoginService, LoginService>();
             services.AddTransient<IRoleService, RoleService>();
 
-            services.AddTransient<ISBranchService, SBranchService>();
-            services.AddTransient<ISCareerService, SCareerService>();
-            services.AddTransient<ISCountryService, SCountryService>();
-            services.AddTransient<ISDepartmentService, SDepartmentService>();
-            services.AddTransient<ISDepartmentTypeService, SDepartmentTypeService>();
-            services.AddTransient<ISDistrictService, SDistrictService>();
-            services.AddTransient<ISEthnicService, SEthnicService>();
-            services.AddTransient<ISGenderService, SGenderService>();
-            services.AddTransient<ISRoomService, SRoomService>();
-            services.AddTransient<ISRoomTypeService, SRoomTypeService>();
-            services.AddTransient<ISHospitalService, SHospitalService>();
+            services.AddTransient<IBranchService, BranchService>();
+            services.AddTransient<ICareerService, CareerService>();
+            services.AddTransient<ICountryService, CountryService>();
+            services.AddTransient<IDepartmentService, DepartmentService>();
+            services.AddTransient<IDepartmentTypeService, DepartmentTypeService>();
+            services.AddTransient<IDistrictService, DistrictService>();
+            services.AddTransient<IEthnicService, EthnicService>();
+            services.AddTransient<IGenderService, GenderService>();
+            services.AddTransient<IRoomService, RoomService>();
+            services.AddTransient<IRoomTypeService, RoomTypeService>();
+            services.AddTransient<IHospitalService, HospitalService>();
 
-            services.AddTransient<ISIcdService, SIcdService>();
-            services.AddTransient<ISProvinceService, SProvinceService>();
-            services.AddTransient<ISWardService, SWardService>();
-            services.AddTransient<ISServicePricePolicyService, SServicePricePolicyService>();
+            services.AddTransient<IIcdService, IcdService>();
+            services.AddTransient<IProvinceService, ProvinceService>();
+            services.AddTransient<IWardService, WardService>();
+            services.AddTransient<IServicePricePolicyService, ServicePricePolicyService>();
             services.AddTransient<IServiceService, ServiceService>();
             services.AddTransient<ISurgicalProcedureTypeService, SurgicalProcedureTypeService>();
             services.AddTransient<IServiceGroupService, ServiceGroupService>();
             services.AddTransient<IServiceGroupHeInService, ServiceGroupHeInService>();
-            services.AddTransient<ISUnitService, SUnitService>();
-            services.AddTransient<ISChapterIcdService, SChapterIcdService>();
-            services.AddTransient<ISSupplierService, SSupplierService>();
+            services.AddTransient<IUnitService, UnitService>();
+            services.AddTransient<IChapterIcdService, ChapterIcdService>();
+            services.AddTransient<ISupplierService, SupplierService>();
             services.AddTransient<IUserService, UserService>();
 
-            services.AddTransient<ISMedicineGroupService, SMedicineGroupService>();
-            services.AddTransient<ISMedicineTypeService, SMedicineTypeService>();
-            services.AddTransient<ISMedicineLineService, SMedicineLineService>();
-            services.AddTransient<ISMedicinePricePolicyService, SMedicinePricePolicyService>();
+            services.AddTransient<IMedicineGroupService, SMedicineGroupService>();
+            services.AddTransient<IMedicineTypeService, MedicineTypeService>();
+            services.AddTransient<IMedicineLineService, MedicineLineService>();
+            services.AddTransient<ISMedicinePricePolicyService, MedicinePricePolicyService>();
 
             services.AddTransient<IInOutStockTypeService, InOutStockTypeService>();
 

@@ -18,9 +18,9 @@ namespace HIS.ApplicationService.Systems.Role
             _config = config;
         }
 
-        public async Task<ApiResultList<SRoleDto>> GetAll(GetAllSRoleInput input)
+        public async Task<ApiResultList<RoleDto>> GetAll(GetAllRoleInput input)
         {
-            var result = new ApiResultList<SRoleDto>();
+            var result = new ApiResultList<RoleDto>();
             try
             {
                 result.IsSuccessed = true;
@@ -28,7 +28,7 @@ namespace HIS.ApplicationService.Systems.Role
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
-                                 select new SRoleDto()
+                                 select new RoleDto()
                                  {
                                      Id = r.Id,
                                      Code = r.Code,
@@ -47,14 +47,14 @@ namespace HIS.ApplicationService.Systems.Role
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SRoleDto>> GetById(Guid id)
+        public async Task<ApiResult<RoleDto>> GetById(Guid id)
         {
-            var result = new ApiResult<SRoleDto>();
+            var result = new ApiResult<RoleDto>();
 
             var role = _dbContext.SRoles.SingleOrDefault(s => s.Id == id);
             if (role != null)
             {
-                result.Result = new SRoleDto()
+                result.Result = new RoleDto()
                 {
                     Id = role.Id,
                     Code = role.Code,
@@ -67,7 +67,7 @@ namespace HIS.ApplicationService.Systems.Role
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SRoleDto>> CreateOrEdit(SRoleDto input)
+        public async Task<ApiResult<RoleDto>> CreateOrEdit(RoleDto input)
         {
             if (input.Id == null)
                 return await Create(input);
@@ -75,9 +75,9 @@ namespace HIS.ApplicationService.Systems.Role
                 return await Update(input);
         }
 
-        private async Task<ApiResult<SRoleDto>> Create(SRoleDto input)
+        private async Task<ApiResult<RoleDto>> Create(RoleDto input)
         {
-            var result = new ApiResult<SRoleDto>();
+            var result = new ApiResult<RoleDto>();
             await _dbContext.SRoles.AddAsync(new EntityFrameworkCore.Entities.Systems.Role()
             {
 
@@ -87,12 +87,12 @@ namespace HIS.ApplicationService.Systems.Role
             return result;
         }
 
-        private Task<ApiResult<SRoleDto>> Update(SRoleDto input)
+        private Task<ApiResult<RoleDto>> Update(RoleDto input)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ApiResult<SRoleDto>> Delete(Guid id)
+        public Task<ApiResult<RoleDto>> Delete(Guid id)
         {
             throw new NotImplementedException();
         }

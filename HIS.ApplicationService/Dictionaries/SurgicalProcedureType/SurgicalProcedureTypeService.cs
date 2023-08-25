@@ -1,15 +1,8 @@
 ﻿using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.ServicePricePolicy;
 using HIS.Dtos.Dictionaries.SurgicalProcedureType;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Dictionaries.SurgicalProcedureType
 {
@@ -30,7 +23,7 @@ namespace HIS.ApplicationService.Dictionaries.SurgicalProcedureType
             throw new NotImplementedException();
         }
 
-        public async Task<ApiResultList<SSurgicalProcedureTypeDto>> GetAll(GetAllSSurgicalProcedureTypeInput input)
+        public async Task<ApiResultList<SSurgicalProcedureTypeDto>> GetAll(GetAllSurgicalProcedureTypeInput input)
         {
             var result = new ApiResultList<SSurgicalProcedureTypeDto>();
 

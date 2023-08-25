@@ -2,7 +2,7 @@
 using HIS.Dtos.Business;
 using HIS.Dtos.Business.InOutStockMedicine;
 using HIS.Dtos.Business.InOutStock;
-using HIS.Dtos.Business.DMedicineStock;
+using HIS.Dtos.Business.MedicineStock;
 using HIS.Dtos.Dictionaries.Branch;
 using HIS.Dtos.Dictionaries.Career;
 using HIS.Dtos.Dictionaries.ChapterICD10;
@@ -43,66 +43,66 @@ namespace HIS.AutoMappers
     {
         public AutoMapperConfiguration()
         {
-            CreateMap<Branch, SBranchDto>().ReverseMap();
-            CreateMap<Career, SCareerDto>().ReverseMap();
-            CreateMap<Country, SCountryDto>().ReverseMap();
-            CreateMap<Department, SDepartmentDto>().ReverseMap();
-            CreateMap<DepartmentType, SDepartmentTypeDto>().ReverseMap();
-            CreateMap<SChapterIcdDto, ChapterIcd>().ReverseMap();
-            CreateMap<District, SDistrictDto>().ReverseMap();
-            CreateMap<Ethnic, SEthnicDto>().ReverseMap();
-            CreateMap<Gender, SGenderDto>().ReverseMap();
-            CreateMap<Hospital, SHospitalDto>().ReverseMap();
-            CreateMap<Icd, SIcdDto>().ReverseMap();
-            CreateMap<Province, SProvinceDto>().ReverseMap();
-            CreateMap<SRoomDto, Room>()
+            CreateMap<Branch, BranchDto>().ReverseMap();
+            CreateMap<Career, CareerDto>().ReverseMap();
+            CreateMap<Country, CountryDto>().ReverseMap();
+            CreateMap<Department, DepartmentDto>().ReverseMap();
+            CreateMap<DepartmentType, DepartmentTypeDto>().ReverseMap();
+            CreateMap<ChapterIcdDto, ChapterIcd>().ReverseMap();
+            CreateMap<District, DistrictDto>().ReverseMap();
+            CreateMap<Ethnic, EthnicDto>().ReverseMap();
+            CreateMap<Gender, GenderDto>().ReverseMap();
+            CreateMap<Hospital, HospitalDto>().ReverseMap();
+            CreateMap<Icd, IcdDto>().ReverseMap();
+            CreateMap<Province, ProvinceDto>().ReverseMap();
+            CreateMap<RoomDto, Room>()
                 .ForMember(dest => dest.RoomType, opt => opt.Ignore())
                 .ForMember(dest => dest.Department, opt => opt.Ignore())
                 .ReverseMap();
-            CreateMap<SRoomTypeDto, RoomType>()
+            CreateMap<RoomTypeDto, RoomType>()
                 .ForMember(dest => dest.SRooms, opt => opt.Ignore())
                 .ReverseMap();
-            CreateMap<SWard, SWardDto>().ReverseMap();
-            CreateMap<SServiceGroupDto, ServiceGroup>()
+            CreateMap<SWard, WardDto>().ReverseMap();
+            CreateMap<ServiceGroupDto, ServiceGroup>()
                 .ReverseMap();
-            CreateMap<SServiceGroupHeInDto, ServiceGroupHeIn>()
+            CreateMap<ServiceGroupHeInDto, ServiceGroupHeIn>()
                 .ReverseMap();
-            CreateMap<SUnitDto, Unit>()
+            CreateMap<UnitDto, Unit>()
                 .ForMember(dest => dest.Services, opt => opt.Ignore())
                 .ForMember(dest => dest.MedicineTypes, opt => opt.Ignore())
                 .ForMember(dest => dest.Medicines, opt => opt.Ignore())
                 .ForMember(dest => dest.Materials, opt => opt.Ignore())
                 .ForMember(dest => dest.MaterialTypes, opt => opt.Ignore())
                 .ReverseMap();
-            CreateMap<SServiceDto, Service>()
+            CreateMap<ServiceDto, Service>()
                 .ForMember(dest => dest.Unit, opt => opt.Ignore())
                 .ForMember(dest => dest.ServiceGroup, opt => opt.Ignore())
                 .ForMember(dest => dest.SurgicalProcedureType, opt => opt.Ignore())
                 .ReverseMap();
-            CreateMap<SServicePricePolicyDto, ServicePricePolicy>()
+            CreateMap<ServicePricePolicyDto, ServicePricePolicy>()
                .ForMember(dest => dest.PatientType, opt => opt.Ignore())
                .ForMember(dest => dest.Service, opt => opt.Ignore())
                .ReverseMap();
 
-            CreateMap<SExecutionRoomDto, ExecutionRoom>()
+            CreateMap<ExecutionRoomDto, ExecutionRoom>()
                 .ForMember(dest => dest.Service, opt => opt.Ignore())
                 .ForMember(dest => dest.Room, opt => opt.Ignore())
                 .ReverseMap();
 
-            CreateMap<SServiceResultIndiceDto, ServiceResultIndice>()
+            CreateMap<ServiceResultIndiceDto, ServiceResultIndice>()
              .ForMember(dest => dest.Service, opt => opt.Ignore())
              .ReverseMap();
 
-            CreateMap<SMedicineGroupDto, MedicineGroup>()
+            CreateMap<MedicineGroupDto, MedicineGroup>()
                 .ReverseMap();
-            CreateMap<SMedicineTypeDto, MedicineType>()
+            CreateMap<MedicineTypeDto, MedicineType>()
                 .ForMember(dest => dest.Unit, opt => opt.Ignore())
                 .ForMember(dest => dest.MedicineLine, opt => opt.Ignore())
                 .ForMember(dest => dest.MedicineGroup, opt => opt.Ignore())
                 .ForMember(dest => dest.Country, opt => opt.Ignore())
                 .ReverseMap();
 
-            CreateMap<SSupplierDto, Supplier>()
+            CreateMap<SupplierDto, Supplier>()
                 .ReverseMap();
 
 
@@ -113,19 +113,19 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.Country, opt => opt.Ignore())
                 .ReverseMap();
 
-            CreateMap<SMedicineDto, Medicine>()
+            CreateMap<MedicineDto, Medicine>()
                 .ForMember(dest => dest.MedicineType, opt => opt.Ignore())
                 .ForMember(dest => dest.Unit, opt => opt.Ignore())
                 .ForMember(dest => dest.MedicineLine, opt => opt.Ignore())
                 .ForMember(dest => dest.Country, opt => opt.Ignore())
                 .ReverseMap();
 
-            CreateMap<SMedicinePricePolicyDto, MedicinePricePolicy>()
+            CreateMap<MedicinePricePolicyDto, MedicinePricePolicy>()
                 .ForMember(dest => dest.Medicine, opt => opt.Ignore())
                 .ForMember(dest => dest.PatientType, opt => opt.Ignore())
                 .ReverseMap();
 
-            CreateMap<DMedicineStockDto, MedicineStock>()
+            CreateMap<MedicineStockDto, MedicineStock>()
                 .ForMember(dest => dest.Medicine, opt => opt.Ignore())
                 .ForMember(dest => dest.Stock, opt => opt.Ignore())
                 .ReverseMap();

@@ -2,29 +2,18 @@
 using HIS.Core.Linq;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ExecutionRoom;
-using HIS.Dtos.Dictionaries.Room;
 using HIS.Dtos.Dictionaries.Service;
 using HIS.Dtos.Dictionaries.ServicePricePolicy;
 using HIS.Dtos.Dictionaries.ServiceResultIndex;
-using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Dictionaries.Service
 {
@@ -34,7 +23,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
         {
         }
 
-        public async Task<ApiResult<SServiceDto>> CreateOrEdit(SServiceDto input)
+        public async Task<ApiResult<ServiceDto>> CreateOrEdit(ServiceDto input)
         {
             var result = await ValidSave(input);
 
@@ -47,9 +36,9 @@ namespace HIS.ApplicationService.Dictionaries.Service
                 return await Update(input);
         }
 
-        private async Task<ApiResult<SServiceDto>> Create(SServiceDto input)
+        private async Task<ApiResult<ServiceDto>> Create(ServiceDto input)
         {
-            var result = new ApiResult<SServiceDto>();
+            var result = new ApiResult<ServiceDto>();
 
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
@@ -134,9 +123,9 @@ namespace HIS.ApplicationService.Dictionaries.Service
             return await Task.FromResult(result);
         }
 
-        private async Task<ApiResult<SServiceDto>> Update(SServiceDto input)
+        private async Task<ApiResult<ServiceDto>> Update(ServiceDto input)
         {
-            var result = new ApiResult<SServiceDto>();
+            var result = new ApiResult<ServiceDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
@@ -228,9 +217,9 @@ namespace HIS.ApplicationService.Dictionaries.Service
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SServiceDto>> Delete(Guid id)
+        public async Task<ApiResult<ServiceDto>> Delete(Guid id)
         {
-            var result = new ApiResult<SServiceDto>();
+            var result = new ApiResult<ServiceDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
@@ -261,9 +250,9 @@ namespace HIS.ApplicationService.Dictionaries.Service
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<SServiceDto>> GetAll(GetAllSServiceInput input)
+        public async Task<ApiResultList<ServiceDto>> GetAll(GetAllServiceInput input)
         {
-            var result = new ApiResultList<SServiceDto>();
+            var result = new ApiResultList<ServiceDto>();
 
             try
             {
@@ -274,7 +263,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                  join r3 in _dbContext.SServiceGroupHeIns on r.ServiceGroupHeInId equals r3.Id
 
                                  where r.IsDeleted == false
-                                 select new SServiceDto()
+                                 select new ServiceDto()
                                  {
                                      Id = r.Id,
                                      Code = r.Code,
@@ -306,11 +295,11 @@ namespace HIS.ApplicationService.Dictionaries.Service
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SServiceDto>> GetById(Guid id)
+        public async Task<ApiResult<ServiceDto>> GetById(Guid id)
         {
-            var result = new ApiResult<SServiceDto>();
+            var result = new ApiResult<ServiceDto>();
 
-            var serviceDto = new SServiceDto();
+            var serviceDto = new ServiceDto();
 
             try
             {
@@ -326,7 +315,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                     var sServicePricePolicyDtos = (from ser in _dbContext.SServicePricePolicies
                                                    join pa in _dbContext.SPatientTypes on ser.PatientTypeId equals pa.Id
                                                    where ser.ServiceId == id
-                                                   select new SServicePricePolicyDto()
+                                                   select new ServicePricePolicyDto()
                                                    {
                                                        Id = ser.Id,
                                                        ServiceId = ser.ServiceId,
@@ -346,7 +335,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                               join exec in _dbContext.SExecutionRooms.Where(w => w.ServiceId == id) on room.Id equals exec.RoomId into SExecutionRooms
                                               from s in SExecutionRooms.DefaultIfEmpty()
                                               where rommTypes.Contains(room.RoomTypeId)
-                                              select new SExecutionRoomDto()
+                                              select new ExecutionRoomDto()
                                               {
                                                   Id = s != null ? s.Id : null,
                                                   RoomId = room.Id,
@@ -359,9 +348,9 @@ namespace HIS.ApplicationService.Dictionaries.Service
 
 
                     var sServiceResultIndexs = _dbContext.SServiceResultIndices.Where(w => w.ServiceId == id).ToList();
-                    var sServiceResultIndexDtos = _mapper.Map<IList<SServiceResultIndiceDto>>(sServiceResultIndexs);
+                    var sServiceResultIndexDtos = _mapper.Map<IList<ServiceResultIndiceDto>>(sServiceResultIndexs);
 
-                    serviceDto = _mapper.Map<SServiceDto>(service);
+                    serviceDto = _mapper.Map<ServiceDto>(service);
                     serviceDto.SServicePricePolicies = sServicePricePolicyDtos;
                     serviceDto.SExecutionRooms = sExecutionRoomDtos;
                     serviceDto.SServiceResultIndices = sServiceResultIndexDtos;
@@ -370,7 +359,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                 {
                     var sServicePricePolicys = (from r in _dbContext.SPatientTypes
                                                 where r.Inactive == false
-                                                select new SServicePricePolicyDto()
+                                                select new ServicePricePolicyDto()
                                                 {
                                                     PatientTypeId = r.Id,
                                                     PatientTypeCode = r.Code,
@@ -381,7 +370,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                     var sExecutionRooms = (from room in _dbContext.SRooms
                                            where room.Inactive == false
                                                 && rommTypes.Contains(room.RoomTypeId)
-                                           select new SExecutionRoomDto()
+                                           select new ExecutionRoomDto()
                                            {
                                                RoomId = room.Id,
                                                RoomCode = room.Code,
@@ -403,7 +392,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<bool>> Import(IList<SServiceImportExcelDto> input)
+        public async Task<ApiResult<bool>> Import(IList<ServiceImportExcelDto> input)
         {
             var result = new ApiResult<bool>();
 
@@ -418,16 +407,16 @@ namespace HIS.ApplicationService.Dictionaries.Service
                     var sPatientTypes = _dbContext.SPatientTypes.ToList();
                     var sRooms = _dbContext.SRooms.ToList();
 
-                    var sServiceDtos = new List<SServiceDto>();
+                    var sServiceDtos = new List<ServiceDto>();
 
                     foreach (var serviceImport in input)
                     {
-                        var serviceDto = (SServiceDto)serviceImport;
+                        var serviceDto = (ServiceDto)serviceImport;
                         serviceDto.Id = Guid.NewGuid();
 
-                        serviceDto.SServicePricePolicies = new List<SServicePricePolicyDto>()
+                        serviceDto.SServicePricePolicies = new List<ServicePricePolicyDto>()
                         {
-                            new SServicePricePolicyDto()
+                            new ServicePricePolicyDto()
                             {
                                 Id = Guid.NewGuid(),
                                 ServiceId = serviceDto.Id,
@@ -437,7 +426,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                 CeilingPrice = serviceImport.CeilingPrice,
                                 ExecutionTime = string.IsNullOrEmpty( serviceImport.ExecutionTimeString) ? null : DateTime.ParseExact(serviceImport.ExecutionTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None),
                             },
-                            new SServicePricePolicyDto()
+                            new ServicePricePolicyDto()
                             {
                                 Id = Guid.NewGuid(),
                                 ServiceId = serviceDto.Id,
@@ -445,7 +434,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                 PatientTypeCode = PatientTypes.DV,
                                 ExecutionTime = string.IsNullOrEmpty( serviceImport.ExecutionTimeString) ? null : DateTime.ParseExact(serviceImport.ExecutionTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None),
                             },
-                            new SServicePricePolicyDto()
+                            new ServicePricePolicyDto()
                             {
                                 Id = Guid.NewGuid(),
                                 ServiceId = serviceDto.Id,
@@ -455,9 +444,9 @@ namespace HIS.ApplicationService.Dictionaries.Service
                             }
                         };
 
-                        serviceDto.SExecutionRooms = new List<SExecutionRoomDto>()
+                        serviceDto.SExecutionRooms = new List<ExecutionRoomDto>()
                         {
-                            new SExecutionRoomDto()
+                            new ExecutionRoomDto()
                             {
                                 Id = Guid.NewGuid(),
                                 ServiceId = serviceDto.Id,
@@ -536,7 +525,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<bool>> ImportServiceResultIndices(IList<SServiceResultIndiceDto> sServiceResultIndexs)
+        public async Task<ApiResult<bool>> ImportServiceResultIndices(IList<ServiceResultIndiceDto> sServiceResultIndexs)
         {
             var result = new ApiResult<bool>();
 
@@ -579,9 +568,9 @@ namespace HIS.ApplicationService.Dictionaries.Service
             return await Task.FromResult(result);
         }
 
-        private async Task<ApiResult<SServiceDto>> ValidSave(SServiceDto input)
+        private async Task<ApiResult<ServiceDto>> ValidSave(ServiceDto input)
         {
-            var result = new ApiResult<SServiceDto>();
+            var result = new ApiResult<ServiceDto>();
 
             try
             {

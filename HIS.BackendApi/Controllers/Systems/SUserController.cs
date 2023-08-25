@@ -21,25 +21,25 @@ namespace HIS.BackendApi.Controllers.Systems
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<SUserDto>> GetAll([FromQuery] GetAllSUserInput input)
+        public async Task<ApiResultList<UserDto>> GetAll([FromQuery] GetAllUserInput input)
         {
             return await _userService.GetAll(input);
         }
 
         [HttpGet("GetById")]
-        public async Task<ApiResult<SUserDto>> GetById(Guid id)
+        public async Task<ApiResult<UserDto>> GetById(Guid id)
         {
             return await _userService.GetById(id);
         }
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ApiResult<SUserDto>> CreateOrEdit(SUserDto input)
+        public async Task<ApiResult<UserDto>> CreateOrEdit(UserDto input)
         {
             return await _userService.CreateOrEdit(input);
         }
 
         [HttpDelete("Delete")]
-        public async Task<ApiResult<SUserDto>> Delete(Guid id)
+        public async Task<ApiResult<UserDto>> Delete(Guid id)
         {
             return await _userService.Delete(id);
         }
