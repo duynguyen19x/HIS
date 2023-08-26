@@ -2092,50 +2092,50 @@ namespace HIS.EntityFrameworkCore.Migrations
                     { new Guid("fa11ad72-29b7-49f4-986d-fea0d53de210"), "87", new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"), false, "Tỉnh Đồng Tháp" }
                 });
 
-            migrationBuilder.Sql(@"IF  EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].[AfterInsertMedicines]'))
-DROP TRIGGER [dbo].[AfterInsertMedicines]
-GO
--- =============================================
--- Author:		DuyNV
--- Create date: 11/08/2023
--- Description:	Lấy mã thuốc theo lô
--- =============================================
-CREATE TRIGGER [dbo].[AfterInsertMedicines]
-   ON  [dbo].[Medicines] 
-   AFTER INSERT
-AS 
-BEGIN
-	DECLARE @MedicineTypeId uniqueidentifier;
-	DECLARE @MedicineId uniqueidentifier;
+//            migrationBuilder.Sql(@"IF  EXISTS (SELECT * FROM sys.triggers WHERE object_id = OBJECT_ID(N'[dbo].[AfterInsertMedicines]'))
+//DROP TRIGGER [dbo].[AfterInsertMedicines]
+//GO
+//-- =============================================
+//-- Author:		DuyNV
+//-- Create date: 11/08/2023
+//-- Description:	Lấy mã thuốc theo lô
+//-- =============================================
+//CREATE TRIGGER [dbo].[AfterInsertMedicines]
+//   ON  [dbo].[Medicines] 
+//   AFTER INSERT
+//AS 
+//BEGIN
+//	DECLARE @MedicineTypeId uniqueidentifier;
+//	DECLARE @MedicineId uniqueidentifier;
 
-    DECLARE cursor_inserted CURSOR FOR
+//    DECLARE cursor_inserted CURSOR FOR
 
-	SELECT MedicineTypeId, Id
-    FROM INSERTED;
+//	SELECT MedicineTypeId, Id
+//    FROM INSERTED;
 
-    OPEN cursor_inserted
-    FETCH NEXT FROM cursor_inserted INTO @MedicineTypeId, @MedicineId
+//    OPEN cursor_inserted
+//    FETCH NEXT FROM cursor_inserted INTO @MedicineTypeId, @MedicineId
 
-    WHILE @@FETCH_STATUS = 0
-    BEGIN
-		DECLARE @Code NVARCHAR(50);
-		DECLARE @AutoNumber INT;
+//    WHILE @@FETCH_STATUS = 0
+//    BEGIN
+//		DECLARE @Code NVARCHAR(50);
+//		DECLARE @AutoNumber INT;
 		
-		SELECT @Code = Code, @AutoNumber = AutoNumber FROM MedicineTypes WHERE Id = @MedicineTypeId;
-		SET @Code = @Code + '.' + CONVERT(NVARCHAR(50), @AutoNumber  + 1);
+//		SELECT @Code = Code, @AutoNumber = AutoNumber FROM MedicineTypes WHERE Id = @MedicineTypeId;
+//		SET @Code = @Code + '.' + CONVERT(NVARCHAR(50), @AutoNumber  + 1);
 
-        UPDATE Medicines SET Code = @Code WHERE Id = @MedicineId;
-		UPDATE MedicineTypes SET AutoNumber = @AutoNumber + 1 WHERE Id = @MedicineTypeId;
+//        UPDATE Medicines SET Code = @Code WHERE Id = @MedicineId;
+//		UPDATE MedicineTypes SET AutoNumber = @AutoNumber + 1 WHERE Id = @MedicineTypeId;
 
-        FETCH NEXT FROM cursor_inserted INTO @MedicineTypeId, @MedicineId
-    END
+//        FETCH NEXT FROM cursor_inserted INTO @MedicineTypeId, @MedicineId
+//    END
 
-    CLOSE cursor_inserted
-    DEALLOCATE cursor_inserted
-END
-GO
-ALTER TABLE [dbo].[Medicines] ENABLE TRIGGER [AfterInsertMedicines]
-GO");
+//    CLOSE cursor_inserted
+//    DEALLOCATE cursor_inserted
+//END
+//GO
+//ALTER TABLE [dbo].[Medicines] ENABLE TRIGGER [AfterInsertMedicines]
+//GO");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Departments_BranchId",

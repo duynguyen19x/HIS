@@ -325,19 +325,19 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
                         {
                             inOutStockMedicineDto.ApprovedQuantity = inOutStockMedicineDto.RequestQuantity;
 
-                            var sMedicine = _mapper.Map<Medicine>(inOutStockMedicineDto);
+                            var medicine = _mapper.Map<Medicine>(inOutStockMedicineDto);
                             if (!GuidHelper.IsNullOrEmpty(inOutStockMedicineDto.MedicineId))
-                                sMedicine.Id = inOutStockMedicineDto.MedicineId.GetValueOrDefault();
+                                medicine.Id = inOutStockMedicineDto.MedicineId.GetValueOrDefault();
                             else
-                                sMedicine.Id = Guid.NewGuid();
-                            sMedicine.CreatedDate = dateNow;
-                            sMedicine.CreatedBy = SessionExtensions.Login?.Id;
-                            sMedicine.ImpQuantity = inOutStockMedicineDto.RequestQuantity;
+                                medicine.Id = Guid.NewGuid();
+                            medicine.CreatedDate = dateNow;
+                            medicine.CreatedBy = SessionExtensions.Login?.Id;
+                            medicine.ImpQuantity = inOutStockMedicineDto.RequestQuantity;
 
                             var inOutStockMedicine = _mapper.Map<InOutStockMedicine>(inOutStockMedicineDto);
                             inOutStockMedicine.Id = Guid.NewGuid();
                             inOutStockMedicine.InOutStockId = id;
-                            inOutStockMedicine.MedicineId = sMedicine.Id;
+                            inOutStockMedicine.MedicineId = medicine.Id;
 
                             if (inOutStockMedicineDto.MedicinePricePolicies != null)
                             {
@@ -350,7 +350,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
 
                                     sMedicinePricePolicy.CreatedDate = dateNow;
                                     sMedicinePricePolicy.CreatedBy = SessionExtensions.Login?.Id;
-                                    sMedicinePricePolicy.MedicineId = sMedicine.Id;
+                                    sMedicinePricePolicy.MedicineId = medicine.Id;
 
                                     medicinePricePolicies.Add(sMedicinePricePolicy);
                                 }
@@ -372,12 +372,30 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
                                     AvailableQuantity = inOutStockMedicineDto.ApprovedQuantity.GetValueOrDefault(),
                                     Quantity = inOutStockMedicineDto.ApprovedQuantity.GetValueOrDefault(),
                                     StockId = input.ImpStockId,
-                                    MedicineId = sMedicine.Id
+                                    MedicineId = medicine.Id
                                 });
                             }
 
-                            medicines.Add(sMedicine);
+                            medicines.Add(medicine);
                             inOutStockMedicines.Add(inOutStockMedicine);
+                        }
+
+                        if (medicines.Count > 0)
+                        {
+                            var medicineTypeIds = medicines.Select(s => s.MedicineTypeId).ToList();
+                            var medicineTypes = _dbContext.MedicineTypes.Where(w => medicineTypeIds.Contains(w.Id)).ToList();
+                            if (medicineTypes != null && medicineTypes.Count > 0)
+                            {
+                                foreach (var medicine in medicines)
+                                {
+                                    var medicineType = medicineTypes.FirstOrDefault(f => f.Id == medicine.MedicineTypeId);
+                                    if (medicineType != null)
+                                    {
+                                        medicineType.AutoNumber += 1;
+                                        medicine.Code = string.Format("{0}.{1}", medicineType.Code, medicineType.AutoNumber);
+                                    }
+                                }
+                            }
                         }
 
                         _dbContext.InOutStocks.Add(dImMest);
@@ -399,6 +417,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
                             _dbContext.MedicineStocks.RemoveRange(medicineStockOlds);
                             _dbContext.InOutStockMedicines.RemoveRange(inOutStockMedicineOlds);
                             _dbContext.Medicines.RemoveRange(medicineOlds);
+
+                            // Chưa biết nguyên nhân: Khi xóa bản ghi cũ và thêm bản ghi mới lại update khóa ngoại về NULL
                             _dbContext.SaveChanges();
                         }
 
@@ -406,28 +426,36 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
                         {
                             inOutStockMedicineDto.ApprovedQuantity = inOutStockMedicineDto.RequestQuantity;
 
-                            var sMedicine = _mapper.Map<Medicine>(inOutStockMedicineDto);
+                            var medicine = _mapper.Map<Medicine>(inOutStockMedicineDto);
                             if (!GuidHelper.IsNullOrEmpty(inOutStockMedicineDto.MedicineId))
                             {
-                                sMedicine.Id = inOutStockMedicineDto.MedicineId.GetValueOrDefault();
-
-                                var sMedicineOld = medicineOlds?.FirstOrDefault(w => w.Id == sMedicine.Id);
-                                if (sMedicineOld != null)
-                                    sMedicine.Code = sMedicineOld.Code;
+                                medicine.Id = inOutStockMedicineDto.MedicineId.GetValueOrDefault();
+                                var medicineOld = medicineOlds.FirstOrDefault(f => f.Id == medicine.Id);
+                                if (medicineOld != null)
+                                    medicine.Code = medicineOld.Code;
                             }
                             else
-                                sMedicine.Id = Guid.NewGuid();
-                            sMedicine.CreatedDate = dImMestOld.CreatedDate;
-                            sMedicine.CreatedBy = dImMestOld.CreatedBy;
-                            sMedicine.ModifiedDate = dateNow;
-                            sMedicine.ModifiedBy = SessionExtensions.Login?.Id;
-                            sMedicine.ImpQuantity = inOutStockMedicineDto.RequestQuantity;
+                            {
+                                medicine.Id = Guid.NewGuid();
+
+                                var medicineType = _dbContext.MedicineTypes.FirstOrDefault(f => f.Id == medicine.MedicineTypeId);
+                                if (medicineType != null)
+                                {
+                                    medicineType.AutoNumber += 1;
+                                    medicine.Code = string.Format("{0}.{1}", medicineType.Code, medicineType.AutoNumber);
+                                }
+                            }
+                            medicine.CreatedDate = dImMestOld.CreatedDate;
+                            medicine.CreatedBy = dImMestOld.CreatedBy;
+                            medicine.ModifiedDate = dateNow;
+                            medicine.ModifiedBy = SessionExtensions.Login?.Id;
+                            medicine.ImpQuantity = inOutStockMedicineDto.RequestQuantity;
 
                             var inOutStockMedicine = _mapper.Map<InOutStockMedicine>(inOutStockMedicineDto);
                             if (GuidHelper.IsNullOrEmpty(inOutStockMedicine.Id))
                                 inOutStockMedicine.Id = Guid.NewGuid();
 
-                            inOutStockMedicine.MedicineId = sMedicine.Id;
+                            inOutStockMedicine.MedicineId = medicine.Id;
                             inOutStockMedicine.InOutStockId = input.Id;
 
                             if (inOutStockMedicineDto.MedicinePricePolicies != null)
@@ -443,7 +471,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
                                     sMedicinePricePolicy.CreatedBy = dImMestOld.CreatedBy;
                                     sMedicinePricePolicy.ModifiedDate = dateNow;
                                     sMedicinePricePolicy.ModifiedBy = SessionExtensions.Login?.Id;
-                                    sMedicinePricePolicy.MedicineId = sMedicine.Id;
+                                    sMedicinePricePolicy.MedicineId = medicine.Id;
 
                                     medicinePricePolicies.Add(sMedicinePricePolicy);
                                 }
@@ -465,15 +493,15 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
                                     AvailableQuantity = inOutStockMedicineDto.ApprovedQuantity.GetValueOrDefault(),
                                     Quantity = inOutStockMedicineDto.ApprovedQuantity.GetValueOrDefault(),
                                     StockId = input.ImpStockId,
-                                    MedicineId = sMedicine.Id
+                                    MedicineId = medicine.Id
                                 });
                             }
 
-                            medicines.Add(sMedicine);
+                            medicines.Add(medicine);
                             inOutStockMedicines.Add(inOutStockMedicine);
                         }
-                        _mapper.Map(input, dImMestOld);
 
+                        _mapper.Map(input, dImMestOld);
                         dImMestOld.ModifiedDate = dateNow;
                         dImMestOld.ModifiedBy = SessionExtensions.Login?.Id;
                     }
