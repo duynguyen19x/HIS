@@ -49,7 +49,7 @@ namespace HIS.Dtos.Business.InOutStockMedicine
         public decimal? ImpVatRate { get; set; }
 
         [Description("Phần trăm thuế")]
-        public decimal? TaxRate { get; set; }
+        public decimal? ImpTaxRate { get; set; }
 
         public decimal? ImpAmount
         {
@@ -57,7 +57,7 @@ namespace HIS.Dtos.Business.InOutStockMedicine
             {
                 var impAmount = RequestQuantity.GetValueOrDefault() * ImpPrice.GetValueOrDefault();
                 var vatRate = ImpVatRate.GetValueOrDefault() / 100;
-                var taxRate = TaxRate.GetValueOrDefault() / 100;
+                var taxRate = ImpTaxRate.GetValueOrDefault() / 100;
 
                 return impAmount * (1 + vatRate + taxRate);
             }
