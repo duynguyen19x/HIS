@@ -79,8 +79,8 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<InOutStockMedicine> InOutStockMedicines { get; set; }
 
         #region Patient
-        public DbSet<HISPatient> Patients { get; set; }
-        public DbSet<HISPatientRecord> PatientRecords { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<PatientRecord> PatientRecords { get; set; }
         #endregion
 
         #region System

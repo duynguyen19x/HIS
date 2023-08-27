@@ -130,8 +130,8 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.Stock, opt => opt.Ignore())
                 .ReverseMap();
 
-            CreateMap<PatientDto, HISPatient>().ReverseMap();
-            CreateMap<PatientRecordDto, HISPatientRecord>().ReverseMap();
+            CreateMap<PatientDto, Patient>().ReverseMap();
+            CreateMap<PatientRecordDto, PatientRecord>().ReverseMap();
             CreateMap<PatientRecordDto, PatientDto>()
                 .ForMember(d => d.Id, o => o.MapFrom(s => s.PatientId))
                 .ForMember(d => d.Code, o => o.MapFrom(s => s.PatientCode))

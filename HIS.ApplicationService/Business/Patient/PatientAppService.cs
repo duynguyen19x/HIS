@@ -85,7 +85,7 @@ namespace HIS.ApplicationService.Business
                         input.Code = "BN" + DateTime.Now.Year + (Context.Patients.Count() + 1).ToString().PadLeft(5, '0');
 
                     // map
-                    var patient = Mapper.Map<EntityFrameworkCore.Entities.Business.HISPatient>(input);
+                    var patient = Mapper.Map<EntityFrameworkCore.Entities.Business.Patient>(input);
                     patient.CreatedDate = DateTime.Now;
                     patient.CreatedBy = Guid.NewGuid(); // giả lập tài khoản create
 
@@ -109,7 +109,7 @@ namespace HIS.ApplicationService.Business
                 {
                     if (string.IsNullOrEmpty(input.Code))
                         input.Code = "BN" + DateTime.Now.Year + Context.Patients.Count().ToString().PadLeft(5, '0');
-                    var patient = Mapper.Map<HISPatient>(input);
+                    var patient = Mapper.Map<Patient>(input);
                     patient.ModifiedDate = DateTime.Now;
                     patient.ModifiedBy = Guid.NewGuid(); // giả lập tài khoản update
                     Context.Update(patient);
