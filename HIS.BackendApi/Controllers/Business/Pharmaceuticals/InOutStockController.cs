@@ -25,15 +25,17 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
         {
              return await _inOutStockService.GetByStocks(stockId, fromDate, toDate);
         }
+
+        #region Nhập thuốc từ NCC
         [HttpGet("ImportFromSupplierGetById")]
         public async Task<ApiResult<InOutStockDto>> ImportFromSupplierGetById(Guid id)
         {
             return await _inOutStockService.ImportFromSupplierGetById(id);
         }
-        [HttpGet("ImportFromSupplierCanceled")]
-        public async Task<ApiResult<bool>> ImportFromSupplierCanceled(Guid id)
+        [HttpPost("ImportFromSupplierCanceled")]
+        public async Task<ApiResult<InOutStockDto>> ImportFromSupplierCanceled(InOutStockDto input)
         {
-            return await _inOutStockService.ImportFromSupplierCanceled(id);
+            return await _inOutStockService.ImportFromSupplierCanceled(input);
         }
         [HttpPost("ImportFromSupplierSaveAsDraft")]
         public async Task<ApiResult<InOutStockDto>> ImportFromSupplierSaveAsDraft(InOutStockDto input)
@@ -45,7 +47,14 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
         {
             return await _inOutStockService.ImportFromSupplierStockIn(input);
         }
+        [HttpDelete("ImportFromSupplierDeleted")]
+        public async Task<ApiResult<bool>>  ImportFromSupplierDeleted(Guid id)
+        {
+            return await _inOutStockService.ImportFromSupplierDeleted(id);
+        }
+        #endregion
 
+        #region Nhập chuyển kho
         [HttpGet("ImportFromAnotherStockGetById")]
         public async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockGetById(Guid id)
         {
@@ -66,5 +75,6 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
         {
             return await _inOutStockService.ImportFromAnotherStockStockIn(input);
         }
+        #endregion
     }
 }

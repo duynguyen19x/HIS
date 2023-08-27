@@ -14,9 +14,10 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
         Task<ApiResultList<InOutStockDto>> GetByStocks(Guid stockId, string fromDate, string toDate);
 
         Task<ApiResult<InOutStockDto>> ImportFromSupplierGetById(Guid id);
-        Task<ApiResult<bool>> ImportFromSupplierCanceled(Guid id);
+        Task<ApiResult<InOutStockDto>> ImportFromSupplierCanceled(InOutStockDto input);
         Task<ApiResult<InOutStockDto>> ImportFromSupplierSaveAsDraft(InOutStockDto input);
         Task<ApiResult<InOutStockDto>> ImportFromSupplierStockIn(InOutStockDto input);
+        Task<ApiResult<bool>> ImportFromSupplierDeleted(Guid id);
 
         Task<ApiResult<InOutStockDto>> ImportFromAnotherStockGetById(Guid id);
         Task<ApiResult<InOutStockDto>> ImportFromAnotherStockSaveAsDraft(InOutStockDto input);

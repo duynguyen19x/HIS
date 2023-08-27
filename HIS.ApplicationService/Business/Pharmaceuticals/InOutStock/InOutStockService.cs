@@ -154,7 +154,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
                             inOutStockMedicine.CountryId = sMedicine.CountryId;
                             inOutStockMedicine.ImpPrice = sMedicine.ImpPrice;
                             inOutStockMedicine.ImpVatRate = sMedicine.ImpVatRate;
-                            inOutStockMedicine.TaxRate = sMedicine.TaxRate;
+                            inOutStockMedicine.ImpTaxRate = sMedicine.ImpTaxRate;
                             inOutStockMedicine.Description = sMedicine.Description;
                             inOutStockMedicine.ActiveSubstance = sMedicine.ActiveSubstance;
                             inOutStockMedicine.Concentration = sMedicine.Concentration;
@@ -192,22 +192,21 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<ApiResult<bool>> ImportFromSupplierCanceled(Guid id)
+        public async Task<ApiResult<InOutStockDto>> ImportFromSupplierCanceled(InOutStockDto input)
         {
-            var result = new ApiResult<bool>();
+            var result = new ApiResult<InOutStockDto>();
 
             try
             {
                 var timeNow = DateTime.Now;
-
-                var dImpMests = _dbContext.InOutStocks.FirstOrDefault(w => w.Id == id);
+                var inOutStocks = _dbContext.InOutStocks.FirstOrDefault(w => w.Id == input.Id);
 
                 // Nhập thuốc từ nhà cung cấp
-                if (dImpMests.InOutStockTypeId == 1)
+                if (inOutStocks.InOutStockTypeId == 1)
                 {
                     var medicineOlds = (from inOutStock in _dbContext.InOutStocks
                                         join inOutStockMedicine in _dbContext.InOutStockMedicines on inOutStock.Id equals inOutStockMedicine.InOutStockId
-                                        where inOutStock.Id == id && inOutStock.IsDeleted == false
+                                        where inOutStock.Id == input.Id && inOutStock.IsDeleted == false
                                         select new
                                         {
                                             inOutStockMedicine.Id,
@@ -223,31 +222,33 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
                     {
                         var stockId = medicineOlds.Select(s => s.ImpStockId).Distinct().ToList();
                         var medicinIds = medicineOlds.Select(s => s.MedicineId).Distinct().ToList();
-                        var sMedicineStocks = _dbContext.MedicineStocks.Where(w => stockId.Contains(w.StockId) && medicinIds.Contains(w.MedicineId)).ToList();
+                        var medicineStocks = _dbContext.MedicineStocks.Where(w => stockId.Contains(w.StockId) && medicinIds.Contains(w.MedicineId)).ToList();
 
                         // Ktra số lượng đã bị xuất nhập chưa để hủy phiếu
-                        bool anyExists = sMedicineStocks.Any(record => medicineOlds.Any(r => r.ApprovedQuantity < record.AvailableQuantity));
+                        bool anyExists = medicineStocks.Any(record => medicineOlds.Any(r => r.ApprovedQuantity < record.AvailableQuantity));
                         if (anyExists)
                         {
-                            result.Message = "Không thể hủy phiếu khi đã được sử dụng!";
+                            result.Message = "Bạn không thể hủy nhập kho khi phiếu thuốc đã được sử dụng!";
                             result.IsSuccessed = false;
                         }
                         else
                         {
-                            dImpMests.Status = InOutStatusType.Canceled;
-                            dImpMests.ModifiedDate = timeNow;
-                            dImpMests.ModifiedBy = SessionExtensions.Login?.Id;
+                            inOutStocks.Status = InOutStatusType.New;
+                            inOutStocks.ModifiedDate = timeNow;
+                            inOutStocks.ModifiedBy = SessionExtensions.Login?.Id;
+                            inOutStocks.StockExpTime = null;
+                            inOutStocks.ApproverTime = null;
 
-                            foreach (var sMedicineStock in sMedicineStocks)
+                            foreach (var medicineStock in medicineStocks)
                             {
-                                var medicine = medicineOlds.FirstOrDefault(s => s.MedicineId == sMedicineStock.MedicineId && s.ImpStockId == sMedicineStock.StockId);
+                                var medicine = medicineOlds.FirstOrDefault(s => s.MedicineId == medicineStock.MedicineId && s.ImpStockId == medicineStock.StockId);
                                 if (medicine != null)
                                 {
-                                    sMedicineStock.ModifiedDate = timeNow;
-                                    sMedicineStock.ModifiedBy = SessionExtensions.Login?.Id;
+                                    medicineStock.ModifiedDate = timeNow;
+                                    medicineStock.ModifiedBy = SessionExtensions.Login?.Id;
 
-                                    sMedicineStock.Quantity -= medicine.ApprovedQuantity.GetValueOrDefault();
-                                    sMedicineStock.AvailableQuantity -= medicine.ApprovedQuantity.GetValueOrDefault();
+                                    medicineStock.Quantity -= medicine.ApprovedQuantity.GetValueOrDefault();
+                                    medicineStock.AvailableQuantity -= medicine.ApprovedQuantity.GetValueOrDefault();
                                 }
                             }
                         }
@@ -284,6 +285,66 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
         {
             input.Status = InOutStatusType.ReceivedInStock;
             return await ImportFromSupplier(input);
+        }
+
+        public async Task<ApiResult<bool>> ImportFromSupplierDeleted(Guid id)
+        {
+            var result = new ApiResult<bool>();
+
+            using (var transaction = _dbContext.BeginTransaction())
+            {
+                try
+                {
+                    var timeNow = DateTime.Now;
+
+                    var inOutStock = _dbContext.InOutStocks.FirstOrDefault(f => f.Id == id);
+                    if (inOutStock != null)
+                    {
+                        inOutStock.Status = InOutStatusType.Canceled;
+                        inOutStock.DeletedBy = SessionExtensions.Login?.Id;
+                        inOutStock.DeletedDate = timeNow;
+                        inOutStock.IsDeleted = true;
+
+                        var inOutStockMedicines = _dbContext.InOutStockMedicines.Where(w => w.InOutStockId == id).ToList();
+                        if (inOutStockMedicines != null)
+                        {
+                            var medicineIds = inOutStockMedicines.Select(s => s.MedicineId).ToList();
+                            var medicines = _dbContext.Medicines.Where(w => medicineIds.Contains(w.Id)).ToList();
+                            if (medicines != null && medicines.Count > 0)
+                            {
+                                foreach (var medicine in medicines)
+                                {
+                                    medicine.DeletedBy = SessionExtensions.Login?.Id;
+                                    medicine.DeletedDate = timeNow;
+                                    medicine.IsDeleted = true;
+                                }
+
+                                var medicinePricePolicies = _dbContext.MedicinePricePolicies.Where(w => medicineIds.Contains(w.MedicineId)).ToList();
+                                foreach (var pricePolicy in medicinePricePolicies)
+                                {
+                                    pricePolicy.DeletedBy = SessionExtensions.Login?.Id;
+                                    pricePolicy.DeletedDate = timeNow;
+                                    pricePolicy.IsDeleted = true;
+                                }
+                            }
+                        }
+                    }
+
+                    _dbContext.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    result.IsSuccessed = false;
+                    result.Message = ex.Message;
+                }
+                finally
+                {
+                    transaction.Dispose();
+                }
+            }
+
+            return await Task.FromResult(result);
         }
 
         /// <summary>
@@ -616,40 +677,40 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
                     if (inOutStockDto.InOutStockTypeId == (int)Utilities.Enums.InOutStockType.ImportFromAnotherStock)
                     {
                         var inOutStockMedicineDtos = (from inOutStockMedicine in _dbContext.InOutStockMedicines
-                                                      join sMedicine in _dbContext.Medicines on inOutStockMedicine.MedicineId equals sMedicine.Id
+                                                      join medicine in _dbContext.Medicines on inOutStockMedicine.MedicineId equals medicine.Id
                                                       where inOutStockMedicine.InOutStockId == id
                                                       select new InOutStockMedicineDto()
                                                       {
                                                           Id = id,
-                                                          Code = sMedicine.Code,
-                                                          HeInCode = sMedicine.HeInCode,
-                                                          Name = sMedicine.Name,
+                                                          Code = medicine.Code,
+                                                          HeInCode = medicine.HeInCode,
+                                                          Name = medicine.Name,
                                                           MedicineId = inOutStockMedicine.MedicineId,
-                                                          SortOrder = sMedicine.SortOrder,
-                                                          MedicineLineId = sMedicine.MedicineLineId,
-                                                          MedicineGroupId = sMedicine.MedicineGroupId,
-                                                          MedicineTypeId = sMedicine.MedicineTypeId,
-                                                          UnitId = sMedicine.UnitId,
-                                                          Tutorial = sMedicine.Tutorial,
-                                                          CountryId = sMedicine.CountryId,
-                                                          ImpPrice = sMedicine.ImpPrice,
-                                                          RequestQuantity = sMedicine.ImpQuantity,
-                                                          ApprovedQuantity = sMedicine.ImpQuantity,
-                                                          ImpVatRate = sMedicine.ImpVatRate,
-                                                          TaxRate = sMedicine.TaxRate,
-                                                          Description = sMedicine.Description,
-                                                          ActiveSubstance = sMedicine.ActiveSubstance,
-                                                          Concentration = sMedicine.Concentration,
-                                                          Content = sMedicine.Content,
-                                                          Manufacturer = sMedicine.Manufacturer,
-                                                          PackagingSpecifications = sMedicine.PackagingSpecifications,
-                                                          Dosage = sMedicine.Dosage,
-                                                          Lot = sMedicine.Lot,
-                                                          DueDate = sMedicine.DueDate,
-                                                          TenderDecision = sMedicine.TenderDecision,
-                                                          TenderPackage = sMedicine.TenderPackage,
-                                                          TenderGroup = sMedicine.TenderGroup,
-                                                          TenderYear = sMedicine.TenderYear,
+                                                          SortOrder = medicine.SortOrder,
+                                                          MedicineLineId = medicine.MedicineLineId,
+                                                          MedicineGroupId = medicine.MedicineGroupId,
+                                                          MedicineTypeId = medicine.MedicineTypeId,
+                                                          UnitId = medicine.UnitId,
+                                                          Tutorial = medicine.Tutorial,
+                                                          CountryId = medicine.CountryId,
+                                                          ImpPrice = medicine.ImpPrice,
+                                                          RequestQuantity = medicine.ImpQuantity,
+                                                          ApprovedQuantity = medicine.ImpQuantity,
+                                                          ImpVatRate = medicine.ImpVatRate,
+                                                          ImpTaxRate = medicine.ImpTaxRate,
+                                                          Description = medicine.Description,
+                                                          ActiveSubstance = medicine.ActiveSubstance,
+                                                          Concentration = medicine.Concentration,
+                                                          Content = medicine.Content,
+                                                          Manufacturer = medicine.Manufacturer,
+                                                          PackagingSpecifications = medicine.PackagingSpecifications,
+                                                          Dosage = medicine.Dosage,
+                                                          Lot = medicine.Lot,
+                                                          DueDate = medicine.DueDate,
+                                                          TenderDecision = medicine.TenderDecision,
+                                                          TenderPackage = medicine.TenderPackage,
+                                                          TenderGroup = medicine.TenderGroup,
+                                                          TenderYear = medicine.TenderYear,
                                                       }).ToList();
 
 

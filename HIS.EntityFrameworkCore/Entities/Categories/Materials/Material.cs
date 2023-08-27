@@ -42,7 +42,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public decimal? ImpVatRate { get; set; }
 
         [Description("Phần trăm thuế")]
-        public decimal? TaxRate { get; set; }
+        public decimal? ImpTaxRate { get; set; }
 
         [Description("Giá nội bộ")]
         public decimal? InternalPrice { get; set; }

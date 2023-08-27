@@ -64,7 +64,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public decimal? ImpVatRate { get; set; }
 
         [Description("Phần trăm thuế")]
-        public decimal? TaxRate { get; set; }
+        public decimal? ImpTaxRate { get; set; }
 
         [Description("Diễn giải")]
         public string Description { get; set; }
