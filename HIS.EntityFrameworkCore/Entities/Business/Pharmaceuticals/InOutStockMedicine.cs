@@ -1,4 +1,5 @@
-﻿using HIS.Core.Entities;
+﻿using AutoMapper.Configuration.Annotations;
+using HIS.Core.Entities;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using System;
 using System.Collections.Generic;
@@ -34,7 +35,9 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals
         [Description("Phần trăm thuế")]
         public decimal? ImpTaxRate { get; set; }
 
+        [Ignore]
         public InOutStock InOutStock { get; set; }
+        [Ignore]
         public Medicine Medicine { get; set; }
 }
 }

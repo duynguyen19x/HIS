@@ -1,19 +1,11 @@
 ﻿using AutoMapper;
-using HIS.ApplicationService.Dictionaries.Branch;
 using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.Branch;
 using HIS.Dtos.Dictionaries.Department;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Dictionaries.Department
 {

@@ -14,7 +14,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
     {
         public void Configure(EntityTypeBuilder<Patient> builder)
         {
-            builder.ToTable("Patient");
+            builder.ToTable("Patients");
             builder.HasKey(x => x.Id);
             builder.Property(r => r.Code).IsRequired().HasMaxLength(50);
             builder.Property(u => u.Name).IsRequired().HasMaxLength(500);

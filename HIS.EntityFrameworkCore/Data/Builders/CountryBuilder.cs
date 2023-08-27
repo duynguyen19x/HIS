@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Data.Builders
 {
-    public class SCountryBuilder
+    public class CountryBuilder
     {
         public static void Seed(ModelBuilder modelBuilder)
         {

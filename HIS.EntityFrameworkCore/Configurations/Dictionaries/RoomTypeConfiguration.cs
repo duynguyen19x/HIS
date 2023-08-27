@@ -13,7 +13,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<RoomType> builder)
         {
-            builder.ToTable("SRoomTypes");
+            builder.ToTable("RoomTypes");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();

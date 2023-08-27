@@ -39,8 +39,11 @@ namespace HIS.Dtos.Business.InOutStockMedicine
         [Description("Giá nhập")]
         public decimal? ImpPrice { get; set; }
 
-        [Description("Số lượng nhập")]
-        public decimal? ImpQuantity { get; set; }
+        [Description("Số lượng YC")]
+        public decimal? RequestQuantity { get; set; }
+
+        [Description("Số lượng duyệt")]
+        public decimal? ApprovedQuantity { get; set; }
 
         [Description("Phần trăm vat giá nhập")]
         public decimal? ImpVatRate { get; set; }
@@ -52,7 +55,7 @@ namespace HIS.Dtos.Business.InOutStockMedicine
         {
             get
             {
-                var impAmount = ImpQuantity.GetValueOrDefault() * ImpPrice.GetValueOrDefault();
+                var impAmount = RequestQuantity.GetValueOrDefault() * ImpPrice.GetValueOrDefault();
                 var vatRate = ImpVatRate.GetValueOrDefault() / 100;
                 var taxRate = TaxRate.GetValueOrDefault() / 100;
 
@@ -102,8 +105,8 @@ namespace HIS.Dtos.Business.InOutStockMedicine
 
         public Guid? MedicineId { get; set; }
 
-        public Guid? ImpMestId { get; set; }
+        public Guid? InOutStockId { get; set; }
 
-        public IList<MedicinePricePolicyDto> SMedicinePricePolicies { get; set; }
+        public IList<MedicinePricePolicyDto> MedicinePricePolicies { get; set; }
     }
 }

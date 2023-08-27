@@ -19,9 +19,9 @@ using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Dictionaries.MedicineGroup
 {
-    public class SMedicineGroupService : BaseSerivce, IMedicineGroupService
+    public class MedicineGroupService : BaseSerivce, IMedicineGroupService
     {
-        public SMedicineGroupService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
+        public MedicineGroupService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
            : base(dbContext, config, mapper)
         {
 

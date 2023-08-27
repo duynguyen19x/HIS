@@ -46,7 +46,10 @@ namespace HIS.AutoMappers
             CreateMap<Branch, BranchDto>().ReverseMap();
             CreateMap<Career, CareerDto>().ReverseMap();
             CreateMap<Country, CountryDto>().ReverseMap();
-            CreateMap<Department, DepartmentDto>().ReverseMap();
+            CreateMap<DepartmentDto, Department>()
+                //.ForMember(dest => dest.DepartmentType, opt => opt.Ignore())
+                //.ForMember(dest => dest.Branch, opt => opt.Ignore())
+                .ReverseMap();
             CreateMap<DepartmentType, DepartmentTypeDto>().ReverseMap();
             CreateMap<ChapterIcdDto, ChapterIcd>().ReverseMap();
             CreateMap<District, DistrictDto>().ReverseMap();
@@ -105,7 +108,6 @@ namespace HIS.AutoMappers
             CreateMap<SupplierDto, Supplier>()
                 .ReverseMap();
 
-
             CreateMap<InOutStockMedicineDto, Medicine>()
                 .ForMember(dest => dest.MedicineType, opt => opt.Ignore())
                 .ForMember(dest => dest.Unit, opt => opt.Ignore())
@@ -123,6 +125,26 @@ namespace HIS.AutoMappers
             CreateMap<MedicinePricePolicyDto, MedicinePricePolicy>()
                 .ForMember(dest => dest.Medicine, opt => opt.Ignore())
                 .ForMember(dest => dest.PatientType, opt => opt.Ignore())
+                .ReverseMap();
+
+            CreateMap<InOutStockDto, InOutStock>()
+                .ForMember(dest => dest.ImpStock, opt => opt.Ignore())
+                .ForMember(dest => dest.ExpStock, opt => opt.Ignore())
+                .ForMember(dest => dest.InOutStockType, opt => opt.Ignore())
+                .ForMember(dest => dest.CreationUser, opt => opt.Ignore())
+                .ForMember(dest => dest.ReceiverUser, opt => opt.Ignore())
+                .ForMember(dest => dest.ApproverUser, opt => opt.Ignore())
+                .ForMember(dest => dest.StockImpUser, opt => opt.Ignore())
+                .ForMember(dest => dest.StockExpUser, opt => opt.Ignore())
+                .ForMember(dest => dest.ReqRoom, opt => opt.Ignore())
+                .ForMember(dest => dest.ReqDepartment, opt => opt.Ignore())
+                .ForMember(dest => dest.Supplier, opt => opt.Ignore())
+                .ForMember(dest => dest.Patient, opt => opt.Ignore())
+                .ForMember(dest => dest.PatientRecord, opt => opt.Ignore())
+                .ReverseMap();
+            CreateMap<InOutStockMedicineDto, InOutStockMedicine>()
+                .ForMember(dest => dest.InOutStock, opt => opt.Ignore())
+                .ForMember(dest => dest.Medicine, opt => opt.Ignore())
                 .ReverseMap();
 
             CreateMap<MedicineStockDto, MedicineStock>()
