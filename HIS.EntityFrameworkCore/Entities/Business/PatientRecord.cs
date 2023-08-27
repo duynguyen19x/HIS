@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
     /// <summary>
     /// Thông tin đợt điều trị của bệnh nhân.
     /// </summary>
-    public class HISPatientRecord : FullAuditedEntity<Guid>
+    public class PatientRecord : FullAuditedEntity<Guid>
     {
         [Required]
         [MaxLength(50)]
@@ -102,7 +102,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
 
         [Ignore]
         [ForeignKey(nameof(PatientId))]
-        public virtual HISPatient PatientFk { get; set; }
+        public virtual Patient PatientFk { get; set; }
 
         [Ignore]
         [ForeignKey(nameof(GenderId))]

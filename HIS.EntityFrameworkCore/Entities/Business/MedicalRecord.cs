@@ -13,7 +13,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
     /// <summary>
     /// Thông tin bệnh án theo từng khoa/phòng.
     /// </summary>
-    public class HISMedicalRecord : FullAuditedEntity<Guid>
+    public class MedicalRecord : FullAuditedEntity<Guid>
     {
         public virtual Guid PatientId { get; set; }
         public virtual Guid PatientRecordId { get; set; }
@@ -29,11 +29,11 @@ namespace HIS.EntityFrameworkCore.Entities.Business
 
         [Ignore]
         [ForeignKey(nameof(PatientId))]
-        public virtual HISPatient PatientFk { get; set; }
+        public virtual Patient PatientFk { get; set; }
 
         [Ignore]
         [ForeignKey(nameof(PatientRecordId))]
-        public virtual HISPatientRecord PatientRecordFk { get; set; }
+        public virtual PatientRecord PatientRecordFk { get; set; }
 
         [Ignore]
         [ForeignKey(nameof(BranchId))]

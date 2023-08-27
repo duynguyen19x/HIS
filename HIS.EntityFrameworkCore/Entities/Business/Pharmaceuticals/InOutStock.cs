@@ -148,8 +148,8 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals
         [Ignore]
         public Supplier Supplier { get; set; }
         [Ignore]
-        public HISPatient Patient { get; set; }
+        public Patient Patient { get; set; }
         [Ignore]
-        public HISPatientRecord PatientRecord { get; set; }
+        public PatientRecord PatientRecord { get; set; }
     }
 }
