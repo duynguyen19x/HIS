@@ -25,7 +25,7 @@ namespace HIS.Dtos.Business.MedicineStock
         public string MedicineCode { get; set; }
         public string MedicineName { get; set; }
 
-        public MedicineDto SMedicine { get; set; }
+        public MedicineDto Medicine { get; set; }
         public RoomDto Stock { get; set; }
     }
 }
