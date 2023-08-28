@@ -22,13 +22,13 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         [MaxLength(500)]
         public virtual string PatientName { get; set; }
 
-        public DateTime? BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; } // ngày sinh
 
         [Required]
-        public int BirthYear { get; set; }
+        public int BirthYear { get; set; } // năm sinh
 
         [MaxLength(500)]
-        public string BirthPlace { get; set; }
+        public string BirthPlace { get; set; } // nơi sinh
 
         [MaxLength(50)]
         public virtual string IdentificationNumber { get; set; } // số CMND / CCCD
@@ -39,61 +39,93 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public virtual string IssueBy { get; set; } // nơi cấp
 
         [Required]
-        public virtual Guid GenderId { get; set; }
+        public virtual Guid GenderID { get; set; } // giới tính
 
         [Required]
-        public virtual Guid EthnicityId { get; set; }
+        public virtual Guid EthnicityID { get; set; } // dân tộc
 
         [Required]
-        public virtual Guid CareerId { get; set; }
+        public virtual Guid CareerID { get; set; } // nghề nghiệp
 
         [Required]
-        public virtual Guid CountryId { get; set; }
+        public virtual Guid CountryID { get; set; } // quốc gia
 
-        public virtual Guid? ProvinceId { get; set; }
+        public virtual string CountryCode { get; set; }
 
-        public virtual Guid? DistrictId { get; set; }
+        public virtual string CountryName { get; set; }
 
-        public virtual Guid? WardId { get; set; }
+        public virtual Guid? ProvinceID { get; set; } // tỉnh/ thành phố
 
-        public virtual Guid BranchId { get; set; }
+        public virtual string ProvinceCode { get; set; }
+
+        public virtual string ProvinceName { get; set; }
+
+        public virtual Guid? DistrictID { get; set; } // quận/ huyện
+
+        public virtual string DistrictCode { get; set; }
+
+        public virtual string DistrictName { get; set; }
+
+        public virtual Guid? WardID { get; set; } // xã, phường
+
+        public virtual string WardCode { get; set; }
+
+        public virtual string WardName { get; set; }
 
         [MaxLength(500)]
-        public virtual string Address { get; set; }
+        public virtual string Address { get; set; } // địa chỉ (số nhà, thôn, phố, ...)
 
         [MaxLength(50)]
-        public virtual string Tel { get; set; }
+        public virtual string Tel { get; set; } // số điện thoại cố định
 
         [MaxLength(50)]
-        public virtual string Mobile { get; set; }
+        public virtual string Mobile { get; set; } // số điện thoại di động
 
         [MaxLength(50)]
-        public virtual string Fax { get; set; }
+        public virtual string Fax { get; set; } // fax
 
         [MaxLength(50)]
-        public virtual string Email { get; set; }
+        public virtual string Email { get; set; } // email
+
+        [MaxLength(250)]
+        public virtual string Workplace { get; set; } // nơi làm việc
 
         [Required]
-        public virtual int PatientTypeId { get; set; }
+        public virtual int PatientTypeID { get; set; } // đối tượng bệnh nhân (BHYT, viện phí, dịch vụ, ...)
 
         [Required]
-        public virtual int PatientRecordTypeId { get; set; }
+        public virtual int PatientRecordTypeID { get; set; } // đối tượng điều trị (khám bệnh, nội trứ, ngoại trú, ...)
+
+        [Required]
+        public virtual int PatientRecordStatusID { get; set; } // trạng thái đợt điều trị
+
 
         [Required]
         public virtual DateTime ReceiptionDate { get; set; } // thơi gian đăng ký, tiếp nhận
-        public virtual Guid ReceiptionRoomId { get; set; } // phòng tiếp đón
-        public virtual Guid ReceiptionDepartmentId { get; set; } // khoa đón tiếp
 
-        public virtual bool IsEmergency { get; set; } // cấp cứu
+        public virtual Guid ReceiptionRoomID { get; set; } // phòng tiếp đón
+
+        public virtual Guid ReceiptionDepartmentID { get; set; } // khoa đón tiếp
+
+        public virtual bool IsEmergency { get; set; } // là cấp cứu
+
         public virtual string HospitalizationReason { get; set; } // lý do nhập viện
 
+
         public virtual DateTime? StartDate { get; set; } // thời gian bắt đầu khám/ điều trị
-        public virtual Guid? StartRoomId { get; set; } // phòng bắt đầu khám / điều trị
-        public virtual Guid? StartDepartmentId { get; set; } // khoa bắt đầu khám / điều trị
+
+        public virtual Guid? StartRoomID { get; set; } // phòng bắt đầu khám / điều trị
+
+        public virtual Guid? StartDepartmentID { get; set; } // khoa bắt đầu khám / điều trị
 
         public virtual DateTime? EndDate { get; set; } // thời gian kết thúc điều trị
-        public virtual Guid? EndRoomId { get; set; } // phòng kết thúc điều trị
-        public virtual Guid? EndDepartmentId { get; set; } // khoa kết thúc điều trị
+
+        public virtual Guid? EndRoomID { get; set; } // phòng kết thúc điều trị
+
+        public virtual Guid? EndDepartmentID { get; set; } // khoa kết thúc điều trị
+
+
+        public virtual Guid BranchID { get; set; } // chi nhánh
 
         [MaxLength(500)]
         public virtual string Description { get; set; }
@@ -105,35 +137,35 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public virtual Patient PatientFk { get; set; }
 
         [Ignore]
-        [ForeignKey(nameof(GenderId))]
+        [ForeignKey(nameof(GenderID))]
         public virtual Gender SGenderFk { get; set; }
 
         [Ignore]
-        [ForeignKey(nameof(EthnicityId))]
+        [ForeignKey(nameof(EthnicityID))]
         public virtual Ethnic SEthnicFk { get; set; }
 
         [Ignore]
-        [ForeignKey(nameof(CareerId))]
+        [ForeignKey(nameof(CareerID))]
         public virtual Career SCareerFk { get; set; }
 
         [Ignore]
-        [ForeignKey(nameof(CountryId))]
+        [ForeignKey(nameof(CountryID))]
         public virtual Country SCountryFk { get; set; }
 
         [Ignore]
-        [ForeignKey(nameof(ProvinceId))]
+        [ForeignKey(nameof(ProvinceID))]
         public virtual Province SProvinceFk { get; set; }
 
         [Ignore]
-        [ForeignKey(nameof(DistrictId))]
+        [ForeignKey(nameof(DistrictID))]
         public virtual District SDistrictFk { get; set; }
 
         [Ignore]
-        [ForeignKey(nameof(WardId))]
+        [ForeignKey(nameof(WardID))]
         public virtual SWard SWardFk { get; set; }
 
         [Ignore]
-        [ForeignKey(nameof(BranchId))]
+        [ForeignKey(nameof(BranchID))]
         public virtual Branch SBracnhFk { get; set; }
     }
 }
