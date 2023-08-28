@@ -65,21 +65,21 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.MedicineStock
 
             try
             {
-                result.Result = (from dMedicineStock in _dbContext.MedicineStocks
-                                 join sMedicine in _dbContext.Medicines on dMedicineStock.MedicineId equals sMedicine.Id
+                result.Result = (from medicineStock in _dbContext.MedicineStocks
+                                 join medicine in _dbContext.Medicines on medicineStock.MedicineId equals medicine.Id
 
-                                 where dMedicineStock.IsDeleted == false && dMedicineStock.AvailableQuantity > 0
+                                 where medicineStock.IsDeleted == false && medicineStock.AvailableQuantity > 0
 
                                  select new MedicineStockDto()
                                  {
-                                     Id = dMedicineStock.Id,
-                                     MedicineCode = sMedicine.Code,
-                                     MedicineName = sMedicine.Name,
-                                     StockId = dMedicineStock.StockId,
-                                     MedicineId = dMedicineStock.MedicineId,
-                                     Quantity = dMedicineStock.Quantity,
-                                     AvailableQuantity = dMedicineStock.AvailableQuantity,
-                                     SMedicine = _mapper.Map<MedicineDto>(sMedicine)
+                                     Id = medicineStock.Id,
+                                     MedicineCode = medicine.Code,
+                                     MedicineName = medicine.Name,
+                                     StockId = medicineStock.StockId,
+                                     MedicineId = medicineStock.MedicineId,
+                                     Quantity = medicineStock.Quantity,
+                                     AvailableQuantity = medicineStock.AvailableQuantity,
+                                     Medicine = _mapper.Map<MedicineDto>(medicine)
                                  }).ToList();
             }
             catch (Exception ex)
