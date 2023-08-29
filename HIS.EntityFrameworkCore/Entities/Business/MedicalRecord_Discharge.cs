@@ -8,10 +8,13 @@ using System.Threading.Tasks;
 namespace HIS.EntityFrameworkCore.Entities.Business
 {
     /// <summary>
-    /// Phiếu chỉ định dịch vụ.
+    /// Bệnh án ra viện.
     /// </summary>
-    public class ServiceReq : FullAuditedEntity<Guid>
+    public class MedicalRecord_Discharge : AuditedEntity<Guid>
     {
+        public virtual Guid PatientRecordID { get; set; }
+        public virtual Guid MedicalRecordID { get; set; }
+
 
     }
 }

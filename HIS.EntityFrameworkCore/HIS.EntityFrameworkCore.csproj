@@ -36,4 +36,8 @@
     <ProjectReference Include="..\HIS.Utilities\HIS.Utilities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="EntityFrameworkCore\Seed\Dictionary\" />
+  </ItemGroup>
+
 </Project>

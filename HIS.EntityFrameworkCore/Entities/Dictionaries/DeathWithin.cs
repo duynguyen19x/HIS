@@ -1,20 +1,34 @@
 ﻿using HIS.Core.Entities.Auditing;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
-    /// Đói tượng bệnh nhân.
+    /// Thời gian tử vong.
     /// </summary>
-    public class PatientType : AuditedEntity<int>
+    public class DeathWithin : AuditedEntity<int>
     {
+        [MaxLength(50)]
         public virtual string Code { get; set; }
+
+        [MaxLength(250)]
         public virtual string Name { get; set; }
+
+        [MaxLength(250)]
         public virtual string Description { get; set; }
+
         public virtual int SortOrder { get; set; }
+
         public virtual bool Inactive { get; set; }
 
-        public PatientType() { }
-        public PatientType(int id, string code, string name, string description, int sortOrder, bool inactive)
+        public DeathWithin() { }
+
+        public DeathWithin(int id, string code, string name, string description, int sortOrder, bool inactive) 
         {
             this.Id = id;
             this.Code = code;

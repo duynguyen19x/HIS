@@ -1,5 +1,5 @@
-﻿using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.Utilities.Enums;
+﻿using HIS.Core.Enums;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using Microsoft.EntityFrameworkCore;
 
 namespace HIS.EntityFrameworkCore.Data.Builders
@@ -9,27 +9,9 @@ namespace HIS.EntityFrameworkCore.Data.Builders
         public static void Seed(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<PatientType>().HasData(
-                new PatientType()
-                {
-                    Id = 1,
-                    Code = PatientTypes.BHYT,
-                    Name = "Bảo hiểm y tế",
-                    Inactive = false
-                },
-                new PatientType()
-                {
-                    Id = 2,
-                    Code = PatientTypes.VP,
-                    Name = "Viện phí",
-                    Inactive = false
-                },
-                new PatientType()
-                {
-                    Id = 3,
-                    Code = PatientTypes.DV,
-                    Name = "Dịch vụ",
-                    Inactive = false
-                }
+                new PatientType((int)PatientTypes.BHYT, PatientTypes.BHYT.ToString(), "Bảo hiểm y tế", null, 1, false),
+                new PatientType((int)PatientTypes.VP, PatientTypes.VP.ToString(), "Viện phí", null, 2, false),
+                new PatientType((int)PatientTypes.DV, PatientTypes.DV.ToString(), "Dịch vụ", null, 3, false)
             );
         }
     }

@@ -33,9 +33,9 @@ namespace HIS.ApplicationService.Business
                     .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), x => x.Code.ToUpper() == input.CodeFilter.ToUpper())
                     .WhereIf(input.PatientIdFilter != null, x => x.PatientId == input.PatientIdFilter)
                     .WhereIf(!string.IsNullOrEmpty(input.PatientNameFilter), x => x.PatientName.ToUpper() == input.PatientNameFilter.ToUpper())
-                    .WhereIf(input.GenderIdFilter != null, x => x.GenderId == input.GenderIdFilter)
-                    .WhereIf(input.EthnicityIdFilter != null, x => x.EthnicityId == input.EthnicityIdFilter)
-                    .WhereIf(input.CareerIdFilter != null, x => x.CareerId == input.CareerIdFilter)
+                    .WhereIf(input.GenderIdFilter != null, x => x.GenderID == input.GenderIdFilter)
+                    .WhereIf(input.EthnicityIdFilter != null, x => x.EthnicityID == input.EthnicityIdFilter)
+                    .WhereIf(input.CareerIdFilter != null, x => x.CareerID == input.CareerIdFilter)
                     .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
 
                 result.TotalCount = await filter.CountAsync();
@@ -55,20 +55,20 @@ namespace HIS.ApplicationService.Business
                                     IdentificationNumber = o.IdentificationNumber,
                                     IssueBy = o.IssueBy,
                                     IssueDate = o.IssueDate,
-                                    GenderId = o.GenderId,
-                                    EthnicityId = o.EthnicityId,
-                                    CareerId = o.CareerId,
-                                    CountryId = o.CountryId,
-                                    ProvinceId = o.ProvinceId,
-                                    DistrictId = o.DistrictId,
-                                    WardId = o.WardId,
+                                    GenderId = o.GenderID,
+                                    EthnicityId = o.EthnicityID,
+                                    CareerId = o.CareerID,
+                                    CountryId = o.CountryID,
+                                    ProvinceId = o.ProvinceID,
+                                    DistrictId = o.DistrictID,
+                                    WardId = o.WardID,
                                     Address = o.Address,
                                     Tel = o.Tel,
                                     Mobile = o.Mobile,
                                     Fax = o.Fax,
                                     Email = o.Email,
-                                    PatientTypeId = o.PatientTypeId,
-                                    PatientRecordTypeId = o.PatientRecordTypeId,
+                                    PatientTypeId = o.PatientTypeID,
+                                    PatientRecordTypeId = o.PatientRecordTypeID,
 
                                     Description = o.Description,
                                     Inactive = o.Inactive
