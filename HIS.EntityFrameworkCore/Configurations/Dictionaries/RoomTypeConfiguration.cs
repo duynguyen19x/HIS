@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class RoomTypeConfiguration : IEntityTypeConfiguration<SRoomType>
+    public class RoomTypeConfiguration : IEntityTypeConfiguration<RoomType>
     {
-        public void Configure(EntityTypeBuilder<SRoomType> builder)
+        public void Configure(EntityTypeBuilder<RoomType> builder)
         {
-            builder.ToTable("SRoomTypes");
+            builder.ToTable("RoomTypes");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();

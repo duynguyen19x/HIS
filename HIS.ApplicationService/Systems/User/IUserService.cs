@@ -2,7 +2,7 @@
 
 namespace HIS.ApplicationService.Systems.User
 {
-    public interface IUserService : IBaseService<SUserDto, GetAllSUserInput>
+    public interface IUserService : IBaseService<UserDto, GetAllUserInput>
     {
     }
 }

@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations
 {
-    public class MaterialTypeConfiguration : IEntityTypeConfiguration<SMaterialType>
+    public class MaterialTypeConfiguration : IEntityTypeConfiguration<MaterialType>
     {
-        public void Configure(EntityTypeBuilder<SMaterialType> builder)
+        public void Configure(EntityTypeBuilder<MaterialType> builder)
         {
-            builder.ToTable("SMaterialTypes");
+            builder.ToTable("MaterialTypes");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50);
@@ -21,7 +21,7 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.Property(x => x.Tutorial).HasMaxLength(500);
             builder.Property(x => x.Description).HasMaxLength(500);
 
-            builder.HasOne(t => t.SUnit).WithMany(pc => pc.SMaterialTypes)
+            builder.HasOne(t => t.SUnit).WithMany()
                 .HasForeignKey(pc => pc.ServiceUnitId).OnDelete(DeleteBehavior.NoAction);
         }
     }

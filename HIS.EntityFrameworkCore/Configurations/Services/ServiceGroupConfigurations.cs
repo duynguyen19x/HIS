@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Services
 {
-    public class ServiceGroupConfigurations : IEntityTypeConfiguration<SServiceGroup>
+    public class ServiceGroupConfigurations : IEntityTypeConfiguration<ServiceGroup>
     {
-        public void Configure(EntityTypeBuilder<SServiceGroup> builder)
+        public void Configure(EntityTypeBuilder<ServiceGroup> builder)
         {
-            builder.ToTable("SServiceGroups");
+            builder.ToTable("ServiceGroups");
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Code).HasMaxLength(50);

@@ -1,29 +1,24 @@
 ﻿using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
 {
-    public class MedicineStockConfiguration : IEntityTypeConfiguration<DMedicineStock>
+    public class MedicineStockConfiguration : IEntityTypeConfiguration<MedicineStock>
     {
-        public void Configure(EntityTypeBuilder<DMedicineStock> builder)
+        public void Configure(EntityTypeBuilder<MedicineStock> builder)
         {
-            builder.ToTable("DMedicineStocks");
+            builder.ToTable("MedicineStocks");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id);
 
-            builder.HasOne(e => e.SMedicine)
+            builder.HasOne(e => e.Medicine)
                .WithMany()
                .HasForeignKey(e => e.MedicineId)
                .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(e => e.SStock)
+            builder.HasOne(e => e.Stock)
                 .WithMany()
                 .HasForeignKey(e => e.StockId)
                 .OnDelete(DeleteBehavior.NoAction);

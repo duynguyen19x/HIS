@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations
 {
-    public class UserConfigurations : IEntityTypeConfiguration<SUser>
+    public class UserConfigurations : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<SUser> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.ToTable("SUsers");
+            builder.ToTable("Users");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.UserName).IsRequired().HasMaxLength(100);
             builder.Property(x => x.FirstName).IsRequired().HasMaxLength(256);

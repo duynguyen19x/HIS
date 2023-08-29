@@ -2,29 +2,18 @@
 using HIS.Core.Linq;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ExecutionRoom;
-using HIS.Dtos.Dictionaries.Room;
 using HIS.Dtos.Dictionaries.Service;
 using HIS.Dtos.Dictionaries.ServicePricePolicy;
 using HIS.Dtos.Dictionaries.ServiceResultIndex;
-using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Dictionaries.Service
 {
@@ -34,7 +23,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
         {
         }
 
-        public async Task<ApiResult<SServiceDto>> CreateOrEdit(SServiceDto input)
+        public async Task<ApiResult<ServiceDto>> CreateOrEdit(ServiceDto input)
         {
             var result = await ValidSave(input);
 
@@ -47,9 +36,9 @@ namespace HIS.ApplicationService.Dictionaries.Service
                 return await Update(input);
         }
 
-        private async Task<ApiResult<SServiceDto>> Create(SServiceDto input)
+        private async Task<ApiResult<ServiceDto>> Create(ServiceDto input)
         {
-            var result = new ApiResult<SServiceDto>();
+            var result = new ApiResult<ServiceDto>();
 
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
@@ -58,9 +47,9 @@ namespace HIS.ApplicationService.Dictionaries.Service
                     var timeNow = DateTime.Now;
                     input.Id = Guid.NewGuid();
 
-                    var data = _mapper.Map<SService>(input);
+                    var data = _mapper.Map<EntityFrameworkCore.Entities.Categories.Service>(input);
                     data.CreatedDate = timeNow;
-                    _dbContext.SServices.Add(data);
+                    _dbContext.Services.Add(data);
 
                     if (input.SServicePricePolicies != null)
                     {
@@ -69,7 +58,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                             sServicePricePolicy.ExecutionTime = string.IsNullOrEmpty(sServicePricePolicy.ExecutionTimeString) ? null : DateTime.ParseExact(sServicePricePolicy.ExecutionTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None);
                         }
 
-                        var sServicePricePolicys = _mapper.Map<List<SServicePricePolicy>>(input.SServicePricePolicies);
+                        var sServicePricePolicys = _mapper.Map<List<EntityFrameworkCore.Entities.Categories.Services.ServicePricePolicy>>(input.SServicePricePolicies);
                         foreach (var sServicePricePolicy in sServicePricePolicys)
                         {
                             sServicePricePolicy.Id = Guid.NewGuid();
@@ -77,31 +66,31 @@ namespace HIS.ApplicationService.Dictionaries.Service
                             sServicePricePolicy.ServiceId = data.Id;
                         }
 
-                        _dbContext.SServicePricePolicies.AddRange(sServicePricePolicys);
+                        _dbContext.ServicePricePolicies.AddRange(sServicePricePolicys);
                     }
 
                     if (!GuidHelper.IsNullOrEmpty(input.ServiceGroupHeInId))
                     {
                         var serviceGroupHeInTypes = new List<string>() { "XN", "CDHA", "TDCN", };
 
-                        var serviceGroupHeIn = _dbContext.SServiceGroupHeIns.FirstOrDefault(f => f.Id == input.ServiceGroupHeInId);
+                        var serviceGroupHeIn = _dbContext.ServiceGroupHeIns.FirstOrDefault(f => f.Id == input.ServiceGroupHeInId);
                         if (serviceGroupHeIn != null && serviceGroupHeInTypes.Any(a => a == serviceGroupHeIn.Code) && input.SExecutionRooms != null)
                         {
                             var executionRoomDtos = input.SExecutionRooms.Where(w => w.IsCheck).ToList();
-                            var executionRooms = _mapper.Map<List<SExecutionRoom>>(executionRoomDtos);
+                            var executionRooms = _mapper.Map<List<ExecutionRoom>>(executionRoomDtos);
                             foreach (var executionRoom in executionRooms)
                             {
                                 executionRoom.Id = Guid.NewGuid();
                                 executionRoom.ServiceId = data.Id;
                             }
 
-                            _dbContext.SExecutionRooms.AddRange(executionRooms);
+                            _dbContext.ExecutionRooms.AddRange(executionRooms);
                         }
                     }
 
                     if (input.SServiceResultIndices != null)
                     {
-                        var serviceResultIndices = _mapper.Map<List<SServiceResultIndice>>(input.SServiceResultIndices);
+                        var serviceResultIndices = _mapper.Map<List<ServiceResultIndice>>(input.SServiceResultIndices);
                         foreach (var item in serviceResultIndices)
                         {
                             if (GuidHelper.IsNullOrEmpty(item.Id))
@@ -110,7 +99,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                             item.ServiceId = input.Id;
                         }
 
-                        _dbContext.SServiceResultIndices.AddRange(serviceResultIndices);
+                        _dbContext.ServiceResultIndices.AddRange(serviceResultIndices);
                     }
 
                     await _dbContext.SaveChangesAsync();
@@ -134,23 +123,23 @@ namespace HIS.ApplicationService.Dictionaries.Service
             return await Task.FromResult(result);
         }
 
-        private async Task<ApiResult<SServiceDto>> Update(SServiceDto input)
+        private async Task<ApiResult<ServiceDto>> Update(ServiceDto input)
         {
-            var result = new ApiResult<SServiceDto>();
+            var result = new ApiResult<ServiceDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
                     var timeNow = DateTime.Now;
 
-                    var sServicePricePolicyOlds = _dbContext.SServicePricePolicies.Where(w => w.ServiceId == input.Id).ToList();
-                    var sExecutionRoomOlds = _dbContext.SExecutionRooms.Where(w => w.ServiceId == input.Id).ToList();
-                    var sServiceResultIndexOlds = _dbContext.SServiceResultIndices.Where(w => w.ServiceId == input.Id).ToList();
-                    _dbContext.SServicePricePolicies.RemoveRange(sServicePricePolicyOlds);
-                    _dbContext.SExecutionRooms.RemoveRange(sExecutionRoomOlds);
-                    _dbContext.SServiceResultIndices.RemoveRange(sServiceResultIndexOlds);
+                    var sServicePricePolicyOlds = _dbContext.ServicePricePolicies.Where(w => w.ServiceId == input.Id).ToList();
+                    var sExecutionRoomOlds = _dbContext.ExecutionRooms.Where(w => w.ServiceId == input.Id).ToList();
+                    var sServiceResultIndexOlds = _dbContext.ServiceResultIndices.Where(w => w.ServiceId == input.Id).ToList();
+                    _dbContext.ServicePricePolicies.RemoveRange(sServicePricePolicyOlds);
+                    _dbContext.ExecutionRooms.RemoveRange(sExecutionRoomOlds);
+                    _dbContext.ServiceResultIndices.RemoveRange(sServiceResultIndexOlds);
 
-                    var sService = _dbContext.SServices.FirstOrDefault(f => f.Id == input.Id);
+                    var sService = _dbContext.Services.FirstOrDefault(f => f.Id == input.Id);
                     if (sService != null)
                     {
                         _mapper.Map(input, sService);
@@ -162,7 +151,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                 sServicePricePolicy.ExecutionTime = string.IsNullOrEmpty(sServicePricePolicy.ExecutionTimeString) ? null : DateTime.ParseExact(sServicePricePolicy.ExecutionTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None);
                             }
 
-                            var sServicePricePolicys = _mapper.Map<List<SServicePricePolicy>>(input.SServicePricePolicies);
+                            var sServicePricePolicys = _mapper.Map<List<EntityFrameworkCore.Entities.Categories.Services.ServicePricePolicy>>(input.SServicePricePolicies);
                             foreach (var sServicePricePolicy in sServicePricePolicys)
                             {
                                 if (GuidHelper.IsNullOrEmpty(sServicePricePolicy.Id))
@@ -172,18 +161,18 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                 sServicePricePolicy.ServiceId = sService.Id;
                             }
 
-                            _dbContext.SServicePricePolicies.AddRange(sServicePricePolicys);
+                            _dbContext.ServicePricePolicies.AddRange(sServicePricePolicys);
                         }
 
                         if (!GuidHelper.IsNullOrEmpty(input.ServiceGroupHeInId))
                         {
                             var serviceGroupHeInTypes = new List<string>() { "XN", "CDHA", "TDCN", };
 
-                            var serviceGroupHeIn = _dbContext.SServiceGroupHeIns.FirstOrDefault(f => f.Id == input.ServiceGroupHeInId);
+                            var serviceGroupHeIn = _dbContext.ServiceGroupHeIns.FirstOrDefault(f => f.Id == input.ServiceGroupHeInId);
                             if (serviceGroupHeIn != null && serviceGroupHeInTypes.Any(a => a == serviceGroupHeIn.Code))
                             {
                                 var executionRoomDtos = input.SExecutionRooms.Where(w => w.IsCheck).ToList();
-                                var executionRooms = _mapper.Map<List<SExecutionRoom>>(executionRoomDtos);
+                                var executionRooms = _mapper.Map<List<ExecutionRoom>>(executionRoomDtos);
                                 foreach (var executionRoom in executionRooms)
                                 {
                                     if (GuidHelper.IsNullOrEmpty(executionRoom.Id))
@@ -192,13 +181,13 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                     executionRoom.ServiceId = sService.Id;
                                 }
 
-                                _dbContext.SExecutionRooms.AddRange(executionRooms);
+                                _dbContext.ExecutionRooms.AddRange(executionRooms);
                             }
                         }
 
                         if (input.SServiceResultIndices != null)
                         {
-                            var serviceResultIndices = _mapper.Map<List<SServiceResultIndice>>(input.SServiceResultIndices);
+                            var serviceResultIndices = _mapper.Map<List<ServiceResultIndice>>(input.SServiceResultIndices);
                             foreach (var item in serviceResultIndices)
                             {
                                 if (GuidHelper.IsNullOrEmpty(item.Id))
@@ -207,7 +196,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                 item.ServiceId = sService.Id;
                             }
 
-                            _dbContext.SServiceResultIndices.AddRange(serviceResultIndices);
+                            _dbContext.ServiceResultIndices.AddRange(serviceResultIndices);
                         }
                     }
 
@@ -228,19 +217,19 @@ namespace HIS.ApplicationService.Dictionaries.Service
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SServiceDto>> Delete(Guid id)
+        public async Task<ApiResult<ServiceDto>> Delete(Guid id)
         {
-            var result = new ApiResult<SServiceDto>();
+            var result = new ApiResult<ServiceDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
-                    var service = _dbContext.SServices.SingleOrDefault(x => x.Id == id);
+                    var service = _dbContext.Services.SingleOrDefault(x => x.Id == id);
                     if (service != null)
                     {
                         service.DeletedDate = DateTime.Now;
                         service.IsDeleted = true;
-                        _dbContext.SServices.Update(service);
+                        _dbContext.Services.Update(service);
 
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
@@ -261,20 +250,20 @@ namespace HIS.ApplicationService.Dictionaries.Service
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<SServiceDto>> GetAll(GetAllSServiceInput input)
+        public async Task<ApiResultList<ServiceDto>> GetAll(GetAllServiceInput input)
         {
-            var result = new ApiResultList<SServiceDto>();
+            var result = new ApiResultList<ServiceDto>();
 
             try
             {
-                result.Result = (from r in _dbContext.SServices
+                result.Result = (from r in _dbContext.Services
 
-                                 join r1 in _dbContext.SUnits on r.UnitId equals r1.Id
-                                 join r2 in _dbContext.SServiceGroups on r.ServiceGroupId equals r2.Id
-                                 join r3 in _dbContext.SServiceGroupHeIns on r.ServiceGroupHeInId equals r3.Id
+                                 join r1 in _dbContext.Units on r.UnitId equals r1.Id
+                                 join r2 in _dbContext.ServiceGroups on r.ServiceGroupId equals r2.Id
+                                 join r3 in _dbContext.ServiceGroupHeIns on r.ServiceGroupHeInId equals r3.Id
 
                                  where r.IsDeleted == false
-                                 select new SServiceDto()
+                                 select new ServiceDto()
                                  {
                                      Id = r.Id,
                                      Code = r.Code,
@@ -306,11 +295,11 @@ namespace HIS.ApplicationService.Dictionaries.Service
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SServiceDto>> GetById(Guid id)
+        public async Task<ApiResult<ServiceDto>> GetById(Guid id)
         {
-            var result = new ApiResult<SServiceDto>();
+            var result = new ApiResult<ServiceDto>();
 
-            var serviceDto = new SServiceDto();
+            var serviceDto = new ServiceDto();
 
             try
             {
@@ -322,11 +311,11 @@ namespace HIS.ApplicationService.Dictionaries.Service
 
                 if (!GuidHelper.IsNullOrEmpty(id))
                 {
-                    var service = _dbContext.SServices.FirstOrDefault(s => s.Id == id && s.IsDeleted == false);
-                    var sServicePricePolicyDtos = (from ser in _dbContext.SServicePricePolicies
-                                                   join pa in _dbContext.SPatientTypes on ser.PatientTypeId equals pa.Id
+                    var service = _dbContext.Services.FirstOrDefault(s => s.Id == id && s.IsDeleted == false);
+                    var sServicePricePolicyDtos = (from ser in _dbContext.ServicePricePolicies
+                                                   join pa in _dbContext.PatientTypes on ser.PatientTypeId equals pa.Id
                                                    where ser.ServiceId == id
-                                                   select new SServicePricePolicyDto()
+                                                   select new ServicePricePolicyDto()
                                                    {
                                                        Id = ser.Id,
                                                        ServiceId = ser.ServiceId,
@@ -342,11 +331,11 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                                        IsHeIn = pa.Code == PatientTypes.BHYT ? true : false,
                                                    }).OrderBy(s => s.PatientTypeCode).ToList();
 
-                    var sExecutionRoomDtos = (from room in _dbContext.SRooms
-                                              join exec in _dbContext.SExecutionRooms.Where(w => w.ServiceId == id) on room.Id equals exec.RoomId into SExecutionRooms
+                    var sExecutionRoomDtos = (from room in _dbContext.Rooms
+                                              join exec in _dbContext.ExecutionRooms.Where(w => w.ServiceId == id) on room.Id equals exec.RoomId into SExecutionRooms
                                               from s in SExecutionRooms.DefaultIfEmpty()
                                               where rommTypes.Contains(room.RoomTypeId)
-                                              select new SExecutionRoomDto()
+                                              select new ExecutionRoomDto()
                                               {
                                                   Id = s != null ? s.Id : null,
                                                   RoomId = room.Id,
@@ -358,19 +347,19 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                               }).OrderBy(s => s.RoomCode).ToList();
 
 
-                    var sServiceResultIndexs = _dbContext.SServiceResultIndices.Where(w => w.ServiceId == id).ToList();
-                    var sServiceResultIndexDtos = _mapper.Map<IList<SServiceResultIndiceDto>>(sServiceResultIndexs);
+                    var sServiceResultIndexs = _dbContext.ServiceResultIndices.Where(w => w.ServiceId == id).ToList();
+                    var sServiceResultIndexDtos = _mapper.Map<IList<ServiceResultIndiceDto>>(sServiceResultIndexs);
 
-                    serviceDto = _mapper.Map<SServiceDto>(service);
+                    serviceDto = _mapper.Map<ServiceDto>(service);
                     serviceDto.SServicePricePolicies = sServicePricePolicyDtos;
                     serviceDto.SExecutionRooms = sExecutionRoomDtos;
                     serviceDto.SServiceResultIndices = sServiceResultIndexDtos;
                 }
                 else
                 {
-                    var sServicePricePolicys = (from r in _dbContext.SPatientTypes
+                    var sServicePricePolicys = (from r in _dbContext.PatientTypes
                                                 where r.Inactive == false
-                                                select new SServicePricePolicyDto()
+                                                select new ServicePricePolicyDto()
                                                 {
                                                     PatientTypeId = r.Id,
                                                     PatientTypeCode = r.Code,
@@ -378,10 +367,10 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                                     IsHeIn = r.Code == PatientTypes.BHYT ? true : false,
                                                 }).OrderBy(o => o.PatientTypeCode).ToList();
 
-                    var sExecutionRooms = (from room in _dbContext.SRooms
+                    var sExecutionRooms = (from room in _dbContext.Rooms
                                            where room.Inactive == false
                                                 && rommTypes.Contains(room.RoomTypeId)
-                                           select new SExecutionRoomDto()
+                                           select new ExecutionRoomDto()
                                            {
                                                RoomId = room.Id,
                                                RoomCode = room.Code,
@@ -403,7 +392,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<bool>> Import(IList<SServiceImportExcelDto> input)
+        public async Task<ApiResult<bool>> Import(IList<ServiceImportExcelDto> input)
         {
             var result = new ApiResult<bool>();
 
@@ -411,23 +400,23 @@ namespace HIS.ApplicationService.Dictionaries.Service
             {
                 try
                 {
-                    var sServiceUnits = _dbContext.SUnits.ToList();
-                    var sServiceGroupHeIns = _dbContext.SServiceGroupHeIns.ToList();
-                    var sServiceGroups = _dbContext.SServiceGroups.ToList();
-                    var sSurgicalProcedureTypes = _dbContext.SSurgicalProcedureTypes.ToList();
-                    var sPatientTypes = _dbContext.SPatientTypes.ToList();
-                    var sRooms = _dbContext.SRooms.ToList();
+                    var sServiceUnits = _dbContext.Units.ToList();
+                    var sServiceGroupHeIns = _dbContext.ServiceGroupHeIns.ToList();
+                    var sServiceGroups = _dbContext.ServiceGroups.ToList();
+                    var sSurgicalProcedureTypes = _dbContext.SurgicalProcedureTypes.ToList();
+                    var sPatientTypes = _dbContext.PatientTypes.ToList();
+                    var sRooms = _dbContext.Rooms.ToList();
 
-                    var sServiceDtos = new List<SServiceDto>();
+                    var sServiceDtos = new List<ServiceDto>();
 
                     foreach (var serviceImport in input)
                     {
-                        var serviceDto = (SServiceDto)serviceImport;
+                        var serviceDto = (ServiceDto)serviceImport;
                         serviceDto.Id = Guid.NewGuid();
 
-                        serviceDto.SServicePricePolicies = new List<SServicePricePolicyDto>()
+                        serviceDto.SServicePricePolicies = new List<ServicePricePolicyDto>()
                         {
-                            new SServicePricePolicyDto()
+                            new ServicePricePolicyDto()
                             {
                                 Id = Guid.NewGuid(),
                                 ServiceId = serviceDto.Id,
@@ -437,7 +426,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                 CeilingPrice = serviceImport.CeilingPrice,
                                 ExecutionTime = string.IsNullOrEmpty( serviceImport.ExecutionTimeString) ? null : DateTime.ParseExact(serviceImport.ExecutionTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None),
                             },
-                            new SServicePricePolicyDto()
+                            new ServicePricePolicyDto()
                             {
                                 Id = Guid.NewGuid(),
                                 ServiceId = serviceDto.Id,
@@ -445,7 +434,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                 PatientTypeCode = PatientTypes.DV,
                                 ExecutionTime = string.IsNullOrEmpty( serviceImport.ExecutionTimeString) ? null : DateTime.ParseExact(serviceImport.ExecutionTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None),
                             },
-                            new SServicePricePolicyDto()
+                            new ServicePricePolicyDto()
                             {
                                 Id = Guid.NewGuid(),
                                 ServiceId = serviceDto.Id,
@@ -455,9 +444,9 @@ namespace HIS.ApplicationService.Dictionaries.Service
                             }
                         };
 
-                        serviceDto.SExecutionRooms = new List<SExecutionRoomDto>()
+                        serviceDto.SExecutionRooms = new List<ExecutionRoomDto>()
                         {
-                            new SExecutionRoomDto()
+                            new ExecutionRoomDto()
                             {
                                 Id = Guid.NewGuid(),
                                 ServiceId = serviceDto.Id,
@@ -470,13 +459,13 @@ namespace HIS.ApplicationService.Dictionaries.Service
                         sServiceDtos.Add(serviceDto);
                     }
 
-                    var sServices = (from serviceDto in sServiceDtos
+                    var Services = (from serviceDto in sServiceDtos
                                      join sServiceUnit in sServiceUnits on serviceDto.ServiceUnitCode equals sServiceUnit.Code
                                      join sServiceGroupHeIn in sServiceGroupHeIns on serviceDto.ServiceGroupHeInCode equals sServiceGroupHeIn.Code
                                      join sServiceGroup in sServiceGroups on serviceDto.ServiceGroupCode equals sServiceGroup.Code
                                      join sSurgicalProcedureType in sSurgicalProcedureTypes on serviceDto.SurgicalProcedureTypeCode equals sSurgicalProcedureType.Code into sSurgicalProcedureTypeTems
                                      from surg in sSurgicalProcedureTypeTems.DefaultIfEmpty()
-                                     select new SService()
+                                     select new EntityFrameworkCore.Entities.Categories.Service()
                                      {
                                          Id = serviceDto.Id.GetValueOrDefault(),
                                          Code = serviceDto.Code,
@@ -494,7 +483,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                     var servicePricePolicieDtos = sServiceDtos.SelectMany(s => s.SServicePricePolicies).ToList();
                     var servicePricePolicie = (from servicePricePolicy in servicePricePolicieDtos
                                                join sPatientType in sPatientTypes on servicePricePolicy.PatientTypeCode equals sPatientType.Code
-                                               select new SServicePricePolicy()
+                                               select new EntityFrameworkCore.Entities.Categories.Services.ServicePricePolicy()
                                                {
                                                    Id = servicePricePolicy.Id.GetValueOrDefault(),
                                                    PatientTypeId = sPatientType.Id,
@@ -509,7 +498,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                     var executionRoomDtos = sServiceDtos.SelectMany(s => s.SExecutionRooms).ToList();
                     var executionRooms = (from executionRoom in executionRoomDtos
                                           join sRoom in sRooms on executionRoom.RoomCode equals sRoom.Code
-                                          select new SExecutionRoom()
+                                          select new ExecutionRoom()
                                           {
                                               Id = executionRoom.Id.GetValueOrDefault(),
                                               ServiceId = executionRoom.ServiceId,
@@ -517,9 +506,9 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                               IsMain = executionRoom.IsMain,
                                           }).ToList();
 
-                    _dbContext.SServices.AddRange(sServices);
-                    _dbContext.SServicePricePolicies.AddRange(servicePricePolicie);
-                    _dbContext.SExecutionRooms.AddRange(executionRooms);
+                    _dbContext.Services.AddRange(Services);
+                    _dbContext.ServicePricePolicies.AddRange(servicePricePolicie);
+                    _dbContext.ExecutionRooms.AddRange(executionRooms);
 
                     _dbContext.SaveChanges();
 
@@ -536,7 +525,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<bool>> ImportServiceResultIndices(IList<SServiceResultIndiceDto> sServiceResultIndexs)
+        public async Task<ApiResult<bool>> ImportServiceResultIndices(IList<ServiceResultIndiceDto> sServiceResultIndexs)
         {
             var result = new ApiResult<bool>();
 
@@ -544,11 +533,11 @@ namespace HIS.ApplicationService.Dictionaries.Service
             {
                 try
                 {
-                    var services = _dbContext.SServices.ToList();
+                    var services = _dbContext.Services.ToList();
 
                     var serviceResultIndexs = (from resultIndex in sServiceResultIndexs
                                                join service in services on resultIndex.ServiceCode equals service.Code
-                                               select new SServiceResultIndice()
+                                               select new ServiceResultIndice()
                                                {
                                                    Id = Guid.NewGuid(),
                                                    Code = resultIndex.Code,
@@ -563,7 +552,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                                    SortOrder = resultIndex.SortOrder,
                                                }).ToList();
 
-                    _dbContext.SServiceResultIndices.AddRange(serviceResultIndexs);
+                    _dbContext.ServiceResultIndices.AddRange(serviceResultIndexs);
 
                     _dbContext.SaveChanges();
                 }
@@ -579,21 +568,21 @@ namespace HIS.ApplicationService.Dictionaries.Service
             return await Task.FromResult(result);
         }
 
-        private async Task<ApiResult<SServiceDto>> ValidSave(SServiceDto input)
+        private async Task<ApiResult<ServiceDto>> ValidSave(ServiceDto input)
         {
-            var result = new ApiResult<SServiceDto>();
+            var result = new ApiResult<ServiceDto>();
 
             try
             {
                 List<string> errs = new List<string>();
 
-                var sServices = _dbContext.SServices.FirstOrDefault(w => w.Code == input.Code && w.Id != input.Id);
-                if (sServices != null)
+                var Services = _dbContext.Services.FirstOrDefault(w => w.Code == input.Code && w.Id != input.Id);
+                if (Services != null)
                 {
                     errs.Add(string.Format("Mã dịch vụ [{0}] đã tồn tại trên hệ thống!", input.Code));
                 }
 
-                var sServiceHein = _dbContext.SServices.FirstOrDefault(w => w.Code == input.HeInCode && w.Id != input.Id);
+                var sServiceHein = _dbContext.Services.FirstOrDefault(w => w.Code == input.HeInCode && w.Id != input.Id);
                 if (sServiceHein != null)
                 {
                     errs.Add(string.Format("Mã BHYT [{0}] đã tồn tại trên hệ thống!", input.HeInName));

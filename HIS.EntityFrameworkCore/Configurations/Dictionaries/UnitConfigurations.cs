@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class UnitConfigurations : IEntityTypeConfiguration<SUnit>
+    public class UnitConfigurations : IEntityTypeConfiguration<Unit>
     {
-        public void Configure(EntityTypeBuilder<SUnit> builder)
+        public void Configure(EntityTypeBuilder<Unit> builder)
         {
-            builder.ToTable("SUnits");
+            builder.ToTable("Units");
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Code).HasMaxLength(50);

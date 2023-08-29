@@ -13,7 +13,7 @@ namespace HIS.EntityFrameworkCore.Configurations
     {
         public void Configure(EntityTypeBuilder<SToken> builder)
         {
-            builder.ToTable("STokens");
+            builder.ToTable("Tokens");
 
             builder.HasKey(x => x.Id);
 

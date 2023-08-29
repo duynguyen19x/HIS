@@ -21,25 +21,25 @@ namespace HIS.BackendApi.Controllers.Systems.Role
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<SRoleDto>> GetAll([FromQuery] GetAllSRoleInput input)
+        public async Task<ApiResultList<RoleDto>> GetAll([FromQuery] GetAllRoleInput input)
         {
             return await _roleService.GetAll(input);
         }
 
         [HttpGet("GetById")]
-        public async Task<ApiResult<SRoleDto>> GetById(Guid id)
+        public async Task<ApiResult<RoleDto>> GetById(Guid id)
         {
             return await _roleService.GetById(id);
         }
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ApiResult<SRoleDto>> CreateOrEdit(SRoleDto input)
+        public async Task<ApiResult<RoleDto>> CreateOrEdit(RoleDto input)
         {
             return await _roleService.CreateOrEdit(input);
         }
 
-        [HttpPost("Delete")]
-        public async Task<ApiResult<SRoleDto>> Delete(Guid input)
+        [HttpDelete("Delete")]
+        public async Task<ApiResult<RoleDto>> Delete(Guid input)
         {
             return await _roleService.Delete(input);
         }

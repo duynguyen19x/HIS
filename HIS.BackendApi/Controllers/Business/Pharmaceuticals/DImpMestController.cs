@@ -1,5 +1,5 @@
 ﻿using HIS.ApplicationService.Business.Pharmaceuticals.DImpMests;
-using HIS.Dtos.Business.DImpMest;
+using HIS.Dtos.Business.InOutStock;
 using HIS.Dtos.Business.DMedicineStock;
 using HIS.Dtos.Commons;
 using HIS.Models.Commons;
@@ -19,32 +19,26 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
         }
 
         [HttpGet("GetByStocks")]
-        public async Task<ApiResultList<DImpMestDto>> GetByStocks(Guid stockId, string fromDate, string toDate)
+        public async Task<ApiResultList<InOutStockDto>> GetByStocks(Guid stockId, string fromDate, string toDate)
         {
             return await _dImpMestService.GetByStocks(stockId, fromDate, toDate);
         }
 
-        [HttpGet("GetMedicineByStocks")]
-        public async Task<ApiResultList<DMedicineStockDto>> GetMedicineByStocks(Guid stockId)
-        {
-            return await _dImpMestService.GetMedicineByStocks(stockId);
-        }
-
         #region Nhập từ NCC
         [HttpPost("ImportFromSupplierSaveAsDraft")]
-        public async Task<ApiResult<DImpMestDto>> ImportFromSupplierSaveAsDraft(DImpMestDto input)
+        public async Task<ApiResult<InOutStockDto>> ImportFromSupplierSaveAsDraft(InOutStockDto input)
         {
             return await _dImpMestService.ImportFromSupplierSaveAsDraft(input);
         }
 
         [HttpPost("ImportFromSupplierStockIn")]
-        public async Task<ApiResult<DImpMestDto>> ImportFromSupplierStockIn(DImpMestDto input)
+        public async Task<ApiResult<InOutStockDto>> ImportFromSupplierStockIn(InOutStockDto input)
         {
             return await _dImpMestService.ImportFromSupplierStockIn(input);
         }
 
         [HttpGet("ImportFromSupplierGetById")]
-        public async Task<ApiResult<DImpMestDto>> ImportFromSupplierGetById(Guid id)
+        public async Task<ApiResult<InOutStockDto>> ImportFromSupplierGetById(Guid id)
         {
             return await _dImpMestService.ImportFromSupplierGetById(id);
         }
@@ -58,25 +52,25 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
 
         #region Nhập từ kho khác
         [HttpGet("ImportFromAnotherStockGetById")]
-        public async Task<ApiResult<DImpMestDto>> ImportFromAnotherStockGetById(Guid id)
+        public async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockGetById(Guid id)
         {
             return await _dImpMestService.ImportFromAnotherStockGetById(id);
         }
 
         [HttpPost("ImportFromAnotherStockSaveAsDraft")]
-        public async Task<ApiResult<DImpMestDto>> ImportFromAnotherStockSaveAsDraft(DImpMestDto input)
+        public async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockSaveAsDraft(InOutStockDto input)
         {
             return await _dImpMestService.ImportFromAnotherStockSaveAsDraft(input);
         }
 
         [HttpPost("ImportFromAnotherStockRequest")]
-        public async Task<ApiResult<DImpMestDto>> ImportFromAnotherStockRequest(DImpMestDto input)
+        public async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockRequest(InOutStockDto input)
         {
             return await _dImpMestService.ImportFromAnotherStockRequest(input);
         }
 
         [HttpPost("ImportFromAnotherStockStockIn")]
-        public async Task<ApiResult<DImpMestDto>> ImportFromAnotherStockStockIn(DImpMestDto input)
+        public async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockStockIn(InOutStockDto input)
         {
             return await _dImpMestService.ImportFromAnotherStockStockIn(input);
         }

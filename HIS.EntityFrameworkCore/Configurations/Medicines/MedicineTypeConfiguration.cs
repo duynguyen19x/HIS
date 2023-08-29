@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations
 {
-    public class MedicineTypeConfiguration : IEntityTypeConfiguration<SMedicineType>
+    public class MedicineTypeConfiguration : IEntityTypeConfiguration<MedicineType>
     {
-        public void Configure(EntityTypeBuilder<SMedicineType> builder)
+        public void Configure(EntityTypeBuilder<MedicineType> builder)
         {
-            builder.ToTable("SMedicineTypes");
+            builder.ToTable("MedicineTypes");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50);
@@ -39,16 +39,16 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.Property(x => x.QualityStandards).HasMaxLength(512);
             builder.Property(x => x.PharmaceuticalFormulation).HasMaxLength(512);
 
-            builder.HasOne(t => t.SMedicineGroup).WithMany(pc => pc.SMedicineTypes)
+            builder.HasOne(t => t.MedicineGroup).WithMany()
                 .HasForeignKey(pc => pc.MedicineGroupId).OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(t => t.SUnit).WithMany(pc => pc.SMedicineTypes)
+            builder.HasOne(t => t.Unit).WithMany()
                 .HasForeignKey(pc => pc.UnitId).OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(t => t.SMedicineLine).WithMany(pc => pc.SMedicineTypes)
+            builder.HasOne(t => t.MedicineLine).WithMany()
                 .HasForeignKey(pc => pc.MedicineLineId).OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(t => t.SCountry).WithMany(pc => pc.SMedicineTypes)
+            builder.HasOne(t => t.Country).WithMany()
                 .HasForeignKey(pc => pc.CountryId).OnDelete(DeleteBehavior.NoAction);
         }
     }

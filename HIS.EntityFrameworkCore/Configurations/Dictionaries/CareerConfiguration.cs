@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class CareerConfiguration : IEntityTypeConfiguration<SCareer>
+    public class CareerConfiguration : IEntityTypeConfiguration<Career>
     {
-        public void Configure(EntityTypeBuilder<SCareer> builder)
+        public void Configure(EntityTypeBuilder<Career> builder)
         {
-            builder.ToTable("SCareers");
+            builder.ToTable("Careers");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50).IsRequired();

@@ -20,6 +20,6 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
         public virtual Guid BranchId { get; set; }
 
         public virtual SYSRefTypeCategory RefTypeCategory { get; set; }
-        public virtual SBranch Branch { get; set; }
+        public virtual Branch Branch { get; set; }
     }
 }

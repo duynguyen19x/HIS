@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class BranchConfiguration : IEntityTypeConfiguration<SBranch>
+    public class BranchConfiguration : IEntityTypeConfiguration<Branch>
     {
-        public void Configure(EntityTypeBuilder<SBranch> builder)
+        public void Configure(EntityTypeBuilder<Branch> builder)
         {
-            builder.ToTable("SBranchs");
+            builder.ToTable("Branchs");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50).IsRequired(); 

@@ -10,19 +10,19 @@ using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
 
 namespace HIS.EntityFrameworkCore.Configurations.Medicines
 {
-    public class MedicinePricePolicyConfigurations : IEntityTypeConfiguration<SMedicinePricePolicy>
+    public class MedicinePricePolicyConfigurations : IEntityTypeConfiguration<MedicinePricePolicy>
     {
-        public void Configure(EntityTypeBuilder<SMedicinePricePolicy> builder)
+        public void Configure(EntityTypeBuilder<MedicinePricePolicy> builder)
         {
-            builder.ToTable("SMedicinePricePolicies");
+            builder.ToTable("MedicinePricePolicies");
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(t => t.SPatientType)
+            builder.HasOne(t => t.PatientType)
                 .WithMany()
                 .HasForeignKey(pc => pc.PatientTypeId)
                 .OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(t => t.SMedicine)
+            builder.HasOne(t => t.Medicine)
                 .WithMany()
                 .HasForeignKey(pc => pc.MedicineId)
                 .OnDelete(DeleteBehavior.NoAction);

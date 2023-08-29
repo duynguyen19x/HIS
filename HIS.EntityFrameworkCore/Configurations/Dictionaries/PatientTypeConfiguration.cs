@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class PatientTypeConfiguration : IEntityTypeConfiguration<SPatientType>
+    public class PatientTypeConfiguration : IEntityTypeConfiguration<PatientType>
     {
-        public void Configure(EntityTypeBuilder<SPatientType> builder)
+        public void Configure(EntityTypeBuilder<PatientType> builder)
         {
-            builder.ToTable("SPatientTypes");
+            builder.ToTable("PatientTypes");
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Code).HasMaxLength(50);

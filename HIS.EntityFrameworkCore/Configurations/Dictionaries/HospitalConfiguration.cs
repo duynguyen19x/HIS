@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    internal class HospitalConfiguration : IEntityTypeConfiguration<SHospital>
+    internal class HospitalConfiguration : IEntityTypeConfiguration<Hospital>
     {
-        public void Configure(EntityTypeBuilder<SHospital> builder)
+        public void Configure(EntityTypeBuilder<Hospital> builder)
         {
-            builder.ToTable("SHospitals");
+            builder.ToTable("Hospitals");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50).IsRequired(); 

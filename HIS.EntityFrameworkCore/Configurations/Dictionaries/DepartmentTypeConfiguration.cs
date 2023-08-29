@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class DepartmentTypeConfiguration : IEntityTypeConfiguration<SDepartmentType>
+    public class DepartmentTypeConfiguration : IEntityTypeConfiguration<DepartmentType>
     {
-        public void Configure(EntityTypeBuilder<SDepartmentType> builder)
+        public void Configure(EntityTypeBuilder<DepartmentType> builder)
         {
-            builder.ToTable("SDepartmentTypes");
+            builder.ToTable("DepartmentTypes");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();

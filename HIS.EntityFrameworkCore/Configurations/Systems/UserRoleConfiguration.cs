@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations
 {
-    public class UserRoleConfiguration : IEntityTypeConfiguration<SUserRole>
+    public class UserRoleConfiguration : IEntityTypeConfiguration<UserRole>
     {
-        public void Configure(EntityTypeBuilder<SUserRole> builder)
+        public void Configure(EntityTypeBuilder<UserRole> builder)
         {
-            builder.ToTable("SUserRoles");
+            builder.ToTable("UserRoles");
             builder.HasKey(t => new { t.UserId, t.RoleId });
 
             builder.HasOne(t => t.User).WithMany(pc => pc.UserRoles)

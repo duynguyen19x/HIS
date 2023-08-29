@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class EthnicConfiguration : IEntityTypeConfiguration<SEthnic>
+    public class EthnicConfiguration : IEntityTypeConfiguration<Ethnic>
     {
-        public void Configure(EntityTypeBuilder<SEthnic> builder)
+        public void Configure(EntityTypeBuilder<Ethnic> builder)
         {
-            builder.ToTable("SEthnics");
+            builder.ToTable("Ethnics");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50).IsRequired(); 

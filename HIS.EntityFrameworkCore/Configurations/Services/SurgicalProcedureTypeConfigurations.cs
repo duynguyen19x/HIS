@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Services
 {
-    public class SurgicalProcedureTypeConfigurations : IEntityTypeConfiguration<SSurgicalProcedureType>
+    public class SurgicalProcedureTypeConfigurations : IEntityTypeConfiguration<SurgicalProcedureType>
     {
-        public void Configure(EntityTypeBuilder<SSurgicalProcedureType> builder)
+        public void Configure(EntityTypeBuilder<SurgicalProcedureType> builder)
         {
-            builder.ToTable("SSurgicalProcedureTypes");
+            builder.ToTable("SurgicalProcedureTypes");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
 

@@ -34,7 +34,7 @@ namespace HIS.ApplicationService.Systems.Login
             {
                 try
                 {
-                    var user = _dbContext.SUsers.Where(w => w.UserName == request.UserName && w.Password.ToUpper() == request.Password.ToUpper()).FirstOrDefault();
+                    var user = _dbContext.Users.Where(w => w.UserName == request.UserName && w.Password.ToUpper() == request.Password.ToUpper()).FirstOrDefault();
                     if (user == null)
                     {
                         apiResult.IsSuccessed = false;
@@ -43,8 +43,8 @@ namespace HIS.ApplicationService.Systems.Login
                         return apiResult;
                     }
 
-                    var acceptToken = await CreateTokenAsync(await CreateClaimsAsync(user), TokenConsts.AcceptTokenExpiration);
-                    var refreshToken = await CreateTokenAsync(await CreateClaimsAsync(user, TokenTypes.RefreshToken), TokenConsts.RefreshTokenExpiration);
+                    var acceptToken = await CreateTokenAsync(await CreateClaimsAsync(user), AppConst.AcceptTokenExpiration);
+                    var refreshToken = await CreateTokenAsync(await CreateClaimsAsync(user, TokenTypes.RefreshToken), AppConst.RefreshTokenExpiration);
 
                     var token = new TokenResultDto()
                     {
@@ -68,7 +68,7 @@ namespace HIS.ApplicationService.Systems.Login
                         ExpiredAt = refreshToken.ValidTo
                     };
 
-                    await _dbContext.STokens.AddAsync(sToken);
+                    await _dbContext.Tokens.AddAsync(sToken);
                     _dbContext.SaveChanges();
 
                     // Lưu thông tin đăng nhập
@@ -98,7 +98,7 @@ namespace HIS.ApplicationService.Systems.Login
             {
                 try
                 {
-                    var user = _dbContext.SUsers.FirstOrDefault(f => f.UserName == request.UserName);
+                    var user = _dbContext.Users.FirstOrDefault(f => f.UserName == request.UserName);
                     if (user != null)
                     {
                         apiResult.Result = false;
@@ -108,7 +108,7 @@ namespace HIS.ApplicationService.Systems.Login
                         return await Task.FromResult(apiResult);
                     }
 
-                    user = _dbContext.SUsers.FirstOrDefault(f => f.Email == request.UserName);
+                    user = _dbContext.Users.FirstOrDefault(f => f.Email == request.UserName);
                     if (user != null)
                     {
                         apiResult.Result = false;
@@ -118,7 +118,7 @@ namespace HIS.ApplicationService.Systems.Login
                         return await Task.FromResult(apiResult);
                     }
 
-                    var userSave = new SUser()
+                    var userSave = new EntityFrameworkCore.Entities.Systems.User()
                     {
                         Id = Guid.NewGuid(),
                         UserName = request.UserName,
@@ -136,7 +136,7 @@ namespace HIS.ApplicationService.Systems.Login
                         DistrictId = request.District,
                         WardId = request.WardsId,
                     };
-                    var result = _dbContext.SUsers.Add(userSave);
+                    var result = _dbContext.Users.Add(userSave);
                     if (result != null)
                     {
                         apiResult.Message = "Đăng ký thằng công!";
@@ -165,10 +165,10 @@ namespace HIS.ApplicationService.Systems.Login
             return dateTimeInterval;
         }
 
-        private async Task<IList<Claim>> CreateClaimsAsync(SUser user, TokenTypes tokenType = TokenTypes.AcceptToken)
+        private async Task<IList<Claim>> CreateClaimsAsync(EntityFrameworkCore.Entities.Systems.User user, TokenTypes tokenType = TokenTypes.AcceptToken)
         {
-            var roleIds = _dbContext.SUserRoles.Where(w => w.UserId == user.Id).Select(s => s.RoleId).ToList();
-            var roles = _dbContext.SRoles.Where(w => roleIds.Contains(w.Id)).ToList();
+            var roleIds = _dbContext.UserRoles.Where(w => w.UserId == user.Id).Select(s => s.RoleId).ToList();
+            var roles = _dbContext.Roles.Where(w => roleIds.Contains(w.Id)).ToList();
 
             var claims = new List<Claim>()
             {
@@ -264,7 +264,7 @@ namespace HIS.ApplicationService.Systems.Login
                     }
 
                     // Kiểm tra refreshToken có trong database ko?
-                    var storedToken = _dbContext.STokens.Where(w => w.TokenValue == token.RefreshToken).FirstOrDefault(); // RefreshToken = RefreshToken trong database
+                    var storedToken = _dbContext.Tokens.Where(w => w.TokenValue == token.RefreshToken).FirstOrDefault(); // RefreshToken = RefreshToken trong database
                     if (storedToken == null)
                     {
                         apiResult.Message = "Refresh token does not exist";
@@ -313,8 +313,8 @@ namespace HIS.ApplicationService.Systems.Login
                     }
 
                     // Tạo token mới
-                    var userById = _dbContext.SUsers.FirstOrDefault(f => f.Id == storedToken.UserId.GetValueOrDefault());
-                    var acceptToken = await CreateTokenAsync(await CreateClaimsAsync(userById), TokenConsts.AcceptTokenExpiration);
+                    var userById = _dbContext.Users.FirstOrDefault(f => f.Id == storedToken.UserId.GetValueOrDefault());
+                    var acceptToken = await CreateTokenAsync(await CreateClaimsAsync(userById), AppConst.AcceptTokenExpiration);
 
                     // Update token
                     storedToken.Jti = acceptToken.Id;

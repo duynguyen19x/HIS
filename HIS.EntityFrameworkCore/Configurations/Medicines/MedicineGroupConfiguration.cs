@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations
 {
-    public class MedicineGroupConfiguration : IEntityTypeConfiguration<SMedicineGroup>
+    public class MedicineGroupConfiguration : IEntityTypeConfiguration<MedicineGroup>
     {
-        public void Configure(EntityTypeBuilder<SMedicineGroup> builder)
+        public void Configure(EntityTypeBuilder<MedicineGroup> builder)
         {
-            builder.ToTable("SMedicineGroups");
+            builder.ToTable("MedicineGroups");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50);

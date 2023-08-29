@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations
 {
-    public class ServiceConfigurations : IEntityTypeConfiguration<SService>
+    public class ServiceConfigurations : IEntityTypeConfiguration<Service>
     {
-        public void Configure(EntityTypeBuilder<SService> builder)
+        public void Configure(EntityTypeBuilder<Service> builder)
         {
-            builder.ToTable("SServices");
+            builder.ToTable("Services");
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Code).HasMaxLength(50);
@@ -21,10 +21,10 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.Property(x => x.HeInCode).HasMaxLength(50);
             builder.Property(x => x.HeInName).HasMaxLength(500);
 
-            builder.HasOne(t => t.SUnit).WithMany(pc => pc.SServices).HasForeignKey(pc => pc.UnitId).OnDelete(DeleteBehavior.NoAction); 
-            builder.HasOne(t => t.SServiceGroup).WithMany(pc => pc.SServices).HasForeignKey(pc => pc.ServiceGroupId).OnDelete(DeleteBehavior.NoAction); 
-            builder.HasOne(t => t.SServiceGroupHeIn).WithMany(pc => pc.SServices).HasForeignKey(pc => pc.ServiceGroupHeInId).OnDelete(DeleteBehavior.NoAction); 
-            builder.HasOne(t => t.SSurgicalProcedureType).WithMany(pc => pc.SServices).HasForeignKey(pc => pc.SurgicalProcedureTypeId).OnDelete(DeleteBehavior.NoAction); 
+            builder.HasOne(t => t.Unit).WithMany().HasForeignKey(pc => pc.UnitId).OnDelete(DeleteBehavior.NoAction); 
+            builder.HasOne(t => t.ServiceGroup).WithMany().HasForeignKey(pc => pc.ServiceGroupId).OnDelete(DeleteBehavior.NoAction); 
+            builder.HasOne(t => t.ServiceGroupHeIn).WithMany().HasForeignKey(pc => pc.ServiceGroupHeInId).OnDelete(DeleteBehavior.NoAction); 
+            builder.HasOne(t => t.SurgicalProcedureType).WithMany().HasForeignKey(pc => pc.SurgicalProcedureTypeId).OnDelete(DeleteBehavior.NoAction); 
         }
     }
 }

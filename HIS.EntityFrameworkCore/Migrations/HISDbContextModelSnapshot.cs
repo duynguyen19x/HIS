@@ -22,7 +22,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Patient", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.HISPatient", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -68,10 +68,10 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Patient", (string)null);
+                    b.ToTable("Patients", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.PatientRecord", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.HISPatientRecord", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -90,6 +90,9 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Property<int>("BirthYear")
                         .HasColumnType("int");
+
+                    b.Property<Guid>("BranchId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("CareerId")
                         .HasColumnType("uniqueidentifier");
@@ -125,6 +128,15 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("EndDepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("EndRoomId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("EthnicityId")
                         .HasColumnType("uniqueidentifier");
 
@@ -135,6 +147,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid>("GenderId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("HospitalizationReason")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("IdentificationNumber")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -143,6 +158,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsEmergency")
                         .HasColumnType("bit");
 
                     b.Property<string>("IssueBy")
@@ -179,6 +197,24 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("ProvinceId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("ReceiptionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ReceiptionDepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ReceiptionRoomId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("StartDepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("StartRoomId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Tel")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -187,6 +223,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BranchId");
 
                     b.HasIndex("CareerId");
 
@@ -204,10 +242,10 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("WardId");
 
-                    b.ToTable("PatientRecord", (string)null);
+                    b.ToTable("PatientRecords", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests.DExpMest", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.InOutStock", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -229,39 +267,37 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid?>("CreationUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("DeletedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Deliverer")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
                     b.Property<string>("Description")
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
 
-                    b.Property<int>("ExpMestStatus")
-                        .HasColumnType("int");
-
                     b.Property<Guid?>("ExpStockId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("ExpTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("ExpUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("ImpExpMestTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("ImpMestId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("ImpMestStatus")
-                        .HasColumnType("int");
-
                     b.Property<Guid?>("ImpStockId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("InOutStockTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("InvNo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("InvTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -287,26 +323,41 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("ReqRoomId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime?>("ReqTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("StockExpTime")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("StockExpUserId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime?>("StockImpTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("StockImpUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("SupplierId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ApproverUserId");
 
+                    b.HasIndex("CreationUserId");
+
                     b.HasIndex("ExpStockId");
 
-                    b.HasIndex("ImpExpMestTypeId");
-
-                    b.HasIndex("ImpMestId");
-
                     b.HasIndex("ImpStockId");
+
+                    b.HasIndex("InOutStockTypeId");
 
                     b.HasIndex("PatientId");
 
@@ -320,48 +371,53 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("StockExpUserId");
 
+                    b.HasIndex("StockImpUserId");
+
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("DExpMests", (string)null);
+                    b.ToTable("InOutStocks", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests.DExpMestMedicine", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.InOutStockMedicine", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ExpMestId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<decimal?>("ApprovedQuantity")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal?>("ImpPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal?>("ImpQuantity")
+                    b.Property<decimal?>("ImpTaxRate")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal?>("ImpVatRate")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<Guid?>("InOutStockId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("MedicineId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal?>("RequestQuantity")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int?>("SortOrder")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("TaxRate")
-                        .HasColumnType("decimal(18,2)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("ExpMestId");
+                    b.HasIndex("InOutStockId");
 
                     b.HasIndex("MedicineId");
 
-                    b.ToTable("DExpMestMedicines", (string)null);
+                    b.ToTable("InOutStockMedicines", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpExpMestType", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.InOutStockType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -382,7 +438,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DImpExpMestTypes", (string)null);
+                    b.ToTable("InOutStockTypes", (string)null);
 
                     b.HasData(
                         new
@@ -390,14 +446,14 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = 1,
                             Code = "01",
                             Inactive = false,
-                            Name = "Nhập thuốc từ nhà cung cấp"
+                            Name = "Nhập hàng hóa từ nhà cung cấp"
                         },
                         new
                         {
                             Id = 2,
                             Code = "02",
                             Inactive = false,
-                            Name = "Xuất thuốc trả nhà cung cấp"
+                            Name = "Xuất hàng hóa trả nhà cung cấp"
                         },
                         new
                         {
@@ -506,20 +562,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = 18,
-                            Code = "18",
-                            Inactive = false,
-                            Name = "Nhập VTYT từ nhà cung cấp"
-                        },
-                        new
-                        {
-                            Id = 19,
-                            Code = "19",
-                            Inactive = false,
-                            Name = "Xuất VTYT trả nhà cung cấp"
-                        },
-                        new
-                        {
                             Id = 99,
                             Code = "99",
                             Inactive = false,
@@ -527,171 +569,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests.DImpMest", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ApproverTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("ApproverUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("DeletedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Deliverer")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<Guid?>("ExpMestId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("ExpMestStatus")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("ExpStockId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("ImpExpMestTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ImpMestStatus")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("ImpStockId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ImpTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("ImpUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("InvNo")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("InvTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("PatientId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("PatientRecordId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ReceiverUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ReqDepartmentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ReqRoomId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("StockImpTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("StockImpUserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("SupplierId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApproverUserId");
-
-                    b.HasIndex("ExpMestId");
-
-                    b.HasIndex("ExpStockId");
-
-                    b.HasIndex("ImpExpMestTypeId");
-
-                    b.HasIndex("ImpStockId");
-
-                    b.HasIndex("PatientId");
-
-                    b.HasIndex("PatientRecordId");
-
-                    b.HasIndex("ReceiverUserId");
-
-                    b.HasIndex("ReqDepartmentId");
-
-                    b.HasIndex("ReqRoomId");
-
-                    b.HasIndex("StockImpUserId");
-
-                    b.HasIndex("SupplierId");
-
-                    b.ToTable("DImpMests", (string)null);
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests.DImpMestMedicine", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ImpMestId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal?>("ImpPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal?>("ImpQuantity")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal?>("ImpVatRate")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<Guid?>("MedicineId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int?>("SortOrder")
-                        .HasColumnType("int");
-
-                    b.Property<decimal?>("TaxRate")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ImpMestId");
-
-                    b.HasIndex("MedicineId");
-
-                    b.ToTable("DImpMestMedicines", (string)null);
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DMedicineStock", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.MedicineStock", b =>
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
@@ -736,67 +614,10 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("StockId");
 
-                    b.ToTable("DMedicineStocks", (string)null);
+                    b.ToTable("MedicineStocks", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Medicines.SMedicinePricePolicy", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal?>("CeilingPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("DeletedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("ExecutionTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("MedicineId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal?>("NewUnitPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal?>("OldUnitPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("PatientTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal?>("PaymentRate")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MedicineId");
-
-                    b.HasIndex("PatientTypeId");
-
-                    b.ToTable("SMedicinePricePolicies", (string)null);
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMaterial", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Material", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -843,6 +664,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("MaterialTypeId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("MaterialTypeId1")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
@@ -868,16 +692,23 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("UnitId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("UnitId1")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("MaterialTypeId");
 
+                    b.HasIndex("MaterialTypeId1");
+
                     b.HasIndex("UnitId");
 
-                    b.ToTable("SMaterials", (string)null);
+                    b.HasIndex("UnitId1");
+
+                    b.ToTable("Materials", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMaterialType", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.MaterialType", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -944,14 +775,19 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
+                    b.Property<Guid?>("UnitId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ServiceUnitId");
 
-                    b.ToTable("SMaterialTypes", (string)null);
+                    b.HasIndex("UnitId");
+
+                    b.ToTable("MaterialTypes", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMedicine", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Medicine", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1077,6 +913,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("UnitId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("UnitId1")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CountryId");
@@ -1087,10 +926,12 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("UnitId");
 
-                    b.ToTable("SMedicines", (string)null);
+                    b.HasIndex("UnitId1");
+
+                    b.ToTable("Medicines", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMedicineGroup", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.MedicineGroup", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1115,7 +956,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SMedicineGroups", (string)null);
+                    b.ToTable("MedicineGroups", (string)null);
 
                     b.HasData(
                         new
@@ -1327,7 +1168,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMedicineLine", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.MedicineLine", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1349,7 +1190,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SMedicineLines", (string)null);
+                    b.ToTable("MedicineLines", (string)null);
 
                     b.HasData(
                         new
@@ -1714,7 +1555,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMedicineType", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.MedicineType", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1901,6 +1742,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("UnitId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("UnitId1")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CountryId");
@@ -1911,10 +1755,69 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("UnitId");
 
-                    b.ToTable("SMedicineTypes", (string)null);
+                    b.HasIndex("UnitId1");
+
+                    b.ToTable("MedicineTypes", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SService", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Medicines.MedicinePricePolicy", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal?>("CeilingPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("ExecutionTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("MedicineId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal?>("NewUnitPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("OldUnitPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("PatientTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("PaymentRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicineId");
+
+                    b.HasIndex("PatientTypeId");
+
+                    b.ToTable("MedicinePricePolicies", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Service", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1975,6 +1878,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("UnitId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("UnitId1")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ServiceGroupHeInId");
@@ -1985,10 +1891,12 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("UnitId");
 
-                    b.ToTable("SServices", (string)null);
+                    b.HasIndex("UnitId1");
+
+                    b.ToTable("Services", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SServiceGroup", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.ServiceGroup", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -2010,7 +1918,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SServiceGroups", (string)null);
+                    b.ToTable("ServiceGroups", (string)null);
 
                     b.HasData(
                         new
@@ -2239,7 +2147,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SServiceGroupHeIn", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.ServiceGroupHeIn", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -2261,7 +2169,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SServiceGroupHeIns", (string)null);
+                    b.ToTable("ServiceGroupHeIns", (string)null);
 
                     b.HasData(
                         new
@@ -2418,7 +2326,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SServicePricePolicy", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.ServicePricePolicy", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -2472,10 +2380,10 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("ServiceId");
 
-                    b.ToTable("SServicePricePolicies", (string)null);
+                    b.ToTable("ServicePricePolicies", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SServiceResultIndice", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.ServiceResultIndice", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -2518,10 +2426,10 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("ServiceId");
 
-                    b.ToTable("SServiceResultIndices", (string)null);
+                    b.ToTable("ServiceResultIndices", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SSurgicalProcedureType", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SurgicalProcedureType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -2542,7 +2450,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SSurgicalProcedureTypes", (string)null);
+                    b.ToTable("SurgicalProcedureTypes", (string)null);
 
                     b.HasData(
                         new
@@ -2603,7 +2511,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SBranch", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Branch", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -2635,10 +2543,10 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SBranchs", (string)null);
+                    b.ToTable("Branchs", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SCareer", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Career", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -2666,10 +2574,10 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SCareers", (string)null);
+                    b.ToTable("Careers", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SChapterIcd", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.ChapterIcd", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -2691,7 +2599,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SChapterIcds", (string)null);
+                    b.ToTable("ChapterIcds", (string)null);
 
                     b.HasData(
                         new
@@ -3024,7 +2932,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SCountry", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Country", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -3050,7 +2958,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SCountries", (string)null);
+                    b.ToTable("Countries", (string)null);
 
                     b.HasData(
                         new
@@ -5079,7 +4987,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SDepartment", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Department", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -5134,10 +5042,10 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("DepartmentTypeId");
 
-                    b.ToTable("SDepartments", (string)null);
+                    b.ToTable("Departments", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SDepartmentType", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.DepartmentType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -5167,7 +5075,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SDepartmentTypes", (string)null);
+                    b.ToTable("DepartmentTypes", (string)null);
 
                     b.HasData(
                         new
@@ -5204,7 +5112,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SDistrict", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.District", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -5255,10 +5163,10 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("ProvinceId");
 
-                    b.ToTable("SDistricts", (string)null);
+                    b.ToTable("Districts", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SEthnic", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Ethnic", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -5304,10 +5212,10 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SEthnics", (string)null);
+                    b.ToTable("Ethnics", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SExecutionRoom", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.ExecutionRoom", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -5328,10 +5236,10 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("ServiceId");
 
-                    b.ToTable("SExecutionRooms", (string)null);
+                    b.ToTable("ExecutionRooms", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SGender", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Gender", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -5342,24 +5250,12 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
 
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -5371,14 +5267,13 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SGenders", (string)null);
+                    b.ToTable("Genders", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"),
                             Code = "KXD",
-                            CreatedDate = new DateTime(2023, 8, 20, 10, 29, 47, 843, DateTimeKind.Local).AddTicks(9168),
                             Inactive = false,
                             Name = "Chưa xác định",
                             SortOrder = 0
@@ -5387,7 +5282,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"),
                             Code = "NAM",
-                            CreatedDate = new DateTime(2023, 8, 20, 10, 29, 47, 843, DateTimeKind.Local).AddTicks(9191),
                             Inactive = false,
                             Name = "Nam",
                             SortOrder = 1
@@ -5396,14 +5290,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e9497984-d355-41af-b917-091500956be9"),
                             Code = "NU",
-                            CreatedDate = new DateTime(2023, 8, 20, 10, 29, 47, 843, DateTimeKind.Local).AddTicks(9193),
                             Inactive = false,
                             Name = "Nữ",
                             SortOrder = 2
                         });
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SHospital", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Hospital", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -5456,10 +5349,10 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SHospitals", (string)null);
+                    b.ToTable("Hospitals", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SIcd", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Icd", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -5468,6 +5361,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<string>("ChapterCode")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid?>("ChapterIcdId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ChapterName")
                         .HasMaxLength(512)
@@ -5568,10 +5464,12 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SIcds", (string)null);
+                    b.HasIndex("ChapterIcdId");
+
+                    b.ToTable("Icds", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SPatientType", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.PatientType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -5611,14 +5509,14 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SPatientTypes", (string)null);
+                    b.ToTable("PatientTypes", (string)null);
 
                     b.HasData(
                         new
                         {
                             Id = 1,
                             Code = "BHYT",
-                            CreatedDate = new DateTime(2023, 8, 20, 10, 29, 47, 844, DateTimeKind.Local).AddTicks(243),
+                            CreatedDate = new DateTime(2023, 8, 25, 20, 6, 22, 866, DateTimeKind.Local).AddTicks(5690),
                             Inactive = false,
                             Name = "Bảo hiểm y tế",
                             SortOrder = 0
@@ -5627,7 +5525,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "VP",
-                            CreatedDate = new DateTime(2023, 8, 20, 10, 29, 47, 844, DateTimeKind.Local).AddTicks(248),
+                            CreatedDate = new DateTime(2023, 8, 25, 20, 6, 22, 866, DateTimeKind.Local).AddTicks(5703),
                             Inactive = false,
                             Name = "Viện phí",
                             SortOrder = 0
@@ -5636,14 +5534,14 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 3,
                             Code = "DV",
-                            CreatedDate = new DateTime(2023, 8, 20, 10, 29, 47, 844, DateTimeKind.Local).AddTicks(249),
+                            CreatedDate = new DateTime(2023, 8, 25, 20, 6, 22, 866, DateTimeKind.Local).AddTicks(5705),
                             Inactive = false,
                             Name = "Dịch vụ",
                             SortOrder = 0
                         });
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SProvince", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Province", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -5669,10 +5567,516 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.ToTable("SProvinces", (string)null);
+                    b.ToTable("Provinces", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("889693ed-0453-4387-941b-d70dd4870dc5"),
+                            Code = "01",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Thành phố Hà Nội"
+                        },
+                        new
+                        {
+                            Id = new Guid("e7fe23cb-4304-4fb0-90a5-9ff4da5048aa"),
+                            Code = "02",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Hà Giang"
+                        },
+                        new
+                        {
+                            Id = new Guid("f5d76f98-2024-4c60-81ad-577359cb69d1"),
+                            Code = "04",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Cao Bằng"
+                        },
+                        new
+                        {
+                            Id = new Guid("8ed43986-0586-4742-8f89-a673c9f63756"),
+                            Code = "06",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Bắc Kạn"
+                        },
+                        new
+                        {
+                            Id = new Guid("38e1ffeb-7572-40c7-a716-cd880eb8d1ce"),
+                            Code = "08",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Tuyên Quang"
+                        },
+                        new
+                        {
+                            Id = new Guid("528fe36b-ac63-4f15-96f5-104ac221a155"),
+                            Code = "10",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Lào Cai"
+                        },
+                        new
+                        {
+                            Id = new Guid("52b17f24-a4a1-4cc6-88a0-c526ee8256c6"),
+                            Code = "11",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Điện Biên"
+                        },
+                        new
+                        {
+                            Id = new Guid("4e6a7717-9e60-4bae-a2d4-d29dacd8af47"),
+                            Code = "12",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Lai Châu"
+                        },
+                        new
+                        {
+                            Id = new Guid("8eb57a8e-8281-41bb-a5ab-637dcac67177"),
+                            Code = "14",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Sơn La"
+                        },
+                        new
+                        {
+                            Id = new Guid("77e4b05d-6245-43ee-ba94-84faaece9018"),
+                            Code = "15",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Yên Bái"
+                        },
+                        new
+                        {
+                            Id = new Guid("003360aa-6adc-4e1c-8da9-fd1d1665729d"),
+                            Code = "17",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Hoà Bình"
+                        },
+                        new
+                        {
+                            Id = new Guid("927f685b-f766-4bf8-93ed-ae7aabc4071c"),
+                            Code = "19",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Thái Nguyên"
+                        },
+                        new
+                        {
+                            Id = new Guid("c16dbbe1-bea2-413b-9216-5b547deac9f5"),
+                            Code = "20",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Lạng Sơn"
+                        },
+                        new
+                        {
+                            Id = new Guid("37d13fe4-1fd2-4268-bbae-4ab301f634c5"),
+                            Code = "22",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Quảng Ninh"
+                        },
+                        new
+                        {
+                            Id = new Guid("9c2a8569-d860-459d-8c3a-49966ea0038d"),
+                            Code = "24",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Bắc Giang"
+                        },
+                        new
+                        {
+                            Id = new Guid("a1f48dda-f1a3-473a-b4f7-6843312303f4"),
+                            Code = "25",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Phú Thọ"
+                        },
+                        new
+                        {
+                            Id = new Guid("7acbf3ec-7068-4007-a871-e0fee1ef28c5"),
+                            Code = "26",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Vĩnh Phúc"
+                        },
+                        new
+                        {
+                            Id = new Guid("2d80dbcf-c7d5-4450-9847-e7e6f737f567"),
+                            Code = "27",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Bắc Ninh"
+                        },
+                        new
+                        {
+                            Id = new Guid("ed0a3763-3a96-46c5-8094-c47a4708e3cb"),
+                            Code = "30",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Hải Dương"
+                        },
+                        new
+                        {
+                            Id = new Guid("46ddf496-df97-40b4-9b23-bfd17357abbe"),
+                            Code = "31",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Thành phố Hải Phòng"
+                        },
+                        new
+                        {
+                            Id = new Guid("198417f7-e503-4435-bde2-7547487c943a"),
+                            Code = "33",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Hưng Yên"
+                        },
+                        new
+                        {
+                            Id = new Guid("1d8b3ff0-1bbd-4fa4-a4c8-1a4e2c394a55"),
+                            Code = "34",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Thái Bình"
+                        },
+                        new
+                        {
+                            Id = new Guid("0fdfd770-bee4-4dc4-9eb5-d86816bfc2bf"),
+                            Code = "35",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Hà Nam"
+                        },
+                        new
+                        {
+                            Id = new Guid("94dab20e-c05d-4aa9-93e9-82e972792756"),
+                            Code = "36",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Nam Định"
+                        },
+                        new
+                        {
+                            Id = new Guid("aee0f859-e3bd-41ae-be15-17060d5ad617"),
+                            Code = "37",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Ninh Bình"
+                        },
+                        new
+                        {
+                            Id = new Guid("b2cace92-0d42-4789-97c7-83ea3c3667c5"),
+                            Code = "38",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Thanh Hóa"
+                        },
+                        new
+                        {
+                            Id = new Guid("ec0b077d-3957-4089-85f8-c1d6742aab19"),
+                            Code = "40",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Nghệ An"
+                        },
+                        new
+                        {
+                            Id = new Guid("b2035ac5-5e24-4a18-8587-62e65fd64697"),
+                            Code = "42",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Hà Tĩnh"
+                        },
+                        new
+                        {
+                            Id = new Guid("3035b967-95aa-46a5-be3f-b1f7bec1fd51"),
+                            Code = "44",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Quảng Bình"
+                        },
+                        new
+                        {
+                            Id = new Guid("8f0f2a47-34e4-4af3-811a-4d9c1fbf1cae"),
+                            Code = "45",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Quảng Trị"
+                        },
+                        new
+                        {
+                            Id = new Guid("0729fb2e-ae19-41f3-b948-b0f0c51fbf99"),
+                            Code = "46",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Thừa Thiên Huế"
+                        },
+                        new
+                        {
+                            Id = new Guid("40064e04-52c1-460d-b3d3-04f4e991f82c"),
+                            Code = "48",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Thành phố Đà Nẵng"
+                        },
+                        new
+                        {
+                            Id = new Guid("3109e53a-812d-455e-a968-e86ff499d74d"),
+                            Code = "49",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Quảng Nam"
+                        },
+                        new
+                        {
+                            Id = new Guid("af97b966-5b74-4580-a948-c8a9df0a5fba"),
+                            Code = "51",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Quảng Ngãi"
+                        },
+                        new
+                        {
+                            Id = new Guid("7a3c3be6-fe62-42ab-9764-f8e62d7f5916"),
+                            Code = "52",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Bình Định"
+                        },
+                        new
+                        {
+                            Id = new Guid("c30f4992-257a-4abf-abb0-2ea4b36f247f"),
+                            Code = "54",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Phú Yên"
+                        },
+                        new
+                        {
+                            Id = new Guid("5329306e-8290-4ca4-b110-0678c20752e0"),
+                            Code = "56",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Khánh Hòa"
+                        },
+                        new
+                        {
+                            Id = new Guid("68d199cc-b739-4d61-b412-40d2242f374d"),
+                            Code = "58",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Ninh Thuận"
+                        },
+                        new
+                        {
+                            Id = new Guid("33d6ec24-75ee-402e-b8d2-3296e90ea336"),
+                            Code = "60",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Bình Thuận"
+                        },
+                        new
+                        {
+                            Id = new Guid("3baaffd5-90a2-471f-8581-b5969184fcbe"),
+                            Code = "62",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Kon Tum"
+                        },
+                        new
+                        {
+                            Id = new Guid("b42cba39-912a-4400-84a5-fe15eb71766e"),
+                            Code = "64",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Gia Lai"
+                        },
+                        new
+                        {
+                            Id = new Guid("64a15171-a037-45b4-a55d-08ee58ce687d"),
+                            Code = "66",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Đắk Lắk"
+                        },
+                        new
+                        {
+                            Id = new Guid("2c03541e-db56-4bcb-8012-52b0f130ca09"),
+                            Code = "67",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Đắk Nông"
+                        },
+                        new
+                        {
+                            Id = new Guid("395f3325-851f-41ee-b652-5002ce7cf547"),
+                            Code = "68",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Lâm Đồng"
+                        },
+                        new
+                        {
+                            Id = new Guid("839f0efb-168d-4110-a041-60b463ae48a1"),
+                            Code = "70",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Bình Phước"
+                        },
+                        new
+                        {
+                            Id = new Guid("6f51a702-3c62-4a43-8042-9cf6e8bf3186"),
+                            Code = "72",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Tây Ninh"
+                        },
+                        new
+                        {
+                            Id = new Guid("ef981a1e-0af1-4b7f-9fd7-42de078e7d97"),
+                            Code = "74",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Bình Dương"
+                        },
+                        new
+                        {
+                            Id = new Guid("b6cf7563-f2be-4273-bcc7-58bb3cd4edec"),
+                            Code = "75",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Đồng Nai"
+                        },
+                        new
+                        {
+                            Id = new Guid("0b13943c-ead8-4e76-80b8-33b31828dd7a"),
+                            Code = "77",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Bà Rịa - Vũng Tàu"
+                        },
+                        new
+                        {
+                            Id = new Guid("7184c251-1c62-4b69-a63f-de49e85633f0"),
+                            Code = "79",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Thành phố Hồ Chí Minh"
+                        },
+                        new
+                        {
+                            Id = new Guid("9d49b503-ac5f-47f3-aaa2-8d18853bfba6"),
+                            Code = "80",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Long An"
+                        },
+                        new
+                        {
+                            Id = new Guid("f06e27bf-1470-4f7a-873f-f0dc77e405e4"),
+                            Code = "82",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Tiền Giang"
+                        },
+                        new
+                        {
+                            Id = new Guid("952aa342-c05d-46d3-8ffe-6a22d7512dc2"),
+                            Code = "83",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Bến Tre"
+                        },
+                        new
+                        {
+                            Id = new Guid("702c3cf1-d0b3-4647-8d39-7549dd42f610"),
+                            Code = "84",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Trà Vinh"
+                        },
+                        new
+                        {
+                            Id = new Guid("e5a4e82b-b29d-4b47-a563-82977ea93346"),
+                            Code = "86",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Vĩnh Long"
+                        },
+                        new
+                        {
+                            Id = new Guid("fa11ad72-29b7-49f4-986d-fea0d53de210"),
+                            Code = "87",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Đồng Tháp"
+                        },
+                        new
+                        {
+                            Id = new Guid("72478add-ca26-4a9b-92bd-2b075006f36a"),
+                            Code = "89",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh An Giang"
+                        },
+                        new
+                        {
+                            Id = new Guid("da06856d-9e6c-49f7-bbed-ca2a06ca81c1"),
+                            Code = "91",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Kiên Giang"
+                        },
+                        new
+                        {
+                            Id = new Guid("619d7aee-4e6a-4993-9d7a-c6e32958851f"),
+                            Code = "92",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Thành phố Cần Thơ"
+                        },
+                        new
+                        {
+                            Id = new Guid("cd4eab40-92a3-4898-8a65-c67ccde721c0"),
+                            Code = "93",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Hậu Giang"
+                        },
+                        new
+                        {
+                            Id = new Guid("3fd18cc5-7204-42a9-a940-c5cf3128518f"),
+                            Code = "94",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Sóc Trăng"
+                        },
+                        new
+                        {
+                            Id = new Guid("b6bdda7d-b047-45a0-9d73-ffcb4e938e38"),
+                            Code = "95",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Bạc Liêu"
+                        },
+                        new
+                        {
+                            Id = new Guid("f2aac7ae-5a85-48fc-9166-d9ab6efb79ab"),
+                            Code = "96",
+                            CountryId = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
+                            Inactive = false,
+                            Name = "Tỉnh Cà Mau"
+                        });
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Room", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -5718,6 +6122,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<int?>("RoomTypeId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("RoomTypeId1")
+                        .HasColumnType("int");
+
                     b.Property<int?>("SortOrder")
                         .HasColumnType("int");
 
@@ -5727,10 +6134,12 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("RoomTypeId");
 
-                    b.ToTable("SRooms", (string)null);
+                    b.HasIndex("RoomTypeId1");
+
+                    b.ToTable("Rooms", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoomType", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.RoomType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -5760,7 +6169,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SRoomTypes", (string)null);
+                    b.ToTable("RoomTypes", (string)null);
 
                     b.HasData(
                         new
@@ -5893,7 +6302,61 @@ namespace HIS.EntityFrameworkCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SSupplier", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SWard", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<Guid?>("DistrictId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DistrictId");
+
+                    b.ToTable("Wards", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Supplier", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -5948,10 +6411,10 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SSuppliers", (string)null);
+                    b.ToTable("Suppliers", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SUnit", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Unit", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -5976,7 +6439,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SUnits", (string)null);
+                    b.ToTable("Units", (string)null);
 
                     b.HasData(
                         new
@@ -6170,61 +6633,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SWard", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("DeletedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<Guid?>("DistrictId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DistrictId");
-
-                    b.ToTable("SWards", (string)null);
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.SPermission", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.Permission", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -6240,10 +6649,10 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SPermissions", (string)null);
+                    b.ToTable("Permissions", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.SRole", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.Role", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -6271,10 +6680,10 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SRoles", (string)null);
+                    b.ToTable("Roles", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.SRolePermissionBranch", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.RolePermissionBranch", b =>
                 {
                     b.Property<Guid?>("RoleId")
                         .HasColumnType("uniqueidentifier");
@@ -6291,7 +6700,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("PermissionId");
 
-                    b.ToTable("SRolePermissionBranchs", (string)null);
+                    b.ToTable("RolePermissionBranchs", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.SToken", b =>
@@ -6326,98 +6735,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("STokens", (string)null);
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.SUser", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Address")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<Guid?>("DistrictId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("Dob")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<Guid?>("GenderId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("Password")
-                        .HasMaxLength(1020)
-                        .HasColumnType("nvarchar(1020)");
-
-                    b.Property<string>("PhoneNumber")
-                        .HasMaxLength(25)
-                        .HasColumnType("nvarchar(25)");
-
-                    b.Property<Guid?>("ProvinceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UseType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<Guid?>("WardId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("3382be1c-2836-4246-99db-c4e1c781e868"),
-                            Email = "administrator@gmail.com",
-                            FirstName = "Admin",
-                            LastName = "Administrator",
-                            Password = "79956B61E1B250869A6716CE37EFD6E6",
-                            Status = 1,
-                            UseType = 0,
-                            UserName = "Administrator"
-                        });
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.SUserRole", b =>
-                {
-                    b.Property<Guid?>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("RoleId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("SUserRoles", (string)null);
+                    b.ToTable("Tokens", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.SYSAutoNumber", b =>
@@ -6526,46 +6844,143 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("sYSRefTypeCategories");
+                    b.ToTable("SYSRefTypeCategories");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.PatientRecord", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.User", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SCareer", "SCareerFk")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<Guid?>("DistrictId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("Dob")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<Guid?>("GenderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("Password")
+                        .HasMaxLength(1020)
+                        .HasColumnType("nvarchar(1020)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
+
+                    b.Property<Guid?>("ProvinceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UseType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<Guid?>("WardId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("3382be1c-2836-4246-99db-c4e1c781e868"),
+                            Email = "administrator@gmail.com",
+                            FirstName = "Admin",
+                            LastName = "Administrator",
+                            Password = "79956B61E1B250869A6716CE37EFD6E6",
+                            Status = 1,
+                            UseType = 0,
+                            UserName = "Administrator"
+                        });
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.UserRole", b =>
+                {
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("RoleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("UserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.HISPatientRecord", b =>
+                {
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Branch", "SBracnhFk")
+                        .WithMany()
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Career", "SCareerFk")
                         .WithMany()
                         .HasForeignKey("CareerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SCountry", "SCountryFk")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Country", "SCountryFk")
                         .WithMany()
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SDistrict", "SDistrictFk")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.District", "SDistrictFk")
                         .WithMany()
                         .HasForeignKey("DistrictId");
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SEthnic", "SEthnicFk")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Ethnic", "SEthnicFk")
                         .WithMany()
                         .HasForeignKey("EthnicityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SGender", "SGenderFk")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Gender", "SGenderFk")
                         .WithMany()
                         .HasForeignKey("GenderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Patient", "PatientFk")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.HISPatient", "PatientFk")
                         .WithMany()
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SProvince", "SProvinceFk")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Province", "SProvinceFk")
                         .WithMany()
                         .HasForeignKey("ProvinceId");
 
@@ -6574,6 +6989,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasForeignKey("WardId");
 
                     b.Navigation("PatientFk");
+
+                    b.Navigation("SBracnhFk");
 
                     b.Navigation("SCareerFk");
 
@@ -6590,177 +7007,82 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("SWardFk");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests.DExpMest", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.InOutStock", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SUser", "ApproverUser")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.User", "ApproverUser")
                         .WithMany()
                         .HasForeignKey("ApproverUserId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "ExpStock")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.User", "CreationUser")
+                        .WithMany()
+                        .HasForeignKey("CreationUserId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Room", "ExpStock")
                         .WithMany()
                         .HasForeignKey("ExpStockId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpExpMestType", "DImpExpMestType")
-                        .WithMany()
-                        .HasForeignKey("ImpExpMestTypeId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests.DImpMest", "DImpMest")
-                        .WithMany()
-                        .HasForeignKey("ImpMestId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "ImpStock")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Room", "ImpStock")
                         .WithMany()
                         .HasForeignKey("ImpStockId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Patient", "Patient")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.InOutStockType", "InOutStockType")
+                        .WithMany()
+                        .HasForeignKey("InOutStockTypeId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.HISPatient", "Patient")
                         .WithMany()
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.PatientRecord", "PatientRecord")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.HISPatientRecord", "PatientRecord")
                         .WithMany()
                         .HasForeignKey("PatientRecordId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SUser", "ReceiverUser")
-                        .WithMany()
-                        .HasForeignKey("ReceiverUserId");
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SDepartment", "ReqDepartment")
-                        .WithMany()
-                        .HasForeignKey("ReqDepartmentId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "ReqRoom")
-                        .WithMany()
-                        .HasForeignKey("ReqRoomId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SUser", "StockExpUser")
-                        .WithMany()
-                        .HasForeignKey("StockExpUserId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SSupplier", "SSupplier")
-                        .WithMany()
-                        .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("ApproverUser");
-
-                    b.Navigation("DImpExpMestType");
-
-                    b.Navigation("DImpMest");
-
-                    b.Navigation("ExpStock");
-
-                    b.Navigation("ImpStock");
-
-                    b.Navigation("Patient");
-
-                    b.Navigation("PatientRecord");
-
-                    b.Navigation("ReceiverUser");
-
-                    b.Navigation("ReqDepartment");
-
-                    b.Navigation("ReqRoom");
-
-                    b.Navigation("SSupplier");
-
-                    b.Navigation("StockExpUser");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests.DExpMestMedicine", b =>
-                {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests.DImpMest", "DExpMest")
-                        .WithMany()
-                        .HasForeignKey("ExpMestId");
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicine", "SMedicine")
-                        .WithMany()
-                        .HasForeignKey("MedicineId");
-
-                    b.Navigation("DExpMest");
-
-                    b.Navigation("SMedicine");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests.DImpMest", b =>
-                {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SUser", "ApproverUser")
-                        .WithMany()
-                        .HasForeignKey("ApproverUserId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DExpMests.DExpMest", "DExpMest")
-                        .WithMany()
-                        .HasForeignKey("ExpMestId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "ExpStock")
-                        .WithMany()
-                        .HasForeignKey("ExpStockId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpExpMestType", "DImpExpMestType")
-                        .WithMany()
-                        .HasForeignKey("ImpExpMestTypeId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "ImpStock")
-                        .WithMany()
-                        .HasForeignKey("ImpStockId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Patient", "Patient")
-                        .WithMany()
-                        .HasForeignKey("PatientId");
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.PatientRecord", "PatientRecord")
-                        .WithMany()
-                        .HasForeignKey("PatientRecordId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SUser", "ReceiverUser")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.User", "ReceiverUser")
                         .WithMany()
                         .HasForeignKey("ReceiverUserId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SDepartment", "ReqDepartment")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Department", "ReqDepartment")
                         .WithMany()
                         .HasForeignKey("ReqDepartmentId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "ReqRoom")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Room", "ReqRoom")
                         .WithMany()
                         .HasForeignKey("ReqRoomId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SUser", "StockImpUser")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.User", "StockExpUser")
+                        .WithMany()
+                        .HasForeignKey("StockExpUserId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.User", "StockImpUser")
                         .WithMany()
                         .HasForeignKey("StockImpUserId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SSupplier", "SSupplier")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Supplier", "Supplier")
                         .WithMany()
                         .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("ApproverUser");
 
-                    b.Navigation("DExpMest");
-
-                    b.Navigation("DImpExpMestType");
+                    b.Navigation("CreationUser");
 
                     b.Navigation("ExpStock");
 
                     b.Navigation("ImpStock");
+
+                    b.Navigation("InOutStockType");
 
                     b.Navigation("Patient");
 
@@ -6772,281 +7094,321 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Navigation("ReqRoom");
 
-                    b.Navigation("SSupplier");
+                    b.Navigation("StockExpUser");
 
                     b.Navigation("StockImpUser");
+
+                    b.Navigation("Supplier");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests.DImpMestMedicine", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.InOutStockMedicine", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DImpMests.DImpMest", "DImpMest")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.InOutStock", "InOutStock")
                         .WithMany()
-                        .HasForeignKey("ImpMestId");
+                        .HasForeignKey("InOutStockId");
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicine", "SMedicine")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Medicine", "Medicine")
                         .WithMany()
                         .HasForeignKey("MedicineId");
 
-                    b.Navigation("DImpMest");
+                    b.Navigation("InOutStock");
 
-                    b.Navigation("SMedicine");
+                    b.Navigation("Medicine");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.DMedicineStock", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.MedicineStock", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicine", "SMedicine")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Medicine", "Medicine")
                         .WithMany()
                         .HasForeignKey("MedicineId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "SStock")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Room", "Stock")
                         .WithMany()
                         .HasForeignKey("StockId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("SMedicine");
+                    b.Navigation("Medicine");
 
-                    b.Navigation("SStock");
+                    b.Navigation("Stock");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Medicines.SMedicinePricePolicy", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Material", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicine", "SMedicine")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.MaterialType", "MaterialType")
+                        .WithMany()
+                        .HasForeignKey("MaterialTypeId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.MaterialType", null)
+                        .WithMany("SMaterials")
+                        .HasForeignKey("MaterialTypeId1");
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Unit", "Unit")
+                        .WithMany()
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Unit", null)
+                        .WithMany("Materials")
+                        .HasForeignKey("UnitId1");
+
+                    b.Navigation("MaterialType");
+
+                    b.Navigation("Unit");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.MaterialType", b =>
+                {
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Unit", "SUnit")
+                        .WithMany()
+                        .HasForeignKey("ServiceUnitId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Unit", null)
+                        .WithMany("MaterialTypes")
+                        .HasForeignKey("UnitId");
+
+                    b.Navigation("SUnit");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Medicine", b =>
+                {
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.MedicineLine", "MedicineLine")
+                        .WithMany()
+                        .HasForeignKey("MedicineLineId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.MedicineType", "MedicineType")
+                        .WithMany()
+                        .HasForeignKey("MedicineTypeId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Unit", "Unit")
+                        .WithMany()
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Unit", null)
+                        .WithMany("Medicines")
+                        .HasForeignKey("UnitId1");
+
+                    b.Navigation("Country");
+
+                    b.Navigation("MedicineLine");
+
+                    b.Navigation("MedicineType");
+
+                    b.Navigation("Unit");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.MedicineType", b =>
+                {
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.MedicineGroup", "MedicineGroup")
+                        .WithMany()
+                        .HasForeignKey("MedicineGroupId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.MedicineLine", "MedicineLine")
+                        .WithMany()
+                        .HasForeignKey("MedicineLineId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Unit", "Unit")
+                        .WithMany()
+                        .HasForeignKey("UnitId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Unit", null)
+                        .WithMany("MedicineTypes")
+                        .HasForeignKey("UnitId1");
+
+                    b.Navigation("Country");
+
+                    b.Navigation("MedicineGroup");
+
+                    b.Navigation("MedicineLine");
+
+                    b.Navigation("Unit");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Medicines.MedicinePricePolicy", b =>
+                {
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Medicine", "Medicine")
                         .WithMany()
                         .HasForeignKey("MedicineId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SPatientType", "SPatientType")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.PatientType", "PatientType")
                         .WithMany()
                         .HasForeignKey("PatientTypeId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("SMedicine");
+                    b.Navigation("Medicine");
 
-                    b.Navigation("SPatientType");
+                    b.Navigation("PatientType");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMaterial", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Service", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMaterialType", "SMaterialType")
-                        .WithMany("SMaterials")
-                        .HasForeignKey("MaterialTypeId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SUnit", "SUnit")
-                        .WithMany("SMaterials")
-                        .HasForeignKey("UnitId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("SMaterialType");
-
-                    b.Navigation("SUnit");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMaterialType", b =>
-                {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SUnit", "SUnit")
-                        .WithMany("SMaterialTypes")
-                        .HasForeignKey("ServiceUnitId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("SUnit");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMedicine", b =>
-                {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SCountry", "SCountry")
-                        .WithMany("SMedicines")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicineLine", "SMedicineLine")
-                        .WithMany("SMedicines")
-                        .HasForeignKey("MedicineLineId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicineType", "SMedicineType")
-                        .WithMany("SMedicines")
-                        .HasForeignKey("MedicineTypeId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SUnit", "SUnit")
-                        .WithMany("SMedicines")
-                        .HasForeignKey("UnitId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("SCountry");
-
-                    b.Navigation("SMedicineLine");
-
-                    b.Navigation("SMedicineType");
-
-                    b.Navigation("SUnit");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMedicineType", b =>
-                {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SCountry", "SCountry")
-                        .WithMany("SMedicineTypes")
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicineGroup", "SMedicineGroup")
-                        .WithMany("SMedicineTypes")
-                        .HasForeignKey("MedicineGroupId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SMedicineLine", "SMedicineLine")
-                        .WithMany("SMedicineTypes")
-                        .HasForeignKey("MedicineLineId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SUnit", "SUnit")
-                        .WithMany("SMedicineTypes")
-                        .HasForeignKey("UnitId")
-                        .OnDelete(DeleteBehavior.NoAction);
-
-                    b.Navigation("SCountry");
-
-                    b.Navigation("SMedicineGroup");
-
-                    b.Navigation("SMedicineLine");
-
-                    b.Navigation("SUnit");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SService", b =>
-                {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Services.SServiceGroupHeIn", "SServiceGroupHeIn")
-                        .WithMany("SServices")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Services.ServiceGroupHeIn", "ServiceGroupHeIn")
+                        .WithMany()
                         .HasForeignKey("ServiceGroupHeInId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SServiceGroup", "SServiceGroup")
-                        .WithMany("SServices")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.ServiceGroup", "ServiceGroup")
+                        .WithMany()
                         .HasForeignKey("ServiceGroupId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Services.SSurgicalProcedureType", "SSurgicalProcedureType")
-                        .WithMany("SServices")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Services.SurgicalProcedureType", "SurgicalProcedureType")
+                        .WithMany()
                         .HasForeignKey("SurgicalProcedureTypeId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SUnit", "SUnit")
-                        .WithMany("SServices")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Unit", "Unit")
+                        .WithMany()
                         .HasForeignKey("UnitId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("SServiceGroup");
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Unit", null)
+                        .WithMany("Services")
+                        .HasForeignKey("UnitId1");
 
-                    b.Navigation("SServiceGroupHeIn");
+                    b.Navigation("ServiceGroup");
 
-                    b.Navigation("SSurgicalProcedureType");
+                    b.Navigation("ServiceGroupHeIn");
 
-                    b.Navigation("SUnit");
+                    b.Navigation("SurgicalProcedureType");
+
+                    b.Navigation("Unit");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SServicePricePolicy", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.ServicePricePolicy", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SPatientType", "SPatientType")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.PatientType", "PatientType")
                         .WithMany()
                         .HasForeignKey("PatientTypeId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SService", "SService")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Service", "Service")
                         .WithMany()
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("SPatientType");
+                    b.Navigation("PatientType");
 
-                    b.Navigation("SService");
+                    b.Navigation("Service");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SServiceResultIndice", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.ServiceResultIndice", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SService", "SService")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Service", "Service")
                         .WithMany()
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("SService");
+                    b.Navigation("Service");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SDepartment", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Department", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SBranch", "SBranch")
-                        .WithMany("Departments")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Branch", "Branch")
+                        .WithMany()
                         .HasForeignKey("BranchId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SDepartmentType", "SDepartmentType")
-                        .WithMany("SDepartments")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.DepartmentType", "DepartmentType")
+                        .WithMany()
                         .HasForeignKey("DepartmentTypeId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("SBranch");
+                    b.Navigation("Branch");
 
-                    b.Navigation("SDepartmentType");
+                    b.Navigation("DepartmentType");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SDistrict", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.District", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SProvince", "Province")
-                        .WithMany("Districts")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Province", "Province")
+                        .WithMany()
                         .HasForeignKey("ProvinceId")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Province");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SExecutionRoom", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.ExecutionRoom", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", "SRoom")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Room", "Room")
                         .WithMany()
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.SService", "SService")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Service", "Service")
                         .WithMany()
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("SRoom");
+                    b.Navigation("Room");
 
-                    b.Navigation("SService");
+                    b.Navigation("Service");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SProvince", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Icd", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SCountry", "Country")
-                        .WithMany("SProvinces")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.ChapterIcd", "ChapterIcd")
+                        .WithMany()
+                        .HasForeignKey("ChapterIcdId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.Navigation("ChapterIcd");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Province", b =>
+                {
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Country", "Country")
+                        .WithMany()
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("Country");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoom", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Room", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SDepartment", "SDepartment")
-                        .WithMany("SRooms")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Department", "Department")
+                        .WithMany()
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoomType", "SRoomType")
-                        .WithMany("SRooms")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.RoomType", "RoomType")
+                        .WithMany()
                         .HasForeignKey("RoomTypeId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.Navigation("SDepartment");
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.RoomType", null)
+                        .WithMany("SRooms")
+                        .HasForeignKey("RoomTypeId1");
 
-                    b.Navigation("SRoomType");
+                    b.Navigation("Department");
+
+                    b.Navigation("RoomType");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SWard", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SDistrict", "District")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.District", "District")
                         .WithMany("Wards")
                         .HasForeignKey("DistrictId")
                         .OnDelete(DeleteBehavior.NoAction);
@@ -7054,19 +7416,19 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("District");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.SRolePermissionBranch", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.RolePermissionBranch", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SBranch", "Branch")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Branch", "Branch")
                         .WithMany()
                         .HasForeignKey("BranchId");
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SPermission", "Permission")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.Permission", "Permission")
                         .WithMany("RolePermissions")
                         .HasForeignKey("PermissionId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SRole", "Role")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.Role", "Role")
                         .WithMany("RolePermissions")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -7081,7 +7443,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.SToken", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SUser", "User")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.User", "User")
                         .WithMany("UserTokens")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction);
@@ -7089,28 +7451,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.SUserRole", b =>
-                {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SRole", "Role")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SUser", "User")
-                        .WithMany("UserRoles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Role");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.SYSAutoNumber", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SBranch", "Branch")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Branch", "Branch")
                         .WithMany()
                         .HasForeignKey("BranchId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -7138,112 +7481,63 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("RefTypeCategory");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMaterialType", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.UserRole", b =>
+                {
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.User", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.MaterialType", b =>
                 {
                     b.Navigation("SMaterials");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMedicineGroup", b =>
-                {
-                    b.Navigation("SMedicineTypes");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMedicineLine", b =>
-                {
-                    b.Navigation("SMedicineTypes");
-
-                    b.Navigation("SMedicines");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SMedicineType", b =>
-                {
-                    b.Navigation("SMedicines");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.SServiceGroup", b =>
-                {
-                    b.Navigation("SServices");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SServiceGroupHeIn", b =>
-                {
-                    b.Navigation("SServices");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SSurgicalProcedureType", b =>
-                {
-                    b.Navigation("SServices");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SBranch", b =>
-                {
-                    b.Navigation("Departments");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SCountry", b =>
-                {
-                    b.Navigation("SMedicineTypes");
-
-                    b.Navigation("SMedicines");
-
-                    b.Navigation("SProvinces");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SDepartment", b =>
-                {
-                    b.Navigation("SRooms");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SDepartmentType", b =>
-                {
-                    b.Navigation("SDepartments");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SDistrict", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.District", b =>
                 {
                     b.Navigation("Wards");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SProvince", b =>
-                {
-                    b.Navigation("Districts");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SRoomType", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.RoomType", b =>
                 {
                     b.Navigation("SRooms");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.SUnit", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Unit", b =>
                 {
-                    b.Navigation("SMaterialTypes");
+                    b.Navigation("MaterialTypes");
 
-                    b.Navigation("SMaterials");
+                    b.Navigation("Materials");
 
-                    b.Navigation("SMedicineTypes");
+                    b.Navigation("MedicineTypes");
 
-                    b.Navigation("SMedicines");
+                    b.Navigation("Medicines");
 
-                    b.Navigation("SServices");
+                    b.Navigation("Services");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.SPermission", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.Permission", b =>
                 {
                     b.Navigation("RolePermissions");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.SRole", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.Role", b =>
                 {
                     b.Navigation("RolePermissions");
 
                     b.Navigation("UserRoles");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.SUser", b =>
-                {
-                    b.Navigation("UserRoles");
-
-                    b.Navigation("UserTokens");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.SYSRefTypeCategory", b =>
@@ -7251,6 +7545,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("AutoNumbers");
 
                     b.Navigation("RefTypes");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.User", b =>
+                {
+                    b.Navigation("UserRoles");
+
+                    b.Navigation("UserTokens");
                 });
 #pragma warning restore 612, 618
         }

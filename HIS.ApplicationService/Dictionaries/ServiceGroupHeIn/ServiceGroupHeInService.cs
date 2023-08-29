@@ -15,7 +15,7 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroupHeIn
         {
         }
 
-        public async Task<ApiResult<SServiceGroupHeInDto>> CreateOrEdit(SServiceGroupHeInDto input)
+        public async Task<ApiResult<ServiceGroupHeInDto>> CreateOrEdit(ServiceGroupHeInDto input)
         {
             if (GuidHelper.IsNullOrEmpty(input.Id))
                 return await Create(input);
@@ -23,18 +23,18 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroupHeIn
                 return await Update(input);
         }
 
-        private async Task<ApiResult<SServiceGroupHeInDto>> Create(SServiceGroupHeInDto input)
+        private async Task<ApiResult<ServiceGroupHeInDto>> Create(ServiceGroupHeInDto input)
         {
-            var result = new ApiResult<SServiceGroupHeInDto>();
+            var result = new ApiResult<ServiceGroupHeInDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
 
-                    var data = _mapper.Map<SServiceGroupHeIn>(input);
+                    var data = _mapper.Map<EntityFrameworkCore.Entities.Categories.Services.ServiceGroupHeIn>(input);
 
-                    _dbContext.SServiceGroupHeIns.Add(data);
+                    _dbContext.ServiceGroupHeIns.Add(data);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -55,14 +55,14 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroupHeIn
             return await Task.FromResult(result);
         }
 
-        private async Task<ApiResult<SServiceGroupHeInDto>> Update(SServiceGroupHeInDto input)
+        private async Task<ApiResult<ServiceGroupHeInDto>> Update(ServiceGroupHeInDto input)
         {
-            var result = new ApiResult<SServiceGroupHeInDto>();
+            var result = new ApiResult<ServiceGroupHeInDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
-                    var sServiceGroupHeIn = _dbContext.SServiceGroupHeIns.FirstOrDefault(f => f.Id == input.Id);
+                    var sServiceGroupHeIn = _dbContext.ServiceGroupHeIns.FirstOrDefault(f => f.Id == input.Id);
                     if (sServiceGroupHeIn == null)
                         _mapper.Map(input, sServiceGroupHeIn);
 
@@ -86,17 +86,17 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroupHeIn
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SServiceGroupHeInDto>> Delete(Guid id)
+        public async Task<ApiResult<ServiceGroupHeInDto>> Delete(Guid id)
         {
-            var result = new ApiResult<SServiceGroupHeInDto>();
+            var result = new ApiResult<ServiceGroupHeInDto>();
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
                 {
-                    var sServiceGroupHeIn = _dbContext.SServiceGroupHeIns.SingleOrDefault(x => x.Id == id);
+                    var sServiceGroupHeIn = _dbContext.ServiceGroupHeIns.SingleOrDefault(x => x.Id == id);
                     if (sServiceGroupHeIn != null)
                     {
-                        _dbContext.SServiceGroupHeIns.Remove(sServiceGroupHeIn);
+                        _dbContext.ServiceGroupHeIns.Remove(sServiceGroupHeIn);
                         await _dbContext.SaveChangesAsync();
                         result.IsSuccessed = true;
 
@@ -117,14 +117,14 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroupHeIn
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<SServiceGroupHeInDto>> GetAll(GetAllSServiceGroupHeInInput input)
+        public async Task<ApiResultList<ServiceGroupHeInDto>> GetAll(GetAllServiceGroupHeInInput input)
         {
-            var result = new ApiResultList<SServiceGroupHeInDto>();
+            var result = new ApiResultList<ServiceGroupHeInDto>();
 
             try
             {
-                result.Result = (from r in _dbContext.SServiceGroupHeIns
-                                 select new SServiceGroupHeInDto()
+                result.Result = (from r in _dbContext.ServiceGroupHeIns
+                                 select new ServiceGroupHeInDto()
                                  {
                                      Id = r.Id,
                                      Code = r.Code,
@@ -146,14 +146,14 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroupHeIn
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SServiceGroupHeInDto>> GetById(Guid id)
+        public async Task<ApiResult<ServiceGroupHeInDto>> GetById(Guid id)
         {
-            var result = new ApiResult<SServiceGroupHeInDto>();
+            var result = new ApiResult<ServiceGroupHeInDto>();
 
             try
             {
-                var service = _dbContext.SServiceGroupHeIns.FirstOrDefault(s => s.Id == id);
-                result.Result = _mapper.Map<SServiceGroupHeInDto>(service);
+                var service = _dbContext.ServiceGroupHeIns.FirstOrDefault(s => s.Id == id);
+                result.Result = _mapper.Map<ServiceGroupHeInDto>(service);
             }
             catch (Exception ex)
             {

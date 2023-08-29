@@ -10,17 +10,17 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class ExecutionRoomConfiguration : IEntityTypeConfiguration<SExecutionRoom>
+    public class ExecutionRoomConfiguration : IEntityTypeConfiguration<ExecutionRoom>
     {
-        public void Configure(EntityTypeBuilder<SExecutionRoom> builder)
+        public void Configure(EntityTypeBuilder<ExecutionRoom> builder)
         {
-            builder.ToTable("SExecutionRooms");
+            builder.ToTable("ExecutionRooms");
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(t => t.SService).WithMany()
+            builder.HasOne(t => t.Service).WithMany()
               .HasForeignKey(pc => pc.ServiceId).OnDelete(DeleteBehavior.NoAction);
 
-            builder.HasOne(t => t.SRoom).WithMany()
+            builder.HasOne(t => t.Room).WithMany()
               .HasForeignKey(pc => pc.RoomId).OnDelete(DeleteBehavior.NoAction);
         }
     }
