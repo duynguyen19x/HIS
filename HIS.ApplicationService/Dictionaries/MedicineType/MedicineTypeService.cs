@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HIS.Core.Linq;
 using HIS.Dtos.Commons;
+using HIS.Dtos.Dictionaries.MedicineGroup;
 using HIS.Dtos.Dictionaries.MedicineType;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
@@ -279,6 +280,29 @@ namespace HIS.ApplicationService.Dictionaries.MedicineType
                 result.Result = _mapper.Map<MedicineTypeDto>(medicineType);
             }
 
+            return await Task.FromResult(result);
+        }
+
+        public async Task<ApiResult<bool>> Import(IList<MedicineTypeDto> input)
+        {
+            var result = new ApiResult<bool>();
+
+            using (var transaction = _dbContext.Database.BeginTransaction())
+            {
+                try
+                {
+                    var medicineTypes = _mapper.Map<List<EntityFrameworkCore.Entities.Categories.MedicineType>>(input);
+                    _dbContext.MedicineTypes.AddRange(medicineTypes);
+                    await _dbContext.SaveChangesAsync();
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    result.IsSuccessed = false;
+                    result.Message = ex.Message;
+                    transaction.Rollback();
+                }
+            }
             return await Task.FromResult(result);
         }
     }
