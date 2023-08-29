@@ -1,11 +1,16 @@
 ﻿using HIS.Core.Entities.Auditing;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
-    /// Đói tượng bệnh nhân.
+    /// Kết quả khám, chữa bệnh.
     /// </summary>
-    public class PatientType : AuditedEntity<int>
+    public class MedicalRecordResult : AuditedEntity<int>
     {
         public virtual string Code { get; set; }
         public virtual string Name { get; set; }
@@ -13,8 +18,8 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public virtual int SortOrder { get; set; }
         public virtual bool Inactive { get; set; }
 
-        public PatientType() { }
-        public PatientType(int id, string code, string name, string description, int sortOrder, bool inactive)
+        public MedicalRecordResult() { }
+        public MedicalRecordResult(int id, string code, string name, string description, int sortOrder, bool inactive)
         {
             this.Id = id;
             this.Code = code;

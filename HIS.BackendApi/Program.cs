@@ -1,14 +1,10 @@
 using HIS.ApplicationService;
 using HIS.AutoMappers;
-using HIS.Core.Repositories;
-using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
-using HIS.EntityFrameworkCore.EntityFrameworkCore.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigureService();
@@ -28,7 +24,6 @@ void ConfigureService()
         builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
     }));
 
-    builder.Services.AddTransient(typeof(IRepository<,>), typeof(HISRepository<,>));
     builder.Services.ServiceCollection();
 
     string issuer = builder.Configuration.GetValue<string>("Tokens:Issuer");

@@ -7,6 +7,7 @@ using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.Systems;
+using HIS.EntityFrameworkCore.EntityFrameworkCore.Seed;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
@@ -52,7 +53,6 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<Unit> Units { get; set; }
         public DbSet<Material> Materials { get; set; }
         public DbSet<MaterialType> MaterialTypes { get; set; }
-        public DbSet<PatientType> PatientTypes { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Province> Provinces { get; set; }
         public DbSet<District> Districts { get; set; }
@@ -78,9 +78,24 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<InOutStock> InOutStocks { get; set; }
         public DbSet<InOutStockMedicine> InOutStockMedicines { get; set; }
 
+
+        public DbSet<PatientType> PatientTypes { get; set; }
+        public DbSet<PatientRecordType> PatientRecordTypes { get; set; }
+        public DbSet<MedicalRecordType> MedicalRecordTypes { get; set; }
+        public DbSet<MedicalRecordResult> MedicalRecordResults { get; set; }
+        public DbSet<MedicalRecordEndType> MedicalRecordEndTypes { get; set; }
+        public DbSet<TreatmentResult> TreatmentResults { get; set; }
+        public DbSet<TreatmentType> TreatmentTypes { get; set; }
+
         #region Patient
         public DbSet<Patient> Patients { get; set; }
         public DbSet<PatientRecord> PatientRecords { get; set; }
+        public DbSet<MedicalRecord> MedicalRecords { get; set; }
+        public DbSet<Treatment> Treatments { get; set; }
+
+        public DbSet<ServiceRequest> ServiceRequests { get; set; }
+        public DbSet<ServiceRequestDetail> ServiceRequestDetails { get; set; }
+
         #endregion
 
         #region System
