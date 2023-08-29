@@ -68,7 +68,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.MedicineStock
                 result.Result = (from medicineStock in _dbContext.MedicineStocks
                                  join medicine in _dbContext.Medicines on medicineStock.MedicineId equals medicine.Id
 
-                                 where medicineStock.IsDeleted == false && medicineStock.AvailableQuantity > 0
+                                 where medicineStock.IsDeleted == false 
+                                    && medicineStock.AvailableQuantity > 0
+                                    && medicineStock.StockId == stockId
 
                                  select new MedicineStockDto()
                                  {

@@ -694,8 +694,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
                                                           Tutorial = medicine.Tutorial,
                                                           CountryId = medicine.CountryId,
                                                           ImpPrice = medicine.ImpPrice,
-                                                          RequestQuantity = medicine.ImpQuantity,
-                                                          ApprovedQuantity = medicine.ImpQuantity,
+                                                          RequestQuantity = inOutStockMedicine.RequestQuantity,
+                                                          ApprovedQuantity = inOutStockMedicine.ApprovedQuantity,
                                                           ImpVatRate = medicine.ImpVatRate,
                                                           ImpTaxRate = medicine.ImpTaxRate,
                                                           Description = medicine.Description,
@@ -803,7 +803,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
         public async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockCanCelStockOut(InOutStockDto input)
         {
             input.Status = InOutStatusType.Approved;
-            return await ImportFromAnotherStock(input);
+            return await ImportFromAnotherStock(input, true, false);
         }
 
         /// <summary>
@@ -825,7 +825,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
         public async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockCancelStockIn(InOutStockDto input)
         {
             input.Status = InOutStatusType.ReceivedOutStock;
-            return await ImportFromAnotherStock(input);
+            return await ImportFromAnotherStock(input, false, true);
         }
 
         /// <summary>
@@ -833,7 +833,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        private async Task<ApiResult<InOutStockDto>> ImportFromAnotherStock(InOutStockDto input)
+        private async Task<ApiResult<InOutStockDto>> ImportFromAnotherStock(InOutStockDto input, bool canCelStockOut = false, bool cancelStockIn = false)
         {
             var result = new ApiResult<InOutStockDto>();
 
@@ -856,7 +856,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
                     var inOutStockMedicines = new List<InOutStockMedicine>();
                     var medicineStocks = new List<EntityFrameworkCore.Entities.Business.Pharmaceuticals.MedicineStock>();
 
-                    if (GuidHelper.IsNullOrEmpty(input.Id))
+                    if (GuidHelper.IsNullOrEmpty(input.Id)) // Thêm mới (Lưu tạm)
                     {
                         inOutStock = _mapper.Map<EntityFrameworkCore.Entities.Business.Pharmaceuticals.InOutStock>(input);
                         inOutStock.Id = id;
@@ -865,6 +865,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
 
                         foreach (var inOutStockMedicineDto in input.InOutStockMedicines)
                         {
+                            inOutStockMedicineDto.ApprovedQuantity = inOutStockMedicineDto.RequestQuantity;
                             var inOutStockMedicine = _mapper.Map<InOutStockMedicine>(inOutStockMedicineDto);
                             inOutStockMedicine.Id = Guid.NewGuid();
                             inOutStockMedicine.InOutStockId = id;
@@ -872,63 +873,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
                             inOutStockMedicines.Add(inOutStockMedicine);
                         }
 
-                        // Trừ khả dụng kho xuất
-                        var medicineIds = input.InOutStockMedicines.Select(s => s.MedicineId).ToList();
-                        if (medicineIds != null && medicineIds.Count > 0)
-                        {
-                            var medicineStockOuts = _dbContext.MedicineStocks.Where(w => w.StockId == input.ExpStockId && medicineIds.Contains(w.MedicineId)).ToList();
-                            foreach (var medicineStock in medicineStockOuts)
-                            {
-                                var inOutStockMedicine = input.InOutStockMedicines.FirstOrDefault(f => f.MedicineId == medicineStock.MedicineId);
-                                if (inOutStockMedicine != null)
-                                {
-                                    medicineStock.AvailableQuantity -= inOutStockMedicine.ApprovedQuantity.GetValueOrDefault();
-                                }
-                            }
-                        }
-
-                        // Trạng thái nhập kho mới thêm vào thuốc trong kho
-                        if (input.Status == InOutStatusType.ReceivedInStock)
-                        {
-                            inOutStock.StockImpTime = dateNow;
-                            inOutStock.StockImpUserId = SessionExtensions.Login?.Id;
-
-                            if (medicineIds != null && medicineIds.Count > 0)
-                            {
-                                var medicineStockOlds = _dbContext.MedicineStocks.Where(w => medicineIds.Contains(w.MedicineId) && w.StockId == inOutStock.ImpStockId).ToList();
-
-                                foreach (var inOutStockMedicineDto in input.InOutStockMedicines)
-                                {
-                                    // Nếu tồn tại thuốc trong kho thì cộng thêm vào tồn và khả dụng
-                                    var medicineStock = medicineStockOlds?.FirstOrDefault(f => f.MedicineId == inOutStockMedicineDto.MedicineId);
-                                    if (medicineStock != null)
-                                    {
-                                        medicineStock.ModifiedBy = SessionExtensions.Login?.Id;
-                                        medicineStock.ModifiedDate = dateNow;
-
-                                        medicineStock.AvailableQuantity += inOutStockMedicineDto.ApprovedQuantity.GetValueOrDefault();
-                                        medicineStock.Quantity += inOutStockMedicineDto.ApprovedQuantity.GetValueOrDefault();
-                                    }
-                                    else // Nếu chưa tồn tại thuốc trong kho thì thêm mới thuốc vào kho
-                                    {
-                                        medicineStocks.Add(new EntityFrameworkCore.Entities.Business.Pharmaceuticals.MedicineStock()
-                                        {
-                                            Id = Guid.NewGuid(),
-                                            CreatedDate = dateNow,
-                                            CreatedBy = SessionExtensions.Login?.Id,
-                                            AvailableQuantity = inOutStockMedicineDto.ApprovedQuantity.GetValueOrDefault(),
-                                            Quantity = inOutStockMedicineDto.ApprovedQuantity.GetValueOrDefault(),
-                                            StockId = input.ImpStockId,
-                                            MedicineId = inOutStockMedicineDto.MedicineId
-                                        });
-                                    }
-                                }
-                            }
-                        }
-
                         _dbContext.InOutStocks.Add(inOutStock);
                     }
-                    else
+                    else // Sửa
                     {
                         inOutStock = _dbContext.InOutStocks.FirstOrDefault(d => d.Id == input.Id);
 
@@ -936,23 +883,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
                         var inOutStockMedicineOlds = _dbContext.InOutStockMedicines.Where(s => s.InOutStockId == input.Id).ToList();
                         if (inOutStockMedicineOlds != null)
                         {
-                            _dbContext.InOutStockMedicines.RemoveRange(inOutStockMedicineOlds);
-                        }
-
-                        foreach (var inOutStockMedicineDto in input.InOutStockMedicines)
-                        {
-                            var inOutStockMedicine = _mapper.Map<InOutStockMedicine>(inOutStockMedicineDto);
-                            if (GuidHelper.IsNullOrEmpty(inOutStockMedicine.Id))
-                                inOutStockMedicine.Id = Guid.NewGuid();
-                            inOutStockMedicine.InOutStockId = input.Id;
-
-                            inOutStockMedicines.Add(inOutStockMedicine);
-                        }
-
-                        // Trạng thái nhập kho thì trừ đi tồn kho ở kho xuất (chỉ trừ tồn kho vì khả dụng đã trừ lúc tạo phiếu)
-                        if (input.Status == InOutStatusType.ReceivedOutStock)
-                        {
-                            var medicineIds = input.InOutStockMedicines.Select(s => s.MedicineId).ToList();
+                            // Cộng lại khả dụng bản ghi cũ
+                            var medicineIds = inOutStockMedicineOlds.Select(s => s.MedicineId).ToList();
                             if (medicineIds != null && medicineIds.Count > 0)
                             {
                                 var medicineStockOuts = _dbContext.MedicineStocks.Where(w => w.StockId == input.ExpStockId && medicineIds.Contains(w.MedicineId)).ToList();
@@ -961,55 +893,125 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
                                     var inOutStockMedicine = input.InOutStockMedicines.FirstOrDefault(f => f.MedicineId == medicineStock.MedicineId);
                                     if (inOutStockMedicine != null)
                                     {
-                                        medicineStock.Quantity -= inOutStockMedicine.ApprovedQuantity.GetValueOrDefault();
+                                        medicineStock.AvailableQuantity += inOutStockMedicine.ApprovedQuantity.GetValueOrDefault();
                                     }
                                 }
                             }
+
+                            _dbContext.InOutStockMedicines.RemoveRange(inOutStockMedicineOlds);
                         }
 
-                        // Trạng thái nhập kho mới thêm vào thuốc trong kho
-                        if (input.Status == InOutStatusType.ReceivedInStock)
+                        // Thêm mới bản ghi InOutStockMedicines
+                        foreach (var inOutStockMedicineDto in input.InOutStockMedicines)
                         {
-                            input.StockImpTime = dateNow;
-                            input.StockImpUserId = SessionExtensions.Login?.Id;
-
-                            var medicineIds = input.InOutStockMedicines.Select(s => s.MedicineId).ToList();
-                            if (medicineIds != null && medicineIds.Count > 0)
+                            switch (input.Status)
                             {
-                                var medicineStockOlds = _dbContext.MedicineStocks.Where(w => medicineIds.Contains(w.MedicineId) && w.StockId == inOutStock.ImpStockId).ToList();
+                                // Trạng thái thêm mới và gửi y/c thì mặc định để SL YC = SL Duyệt
+                                case InOutStatusType.New:
+                                case InOutStatusType.Request:
+                                    inOutStockMedicineDto.ApprovedQuantity = inOutStockMedicineDto.RequestQuantity;
+                                    break;
+                            }
 
-                                foreach (var dImMestMedicineDto in input.InOutStockMedicines)
+                            var inOutStockMedicine = _mapper.Map<InOutStockMedicine>(inOutStockMedicineDto);
+                            if (GuidHelper.IsNullOrEmpty(inOutStockMedicine.Id))
+                                inOutStockMedicine.Id = Guid.NewGuid();
+                            inOutStockMedicine.InOutStockId = input.Id;
+
+                            inOutStockMedicines.Add(inOutStockMedicine);
+                        }
+
+                        switch (input.Status)
+                        {
+                            case InOutStatusType.Approved:
                                 {
-                                    // Nếu tồn tại thuốc trong kho thì cộng thêm vào tồn và khả dụng
-                                    var medicineStock = medicineStockOlds?.FirstOrDefault(f => f.MedicineId == dImMestMedicineDto.MedicineId);
-                                    if (medicineStock != null)
+                                    foreach (var inOutStockMedicine in inOutStockMedicines)
                                     {
-                                        medicineStock.ModifiedBy = SessionExtensions.Login?.Id;
-                                        medicineStock.ModifiedDate = dateNow;
-
-                                        medicineStock.AvailableQuantity += dImMestMedicineDto.ApprovedQuantity.GetValueOrDefault();
-                                        medicineStock.Quantity += dImMestMedicineDto.ApprovedQuantity.GetValueOrDefault();
-                                    }
-                                    else // Nếu chưa tồn tại thuốc trong kho thì thêm mới thuốc vào kho
-                                    {
-                                        medicineStocks.Add(new EntityFrameworkCore.Entities.Business.Pharmaceuticals.MedicineStock()
+                                        if (inOutStockMedicine.ApprovedQuantity == null)
                                         {
-                                            Id = Guid.NewGuid(),
-                                            CreatedDate = dateNow,
-                                            CreatedBy = SessionExtensions.Login?.Id,
-                                            AvailableQuantity = dImMestMedicineDto.ApprovedQuantity.GetValueOrDefault(),
-                                            Quantity = dImMestMedicineDto.ApprovedQuantity.GetValueOrDefault(),
-                                            StockId = input.ImpStockId,
-                                            MedicineId = dImMestMedicineDto.MedicineId
-                                        });
+                                            inOutStockMedicine.ApprovedQuantity = inOutStockMedicine.RequestQuantity;
+                                        }
                                     }
                                 }
-                            }
+                                break;
+                            case InOutStatusType.ReceivedOutStock: // Xuất kho (Nhập kho thì trừ đi tồn kho ở kho xuất (chỉ trừ tồn kho vì khả dụng đã trừ lúc tạo phiếu))
+                                {
+                                    if (!cancelStockIn)
+                                    {
+                                        var medicineIds = input.InOutStockMedicines.Select(s => s.MedicineId).ToList();
+                                        if (medicineIds != null && medicineIds.Count > 0)
+                                        {
+                                            var medicineStockOuts = _dbContext.MedicineStocks.Where(w => w.StockId == input.ExpStockId && medicineIds.Contains(w.MedicineId)).ToList();
+                                            foreach (var medicineStock in medicineStockOuts)
+                                            {
+                                                var inOutStockMedicine = input.InOutStockMedicines.FirstOrDefault(f => f.MedicineId == medicineStock.MedicineId);
+                                                if (inOutStockMedicine != null)
+                                                {
+                                                    medicineStock.Quantity -= inOutStockMedicine.ApprovedQuantity.GetValueOrDefault();
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                            case InOutStatusType.ReceivedInStock: // Nhập kho
+                                {
+                                    var medicineIds = input.InOutStockMedicines.Select(s => s.MedicineId).ToList();
+                                    if (medicineIds != null && medicineIds.Count > 0)
+                                    {
+                                        var medicineStockOlds = _dbContext.MedicineStocks.Where(w => medicineIds.Contains(w.MedicineId) && w.StockId == inOutStock.ImpStockId).ToList();
+
+                                        foreach (var dImMestMedicineDto in input.InOutStockMedicines)
+                                        {
+                                            // Nếu tồn tại thuốc trong kho thì cộng thêm vào tồn và khả dụng
+                                            var medicineStock = medicineStockOlds?.FirstOrDefault(f => f.MedicineId == dImMestMedicineDto.MedicineId);
+                                            if (medicineStock != null)
+                                            {
+                                                medicineStock.ModifiedBy = SessionExtensions.Login?.Id;
+                                                medicineStock.ModifiedDate = dateNow;
+
+                                                medicineStock.AvailableQuantity += dImMestMedicineDto.ApprovedQuantity.GetValueOrDefault();
+                                                medicineStock.Quantity += dImMestMedicineDto.ApprovedQuantity.GetValueOrDefault();
+                                            }
+                                            else // Nếu chưa tồn tại thuốc trong kho thì thêm mới thuốc vào kho
+                                            {
+                                                medicineStocks.Add(new EntityFrameworkCore.Entities.Business.Pharmaceuticals.MedicineStock()
+                                                {
+                                                    Id = Guid.NewGuid(),
+                                                    CreatedDate = dateNow,
+                                                    CreatedBy = SessionExtensions.Login?.Id,
+                                                    AvailableQuantity = dImMestMedicineDto.ApprovedQuantity.GetValueOrDefault(),
+                                                    Quantity = dImMestMedicineDto.ApprovedQuantity.GetValueOrDefault(),
+                                                    StockId = input.ImpStockId,
+                                                    MedicineId = dImMestMedicineDto.MedicineId
+                                                });
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                            default:
+                                break;
                         }
 
                         _mapper.Map(input, inOutStock);
                         inOutStock.ModifiedDate = dateNow;
                         inOutStock.ModifiedBy = SessionExtensions.Login?.Id;
+                    }
+
+                    // Trừ khả dụng kho xuất
+                    var medicineIdOuts = input.InOutStockMedicines.Select(s => s.MedicineId).ToList();
+                    if (medicineIdOuts != null && medicineIdOuts.Count > 0)
+                    {
+                        var medicineStockOuts = _dbContext.MedicineStocks.Where(w => w.StockId == input.ExpStockId && medicineIdOuts.Contains(w.MedicineId)).ToList();
+                        foreach (var medicineStock in medicineStockOuts)
+                        {
+                            var inOutStockMedicine = input.InOutStockMedicines.FirstOrDefault(f => f.MedicineId == medicineStock.MedicineId);
+                            if (inOutStockMedicine != null)
+                            {
+                                medicineStock.AvailableQuantity -= inOutStockMedicine.ApprovedQuantity.GetValueOrDefault();
+                            }
+                        }
                     }
 
                     switch (input.Status)
@@ -1057,6 +1059,25 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
 
                                 inOutStock.StockExpTime = null;
                                 inOutStock.StockExpUserId = null;
+
+                                // Hủy xuất kho thì cộng lại tồn kho xuất
+                                if (canCelStockOut)
+                                {
+                                    var medicineIds = input.InOutStockMedicines.Select(s => s.MedicineId).ToList();
+                                    if (medicineIds != null && medicineIds.Count > 0)
+                                    {
+                                        var medicineStockOuts = _dbContext.MedicineStocks.Where(w => w.StockId == input.ExpStockId && medicineIds.Contains(w.MedicineId)).ToList();
+                                        foreach (var medicineStock in medicineStockOuts)
+                                        {
+                                            var inOutStockMedicine = input.InOutStockMedicines.FirstOrDefault(f => f.MedicineId == medicineStock.MedicineId);
+                                            if (inOutStockMedicine != null)
+                                            {
+                                                medicineStock.Quantity += inOutStockMedicine.ApprovedQuantity.GetValueOrDefault();
+                                                //medicineStock.AvailableQuantity += inOutStockMedicine.ApprovedQuantity.GetValueOrDefault(); Không cần trừ khả dụng vì đã cộng trên rồi
+                                            }
+                                        }
+                                    }
+                                }
                             }
                             break;
                         case InOutStatusType.ReceivedOutStock:
@@ -1067,6 +1088,25 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
 
                                 inOutStock.StockImpTime = null;
                                 inOutStock.StockExpUserId = null;
+
+                                // Hủy nhập kho thì trừ đi SL đã nhập
+                                if (cancelStockIn)
+                                {
+                                    var medicineIds = input.InOutStockMedicines.Select(s => s.MedicineId).ToList();
+                                    if (medicineIds != null && medicineIds.Count > 0)
+                                    {
+                                        var medicineStockIns = _dbContext.MedicineStocks.Where(w => medicineIds.Contains(w.MedicineId) && w.StockId == inOutStock.ImpStockId).ToList();
+                                        foreach (var medicineStock in medicineStockIns)
+                                        {
+                                            var inOutStockMedicine = input.InOutStockMedicines.FirstOrDefault(f => f.MedicineId == medicineStock.MedicineId);
+                                            if (inOutStockMedicine != null)
+                                            {
+                                                medicineStock.Quantity -= inOutStockMedicine.ApprovedQuantity.GetValueOrDefault();
+                                                medicineStock.AvailableQuantity -= inOutStockMedicine.ApprovedQuantity.GetValueOrDefault();
+                                            }
+                                        }
+                                    }
+                                }
                             }
                             break;
                         case InOutStatusType.ReceivedInStock:
@@ -1075,8 +1115,6 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
                                 inOutStock.StockImpTime = dateNow;
                                 inOutStock.StockExpUserId = SessionExtensions.Login?.Id;
                             }
-                            break;
-                        default:
                             break;
                     }
 
