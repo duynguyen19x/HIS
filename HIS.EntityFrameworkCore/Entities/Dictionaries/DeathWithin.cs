@@ -1,5 +1,4 @@
-﻿using HIS.Core.Entities;
-using HIS.Core.Entities.Auditing;
+﻿using HIS.Core.Entities.Auditing;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,9 +9,9 @@ using System.Threading.Tasks;
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
-    /// Loại điều trị.
+    /// Thời gian tử vong.
     /// </summary>
-    public class PatientRecordType : AuditedEntity<int>
+    public class DeathWithin : AuditedEntity<int>
     {
         [MaxLength(50)]
         public virtual string Code { get; set; }
@@ -27,9 +26,9 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 
         public virtual bool Inactive { get; set; }
 
-        public PatientRecordType() { }
+        public DeathWithin() { }
 
-        public PatientRecordType(int id, string code, string name, string description, int sortOrder, bool inactive)
+        public DeathWithin(int id, string code, string name, string description, int sortOrder, bool inactive) 
         {
             this.Id = id;
             this.Code = code;

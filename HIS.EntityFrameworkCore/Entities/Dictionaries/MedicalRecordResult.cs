@@ -1,6 +1,7 @@
 ﻿using HIS.Core.Entities.Auditing;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,13 +13,21 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// </summary>
     public class MedicalRecordResult : AuditedEntity<int>
     {
+        [MaxLength(50)]
         public virtual string Code { get; set; }
+
+        [MaxLength(250)]
         public virtual string Name { get; set; }
+
+        [MaxLength(250)]
         public virtual string Description { get; set; }
+
         public virtual int SortOrder { get; set; }
+
         public virtual bool Inactive { get; set; }
 
         public MedicalRecordResult() { }
+
         public MedicalRecordResult(int id, string code, string name, string description, int sortOrder, bool inactive)
         {
             this.Id = id;

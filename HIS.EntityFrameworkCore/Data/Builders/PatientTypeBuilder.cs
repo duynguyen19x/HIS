@@ -8,7 +8,6 @@ namespace HIS.EntityFrameworkCore.Data.Builders
     {
         public static void Seed(ModelBuilder modelBuilder)
         {
-
             modelBuilder.Entity<PatientType>().HasData(
                 new PatientType((int)PatientTypes.BHYT, PatientTypes.BHYT.ToString(), "Bảo hiểm y tế", null, 1, false),
                 new PatientType((int)PatientTypes.VP, PatientTypes.VP.ToString(), "Viện phí", null, 2, false),
