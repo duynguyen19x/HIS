@@ -13,18 +13,18 @@ namespace HIS.Utilities.Enums
         Canceled = -1,
 
         [Description("Mới tạo")]
-        New,
+        New = 0,
 
         [Description("Yêu cầu")]
-        Request,
+        Request = 1,
 
         [Description("Đã duyệt")]
-        Approved,
+        Approved = 2,
 
         [Description("Đã xuất kho")]
-        ReceivedOutStock,
+        ReceivedOutStock = 3,
 
         [Description("Đã nhập kho")]
-        ReceivedInStock,
+        ReceivedInStock = 4,
     }
 }

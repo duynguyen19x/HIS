@@ -219,7 +219,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicineType
                                      PackagingSpecifications = medi.PackagingSpecifications, // Quy cách đóng gói
                                      ImpPrice = medi.ImpPrice, // Giá nhập
                                      ImpVatRate = medi.ImpVatRate, // Phần trăm vat giá nhập
-                                     TaxRate = medi.TaxRate, // Phần trăm thuế
+                                     ImpTaxRate = medi.ImpTaxRate, // Phần trăm thuế
                                      IsAntibiotics = medi.IsAntibiotics, // Thuốc kháng sinh
                                      IsNewDrug = medi.IsNewDrug, // Thuốc tân dược
                                      IsPrescriptionDrug = medi.IsPrescriptionDrug, // Thuốc kê đơn
