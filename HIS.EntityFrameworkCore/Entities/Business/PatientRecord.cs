@@ -11,6 +11,8 @@ namespace HIS.EntityFrameworkCore.Entities.Business
     /// </summary>
     public class PatientRecord : FullAuditedEntity<Guid>
     {
+        #region hành chính
+
         [Required]
         [MaxLength(50)]
         public virtual string Code { get; set; }
@@ -90,6 +92,10 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         [MaxLength(250)]
         public virtual string Workplace { get; set; } // nơi làm việc
 
+        #endregion
+
+        #region điều trị
+
         [Required]
         public virtual int PatientTypeID { get; set; } // đối tượng bệnh nhân (BHYT, viện phí, dịch vụ, ...)
 
@@ -126,6 +132,10 @@ namespace HIS.EntityFrameworkCore.Entities.Business
 
 
         public virtual Guid BranchID { get; set; } // chi nhánh
+
+        #endregion
+
+        #region khác
 
         [MaxLength(500)]
         public virtual string Description { get; set; }
@@ -167,5 +177,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         [Ignore]
         [ForeignKey(nameof(BranchID))]
         public virtual Branch SBracnhFk { get; set; }
+
+        #endregion
     }
 }

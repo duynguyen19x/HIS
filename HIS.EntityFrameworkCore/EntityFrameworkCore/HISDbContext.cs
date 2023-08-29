@@ -79,13 +79,13 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<InOutStockMedicine> InOutStockMedicines { get; set; }
 
 
+        public DbSet<DeathCause> DeathCauses { get; set; }
+        public DbSet<DeathWithin> DeathWithins { get; set; }
         public DbSet<PatientType> PatientTypes { get; set; }
         public DbSet<PatientRecordType> PatientRecordTypes { get; set; }
         public DbSet<MedicalRecordType> MedicalRecordTypes { get; set; }
         public DbSet<MedicalRecordResult> MedicalRecordResults { get; set; }
         public DbSet<MedicalRecordEndType> MedicalRecordEndTypes { get; set; }
-        public DbSet<TreatmentResult> TreatmentResults { get; set; }
-        public DbSet<TreatmentType> TreatmentTypes { get; set; }
 
         #region Patient
         public DbSet<Patient> Patients { get; set; }
