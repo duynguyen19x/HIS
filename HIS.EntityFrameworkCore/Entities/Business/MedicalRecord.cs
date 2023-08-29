@@ -25,7 +25,37 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public int MedicalRecordTypeId { get; set; } // loại bệnh án
         public int MedicalRecordEndTypeId { get; set; } // xử trí 
         public virtual DateTime StartDate { get; set; }
+
+        // thông tin ra viện
         public virtual DateTime? EndDate { get; set; }
+        
+        public virtual string IcdCode { get; set; } // mã bệnh chính (ICD10)
+        public virtual string IcdName { get; set; } // tên bệnh chính (ICD10)
+        public virtual string IcdSubCode { get; set; } // mã bệnh phụ (ICD10)
+        public virtual string IcdSubName { get; set; } // tên bệnh phụ (ICD10)
+        public virtual string IcdText { get; set; } // danh sách bệnh kèm theo (ICD10)
+
+        public virtual string Advise { get; set; } // lời dặn của bác sĩ
+        public virtual string TreatmentMethod { get; set; } // phương pháp điều trị
+        public virtual string Description { get; set; } // ghi chú
+
+
+        #region thông tin ra viện - tử vong
+
+        public virtual DateTime? DeathTime { get; set; } // thời điểm tử vong
+        public virtual string DeathPlace { get; set; } // nơi tử vong
+        public virtual string DeathDocumentType { get; set; }
+        public virtual string DeathDocumentNumber { get; set; }
+        public virtual string DeathDocumentPlace { get; set; }
+        public virtual DateTime? DeathDocumentDate { get; set; }
+        public virtual int DeathWithinID { get; set; } // thời gian tử vong
+        public virtual int DeathCauseID { get; set; } // nguyên nhân tử vong
+        public virtual bool IsDeathCertificate { get; set; } // có cấp giấy chứng tử
+        public virtual bool IsAutopsy { get; set; } // có khám nghiệm tử thi
+
+        #endregion
+
+
 
         [Ignore]
         [ForeignKey(nameof(PatientId))]

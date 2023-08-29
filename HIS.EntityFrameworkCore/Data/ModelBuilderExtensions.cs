@@ -8,21 +8,28 @@ namespace HIS.EntityFrameworkCore.Data
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
-            GenderBuilder.Seed(modelBuilder);
+            ChapterIcdBuilder.Seed(modelBuilder);
+            CountryBuilder.Seed(modelBuilder);
+            DeathCauseBuilder.Seed(modelBuilder);
+            DeathWithinBuilder.Seed(modelBuilder);
             UserBuilder.Seed(modelBuilder);
             ServiceGroupBuilder.Seed(modelBuilder);
             ServiceGroupHeInBuilder.Seed(modelBuilder);
             UnitBuilder.Seed(modelBuilder);
-            PatientTypeBuilder.Seed(modelBuilder);
             SurgicalProcedureTypeBuilder.Seed(modelBuilder);
             DepartmentTypeBuilder.Seed(modelBuilder);
             RoomTypeBuilder.Seed(modelBuilder);
             MedicineGroupBuilder.Seed(modelBuilder);
             MedicineLineBuilder.Seed(modelBuilder);
-            CountryBuilder.Seed(modelBuilder);
-            ChapterIcdBuilder.Seed(modelBuilder);
             InOutStockTypeBuilder.Seed(modelBuilder);
             ProvinceBuilder.Seed(modelBuilder);
+
+            MedicalRecordEndTypeBuilder.Seed(modelBuilder);
+            MedicalRecordTypeBuilder.Seed(modelBuilder);
+            MedicalRecordResultBuilder.Seed(modelBuilder);
+            MedicalRecordTypeBuilder.Seed(modelBuilder);
+            PatientRecordTypeBuilder.Seed(modelBuilder);
+            PatientTypeBuilder.Seed(modelBuilder);
         }
     }
 }
