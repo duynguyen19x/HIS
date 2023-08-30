@@ -105,6 +105,11 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
         {
             return await _inOutStockService.ImportFromAnotherStockCancelStockIn(input);
         }
+        [HttpDelete("ImportFromAnotherStockDeleted")]
+        public async Task<ApiResult<bool>> ImportFromAnotherStockDeleted(Guid id)
+        {
+            return await _inOutStockService.ImportFromAnotherStockDeleted(id);
+        }
         #endregion
     }
 }

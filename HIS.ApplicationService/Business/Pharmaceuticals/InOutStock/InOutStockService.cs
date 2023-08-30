@@ -286,7 +286,12 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
             input.Status = InOutStatusType.ReceivedInStock;
             return await ImportFromSupplier(input);
         }
-
+        
+        /// <summary>
+        /// Hủy phiếu (xóa phiếu)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<ApiResult<bool>> ImportFromSupplierDeleted(Guid id)
         {
             var result = new ApiResult<bool>();
@@ -826,6 +831,63 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
         {
             input.Status = InOutStatusType.ReceivedOutStock;
             return await ImportFromAnotherStock(input, false, true);
+        }
+
+        /// <summary>
+        /// Hủy phiếu (xóa phiếu)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<ApiResult<bool>> ImportFromAnotherStockDeleted(Guid id)
+        {
+            var result = new ApiResult<bool>();
+
+            using (var transaction = _dbContext.BeginTransaction())
+            {
+                try
+                {
+                    var timeNow = DateTime.Now;
+
+                    var inOutStock = _dbContext.InOutStocks.FirstOrDefault(f => f.Id == id);
+                    if (inOutStock != null)
+                    {
+                        inOutStock.Status = InOutStatusType.Canceled;
+                        inOutStock.DeletedBy = SessionExtensions.Login?.Id;
+                        inOutStock.DeletedDate = timeNow;
+                        inOutStock.IsDeleted = true;
+
+                        // Cộng lại khả dụng cho kho xuất
+                        var inOutStockMedicines = _dbContext.InOutStockMedicines.Where(w => w.InOutStockId == id).ToList(); 
+                        var medicineIds = inOutStockMedicines.Select(s => s.MedicineId).ToList();
+                        if (medicineIds != null && medicineIds.Count > 0)
+                        {
+                            var medicineStockOuts = _dbContext.MedicineStocks.Where(w => w.StockId == inOutStock.ExpStockId && medicineIds.Contains(w.MedicineId)).ToList();
+                            foreach (var medicineStock in medicineStockOuts)
+                            {
+                                var inOutStockMedicine = inOutStockMedicines.FirstOrDefault(f => f.MedicineId == medicineStock.MedicineId);
+                                if (inOutStockMedicine != null)
+                                {
+                                    medicineStock.AvailableQuantity += inOutStockMedicine.ApprovedQuantity.GetValueOrDefault();
+                                }
+                            }
+                        }
+                    }
+
+                    _dbContext.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    result.IsSuccessed = false;
+                    result.Message = ex.Message;
+                }
+                finally
+                {
+                    transaction.Dispose();
+                }
+            }
+
+            return await Task.FromResult(result);
         }
 
         /// <summary>
