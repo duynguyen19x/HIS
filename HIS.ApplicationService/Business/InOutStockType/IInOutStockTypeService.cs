@@ -1,4 +1,4 @@
-﻿using HIS.Dtos.Business.InOutStockType;
+﻿using HIS.Dtos.Business.InOutStockTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;

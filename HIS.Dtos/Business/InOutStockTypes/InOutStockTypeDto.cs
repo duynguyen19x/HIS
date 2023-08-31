@@ -1,6 +1,6 @@
 ﻿using HIS.Application.Core.Services.Dto;
 
-namespace HIS.Dtos.Business.InOutStockType
+namespace HIS.Dtos.Business.InOutStockTypes
 {
     public class InOutStockTypeDto : EntityDto<int>
     {

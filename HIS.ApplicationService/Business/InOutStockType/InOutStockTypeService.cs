@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HIS.Core.Linq;
-using HIS.Dtos.Business.InOutStockType;
+using HIS.Dtos.Business.InOutStockTypes;
 using HIS.Dtos.Commons;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;

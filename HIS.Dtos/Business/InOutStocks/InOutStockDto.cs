@@ -1,8 +1,8 @@
 ﻿using HIS.Application.Core.Services.Dto;
-using HIS.Dtos.Business.InOutStockMedicine;
+using HIS.Dtos.Business.InOutStockMedicines;
 using HIS.Utilities.Enums;
 
-namespace HIS.Dtos.Business.InOutStock
+namespace HIS.Dtos.Business.InOutStocks
 {
     public class InOutStockDto : EntityDto<Guid?>
     {

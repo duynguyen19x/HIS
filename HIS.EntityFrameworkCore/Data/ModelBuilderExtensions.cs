@@ -25,9 +25,7 @@ namespace HIS.EntityFrameworkCore.Data
             ProvinceBuilder.Seed(modelBuilder);
 
             MedicalRecordEndTypeBuilder.Seed(modelBuilder);
-            MedicalRecordTypeBuilder.Seed(modelBuilder);
             MedicalRecordResultBuilder.Seed(modelBuilder);
-            MedicalRecordTypeBuilder.Seed(modelBuilder);
             PatientRecordTypeBuilder.Seed(modelBuilder);
             PatientTypeBuilder.Seed(modelBuilder);
         }

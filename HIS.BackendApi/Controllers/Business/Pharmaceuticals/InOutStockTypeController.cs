@@ -1,5 +1,5 @@
 ﻿using HIS.ApplicationService.Business.InOutStockType;
-using HIS.Dtos.Business.InOutStockType;
+using HIS.Dtos.Business.InOutStockTypes;
 using HIS.Dtos.Commons;
 using Microsoft.AspNetCore.Mvc;
 

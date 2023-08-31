@@ -1,4 +1,4 @@
-﻿using HIS.Dtos.Business.InOutStock;
+﻿using HIS.Dtos.Business.InOutStocks;
 using HIS.Dtos.Commons;
 using HIS.Models.Commons;
 using System;

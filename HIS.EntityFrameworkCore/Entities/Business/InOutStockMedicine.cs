@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals
+namespace HIS.EntityFrameworkCore.Entities.Business
 {
     public class InOutStockMedicine : Entity<Guid>
     {
@@ -39,5 +39,5 @@ namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals
         public InOutStock InOutStock { get; set; }
         [Ignore]
         public Medicine Medicine { get; set; }
-}
+    }
 }

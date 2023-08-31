@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Business.MedicineStock
+namespace HIS.Dtos.Business.MedicineStocks
 {
     public class GetAllMedicineStockInput
     {

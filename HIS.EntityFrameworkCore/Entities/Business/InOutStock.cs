@@ -4,7 +4,7 @@ using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.Systems;
 using HIS.Utilities.Enums;
 
-namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals
+namespace HIS.EntityFrameworkCore.Entities.Business
 {
     public class InOutStock : FullAuditedEntity<Guid>
     {

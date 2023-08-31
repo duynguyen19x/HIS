@@ -1,5 +1,4 @@
 ﻿using HIS.EntityFrameworkCore.Configurations.Business;
-using HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals;
 using HIS.EntityFrameworkCore.Configurations.Dictionaries;
 using HIS.EntityFrameworkCore.Configurations.Medicines;
 using HIS.EntityFrameworkCore.Configurations.Services;
@@ -32,7 +31,6 @@ namespace HIS.EntityFrameworkCore.Configurations
             modelBuilder.ApplyConfiguration(new MedicineTypeConfiguration());
             modelBuilder.ApplyConfiguration(new MaterialTypeConfiguration());
             modelBuilder.ApplyConfiguration(new MaterialConfiguration());
-            modelBuilder.ApplyConfiguration(new PatientTypeConfiguration());
             modelBuilder.ApplyConfiguration(new CountryConfiguration());
             modelBuilder.ApplyConfiguration(new ProvinceConfiguration());
             modelBuilder.ApplyConfiguration(new DistrictConfiguration());
@@ -49,18 +47,19 @@ namespace HIS.EntityFrameworkCore.Configurations
             modelBuilder.ApplyConfiguration(new ServiceResultIndexConfiguration());
             modelBuilder.ApplyConfiguration(new ExecutionRoomConfiguration());
             modelBuilder.ApplyConfiguration(new SupplierConfiguration());
-            modelBuilder.ApplyConfiguration(new InOutStockTypeConfiguration());
-            //modelBuilder.ApplyConfiguration(new ImpMestConfiguration());
-            //modelBuilder.ApplyConfiguration(new ImpMestMedicineConfigaration());
-            modelBuilder.ApplyConfiguration(new MedicineStockConfiguration());
-            //modelBuilder.ApplyConfiguration(new ExpMestConfiguration());
-            //modelBuilder.ApplyConfiguration(new ExpMestMedicineConfiguration());
 
+            modelBuilder.ApplyConfiguration(new InOutStockTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new MedicineStockConfiguration());
             modelBuilder.ApplyConfiguration(new InOutStockMedicineConfiguration());
             modelBuilder.ApplyConfiguration(new InOutStockConfiguration());
 
+            modelBuilder.ApplyConfiguration(new PatientTypeConfiguration());
             modelBuilder.ApplyConfiguration(new PatientConfiguration());
             modelBuilder.ApplyConfiguration(new PatientRecordConfiguration());
+            modelBuilder.ApplyConfiguration(new MedicalRecordEndTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new MedicalRecordResultConfiguration());
+            modelBuilder.ApplyConfiguration(new PatientRecordTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new MedicalRecordTypeConfiguration());
         }
     }
 }

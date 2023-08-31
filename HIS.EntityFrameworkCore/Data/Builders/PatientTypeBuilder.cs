@@ -1,6 +1,8 @@
 ﻿using HIS.Core.Enums;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.Utilities.Enums;
 using Microsoft.EntityFrameworkCore;
+using PatientTypes = HIS.Core.Enums.PatientTypes;
 
 namespace HIS.EntityFrameworkCore.Data.Builders
 {

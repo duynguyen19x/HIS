@@ -1,6 +1,6 @@
 ﻿using HIS.Core.Entities;
 
-namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals
+namespace HIS.EntityFrameworkCore.Entities.Business
 {
     public class InOutStockType : Entity<int>
     {
