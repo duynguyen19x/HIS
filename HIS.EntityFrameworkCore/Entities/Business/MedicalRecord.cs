@@ -1,8 +1,10 @@
 ﻿using AutoMapper.Configuration.Annotations;
 using HIS.Core.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -16,14 +18,16 @@ namespace HIS.EntityFrameworkCore.Entities.Business
     public class MedicalRecord : FullAuditedEntity<Guid>
     {
         //public virtual Guid PatientId { get; set; }
-        public virtual Guid PatientRecordId { get; set; }
-        public virtual Guid BranchId { get; set; }
-        public virtual Guid DepartmentId { get; set; }
-        public virtual Guid RoomId { get; set; }
-        public virtual Guid BedId { get; set; }
-        public int MedicalRecordStatusId { get; set; } // trạng thái bệnh án
-        public int MedicalRecordTypeId { get; set; } // loại bệnh án
-        public int MedicalRecordEndTypeId { get; set; } // xử trí 
+        [Required]
+        public virtual Guid PatientRecordID { get; set; }
+        [Required]
+        public virtual Guid BranchID { get; set; }
+        public virtual Guid DepartmentID { get; set; }
+        public virtual Guid RoomID { get; set; }
+        public virtual Guid BedID { get; set; }
+        public int MedicalRecordStatusID { get; set; } // trạng thái bệnh án
+        public int MedicalRecordTypeID { get; set; } // loại bệnh án
+        public int MedicalRecordEndTypeID { get; set; } // xử trí 
         public virtual DateTime StartDate { get; set; }
 
         // thông tin ra viện
@@ -62,19 +66,19 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         //public virtual Patient PatientFk { get; set; }
 
         [Ignore]
-        [ForeignKey(nameof(PatientRecordId))]
+        [ForeignKey(nameof(PatientRecordID))]
         public virtual PatientRecord PatientRecordFk { get; set; }
 
         [Ignore]
-        [ForeignKey(nameof(BranchId))]
+        [ForeignKey(nameof(BranchID))]
         public virtual Branch BranchFk { get; set; }
 
         [Ignore]
-        [ForeignKey(nameof(DepartmentId))]
+        [ForeignKey(nameof(DepartmentID))]
         public virtual Department DepartmentFk { get; set; }
 
         [Ignore]
-        [ForeignKey(nameof(RoomId))]
+        [ForeignKey(nameof(RoomID))]
         public virtual Room RoomFk { get; set; }
     }
 }
