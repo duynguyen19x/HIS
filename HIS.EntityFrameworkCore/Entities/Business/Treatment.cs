@@ -21,7 +21,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public int TreatmentTypeID { get; set; } // loại điều trị
         public DateTime TreatmentDate { get; set; } // ngày điều trị
 
-        #region dấu hiệu sih tồn
+        #region dấu hiệu sinh tồn
         public virtual decimal? Temperature { get; set; } // nhiệt độ
         public virtual int TemperatureType { get; set; } // loại nhiệt độ (oC hay oF)
         public virtual decimal? BloodPressureMin { get; set; } // huyết áp

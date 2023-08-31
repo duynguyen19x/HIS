@@ -18,7 +18,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public virtual string Code { get; set; }
 
         [Required]
-        public virtual Guid PatientId { get; set; }
+        public virtual Guid PatientID { get; set; }
 
         [Required]
         [MaxLength(500)]
@@ -143,40 +143,40 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public virtual bool Inactive { get; set; }
 
         [Ignore]
-        [ForeignKey(nameof(PatientId))]
+        [ForeignKey(nameof(PatientID))]
         public virtual Patient PatientFk { get; set; }
 
         [Ignore]
         [ForeignKey(nameof(GenderID))]
-        public virtual Gender SGenderFk { get; set; }
+        public virtual Gender GenderFk { get; set; }
 
         [Ignore]
         [ForeignKey(nameof(EthnicityID))]
-        public virtual Ethnic SEthnicFk { get; set; }
+        public virtual Ethnic EthnicityFk { get; set; }
 
         [Ignore]
         [ForeignKey(nameof(CareerID))]
-        public virtual Career SCareerFk { get; set; }
+        public virtual Career CareerFk { get; set; }
 
         [Ignore]
         [ForeignKey(nameof(CountryID))]
-        public virtual Country SCountryFk { get; set; }
+        public virtual Country CountryFk { get; set; }
 
         [Ignore]
         [ForeignKey(nameof(ProvinceID))]
-        public virtual Province SProvinceFk { get; set; }
+        public virtual Province ProvinceFk { get; set; }
 
         [Ignore]
         [ForeignKey(nameof(DistrictID))]
-        public virtual District SDistrictFk { get; set; }
+        public virtual District DistrictFk { get; set; }
 
         [Ignore]
         [ForeignKey(nameof(WardID))]
-        public virtual SWard SWardFk { get; set; }
+        public virtual SWard WardFk { get; set; }
 
         [Ignore]
         [ForeignKey(nameof(BranchID))]
-        public virtual Branch SBracnhFk { get; set; }
+        public virtual Branch BracnhFk { get; set; }
 
         #endregion
     }
