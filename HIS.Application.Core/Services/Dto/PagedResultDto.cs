@@ -15,10 +15,16 @@ namespace HIS.Application.Core.Services.Dto
         {
         }
 
-        public PagedResultDto(int totalCount, IReadOnlyList<T> items)
+        public PagedResultDto(int totalCount, IList<T> items)
             : base(items)
         {
             TotalCount = totalCount;
+        }
+
+        public void Exception(Exception ex)
+        {
+            this.IsSuccessed = false;
+            this.Message = ex.Message;
         }
     }
 }

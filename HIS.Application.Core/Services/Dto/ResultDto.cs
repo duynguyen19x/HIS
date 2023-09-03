@@ -27,11 +27,10 @@ namespace HIS.Application.Core.Services.Dto
             Item = item;
         }
 
-        public void Exception(Exception ex)
+        public virtual void Exception(Exception ex)
         {
             this.IsSuccessed = false;
             this.Message = ex.Message;
-            throw ex;
         }
     }
 }
