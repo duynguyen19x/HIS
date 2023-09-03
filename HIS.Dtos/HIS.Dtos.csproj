@@ -7,19 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Business\MedicalRecords\**" />
+    <Compile Remove="Business\Receptions\**" />
     <Compile Remove="Categories\**" />
+    <EmbeddedResource Remove="Business\MedicalRecords\**" />
+    <EmbeddedResource Remove="Business\Receptions\**" />
     <EmbeddedResource Remove="Categories\**" />
+    <None Remove="Business\MedicalRecords\**" />
+    <None Remove="Business\Receptions\**" />
     <None Remove="Categories\**" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\HIS.Application.Core\HIS.Application.Core.csproj" />
     <ProjectReference Include="..\HIS.Utilities\HIS.Utilities.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Business\MedicalRecords\" />
-    <Folder Include="Business\Receptions\" />
   </ItemGroup>
 
 </Project>

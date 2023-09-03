@@ -77,11 +77,6 @@ namespace HIS.ApplicationService
             services.AddTransient<IInOutStockService, InOutStockService>();
             services.AddTransient<IMedicineStockService, MedicineStockService>();
 
-            #region Patient
-            services.AddTransient<IPatientAppService, PatientAppService>();
-            services.AddTransient<IPatientRecordAppService, PatientRecordAppService>();
-            #endregion
-
             #region Sys
             services.AddTransient<ISYSAutoNumberAppService, SYSAutoNumberAppService>();
             #endregion
