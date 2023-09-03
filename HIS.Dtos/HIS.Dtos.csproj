@@ -17,4 +17,9 @@
     <ProjectReference Include="..\HIS.Utilities\HIS.Utilities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Business\MedicalRecords\" />
+    <Folder Include="Business\Receptions\" />
+  </ItemGroup>
+
 </Project>
