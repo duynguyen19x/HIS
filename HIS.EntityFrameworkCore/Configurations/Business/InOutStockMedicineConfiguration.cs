@@ -1,8 +1,8 @@
-﻿using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals;
+﻿using HIS.EntityFrameworkCore.Entities.Business;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace HIS.EntityFrameworkCore.Configurations.Business.Pharmaceuticals
+namespace HIS.EntityFrameworkCore.Configurations.Business
 {
     public class InOutStockMedicineConfiguration : IEntityTypeConfiguration<InOutStockMedicine>
     {

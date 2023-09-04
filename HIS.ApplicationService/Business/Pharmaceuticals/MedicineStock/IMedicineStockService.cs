@@ -1,4 +1,4 @@
-﻿using HIS.Dtos.Business.MedicineStock;
+﻿using HIS.Dtos.Business.MedicineStocks;
 using HIS.Dtos.Commons;
 
 namespace HIS.ApplicationService.Business.Pharmaceuticals.MedicineStock

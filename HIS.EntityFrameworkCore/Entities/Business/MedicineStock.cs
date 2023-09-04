@@ -2,7 +2,7 @@
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 
-namespace HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals
+namespace HIS.EntityFrameworkCore.Entities.Business
 {
     public class MedicineStock : FullAuditedEntity<Guid?>
     {

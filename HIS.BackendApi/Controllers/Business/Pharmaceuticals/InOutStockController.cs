@@ -1,11 +1,8 @@
-﻿using HIS.ApplicationService.Business.InOutStockType;
-using HIS.ApplicationService.Business.Pharmaceuticals.InOutStock;
-using HIS.Dtos.Business.InOutStock;
+﻿using HIS.ApplicationService.Business.Pharmaceuticals.InOutStock;
+using HIS.Dtos.Business.InOutStocks;
 using HIS.Dtos.Commons;
 using HIS.Models.Commons;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
 {
@@ -104,6 +101,11 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
         public async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockCancelStockIn(InOutStockDto input)
         {
             return await _inOutStockService.ImportFromAnotherStockCancelStockIn(input);
+        }
+        [HttpDelete("ImportFromAnotherStockDeleted")]
+        public async Task<ApiResult<bool>> ImportFromAnotherStockDeleted(Guid id)
+        {
+            return await _inOutStockService.ImportFromAnotherStockDeleted(id);
         }
         #endregion
     }

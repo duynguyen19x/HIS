@@ -1,5 +1,5 @@
 ﻿using HIS.ApplicationService.Business.Pharmaceuticals.MedicineStock;
-using HIS.Dtos.Business.MedicineStock;
+using HIS.Dtos.Business.MedicineStocks;
 using HIS.Dtos.Commons;
 using Microsoft.AspNetCore.Mvc;
 

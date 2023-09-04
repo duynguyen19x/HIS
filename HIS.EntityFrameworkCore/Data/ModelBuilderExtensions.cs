@@ -24,12 +24,12 @@ namespace HIS.EntityFrameworkCore.Data
             InOutStockTypeBuilder.Seed(modelBuilder);
             ProvinceBuilder.Seed(modelBuilder);
 
-            MedicalRecordEndTypeBuilder.Seed(modelBuilder);
-            MedicalRecordTypeBuilder.Seed(modelBuilder);
-            MedicalRecordResultBuilder.Seed(modelBuilder);
-            MedicalRecordTypeBuilder.Seed(modelBuilder);
-            PatientRecordTypeBuilder.Seed(modelBuilder);
             PatientTypeBuilder.Seed(modelBuilder);
+            PatientRecordTypeBuilder.Seed(modelBuilder);
+            MedicalRecordEndTypeBuilder.Seed(modelBuilder);
+            MedicalRecordResultBuilder.Seed(modelBuilder);
+            
+            
         }
     }
 }

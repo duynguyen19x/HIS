@@ -15,10 +15,10 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HIS.Dtos.Business.InOutStock;
-using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals;
+using HIS.Dtos.Business.InOutStocks;
 using HIS.Core.Linq;
-using HIS.Dtos.Business.InOutStockMedicine;
+using HIS.Dtos.Business.InOutStockMedicines;
+using HIS.EntityFrameworkCore.Entities.Business;
 
 namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
 {
@@ -286,7 +286,12 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
             input.Status = InOutStatusType.ReceivedInStock;
             return await ImportFromSupplier(input);
         }
-
+        
+        /// <summary>
+        /// Hủy phiếu (xóa phiếu)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<ApiResult<bool>> ImportFromSupplierDeleted(Guid id)
         {
             var result = new ApiResult<bool>();
@@ -372,12 +377,12 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
 
                     var inOutStockMedicines = new List<InOutStockMedicine>();
                     var medicines = new List<Medicine>();
-                    var medicineStocks = new List<EntityFrameworkCore.Entities.Business.Pharmaceuticals.MedicineStock>();
+                    var medicineStocks = new List<EntityFrameworkCore.Entities.Business.MedicineStock>();
                     var medicinePricePolicies = new List<MedicinePricePolicy>();
 
                     if (GuidHelper.IsNullOrEmpty(input.Id))
                     {
-                        var dImMest = _mapper.Map<EntityFrameworkCore.Entities.Business.Pharmaceuticals.InOutStock>(input);
+                        var dImMest = _mapper.Map<EntityFrameworkCore.Entities.Business.InOutStock>(input);
                         dImMest.Id = id;
                         dImMest.CreatedBy = SessionExtensions.Login?.Id;
                         dImMest.CreatedDate = dateNow;
@@ -425,7 +430,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
                                 dImMest.StockImpTime = dateNow;
                                 dImMest.StockImpUserId = SessionExtensions.Login?.Id;
 
-                                medicineStocks.Add(new EntityFrameworkCore.Entities.Business.Pharmaceuticals.MedicineStock()
+                                medicineStocks.Add(new EntityFrameworkCore.Entities.Business.MedicineStock()
                                 {
                                     Id = Guid.NewGuid(),
                                     CreatedDate = dateNow,
@@ -546,7 +551,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
                                 input.StockImpTime = dateNow;
                                 input.StockImpUserId = SessionExtensions.Login?.Id;
 
-                                medicineStocks.Add(new EntityFrameworkCore.Entities.Business.Pharmaceuticals.MedicineStock()
+                                medicineStocks.Add(new EntityFrameworkCore.Entities.Business.MedicineStock()
                                 {
                                     Id = Guid.NewGuid(),
                                     CreatedDate = dateNow,
@@ -829,6 +834,63 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
         }
 
         /// <summary>
+        /// Hủy phiếu (xóa phiếu)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<ApiResult<bool>> ImportFromAnotherStockDeleted(Guid id)
+        {
+            var result = new ApiResult<bool>();
+
+            using (var transaction = _dbContext.BeginTransaction())
+            {
+                try
+                {
+                    var timeNow = DateTime.Now;
+
+                    var inOutStock = _dbContext.InOutStocks.FirstOrDefault(f => f.Id == id);
+                    if (inOutStock != null)
+                    {
+                        inOutStock.Status = InOutStatusType.Canceled;
+                        inOutStock.DeletedBy = SessionExtensions.Login?.Id;
+                        inOutStock.DeletedDate = timeNow;
+                        inOutStock.IsDeleted = true;
+
+                        // Cộng lại khả dụng cho kho xuất
+                        var inOutStockMedicines = _dbContext.InOutStockMedicines.Where(w => w.InOutStockId == id).ToList(); 
+                        var medicineIds = inOutStockMedicines.Select(s => s.MedicineId).ToList();
+                        if (medicineIds != null && medicineIds.Count > 0)
+                        {
+                            var medicineStockOuts = _dbContext.MedicineStocks.Where(w => w.StockId == inOutStock.ExpStockId && medicineIds.Contains(w.MedicineId)).ToList();
+                            foreach (var medicineStock in medicineStockOuts)
+                            {
+                                var inOutStockMedicine = inOutStockMedicines.FirstOrDefault(f => f.MedicineId == medicineStock.MedicineId);
+                                if (inOutStockMedicine != null)
+                                {
+                                    medicineStock.AvailableQuantity += inOutStockMedicine.ApprovedQuantity.GetValueOrDefault();
+                                }
+                            }
+                        }
+                    }
+
+                    _dbContext.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    result.IsSuccessed = false;
+                    result.Message = ex.Message;
+                }
+                finally
+                {
+                    transaction.Dispose();
+                }
+            }
+
+            return await Task.FromResult(result);
+        }
+
+        /// <summary>
         /// Nhập thuốc từ kho khác
         /// </summary>
         /// <param name="input"></param>
@@ -852,13 +914,13 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
 
                     input.InOutStockTypeId = (int)Utilities.Enums.InOutStockType.ImportFromAnotherStock;
 
-                    var inOutStock = new EntityFrameworkCore.Entities.Business.Pharmaceuticals.InOutStock();
+                    var inOutStock = new EntityFrameworkCore.Entities.Business.InOutStock();
                     var inOutStockMedicines = new List<InOutStockMedicine>();
-                    var medicineStocks = new List<EntityFrameworkCore.Entities.Business.Pharmaceuticals.MedicineStock>();
+                    var medicineStocks = new List<EntityFrameworkCore.Entities.Business.MedicineStock>();
 
                     if (GuidHelper.IsNullOrEmpty(input.Id)) // Thêm mới (Lưu tạm)
                     {
-                        inOutStock = _mapper.Map<EntityFrameworkCore.Entities.Business.Pharmaceuticals.InOutStock>(input);
+                        inOutStock = _mapper.Map<EntityFrameworkCore.Entities.Business.InOutStock>(input);
                         inOutStock.Id = id;
                         inOutStock.CreatedBy = SessionExtensions.Login?.Id;
                         inOutStock.CreatedDate = dateNow;
@@ -975,7 +1037,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
                                             }
                                             else // Nếu chưa tồn tại thuốc trong kho thì thêm mới thuốc vào kho
                                             {
-                                                medicineStocks.Add(new EntityFrameworkCore.Entities.Business.Pharmaceuticals.MedicineStock()
+                                                medicineStocks.Add(new EntityFrameworkCore.Entities.Business.MedicineStock()
                                                 {
                                                     Id = Guid.NewGuid(),
                                                     CreatedDate = dateNow,

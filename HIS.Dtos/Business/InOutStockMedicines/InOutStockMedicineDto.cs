@@ -2,7 +2,7 @@
 using HIS.Dtos.Dictionaries.MedicinePricePolicy;
 using System.ComponentModel;
 
-namespace HIS.Dtos.Business.InOutStockMedicine
+namespace HIS.Dtos.Business.InOutStockMedicines
 {
     public class InOutStockMedicineDto : EntityDto<Guid?>
     {

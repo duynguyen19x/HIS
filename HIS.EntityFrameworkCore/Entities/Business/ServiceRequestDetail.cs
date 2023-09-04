@@ -12,7 +12,6 @@ namespace HIS.EntityFrameworkCore.Entities.Business
     /// </summary>
     public class ServiceRequestDetail : AuditedEntity<Guid>
     {
-        public virtual Guid ServiceRequestID { get; set; }
         public virtual Guid ServiceID { get; set; }
 
         public virtual string Description { get; set; }

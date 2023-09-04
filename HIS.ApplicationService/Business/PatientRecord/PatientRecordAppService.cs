@@ -31,7 +31,7 @@ namespace HIS.ApplicationService.Business
                 var filter = Context.PatientRecords.AsQueryable()
                     .Include(x => x.PatientFk)
                     .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), x => x.Code.ToUpper() == input.CodeFilter.ToUpper())
-                    .WhereIf(input.PatientIdFilter != null, x => x.PatientId == input.PatientIdFilter)
+                    .WhereIf(input.PatientIdFilter != null, x => x.PatientID == input.PatientIdFilter)
                     .WhereIf(!string.IsNullOrEmpty(input.PatientNameFilter), x => x.PatientName.ToUpper() == input.PatientNameFilter.ToUpper())
                     .WhereIf(input.GenderIdFilter != null, x => x.GenderID == input.GenderIdFilter)
                     .WhereIf(input.EthnicityIdFilter != null, x => x.EthnicityID == input.EthnicityIdFilter)
@@ -41,13 +41,13 @@ namespace HIS.ApplicationService.Business
                 result.TotalCount = await filter.CountAsync();
                 result.Items = (from o in filter
 
-                                join o1 in Context.Patients on o.PatientId equals o1.Id 
+                                join o1 in Context.Patients on o.PatientID equals o1.Id 
 
                                 select new PatientRecordDto()
                                 {
                                     Id = o.Id,
                                     Code = o.Code,
-                                    PatientId = o.PatientId,
+                                    PatientId = o.PatientID,
                                     PatientName = o.PatientName,
                                     BirthDate = o.BirthDate,
                                     BirthYear = o.BirthYear,

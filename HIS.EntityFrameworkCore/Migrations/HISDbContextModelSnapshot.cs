@@ -22,230 +22,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.HISPatient", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("DeletedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Patients", (string)null);
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.HISPatientRecord", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Address")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<DateTime?>("BirthDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("BirthPlace")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<int>("BirthYear")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("BranchId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("CareerId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid>("CountryId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("DeletedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<Guid?>("DistrictId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Email")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("EndDepartmentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("EndRoomId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("EthnicityId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Fax")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid>("GenderId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("HospitalizationReason")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IdentificationNumber")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsEmergency")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("IssueBy")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<DateTime?>("IssueDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Mobile")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("PatientId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("PatientName")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<int>("PatientRecordTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PatientTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<Guid?>("ProvinceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("ReceiptionDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("ReceiptionDepartmentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ReceiptionRoomId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("StartDepartmentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("StartRoomId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Tel")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("WardId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BranchId");
-
-                    b.HasIndex("CareerId");
-
-                    b.HasIndex("CountryId");
-
-                    b.HasIndex("DistrictId");
-
-                    b.HasIndex("EthnicityId");
-
-                    b.HasIndex("GenderId");
-
-                    b.HasIndex("PatientId");
-
-                    b.HasIndex("ProvinceId");
-
-                    b.HasIndex("WardId");
-
-                    b.ToTable("PatientRecords", (string)null);
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.InOutStock", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.InOutStock", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -378,7 +155,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.ToTable("InOutStocks", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.InOutStockMedicine", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.InOutStockMedicine", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -417,7 +194,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.ToTable("InOutStockMedicines", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.InOutStockType", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.InOutStockType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -569,7 +346,131 @@ namespace HIS.EntityFrameworkCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.MedicineStock", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.MedicalRecord", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Advise")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("BedID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BranchID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DeathCauseID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("DeathDocumentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DeathDocumentNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DeathDocumentPlace")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DeathDocumentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DeathPlace")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("DeathTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DeathWithinID")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("DepartmentID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("IcdCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IcdName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IcdSubCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IcdSubName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IcdText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAutopsy")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeathCertificate")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("MedicalRecordEndTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MedicalRecordStatusID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MedicalRecordTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("PatientRecordID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RoomID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TreatmentMethod")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BranchID");
+
+                    b.HasIndex("DepartmentID");
+
+                    b.HasIndex("PatientRecordID");
+
+                    b.HasIndex("RoomID");
+
+                    b.ToTable("MedicalRecords", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.MedicineStock", b =>
                 {
                     b.Property<Guid?>("Id")
                         .ValueGeneratedOnAdd()
@@ -617,6 +518,458 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.ToTable("MedicineStocks", (string)null);
                 });
 
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Patient", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("BloodRhID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BloodTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Patients", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.PatientRecord", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime?>("BirthDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("BirthPlace")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("BirthYear")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("BranchID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CareerID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CountryCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("CountryID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CountryName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("DistrictCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("DistrictID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("DistrictName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("EndDepartmentID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("EndRoomID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("EthnicityID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Fax")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid>("GenderID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("HospitalizationReason")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdentificationNumber")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsEmergency")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("IssueBy")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<DateTime?>("IssueDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Mobile")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("PatientID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PatientName")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<int>("PatientRecordStatusID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PatientRecordTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PatientTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ProvinceCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("ProvinceID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ProvinceName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ReceiptionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ReceiptionDepartmentID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ReceiptionRoomID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("StartDepartmentID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("StartRoomID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Tel")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("WardCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("WardID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("WardName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Workplace")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BranchID");
+
+                    b.HasIndex("CareerID");
+
+                    b.HasIndex("CountryID");
+
+                    b.HasIndex("DistrictID");
+
+                    b.HasIndex("EthnicityID");
+
+                    b.HasIndex("GenderID");
+
+                    b.HasIndex("PatientID");
+
+                    b.HasIndex("ProvinceID");
+
+                    b.HasIndex("WardID");
+
+                    b.ToTable("PatientRecords", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.ServiceRequest", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BranchID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("ExecuteDepartmentID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ExecuteRoomID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ExecuteTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("GroupCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("MedicalRecordID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("PatientID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PatientRecordID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RequestDepartmentID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("RequestRoomID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("RequestTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("TreatmentID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ServiceRequests");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.ServiceRequestDetail", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ServiceID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ServiceRequestDetails");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Treatment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal?>("BloodPressureMax")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("BloodPressureMin")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("BranchID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal?>("BreathRate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DeletedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("DepartmentID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal?>("Height")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("MedicalRecordID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("PatientID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PatientRecordID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal?>("Pulse")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("RoomID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<decimal?>("SPO2")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("Temperature")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("TemperatureType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TreatmentCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TreatmentDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TreatmentTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<decimal?>("Weight")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Treatments");
+                });
+
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Material", b =>
                 {
                     b.Property<Guid>("Id")
@@ -647,6 +1000,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal?>("ImpQuantity")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal?>("ImpTaxRate")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal?>("ImpVatRate")
@@ -685,9 +1041,6 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Property<int?>("SoftOrder")
                         .HasColumnType("int");
-
-                    b.Property<decimal?>("TaxRate")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<Guid?>("UnitId")
                         .HasColumnType("uniqueidentifier");
@@ -845,6 +1198,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<decimal?>("ImpQuantity")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<decimal?>("ImpTaxRate")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<decimal?>("ImpVatRate")
                         .HasColumnType("decimal(18,2)");
 
@@ -887,9 +1243,6 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Property<int?>("SortOrder")
                         .HasColumnType("int");
-
-                    b.Property<decimal?>("TaxRate")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("TenderDecision")
                         .HasMaxLength(256)
@@ -1610,6 +1963,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<decimal?>("ImpPrice")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<decimal?>("ImpTaxRate")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<decimal?>("ImpVatRate")
                         .HasColumnType("decimal(18,2)");
 
@@ -1731,9 +2087,6 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Property<int?>("SortOrder")
                         .HasColumnType("int");
-
-                    b.Property<decimal?>("TaxRate")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Tutorial")
                         .HasMaxLength(512)
@@ -4987,6 +5340,159 @@ namespace HIS.EntityFrameworkCore.Migrations
                         });
                 });
 
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.DeathCause", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DeathCauses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "DISEASE",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(5435),
+                            Inactive = false,
+                            Name = "Do bệnh",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "COMPLICATION",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(5448),
+                            Inactive = false,
+                            Name = "Do tai biến điều trị",
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 99,
+                            Code = "OTHER",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(5465),
+                            Inactive = false,
+                            Name = "Khác",
+                            SortOrder = 99
+                        });
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.DeathWithin", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DeathWithins");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "WITHIN_24H",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(5482),
+                            Inactive = false,
+                            Name = "Trong 24h vào",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "WITHIN_48H",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(5485),
+                            Inactive = false,
+                            Name = "Trong 48h vào",
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Code = "WITHIN_72H",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(5487),
+                            Inactive = false,
+                            Name = "Trong 72h vào",
+                            SortOrder = 3
+                        },
+                        new
+                        {
+                            Id = 99,
+                            Code = "OTHER",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(5489),
+                            Inactive = false,
+                            Name = "Khác",
+                            SortOrder = 99
+                        });
+                });
+
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Department", b =>
                 {
                     b.Property<Guid>("Id")
@@ -5268,32 +5774,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genders", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"),
-                            Code = "KXD",
-                            Inactive = false,
-                            Name = "Chưa xác định",
-                            SortOrder = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"),
-                            Code = "NAM",
-                            Inactive = false,
-                            Name = "Nam",
-                            SortOrder = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("e9497984-d355-41af-b917-091500956be9"),
-                            Code = "NU",
-                            Inactive = false,
-                            Name = "Nữ",
-                            SortOrder = 2
-                        });
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Hospital", b =>
@@ -5469,6 +5949,428 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.ToTable("Icds", (string)null);
                 });
 
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.MedicalRecordEndType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsForInPatient")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsForOutPatient")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MedicalRecordEndTypes", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "CAPTOACHOVE",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(6959),
+                            Inactive = false,
+                            IsForInPatient = false,
+                            IsForOutPatient = true,
+                            Name = "Cấp toa cho về",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "HEN",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(6963),
+                            Inactive = false,
+                            IsForInPatient = false,
+                            IsForOutPatient = true,
+                            Name = "Hẹn",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Code = "CHUYEN_PHONGKHAM",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(6965),
+                            Inactive = false,
+                            IsForInPatient = false,
+                            IsForOutPatient = true,
+                            Name = "Chuyển phòng khám",
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Code = "DTRI_NGOAITRU",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(6967),
+                            Inactive = false,
+                            IsForInPatient = false,
+                            IsForOutPatient = true,
+                            Name = "Điều trị ngoại trú",
+                            SortOrder = 3
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Code = "NHAPVIEN",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(6969),
+                            Inactive = false,
+                            IsForInPatient = false,
+                            IsForOutPatient = true,
+                            Name = "Nhập viện",
+                            SortOrder = 4
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Code = "BOKHAM",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(6971),
+                            Inactive = false,
+                            IsForInPatient = false,
+                            IsForOutPatient = true,
+                            Name = "Bỏ khám",
+                            SortOrder = 5
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Code = "CHUYEN_KHOA",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(6972),
+                            Inactive = false,
+                            IsForInPatient = true,
+                            IsForOutPatient = true,
+                            Name = "Chuyển khoa",
+                            SortOrder = 8
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Code = "RAVIEN",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(6974),
+                            Inactive = false,
+                            IsForInPatient = true,
+                            IsForOutPatient = false,
+                            Name = "Ra viện",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Code = "XINVE",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(6976),
+                            Inactive = false,
+                            IsForInPatient = true,
+                            IsForOutPatient = false,
+                            Name = "Xin về",
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Code = "DUAVE",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(6978),
+                            Inactive = false,
+                            IsForInPatient = true,
+                            IsForOutPatient = false,
+                            Name = "Đưa về",
+                            SortOrder = 3
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Code = "TRONVIEN",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(6979),
+                            Inactive = false,
+                            IsForInPatient = true,
+                            IsForOutPatient = false,
+                            Name = "Trốn viện",
+                            SortOrder = 4
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Code = "CHUYEN_TUYEN",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(6981),
+                            Inactive = false,
+                            IsForInPatient = false,
+                            IsForOutPatient = true,
+                            Name = "Chuyển tuyến",
+                            SortOrder = 6
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Code = "TUVONG",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(6983),
+                            Inactive = false,
+                            IsForInPatient = true,
+                            IsForOutPatient = true,
+                            Name = "Tử vong",
+                            SortOrder = 7
+                        },
+                        new
+                        {
+                            Id = 99,
+                            Code = "KHAC",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(6985),
+                            Inactive = false,
+                            IsForInPatient = true,
+                            IsForOutPatient = true,
+                            Name = "Khác",
+                            SortOrder = 99
+                        });
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.MedicalRecordResult", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MedicalRecordResults", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "KHOI",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(7018),
+                            Inactive = false,
+                            Name = "Khỏi",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "DO_GIAM",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(7022),
+                            Inactive = false,
+                            Name = "Đỡ, giảm",
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Code = "KHONGTHAYDOI",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(7053),
+                            Inactive = false,
+                            Name = "Không thay đổi",
+                            SortOrder = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Code = "NANGHON",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(7068),
+                            Inactive = false,
+                            Name = "Nặng hơn",
+                            SortOrder = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Code = "TUVONG",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(7070),
+                            Inactive = false,
+                            Name = "Tử vong",
+                            SortOrder = 5
+                        },
+                        new
+                        {
+                            Id = 99,
+                            Code = "KHAC",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(7072),
+                            Inactive = true,
+                            Name = "Khác",
+                            SortOrder = 6
+                        });
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.MedicalRecordType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<int>("GroupTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MedicalRecordTypes", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.PatientRecordType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(250)
+                        .HasColumnType("nvarchar(250)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PatientRecordTypes", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "NOITRU",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(6911),
+                            Inactive = false,
+                            Name = "Nội trú",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "NGOAITRU",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(6914),
+                            Inactive = false,
+                            Name = "Ngoại trú",
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Code = "DICHVU",
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(6916),
+                            Inactive = false,
+                            Name = "Dịch vụ",
+                            SortOrder = 3
+                        });
+                });
+
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.PatientType", b =>
                 {
                     b.Property<int>("Id")
@@ -5516,28 +6418,28 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "BHYT",
-                            CreatedDate = new DateTime(2023, 8, 25, 20, 6, 22, 866, DateTimeKind.Local).AddTicks(5690),
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(6872),
                             Inactive = false,
                             Name = "Bảo hiểm y tế",
-                            SortOrder = 0
+                            SortOrder = 1
                         },
                         new
                         {
                             Id = 2,
                             Code = "VP",
-                            CreatedDate = new DateTime(2023, 8, 25, 20, 6, 22, 866, DateTimeKind.Local).AddTicks(5703),
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(6876),
                             Inactive = false,
                             Name = "Viện phí",
-                            SortOrder = 0
+                            SortOrder = 2
                         },
                         new
                         {
                             Id = 3,
                             Code = "DV",
-                            CreatedDate = new DateTime(2023, 8, 25, 20, 6, 22, 866, DateTimeKind.Local).AddTicks(5705),
+                            CreatedDate = new DateTime(2023, 9, 1, 5, 7, 6, 430, DateTimeKind.Local).AddTicks(6878),
                             Inactive = false,
                             Name = "Dịch vụ",
-                            SortOrder = 0
+                            SortOrder = 3
                         });
                 });
 
@@ -6938,76 +7840,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.ToTable("UserRoles", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.HISPatientRecord", b =>
-                {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Branch", "SBracnhFk")
-                        .WithMany()
-                        .HasForeignKey("BranchId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Career", "SCareerFk")
-                        .WithMany()
-                        .HasForeignKey("CareerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Country", "SCountryFk")
-                        .WithMany()
-                        .HasForeignKey("CountryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.District", "SDistrictFk")
-                        .WithMany()
-                        .HasForeignKey("DistrictId");
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Ethnic", "SEthnicFk")
-                        .WithMany()
-                        .HasForeignKey("EthnicityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Gender", "SGenderFk")
-                        .WithMany()
-                        .HasForeignKey("GenderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.HISPatient", "PatientFk")
-                        .WithMany()
-                        .HasForeignKey("PatientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Province", "SProvinceFk")
-                        .WithMany()
-                        .HasForeignKey("ProvinceId");
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SWard", "SWardFk")
-                        .WithMany()
-                        .HasForeignKey("WardId");
-
-                    b.Navigation("PatientFk");
-
-                    b.Navigation("SBracnhFk");
-
-                    b.Navigation("SCareerFk");
-
-                    b.Navigation("SCountryFk");
-
-                    b.Navigation("SDistrictFk");
-
-                    b.Navigation("SEthnicFk");
-
-                    b.Navigation("SGenderFk");
-
-                    b.Navigation("SProvinceFk");
-
-                    b.Navigation("SWardFk");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.InOutStock", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.InOutStock", b =>
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.User", "ApproverUser")
                         .WithMany()
@@ -7029,17 +7862,17 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasForeignKey("ImpStockId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.InOutStockType", "InOutStockType")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.InOutStockType", "InOutStockType")
                         .WithMany()
                         .HasForeignKey("InOutStockTypeId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.HISPatient", "Patient")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Patient", "Patient")
                         .WithMany()
                         .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.HISPatientRecord", "PatientRecord")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.PatientRecord", "PatientRecord")
                         .WithMany()
                         .HasForeignKey("PatientRecordId")
                         .OnDelete(DeleteBehavior.NoAction);
@@ -7101,9 +7934,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("Supplier");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.InOutStockMedicine", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.InOutStockMedicine", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.InOutStock", "InOutStock")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.InOutStock", "InOutStock")
                         .WithMany()
                         .HasForeignKey("InOutStockId");
 
@@ -7116,7 +7949,42 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("Medicine");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals.MedicineStock", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.MedicalRecord", b =>
+                {
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Branch", "BranchFk")
+                        .WithMany()
+                        .HasForeignKey("BranchID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Department", "DepartmentFk")
+                        .WithMany()
+                        .HasForeignKey("DepartmentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.PatientRecord", "PatientRecordFk")
+                        .WithMany()
+                        .HasForeignKey("PatientRecordID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Room", "RoomFk")
+                        .WithMany()
+                        .HasForeignKey("RoomID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BranchFk");
+
+                    b.Navigation("DepartmentFk");
+
+                    b.Navigation("PatientRecordFk");
+
+                    b.Navigation("RoomFk");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.MedicineStock", b =>
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Medicine", "Medicine")
                         .WithMany()
@@ -7131,6 +7999,75 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("Medicine");
 
                     b.Navigation("Stock");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.PatientRecord", b =>
+                {
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Branch", "BracnhFk")
+                        .WithMany()
+                        .HasForeignKey("BranchID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Career", "CareerFk")
+                        .WithMany()
+                        .HasForeignKey("CareerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Country", "CountryFk")
+                        .WithMany()
+                        .HasForeignKey("CountryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.District", "DistrictFk")
+                        .WithMany()
+                        .HasForeignKey("DistrictID");
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Ethnic", "EthnicityFk")
+                        .WithMany()
+                        .HasForeignKey("EthnicityID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Gender", "GenderFk")
+                        .WithMany()
+                        .HasForeignKey("GenderID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.Patient", "PatientFk")
+                        .WithMany()
+                        .HasForeignKey("PatientID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Province", "ProvinceFk")
+                        .WithMany()
+                        .HasForeignKey("ProvinceID");
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.SWard", "WardFk")
+                        .WithMany()
+                        .HasForeignKey("WardID");
+
+                    b.Navigation("BracnhFk");
+
+                    b.Navigation("CareerFk");
+
+                    b.Navigation("CountryFk");
+
+                    b.Navigation("DistrictFk");
+
+                    b.Navigation("EthnicityFk");
+
+                    b.Navigation("GenderFk");
+
+                    b.Navigation("PatientFk");
+
+                    b.Navigation("ProvinceFk");
+
+                    b.Navigation("WardFk");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Material", b =>

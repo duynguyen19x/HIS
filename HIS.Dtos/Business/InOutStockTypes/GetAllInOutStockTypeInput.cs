@@ -1,4 +1,4 @@
-﻿namespace HIS.Dtos.Business.InOutStockType
+﻿namespace HIS.Dtos.Business.InOutStockTypes
 {
     public  class GetAllInOutStockTypeInput
     {

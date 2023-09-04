@@ -38,6 +38,7 @@
 
   <ItemGroup>
     <Folder Include="EntityFrameworkCore\Seed\Dictionary\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,6 @@
 ﻿using HIS.EntityFrameworkCore.Configurations;
 using HIS.EntityFrameworkCore.Data;
 using HIS.EntityFrameworkCore.Entities.Business;
-using HIS.EntityFrameworkCore.Entities.Business.Pharmaceuticals;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
@@ -78,7 +77,6 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<InOutStock> InOutStocks { get; set; }
         public DbSet<InOutStockMedicine> InOutStockMedicines { get; set; }
 
-
         public DbSet<DeathCause> DeathCauses { get; set; }
         public DbSet<DeathWithin> DeathWithins { get; set; }
         public DbSet<PatientType> PatientTypes { get; set; }
@@ -95,7 +93,6 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
 
         public DbSet<ServiceRequest> ServiceRequests { get; set; }
         public DbSet<ServiceRequestDetail> ServiceRequestDetails { get; set; }
-
         #endregion
 
         #region System

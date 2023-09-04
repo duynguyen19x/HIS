@@ -1,4 +1,4 @@
-﻿using HIS.Dtos.Business.InOutStock;
+﻿using HIS.Dtos.Business.InOutStocks;
 using HIS.Dtos.Commons;
 using HIS.Models.Commons;
 using System;
@@ -29,5 +29,6 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStock
         Task<ApiResult<InOutStockDto>> ImportFromAnotherStockCanCelStockOut(InOutStockDto input);
         Task<ApiResult<InOutStockDto>> ImportFromAnotherStockStockIn(InOutStockDto input);
         Task<ApiResult<InOutStockDto>> ImportFromAnotherStockCancelStockIn(InOutStockDto input);
+        Task<ApiResult<bool>> ImportFromAnotherStockDeleted(Guid id);
     }
 }

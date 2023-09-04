@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using HIS.Core.Linq;
-using HIS.Dtos.Business.InOutStock;
-using HIS.Dtos.Business.MedicineStock;
+using HIS.Dtos.Business.InOutStocks;
+using HIS.Dtos.Business.MedicineStocks;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Medicine;
 using HIS.Dtos.Dictionaries.ServicePricePolicy;
@@ -44,8 +44,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.MedicineStock
                                      StockCode = stock.Code,
                                      StockName = stock.Name,
                                  })
-                                 .WhereIf(!GuidHelper.IsNullOrEmpty( input.StockIdFilter), w => w.StockId == input.StockIdFilter)
-                                 .WhereIf(!GuidHelper.IsNullOrEmpty( input.MedicineIdFilter), w => w.MedicineId == input.MedicineIdFilter)
+                                 .WhereIf(!GuidHelper.IsNullOrEmpty(input.StockIdFilter), w => w.StockId == input.StockIdFilter)
+                                 .WhereIf(!GuidHelper.IsNullOrEmpty(input.MedicineIdFilter), w => w.MedicineId == input.MedicineIdFilter)
                                  .OrderBy(o => o.StockCode).ToList();
 
                 result.TotalCount = result.Result.Count;
@@ -65,23 +65,21 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.MedicineStock
 
             try
             {
-                result.Result = (from medicineStock in _dbContext.MedicineStocks
-                                 join medicine in _dbContext.Medicines on medicineStock.MedicineId equals medicine.Id
+                result.Result = (from dMedicineStock in _dbContext.MedicineStocks
+                                 join sMedicine in _dbContext.Medicines on dMedicineStock.MedicineId equals sMedicine.Id
 
-                                 where medicineStock.IsDeleted == false 
-                                    && medicineStock.AvailableQuantity > 0
-                                    && medicineStock.StockId == stockId
+                                 where dMedicineStock.IsDeleted == false && dMedicineStock.AvailableQuantity > 0
 
                                  select new MedicineStockDto()
                                  {
-                                     Id = medicineStock.Id,
-                                     MedicineCode = medicine.Code,
-                                     MedicineName = medicine.Name,
-                                     StockId = medicineStock.StockId,
-                                     MedicineId = medicineStock.MedicineId,
-                                     Quantity = medicineStock.Quantity,
-                                     AvailableQuantity = medicineStock.AvailableQuantity,
-                                     Medicine = _mapper.Map<MedicineDto>(medicine)
+                                     Id = dMedicineStock.Id,
+                                     MedicineCode = sMedicine.Code,
+                                     MedicineName = sMedicine.Name,
+                                     StockId = dMedicineStock.StockId,
+                                     MedicineId = dMedicineStock.MedicineId,
+                                     Quantity = dMedicineStock.Quantity,
+                                     AvailableQuantity = dMedicineStock.AvailableQuantity,
+                                     Medicine = _mapper.Map<MedicineDto>(sMedicine)
                                  }).ToList();
             }
             catch (Exception ex)

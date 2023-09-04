@@ -2,7 +2,7 @@
 using HIS.Dtos.Dictionaries.Medicine;
 using HIS.Dtos.Dictionaries.Room;
 
-namespace HIS.Dtos.Business.MedicineStock
+namespace HIS.Dtos.Business.MedicineStocks
 {
     public class MedicineStockDto : EntityDto<Guid?>
     {
