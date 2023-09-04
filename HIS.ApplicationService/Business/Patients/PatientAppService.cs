@@ -21,9 +21,22 @@ namespace HIS.ApplicationService.Business.Patients
         {
         }
 
-        public override Task<ResultDto<PatientDto>> Create(PatientDto input)
+        public override async Task<ResultDto<PatientDto>> Create(PatientDto input)
         {
-            throw new NotImplementedException();
+            return await BeginTransactionAsync<ResultDto<PatientDto>>(async result =>
+            {
+                try
+                {
+
+
+
+                    await SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    result.Exception(ex);
+                }
+            });
         }
 
         public override Task<ResultDto<PatientDto>> Update(PatientDto input)
@@ -85,60 +98,5 @@ namespace HIS.ApplicationService.Business.Patients
             }
             return result;
         }
-
-        
-
-        //public override Task<ResultDto<PatientDto>> Create(PatientDto input)
-        //{
-        //    return base.Create(input);
-        //}
-
-        //public override Task<ResultDto<PatientDto>> Update(PatientDto input)
-        //{
-        //    return base.Update(input);
-        //}
-
-        //public override Task<ResultDto<PatientDto>> Delete(Guid id)
-        //{
-        //    return Context.UsingTransactionAsync<ResultDto<PatientDto>>(async result =>
-        //    {
-        //        Context.Patients.Remove(id);
-        //    });
-        //}
-
-        //public override async Task<PagedResultDto<PatientDto>> GetAll(PatientRequestDto input)
-        //{
-        //    var result = new PagedResultDto<PatientDto>();
-        //    try
-        //    {
-        //        var filter = Context.Patients.AsQueryable()
-        //            .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), x => x.Code.ToLower() == input.CodeFilter.ToLower());
-        //        var paged = await filter.PageBy(input).ToListAsync();
-        //        var totalCount = await filter.CountAsync();
-
-        //        result.Items = Mapper.Map<IList<PatientDto>>(paged);
-        //        result.TotalCount = totalCount;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        result.Exception(ex);
-        //    }
-
-        //    return result;
-        //}
-
-        //public override async Task<ResultDto<PatientDto>> GetById(Guid id)
-        //{
-        //    var result = new ResultDto<PatientDto>();
-        //    try
-        //    {
-        //        result.Item = Mapper.Map<PatientDto>(await Context.Patients.FindAsync(id));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        result.Exception(ex);
-        //    }
-        //    return result;
-        //}
     }
 }

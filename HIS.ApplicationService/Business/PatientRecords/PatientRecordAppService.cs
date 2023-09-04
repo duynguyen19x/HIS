@@ -22,6 +22,11 @@ namespace HIS.ApplicationService.Business.PatientRecords
             throw new NotImplementedException();
         }
 
+        public override Task<ResultDto<PatientRecordDto>> Update(PatientRecordDto input)
+        {
+            throw new NotImplementedException();
+        }
+
         public override Task<ResultDto<PatientRecordDto>> Delete(Guid id)
         {
             throw new NotImplementedException();
@@ -33,11 +38,6 @@ namespace HIS.ApplicationService.Business.PatientRecords
         }
 
         public override Task<ResultDto<PatientRecordDto>> GetById(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public override Task<ResultDto<PatientRecordDto>> Update(PatientRecordDto input)
         {
             throw new NotImplementedException();
         }
