@@ -82,9 +82,9 @@ namespace HIS.ApplicationService.Business.Receptions
                     else
                         return;
 
-                    // thông tin bệnh án khoa.
+                    // thông tin bệnh án khoa + khám bệnh.
 
-
+                    // thông tin dịch vụ.
 
 
                     await SaveChangesAsync();
