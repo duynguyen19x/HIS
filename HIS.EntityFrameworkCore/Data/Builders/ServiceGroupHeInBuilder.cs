@@ -35,21 +35,21 @@ namespace HIS.EntityFrameworkCore.Data.Builders
                     Id = new Guid("7D39F21A-3F78-4C5A-B288-02532A9769D7"),
                     Code = "THUOC-BHYT",
                     Name = "Thuốc trong danh mục BHYT",
-                    SortOrder = (int)ServiceGroupHeInTypes.MedicineHeInList
+                    SortOrder = (int)ServiceGroupHeInTypes.ItemHeInList
                 },
                 new ServiceGroupHeIn()
                 {
                     Id = new Guid("90ADCFC5-7518-46E2-995F-D304C31583B5"),
                     Code = "THUOC-NgBHYT",
                     Name = "Thuốc điều trị ung thư, chống thải ghép ngoài danh mục",
-                    SortOrder = (int)ServiceGroupHeInTypes.MedicineOutHeInList
+                    SortOrder = (int)ServiceGroupHeInTypes.ItemOutHeInList
                 },
                 new ServiceGroupHeIn()
                 {
                     Id = new Guid("53BF47C7-1414-47CF-8C88-5BA96AA2C978"),
                     Code = "THUOC-TT",
                     Name = "Thuốc thanh toán theo tỷ lệ",
-                    SortOrder = (int)ServiceGroupHeInTypes.MedicinePaymentRate
+                    SortOrder = (int)ServiceGroupHeInTypes.ItemPaymentRate
                 },
                 new ServiceGroupHeIn()
                 {

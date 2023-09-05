@@ -17,10 +17,10 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.HasKey(t => new { t.UserId, t.RoleId });
 
             builder.HasOne(t => t.User).WithMany(pc => pc.UserRoles)
-              .HasForeignKey(pc => pc.UserId).OnDelete(DeleteBehavior.NoAction);
+              .HasForeignKey(pc => pc.UserId);
 
             builder.HasOne(t => t.Role).WithMany(pc => pc.UserRoles)
-              .HasForeignKey(pc => pc.RoleId).OnDelete(DeleteBehavior.NoAction);
+              .HasForeignKey(pc => pc.RoleId);
         }
     }
 }

@@ -4,24 +4,24 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business
 {
-    public class MedicineStockConfiguration : IEntityTypeConfiguration<MedicineStock>
+    public class ItemStockConfiguration : IEntityTypeConfiguration<ItemStock>
     {
-        public void Configure(EntityTypeBuilder<MedicineStock> builder)
+        public void Configure(EntityTypeBuilder<ItemStock> builder)
         {
-            builder.ToTable("MedicineStocks");
+            builder.ToTable("ItemStocks");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id);
 
-            builder.HasOne(e => e.Medicine)
+            builder.HasOne(e => e.Item)
                .WithMany()
-               .HasForeignKey(e => e.MedicineId)
-               .OnDelete(DeleteBehavior.NoAction);
+               .HasForeignKey(e => e.ItemId)
+               ;
 
             builder.HasOne(e => e.Stock)
                 .WithMany()
                 .HasForeignKey(e => e.StockId)
-                .OnDelete(DeleteBehavior.NoAction);
+                ;
         }
     }
 }

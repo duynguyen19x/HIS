@@ -14,12 +14,12 @@ namespace HIS.EntityFrameworkCore.Configurations.Services
             builder.HasOne(t => t.PatientType)
                 .WithMany()
                 .HasForeignKey(pc => pc.PatientTypeId)
-                .OnDelete(DeleteBehavior.NoAction);
+                ;
 
             builder.HasOne(t => t.Service)
                 .WithMany()
                 .HasForeignKey(pc => pc.ServiceId)
-                .OnDelete(DeleteBehavior.NoAction); 
+                ; 
         }
     }
 }

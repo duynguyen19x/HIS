@@ -4,20 +4,20 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business
 {
-    public class InOutStockMedicineConfiguration : IEntityTypeConfiguration<InOutStockMedicine>
+    public class InOutStockItemConfiguration : IEntityTypeConfiguration<InOutStockItem>
     {
-        public void Configure(EntityTypeBuilder<InOutStockMedicine> builder)
+        public void Configure(EntityTypeBuilder<InOutStockItem> builder)
         {
-            builder.ToTable("InOutStockMedicines");
+            builder.ToTable("InOutStockItems");
             builder.HasKey(x => x.Id);
 
             builder.HasOne(t => t.InOutStock)
                 .WithMany()
                 .HasForeignKey(t => t.InOutStockId);
 
-            builder.HasOne(e => e.Medicine)
+            builder.HasOne(e => e.Item)
                .WithMany()
-               .HasForeignKey(e => e.MedicineId);
+               .HasForeignKey(e => e.ItemId);
         }
     }
 }

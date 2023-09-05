@@ -109,10 +109,10 @@ namespace HIS.EntityFrameworkCore.Data.Builders
                 },
                 new RoomType()
                 {
-                    Id = (int)RoomTypes.MedicineManagement,
+                    Id = (int)RoomTypes.ItemManagement,
                     Code = "QLT",
                     Name = "Quản lý thuốc",
-                    SortOrder = (int)RoomTypes.MedicineManagement
+                    SortOrder = (int)RoomTypes.ItemManagement
                 },
                 new RoomType()
                 {

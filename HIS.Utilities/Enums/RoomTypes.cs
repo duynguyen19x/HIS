@@ -52,7 +52,7 @@ namespace HIS.Utilities.Enums
         InventoryCabinet,
 
         [Description("Quản lý thuốc")]
-        MedicineManagement,
+        ItemManagement,
 
         [Description("Quản lý vật tư")]
         MaterialManagement,
