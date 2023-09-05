@@ -1,12 +1,9 @@
-﻿using HIS.ApplicationService.Business;
-using HIS.ApplicationService.Business.InOutStockType;
+﻿using HIS.ApplicationService.Business.InOutStockType;
 using HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks;
 using HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks;
 using HIS.ApplicationService.Business.MedicalRecords;
 using HIS.ApplicationService.Business.PatientRecords;
 using HIS.ApplicationService.Business.Patients;
-using HIS.ApplicationService.Business.Pharmaceuticals.InOutStock;
-using HIS.ApplicationService.Business.Pharmaceuticals.MedicineStock;
 using HIS.ApplicationService.Business.Receptions;
 using HIS.ApplicationService.Dictionaries.Branch;
 using HIS.ApplicationService.Dictionaries.Career;
@@ -38,7 +35,6 @@ using HIS.ApplicationService.Systems.AutoNumber;
 using HIS.ApplicationService.Systems.Login;
 using HIS.ApplicationService.Systems.Role;
 using HIS.ApplicationService.Systems.User;
-using HIS.EntityFrameworkCore.Entities.Business;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HIS.ApplicationService
