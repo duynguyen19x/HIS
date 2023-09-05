@@ -1,8 +1,6 @@
 ﻿using HIS.Application.Core.Services.Dto;
 using HIS.ApplicationService.Business.Receptions;
 using HIS.Dtos.Business.PatientRecords;
-using HIS.Dtos.Business.Receptions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Business.Receptions

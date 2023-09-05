@@ -9,6 +9,12 @@ namespace HIS.Dtos.Business.PatientRecords
 {
     public class PatientRecordRequestDto : PagedResultRequestDto
     {
-
+        public virtual string PatientRecordCodeFilter { get; set; }
+        public virtual string PatientCodeFilter { get; set; }
+        public virtual string PatientNameFilter { get; set; }
+        public virtual DateTime? BirthFromDateFilter { get; set; }
+        public virtual DateTime? BirthToDateFilter { get; set; }
+        public virtual DateTime? ReceptionFromDateFilter { get; set; }
+        public virtual DateTime? ReceptionToDateFilter { get; set; }
     }
 }

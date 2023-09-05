@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
 using HIS.Application.Core.Services.Dto;
+using HIS.Application.Core.Utils;
 using HIS.Dtos.Business.PatientRecords;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using System;
@@ -11,35 +12,45 @@ using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Business.PatientRecords
 {
-    public class PatientRecordAppService : BaseCrudAppService<PatientRecordDto, PatientRecordRequestDto>, IPatientRecordAppService
+    public class PatientRecordAppService : BaseAppService, IPatientRecordAppService
     {
         public PatientRecordAppService(HISDbContext context, IMapper mapper) : base(context, mapper)
         {
         }
 
-        public override Task<ResultDto<PatientRecordDto>> Create(PatientRecordDto input)
+        public virtual async Task<ResultDto<PatientRecordDto>> CreateOrEdit(PatientRecordDto input)
+        {
+            if (DataHelper.IsNullOrDefault(input.PatientRecordId))
+                return await Create(input);
+            else
+                return await Update(input); 
+        }
+
+        public virtual Task<ResultDto<PatientRecordDto>> Create(PatientRecordDto input)
         {
             throw new NotImplementedException();
         }
 
-        public override Task<ResultDto<PatientRecordDto>> Update(PatientRecordDto input)
+        public virtual Task<ResultDto<PatientRecordDto>> Update(PatientRecordDto input)
         {
             throw new NotImplementedException();
         }
 
-        public override Task<ResultDto<PatientRecordDto>> Delete(Guid id)
+        public virtual Task<ResultDto<PatientRecordDto>> Delete(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public override Task<PagedResultDto<PatientRecordDto>> GetAll(PatientRecordRequestDto input)
+        public virtual Task<PagedResultDto<PatientRecordDto>> GetAll(PatientRecordRequestDto input)
         {
             throw new NotImplementedException();
         }
 
-        public override Task<ResultDto<PatientRecordDto>> GetById(Guid id)
+        public virtual Task<ResultDto<PatientRecordDto>> GetById(Guid id)
         {
             throw new NotImplementedException();
         }
+
+        
     }
 }

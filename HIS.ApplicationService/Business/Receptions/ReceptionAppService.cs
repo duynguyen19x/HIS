@@ -1,11 +1,14 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
 using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Business.MedicalRecords;
 using HIS.ApplicationService.Business.PatientRecords;
 using HIS.ApplicationService.Business.Patients;
+using HIS.Core.Linq;
 using HIS.Dtos.Business.PatientRecords;
 using HIS.Dtos.Business.Patients;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,20 +18,26 @@ using System.Threading.Tasks;
 namespace HIS.ApplicationService.Business.Receptions
 {
     /// <summary>
-    /// Xử lý tiếp nhận bệnh nhân (tiếp đón)
+    /// Xử lý tiếp nhận bệnh nhân.
     /// </summary>
     public class ReceptionAppService : BaseAppService, IReceptionAppService
     {
+        private readonly IMedicalRecordAppService _medicalRecordAppService;
+        private readonly IMedicalRecordExamAppService _medicalRecordExamAppService;
         private readonly IPatientAppService _patientAppService;
         private readonly IPatientRecordAppService _patientRecordAppService;
 
         public ReceptionAppService(
+            IMedicalRecordAppService medicalRecordAppService,
+            IMedicalRecordExamAppService medicalRecordExamAppService,
             IPatientAppService patientAppService,
             IPatientRecordAppService patientRecordAppService,
             HISDbContext context,
             IMapper mapper) 
             : base(context, mapper)
         {
+            _medicalRecordAppService = medicalRecordAppService;
+            _medicalRecordExamAppService = medicalRecordExamAppService;
             _patientAppService = patientAppService;
             _patientRecordAppService = patientRecordAppService;
         }
@@ -97,14 +106,40 @@ namespace HIS.ApplicationService.Business.Receptions
             throw new NotImplementedException();
         }
 
-        public Task<PagedResultDto<PatientRecordDto>> GetAll(PatientRecordRequestDto input)
+        public virtual async Task<PagedResultDto<PatientRecordDto>> GetAll(PatientRecordRequestDto input)
         {
-            throw new NotImplementedException();
+            var result = new PagedResultDto<PatientRecordDto>();
+            try
+            {
+                var filter = Context.PatientRecords.AsQueryable()
+                    .WhereIf(!string.IsNullOrEmpty(input.PatientRecordCodeFilter), x => x.Code.ToLower() == input.PatientRecordCodeFilter.ToLower())
+                    ;
+                var paged = await filter.PageBy(input).ToListAsync();
+                var totalCount = await filter.CountAsync();
+
+                result.Items = Mapper.Map<IList<PatientRecordDto>>(paged);
+                result.TotalCount = totalCount;
+            }
+            catch (Exception ex)
+            {
+                result.Exception(ex);
+            }
+
+            return result;
         }
 
-        public Task<ResultDto<PatientRecordDto>> GetById(Guid id)
+        public virtual async Task<ResultDto<PatientRecordDto>> GetById(Guid id)
         {
-            throw new NotImplementedException();
+            var result = new ResultDto<PatientRecordDto>();
+            try
+            {
+                result.Item = Mapper.Map<PatientRecordDto>(await Context.PatientRecords.FindAsync(id));
+            }
+            catch (Exception ex)
+            {
+                result.Exception(ex);
+            }
+            return result;
         }
     }
 }

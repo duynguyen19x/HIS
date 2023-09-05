@@ -7,11 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Business\MedicalRecords\**" />
     <Compile Remove="Categories\**" />
-    <EmbeddedResource Remove="Business\MedicalRecords\**" />
     <EmbeddedResource Remove="Categories\**" />
-    <None Remove="Business\MedicalRecords\**" />
     <None Remove="Categories\**" />
   </ItemGroup>
 

@@ -1,4 +1,5 @@
 ﻿using HIS.Application.Core.Services;
+using HIS.Application.Core.Services.Dto;
 using HIS.Dtos.Business.PatientRecords;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Business.PatientRecords
 {
-    public interface IPatientRecordAppService : IBaseCrudAppService<PatientRecordDto, Guid, PatientRecordRequestDto>
+    public interface IPatientRecordAppService : IBaseAppService
     {
+        Task<ResultDto<PatientRecordDto>> CreateOrEdit(PatientRecordDto input);
+        Task<ResultDto<PatientRecordDto>> Delete(Guid id);
+        Task<PagedResultDto<PatientRecordDto>> GetAll(PatientRecordRequestDto input);
+        Task<ResultDto<PatientRecordDto>> GetById(Guid id);
     }
 }
