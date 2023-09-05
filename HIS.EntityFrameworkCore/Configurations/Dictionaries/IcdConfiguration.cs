@@ -45,7 +45,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.Property(x => x.Description).HasMaxLength(512);
 
             builder.HasOne(t => t.ChapterIcd).WithMany()
-              .HasForeignKey(pc => pc.ChapterIcdId).OnDelete(DeleteBehavior.NoAction);
+              .HasForeignKey(pc => pc.ChapterIcdId);
         }
     }
 }

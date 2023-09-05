@@ -1,5 +1,7 @@
 ﻿using HIS.ApplicationService.Business;
 using HIS.ApplicationService.Business.InOutStockType;
+using HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks;
+using HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks;
 using HIS.ApplicationService.Business.MedicalRecords;
 using HIS.ApplicationService.Business.PatientRecords;
 using HIS.ApplicationService.Business.Patients;
@@ -17,10 +19,10 @@ using HIS.ApplicationService.Dictionaries.Ethnic;
 using HIS.ApplicationService.Dictionaries.Gender;
 using HIS.ApplicationService.Dictionaries.Hospital;
 using HIS.ApplicationService.Dictionaries.Icd;
-using HIS.ApplicationService.Dictionaries.MedicineGroup;
-using HIS.ApplicationService.Dictionaries.MedicineLine;
-using HIS.ApplicationService.Dictionaries.MedicinePricePolicy;
-using HIS.ApplicationService.Dictionaries.MedicineType;
+using HIS.ApplicationService.Dictionaries.ItemGroups;
+using HIS.ApplicationService.Dictionaries.ItemLines;
+using HIS.ApplicationService.Dictionaries.ItemPricePolicies;
+using HIS.ApplicationService.Dictionaries.ItemTypes;
 using HIS.ApplicationService.Dictionaries.Province;
 using HIS.ApplicationService.Dictionaries.Room;
 using HIS.ApplicationService.Dictionaries.RoomType;
@@ -73,14 +75,14 @@ namespace HIS.ApplicationService
             services.AddTransient<ISupplierService, SupplierService>();
             services.AddTransient<IUserService, UserService>();
 
-            services.AddTransient<IMedicineGroupService, MedicineGroupService>();
-            services.AddTransient<IMedicineTypeService, MedicineTypeService>();
-            services.AddTransient<IMedicineLineService, MedicineLineService>();
-            services.AddTransient<ISMedicinePricePolicyService, MedicinePricePolicyService>();
+            services.AddTransient<IItemGroupService, ItemGroupService>();
+            services.AddTransient<IItemTypeService, ItemTypeService>();
+            services.AddTransient<IItemLineService, ItemLineService>();
+            services.AddTransient<IItemPricePolicyService, ItemPricePolicyService>();
 
             services.AddTransient<IInOutStockTypeService, InOutStockTypeService>();
             services.AddTransient<IInOutStockService, InOutStockService>();
-            services.AddTransient<IMedicineStockService, MedicineStockService>();
+            services.AddTransient<IItemStockService, ItemStockService>();
 
             services.AddTransient<IMedicalRecordAppService, MedicalRecordAppService>();
             services.AddTransient<IMedicalRecordExamAppService, MedicalRecordExamAppService>();

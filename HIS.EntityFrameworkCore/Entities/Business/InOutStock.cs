@@ -125,6 +125,11 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         /// </summary>
         public Guid? StockExpUserId { get; set; }
 
+        /// <summary>
+        /// Loại hàng hóa
+        /// </summary>
+        public CommodityTypes CommodityType { get; set; }
+
         [Ignore]
         public Room ImpStock { get; set; }
         [Ignore]

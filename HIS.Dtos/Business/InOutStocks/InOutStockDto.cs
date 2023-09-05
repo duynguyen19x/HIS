@@ -1,5 +1,5 @@
 ﻿using HIS.Application.Core.Services.Dto;
-using HIS.Dtos.Business.InOutStockMedicines;
+using HIS.Dtos.Business.InOutStockItems;
 using HIS.Utilities.Enums;
 
 namespace HIS.Dtos.Business.InOutStocks
@@ -128,7 +128,8 @@ namespace HIS.Dtos.Business.InOutStocks
         /// </summary>
         public Guid? StockExpUserId { get; set; }
 
+        public CommodityTypes CommodityType { get; set; }
 
-        public IList<InOutStockMedicineDto> InOutStockMedicines { get; set; }
+        public IList<InOutStockItemDto> InOutStockItems { get; set; }
     }
 }

@@ -182,7 +182,7 @@ namespace HIS.EntityFrameworkCore.Data.Builders
                     Id = new Guid("B4573FB1-32A6-45E3-9782-07066D090A5C"),
                     Code = "THUOC",
                     Name = "Thuốc",
-                    SortOrder = (int)ServiceGroupTypes.Medicine
+                    SortOrder = (int)ServiceGroupTypes.Item
                 },
                 new ServiceGroup()
                 {

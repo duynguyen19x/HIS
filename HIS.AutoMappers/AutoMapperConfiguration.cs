@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using HIS.Dtos.Business;
+using HIS.Dtos.Business.InOutStockItems;
 using HIS.Dtos.Business.InOutStocks;
-using HIS.Dtos.Business.InOutStockMedicines;
-using HIS.Dtos.Business.MedicineStocks;
+using HIS.Dtos.Business.ItemStocks;
 using HIS.Dtos.Dictionaries.Branch;
 using HIS.Dtos.Dictionaries.Career;
 using HIS.Dtos.Dictionaries.ChapterICD10;
@@ -15,10 +15,10 @@ using HIS.Dtos.Dictionaries.ExecutionRoom;
 using HIS.Dtos.Dictionaries.Gender;
 using HIS.Dtos.Dictionaries.Hospital;
 using HIS.Dtos.Dictionaries.Icd;
-using HIS.Dtos.Dictionaries.Medicine;
-using HIS.Dtos.Dictionaries.MedicineGroup;
-using HIS.Dtos.Dictionaries.MedicinePricePolicy;
-using HIS.Dtos.Dictionaries.MedicineType;
+using HIS.Dtos.Dictionaries.ItemGroups;
+using HIS.Dtos.Dictionaries.ItemPricePolicies;
+using HIS.Dtos.Dictionaries.Items;
+using HIS.Dtos.Dictionaries.ItemTypes;
 using HIS.Dtos.Dictionaries.Province;
 using HIS.Dtos.Dictionaries.Room;
 using HIS.Dtos.Dictionaries.RoomType;
@@ -32,7 +32,7 @@ using HIS.Dtos.Dictionaries.Supplier;
 using HIS.Dtos.Dictionaries.Ward;
 using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Categories;
-using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
+using HIS.EntityFrameworkCore.Entities.Categories.Items;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Dtos.Business.Patients;
@@ -72,11 +72,6 @@ namespace HIS.AutoMappers
             CreateMap<ServiceGroupHeInDto, ServiceGroupHeIn>()
                 .ReverseMap();
             CreateMap<UnitDto, Unit>()
-                .ForMember(dest => dest.Services, opt => opt.Ignore())
-                .ForMember(dest => dest.MedicineTypes, opt => opt.Ignore())
-                .ForMember(dest => dest.Medicines, opt => opt.Ignore())
-                .ForMember(dest => dest.Materials, opt => opt.Ignore())
-                .ForMember(dest => dest.MaterialTypes, opt => opt.Ignore())
                 .ReverseMap();
             CreateMap<ServiceDto, Service>()
                 .ForMember(dest => dest.Unit, opt => opt.Ignore())
@@ -97,34 +92,34 @@ namespace HIS.AutoMappers
              .ForMember(dest => dest.Service, opt => opt.Ignore())
              .ReverseMap();
 
-            CreateMap<MedicineGroupDto, MedicineGroup>()
+            CreateMap<ItemGroupDto, ItemGroup>()
                 .ReverseMap();
-            CreateMap<MedicineTypeDto, MedicineType>()
+            CreateMap<ItemTypeDto, ItemType>()
                 .ForMember(dest => dest.Unit, opt => opt.Ignore())
-                .ForMember(dest => dest.MedicineLine, opt => opt.Ignore())
-                .ForMember(dest => dest.MedicineGroup, opt => opt.Ignore())
+                .ForMember(dest => dest.ItemLine, opt => opt.Ignore())
+                .ForMember(dest => dest.ItemGroup, opt => opt.Ignore())
                 .ForMember(dest => dest.Country, opt => opt.Ignore())
                 .ReverseMap();
 
             CreateMap<SupplierDto, Supplier>()
                 .ReverseMap();
 
-            CreateMap<InOutStockMedicineDto, Medicine>()
-                .ForMember(dest => dest.MedicineType, opt => opt.Ignore())
+            CreateMap<InOutStockItemDto, Item>()
+                .ForMember(dest => dest.ItemType, opt => opt.Ignore())
                 .ForMember(dest => dest.Unit, opt => opt.Ignore())
-                .ForMember(dest => dest.MedicineLine, opt => opt.Ignore())
+                .ForMember(dest => dest.ItemLine, opt => opt.Ignore())
                 .ForMember(dest => dest.Country, opt => opt.Ignore())
                 .ReverseMap();
 
-            CreateMap<MedicineDto, Medicine>()
-                .ForMember(dest => dest.MedicineType, opt => opt.Ignore())
+            CreateMap<ItemDto, Item>()
+                .ForMember(dest => dest.ItemType, opt => opt.Ignore())
                 .ForMember(dest => dest.Unit, opt => opt.Ignore())
-                .ForMember(dest => dest.MedicineLine, opt => opt.Ignore())
+                .ForMember(dest => dest.ItemLine, opt => opt.Ignore())
                 .ForMember(dest => dest.Country, opt => opt.Ignore())
                 .ReverseMap();
 
-            CreateMap<MedicinePricePolicyDto, MedicinePricePolicy>()
-                .ForMember(dest => dest.Medicine, opt => opt.Ignore())
+            CreateMap<ItemPricePolicyDto, ItemPricePolicy>()
+                .ForMember(dest => dest.Item, opt => opt.Ignore())
                 .ForMember(dest => dest.PatientType, opt => opt.Ignore())
                 .ReverseMap();
 
@@ -143,13 +138,13 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.Patient, opt => opt.Ignore())
                 .ForMember(dest => dest.PatientRecord, opt => opt.Ignore())
                 .ReverseMap();
-            CreateMap<InOutStockMedicineDto, InOutStockMedicine>()
+            CreateMap<InOutStockItemDto, InOutStockItem>()
                 .ForMember(dest => dest.InOutStock, opt => opt.Ignore())
-                .ForMember(dest => dest.Medicine, opt => opt.Ignore())
+                .ForMember(dest => dest.Item, opt => opt.Ignore())
                 .ReverseMap();
 
-            CreateMap<MedicineStockDto, MedicineStock>()
-                .ForMember(dest => dest.Medicine, opt => opt.Ignore())
+            CreateMap<ItemStockDto, ItemStock>()
+                .ForMember(dest => dest.Item, opt => opt.Ignore())
                 .ForMember(dest => dest.Stock, opt => opt.Ignore())
                 .ReverseMap();
 

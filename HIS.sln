@@ -29,6 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HIS.Dtos", "HIS.Dtos\HIS.Dt
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Imports", "Imports", "{2305BFCF-EFA5-48EB-BE7E-3753FA0E3A21}"
 	ProjectSection(SolutionItems) = preProject
+		C:\Users\Hoang-PC\Downloads\MedicineTypeImportTemplate.xlsx = C:\Users\Hoang-PC\Downloads\MedicineTypeImportTemplate.xlsx
 		Files\Imports\ServiceResultIndexTemplate.xlsx = Files\Imports\ServiceResultIndexTemplate.xlsx
 		Files\Imports\ServiceTemplate.xlsx = Files\Imports\ServiceTemplate.xlsx
 	EndProjectSection

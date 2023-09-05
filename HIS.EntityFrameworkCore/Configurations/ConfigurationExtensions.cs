@@ -1,6 +1,6 @@
 ﻿using HIS.EntityFrameworkCore.Configurations.Business;
 using HIS.EntityFrameworkCore.Configurations.Dictionaries;
-using HIS.EntityFrameworkCore.Configurations.Medicines;
+using HIS.EntityFrameworkCore.Configurations.Items;
 using HIS.EntityFrameworkCore.Configurations.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,12 +25,10 @@ namespace HIS.EntityFrameworkCore.Configurations
             modelBuilder.ApplyConfiguration(new RolePermissionBranchConfigurations());
             modelBuilder.ApplyConfiguration(new UnitConfigurations());
             modelBuilder.ApplyConfiguration(new ServiceConfigurations());
-            modelBuilder.ApplyConfiguration(new MedicineConfiguration());
-            modelBuilder.ApplyConfiguration(new MedicineGroupConfiguration());
-            modelBuilder.ApplyConfiguration(new MedicineLineConfiguration());
-            modelBuilder.ApplyConfiguration(new MedicineTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new MaterialTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new MaterialConfiguration());
+            modelBuilder.ApplyConfiguration(new ItemConfiguration());
+            modelBuilder.ApplyConfiguration(new ItemGroupConfiguration());
+            modelBuilder.ApplyConfiguration(new ItemLineConfiguration());
+            modelBuilder.ApplyConfiguration(new ItemTypeConfiguration());
             modelBuilder.ApplyConfiguration(new CountryConfiguration());
             modelBuilder.ApplyConfiguration(new ProvinceConfiguration());
             modelBuilder.ApplyConfiguration(new DistrictConfiguration());
@@ -38,7 +36,7 @@ namespace HIS.EntityFrameworkCore.Configurations
             modelBuilder.ApplyConfiguration(new IcdConfiguration());
             modelBuilder.ApplyConfiguration(new ChapterIcdConfigurations());
             modelBuilder.ApplyConfiguration(new ServicePricePolicyConfigurations());
-            modelBuilder.ApplyConfiguration(new MedicinePricePolicyConfigurations());
+            modelBuilder.ApplyConfiguration(new ItemPricePolicyConfigurations());
             modelBuilder.ApplyConfiguration(new SurgicalProcedureTypeConfigurations());
             modelBuilder.ApplyConfiguration(new EthnicConfiguration());
             modelBuilder.ApplyConfiguration(new HospitalConfiguration());
@@ -49,8 +47,8 @@ namespace HIS.EntityFrameworkCore.Configurations
             modelBuilder.ApplyConfiguration(new SupplierConfiguration());
 
             modelBuilder.ApplyConfiguration(new InOutStockTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new MedicineStockConfiguration());
-            modelBuilder.ApplyConfiguration(new InOutStockMedicineConfiguration());
+            modelBuilder.ApplyConfiguration(new ItemStockConfiguration());
+            modelBuilder.ApplyConfiguration(new InOutStockItemConfiguration());
             modelBuilder.ApplyConfiguration(new InOutStockConfiguration());
 
             modelBuilder.ApplyConfiguration(new PatientTypeConfiguration());
