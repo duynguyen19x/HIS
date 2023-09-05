@@ -9,7 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Business.Patients
 {
-    public interface IPatientAppService : IBaseCrudAppService<PatientDto, Guid, PatientRequestDto>
+    public interface IPatientAppService : IBaseAppService
     {
+        Task<ResultDto<PatientDto>> CreateOrEdit(PatientDto input);
+        Task<ResultDto<PatientDto>> Delete(Guid id);
+        Task<PagedResultDto<PatientDto>> GetAll(PatientRequestDto input);
+        Task<ResultDto<PatientDto>> GetById(Guid id);
     }
 }

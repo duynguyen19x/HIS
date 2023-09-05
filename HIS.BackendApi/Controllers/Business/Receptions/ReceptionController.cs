@@ -1,5 +1,6 @@
 ﻿using HIS.Application.Core.Services.Dto;
 using HIS.ApplicationService.Business.Receptions;
+using HIS.Dtos.Business.PatientRecords;
 using HIS.Dtos.Business.Receptions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -18,25 +19,25 @@ namespace HIS.BackendApi.Controllers.Business.Receptions
         }
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ResultDto<ReceptionDto>> CreateOrEdit(ReceptionDto input)
+        public async Task<ResultDto<PatientRecordDto>> CreateOrEdit(PatientRecordDto input)
         {
             return await _receptionAppService.CreateOrEdit(input);
         }
 
         [HttpDelete("Delete")]
-        public async Task<ResultDto<ReceptionDto>> Delete(Guid id)
+        public async Task<ResultDto<PatientRecordDto>> Delete(Guid id)
         {
             return await _receptionAppService.Delete(id);
         }
 
         [HttpGet("GetAll")]
-        public async Task<PagedResultDto<ReceptionDto>> GetAll(ReceptionRequestDto input)
+        public async Task<PagedResultDto<PatientRecordDto>> GetAll([FromQuery] PatientRecordRequestDto input)
         {
             return await _receptionAppService.GetAll(input);
         }
 
         [HttpGet("GetById")]
-        public async Task<ResultDto<ReceptionDto>> GetById(Guid id)
+        public async Task<ResultDto<PatientRecordDto>> GetById(Guid id)
         {
             return await _receptionAppService.GetById(id);
         }

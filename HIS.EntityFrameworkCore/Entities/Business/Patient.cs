@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace HIS.EntityFrameworkCore.Entities.Business
 {
     /// <summary>
-    /// Thông tin bệnh nhân.
+    /// Thông tin định danh bệnh nhân.
     /// </summary>
     public class Patient : FullAuditedEntity<Guid>
     {
@@ -25,12 +25,12 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         /// <summary>
         /// Nhóm máu
         /// </summary>
-        public virtual int BloodTypeID { get; set; }
+        public virtual int BloodTypeId { get; set; }
 
         /// <summary>
         /// Nhóm máu Rh
         /// </summary>
-        public virtual int BloodRhID { get; set; }
+        public virtual int BloodRhId { get; set; }
 
         [MaxLength(500)]
         public virtual string Description { get; set; }

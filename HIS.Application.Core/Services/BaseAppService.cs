@@ -11,8 +11,6 @@ namespace HIS.Application.Core.Services
         public virtual HISDbContext Context { get; set; }
         public virtual IMapper Mapper { get; set; }
 
-        public BaseAppService() 
-        { }
         public BaseAppService(HISDbContext context, IMapper mapper) 
         {
             Context = context;
@@ -48,7 +46,6 @@ namespace HIS.Application.Core.Services
 
         public virtual async Task<TResult> BeginTransactionAsync<TResult>(Func<TResult, Task> func) where TResult : class
         {
-            //return await Context.UsingTransactionAsync<TResult>(func);
             var result = Activator.CreateInstance<TResult>();
             if (Context.Database.CurrentTransaction != null)
             {

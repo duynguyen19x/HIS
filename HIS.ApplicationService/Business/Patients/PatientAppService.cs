@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
 using HIS.Application.Core.Services.Dto;
+using HIS.Application.Core.Utils;
 using HIS.Core.Extensions;
 using HIS.Core.Linq;
 using HIS.Dtos.Business.Patients;
+using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.Utilities.Sections;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,22 +17,38 @@ using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Business.Patients
 {
-    public class PatientAppService : BaseCrudAppService<PatientDto, PatientRequestDto>, IPatientAppService
+    public class PatientAppService : BaseAppService, IPatientAppService
     {
         public PatientAppService(HISDbContext context, IMapper mapper)
             : base(context, mapper)
         {
         }
 
-        public override async Task<ResultDto<PatientDto>> Create(PatientDto input)
+        public virtual async Task<ResultDto<PatientDto>> CreateOrEdit(PatientDto input)
+        {
+            if (DataHelper.IsNullOrDefault(input.PatientId))
+                return await Create(input);
+            else
+                return await Update(input);
+        }
+
+        public virtual async Task<ResultDto<PatientDto>> Create(PatientDto input)
         {
             return await BeginTransactionAsync<ResultDto<PatientDto>>(async result =>
             {
                 try
                 {
+                    input.PatientId = Guid.NewGuid();
+                    if (DataHelper.IsNullOrDefault(input.PatientCode))
+                        input.PatientCode = "BN" + String.Format("{0:00000}", Context.Patients.Count() + 1);
 
+                    var patient = Mapper.Map<Patient>(input);
+                    patient.CreatedDate = DateTime.Now;
+                    patient.CreatedBy = SessionExtensions.Login.Id;
 
+                    Context.Patients.Add(patient);
 
+                    result.Item = input;
                     await SaveChangesAsync();
                 }
                 catch (Exception ex)
@@ -39,12 +58,29 @@ namespace HIS.ApplicationService.Business.Patients
             });
         }
 
-        public override Task<ResultDto<PatientDto>> Update(PatientDto input)
+        public virtual async Task<ResultDto<PatientDto>> Update(PatientDto input)
         {
-            throw new NotImplementedException();
+            return await BeginTransactionAsync<ResultDto<PatientDto>>(async result =>
+            {
+                try
+                {
+                    var patient = Mapper.Map<Patient>(input);
+                    patient.ModifiedDate = DateTime.Now;
+                    patient.ModifiedBy = SessionExtensions.Login.Id;
+
+                    Context.Patients.Update(patient);
+
+                    result.Item = input;
+                    await SaveChangesAsync();
+                }
+                catch (Exception ex)
+                {
+                    result.Exception(ex);
+                }
+            });
         }
 
-        public override async Task<ResultDto<PatientDto>> Delete(Guid id)
+        public virtual async Task<ResultDto<PatientDto>> Delete(Guid id)
         {
             return await BeginTransactionAsync<ResultDto<PatientDto>>(async result =>
             {
@@ -64,7 +100,7 @@ namespace HIS.ApplicationService.Business.Patients
             });
         }
 
-        public override async Task<PagedResultDto<PatientDto>> GetAll(PatientRequestDto input)
+        public virtual async Task<PagedResultDto<PatientDto>> GetAll(PatientRequestDto input)
         {
             var result = new PagedResultDto<PatientDto>();
             try
@@ -85,7 +121,7 @@ namespace HIS.ApplicationService.Business.Patients
             return result;
         }
 
-        public override async Task<ResultDto<PatientDto>> GetById(Guid id)
+        public virtual async Task<ResultDto<PatientDto>> GetById(Guid id)
         {
             var result = new ResultDto<PatientDto>();
             try
