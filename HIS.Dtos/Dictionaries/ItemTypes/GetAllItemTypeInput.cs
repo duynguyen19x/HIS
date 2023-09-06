@@ -12,5 +12,6 @@
         public Guid? UnitIdFilter { get; set; }
         public List<Guid?> UnitIdsFilter { get; set; }
         public bool? InactiveFilter { get; set; }
+        public int? CommodityTypeFilter { get; set; }
     }
 }
