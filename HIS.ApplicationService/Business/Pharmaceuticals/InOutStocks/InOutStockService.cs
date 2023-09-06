@@ -114,23 +114,22 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                         var ItemDtos = _mapper.Map<IList<Item>>(_dbContext.Items.Where(w => ItemIds.Contains(w.Id)).ToList());
 
                         var ItemPricePolicyDtos = (from med in _dbContext.ItemPricePolicies
-                                                       join pa in _dbContext.PatientTypes on med.PatientTypeId equals pa.Id
-                                                       select new ItemPricePolicyDto()
-                                                       {
-                                                           Id = med.Id,
-                                                           ItemId = med.ItemId,
-                                                           PatientTypeId = med.PatientTypeId,
-                                                           OldUnitPrice = med.OldUnitPrice,
-                                                           NewUnitPrice = med.NewUnitPrice,
-                                                           CeilingPrice = med.CeilingPrice,
-                                                           PaymentRate = med.PaymentRate,
-                                                           ExecutionTime = med.ExecutionTime,
-                                                           PatientTypeCode = pa.Code,
-                                                           PatientTypeName = pa.Name,
-                                                           IsHeIn = pa.Code == PatientTypes.BHYT ? true : false,
-                                                       })
-                                                      .WhereIf(ItemIds != null, w => ItemIds.Contains(w.ItemId))
-                                                      .OrderBy(s => s.PatientTypeCode).ToList();
+                                                   join pa in _dbContext.PatientTypes on med.PatientTypeId equals pa.Id
+                                                   select new ItemPricePolicyDto()
+                                                   {
+                                                       Id = med.Id,
+                                                       ItemId = med.ItemId,
+                                                       PatientTypeId = med.PatientTypeId,
+                                                       OldUnitPrice = med.OldUnitPrice,
+                                                       NewUnitPrice = med.NewUnitPrice,
+                                                       CeilingPrice = med.CeilingPrice,
+                                                       PaymentRate = med.PaymentRate,
+                                                       ExecutionTime = med.ExecutionTime,
+                                                       PatientTypeCode = pa.Code,
+                                                       PatientTypeName = pa.Name,
+                                                       IsHeIn = pa.Code == PatientTypes.BHYT ? true : false,
+                                                   }).WhereIf(ItemIds != null, w => ItemIds.Contains(w.ItemId))
+                                                   .OrderBy(s => s.PatientTypeCode).ToList();
 
                         foreach (var inOutStockItem in inOutStockItemDtos)
                         {
@@ -201,17 +200,17 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                 if (inOutStocks.InOutStockTypeId == 1)
                 {
                     var ItemOlds = (from inOutStock in _dbContext.InOutStocks
-                                        join inOutStockItem in _dbContext.InOutStockItems on inOutStock.Id equals inOutStockItem.InOutStockId
-                                        where inOutStock.Id == input.Id && inOutStock.IsDeleted == false
-                                        select new
-                                        {
-                                            inOutStockItem.Id,
-                                            inOutStockItem.ItemId,
-                                            inOutStockItem.RequestQuantity,
-                                            inOutStockItem.ApprovedQuantity,
-                                            inOutStock.ImpStockId,
-                                            inOutStock.InOutStockTypeId,
-                                        }).Distinct().ToList();
+                                    join inOutStockItem in _dbContext.InOutStockItems on inOutStock.Id equals inOutStockItem.InOutStockId
+                                    where inOutStock.Id == input.Id && inOutStock.IsDeleted == false
+                                    select new
+                                    {
+                                        inOutStockItem.Id,
+                                        inOutStockItem.ItemId,
+                                        inOutStockItem.RequestQuantity,
+                                        inOutStockItem.ApprovedQuantity,
+                                        inOutStock.ImpStockId,
+                                        inOutStock.InOutStockTypeId,
+                                    }).Distinct().ToList();
 
 
                     if (ItemOlds != null && ItemOlds.Count > 0)
@@ -282,7 +281,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
             input.Status = InOutStatusType.ReceivedInStock;
             return await ImportFromSupplier(input);
         }
-        
+
         /// <summary>
         /// Hủy phiếu (xóa phiếu)
         /// </summary>
@@ -372,13 +371,13 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                     input.InOutStockTypeId = (int)Utilities.Enums.InOutStockType.ImportFromSupplier;
 
                     var inOutStockItems = new List<InOutStockItem>();
-                    var Items = new List<Item>();
-                    var ItemStocks = new List<EntityFrameworkCore.Entities.Business.ItemStock>();
-                    var ItemPricePolicies = new List<ItemPricePolicy>();
+                    var items = new List<Item>();
+                    var itemStocks = new List<ItemStock>();
+                    var itemPricePolicies = new List<ItemPricePolicy>();
 
                     if (GuidHelper.IsNullOrEmpty(input.Id))
                     {
-                        var dImMest = _mapper.Map<EntityFrameworkCore.Entities.Business.InOutStock>(input);
+                        var dImMest = _mapper.Map<InOutStock>(input);
                         dImMest.Id = id;
                         dImMest.CreatedBy = SessionExtensions.Login?.Id;
                         dImMest.CreatedDate = dateNow;
@@ -387,19 +386,20 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                         {
                             inOutStockItemDto.ApprovedQuantity = inOutStockItemDto.RequestQuantity;
 
-                            var Item = _mapper.Map<Item>(inOutStockItemDto);
+                            var item = _mapper.Map<Item>(inOutStockItemDto);
                             if (!GuidHelper.IsNullOrEmpty(inOutStockItemDto.ItemId))
-                                Item.Id = inOutStockItemDto.ItemId.GetValueOrDefault();
+                                item.Id = inOutStockItemDto.ItemId.GetValueOrDefault();
                             else
-                                Item.Id = Guid.NewGuid();
-                            Item.CreatedDate = dateNow;
-                            Item.CreatedBy = SessionExtensions.Login?.Id;
-                            Item.ImpQuantity = inOutStockItemDto.RequestQuantity;
+                                item.Id = Guid.NewGuid();
+                            item.CreatedDate = dateNow;
+                            item.CreatedBy = SessionExtensions.Login?.Id;
+                            item.ImpQuantity = inOutStockItemDto.RequestQuantity;
+                            item.CommodityType = dImMest.CommodityType;
 
                             var inOutStockItem = _mapper.Map<InOutStockItem>(inOutStockItemDto);
                             inOutStockItem.Id = Guid.NewGuid();
                             inOutStockItem.InOutStockId = id;
-                            inOutStockItem.ItemId = Item.Id;
+                            inOutStockItem.ItemId = item.Id;
 
                             if (inOutStockItemDto.ItemPricePolicies != null)
                             {
@@ -412,9 +412,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
                                     sItemPricePolicy.CreatedDate = dateNow;
                                     sItemPricePolicy.CreatedBy = SessionExtensions.Login?.Id;
-                                    sItemPricePolicy.ItemId = Item.Id;
+                                    sItemPricePolicy.ItemId = item.Id;
 
-                                    ItemPricePolicies.Add(sItemPricePolicy);
+                                    itemPricePolicies.Add(sItemPricePolicy);
                                 }
                             }
 
@@ -426,7 +426,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                 dImMest.StockImpTime = dateNow;
                                 dImMest.StockImpUserId = SessionExtensions.Login?.Id;
 
-                                ItemStocks.Add(new EntityFrameworkCore.Entities.Business.ItemStock()
+                                itemStocks.Add(new ItemStock()
                                 {
                                     Id = Guid.NewGuid(),
                                     CreatedDate = dateNow,
@@ -434,21 +434,21 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     AvailableQuantity = inOutStockItemDto.ApprovedQuantity.GetValueOrDefault(),
                                     Quantity = inOutStockItemDto.ApprovedQuantity.GetValueOrDefault(),
                                     StockId = input.ImpStockId,
-                                    ItemId = Item.Id
+                                    ItemId = item.Id
                                 });
                             }
 
-                            Items.Add(Item);
+                            items.Add(item);
                             inOutStockItems.Add(inOutStockItem);
                         }
 
-                        if (Items.Count > 0)
+                        if (items.Count > 0)
                         {
-                            var ItemTypeIds = Items.Select(s => s.ItemTypeId).ToList();
+                            var ItemTypeIds = items.Select(s => s.ItemTypeId).ToList();
                             var ItemTypes = _dbContext.ItemTypes.Where(w => ItemTypeIds.Contains(w.Id)).ToList();
                             if (ItemTypes != null && ItemTypes.Count > 0)
                             {
-                                foreach (var Item in Items)
+                                foreach (var Item in items)
                                 {
                                     var ItemType = ItemTypes.FirstOrDefault(f => f.Id == Item.ItemTypeId);
                                     if (ItemType != null)
@@ -488,36 +488,37 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                         {
                             inOutStockItemDto.ApprovedQuantity = inOutStockItemDto.RequestQuantity;
 
-                            var Item = _mapper.Map<Item>(inOutStockItemDto);
+                            var item = _mapper.Map<Item>(inOutStockItemDto);
                             if (!GuidHelper.IsNullOrEmpty(inOutStockItemDto.ItemId))
                             {
-                                Item.Id = inOutStockItemDto.ItemId.GetValueOrDefault();
-                                var ItemOld = ItemOlds.FirstOrDefault(f => f.Id == Item.Id);
+                                item.Id = inOutStockItemDto.ItemId.GetValueOrDefault();
+                                var ItemOld = ItemOlds.FirstOrDefault(f => f.Id == item.Id);
                                 if (ItemOld != null)
-                                    Item.Code = ItemOld.Code;
+                                    item.Code = ItemOld.Code;
                             }
                             else
                             {
-                                Item.Id = Guid.NewGuid();
+                                item.Id = Guid.NewGuid();
 
-                                var ItemType = _dbContext.ItemTypes.FirstOrDefault(f => f.Id == Item.ItemTypeId);
+                                var ItemType = _dbContext.ItemTypes.FirstOrDefault(f => f.Id == item.ItemTypeId);
                                 if (ItemType != null)
                                 {
                                     ItemType.AutoNumber += 1;
-                                    Item.Code = string.Format("{0}.{1}", ItemType.Code, ItemType.AutoNumber);
+                                    item.Code = string.Format("{0}.{1}", ItemType.Code, ItemType.AutoNumber);
                                 }
                             }
-                            Item.CreatedDate = dImMestOld.CreatedDate;
-                            Item.CreatedBy = dImMestOld.CreatedBy;
-                            Item.ModifiedDate = dateNow;
-                            Item.ModifiedBy = SessionExtensions.Login?.Id;
-                            Item.ImpQuantity = inOutStockItemDto.RequestQuantity;
+                            item.CreatedDate = dImMestOld.CreatedDate;
+                            item.CreatedBy = dImMestOld.CreatedBy;
+                            item.ModifiedDate = dateNow;
+                            item.ModifiedBy = SessionExtensions.Login?.Id;
+                            item.ImpQuantity = inOutStockItemDto.RequestQuantity;
+                            item.CommodityType = dImMestOld.CommodityType;
 
                             var inOutStockItem = _mapper.Map<InOutStockItem>(inOutStockItemDto);
                             if (GuidHelper.IsNullOrEmpty(inOutStockItem.Id))
                                 inOutStockItem.Id = Guid.NewGuid();
 
-                            inOutStockItem.ItemId = Item.Id;
+                            inOutStockItem.ItemId = item.Id;
                             inOutStockItem.InOutStockId = input.Id;
 
                             if (inOutStockItemDto.ItemPricePolicies != null)
@@ -533,9 +534,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     sItemPricePolicy.CreatedBy = dImMestOld.CreatedBy;
                                     sItemPricePolicy.ModifiedDate = dateNow;
                                     sItemPricePolicy.ModifiedBy = SessionExtensions.Login?.Id;
-                                    sItemPricePolicy.ItemId = Item.Id;
+                                    sItemPricePolicy.ItemId = item.Id;
 
-                                    ItemPricePolicies.Add(sItemPricePolicy);
+                                    itemPricePolicies.Add(sItemPricePolicy);
                                 }
                             }
 
@@ -547,7 +548,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                 input.StockImpTime = dateNow;
                                 input.StockImpUserId = SessionExtensions.Login?.Id;
 
-                                ItemStocks.Add(new EntityFrameworkCore.Entities.Business.ItemStock()
+                                itemStocks.Add(new ItemStock()
                                 {
                                     Id = Guid.NewGuid(),
                                     CreatedDate = dateNow,
@@ -555,11 +556,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     AvailableQuantity = inOutStockItemDto.ApprovedQuantity.GetValueOrDefault(),
                                     Quantity = inOutStockItemDto.ApprovedQuantity.GetValueOrDefault(),
                                     StockId = input.ImpStockId,
-                                    ItemId = Item.Id
+                                    ItemId = item.Id,
                                 });
                             }
 
-                            Items.Add(Item);
+                            items.Add(item);
                             inOutStockItems.Add(inOutStockItem);
                         }
 
@@ -568,10 +569,10 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                         dImMestOld.ModifiedBy = SessionExtensions.Login?.Id;
                     }
 
-                    _dbContext.Items.AddRange(Items);
+                    _dbContext.Items.AddRange(items);
                     _dbContext.InOutStockItems.AddRange(inOutStockItems);
-                    _dbContext.ItemStocks.AddRange(ItemStocks);
-                    _dbContext.ItemPricePolicies.AddRange(ItemPricePolicies);
+                    _dbContext.ItemStocks.AddRange(itemStocks);
+                    _dbContext.ItemPricePolicies.AddRange(itemPricePolicies);
 
                     _dbContext.SaveChanges();
                     transaction.Commit();
@@ -678,41 +679,41 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                     if (inOutStockDto.InOutStockTypeId == (int)Utilities.Enums.InOutStockType.ImportFromAnotherStock)
                     {
                         var inOutStockItemDtos = (from inOutStockItem in _dbContext.InOutStockItems
-                                                      join Item in _dbContext.Items on inOutStockItem.ItemId equals Item.Id
-                                                      where inOutStockItem.InOutStockId == id
-                                                      select new InOutStockItemDto()
-                                                      {
-                                                          Id = inOutStockItem.Id,
-                                                          Code = Item.Code,
-                                                          HeInCode = Item.HeInCode,
-                                                          Name = Item.Name,
-                                                          ItemId = inOutStockItem.ItemId,
-                                                          SortOrder = Item.SortOrder,
-                                                          ItemLineId = Item.ItemLineId,
-                                                          ItemGroupId = Item.ItemGroupId,
-                                                          ItemTypeId = Item.ItemTypeId,
-                                                          UnitId = Item.UnitId,
-                                                          Tutorial = Item.Tutorial,
-                                                          CountryId = Item.CountryId,
-                                                          ImpPrice = Item.ImpPrice,
-                                                          RequestQuantity = inOutStockItem.RequestQuantity,
-                                                          ApprovedQuantity = inOutStockItem.ApprovedQuantity,
-                                                          ImpVatRate = Item.ImpVatRate,
-                                                          ImpTaxRate = Item.ImpTaxRate,
-                                                          Description = Item.Description,
-                                                          ActiveSubstance = Item.ActiveSubstance,
-                                                          Concentration = Item.Concentration,
-                                                          Content = Item.Content,
-                                                          Manufacturer = Item.Manufacturer,
-                                                          PackagingSpecifications = Item.PackagingSpecifications,
-                                                          Dosage = Item.Dosage,
-                                                          Lot = Item.Lot,
-                                                          DueDate = Item.DueDate,
-                                                          TenderDecision = Item.TenderDecision,
-                                                          TenderPackage = Item.TenderPackage,
-                                                          TenderGroup = Item.TenderGroup,
-                                                          TenderYear = Item.TenderYear,
-                                                      }).ToList();
+                                                  join item in _dbContext.Items on inOutStockItem.ItemId equals item.Id
+                                                  where inOutStockItem.InOutStockId == id
+                                                  select new InOutStockItemDto()
+                                                  {
+                                                      Id = inOutStockItem.Id,
+                                                      Code = item.Code,
+                                                      HeInCode = item.HeInCode,
+                                                      Name = item.Name,
+                                                      ItemId = inOutStockItem.ItemId,
+                                                      SortOrder = item.SortOrder,
+                                                      ItemLineId = item.ItemLineId,
+                                                      ItemGroupId = item.ItemGroupId,
+                                                      ItemTypeId = item.ItemTypeId,
+                                                      UnitId = item.UnitId,
+                                                      Tutorial = item.Tutorial,
+                                                      CountryId = item.CountryId,
+                                                      ImpPrice = item.ImpPrice,
+                                                      RequestQuantity = inOutStockItem.RequestQuantity,
+                                                      ApprovedQuantity = inOutStockItem.ApprovedQuantity,
+                                                      ImpVatRate = item.ImpVatRate,
+                                                      ImpTaxRate = item.ImpTaxRate,
+                                                      Description = item.Description,
+                                                      ActiveSubstance = item.ActiveSubstance,
+                                                      Concentration = item.Concentration,
+                                                      Content = item.Content,
+                                                      Manufacturer = item.Manufacturer,
+                                                      PackagingSpecifications = item.PackagingSpecifications,
+                                                      Dosage = item.Dosage,
+                                                      Lot = item.Lot,
+                                                      DueDate = item.DueDate,
+                                                      TenderDecision = item.TenderDecision,
+                                                      TenderPackage = item.TenderPackage,
+                                                      TenderGroup = item.TenderGroup,
+                                                      TenderYear = item.TenderYear,
+                                                  }).ToList();
 
 
                         inOutStockDto.InOutStockItems = inOutStockItemDtos;
@@ -853,7 +854,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                         inOutStock.IsDeleted = true;
 
                         // Cộng lại khả dụng cho kho xuất
-                        var inOutStockItems = _dbContext.InOutStockItems.Where(w => w.InOutStockId == id).ToList(); 
+                        var inOutStockItems = _dbContext.InOutStockItems.Where(w => w.InOutStockId == id).ToList();
                         var ItemIds = inOutStockItems.Select(s => s.ItemId).ToList();
                         if (ItemIds != null && ItemIds.Count > 0)
                         {

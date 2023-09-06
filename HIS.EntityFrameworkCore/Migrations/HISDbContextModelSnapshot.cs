@@ -1756,6 +1756,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int>("CommodityType")
+                        .HasColumnType("int");
+
                     b.Property<string>("Concentration")
                         .HasMaxLength(250)
                         .HasColumnType("nvarchar(250)");
@@ -5208,7 +5211,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "DISEASE",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 166, DateTimeKind.Local).AddTicks(9410),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(3920),
                             Inactive = false,
                             Name = "Do bệnh",
                             SortOrder = 1
@@ -5217,7 +5220,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "COMPLICATION",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 166, DateTimeKind.Local).AddTicks(9424),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(3932),
                             Inactive = false,
                             Name = "Do tai biến điều trị",
                             SortOrder = 2
@@ -5226,7 +5229,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 99,
                             Code = "OTHER",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 166, DateTimeKind.Local).AddTicks(9443),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(3950),
                             Inactive = false,
                             Name = "Khác",
                             SortOrder = 99
@@ -5280,7 +5283,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "WITHIN_24H",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 166, DateTimeKind.Local).AddTicks(9469),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(3973),
                             Inactive = false,
                             Name = "Trong 24h vào",
                             SortOrder = 1
@@ -5289,7 +5292,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "WITHIN_48H",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 166, DateTimeKind.Local).AddTicks(9474),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(3978),
                             Inactive = false,
                             Name = "Trong 48h vào",
                             SortOrder = 2
@@ -5298,7 +5301,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 3,
                             Code = "WITHIN_72H",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 166, DateTimeKind.Local).AddTicks(9476),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(3980),
                             Inactive = false,
                             Name = "Trong 72h vào",
                             SortOrder = 3
@@ -5307,7 +5310,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 99,
                             Code = "OTHER",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 166, DateTimeKind.Local).AddTicks(9478),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(3982),
                             Inactive = false,
                             Name = "Khác",
                             SortOrder = 99
@@ -5823,7 +5826,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "CAPTOACHOVE",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(1022),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5635),
                             Inactive = false,
                             IsForInPatient = false,
                             IsForOutPatient = true,
@@ -5834,7 +5837,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "HEN",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(1027),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5640),
                             Inactive = false,
                             IsForInPatient = false,
                             IsForOutPatient = true,
@@ -5845,7 +5848,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 3,
                             Code = "CHUYEN_PHONGKHAM",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(1029),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5642),
                             Inactive = false,
                             IsForInPatient = false,
                             IsForOutPatient = true,
@@ -5856,7 +5859,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 4,
                             Code = "DTRI_NGOAITRU",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(1031),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5644),
                             Inactive = false,
                             IsForInPatient = false,
                             IsForOutPatient = true,
@@ -5867,7 +5870,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 5,
                             Code = "NHAPVIEN",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(1033),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5646),
                             Inactive = false,
                             IsForInPatient = false,
                             IsForOutPatient = true,
@@ -5878,7 +5881,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 6,
                             Code = "BOKHAM",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(1036),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5649),
                             Inactive = false,
                             IsForInPatient = false,
                             IsForOutPatient = true,
@@ -5889,7 +5892,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 7,
                             Code = "CHUYEN_KHOA",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(1038),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5650),
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = true,
@@ -5900,7 +5903,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 8,
                             Code = "RAVIEN",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(1040),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5653),
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = false,
@@ -5911,7 +5914,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 9,
                             Code = "XINVE",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(1042),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5655),
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = false,
@@ -5922,7 +5925,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 10,
                             Code = "DUAVE",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(1044),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5657),
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = false,
@@ -5933,7 +5936,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 11,
                             Code = "TRONVIEN",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(1046),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5659),
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = false,
@@ -5944,7 +5947,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 12,
                             Code = "CHUYEN_TUYEN",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(1049),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5666),
                             Inactive = false,
                             IsForInPatient = false,
                             IsForOutPatient = true,
@@ -5955,7 +5958,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 13,
                             Code = "TUVONG",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(1051),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5668),
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = true,
@@ -5966,7 +5969,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 99,
                             Code = "KHAC",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(1053),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5670),
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = true,
@@ -6022,7 +6025,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "KHOI",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(1095),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5710),
                             Inactive = false,
                             Name = "Khỏi",
                             SortOrder = 1
@@ -6031,7 +6034,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "DO_GIAM",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(1099),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5714),
                             Inactive = false,
                             Name = "Đỡ, giảm",
                             SortOrder = 2
@@ -6040,7 +6043,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 3,
                             Code = "KHONGTHAYDOI",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(1140),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5750),
                             Inactive = false,
                             Name = "Không thay đổi",
                             SortOrder = 3
@@ -6049,7 +6052,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 4,
                             Code = "NANGHON",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(1156),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5763),
                             Inactive = false,
                             Name = "Nặng hơn",
                             SortOrder = 4
@@ -6058,7 +6061,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 5,
                             Code = "TUVONG",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(1159),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5766),
                             Inactive = false,
                             Name = "Tử vong",
                             SortOrder = 5
@@ -6067,7 +6070,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 99,
                             Code = "KHAC",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(1161),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5768),
                             Inactive = true,
                             Name = "Khác",
                             SortOrder = 6
@@ -6167,7 +6170,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "NOITRU",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(965),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5574),
                             Inactive = false,
                             Name = "Nội trú",
                             SortOrder = 1
@@ -6176,7 +6179,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "NGOAITRU",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(969),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5580),
                             Inactive = false,
                             Name = "Ngoại trú",
                             SortOrder = 2
@@ -6185,7 +6188,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 3,
                             Code = "DICHVU",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(972),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5582),
                             Inactive = false,
                             Name = "Dịch vụ",
                             SortOrder = 3
@@ -6239,7 +6242,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "BHYT",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(923),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5531),
                             Inactive = false,
                             Name = "Bảo hiểm y tế",
                             SortOrder = 1
@@ -6248,7 +6251,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "VP",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(930),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5537),
                             Inactive = false,
                             Name = "Viện phí",
                             SortOrder = 2
@@ -6257,7 +6260,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 3,
                             Code = "DV",
-                            CreatedDate = new DateTime(2023, 9, 5, 23, 16, 1, 167, DateTimeKind.Local).AddTicks(932),
+                            CreatedDate = new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5539),
                             Inactive = false,
                             Name = "Dịch vụ",
                             SortOrder = 3

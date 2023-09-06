@@ -1,5 +1,6 @@
 ﻿using HIS.Core.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.Utilities.Enums;
 using System.ComponentModel;
 
 namespace HIS.EntityFrameworkCore.Entities.Categories
@@ -144,6 +145,9 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
 
         [Description("Đánh số lô")]
         public int AutoNumber { get; set; }
+
+        [Description("Loại hàng hóa")]
+        public CommodityTypes CommodityType { get; set; }
 
         public Unit Unit { get; set; }
         public ItemLine ItemLine { get; set; }

@@ -195,6 +195,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
                                  select new ItemTypeDto()
                                  {
                                      Id = medi.Id,
+                                     CommodityType = medi.CommodityType,
                                      Code = medi.Code,
                                      HeInCode = medi.HeInCode,
                                      Name = medi.Name,
