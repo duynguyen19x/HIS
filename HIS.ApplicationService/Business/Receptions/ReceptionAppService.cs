@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
 using HIS.Application.Core.Services.Dto;
+using HIS.Application.Core.Utils;
 using HIS.ApplicationService.Business.MedicalRecords;
 using HIS.ApplicationService.Business.PatientRecords;
 using HIS.ApplicationService.Business.Patients;
 using HIS.Core.Linq;
 using HIS.Dtos.Business.PatientRecords;
 using HIS.Dtos.Business.Patients;
+using HIS.Dtos.Business.Receptions;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -43,17 +45,17 @@ namespace HIS.ApplicationService.Business.Receptions
         }
 
 
-        public async Task<ResultDto<PatientRecordDto>> CreateOrEdit(PatientRecordDto input)
+        public async Task<ResultDto<ReceptionDto>> CreateOrEdit(ReceptionDto input)
         {
-            if (input.PatientRecordId == default(Guid))
+            if (DataHelper.IsNullOrDefault(input.PatientRecordId))
                 return await Create(input);
             else
                 return await Update(input);
         }
 
-        public async Task<ResultDto<PatientRecordDto>> Create(PatientRecordDto input)
+        public async Task<ResultDto<ReceptionDto>> Create(ReceptionDto input)
         {
-            return await BeginTransactionAsync<ResultDto<PatientRecordDto>>(async result =>
+            return await BeginTransactionAsync<ResultDto<ReceptionDto>>(async result =>
             {
                 try
                 {
@@ -74,10 +76,10 @@ namespace HIS.ApplicationService.Business.Receptions
                     }
 
                     // thông tin điều trị.
-                    result = await _patientRecordAppService.CreateOrEdit(input);
-                    if (result.IsSuccessed)
+                    var createOrUpdatePatientRecordResult = await _patientRecordAppService.CreateOrEdit(Mapper.Map<PatientRecordDto>(input));
+                    if (createOrUpdatePatientRecordResult.IsSuccessed)
                     {
-                        input = result.Item;
+                        input.PatientRecordId = createOrUpdatePatientRecordResult.Item.PatientRecordId;
                     }
                     else
                         return;
@@ -96,28 +98,31 @@ namespace HIS.ApplicationService.Business.Receptions
             });
         }
 
-        public Task<ResultDto<PatientRecordDto>> Update(PatientRecordDto input)
+        public Task<ResultDto<ReceptionDto>> Update(ReceptionDto input)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ResultDto<PatientRecordDto>> Delete(Guid id)
+        public Task<ResultDto<ReceptionDto>> Delete(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public virtual async Task<PagedResultDto<PatientRecordDto>> GetAll(PatientRecordRequestDto input)
+        public virtual async Task<PagedResultDto<ReceptionDto>> GetAll(ReceptionRequestDto input)
         {
-            var result = new PagedResultDto<PatientRecordDto>();
+            var result = new PagedResultDto<ReceptionDto>();
             try
             {
                 var filter = Context.PatientRecords.AsQueryable()
-                    .WhereIf(!string.IsNullOrEmpty(input.PatientRecordCodeFilter), x => x.Code.ToLower() == input.PatientRecordCodeFilter.ToLower())
-                    ;
+                    .WhereIf(input.DepartmentId != null, x => x.ReceiptionDepartmentID == input.DepartmentId)
+                    .WhereIf(input.RoomId != null, x => x.ReceiptionRoomID == input.RoomId)
+                    .WhereIf(input.ReceptionFromDate != null, x => x.ReceiptionDate >= input.ReceptionFromDate)
+                    .WhereIf(input.ReceptionToDate != null, x => x.ReceiptionDate <= input.ReceptionToDate);
+
                 var paged = await filter.PageBy(input).ToListAsync();
                 var totalCount = await filter.CountAsync();
 
-                result.Items = Mapper.Map<IList<PatientRecordDto>>(paged);
+                result.Items = Mapper.Map<IList<ReceptionDto>>(paged);
                 result.TotalCount = totalCount;
             }
             catch (Exception ex)
@@ -128,12 +133,12 @@ namespace HIS.ApplicationService.Business.Receptions
             return result;
         }
 
-        public virtual async Task<ResultDto<PatientRecordDto>> GetById(Guid id)
+        public virtual async Task<ResultDto<ReceptionDto>> GetById(Guid id)
         {
-            var result = new ResultDto<PatientRecordDto>();
+            var result = new ResultDto<ReceptionDto>();
             try
             {
-                result.Item = Mapper.Map<PatientRecordDto>(await Context.PatientRecords.FindAsync(id));
+                result.Item = Mapper.Map<ReceptionDto>(await Context.PatientRecords.FindAsync(id));
             }
             catch (Exception ex)
             {
