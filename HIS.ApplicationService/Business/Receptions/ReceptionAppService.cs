@@ -24,11 +24,6 @@ namespace HIS.ApplicationService.Business.Receptions
     /// </summary>
     public class ReceptionAppService : BaseAppService, IReceptionAppService
     {
-        private readonly IMedicalRecordAppService _medicalRecordAppService;
-        private readonly IMedicalRecordExamAppService _medicalRecordExamAppService;
-        private readonly IPatientAppService _patientAppService;
-        private readonly IPatientRecordAppService _patientRecordAppService;
-
         public ReceptionAppService(
             IMedicalRecordAppService medicalRecordAppService,
             IMedicalRecordExamAppService medicalRecordExamAppService,
@@ -38,10 +33,6 @@ namespace HIS.ApplicationService.Business.Receptions
             IMapper mapper) 
             : base(context, mapper)
         {
-            _medicalRecordAppService = medicalRecordAppService;
-            _medicalRecordExamAppService = medicalRecordExamAppService;
-            _patientAppService = patientAppService;
-            _patientRecordAppService = patientRecordAppService;
         }
 
 
@@ -55,47 +46,7 @@ namespace HIS.ApplicationService.Business.Receptions
 
         public async Task<ResultDto<ReceptionDto>> Create(ReceptionDto input)
         {
-            return await BeginTransactionAsync<ResultDto<ReceptionDto>>(async result =>
-            {
-                try
-                {
-                    // validate
-
-                    // thông tin định danh bệnh nhân.
-                    var createOrUpdatePatientResult = await _patientAppService.CreateOrEdit(Mapper.Map<PatientDto>(input));
-                    if (createOrUpdatePatientResult.IsSuccessed)
-                    {
-                        input.PatientId = createOrUpdatePatientResult.Item.PatientId;
-                    }
-                    else
-                    {
-                        result.IsSuccessed = false;
-                        result.Message = createOrUpdatePatientResult.Message;
-                        result.Errors = createOrUpdatePatientResult.Errors;
-                        return;
-                    }
-
-                    // thông tin điều trị.
-                    var createOrUpdatePatientRecordResult = await _patientRecordAppService.CreateOrEdit(Mapper.Map<PatientRecordDto>(input));
-                    if (createOrUpdatePatientRecordResult.IsSuccessed)
-                    {
-                        input.PatientRecordId = createOrUpdatePatientRecordResult.Item.PatientRecordId;
-                    }
-                    else
-                        return;
-
-                    // thông tin bệnh án khoa + khám bệnh.
-
-                    // thông tin dịch vụ.
-
-
-                    await SaveChangesAsync();
-                }
-                catch (Exception ex)
-                {
-                    result.Exception(ex);
-                }
-            });
+            throw new NotImplementedException();
         }
 
         public Task<ResultDto<ReceptionDto>> Update(ReceptionDto input)
@@ -114,10 +65,10 @@ namespace HIS.ApplicationService.Business.Receptions
             try
             {
                 var filter = Context.PatientRecords.AsQueryable()
-                    .WhereIf(input.DepartmentId != null, x => x.ReceiptionDepartmentID == input.DepartmentId)
-                    .WhereIf(input.RoomId != null, x => x.ReceiptionRoomID == input.RoomId)
-                    .WhereIf(input.ReceptionFromDate != null, x => x.ReceiptionDate >= input.ReceptionFromDate)
-                    .WhereIf(input.ReceptionToDate != null, x => x.ReceiptionDate <= input.ReceptionToDate);
+                    .WhereIf(input.DepartmentId != null, x => x.ReceptionDepartmentId == input.DepartmentId)
+                    .WhereIf(input.RoomId != null, x => x.ReceptionRoomId == input.RoomId)
+                    .WhereIf(input.ReceptionFromDate != null, x => x.ReceptionDate >= input.ReceptionFromDate)
+                    .WhereIf(input.ReceptionToDate != null, x => x.ReceptionDate <= input.ReceptionToDate);
 
                 var paged = await filter.PageBy(input).ToListAsync();
                 var totalCount = await filter.CountAsync();

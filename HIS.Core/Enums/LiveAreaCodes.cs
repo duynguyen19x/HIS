@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Systems.Department
+namespace HIS.Core.Enums
 {
-    internal class DepartmentDto
+    public enum LiveAreaCodes
     {
+        K1,
+        K2, 
+        K3
     }
 }

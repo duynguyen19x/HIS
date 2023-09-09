@@ -52,6 +52,7 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<Unit> Units { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Province> Provinces { get; set; }
+        public DbSet<ReceptionType> ReceptionTypes { get; set; }
         public DbSet<District> Districts { get; set; }
         public DbSet<SWard> Wards { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
