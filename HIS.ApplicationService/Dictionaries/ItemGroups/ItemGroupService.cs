@@ -182,11 +182,13 @@ namespace HIS.ApplicationService.Dictionaries.ItemGroups
                                      Name = r.Name,
                                      SortOrder = r.SortOrder,
                                      IsSystem = r.IsSystem,
+                                     CommodityType = r.CommodityType,
                                      Inactive = r.Inactive
                                  })
                                  .WhereIf(!string.IsNullOrEmpty(input.NameFilter), r => r.Name == input.NameFilter)
                                  .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), r => r.Code == input.CodeFilter)
                                  .WhereIf(input.InactiveFilter != null, r => r.Inactive == input.InactiveFilter)
+                                 .WhereIf(input.CommodityTypeFilter != null, r => r.CommodityType == input.CommodityTypeFilter)
                                  .OrderBy(o => o.SortOrder).ToList();
 
                 result.TotalCount = result.Result.Count;

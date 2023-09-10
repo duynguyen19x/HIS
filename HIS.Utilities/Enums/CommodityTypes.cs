@@ -13,7 +13,7 @@ namespace HIS.Utilities.Enums
     public enum CommodityTypes
     {
         [Description("Thuốc")]
-        Item,
+        Medicine,
         [Description("Vật tư")]
         Material,
         [Description("Máu")]

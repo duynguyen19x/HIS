@@ -1,5 +1,6 @@
 ﻿using HIS.Application.Core.Services.Dto;
 using HIS.Dtos.Dictionaries.ItemPricePolicies;
+using HIS.Utilities.Enums;
 using System.ComponentModel;
 
 namespace HIS.Dtos.Business.InOutStockItems
@@ -106,6 +107,8 @@ namespace HIS.Dtos.Business.InOutStockItems
         public Guid? ItemId { get; set; }
 
         public Guid? InOutStockId { get; set; }
+
+        public CommodityTypes CommodityType { get; set; }
 
         public IList<ItemPricePolicyDto> ItemPricePolicies { get; set; }
     }

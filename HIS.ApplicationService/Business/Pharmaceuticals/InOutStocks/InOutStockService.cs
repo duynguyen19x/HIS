@@ -163,6 +163,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                             inOutStockItem.TenderPackage = sItem.TenderPackage;
                             inOutStockItem.TenderGroup = sItem.TenderGroup;
                             inOutStockItem.TenderYear = sItem.TenderYear;
+                            inOutStockItem.CommodityType = sItem.CommodityType;
 
                             inOutStockItem.ItemPricePolicies = ItemPricePolicyDtos.Where(w => w.ItemId == inOutStockItem.ItemId).ToList();
                         }
@@ -394,7 +395,6 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                             item.CreatedDate = dateNow;
                             item.CreatedBy = SessionExtensions.Login?.Id;
                             item.ImpQuantity = inOutStockItemDto.RequestQuantity;
-                            item.CommodityType = dImMest.CommodityType;
 
                             var inOutStockItem = _mapper.Map<InOutStockItem>(inOutStockItemDto);
                             inOutStockItem.Id = Guid.NewGuid();
@@ -512,7 +512,6 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                             item.ModifiedDate = dateNow;
                             item.ModifiedBy = SessionExtensions.Login?.Id;
                             item.ImpQuantity = inOutStockItemDto.RequestQuantity;
-                            item.CommodityType = dImMestOld.CommodityType;
 
                             var inOutStockItem = _mapper.Map<InOutStockItem>(inOutStockItemDto);
                             if (GuidHelper.IsNullOrEmpty(inOutStockItem.Id))
@@ -713,6 +712,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                                       TenderPackage = item.TenderPackage,
                                                       TenderGroup = item.TenderGroup,
                                                       TenderYear = item.TenderYear,
+                                                      CommodityType = item.CommodityType,
                                                   }).ToList();
 
 
@@ -913,11 +913,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
                     var inOutStock = new EntityFrameworkCore.Entities.Business.InOutStock();
                     var inOutStockItems = new List<InOutStockItem>();
-                    var ItemStocks = new List<EntityFrameworkCore.Entities.Business.ItemStock>();
+                    var ItemStocks = new List<ItemStock>();
 
                     if (GuidHelper.IsNullOrEmpty(input.Id)) // Thêm mới (Lưu tạm)
                     {
-                        inOutStock = _mapper.Map<EntityFrameworkCore.Entities.Business.InOutStock>(input);
+                        inOutStock = _mapper.Map<InOutStock>(input);
                         inOutStock.Id = id;
                         inOutStock.CreatedBy = SessionExtensions.Login?.Id;
                         inOutStock.CreatedDate = dateNow;
@@ -1034,7 +1034,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                             }
                                             else // Nếu chưa tồn tại thuốc trong kho thì thêm mới thuốc vào kho
                                             {
-                                                ItemStocks.Add(new EntityFrameworkCore.Entities.Business.ItemStock()
+                                                ItemStocks.Add(new ItemStock()
                                                 {
                                                     Id = Guid.NewGuid(),
                                                     CreatedDate = dateNow,
@@ -1197,6 +1197,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
             return await Task.FromResult(result);
         }
 
+        /// <summary>
+        /// Kiểm tra dữ liệu trước khi lưu
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
         private async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockValid(InOutStockDto input)
         {
             var result = new ApiResult<InOutStockDto>();

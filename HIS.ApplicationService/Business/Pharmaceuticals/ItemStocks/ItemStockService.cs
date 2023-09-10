@@ -4,8 +4,10 @@ using HIS.Dtos.Business.ItemStocks;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Items;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
+using System.Linq;
 
 namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
 {
@@ -35,9 +37,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
                                      ItemName = Item.Name,
                                      StockCode = stock.Code,
                                      StockName = stock.Name,
+                                     CommodityType = Item.CommodityType
                                  })
                                  .WhereIf(!GuidHelper.IsNullOrEmpty(input.StockIdFilter), w => w.StockId == input.StockIdFilter)
                                  .WhereIf(!GuidHelper.IsNullOrEmpty(input.ItemIdFilter), w => w.ItemId == input.ItemIdFilter)
+                                 .WhereIf(input.CommodityTypeFilter != null, w => w.CommodityType == input.CommodityTypeFilter)
                                  .OrderBy(o => o.StockCode).ToList();
 
                 result.TotalCount = result.Result.Count;
@@ -60,7 +64,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
                 result.Result = (from dItemStock in _dbContext.ItemStocks
                                  join sItem in _dbContext.Items on dItemStock.ItemId equals sItem.Id
 
-                                 where dItemStock.IsDeleted == false && dItemStock.AvailableQuantity > 0
+                                 where dItemStock.IsDeleted == false
+                                    && dItemStock.AvailableQuantity > 0
+                                    && dItemStock.StockId == stockId
 
                                  select new ItemStockDto()
                                  {

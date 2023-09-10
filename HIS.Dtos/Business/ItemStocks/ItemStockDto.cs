@@ -1,6 +1,7 @@
 ﻿using HIS.Application.Core.Services.Dto;
 using HIS.Dtos.Dictionaries.Items;
 using HIS.Dtos.Dictionaries.Room;
+using HIS.Utilities.Enums;
 
 namespace HIS.Dtos.Business.ItemStocks
 {
@@ -24,6 +25,8 @@ namespace HIS.Dtos.Business.ItemStocks
 
         public string ItemCode { get; set; }
         public string ItemName { get; set; }
+
+        public CommodityTypes CommodityType { get; set; }
 
         public ItemDto Item { get; set; }
         public RoomDto Stock { get; set; }
