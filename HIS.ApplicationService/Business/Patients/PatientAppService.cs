@@ -42,7 +42,7 @@ namespace HIS.ApplicationService.Business.Patients
                     if (DataHelper.IsNullOrDefault(input.PatientCode))
                         input.PatientCode = "BN" + String.Format("{0:00000}", Context.Patients.Count() + 1);
 
-                    var patient = Mapper.Map<Patient>(input);
+                    var patient = ObjectMapper.Map<Patient>(input);
                     patient.CreatedDate = DateTime.Now;
                     patient.CreatedBy = SessionExtensions.Login.Id;
 
@@ -64,7 +64,7 @@ namespace HIS.ApplicationService.Business.Patients
             {
                 try
                 {
-                    var patient = Mapper.Map<Patient>(input);
+                    var patient = ObjectMapper.Map<Patient>(input);
                     patient.ModifiedDate = DateTime.Now;
                     patient.ModifiedBy = SessionExtensions.Login.Id;
 
@@ -110,7 +110,7 @@ namespace HIS.ApplicationService.Business.Patients
                 var paged = await filter.PageBy(input).ToListAsync();
                 var totalCount = await filter.CountAsync();
 
-                result.Items = Mapper.Map<IList<PatientDto>>(paged);
+                result.Items = ObjectMapper.Map<IList<PatientDto>>(paged);
                 result.TotalCount = totalCount;
             }
             catch (Exception ex)
@@ -126,7 +126,7 @@ namespace HIS.ApplicationService.Business.Patients
             var result = new ResultDto<PatientDto>();
             try
             {
-                result.Item = Mapper.Map<PatientDto>(await Context.Patients.FindAsync(id));
+                result.Item = ObjectMapper.Map<PatientDto>(await Context.Patients.FindAsync(id));
             }
             catch (Exception ex)
             {

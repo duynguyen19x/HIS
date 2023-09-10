@@ -24,6 +24,8 @@ namespace HIS.ApplicationService.Business.Receptions
     /// </summary>
     public class ReceptionAppService : BaseAppService, IReceptionAppService
     {
+        private readonly IPatientAppService _patientAppService;
+        private readonly IPatientRecordAppService _patientRecordAppService;
         public ReceptionAppService(
             IMedicalRecordAppService medicalRecordAppService,
             IMedicalRecordExamAppService medicalRecordExamAppService,
@@ -33,6 +35,8 @@ namespace HIS.ApplicationService.Business.Receptions
             IMapper mapper) 
             : base(context, mapper)
         {
+            _patientAppService = patientAppService;
+            _patientRecordAppService = patientRecordAppService;
         }
 
 
@@ -44,9 +48,50 @@ namespace HIS.ApplicationService.Business.Receptions
                 return await Update(input);
         }
 
-        public Task<ResultDto<ReceptionDto>> Create(ReceptionDto input)
+        public async Task<ResultDto<ReceptionDto>> Create(ReceptionDto input)
         {
-            throw new NotImplementedException();
+            var result = new ResultDto<ReceptionDto>();
+            try
+            {
+                // 1. thêm mới hoặc cập nhật thông tin định danh bệnh nhân (Patient)
+                // 2. thêm mới thông tin điều trị (PatientRecord)
+                // 3. thêm mới thông tin đăng ký dịch vụ khám (ServiceReq và ServiceReqServe).
+                var patient = ObjectMapper.Map<PatientDto>(input);
+                var resultCreateOrEditPatientResult = await _patientAppService.CreateOrEdit(patient);
+                if (resultCreateOrEditPatientResult.IsSuccessed)
+                {
+                    input.PatientId = resultCreateOrEditPatientResult.Item.Id;
+                    input.PatientCode = resultCreateOrEditPatientResult.Item.Code;
+
+                    var patientRecord = ObjectMapper.Map<PatientRecordDto>(input);
+                    var resultCreateOrEditPatientRecordResult = await _patientRecordAppService.CreateOrEdit(patientRecord);
+                    if (resultCreateOrEditPatientRecordResult.IsSuccessed)
+                    {
+
+
+
+
+                    }    
+                    else
+                    {
+                        result.IsSuccessed = false;
+                        result.Message = resultCreateOrEditPatientResult.Message;
+                        result.Errors = resultCreateOrEditPatientResult.Errors;
+                    }    
+                }  
+                else
+                {
+                    result.IsSuccessed = false;
+                    result.Message = resultCreateOrEditPatientResult.Message;
+                    result.Errors = resultCreateOrEditPatientResult.Errors;
+                }    
+            }
+            catch (Exception ex)
+            {
+                result.Exception(ex);
+            }
+
+            return result;
         }
 
         public Task<ResultDto<ReceptionDto>> Update(ReceptionDto input)
@@ -73,7 +118,7 @@ namespace HIS.ApplicationService.Business.Receptions
                 var paged = await filter.PageBy(input).ToListAsync();
                 var totalCount = await filter.CountAsync();
 
-                result.Items = Mapper.Map<IList<ReceptionDto>>(paged);
+                result.Items = ObjectMapper.Map<IList<ReceptionDto>>(paged);
                 result.TotalCount = totalCount;
             }
             catch (Exception ex)
@@ -89,7 +134,7 @@ namespace HIS.ApplicationService.Business.Receptions
             var result = new ResultDto<ReceptionDto>();
             try
             {
-                result.Item = Mapper.Map<ReceptionDto>(await Context.PatientRecords.FindAsync(id));
+                result.Item = ObjectMapper.Map<ReceptionDto>(await Context.PatientRecords.FindAsync(id));
             }
             catch (Exception ex)
             {
