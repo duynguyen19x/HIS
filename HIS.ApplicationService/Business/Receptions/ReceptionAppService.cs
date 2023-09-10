@@ -44,7 +44,7 @@ namespace HIS.ApplicationService.Business.Receptions
                 return await Update(input);
         }
 
-        public async Task<ResultDto<ReceptionDto>> Create(ReceptionDto input)
+        public Task<ResultDto<ReceptionDto>> Create(ReceptionDto input)
         {
             throw new NotImplementedException();
         }

@@ -59,6 +59,9 @@ namespace HIS.EntityFrameworkCore.Configurations
             modelBuilder.ApplyConfiguration(new MedicalRecordResultConfiguration());
             modelBuilder.ApplyConfiguration(new PatientRecordTypeConfiguration());
             modelBuilder.ApplyConfiguration(new MedicalRecordTypeConfiguration());
+
+            modelBuilder.ApplyConfiguration(new InsuranceConfiguration());
+            modelBuilder.ApplyConfiguration(new ReceptionTypeConfiguration());
         }
     }
 }

@@ -8,7 +8,7 @@ namespace HIS.Core.Enums
 {
     public enum ReceptionTypes
     {
-        KHAMBENH = 0,
-        CAPCUU = 1,
+        KHAMBENH = 1,
+        CAPCUU = 2,
     }
 }
