@@ -13,48 +13,48 @@ namespace HIS.Utilities.Enums
         Reception = 1,
 
         [Description("Hành chính")]
-        Administration,
+        Administration = 2,
 
         [Description("Khám bệnh")]
-        MedicalExamination,
+        MedicalExamination = 3,
 
         [Description("Nội trú")]
-        InpatientTreatment,
+        InpatientTreatment = 4,
 
         [Description("Ngoại trú")]
-        Outpatient,
+        Outpatient = 5,
 
         [Description("Xét nghiệm")]
-        LaboratoryTesting,
+        LaboratoryTesting = 6,
 
         [Description("Chẩn đoán hình ảnh")]
-        DiagnosticImaging,
+        DiagnosticImaging = 7,
 
         [Description("Kho tổng")]
-        CentralWarehouse,
+        CentralWarehouse = 8,
 
         [Description("Kho thuốc ngoại trú")]
-        OutpatientPharmacy,
+        OutpatientPharmacy = 9,
 
         [Description("Kho thuốc nội trú")]
-        InpatientPharmacy,
+        InpatientPharmacy = 10,
 
         [Description("Tủ trực thuốc")]
-        EmergencyCabinet,
+        EmergencyCabinet = 11,
 
         [Description("Kho VTYT")]
-        OutpatientInventory,
+        OutpatientInventory = 12,
 
         [Description("Kho máu")]
-        BloodBack,
+        BloodBack = 13,
 
         [Description("Tủ trực VTYT")]
-        InventoryCabinet,
+        InventoryCabinet = 14,
 
         [Description("Quản lý thuốc")]
-        ItemManagement,
+        ItemManagement = 15,
 
         [Description("Quản lý vật tư")]
-        MaterialManagement,
+        MaterialManagement = 16,
     }
 }

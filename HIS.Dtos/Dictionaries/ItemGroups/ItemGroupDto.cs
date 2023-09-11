@@ -1,4 +1,5 @@
 ﻿using HIS.Application.Core.Services.Dto;
+using HIS.Utilities.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,6 +22,9 @@ namespace HIS.Dtos.Dictionaries.ItemGroups
 
         [Description("Dữ liệu gốc")]
         public bool IsSystem { get; set; }
+
+        [Description("Loại hàng hóa")]
+        public CommodityTypes CommodityType { get; set; }
 
         [Description("Ngưng sử dụng")]
         public bool Inactive { get; set; }

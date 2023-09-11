@@ -4,6 +4,7 @@ using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ItemTypes;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
+using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
 
@@ -195,6 +196,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
                                  select new ItemTypeDto()
                                  {
                                      Id = medi.Id,
+                                     CommodityType = medi.CommodityType,
                                      Code = medi.Code,
                                      HeInCode = medi.HeInCode,
                                      Name = medi.Name,
@@ -254,6 +256,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
                                  .WhereIf(input.ItemLineIdsFilter != null && input.ItemLineIdsFilter.Count > 0, w => input.ItemLineIdsFilter.Contains(w.ItemLineId))
                                  .WhereIf(input.ItemGroupIdsFilter != null && input.ItemGroupIdsFilter.Count > 0, w => input.ItemGroupIdsFilter.Contains(w.ItemGroupId))
                                  .WhereIf(input.UnitIdsFilter != null && input.UnitIdsFilter.Count > 0, w => input.UnitIdsFilter.Contains(w.UnitId))
+                                 .WhereIf(input.CommodityTypeFilter != null, w => w.CommodityType == (CommodityTypes)input.CommodityTypeFilter)
                                  .OrderBy(o => o.SortOrder).ToList();
 
                 result.TotalCount = result.Result.Count;

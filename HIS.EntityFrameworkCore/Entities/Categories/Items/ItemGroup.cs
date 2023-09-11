@@ -1,4 +1,5 @@
 ﻿using HIS.Core.Entities;
+using HIS.Utilities.Enums;
 using System.ComponentModel;
 
 namespace HIS.EntityFrameworkCore.Entities.Categories
@@ -19,5 +20,8 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
 
         [Description("Dữ liệu gốc")]
         public bool IsSystem { get; set; }
+
+        [Description("Loại hàng hóa")]
+        public CommodityTypes CommodityType { get; set; }
     }
 }
