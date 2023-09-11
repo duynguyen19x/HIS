@@ -90,7 +90,7 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<Treatment> Treatments { get; set; }
 
         public DbSet<ServiceRequest> ServiceRequests { get; set; }
-        public DbSet<ServiceRequestDetail> ServiceRequestDetails { get; set; }
+        public DbSet<ServiceRequestServe> ServiceRequestServes { get; set; }
         #endregion
 
         #region System

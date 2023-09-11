@@ -17,8 +17,4 @@
     <ProjectReference Include="..\HIS.Utilities\HIS.Utilities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Business\ServiceResultTemps\" />
-  </ItemGroup>
-
 </Project>

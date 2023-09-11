@@ -1,5 +1,4 @@
 ﻿using HIS.EntityFrameworkCore.Entities.Business;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -10,14 +9,13 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business
 {
-    public class PatientConfiguration : IEntityTypeConfiguration<Patient>
+    public class ServiceRequestConfiguration : IEntityTypeConfiguration<ServiceRequest>
     {
-        public void Configure(EntityTypeBuilder<Patient> builder)
+        public void Configure(EntityTypeBuilder<ServiceRequest> builder)
         {
-            builder.ToTable("Patient");
+            builder.ToTable("ServiceRequest");
             builder.HasKey(x => x.Id);
             builder.Property(r => r.Code).IsRequired().HasMaxLength(50);
-            builder.Property(u => u.Name).IsRequired().HasMaxLength(500);
             builder.Property(u => u.Description).HasMaxLength(500);
         }
     }

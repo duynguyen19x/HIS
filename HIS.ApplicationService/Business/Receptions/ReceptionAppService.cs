@@ -11,16 +11,8 @@ using HIS.Dtos.Business.PatientRecords;
 using HIS.Dtos.Business.Patients;
 using HIS.Dtos.Business.Receptions;
 using HIS.Dtos.Business.ServiceReqs;
-using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
-using Microsoft.Identity.Client;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Business.Receptions
 {
@@ -71,32 +63,32 @@ namespace HIS.ApplicationService.Business.Receptions
                     input.PatientId = resultCreateOrEditPatient.Item.Id;
                     input.PatientCode = resultCreateOrEditPatient.Item.Code;
 
-                    //var patientRecord = ObjectMapper.Map<PatientRecordDto>(input);
-                    //var resultCreateOrEditPatientRecord = await _patientRecordAppService.CreateOrEdit(patientRecord);
-                    //if (resultCreateOrEditPatientRecord.IsSuccessed)
-                    //{
-                    //    input.PatientRecordId = resultCreateOrEditPatientRecord.Item.Id;
-                    //    input.PatientRecordCode = resultCreateOrEditPatientRecord.Item.Code;
+                    var patientRecord = ObjectMapper.Map<PatientRecordDto>(input);
+                    var resultCreateOrEditPatientRecord = await _patientRecordAppService.CreateOrEdit(patientRecord);
+                    if (resultCreateOrEditPatientRecord.IsSuccessed)
+                    {
+                        input.PatientRecordId = resultCreateOrEditPatientRecord.Item.Id;
+                        input.PatientRecordCode = resultCreateOrEditPatientRecord.Item.Code;
 
-                    //    var serviceReq = ObjectMapper.Map<ServiceReqDto>(input);
-                    //    var resultCreateOrEditServiceReq = await _serviceReqAppService.CreateOrEdit(serviceReq);
-                    //    if (resultCreateOrEditServiceReq.IsSuccessed)
-                    //    {
-                    //        //input.ServiceId =
-                    //    }
-                    //    else
-                    //    {
-                    //        result.IsSuccessed = false;
-                    //        result.Message = resultCreateOrEditServiceReq.Message;
-                    //        result.Errors = resultCreateOrEditServiceReq.Errors;
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    result.IsSuccessed = false;
-                    //    result.Message = resultCreateOrEditPatientRecord.Message;
-                    //    result.Errors = resultCreateOrEditPatientRecord.Errors;
-                    //}
+                        //var serviceReq = ObjectMapper.Map<ServiceReqDto>(input);
+                        //var resultCreateOrEditServiceReq = await _serviceReqAppService.CreateOrEdit(serviceReq);
+                        //if (resultCreateOrEditServiceReq.IsSuccessed)
+                        //{
+                        //    //input.ServiceId =
+                        //}
+                        //else
+                        //{
+                        //    result.IsSuccessed = false;
+                        //    result.Message = resultCreateOrEditServiceReq.Message;
+                        //    result.Errors = resultCreateOrEditServiceReq.Errors;
+                        //}
+                    }
+                    else
+                    {
+                        result.IsSuccessed = false;
+                        result.Message = resultCreateOrEditPatientRecord.Message;
+                        result.Errors = resultCreateOrEditPatientRecord.Errors;
+                    }
                 }
                 else
                 {

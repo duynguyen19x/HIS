@@ -15,8 +15,8 @@ namespace HIS.Dtos.Business.Patients
         public virtual string Code { get; set; }
         public virtual string Name { get; set; }
         public virtual string Description { get; set; }
-        public virtual int BloodTypeId { get; set; }
-        public virtual int BloodRhTypeId { get; set; }
+        public virtual int? BloodTypeId { get; set; }
+        public virtual int? BloodRhTypeId { get; set; }
         public virtual bool Inactive { get; set; }
     }
 }

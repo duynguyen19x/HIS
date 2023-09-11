@@ -14,7 +14,9 @@ namespace HIS.Application.Core.Services.Dto
 
         public virtual T Item { get; set; }
 
-        public IList<ResultErrorDto> Errors { get; set; }
+        public virtual IList<ResultErrorDto> Errors { get; set; }
+
+        public virtual bool HasErrors => Errors != null && Errors.Count > 0;
 
         public ResultDto() 
         {
@@ -27,6 +29,16 @@ namespace HIS.Application.Core.Services.Dto
             Item = item;
         }
 
+        public virtual void Error(string field, string message)
+        {
+            if (Errors == null)
+                Errors = new List<ResultErrorDto>();
+            Errors.Add(new ResultErrorDto(field, message));
+        }
+        public virtual void RemoveError()
+        {
+            this.Errors = new List<ResultErrorDto>();
+        }
         public virtual void Exception(Exception ex)
         {
             this.IsSuccessed = false;

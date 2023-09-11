@@ -37,6 +37,8 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
             this.Name = name;
             this.SortOrder = sortOrder;
             this.Inactive = false;
+
+            this.CreatedDate = new DateTime(1975, 01, 01);
         }
     }
 }

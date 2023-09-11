@@ -2,18 +2,12 @@
 using HIS.Application.Core.Services;
 using HIS.Application.Core.Services.Dto;
 using HIS.Application.Core.Utils;
-using HIS.Core.Extensions;
 using HIS.Core.Linq;
 using HIS.Dtos.Business.Patients;
 using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Utilities.Sections;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Business.Patients
 {
@@ -32,11 +26,15 @@ namespace HIS.ApplicationService.Business.Patients
                 return await Update(input);
         }
 
-        public virtual async Task<ResultDto<PatientDto>> Create(PatientDto input)
+        public virtual async Task<ResultDto<PatientDto>> Create(PatientDto input) => await BeginTransactionAsync<ResultDto<PatientDto>>(async result =>
         {
-            return await BeginTransactionAsync<ResultDto<PatientDto>>(async result =>
+            try
             {
-                try
+                // kiểm tra dữ liệu
+                if (DataHelper.IsNullOrDefault(input.Name))
+                    result.Error(nameof(PatientDto.Name), "Tên bệnh nhân không được bỏ trống!");
+
+                if (!result.HasErrors)
                 {
                     input.Id = Guid.NewGuid();
                     if (DataHelper.IsNullOrDefault(input.Code))
@@ -47,22 +45,30 @@ namespace HIS.ApplicationService.Business.Patients
                     patient.CreatedBy = SessionExtensions.Login?.Id;
 
                     Context.Patients.Add(patient);
+                    await SaveChangesAsync();
 
                     result.Item = input;
-                    await SaveChangesAsync();
                 }
-                catch (Exception ex)
-                {
-                    result.Exception(ex);
-                }
-            });
-        }
-
-        public virtual async Task<ResultDto<PatientDto>> Update(PatientDto input)
-        {
-            return await BeginTransactionAsync<ResultDto<PatientDto>>(async result =>
+            }
+            catch (Exception ex)
             {
-                try
+                result.Exception(ex);
+            }
+        });
+
+        public virtual async Task<ResultDto<PatientDto>> Update(PatientDto input) => await BeginTransactionAsync<ResultDto<PatientDto>>(async result =>
+        {
+            try
+            {
+                // kiểm tra dữ liệu
+                if (DataHelper.IsNullOrDefault(input.Code))
+                    result.Error(nameof(PatientDto.Code), "Mã bệnh nhân không được bỏ trống!");
+                if (DataHelper.IsNullOrDefault(input.Name))
+                    result.Error(nameof(PatientDto.Name), "Tên bệnh nhân không được bỏ trống!");
+                input.BloodTypeId = 0;
+                input.BloodRhTypeId = 0;
+
+                if (!result.HasErrors)
                 {
                     var patient = ObjectMapper.Map<Patient>(input);
                     patient.ModifiedDate = DateTime.Now;
@@ -73,32 +79,29 @@ namespace HIS.ApplicationService.Business.Patients
                     result.Item = input;
                     await SaveChangesAsync();
                 }
-                catch (Exception ex)
-                {
-                    result.Exception(ex);
-                }
-            });
-        }
-
-        public virtual async Task<ResultDto<PatientDto>> Delete(Guid id)
-        {
-            return await BeginTransactionAsync<ResultDto<PatientDto>>(async result =>
+            }
+            catch (Exception ex)
             {
-                try
+                result.Exception(ex);
+            }
+        });
+
+        public virtual async Task<ResultDto<PatientDto>> Delete(Guid id) => await BeginTransactionAsync<ResultDto<PatientDto>>(async result =>
+        {
+            try
+            {
+                var patient = Context.Patients.SingleOrDefault(x => x.Id == id);
+                if (patient != null)
                 {
-                    var patient = Context.Patients.SingleOrDefault(x => x.Id == id);
-                    if (patient != null)
-                    {
-                        Context.Patients.Remove(patient);
-                        await SaveChangesAsync();
-                    }
+                    Context.Patients.Remove(patient);
+                    await SaveChangesAsync();
                 }
-                catch (Exception ex)
-                {
-                    result.Exception(ex);
-                }
-            });
-        }
+            }
+            catch (Exception ex)
+            {
+                result.Exception(ex);
+            }
+        });
 
         public virtual async Task<PagedResultDto<PatientDto>> GetAll(PagedPatientInputDto input)
         {

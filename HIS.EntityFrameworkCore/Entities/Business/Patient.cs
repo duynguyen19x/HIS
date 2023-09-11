@@ -25,12 +25,12 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         /// <summary>
         /// Nhóm máu
         /// </summary>
-        public virtual int BloodTypeId { get; set; }
+        public virtual int? BloodTypeId { get; set; }
 
         /// <summary>
         /// Nhóm máu Rh
         /// </summary>
-        public virtual int BloodRhId { get; set; }
+        public virtual int? BloodRhId { get; set; }
 
         [MaxLength(500)]
         public virtual string Description { get; set; }
