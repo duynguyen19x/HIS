@@ -1,4 +1,4 @@
-﻿using HIS.ApplicationService.Business.Pharmaceuticals.InOutStock;
+﻿using HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks;
 using HIS.Dtos.Business.InOutStocks;
 using HIS.Dtos.Commons;
 using HIS.Models.Commons;

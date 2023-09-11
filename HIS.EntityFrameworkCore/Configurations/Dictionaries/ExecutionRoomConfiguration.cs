@@ -18,10 +18,10 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.HasKey(x => x.Id);
 
             builder.HasOne(t => t.Service).WithMany()
-              .HasForeignKey(pc => pc.ServiceId).OnDelete(DeleteBehavior.NoAction);
+              .HasForeignKey(pc => pc.ServiceId);
 
             builder.HasOne(t => t.Room).WithMany()
-              .HasForeignKey(pc => pc.RoomId).OnDelete(DeleteBehavior.NoAction);
+              .HasForeignKey(pc => pc.RoomId);
         }
     }
 }

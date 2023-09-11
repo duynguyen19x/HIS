@@ -21,8 +21,8 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.Property(x => x.Name).HasMaxLength(512).IsRequired();
             builder.Property(x => x.Description).HasMaxLength(512);
 
-            builder.HasOne(t => t.DepartmentType).WithMany().HasForeignKey(p => p.DepartmentTypeId).OnDelete(DeleteBehavior.NoAction);
-            builder.HasOne(t => t.Branch).WithMany().HasForeignKey(p => p.BranchId).OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(t => t.DepartmentType).WithMany().HasForeignKey(p => p.DepartmentTypeId);
+            builder.HasOne(t => t.Branch).WithMany().HasForeignKey(p => p.BranchId);
         }
     }
 }

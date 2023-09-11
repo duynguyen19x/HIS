@@ -21,10 +21,10 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.Property(x => x.HeInCode).HasMaxLength(50);
             builder.Property(x => x.HeInName).HasMaxLength(500);
 
-            builder.HasOne(t => t.Unit).WithMany().HasForeignKey(pc => pc.UnitId).OnDelete(DeleteBehavior.NoAction); 
-            builder.HasOne(t => t.ServiceGroup).WithMany().HasForeignKey(pc => pc.ServiceGroupId).OnDelete(DeleteBehavior.NoAction); 
-            builder.HasOne(t => t.ServiceGroupHeIn).WithMany().HasForeignKey(pc => pc.ServiceGroupHeInId).OnDelete(DeleteBehavior.NoAction); 
-            builder.HasOne(t => t.SurgicalProcedureType).WithMany().HasForeignKey(pc => pc.SurgicalProcedureTypeId).OnDelete(DeleteBehavior.NoAction); 
+            builder.HasOne(t => t.Unit).WithMany().HasForeignKey(pc => pc.UnitId); 
+            builder.HasOne(t => t.ServiceGroup).WithMany().HasForeignKey(pc => pc.ServiceGroupId); 
+            builder.HasOne(t => t.ServiceGroupHeIn).WithMany().HasForeignKey(pc => pc.ServiceGroupHeInId); 
+            builder.HasOne(t => t.SurgicalProcedureType).WithMany().HasForeignKey(pc => pc.SurgicalProcedureTypeId); 
         }
     }
 }

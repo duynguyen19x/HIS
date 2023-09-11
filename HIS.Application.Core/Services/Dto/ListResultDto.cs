@@ -9,9 +9,9 @@ namespace HIS.Application.Core.Services.Dto
     [Serializable]
     public class ListResultDto<T> : IListResult<T>
     {
-        private IReadOnlyList<T> _items;
+        private IList<T> _items;
 
-        public IReadOnlyList<T> Items
+        public IList<T> Items
         {
             get
             {
@@ -31,7 +31,7 @@ namespace HIS.Application.Core.Services.Dto
         {
         }
 
-        public ListResultDto(IReadOnlyList<T> items)
+        public ListResultDto(IList<T> items)
         {
             Items = items;
         }

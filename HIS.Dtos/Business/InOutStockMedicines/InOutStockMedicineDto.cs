@@ -1,10 +1,11 @@
 ﻿using HIS.Application.Core.Services.Dto;
-using HIS.Dtos.Dictionaries.MedicinePricePolicy;
+using HIS.Dtos.Dictionaries.ItemPricePolicies;
+using HIS.Utilities.Enums;
 using System.ComponentModel;
 
-namespace HIS.Dtos.Business.InOutStockMedicines
+namespace HIS.Dtos.Business.InOutStockItems
 {
-    public class InOutStockMedicineDto : EntityDto<Guid?>
+    public class InOutStockItemDto : EntityDto<Guid?>
     {
         [Description("Mã thuốc")]
         public string Code { get; set; }
@@ -19,13 +20,13 @@ namespace HIS.Dtos.Business.InOutStockMedicines
         public int? SortOrder { get; set; }
 
         [Description("Đường dùng thuốc")]
-        public Guid? MedicineLineId { get; set; }
+        public Guid? ItemLineId { get; set; }
 
         [Description("Nhóm thuốc")]
-        public Guid? MedicineGroupId { get; set; }
+        public Guid? ItemGroupId { get; set; }
 
         [Description("Nhóm thuốc")]
-        public Guid? MedicineTypeId { get; set; }
+        public Guid? ItemTypeId { get; set; }
 
         [Description("Đơn vị tính")]
         public Guid? UnitId { get; set; }
@@ -103,10 +104,12 @@ namespace HIS.Dtos.Business.InOutStockMedicines
         [Description("Năm thầu")]
         public int? TenderYear { get; set; }
 
-        public Guid? MedicineId { get; set; }
+        public Guid? ItemId { get; set; }
 
         public Guid? InOutStockId { get; set; }
 
-        public IList<MedicinePricePolicyDto> MedicinePricePolicies { get; set; }
+        public CommodityTypes CommodityType { get; set; }
+
+        public IList<ItemPricePolicyDto> ItemPricePolicies { get; set; }
     }
 }

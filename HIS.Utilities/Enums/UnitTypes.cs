@@ -9,7 +9,7 @@ namespace HIS.Utilities.Enums
     public enum UnitTypes
     {
         Service = 1,
-        Medicine,
+        Item,
         Material
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace HIS.Utilities.Enums
 {
@@ -19,13 +14,13 @@ namespace HIS.Utilities.Enums
         FunctionalEvaluation,
 
         [Description("Thuốc trong danh mục BHYT")]
-        MedicineHeInList,
+        ItemHeInList,
 
         [Description("Thuốc điều trị ung thư, chống thải ghép ngoài danh mục")]
-        MedicineOutHeInList,
+        ItemOutHeInList,
 
         [Description("Thuốc thanh toán theo tỷ lệ")]
-        MedicinePaymentRate,
+        ItemPaymentRate,
 
         [Description("Máu và chế phẩm máu")]
         Blood,

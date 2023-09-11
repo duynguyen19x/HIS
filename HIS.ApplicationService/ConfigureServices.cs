@@ -1,7 +1,10 @@
-﻿using HIS.ApplicationService.Business;
-using HIS.ApplicationService.Business.InOutStockType;
-using HIS.ApplicationService.Business.Pharmaceuticals.InOutStock;
-using HIS.ApplicationService.Business.Pharmaceuticals.MedicineStock;
+﻿using HIS.ApplicationService.Business.InOutStockType;
+using HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks;
+using HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks;
+using HIS.ApplicationService.Business.MedicalRecords;
+using HIS.ApplicationService.Business.PatientRecords;
+using HIS.ApplicationService.Business.Patients;
+using HIS.ApplicationService.Business.Receptions;
 using HIS.ApplicationService.Dictionaries.Branch;
 using HIS.ApplicationService.Dictionaries.Career;
 using HIS.ApplicationService.Dictionaries.ChapterICD10;
@@ -13,10 +16,10 @@ using HIS.ApplicationService.Dictionaries.Ethnic;
 using HIS.ApplicationService.Dictionaries.Gender;
 using HIS.ApplicationService.Dictionaries.Hospital;
 using HIS.ApplicationService.Dictionaries.Icd;
-using HIS.ApplicationService.Dictionaries.MedicineGroup;
-using HIS.ApplicationService.Dictionaries.MedicineLine;
-using HIS.ApplicationService.Dictionaries.MedicinePricePolicy;
-using HIS.ApplicationService.Dictionaries.MedicineType;
+using HIS.ApplicationService.Dictionaries.ItemGroups;
+using HIS.ApplicationService.Dictionaries.ItemLines;
+using HIS.ApplicationService.Dictionaries.ItemPricePolicies;
+using HIS.ApplicationService.Dictionaries.ItemTypes;
 using HIS.ApplicationService.Dictionaries.Province;
 using HIS.ApplicationService.Dictionaries.Room;
 using HIS.ApplicationService.Dictionaries.RoomType;
@@ -33,6 +36,7 @@ using HIS.ApplicationService.Systems.Login;
 using HIS.ApplicationService.Systems.Role;
 using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
+using HIS.ApplicationService.Business.ServiceRequests;
 
 namespace HIS.ApplicationService
 {
@@ -68,19 +72,21 @@ namespace HIS.ApplicationService
             services.AddTransient<ISupplierService, SupplierService>();
             services.AddTransient<IUserService, UserService>();
 
-            services.AddTransient<IMedicineGroupService, MedicineGroupService>();
-            services.AddTransient<IMedicineTypeService, MedicineTypeService>();
-            services.AddTransient<IMedicineLineService, MedicineLineService>();
-            services.AddTransient<ISMedicinePricePolicyService, MedicinePricePolicyService>();
+            services.AddTransient<IItemGroupService, ItemGroupService>();
+            services.AddTransient<IItemTypeService, ItemTypeService>();
+            services.AddTransient<IItemLineService, ItemLineService>();
+            services.AddTransient<IItemPricePolicyService, ItemPricePolicyService>();
 
             services.AddTransient<IInOutStockTypeService, InOutStockTypeService>();
             services.AddTransient<IInOutStockService, InOutStockService>();
-            services.AddTransient<IMedicineStockService, MedicineStockService>();
+            services.AddTransient<IItemStockService, ItemStockService>();
 
-            #region Patient
-            services.AddTransient<IPatientAppService, PatientAppService>();
+            services.AddTransient<IMedicalRecordAppService, MedicalRecordAppService>();
+            services.AddTransient<IMedicalRecordExamAppService, MedicalRecordExamAppService>();
             services.AddTransient<IPatientRecordAppService, PatientRecordAppService>();
-            #endregion
+            services.AddTransient<IPatientAppService, PatientAppService>();
+            services.AddTransient<IReceptionAppService, ReceptionAppService>();
+            services.AddTransient<IServiceRequestAppService, ServiceRequestAppService>();
 
             #region Sys
             services.AddTransient<ISYSAutoNumberAppService, SYSAutoNumberAppService>();

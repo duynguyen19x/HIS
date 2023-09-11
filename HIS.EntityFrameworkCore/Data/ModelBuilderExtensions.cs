@@ -19,10 +19,11 @@ namespace HIS.EntityFrameworkCore.Data
             SurgicalProcedureTypeBuilder.Seed(modelBuilder);
             DepartmentTypeBuilder.Seed(modelBuilder);
             RoomTypeBuilder.Seed(modelBuilder);
-            MedicineGroupBuilder.Seed(modelBuilder);
-            MedicineLineBuilder.Seed(modelBuilder);
+            ItemGroupBuilder.Seed(modelBuilder);
+            ItemLineBuilder.Seed(modelBuilder);
             InOutStockTypeBuilder.Seed(modelBuilder);
             ProvinceBuilder.Seed(modelBuilder);
+            ReceptionTypeBuilder.Seed(modelBuilder);
 
             PatientTypeBuilder.Seed(modelBuilder);
             PatientRecordTypeBuilder.Seed(modelBuilder);

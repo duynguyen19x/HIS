@@ -18,12 +18,5 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public int UnitType { get; set; }
 
         public bool Inactive { get; set; }
-
-        public IList<Service> Services { get; set; }
-        public IList<MedicineType> MedicineTypes { get; set; }
-        public IList<Medicine> Medicines { get; set; }
-
-        public IList<Material> Materials { get; set; }
-        public IList<MaterialType> MaterialTypes { get; set; }
     }
 }

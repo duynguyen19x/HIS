@@ -2,11 +2,10 @@
 using HIS.EntityFrameworkCore.Data;
 using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Categories;
-using HIS.EntityFrameworkCore.Entities.Categories.Medicines;
+using HIS.EntityFrameworkCore.Entities.Categories.Items;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.Systems;
-using HIS.EntityFrameworkCore.EntityFrameworkCore.Seed;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
@@ -50,10 +49,9 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<ChapterIcd> ChapterIcds { get; set; }
         public DbSet<RolePermissionBranch> RolePermissionBranchs { get; set; }
         public DbSet<Unit> Units { get; set; }
-        public DbSet<Material> Materials { get; set; }
-        public DbSet<MaterialType> MaterialTypes { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Province> Provinces { get; set; }
+        public DbSet<ReceptionType> ReceptionTypes { get; set; }
         public DbSet<District> Districts { get; set; }
         public DbSet<SWard> Wards { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
@@ -66,16 +64,16 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<ExecutionRoom> ExecutionRooms { get; set; }
         public DbSet<ServiceResultIndice> ServiceResultIndices { get; set; }
 
-        public DbSet<Medicine> Medicines { get; set; }
-        public DbSet<MedicineGroup> MedicineGroups { get; set; }
-        public DbSet<MedicineLine> MedicineLines { get; set; }
-        public DbSet<MedicineType> MedicineTypes { get; set; }
-        public DbSet<MedicinePricePolicy> MedicinePricePolicies { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<ItemGroup> ItemGroups { get; set; }
+        public DbSet<ItemLine> ItemLines { get; set; }
+        public DbSet<ItemType> ItemTypes { get; set; }
+        public DbSet<ItemPricePolicy> ItemPricePolicies { get; set; }
 
         public DbSet<InOutStockType> InOutStockTypes { get; set; }
-        public DbSet<MedicineStock> MedicineStocks { get; set; }
+        public DbSet<ItemStock> ItemStocks { get; set; }
         public DbSet<InOutStock> InOutStocks { get; set; }
-        public DbSet<InOutStockMedicine> InOutStockMedicines { get; set; }
+        public DbSet<InOutStockItem> InOutStockItems { get; set; }
 
         public DbSet<DeathCause> DeathCauses { get; set; }
         public DbSet<DeathWithin> DeathWithins { get; set; }
@@ -92,7 +90,7 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<Treatment> Treatments { get; set; }
 
         public DbSet<ServiceRequest> ServiceRequests { get; set; }
-        public DbSet<ServiceRequestDetail> ServiceRequestDetails { get; set; }
+        public DbSet<ServiceRequestServe> ServiceRequestServes { get; set; }
         #endregion
 
         #region System

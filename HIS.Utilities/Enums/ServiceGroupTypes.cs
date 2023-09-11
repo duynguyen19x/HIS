@@ -82,7 +82,7 @@ namespace HIS.Utilities.Enums
         Material,
 
         [Description("Thuốc")]
-        Medicine,
+        Item,
 
         [Description("Giường")]
         Bed,
