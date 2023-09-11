@@ -1,6 +1,7 @@
 ﻿using HIS.ApplicationService.Dictionaries.ItemTypes;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ItemTypes;
+using HIS.Dtos.Dictionaries.Service;
 using HIS.Models.Commons;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,6 +34,12 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         public async Task<ApiResult<ItemTypeDto>> CreateOrEdit(ItemTypeDto input)
         {
             return await _sItemTypeService.CreateOrEdit(input);
+        }
+
+        [HttpPost("Import")]
+        public async Task<ApiResult<bool>> Import(IList<ItemTypeDto> input)
+        {
+            return await _sItemTypeService.Import(input);
         }
 
         [HttpDelete("Delete")]
