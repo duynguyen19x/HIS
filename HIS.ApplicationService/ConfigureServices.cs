@@ -1,7 +1,10 @@
-﻿using HIS.ApplicationService.Business;
-using HIS.ApplicationService.Business.InOutStockType;
+﻿using HIS.ApplicationService.Business.InOutStockType;
 using HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks;
 using HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks;
+using HIS.ApplicationService.Business.MedicalRecords;
+using HIS.ApplicationService.Business.PatientRecords;
+using HIS.ApplicationService.Business.Patients;
+using HIS.ApplicationService.Business.Receptions;
 using HIS.ApplicationService.Dictionaries.Branch;
 using HIS.ApplicationService.Dictionaries.Career;
 using HIS.ApplicationService.Dictionaries.ChapterICD10;
@@ -33,6 +36,7 @@ using HIS.ApplicationService.Systems.Login;
 using HIS.ApplicationService.Systems.Role;
 using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
+using HIS.ApplicationService.Business.ServiceRequests;
 
 namespace HIS.ApplicationService
 {
@@ -77,10 +81,12 @@ namespace HIS.ApplicationService
             services.AddTransient<IInOutStockService, InOutStockService>();
             services.AddTransient<IItemStockService, ItemStockService>();
 
-            #region Patient
-            services.AddTransient<IPatientAppService, PatientAppService>();
+            services.AddTransient<IMedicalRecordAppService, MedicalRecordAppService>();
+            services.AddTransient<IMedicalRecordExamAppService, MedicalRecordExamAppService>();
             services.AddTransient<IPatientRecordAppService, PatientRecordAppService>();
-            #endregion
+            services.AddTransient<IPatientAppService, PatientAppService>();
+            services.AddTransient<IReceptionAppService, ReceptionAppService>();
+            services.AddTransient<IServiceRequestAppService, ServiceRequestAppService>();
 
             #region Sys
             services.AddTransient<ISYSAutoNumberAppService, SYSAutoNumberAppService>();

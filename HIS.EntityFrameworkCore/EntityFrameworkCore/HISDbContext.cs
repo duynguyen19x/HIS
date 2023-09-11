@@ -6,7 +6,6 @@ using HIS.EntityFrameworkCore.Entities.Categories.Items;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.Systems;
-using HIS.EntityFrameworkCore.EntityFrameworkCore.Seed;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
@@ -52,6 +51,7 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<Unit> Units { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Province> Provinces { get; set; }
+        public DbSet<ReceptionType> ReceptionTypes { get; set; }
         public DbSet<District> Districts { get; set; }
         public DbSet<SWard> Wards { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
@@ -90,7 +90,7 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<Treatment> Treatments { get; set; }
 
         public DbSet<ServiceRequest> ServiceRequests { get; set; }
-        public DbSet<ServiceRequestDetail> ServiceRequestDetails { get; set; }
+        public DbSet<ServiceRequestServe> ServiceRequestServes { get; set; }
         #endregion
 
         #region System
