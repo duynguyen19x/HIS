@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HIS.Dtos.Business.ServiceReqServes
 {
-    public class PagedServiceReqServeRequestDto : PagedResultRequestDto
+    public class PagedServiceRequestServeInputDto : PagedResultRequestDto
     {
     }
 }

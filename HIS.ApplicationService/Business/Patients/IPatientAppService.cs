@@ -13,7 +13,7 @@ namespace HIS.ApplicationService.Business.Patients
     {
         Task<ResultDto<PatientDto>> CreateOrEdit(PatientDto input);
         Task<ResultDto<PatientDto>> Delete(Guid id);
-        Task<PagedResultDto<PatientDto>> GetAll(PagedPatientRequestDto input);
+        Task<PagedResultDto<PatientDto>> GetAll(PagedPatientInputDto input);
         Task<ResultDto<PatientDto>> GetById(Guid id);
     }
 }

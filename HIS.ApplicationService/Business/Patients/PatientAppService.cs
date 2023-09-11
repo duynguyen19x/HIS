@@ -100,7 +100,7 @@ namespace HIS.ApplicationService.Business.Patients
             });
         }
 
-        public virtual async Task<PagedResultDto<PatientDto>> GetAll(PagedPatientRequestDto input)
+        public virtual async Task<PagedResultDto<PatientDto>> GetAll(PagedPatientInputDto input)
         {
             var result = new PagedResultDto<PatientDto>();
             try

@@ -173,7 +173,7 @@ namespace HIS.ApplicationService.Business.Receptions
             throw new NotImplementedException();
         }
 
-        public virtual async Task<PagedResultDto<ReceptionDto>> GetAll(PagedReceptionRequestDto input)
+        public virtual async Task<PagedResultDto<ReceptionDto>> GetAll(PagedReceptionInputDto input)
         {
             var result = new PagedResultDto<ReceptionDto>();
             try

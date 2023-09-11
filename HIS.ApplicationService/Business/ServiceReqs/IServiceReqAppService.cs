@@ -8,7 +8,7 @@ namespace HIS.ApplicationService.Business.ServiceReqs
     {
         Task<ResultDto<ServiceReqDto>> CreateOrEdit(ServiceReqDto input);
         Task<ResultDto<ServiceReqDto>> Delete(Guid id);
-        Task<PagedResultDto<ServiceReqDto>> GetAll(PagedServiceReqRequestDto input);
+        Task<PagedResultDto<ServiceReqDto>> GetAll(PagedServiceRequestInputDto input);
         Task<ResultDto<ServiceReqDto>> GetById(Guid id);
     }
 }

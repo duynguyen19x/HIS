@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Business.ServiceReqs
+namespace HIS.Dtos.Business.Patients
 {
-    public class PagedServiceReqRequestDto : PagedResultRequestDto
+    public class PagedPatientInputDto : PagedResultRequestDto
     {
-
+        public virtual string CodeFilter { get; set; }
     }
 }

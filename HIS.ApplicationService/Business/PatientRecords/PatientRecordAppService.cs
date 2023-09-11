@@ -41,7 +41,7 @@ namespace HIS.ApplicationService.Business.PatientRecords
             throw new NotImplementedException();
         }
 
-        public virtual Task<PagedResultDto<PatientRecordDto>> GetAll(PagedPatientRecordRequestDto input)
+        public virtual Task<PagedResultDto<PatientRecordDto>> GetAll(PagedPatientRecordInputDto input)
         {
             throw new NotImplementedException();
         }

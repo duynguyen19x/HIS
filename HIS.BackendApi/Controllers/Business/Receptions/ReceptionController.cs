@@ -30,7 +30,7 @@ namespace HIS.BackendApi.Controllers.Business.Receptions
         }
 
         [HttpGet("GetAll")]
-        public async Task<PagedResultDto<ReceptionDto>> GetAll([FromQuery] PagedReceptionRequestDto input)
+        public async Task<PagedResultDto<ReceptionDto>> GetAll([FromQuery] PagedReceptionInputDto input)
         {
             input.ReceptionFromDate.Value.AddHours(7);
             return await _receptionAppService.GetAll(input);

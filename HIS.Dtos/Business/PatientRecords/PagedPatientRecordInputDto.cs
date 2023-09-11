@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HIS.Dtos.Business.PatientRecords
 {
-    public class PagedPatientRecordRequestDto : PagedResultRequestDto
+    public class PagedPatientRecordInputDto : PagedResultRequestDto
     {
         public virtual Guid? DepartmentId { get; set; }
         public virtual Guid? RoomId {  get; set; }

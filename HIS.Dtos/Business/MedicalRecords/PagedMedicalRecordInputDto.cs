@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HIS.Dtos.Business.MedicalRecords
 {
-    public class MedicalRecordRequestDto : PagedResultRequestDto
+    public class PagedMedicalRecordInputDto : PagedResultRequestDto
     {
     }
 }

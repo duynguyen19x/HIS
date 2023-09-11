@@ -14,7 +14,7 @@ namespace HIS.ApplicationService.Business.MedicalRecords
     {
         Task<ResultDto<MedicalRecordDto>> CreateOrEdit(MedicalRecordDto input);
         Task<ResultDto<MedicalRecordDto>> Delete(Guid id);
-        Task<PagedResultDto<MedicalRecordDto>> GetAll(MedicalRecordRequestDto input);
+        Task<PagedResultDto<MedicalRecordDto>> GetAll(PagedMedicalRecordInputDto input);
         Task<ResultDto<MedicalRecordDto>> GetById(Guid id);
     }
 }

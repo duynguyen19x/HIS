@@ -28,7 +28,7 @@ namespace HIS.ApplicationService.Business.MedicalRecords
             throw new NotImplementedException();
         }
 
-        public Task<PagedResultDto<MedicalRecordDto>> GetAll(MedicalRecordRequestDto input)
+        public Task<PagedResultDto<MedicalRecordDto>> GetAll(PagedMedicalRecordInputDto input)
         {
             throw new NotImplementedException();
         }

@@ -42,7 +42,7 @@ namespace HIS.ApplicationService.Business.ServiceReqs
             throw new NotImplementedException();
         }
 
-        public Task<PagedResultDto<ServiceReqDto>> GetAll(PagedServiceReqRequestDto input)
+        public Task<PagedResultDto<ServiceReqDto>> GetAll(PagedServiceRequestInputDto input)
         {
             throw new NotImplementedException();
         }
