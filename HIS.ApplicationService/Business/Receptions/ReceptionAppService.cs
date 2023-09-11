@@ -5,12 +5,12 @@ using HIS.Application.Core.Utils;
 using HIS.ApplicationService.Business.MedicalRecords;
 using HIS.ApplicationService.Business.PatientRecords;
 using HIS.ApplicationService.Business.Patients;
-using HIS.ApplicationService.Business.ServiceReqs;
+using HIS.ApplicationService.Business.ServiceRequests;
 using HIS.Core.Linq;
 using HIS.Dtos.Business.PatientRecords;
 using HIS.Dtos.Business.Patients;
 using HIS.Dtos.Business.Receptions;
-using HIS.Dtos.Business.ServiceReqs;
+using HIS.Dtos.Business.ServiceRequests;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -23,21 +23,25 @@ namespace HIS.ApplicationService.Business.Receptions
     {
         private readonly IPatientAppService _patientAppService;
         private readonly IPatientRecordAppService _patientRecordAppService;
-        private readonly IServiceReqAppService _serviceReqAppService;
+        private readonly IMedicalRecordAppService _medicalRecordAppService;
+        private readonly IMedicalRecordExamAppService _medicalRecordExamAppService;
+        private readonly IServiceRequestAppService _serviceRequestAppService;
 
         public ReceptionAppService(
             IMedicalRecordAppService medicalRecordAppService,
             IMedicalRecordExamAppService medicalRecordExamAppService,
             IPatientAppService patientAppService,
             IPatientRecordAppService patientRecordAppService,
-            IServiceReqAppService serviceReqAppService,
+            IServiceRequestAppService serviceReqAppService,
             HISDbContext context,
             IMapper mapper) 
             : base(context, mapper)
         {
             _patientAppService = patientAppService;
             _patientRecordAppService = patientRecordAppService;
-            _serviceReqAppService = serviceReqAppService;
+            _medicalRecordAppService = medicalRecordAppService;
+            _medicalRecordExamAppService = medicalRecordExamAppService;
+            _serviceRequestAppService = serviceReqAppService;
         }
 
 
@@ -124,8 +128,8 @@ namespace HIS.ApplicationService.Business.Receptions
                         input.PatientRecordId = resultCreateOrEditPatientRecord.Item.Id;
                         input.PatientRecordCode = resultCreateOrEditPatientRecord.Item.Code;
 
-                        var serviceReq = ObjectMapper.Map<ServiceReqDto>(input);
-                        var resultCreateOrEditServiceReq = await _serviceReqAppService.CreateOrEdit(serviceReq);
+                        var serviceReq = ObjectMapper.Map<ServiceRequestDto>(input);
+                        var resultCreateOrEditServiceReq = await _serviceRequestAppService.CreateOrEdit(serviceReq);
                         if (resultCreateOrEditServiceReq.IsSuccessed)
                         {
                             //input.ServiceId =

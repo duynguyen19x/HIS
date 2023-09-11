@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Business.ServiceReqs
+namespace HIS.Dtos.Business.ServiceRequestServes
 {
-    public class PagedServiceRequestInputDto : PagedResultRequestDto
+    public class ServiceRequestServeDto : EntityDto<Guid>
     {
-
     }
 }
