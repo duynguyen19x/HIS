@@ -20,7 +20,7 @@ namespace HIS.ApplicationService.Business.PatientRecords
 
         public virtual async Task<ResultDto<PatientRecordDto>> CreateOrEdit(PatientRecordDto input)
         {
-            if (DataHelper.IsNullOrDefault(input.PatientRecordId))
+            if (DataHelper.IsNullOrDefault(input.Id))
                 return await Create(input);
             else
                 return await Update(input); 
@@ -41,7 +41,7 @@ namespace HIS.ApplicationService.Business.PatientRecords
             throw new NotImplementedException();
         }
 
-        public virtual Task<PagedResultDto<PatientRecordDto>> GetAll(PatientRecordRequestDto input)
+        public virtual Task<PagedResultDto<PatientRecordDto>> GetAll(PagedPatientRecordRequestDto input)
         {
             throw new NotImplementedException();
         }

@@ -36,6 +36,7 @@ using HIS.ApplicationService.Systems.Login;
 using HIS.ApplicationService.Systems.Role;
 using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
+using HIS.ApplicationService.Business.ServiceReqs;
 
 namespace HIS.ApplicationService
 {
@@ -85,6 +86,7 @@ namespace HIS.ApplicationService
             services.AddTransient<IPatientRecordAppService, PatientRecordAppService>();
             services.AddTransient<IPatientAppService, PatientAppService>();
             services.AddTransient<IReceptionAppService, ReceptionAppService>();
+            services.AddTransient<IServiceReqAppService, ServiceReqAppService>();
 
             #region Sys
             services.AddTransient<ISYSAutoNumberAppService, SYSAutoNumberAppService>();

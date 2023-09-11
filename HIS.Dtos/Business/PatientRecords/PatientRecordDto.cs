@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace HIS.Dtos.Business.PatientRecords
 {
-    public class PatientRecordDto : EntityDto
+    public class PatientRecordDto : EntityDto<Guid>
     {
-        public virtual Guid PatientRecordId { get; set; }
-        public virtual string PatientRecordCode { get; set; }
+        public virtual string Code { get; set; }
         public virtual Guid PatientId { get; set; }
         public virtual string PatientCode { get; set; }
         public virtual string PatientName { get; set; }

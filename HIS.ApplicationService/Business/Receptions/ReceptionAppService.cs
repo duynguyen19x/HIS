@@ -5,12 +5,17 @@ using HIS.Application.Core.Utils;
 using HIS.ApplicationService.Business.MedicalRecords;
 using HIS.ApplicationService.Business.PatientRecords;
 using HIS.ApplicationService.Business.Patients;
+using HIS.ApplicationService.Business.ServiceReqs;
 using HIS.Core.Linq;
 using HIS.Dtos.Business.PatientRecords;
 using HIS.Dtos.Business.Patients;
 using HIS.Dtos.Business.Receptions;
+using HIS.Dtos.Business.ServiceReqs;
+using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,17 +31,21 @@ namespace HIS.ApplicationService.Business.Receptions
     {
         private readonly IPatientAppService _patientAppService;
         private readonly IPatientRecordAppService _patientRecordAppService;
+        private readonly IServiceReqAppService _serviceReqAppService;
+
         public ReceptionAppService(
             IMedicalRecordAppService medicalRecordAppService,
             IMedicalRecordExamAppService medicalRecordExamAppService,
             IPatientAppService patientAppService,
             IPatientRecordAppService patientRecordAppService,
+            IServiceReqAppService serviceReqAppService,
             HISDbContext context,
             IMapper mapper) 
             : base(context, mapper)
         {
             _patientAppService = patientAppService;
             _patientRecordAppService = patientRecordAppService;
+            _serviceReqAppService = serviceReqAppService;
         }
 
 
@@ -48,63 +57,123 @@ namespace HIS.ApplicationService.Business.Receptions
                 return await Update(input);
         }
 
-        public async Task<ResultDto<ReceptionDto>> Create(ReceptionDto input)
+        public async Task<ResultDto<ReceptionDto>> Create(ReceptionDto input) => await BeginTransactionAsync<ResultDto<ReceptionDto>>(async result =>
         {
-            var result = new ResultDto<ReceptionDto>();
             try
             {
                 // 1. thêm mới hoặc cập nhật thông tin định danh bệnh nhân (Patient)
                 // 2. thêm mới thông tin điều trị (PatientRecord)
                 // 3. thêm mới thông tin đăng ký dịch vụ khám (ServiceReq và ServiceReqServe).
                 var patient = ObjectMapper.Map<PatientDto>(input);
-                var resultCreateOrEditPatientResult = await _patientAppService.CreateOrEdit(patient);
-                if (resultCreateOrEditPatientResult.IsSuccessed)
+                var resultCreateOrEditPatient = await _patientAppService.CreateOrEdit(patient);
+                if (resultCreateOrEditPatient.IsSuccessed)
                 {
-                    input.PatientId = resultCreateOrEditPatientResult.Item.Id;
-                    input.PatientCode = resultCreateOrEditPatientResult.Item.Code;
+                    input.PatientId = resultCreateOrEditPatient.Item.Id;
+                    input.PatientCode = resultCreateOrEditPatient.Item.Code;
 
-                    var patientRecord = ObjectMapper.Map<PatientRecordDto>(input);
-                    var resultCreateOrEditPatientRecordResult = await _patientRecordAppService.CreateOrEdit(patientRecord);
-                    if (resultCreateOrEditPatientRecordResult.IsSuccessed)
-                    {
+                    //var patientRecord = ObjectMapper.Map<PatientRecordDto>(input);
+                    //var resultCreateOrEditPatientRecord = await _patientRecordAppService.CreateOrEdit(patientRecord);
+                    //if (resultCreateOrEditPatientRecord.IsSuccessed)
+                    //{
+                    //    input.PatientRecordId = resultCreateOrEditPatientRecord.Item.Id;
+                    //    input.PatientRecordCode = resultCreateOrEditPatientRecord.Item.Code;
 
-
-
-
-                    }    
-                    else
-                    {
-                        result.IsSuccessed = false;
-                        result.Message = resultCreateOrEditPatientResult.Message;
-                        result.Errors = resultCreateOrEditPatientResult.Errors;
-                    }    
-                }  
+                    //    var serviceReq = ObjectMapper.Map<ServiceReqDto>(input);
+                    //    var resultCreateOrEditServiceReq = await _serviceReqAppService.CreateOrEdit(serviceReq);
+                    //    if (resultCreateOrEditServiceReq.IsSuccessed)
+                    //    {
+                    //        //input.ServiceId =
+                    //    }
+                    //    else
+                    //    {
+                    //        result.IsSuccessed = false;
+                    //        result.Message = resultCreateOrEditServiceReq.Message;
+                    //        result.Errors = resultCreateOrEditServiceReq.Errors;
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    result.IsSuccessed = false;
+                    //    result.Message = resultCreateOrEditPatientRecord.Message;
+                    //    result.Errors = resultCreateOrEditPatientRecord.Errors;
+                    //}
+                }
                 else
                 {
                     result.IsSuccessed = false;
-                    result.Message = resultCreateOrEditPatientResult.Message;
-                    result.Errors = resultCreateOrEditPatientResult.Errors;
-                }    
+                    result.Message = resultCreateOrEditPatient.Message;
+                    result.Errors = resultCreateOrEditPatient.Errors;
+                }
+
+                await SaveChangesAsync();
             }
             catch (Exception ex)
             {
                 result.Exception(ex);
+                throw;
             }
+        });
 
-            return result;
-        }
-
-        public Task<ResultDto<ReceptionDto>> Update(ReceptionDto input)
+        public async Task<ResultDto<ReceptionDto>> Update(ReceptionDto input) => await BeginTransactionAsync<ResultDto<ReceptionDto>>(async result =>
         {
-            throw new NotImplementedException();
-        }
+            try
+            {
+                var patient = ObjectMapper.Map<PatientDto>(input);
+                var resultCreateOrEditPatient = await _patientAppService.CreateOrEdit(patient);
+                if (resultCreateOrEditPatient.IsSuccessed)
+                {
+                    input.PatientId = resultCreateOrEditPatient.Item.Id;
+                    input.PatientCode = resultCreateOrEditPatient.Item.Code;
+
+                    var patientRecord = ObjectMapper.Map<PatientRecordDto>(input);
+                    var resultCreateOrEditPatientRecord = await _patientRecordAppService.CreateOrEdit(patientRecord);
+                    if (resultCreateOrEditPatientRecord.IsSuccessed)
+                    {
+                        input.PatientRecordId = resultCreateOrEditPatientRecord.Item.Id;
+                        input.PatientRecordCode = resultCreateOrEditPatientRecord.Item.Code;
+
+                        var serviceReq = ObjectMapper.Map<ServiceReqDto>(input);
+                        var resultCreateOrEditServiceReq = await _serviceReqAppService.CreateOrEdit(serviceReq);
+                        if (resultCreateOrEditServiceReq.IsSuccessed)
+                        {
+                            //input.ServiceId =
+                        }
+                        else
+                        {
+                            result.IsSuccessed = false;
+                            result.Message = resultCreateOrEditServiceReq.Message;
+                            result.Errors = resultCreateOrEditServiceReq.Errors;
+                        }
+                    }
+                    else
+                    {
+                        result.IsSuccessed = false;
+                        result.Message = resultCreateOrEditPatientRecord.Message;
+                        result.Errors = resultCreateOrEditPatientRecord.Errors;
+                    }
+                }
+                else
+                {
+                    result.IsSuccessed = false;
+                    result.Message = resultCreateOrEditPatient.Message;
+                    result.Errors = resultCreateOrEditPatient.Errors;
+                }
+
+                await SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                result.Exception(ex);
+                throw;
+            }
+        });
 
         public Task<ResultDto<ReceptionDto>> Delete(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public virtual async Task<PagedResultDto<ReceptionDto>> GetAll(ReceptionRequestDto input)
+        public virtual async Task<PagedResultDto<ReceptionDto>> GetAll(PagedReceptionRequestDto input)
         {
             var result = new PagedResultDto<ReceptionDto>();
             try

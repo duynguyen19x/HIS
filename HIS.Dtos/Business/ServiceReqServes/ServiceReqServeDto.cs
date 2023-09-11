@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Business.Patients
+namespace HIS.Dtos.Business.ServiceReqServes
 {
-    public class PatientRequestDto : PagedResultRequestDto
+    public class ServiceReqServeDto : EntityDto<Guid>
     {
-        public virtual string CodeFilter { get; set; }
     }
 }

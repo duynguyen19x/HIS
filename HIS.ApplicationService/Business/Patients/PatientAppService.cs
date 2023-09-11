@@ -26,7 +26,7 @@ namespace HIS.ApplicationService.Business.Patients
 
         public virtual async Task<ResultDto<PatientDto>> CreateOrEdit(PatientDto input)
         {
-            if (DataHelper.IsNullOrDefault(input.PatientId))
+            if (DataHelper.IsNullOrDefault(input.Id))
                 return await Create(input);
             else
                 return await Update(input);
@@ -38,13 +38,13 @@ namespace HIS.ApplicationService.Business.Patients
             {
                 try
                 {
-                    input.PatientId = Guid.NewGuid();
-                    if (DataHelper.IsNullOrDefault(input.PatientCode))
-                        input.PatientCode = "BN" + String.Format("{0:00000}", Context.Patients.Count() + 1);
+                    input.Id = Guid.NewGuid();
+                    if (DataHelper.IsNullOrDefault(input.Code))
+                        input.Code = "BN" + String.Format("{0:00000}", Context.Patients.Count() + 1);
 
                     var patient = ObjectMapper.Map<Patient>(input);
                     patient.CreatedDate = DateTime.Now;
-                    patient.CreatedBy = SessionExtensions.Login.Id;
+                    patient.CreatedBy = SessionExtensions.Login?.Id;
 
                     Context.Patients.Add(patient);
 
@@ -66,7 +66,7 @@ namespace HIS.ApplicationService.Business.Patients
                 {
                     var patient = ObjectMapper.Map<Patient>(input);
                     patient.ModifiedDate = DateTime.Now;
-                    patient.ModifiedBy = SessionExtensions.Login.Id;
+                    patient.ModifiedBy = SessionExtensions.Login?.Id;
 
                     Context.Patients.Update(patient);
 
@@ -100,7 +100,7 @@ namespace HIS.ApplicationService.Business.Patients
             });
         }
 
-        public virtual async Task<PagedResultDto<PatientDto>> GetAll(PatientRequestDto input)
+        public virtual async Task<PagedResultDto<PatientDto>> GetAll(PagedPatientRequestDto input)
         {
             var result = new PagedResultDto<PatientDto>();
             try

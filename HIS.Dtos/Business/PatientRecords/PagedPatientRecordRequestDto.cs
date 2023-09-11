@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Business.Receptions
+namespace HIS.Dtos.Business.PatientRecords
 {
-    public class ReceptionRequestDto : PagedResultRequestDto
+    public class PagedPatientRecordRequestDto : PagedResultRequestDto
     {
         public virtual Guid? DepartmentId { get; set; }
-        public virtual Guid? RoomId { get; set; }
+        public virtual Guid? RoomId {  get; set; }
         public virtual DateTime? ReceptionFromDate { get; set; }
         public virtual DateTime? ReceptionToDate { get; set; }
     }
