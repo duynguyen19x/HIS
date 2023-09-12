@@ -18,38 +18,18 @@ namespace HIS.Core.Repositories
         private readonly TDbContext _dbContext;
         private readonly DbSet<TEntity> _dbSet;
 
-        //
-        // Summary:
-        //     Constructor
-        //
-        // Parameters:
-        //   dbContextProvider:
         public Repository(TDbContext dbContext)
         {
             _dbContext = dbContext;
             _dbSet = _dbContext.Set<TEntity>();
         }
 
-        public virtual IQueryable<TEntity> GetAll()
-        {
-            return GetTable().AsQueryable();
-        }
-        public virtual List<TEntity> GetAllList()
-        {
-            return _dbSet.ToList();
-        }
-        public virtual List<TEntity> GetAllList(Expression<Func<TEntity, bool>> predicate)
-        {
-            return _dbSet.Where(predicate).ToList();
-        }
-        public virtual async Task<List<TEntity>> GetAllListAsync()
-        {
-            return await _dbSet.ToListAsync().ConfigureAwait(continueOnCapturedContext: false);
-        }
-        public virtual async Task<List<TEntity>> GetAllListAsync(Expression<Func<TEntity, bool>> predicate)
-        {
-            return await _dbSet.Where(predicate).ToListAsync().ConfigureAwait(continueOnCapturedContext: false);
-        }
+        public virtual IQueryable<TEntity> GetAll() => _dbSet.AsQueryable();
+
+        public virtual List<TEntity> GetAllList() => _dbSet.ToList();
+        public virtual async Task<List<TEntity>> GetAllListAsync() => await _dbSet.ToListAsync().ConfigureAwait(continueOnCapturedContext: false);
+        public virtual List<TEntity> GetAllList(Expression<Func<TEntity, bool>> predicate) => _dbSet.Where(predicate).ToList();
+        public virtual async Task<List<TEntity>> GetAllListAsync(Expression<Func<TEntity, bool>> predicate) => await _dbSet.Where(predicate).ToListAsync().ConfigureAwait(continueOnCapturedContext: false);
 
 
         public virtual TEntity Get(TPrimaryKey id)
