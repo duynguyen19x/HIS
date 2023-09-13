@@ -5,7 +5,7 @@ using HIS.Utilities.Enums;
 
 namespace HIS.Dtos.Business.ItemStocks
 {
-    public class ItemStockDto : EntityDto<Guid?>
+    public class ItemStockDto : ItemDto//EntityDto<Guid?>
     {
         public Guid? StockId { get; set; }
         public Guid? ItemId { get; set; }
@@ -25,8 +25,6 @@ namespace HIS.Dtos.Business.ItemStocks
 
         public string ItemCode { get; set; }
         public string ItemName { get; set; }
-
-        public CommodityTypes CommodityType { get; set; }
 
         public ItemDto Item { get; set; }
         public RoomDto Stock { get; set; }
