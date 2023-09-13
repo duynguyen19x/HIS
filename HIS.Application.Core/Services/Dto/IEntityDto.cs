@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace HIS.Application.Core.Services.Dto
 {
-    public interface IEntityDto<TPrimaryKey>
+    public interface IEntityDto
+    {
+
+    }
+
+    public interface IEntityDto<TPrimaryKey> : IEntityDto
     {
         TPrimaryKey Id { get; set; }
     }

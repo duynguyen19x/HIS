@@ -293,6 +293,10 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
                 try
                 {
                     var ItemTypes = _mapper.Map<List<EntityFrameworkCore.Entities.Categories.ItemType>>(input);
+                    //foreach (var item in ItemTypes)
+                    //{
+                    //    item.
+                    //}
                     _dbContext.ItemTypes.AddRange(ItemTypes);
                     await _dbContext.SaveChangesAsync();
                     transaction.Commit();

@@ -23,6 +23,7 @@ namespace HIS.EntityFrameworkCore.Data
             ItemLineBuilder.Seed(modelBuilder);
             InOutStockTypeBuilder.Seed(modelBuilder);
             ProvinceBuilder.Seed(modelBuilder);
+            ReceptionTypeBuilder.Seed(modelBuilder);
 
             PatientTypeBuilder.Seed(modelBuilder);
             PatientRecordTypeBuilder.Seed(modelBuilder);

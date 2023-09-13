@@ -35,6 +35,9 @@ using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Items;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.Dtos.Business.Patients;
+using HIS.Dtos.Business.PatientRecords;
+using HIS.Dtos.Business.Receptions;
 
 namespace HIS.AutoMappers
 {
@@ -146,13 +149,22 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.Stock, opt => opt.Ignore())
                 .ReverseMap();
 
-            CreateMap<PatientDto, Patient>().ReverseMap();
-            CreateMap<PatientRecordDto, PatientRecord>().ReverseMap();
-            CreateMap<PatientRecordDto, PatientDto>()
+
+            CreateMap<ReceptionDto, PatientDto>()
                 .ForMember(d => d.Id, o => o.MapFrom(s => s.PatientId))
                 .ForMember(d => d.Code, o => o.MapFrom(s => s.PatientCode))
                 .ForMember(d => d.Name, o => o.MapFrom(s => s.PatientName))
                 .ReverseMap();
+            CreateMap<ReceptionDto, Patient>()
+                .ForMember(d => d.Id, o => o.MapFrom(s => s.PatientId))
+                .ForMember(d => d.Code, o => o.MapFrom(s => s.PatientCode))
+                .ForMember(d => d.Name, o => o.MapFrom(s => s.PatientName))
+                .ReverseMap();
+            CreateMap<ReceptionDto, PatientRecordDto>().ReverseMap();
+            CreateMap<ReceptionDto, PatientRecord>().ReverseMap();
+            
+            CreateMap<PatientDto, Patient>().ReverseMap();
+            CreateMap<PatientRecordDto, PatientRecord>().ReverseMap();
         }
     }
 }
