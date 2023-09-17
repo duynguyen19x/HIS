@@ -15,4 +15,8 @@
     <Folder Include="Utils\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HIS.Utilities\HIS.Utilities.csproj" />
+  </ItemGroup>
+
 </Project>
