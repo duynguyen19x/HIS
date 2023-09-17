@@ -15,6 +15,9 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         [Description("Thuốc")]
         public Guid? ItemId { get; set; }
 
+        [Description("Thuốc")]
+        public Guid? ItemTypeId { get; set; }
+
         [Description("Giá nhập")]
         public decimal? ImpPrice { get; set; }
 
@@ -34,5 +37,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public InOutStock InOutStock { get; set; }
         [Ignore]
         public Item Item { get; set; }
+        [Ignore]
+        public ItemType ItemType { get; set; }
     }
 }

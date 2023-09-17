@@ -176,7 +176,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
                         StockId = s.Key.StockId,
                         StockCode = s.Key.StockCode,
                         StockName = s.Key.StockName,
-                        ItemId = s.Key.ItemTypeId,
+                        ItemId = s.FirstOrDefault().ItemId,
                         ItemCode = s.Key.ItemCode,
                         ItemName = s.Key.ItemName,
                         Code = s.Key.ItemCode,

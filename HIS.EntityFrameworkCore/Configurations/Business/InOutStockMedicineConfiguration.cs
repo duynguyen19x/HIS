@@ -1,4 +1,5 @@
 ﻿using HIS.EntityFrameworkCore.Entities.Business;
+using HIS.EntityFrameworkCore.Entities.Categories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -18,6 +19,10 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
             builder.HasOne(e => e.Item)
                .WithMany()
                .HasForeignKey(e => e.ItemId);
+
+            builder.HasOne(e => e.ItemType)
+               .WithMany()
+               .HasForeignKey(e => e.ItemTypeId);
         }
     }
 }
