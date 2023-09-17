@@ -293,13 +293,26 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
             {
                 try
                 {                    
-                    var units = _mapper.Map<List<EntityFrameworkCore.Entities.Dictionaries.Unit>>(_dbContext.Units);
+                    var units = _mapper.Map<List<EntityFrameworkCore.Entities.Dictionaries.Unit>>(_dbContext.Units).OrderBy(o => o.Code);
+                    var itemGroups = _mapper.Map<List<EntityFrameworkCore.Entities.Categories.ItemGroup>>(_dbContext.ItemGroups).OrderBy(o => o.Code);
+                    var itemLines = _mapper.Map<List<EntityFrameworkCore.Entities.Categories.ItemLine>>(_dbContext.ItemLines).OrderBy(o => o.Code);
+                    var serviceGroupHeIns = _mapper.Map<List<EntityFrameworkCore.Entities.Categories.Services.ServiceGroupHeIn>>(_dbContext.ServiceGroupHeIns).OrderBy(o => o.Code);
                     foreach (var item in input)
                     {
-                        if (item.Code != null && units != null)
-                        {
-                            item.UnitId = units.FirstOrDefault(f => f.Code.ToUpper() == item.Code.ToUpper())?.Id;
-                        }
+                        //Đơn vị tính
+                        if (!string.IsNullOrEmpty(item.UnitCode))
+                            item.UnitId = units?.FirstOrDefault(f => f.Code.ToUpper() == item.Code.ToUpper())?.Id;
+                        else
+                            item.UnitId = units?.FirstOrDefault()?.Id;
+                        //Nhóm thuốc
+                        if (item.ItemGroupId == null)                            
+                            item.ItemGroupId = itemGroups?.FirstOrDefault()?.Id;
+                        //Nhóm bảo hiểm
+                        if (item.ServiceGroupHeInId == null)
+                            item.ServiceGroupHeInId = serviceGroupHeIns?.FirstOrDefault()?.Id;
+                        //Đường dùng
+                        if (item.ItemLineId == null)
+                            item.ItemLineId = itemLines?.FirstOrDefault()?.Id;
                     }
                     var ItemTypes = _mapper.Map<List<EntityFrameworkCore.Entities.Categories.ItemType>>(input);
                     _dbContext.ItemTypes.AddRange(ItemTypes);
