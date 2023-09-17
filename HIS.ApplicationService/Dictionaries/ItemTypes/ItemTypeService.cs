@@ -191,7 +191,8 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
             try
             {
                 result.Result = (from medi in _dbContext.ItemTypes
-                                 join unit in _dbContext.Units on medi.UnitId equals unit.Id
+                                 join unit in _dbContext.Units on medi.UnitId equals unit.Id into units
+                                 from u in units.DefaultIfEmpty()
                                  where medi.IsDeleted == false
                                  select new ItemTypeDto()
                                  {
@@ -207,8 +208,8 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
                                      ItemGroupId = medi.ItemGroupId, // Nhóm thuốc
                                      ServiceGroupHeInId = medi.ServiceGroupHeInId, // Nhóm thuốc
                                      UnitId = medi.UnitId, // Đơn vị tính
-                                     UnitCode = unit.Code, // Đơn vị tính
-                                     UnitName = unit.Name, // Đơn vị tính
+                                     UnitCode = u.Code, // Đơn vị tính
+                                     UnitName = u.Name, // Đơn vị tính
                                      Tutorial = medi.Tutorial, // Hướng dẫn
                                      ActiveSubstance = medi.ActiveSubstance, // Hoạt chất
                                      Concentration = medi.Concentration, // Nồng độ
@@ -291,12 +292,16 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
-                {
+                {                    
+                    var units = _mapper.Map<List<EntityFrameworkCore.Entities.Dictionaries.Unit>>(_dbContext.Units);
+                    foreach (var item in input)
+                    {
+                        if (item.Code != null && units != null)
+                        {
+                            item.UnitId = units.FirstOrDefault(f => f.Code.ToUpper() == item.Code.ToUpper())?.Id;
+                        }
+                    }
                     var ItemTypes = _mapper.Map<List<EntityFrameworkCore.Entities.Categories.ItemType>>(input);
-                    //foreach (var item in ItemTypes)
-                    //{
-                    //    item.
-                    //}
                     _dbContext.ItemTypes.AddRange(ItemTypes);
                     await _dbContext.SaveChangesAsync();
                     transaction.Commit();
