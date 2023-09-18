@@ -103,7 +103,6 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
                                      join itemType in _dbContext.ItemTypes on item.ItemTypeId equals itemType.Id
 
                                      where itemStock.IsDeleted == false
-                                        && itemStock.AvailableQuantity > 0
                                         && itemStock.StockId == stockId
 
                                      select new ItemStockDto()
@@ -149,6 +148,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
                                          TenderYear = item.TenderYear,
                                      })
                          .WhereIf(true, w => w.StockId == stockId)
+                         .WhereIf(isGroup, w => w.AvailableQuantity > 0)
                          .WhereIf(commodityType != null, w => w.CommodityType == commodityType)
                          .OrderBy(o => o.ItemCode).ThenBy(t => t.DueDate).ToList(); // ToList() tại đây vì trong GroupBy mà có FirstOrDefault Sql build ra rất dài
 
