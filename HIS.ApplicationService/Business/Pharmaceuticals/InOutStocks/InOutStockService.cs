@@ -746,6 +746,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                         ItemGroupId = s.Key.ItemGroupId,
                                         UnitId = s.Key.UnitId,
 
+                                        ItemId = s.Max(m => m.ItemId),
+                                        Code = s.Max(m => m.Code),
+                                        Name = s.Max(m => m.Name),
                                         CountryId = s.FirstOrDefault().CountryId,
                                         Tutorial = s.FirstOrDefault().Tutorial,
                                         ImpPrice = s.FirstOrDefault().ImpPrice,
@@ -1351,7 +1354,6 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
             using (var transaction = _dbContext.BeginTransaction())
             {
                 var dateNow = DateTime.Now;
-                var id = Guid.NewGuid();
 
                 input.InOutStockTypeId = (int)Utilities.Enums.InOutStockType.ImportFromAnotherStock;
 
@@ -1362,7 +1364,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                         var inOutStockItems = new List<InOutStockItem>();
 
                         var inOutStock = _mapper.Map<InOutStock>(input);
-                        inOutStock.Id = id;
+                        inOutStock.Id = Guid.NewGuid();
 
                         switch (input.Status)
                         {
@@ -1372,7 +1374,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     {
                                         var inOutStockItem = _mapper.Map<InOutStockItem>(inOutStockItemDto);
                                         inOutStockItem.Id = Guid.NewGuid();
-                                        inOutStockItem.InOutStockId = id;
+                                        inOutStockItem.InOutStockId = inOutStock.Id;
 
                                         inOutStockItems.Add(inOutStockItem);
                                     }
@@ -1395,6 +1397,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                                              Id = itemStock.Id,
                                                              StockId = itemStock.StockId,
                                                              ItemId = itemStock.ItemId,
+                                                             Code = item.Code,
                                                              AvailableQuantity = itemStock.AvailableQuantity,
                                                              Quantity = itemStock.Quantity,
                                                              ItemTypeId = item.ItemTypeId,
@@ -1402,7 +1405,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                                              ImpPrice = item.ImpPrice,
                                                              ImpVatRate = item.ImpVatRate,
                                                              ImpTaxRate = item.ImpTaxRate,
-                                                         }).WhereIf(itemTypeIds != null && itemTypeIds.Count > 0, w => itemTypeIds.Exists(e => e == w.ItemTypeId)).OrderBy(o => o.DueDate).ThenBy(t => t.Code).ToList();
+                                                             DueDate = item.DueDate,
+                                                         }).WhereIf(itemTypeIds != null && itemTypeIds.Count > 0, w => itemTypeIds.Contains(w.ItemTypeId)).OrderBy(o => o.DueDate).ThenBy(t => t.Code).ToList();
 
                                     foreach (var inOutStockItemDto in input.InOutStockItems)
                                     {
@@ -1416,8 +1420,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                                 var inOutStockItem = new InOutStockItem()
                                                 {
                                                     Id = Guid.NewGuid(),
-                                                    InOutStockId = id,
+                                                    InOutStockId = inOutStock.Id,
                                                     SortOrder = index,
+                                                    ItemTypeId = inOutStockItemDto.ItemTypeId
                                                 };
 
                                                 /* 
@@ -1432,7 +1437,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                                     inOutStockItem.ImpVatRate = itemStock.ImpVatRate;
                                                     inOutStockItem.ImpTaxRate = itemStock.ImpTaxRate;
                                                     inOutStockItem.RequestQuantity = inOutStockItemDto.RequestQuantity;
-                                                    inOutStockItem.ApprovedQuantity = inOutStockItemDto.ApprovedQuantity;
+                                                    inOutStockItem.ApprovedQuantity = inOutStockItemDto.RequestQuantity;
                                                 }
                                                 else
                                                 {
@@ -1440,12 +1445,17 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                                     inOutStockItem.ImpPrice = itemStock.ImpPrice;
                                                     inOutStockItem.ImpVatRate = itemStock.ImpVatRate;
                                                     inOutStockItem.ImpTaxRate = itemStock.ImpTaxRate;
-                                                    inOutStockItem.RequestQuantity = inOutStockItemDto.RequestQuantity;
+                                                    if (index < itemStockByItemTypes.Count - 1)
+                                                        inOutStockItem.RequestQuantity = itemStock.AvailableQuantity;
+                                                    else
+                                                        inOutStockItem.RequestQuantity = inOutStockItemDto.RequestQuantity;
                                                     inOutStockItem.ApprovedQuantity = itemStock.AvailableQuantity;
                                                 }
 
                                                 inOutStockItemDto.RequestQuantity -= inOutStockItem.ApprovedQuantity;
                                                 index += 1;
+
+                                                inOutStockItems.Add(inOutStockItem);
                                             }
                                         }
                                     }
@@ -1453,7 +1463,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
                                     #region Trừ khả dụng kho xuất
                                     var itemIds = inOutStockItems.Select(s => s.ItemId).ToList();
-                                    var itemStocks = _dbContext.ItemStocks.Where(w => w.StockId == input.ExpStockId && itemIds.Exists(e => e == w.ItemId)).ToList();
+                                    var itemStocks = _dbContext.ItemStocks.Where(w => w.StockId == input.ExpStockId && itemIds.Contains(w.ItemId)).ToList();
 
                                     foreach (var itemStock in itemStocks)
                                     {
@@ -1489,7 +1499,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     {
                                         var inOutStockItem = _mapper.Map<InOutStockItem>(inOutStockItemDto);
                                         inOutStockItem.Id = Guid.NewGuid();
-                                        inOutStockItem.InOutStockId = id;
+                                        inOutStockItem.InOutStockId = inOutStock.Id;
 
                                         inOutStockItems.Add(inOutStockItem);
                                     }
@@ -1535,10 +1545,10 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                         var itemStockByItemTypes = itemStockDtos.Where(w => w.ItemTypeId == inOutStockItemDto.ItemTypeId).ToList();
                                         if (itemStockByItemTypes != null && itemStockByItemTypes.Count() > 0)
                                         {
+                                            int index = 0;
+
                                             foreach (var itemStock in itemStockByItemTypes)
                                             {
-                                                int index = 0;
-
                                                 var inOutStockItem = new InOutStockItem()
                                                 {
                                                     Id = Guid.NewGuid(),
@@ -1567,7 +1577,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                                     inOutStockItem.ImpPrice = itemStock.ImpPrice;
                                                     inOutStockItem.ImpVatRate = itemStock.ImpVatRate;
                                                     inOutStockItem.ImpTaxRate = itemStock.ImpTaxRate;
-                                                    inOutStockItem.RequestQuantity = inOutStockItemDto.RequestQuantity;
+                                                    if (index < itemStockByItemTypes.Count - 1)
+                                                        inOutStockItem.RequestQuantity = itemStock.AvailableQuantity;
+                                                    else
+                                                        inOutStockItem.RequestQuantity = inOutStockItemDto.RequestQuantity;
+                                                    inOutStockItem.ApprovedQuantity = itemStock.AvailableQuantity;
                                                     inOutStockItem.ApprovedQuantity = itemStock.AvailableQuantity;
                                                 }
 
@@ -1764,7 +1778,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                             var inOutStockItem = inOutStockItems.FirstOrDefault(f => f.ItemId == item.ItemId);
                                             if (inOutStockItem != null)
                                             {
-                                                item.AvailableQuantity += inOutStockItem.ApprovedQuantity.GetValueOrDefault();
+                                                //item.AvailableQuantity += inOutStockItem.ApprovedQuantity.GetValueOrDefault();
                                                 item.Quantity += inOutStockItem.ApprovedQuantity.GetValueOrDefault();
                                             }
                                         }
