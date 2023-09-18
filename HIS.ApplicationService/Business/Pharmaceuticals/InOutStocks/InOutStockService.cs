@@ -1351,6 +1351,12 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         {
             var result = new ApiResult<InOutStockDto>();
 
+            result = await ImportFromAnotherStockValid(input);
+            if (!result.IsSuccessed)
+            {
+                return result;
+            }
+
             using (var transaction = _dbContext.BeginTransaction())
             {
                 var dateNow = DateTime.Now;
