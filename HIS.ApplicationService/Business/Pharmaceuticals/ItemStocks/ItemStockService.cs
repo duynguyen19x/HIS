@@ -91,7 +91,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<ItemStockDto>> GetItemStockByStocks(Guid stockId, CommodityTypes? commodityType, bool isGroup = false)
+        public async Task<ApiResultList<ItemStockDto>> GetItemStockByStocks(Guid stockId, CommodityTypes? commodityType, bool isGroup = false, bool isAvailableQuantity = false)
         {
             var result = new ApiResultList<ItemStockDto>();
 
@@ -148,7 +148,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
                                          TenderYear = item.TenderYear,
                                      })
                          .WhereIf(true, w => w.StockId == stockId)
-                         .WhereIf(isGroup, w => w.AvailableQuantity > 0)
+                         .WhereIf(isAvailableQuantity, w => w.AvailableQuantity >= 0)
+                         .WhereIf(!isAvailableQuantity, w => w.AvailableQuantity > 0)
                          .WhereIf(commodityType != null, w => w.CommodityType == commodityType)
                          .OrderBy(o => o.ItemCode).ThenBy(t => t.DueDate).ToList(); // ToList() tại đây vì trong GroupBy mà có FirstOrDefault Sql build ra rất dài
 
