@@ -191,7 +191,8 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
             try
             {
                 result.Result = (from medi in _dbContext.ItemTypes
-                                 join unit in _dbContext.Units on medi.UnitId equals unit.Id
+                                 join unit in _dbContext.Units on medi.UnitId equals unit.Id into units
+                                 from u in units.DefaultIfEmpty()
                                  where medi.IsDeleted == false
                                  select new ItemTypeDto()
                                  {
@@ -207,8 +208,8 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
                                      ItemGroupId = medi.ItemGroupId, // Nhóm thuốc
                                      ServiceGroupHeInId = medi.ServiceGroupHeInId, // Nhóm thuốc
                                      UnitId = medi.UnitId, // Đơn vị tính
-                                     UnitCode = unit.Code, // Đơn vị tính
-                                     UnitName = unit.Name, // Đơn vị tính
+                                     UnitCode = u.Code, // Đơn vị tính
+                                     UnitName = u.Name, // Đơn vị tính
                                      Tutorial = medi.Tutorial, // Hướng dẫn
                                      ActiveSubstance = medi.ActiveSubstance, // Hoạt chất
                                      Concentration = medi.Concentration, // Nồng độ
@@ -291,12 +292,29 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
-                {
+                {                    
+                    var units = _mapper.Map<List<EntityFrameworkCore.Entities.Dictionaries.Unit>>(_dbContext.Units).OrderBy(o => o.Code);
+                    var itemGroups = _mapper.Map<List<EntityFrameworkCore.Entities.Categories.ItemGroup>>(_dbContext.ItemGroups).OrderBy(o => o.Code);
+                    var itemLines = _mapper.Map<List<EntityFrameworkCore.Entities.Categories.ItemLine>>(_dbContext.ItemLines).OrderBy(o => o.Code);
+                    var serviceGroupHeIns = _mapper.Map<List<EntityFrameworkCore.Entities.Categories.Services.ServiceGroupHeIn>>(_dbContext.ServiceGroupHeIns).OrderBy(o => o.Code);
+                    foreach (var item in input)
+                    {
+                        //Đơn vị tính
+                        if (!string.IsNullOrEmpty(item.UnitCode))
+                            item.UnitId = units?.FirstOrDefault(f => f.Code.ToUpper() == item.Code.ToUpper())?.Id;
+                        else
+                            item.UnitId = units?.FirstOrDefault()?.Id;
+                        //Nhóm thuốc
+                        if (item.ItemGroupId == null)                            
+                            item.ItemGroupId = itemGroups?.FirstOrDefault()?.Id;
+                        //Nhóm bảo hiểm
+                        if (item.ServiceGroupHeInId == null)
+                            item.ServiceGroupHeInId = serviceGroupHeIns?.FirstOrDefault()?.Id;
+                        //Đường dùng
+                        if (item.ItemLineId == null)
+                            item.ItemLineId = itemLines?.FirstOrDefault()?.Id;
+                    }
                     var ItemTypes = _mapper.Map<List<EntityFrameworkCore.Entities.Categories.ItemType>>(input);
-                    //foreach (var item in ItemTypes)
-                    //{
-                    //    item.
-                    //}
                     _dbContext.ItemTypes.AddRange(ItemTypes);
                     await _dbContext.SaveChangesAsync();
                     transaction.Commit();

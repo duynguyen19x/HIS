@@ -112,23 +112,6 @@ namespace HIS.Dtos.Business.InOutStockItems
 
         public CommodityTypes CommodityType { get; set; }
 
-        public Guid? StockId { get; set; }
-        public string StockCode { get; set; }
-        public string StockName { get; set; }
-
-        public string ItemCode { get; set; }
-        public string ItemName { get; set; }
-
-        /// <summary>
-        /// Số lượng tồn kho
-        /// </summary>
-        public decimal Quantity { get; set; }
-
-        /// <summary>
-        /// Số lượng khả dụng
-        /// </summary>
-        public decimal AvailableQuantity { get; set; }
-
         #endregion
 
         public IList<ItemPricePolicyDto> ItemPricePolicies { get; set; }
