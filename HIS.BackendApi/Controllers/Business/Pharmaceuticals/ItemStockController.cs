@@ -30,9 +30,9 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
         }
 
         [HttpGet("GetItemStockByStocks")]
-        public async Task<ApiResultList<ItemStockDto>> GetItemStockByStocks(Guid stockId, CommodityTypes? commodityType, bool isGroup = false)
+        public async Task<ApiResultList<ItemStockDto>> GetItemStockByStocks(Guid stockId, CommodityTypes? commodityType, bool isGroup = false, bool isAvailableQuantity = false)
         {
-            return await _dItemStockService.GetItemStockByStocks(stockId, commodityType, isGroup);
+            return await _dItemStockService.GetItemStockByStocks(stockId, commodityType, isGroup, isAvailableQuantity);
         }
     }
 }
