@@ -17,7 +17,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
             builder.ToTable("MedicalRecord");
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(x => x.PatientRecordFk).WithMany().HasForeignKey(x => x.PatientRecordID).OnDelete(DeleteBehavior.Restrict);
+            //builder.HasOne(x => x.PatientRecordFk).WithMany().HasForeignKey(x => x.PatientRecordID).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

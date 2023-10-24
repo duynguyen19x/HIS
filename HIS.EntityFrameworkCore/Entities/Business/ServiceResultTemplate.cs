@@ -8,13 +8,11 @@ using System.Threading.Tasks;
 namespace HIS.EntityFrameworkCore.Entities.Business
 {
     /// <summary>
-    /// Bệnh án ra viện.
+    /// Mẫu kết quả thực hiện dịch vụ.
     /// </summary>
-    public class MedicalRecord_Discharge : AuditedEntity<Guid>
+    public class ServiceResultTemplate : AuditedEntity<Guid>
     {
-        public virtual Guid PatientRecordID { get; set; }
-        public virtual Guid MedicalRecordID { get; set; }
-
-
+        public Guid UserId { get; set; }
+        public Guid ServiceId { get; set; }
     }
 }

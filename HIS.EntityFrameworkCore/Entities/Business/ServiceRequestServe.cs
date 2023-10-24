@@ -7,19 +7,13 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Business
 {
-    /// <summary>
-    /// Chi tiết phiếu chỉ định dịch vụ
-    /// </summary>
-    public class ServiceRequestServe : AuditedEntity<Guid>
+    public class ServiceRequestServe : FullAuditedEntity<Guid>
     {
-        public virtual Guid ServiceRequestId { get; set; }
-        public virtual Guid ServiceId { get; set; }
-        public virtual string ServiceCode { get; set; }
-        public virtual string ServiceName { get; set; }
+        public Guid PatientId { get; set; }
+        public Guid PatientRecordId { get; set; }
+        public Guid MedicalRecordId { get; set; }
+        public Guid TreatmentId { get; set; }
 
-        public virtual decimal UnitPrice { get; set; }
-        public virtual decimal Quantity { get; set; }
-
-        public virtual string Description { get; set; }
+        public Guid ServiceId { get; set; }
     }
 }

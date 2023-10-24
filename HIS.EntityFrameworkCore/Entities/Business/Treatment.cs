@@ -13,9 +13,9 @@ namespace HIS.EntityFrameworkCore.Entities.Business
     /// </summary>
     public class Treatment : FullAuditedEntity<Guid>
     {
-        public Guid PatientID { get; set; }
-        public Guid PatientRecordID { get; set; }
-        public Guid MedicalRecordID { get; set; }
+        public Guid PatientId { get; set; }
+        public Guid PatientRecordId { get; set; }
+        public Guid MedicalRecordId { get; set; }
 
         public string TreatmentCode { get; set; } // mã điều trị
         public int TreatmentTypeID { get; set; } // loại điều trị
