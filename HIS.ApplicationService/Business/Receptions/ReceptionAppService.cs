@@ -175,8 +175,8 @@ namespace HIS.ApplicationService.Business.Receptions
             try
             {
                 var filter = Context.PatientRecords.AsQueryable()
-                    .WhereIf(input.DepartmentId != null, x => x.ReceptionDepartmentId == input.DepartmentId)
-                    .WhereIf(input.RoomId != null, x => x.ReceptionRoomId == input.RoomId)
+                    //.WhereIf(input.DepartmentId != null, x => x.ReceptionDepartmentId == input.DepartmentId)
+                    //.WhereIf(input.RoomId != null, x => x.ReceptionRoomId == input.RoomId)
                     .WhereIf(input.ReceptionFromDate != null, x => x.ReceptionDate >= input.ReceptionFromDate)
                     .WhereIf(input.ReceptionToDate != null, x => x.ReceptionDate <= input.ReceptionToDate);
 

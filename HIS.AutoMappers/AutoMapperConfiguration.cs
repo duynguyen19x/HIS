@@ -38,6 +38,7 @@ using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Dtos.Business.Patients;
 using HIS.Dtos.Business.PatientRecords;
 using HIS.Dtos.Business.Receptions;
+using HIS.Dtos.Dictionaries.ColumnTemplates;
 
 namespace HIS.AutoMappers
 {
@@ -165,6 +166,11 @@ namespace HIS.AutoMappers
             
             CreateMap<PatientDto, Patient>().ReverseMap();
             CreateMap<PatientRecordDto, PatientRecord>().ReverseMap();
+
+            #region
+            CreateMap<ColumnTemplateDto, ColumnTemplate>().ReverseMap();
+
+            #endregion
         }
     }
 }

@@ -13,7 +13,9 @@ namespace HIS.ApplicationService.Business.Patients
 {
     public class PatientAppService : BaseAppService, IPatientAppService
     {
-        public PatientAppService(HISDbContext context, IMapper mapper)
+        public PatientAppService(
+            HISDbContext context, 
+            IMapper mapper)
             : base(context, mapper)
         {
         }
@@ -30,10 +32,6 @@ namespace HIS.ApplicationService.Business.Patients
         {
             try
             {
-                // kiểm tra dữ liệu
-                if (DataHelper.IsNullOrDefault(input.Name))
-                    result.Error(nameof(PatientDto.Name), "Tên bệnh nhân không được bỏ trống!");
-
                 if (!result.HasErrors)
                 {
                     input.Id = Guid.NewGuid();
@@ -60,14 +58,6 @@ namespace HIS.ApplicationService.Business.Patients
         {
             try
             {
-                // kiểm tra dữ liệu
-                if (DataHelper.IsNullOrDefault(input.Code))
-                    result.Error(nameof(PatientDto.Code), "Mã bệnh nhân không được bỏ trống!");
-                if (DataHelper.IsNullOrDefault(input.Name))
-                    result.Error(nameof(PatientDto.Name), "Tên bệnh nhân không được bỏ trống!");
-                input.BloodTypeId = 0;
-                input.BloodRhTypeId = 0;
-
                 if (!result.HasErrors)
                 {
                     var patient = ObjectMapper.Map<Patient>(input);

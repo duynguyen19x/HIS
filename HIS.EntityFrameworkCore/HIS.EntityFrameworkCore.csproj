@@ -37,7 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="EntityFrameworkCore\Seeds\Systems\" />
+    <Folder Include="EntityFrameworkCore\Seeds\Dictionaries\" />
   </ItemGroup>
 
 </Project>

@@ -15,5 +15,12 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public Guid TreatmentId { get; set; }
 
         public Guid ServiceId { get; set; }
+        public string ServiceName { get; set; }
+        public decimal Quantity { get; set; }
+        public decimal Amount { get; set; }
+        public decimal UnitPrice { get; set; }
+
+
+        public string Description { get; set; }
     }
 }

@@ -3,12 +3,17 @@ using HIS.Core.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Business
 {
+    /// <summary>
+    /// Bệnh nhân.
+    /// </summary>
     public class Patient : FullAuditedEntity<Guid>
     {
         public string Code { get; set; }
@@ -33,25 +38,33 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public string IdentificationNumber { get; set; }
         public DateTime? IssueDate { get; set; }
         public string IssueBy { get; set; }
-
-        public Guid? RalativeTypeId { get; set; }
-        public string RelativeName { get; set; }
-        public string RelativeAddress { get; set; }
-        public string RelativeTel { get; set; }
-        public string RelativePhone { get; set; }
-        public string RelativeIdentificationNumber { get; set; }
-        public DateTime? RelativeIssueDate { get; set; }
-        public string RelativeIssueBy { get; set; }
-
         public string Description { get; set; }
 
         [Ignore]
         public Gender Gender { get; set; }
 
         [Ignore]
+        public Ethnic Ethnic { get; set; }
+
+        [Ignore]
         public BloodType BloodType { get; set; }
 
         [Ignore]
         public BloodTypeRh BloodTypeRh { get; set; }
+
+        [Ignore]
+        public Country Country { get; set; }
+
+        [Ignore]
+        public Province Province { get; set; }
+
+        [Ignore]
+        public District District { get; set; }
+
+        [Ignore]
+        public SWard Ward { get; set; }
+
+        [Ignore]
+        public Career Career { get; set; }
     }
 }

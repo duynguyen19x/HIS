@@ -83,6 +83,10 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<MedicalRecordResult> MedicalRecordResults { get; set; }
         public DbSet<MedicalRecordEndType> MedicalRecordEndTypes { get; set; }
 
+        #region - danh mục
+        public DbSet<ColumnTemplate> ColumnTemplates { get; set; }
+        #endregion
+
         #region Patient
         public DbSet<Patient> Patients { get; set; }
         public DbSet<PatientRecord> PatientRecords { get; set; }

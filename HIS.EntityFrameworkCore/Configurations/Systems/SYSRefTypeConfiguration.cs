@@ -20,7 +20,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Systems
             builder.Property(x => x.Description).HasMaxLength(255);
             builder.Property(x => x.RefTypeCategoryId).IsRequired();
 
-            builder.HasOne(t => t.RefTypeCategory).WithMany(pc => pc.RefTypes).HasForeignKey(pc => pc.RefTypeCategoryId).OnDelete(DeleteBehavior.Restrict);
+            //builder.HasOne(t => t.RefTypeCategory).WithMany(pc => pc.RefTypes).HasForeignKey(pc => pc.RefTypeCategoryId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

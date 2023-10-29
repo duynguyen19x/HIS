@@ -49,8 +49,10 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public int PatientRecordStatus { get; set; }
         public DateTime PatientRecordDate { get; set; }
         public string StoreCode { get; set; } // số lưu trữ
+        public DateTime? StoreTime { get; set; }
         public string InCode { get; set; } // số vào viện
-        public Guid? PatientId { get; set; } // thông tin điều trị chính (tách bệnh án)
+        public DateTime? InTime { get; set; }
+        public Guid? ParentId { get; set; } // thông tin điều trị chính (tách bệnh án)
 
         public DateTime ReceptionDate { get; set; }
         public string LyDoDenKham { get; set; }
