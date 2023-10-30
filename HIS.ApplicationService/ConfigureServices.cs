@@ -37,6 +37,7 @@ using HIS.ApplicationService.Systems.Role;
 using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
 using HIS.ApplicationService.Business.ServiceRequests;
+using HIS.ApplicationService.Dictionaries.ColumnTemplates;
 
 namespace HIS.ApplicationService
 {
@@ -87,6 +88,8 @@ namespace HIS.ApplicationService
             services.AddTransient<IPatientAppService, PatientAppService>();
             services.AddTransient<IReceptionAppService, ReceptionAppService>();
             services.AddTransient<IServiceRequestAppService, ServiceRequestAppService>();
+
+            services.AddTransient<IColumnTemplateAppService, ColumnTemplateAppService>();
 
             #region Sys
             services.AddTransient<ISYSAutoNumberAppService, SYSAutoNumberAppService>();

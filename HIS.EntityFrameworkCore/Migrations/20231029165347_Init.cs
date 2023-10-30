@@ -8,11 +8,51 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     /// <inheritdoc />
-    public partial class AddTable : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "BloodType",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    SortOrder = table.Column<int>(type: "int", nullable: false),
+                    Inactive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BloodType", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BloodTypeRh",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    SortOrder = table.Column<int>(type: "int", nullable: false),
+                    Inactive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BloodTypeRh", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Branchs",
                 columns: table => new
@@ -39,7 +79,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Name = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: true),
-                    Inactive = table.Column<bool>(type: "bit", nullable: false)
+                    Inactive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -62,6 +106,29 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ColumnTemplates",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TemplateName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RefType = table.Column<int>(type: "int", nullable: false),
+                    FieldName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FieldType = table.Column<int>(type: "int", nullable: false),
+                    Caption = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DefaultCaption = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TooltipText = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Visible = table.Column<bool>(type: "bit", nullable: false),
+                    VisibleIndex = table.Column<bool>(type: "bit", nullable: false),
+                    Width = table.Column<int>(type: "int", nullable: false),
+                    IsReadOnly = table.Column<bool>(type: "bit", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ColumnTemplates", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Countries",
                 columns: table => new
                 {
@@ -69,7 +136,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     HeInCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
-                    Inactive = table.Column<bool>(type: "bit", nullable: false)
+                    Inactive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -212,6 +283,34 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Insurance",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FromDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ToDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    MediOrgCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MediOrgName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LevelCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LiveAreaCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    HasBirthCertificate = table.Column<bool>(type: "bit", nullable: false),
+                    FreeCoPaidDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Join5YearDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    PatientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PatientRecordId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Insurance", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ItemGroups",
                 columns: table => new
                 {
@@ -220,7 +319,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Name = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: true),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    IsSystem = table.Column<bool>(type: "bit", nullable: false)
+                    IsSystem = table.Column<bool>(type: "bit", nullable: false),
+                    CommodityType = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -240,6 +340,26 @@ namespace HIS.EntityFrameworkCore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ItemLines", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MedicalRecord",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PatientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PatientRecordId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MedicalRecord", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -309,6 +429,66 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PatientRecord",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    BirthYear = table.Column<int>(type: "int", nullable: false),
+                    BirthPlace = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    GenderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EthnicId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BloodTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BloodTypeRhId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CountryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ProvinceOrCityId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DistrictId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    WardOrCommuneId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CareerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    WorkPlace = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Tel = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IdentificationNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IssueDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IssueBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RalativeTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    RelativeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RelativeAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RelativeTel = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RelativePhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RelativeIdentificationNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RelativeIssueDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RelativeIssueBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PatientTypeId = table.Column<int>(type: "int", nullable: false),
+                    PatientRecordType = table.Column<int>(type: "int", nullable: false),
+                    PatientRecordStatus = table.Column<int>(type: "int", nullable: false),
+                    PatientRecordDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StoreCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StoreTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    InCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    InTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ParentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ReceptionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LyDoDenKham = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PatientRecord", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PatientRecordTypes",
                 columns: table => new
                 {
@@ -327,30 +507,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PatientRecordTypes", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Patients",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
-                    BloodTypeID = table.Column<int>(type: "int", nullable: false),
-                    BloodRhID = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Patients", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -385,6 +541,27 @@ namespace HIS.EntityFrameworkCore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Permissions", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ReceptionType",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    SortOrder = table.Column<int>(type: "int", nullable: false),
+                    Inactive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReceptionType", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -451,42 +628,17 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ServiceRequestDetails",
+                name: "ServiceRequest",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ServiceID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ServiceRequestDetails", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ServiceRequests",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    GroupCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PatientID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PatientRecordID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MedicalRecordID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TreatmentID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BranchID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PatientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PatientRecordId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MedicalRecordId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TreatmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     RequestTime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RequestDepartmentID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RequestRoomID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ExecuteTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ExecuteDepartmentID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ExecuteRoomID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Status = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -497,7 +649,35 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ServiceRequests", x => x.Id);
+                    table.PrimaryKey("PK_ServiceRequest", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ServiceRequestServe",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PatientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PatientRecordId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MedicalRecordId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TreatmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ServiceName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    UnitPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ServiceRequestServe", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -561,9 +741,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PatientID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PatientRecordID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MedicalRecordID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PatientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PatientRecordId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MedicalRecordId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TreatmentCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TreatmentTypeID = table.Column<int>(type: "int", nullable: false),
                     TreatmentDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -1313,57 +1493,35 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PatientRecords",
+                name: "Patient",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    PatientID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PatientName = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     BirthYear = table.Column<int>(type: "int", nullable: false),
-                    BirthPlace = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    BirthPlace = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    GenderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    EthnicId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BloodTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BloodTypeRhId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CountryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ProvinceOrCityId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DistrictId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    WardOrCommuneId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
+                    CareerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    WorkPlace = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Tel = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     IdentificationNumber = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     IssueDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IssueBy = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    GenderID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    EthnicityID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CareerID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CountryID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CountryCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CountryName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProvinceID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ProvinceCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ProvinceName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DistrictID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DistrictCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DistrictName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    WardID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    WardCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    WardName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    Tel = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Mobile = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Fax = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    Workplace = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
-                    PatientTypeID = table.Column<int>(type: "int", nullable: false),
-                    PatientRecordTypeID = table.Column<int>(type: "int", nullable: false),
-                    PatientRecordStatusID = table.Column<int>(type: "int", nullable: false),
-                    ReceiptionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ReceiptionRoomID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ReceiptionDepartmentID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    IsEmergency = table.Column<bool>(type: "bit", nullable: false),
-                    HospitalizationReason = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    StartRoomID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    StartDepartmentID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    EndRoomID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    EndDepartmentID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    BranchID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    IssueBy = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     Description = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    Inactive = table.Column<bool>(type: "bit", nullable: false),
+                    ProvinceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    WardId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -1374,56 +1532,53 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PatientRecords", x => x.Id);
+                    table.PrimaryKey("PK_Patient", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PatientRecords_Branchs_BranchID",
-                        column: x => x.BranchID,
-                        principalTable: "Branchs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        name: "FK_Patient_BloodTypeRh_BloodTypeRhId",
+                        column: x => x.BloodTypeRhId,
+                        principalTable: "BloodTypeRh",
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_PatientRecords_Careers_CareerID",
-                        column: x => x.CareerID,
+                        name: "FK_Patient_BloodType_BloodTypeId",
+                        column: x => x.BloodTypeId,
+                        principalTable: "BloodType",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Patient_Careers_CareerId",
+                        column: x => x.CareerId,
                         principalTable: "Careers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PatientRecords_Countries_CountryID",
-                        column: x => x.CountryID,
+                        name: "FK_Patient_Countries_CountryId",
+                        column: x => x.CountryId,
                         principalTable: "Countries",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_PatientRecords_Districts_DistrictID",
-                        column: x => x.DistrictID,
+                        name: "FK_Patient_Districts_DistrictId",
+                        column: x => x.DistrictId,
                         principalTable: "Districts",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_PatientRecords_Ethnics_EthnicityID",
-                        column: x => x.EthnicityID,
+                        name: "FK_Patient_Ethnics_EthnicId",
+                        column: x => x.EthnicId,
                         principalTable: "Ethnics",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PatientRecords_Genders_GenderID",
-                        column: x => x.GenderID,
+                        name: "FK_Patient_Genders_GenderId",
+                        column: x => x.GenderId,
                         principalTable: "Genders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PatientRecords_Patients_PatientID",
-                        column: x => x.PatientID,
-                        principalTable: "Patients",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PatientRecords_Provinces_ProvinceID",
-                        column: x => x.ProvinceID,
+                        name: "FK_Patient_Provinces_ProvinceId",
+                        column: x => x.ProvinceId,
                         principalTable: "Provinces",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_PatientRecords_Wards_WardID",
-                        column: x => x.WardID,
+                        name: "FK_Patient_Wards_WardId",
+                        column: x => x.WardId,
                         principalTable: "Wards",
                         principalColumn: "Id");
                 });
@@ -1480,14 +1635,14 @@ namespace HIS.EntityFrameworkCore.Migrations
                         principalTable: "InOutStockTypes",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_InOutStocks_PatientRecords_PatientRecordId",
+                        name: "FK_InOutStocks_PatientRecord_PatientRecordId",
                         column: x => x.PatientRecordId,
-                        principalTable: "PatientRecords",
+                        principalTable: "PatientRecord",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_InOutStocks_Patients_PatientId",
+                        name: "FK_InOutStocks_Patient_PatientId",
                         column: x => x.PatientId,
-                        principalTable: "Patients",
+                        principalTable: "Patient",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_InOutStocks_Rooms_ExpStockId",
@@ -1537,76 +1692,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MedicalRecords",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PatientRecordID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BranchID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DepartmentID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RoomID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BedID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MedicalRecordStatusID = table.Column<int>(type: "int", nullable: false),
-                    MedicalRecordTypeID = table.Column<int>(type: "int", nullable: false),
-                    MedicalRecordEndTypeID = table.Column<int>(type: "int", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IcdCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IcdName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IcdSubCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IcdSubName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IcdText = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Advise = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TreatmentMethod = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DeathTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeathPlace = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DeathDocumentType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DeathDocumentNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DeathDocumentPlace = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DeathDocumentDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeathWithinID = table.Column<int>(type: "int", nullable: false),
-                    DeathCauseID = table.Column<int>(type: "int", nullable: false),
-                    IsDeathCertificate = table.Column<bool>(type: "bit", nullable: false),
-                    IsAutopsy = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_MedicalRecords", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_MedicalRecords_Branchs_BranchID",
-                        column: x => x.BranchID,
-                        principalTable: "Branchs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MedicalRecords_Departments_DepartmentID",
-                        column: x => x.DepartmentID,
-                        principalTable: "Departments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_MedicalRecords_PatientRecords_PatientRecordID",
-                        column: x => x.PatientRecordID,
-                        principalTable: "PatientRecords",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_MedicalRecords_Rooms_RoomID",
-                        column: x => x.RoomID,
-                        principalTable: "Rooms",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "InOutStockItems",
                 columns: table => new
                 {
@@ -1614,6 +1699,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     InOutStockId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: true),
                     ItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ItemTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ImpPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     RequestQuantity = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     ApprovedQuantity = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
@@ -1627,6 +1713,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_InOutStockItems_InOutStocks_InOutStockId",
                         column: x => x.InOutStockId,
                         principalTable: "InOutStocks",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_InOutStockItems_ItemTypes_ItemTypeId",
+                        column: x => x.ItemTypeId,
+                        principalTable: "ItemTypes",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_InOutStockItems_Items_ItemId",
@@ -1685,262 +1776,262 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             migrationBuilder.InsertData(
                 table: "Countries",
-                columns: new[] { "Id", "Code", "HeInCode", "Inactive", "Name" },
+                columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "HeInCode", "Inactive", "ModifiedBy", "ModifiedDate", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"), "VN", "000", false, "Việt Nam" },
-                    { new Guid("0105cfd9-5265-4dcc-b2d8-790abecd5577"), "PS", "PS", false, "Palestinian Authority" },
-                    { new Guid("02cd862f-7bf2-4dee-9d8d-869f67659eac"), "CX", "CX", false, "Christmas island" },
-                    { new Guid("05600686-62bc-4be9-b009-58ae6fac5dc2"), "UM", "UM", false, "United States Minor Outlying Islands" },
-                    { new Guid("05f8a24e-3764-41af-b79b-3e05da6964ad"), "TO", "276", false, "Tonga" },
-                    { new Guid("060539cd-d169-45c2-bec2-28a91e41bcb3"), "IL", "184", false, "Israel" },
-                    { new Guid("067dbcfb-9729-4016-aa0f-526f43657542"), "CL", "141", false, "Chile" },
-                    { new Guid("07c04d8d-4e1c-4896-ba8a-7d8172562b37"), "KP", "277", false, "Triều Tiên" },
-                    { new Guid("09127bf0-ff5d-4660-8fef-18b3107bf295"), "BI", "135", false, "Burundi" },
-                    { new Guid("0d9bf5f6-20bb-4b4f-8c3e-0b7205eabe19"), "PR", "PR", false, "Puerto Rico" },
-                    { new Guid("0f42743d-f2ae-4d4d-9e9c-6dcd785204ff"), "SE", "273", false, "Thụy Điển" },
-                    { new Guid("10a98338-7167-4e5b-b3e4-9515f63bb43d"), "FI", "241", false, "Phần Lan" },
-                    { new Guid("10f310c4-857b-431b-934c-19ebc560571c"), "IS", "179", false, "Iceland" },
-                    { new Guid("1137907c-6292-4973-8a6a-5a8a55216701"), "OM", "233", false, "Oman" },
-                    { new Guid("16bfb332-7ffe-4d31-a2a2-05e7cc250969"), "Z1", "Z1", false, "Sovereign Military Order of Malta (SMOM)" },
-                    { new Guid("1760cdb2-5d9e-4a4d-a422-9d2d54333b72"), "VA", "290", false, "Thành Vatican" },
-                    { new Guid("18be6a2d-0cc9-4e57-9b95-0fd5e0999094"), "LA", "193", false, "Lào" },
-                    { new Guid("19b9d4e2-dd04-4d66-ba70-e71a800b8563"), "CO", "142", false, "Colombia" },
-                    { new Guid("1a52542a-e4e8-4514-b84f-d8f7a0ce8bf5"), "HU", "177", false, "Hungary" },
-                    { new Guid("1bb67a2c-65b1-4437-b7db-61bb5c5c945a"), "NZ", "227", false, "New Zealand" },
-                    { new Guid("1bd96043-4837-4ab4-8812-0230d7cdc37c"), "BH", "117", false, "Bahrain" },
-                    { new Guid("1c1e8f0d-fa36-4dd5-a349-51f8f8cf1e11"), "RU", "231", false, "Nga" },
-                    { new Guid("1c3907c5-3cd4-4530-a28c-6d4acceec175"), "AZ", "113", false, "Azerbaijan" },
-                    { new Guid("1cb83a16-11a1-438b-8fd9-22e661c5904a"), "TN", "281", false, "Tunisia" },
-                    { new Guid("1cc02fda-f061-49ad-a4f1-ecb564a28c88"), "KZ", "187", false, "Kazakhstan" },
-                    { new Guid("1d374c8c-88c5-49ae-9c9c-0b2b362b1198"), "BR", "131", false, "Brasil" },
-                    { new Guid("1d41f179-ba78-41d6-8ecf-595c7d6de65a"), "MA", "209", false, "Maroc" },
-                    { new Guid("1df44627-4127-48c0-bbc7-2afc64cb75d2"), "CH", "274", false, "Thụy Sĩ" },
-                    { new Guid("1f0c0c80-dceb-47c4-9bfb-d9e2b29e8010"), "NR", "224", false, "Nauru" },
-                    { new Guid("20aa6e3b-0838-45fc-9769-161b291e5e24"), "Z4", "Z4", false, "Scotland" },
-                    { new Guid("212573b7-ec34-4844-b150-74f567de2c5d"), "GF", "GF", false, "French guiana" },
-                    { new Guid("21668f2b-b3d0-4927-9d67-3f9eee4736d6"), "AS", "AS", false, "Samoa thuộc Hoa Kỳ" },
-                    { new Guid("22174cd0-7b2d-4c6b-bb6c-5273e63d28f0"), "MY", "205", false, "Malaysia" },
-                    { new Guid("226d663e-46ee-4ab2-b385-b062345debd9"), "FR", "240", false, "Pháp" },
-                    { new Guid("23063395-5d36-41c9-9711-66722ab8849f"), "CZ", "252", false, "Séc" },
-                    { new Guid("24c5f9fa-e493-43a1-9d2a-c6d25dc2ea89"), "FY", "254", false, "Serbia" },
-                    { new Guid("25b7ed9b-8bfd-4601-a4c5-a59dfe5a3fab"), "AN", "AN", false, "Netherlands antilles" },
-                    { new Guid("25df127f-9fb7-4f1d-8a4f-484364e15f91"), "GN", "170", false, "Guinea" },
-                    { new Guid("264432ff-ba3d-4402-ae05-d3cbbdf7eef4"), "NE", "229", false, "Niger" },
-                    { new Guid("26d0e10a-43ea-4654-93be-00a21f60b760"), "PG", "237", false, "Papua New Guinea" },
-                    { new Guid("298cf3d9-cf13-401f-86b5-368d1c71ec77"), "GQ", "169", false, "Guinea Xích Đạo" },
-                    { new Guid("2e24284d-fe7b-477b-a3e9-23505ccbe379"), "Z6", "Z6", false, "Great Britain (See United Kingdom)" },
-                    { new Guid("2eab2085-d20b-4cc4-a85b-7567c9ce6ea9"), "LC", "247", false, "Saint Lucia" },
-                    { new Guid("2eb9de76-3d99-43a5-b17d-ba2f0e08c64a"), "NI", "228", false, "Nicaragua" },
-                    { new Guid("2eead3fb-8c57-4699-a48d-b9eb2a781d23"), "TF", "TF", false, "French Southern Territories" },
-                    { new Guid("2f4455d6-efee-4959-8dfd-6f7db81faadd"), "NP", "226", false, "Nepal" },
-                    { new Guid("2facb682-01d5-4798-bf0a-928bd471ecb3"), "CC", "CC", false, "Cocos (keeling) islands" },
-                    { new Guid("332e0e9e-0182-47a0-b894-ade71da83708"), "BB", "120", false, "Barbados" },
-                    { new Guid("33aeb885-ea5c-4343-8011-b1dccebdd65f"), "SA", "110", false, "Ả Rập Saudi" },
-                    { new Guid("347a0e24-276d-4a54-b92b-4b88b60179af"), "GM", "163", false, "Gambia" },
-                    { new Guid("36299397-b100-420b-bd1b-3f18eda310fa"), "TD", "270", false, "Tchad" },
-                    { new Guid("3671801a-1c88-4dc6-9e75-d766644c2af9"), "SR", "264", false, "Suriname" },
-                    { new Guid("36ddc306-adf0-4897-a200-6377ff0d9042"), "TT", "278", false, "Trinidad và Tobago" },
-                    { new Guid("39351753-1af5-4797-89e2-b97589db8d2e"), "AZ", "114", false, "Cộng hòa Azerbaijan" },
-                    { new Guid("39ef7fcd-b539-46be-90a6-bc3f6d1524d8"), "KR", "174", false, "Hàn Quốc" },
-                    { new Guid("3adb70b0-ae40-4ac0-8a27-15398cc79d49"), "GS", "GS", false, "South georgia and the south sandwich islands" },
-                    { new Guid("3af1daa8-65e1-4502-823d-3c8530608104"), "MP", "MP", false, "Northern mariana islands" },
-                    { new Guid("3d9d9ca5-3356-48b3-b518-eb806a6128ee"), "VU", "289", false, "Vanuatu" },
-                    { new Guid("3dac050e-a2a6-469b-b0bb-def2e17544a5"), "GW", "168", false, "Guinea-Bissau" },
-                    { new Guid("3de67d92-a46e-4113-bd12-2e89a48aa1f0"), "CN", "279", false, "Trung Quốc" },
-                    { new Guid("3edffd99-5e14-4466-9f3e-a72ab48711d7"), "HM", "HM", false, "Heard and mc donald islands" },
-                    { new Guid("3f3e1d5e-ca7b-45ef-9e1e-f3c471e8894f"), "ST", "251", false, "São Tomé và Príncipe" },
-                    { new Guid("426516a2-46e9-4103-8b44-22b4a30b21ae"), "LS", "195", false, "Lesotho" },
-                    { new Guid("4452efd3-9727-4c5c-9cc9-76f7270c673d"), "CI", "130", false, "Bờ Biển Ngà" },
-                    { new Guid("44ff82d4-3356-4f71-9aa2-dc5f161537f0"), "SY", "266", false, "Syria" },
-                    { new Guid("45696681-b325-4d55-b4ea-56a920227907"), "SL", "256", false, "Sierra Leone" },
-                    { new Guid("4589f414-2018-4196-a42a-68fa60b41dae"), "MZ", "219", false, "Mozambique" },
-                    { new Guid("45a0ebe0-51be-423b-8885-7a7bf06e6f95"), "BA", "127", false, "Bosna và Hercegovina" },
-                    { new Guid("46651a82-3d63-4a24-baff-9bb1ee8ac492"), "CF", "280", false, "Trung Phi" },
-                    { new Guid("484be820-41ff-4911-94c6-2d2969764ac4"), "CD", "145", false, "Cộng hòa Dân chủ Congo" },
-                    { new Guid("4b12f61e-5980-415f-a62b-b296753fd70d"), "PT", "129", false, "Bồ Đào Nha" },
-                    { new Guid("4b7309a1-de33-4f43-a2ff-3f11e0e5869b"), "SM", "250", false, "San Marino" },
-                    { new Guid("4bab2495-c861-47e7-82e6-1806fd87b767"), "IM", "IM", false, "Isle of man" },
-                    { new Guid("4dbc51c5-3faa-4e76-b0d5-a28df95c5c01"), "GT", "167", false, "Guatemala" },
-                    { new Guid("4dcd4bda-0da9-415d-8f7e-ecd5841ad250"), "ER", "158", false, "Eritrea" },
-                    { new Guid("4e6e77af-56d6-4314-ac68-c39713511d70"), "IE", "183", false, "Ireland" },
-                    { new Guid("50202b21-f7c0-42eb-89bd-4470e82f3943"), "JE", "JE", false, "Jersey" },
-                    { new Guid("502c14cb-18ea-461f-9bc0-9591b056284c"), "DK", "153", false, "Đan Mạch" },
-                    { new Guid("506ddd2c-4f81-4d6d-806c-4c9e605bab3f"), "KN", "246", false, "Saint Kitts và Nevis" },
-                    { new Guid("509f7d40-e740-472f-8a7a-84b5a527eb96"), "KG", "192", false, "Kyrgyzstan" },
-                    { new Guid("50c044c3-6cd1-46ad-b10a-e879291806f2"), "NU", "NU", false, "Niue" },
-                    { new Guid("52595376-4b2b-4746-bb17-16f7ba234a33"), "MW", "204", false, "Malawi" },
-                    { new Guid("5300fbb8-1d3b-48c2-b251-c9daab165b94"), "SH", "SH", false, "St. Helena" },
-                    { new Guid("5351587c-9713-44c9-9088-9626d01300c8"), "TK", "TK", false, "Tokelau" },
-                    { new Guid("539247ef-f9a9-4893-b250-2aa204a87640"), "VG", "VG", false, "Virgin Islands (British)" },
-                    { new Guid("53b7d739-4b49-4a35-9d04-93520d79d105"), "TJ", "267", false, "Tajikistan" },
-                    { new Guid("53fdbb96-c808-4474-83bc-084e422a8b95"), "BY", "121", false, "Belarus" },
-                    { new Guid("54ca17f4-f6f7-4bcf-9809-8d45153c2271"), "LR", "197", false, "Liberia" },
-                    { new Guid("561d896e-c3c5-4dfc-b13c-790aa25fbd5d"), "PA", "236", false, "Panama" },
-                    { new Guid("5701a860-793e-4660-9302-005b27d4348e"), "AO", "106", false, "Angola" },
-                    { new Guid("573dec77-5908-42b2-b1a5-8a5ee8407dee"), "GD", "165", false, "Grenada" },
-                    { new Guid("57c01cf1-7f20-4a6c-bec9-bcc9a3a039fe"), "SG", "257", false, "Singapore" },
-                    { new Guid("58357a87-d3a9-4ea4-82ea-eb7775f1c568"), "IR", "181", false, "Iran" },
-                    { new Guid("58486abc-86a6-4bb8-a610-eb0e4bdf0b73"), "LT", "200", false, "Litva" },
-                    { new Guid("58776bc3-ee4b-44ae-ac9e-a501437bde2f"), "PF", "PF", false, "French Polynesia" },
-                    { new Guid("58d12ab1-4946-45f9-bef5-354e5803f357"), "DO", "152", false, "Cộng hòa Dominicana" },
-                    { new Guid("59e93599-98e9-44de-b9d1-bbbf17c599bf"), "ZA", "223", false, "Nam Phi" },
-                    { new Guid("5a68453d-81d4-4417-a579-33d6a1c27ea6"), "PE", "239", false, "Peru" },
-                    { new Guid("5b526a49-1694-4eb8-b602-4e150d12184d"), "MC", "216", false, "Monaco" },
-                    { new Guid("5bd03273-5b23-4181-892c-397126e8da56"), "PK", "234", false, "Pakistan" },
-                    { new Guid("5d60e969-8387-42e4-b866-31dfb209f433"), "Z3", "Z3", false, "England" },
-                    { new Guid("5dc567de-1249-4aaa-9d49-04dcd3501220"), "ES", "269", false, "Tây Ban Nha" },
-                    { new Guid("5f4a7dfd-c3ed-4796-bde2-94199e595ef0"), "BV", "BV", false, "Bouvet island" },
-                    { new Guid("62947f31-4a3e-441b-a9d2-9642ce61de2f"), "KI", "189", false, "Kiribati" },
-                    { new Guid("62b0c6c0-4a45-4f33-b35e-d184d815518e"), "GH", "164", false, "Ghana" },
-                    { new Guid("63c8621a-fc44-4abe-ba08-8d80520280cf"), "SC", "255", false, "Seychelles" },
-                    { new Guid("6477d7a3-465e-4277-a4eb-ef09b13f5eca"), "MO", "MO", false, "Macau" },
-                    { new Guid("66169c75-2aa7-409a-a7b9-d8cfe6ac80c0"), "LB", "196", false, "Li ban" },
-                    { new Guid("66400b32-893a-489c-a5e1-180d55fb20d4"), "KE", "188", false, "Kenya" },
-                    { new Guid("66533605-d826-4aec-9536-e4d30effefda"), "AL", "103", false, "Albania" },
-                    { new Guid("665d03c6-346e-43d8-ad21-31492b4382aa"), "JO", "186", false, "Jordan" },
-                    { new Guid("686b79de-db2f-4ccd-946c-1bef80cd503e"), "CA", "140", false, "Canada" },
-                    { new Guid("6b24b562-1294-4537-a69a-26ac34c41521"), "AD", "105", false, "Andorra" },
-                    { new Guid("6b8836aa-2476-4d82-98f1-0b7f56e66f7a"), "TL", "TL", false, "Timor Leste" },
-                    { new Guid("6c408b50-b4be-4eca-a710-11a6d914cf4f"), "AT", "109", false, "Áo" },
-                    { new Guid("6d2d2371-8785-4a7b-94ba-84c804b2b0a2"), "RE", "RE", false, "Reunion" },
-                    { new Guid("6d5a6761-432b-4bd2-9b04-5e01c421de23"), "NF", "NF", false, "Norfolk Island" },
-                    { new Guid("716a0688-0378-4941-af8f-c11dc4c45ac2"), "TC", "TC", false, "Turks and Caicos Islands" },
-                    { new Guid("720aaa71-3cc0-470f-b56c-472ac37a6574"), "BE", "125", false, "Bỉ" },
-                    { new Guid("72d527d4-00df-4f9a-b0e1-e1fa84a4ba6d"), "SO", "261", false, "Somalia" },
-                    { new Guid("74c266fd-7287-4525-aca3-6bb66ddcf61f"), "WS", "249", false, "Samoa" },
-                    { new Guid("75de9dea-ef0f-4492-890a-f5af36cce7aa"), "CG", "144", false, "Cộng hòa Congo" },
-                    { new Guid("76c42f0f-bfb2-4a11-b5a4-e854f74e72cd"), "BZ", "122", false, "Belize" },
-                    { new Guid("77365013-80d7-44d5-bd8d-472542cac431"), "MQ", "MQ", false, "Martinique" },
-                    { new Guid("788693d2-4ac9-4f85-94bf-13d021bc000d"), "PM", "PM", false, "St. Pierre and Miquelon" },
-                    { new Guid("78dcfd52-de7b-4c1d-9ded-0e5d3f7a8a35"), "MT", "208", false, "Malta" },
-                    { new Guid("79bc1ba0-a0f6-4065-9783-9e01ade32cde"), "PN", "PN", false, "Pitcairn" },
-                    { new Guid("7a384197-d55e-44b8-b389-a65f17e74e1f"), "PH", "242", false, "Philippines" },
-                    { new Guid("7af80a81-41e5-47de-abd3-7ce25f9c39b4"), "TM", "282", false, "Turkmenistan" },
-                    { new Guid("7afaefc0-9aa8-4ba7-98ae-618682a5be7f"), "KM", "143", false, "Comoros" },
-                    { new Guid("7b0c9a9c-e730-4b96-9372-e9ef8ab5339b"), "BM", "BM", false, "Bermuda" },
-                    { new Guid("7bea406c-221d-45dd-aca6-a2ceb90741aa"), "DM", "151", false, "Dominica" },
-                    { new Guid("7e27cb42-41fb-4b20-b26b-3c1ea9b4ff5c"), "SB", "260", false, "Solomon" },
-                    { new Guid("7ef68b6d-2d6b-4688-95bc-d0fd79ffb6c5"), "CY", "191", false, "Síp" },
-                    { new Guid("7f233816-fe94-4941-8125-b62c88410fa9"), "BD", "119", false, "Bangladesh" },
-                    { new Guid("8562fd7f-49aa-46cf-bbc9-71f7460c6ba7"), "SZ", "265", false, "Swaziland" },
-                    { new Guid("8592d87f-720b-48e7-82ee-e82d64cbf984"), "AG", "108", false, "Antigua và Barbuda" },
-                    { new Guid("8764ee96-c950-44cf-a1f4-7636126c671b"), "BS", "116", false, "Bahamas" },
-                    { new Guid("882c80ef-806d-4370-9fb1-f00a13a7a5c1"), "LV", "194", false, "Latvia" },
-                    { new Guid("8a003437-323c-451c-b211-1886f79c25f1"), "MV", "206", false, "Maldives" },
-                    { new Guid("8a6a8442-1533-4bba-9a05-ed707122573e"), "GR", "178", false, "Hy Lạp" },
-                    { new Guid("8f800608-e254-418d-8163-78f71be4873f"), "EG", "102", false, "Ai Cập" },
-                    { new Guid("8ff51ea0-476b-4dec-8736-70cc36ea1d2c"), "NO", "225", false, "Na Uy" },
-                    { new Guid("90b2a6a0-bacd-4175-80e9-b8fde9233786"), "KW", "190", false, "Kuwait" },
-                    { new Guid("90ef0553-8520-4d57-ae3b-112ebf28b313"), "ZW", "295", false, "Zimbabwe" },
-                    { new Guid("92aea1da-5cf2-40fa-92a2-cce297949451"), "SI", "259", false, "Slovenia" },
-                    { new Guid("92b69f82-f3e2-4ea9-9d4b-1763b1a75dec"), "MX", "213", false, "Mexico" },
-                    { new Guid("93fc49be-bd23-41c3-8538-4b424a7806da"), "CV", "CV", false, "Cape verde" },
-                    { new Guid("9412c9e0-c4fe-442f-8b13-ea064bf48703"), "LI", "199", false, "Liechtenstein" },
-                    { new Guid("9601fc62-41b1-44af-af8e-8a03c91c96b8"), "JP", "232", false, "Nhật Bản" },
-                    { new Guid("97bc234b-7d4c-4870-801b-74f1998741be"), "US", "175", false, "Hoa Kỳ" },
-                    { new Guid("98062645-5015-4d8c-886e-3fb70c247ada"), "GP", "GP", false, "Guadeloupe" },
-                    { new Guid("994cf06f-b833-4415-84e0-94f3847b6dd8"), "KY", "KY", false, "Cayman islands" },
-                    { new Guid("99cfce62-6540-4525-97b8-9a2e62618e05"), "SJ", "SJ", false, "Svalbard and Jan Mayen Islands" },
-                    { new Guid("9acb769e-d2de-479c-b66a-424ce710a036"), "NG", "230", false, "Nigeria" },
-                    { new Guid("9d5769fe-b3ae-4697-9150-44674e8008ba"), "DE", "155", false, "Đức" },
-                    { new Guid("9ded845f-06a1-4651-8903-bc46f7978c84"), "GE", "GE", false, "Georgia" },
-                    { new Guid("9eb57842-f592-4080-affd-71b43f7d0517"), "AQ", "AQ", false, "Antarctica" },
-                    { new Guid("9ee7b166-4c6f-4136-8928-c6246c3e76d5"), "UZ", "288", false, "Uzbekistan" },
-                    { new Guid("a1080c01-e5bb-4e3f-8784-f0678f1eff58"), "DJ", "150", false, "Djibouti" },
-                    { new Guid("a1ba5be8-fef9-470a-a5f7-efcf7fc900a4"), "ME", "218", false, "Montenegro" },
-                    { new Guid("a1f120ed-4785-486e-b796-dd8cd569a415"), "VC", "248", false, "Saint Vincent và Grenadines" },
-                    { new Guid("a30f588b-166d-4118-9d33-b8294e15ad44"), "SD", "263", false, "Sudan" },
-                    { new Guid("a3597652-cc84-40ff-b143-208ee8473e93"), "EA", "154", false, "Đông Timor" },
-                    { new Guid("a3c5c224-a013-4e23-8655-641a0a76b38a"), "PW", "235", false, "Palau" },
-                    { new Guid("a695b824-cfc2-40a3-b5a1-35243a6e2116"), "YE", "293", false, "Yemen" },
-                    { new Guid("a7a696de-3fd8-48c2-b87a-6464b222af87"), "VE", "291", false, "Venezuela" },
-                    { new Guid("a8b38e56-d3ea-435f-907a-615ed7ced805"), "AF", "101", false, "Afghanistan" },
-                    { new Guid("aa3d56b9-f398-4be1-b8ae-9f8563101b6e"), "IT", "292", false, "Ý" },
-                    { new Guid("aa4399ec-1ff3-4837-a68e-0df0720162cb"), "MR", "211", false, "Mauritanie" },
-                    { new Guid("aa745539-b444-49d2-ad13-14149f8a1645"), "BO", "126", false, "Bolivia" },
-                    { new Guid("ab16a3ed-00cd-4445-8e7c-770b1965232e"), "NL", "173", false, "Hà Lan" },
-                    { new Guid("abdfeb5b-a4b8-4ab1-b6b8-83f7fb72ec23"), "EE", "159", false, "Estonia" },
-                    { new Guid("ad4ef5f1-e823-4ed4-9ad5-cec4a2cae6af"), "UG", "285", false, "Uganda" },
-                    { new Guid("af24512b-01ae-4420-96cb-62051ede96cc"), "UA", "286", false, "Ukraina" },
-                    { new Guid("af3badc9-b6da-4eb0-8a42-ecf8dfd6ae19"), "AM", "112", false, "Armenia" },
-                    { new Guid("af9c2425-679e-4459-8c68-2d357f4f93e5"), "PY", "238", false, "Paraguay" },
-                    { new Guid("affdf19e-5ed4-497a-97d0-0fc95a547785"), "LK", "262", false, "Sri Lanka" },
-                    { new Guid("b16a509f-5c70-42b1-a05e-6d4426c721ca"), "IQ", "182", false, "Iraq" },
-                    { new Guid("b171e933-4b7d-46f5-802a-14c5c9234ed7"), "ML", "207", false, "Mali" },
-                    { new Guid("b1829e62-c3dd-4f65-8c41-fdbe26aedb93"), "MG", "203", false, "Madagascar" },
-                    { new Guid("b4e019b1-042b-465c-baf9-60d525d9b85c"), "CK", "CK", false, "Cook islands" },
-                    { new Guid("b6169a90-920f-425d-a275-82601862a220"), "SK", "258", false, "Slovakia" },
-                    { new Guid("b83926c4-6963-4f82-97f7-dffa6e87ea7d"), "MK", "202", false, "Macedonia" },
-                    { new Guid("b83be42b-cde9-4dc3-a838-d8197d2c678f"), "FO", "FO", false, "Faroe islands" },
-                    { new Guid("ba7304bd-7e25-4731-a60f-10c13589c71a"), "ET", "160", false, "Ethiopia" },
-                    { new Guid("ba947c48-36fb-420b-b2d9-663fe308b18c"), "TG", "275", false, "Togo" },
-                    { new Guid("bcb96598-0e05-4316-86d3-80413326555a"), "MH", "210", false, "Quần đảo Marshall" },
-                    { new Guid("be946a16-a1af-499c-9bd8-ca12a22fb69c"), "CU", "149", false, "Cuba" },
-                    { new Guid("bf1bf333-4604-4974-838f-886100c006f3"), "TW", "TW", false, "Đài Loan" },
-                    { new Guid("c4065df0-2539-4046-bb77-7d699a072734"), "FM", "214", false, "Micronesia" },
-                    { new Guid("c5c14db2-753f-4e28-88b5-3b9e502fa0c6"), "BN", "132", false, "Brunei" },
-                    { new Guid("c6f6287f-39f6-4470-ad46-ac539eef3052"), "EC", "156", false, "Ecuador" },
-                    { new Guid("c7f500b0-be15-4ab8-ae5c-1db430d19b8c"), "YT", "YT", false, "Mayotte" },
-                    { new Guid("c831fb16-910b-4939-804a-1052b8f8adc1"), "HT", "172", false, "Haiti" },
-                    { new Guid("c8766416-ed13-4631-a9c4-e89e782055c9"), "Z7", "Z7", false, "Wales" },
-                    { new Guid("cba207c9-9ee4-4a20-876b-ecb1160d0845"), "SN", "253", false, "Sénégal" },
-                    { new Guid("cbf1c521-494b-4981-9dc9-b6a1b229c01d"), "JM", "185", false, "Jamaica" },
-                    { new Guid("cc2a4d3b-bae2-4602-9d23-4d4d2d918699"), "MD", "215", false, "Moldova" },
-                    { new Guid("cdd52492-d981-4972-9f41-4b1774c002ee"), "GI", "GI", false, "Gibraltar" },
-                    { new Guid("cf8c2ebc-2ed1-404c-875c-d2151d54ab9e"), "MM", "220", false, "Myanma" },
-                    { new Guid("d0357290-582a-47cd-984c-8815d38454be"), "Z5", "Z5", false, "Northern Ireland" },
-                    { new Guid("d1fef153-87bc-403a-9590-0ec4cc8d676e"), "PL", "118", false, "Ba Lan" },
-                    { new Guid("d200b4b5-7435-41a9-be8b-b6a80e14120b"), "IO", "IO", false, "British indian ocean territory" },
-                    { new Guid("d2ebac27-3463-40cb-9eb2-86e1da12a3ba"), "MS", "MS", false, "Montserrat" },
-                    { new Guid("d34d65e5-253f-4324-9aee-f74045802e47"), "GG", "GG", false, "Guernsey" },
-                    { new Guid("d3c10501-b94f-4a0e-b871-80d4b3d7bbbb"), "HK", "HK", false, "Hong kong" },
-                    { new Guid("d50a063a-82ef-4b56-858e-1a8794b32878"), "HN", "176", false, "Honduras" },
-                    { new Guid("d576474f-de6a-45fc-bd19-e18a2915f1a4"), "CR", "146", false, "Costa Rica" },
-                    { new Guid("d892c6c0-bf86-4487-ab8b-5af35cc32a0c"), "GV", "171", false, "Guyana" },
-                    { new Guid("d94b5935-e6d2-4aa7-b9f7-d332badacd8d"), "BT", "124", false, "Bhutan" },
-                    { new Guid("da333d92-e16c-4b49-b9d8-669df9032f82"), "FJ", "161", false, "Fiji" },
-                    { new Guid("dd79ead4-6e12-4cb8-aff5-8f00d8bf9e99"), "SD", "222", false, "Nam Sudan" },
-                    { new Guid("dd951a03-c803-4351-aac5-ed4ec9922bab"), "QA", "243", false, "Qatar" },
-                    { new Guid("ddf4ecad-6f97-4bde-84fe-2b9dc51f0ffd"), "BW", "128", false, "Botswana" },
-                    { new Guid("de0d7be8-8a87-4358-b93e-e809ab17f238"), "RO", "244", false, "Romania" },
-                    { new Guid("e180ff8a-4e49-4edd-9168-21b372b8d9b7"), "BG", "133", false, "Bulgaria" },
-                    { new Guid("e1fc9395-73b5-4fd6-8c31-37fef3a3e866"), "ZM", "294", false, "Zambia" },
-                    { new Guid("e369137c-1730-4809-88e4-e43031327233"), "BF", "134", false, "Burkina Faso" },
-                    { new Guid("e3a2237c-9d57-462f-bad8-7a78856303c8"), "ID", "180", false, "Indonesia" },
-                    { new Guid("e43c3f5c-e8d7-430a-9869-e61337bd4188"), "Z2", "Z2", false, "British Southern and Antarctic Territories" },
-                    { new Guid("e4acc3fd-7e2d-4927-b7e8-797cb8a29a86"), "GU", "GU", false, "Guam" },
-                    { new Guid("e4c05566-0c8d-42a4-a2e9-ad4d6d33b35f"), "AI", "AI", false, "Anguilla" },
-                    { new Guid("e5439053-279d-4094-852d-0c2edc6992ed"), "SV", "157", false, "El Salvador" },
-                    { new Guid("e5837adb-d926-41f1-8434-73fed9db7504"), "AW", "AW", false, "Aruba việt nam" },
-                    { new Guid("e6e7518f-73eb-4010-b0cf-6dcc5c8f8e01"), "DZ", "104", false, "Algérie" },
-                    { new Guid("e9455b51-bd57-482f-a979-5ecf6c8c4afd"), "GB", "107", false, "Vương quốc Liên hiệp Anh và Bắc Ireland" },
-                    { new Guid("edb5a6e1-b084-4e46-87ab-22d38da9cf0a"), "UY", "287", false, "Uruguay" },
-                    { new Guid("edcecb3c-ffcb-451f-8e24-02a0bf6499ae"), "IN", "115", false, "Cộng hòa Ấn Độ" },
-                    { new Guid("ee02aa87-f8dc-44ac-9ac9-830120f05656"), "TR", "272", false, "Thổ Nhĩ Kỳ" },
-                    { new Guid("ee707e39-4195-426c-abf9-1ce21a771350"), "NA", "221", false, "Namibia" },
-                    { new Guid("f034e368-335c-4a9f-a039-b7ea83f8a315"), "LU", "201", false, "Luxembourg" },
-                    { new Guid("f07d3dde-aea1-4f0a-ba9d-310cda4fa6e9"), "TH", "271", false, "Thái Lan" },
-                    { new Guid("f1218849-b5cf-43c8-b3c4-b1ff145f27fc"), "MU", "212", false, "Mauritius" },
-                    { new Guid("f1c02c7d-3154-4e55-817c-1e24f6eef729"), "GA", "162", false, "Gabon" },
-                    { new Guid("f21a86da-a1de-4023-93c9-3a23d315a8cd"), "RW", "245", false, "Rwanda" },
-                    { new Guid("f36eb030-510e-4ca0-b7c4-a1c1ef656dd6"), "FK", "FK", false, "Falkland islands (malvinas)" },
-                    { new Guid("f468cb27-57fb-4b75-b3b7-70bb33ca2705"), "KH", "139", false, "Campuchia" },
-                    { new Guid("f5874f17-6c1e-4c07-b8bf-41b76546f6f0"), "CM", "138", false, "Cameroon" },
-                    { new Guid("f5f9c1ed-f4fb-4cff-aee3-2bcb0d8eed3e"), "NC", "NC", false, "New Caledonia" },
-                    { new Guid("f5fdcb6c-e0c5-4a57-adca-e743ba60ccee"), "LY", "198", false, "Libya" },
-                    { new Guid("f79baaf7-6191-4ba9-b38a-2f1b50d05598"), "TV", "283", false, "Tuvalu" },
-                    { new Guid("f9375017-9897-4487-8916-c98d22fd05b9"), "GL", "GL", false, "Greenland" },
-                    { new Guid("fb10ce71-e68a-4a70-bf7e-5edee9388d48"), "AE", "137", false, "Các Tiểu Vương quốc Ả Rập Thống nhất" },
-                    { new Guid("fb67b422-6903-494e-945d-fa09f031b4f1"), "VI", "VI", false, "Virgin Islands (U.S.)" },
-                    { new Guid("fc5a0c05-ebac-4906-8a9f-dddcdbcc0a9d"), "AU", "284", false, "Úc" },
-                    { new Guid("fd0ac376-bf65-4bf8-9067-245691aa1827"), "HR", "147", false, "Croatia" },
-                    { new Guid("fd21963c-7b5e-44a8-8d70-2edbda437946"), "MN", "217", false, "Mông Cổ" },
-                    { new Guid("fd235817-1607-4f4c-83c7-ff5bd0012896"), "BJ", "123", false, "Benin" },
-                    { new Guid("fd32d265-24dd-4073-a4b8-59e6358b59ed"), "AR", "111", false, "Argentina" },
-                    { new Guid("fe657d37-7960-4bb3-8f15-81666fca928d"), "EH", "EH", false, "Western sahara" },
-                    { new Guid("ff78779a-45cd-4076-8c61-442a9a3873f2"), "TZ", "268", false, "Tanzania" },
-                    { new Guid("ffd3fabd-a5f1-4442-837b-d53b5d89272e"), "WF", "WF", false, "Wallis and Futuna Islands" }
+                    { new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"), "VN", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8359), "000", false, null, null, "Việt Nam" },
+                    { new Guid("0105cfd9-5265-4dcc-b2d8-790abecd5577"), "PS", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8253), "PS", false, null, null, "Palestinian Authority" },
+                    { new Guid("02cd862f-7bf2-4dee-9d8d-869f67659eac"), "CX", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7999), "CX", false, null, null, "Christmas island" },
+                    { new Guid("05600686-62bc-4be9-b009-58ae6fac5dc2"), "UM", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8338), "UM", false, null, null, "United States Minor Outlying Islands" },
+                    { new Guid("05f8a24e-3764-41af-b79b-3e05da6964ad"), "TO", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8323), "276", false, null, null, "Tonga" },
+                    { new Guid("060539cd-d169-45c2-bec2-28a91e41bcb3"), "IL", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8095), "184", false, null, null, "Israel" },
+                    { new Guid("067dbcfb-9729-4016-aa0f-526f43657542"), "CL", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7978), "141", false, null, null, "Chile" },
+                    { new Guid("07c04d8d-4e1c-4896-ba8a-7d8172562b37"), "KP", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8135), "277", false, null, null, "Triều Tiên" },
+                    { new Guid("09127bf0-ff5d-4660-8fef-18b3107bf295"), "BI", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7925), "135", false, null, null, "Burundi" },
+                    { new Guid("0d9bf5f6-20bb-4b4f-8c3e-0b7205eabe19"), "PR", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8251), "PR", false, null, null, "Puerto Rico" },
+                    { new Guid("0f42743d-f2ae-4d4d-9e9c-6dcd785204ff"), "SE", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8277), "273", false, null, null, "Thụy Điển" },
+                    { new Guid("10a98338-7167-4e5b-b3e4-9515f63bb43d"), "FI", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8031), "241", false, null, null, "Phần Lan" },
+                    { new Guid("10f310c4-857b-431b-934c-19ebc560571c"), "IS", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8112), "179", false, null, null, "Iceland" },
+                    { new Guid("1137907c-6292-4973-8a6a-5a8a55216701"), "OM", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8228), "233", false, null, null, "Oman" },
+                    { new Guid("16bfb332-7ffe-4d31-a2a2-05e7cc250969"), "Z1", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8372), "Z1", false, null, null, "Sovereign Military Order of Malta (SMOM)" },
+                    { new Guid("1760cdb2-5d9e-4a4d-a422-9d2d54333b72"), "VA", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8345), "290", false, null, null, "Thành Vatican" },
+                    { new Guid("18be6a2d-0cc9-4e57-9b95-0fd5e0999094"), "LA", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8144), "193", false, null, null, "Lào" },
+                    { new Guid("19b9d4e2-dd04-4d66-ba70-e71a800b8563"), "CO", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7985), "142", false, null, null, "Colombia" },
+                    { new Guid("1a52542a-e4e8-4514-b84f-d8f7a0ce8bf5"), "HU", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8089), "177", false, null, null, "Hungary" },
+                    { new Guid("1bb67a2c-65b1-4437-b7db-61bb5c5c945a"), "NZ", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8226), "227", false, null, null, "New Zealand" },
+                    { new Guid("1bd96043-4837-4ab4-8812-0230d7cdc37c"), "BH", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7922), "117", false, null, null, "Bahrain" },
+                    { new Guid("1c1e8f0d-fa36-4dd5-a349-51f8f8cf1e11"), "RU", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8266), "231", false, null, null, "Nga" },
+                    { new Guid("1c3907c5-3cd4-4530-a28c-6d4acceec175"), "AZ", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7905), "113", false, null, null, "Azerbaijan" },
+                    { new Guid("1cb83a16-11a1-438b-8fd9-22e661c5904a"), "TN", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8321), "281", false, null, null, "Tunisia" },
+                    { new Guid("1cc02fda-f061-49ad-a4f1-ecb564a28c88"), "KZ", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8142), "187", false, null, null, "Kazakhstan" },
+                    { new Guid("1d374c8c-88c5-49ae-9c9c-0b2b362b1198"), "BR", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7936), "131", false, null, null, "Brasil" },
+                    { new Guid("1d41f179-ba78-41d6-8ecf-595c7d6de65a"), "MA", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8166), "209", false, null, null, "Maroc" },
+                    { new Guid("1df44627-4127-48c0-bbc7-2afc64cb75d2"), "CH", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7964), "274", false, null, null, "Thụy Sĩ" },
+                    { new Guid("1f0c0c80-dceb-47c4-9bfb-d9e2b29e8010"), "NR", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8222), "224", false, null, null, "Nauru" },
+                    { new Guid("20aa6e3b-0838-45fc-9769-161b291e5e24"), "Z4", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8378), "Z4", false, null, null, "Scotland" },
+                    { new Guid("212573b7-ec34-4844-b150-74f567de2c5d"), "GF", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8052), "GF", false, null, null, "French guiana" },
+                    { new Guid("21668f2b-b3d0-4927-9d67-3f9eee4736d6"), "AS", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7896), "AS", false, null, null, "Samoa thuộc Hoa Kỳ" },
+                    { new Guid("22174cd0-7b2d-4c6b-bb6c-5273e63d28f0"), "MY", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8201), "205", false, null, null, "Malaysia" },
+                    { new Guid("226d663e-46ee-4ab2-b385-b062345debd9"), "FR", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8041), "240", false, null, null, "Pháp" },
+                    { new Guid("23063395-5d36-41c9-9711-66722ab8849f"), "CZ", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8003), "252", false, null, null, "Séc" },
+                    { new Guid("24c5f9fa-e493-43a1-9d2a-c6d25dc2ea89"), "FY", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8043), "254", false, null, null, "Serbia" },
+                    { new Guid("25b7ed9b-8bfd-4601-a4c5-a59dfe5a3fab"), "AN", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7886), "AN", false, null, null, "Netherlands antilles" },
+                    { new Guid("25df127f-9fb7-4f1d-8a4f-484364e15f91"), "GN", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8063), "170", false, null, null, "Guinea" },
+                    { new Guid("264432ff-ba3d-4402-ae05-d3cbbdf7eef4"), "NE", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8209), "229", false, null, null, "Niger" },
+                    { new Guid("26d0e10a-43ea-4654-93be-00a21f60b760"), "PG", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8240), "237", false, null, null, "Papua New Guinea" },
+                    { new Guid("298cf3d9-cf13-401f-86b5-368d1c71ec77"), "GQ", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8067), "169", false, null, null, "Guinea Xích Đạo" },
+                    { new Guid("2e24284d-fe7b-477b-a3e9-23505ccbe379"), "Z6", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8381), "Z6", false, null, null, "Great Britain (See United Kingdom)" },
+                    { new Guid("2eab2085-d20b-4cc4-a85b-7567c9ce6ea9"), "LC", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8148), "247", false, null, null, "Saint Lucia" },
+                    { new Guid("2eb9de76-3d99-43a5-b17d-ba2f0e08c64a"), "NI", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8215), "228", false, null, null, "Nicaragua" },
+                    { new Guid("2eead3fb-8c57-4699-a48d-b9eb2a781d23"), "TF", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8309), "TF", false, null, null, "French Southern Territories" },
+                    { new Guid("2f4455d6-efee-4959-8dfd-6f7db81faadd"), "NP", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8220), "226", false, null, null, "Nepal" },
+                    { new Guid("2facb682-01d5-4798-bf0a-928bd471ecb3"), "CC", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7955), "CC", false, null, null, "Cocos (keeling) islands" },
+                    { new Guid("332e0e9e-0182-47a0-b894-ade71da83708"), "BB", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7910), "120", false, null, null, "Barbados" },
+                    { new Guid("33aeb885-ea5c-4343-8011-b1dccebdd65f"), "SA", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8270), "110", false, null, null, "Ả Rập Saudi" },
+                    { new Guid("347a0e24-276d-4a54-b92b-4b88b60179af"), "GM", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8061), "163", false, null, null, "Gambia" },
+                    { new Guid("36299397-b100-420b-bd1b-3f18eda310fa"), "TD", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8307), "270", false, null, null, "Tchad" },
+                    { new Guid("3671801a-1c88-4dc6-9e75-d766644c2af9"), "SR", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8296), "264", false, null, null, "Suriname" },
+                    { new Guid("36ddc306-adf0-4897-a200-6377ff0d9042"), "TT", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8327), "278", false, null, null, "Trinidad và Tobago" },
+                    { new Guid("39351753-1af5-4797-89e2-b97589db8d2e"), "AZ", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8391), "114", false, null, null, "Cộng hòa Azerbaijan" },
+                    { new Guid("39ef7fcd-b539-46be-90a6-bc3f6d1524d8"), "KR", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8137), "174", false, null, null, "Hàn Quốc" },
+                    { new Guid("3adb70b0-ae40-4ac0-8a27-15398cc79d49"), "GS", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8071), "GS", false, null, null, "South georgia and the south sandwich islands" },
+                    { new Guid("3af1daa8-65e1-4502-823d-3c8530608104"), "MP", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8185), "MP", false, null, null, "Northern mariana islands" },
+                    { new Guid("3d9d9ca5-3356-48b3-b518-eb806a6128ee"), "VU", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8361), "289", false, null, null, "Vanuatu" },
+                    { new Guid("3dac050e-a2a6-469b-b0bb-def2e17544a5"), "GW", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8078), "168", false, null, null, "Guinea-Bissau" },
+                    { new Guid("3de67d92-a46e-4113-bd12-2e89a48aa1f0"), "CN", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7983), "279", false, null, null, "Trung Quốc" },
+                    { new Guid("3edffd99-5e14-4466-9f3e-a72ab48711d7"), "HM", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8082), "HM", false, null, null, "Heard and mc donald islands" },
+                    { new Guid("3f3e1d5e-ca7b-45ef-9e1e-f3c471e8894f"), "ST", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8297), "251", false, null, null, "São Tomé và Príncipe" },
+                    { new Guid("426516a2-46e9-4103-8b44-22b4a30b21ae"), "LS", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8155), "195", false, null, null, "Lesotho" },
+                    { new Guid("4452efd3-9727-4c5c-9cc9-76f7270c673d"), "CI", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7973), "130", false, null, null, "Bờ Biển Ngà" },
+                    { new Guid("44ff82d4-3356-4f71-9aa2-dc5f161537f0"), "SY", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8301), "266", false, null, null, "Syria" },
+                    { new Guid("45696681-b325-4d55-b4ea-56a920227907"), "SL", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8288), "256", false, null, null, "Sierra Leone" },
+                    { new Guid("4589f414-2018-4196-a42a-68fa60b41dae"), "MZ", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8203), "219", false, null, null, "Mozambique" },
+                    { new Guid("45a0ebe0-51be-423b-8885-7a7bf06e6f95"), "BA", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7908), "127", false, null, null, "Bosna và Hercegovina" },
+                    { new Guid("46651a82-3d63-4a24-baff-9bb1ee8ac492"), "CF", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7960), "280", false, null, null, "Trung Phi" },
+                    { new Guid("484be820-41ff-4911-94c6-2d2969764ac4"), "CD", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7957), "145", false, null, null, "Cộng hòa Dân chủ Congo" },
+                    { new Guid("4b12f61e-5980-415f-a62b-b296753fd70d"), "PT", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8255), "129", false, null, null, "Bồ Đào Nha" },
+                    { new Guid("4b7309a1-de33-4f43-a2ff-3f11e0e5869b"), "SM", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8290), "250", false, null, null, "San Marino" },
+                    { new Guid("4bab2495-c861-47e7-82e6-1806fd87b767"), "IM", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8097), "IM", false, null, null, "Isle of man" },
+                    { new Guid("4dbc51c5-3faa-4e76-b0d5-a28df95c5c01"), "GT", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8072), "167", false, null, null, "Guatemala" },
+                    { new Guid("4dcd4bda-0da9-415d-8f7e-ecd5841ad250"), "ER", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8026), "158", false, null, null, "Eritrea" },
+                    { new Guid("4e6e77af-56d6-4314-ac68-c39713511d70"), "IE", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8093), "183", false, null, null, "Ireland" },
+                    { new Guid("50202b21-f7c0-42eb-89bd-4470e82f3943"), "JE", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8116), "JE", false, null, null, "Jersey" },
+                    { new Guid("502c14cb-18ea-461f-9bc0-9591b056284c"), "DK", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8009), "153", false, null, null, "Đan Mạch" },
+                    { new Guid("506ddd2c-4f81-4d6d-806c-4c9e605bab3f"), "KN", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8133), "246", false, null, null, "Saint Kitts và Nevis" },
+                    { new Guid("509f7d40-e740-472f-8a7a-84b5a527eb96"), "KG", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8125), "192", false, null, null, "Kyrgyzstan" },
+                    { new Guid("50c044c3-6cd1-46ad-b10a-e879291806f2"), "NU", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8224), "NU", false, null, null, "Niue" },
+                    { new Guid("52595376-4b2b-4746-bb17-16f7ba234a33"), "MW", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8198), "204", false, null, null, "Malawi" },
+                    { new Guid("5300fbb8-1d3b-48c2-b251-c9daab165b94"), "SH", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8281), "SH", false, null, null, "St. Helena" },
+                    { new Guid("5351587c-9713-44c9-9088-9626d01300c8"), "TK", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8316), "TK", false, null, null, "Tokelau" },
+                    { new Guid("539247ef-f9a9-4893-b250-2aa204a87640"), "VG", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8351), "VG", false, null, null, "Virgin Islands (British)" },
+                    { new Guid("53b7d739-4b49-4a35-9d04-93520d79d105"), "TJ", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8314), "267", false, null, null, "Tajikistan" },
+                    { new Guid("53fdbb96-c808-4474-83bc-084e422a8b95"), "BY", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7948), "121", false, null, null, "Belarus" },
+                    { new Guid("54ca17f4-f6f7-4bcf-9809-8d45153c2271"), "LR", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8154), "197", false, null, null, "Liberia" },
+                    { new Guid("561d896e-c3c5-4dfc-b13c-790aa25fbd5d"), "PA", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8234), "236", false, null, null, "Panama" },
+                    { new Guid("5701a860-793e-4660-9302-005b27d4348e"), "AO", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7889), "106", false, null, null, "Angola" },
+                    { new Guid("573dec77-5908-42b2-b1a5-8a5ee8407dee"), "GD", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8048), "165", false, null, null, "Grenada" },
+                    { new Guid("57c01cf1-7f20-4a6c-bec9-bcc9a3a039fe"), "SG", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8279), "257", false, null, null, "Singapore" },
+                    { new Guid("58357a87-d3a9-4ea4-82ea-eb7775f1c568"), "IR", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8111), "181", false, null, null, "Iran" },
+                    { new Guid("58486abc-86a6-4bb8-a610-eb0e4bdf0b73"), "LT", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8157), "200", false, null, null, "Litva" },
+                    { new Guid("58776bc3-ee4b-44ae-ac9e-a501437bde2f"), "PF", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8238), "PF", false, null, null, "French Polynesia" },
+                    { new Guid("58d12ab1-4946-45f9-bef5-354e5803f357"), "DO", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8012), "152", false, null, null, "Cộng hòa Dominicana" },
+                    { new Guid("59e93599-98e9-44de-b9d1-bbbf17c599bf"), "ZA", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8385), "223", false, null, null, "Nam Phi" },
+                    { new Guid("5a68453d-81d4-4417-a579-33d6a1c27ea6"), "PE", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8236), "239", false, null, null, "Peru" },
+                    { new Guid("5b526a49-1694-4eb8-b602-4e150d12184d"), "MC", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8168), "216", false, null, null, "Monaco" },
+                    { new Guid("5bd03273-5b23-4181-892c-397126e8da56"), "PK", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8244), "234", false, null, null, "Pakistan" },
+                    { new Guid("5d60e969-8387-42e4-b866-31dfb209f433"), "Z3", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8376), "Z3", false, null, null, "England" },
+                    { new Guid("5dc567de-1249-4aaa-9d49-04dcd3501220"), "ES", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8028), "269", false, null, null, "Tây Ban Nha" },
+                    { new Guid("5f4a7dfd-c3ed-4796-bde2-94199e595ef0"), "BV", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7943), "BV", false, null, null, "Bouvet island" },
+                    { new Guid("62947f31-4a3e-441b-a9d2-9642ce61de2f"), "KI", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8129), "189", false, null, null, "Kiribati" },
+                    { new Guid("62b0c6c0-4a45-4f33-b35e-d184d815518e"), "GH", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8056), "164", false, null, null, "Ghana" },
+                    { new Guid("63c8621a-fc44-4abe-ba08-8d80520280cf"), "SC", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8273), "255", false, null, null, "Seychelles" },
+                    { new Guid("6477d7a3-465e-4277-a4eb-ef09b13f5eca"), "MO", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8183), "MO", false, null, null, "Macau" },
+                    { new Guid("66169c75-2aa7-409a-a7b9-d8cfe6ac80c0"), "LB", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8146), "196", false, null, null, "Li ban" },
+                    { new Guid("66400b32-893a-489c-a5e1-180d55fb20d4"), "KE", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8123), "188", false, null, null, "Kenya" },
+                    { new Guid("66533605-d826-4aec-9536-e4d30effefda"), "AL", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7879), "103", false, null, null, "Albania" },
+                    { new Guid("665d03c6-346e-43d8-ad21-31492b4382aa"), "JO", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8120), "186", false, null, null, "Jordan" },
+                    { new Guid("686b79de-db2f-4ccd-946c-1bef80cd503e"), "CA", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7953), "140", false, null, null, "Canada" },
+                    { new Guid("6b24b562-1294-4537-a69a-26ac34c41521"), "AD", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7851), "105", false, null, null, "Andorra" },
+                    { new Guid("6b8836aa-2476-4d82-98f1-0b7f56e66f7a"), "TL", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8318), "TL", false, null, null, "Timor Leste" },
+                    { new Guid("6c408b50-b4be-4eca-a710-11a6d914cf4f"), "AT", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7898), "109", false, null, null, "Áo" },
+                    { new Guid("6d2d2371-8785-4a7b-94ba-84c804b2b0a2"), "RE", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8262), "RE", false, null, null, "Reunion" },
+                    { new Guid("6d5a6761-432b-4bd2-9b04-5e01c421de23"), "NF", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8211), "NF", false, null, null, "Norfolk Island" },
+                    { new Guid("716a0688-0378-4941-af8f-c11dc4c45ac2"), "TC", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8305), "TC", false, null, null, "Turks and Caicos Islands" },
+                    { new Guid("720aaa71-3cc0-470f-b56c-472ac37a6574"), "BE", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7915), "125", false, null, null, "Bỉ" },
+                    { new Guid("72d527d4-00df-4f9a-b0e1-e1fa84a4ba6d"), "SO", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8294), "261", false, null, null, "Somalia" },
+                    { new Guid("74c266fd-7287-4525-aca3-6bb66ddcf61f"), "WS", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8365), "249", false, null, null, "Samoa" },
+                    { new Guid("75de9dea-ef0f-4492-890a-f5af36cce7aa"), "CG", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7962), "144", false, null, null, "Cộng hòa Congo" },
+                    { new Guid("76c42f0f-bfb2-4a11-b5a4-e854f74e72cd"), "BZ", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7950), "122", false, null, null, "Belize" },
+                    { new Guid("77365013-80d7-44d5-bd8d-472542cac431"), "MQ", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8187), "MQ", false, null, null, "Martinique" },
+                    { new Guid("788693d2-4ac9-4f85-94bf-13d021bc000d"), "PM", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8247), "PM", false, null, null, "St. Pierre and Miquelon" },
+                    { new Guid("78dcfd52-de7b-4c1d-9ded-0e5d3f7a8a35"), "MT", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8192), "208", false, null, null, "Malta" },
+                    { new Guid("79bc1ba0-a0f6-4065-9783-9e01ade32cde"), "PN", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8249), "PN", false, null, null, "Pitcairn" },
+                    { new Guid("7a384197-d55e-44b8-b389-a65f17e74e1f"), "PH", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8242), "242", false, null, null, "Philippines" },
+                    { new Guid("7af80a81-41e5-47de-abd3-7ce25f9c39b4"), "TM", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8320), "282", false, null, null, "Turkmenistan" },
+                    { new Guid("7afaefc0-9aa8-4ba7-98ae-618682a5be7f"), "KM", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8131), "143", false, null, null, "Comoros" },
+                    { new Guid("7b0c9a9c-e730-4b96-9372-e9ef8ab5339b"), "BM", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7929), "BM", false, null, null, "Bermuda" },
+                    { new Guid("7bea406c-221d-45dd-aca6-a2ceb90741aa"), "DM", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8010), "151", false, null, null, "Dominica" },
+                    { new Guid("7e27cb42-41fb-4b20-b26b-3c1ea9b4ff5c"), "SB", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8272), "260", false, null, null, "Solomon" },
+                    { new Guid("7ef68b6d-2d6b-4688-95bc-d0fd79ffb6c5"), "CY", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8001), "191", false, null, null, "Síp" },
+                    { new Guid("7f233816-fe94-4941-8125-b62c88410fa9"), "BD", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7912), "119", false, null, null, "Bangladesh" },
+                    { new Guid("8562fd7f-49aa-46cf-bbc9-71f7460c6ba7"), "SZ", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8303), "265", false, null, null, "Swaziland" },
+                    { new Guid("8592d87f-720b-48e7-82ee-e82d64cbf984"), "AG", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7873), "108", false, null, null, "Antigua và Barbuda" },
+                    { new Guid("8764ee96-c950-44cf-a1f4-7636126c671b"), "BS", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7938), "116", false, null, null, "Bahamas" },
+                    { new Guid("882c80ef-806d-4370-9fb1-f00a13a7a5c1"), "LV", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8162), "194", false, null, null, "Latvia" },
+                    { new Guid("8a003437-323c-451c-b211-1886f79c25f1"), "MV", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8196), "206", false, null, null, "Maldives" },
+                    { new Guid("8a6a8442-1533-4bba-9a05-ed707122573e"), "GR", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8069), "178", false, null, null, "Hy Lạp" },
+                    { new Guid("8f800608-e254-418d-8163-78f71be4873f"), "EG", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8022), "102", false, null, null, "Ai Cập" },
+                    { new Guid("8ff51ea0-476b-4dec-8736-70cc36ea1d2c"), "NO", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8218), "225", false, null, null, "Na Uy" },
+                    { new Guid("90b2a6a0-bacd-4175-80e9-b8fde9233786"), "KW", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8138), "190", false, null, null, "Kuwait" },
+                    { new Guid("90ef0553-8520-4d57-ae3b-112ebf28b313"), "ZW", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8389), "295", false, null, null, "Zimbabwe" },
+                    { new Guid("92aea1da-5cf2-40fa-92a2-cce297949451"), "SI", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8282), "259", false, null, null, "Slovenia" },
+                    { new Guid("92b69f82-f3e2-4ea9-9d4b-1763b1a75dec"), "MX", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8200), "213", false, null, null, "Mexico" },
+                    { new Guid("93fc49be-bd23-41c3-8538-4b424a7806da"), "CV", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7997), "CV", false, null, null, "Cape verde" },
+                    { new Guid("9412c9e0-c4fe-442f-8b13-ea064bf48703"), "LI", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8150), "199", false, null, null, "Liechtenstein" },
+                    { new Guid("9601fc62-41b1-44af-af8e-8a03c91c96b8"), "JP", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8122), "232", false, null, null, "Nhật Bản" },
+                    { new Guid("97bc234b-7d4c-4870-801b-74f1998741be"), "US", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8340), "175", false, null, null, "Hoa Kỳ" },
+                    { new Guid("98062645-5015-4d8c-886e-3fb70c247ada"), "GP", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8065), "GP", false, null, null, "Guadeloupe" },
+                    { new Guid("994cf06f-b833-4415-84e0-94f3847b6dd8"), "KY", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8140), "KY", false, null, null, "Cayman islands" },
+                    { new Guid("99cfce62-6540-4525-97b8-9a2e62618e05"), "SJ", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8284), "SJ", false, null, null, "Svalbard and Jan Mayen Islands" },
+                    { new Guid("9acb769e-d2de-479c-b66a-424ce710a036"), "NG", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8213), "230", false, null, null, "Nigeria" },
+                    { new Guid("9d5769fe-b3ae-4697-9150-44674e8008ba"), "DE", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8005), "155", false, null, null, "Đức" },
+                    { new Guid("9ded845f-06a1-4651-8903-bc46f7978c84"), "GE", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8050), "GE", false, null, null, "Georgia" },
+                    { new Guid("9eb57842-f592-4080-affd-71b43f7d0517"), "AQ", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7891), "AQ", false, null, null, "Antarctica" },
+                    { new Guid("9ee7b166-4c6f-4136-8928-c6246c3e76d5"), "UZ", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8344), "288", false, null, null, "Uzbekistan" },
+                    { new Guid("a1080c01-e5bb-4e3f-8784-f0678f1eff58"), "DJ", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8007), "150", false, null, null, "Djibouti" },
+                    { new Guid("a1ba5be8-fef9-470a-a5f7-efcf7fc900a4"), "ME", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8370), "218", false, null, null, "Montenegro" },
+                    { new Guid("a1f120ed-4785-486e-b796-dd8cd569a415"), "VC", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8347), "248", false, null, null, "Saint Vincent và Grenadines" },
+                    { new Guid("a30f588b-166d-4118-9d33-b8294e15ad44"), "SD", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8275), "263", false, null, null, "Sudan" },
+                    { new Guid("a3597652-cc84-40ff-b143-208ee8473e93"), "EA", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8016), "154", false, null, null, "Đông Timor" },
+                    { new Guid("a3c5c224-a013-4e23-8655-641a0a76b38a"), "PW", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8257), "235", false, null, null, "Palau" },
+                    { new Guid("a695b824-cfc2-40a3-b5a1-35243a6e2116"), "YE", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8367), "293", false, null, null, "Yemen" },
+                    { new Guid("a7a696de-3fd8-48c2-b87a-6464b222af87"), "VE", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8349), "291", false, null, null, "Venezuela" },
+                    { new Guid("a8b38e56-d3ea-435f-907a-615ed7ced805"), "AF", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8394), "101", false, null, null, "Afghanistan" },
+                    { new Guid("aa3d56b9-f398-4be1-b8ae-9f8563101b6e"), "IT", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8114), "292", false, null, null, "Ý" },
+                    { new Guid("aa4399ec-1ff3-4837-a68e-0df0720162cb"), "MR", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8188), "211", false, null, null, "Mauritanie" },
+                    { new Guid("aa745539-b444-49d2-ad13-14149f8a1645"), "BO", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7934), "126", false, null, null, "Bolivia" },
+                    { new Guid("ab16a3ed-00cd-4445-8e7c-770b1965232e"), "NL", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8216), "173", false, null, null, "Hà Lan" },
+                    { new Guid("abdfeb5b-a4b8-4ab1-b6b8-83f7fb72ec23"), "EE", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8020), "159", false, null, null, "Estonia" },
+                    { new Guid("ad4ef5f1-e823-4ed4-9ad5-cec4a2cae6af"), "UG", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8336), "285", false, null, null, "Uganda" },
+                    { new Guid("af24512b-01ae-4420-96cb-62051ede96cc"), "UA", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8334), "286", false, null, null, "Ukraina" },
+                    { new Guid("af3badc9-b6da-4eb0-8a42-ecf8dfd6ae19"), "AM", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7883), "112", false, null, null, "Armenia" },
+                    { new Guid("af9c2425-679e-4459-8c68-2d357f4f93e5"), "PY", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8259), "238", false, null, null, "Paraguay" },
+                    { new Guid("affdf19e-5ed4-497a-97d0-0fc95a547785"), "LK", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8152), "262", false, null, null, "Sri Lanka" },
+                    { new Guid("b16a509f-5c70-42b1-a05e-6d4426c721ca"), "IQ", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8109), "182", false, null, null, "Iraq" },
+                    { new Guid("b171e933-4b7d-46f5-802a-14c5c9234ed7"), "ML", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8177), "207", false, null, null, "Mali" },
+                    { new Guid("b1829e62-c3dd-4f65-8c41-fdbe26aedb93"), "MG", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8171), "203", false, null, null, "Madagascar" },
+                    { new Guid("b4e019b1-042b-465c-baf9-60d525d9b85c"), "CK", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7976), "CK", false, null, null, "Cook islands" },
+                    { new Guid("b6169a90-920f-425d-a275-82601862a220"), "SK", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8286), "258", false, null, null, "Slovakia" },
+                    { new Guid("b83926c4-6963-4f82-97f7-dffa6e87ea7d"), "MK", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8175), "202", false, null, null, "Macedonia" },
+                    { new Guid("b83be42b-cde9-4dc3-a838-d8197d2c678f"), "FO", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8039), "FO", false, null, null, "Faroe islands" },
+                    { new Guid("ba7304bd-7e25-4731-a60f-10c13589c71a"), "ET", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8029), "160", false, null, null, "Ethiopia" },
+                    { new Guid("ba947c48-36fb-420b-b2d9-663fe308b18c"), "TG", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8310), "275", false, null, null, "Togo" },
+                    { new Guid("bcb96598-0e05-4316-86d3-80413326555a"), "MH", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8173), "210", false, null, null, "Quần đảo Marshall" },
+                    { new Guid("be946a16-a1af-499c-9bd8-ca12a22fb69c"), "CU", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7995), "149", false, null, null, "Cuba" },
+                    { new Guid("bf1bf333-4604-4974-838f-886100c006f3"), "TW", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8331), "TW", false, null, null, "Đài Loan" },
+                    { new Guid("c4065df0-2539-4046-bb77-7d699a072734"), "FM", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8037), "214", false, null, null, "Micronesia" },
+                    { new Guid("c5c14db2-753f-4e28-88b5-3b9e502fa0c6"), "BN", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7931), "132", false, null, null, "Brunei" },
+                    { new Guid("c6f6287f-39f6-4470-ad46-ac539eef3052"), "EC", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8018), "156", false, null, null, "Ecuador" },
+                    { new Guid("c7f500b0-be15-4ab8-ae5c-1db430d19b8c"), "YT", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8369), "YT", false, null, null, "Mayotte" },
+                    { new Guid("c831fb16-910b-4939-804a-1052b8f8adc1"), "HT", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8087), "172", false, null, null, "Haiti" },
+                    { new Guid("c8766416-ed13-4631-a9c4-e89e782055c9"), "Z7", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8383), "Z7", false, null, null, "Wales" },
+                    { new Guid("cba207c9-9ee4-4a20-876b-ecb1160d0845"), "SN", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8292), "253", false, null, null, "Sénégal" },
+                    { new Guid("cbf1c521-494b-4981-9dc9-b6a1b229c01d"), "JM", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8118), "185", false, null, null, "Jamaica" },
+                    { new Guid("cc2a4d3b-bae2-4602-9d23-4d4d2d918699"), "MD", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8170), "215", false, null, null, "Moldova" },
+                    { new Guid("cdd52492-d981-4972-9f41-4b1774c002ee"), "GI", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8057), "GI", false, null, null, "Gibraltar" },
+                    { new Guid("cf8c2ebc-2ed1-404c-875c-d2151d54ab9e"), "MM", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8179), "220", false, null, null, "Myanma" },
+                    { new Guid("d0357290-582a-47cd-984c-8815d38454be"), "Z5", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8380), "Z5", false, null, null, "Northern Ireland" },
+                    { new Guid("d1fef153-87bc-403a-9590-0ec4cc8d676e"), "PL", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8245), "118", false, null, null, "Ba Lan" },
+                    { new Guid("d200b4b5-7435-41a9-be8b-b6a80e14120b"), "IO", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8100), "IO", false, null, null, "British indian ocean territory" },
+                    { new Guid("d2ebac27-3463-40cb-9eb2-86e1da12a3ba"), "MS", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8190), "MS", false, null, null, "Montserrat" },
+                    { new Guid("d34d65e5-253f-4324-9aee-f74045802e47"), "GG", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8054), "GG", false, null, null, "Guernsey" },
+                    { new Guid("d3c10501-b94f-4a0e-b871-80d4b3d7bbbb"), "HK", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8080), "HK", false, null, null, "Hong kong" },
+                    { new Guid("d50a063a-82ef-4b56-858e-1a8794b32878"), "HN", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8083), "176", false, null, null, "Honduras" },
+                    { new Guid("d576474f-de6a-45fc-bd19-e18a2915f1a4"), "CR", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7989), "146", false, null, null, "Costa Rica" },
+                    { new Guid("d892c6c0-bf86-4487-ab8b-5af35cc32a0c"), "GV", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8076), "171", false, null, null, "Guyana" },
+                    { new Guid("d94b5935-e6d2-4aa7-b9f7-d332badacd8d"), "BT", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7941), "124", false, null, null, "Bhutan" },
+                    { new Guid("da333d92-e16c-4b49-b9d8-669df9032f82"), "FJ", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8033), "161", false, null, null, "Fiji" },
+                    { new Guid("dd79ead4-6e12-4cb8-aff5-8f00d8bf9e99"), "SD", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8392), "222", false, null, null, "Nam Sudan" },
+                    { new Guid("dd951a03-c803-4351-aac5-ed4ec9922bab"), "QA", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8260), "243", false, null, null, "Qatar" },
+                    { new Guid("ddf4ecad-6f97-4bde-84fe-2b9dc51f0ffd"), "BW", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7946), "128", false, null, null, "Botswana" },
+                    { new Guid("de0d7be8-8a87-4358-b93e-e809ab17f238"), "RO", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8264), "244", false, null, null, "Romania" },
+                    { new Guid("e180ff8a-4e49-4edd-9168-21b372b8d9b7"), "BG", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7920), "133", false, null, null, "Bulgaria" },
+                    { new Guid("e1fc9395-73b5-4fd6-8c31-37fef3a3e866"), "ZM", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8387), "294", false, null, null, "Zambia" },
+                    { new Guid("e369137c-1730-4809-88e4-e43031327233"), "BF", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7917), "134", false, null, null, "Burkina Faso" },
+                    { new Guid("e3a2237c-9d57-462f-bad8-7a78856303c8"), "ID", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8091), "180", false, null, null, "Indonesia" },
+                    { new Guid("e43c3f5c-e8d7-430a-9869-e61337bd4188"), "Z2", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8374), "Z2", false, null, null, "British Southern and Antarctic Territories" },
+                    { new Guid("e4acc3fd-7e2d-4927-b7e8-797cb8a29a86"), "GU", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8074), "GU", false, null, null, "Guam" },
+                    { new Guid("e4c05566-0c8d-42a4-a2e9-ad4d6d33b35f"), "AI", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7877), "AI", false, null, null, "Anguilla" },
+                    { new Guid("e5439053-279d-4094-852d-0c2edc6992ed"), "SV", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8299), "157", false, null, null, "El Salvador" },
+                    { new Guid("e5837adb-d926-41f1-8434-73fed9db7504"), "AW", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7903), "AW", false, null, null, "Aruba việt nam" },
+                    { new Guid("e6e7518f-73eb-4010-b0cf-6dcc5c8f8e01"), "DZ", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8014), "104", false, null, null, "Algérie" },
+                    { new Guid("e9455b51-bd57-482f-a979-5ecf6c8c4afd"), "GB", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8046), "107", false, null, null, "Vương quốc Liên hiệp Anh và Bắc Ireland" },
+                    { new Guid("edb5a6e1-b084-4e46-87ab-22d38da9cf0a"), "UY", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8342), "287", false, null, null, "Uruguay" },
+                    { new Guid("edcecb3c-ffcb-451f-8e24-02a0bf6499ae"), "IN", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8098), "115", false, null, null, "Cộng hòa Ấn Độ" },
+                    { new Guid("ee02aa87-f8dc-44ac-9ac9-830120f05656"), "TR", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8325), "272", false, null, null, "Thổ Nhĩ Kỳ" },
+                    { new Guid("ee707e39-4195-426c-abf9-1ce21a771350"), "NA", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8205), "221", false, null, null, "Namibia" },
+                    { new Guid("f034e368-335c-4a9f-a039-b7ea83f8a315"), "LU", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8159), "201", false, null, null, "Luxembourg" },
+                    { new Guid("f07d3dde-aea1-4f0a-ba9d-310cda4fa6e9"), "TH", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8312), "271", false, null, null, "Thái Lan" },
+                    { new Guid("f1218849-b5cf-43c8-b3c4-b1ff145f27fc"), "MU", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8194), "212", false, null, null, "Mauritius" },
+                    { new Guid("f1c02c7d-3154-4e55-817c-1e24f6eef729"), "GA", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8044), "162", false, null, null, "Gabon" },
+                    { new Guid("f21a86da-a1de-4023-93c9-3a23d315a8cd"), "RW", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8268), "245", false, null, null, "Rwanda" },
+                    { new Guid("f36eb030-510e-4ca0-b7c4-a1c1ef656dd6"), "FK", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8035), "FK", false, null, null, "Falkland islands (malvinas)" },
+                    { new Guid("f468cb27-57fb-4b75-b3b7-70bb33ca2705"), "KH", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8127), "139", false, null, null, "Campuchia" },
+                    { new Guid("f5874f17-6c1e-4c07-b8bf-41b76546f6f0"), "CM", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7980), "138", false, null, null, "Cameroon" },
+                    { new Guid("f5f9c1ed-f4fb-4cff-aee3-2bcb0d8eed3e"), "NC", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8207), "NC", false, null, null, "New Caledonia" },
+                    { new Guid("f5fdcb6c-e0c5-4a57-adca-e743ba60ccee"), "LY", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8164), "198", false, null, null, "Libya" },
+                    { new Guid("f79baaf7-6191-4ba9-b38a-2f1b50d05598"), "TV", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8329), "283", false, null, null, "Tuvalu" },
+                    { new Guid("f9375017-9897-4487-8916-c98d22fd05b9"), "GL", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8059), "GL", false, null, null, "Greenland" },
+                    { new Guid("fb10ce71-e68a-4a70-bf7e-5edee9388d48"), "AE", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7871), "137", false, null, null, "Các Tiểu Vương quốc Ả Rập Thống nhất" },
+                    { new Guid("fb67b422-6903-494e-945d-fa09f031b4f1"), "VI", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8357), "VI", false, null, null, "Virgin Islands (U.S.)" },
+                    { new Guid("fc5a0c05-ebac-4906-8a9f-dddcdbcc0a9d"), "AU", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7901), "284", false, null, null, "Úc" },
+                    { new Guid("fd0ac376-bf65-4bf8-9067-245691aa1827"), "HR", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8085), "147", false, null, null, "Croatia" },
+                    { new Guid("fd21963c-7b5e-44a8-8d70-2edbda437946"), "MN", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8181), "217", false, null, null, "Mông Cổ" },
+                    { new Guid("fd235817-1607-4f4c-83c7-ff5bd0012896"), "BJ", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7927), "123", false, null, null, "Benin" },
+                    { new Guid("fd32d265-24dd-4073-a4b8-59e6358b59ed"), "AR", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(7893), "111", false, null, null, "Argentina" },
+                    { new Guid("fe657d37-7960-4bb3-8f15-81666fca928d"), "EH", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8024), "EH", false, null, null, "Western sahara" },
+                    { new Guid("ff78779a-45cd-4076-8c61-442a9a3873f2"), "TZ", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8332), "268", false, null, null, "Tanzania" },
+                    { new Guid("ffd3fabd-a5f1-4442-837b-d53b5d89272e"), "WF", null, new DateTime(2023, 10, 29, 23, 53, 46, 474, DateTimeKind.Local).AddTicks(8363), "WF", false, null, null, "Wallis and Futuna Islands" }
                 });
 
             migrationBuilder.InsertData(
@@ -1948,9 +2039,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { 1, "DISEASE", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(3920), null, false, null, null, "Do bệnh", 1 },
-                    { 2, "COMPLICATION", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(3932), null, false, null, null, "Do tai biến điều trị", 2 },
-                    { 99, "OTHER", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(3950), null, false, null, null, "Khác", 99 }
+                    { 1, "DISEASE", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Do bệnh", 1 },
+                    { 2, "COMPLICATION", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Do tai biến điều trị", 2 },
+                    { 99, "OTHER", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Khác", 99 }
                 });
 
             migrationBuilder.InsertData(
@@ -1958,10 +2049,10 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { 1, "WITHIN_24H", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(3973), null, false, null, null, "Trong 24h vào", 1 },
-                    { 2, "WITHIN_48H", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(3978), null, false, null, null, "Trong 48h vào", 2 },
-                    { 3, "WITHIN_72H", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(3980), null, false, null, null, "Trong 72h vào", 3 },
-                    { 99, "OTHER", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(3982), null, false, null, null, "Khác", 99 }
+                    { 1, "WITHIN_24H", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Trong 24h vào", 1 },
+                    { 2, "WITHIN_48H", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Trong 48h vào", 2 },
+                    { 3, "WITHIN_72H", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Trong 72h vào", 3 },
+                    { 99, "OTHER", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Khác", 99 }
                 });
 
             migrationBuilder.InsertData(
@@ -2002,32 +2093,43 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             migrationBuilder.InsertData(
                 table: "ItemGroups",
-                columns: new[] { "Id", "Code", "Inactive", "IsSystem", "Name", "SortOrder" },
+                columns: new[] { "Id", "Code", "CommodityType", "Inactive", "IsSystem", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("00be783e-d679-4f1c-9ae2-a4f4c79de0ef"), "TKSV", false, true, "Thuốc kháng sinh viên", 4 },
-                    { new Guid("05a24915-0bed-4f61-b53d-b5e52482e44c"), "TK", false, true, "Thuốc khác", 21 },
-                    { new Guid("25454ce7-bff0-4fd5-a47a-069554c1535a"), "VC", false, true, "Vaccine", 19 },
-                    { new Guid("2f5148cb-8adf-45ec-88ee-f84530cfa164"), "THTT", false, true, "Thuốc hướng tâm thần", 10 },
-                    { new Guid("2fd41f93-ddb9-47dd-9833-4507ce71128c"), "TV", false, true, "Thuốc viên", 1 },
-                    { new Guid("3144745c-477c-4ce2-9c33-a38eb2153057"), "SP", false, true, "Sinh phẩm", 18 },
-                    { new Guid("31d26ca7-2b5f-4dfd-b961-f3609e6a0b69"), "TCO", false, true, "Nhóm thuốc corticoid", 12 },
-                    { new Guid("35df3868-8db6-440d-809f-f4c345d804a7"), "TS", false, true, "Thuốc siro", 6 },
-                    { new Guid("6375b8a1-b6e7-4724-a1b4-8cc3acc98e43"), "KCVI", false, true, "Khoáng chất và Vitamin", 5 },
-                    { new Guid("8590ae3d-351c-4438-bfe5-3f69dcf97349"), "TB", false, true, "Thuốc bột", 8 },
-                    { new Guid("914ca65d-6579-4590-b963-fee8a743bae1"), "DC", false, true, "Dịch truyền", 3 },
-                    { new Guid("9e144dff-29f6-47da-b7ed-b55abd1a2cd3"), "VTNT", false, true, "Vật tư nhà thuốc", 20 },
-                    { new Guid("a28fb46e-e9b9-410e-9c31-d8ebfd22015c"), "TKTT", false, true, "Thuốc kê tự túc", 16 },
-                    { new Guid("ae04abd7-d012-470d-9b8a-f38d9c5c94a8"), "TG", false, true, "Thuốc gói", 14 },
-                    { new Guid("b5f03233-d733-4349-93df-db562b7d4376"), "THD", false, true, "Thuốc hỗn dịch", 6 },
-                    { new Guid("c987b9d2-e599-49cc-99f3-d075d27cee7c"), "TDY", false, true, "Thuốc đông y", 5 },
-                    { new Guid("cc48bb40-fbf0-4054-818c-eb49545aaeea"), "TDN", false, true, "Thuốc dùng ngoài", 7 },
-                    { new Guid("cd5d7538-b1d2-448d-b6ff-c139c35f9dc7"), "TGTM", false, true, "Thuốc gây tê, mê", 13 },
-                    { new Guid("ddf105e8-6534-46e4-832b-598daa84c4d5"), "TGN", false, true, "Thuốc gây nghiện", 9 },
-                    { new Guid("e47ab5de-9ea5-4075-8da5-7ae9f36538e2"), "TUT", false, true, "Thuốc ung thư", 15 },
-                    { new Guid("e482e866-9243-49d8-8676-403377de353c"), "TKSO", false, true, "Thuốc kháng sinh ống", 11 },
-                    { new Guid("ea57a262-6647-4e88-880c-82bc4227e916"), "TNM", false, true, "Thuốc nhỏ mắt", 17 },
-                    { new Guid("ff9be71e-a958-4244-9df1-1582229c67d5"), "TU", false, true, "Thuốc uống", 2 }
+                    { new Guid("00be783e-d679-4f1c-9ae2-a4f4c79de0ef"), "TKSV", 0, false, true, "Thuốc kháng sinh viên", 4 },
+                    { new Guid("05a24915-0bed-4f61-b53d-b5e52482e44c"), "TK", 0, false, true, "Thuốc khác", 21 },
+                    { new Guid("077fe8b3-03d1-4c4c-b7be-5f7fb2015957"), "VTAC", 1, false, true, "Vật tư ấn chỉ", 27 },
+                    { new Guid("18b82fb4-2ba8-4713-871f-3ba51c031b42"), "VTTH", 1, false, true, "Vật tư tiêu hoa", 23 },
+                    { new Guid("25454ce7-bff0-4fd5-a47a-069554c1535a"), "VC", 0, false, true, "Vaccine", 19 },
+                    { new Guid("27988a81-eeab-41f0-a279-c774259ecdcf"), "VTCC", 1, false, true, "Vật tư công cụ - dụng cụ", 30 },
+                    { new Guid("2a8c130b-8170-4776-b3bc-51eb9da01d35"), "VTNV", 1, false, true, "Vật tư nẹp vít", 26 },
+                    { new Guid("2f5148cb-8adf-45ec-88ee-f84530cfa164"), "THTT", 0, false, true, "Thuốc hướng tâm thần", 10 },
+                    { new Guid("2fd41f93-ddb9-47dd-9833-4507ce71128c"), "TV", 0, false, true, "Thuốc viên", 1 },
+                    { new Guid("3144745c-477c-4ce2-9c33-a38eb2153057"), "SP", 0, false, true, "Sinh phẩm", 18 },
+                    { new Guid("31d26ca7-2b5f-4dfd-b961-f3609e6a0b69"), "TCO", 0, false, true, "Nhóm thuốc corticoid", 12 },
+                    { new Guid("35df3868-8db6-440d-809f-f4c345d804a7"), "TS", 0, false, true, "Thuốc siro", 6 },
+                    { new Guid("54eed868-2c02-46b3-acdf-e064a4ddb893"), "VTXH", 1, false, true, "Vật tư xã hội hóa", 31 },
+                    { new Guid("58215bd0-ff85-45b4-90bb-4550f7e97838"), "VTHC", 1, false, true, "Vật tư hóa chất", 25 },
+                    { new Guid("58291959-c2ca-45d6-b68d-ef81568fc163"), "VTXH", 1, false, true, "Vật tư khác", 32 },
+                    { new Guid("6375b8a1-b6e7-4724-a1b4-8cc3acc98e43"), "KCVI", 0, false, true, "Khoáng chất và Vitamin", 5 },
+                    { new Guid("8590ae3d-351c-4438-bfe5-3f69dcf97349"), "TB", 0, false, true, "Thuốc bột", 8 },
+                    { new Guid("891ad741-f6dc-48ee-be99-3e678b5e8f6c"), "VTTT", 1, false, true, "Vật tư thay thế", 24 },
+                    { new Guid("914ca65d-6579-4590-b963-fee8a743bae1"), "DC", 0, false, true, "Dịch truyền", 3 },
+                    { new Guid("9e144dff-29f6-47da-b7ed-b55abd1a2cd3"), "VTNT", 0, false, true, "Vật tư nhà thuốc", 20 },
+                    { new Guid("a15b74b8-1a38-42de-b958-a62bbd5d8a02"), "VTTB", 1, false, true, "Vật tư thiết bị y tế", 28 },
+                    { new Guid("a28fb46e-e9b9-410e-9c31-d8ebfd22015c"), "TKTT", 0, false, true, "Thuốc kê tự túc", 16 },
+                    { new Guid("ae04abd7-d012-470d-9b8a-f38d9c5c94a8"), "TG", 0, false, true, "Thuốc gói", 14 },
+                    { new Guid("b5f03233-d733-4349-93df-db562b7d4376"), "THD", 0, false, true, "Thuốc hỗn dịch", 6 },
+                    { new Guid("c987b9d2-e599-49cc-99f3-d075d27cee7c"), "TDY", 0, false, true, "Thuốc đông y", 5 },
+                    { new Guid("c9c64187-bf8c-49f4-8b5b-2a04c9aafb5b"), "VTYT", 1, false, true, "Vật tư y tế", 22 },
+                    { new Guid("cc48bb40-fbf0-4054-818c-eb49545aaeea"), "TDN", 0, false, true, "Thuốc dùng ngoài", 7 },
+                    { new Guid("cd5d7538-b1d2-448d-b6ff-c139c35f9dc7"), "TGTM", 0, false, true, "Thuốc gây tê, mê", 13 },
+                    { new Guid("d3ee2c41-ac9f-4356-8b76-a9b319929970"), "VTDC", 1, false, true, "Vật tư dụng cụ", 29 },
+                    { new Guid("ddf105e8-6534-46e4-832b-598daa84c4d5"), "TGN", 0, false, true, "Thuốc gây nghiện", 9 },
+                    { new Guid("e47ab5de-9ea5-4075-8da5-7ae9f36538e2"), "TUT", 0, false, true, "Thuốc ung thư", 15 },
+                    { new Guid("e482e866-9243-49d8-8676-403377de353c"), "TKSO", 0, false, true, "Thuốc kháng sinh ống", 11 },
+                    { new Guid("ea57a262-6647-4e88-880c-82bc4227e916"), "TNM", 0, false, true, "Thuốc nhỏ mắt", 17 },
+                    { new Guid("ff9be71e-a958-4244-9df1-1582229c67d5"), "TU", 0, false, true, "Thuốc uống", 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -2087,20 +2189,20 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "IsForInPatient", "IsForOutPatient", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { 1, "CAPTOACHOVE", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5635), null, false, false, true, null, null, "Cấp toa cho về", 1 },
-                    { 2, "HEN", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5640), null, false, false, true, null, null, "Hẹn", 1 },
-                    { 3, "CHUYEN_PHONGKHAM", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5642), null, false, false, true, null, null, "Chuyển phòng khám", 2 },
-                    { 4, "DTRI_NGOAITRU", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5644), null, false, false, true, null, null, "Điều trị ngoại trú", 3 },
-                    { 5, "NHAPVIEN", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5646), null, false, false, true, null, null, "Nhập viện", 4 },
-                    { 6, "BOKHAM", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5649), null, false, false, true, null, null, "Bỏ khám", 5 },
-                    { 7, "CHUYEN_KHOA", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5650), null, false, true, true, null, null, "Chuyển khoa", 8 },
-                    { 8, "RAVIEN", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5653), null, false, true, false, null, null, "Ra viện", 1 },
-                    { 9, "XINVE", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5655), null, false, true, false, null, null, "Xin về", 2 },
-                    { 10, "DUAVE", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5657), null, false, true, false, null, null, "Đưa về", 3 },
-                    { 11, "TRONVIEN", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5659), null, false, true, false, null, null, "Trốn viện", 4 },
-                    { 12, "CHUYEN_TUYEN", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5666), null, false, false, true, null, null, "Chuyển tuyến", 6 },
-                    { 13, "TUVONG", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5668), null, false, true, true, null, null, "Tử vong", 7 },
-                    { 99, "KHAC", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5670), null, false, true, true, null, null, "Khác", 99 }
+                    { 1, "CAPTOACHOVE", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, false, true, null, null, "Cấp toa cho về", 1 },
+                    { 2, "HEN", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, false, true, null, null, "Hẹn", 1 },
+                    { 3, "CHUYEN_PHONGKHAM", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, false, true, null, null, "Chuyển phòng khám", 2 },
+                    { 4, "DTRI_NGOAITRU", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, false, true, null, null, "Điều trị ngoại trú", 3 },
+                    { 5, "NHAPVIEN", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, false, true, null, null, "Nhập viện", 4 },
+                    { 6, "BOKHAM", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, false, true, null, null, "Bỏ khám", 5 },
+                    { 7, "CHUYEN_KHOA", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, true, true, null, null, "Chuyển khoa", 8 },
+                    { 8, "RAVIEN", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, true, false, null, null, "Ra viện", 1 },
+                    { 9, "XINVE", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, true, false, null, null, "Xin về", 2 },
+                    { 10, "DUAVE", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, true, false, null, null, "Đưa về", 3 },
+                    { 11, "TRONVIEN", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, true, false, null, null, "Trốn viện", 4 },
+                    { 12, "CHUYEN_TUYEN", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, false, true, null, null, "Chuyển tuyến", 6 },
+                    { 13, "TUVONG", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, true, true, null, null, "Tử vong", 7 },
+                    { 99, "KHAC", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, true, true, null, null, "Khác", 99 }
                 });
 
             migrationBuilder.InsertData(
@@ -2108,12 +2210,12 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { 1, "KHOI", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5710), null, false, null, null, "Khỏi", 1 },
-                    { 2, "DO_GIAM", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5714), null, false, null, null, "Đỡ, giảm", 2 },
-                    { 3, "KHONGTHAYDOI", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5750), null, false, null, null, "Không thay đổi", 3 },
-                    { 4, "NANGHON", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5763), null, false, null, null, "Nặng hơn", 4 },
-                    { 5, "TUVONG", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5766), null, false, null, null, "Tử vong", 5 },
-                    { 99, "KHAC", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5768), null, true, null, null, "Khác", 6 }
+                    { 1, "KHOI", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Khỏi", 1 },
+                    { 2, "DO_GIAM", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Đỡ, giảm", 2 },
+                    { 3, "KHONGTHAYDOI", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Không thay đổi", 3 },
+                    { 4, "NANGHON", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Nặng hơn", 4 },
+                    { 5, "TUVONG", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Tử vong", 5 },
+                    { 99, "KHAC", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, true, null, null, "Khác", 6 }
                 });
 
             migrationBuilder.InsertData(
@@ -2121,9 +2223,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { 1, "NOITRU", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5574), null, false, null, null, "Nội trú", 1 },
-                    { 2, "NGOAITRU", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5580), null, false, null, null, "Ngoại trú", 2 },
-                    { 3, "DICHVU", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5582), null, false, null, null, "Dịch vụ", 3 }
+                    { 1, "NOITRU", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Nội trú", 1 },
+                    { 2, "NGOAITRU", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Ngoại trú", 2 },
+                    { 3, "DICHVU", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Dịch vụ", 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -2131,9 +2233,18 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { 1, "BHYT", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5531), null, false, null, null, "Bảo hiểm y tế", 1 },
-                    { 2, "VP", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5537), null, false, null, null, "Viện phí", 2 },
-                    { 3, "DV", null, new DateTime(2023, 9, 6, 21, 6, 33, 188, DateTimeKind.Local).AddTicks(5539), null, false, null, null, "Dịch vụ", 3 }
+                    { 1, "BHYT", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Bảo hiểm y tế", 1 },
+                    { 2, "VP", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Viện phí", 2 },
+                    { 3, "DV", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Dịch vụ", 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "ReceptionType",
+                columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
+                values: new object[,]
+                {
+                    { 1, "KB", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Khám bệnh", 1 },
+                    { 2, "CC", null, new DateTime(1975, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Cấp cứu", 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -2169,7 +2280,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     { new Guid("22048fa7-a9e4-4ac7-89a6-e9e34e4811b4"), "GI-LUU", false, "Ngày giường lưu", 16 },
                     { new Guid("45e3f5de-4096-4944-a6b6-69b829b0f61f"), "XN", false, "Xét nghiệm", 1 },
                     { new Guid("53bf47c7-1414-47cf-8c88-5ba96aa2c978"), "THUOC-TT", false, "Thuốc thanh toán theo tỷ lệ", 6 },
-                    { new Guid("675d16db-cd35-4229-b042-82aef4718aff"), "14", false, "Giường điều trị ngoại trú", 14 },
+                    { new Guid("675d16db-cd35-4229-b042-82aef4718aff"), "GI-NgT", false, "Giường điều trị ngoại trú", 14 },
                     { new Guid("75b2f46f-f841-4cbe-9513-93c44306e78e"), "KHAM", false, "Khám bệnh", 13 },
                     { new Guid("7802d629-9e6a-48a7-825c-c91f530785ac"), "CPM", false, "Chế phẩm máu", 17 },
                     { new Guid("7a871ff7-c167-4fc8-b652-0aa2ecd72444"), "TDCN", false, "Thăm dò chức năng", 3 },
@@ -2379,6 +2490,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                 column: "ItemId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_InOutStockItems_ItemTypeId",
+                table: "InOutStockItems",
+                column: "ItemTypeId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_InOutStocks_ApproverUserId",
                 table: "InOutStocks",
                 column: "ApproverUserId");
@@ -2504,69 +2620,49 @@ namespace HIS.EntityFrameworkCore.Migrations
                 column: "UnitId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MedicalRecords_BranchID",
-                table: "MedicalRecords",
-                column: "BranchID");
+                name: "IX_Patient_BloodTypeId",
+                table: "Patient",
+                column: "BloodTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MedicalRecords_DepartmentID",
-                table: "MedicalRecords",
-                column: "DepartmentID");
+                name: "IX_Patient_BloodTypeRhId",
+                table: "Patient",
+                column: "BloodTypeRhId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MedicalRecords_PatientRecordID",
-                table: "MedicalRecords",
-                column: "PatientRecordID");
+                name: "IX_Patient_CareerId",
+                table: "Patient",
+                column: "CareerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MedicalRecords_RoomID",
-                table: "MedicalRecords",
-                column: "RoomID");
+                name: "IX_Patient_CountryId",
+                table: "Patient",
+                column: "CountryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PatientRecords_BranchID",
-                table: "PatientRecords",
-                column: "BranchID");
+                name: "IX_Patient_DistrictId",
+                table: "Patient",
+                column: "DistrictId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PatientRecords_CareerID",
-                table: "PatientRecords",
-                column: "CareerID");
+                name: "IX_Patient_EthnicId",
+                table: "Patient",
+                column: "EthnicId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PatientRecords_CountryID",
-                table: "PatientRecords",
-                column: "CountryID");
+                name: "IX_Patient_GenderId",
+                table: "Patient",
+                column: "GenderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PatientRecords_DistrictID",
-                table: "PatientRecords",
-                column: "DistrictID");
+                name: "IX_Patient_ProvinceId",
+                table: "Patient",
+                column: "ProvinceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PatientRecords_EthnicityID",
-                table: "PatientRecords",
-                column: "EthnicityID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PatientRecords_GenderID",
-                table: "PatientRecords",
-                column: "GenderID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PatientRecords_PatientID",
-                table: "PatientRecords",
-                column: "PatientID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PatientRecords_ProvinceID",
-                table: "PatientRecords",
-                column: "ProvinceID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PatientRecords_WardID",
-                table: "PatientRecords",
-                column: "WardID");
+                name: "IX_Patient_WardId",
+                table: "Patient",
+                column: "WardId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Provinces_CountryId",
@@ -2668,6 +2764,9 @@ namespace HIS.EntityFrameworkCore.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ColumnTemplates");
+
+            migrationBuilder.DropTable(
                 name: "DeathCauses");
 
             migrationBuilder.DropTable(
@@ -2686,10 +2785,16 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "InOutStockItems");
 
             migrationBuilder.DropTable(
+                name: "Insurance");
+
+            migrationBuilder.DropTable(
                 name: "ItemPricePolicies");
 
             migrationBuilder.DropTable(
                 name: "ItemStocks");
+
+            migrationBuilder.DropTable(
+                name: "MedicalRecord");
 
             migrationBuilder.DropTable(
                 name: "MedicalRecordEndTypes");
@@ -2698,13 +2803,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "MedicalRecordResults");
 
             migrationBuilder.DropTable(
-                name: "MedicalRecords");
-
-            migrationBuilder.DropTable(
                 name: "MedicalRecordTypes");
 
             migrationBuilder.DropTable(
                 name: "PatientRecordTypes");
+
+            migrationBuilder.DropTable(
+                name: "ReceptionType");
 
             migrationBuilder.DropTable(
                 name: "RolePermissionBranchs");
@@ -2713,10 +2818,10 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "ServicePricePolicies");
 
             migrationBuilder.DropTable(
-                name: "ServiceRequestDetails");
+                name: "ServiceRequest");
 
             migrationBuilder.DropTable(
-                name: "ServiceRequests");
+                name: "ServiceRequestServe");
 
             migrationBuilder.DropTable(
                 name: "ServiceResultIndices");
@@ -2764,7 +2869,10 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "InOutStockTypes");
 
             migrationBuilder.DropTable(
-                name: "PatientRecords");
+                name: "PatientRecord");
+
+            migrationBuilder.DropTable(
+                name: "Patient");
 
             migrationBuilder.DropTable(
                 name: "Rooms");
@@ -2788,6 +2896,12 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SurgicalProcedureTypes");
 
             migrationBuilder.DropTable(
+                name: "BloodTypeRh");
+
+            migrationBuilder.DropTable(
+                name: "BloodType");
+
+            migrationBuilder.DropTable(
                 name: "Careers");
 
             migrationBuilder.DropTable(
@@ -2795,9 +2909,6 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "Genders");
-
-            migrationBuilder.DropTable(
-                name: "Patients");
 
             migrationBuilder.DropTable(
                 name: "Wards");

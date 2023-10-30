@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace HIS.Dtos.Dictionaries.ColumnTemplates
 {
-    public class GetAllColumnTemplateInput : PagedResultRequestDto
+    public class PagedColumnTemplateResultRequestDto : PagedResultRequestDto
     {
         public int? MaxRefTypeFilter { get; set; }
         public int? MinRefTypeFilter { get; set; }
         public string TemplateNameFilter { get; set; }
+        public bool? VisibleFilter { get; set; }
     }
 }

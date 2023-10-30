@@ -6,12 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.ApplicationService.Dictionaries.ColumnTemplate
+namespace HIS.ApplicationService.Dictionaries.ColumnTemplates
 {
     public interface IColumnTemplateAppService
     {
-        Task<PagedResultDto<ColumnTemplateDto>> GetAll(GetAllColumnTemplateInput input);
+        Task<PagedResultDto<ColumnTemplateDto>> GetAll(PagedColumnTemplateResultRequestDto input);
         Task<ResultDto<ColumnTemplateDto>> CreateOrEdit(CreateOrEditColumnTemplateDto input);
-        Task<ResultDto<ColumnTemplateDto>> Delete(Guid id);
     }
 }

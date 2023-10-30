@@ -4,23 +4,26 @@ using HIS.Application.Core.Services.Dto;
 using HIS.Core.Linq;
 using HIS.Dtos.Business.Receptions;
 using HIS.Dtos.Dictionaries.ColumnTemplates;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.ApplicationService.Dictionaries.ColumnTemplate
+namespace HIS.ApplicationService.Dictionaries.ColumnTemplates
 {
     public class ColumnTemplateAppService : BaseAppService, IColumnTemplateAppService
     {
-        public ColumnTemplateAppService(HISDbContext context, IMapper mapper) : base(context, mapper)
+        public ColumnTemplateAppService(HISDbContext context, IMapper mapper) 
+            : base(context, mapper)
         {
         }
 
-        public virtual async Task<PagedResultDto<ColumnTemplateDto>> GetAll(GetAllColumnTemplateInput input)
+        public virtual async Task<PagedResultDto<ColumnTemplateDto>> GetAll(PagedColumnTemplateResultRequestDto input)
         {
             var result = new PagedResultDto<ColumnTemplateDto>();
             try
@@ -44,45 +47,38 @@ namespace HIS.ApplicationService.Dictionaries.ColumnTemplate
 
         public virtual async Task<ResultDto<ColumnTemplateDto>> CreateOrEdit(CreateOrEditColumnTemplateDto input)
         {
-            if (input.Id == null)
-                return await Create(input);
-            else
-                return await Update(input);
-        }
-
-        public virtual async Task<ResultDto<ColumnTemplateDto>> Create(CreateOrEditColumnTemplateDto input)
-        {
-            return null;
-        }
-
-        public virtual async Task<ResultDto<ColumnTemplateDto>> Update(CreateOrEditColumnTemplateDto input)
-        {
-            return null;
-        }
-
-        public virtual async Task<ResultDto<ColumnTemplateDto>> Delete(Guid id)
-        {
             var result = new ResultDto<ColumnTemplateDto>();
-            using (var transaction = Context.BeginTransaction())
+            using (var transaction  = Context.BeginTransaction())
             {
                 try
                 {
-                    var data = Context.ColumnTemplates.SingleOrDefault(x => x.Id == id);
-                    if (data != null)
-                    {
-                        Context.ColumnTemplates.Remove(data);
-                        await Context.SaveChangesAsync();
+                    var inputDels = Context.ColumnTemplates.Where(x => x.RefType == input.RefType && x.TemplateName == input.TemplateName).ToList();
+                    if (inputDels != null)
+                        Context.ColumnTemplates.RemoveRange(inputDels);
 
-                        transaction.Commit();
-                    }    
+                    var columns = new List<ColumnTemplate>();
+                    foreach (var inputDetail in input.Details)
+                    {
+                        if (inputDetail.Id == default(Guid))
+                            inputDetail.Id = Guid.NewGuid();
+                        inputDetail.RefType = input.RefType;
+                        inputDetail.TemplateName = input.TemplateName;
+
+                        var column = ObjectMapper.Map<ColumnTemplate>(inputDetail);
+                    }
+                    var columnTemplates = ObjectMapper.Map<IList<ColumnTemplate>>(input.Details);
+                    if (columnTemplates != null)
+                        Context.ColumnTemplates.AddRange(columnTemplates);
+
+                    await SaveChangesAsync();
+                    transaction.Commit();
                 }
                 catch (Exception ex)
-                {
+                { 
                     result.IsSuccessed = false;
                     result.Message = ex.Message;
                 }
-            }    
-                
+            }
             return result;
         }
     }
