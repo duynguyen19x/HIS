@@ -7,6 +7,40 @@ namespace HIS.Dtos.Business.InOutStockItems
 {
     public class InOutStockItemDto : EntityDto<Guid?>
     {
+        public Guid? ItemId { get; set; }
+
+        public Guid? InOutStockId { get; set; }
+
+        [Description("Giá nhập")]
+        public decimal? ImpPrice { get; set; }
+
+        [Description("Số lượng YC")]
+        public decimal? RequestQuantity { get; set; }
+
+        [Description("Số lượng duyệt")]
+        public decimal? ApprovedQuantity { get; set; }
+
+        [Description("Phần trăm vat giá nhập")]
+        public decimal? ImpVatRate { get; set; }
+
+        [Description("Phần trăm thuế")]
+        public decimal? ImpTaxRate { get; set; }
+
+        public decimal? ImpAmount
+        {
+            get
+            {
+                var impAmount = RequestQuantity.GetValueOrDefault() * ImpPrice.GetValueOrDefault();
+                var vatRate = ImpVatRate.GetValueOrDefault() / 100;
+                var taxRate = ImpTaxRate.GetValueOrDefault() / 100;
+
+                return impAmount * (1 + vatRate + taxRate);
+            }
+            set { }
+        }
+
+        #region Mở rộng
+
         [Description("Mã thuốc")]
         public string Code { get; set; }
 
@@ -36,34 +70,6 @@ namespace HIS.Dtos.Business.InOutStockItems
 
         [Description("Nước sản xuất")]
         public Guid? CountryId { get; set; }
-
-        [Description("Giá nhập")]
-        public decimal? ImpPrice { get; set; }
-
-        [Description("Số lượng YC")]
-        public decimal? RequestQuantity { get; set; }
-
-        [Description("Số lượng duyệt")]
-        public decimal? ApprovedQuantity { get; set; }
-
-        [Description("Phần trăm vat giá nhập")]
-        public decimal? ImpVatRate { get; set; }
-
-        [Description("Phần trăm thuế")]
-        public decimal? ImpTaxRate { get; set; }
-
-        public decimal? ImpAmount
-        {
-            get
-            {
-                var impAmount = RequestQuantity.GetValueOrDefault() * ImpPrice.GetValueOrDefault();
-                var vatRate = ImpVatRate.GetValueOrDefault() / 100;
-                var taxRate = ImpTaxRate.GetValueOrDefault() / 100;
-
-                return impAmount * (1 + vatRate + taxRate);
-            }
-            set { }
-        }
 
         [Description("Diễn giải")]
         public string Description { get; set; }
@@ -104,11 +110,9 @@ namespace HIS.Dtos.Business.InOutStockItems
         [Description("Năm thầu")]
         public int? TenderYear { get; set; }
 
-        public Guid? ItemId { get; set; }
-
-        public Guid? InOutStockId { get; set; }
-
         public CommodityTypes CommodityType { get; set; }
+
+        #endregion
 
         public IList<ItemPricePolicyDto> ItemPricePolicies { get; set; }
     }
