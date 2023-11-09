@@ -18,6 +18,17 @@ namespace HIS.EntityFrameworkCore.Data.Builders
                 Email = "administrator@gmail.com",
                 UseType = Utilities.Enums.UseTypes.Admin,
                 Status = Utilities.Enums.UserStatusTypes.Active,
+            },
+            new User
+            {
+                Id = new Guid("49BA7FD4-2EDB-4482-A419-00C81F023F5C"),
+                UserName = "hainx",
+                Password = Security.EncryptMd5("123qwe"),
+                FirstName = "Hai",
+                LastName = "Nghiem",
+                Email = "nghiemhai293@gmail.com",
+                UseType = Utilities.Enums.UseTypes.Admin,
+                Status = Utilities.Enums.UserStatusTypes.Active
             });
         }
     }

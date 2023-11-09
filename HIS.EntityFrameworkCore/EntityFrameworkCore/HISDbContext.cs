@@ -55,6 +55,7 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<District> Districts { get; set; }
         public DbSet<SWard> Wards { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<RelativeType> RelativeTypes { get; set; }
 
         public DbSet<Service> Services { get; set; }
         public DbSet<ServiceGroup> ServiceGroups { get; set; }

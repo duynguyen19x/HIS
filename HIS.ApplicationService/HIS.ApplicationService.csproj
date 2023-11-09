@@ -36,6 +36,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Business\Receptions\Dtos\" />
+    <Folder Include="Dictionaries\RelativeTypes\Dtos\" />
     <Folder Include="Reports\" />
   </ItemGroup>
 

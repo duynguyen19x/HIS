@@ -38,6 +38,8 @@ using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
 using HIS.ApplicationService.Business.ServiceRequests;
 using HIS.ApplicationService.Dictionaries.ColumnTemplates;
+using Microsoft.EntityFrameworkCore.Metadata;
+using HIS.ApplicationService.Dictionaries.RelativeTypes;
 
 namespace HIS.ApplicationService
 {
@@ -59,6 +61,7 @@ namespace HIS.ApplicationService
             services.AddTransient<IRoomService, RoomService>();
             services.AddTransient<IRoomTypeService, RoomTypeService>();
             services.AddTransient<IHospitalService, HospitalService>();
+            services.AddTransient<IRelativeTypeAppService, RelativeTypeAppService>();
 
             services.AddTransient<IIcdService, IcdService>();
             services.AddTransient<IProvinceService, ProvinceService>();

@@ -1,11 +1,12 @@
 ﻿using HIS.Core.Entities;
+using HIS.Core.Entities.Auditing;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
     /// Loại phòng, buồng.
     /// </summary>
-    public class RoomType : Entity<int>
+    public class RoomType : AuditedEntity<int>
     {
         public string Code { get; set; }
         public string Name { get; set; }

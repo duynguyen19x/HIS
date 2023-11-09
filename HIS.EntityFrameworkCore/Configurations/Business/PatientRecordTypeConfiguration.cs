@@ -14,7 +14,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
     {
         public void Configure(EntityTypeBuilder<PatientRecordType> builder)
         {
-            builder.ToTable("PatientRecordTypes");
+            builder.ToTable("PatientRecordType");
             builder.HasKey(x => x.Id);
         }
     }

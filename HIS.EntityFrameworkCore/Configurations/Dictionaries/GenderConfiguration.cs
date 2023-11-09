@@ -13,7 +13,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<Gender> builder)
         {
-            builder.ToTable("Genders");
+            builder.ToTable("Gender");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50).IsRequired();
             builder.Property(x => x.Name).HasMaxLength(512).IsRequired();

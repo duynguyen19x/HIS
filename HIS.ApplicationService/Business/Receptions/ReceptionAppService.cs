@@ -50,7 +50,7 @@ namespace HIS.ApplicationService.Business.Receptions
 
         public async Task<ResultDto<ReceptionDto>> CreateOrEdit(ReceptionDto input)
         {
-            if (DataHelper.IsNullOrDefault(input.PatientRecordId))
+            if (DataHelper.IsNullOrDefault(input.Id))
                 return await Create(input);
             else
                 return await Update(input);
@@ -64,15 +64,19 @@ namespace HIS.ApplicationService.Business.Receptions
             {
                 try
                 {
-                    // thêm mới hoặc cập nhật bệnh nhân
                     var patient = ObjectMapper.Map<Patient>(input);
-                    patient.Id = input.PatientId;
+                    patient.Id = input.PatientId.GetValueOrDefault();
                     if (DataHelper.IsNullOrDefault(patient.Id))
                     {
                         patient.Id = Guid.NewGuid();
                         patient.Code = "BN" + dateNow.Year + String.Format("{0:000}", Context.Patients.Count() + 1);
                         patient.CreatedDate = dateNow;
                         patient.CreatedBy = SessionExtensions.Login?.Id;
+                        Context.Patients.Add(patient);
+                    }
+                    else
+                    {
+                        Context.Patients.Update(patient);
                     }
 
                     // thêm mới hồ sơ bệnh án

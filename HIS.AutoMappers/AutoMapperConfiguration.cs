@@ -39,6 +39,7 @@ using HIS.Dtos.Business.Patients;
 using HIS.Dtos.Business.PatientRecords;
 using HIS.Dtos.Business.Receptions;
 using HIS.Dtos.Dictionaries.ColumnTemplates;
+using HIS.Dtos.Dictionaries.RelativeTypes;
 
 namespace HIS.AutoMappers
 {
@@ -169,6 +170,7 @@ namespace HIS.AutoMappers
 
             #region
             CreateMap<ColumnTemplateDto, ColumnTemplate>().ReverseMap();
+            CreateMap<RelativeTypeDto, RelativeType>().ReverseMap();
 
             #endregion
         }

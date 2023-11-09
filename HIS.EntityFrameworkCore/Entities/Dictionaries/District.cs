@@ -5,7 +5,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// <summary>
     /// Quận, huyện
     /// </summary>
-    public class District : FullAuditedEntity<Guid>
+    public class District : AuditedEntity<Guid>
     {
         public string Code { get; set; }
         public string Name { get; set; }

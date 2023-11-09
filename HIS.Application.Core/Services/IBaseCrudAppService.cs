@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace HIS.Application.Core.Services
 {
-    public interface IBaseCrudAppService<TEntityDto, TKey, TPagedRequestDto> : IBaseAppService
-        where TEntityDto : IEntityDto<TKey>
+    public interface IBaseCrudAppService<TEntityDto, TPrimaryKey, TPagedRequestDto> : IBaseAppService
+        where TEntityDto : IEntityDto<TPrimaryKey>
         where TPagedRequestDto : IPagedResultRequest
     {
         Task<ResultDto<TEntityDto>> CreateOrEdit(TEntityDto input);
-        Task<ResultDto<TEntityDto>> Delete(TKey id);
+        Task<ResultDto<TEntityDto>> Delete(TPrimaryKey id);
         Task<PagedResultDto<TEntityDto>> GetAll(TPagedRequestDto input);
-        Task<ResultDto<TEntityDto>> GetById(TKey id);
+        Task<ResultDto<TEntityDto>> GetById(TPrimaryKey id);
     }
 }

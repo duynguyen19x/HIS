@@ -5,7 +5,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// <summary>
     /// Xã, phường.
     /// </summary>
-    public class SWard : FullAuditedEntity<Guid>
+    public class SWard : AuditedEntity<Guid>
     {
         public string Code { get; set; }
         public string Name { get; set; }

@@ -1,11 +1,12 @@
 ﻿using HIS.Core.Entities;
+using HIS.Core.Entities.Auditing;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
     /// Tỉnh, thành phố.
     /// </summary>
-    public class Province : Entity<Guid>
+    public class Province : AuditedEntity<Guid>
     {
         public string Code { get; set; }
         public string Name { get; set; }

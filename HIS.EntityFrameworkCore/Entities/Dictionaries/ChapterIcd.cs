@@ -1,4 +1,5 @@
 ﻿using HIS.Core.Entities;
+using HIS.Core.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
-    public class ChapterIcd : Entity<Guid>
+    public class ChapterIcd : AuditedEntity<Guid>
     {
         [Description("ID")]
         public string Code { get; set; }

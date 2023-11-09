@@ -8,8 +8,11 @@
 
   <ItemGroup>
     <Compile Remove="Configurations\Others\**" />
+    <Compile Remove="EntityFrameworkCore\Seeds\**" />
     <EmbeddedResource Remove="Configurations\Others\**" />
+    <EmbeddedResource Remove="EntityFrameworkCore\Seeds\**" />
     <None Remove="Configurations\Others\**" />
+    <None Remove="EntityFrameworkCore\Seeds\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,7 +40,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="EntityFrameworkCore\Seeds\Dictionaries\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

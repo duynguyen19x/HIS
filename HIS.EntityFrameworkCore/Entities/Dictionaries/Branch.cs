@@ -1,11 +1,12 @@
 ﻿using HIS.Core.Entities;
+using HIS.Core.Entities.Auditing;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
     /// Chi nhánh
     /// </summary>
-    public class Branch : Entity<Guid>
+    public class Branch : AuditedEntity<Guid>
     {
         public string Code { get; set; }
         public string Name { get; set; }
