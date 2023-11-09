@@ -8,7 +8,7 @@ namespace HIS.Application.Core.Services.Dto
 {
     public class ResultDto<T>
     {
-        public virtual bool IsSuccessed { get; set; }
+        public virtual bool IsSucceeded { get; set; }
 
         public virtual string Message { get; set; }
 
@@ -20,7 +20,7 @@ namespace HIS.Application.Core.Services.Dto
 
         public ResultDto() 
         {
-            IsSuccessed = true;
+            IsSucceeded = true;
             Errors = new List<ResultErrorDto>();
         }
         public ResultDto(T item) 
@@ -41,7 +41,7 @@ namespace HIS.Application.Core.Services.Dto
         }
         public virtual void Exception(Exception ex)
         {
-            this.IsSuccessed = false;
+            this.IsSucceeded = false;
             this.Message = ex.Message;
         }
     }

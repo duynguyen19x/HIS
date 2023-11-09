@@ -34,7 +34,7 @@ namespace HIS.ApplicationService.Business.PatientRecords
         {
             try
             {
-                result.IsSuccessed = false;
+                result.IsSucceeded = false;
                 if (DataHelper.IsNullOrDefault(input.PatientId))
                     result.Error(nameof(PatientRecordDto.PatientId), "Mã bệnh nhân không tồn tại!");
 
@@ -52,7 +52,7 @@ namespace HIS.ApplicationService.Business.PatientRecords
                     await SaveChangesAsync();
 
                     result.Item = input;
-                    result.IsSuccessed = true;
+                    result.IsSucceeded = true;
                 } 
             }
             catch (Exception ex)
@@ -66,7 +66,7 @@ namespace HIS.ApplicationService.Business.PatientRecords
         {
             try
             {
-                result.IsSuccessed = false;
+                result.IsSucceeded = false;
                 if (DataHelper.IsNullOrDefault(input.PatientId))
                     result.Error(nameof(PatientRecordDto.PatientId), "Bệnh nhân không tồn tại!");
                 if (DataHelper.IsNullOrDefault(input.Id))
@@ -87,7 +87,7 @@ namespace HIS.ApplicationService.Business.PatientRecords
                     await SaveChangesAsync();
 
                     result.Item = input;
-                    result.IsSuccessed = true;
+                    result.IsSucceeded = true;
                 }
             }
             catch (Exception ex)

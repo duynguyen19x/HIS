@@ -75,7 +75,7 @@ namespace HIS.ApplicationService.Dictionaries.ColumnTemplates
                 }
                 catch (Exception ex)
                 { 
-                    result.IsSuccessed = false;
+                    result.IsSucceeded = false;
                     result.Message = ex.Message;
                 }
             }

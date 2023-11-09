@@ -11,8 +11,11 @@ using HIS.Dtos.Business.PatientRecords;
 using HIS.Dtos.Business.Patients;
 using HIS.Dtos.Business.Receptions;
 using HIS.Dtos.Business.ServiceRequests;
+using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.Utilities.Sections;
 using Microsoft.EntityFrameworkCore;
+using System.Net.WebSockets;
 
 namespace HIS.ApplicationService.Business.Receptions
 {
@@ -53,62 +56,48 @@ namespace HIS.ApplicationService.Business.Receptions
                 return await Update(input);
         }
 
-        public async Task<ResultDto<ReceptionDto>> Create(ReceptionDto input) => await BeginTransactionAsync<ResultDto<ReceptionDto>>(async result =>
+        public async Task<ResultDto<ReceptionDto>> Create(ReceptionDto input)
         {
-            try
+            var result = new ResultDto<ReceptionDto>();
+            var dateNow = DateTime.Now;
+            using (var transaction = BeginTransaction())
             {
-                // 1. thêm mới hoặc cập nhật thông tin định danh bệnh nhân (Patient)
-                // 2. thêm mới thông tin điều trị (PatientRecord)
-                // 3. thêm mới thông tin đăng ký dịch vụ khám (ServiceReq và ServiceReqServe).
-                var patient = ObjectMapper.Map<PatientDto>(input);
-                var resultCreateOrEditPatient = await _patientAppService.CreateOrEdit(patient);
-                if (resultCreateOrEditPatient.IsSuccessed)
+                try
                 {
-                    input.PatientId = resultCreateOrEditPatient.Item.Id;
-                    input.PatientCode = resultCreateOrEditPatient.Item.Code;
-
-                    var patientRecord = ObjectMapper.Map<PatientRecordDto>(input);
-                    var resultCreateOrEditPatientRecord = await _patientRecordAppService.CreateOrEdit(patientRecord);
-                    if (resultCreateOrEditPatientRecord.IsSuccessed)
+                    // thêm mới hoặc cập nhật bệnh nhân
+                    var patient = ObjectMapper.Map<Patient>(input);
+                    patient.Id = input.PatientId;
+                    if (DataHelper.IsNullOrDefault(patient.Id))
                     {
-                        input.PatientRecordId = resultCreateOrEditPatientRecord.Item.Id;
-                        input.PatientRecordCode = resultCreateOrEditPatientRecord.Item.Code;
+                        patient.Id = Guid.NewGuid();
+                        patient.Code = "BN" + dateNow.Year + String.Format("{0:000}", Context.Patients.Count() + 1);
+                        patient.CreatedDate = dateNow;
+                        patient.CreatedBy = SessionExtensions.Login?.Id;
+                    }
 
-                        //var serviceReq = ObjectMapper.Map<ServiceReqDto>(input);
-                        //var resultCreateOrEditServiceReq = await _serviceReqAppService.CreateOrEdit(serviceReq);
-                        //if (resultCreateOrEditServiceReq.IsSuccessed)
-                        //{
-                        //    //input.ServiceId =
-                        //}
-                        //else
-                        //{
-                        //    result.IsSuccessed = false;
-                        //    result.Message = resultCreateOrEditServiceReq.Message;
-                        //    result.Errors = resultCreateOrEditServiceReq.Errors;
-                        //}
-                    }
-                    else
-                    {
-                        result.IsSuccessed = false;
-                        result.Message = resultCreateOrEditPatientRecord.Message;
-                        result.Errors = resultCreateOrEditPatientRecord.Errors;
-                    }
+                    // thêm mới hồ sơ bệnh án
+                    var patientRecord = ObjectMapper.Map<PatientRecord>(input);
+                    patientRecord.PatientId = patient.Id;
+                    patientRecord.Code = "BA" + String.Format("{0:000}", Context.PatientRecords.Count() + 1);
+                    patientRecord.CreatedDate = dateNow;
+                    patientRecord.CreatedBy = SessionExtensions.Login?.Id;
+                    Context.PatientRecords.Add(patientRecord);
+
+                    await SaveChangesAsync();
+                    transaction.Commit();
+
+                    result.IsSucceeded = true;
+                    result.Item = input;
                 }
-                else
+                catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = resultCreateOrEditPatient.Message;
-                    result.Errors = resultCreateOrEditPatient.Errors;
+                    result.IsSucceeded = false;
+                    result.Message = ex.Message;
                 }
+            }
 
-                await SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                result.Exception(ex);
-                throw;
-            }
-        });
+            return result;
+        }
 
         public async Task<ResultDto<ReceptionDto>> Update(ReceptionDto input) => await BeginTransactionAsync<ResultDto<ReceptionDto>>(async result =>
         {
@@ -116,41 +105,41 @@ namespace HIS.ApplicationService.Business.Receptions
             {
                 var patient = ObjectMapper.Map<PatientDto>(input);
                 var resultCreateOrEditPatient = await _patientAppService.CreateOrEdit(patient);
-                if (resultCreateOrEditPatient.IsSuccessed)
+                if (resultCreateOrEditPatient.IsSucceeded)
                 {
                     input.PatientId = resultCreateOrEditPatient.Item.Id;
                     input.PatientCode = resultCreateOrEditPatient.Item.Code;
 
                     var patientRecord = ObjectMapper.Map<PatientRecordDto>(input);
                     var resultCreateOrEditPatientRecord = await _patientRecordAppService.CreateOrEdit(patientRecord);
-                    if (resultCreateOrEditPatientRecord.IsSuccessed)
+                    if (resultCreateOrEditPatientRecord.IsSucceeded)
                     {
                         input.PatientRecordId = resultCreateOrEditPatientRecord.Item.Id;
                         input.PatientRecordCode = resultCreateOrEditPatientRecord.Item.Code;
 
                         var serviceReq = ObjectMapper.Map<ServiceRequestDto>(input);
                         var resultCreateOrEditServiceReq = await _serviceRequestAppService.CreateOrEdit(serviceReq);
-                        if (resultCreateOrEditServiceReq.IsSuccessed)
+                        if (resultCreateOrEditServiceReq.IsSucceeded)
                         {
                             //input.ServiceId =
                         }
                         else
                         {
-                            result.IsSuccessed = false;
+                            result.IsSucceeded = false;
                             result.Message = resultCreateOrEditServiceReq.Message;
                             result.Errors = resultCreateOrEditServiceReq.Errors;
                         }
                     }
                     else
                     {
-                        result.IsSuccessed = false;
+                        result.IsSucceeded = false;
                         result.Message = resultCreateOrEditPatientRecord.Message;
                         result.Errors = resultCreateOrEditPatientRecord.Errors;
                     }
                 }
                 else
                 {
-                    result.IsSuccessed = false;
+                    result.IsSucceeded = false;
                     result.Message = resultCreateOrEditPatient.Message;
                     result.Errors = resultCreateOrEditPatient.Errors;
                 }

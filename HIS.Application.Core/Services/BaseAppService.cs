@@ -72,6 +72,12 @@ namespace HIS.Application.Core.Services
             return result;
         }
 
+
+        public virtual IDbContextTransaction BeginTransaction()
+        {
+            return Context.BeginTransaction();
+        }
+
         public virtual void SaveChanges() 
         {
             Context.SaveChanges();

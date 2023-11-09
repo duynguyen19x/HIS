@@ -25,7 +25,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
             builder.Property(x => x.Address).HasMaxLength(500);
             builder.Property(x => x.Email).HasMaxLength(50);
             builder.Property(x => x.Tel).HasMaxLength(20);
-            builder.Property(x => x.Phone).HasMaxLength(20);
+            builder.Property(x => x.Mobile).HasMaxLength(20);
             builder.Property(x => x.IdentificationNumber).HasMaxLength(50);
             builder.Property(x => x.IssueBy).HasMaxLength(250);
             builder.Property(x => x.CareerId).IsRequired();
