@@ -95,6 +95,7 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
 
         #region System
         public DbSet<SYSAutoNumber> SYSAutoNumbers { get; set; }
+        public DbSet<DbOption> DbOptions { get; set; }
         public DbSet<SYSRefType> SYSRefTypes { get; set; }
         public DbSet<SYSRefTypeCategory> SYSRefTypeCategories { get; set; }
         #endregion
