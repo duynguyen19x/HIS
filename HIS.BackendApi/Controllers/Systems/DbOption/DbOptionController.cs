@@ -31,6 +31,12 @@ namespace HIS.BackendApi.Controllers.Systems.DbOption
             return await _iDbOptionAppService.GetById(id);
         }
 
+        [HttpGet("GetMapOptions")]
+        public async Task<ApiResult<OptionValueDto>> GetMapOptions()
+        {
+            return await _iDbOptionAppService.GetMapOptions();
+        }
+
         [HttpPost("CreateOrEdit")]
         public async Task<ApiResult<DbOptionDto>> CreateOrEdit(DbOptionDto input)
         {
