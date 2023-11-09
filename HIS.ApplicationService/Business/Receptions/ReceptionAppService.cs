@@ -64,20 +64,15 @@ namespace HIS.ApplicationService.Business.Receptions
             {
                 try
                 {
-                    var patient = ObjectMapper.Map<Patient>(input);
+                    var patient = ObjectMapper.Map<PatientDto>(input);
                     patient.Id = input.PatientId.GetValueOrDefault();
-                    if (DataHelper.IsNullOrDefault(patient.Id))
+                    var patientResult = await _patientAppService.CreateOrEdit(patient);
+                    if (patientResult.IsSucceeded)
                     {
-                        patient.Id = Guid.NewGuid();
-                        patient.Code = "BN" + dateNow.Year + String.Format("{0:000}", Context.Patients.Count() + 1);
-                        patient.CreatedDate = dateNow;
-                        patient.CreatedBy = SessionExtensions.Login?.Id;
-                        Context.Patients.Add(patient);
-                    }
-                    else
-                    {
-                        Context.Patients.Update(patient);
-                    }
+                        var data = patientResult.Item;
+                        input.PatientId = data.Id;
+                    }    
+
 
                     // thêm mới hồ sơ bệnh án
                     var patientRecord = ObjectMapper.Map<PatientRecord>(input);

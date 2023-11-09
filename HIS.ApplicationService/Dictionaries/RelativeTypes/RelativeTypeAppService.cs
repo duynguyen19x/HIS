@@ -9,6 +9,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HIS.ApplicationService.Dictionaries.RelativeTypes
 {
+    /// <summary>
+    /// Mối quan hệ người nhà.
+    /// </summary>
     public class RelativeTypeAppService : BaseCrudAppService<RelativeTypeDto, Guid, PagedRelativeTypeInputDto>, IRelativeTypeAppService
     {
         public RelativeTypeAppService(HISDbContext context, IMapper mapper) 
@@ -98,15 +101,22 @@ namespace HIS.ApplicationService.Dictionaries.RelativeTypes
         public override async Task<PagedResultDto<RelativeTypeDto>> GetAll(PagedRelativeTypeInputDto input)
         {
             var result = new PagedResultDto<RelativeTypeDto>();
-            var relativeTypes = Context.RelativeTypes
-                .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), x => x.Code == input.CodeFilter)
-                .WhereIf(!string.IsNullOrEmpty(input.NameFilter), x => x.Name == input.NameFilter)
-                .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter)
-                .OrderBy(o => o.SortOrder);
+            try
+            {
+                var relativeTypes = Context.RelativeTypes
+                    .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), x => x.Code == input.CodeFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.NameFilter), x => x.Name == input.NameFilter)
+                    .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter)
+                    .OrderBy(o => o.SortOrder)
+                    .PageBy(input);
 
-            result.TotalCount = await relativeTypes.CountAsync();
-            result.Items = ObjectMapper.Map<IList<RelativeTypeDto>>(relativeTypes.ToList());
-
+                result.TotalCount = await relativeTypes.CountAsync();
+                result.Items = ObjectMapper.Map<IList<RelativeTypeDto>>(relativeTypes.ToList());
+            }
+            catch (Exception ex)
+            {
+                result.Exception(ex);
+            }
             return result;
         }
 
