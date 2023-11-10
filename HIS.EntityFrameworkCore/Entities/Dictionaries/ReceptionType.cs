@@ -1,8 +1,10 @@
 ﻿using HIS.Core.Entities;
 using HIS.Core.Entities.Auditing;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,17 +14,19 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// <summary>
     /// Loại tiếp nhận.
     /// </summary>
+    [Table("ReceptionType")]
+    [PrimaryKey(nameof(Id))]
     public class ReceptionType : AuditedEntity<int>
     {
         [Required]
-        [MaxLength(50)]
+        [MaxLength(20)]
         public virtual string Code { get; set; }
 
         [Required]
-        [MaxLength(250)]
+        [MaxLength(256)]
         public virtual string Name { get; set; }
 
-        [MaxLength(250)]
+        [MaxLength(512)]
         public virtual string Description { get; set; }
 
         public virtual int SortOrder { get; set; }

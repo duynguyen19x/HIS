@@ -8,29 +8,12 @@ using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.Systems;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using System.Reflection;
 
 namespace HIS.EntityFrameworkCore.EntityFrameworkCore
 {
     public class HISDbContext : DbContext
     {
-        public HISDbContext(DbContextOptions options) : base(options)
-        {
-
-        }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.ApplyConfiguration();
-            modelBuilder.Seed();
-        }
-
-        public virtual IDbContextTransaction BeginTransaction()
-        {
-            return Database.BeginTransaction();
-        }
-
         public DbSet<Gender> Genders { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
@@ -51,7 +34,7 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<Unit> Units { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<Province> Provinces { get; set; }
-        public DbSet<ReceptionType> ReceptionTypes { get; set; }
+        
         public DbSet<District> Districts { get; set; }
         public DbSet<SWard> Wards { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
@@ -85,6 +68,12 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<MedicalRecordEndType> MedicalRecordEndTypes { get; set; }
 
         #region - danh mục
+
+        public DbSet<BloodType> BloodTypes { get; set; }
+        public DbSet<BloodTypeRh> bloodTypeRhs { get; set; }
+
+        public DbSet<ReceptionType> ReceptionTypes { get; set; }
+
         public DbSet<ColumnTemplate> ColumnTemplates { get; set; }
         #endregion
 
@@ -103,5 +92,26 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
         public DbSet<SYSRefType> SYSRefTypes { get; set; }
         public DbSet<SYSRefTypeCategory> SYSRefTypeCategories { get; set; }
         #endregion
+
+
+        public HISDbContext(DbContextOptions options) : base(options)
+        {
+
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.ApplyConfiguration();
+            builder.Seed();
+
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        }
+
+        public virtual IDbContextTransaction BeginTransaction()
+        {
+            return Database.BeginTransaction();
+        }
     }
 }
