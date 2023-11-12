@@ -69,6 +69,7 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
 
         #region - danh mục
 
+        public DbSet<AccountBook> AccountBooks { get; set; }
         public DbSet<BloodType> BloodTypes { get; set; }
         public DbSet<BloodTypeRh> bloodTypeRhs { get; set; }
 

@@ -21,7 +21,7 @@ namespace HIS.Application.Core.Services.Dto
             TotalCount = totalCount;
         }
 
-        public void Exception(Exception ex)
+        public virtual void Exception(Exception ex)
         {
             this.IsSuccessed = false;
             this.Message = ex.Message;

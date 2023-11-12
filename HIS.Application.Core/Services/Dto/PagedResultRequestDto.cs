@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace HIS.Application.Core.Services.Dto
 {
     [Serializable]
-    public abstract class PagedResultRequestDto : IPagedResultRequest
+    public abstract class PagedResultRequestDto : IPagedResultRequestDto
     {
         public virtual string Filter { get; set; }
 

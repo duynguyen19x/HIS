@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using HIS.Dtos.Business;
 using HIS.Dtos.Business.InOutStockItems;
 using HIS.Dtos.Business.InOutStocks;
 using HIS.Dtos.Business.ItemStocks;
@@ -40,6 +39,7 @@ using HIS.Dtos.Business.PatientRecords;
 using HIS.Dtos.Business.Receptions;
 using HIS.Dtos.Dictionaries.ColumnTemplates;
 using HIS.Dtos.Dictionaries.RelativeTypes;
+using HIS.Dtos.Dictionaries.AccountBooks;
 
 namespace HIS.AutoMappers
 {
@@ -171,6 +171,9 @@ namespace HIS.AutoMappers
             #region
             CreateMap<ColumnTemplateDto, ColumnTemplate>().ReverseMap();
             CreateMap<RelativeTypeDto, RelativeType>().ReverseMap();
+            CreateMap<AccountBookDto, AccountBook>().ReverseMap();
+            CreateMap<Transaction, Transaction>().ReverseMap();
+            CreateMap<TransactionType, TransactionType>().ReverseMap();
 
             #endregion
         }

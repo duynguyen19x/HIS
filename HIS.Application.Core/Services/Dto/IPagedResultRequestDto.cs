@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HIS.Application.Core.Services.Dto
 {
-    public interface IPagedResultRequest
+    public interface IPagedResultRequestDto
     {
         int MaxResultCount { get; set; }
         int SkipCount { get; set; }

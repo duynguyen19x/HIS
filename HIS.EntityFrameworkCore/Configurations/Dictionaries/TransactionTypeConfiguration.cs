@@ -9,15 +9,16 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class EthnicConfiguration : IEntityTypeConfiguration<Ethnic>
+    public class TransactionTypeConfiguration : IEntityTypeConfiguration<TransactionType>
     {
-        public void Configure(EntityTypeBuilder<Ethnic> builder)
+        public void Configure(EntityTypeBuilder<TransactionType> builder)
         {
-            builder.ToTable("Ethnic");
+            builder.ToTable("TransactionType");
 
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Code).HasMaxLength(20).IsRequired(); 
-            builder.Property(x => x.Name).HasMaxLength(128).IsRequired(); 
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.Property(x => x.Code).HasMaxLength(20).IsRequired();
+            builder.Property(x => x.Name).HasMaxLength(128).IsRequired();
             builder.Property(x => x.Description).HasMaxLength(255);
         }
     }

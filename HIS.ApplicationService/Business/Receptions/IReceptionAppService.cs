@@ -5,11 +5,7 @@ using HIS.Dtos.Business.Receptions;
 
 namespace HIS.ApplicationService.Business.Receptions
 {
-    public interface IReceptionAppService : IBaseAppService
+    public interface IReceptionAppService : IBaseCrudAppService<ReceptionDto, Guid, PagedReceptionInputDto>
     {
-        Task<ResultDto<ReceptionDto>> CreateOrEdit(ReceptionDto input);
-        Task<ResultDto<ReceptionDto>> Delete(Guid id);
-        Task<PagedResultDto<ReceptionDto>> GetAll(PagedReceptionInputDto input);
-        Task<ResultDto<ReceptionDto>> GetById(Guid id);
     }
 }

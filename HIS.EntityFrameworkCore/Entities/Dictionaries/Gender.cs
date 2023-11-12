@@ -12,14 +12,12 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public bool Inactive { get; set; }
 
         public Gender() { }
-        public Gender(Guid id, string code, string name)
+        public Gender(Guid id, string code, string name, int order)
         {
             this.Id = id;
             this.Code = code;
             this.Name = name;
-            this.Description = null; 
-            this.SortOrder = 0;
-            this.Inactive = false;
+            this.SortOrder = order;
         }
     }
 }

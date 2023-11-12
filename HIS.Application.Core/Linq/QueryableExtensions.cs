@@ -14,7 +14,7 @@ namespace HIS.Core.Linq
             return query.Skip(skipCount).Take(maxResultCount);
         }
 
-        public static IQueryable<T> PageBy<T>(this IQueryable<T> query, IPagedResultRequest pagedResultRequest)
+        public static IQueryable<T> PageBy<T>(this IQueryable<T> query, IPagedResultRequestDto pagedResultRequest)
         {
             return query.PageBy(pagedResultRequest.SkipCount, pagedResultRequest.MaxResultCount);
         }

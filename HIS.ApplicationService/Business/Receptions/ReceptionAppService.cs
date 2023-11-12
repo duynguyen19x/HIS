@@ -22,7 +22,7 @@ namespace HIS.ApplicationService.Business.Receptions
     /// <summary>
     /// Xử lý tiếp nhận bệnh nhân.
     /// </summary>
-    public class ReceptionAppService : BaseAppService, IReceptionAppService
+    public class ReceptionAppService : BaseCrudAppService<ReceptionDto, Guid, PagedReceptionInputDto>, IReceptionAppService
     {
         private readonly IPatientAppService _patientAppService;
         private readonly IPatientRecordAppService _patientRecordAppService;
@@ -47,16 +47,7 @@ namespace HIS.ApplicationService.Business.Receptions
             _serviceRequestAppService = serviceReqAppService;
         }
 
-
-        public async Task<ResultDto<ReceptionDto>> CreateOrEdit(ReceptionDto input)
-        {
-            if (DataHelper.IsNullOrDefault(input.Id))
-                return await Create(input);
-            else
-                return await Update(input);
-        }
-
-        public async Task<ResultDto<ReceptionDto>> Create(ReceptionDto input)
+        public async override Task<ResultDto<ReceptionDto>> Create(ReceptionDto input)
         {
             var result = new ResultDto<ReceptionDto>();
             var dateNow = DateTime.Now;
@@ -71,7 +62,7 @@ namespace HIS.ApplicationService.Business.Receptions
                     {
                         var data = patientResult.Item;
                         input.PatientId = data.Id;
-                    }    
+                    }
 
 
                     // thêm mới hồ sơ bệnh án
@@ -98,8 +89,9 @@ namespace HIS.ApplicationService.Business.Receptions
             return result;
         }
 
-        public async Task<ResultDto<ReceptionDto>> Update(ReceptionDto input) => await BeginTransactionAsync<ResultDto<ReceptionDto>>(async result =>
+        public async override Task<ResultDto<ReceptionDto>> Update(ReceptionDto input)
         {
+            var result = new ResultDto<ReceptionDto>();
             try
             {
                 var patient = ObjectMapper.Map<PatientDto>(input);
@@ -150,14 +142,24 @@ namespace HIS.ApplicationService.Business.Receptions
                 result.Exception(ex);
                 throw;
             }
-        });
-
-        public Task<ResultDto<ReceptionDto>> Delete(Guid id)
-        {
-            throw new NotImplementedException();
+            return result;
         }
 
-        public virtual async Task<PagedResultDto<ReceptionDto>> GetAll(PagedReceptionInputDto input)
+        public async override Task<ResultDto<ReceptionDto>> Delete(Guid id)
+        {
+            var result = new ResultDto<ReceptionDto>();
+            try
+            {
+                result.Item = ObjectMapper.Map<ReceptionDto>(await Context.PatientRecords.FindAsync(id));
+            }
+            catch (Exception ex)
+            {
+                result.Exception(ex);
+            }
+            return result;
+        }
+
+        public async override Task<PagedResultDto<ReceptionDto>> GetAll(PagedReceptionInputDto input)
         {
             var result = new PagedResultDto<ReceptionDto>();
             try
@@ -182,7 +184,7 @@ namespace HIS.ApplicationService.Business.Receptions
             return result;
         }
 
-        public virtual async Task<ResultDto<ReceptionDto>> GetById(Guid id)
+        public async override Task<ResultDto<ReceptionDto>> GetById(Guid id)
         {
             var result = new ResultDto<ReceptionDto>();
             try
