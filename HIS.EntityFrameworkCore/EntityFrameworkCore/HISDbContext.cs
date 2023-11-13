@@ -69,23 +69,24 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
 
         #region - danh mục
 
-        public DbSet<AccountBook> AccountBooks { get; set; }
+        public DbSet<AccountingBook> AccountingBooks { get; set; }
+        public DbSet<AccountingBookUser> AccountingBookUsers { get; set; }
         public DbSet<BloodType> BloodTypes { get; set; }
-        public DbSet<BloodTypeRh> bloodTypeRhs { get; set; }
+        public DbSet<BloodTypeRh> BloodTypeRhs { get; set; }
 
         public DbSet<ReceptionType> ReceptionTypes { get; set; }
 
         public DbSet<ColumnTemplate> ColumnTemplates { get; set; }
         #endregion
 
-        #region Patient
+        #region Business
         public DbSet<Patient> Patients { get; set; }
         public DbSet<PatientRecord> PatientRecords { get; set; }
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
         public DbSet<Treatment> Treatments { get; set; }
 
-        public DbSet<ServiceRequest> ServiceRequests { get; set; }
-        public DbSet<ServiceRequestServe> ServiceRequestServes { get; set; }
+        public DbSet<ServiceReq> ServiceReqs { get; set; }
+        public DbSet<ServiceReqDetail> ServiceReqDetails { get; set; }
         #endregion
 
         #region System

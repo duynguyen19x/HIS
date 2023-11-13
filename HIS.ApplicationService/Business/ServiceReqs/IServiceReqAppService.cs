@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Business.ServiceResults
+namespace HIS.ApplicationService.Business.ServiceReqs
 {
-    internal class ServiceResultDto
+    public interface IServiceReqAppService 
     {
     }
 }

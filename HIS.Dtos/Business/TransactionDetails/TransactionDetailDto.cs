@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Business.ServiceResultTemplates
+namespace HIS.Dtos.Business.TransactionDetails
 {
-    public class ServiceResultTemplateDto : EntityDto<Guid>
+    public class TransactionDetailDto : EntityDto<Guid>
     {
     }
 }

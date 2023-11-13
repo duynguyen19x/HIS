@@ -12,25 +12,14 @@ using System.Threading.Tasks;
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
-    /// Loại tiếp nhận.
+    /// Loại đăng ký khám.
     /// </summary>
-    [Table("ReceptionType")]
-    [PrimaryKey(nameof(Id))]
     public class ReceptionType : AuditedEntity<int>
     {
-        [Required]
-        [MaxLength(20)]
         public virtual string Code { get; set; }
-
-        [Required]
-        [MaxLength(256)]
         public virtual string Name { get; set; }
-
-        [MaxLength(512)]
         public virtual string Description { get; set; }
-
         public virtual int SortOrder { get; set; }
-
         public virtual bool Inactive { get; set; }
 
         public ReceptionType() { }

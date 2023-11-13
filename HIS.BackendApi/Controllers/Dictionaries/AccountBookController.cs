@@ -1,15 +1,14 @@
 ﻿using HIS.ApplicationService.Dictionaries.AccountBooks;
-using HIS.Dtos.Dictionaries.AccountBooks;
-using Microsoft.AspNetCore.Http;
+using HIS.Dtos.Dictionaries.AccountingBooks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountBookController : BaseCrudController<IAccountBookAppService, AccountBookDto, Guid, PagedAccountBookInputDto>
+    public class AccountBookController : BaseCrudController<IAccountingBookAppService, AccountingBookDto, Guid, PagedAccountBookInputDto>
     {
-        public AccountBookController(IAccountBookAppService appService) 
+        public AccountBookController(IAccountingBookAppService appService) 
             : base(appService)
         {
         }

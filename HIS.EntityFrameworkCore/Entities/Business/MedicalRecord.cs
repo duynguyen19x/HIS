@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Business
 {
+    /// <summary>
+    /// bệnh án.
+    /// </summary>
     public class MedicalRecord : FullAuditedEntity<Guid>
     {
         public Guid PatientId { get; set; }

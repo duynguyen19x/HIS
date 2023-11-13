@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Business.ServiceResults
+namespace HIS.EntityFrameworkCore.Entities.Business
 {
-    internal class PagedServiceResultInputDto
+    public class MedicalRecord_Exam
     {
     }
 }

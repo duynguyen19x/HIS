@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Business.ServiceRequestServes
+namespace HIS.Dtos.Business.ServiceReqDetails
 {
-    public class ServiceRequestServeDto : EntityDto<Guid>
+    public class ServiceReqDetailDto : EntityDto<Guid>
     {
     }
 }

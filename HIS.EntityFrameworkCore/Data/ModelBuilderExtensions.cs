@@ -29,9 +29,11 @@ namespace HIS.EntityFrameworkCore.Data
             RelativeTypeBuilder.Seed(modelBuilder);
 
             PatientTypeBuilder.Seed(modelBuilder);
+            PaymentMethodBuilder.Seed(modelBuilder);
             PatientRecordTypeBuilder.Seed(modelBuilder);
             MedicalRecordEndTypeBuilder.Seed(modelBuilder);
             MedicalRecordResultBuilder.Seed(modelBuilder);
+            TransactionTypeBuilder.Seed(modelBuilder);
             
             
         }

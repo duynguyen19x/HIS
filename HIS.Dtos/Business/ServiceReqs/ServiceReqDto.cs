@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Dictionaries.AccountingBooks
+namespace HIS.Dtos.Business.ServiceReqs
 {
-    public class PagedAccountBookInputDto : PagedResultRequestDto
+    public class ServiceReqDto : EntityDto<Guid>
     {
     }
 }

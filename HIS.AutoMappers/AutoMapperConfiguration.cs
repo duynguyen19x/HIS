@@ -39,7 +39,7 @@ using HIS.Dtos.Business.PatientRecords;
 using HIS.Dtos.Business.Receptions;
 using HIS.Dtos.Dictionaries.ColumnTemplates;
 using HIS.Dtos.Dictionaries.RelativeTypes;
-using HIS.Dtos.Dictionaries.AccountBooks;
+using HIS.Dtos.Dictionaries.AccountingBooks;
 
 namespace HIS.AutoMappers
 {
@@ -171,7 +171,7 @@ namespace HIS.AutoMappers
             #region
             CreateMap<ColumnTemplateDto, ColumnTemplate>().ReverseMap();
             CreateMap<RelativeTypeDto, RelativeType>().ReverseMap();
-            CreateMap<AccountBookDto, AccountBook>().ReverseMap();
+            CreateMap<AccountingBookDto, AccountingBook>().ReverseMap();
             CreateMap<Transaction, Transaction>().ReverseMap();
             CreateMap<TransactionType, TransactionType>().ReverseMap();
 

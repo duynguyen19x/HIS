@@ -10,7 +10,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// <summary>
     /// Sổ thu chi.
     /// </summary>
-    public class AccountBook : FullAuditedEntity<Guid>
+    public class AccountingBook : AuditedEntity<Guid>
     {
         public virtual string Code { get; set; }
         public virtual string Name { get; set; }
@@ -18,13 +18,13 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public virtual string SymbolCode { get; set; } // ký hiệu
         public virtual int Total { get; set; } // tổng số phiếu
         public virtual int FromNumberOrder { get; set; } // số bắt đầu
-        public virtual int NumberOrder { get; set; } // số phiếu mới nhất đã cấp (tăng lên sau mỗi lần tạo phiếu)
         public virtual DateTime ReleaseDate { get; set; } // ngày bắt đầu sử dụng
         public virtual string Description { get; set; } // ghi chú
         public virtual int SortOrder { get; set; } // thứ tự hiển thị
         public virtual bool Inactive { get; set; } // khóa
-        public virtual string TransactionTypeList { get; set; } // loại phiếu thu chi
+        public virtual Guid UserId { get; set; } // người tạo phiếu
+        public virtual string TransactionTypeList { get; set; } // danh sách loại phiếu thu, chi
 
-        public AccountBook() { }
+        public AccountingBook() { }
     }
 }

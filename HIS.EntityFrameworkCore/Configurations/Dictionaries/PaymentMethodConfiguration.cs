@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class AccountBookConfiguration : IEntityTypeConfiguration<AccountBook>
+    public class PaymentMethodConfiguration : IEntityTypeConfiguration<PaymentMethod>
     {
-        public void Configure(EntityTypeBuilder<AccountBook> builder)
+        public void Configure(EntityTypeBuilder<PaymentMethod> builder)
         {
-            builder.ToTable("AccountBook");
+            builder.ToTable("PaymentMethod");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(20).IsRequired();
