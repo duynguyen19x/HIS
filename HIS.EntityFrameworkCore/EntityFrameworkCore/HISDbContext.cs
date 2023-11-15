@@ -69,27 +69,24 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
 
         #region - danh mục
 
-        public DbSet<AccountingBook> AccountingBooks { get; set; }
-        public DbSet<AccountingBookUser> AccountingBookUsers { get; set; }
+        public DbSet<BloodType> AccountBooks { get; set; }
         public DbSet<BloodType> BloodTypes { get; set; }
         public DbSet<BloodTypeRh> BloodTypeRhs { get; set; }
-
         public DbSet<ReceptionType> ReceptionTypes { get; set; }
+        public DbSet<UserAccountBook> UserAccountBooks { get; set; }
 
-        public DbSet<ColumnTemplate> ColumnTemplates { get; set; }
         #endregion
 
-        #region Business
+        #region - nghiệp vụ
+
         public DbSet<Patient> Patients { get; set; }
         public DbSet<PatientRecord> PatientRecords { get; set; }
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
         public DbSet<Treatment> Treatments { get; set; }
 
-        public DbSet<ServiceReq> ServiceReqs { get; set; }
-        public DbSet<ServiceReqDetail> ServiceReqDetails { get; set; }
         #endregion
 
-        #region System
+        #region - hệ thống
         public DbSet<SYSAutoNumber> SYSAutoNumbers { get; set; }
         public DbSet<SYSRefType> SYSRefTypes { get; set; }
         public DbSet<SYSRefTypeCategory> SYSRefTypeCategories { get; set; }
@@ -108,6 +105,7 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore
             builder.ApplyConfiguration();
             builder.Seed();
 
+            // load config
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 

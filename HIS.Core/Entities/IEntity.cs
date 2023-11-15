@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace HIS.Core.Entities
 {
-    public interface IEntity<TPrimaryKey>
+    public interface IEntity
+    {
+    }
+
+    public interface IEntity<TPrimaryKey> : IEntity
     {
         TPrimaryKey Id { get; set; }
     }

@@ -1,6 +1,5 @@
 ﻿using AutoMapper.Configuration.Annotations;
 using HIS.Core.Entities;
-using HIS.Core.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Systems;
 using System;
 using System.Collections.Generic;
@@ -10,15 +9,19 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
-    public class AccountingBookUser : Entity<Guid>
+    /// <summary>
+    /// Tài khoản được phân quyền sử dụng sổ thu, chi.
+    /// </summary>
+    public class UserAccountBook : Entity
     {
         public virtual Guid UserId { get; set; }
-        public virtual Guid AccountingBookId { get; set; }
+        public virtual Guid AccountBookId { get; set; }
 
         [Ignore]
         public virtual User User { get; set; }
-
         [Ignore]
-        public virtual AccountingBook AccountingBook { get; set; }
+        public virtual AccountBook AccountBook { get; set; }
+
+        public UserAccountBook() { }
     }
 }

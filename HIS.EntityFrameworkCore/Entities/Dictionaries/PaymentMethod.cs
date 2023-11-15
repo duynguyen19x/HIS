@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
-    /// Phương thức thanh toán.
+    /// Phương thức thanh toán: tiền mặt, chuyển khoản, ....
     /// </summary>
     public class PaymentMethod : AuditedEntity<Guid>
     {

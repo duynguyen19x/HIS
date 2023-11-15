@@ -9,22 +9,19 @@ namespace HIS.EntityFrameworkCore.Entities.Business
 {
     public class ServiceReq : FullAuditedEntity<Guid>
     {
-        public virtual string Code { get; set; } // số phiếu
-        public virtual DateTime ReqDate { get; set; } // thời gian chỉ đinh
-        public virtual DateTime UseDate { get; set; } // thời gian y lệnh
-        public virtual DateTime? StartDate { get; set; }
-        public virtual DateTime? EndDate { get; set; }
-        public virtual Guid UserId { get; set; } // người chỉ định
-        public virtual Guid DepartmentId { get; set; } // khoa chỉ định
-        public virtual Guid RoomId { get; set; } // phòng chỉ đinh
-        public virtual Guid PatientRecordId { get; set; } // mã hồ sơ bệnh án
-        public virtual Guid MedicalRecordId { get; set; } // mã bệnh án
-        public virtual Guid TreatmentId { get; set; } // tờ điều trị
-        public virtual string ICDCode { get; set; } // mã chẩn đoán
-        public virtual string ICDName { get; set; } // tên chẩn đoán
-        public virtual string ICDSubCode { get; set; } // mã bệnh phụ
-        public virtual string ICDText { get; set; } // danh sách mã bệnh kèm theo
-        public virtual string SortOrder { get; set; } // số thứ tự
-        public virtual string Description { get; set; } // ghi chú
+        public virtual string NgayYLenh { get; set; }
+        public virtual string NguoiYLenh { get; set; }
+        public virtual string ChiNhanh { get; set; }
+        public virtual string KhoaChiDinh { get; set; }
+        public virtual string PhongChiDinh { get; set; }
+        public virtual string ChanDoan { get; set; }
+        public virtual string BenhKemTheo { get; set; }
+        public virtual string GhiChu { get; set; }
+        public virtual bool LaCapCuu { get; set; }
+        public virtual bool LaUuTien { get; set; }
+
+        public virtual Guid PatientRecordId { get; set; }
+        public virtual Guid MedicalRecordId { get; set; }
+        public virtual int TreatmentId { get; set; }
     }
 }

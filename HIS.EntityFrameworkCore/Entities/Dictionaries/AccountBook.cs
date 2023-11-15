@@ -1,19 +1,18 @@
-﻿using HIS.Application.Core.Services.Dto;
-using HIS.Dtos.Dictionaries.UserAccountBooks;
-using HIS.Dtos.Systems.User;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+﻿using AutoMapper.Configuration.Annotations;
+using HIS.Core.Entities.Auditing;
+using HIS.EntityFrameworkCore.Entities.Systems;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Dictionaries
+namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
     /// Sổ thu, chi.
     /// </summary>
-    public class AccountBookDto : EntityDto<Guid>
+    public class AccountBook : AuditedEntity<Guid>
     {
         public virtual string Code { get; set; } // mã sổ
         public virtual string Name { get; set; } // tên sổ
@@ -27,6 +26,9 @@ namespace HIS.Dtos.Dictionaries
         public virtual string Description { get; set; } // ghi chú
         public virtual bool Inactive { get; set; } // khóa
 
-        public virtual IList<UserAccountBookDto> Users { get; set; } // danh sách user được phân quyền sử dụng sổ
+        [Ignore]
+        public virtual User User { get; set; }
+
+        public AccountBook() { }
     }
 }

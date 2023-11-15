@@ -36,9 +36,7 @@ using HIS.ApplicationService.Systems.Login;
 using HIS.ApplicationService.Systems.Role;
 using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
-using HIS.ApplicationService.Dictionaries.ColumnTemplates;
 using HIS.ApplicationService.Dictionaries.RelativeTypes;
-using HIS.ApplicationService.Dictionaries.AccountBooks;
 
 namespace HIS.ApplicationService
 {
@@ -61,7 +59,6 @@ namespace HIS.ApplicationService
             services.AddTransient<IRoomTypeService, RoomTypeService>();
             services.AddTransient<IHospitalService, HospitalService>();
             services.AddTransient<IRelativeTypeAppService, RelativeTypeAppService>();
-            services.AddTransient<IAccountingBookAppService, AccountingBookAppService>();
 
             services.AddTransient<IIcdService, IcdService>();
             services.AddTransient<IProvinceService, ProvinceService>();
@@ -91,7 +88,8 @@ namespace HIS.ApplicationService
             services.AddTransient<IPatientAppService, PatientAppService>();
             services.AddTransient<IReceptionAppService, ReceptionAppService>();
 
-            services.AddTransient<IColumnTemplateAppService, ColumnTemplateAppService>();
+            #region - danh mục
+            #endregion
 
             #region Sys
             services.AddTransient<ISYSAutoNumberAppService, SYSAutoNumberAppService>();

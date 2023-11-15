@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
+    /// <summary>
+    /// Loại thu, chi: thu tiền, tạm ứng, hoàn ứng,....
+    /// </summary>
     public class TransactionType : AuditedEntity<int>
     {
         public virtual string Code { get; set; }

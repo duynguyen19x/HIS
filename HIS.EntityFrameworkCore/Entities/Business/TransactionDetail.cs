@@ -12,12 +12,15 @@ namespace HIS.EntityFrameworkCore.Entities.Business
     /// </summary>
     public class TransactionDetail : Entity<Guid>
     {
-        public virtual Guid RefId { get; set; }
-        public virtual int RefType { get; set; }
-        public virtual Guid AccountBookId { get; set; }
-        public virtual int TransactionTypeId { get; set; }
-        public virtual string JournalMemo { get; set; }
-        public virtual decimal TotalAmount { get; set; }
-        public virtual int RefOrder { get; set; }
+        public virtual Guid TransactionId { get; set; }
+        public virtual Guid ServiceReqId { get; set; }
+        public virtual Guid ServiceReqDetailId { get; set; }
+        public virtual Guid ServiceId { get; set; }
+        public virtual Guid UnitId { get; set; }
+        public virtual decimal Price { get; set; } // đơn giá
+        public virtual decimal HeinPrice { get; set; } // đơn giá BHYT
+        public virtual decimal Quantity { get; set; }
+        public virtual decimal Amount { get; set; }
+
     }
 }
