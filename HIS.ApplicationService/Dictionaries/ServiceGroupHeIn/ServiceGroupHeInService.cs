@@ -2,7 +2,7 @@
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ServiceGroupHeIn;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.EntityFrameworkCore;
 using HIS.Models.Commons;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;

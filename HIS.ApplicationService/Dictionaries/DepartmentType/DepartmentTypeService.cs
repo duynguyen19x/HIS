@@ -1,17 +1,9 @@
 ﻿using AutoMapper;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.DepartmentType;
-using HIS.Dtos.Dictionaries.RoomType;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.EntityFrameworkCore;
 using HIS.Models.Commons;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Dictionaries.DepartmentType
 {

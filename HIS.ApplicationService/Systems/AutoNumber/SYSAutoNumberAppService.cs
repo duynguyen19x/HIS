@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HIS.EntityFrameworkCore;
 
 namespace HIS.ApplicationService.Systems.AutoNumber
 {

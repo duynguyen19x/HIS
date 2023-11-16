@@ -2,12 +2,7 @@
 using HIS.Application.Core.Services;
 using HIS.Application.Core.Services.Dto;
 using HIS.Dtos.Business.MedicalRecords;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HIS.EntityFrameworkCore;
 
 namespace HIS.ApplicationService.Business.MedicalRecords
 {

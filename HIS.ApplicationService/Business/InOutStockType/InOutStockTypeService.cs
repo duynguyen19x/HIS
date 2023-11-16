@@ -2,7 +2,7 @@
 using HIS.Core.Linq;
 using HIS.Dtos.Business.InOutStockTypes;
 using HIS.Dtos.Commons;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.EntityFrameworkCore;
 using HIS.Models.Commons;
 
 namespace HIS.ApplicationService.Business.InOutStockType

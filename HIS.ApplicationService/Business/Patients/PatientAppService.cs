@@ -5,7 +5,7 @@ using HIS.Application.Core.Utils;
 using HIS.Core.Linq;
 using HIS.Dtos.Business.Patients;
 using HIS.EntityFrameworkCore.Entities.Business;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.EntityFrameworkCore;
 using HIS.Utilities.Sections;
 using Microsoft.EntityFrameworkCore;
 

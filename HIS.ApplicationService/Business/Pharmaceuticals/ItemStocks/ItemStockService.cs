@@ -3,13 +3,11 @@ using HIS.Core.Linq;
 using HIS.Dtos.Business.ItemStocks;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Items;
-using HIS.EntityFrameworkCore.Entities.Business;
+using HIS.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.Entities.Categories;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
-using System.Linq;
 
 namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
 {

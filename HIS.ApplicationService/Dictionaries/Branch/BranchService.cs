@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Branch;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.EntityFrameworkCore;
 using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
 

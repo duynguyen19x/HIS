@@ -9,7 +9,7 @@ using HIS.Dtos.Business.PatientRecords;
 using HIS.Dtos.Business.Patients;
 using HIS.Dtos.Business.Receptions;
 using HIS.EntityFrameworkCore.Entities.Business;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.EntityFrameworkCore;
 using HIS.Utilities.Sections;
 using Microsoft.EntityFrameworkCore;
 

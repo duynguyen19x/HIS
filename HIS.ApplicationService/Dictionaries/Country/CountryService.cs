@@ -1,17 +1,9 @@
-﻿using HIS.ApplicationService.Dictionaries.Career;
-using HIS.Dtos.Commons;
+﻿using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Country;
-using HIS.Dtos.Dictionaries.Career;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.EntityFrameworkCore;
 
 namespace HIS.ApplicationService.Dictionaries.Country
 {

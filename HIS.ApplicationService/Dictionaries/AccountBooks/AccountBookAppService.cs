@@ -4,15 +4,8 @@ using HIS.Application.Core.Services.Dto;
 using HIS.Core.Linq;
 using HIS.Dtos.Dictionaries;
 using HIS.Dtos.Dictionaries.UserAccountBooks;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
-using HIS.EntityFrameworkCore.Migrations;
+using HIS.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Dictionaries.AccountBooks
 {

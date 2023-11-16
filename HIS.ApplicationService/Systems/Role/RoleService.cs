@@ -1,7 +1,6 @@
 ﻿using HIS.Dtos.Commons;
 using HIS.Dtos.Systems.Role;
-using HIS.EntityFrameworkCore.Entities.Systems;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.EntityFrameworkCore;
 using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
 

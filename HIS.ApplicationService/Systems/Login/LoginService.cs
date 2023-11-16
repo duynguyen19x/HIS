@@ -1,6 +1,6 @@
 ﻿using HIS.Dtos.Systems.Login;
 using HIS.EntityFrameworkCore.Entities.Systems;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.EntityFrameworkCore;
 using HIS.Models.Commons;
 using HIS.Utilities.Commons;
 using HIS.Utilities.Enums;

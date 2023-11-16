@@ -2,7 +2,7 @@
 using HIS.Core.Linq;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ItemPricePolicies;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.EntityFrameworkCore;
 using HIS.Models.Commons;
 using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;

@@ -4,14 +4,8 @@ using HIS.Application.Core.Services.Dto;
 using HIS.Application.Core.Utils;
 using HIS.Dtos.Business.PatientRecords;
 using HIS.EntityFrameworkCore.Entities.Business;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.EntityFrameworkCore;
 using HIS.Utilities.Sections;
-using Microsoft.EntityFrameworkCore.Query;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Business.PatientRecords
 {

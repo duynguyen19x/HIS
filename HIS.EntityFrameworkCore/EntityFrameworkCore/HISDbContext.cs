@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Reflection;
 
-namespace HIS.EntityFrameworkCore.EntityFrameworkCore
+namespace HIS.EntityFrameworkCore
 {
     public class HISDbContext : DbContext
     {

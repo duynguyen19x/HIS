@@ -4,7 +4,7 @@ using HIS.Application.Core.Services.Dto;
 using HIS.Core.Linq;
 using HIS.Dtos.Dictionaries.RelativeTypes;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace HIS.ApplicationService.Dictionaries.RelativeTypes

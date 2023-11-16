@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services.Dto;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
-using Microsoft.Identity.Client;
-using System.Runtime.InteropServices;
+using HIS.EntityFrameworkCore;
 
 namespace HIS.Application.Core.Services
 {

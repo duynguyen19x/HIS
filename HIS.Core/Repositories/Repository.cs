@@ -24,6 +24,7 @@ namespace HIS.Core.Repositories
             _dbSet = _dbContext.Set<TEntity>();
         }
 
+
         public virtual IQueryable<TEntity> GetAll() => _dbSet.AsQueryable();
 
         public virtual List<TEntity> GetAllList() => _dbSet.ToList();

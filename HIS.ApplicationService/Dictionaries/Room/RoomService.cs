@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Room;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.EntityFrameworkCore;
 using HIS.Models.Commons;
 using HIS.Utilities.Enums;
 using Microsoft.Extensions.Configuration;

@@ -1,18 +1,11 @@
 ﻿using AutoMapper;
 using HIS.Core.Linq;
 using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.Service;
 using HIS.Dtos.Dictionaries.ServiceGroup;
-using HIS.EntityFrameworkCore.Entities.Categories;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.EntityFrameworkCore;
 using HIS.Models.Commons;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Dictionaries.ServiceGroup
 {

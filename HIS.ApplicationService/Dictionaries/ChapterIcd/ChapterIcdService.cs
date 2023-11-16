@@ -2,8 +2,8 @@
 using HIS.Core.Linq;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ChapterICD10;
+using HIS.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Models.Commons;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;

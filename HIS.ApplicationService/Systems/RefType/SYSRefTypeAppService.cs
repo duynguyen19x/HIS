@@ -2,7 +2,7 @@
 using HIS.Application.Core.Services;
 using HIS.Application.Core.Services.Dto;
 using HIS.Dtos.Systems.SYSRefType;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.EntityFrameworkCore;
 
 namespace HIS.ApplicationService.Systems.RefType
 {
