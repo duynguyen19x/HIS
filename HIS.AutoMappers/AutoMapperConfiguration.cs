@@ -55,7 +55,7 @@ namespace HIS.AutoMappers
             CreateMap<DepartmentType, DepartmentTypeDto>().ReverseMap();
             CreateMap<ChapterIcdDto, ChapterIcd>().ReverseMap();
             CreateMap<District, DistrictDto>().ReverseMap();
-            CreateMap<Ethnic, EthnicDto>().ReverseMap();
+            CreateMap<Ethnicity, EthnicDto>().ReverseMap();
             CreateMap<Gender, GenderDto>().ReverseMap();
             CreateMap<Hospital, HospitalDto>().ReverseMap();
             CreateMap<Icd, IcdDto>().ReverseMap();

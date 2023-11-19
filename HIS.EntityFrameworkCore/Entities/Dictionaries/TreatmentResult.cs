@@ -1,10 +1,6 @@
-﻿using HIS.Core.Entities;
-using HIS.Core.Entities.Auditing;
-using Microsoft.EntityFrameworkCore;
+﻿using HIS.Core.Entities.Auditing;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +8,9 @@ using System.Threading.Tasks;
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
-    /// Loại đăng ký khám.
+    /// Kết quả điều trị.
     /// </summary>
-    public class ReceptionType : AuditedEntity<int>
+    public class TreatmentResult : AuditedEntity<int>
     {
         public virtual string Code { get; set; }
         public virtual string Name { get; set; }
@@ -22,16 +18,14 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public virtual int SortOrder { get; set; }
         public virtual bool Inactive { get; set; }
 
-        public ReceptionType() { }
-        public ReceptionType(int id, string code, string name, int sortOrder)
+        public TreatmentResult() { }
+        public TreatmentResult(int id, string name, int sortOrder)
         {
-            this.Id = id;  
-            this.Code = code;
+            this.Id = id;
+            this.Code = id.ToString();
             this.Name = name;
             this.SortOrder = sortOrder;
             this.Inactive = false;
-
-            this.CreatedDate = new DateTime(1975, 01, 01);
         }
     }
 }

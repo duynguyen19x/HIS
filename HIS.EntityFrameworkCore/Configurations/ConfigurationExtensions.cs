@@ -38,7 +38,7 @@ namespace HIS.EntityFrameworkCore.Configurations
             modelBuilder.ApplyConfiguration(new ServicePricePolicyConfigurations());
             modelBuilder.ApplyConfiguration(new ItemPricePolicyConfigurations());
             modelBuilder.ApplyConfiguration(new SurgicalProcedureTypeConfigurations());
-            modelBuilder.ApplyConfiguration(new EthnicConfiguration());
+            modelBuilder.ApplyConfiguration(new EthnicityConfiguration());
             modelBuilder.ApplyConfiguration(new HospitalConfiguration());
             modelBuilder.ApplyConfiguration(new ServiceGroupConfigurations());
             modelBuilder.ApplyConfiguration(new ServiceGroupHeInConfigurations());

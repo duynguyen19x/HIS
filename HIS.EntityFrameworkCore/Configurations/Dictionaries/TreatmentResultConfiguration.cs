@@ -1,12 +1,17 @@
 ﻿using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class ReceptionTypeConfiguration : IEntityTypeConfiguration<ReceptionObjectType>
+    public class TreatmentResultConfiguration : IEntityTypeConfiguration<TreatmentResult>
     {
-        public void Configure(EntityTypeBuilder<ReceptionObjectType> builder)
+        public void Configure(EntityTypeBuilder<TreatmentResult> builder)
         {
             builder.ToTable("ReceptionType");
 

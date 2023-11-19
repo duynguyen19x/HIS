@@ -59,7 +59,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public Gender Gender { get; set; }
 
         [Ignore]
-        public Ethnic Ethnic { get; set; }
+        public Ethnicity Ethnic { get; set; }
 
         [Ignore]
         public BloodType BloodType { get; set; }

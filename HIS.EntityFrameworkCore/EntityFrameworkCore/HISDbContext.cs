@@ -23,7 +23,7 @@ namespace HIS.EntityFrameworkCore
         public DbSet<Branch> Branchs { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<DepartmentType> DepartmentTypes { get; set; }
-        public DbSet<Ethnic> Ethnics { get; set; }
+        public DbSet<Ethnicity> Ethnics { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<RoomType> RoomTypes { get; set; }
         public DbSet<Career> Careers { get; set; }
@@ -72,7 +72,7 @@ namespace HIS.EntityFrameworkCore
         public DbSet<BloodType> AccountBooks { get; set; }
         public DbSet<BloodType> BloodTypes { get; set; }
         public DbSet<BloodTypeRh> BloodTypeRhs { get; set; }
-        public DbSet<ReceptionType> ReceptionTypes { get; set; }
+        public DbSet<ReceptionObjectType> ReceptionTypes { get; set; }
         public DbSet<UserAccountBook> UserAccountBooks { get; set; }
 
         #endregion
@@ -102,11 +102,11 @@ namespace HIS.EntityFrameworkCore
         {
             base.OnModelCreating(builder);
 
-            builder.ApplyConfiguration();
-            builder.Seed();
-
+            //builder.ApplyConfiguration();
             // load config
             builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            builder.Seed();
         }
 
         public virtual IDbContextTransaction BeginTransaction()

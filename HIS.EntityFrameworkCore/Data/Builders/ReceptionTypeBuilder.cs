@@ -13,9 +13,9 @@ namespace HIS.EntityFrameworkCore.Data.Builders
     {
         public static void Seed(ModelBuilder builder)
         {
-            builder.Entity<ReceptionType>().HasData(
-                new ReceptionType((int)ReceptionTypes.KHAMBENH, "KB", "Khám bệnh", 1),
-                new ReceptionType((int)ReceptionTypes.CAPCUU, "CC", "Cấp cứu", 2)
+            builder.Entity<ReceptionObjectType>().HasData(
+                new ReceptionObjectType((int)ReceptionTypes.KHAMBENH, "KB", "Khám bệnh", 1),
+                new ReceptionObjectType((int)ReceptionTypes.CAPCUU, "CC", "Cấp cứu", 2)
                 );
         }
     }

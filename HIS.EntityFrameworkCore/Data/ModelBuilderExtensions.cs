@@ -25,7 +25,7 @@ namespace HIS.EntityFrameworkCore.Data
             ProvinceBuilder.Seed(modelBuilder);
             ReceptionTypeBuilder.Seed(modelBuilder);
             GenderBuilder.Seed(modelBuilder);
-            EthnicBuilder.Seed(modelBuilder);
+            EthnicityBuilder.Seed(modelBuilder);
             RelativeTypeBuilder.Seed(modelBuilder);
 
             PatientTypeBuilder.Seed(modelBuilder);

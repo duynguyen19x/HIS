@@ -10,7 +10,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// <summary>
     /// Dân tộc
     /// </summary>
-    public class Ethnic : AuditedEntity<Guid>
+    public class Ethnicity : AuditedEntity<Guid>
     {
         public string Code { get; set; }
         public string MohCode { get; set; }
@@ -19,8 +19,8 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public int SortOrder { get; set; }
         public bool Inactive { get; set; }
 
-        public Ethnic() { }
-        public Ethnic(Guid id, string code, string mohCode, string name, int sortOrder)
+        public Ethnicity() { }
+        public Ethnicity(Guid id, string code, string mohCode, string name, int sortOrder)
         {
             this.Id = id;
             this.Code = code;

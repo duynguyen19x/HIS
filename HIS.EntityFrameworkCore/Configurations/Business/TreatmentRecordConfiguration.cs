@@ -1,4 +1,4 @@
-﻿using HIS.EntityFrameworkCore.Entities.Dictionaries;
+﻿using HIS.EntityFrameworkCore.Entities.Business;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business
 {
-    public class MedicalRecordResultConfiguration : IEntityTypeConfiguration<MedicalRecordResult>
+    public class TreatmentRecordConfiguration : IEntityTypeConfiguration<TreatmentRecord>
     {
-        public void Configure(EntityTypeBuilder<MedicalRecordResult> builder)
+        public void Configure(EntityTypeBuilder<TreatmentRecord> builder)
         {
-            builder.ToTable("MedicalRecordResults");
+            builder.ToTable("TreatmentRecord");
             builder.HasKey(x => x.Id);
         }
     }
