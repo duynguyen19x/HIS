@@ -292,7 +292,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
                 try
-                {                    
+                {
                     var units = _mapper.Map<List<EntityFrameworkCore.Entities.Dictionaries.Unit>>(_dbContext.Units).OrderBy(o => o.Code);
                     var itemGroups = _mapper.Map<List<EntityFrameworkCore.Entities.Categories.ItemGroup>>(_dbContext.ItemGroups).OrderBy(o => o.Code);
                     var itemLines = _mapper.Map<List<EntityFrameworkCore.Entities.Categories.ItemLine>>(_dbContext.ItemLines).OrderBy(o => o.Code);
@@ -305,7 +305,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
                         else
                             item.UnitId = units?.FirstOrDefault()?.Id;
                         //Nhóm thuốc
-                        if (item.ItemGroupId == null)                            
+                        if (item.ItemGroupId == null)
                             item.ItemGroupId = itemGroups?.FirstOrDefault()?.Id;
                         //Nhóm bảo hiểm
                         if (item.ServiceGroupHeInId == null)
