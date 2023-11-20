@@ -5,7 +5,6 @@ using HIS.Models.Commons;
 using HIS.Utilities.Commons;
 using HIS.Utilities.Enums;
 using HIS.Utilities.Sections;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
