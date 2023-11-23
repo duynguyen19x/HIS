@@ -1,46 +1,48 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
 using HIS.Application.Core.Services.Dto;
-using HIS.Application.Core.Utils;
 using HIS.Core.Linq;
 using HIS.Dtos.Business.Patients;
-using HIS.EntityFrameworkCore.Entities.Business;
+using HIS.Dtos.Dictionaries.ReceptionObjectTypes;
+using HIS.Dtos.Dictionaries.RelativeCategories;
+using HIS.Dtos.Dictionaries.Relatives;
 using HIS.EntityFrameworkCore;
+using HIS.EntityFrameworkCore.Entities.Business;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Utilities.Sections;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Business.Patients
 {
-    public class PatientAppService : BaseCrudAppService<PatientDto, Guid, PagedPatientInputDto>, IPatientAppService
+    public class PatientAppService : BaseCrudAppService<PatientDto, Guid, GetAllPatientInput>, IPatientAppService
     {
-        public PatientAppService(
-            HISDbContext context, 
-            IMapper mapper)
+        public PatientAppService(HISDbContext context, IMapper mapper) 
             : base(context, mapper)
         {
         }
 
-        public override async Task<ResultDto<PatientDto>> Create(PatientDto input)
+        public async override Task<ResultDto<PatientDto>> Create(PatientDto input)
         {
             var result = new ResultDto<PatientDto>();
-            using (var transaction = Context.BeginTransaction())
+            using (var transaction = BeginTransaction())
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    if (DataHelper.IsNullOrDefault(input.Code))
-                        input.Code = "BN" + String.Format("{0:00000}", Context.Patients.Count() + 1);
-
-                    var patient = ObjectMapper.Map<Patient>(input);
-                    patient.CreatedDate = DateTime.Now;
-                    patient.CreatedBy = SessionExtensions.Login?.Id;
-
-                    Context.Patients.Add(patient);
+                    var data = ObjectMapper.Map<Patient>(input);
+                    data.CreatedDate = DateTime.Now;
+                    data.CreatedBy = SessionExtensions.Login?.Id;
+                    Context.Patients.Add(data);
                     await SaveChangesAsync();
-
-                    result.Item = input;
-
                     transaction.Commit();
+
+                    result.IsSucceeded = true;
+                    result.Item = input;
                 }
                 catch (Exception ex)
                 {
@@ -50,23 +52,48 @@ namespace HIS.ApplicationService.Business.Patients
             return result;
         }
 
-        public override async Task<ResultDto<PatientDto>> Update(PatientDto input)
+        public async override Task<ResultDto<PatientDto>> Update(PatientDto input)
         {
             var result = new ResultDto<PatientDto>();
-            using (var transaction = Context.BeginTransaction())
+            using (var transaction = BeginTransaction())
             {
                 try
                 {
-                    var patient = ObjectMapper.Map<Patient>(input);
-                    patient.ModifiedDate = DateTime.Now;
-                    patient.ModifiedBy = SessionExtensions.Login?.Id;
+                    var patient = await Context.Patients.FindAsync(input.Id);
+                    var data = ObjectMapper.Map<Patient>(input);
+                    data.CreatedDate = patient.CreatedDate;
+                    data.CreatedBy = patient.CreatedBy;
+                    data.ModifiedDate = DateTime.Now;
+                    data.ModifiedBy = SessionExtensions.Login?.Id;
+                    Context.Patients.Update(data);
+                    await SaveChangesAsync();
+                    transaction.Commit();
 
+                    result.IsSucceeded = true;
+                    result.Item = input;
+                }
+                catch (Exception ex)
+                {
+                    result.Exception(ex);
+                }
+            }
+            return result;
+        }
+
+        public async override Task<ResultDto<PatientDto>> Delete(Guid id)
+        {
+            var result = new ResultDto<PatientDto>();
+            using (var transaction = BeginTransaction())
+            {
+                try
+                {
+                    var patient = await Context.Patients.FindAsync(id);
+                    patient.IsDeleted = true;
                     Context.Patients.Update(patient);
-
-                    result.Item = input;
                     await SaveChangesAsync();
-
                     transaction.Commit();
+
+                    result.IsSucceeded = true;
                 }
                 catch (Exception ex)
                 {
@@ -76,66 +103,50 @@ namespace HIS.ApplicationService.Business.Patients
             return result;
         }
 
-        public override async Task<ResultDto<PatientDto>> Delete(Guid id)
-        {
-            var result = new ResultDto<PatientDto>();
-            using (var transaction = Context.BeginTransaction())
-            {
-                try
-                {
-                    var patient = Context.Patients.SingleOrDefault(x => x.Id == id);
-                    if (patient != null)
-                    {
-                        Context.Patients.Remove(patient);
-                        await SaveChangesAsync();
-
-                        transaction.Commit();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    result.Exception(ex);
-                }
-            }    
-            return result;
-        }
-
-        public override async Task<PagedResultDto<PatientDto>> GetAll(PagedPatientInputDto input)
+        public async override Task<PagedResultDto<PatientDto>> GetAll(GetAllPatientInput input)
         {
             var result = new PagedResultDto<PatientDto>();
             try
             {
                 var filter = Context.Patients.AsQueryable()
-                    .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), x => x.Code.ToLower() == input.CodeFilter.ToLower())
-                    .WhereIf(!string.IsNullOrEmpty(input.NameFilter), x => x.Name.ToLower() == input.NameFilter.ToLower())
-                    .WhereIf(input.MaxBirthDateFilter != null, x => x.BirthDate <= input.MinBirthDateFilter)
-                    .WhereIf(input.MinBirthDateFilter != null, x => x.BirthDate >= input.MinBirthDateFilter)
-                    .WhereIf(input.MaxBirthYearFilter != null, x => x.BirthYear >= input.MaxBirthYearFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.PatientCodeFilter), x => x.PatientCode == input.PatientCodeFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.PatientNameFilter), x => x.PatientName == input.PatientNameFilter)
+                    .WhereIf(input.MaxBirthDateFilter != null, x => x.BirthDate != null && x.BirthDate <= input.MaxBirthDateFilter)
+                    .WhereIf(input.MinBirthDateFilter != null, x => x.BirthDate != null && x.BirthDate >= input.MinBirthDateFilter)
+                    .WhereIf(input.MaxBirthYearFilter != null, x => x.BirthYear <= input.MaxBirthYearFilter)
                     .WhereIf(input.MinBirthYearFilter != null, x => x.BirthYear >= input.MinBirthYearFilter)
-                    .WhereIf(input.GenderIdFilter != null, x => x.GenderId == input.GenderIdFilter)
-                    .WhereIf(input.CountryIdFilter != null, x => x.CountryId == input.CountryIdFilter)
-                    .WhereIf(input.EthnicIdFilter != null, x => x.EthnicId == input.EthnicIdFilter)
-                    .WhereIf(input.CareerIdFilter != null, x => x.CareerId == input.CareerIdFilter);
-                var paged = await filter.PageBy(input).ToListAsync();
-                var totalCount = await filter.CountAsync();
+                    .WhereIf(string.IsNullOrEmpty(input.BirthPlaceFilter), x => x.BirthPlace == input.BirthPlaceFilter)
+                    .WhereIf(input.GenderFilter != null, x => x.GenderID == input.GenderFilter)
+                    .WhereIf(input.EthnicityFilter != null, x => x.EthnicityID == input.EthnicityFilter)
+                    .WhereIf(input.CountryFilter != null, x => x.CountryID == input.CountryFilter)
+                    .WhereIf(input.ProvinceOrCityFilter != null, x => x.ProvinceOrCityID == input.ProvinceOrCityFilter)
+                    .WhereIf(input.DistrictFilter != null, x => x.DistrictID == input.DistrictFilter)
+                    .WhereIf(input.WardOrCommuneFilter != null, x => x.WardOrCommuneID == input.WardOrCommuneFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.AddressFilter), x => x.Address == input.AddressFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.TelFilter), x => x.Tel == input.TelFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.MobileFilter), x => x.Mobile == input.MobileFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.IdentificationNumberFilter), x => x.IdentificationNumber == input.IdentificationNumberFilter);
 
-                result.Items = ObjectMapper.Map<IList<PatientDto>>(paged);
-                result.TotalCount = totalCount;
+                var paged = filter.OrderBy(s => s.PatientCode).PageBy(input);
+
+                result.TotalCount = await filter.CountAsync();
+                result.Items = ObjectMapper.Map<IList<PatientDto>>(paged.ToList());
+                result.IsSuccessed = true;
             }
             catch (Exception ex)
             {
                 result.Exception(ex);
             }
-
             return result;
         }
 
-        public override async Task<ResultDto<PatientDto>> GetById(Guid id)
+        public async override Task<ResultDto<PatientDto>> GetById(Guid id)
         {
             var result = new ResultDto<PatientDto>();
             try
             {
-                result.Item = ObjectMapper.Map<PatientDto>(await Context.Patients.FindAsync(id));
+                result.Item = ObjectMapper.Map<PatientDto>(await Context.Relatives.FindAsync(id));
+                result.IsSucceeded = true;
             }
             catch (Exception ex)
             {
@@ -143,5 +154,7 @@ namespace HIS.ApplicationService.Business.Patients
             }
             return result;
         }
+
+        
     }
 }

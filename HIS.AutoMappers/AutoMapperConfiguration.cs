@@ -9,7 +9,6 @@ using HIS.Dtos.Dictionaries.Country;
 using HIS.Dtos.Dictionaries.Department;
 using HIS.Dtos.Dictionaries.DepartmentType;
 using HIS.Dtos.Dictionaries.District;
-using HIS.Dtos.Dictionaries.Ethnic;
 using HIS.Dtos.Dictionaries.ExecutionRoom;
 using HIS.Dtos.Dictionaries.Gender;
 using HIS.Dtos.Dictionaries.Hospital;
@@ -34,12 +33,16 @@ using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Items;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.Dtos.Business.Patients;
-using HIS.Dtos.Business.PatientRecords;
 using HIS.Dtos.Business.Receptions;
 using HIS.Dtos.Systems.DbOption;
 using HIS.EntityFrameworkCore.Entities.Systems;
-using HIS.Dtos.Dictionaries.RelativeTypes;
+using HIS.Dtos.Dictionaries.RelativeCategories;
+using HIS.Dtos.Dictionaries.PatientObjectTypes;
+using HIS.Dtos.Dictionaries.ReceptionObjectTypes;
+using HIS.Dtos.Dictionaries.Relatives;
+using HIS.Dtos.Business.Patients;
+using HIS.Dtos.Business.PatientRecords;
+using HIS.Dtos.Dictionaries.Ethnicities;
 
 namespace HIS.AutoMappers
 {
@@ -57,7 +60,6 @@ namespace HIS.AutoMappers
             CreateMap<DepartmentType, DepartmentTypeDto>().ReverseMap();
             CreateMap<ChapterIcdDto, ChapterIcd>().ReverseMap();
             CreateMap<District, DistrictDto>().ReverseMap();
-            CreateMap<Ethnicity, EthnicDto>().ReverseMap();
             CreateMap<Gender, GenderDto>().ReverseMap();
             CreateMap<Hospital, HospitalDto>().ReverseMap();
             CreateMap<Icd, IcdDto>().ReverseMap();
@@ -83,7 +85,7 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.SurgicalProcedureType, opt => opt.Ignore())
                 .ReverseMap();
             CreateMap<ServicePricePolicyDto, ServicePricePolicy>()
-               .ForMember(dest => dest.PatientType, opt => opt.Ignore())
+               .ForMember(dest => dest.PatientObjectType, opt => opt.Ignore())
                .ForMember(dest => dest.Service, opt => opt.Ignore())
                .ReverseMap();
 
@@ -124,7 +126,7 @@ namespace HIS.AutoMappers
 
             CreateMap<ItemPricePolicyDto, ItemPricePolicy>()
                 .ForMember(dest => dest.Item, opt => opt.Ignore())
-                .ForMember(dest => dest.PatientType, opt => opt.Ignore())
+                .ForMember(dest => dest.PatientObjectType, opt => opt.Ignore())
                 .ReverseMap();
 
             CreateMap<InOutStockDto, InOutStock>()
@@ -152,26 +154,18 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.Stock, opt => opt.Ignore())
                 .ReverseMap();
 
-
-            CreateMap<ReceptionDto, PatientDto>()
-                .ForMember(d => d.Id, o => o.MapFrom(s => s.PatientId))
-                .ForMember(d => d.Code, o => o.MapFrom(s => s.PatientCode))
-                .ForMember(d => d.Name, o => o.MapFrom(s => s.PatientName))
-                .ReverseMap();
-            CreateMap<ReceptionDto, Patient>()
-                .ForMember(d => d.Id, o => o.MapFrom(s => s.PatientId))
-                .ForMember(d => d.Code, o => o.MapFrom(s => s.PatientCode))
-                .ForMember(d => d.Name, o => o.MapFrom(s => s.PatientName))
-                .ReverseMap();
+            #region - nghiệp vụ
+            CreateMap<ReceptionDto, PatientDto>().ReverseMap();
             CreateMap<ReceptionDto, PatientRecordDto>().ReverseMap();
-            CreateMap<ReceptionDto, PatientRecord>().ReverseMap();
-            
-            CreateMap<PatientDto, Patient>().ReverseMap();
-            CreateMap<PatientRecordDto, PatientRecord>().ReverseMap();
+            #endregion
 
             #region - danh mục
 
-            CreateMap<RelativeTypeDto, RelativeType>().ReverseMap();
+            CreateMap<Ethnicity, EthnicityDto>().ReverseMap();
+            CreateMap<PatientObjectType, PatientObjectTypeDto>().ReverseMap();
+            CreateMap<ReceptionObjectType, ReceptionObjectTypeDto>().ReverseMap();
+            CreateMap<RelativeCategory, RelativeCategoryDto>().ReverseMap();
+            CreateMap<Relative, RelativeDto>().ReverseMap();
 
             #endregion
         }

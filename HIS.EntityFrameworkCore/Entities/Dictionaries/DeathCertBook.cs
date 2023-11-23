@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
-    /// Sổ giấy báo tử.
+    /// Giấy báo tử.
     /// </summary>
-    public class DeathCertBook : FullAuditedEntity<Guid>
+    public class DeathCertBook : AuditedEntity<Guid>
     {
     }
 }

@@ -1,8 +1,6 @@
 ﻿using HIS.ApplicationService.Business.InOutStockType;
 using HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks;
 using HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks;
-using HIS.ApplicationService.Business.MedicalRecords;
-using HIS.ApplicationService.Business.PatientRecords;
 using HIS.ApplicationService.Business.Patients;
 using HIS.ApplicationService.Business.Receptions;
 using HIS.ApplicationService.Dictionaries.Branch;
@@ -12,7 +10,6 @@ using HIS.ApplicationService.Dictionaries.Country;
 using HIS.ApplicationService.Dictionaries.Department;
 using HIS.ApplicationService.Dictionaries.DepartmentType;
 using HIS.ApplicationService.Dictionaries.District;
-using HIS.ApplicationService.Dictionaries.Ethnic;
 using HIS.ApplicationService.Dictionaries.Gender;
 using HIS.ApplicationService.Dictionaries.Hospital;
 using HIS.ApplicationService.Dictionaries.Icd;
@@ -31,12 +28,19 @@ using HIS.ApplicationService.Dictionaries.Supplier;
 using HIS.ApplicationService.Dictionaries.SurgicalProcedureType;
 using HIS.ApplicationService.Dictionaries.Unit;
 using HIS.ApplicationService.Dictionaries.Ward;
-using HIS.ApplicationService.Systems.AutoNumber;
 using HIS.ApplicationService.Systems.Login;
 using HIS.ApplicationService.Systems.Role;
 using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
-using HIS.ApplicationService.Dictionaries.RelativeTypes;
+using HIS.ApplicationService.Dictionaries.PatientObjectTypes;
+using HIS.ApplicationService.Dictionaries.ReceptionObjectTypes;
+using HIS.ApplicationService.Dictionaries.RelativeCategories;
+using HIS.ApplicationService.Dictionaries.Relatives;
+using HIS.ApplicationService.Dictionaries.DeathCauses;
+using HIS.ApplicationService.Dictionaries.Ethnicities;
+using HIS.ApplicationService.Dictionaries.DeathWithins;
+using HIS.ApplicationService.Dictionaries.TreatmentEndTypes;
+using HIS.ApplicationService.Dictionaries.TreatmentResults;
 
 namespace HIS.ApplicationService
 {
@@ -53,12 +57,11 @@ namespace HIS.ApplicationService
             services.AddTransient<IDepartmentService, DepartmentService>();
             services.AddTransient<IDepartmentTypeService, DepartmentTypeService>();
             services.AddTransient<IDistrictService, DistrictService>();
-            services.AddTransient<IEthnicService, EthnicService>();
+            
             services.AddTransient<IGenderService, GenderService>();
             services.AddTransient<IRoomService, RoomService>();
             services.AddTransient<IRoomTypeService, RoomTypeService>();
             services.AddTransient<IHospitalService, HospitalService>();
-            services.AddTransient<IRelativeTypeAppService, RelativeTypeAppService>();
 
             services.AddTransient<IIcdService, IcdService>();
             services.AddTransient<IProvinceService, ProvinceService>();
@@ -82,17 +85,21 @@ namespace HIS.ApplicationService
             services.AddTransient<IInOutStockService, InOutStockService>();
             services.AddTransient<IItemStockService, ItemStockService>();
 
-            services.AddTransient<IMedicalRecordAppService, MedicalRecordAppService>();
-            services.AddTransient<IMedicalRecordExamAppService, MedicalRecordExamAppService>();
-            services.AddTransient<IPatientRecordAppService, PatientRecordAppService>();
+            #region - nghiệp vụ
             services.AddTransient<IPatientAppService, PatientAppService>();
             services.AddTransient<IReceptionAppService, ReceptionAppService>();
-
-            #region - danh mục
             #endregion
 
-            #region Sys
-            services.AddTransient<ISYSAutoNumberAppService, SYSAutoNumberAppService>();
+            #region - danh mục
+            services.AddTransient<IDeathCauseAppService, DeathCauseAppService>();
+            services.AddTransient<IDeathWithinAppService, DeathWithinAppService>();
+            services.AddTransient<IEthnicityAppService, EthnicityAppService>();
+            services.AddTransient<IPatientObjectTypeAppService, PatientObjectTypeAppService>();
+            services.AddTransient<IReceptionObjectTypeAppService, ReceptionObjectTypeAppService>();
+            services.AddTransient<IRelativeCategoryAppService, RelativeCategoryAppService>();
+            services.AddTransient<IRelativeAppService, RelativeAppService>();
+            services.AddTransient<ITreatmentEndTypeAppService, TreatmentEndTypeAppService>();
+            services.AddTransient<ITreatmentResultAppService, TreatmentResultAppService>();
             #endregion
         }
     }

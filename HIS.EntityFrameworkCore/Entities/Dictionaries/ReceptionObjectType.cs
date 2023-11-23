@@ -1,10 +1,6 @@
-﻿using HIS.Core.Entities;
-using HIS.Core.Entities.Auditing;
-using Microsoft.EntityFrameworkCore;
+﻿using HIS.Core.Entities.Auditing;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,34 +8,23 @@ using System.Threading.Tasks;
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
-    /// Loại đăng ký khám.
+    /// Đối tượng đăng ký khám.
     /// </summary>
     public class ReceptionObjectType : AuditedEntity<int>
     {
-        public virtual string Code { get; set; }
-        public virtual string Name { get; set; }
-        public virtual string Description { get; set; }
-        public virtual int SortOrder { get; set; }
-        public virtual bool Inactive { get; set; }
+        public string ReceptionObjectTypeCode { get; set; }
+        public string ReceptionObjectTypeName { get; set; }
+        public string Description { get; set; }
+        public int SortOrder { get; set; }
+        public bool Inactive { get; set; }
 
         public ReceptionObjectType() { }
-        public ReceptionObjectType(int id, string name, int sortOrder)
+        public ReceptionObjectType(int id, string name, int order)
         {
             this.Id = id;
-            this.Code = id.ToString();
-            this.Name = name;
-            this.SortOrder = sortOrder;
-            this.Inactive = false;
-        }
-        public ReceptionObjectType(int id, string code, string name, int sortOrder)
-        {
-            this.Id = id;  
-            this.Code = code;
-            this.Name = name;
-            this.SortOrder = sortOrder;
-            this.Inactive = false;
-
-            this.CreatedDate = new DateTime(1975, 01, 01);
+            this.ReceptionObjectTypeCode = id.ToString();
+            this.ReceptionObjectTypeName = name;
+            this.SortOrder = order;
         }
     }
 }

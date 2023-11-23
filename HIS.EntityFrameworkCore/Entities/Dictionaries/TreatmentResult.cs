@@ -12,20 +12,12 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// </summary>
     public class TreatmentResult : AuditedEntity<int>
     {
-        public virtual string Code { get; set; }
-        public virtual string Name { get; set; }
-        public virtual string Description { get; set; }
-        public virtual int SortOrder { get; set; }
-        public virtual bool Inactive { get; set; }
+        public string TreatmentResultCode { get; set; }
+        public string TreatmentResultName { get; set; }
+        public string Description { get; set; }
+        public int SortOrder { get; set; }
+        public bool Inactive { get; set; }
 
         public TreatmentResult() { }
-        public TreatmentResult(int id, string name, int sortOrder)
-        {
-            this.Id = id;
-            this.Code = id.ToString();
-            this.Name = name;
-            this.SortOrder = sortOrder;
-            this.Inactive = false;
-        }
     }
 }

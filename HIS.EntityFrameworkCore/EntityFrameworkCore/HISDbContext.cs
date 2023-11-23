@@ -1,4 +1,5 @@
-﻿using HIS.EntityFrameworkCore.Configurations;
+﻿using HIS.Core.Entities;
+using HIS.EntityFrameworkCore.Configurations;
 using HIS.EntityFrameworkCore.Data;
 using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Categories;
@@ -7,8 +8,10 @@ using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.Systems;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace HIS.EntityFrameworkCore
 {
@@ -23,7 +26,7 @@ namespace HIS.EntityFrameworkCore
         public DbSet<Branch> Branchs { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<DepartmentType> DepartmentTypes { get; set; }
-        public DbSet<Ethnicity> Ethnics { get; set; }
+        public DbSet<Ethnicity> Ethnicities { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<RoomType> RoomTypes { get; set; }
         public DbSet<Career> Careers { get; set; }
@@ -38,7 +41,7 @@ namespace HIS.EntityFrameworkCore
         public DbSet<District> Districts { get; set; }
         public DbSet<SWard> Wards { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
-        public DbSet<RelativeType> RelativeTypes { get; set; }
+        public DbSet<RelativeCategory> RelativeTypes { get; set; }
 
         public DbSet<Service> Services { get; set; }
         public DbSet<ServiceGroup> ServiceGroups { get; set; }
@@ -59,21 +62,20 @@ namespace HIS.EntityFrameworkCore
         public DbSet<InOutStock> InOutStocks { get; set; }
         public DbSet<InOutStockItem> InOutStockItems { get; set; }
 
-        public DbSet<DeathCause> DeathCauses { get; set; }
-        public DbSet<DeathWithin> DeathWithins { get; set; }
-        public DbSet<PatientType> PatientTypes { get; set; }
-        public DbSet<PatientRecordType> PatientRecordTypes { get; set; }
-        public DbSet<MedicalRecordType> MedicalRecordTypes { get; set; }
-        public DbSet<MedicalRecordResult> MedicalRecordResults { get; set; }
-        public DbSet<MedicalRecordEndType> MedicalRecordEndTypes { get; set; }
-
         #region - danh mục
 
-        public DbSet<BloodType> AccountBooks { get; set; }
         public DbSet<BloodType> BloodTypes { get; set; }
         public DbSet<BloodTypeRh> BloodTypeRhs { get; set; }
-        public DbSet<ReceptionObjectType> ReceptionTypes { get; set; }
-        public DbSet<UserAccountBook> UserAccountBooks { get; set; }
+        public DbSet<DeathCause> DeathCauses { get; set; }
+        public DbSet<DeathWithin> DeathWithins { get; set; }
+        public DbSet<MedicalRecordType> MedicalRecordTypes { get; set; }
+        public DbSet<MedicalRecordTypeGroup> MedicalRecordTypeGroups { get; set; }
+        public DbSet<PatientObjectType> PatientObjectTypes { get; set; }
+        public DbSet<ReceptionObjectType> ReceptionObjectTypes { get; set; }
+        public DbSet<RelativeCategory> RelativeCategories { get; set; }
+        public DbSet<Relative> Relatives { get; set; }
+        public DbSet<TreatmentEndType> TreatmentEndTypes { get; set; }
+        public DbSet<TreatmentResult> TreatmentResults { get; set; }
 
         #endregion
 
@@ -81,16 +83,11 @@ namespace HIS.EntityFrameworkCore
 
         public DbSet<Patient> Patients { get; set; }
         public DbSet<PatientRecord> PatientRecords { get; set; }
-        public DbSet<MedicalRecord> MedicalRecords { get; set; }
-        public DbSet<Treatment> Treatments { get; set; }
 
         #endregion
 
         #region - hệ thống
-        public DbSet<SYSAutoNumber> SYSAutoNumbers { get; set; }
         public DbSet<DbOption> DbOptions { get; set; }
-        public DbSet<SYSRefType> SYSRefTypes { get; set; }
-        public DbSet<SYSRefTypeCategory> SYSRefTypeCategories { get; set; }
         #endregion
 
 
@@ -113,6 +110,13 @@ namespace HIS.EntityFrameworkCore
         public virtual IDbContextTransaction BeginTransaction()
         {
             return Database.BeginTransaction();
+        }
+
+        public virtual int NewID<TEntity>() where TEntity : class, IEntity<int>
+        {
+            var dbSet = this.Set<TEntity>();
+            var data = dbSet.DefaultIfEmpty().Max(x => x.Id);
+            return data + 1;
         }
     }
 }

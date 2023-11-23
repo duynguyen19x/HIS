@@ -14,6 +14,7 @@ using HIS.Utilities.Helpers;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.Extensions.Configuration;
 using System.Globalization;
+using HIS.Core.Enums;
 
 namespace HIS.ApplicationService.Dictionaries.Service
 {
@@ -313,23 +314,23 @@ namespace HIS.ApplicationService.Dictionaries.Service
                 {
                     var service = _dbContext.Services.FirstOrDefault(s => s.Id == id && s.IsDeleted == false);
                     var sServicePricePolicyDtos = (from ser in _dbContext.ServicePricePolicies
-                                                   join pa in _dbContext.PatientTypes on ser.PatientTypeId equals pa.Id
+                                                   join pa in _dbContext.PatientObjectTypes on ser.PatientObjectTypeId equals pa.Id
                                                    where ser.ServiceId == id
                                                    select new ServicePricePolicyDto()
                                                    {
                                                        Id = ser.Id,
                                                        ServiceId = ser.ServiceId,
-                                                       PatientTypeId = ser.PatientTypeId,
+                                                       PatientObjectTypeId = ser.PatientObjectTypeId,
                                                        OldUnitPrice = ser.OldUnitPrice,
                                                        NewUnitPrice = ser.NewUnitPrice,
                                                        CeilingPrice = ser.CeilingPrice,
                                                        PaymentRate = ser.PaymentRate,
                                                        ExecutionTime = ser.ExecutionTime,
                                                        ExecutionTimeString = ser.ExecutionTime == null ? null : ser.ExecutionTime.Value.ToString("dd/MM/yyyy"),
-                                                       PatientTypeCode = pa.Code,
-                                                       PatientTypeName = pa.Name,
-                                                       IsHeIn = pa.Code == PatientTypes.BHYT ? true : false,
-                                                   }).OrderBy(s => s.PatientTypeCode).ToList();
+                                                       PatientObjectTypeCode = pa.PatientObjectTypeCode,
+                                                       PatientObjectTypeName = pa.PatientObjectTypeName,
+                                                       IsHeIn = ser.PatientObjectTypeId == (int)HIS.Core.Enums.PatientObjectTypes.BHYT ? true : false,
+                                                   }).OrderBy(s => s.PatientObjectTypeCode).ToList();
 
                     var sExecutionRoomDtos = (from room in _dbContext.Rooms
                                               join exec in _dbContext.ExecutionRooms.Where(w => w.ServiceId == id) on room.Id equals exec.RoomId into SExecutionRooms
@@ -357,15 +358,15 @@ namespace HIS.ApplicationService.Dictionaries.Service
                 }
                 else
                 {
-                    var sServicePricePolicys = (from r in _dbContext.PatientTypes
+                    var sServicePricePolicys = (from r in _dbContext.PatientObjectTypes
                                                 where r.Inactive == false
                                                 select new ServicePricePolicyDto()
                                                 {
-                                                    PatientTypeId = r.Id,
-                                                    PatientTypeCode = r.Code,
-                                                    PatientTypeName = r.Name,
-                                                    IsHeIn = r.Code == PatientTypes.BHYT ? true : false,
-                                                }).OrderBy(o => o.PatientTypeCode).ToList();
+                                                    PatientObjectTypeId = r.Id,
+                                                    PatientObjectTypeCode = r.PatientObjectTypeCode,
+                                                    PatientObjectTypeName = r.PatientObjectTypeName,
+                                                    IsHeIn = r.Id == (int)HIS.Core.Enums.PatientObjectTypes.BHYT ? true : false,
+                                                }).OrderBy(o => o.PatientObjectTypeCode).ToList();
 
                     var sExecutionRooms = (from room in _dbContext.Rooms
                                            where room.Inactive == false
@@ -404,7 +405,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                     var sServiceGroupHeIns = _dbContext.ServiceGroupHeIns.ToList();
                     var sServiceGroups = _dbContext.ServiceGroups.ToList();
                     var sSurgicalProcedureTypes = _dbContext.SurgicalProcedureTypes.ToList();
-                    var sPatientTypes = _dbContext.PatientTypes.ToList();
+                    var sPatientTypes = _dbContext.PatientObjectTypes.ToList();
                     var sRooms = _dbContext.Rooms.ToList();
 
                     var sServiceDtos = new List<ServiceDto>();
@@ -421,7 +422,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                 Id = Guid.NewGuid(),
                                 ServiceId = serviceDto.Id,
                                 OldUnitPrice = serviceImport.HeInPrice,
-                                PatientTypeCode = PatientTypes.BHYT,
+                                PatientObjectTypeCode = HIS.Core.Enums.PatientObjectTypes.BHYT.ToString(),
                                 PaymentRate = serviceImport.PaymentRate,
                                 CeilingPrice = serviceImport.CeilingPrice,
                                 ExecutionTime = string.IsNullOrEmpty( serviceImport.ExecutionTimeString) ? null : DateTime.ParseExact(serviceImport.ExecutionTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None),
@@ -431,7 +432,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                 Id = Guid.NewGuid(),
                                 ServiceId = serviceDto.Id,
                                 OldUnitPrice = serviceImport.ServicePrice,
-                                PatientTypeCode = PatientTypes.DV,
+                                PatientObjectTypeCode = HIS.Core.Enums.PatientObjectTypes.DV.ToString(),
                                 ExecutionTime = string.IsNullOrEmpty( serviceImport.ExecutionTimeString) ? null : DateTime.ParseExact(serviceImport.ExecutionTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None),
                             },
                             new ServicePricePolicyDto()
@@ -439,7 +440,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                 Id = Guid.NewGuid(),
                                 ServiceId = serviceDto.Id,
                                 OldUnitPrice = serviceImport.PeoplePrice,
-                                PatientTypeCode = PatientTypes.VP,
+                                PatientObjectTypeCode = HIS.Core.Enums.PatientObjectTypes.VP.ToString(),
                                 ExecutionTime = string.IsNullOrEmpty( serviceImport.ExecutionTimeString) ? null : DateTime.ParseExact(serviceImport.ExecutionTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None),
                             }
                         };
@@ -482,11 +483,11 @@ namespace HIS.ApplicationService.Dictionaries.Service
 
                     var servicePricePolicieDtos = sServiceDtos.SelectMany(s => s.SServicePricePolicies).ToList();
                     var servicePricePolicie = (from servicePricePolicy in servicePricePolicieDtos
-                                               join sPatientType in sPatientTypes on servicePricePolicy.PatientTypeCode equals sPatientType.Code
+                                               join sPatientType in sPatientTypes on servicePricePolicy.PatientObjectTypeCode equals sPatientType.PatientObjectTypeCode
                                                select new EntityFrameworkCore.Entities.Categories.Services.ServicePricePolicy()
                                                {
                                                    Id = servicePricePolicy.Id.GetValueOrDefault(),
-                                                   PatientTypeId = sPatientType.Id,
+                                                   PatientObjectTypeId = sPatientType.Id,
                                                    ServiceId = servicePricePolicy.ServiceId,
                                                    OldUnitPrice = servicePricePolicy.OldUnitPrice,
                                                    NewUnitPrice = servicePricePolicy.NewUnitPrice,

@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
-using HIS.Core.Linq;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Systems.DbOption;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.EntityFrameworkCore;
 using HIS.Models.Commons;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;

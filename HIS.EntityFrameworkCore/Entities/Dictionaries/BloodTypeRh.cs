@@ -1,7 +1,4 @@
 ﻿using HIS.Core.Entities.Auditing;
-using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {

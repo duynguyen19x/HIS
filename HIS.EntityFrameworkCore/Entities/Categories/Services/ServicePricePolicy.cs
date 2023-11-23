@@ -6,7 +6,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories.Services
     public class ServicePricePolicy : FullAuditedEntity<Guid>
     {
         public Guid? ServiceId { get; set; }
-        public int? PatientTypeId { get; set; }
+        public int? PatientObjectTypeId { get; set; }
 
         /// <summary>
         /// Giá cữ
@@ -34,6 +34,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories.Services
         public DateTime? ExecutionTime { get; set; }
 
         public Service Service { get; set; }
-        public PatientType PatientType { get; set; }
+        public PatientObjectType PatientObjectType { get; set; }
     }
 }

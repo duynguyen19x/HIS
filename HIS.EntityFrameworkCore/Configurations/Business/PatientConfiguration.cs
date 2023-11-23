@@ -16,31 +16,34 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
         {
             builder.ToTable("Patient");
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Code).IsRequired().HasMaxLength(20);
-            builder.Property(x => x.Name).IsRequired().HasMaxLength(512);
+            builder.Property(x => x.PatientCode).IsRequired().HasMaxLength(20);
+            builder.Property(x => x.PatientName).IsRequired().HasMaxLength(512);
             builder.Property(x => x.BirthYear).IsRequired();
-            builder.Property(x => x.GenderId).IsRequired();
-            builder.Property(x => x.EthnicId).IsRequired();
-            builder.Property(x => x.BirthPlace).HasMaxLength(250);
-            builder.Property(x => x.Address).HasMaxLength(500);
+            builder.Property(x => x.BirthPlace).HasMaxLength(512);
+            builder.Property(x => x.GenderID).IsRequired();
+            builder.Property(x => x.EthnicityID).IsRequired();
+            builder.Property(x => x.CountryID).IsRequired();
+            builder.Property(x => x.ProvinceOrCityID).IsRequired();
+            builder.Property(x => x.DistrictID).IsRequired();
+            builder.Property(x => x.WardOrCommuneID).IsRequired();
+            builder.Property(x => x.Address).HasMaxLength(512);
             builder.Property(x => x.Email).HasMaxLength(50);
             builder.Property(x => x.Tel).HasMaxLength(20);
             builder.Property(x => x.Mobile).HasMaxLength(20);
             builder.Property(x => x.IdentificationNumber).HasMaxLength(50);
-            builder.Property(x => x.IssueBy).HasMaxLength(250);
-            builder.Property(x => x.CareerId).IsRequired();
-            builder.Property(x => x.WorkPlace).HasMaxLength(250);
-            builder.Property(x => x.Description).HasMaxLength(500);
+            builder.Property(x => x.IssueBy).HasMaxLength(255);
+            builder.Property(x => x.WorkPlace).HasMaxLength(255);
+            builder.Property(x => x.Description).HasMaxLength(255);
 
-            //builder.HasOne(x => x.Gender).WithMany().HasForeignKey(x => x.GenderId).OnDelete(DeleteBehavior.Restrict);
-            //builder.HasOne(x => x.Ethnic).WithMany().HasForeignKey(x => x.EthnicId).OnDelete(DeleteBehavior.Restrict);
-            //builder.HasOne(x => x.BloodType).WithMany().HasForeignKey(x => x.BloodTypeId).OnDelete(DeleteBehavior.Restrict);
-            //builder.HasOne(x => x.BloodTypeRh).WithMany().HasForeignKey(x => x.BloodTypeRhId).OnDelete(DeleteBehavior.Restrict);
-            //builder.HasOne(x => x.Country).WithMany().HasForeignKey(x => x.CountryId).OnDelete(DeleteBehavior.Restrict);
-            //builder.HasOne(x => x.Province).WithMany().HasForeignKey(x => x.ProvinceOrCityId).OnDelete(DeleteBehavior.Restrict);
-            //builder.HasOne(x => x.District).WithMany().HasForeignKey(x => x.DistrictId).OnDelete(DeleteBehavior.Restrict);
-            //builder.HasOne(x => x.Ward).WithMany().HasForeignKey(x => x.WardOrCommuneId).OnDelete(DeleteBehavior.Restrict);
-            //builder.HasOne(x => x.Career).WithMany().HasForeignKey(x => x.CareerId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.Gender).WithMany().HasForeignKey(x => x.GenderID).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.Ethnicity).WithMany().HasForeignKey(x => x.EthnicityID).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.Country).WithMany().HasForeignKey(x => x.CountryID).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.ProvinceOrCity).WithMany().HasForeignKey(x => x.ProvinceOrCityID).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.District).WithMany().HasForeignKey(x => x.DistrictID).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.WardOrCommune).WithMany().HasForeignKey(x => x.WardOrCommuneID).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.Career).WithMany().HasForeignKey(x => x.CareerID).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.BloodType).WithMany().HasForeignKey(x => x.BloodTypeID).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.BloodTypeRh).WithMany().HasForeignKey(x => x.BloodTypeRhID).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

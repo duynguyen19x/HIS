@@ -10,7 +10,7 @@ namespace HIS.Dtos.Dictionaries.ServicePricePolicy
     public class ServicePricePolicyDto : EntityDto<Guid?>
     {
         public Guid? ServiceId { get; set; }
-        public int? PatientTypeId { get; set; }
+        public int? PatientObjectTypeId { get; set; }
         public decimal? OldUnitPrice { get; set; }
         public decimal? NewUnitPrice { get; set; }
         public decimal? CeilingPrice { get; set; }
@@ -19,8 +19,8 @@ namespace HIS.Dtos.Dictionaries.ServicePricePolicy
         public string ExecutionTimeString { get; set; }
 
         public bool IsHeIn { get; set; }
-        public string PatientTypeCode { get; set; }
-        public string PatientTypeName { get; set; }
+        public string PatientObjectTypeCode { get; set; }
+        public string PatientObjectTypeName { get; set; }
 
         public bool Inactive { get; set; }
     }

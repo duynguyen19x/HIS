@@ -8,14 +8,23 @@ using System.Threading.Tasks;
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
-    /// Loại thu, chi: thu tiền, tạm ứng, hoàn ứng,....
+    /// Loại giao dịch thu, chi.
     /// </summary>
     public class TransactionType : AuditedEntity<int>
     {
-        public virtual string Code { get; set; }
-        public virtual string Name { get; set; }
-        public virtual string Description { get; set; }
-        public virtual int SortOrder { get; set; } // số thứ tự hiển thị
-        public virtual bool Inactive { get; set; }
+        public string TransactionTypeCode { get; set; }
+        public string TransactionTypeName { get; set; }
+        public string Description { get; set; }
+        public int SortOrder { get; set; }
+        public bool Inactive { get; set; }
+
+        public TransactionType() { }
+        public TransactionType(int id, string name, int order)
+        {
+            this.Id = id;
+            this.TransactionTypeCode = id.ToString();
+            this.TransactionTypeName = name;
+            this.SortOrder = order;
+        }
     }
 }

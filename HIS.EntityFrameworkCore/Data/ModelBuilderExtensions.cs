@@ -10,8 +10,6 @@ namespace HIS.EntityFrameworkCore.Data
         {
             ChapterIcdBuilder.Seed(modelBuilder);
             CountryBuilder.Seed(modelBuilder);
-            DeathCauseBuilder.Seed(modelBuilder);
-            DeathWithinBuilder.Seed(modelBuilder);
             UserBuilder.Seed(modelBuilder);
             ServiceGroupBuilder.Seed(modelBuilder);
             ServiceGroupHeInBuilder.Seed(modelBuilder);
@@ -23,17 +21,8 @@ namespace HIS.EntityFrameworkCore.Data
             ItemLineBuilder.Seed(modelBuilder);
             InOutStockTypeBuilder.Seed(modelBuilder);
             ProvinceBuilder.Seed(modelBuilder);
-            ReceptionTypeBuilder.Seed(modelBuilder);
             GenderBuilder.Seed(modelBuilder);
             EthnicityBuilder.Seed(modelBuilder);
-            RelativeTypeBuilder.Seed(modelBuilder);
-
-            PatientTypeBuilder.Seed(modelBuilder);
-            PaymentMethodBuilder.Seed(modelBuilder);
-            PatientRecordTypeBuilder.Seed(modelBuilder);
-            MedicalRecordEndTypeBuilder.Seed(modelBuilder);
-            MedicalRecordResultBuilder.Seed(modelBuilder);
-            TransactionTypeBuilder.Seed(modelBuilder);
             
             
         }

@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
-    /// Phương thức thanh toán: tiền mặt, chuyển khoản, ....
+    /// Phương thức thanh toán.
     /// </summary>
     public class PaymentMethod : AuditedEntity<Guid>
     {
-        public virtual string Code { get; set; }
-        public virtual string Name { get; set; }
-        public virtual string Description { get; set; }
-        public virtual int SortOrder { get; set; }
-        public virtual bool Inactive { get; set; }
+        public string PaymentMethodCode { get; set; }
+        public string PaymentMethodName { get; set; }
+        public string Description { get; set; }
+        public int SortOrder { get; set; }
+        public bool Inactive { get; set; }
 
         public PaymentMethod() { }
     }

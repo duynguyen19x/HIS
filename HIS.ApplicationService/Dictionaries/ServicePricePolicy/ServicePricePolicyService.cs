@@ -31,16 +31,16 @@ namespace HIS.ApplicationService.Dictionaries.ServicePricePolicy
 
             try
             {
-                result.Result = (from r in _dbContext.PatientTypes
+                result.Result = (from r in _dbContext.PatientObjectTypes
                                  select new ServicePricePolicyDto()
                                  {
-                                     PatientTypeId = r.Id,
-                                     PatientTypeCode = r.Code,
-                                     PatientTypeName = r.Name,
+                                     PatientObjectTypeId = r.Id,
+                                     PatientObjectTypeCode = r.PatientObjectTypeCode,
+                                     PatientObjectTypeName = r.PatientObjectTypeName,
                                      Inactive = r.Inactive,
                                  })
                                  .WhereIf(input.InactiveFilter != null, w => w.Inactive == input.InactiveFilter)
-                                 .OrderBy(o => o.PatientTypeCode).ToList();
+                                 .OrderBy(o => o.PatientObjectTypeCode).ToList();
 
                 result.TotalCount = result.Result.Count;
             }

@@ -18,6 +18,7 @@ using Microsoft.Extensions.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Net.WebSockets;
+using HIS.Core.Enums;
 
 namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 {
@@ -118,22 +119,22 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                         var ItemDtos = _mapper.Map<IList<Item>>(_dbContext.Items.Where(w => ItemIds.Contains(w.Id)).ToList());
 
                         var ItemPricePolicyDtos = (from med in _dbContext.ItemPricePolicies
-                                                   join pa in _dbContext.PatientTypes on med.PatientTypeId equals pa.Id
+                                                   join pa in _dbContext.PatientObjectTypes on med.PatientObjectTypeId equals pa.Id
                                                    select new ItemPricePolicyDto()
                                                    {
                                                        Id = med.Id,
                                                        ItemId = med.ItemId,
-                                                       PatientTypeId = med.PatientTypeId,
+                                                       PatientObjectTypeId = med.PatientObjectTypeId,
                                                        OldUnitPrice = med.OldUnitPrice,
                                                        NewUnitPrice = med.NewUnitPrice,
                                                        CeilingPrice = med.CeilingPrice,
                                                        PaymentRate = med.PaymentRate,
                                                        ExecutionTime = med.ExecutionTime,
-                                                       PatientTypeCode = pa.Code,
-                                                       PatientTypeName = pa.Name,
-                                                       IsHeIn = pa.Code == PatientTypes.BHYT ? true : false,
+                                                       PatientObjectTypeCode = pa.PatientObjectTypeCode,
+                                                       PatientObjectTypeName = pa.PatientObjectTypeName,
+                                                       IsHeIn = med.PatientObjectTypeId == (int)PatientObjectTypes.BHYT ? true : false,
                                                    }).WhereIf(ItemIds != null, w => ItemIds.Contains(w.ItemId))
-                                                   .OrderBy(s => s.PatientTypeCode).ToList();
+                                                   .OrderBy(s => s.PatientObjectTypeCode).ToList();
 
                         foreach (var inOutStockItem in inOutStockItemDtos)
                         {

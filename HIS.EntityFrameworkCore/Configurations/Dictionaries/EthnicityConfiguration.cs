@@ -13,11 +13,11 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<Ethnicity> builder)
         {
-            builder.ToTable("Ethnic");
+            builder.ToTable("Ethnicity");
 
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Code).HasMaxLength(20).IsRequired(); 
-            builder.Property(x => x.Name).HasMaxLength(128).IsRequired(); 
+            builder.Property(x => x.EthnicityCode).HasMaxLength(20).IsRequired(); 
+            builder.Property(x => x.EthnicityName).HasMaxLength(128).IsRequired(); 
             builder.Property(x => x.Description).HasMaxLength(255);
         }
     }

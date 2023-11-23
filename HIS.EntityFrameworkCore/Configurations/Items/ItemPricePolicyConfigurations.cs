@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using HIS.EntityFrameworkCore.Entities.Categories.Items;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 
 namespace HIS.EntityFrameworkCore.Configurations.Items
 {
@@ -17,10 +18,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Items
             builder.ToTable("ItemPricePolicies");
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(t => t.PatientType)
-                .WithMany()
-                .HasForeignKey(pc => pc.PatientTypeId)
-                ;
+            builder.HasOne<PatientObjectType>(t => t.PatientObjectType).WithMany().HasForeignKey(pc => pc.PatientObjectTypeId);
 
             builder.HasOne(t => t.Item)
                 .WithMany()

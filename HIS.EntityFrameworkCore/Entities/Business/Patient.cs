@@ -4,82 +4,54 @@ using HIS.EntityFrameworkCore.Entities.Dictionaries;
 
 namespace HIS.EntityFrameworkCore.Entities.Business
 {
-    /// <summary>
-    /// Bệnh nhân.
-    /// </summary>
     public class Patient : FullAuditedEntity<Guid>
     {
-        public string Code { get; set; }
-
-        public string Name { get; set; }
-
+        public string PatientCode { get; set; }
+        public string PatientName { get; set; }
         public DateTime? BirthDate { get; set; }
-
         public int BirthYear { get; set; }
-
         public string BirthPlace { get; set; }
-
-        public Guid GenderId { get; set; }
-
-        public Guid EthnicId { get; set; }
-
-        public Guid? BloodTypeId { get; set; }
-
-        public Guid? BloodTypeRhId { get; set; }
-
-        public Guid? CountryId { get; set; }
-
-        public Guid? ProvinceId { get; set; }
-
-        public Guid? DistrictId { get; set; }
-
-        public Guid? WardId { get; set; }
-
+        public Guid GenderID { get; set; }
+        public Guid EthnicityID { get; set; }
+        public Guid CountryID { get; set; }
+        public Guid ProvinceOrCityID { get; set; }
+        public Guid DistrictID { get; set; }
+        public Guid WardOrCommuneID { get; set; }
         public string Address { get; set; }
-
-        public Guid CareerId { get; set; }
-
-        public string WorkPlace { get; set; }
-
         public string Email { get; set; }
-
         public string Tel { get; set; }
-
         public string Mobile { get; set; }
-
+        public Guid CareerID { get; set; }
+        public string WorkPlace { get; set; }
         public string IdentificationNumber { get; set; }
-
         public DateTime? IssueDate { get; set; }
-
         public string IssueBy { get; set; }
-
         public string Description { get; set; }
+        public Guid? BloodTypeID { get; set; }
+        public Guid? BloodTypeRhID { get; set; }
 
         [Ignore]
-        public Gender Gender { get; set; }
-
+        public virtual Gender Gender { get; set; }
         [Ignore]
-        public Ethnicity Ethnic { get; set; }
-
+        public virtual Ethnicity Ethnicity { get; set; }
         [Ignore]
-        public BloodType BloodType { get; set; }
-
+        public virtual Country Country { get; set; }
         [Ignore]
-        public BloodTypeRh BloodTypeRh { get; set; }
-
+        public virtual Province ProvinceOrCity { get; set; }
         [Ignore]
-        public Country Country { get; set; }
-
+        public virtual District District { get; set; }
         [Ignore]
-        public Province Province { get; set; }
-
+        public virtual SWard WardOrCommune { get; set; }
         [Ignore]
-        public District District { get; set; }
-
+        public virtual Career Career { get; set; }
         [Ignore]
-        public SWard Ward { get; set; }
-
+        public virtual BloodType BloodType { get; set; }
         [Ignore]
-        public Career Career { get; set; }
+        public virtual BloodTypeRh BloodTypeRh { get; set; }
+        
+
+        public Patient()
+        {
+        }
     }
 }

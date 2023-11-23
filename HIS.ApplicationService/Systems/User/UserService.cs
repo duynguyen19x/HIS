@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using HIS.Application.Core.Services.Dto;
 using HIS.Dtos.Commons;
 using HIS.Dtos.Systems.User;
 using HIS.EntityFrameworkCore;

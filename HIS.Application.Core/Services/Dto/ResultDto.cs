@@ -14,31 +14,23 @@ namespace HIS.Application.Core.Services.Dto
 
         public virtual T Item { get; set; }
 
-        public virtual IList<ResultErrorDto> Errors { get; set; }
-
-        public virtual bool HasErrors => Errors != null && Errors.Count > 0;
-
         public ResultDto() 
         {
             IsSucceeded = true;
-            Errors = new List<ResultErrorDto>();
         }
+
         public ResultDto(T item) 
             : this()
         {
             Item = item;
         }
 
-        public virtual void Error(string field, string message)
+        public virtual void Succeeded(T item)
         {
-            if (Errors == null)
-                Errors = new List<ResultErrorDto>();
-            Errors.Add(new ResultErrorDto(field, message));
+            this.IsSucceeded = true;
+            this.Item = item;
         }
-        public virtual void RemoveError()
-        {
-            this.Errors = new List<ResultErrorDto>();
-        }
+
         public virtual void Exception(Exception ex)
         {
             this.IsSucceeded = false;

@@ -9,72 +9,30 @@ namespace HIS.Dtos.Business.PatientRecords
 {
     public class PatientRecordDto : EntityDto<Guid>
     {
-        public virtual string Code { get; set; } // mã điều trị
-
-        public virtual Guid PatientId { get; set; } // mã bệnh nhân
-        public virtual string PatientName { get; set; } // tên bệnh nhân
-        public virtual DateTime? BirthDate { get; set; }
-        public virtual int BirthYear { get; set; }
-        public virtual string BirthPlace { get; set; }
-        public virtual Guid GenderId { get; set; }
-        public virtual Guid EthnicId { get; set; }
-        public virtual Guid? CountryId { get; set; }
-        public virtual Guid? ProvinceId { get; set; }
-        public virtual Guid? DistrictId { get; set; }
-        public virtual Guid? WardId { get; set; }
-        public virtual string Address { get; set; }
-        public virtual Guid CareerId { get; set; }
-        public virtual string WorkPlace { get; set; }
-        public virtual string Email { get; set; }
-        public virtual string Tel { get; set; }
-        public virtual string Mobile { get; set; }
-        public virtual string IdentificationNumber { get; set; } // số CMND, CCCD, hộ chiếu
-        public virtual DateTime? IssueDate { get; set; } // ngày cấp
-        public virtual string IssueBy { get; set; } // nơi cấp
-
-        public virtual Guid? RalativeTypeId { get; set; } // mối quan hệ với bệnh nhân
-        public virtual string RelativeName { get; set; } // tên người nhà
-        public virtual string RelativeAddress { get; set; } // địa chỉ người nhà
-        public virtual string RelativeTel { get; set; } // số điện thoại cố định người nhà
-        public virtual string RelativeMobile { get; set; } // số điện thoại di động người nhà
-        public virtual string RelativeIdentificationNumber { get; set; } // số CMND, CCCD người nhà
-        public virtual DateTime? RelativeIssueDate { get; set; } // ngày cấp
-        public virtual string RelativeIssueBy { get; set; } // nơi cấp
-
-        // đăng ký khám
-        public virtual DateTime ReceptionDate { get; set; } // ngày đăng ký
-        public virtual Guid ReceptionDepartmentId { get; set; } // khoa đăng ký
-        public virtual Guid ReceptionRoomId { get; set; } // phòng đăng ký
-        public virtual int ReceptionType { get; set; } // loại đăng ký (cskh, phòng đón tiếp, ....)
-        public virtual int ReceptionObjectType { get; set; } // đối tượng đăng ký khám (khám bệnh, cấp cứu, ....)
-        public virtual string HospitalizationReason { get; set; } // lý do khám
-        public virtual bool IsPriority { get; set; } // là ưu tiên
-        public virtual bool IsEmergency { get; set; } // là cấp cứu
-        public virtual int SortOrder { get; set; } // số thứ tự đến khám
-        public string Description { get; set; } // ghi chú
-
-        // giấy giới thiệu (thông tin chuyển tuyến đến)
+        public string PatientRecordCode { get; set; }
+        public Guid PatientID { get; set; }
+        public string PatientName { get; set; }
+        public DateTime? BirthDate { get; set; }
+        public int BirthYear { get; set; }
+        public string BirthPlace { get; set; }
+        public Guid GenderID { get; set; }
+        public Guid EthnicityID { get; set; }
+        public Guid CountryID { get; set; }
+        public Guid ProvinceOrCityID { get; set; }
+        public Guid DistrictID { get; set; }
+        public Guid WardOrCommuneID { get; set; }
+        public string Address { get; set; }
+        public string Email { get; set; }
+        public string Tel { get; set; }
+        public string Mobile { get; set; }
+        public Guid CareerID { get; set; }
+        public string WorkPlace { get; set; }
+        public string IdentificationNumber { get; set; }
+        public DateTime? IssueDate { get; set; }
+        public string IssueBy { get; set; }
+        public string Description { get; set; }
 
 
-        // khám bệnh
-        public virtual DateTime? ClinicalTime { get; set; } // thời gian bắt đầu khám
-        public virtual Guid? ClinicalDepartmentId { get; set; } // khoa khám bệnh
-        public virtual Guid? ClinicalRoomId { get; set; } // phòng khám bệnh
-
-        // vào viện
-        public virtual DateTime InTime { get; set; }  // thời gian nhập viện
-        public virtual Guid? InDepartmentId { get; set; }
-        public virtual Guid? InRoomId { get; set; }
-
-        // ra viện
-        public virtual DateTime? OutTime { get; set; } // thời gian ra viện
-        public virtual Guid? OutDepartmentId { get; set; }
-        public virtual Guid? OutRoomId { get; set; }
-
-        public string IcdCode { get; set; } // mã bệnh chính
-        public string IcdName { get; set; } // tên bệnh chính
-        public string IcdSubCode { get; set; } // mã bệnh kèm theo
-        public string IcdText { get; set; } // danh sách mã bệnh kèm theo
 
     }
 }
