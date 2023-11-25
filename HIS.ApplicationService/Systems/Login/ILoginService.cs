@@ -11,6 +11,7 @@ namespace HIS.ApplicationService.Systems.Login
     public interface ILoginService
     {
         Task<ApiResult<TokenResultDto>> Authenticate(LoginDto request);
+        Task<ApiResult<TokenResultDto>> RefreshToken(TokenResultDto token);
         Task<ApiResult<bool>> Register(RegisterDto request);
     }
 }
