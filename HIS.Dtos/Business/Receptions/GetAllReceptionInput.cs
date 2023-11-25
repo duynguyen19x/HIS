@@ -11,7 +11,8 @@ namespace HIS.Dtos.Business.Receptions
     {
         public DateTime? MaxReceptionDateFilter { get; set; }
         public DateTime? MinReceptionDateFilter { get; set; }
-        public int? PatientObjectTypeFilter { get; set; }
-        public int? ReceptionObjectTypeFilter { get; set; }
+        public int? PatientTypeFilter { get; set; }
+        public int? PatientRecordTypeFilter { get; set; }
+        public int? ReceptionTypeFilter { get; set; }
     }
 }

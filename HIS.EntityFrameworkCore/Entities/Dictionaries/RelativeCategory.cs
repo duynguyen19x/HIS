@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
-    /// Mỗi quan hệ gia đình.
+    /// Mỗi quan hệ gia đình (bố, mẹ, anh, chị,....).
     /// </summary>
     public class RelativeCategory : AuditedEntity<Guid>
     {

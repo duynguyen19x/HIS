@@ -16,18 +16,15 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.ToTable("Relative");
 
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.RelativeCode).HasMaxLength(20).IsRequired();
             builder.Property(x => x.RelativeName).HasMaxLength(128).IsRequired();
             builder.Property(x => x.IdentificationNumber).HasMaxLength(20);
             builder.Property(x => x.IssueBy).HasMaxLength(128);
             builder.Property(x => x.Tel).HasMaxLength(20);
             builder.Property(x => x.Mobile).HasMaxLength(20);
             builder.Property(x => x.Address).HasMaxLength(255);
-            builder.Property(x => x.Workplace).HasMaxLength(128);
-            builder.Property(x => x.Description).HasMaxLength(255);
 
-            builder.HasOne(t => t.Career).WithMany().HasForeignKey(p => p.CareerID);
             builder.HasOne(t => t.RelativeCategory).WithMany().HasForeignKey(p => p.RelativeCategoryID);
+            builder.HasOne(t => t.PatientRecord).WithMany().HasForeignKey(p => p.PatientRecordID);
         }
     }
 }

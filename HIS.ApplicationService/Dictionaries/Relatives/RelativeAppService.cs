@@ -2,17 +2,11 @@
 using HIS.Application.Core.Services;
 using HIS.Application.Core.Services.Dto;
 using HIS.Core.Linq;
-using HIS.Dtos.Dictionaries.ReceptionObjectTypes;
 using HIS.Dtos.Dictionaries.Relatives;
 using HIS.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Utilities.Sections;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Dictionaries.Relatives
 {
@@ -106,10 +100,12 @@ namespace HIS.ApplicationService.Dictionaries.Relatives
             try
             {
                 var filter = Context.Relatives.AsQueryable()
-                    .WhereIf(!string.IsNullOrEmpty(input.RelativeCodeFilter), x => x.RelativeCode == input.RelativeCodeFilter)
-                    .WhereIf(!string.IsNullOrEmpty(input.RelativeNameFilter), x => x.RelativeName == input.RelativeNameFilter);
+                    .WhereIf(input.RelativeCategoryFilter != null, x => x.RelativeCategoryID == input.RelativeCategoryFilter)
+                    .WhereIf(input.PatientRecordFilter != null, x => x.PatientRecordID == input.PatientRecordFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.RelativeNameFilter), x => x.RelativeName == input.RelativeNameFilter)
+                    .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
 
-                var paged = filter.OrderBy(s => s.Id).PageBy(input);
+                var paged = filter.OrderBy(s => s.SortOrder).PageBy(input);
 
                 result.TotalCount = await filter.CountAsync();
                 result.Items = ObjectMapper.Map<IList<RelativeDto>>(paged.ToList());

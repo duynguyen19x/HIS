@@ -22,6 +22,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
             builder.Property(x => x.BirthPlace).HasMaxLength(512);
             builder.Property(x => x.GenderID).IsRequired();
             builder.Property(x => x.EthnicityID).IsRequired();
+            builder.Property(x => x.ReligionID).IsRequired();
             builder.Property(x => x.CountryID).IsRequired();
             builder.Property(x => x.ProvinceOrCityID).IsRequired();
             builder.Property(x => x.DistrictID).IsRequired();
@@ -37,6 +38,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
 
             builder.HasOne(x => x.Gender).WithMany().HasForeignKey(x => x.GenderID).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(x => x.Ethnicity).WithMany().HasForeignKey(x => x.EthnicityID).OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(x => x.Religion).WithMany().HasForeignKey(x => x.ReligionID).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(x => x.Country).WithMany().HasForeignKey(x => x.CountryID).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(x => x.ProvinceOrCity).WithMany().HasForeignKey(x => x.ProvinceOrCityID).OnDelete(DeleteBehavior.Restrict);
             builder.HasOne(x => x.District).WithMany().HasForeignKey(x => x.DistrictID).OnDelete(DeleteBehavior.Restrict);

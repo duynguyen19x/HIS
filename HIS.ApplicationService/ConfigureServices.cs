@@ -3,7 +3,6 @@ using HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks;
 using HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks;
 using HIS.ApplicationService.Business.Patients;
 using HIS.ApplicationService.Business.Receptions;
-using HIS.ApplicationService.Dictionaries.Branch;
 using HIS.ApplicationService.Dictionaries.Career;
 using HIS.ApplicationService.Dictionaries.ChapterICD10;
 using HIS.ApplicationService.Dictionaries.Country;
@@ -32,8 +31,7 @@ using HIS.ApplicationService.Systems.Login;
 using HIS.ApplicationService.Systems.Role;
 using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
-using HIS.ApplicationService.Dictionaries.PatientObjectTypes;
-using HIS.ApplicationService.Dictionaries.ReceptionObjectTypes;
+using HIS.ApplicationService.Dictionaries.PatientTypes;
 using HIS.ApplicationService.Dictionaries.RelativeCategories;
 using HIS.ApplicationService.Dictionaries.Relatives;
 using HIS.ApplicationService.Dictionaries.DeathCauses;
@@ -41,6 +39,8 @@ using HIS.ApplicationService.Dictionaries.Ethnicities;
 using HIS.ApplicationService.Dictionaries.DeathWithins;
 using HIS.ApplicationService.Dictionaries.TreatmentEndTypes;
 using HIS.ApplicationService.Dictionaries.TreatmentResults;
+using HIS.ApplicationService.Dictionaries.Branchs;
+using HIS.ApplicationService.Dictionaries.ReceptionTypes;
 
 namespace HIS.ApplicationService
 {
@@ -51,7 +51,7 @@ namespace HIS.ApplicationService
             services.AddTransient<ILoginService, LoginService>();
             services.AddTransient<IRoleService, RoleService>();
 
-            services.AddTransient<IBranchService, BranchService>();
+            services.AddTransient<IBranchAppService, BranchAppService>();
             services.AddTransient<ICareerService, CareerService>();
             services.AddTransient<ICountryService, CountryService>();
             services.AddTransient<IDepartmentService, DepartmentService>();
@@ -94,8 +94,8 @@ namespace HIS.ApplicationService
             services.AddTransient<IDeathCauseAppService, DeathCauseAppService>();
             services.AddTransient<IDeathWithinAppService, DeathWithinAppService>();
             services.AddTransient<IEthnicityAppService, EthnicityAppService>();
-            services.AddTransient<IPatientObjectTypeAppService, PatientObjectTypeAppService>();
-            services.AddTransient<IReceptionObjectTypeAppService, ReceptionObjectTypeAppService>();
+            services.AddTransient<IPatientTypeAppService, PatientTypeAppService>();
+            services.AddTransient<IReceptionTypeAppService, ReceptionTypeAppService>();
             services.AddTransient<IRelativeCategoryAppService, RelativeCategoryAppService>();
             services.AddTransient<IRelativeAppService, RelativeAppService>();
             services.AddTransient<ITreatmentEndTypeAppService, TreatmentEndTypeAppService>();

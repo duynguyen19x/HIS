@@ -12,7 +12,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Services
             builder.ToTable("ServicePricePolicies");
             builder.HasKey(x => x.Id);
 
-            builder.HasOne<PatientObjectType>(t => t.PatientObjectType).WithMany().HasForeignKey(pc => pc.PatientObjectTypeId);
+            builder.HasOne<PatientType>(t => t.PatientType).WithMany().HasForeignKey(pc => pc.PatientTypeId);
 
             builder.HasOne(t => t.Service)
                 .WithMany()

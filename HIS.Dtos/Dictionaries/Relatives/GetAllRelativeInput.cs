@@ -9,7 +9,9 @@ namespace HIS.Dtos.Dictionaries.Relatives
 {
     public class GetAllRelativeInput : PagedResultRequestDto
     {
-        public string RelativeCodeFilter { get; set; }
+        public Guid? RelativeCategoryFilter { get; set; }
+        public Guid? PatientRecordFilter { get; set; }
         public string RelativeNameFilter { get; set; }
+        public bool? InactiveFilter { get; set; }
     }
 }

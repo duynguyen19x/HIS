@@ -22,6 +22,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
             builder.Property(x => x.BirthPlace).HasMaxLength(512);
             builder.Property(x => x.GenderID).IsRequired();
             builder.Property(x => x.EthnicityID).IsRequired();
+            builder.Property(x => x.ReligionID).IsRequired();
             builder.Property(x => x.CountryID).IsRequired();
             builder.Property(x => x.ProvinceOrCityID).IsRequired();
             builder.Property(x => x.DistrictID).IsRequired();

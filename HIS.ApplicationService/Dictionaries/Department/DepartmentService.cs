@@ -135,8 +135,8 @@ namespace HIS.ApplicationService.Dictionaries.Department
                                      Description = d.Description,
                                      DepartmentTypeId = d.DepartmentTypeId,
                                      BranchId = d.BranchId,
-                                     BranchCode = b.Code,
-                                     BranchName = b.Name,
+                                     BranchCode = b.BranchCode,
+                                     BranchName = b.BranchName,
                                      Inactive = d.Inactive,
                                      SortOrder = d.SortOrder,
                                  }).ToList();
@@ -166,8 +166,8 @@ namespace HIS.ApplicationService.Dictionaries.Department
                                         Description = d.Description,
                                         DepartmentTypeId = d.DepartmentTypeId,
                                         BranchId = d.BranchId,
-                                        BranchCode = b.Code,
-                                        BranchName = b.Name,
+                                        BranchCode = b.BranchCode,
+                                        BranchName = b.BranchName,
                                         Inactive = d.Inactive,
                                         SortOrder = d.SortOrder,
                                     }).SingleOrDefaultAsync();

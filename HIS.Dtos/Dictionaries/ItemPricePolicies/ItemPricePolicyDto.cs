@@ -4,7 +4,7 @@ namespace HIS.Dtos.Dictionaries.ItemPricePolicies
 {
     public class ItemPricePolicyDto : EntityDto<Guid?>
     {
-        public int? PatientObjectTypeId { get; set; }
+        public int? PatientTypeId { get; set; }
 
         /// <summary>
         /// Giá cữ
@@ -38,8 +38,8 @@ namespace HIS.Dtos.Dictionaries.ItemPricePolicies
         public Guid? ItemId { get; set; }
 
         public bool IsHeIn { get; set; }
-        public string PatientObjectTypeCode { get; set; }
-        public string PatientObjectTypeName { get; set; }
+        public string PatientTypeCode { get; set; }
+        public string PatientTypeName { get; set; }
 
         public bool Inactive { get; set; }
     }

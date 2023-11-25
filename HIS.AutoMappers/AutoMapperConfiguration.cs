@@ -2,7 +2,6 @@
 using HIS.Dtos.Business.InOutStockItems;
 using HIS.Dtos.Business.InOutStocks;
 using HIS.Dtos.Business.ItemStocks;
-using HIS.Dtos.Dictionaries.Branch;
 using HIS.Dtos.Dictionaries.Career;
 using HIS.Dtos.Dictionaries.ChapterICD10;
 using HIS.Dtos.Dictionaries.Country;
@@ -37,12 +36,13 @@ using HIS.Dtos.Business.Receptions;
 using HIS.Dtos.Systems.DbOption;
 using HIS.EntityFrameworkCore.Entities.Systems;
 using HIS.Dtos.Dictionaries.RelativeCategories;
-using HIS.Dtos.Dictionaries.PatientObjectTypes;
-using HIS.Dtos.Dictionaries.ReceptionObjectTypes;
+using HIS.Dtos.Dictionaries.PatientTypes;
 using HIS.Dtos.Dictionaries.Relatives;
 using HIS.Dtos.Business.Patients;
 using HIS.Dtos.Business.PatientRecords;
 using HIS.Dtos.Dictionaries.Ethnicities;
+using HIS.Dtos.Dictionaries.Branchs;
+using HIS.Dtos.Dictionaries.ReceptionTypes;
 
 namespace HIS.AutoMappers
 {
@@ -50,7 +50,6 @@ namespace HIS.AutoMappers
     {
         public AutoMapperConfiguration()
         {
-            CreateMap<Branch, BranchDto>().ReverseMap();
             CreateMap<Career, CareerDto>().ReverseMap();
             CreateMap<Country, CountryDto>().ReverseMap();
             CreateMap<DepartmentDto, Department>()
@@ -85,7 +84,7 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.SurgicalProcedureType, opt => opt.Ignore())
                 .ReverseMap();
             CreateMap<ServicePricePolicyDto, ServicePricePolicy>()
-               .ForMember(dest => dest.PatientObjectType, opt => opt.Ignore())
+               .ForMember(dest => dest.PatientType, opt => opt.Ignore())
                .ForMember(dest => dest.Service, opt => opt.Ignore())
                .ReverseMap();
 
@@ -126,7 +125,7 @@ namespace HIS.AutoMappers
 
             CreateMap<ItemPricePolicyDto, ItemPricePolicy>()
                 .ForMember(dest => dest.Item, opt => opt.Ignore())
-                .ForMember(dest => dest.PatientObjectType, opt => opt.Ignore())
+                .ForMember(dest => dest.PatientType, opt => opt.Ignore())
                 .ReverseMap();
 
             CreateMap<InOutStockDto, InOutStock>()
@@ -161,9 +160,10 @@ namespace HIS.AutoMappers
 
             #region - danh mục
 
+            CreateMap<Branch, BranchDto>().ReverseMap();
             CreateMap<Ethnicity, EthnicityDto>().ReverseMap();
-            CreateMap<PatientObjectType, PatientObjectTypeDto>().ReverseMap();
-            CreateMap<ReceptionObjectType, ReceptionObjectTypeDto>().ReverseMap();
+            CreateMap<PatientType, PatientTypeDto>().ReverseMap();
+            CreateMap<ReceptionType, ReceptionTypeDto>().ReverseMap();
             CreateMap<RelativeCategory, RelativeCategoryDto>().ReverseMap();
             CreateMap<Relative, RelativeDto>().ReverseMap();
 

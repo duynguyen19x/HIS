@@ -34,19 +34,19 @@ namespace HIS.ApplicationService.Dictionaries.ItemPricePolicies
 
             try
             {
-                result.Result = (from r in _dbContext.PatientObjectTypes
+                result.Result = (from r in _dbContext.PatientTypes
                                  select new ItemPricePolicyDto()
                                  {
-                                     PatientObjectTypeId = r.Id,
-                                     PatientObjectTypeCode = r.PatientObjectTypeCode,
-                                     PatientObjectTypeName = r.PatientObjectTypeName,
-                                     IsHeIn = r.Id == (int)HIS.Core.Enums.PatientObjectTypes.BHYT ? true : false,
+                                     PatientTypeId = r.Id,
+                                     PatientTypeCode = r.PatientTypeCode,
+                                     PatientTypeName = r.PatientTypeName,
+                                     IsHeIn = r.Id == (int)HIS.Core.Enums.PatientTypes.BHYT ? true : false,
                                      Inactive = r.Inactive,
                                  })
                                  .WhereIf(input.InactiveFilter != null, w => w.Inactive == input.InactiveFilter)
                                  .WhereIf(!GuidHelper.IsNullOrEmpty(input.ItemIdFilter), w => w.ItemId == input.ItemIdFilter)
-                                 .WhereIf(input.PatientObjectTypeIdFilter != null, w => w.PatientObjectTypeId == input.PatientObjectTypeIdFilter)
-                                 .OrderBy(o => o.PatientObjectTypeCode).ToList();
+                                 .WhereIf(input.PatientTypeIdFilter != null, w => w.PatientTypeId == input.PatientTypeIdFilter)
+                                 .OrderBy(o => o.PatientTypeCode).ToList();
 
                 result.TotalCount = result.Result.Count;
             }

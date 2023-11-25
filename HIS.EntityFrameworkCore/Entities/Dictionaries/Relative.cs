@@ -1,5 +1,6 @@
 ﻿using AutoMapper.Configuration.Annotations;
 using HIS.Core.Entities.Auditing;
+using HIS.EntityFrameworkCore.Entities.Business;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,28 +11,29 @@ using System.Threading.Tasks;
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
-    /// Người nhà bệnh nhân.
+    /// Người nhà bệnh nhân (một bệnh nhân có thể có nhiều người nhà chăm sóc trong quá trình điều trị).
     /// </summary>
     public class Relative : FullAuditedEntity<Guid>
     {
-        public string RelativeCode { get; set; } // mã người nhà
-        public string RelativeName { get; set; } // tên người nhà
-        public DateTime? BirthDate { get; set; } // ngày sinh
-        public string IdentificationNumber { get; set; } // số CMND/CCCD
-        public DateTime? IssueDate { get; set; } // ngày cấp
-        public string IssueBy { get; set; } // người cấp
-        public string Tel { get; set; } // số điện thoại cố định
-        public string Mobile { get; set; } // số điện thoại di động
-        public string Address { get; set; } // địa chỉ
-        public Guid? CareerID { get; set; } // nghề nghiệp
-        public string Workplace { get; set; } // nơi làm việc
-        public Guid RelativeCategoryID { get; set; } // mối quan hệ với bệnh nhân
-        public string Description { get; set; } // ghi chú
+        public Guid RelativeCategoryID { get; set; } // loại quan hệ với bệnh nhân
+        public Guid PatientRecordID { get; set; } // hồ sơ bệnh án
+        public string RelativeName { get; set; }
+        public string Address { get; set; }
+        public string Tel { get; set; }
+        public string Mobile { get; set; }
+        public string IdentificationNumber { get; set; }
+        public DateTime? IssueDate { get; set; }
+        public string IssueBy { get; set; }
+        public string Description { get; set; }
+        public int SortOrder { get; set; }
+        public bool Inactive { get; set; }
 
         [Ignore]
         public virtual Career Career { get; set; }
         [Ignore]
         public virtual RelativeCategory RelativeCategory { get; set; }
+        [Ignore]
+        public virtual PatientRecord PatientRecord { get; set; }
 
         public Relative() { }
     }

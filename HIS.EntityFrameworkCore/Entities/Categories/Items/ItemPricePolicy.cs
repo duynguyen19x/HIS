@@ -5,7 +5,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories.Items
 {
     public class ItemPricePolicy : FullAuditedEntity<Guid>
     {
-        public int? PatientObjectTypeId { get; set; }
+        public int? PatientTypeId { get; set; }
 
         /// <summary>
         /// Giá cữ
@@ -38,6 +38,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories.Items
         public Guid? ItemId { get; set; }
 
         public Item Item { get; set; }
-        public PatientObjectType PatientObjectType { get; set; }
+        public PatientType PatientType { get; set; }
     }
 }

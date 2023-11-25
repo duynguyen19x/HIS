@@ -1,5 +1,4 @@
 ﻿using HIS.Core.Entities;
-using HIS.EntityFrameworkCore.Configurations;
 using HIS.EntityFrameworkCore.Data;
 using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Categories;
@@ -8,10 +7,8 @@ using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.Systems;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Reflection;
-using System.Runtime.InteropServices;
 
 namespace HIS.EntityFrameworkCore
 {
@@ -23,7 +20,6 @@ namespace HIS.EntityFrameworkCore
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<SToken> Tokens { get; set; }
         public DbSet<Permission> Permissions { get; set; }
-        public DbSet<Branch> Branchs { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<DepartmentType> DepartmentTypes { get; set; }
         public DbSet<Ethnicity> Ethnicities { get; set; }
@@ -66,12 +62,14 @@ namespace HIS.EntityFrameworkCore
 
         public DbSet<BloodType> BloodTypes { get; set; }
         public DbSet<BloodTypeRh> BloodTypeRhs { get; set; }
+        public DbSet<Branch> Branchs { get; set; }
         public DbSet<DeathCause> DeathCauses { get; set; }
         public DbSet<DeathWithin> DeathWithins { get; set; }
         public DbSet<MedicalRecordType> MedicalRecordTypes { get; set; }
         public DbSet<MedicalRecordTypeGroup> MedicalRecordTypeGroups { get; set; }
-        public DbSet<PatientObjectType> PatientObjectTypes { get; set; }
-        public DbSet<ReceptionObjectType> ReceptionObjectTypes { get; set; }
+        public DbSet<PatientType> PatientTypes { get; set; }
+        public DbSet<ReceptionType> ReceptionTypes { get; set; }
+        public DbSet<Religion> Religions { get; set; }
         public DbSet<RelativeCategory> RelativeCategories { get; set; }
         public DbSet<Relative> Relatives { get; set; }
         public DbSet<TreatmentEndType> TreatmentEndTypes { get; set; }

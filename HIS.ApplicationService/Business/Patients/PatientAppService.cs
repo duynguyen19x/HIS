@@ -3,19 +3,10 @@ using HIS.Application.Core.Services;
 using HIS.Application.Core.Services.Dto;
 using HIS.Core.Linq;
 using HIS.Dtos.Business.Patients;
-using HIS.Dtos.Dictionaries.ReceptionObjectTypes;
-using HIS.Dtos.Dictionaries.RelativeCategories;
-using HIS.Dtos.Dictionaries.Relatives;
 using HIS.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.Entities.Business;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Utilities.Sections;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Business.Patients
 {

@@ -4,6 +4,9 @@ using HIS.EntityFrameworkCore.Entities.Dictionaries;
 
 namespace HIS.EntityFrameworkCore.Entities.Business
 {
+    /// <summary>
+    /// Thông tin bệnh nhân.
+    /// </summary>
     public class Patient : FullAuditedEntity<Guid>
     {
         public string PatientCode { get; set; }
@@ -13,6 +16,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public string BirthPlace { get; set; }
         public Guid GenderID { get; set; }
         public Guid EthnicityID { get; set; }
+        public Guid ReligionID { get; set; }
         public Guid CountryID { get; set; }
         public Guid ProvinceOrCityID { get; set; }
         public Guid DistrictID { get; set; }
@@ -34,6 +38,8 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public virtual Gender Gender { get; set; }
         [Ignore]
         public virtual Ethnicity Ethnicity { get; set; }
+        [Ignore]
+        public virtual Religion Religion { get; set; }
         [Ignore]
         public virtual Country Country { get; set; }
         [Ignore]

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HIS.Core.Enums
 {
-    public enum PatientObjectTypes
+    public enum PatientTypes
     {
         BHYT = 1,
         VP = 2,

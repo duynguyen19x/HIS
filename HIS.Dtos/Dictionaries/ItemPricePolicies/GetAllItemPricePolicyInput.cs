@@ -9,7 +9,7 @@ namespace HIS.Dtos.Dictionaries.ItemPricePolicies
     public class GetAllItemPricePolicyInput
     {
         public Guid? ItemIdFilter { get; set; }
-        public int? PatientObjectTypeIdFilter { get; set; }
+        public int? PatientTypeIdFilter { get; set; }
         public bool? InactiveFilter { get; set; }
     }
 }
