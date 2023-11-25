@@ -131,6 +131,8 @@ namespace HIS.ApplicationService.Systems.DbOption
                                      DbOptionValue = r.DbOptionValue,
                                      DbOptionType = r.DbOptionType,
                                      Description = r.Description,
+                                     ParentId = r.ParentId,
+                                     IsParent = r.IsParent,
                                  }).OrderBy(o => o.DbOptionId).ToList();
 
                 result.TotalCount = result.Result.Count;
@@ -165,6 +167,18 @@ namespace HIS.ApplicationService.Systems.DbOption
         public async Task<ApiResult<OptionValueDto>> GetMapOptions()
         {
             var result = new ApiResult<OptionValueDto>();
+            var properties = result.GetType().GetProperties();
+            foreach (var property in properties)
+            {
+                //switch (property.PropertyType)
+                //{
+                //    case:
+                //        break;
+                //    default:
+                //        break;
+                //}
+            }
+
             return await Task.FromResult(result);
         }
     }

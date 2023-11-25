@@ -37,6 +37,7 @@ using HIS.ApplicationService.Systems.Role;
 using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
 using HIS.ApplicationService.Business.ServiceRequests;
+using HIS.ApplicationService.Systems.DbOption;
 
 namespace HIS.ApplicationService
 {
@@ -90,6 +91,7 @@ namespace HIS.ApplicationService
 
             #region Sys
             services.AddTransient<ISYSAutoNumberAppService, SYSAutoNumberAppService>();
+            services.AddTransient<IDbOptionAppService, DbOptionAppService>();
             #endregion
         }
     }
