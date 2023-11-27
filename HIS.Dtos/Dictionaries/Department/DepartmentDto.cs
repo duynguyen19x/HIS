@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HIS.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace HIS.Dtos.Dictionaries.Department
 {
-    public class DepartmentDto
+    public class DepartmentDto : Entity<Guid?>
     {
-        public Guid? Id { get; set; }
-        public string Code { get; set; }
+        public string DepartmentCode { get; set; }
+        public string DepartmentName { get; set; }
         public string MohCode { get; set; }
-        public string Name { get; set; }
         public int? DepartmentTypeId { get; set; }
         public string DepartmentTypeCode { get; set; }
         public string DepartmentTypeName { get; set; }

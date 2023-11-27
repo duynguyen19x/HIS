@@ -65,7 +65,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
                 .HasForeignKey(e => e.ReqDepartmentId)
                 ;
 
-            builder.HasOne(e => e.PatientRecord)
+            builder.HasOne(e => e.MedicalRecord)
                 .WithMany()
                 .HasForeignKey(e => e.PatientRecordId)
                 ;

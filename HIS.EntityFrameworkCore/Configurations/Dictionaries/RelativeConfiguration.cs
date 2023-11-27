@@ -24,7 +24,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.Property(x => x.Address).HasMaxLength(255);
 
             builder.HasOne(t => t.RelativeCategory).WithMany().HasForeignKey(p => p.RelativeCategoryID);
-            builder.HasOne(t => t.PatientRecord).WithMany().HasForeignKey(p => p.PatientRecordID);
+            builder.HasOne(t => t.MedicalRecord).WithMany().HasForeignKey(p => p.PatientRecordID);
         }
     }
 }

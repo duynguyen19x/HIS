@@ -8,9 +8,9 @@ namespace HIS.Dtos.Dictionaries.Department
 {
     public class GetAllDepartmentInput
     {
-        public string CodeFilter { get; set; }
-        public string NameFilter { get; set; }
-        public Guid? BranchIdFilter { get; set; }
+        public string DepartmentCodeFilter { get; set; }
+        public string DepartmentNameFilter { get; set; }
+        public Guid? BranchFilter { get; set; }
         public bool? InactiveFilter { get; set; }
     }
 }

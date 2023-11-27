@@ -12,7 +12,13 @@ namespace HIS.Dtos.Business.Receptions
         public DateTime? MaxReceptionDateFilter { get; set; }
         public DateTime? MinReceptionDateFilter { get; set; }
         public int? PatientTypeFilter { get; set; }
-        public int? PatientRecordTypeFilter { get; set; }
         public int? ReceptionTypeFilter { get; set; }
+        public Guid? GenderFilter { get; set; }
+        public Guid? DepartmentFilter { get; set; }
+        public Guid? RoomFilter { get; set; }
+        public Guid? UserFilter { get; set; }
+        public Guid? ExecuteDepartmentFilter { get; set; }
+        public Guid? ExecuteRoomFilter { get; set; }
+        public Guid? ExecuteUserFilter { get; set; }
     }
 }

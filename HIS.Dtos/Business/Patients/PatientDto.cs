@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace HIS.Dtos.Business.Patients
 {
+    /// <summary>
+    /// thông tin bệnh nhân.
+    /// </summary>
     public class PatientDto : EntityDto<Guid>
     {
         public string PatientCode { get; set; }

@@ -122,16 +122,16 @@ namespace HIS.ApplicationService.Dictionaries.Department
                 result.IsSuccessed = true;
                 result.Result = (from d in _dbContext.Departments
                                  join b in _dbContext.Branchs on d.BranchId equals b.Id 
-                                 where (string.IsNullOrEmpty(input.NameFilter) || d.Name == input.NameFilter)
-                                     && (string.IsNullOrEmpty(input.CodeFilter) || d.Code == input.CodeFilter)
-                                     && (input.BranchIdFilter == null || d.BranchId == input.BranchIdFilter)
+                                 where (string.IsNullOrEmpty(input.DepartmentNameFilter) || d.DepartmentName == input.DepartmentNameFilter)
+                                     && (string.IsNullOrEmpty(input.DepartmentCodeFilter) || d.DepartmentCode == input.DepartmentCodeFilter)
+                                     && (input.BranchFilter == null || d.BranchId == input.BranchFilter)
                                      && (input.InactiveFilter == null || d.Inactive == input.InactiveFilter)
                                  select new DepartmentDto()
                                  {
                                      Id = d.Id,
-                                     Code = d.Code,
+                                     DepartmentCode = d.DepartmentCode,
+                                     DepartmentName = d.DepartmentName,
                                      MohCode = d.MohCode,
-                                     Name = d.Name,
                                      Description = d.Description,
                                      DepartmentTypeId = d.DepartmentTypeId,
                                      BranchId = d.BranchId,
@@ -160,9 +160,9 @@ namespace HIS.ApplicationService.Dictionaries.Department
                                     select new DepartmentDto()
                                     {
                                         Id = d.Id,
-                                        Code = d.Code,
+                                        DepartmentCode = d.DepartmentCode,
+                                        DepartmentName = d.DepartmentName,
                                         MohCode = d.MohCode,
-                                        Name = d.Name,
                                         Description = d.Description,
                                         DepartmentTypeId = d.DepartmentTypeId,
                                         BranchId = d.BranchId,

@@ -11,5 +11,7 @@ namespace HIS.Core.Enums
         BHYT = 1,
         VP = 2,
         DV = 3,
+        NGUOI_NUOC_NGOAI = 4,
+        MIEN_PHI = 5
     }
 }

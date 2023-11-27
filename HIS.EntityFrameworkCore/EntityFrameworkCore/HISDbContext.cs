@@ -80,7 +80,10 @@ namespace HIS.EntityFrameworkCore
         #region - nghiệp vụ
 
         public DbSet<Patient> Patients { get; set; }
-        public DbSet<PatientRecord> PatientRecords { get; set; }
+        public DbSet<MedicalRecord> MedicalRecords { get; set; }
+        public DbSet<Treatment> Treatments { get; set; }
+        public DbSet<TreatmentRecord> TreatmentRecords { get; set; }
+        public DbSet<Reception> Receptions { get; set; }
 
         #endregion
 

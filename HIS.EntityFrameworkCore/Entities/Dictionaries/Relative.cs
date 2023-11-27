@@ -33,7 +33,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         [Ignore]
         public virtual RelativeCategory RelativeCategory { get; set; }
         [Ignore]
-        public virtual PatientRecord PatientRecord { get; set; }
+        public virtual MedicalRecord MedicalRecord { get; set; }
 
         public Relative() { }
     }

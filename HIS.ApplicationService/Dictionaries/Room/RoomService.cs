@@ -122,28 +122,28 @@ namespace HIS.ApplicationService.Dictionaries.Room
                 result.Result = (from r in _dbContext.Rooms
                                  join t in _dbContext.RoomTypes on r.RoomTypeId equals t.Id
                                  join d in _dbContext.Departments on r.DepartmentId equals d.Id 
-                                 where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
-                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
+                                 where (string.IsNullOrEmpty(input.NameFilter) || r.RoomName == input.NameFilter)
+                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.RoomCode == input.CodeFilter)
                                      && (input.DepartmentIdFilter == null || r.DepartmentId == input.DepartmentIdFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
                                  select new RoomDto()
                                  {
                                      Id = r.Id,
-                                     Code = r.Code,
+                                     RoomCode = r.RoomCode,
                                      MohCode = r.MohCode,
-                                     Name = r.Name,
+                                     RoomName = r.RoomName,
                                      RoomTypeId = r.RoomTypeId,
                                      RoomTypeCode = t.Code,
                                      RoomTypeName = t.Name,
                                      DepartmentId = r.DepartmentId,
-                                     DepartmentCode = d.Code,
-                                     DepartmentName = d.Name,
+                                     DepartmentCode = d.DepartmentCode,
+                                     DepartmentName = d.DepartmentName,
                                      Description = r.Description,
                                      SortOrder = r.SortOrder,
                                      Inactive = r.Inactive
                                  })
                                  .OrderBy(o => o.SortOrder)
-                                 .ThenBy(o => o.Code)
+                                 .ThenBy(o => o.DepartmentCode)
                                  .ToList();
                 result.TotalCount = result.Result.Count;
             }
@@ -169,15 +169,15 @@ namespace HIS.ApplicationService.Dictionaries.Room
                                  select new RoomDto()
                                  {
                                      Id = r.Id,
-                                     Code = r.Code,
+                                     RoomCode = r.RoomCode,
                                      MohCode = r.MohCode,
-                                     Name = r.Name,
+                                     RoomName = r.RoomName,
                                      RoomTypeId = r.RoomTypeId,
                                      RoomTypeCode = t.Code,
                                      RoomTypeName = t.Name,
                                      DepartmentId = r.DepartmentId,
-                                     DepartmentCode = d.Code,
-                                     DepartmentName = d.Name,
+                                     DepartmentCode = d.DepartmentCode,
+                                     DepartmentName = d.DepartmentName,
                                      Description = r.Description,
                                      SortOrder = r.SortOrder,
                                      Inactive = r.Inactive
@@ -204,21 +204,21 @@ namespace HIS.ApplicationService.Dictionaries.Room
                                  select new RoomDto()
                                  {
                                      Id = r.Id,
-                                     Code = r.Code,
+                                     RoomCode = r.RoomCode,
                                      MohCode = r.MohCode,
-                                     Name = r.Name,
+                                     RoomName = r.RoomName,
                                      RoomTypeId = r.RoomTypeId,
                                      RoomTypeCode = t.Code,
                                      RoomTypeName = t.Name,
                                      DepartmentId = r.DepartmentId,
-                                     DepartmentCode = d.Code,
-                                     DepartmentName = d.Name,
+                                     DepartmentCode = d.DepartmentCode,
+                                     DepartmentName = d.DepartmentName,
                                      Description = r.Description,
                                      SortOrder = r.SortOrder,
                                      Inactive = r.Inactive
                                  })
                                  .OrderBy(o => o.SortOrder)
-                                 .ThenBy(o => o.Code)
+                                 .ThenBy(o => o.DepartmentCode)
                                  .ToList();
                 result.TotalCount = result.Result.Count;
             }

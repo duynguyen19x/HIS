@@ -15,8 +15,8 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
         {
             builder.ToTable("Gender");
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Code).HasMaxLength(20).IsRequired();
-            builder.Property(x => x.Name).HasMaxLength(128).IsRequired();
+            builder.Property(x => x.GenderCode).HasMaxLength(20).IsRequired();
+            builder.Property(x => x.GenderName).HasMaxLength(128).IsRequired();
             builder.Property(x => x.Description).HasMaxLength(255);
         }
     }

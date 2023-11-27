@@ -10,14 +10,14 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// <summary>
     /// Hình thức chuyển viện
     /// </summary>
-    public class TransferInForm : AuditedEntity<Guid>
+    public class TransferForm : AuditedEntity<Guid>
     {
-        public string TransferInFormCode { get; set; } 
-        public string TransferInFormName { get; set; } 
+        public string TransferFormCode { get; set; } 
+        public string TransferFormName { get; set; } 
         public string Description { get; set; } 
         public int SortOrder { get; set; } 
         public bool Inactive { get; set; } 
 
-        public TransferInForm() { }
+        public TransferForm() { }
     }
 }

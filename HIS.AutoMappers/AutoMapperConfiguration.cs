@@ -39,7 +39,6 @@ using HIS.Dtos.Dictionaries.RelativeCategories;
 using HIS.Dtos.Dictionaries.PatientTypes;
 using HIS.Dtos.Dictionaries.Relatives;
 using HIS.Dtos.Business.Patients;
-using HIS.Dtos.Business.PatientRecords;
 using HIS.Dtos.Dictionaries.Ethnicities;
 using HIS.Dtos.Dictionaries.Branchs;
 using HIS.Dtos.Dictionaries.ReceptionTypes;
@@ -141,7 +140,7 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.ReqDepartment, opt => opt.Ignore())
                 .ForMember(dest => dest.Supplier, opt => opt.Ignore())
                 .ForMember(dest => dest.Patient, opt => opt.Ignore())
-                .ForMember(dest => dest.PatientRecord, opt => opt.Ignore())
+                .ForMember(dest => dest.MedicalRecord, opt => opt.Ignore())
                 .ReverseMap();
             CreateMap<InOutStockItemDto, InOutStockItem>()
                 .ForMember(dest => dest.InOutStock, opt => opt.Ignore())
@@ -154,8 +153,7 @@ namespace HIS.AutoMappers
                 .ReverseMap();
 
             #region - nghiệp vụ
-            CreateMap<ReceptionDto, PatientDto>().ReverseMap();
-            CreateMap<ReceptionDto, PatientRecordDto>().ReverseMap();
+            CreateMap<ReceptionDto, Reception>().ReverseMap();
             #endregion
 
             #region - danh mục

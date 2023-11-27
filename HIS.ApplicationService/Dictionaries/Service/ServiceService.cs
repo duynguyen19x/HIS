@@ -341,8 +341,8 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                                   Id = s != null ? s.Id : null,
                                                   RoomId = room.Id,
                                                   ServiceId = s != null ? s.ServiceId : null,
-                                                  RoomCode = room.Code,
-                                                  RoomName = room.Name,
+                                                  RoomCode = room.RoomCode,
+                                                  RoomName = room.RoomName,
                                                   IsMain = s != null ? s.IsMain : false,
                                                   IsCheck = s != null ? true : false,
                                               }).OrderBy(s => s.RoomCode).ToList();
@@ -374,8 +374,8 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                            select new ExecutionRoomDto()
                                            {
                                                RoomId = room.Id,
-                                               RoomCode = room.Code,
-                                               RoomName = room.Name,
+                                               RoomCode = room.RoomCode,
+                                               RoomName = room.RoomName,
                                            }).OrderBy(s => s.RoomCode).ToList();
 
                     serviceDto.SServicePricePolicies = sServicePricePolicys;
@@ -498,7 +498,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
 
                     var executionRoomDtos = sServiceDtos.SelectMany(s => s.SExecutionRooms).ToList();
                     var executionRooms = (from executionRoom in executionRoomDtos
-                                          join sRoom in sRooms on executionRoom.RoomCode equals sRoom.Code
+                                          join sRoom in sRooms on executionRoom.RoomCode equals sRoom.RoomCode
                                           select new ExecutionRoom()
                                           {
                                               Id = executionRoom.Id.GetValueOrDefault(),

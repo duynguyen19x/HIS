@@ -5,9 +5,9 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     public class Department : AuditedEntity<Guid>
     {
-        public string Code { get; set; }
+        public string DepartmentCode { get; set; }
+        public string DepartmentName { get; set; }
         public string MohCode { get; set; }
-        public string Name { get; set; }
         public string Description { get; set; }
         public int? DepartmentTypeId { get; set; }
         public Guid? BranchId { get; set; }
