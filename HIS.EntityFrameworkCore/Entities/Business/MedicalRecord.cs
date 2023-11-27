@@ -51,6 +51,8 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public string Description { get; set; } // ghi chú
         public bool IsPriority { get; set; } // là bệnh nhân ưu tiên
 
+        public Guid? InsuranceID { get; set; } // bhyt
+
         public bool IsTransferIn { get; set; }
         public string TransferInCode { get; set; }
         public DateTime? TransferInDate { get; set; } // ngày chuyển
