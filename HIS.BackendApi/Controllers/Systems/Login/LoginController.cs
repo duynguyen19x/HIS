@@ -28,5 +28,11 @@ namespace HIS.BackendApi.Controllers.Systems.Login
         {
             return await _loginService.Register(request);
         }
+
+        [HttpPost("RefreshToken")]
+        public async Task<ApiResult<TokenResultDto>> RefreshToken(TokenResultDto token)
+        {
+            return await _loginService.RefreshToken(token);
+        }
     }
 }
