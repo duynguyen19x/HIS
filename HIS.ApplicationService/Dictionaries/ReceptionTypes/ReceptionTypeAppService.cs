@@ -25,7 +25,7 @@ namespace HIS.ApplicationService.Dictionaries.ReceptionTypes
                 try
                 {
                     input.Id = NewID();
-                    var data = ObjectMapper.Map<ReceptionType>(input);
+                    var data = ObjectMapper.Map<ReceptionObjectType>(input);
                     data.CreatedDate = DateTime.Now;
                     data.CreatedBy = SessionExtensions.Login?.Id;
                     Context.ReceptionTypes.Add(data);
@@ -51,7 +51,7 @@ namespace HIS.ApplicationService.Dictionaries.ReceptionTypes
                 try
                 {
                     var receptionType = await Context.ReceptionTypes.FindAsync(input.Id);
-                    var data = ObjectMapper.Map<ReceptionType>(input);
+                    var data = ObjectMapper.Map<ReceptionObjectType>(input);
                     data.CreatedDate = receptionType.CreatedDate;
                     data.CreatedBy = receptionType.CreatedBy;
                     data.ModifiedDate = DateTime.Now;

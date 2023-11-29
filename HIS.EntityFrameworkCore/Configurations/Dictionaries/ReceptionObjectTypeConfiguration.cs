@@ -10,9 +10,9 @@ using HIS.Core.Enums;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class ReceptionTypeConfiguration : IEntityTypeConfiguration<ReceptionType>
+    public class ReceptionObjectTypeConfiguration : IEntityTypeConfiguration<ReceptionObjectType>
     {
-        public void Configure(EntityTypeBuilder<ReceptionType> builder)
+        public void Configure(EntityTypeBuilder<ReceptionObjectType> builder)
         {
             builder.ToTable("ReceptionType");
             builder.HasKey(x => x.Id);
@@ -22,8 +22,8 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 
 
             builder.HasData(
-                new ReceptionType((int)ReceptionTypes.KHAMBENH, "Khám bệnh", 1),
-                new ReceptionType((int)ReceptionTypes.CAPCUU, "Cấp cứu", 2)
+                new ReceptionObjectType((int)ReceptionTypes.KHAMBENH, "Khám bệnh", 1),
+                new ReceptionObjectType((int)ReceptionTypes.CAPCUU, "Cấp cứu", 2)
                 );
         }
     }

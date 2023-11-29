@@ -37,7 +37,6 @@ namespace HIS.EntityFrameworkCore
         public DbSet<District> Districts { get; set; }
         public DbSet<SWard> Wards { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
-        public DbSet<RelativeCategory> RelativeTypes { get; set; }
 
         public DbSet<Service> Services { get; set; }
         public DbSet<ServiceGroup> ServiceGroups { get; set; }
@@ -68,22 +67,14 @@ namespace HIS.EntityFrameworkCore
         public DbSet<MedicalRecordType> MedicalRecordTypes { get; set; }
         public DbSet<MedicalRecordTypeGroup> MedicalRecordTypeGroups { get; set; }
         public DbSet<PatientType> PatientTypes { get; set; }
-        public DbSet<ReceptionType> ReceptionTypes { get; set; }
+        public DbSet<ReceptionObjectType> ReceptionTypes { get; set; }
         public DbSet<Religion> Religions { get; set; }
-        public DbSet<RelativeCategory> RelativeCategories { get; set; }
-        public DbSet<Relative> Relatives { get; set; }
         public DbSet<TreatmentEndType> TreatmentEndTypes { get; set; }
         public DbSet<TreatmentResult> TreatmentResults { get; set; }
 
         #endregion
 
         #region - nghiệp vụ
-
-        public DbSet<Patient> Patients { get; set; }
-        public DbSet<MedicalRecord> MedicalRecords { get; set; }
-        public DbSet<Treatment> Treatments { get; set; }
-        public DbSet<TreatmentRecord> TreatmentRecords { get; set; }
-        public DbSet<Reception> Receptions { get; set; }
 
         #endregion
 

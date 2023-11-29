@@ -161,7 +161,7 @@ namespace HIS.AutoMappers
             CreateMap<Branch, BranchDto>().ReverseMap();
             CreateMap<Ethnicity, EthnicityDto>().ReverseMap();
             CreateMap<PatientType, PatientTypeDto>().ReverseMap();
-            CreateMap<ReceptionType, ReceptionTypeDto>().ReverseMap();
+            CreateMap<ReceptionObjectType, ReceptionTypeDto>().ReverseMap();
             CreateMap<RelativeCategory, RelativeCategoryDto>().ReverseMap();
             CreateMap<Relative, RelativeDto>().ReverseMap();
 
