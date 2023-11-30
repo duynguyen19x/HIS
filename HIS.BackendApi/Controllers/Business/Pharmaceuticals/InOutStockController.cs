@@ -108,5 +108,9 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
             return await _inOutStockService.ImportFromAnotherStockDeleted(id);
         }
         #endregion
+
+        #region Xuất trả nhà cung cấp
+
+        #endregion
     }
 }
