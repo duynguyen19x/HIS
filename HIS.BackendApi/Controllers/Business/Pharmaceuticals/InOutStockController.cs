@@ -2,6 +2,7 @@
 using HIS.Dtos.Business.InOutStocks;
 using HIS.Dtos.Commons;
 using HIS.Models.Commons;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
@@ -18,6 +19,7 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
         }
 
         [HttpGet("GetByStocks")]
+        [Authorize]
         public async Task<ApiResultList<InOutStockDto>> GetByStocks(Guid stockId, string fromDate, string toDate)
         {
             return await _inOutStockService.GetByStocks(stockId, fromDate, toDate);
@@ -25,26 +27,35 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
 
         #region Nhập thuốc từ NCC
         [HttpGet("ImportFromSupplierGetById")]
+        [Authorize]
         public async Task<ApiResult<InOutStockDto>> ImportFromSupplierGetById(Guid id)
         {
             return await _inOutStockService.ImportFromSupplierGetById(id);
         }
+
         [HttpPost("ImportFromSupplierCanceled")]
+        [Authorize]
         public async Task<ApiResult<InOutStockDto>> ImportFromSupplierCanceled(InOutStockDto input)
         {
             return await _inOutStockService.ImportFromSupplierCanceled(input);
         }
+
         [HttpPost("ImportFromSupplierSaveAsDraft")]
+        [Authorize]
         public async Task<ApiResult<InOutStockDto>> ImportFromSupplierSaveAsDraft(InOutStockDto input)
         {
             return await _inOutStockService.ImportFromSupplierSaveAsDraft(input);
         }
+
         [HttpPost("ImportFromSupplierStockIn")]
+        [Authorize]
         public async Task<ApiResult<InOutStockDto>> ImportFromSupplierStockIn(InOutStockDto input)
         {
             return await _inOutStockService.ImportFromSupplierStockIn(input);
         }
+
         [HttpDelete("ImportFromSupplierDeleted")]
+        [Authorize]
         public async Task<ApiResult<bool>> ImportFromSupplierDeleted(Guid id)
         {
             return await _inOutStockService.ImportFromSupplierDeleted(id);
@@ -52,56 +63,77 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
         #endregion
 
         #region Nhập chuyển kho
+        [Authorize]
         [HttpGet("ImportFromAnotherStockGetById")]
         public async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockGetById(Guid id)
         {
             return await _inOutStockService.ImportFromAnotherStockGetById(id);
         }
+
+        [Authorize]
         [HttpPost("ImportFromAnotherStockSaveAsDraft")]
         public async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockSaveAsDraft(InOutStockDto input)
         {
             return await _inOutStockService.ImportFromAnotherStockSaveAsDraft(input);
         }
+
+        [Authorize]
         [HttpPost("ImportFromAnotherStockRequest")]
         public async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockRequest(InOutStockDto input)
         {
             return await _inOutStockService.ImportFromAnotherStockRequest(input);
         }
+
+        [Authorize]
         [HttpPost("ImportFromAnotherStockCancelRequest")]
         public async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockCancelRequest(InOutStockDto input)
         {
             return await _inOutStockService.ImportFromAnotherStockCancelRequest(input);
         }
+
+        [Authorize]
         [HttpPost("ImportFromAnotherStockApproved")]
         public async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockApproved(InOutStockDto input)
         {
             return await _inOutStockService.ImportFromAnotherStockApproved(input);
         }
+
+        [Authorize]
         [HttpPost("ImportFromAnotherStockCancelApproved")]
         public async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockCancelApproved(InOutStockDto input)
         {
             return await _inOutStockService.ImportFromAnotherStockCancelApproved(input);
         }
+
+        [Authorize]
         [HttpPost("ImportFromAnotherStockStockOut")]
         public async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockStockOut(InOutStockDto input)
         {
             return await _inOutStockService.ImportFromAnotherStockStockOut(input);
         }
+
+        [Authorize]
         [HttpPost("ImportFromAnotherStockCanCelStockOut")]
         public async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockCanCelStockOut(InOutStockDto input)
         {
             return await _inOutStockService.ImportFromAnotherStockCanCelStockOut(input);
         }
+
+        [Authorize]
         [HttpPost("ImportFromAnotherStockStockIn")]
         public async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockStockIn(InOutStockDto input)
         {
             return await _inOutStockService.ImportFromAnotherStockStockIn(input);
         }
+
+        [Authorize]
         [HttpPost("ImportFromAnotherStockCancelStockIn")]
         public async Task<ApiResult<InOutStockDto>> ImportFromAnotherStockCancelStockIn(InOutStockDto input)
         {
             return await _inOutStockService.ImportFromAnotherStockCancelStockIn(input);
         }
+
+        [Authorize]
         [HttpDelete("ImportFromAnotherStockDeleted")]
         public async Task<ApiResult<bool>> ImportFromAnotherStockDeleted(Guid id)
         {
@@ -110,7 +142,40 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
         #endregion
 
         #region Xuất trả nhà cung cấp
+        [Authorize]
+        [HttpGet("ExportToSupplierGetById")]
+        public async Task<ApiResult<InOutStockDto>> ExportToSupplierGetById(Guid id)
+        {
+            return await _inOutStockService.ExportToSupplierGetById(id);
+        }
 
+        [Authorize]
+        [HttpPost("ExportToSupplierSaveAsDraft")]
+        public async Task<ApiResult<InOutStockDto>> ExportToSupplierSaveAsDraft(InOutStockDto input)
+        {
+            return await _inOutStockService.ExportToSupplierSaveAsDraft(input);
+        }
+
+        [Authorize]
+        [HttpPost("ExportToSupplierStockOut")]
+        public async Task<ApiResult<InOutStockDto>> ExportToSupplierStockOut(InOutStockDto input)
+        {
+            return await _inOutStockService.ExportToSupplierStockOut(input);
+        }
+
+        [Authorize]
+        [HttpPost("ExportToSupplierCanCelStockOut")]
+        public async Task<ApiResult<InOutStockDto>> ExportToSupplierCanCelStockOut(InOutStockDto input)
+        {
+            return await _inOutStockService.ExportToSupplierCanCelStockOut(input);
+        }
+
+        [Authorize]
+        [HttpDelete("ExportToSupplierDeleted")]
+        public async Task<ApiResult<bool>> ExportToSupplierDeleted(Guid id)
+        {
+            return await _inOutStockService.ExportToSupplierDeleted(id);
+        }
         #endregion
     }
 }

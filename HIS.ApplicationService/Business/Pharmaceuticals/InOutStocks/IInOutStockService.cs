@@ -30,5 +30,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         Task<ApiResult<InOutStockDto>> ImportFromAnotherStockStockIn(InOutStockDto input);
         Task<ApiResult<InOutStockDto>> ImportFromAnotherStockCancelStockIn(InOutStockDto input);
         Task<ApiResult<bool>> ImportFromAnotherStockDeleted(Guid id);
+
+        Task<ApiResult<InOutStockDto>> ExportToSupplierGetById(Guid id);
+        Task<ApiResult<InOutStockDto>> ExportToSupplierSaveAsDraft(InOutStockDto input);
+        Task<ApiResult<InOutStockDto>> ExportToSupplierStockOut(InOutStockDto input);
+        Task<ApiResult<InOutStockDto>> ExportToSupplierCanCelStockOut(InOutStockDto input);
+        Task<ApiResult<bool>> ExportToSupplierDeleted(Guid id);
     }
 }
