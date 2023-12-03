@@ -79,7 +79,12 @@ namespace HIS.EntityFrameworkCore
         #region - nghiệp vụ
         public DbSet<Patient> Patients { get; set; }
         public DbSet<PatientRecord> PatientRecords { get; set; }
+        public DbSet<PatientRecordStatus> PatientRecordStatuses { get; set; }
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
+        public DbSet<MedicalRecordStatus> MedicalRecordStatuses { get; set; }
+        public DbSet<Insurance> Insurances { get; set; }
+        public DbSet<ServiceRequest> ServiceRequests { get; set; }
+        public DbSet<ServiceRequestData> ServiceRequestDatas { get; set; }
         #endregion
 
         #region - hệ thống
