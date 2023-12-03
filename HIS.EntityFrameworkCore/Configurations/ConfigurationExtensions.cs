@@ -2,6 +2,7 @@
 using HIS.EntityFrameworkCore.Configurations.Dictionaries;
 using HIS.EntityFrameworkCore.Configurations.Items;
 using HIS.EntityFrameworkCore.Configurations.Services;
+using HIS.EntityFrameworkCore.Configurations.Systems;
 using Microsoft.EntityFrameworkCore;
 
 namespace HIS.EntityFrameworkCore.Configurations
@@ -63,7 +64,11 @@ namespace HIS.EntityFrameworkCore.Configurations
             //modelBuilder.ApplyConfiguration(new InsuranceConfiguration());
             //modelBuilder.ApplyConfiguration(new ReceptionTypeConfiguration());
 
-            //modelBuilder.ApplyConfiguration(new RelativeConfiguration());
+            modelBuilder.ApplyConfiguration(new InsuranceConfiguration());
+            modelBuilder.ApplyConfiguration(new ReceptionTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ServiceRequestConfiguration());
+            modelBuilder.ApplyConfiguration(new ServiceRequestServeConfiguration());
+            modelBuilder.ApplyConfiguration(new DbOptionConfigurations());
         }
     }
 }

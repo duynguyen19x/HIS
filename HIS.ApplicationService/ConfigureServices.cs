@@ -31,6 +31,8 @@ using HIS.ApplicationService.Systems.Login;
 using HIS.ApplicationService.Systems.Role;
 using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
+using HIS.ApplicationService.Business.ServiceRequests;
+using HIS.ApplicationService.Systems.DbOption;
 using HIS.ApplicationService.Dictionaries.PatientTypes;
 using HIS.ApplicationService.Dictionaries.RelativeCategories;
 using HIS.ApplicationService.Dictionaries.Relatives;
@@ -100,6 +102,9 @@ namespace HIS.ApplicationService
             services.AddTransient<IRelativeAppService, RelativeAppService>();
             services.AddTransient<ITreatmentEndTypeAppService, TreatmentEndTypeAppService>();
             services.AddTransient<ITreatmentResultAppService, TreatmentResultAppService>();
+            #region Sys
+            services.AddTransient<ISYSAutoNumberAppService, SYSAutoNumberAppService>();
+            services.AddTransient<IDbOptionAppService, DbOptionAppService>();
             #endregion
         }
     }

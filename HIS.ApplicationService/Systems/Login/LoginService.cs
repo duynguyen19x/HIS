@@ -5,6 +5,7 @@ using HIS.Models.Commons;
 using HIS.Utilities.Commons;
 using HIS.Utilities.Enums;
 using HIS.Utilities.Sections;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -232,7 +233,7 @@ namespace HIS.ApplicationService.Systems.Login
 
                         // Set thời gian
                         ClockSkew = TimeSpan.Zero,
-                        ValidateLifetime = true, // không kiểm tra hết hạn
+                        ValidateLifetime = false, // không kiểm tra hết hạn
 
                         ValidIssuer = issuer,
                         ValidAudience = issuer,
@@ -325,10 +326,13 @@ namespace HIS.ApplicationService.Systems.Login
                         RefreshToken = token.RefreshToken
                     };
 
+                    _dbContext.SaveChanges();
                     transaction.Commit();
                 }
-                catch
+                catch (Exception ex)
                 {
+                    apiResult.Message = ex.Message;
+                    apiResult.IsSuccessed = false;
                     transaction.Dispose();
                 }
             }

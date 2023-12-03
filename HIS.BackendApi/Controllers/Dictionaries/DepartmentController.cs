@@ -2,7 +2,9 @@
 using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Department;
 using HIS.Models.Commons;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
 {
@@ -18,24 +20,28 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpGet("GetAll")]
+        [Authorize]
         public async Task<ApiResultList<DepartmentDto>> GetAll([FromQuery] GetAllDepartmentInput input)
         {
             return await _departmentService.GetAll(input);
         }
 
         [HttpGet("GetById")]
+        [Authorize]
         public async Task<ApiResult<DepartmentDto>> GetById(Guid id)
         {
             return await _departmentService.GetById(id);
         }
 
         [HttpPost("CreateOrEdit")]
+        [Authorize]
         public async Task<ApiResult<DepartmentDto>> CreateOrEdit(DepartmentDto input)
         {
             return await _departmentService.CreateOrEdit(input);
         }
 
         [HttpDelete("Delete")]
+        [Authorize]
         public async Task<ApiResult<DepartmentDto>> Delete(Guid id)
         {
             return await _departmentService.Delete(id);
