@@ -9,7 +9,7 @@ using HIS.Dtos.Dictionaries.Department;
 using HIS.Dtos.Dictionaries.DepartmentType;
 using HIS.Dtos.Dictionaries.District;
 using HIS.Dtos.Dictionaries.ExecutionRoom;
-using HIS.Dtos.Dictionaries.Gender;
+using HIS.Dtos.Dictionaries.Genders;
 using HIS.Dtos.Dictionaries.Hospital;
 using HIS.Dtos.Dictionaries.Icd;
 using HIS.Dtos.Dictionaries.ItemGroups;

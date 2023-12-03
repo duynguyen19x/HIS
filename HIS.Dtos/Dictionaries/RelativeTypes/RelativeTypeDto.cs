@@ -1,16 +1,13 @@
-﻿using HIS.Core.Entities.Auditing;
+﻿using HIS.Application.Core.Services.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionaries
+namespace HIS.Dtos.Dictionaries.RelativeTypes
 {
-    /// <summary>
-    /// Loại mối quan hệ gia đình.
-    /// </summary>
-    public class RelativeType : AuditedEntity<Guid>
+    public class RelativeTypeDto : EntityDto<Guid>
     {
         public string RelativeTypeCode { get; set; }
         public string RelativeTypeName { get; set; }
@@ -18,6 +15,6 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public int SortOrder { get; set; }
         public bool Inactive { get; set; }
 
-        public RelativeType() { }
+        public RelativeTypeDto() { }
     }
 }

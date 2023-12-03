@@ -5,19 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionaries
+namespace HIS.EntityFrameworkCore.Entities.Business
 {
     /// <summary>
-    /// Loại mối quan hệ gia đình.
+    /// Trạng thái bệnh án. 
     /// </summary>
-    public class RelativeType : AuditedEntity<Guid>
+    public class MedicalRecordStatus : AuditedEntity<int>
     {
-        public string RelativeTypeCode { get; set; }
-        public string RelativeTypeName { get; set; }
+        public string MedicalRecordStatusName { get; set; }
         public string Description { get; set; }
         public int SortOrder { get; set; }
         public bool Inactive { get; set; }
 
-        public RelativeType() { }
+        public MedicalRecordStatus() { }
     }
 }

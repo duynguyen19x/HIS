@@ -67,7 +67,9 @@ namespace HIS.EntityFrameworkCore
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Province> Provinces { get; set; }
         public DbSet<ReceptionObjectType> ReceptionTypes { get; set; }
+        public DbSet<RelativeType> RelativeTypes { get; set; }
         public DbSet<Religion> Religions { get; set; }
+        public DbSet<RightRouteType> RightRouteTypes { get; set; }
         public DbSet<TreatmentEndType> TreatmentEndTypes { get; set; }
         public DbSet<TreatmentResult> TreatmentResults { get; set; }
         public DbSet<Ward> Wards { get; set; }

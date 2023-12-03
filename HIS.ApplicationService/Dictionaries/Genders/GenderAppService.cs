@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
 using HIS.Application.Core.Services.Dto;
-using HIS.Dtos.Dictionaries.Gender;
+using HIS.Dtos.Dictionaries.Genders;
 using HIS.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace HIS.ApplicationService.Dictionaries.Gender
+namespace HIS.ApplicationService.Dictionaries.Genders
 {
-    public class GenderService : BaseCrudAppService<GenderDto, Guid?, GetAllGenderInput>, IGenderService
+    public class GenderAppService : BaseCrudAppService<GenderDto, Guid?, GetAllGenderInput>, IGenderAppService
     {
-        public GenderService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
+        public GenderAppService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
             : base(dbContext, mapper)
         {
 

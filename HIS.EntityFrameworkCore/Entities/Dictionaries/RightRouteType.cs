@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
-    /// Loại mối quan hệ gia đình.
+    /// Tuyến KCB.
     /// </summary>
-    public class RelativeType : AuditedEntity<Guid>
+    public class RightRouteType : AuditedEntity<int>
     {
-        public string RelativeTypeCode { get; set; }
-        public string RelativeTypeName { get; set; }
+        public string RightRouteTypeCode { get; set; }
+        public string RightRouteTypeName { get; set; }
         public string Description { get; set; }
         public int SortOrder { get; set; }
         public bool Inactive { get; set; }
 
-        public RelativeType() { }
+        public RightRouteType() { }
     }
 }

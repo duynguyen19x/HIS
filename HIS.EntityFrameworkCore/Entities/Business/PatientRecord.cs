@@ -1,4 +1,6 @@
-﻿using HIS.Core.Entities.Auditing;
+﻿using AutoMapper.Configuration.Annotations;
+using HIS.Core.Entities.Auditing;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,34 +14,32 @@ namespace HIS.EntityFrameworkCore.Entities.Business
     /// </summary>
     public class PatientRecord : FullAuditedEntity<Guid>
     {
-        public string PatientRecordCode { get; set; }
+        public Guid PatientId { get; set; }
+        public string PatientRecordCode { get; set; } // số hồ sơ bệnh án 
         public DateTime PatientRecordDate { get; set; } // thời gian vào viện (thời gian đăng ký)
-        public Guid BranchID { get; set; } // chi nhánh
-        public Guid DepartmentID { get; set; } // khoa tiếp đón
-        public Guid RoomID { get; set; } // phòng tiếp đón
-        public Guid UserID { get; set; } // người tạo (nhân viên tiếp đón)
-        public int PatientTypeID { get; set; }
-        public int ReceptionObjectTypeID { get; set; }
+        public int PatientRecordStatusId { get; set; } // trạng thái (0: mới tạo. 100: đang khám, điều trị. 200: đã kết thúc khám, điều trị. 300: đã thu tiền, khóa viện phí, 400: đã duyệt bhyt. trong các nhóm trạng thái chính sẽ phát sinh các trạng thái phụ khác, vd mở bệnh án, ....)
+        public Guid BranchId { get; set; } // chi nhánh khám, chứa bệnh
+        public Guid DepartmentId { get; set; } // khoa tiếp đón
+        public Guid RoomId { get; set; } // phòng tiếp đón
+        public Guid UserId { get; set; } // người tạo (nhân viên tiếp đón)
+        public int PatientTypeId { get; set; } // đối tượng bệnh nhân
+        public int ReceptionObjectTypeId { get; set; } // đối tượng tiếp đón (khám bệnh, cấp cứu)
         public string HospitalizationReason { get; set; } // lý do khám
         public bool IsPriority { get; set; } // là ưu tiên
-        public int Status { get; set; } // trạng thái (0: mới tạo. 100: đang khám, điều trị. 200: đã kết thúc khám, điều trị. 300: đã thu tiền, khóa viện phí, 400: đã duyệt bhyt. trong các nhóm trạng thái chính sẽ phát sinh các trạng thái phụ khác, vd mở bệnh án, ....)
 
-        #region I. hành chính
-
-        public Guid PatientID { get; set; }
-        public string PatientName { get; set; }
+        public string PatientName { get; set; } 
         public DateTime? BirthDate { get; set; }
         public int BirthYear { get; set; }
         public string Birthplace { get; set; }
-        public Guid? GenderID { get; set; }
-        public Guid? EthnicityID { get; set; }
-        public Guid? ReligionID { get; set; }
-        public Guid? CountryID { get; set; }
-        public Guid? ProvinceID { get; set; }
-        public Guid? DistrictID { get; set; }
-        public Guid? WardID { get; set; }
+        public Guid? GenderId { get; set; }
+        public Guid? EthnicId { get; set; }
+        public Guid? ReligionId { get; set; }
+        public Guid? NationalId { get; set; }
+        public Guid? ProvinceId { get; set; }
+        public Guid? DistrictId { get; set; }
+        public Guid? WardId { get; set; }
         public string Address { get; set; }
-        public Guid? CareerID { get; set; }
+        public Guid? CareerId { get; set; }
         public string Workplace { get; set; }
         public string Tel { get; set; }
         public string Mobile { get; set; }
@@ -48,7 +48,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public DateTime? IssueDate { get; set; }
         public string IssueBy { get; set; }
 
-        public Guid? RelativeTypeID { get; set; } // mối quan hệ với bệnh nhân
+        public Guid? RelativeTypeId { get; set; } // mối quan hệ với bệnh nhân
         public string RelativeName { get; set; } // người nhà bệnh nhân
         public string RelativeAddress { get; set; }
         public string RelativeTel { get; set; }
@@ -57,7 +57,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public DateTime? RelativeIssueDate { get; set; }
         public string RelativeIssueBy { get; set; }
 
-        public Guid? InsuranceID { get; set; } // thông tin bảo hiểm y tế
+        public Guid? InsuranceId { get; set; } // thông tin bảo hiểm y tế
 
         public bool IsTransferIn { get; set; } // là bệnh nhân chuyển viện đến
         public string TransferInCode { get; set; } // số chuyển viện
@@ -71,8 +71,6 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public Guid? TransferInReasonID { get; set; } // lý do chuyển viện
         public bool TransferInRightRoute { get; set; } // chuyển đúng tuyến CMKT
         public bool TransferInOverRoute { get; set; } // chuyển vượt tuyến CMKT
-
-        #endregion
 
         // thông tin khám bệnh và điều trị
         public DateTime? ClinicalTime { get; set; } // thời bắt đầu gian khám
@@ -140,6 +138,21 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public string StoreCode { get; set; }
         #endregion
 
-        // thanh toán
+        [Ignore]
+        public Gender Gender { get; set; }
+        [Ignore]
+        public Ethnic Ethnic { get; set; }
+        [Ignore]
+        public Religion Religion { get; set; }
+        [Ignore]
+        public National National { get; set; }
+        [Ignore]
+        public Province Province { get; set; }
+        [Ignore]
+        public District District { get; set; }
+        [Ignore]
+        public Ward Ward { get; set; }
+        [Ignore]
+        public Career Career { get; set; }
     }
 }

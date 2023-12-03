@@ -7,7 +7,7 @@ using HIS.ApplicationService.Dictionaries.Country;
 using HIS.ApplicationService.Dictionaries.Department;
 using HIS.ApplicationService.Dictionaries.DepartmentType;
 using HIS.ApplicationService.Dictionaries.Districts;
-using HIS.ApplicationService.Dictionaries.Gender;
+using HIS.ApplicationService.Dictionaries.Genders;
 using HIS.ApplicationService.Dictionaries.Hospital;
 using HIS.ApplicationService.Dictionaries.Icds;
 using HIS.ApplicationService.Dictionaries.ItemGroups;
@@ -32,6 +32,7 @@ using Microsoft.Extensions.DependencyInjection;
 using HIS.ApplicationService.Systems.DbOptions;
 using HIS.ApplicationService.Dictionaries.Ethnics;
 using HIS.ApplicationService.Dictionaries.Branchs;
+using HIS.ApplicationService.Dictionaries.RelativeTypes;
 
 namespace HIS.ApplicationService
 {
@@ -49,7 +50,7 @@ namespace HIS.ApplicationService
             services.AddTransient<IDepartmentTypeService, DepartmentTypeService>();
             services.AddTransient<IDistrictService, DistrictService>();
             
-            services.AddTransient<IGenderService, GenderService>();
+            services.AddTransient<IGenderAppService, GenderAppService>();
             services.AddTransient<IRoomAppService, RoomAppService>();
             services.AddTransient<IRoomTypeService, RoomTypeService>();
             services.AddTransient<IHospitalService, HospitalService>();
@@ -76,10 +77,15 @@ namespace HIS.ApplicationService
             services.AddTransient<IInOutStockService, InOutStockService>();
             services.AddTransient<IItemStockService, ItemStockService>();
 
+            #region - nghiệp vụ
+
+            #endregion
 
             #region - danh mục
 
             services.AddTransient<IEthnicAppService, EthnicAppService>();
+            services.AddTransient<IRelativeTypeAppService, RelativeTypeAppService>();
+            //services.AddTransient<IRelativeTypeAppService, RelativeTypeAppService>();
 
             #endregion
 

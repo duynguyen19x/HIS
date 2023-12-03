@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Dictionaries.Gender
+namespace HIS.Dtos.Dictionaries.Genders
 {
     public class GetAllGenderInput : PagedResultRequestDto
     {
