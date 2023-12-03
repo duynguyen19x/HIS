@@ -65,7 +65,7 @@ namespace HIS.EntityFrameworkCore
         public DbSet<DeathCause> DeathCauses { get; set; }
         public DbSet<DeathWithin> DeathWithins { get; set; }
         public DbSet<MedicalRecordType> MedicalRecordTypes { get; set; }
-        public DbSet<MedicalRecordTypeGroup> MedicalRecordTypeGroups { get; set; }
+        public DbSet<MedicalRecordTypeCategory> MedicalRecordTypeGroups { get; set; }
         public DbSet<PatientType> PatientTypes { get; set; }
         public DbSet<ReceptionObjectType> ReceptionTypes { get; set; }
         public DbSet<Religion> Religions { get; set; }
@@ -75,7 +75,9 @@ namespace HIS.EntityFrameworkCore
         #endregion
 
         #region - nghiệp vụ
-
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<PatientRecord> PatientRecords { get; set; }
+        public DbSet<MedicalRecord> MedicalRecords { get; set; }
         #endregion
 
         #region - hệ thống

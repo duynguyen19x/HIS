@@ -21,7 +21,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public int MedicalRecordTypeGroupID { get; set; }
 
         [Ignore]
-        public virtual MedicalRecordTypeGroup MedicalRecordTypeGroup { get; set; }
+        public virtual MedicalRecordTypeCategory MedicalRecordTypeGroup { get; set; }
 
         public MedicalRecordType() { }
         public MedicalRecordType(int id, string name, int groupType, int order)

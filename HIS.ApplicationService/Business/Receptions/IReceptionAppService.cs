@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Business.Receptions
 {
-    public interface IReceptionAppService : IBaseCrudAppService<ReceptionDto, Guid, GetAllReceptionInput>
+    public interface IReceptionAppService : IBaseCrudAppService<ReceptionDto, Guid, GetAllReceptionInputDto>
     {
     }
 }

@@ -32,16 +32,12 @@ using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Items;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.Dtos.Business.Receptions;
 using HIS.Dtos.Systems.DbOption;
 using HIS.EntityFrameworkCore.Entities.Systems;
-using HIS.Dtos.Dictionaries.RelativeCategories;
 using HIS.Dtos.Dictionaries.PatientTypes;
-using HIS.Dtos.Dictionaries.Relatives;
-using HIS.Dtos.Business.Patients;
 using HIS.Dtos.Dictionaries.Ethnicities;
 using HIS.Dtos.Dictionaries.Branchs;
-using HIS.Dtos.Dictionaries.ReceptionTypes;
+using HIS.Dtos.Dictionaries.ReceptionObjectTypes;
 
 namespace HIS.AutoMappers
 {
@@ -153,7 +149,7 @@ namespace HIS.AutoMappers
                 .ReverseMap();
 
             #region - nghiệp vụ
-            CreateMap<ReceptionDto, Reception>().ReverseMap();
+
             #endregion
 
             #region - danh mục
@@ -161,9 +157,7 @@ namespace HIS.AutoMappers
             CreateMap<Branch, BranchDto>().ReverseMap();
             CreateMap<Ethnicity, EthnicityDto>().ReverseMap();
             CreateMap<PatientType, PatientTypeDto>().ReverseMap();
-            CreateMap<ReceptionObjectType, ReceptionTypeDto>().ReverseMap();
-            CreateMap<RelativeCategory, RelativeCategoryDto>().ReverseMap();
-            CreateMap<Relative, RelativeDto>().ReverseMap();
+            CreateMap<ReceptionObjectType, ReceptionObjectTypeDto>().ReverseMap();
 
             #endregion
         }

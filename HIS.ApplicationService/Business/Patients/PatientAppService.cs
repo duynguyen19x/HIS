@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HIS.ApplicationService.Business.Patients
 {
-    public class PatientAppService : BaseCrudAppService<PatientDto, Guid, GetAllPatientInput>, IPatientAppService
+    public class PatientAppService : BaseCrudAppService<PatientDto, Guid, GetAllPatientInputDto>, IPatientAppService
     {
         public PatientAppService(HISDbContext context, IMapper mapper) 
             : base(context, mapper)
@@ -94,7 +94,7 @@ namespace HIS.ApplicationService.Business.Patients
             return result;
         }
 
-        public async override Task<PagedResultDto<PatientDto>> GetAll(GetAllPatientInput input)
+        public async override Task<PagedResultDto<PatientDto>> GetAll(GetAllPatientInputDto input)
         {
             var result = new PagedResultDto<PatientDto>();
             try

@@ -30,8 +30,8 @@ namespace HIS.ApplicationService.Dictionaries.MedicalRecordTypeGroups
             {
                 try
                 {
-                    input.Id = Context.NewID<MedicalRecordTypeGroup>();
-                    var data = ObjectMapper.Map<MedicalRecordTypeGroup>(input);
+                    input.Id = Context.NewID<MedicalRecordTypeCategory>();
+                    var data = ObjectMapper.Map<MedicalRecordTypeCategory>(input);
                     data.CreatedDate = DateTime.Now;
                     data.CreatedBy = SessionExtensions.Login?.Id;
                     Context.MedicalRecordTypeGroups.Add(data);
@@ -57,7 +57,7 @@ namespace HIS.ApplicationService.Dictionaries.MedicalRecordTypeGroups
                 try
                 {
                     var ethnicity = await Context.MedicalRecordTypeGroups.FindAsync(input.Id);
-                    var data = ObjectMapper.Map<MedicalRecordTypeGroup>(input);
+                    var data = ObjectMapper.Map<MedicalRecordTypeCategory>(input);
                     data.CreatedDate = ethnicity.CreatedDate;
                     data.CreatedBy = ethnicity.CreatedBy;
                     data.ModifiedDate = DateTime.Now;

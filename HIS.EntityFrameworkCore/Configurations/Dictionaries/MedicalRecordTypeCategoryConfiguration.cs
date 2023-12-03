@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class MedicalRecordTypeGroupConfiguration : IEntityTypeConfiguration<MedicalRecordTypeGroup>
+    public class MedicalRecordTypeCategoryConfiguration : IEntityTypeConfiguration<MedicalRecordTypeCategory>
     {
-        public void Configure(EntityTypeBuilder<MedicalRecordTypeGroup> builder)
+        public void Configure(EntityTypeBuilder<MedicalRecordTypeCategory> builder)
         {
-            builder.ToTable("MedicalRecordTypeGroup");
+            builder.ToTable("MedicalRecordTypeCategory");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.MedicalRecordTypeGroupCode).HasMaxLength(20).IsRequired();
@@ -22,9 +22,9 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.Property(x => x.Description).HasMaxLength(255);
 
             builder.HasData(
-                new MedicalRecordTypeGroup((int)MedicalRecordTypeGroups.DTRI_NOITRU, "Nội trú", 1),
-                new MedicalRecordTypeGroup((int)MedicalRecordTypeGroups.DTRI_NGOAITRU, "Ngoại trú", 2),
-                new MedicalRecordTypeGroup((int)MedicalRecordTypeGroups.KHAMBENH, "Khám bệnh", 3)
+                new MedicalRecordTypeCategory((int)MedicalRecordTypeGroups.DTRI_NOITRU, "Nội trú", 1),
+                new MedicalRecordTypeCategory((int)MedicalRecordTypeGroups.DTRI_NGOAITRU, "Ngoại trú", 2),
+                new MedicalRecordTypeCategory((int)MedicalRecordTypeGroups.KHAMBENH, "Khám bệnh", 3)
                 );
         }
     }
