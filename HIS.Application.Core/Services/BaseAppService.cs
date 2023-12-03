@@ -18,61 +18,6 @@ namespace HIS.Application.Core.Services
             ObjectMapper = mapper;
         }
 
-        public virtual TResult BeginTransaction<TResult>(Action<TResult> func) 
-        {
-            var result = Activator.CreateInstance<TResult>();
-            if (Context.Database.CurrentTransaction != null)
-            {
-                func(result);
-            }
-            else
-            {
-                using (var transaction = Context.Database.BeginTransaction())
-                {
-                    try
-                    {
-                        func(result);
-                        transaction.Commit();
-                    }
-                    catch
-                    {
-                        transaction.Rollback();
-                        throw;
-                    }
-                }
-
-            }
-            return result;
-        }
-
-        public virtual async Task<TResult> BeginTransactionAsync<TResult>(Func<TResult, Task> func) where TResult : class
-        {
-            var result = Activator.CreateInstance<TResult>();
-            if (Context.Database.CurrentTransaction != null)
-            {
-                await func(result);
-            }
-            else
-            {
-                using (var transaction = await Context.Database.BeginTransactionAsync())
-                {
-                    try
-                    {
-                        await func(result);
-                        await transaction.CommitAsync();
-                    }
-                    catch
-                    {
-                        await transaction.RollbackAsync();
-                        throw;
-                    }
-                }
-
-            }
-            return result;
-        }
-
-
         public virtual IDbContextTransaction BeginTransaction()
         {
             return Context.BeginTransaction();

@@ -1,15 +1,9 @@
-﻿using HIS.ApplicationService.Base;
+﻿using HIS.Application.Core.Services;
 using HIS.Dtos.Dictionaries.Hospital;
-using HIS.Dtos.Dictionaries.Career;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Dictionaries.Hospital
 {
-    public interface IHospitalService : IBaseDictionaryService<HospitalDto, GetAllHospitalInput>
+    public interface IHospitalService : IBaseCrudAppService<HospitalDto, Guid?, GetAllHospitalInput>
     {
     }
 }

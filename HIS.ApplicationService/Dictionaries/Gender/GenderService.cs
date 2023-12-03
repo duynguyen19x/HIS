@@ -1,49 +1,40 @@
 ﻿using AutoMapper;
-using HIS.Dtos.Commons;
+using HIS.Application.Core.Services;
+using HIS.Application.Core.Services.Dto;
 using HIS.Dtos.Dictionaries.Gender;
 using HIS.EntityFrameworkCore;
-using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
 
 namespace HIS.ApplicationService.Dictionaries.Gender
 {
-    public class GenderService : BaseSerivce, IGenderService
+    public class GenderService : BaseCrudAppService<GenderDto, Guid?, GetAllGenderInput>, IGenderService
     {
         public GenderService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
-            : base(dbContext, config, mapper)
+            : base(dbContext, mapper)
         {
 
         }
 
-        public async Task<ApiResult<GenderDto>> CreateOrEdit(GenderDto input)
+        public override async Task<ResultDto<GenderDto>> Create(GenderDto input)
         {
-            if (input.Id == null)
-                return await Create(input);
-            else
-                return await Update(input);
-        }
-
-        public async Task<ApiResult<GenderDto>> Create(GenderDto input)
-        {
-            var result = new ApiResult<GenderDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<GenderDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Gender>(input);
-                    _dbContext.Genders.Add(data);
-                    await _dbContext.SaveChangesAsync();
+                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Gender>(input);
+                    Context.Genders.Add(data);
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
-                    result.Result = input;
+                    result.IsSucceeded = true;
+                    result.Item = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -53,26 +44,25 @@ namespace HIS.ApplicationService.Dictionaries.Gender
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<GenderDto>> Update(GenderDto input)
+        public override async Task<ResultDto<GenderDto>> Update(GenderDto input)
         {
-            var result = new ApiResult<GenderDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<GenderDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Gender>(input);
-                    _dbContext.Genders.Update(data);
-                    await _dbContext.SaveChangesAsync();
+                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Gender>(input);
+                    Context.Genders.Update(data);
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
-                    result.Result = input;
+                    result.IsSucceeded = true;
+                    result.Item = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -82,27 +72,26 @@ namespace HIS.ApplicationService.Dictionaries.Gender
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<GenderDto>> Delete(Guid id)
+        public override async Task<ResultDto<GenderDto>> Delete(Guid? id)
         {
-            var result = new ApiResult<GenderDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<GenderDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var data = _dbContext.Genders.SingleOrDefault(x => x.Id == id);
+                    var data = Context.Genders.SingleOrDefault(x => x.Id == id);
                     if (data != null)
                     {
-                        _dbContext.Genders.Remove(data);
-                        await _dbContext.SaveChangesAsync();
-                        result.IsSuccessed = true;
+                        Context.Genders.Remove(data);
+                        await Context.SaveChangesAsync();
+                        result.IsSucceeded = true;
 
                         transaction.Commit();
                     }
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -112,13 +101,13 @@ namespace HIS.ApplicationService.Dictionaries.Gender
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<GenderDto>> GetAll(GetAllGenderInput input)
+        public override async Task<PagedResultDto<GenderDto>> GetAll(GetAllGenderInput input)
         {
-            var result = new ApiResultList<GenderDto>();
+            var result = new PagedResultDto<GenderDto>();
             try
             {
-                result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.Genders
+                result.IsSucceeded = true;
+                result.Items = (from r in Context.Genders
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.GenderName == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.GenderCode == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -133,26 +122,25 @@ namespace HIS.ApplicationService.Dictionaries.Gender
                                  })
                                  .OrderBy(x => x.SortOrder)
                                  .ToList();
-                result.TotalCount = result.Result.Count;
+                result.TotalCount = result.Items.Count;
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
-                result.Message = ex.Message;
+                result.Exception(ex);
             }
 
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<GenderDto>> GetById(Guid id)
+        public override async Task<ResultDto<GenderDto>> GetById(Guid? id)
         {
-            var result = new ApiResult<GenderDto>();
+            var result = new ResultDto<GenderDto>();
 
-            var data = _dbContext.Genders.SingleOrDefault(s => s.Id == id);
+            var data = Context.Genders.SingleOrDefault(s => s.Id == id);
             if (data != null)
             {
-                result.IsSuccessed = true;
-                result.Result = new GenderDto()
+                result.IsSucceeded = true;
+                result.Item = new GenderDto()
                 {
                     Id = data.Id,
                     Code = data.GenderCode,

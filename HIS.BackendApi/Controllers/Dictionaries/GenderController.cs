@@ -1,7 +1,6 @@
-﻿using HIS.ApplicationService.Dictionaries.Gender;
-using HIS.Dtos.Commons;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Dictionaries.Gender;
 using HIS.Dtos.Dictionaries.Gender;
-using HIS.Models.Commons;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
@@ -18,25 +17,25 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<GenderDto>> GetAll([FromQuery] GetAllGenderInput input)
+        public async Task<PagedResultDto<GenderDto>> GetAll([FromQuery] GetAllGenderInput input)
         {
             return await _genderService.GetAll(input);
         }
 
         [HttpGet("GetById")]
-        public async Task<ApiResult<GenderDto>> GetById(Guid id)
+        public async Task<ResultDto<GenderDto>> GetById(Guid id)
         {
             return await _genderService.GetById(id);
         }
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ApiResult<GenderDto>> CreateOrEdit(GenderDto input)
+        public async Task<ResultDto<GenderDto>> CreateOrEdit(GenderDto input)
         {
             return await _genderService.CreateOrEdit(input);
         }
 
         [HttpDelete("Delete")]
-        public async Task<ApiResult<GenderDto>> Delete(Guid id)
+        public async Task<ResultDto<GenderDto>> Delete(Guid id)
         {
             return await _genderService.Delete(id);
         }

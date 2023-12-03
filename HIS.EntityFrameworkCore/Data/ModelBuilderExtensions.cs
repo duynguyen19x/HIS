@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Data
         public static void Seed(this ModelBuilder modelBuilder)
         {
             ChapterIcdBuilder.Seed(modelBuilder);
-            CountryBuilder.Seed(modelBuilder);
+            NationalBuilder.Seed(modelBuilder);
             UserBuilder.Seed(modelBuilder);
             ServiceGroupBuilder.Seed(modelBuilder);
             ServiceGroupHeInBuilder.Seed(modelBuilder);

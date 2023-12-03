@@ -1,7 +1,6 @@
-﻿using HIS.ApplicationService.Dictionaries.Supplier;
-using HIS.Dtos.Commons;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Dictionaries.Supplier;
 using HIS.Dtos.Dictionaries.Supplier;
-using HIS.Models.Commons;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
@@ -18,25 +17,25 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<SupplierDto>> GetAll([FromQuery] GetAllSupplierInput input)
+        public async Task<PagedResultDto<SupplierDto>> GetAll([FromQuery] GetAllSupplierInput input)
         {
             return await _sSupplierService.GetAll(input);
         }
 
         [HttpGet("GetById")]
-        public async Task<ApiResult<SupplierDto>> GetById(Guid id)
+        public async Task<ResultDto<SupplierDto>> GetById(Guid id)
         {
             return await _sSupplierService.GetById(id);
         }
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ApiResult<SupplierDto>> CreateOrEdit(SupplierDto input)
+        public async Task<ResultDto<SupplierDto>> CreateOrEdit(SupplierDto input)
         {
             return await _sSupplierService.CreateOrEdit(input);
         }
 
         [HttpDelete("Delete")]
-        public async Task<ApiResult<SupplierDto>> Delete(Guid id)
+        public async Task<ResultDto<SupplierDto>> Delete(Guid id)
         {
             return await _sSupplierService.Delete(id);
         }

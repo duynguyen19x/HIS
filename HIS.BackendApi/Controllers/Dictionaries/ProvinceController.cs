@@ -1,7 +1,6 @@
-﻿using HIS.ApplicationService.Dictionaries.Province;
-using HIS.Dtos.Commons;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Dictionaries.Provinces;
 using HIS.Dtos.Dictionaries.Province;
-using HIS.Models.Commons;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
@@ -10,33 +9,33 @@ namespace HIS.BackendApi.Controllers.Dictionaries
     [ApiController]
     public class ProvinceController : ControllerBase
     {
-        private readonly IProvinceService _provinceService;
+        private readonly IProvinceAppService _provinceService;
 
-        public ProvinceController(IProvinceService provinceService)
+        public ProvinceController(IProvinceAppService provinceService)
         {
             _provinceService = provinceService;
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<ProvinceDto>> GetAll([FromQuery] GetAllProvinceInput input)
+        public async Task<PagedResultDto<ProvinceDto>> GetAll([FromQuery] GetAllProvinceInput input)
         {
             return await _provinceService.GetAll(input);
         }
 
         [HttpGet("GetById")]
-        public async Task<ApiResult<ProvinceDto>> GetById(Guid id)
+        public async Task<ResultDto<ProvinceDto>> GetById(Guid id)
         {
             return await _provinceService.GetById(id);
         }
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ApiResult<ProvinceDto>> CreateOrEdit(ProvinceDto input)
+        public async Task<ResultDto<ProvinceDto>> CreateOrEdit(ProvinceDto input)
         {
             return await _provinceService.CreateOrEdit(input);
         }
 
         [HttpDelete("Delete")]
-        public async Task<ApiResult<ProvinceDto>> Delete(Guid id)
+        public async Task<ResultDto<ProvinceDto>> Delete(Guid id)
         {
             return await _provinceService.Delete(id);
         }

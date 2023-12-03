@@ -1,7 +1,6 @@
-﻿using HIS.ApplicationService.Dictionaries.Country;
-using HIS.Dtos.Commons;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Dictionaries.Country;
 using HIS.Dtos.Dictionaries.Country;
-using HIS.Models.Commons;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
@@ -18,25 +17,25 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<CountryDto>> GetAll([FromQuery] GetAllCountryInput input)
+        public async Task<PagedResultDto<CountryDto>> GetAll([FromQuery] GetAllCountryInput input)
         {
             return await _countryService.GetAll(input);
         }
 
         [HttpGet("GetById")]
-        public async Task<ApiResult<CountryDto>> GetById(Guid id)
+        public async Task<ResultDto<CountryDto>> GetById(Guid id)
         {
             return await _countryService.GetById(id);
         }
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ApiResult<CountryDto>> CreateOrEdit(CountryDto input)
+        public async Task<ResultDto<CountryDto>> CreateOrEdit(CountryDto input)
         {
             return await _countryService.CreateOrEdit(input);
         }
 
         [HttpDelete("Delete")]
-        public async Task<ApiResult<CountryDto>> Delete(Guid id)
+        public async Task<ResultDto<CountryDto>> Delete(Guid id)
         {
             return await _countryService.Delete(id);
         }

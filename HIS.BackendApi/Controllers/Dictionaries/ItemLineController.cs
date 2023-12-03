@@ -1,7 +1,6 @@
-﻿using HIS.ApplicationService.Dictionaries.ItemLines;
-using HIS.Dtos.Commons;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Dictionaries.ItemLines;
 using HIS.Dtos.Dictionaries.ItemLines;
-using HIS.Models.Commons;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
@@ -18,25 +17,25 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<ItemLineDto>> GetAll([FromQuery] GetAllItemLineInput input)
+        public async Task<PagedResultDto<ItemLineDto>> GetAll([FromQuery] GetAllItemLineInput input)
         {
             return await _ItemLineService.GetAll(input);
         }
 
         [HttpGet("GetById")]
-        public async Task<ApiResult<ItemLineDto>> GetById(Guid id)
+        public async Task<ResultDto<ItemLineDto>> GetById(Guid id)
         {
             return await _ItemLineService.GetById(id);
         }
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ApiResult<ItemLineDto>> CreateOrEdit(ItemLineDto input)
+        public async Task<ResultDto<ItemLineDto>> CreateOrEdit(ItemLineDto input)
         {
             return await _ItemLineService.CreateOrEdit(input);
         }
 
         [HttpDelete("Delete")]
-        public async Task<ApiResult<ItemLineDto>> Delete(Guid id)
+        public async Task<ResultDto<ItemLineDto>> Delete(Guid id)
         {
             return await _ItemLineService.Delete(id);
         }

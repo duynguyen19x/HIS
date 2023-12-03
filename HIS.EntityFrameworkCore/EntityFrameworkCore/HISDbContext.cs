@@ -22,7 +22,7 @@ namespace HIS.EntityFrameworkCore
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<DepartmentType> DepartmentTypes { get; set; }
-        public DbSet<Ethnicity> Ethnicities { get; set; }
+        public DbSet<Ethnic> Ethnicities { get; set; }
         public DbSet<Room> Rooms { get; set; }
         public DbSet<RoomType> RoomTypes { get; set; }
         public DbSet<Career> Careers { get; set; }
@@ -31,11 +31,6 @@ namespace HIS.EntityFrameworkCore
         public DbSet<ChapterIcd> ChapterIcds { get; set; }
         public DbSet<RolePermissionBranch> RolePermissionBranchs { get; set; }
         public DbSet<Unit> Units { get; set; }
-        public DbSet<Country> Countries { get; set; }
-        public DbSet<Province> Provinces { get; set; }
-        
-        public DbSet<District> Districts { get; set; }
-        public DbSet<SWard> Wards { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
 
         public DbSet<Service> Services { get; set; }
@@ -64,13 +59,18 @@ namespace HIS.EntityFrameworkCore
         public DbSet<Branch> Branchs { get; set; }
         public DbSet<DeathCause> DeathCauses { get; set; }
         public DbSet<DeathWithin> DeathWithins { get; set; }
+        public DbSet<District> Districts { get; set; }
         public DbSet<MedicalRecordType> MedicalRecordTypes { get; set; }
-        public DbSet<MedicalRecordTypeCategory> MedicalRecordTypeGroups { get; set; }
+        public DbSet<MedicalRecordTypeGroup> MedicalRecordTypeGroups { get; set; }
+        public DbSet<National> Nationals { get; set; }
         public DbSet<PatientType> PatientTypes { get; set; }
+        public DbSet<PaymentMethod> PaymentMethods { get; set; }
+        public DbSet<Province> Provinces { get; set; }
         public DbSet<ReceptionObjectType> ReceptionTypes { get; set; }
         public DbSet<Religion> Religions { get; set; }
         public DbSet<TreatmentEndType> TreatmentEndTypes { get; set; }
         public DbSet<TreatmentResult> TreatmentResults { get; set; }
+        public DbSet<Ward> Wards { get; set; }
 
         #endregion
 

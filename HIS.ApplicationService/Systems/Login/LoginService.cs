@@ -1,16 +1,15 @@
 ﻿using HIS.Dtos.Systems.Login;
 using HIS.EntityFrameworkCore.Entities.Systems;
 using HIS.EntityFrameworkCore;
-using HIS.Models.Commons;
 using HIS.Utilities.Commons;
 using HIS.Utilities.Enums;
 using HIS.Utilities.Sections;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using HIS.Application.Core.Services.Dto;
 
 namespace HIS.ApplicationService.Systems.Login
 {
@@ -26,9 +25,9 @@ namespace HIS.ApplicationService.Systems.Login
             _config = config;
         }
 
-        public async Task<ApiResult<TokenResultDto>> Authenticate(LoginDto request)
+        public async Task<ResultDto<TokenResultDto>> Authenticate(LoginDto request)
         {
-            var apiResult = new ApiResult<TokenResultDto>();
+            var apiResult = new ResultDto<TokenResultDto>();
 
             using (var transaction = _dbContext.BeginTransaction())
             {
@@ -37,7 +36,7 @@ namespace HIS.ApplicationService.Systems.Login
                     var user = _dbContext.Users.Where(w => w.UserName == request.UserName && w.Password.ToUpper() == request.Password.ToUpper()).FirstOrDefault();
                     if (user == null)
                     {
-                        apiResult.IsSuccessed = false;
+                        apiResult.IsSucceeded = false;
                         apiResult.Message = "Tài khoản hoặc mật khẩu không đúng!";
 
                         return apiResult;
@@ -52,8 +51,8 @@ namespace HIS.ApplicationService.Systems.Login
                         RefreshToken = new JwtSecurityTokenHandler().WriteToken(refreshToken),
                     };
 
-                    apiResult.IsSuccessed = true;
-                    apiResult.Result = token;
+                    apiResult.IsSucceeded = true;
+                    apiResult.Item = token;
 
                     // Save token
                     var sToken = new SToken()
@@ -82,7 +81,7 @@ namespace HIS.ApplicationService.Systems.Login
                 }
                 catch (Exception)
                 {
-                    apiResult.IsSuccessed = false;
+                    apiResult.IsSucceeded = false;
                     transaction.Dispose();
                 }
             }
@@ -90,9 +89,9 @@ namespace HIS.ApplicationService.Systems.Login
             return await Task.FromResult(apiResult);
         }
 
-        public async Task<ApiResult<bool>> Register(RegisterDto request)
+        public async Task<ResultDto<bool>> Register(RegisterDto request)
         {
-            var apiResult = new ApiResult<bool>();
+            var apiResult = new ResultDto<bool>();
 
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
@@ -101,8 +100,8 @@ namespace HIS.ApplicationService.Systems.Login
                     var user = _dbContext.Users.FirstOrDefault(f => f.UserName == request.UserName);
                     if (user != null)
                     {
-                        apiResult.Result = false;
-                        apiResult.IsSuccessed = false;
+                        apiResult.Item = false;
+                        apiResult.IsSucceeded = false;
                         apiResult.Message = "Tài khoản đã tồn tại";
 
                         return await Task.FromResult(apiResult);
@@ -111,8 +110,8 @@ namespace HIS.ApplicationService.Systems.Login
                     user = _dbContext.Users.FirstOrDefault(f => f.Email == request.UserName);
                     if (user != null)
                     {
-                        apiResult.Result = false;
-                        apiResult.IsSuccessed = false;
+                        apiResult.Item = false;
+                        apiResult.IsSucceeded = false;
                         apiResult.Message = "Emai đã tồn tại";
 
                         return await Task.FromResult(apiResult);
@@ -140,8 +139,8 @@ namespace HIS.ApplicationService.Systems.Login
                     if (result != null)
                     {
                         apiResult.Message = "Đăng ký thằng công!";
-                        apiResult.Result = true;
-                        apiResult.IsSuccessed = true;
+                        apiResult.Item = true;
+                        apiResult.IsSucceeded = true;
 
                         return await Task.FromResult(apiResult);
                     }
@@ -149,8 +148,8 @@ namespace HIS.ApplicationService.Systems.Login
                 catch (Exception ex)
                 {
                     apiResult.Message = ex.Message;
-                    apiResult.Result = false;
-                    apiResult.IsSuccessed = false;
+                    apiResult.Item = false;
+                    apiResult.IsSucceeded = false;
                 }
             }
 
@@ -201,9 +200,9 @@ namespace HIS.ApplicationService.Systems.Login
             return await Task.FromResult(token);
         }
 
-        public async Task<ApiResult<TokenResultDto>> RefreshToken(TokenResultDto token)
+        public async Task<ResultDto<TokenResultDto>> RefreshToken(TokenResultDto token)
         {
-            var apiResult = new ApiResult<TokenResultDto>();
+            var apiResult = new ResultDto<TokenResultDto>();
 
             using (var transaction = _dbContext.Database.BeginTransaction())
             {
@@ -211,7 +210,7 @@ namespace HIS.ApplicationService.Systems.Login
                 {
                     if (string.IsNullOrEmpty(token.RefreshToken))
                     {
-                        apiResult.IsSuccessed = false;
+                        apiResult.IsSucceeded = false;
                         apiResult.Message = "Refresh token is not valid!";
 
                         return apiResult;
@@ -247,7 +246,7 @@ namespace HIS.ApplicationService.Systems.Login
                         if (!isCheckToken)
                         {
                             apiResult.Message = "Invalid token";
-                            apiResult.IsSuccessed = false;
+                            apiResult.IsSucceeded = false;
 
                             return apiResult;
                         }
@@ -258,7 +257,7 @@ namespace HIS.ApplicationService.Systems.Login
                     if (ConvertUnixTimeToDateTime(utcExpireDate) >= DateTime.UtcNow)
                     {
                         apiResult.Message = "The access token has expired!";
-                        apiResult.IsSuccessed = false;
+                        apiResult.IsSucceeded = false;
 
                         return apiResult;
                     }
@@ -268,7 +267,7 @@ namespace HIS.ApplicationService.Systems.Login
                     if (storedToken == null)
                     {
                         apiResult.Message = "Refresh token does not exist";
-                        apiResult.IsSuccessed = false;
+                        apiResult.IsSucceeded = false;
 
                         return apiResult;
                     }
@@ -278,7 +277,7 @@ namespace HIS.ApplicationService.Systems.Login
                         if (storedToken.ExpiredAt < DateTime.Now)
                         {
                             apiResult.Message = "Refresh token token has expired!";
-                            apiResult.IsSuccessed = false;
+                            apiResult.IsSucceeded = false;
 
                             return apiResult;
                         }
@@ -287,7 +286,7 @@ namespace HIS.ApplicationService.Systems.Login
                         if (storedToken.IsUsed)
                         {
                             apiResult.Message = "Refresh token has been used";
-                            apiResult.IsSuccessed = false;
+                            apiResult.IsSucceeded = false;
 
                             return apiResult;
                         }
@@ -296,7 +295,7 @@ namespace HIS.ApplicationService.Systems.Login
                         if (storedToken.IsRevoked)
                         {
                             apiResult.Message = "Refresh token has been revoked";
-                            apiResult.IsSuccessed = false;
+                            apiResult.IsSucceeded = false;
 
                             return apiResult;
                         }
@@ -307,7 +306,7 @@ namespace HIS.ApplicationService.Systems.Login
                     if (storedToken.Jti != jti)
                     {
                         apiResult.Message = "Token doesn't match";
-                        apiResult.IsSuccessed = false;
+                        apiResult.IsSucceeded = false;
 
                         return apiResult;
                     }
@@ -320,7 +319,7 @@ namespace HIS.ApplicationService.Systems.Login
                     storedToken.Jti = acceptToken.Id;
                     _dbContext.Update(storedToken);
 
-                    apiResult.Result = new TokenResultDto()
+                    apiResult.Item = new TokenResultDto()
                     {
                         AcceptToken = new JwtSecurityTokenHandler().WriteToken(acceptToken),
                         RefreshToken = token.RefreshToken
@@ -332,7 +331,7 @@ namespace HIS.ApplicationService.Systems.Login
                 catch (Exception ex)
                 {
                     apiResult.Message = ex.Message;
-                    apiResult.IsSuccessed = false;
+                    apiResult.IsSucceeded = false;
                     transaction.Dispose();
                 }
             }

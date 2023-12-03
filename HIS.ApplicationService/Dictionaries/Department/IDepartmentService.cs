@@ -1,9 +1,9 @@
-﻿using HIS.ApplicationService.Base;
+﻿using HIS.Application.Core.Services;
 using HIS.Dtos.Dictionaries.Department;
 
 namespace HIS.ApplicationService.Dictionaries.Department
 {
-    public interface IDepartmentService : IBaseDictionaryService<DepartmentDto, GetAllDepartmentInput>
+    public interface IDepartmentService : IBaseCrudAppService<DepartmentDto, Guid?, GetAllDepartmentInput>
     {
 
     }

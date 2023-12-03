@@ -64,11 +64,7 @@ namespace HIS.EntityFrameworkCore.Configurations
             //modelBuilder.ApplyConfiguration(new InsuranceConfiguration());
             //modelBuilder.ApplyConfiguration(new ReceptionTypeConfiguration());
 
-            modelBuilder.ApplyConfiguration(new InsuranceConfiguration());
-            modelBuilder.ApplyConfiguration(new ReceptionTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new ServiceRequestConfiguration());
-            modelBuilder.ApplyConfiguration(new ServiceRequestServeConfiguration());
-            modelBuilder.ApplyConfiguration(new DbOptionConfigurations());
+            //modelBuilder.ApplyConfiguration(new DbOptionConfigurations());
         }
     }
 }

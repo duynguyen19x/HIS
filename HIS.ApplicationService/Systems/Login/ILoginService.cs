@@ -1,17 +1,12 @@
-﻿using HIS.Dtos.Systems.Login;
-using HIS.Models.Commons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.Dtos.Systems.Login;
 
 namespace HIS.ApplicationService.Systems.Login
 {
     public interface ILoginService
     {
-        Task<ApiResult<TokenResultDto>> Authenticate(LoginDto request);
-        Task<ApiResult<TokenResultDto>> RefreshToken(TokenResultDto token);
-        Task<ApiResult<bool>> Register(RegisterDto request);
+        Task<ResultDto<TokenResultDto>> Authenticate(LoginDto request);
+        Task<ResultDto<TokenResultDto>> RefreshToken(TokenResultDto token);
+        Task<ResultDto<bool>> Register(RegisterDto request);
     }
 }

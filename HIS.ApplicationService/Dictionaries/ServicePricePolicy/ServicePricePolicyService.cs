@@ -1,37 +1,43 @@
 ﻿using AutoMapper;
+using HIS.Application.Core.Services;
+using HIS.Application.Core.Services.Dto;
 using HIS.Core.Linq;
-using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ServicePricePolicy;
 using HIS.EntityFrameworkCore;
-using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
 
 namespace HIS.ApplicationService.Dictionaries.ServicePricePolicy
 {
-    public class ServicePricePolicyService : BaseSerivce, IServicePricePolicyService
+    public class ServicePricePolicyService : BaseCrudAppService<ServicePricePolicyDto, Guid?, GetAllServicePricePolicyInput>, IServicePricePolicyService
     {
-        public ServicePricePolicyService(HISDbContext dbContext, IConfiguration config, IMapper mapper) : base(dbContext, config, mapper)
+        public ServicePricePolicyService(HISDbContext dbContext, IConfiguration config, IMapper mapper) 
+            : base(dbContext, mapper)
         {
 
         }
 
-        public Task<ApiResult<ServicePricePolicyDto>> CreateOrEdit(ServicePricePolicyDto input)
+        public override Task<ResultDto<ServicePricePolicyDto>> Create(ServicePricePolicyDto input)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ApiResult<ServicePricePolicyDto>> Delete(Guid id)
+        public override Task<ResultDto<ServicePricePolicyDto>> Update(ServicePricePolicyDto input)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<ApiResultList<ServicePricePolicyDto>> GetAll(GetAllServicePricePolicyInput input)
+        public override Task<ResultDto<ServicePricePolicyDto>> Delete(Guid? id)
         {
-            var result = new ApiResultList<ServicePricePolicyDto>();
+            throw new NotImplementedException();
+        }
+
+        public override async Task<PagedResultDto<ServicePricePolicyDto>> GetAll(GetAllServicePricePolicyInput input)
+        {
+            var result = new PagedResultDto<ServicePricePolicyDto>();
 
             try
             {
-                result.Result = (from r in _dbContext.PatientTypes
+                result.Items = (from r in Context.PatientTypes
                                  select new ServicePricePolicyDto()
                                  {
                                      PatientTypeId = r.Id,
@@ -42,20 +48,20 @@ namespace HIS.ApplicationService.Dictionaries.ServicePricePolicy
                                  .WhereIf(input.InactiveFilter != null, w => w.Inactive == input.InactiveFilter)
                                  .OrderBy(o => o.PatientTypeCode).ToList();
 
-                result.TotalCount = result.Result.Count;
+                result.TotalCount = result.Items.Count;
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
-                result.Message = ex.Message;
+                result.Exception(ex);
             }
 
             return await Task.FromResult(result);
         }
 
-        public Task<ApiResult<ServicePricePolicyDto>> GetById(Guid serviceId)
+        public override Task<ResultDto<ServicePricePolicyDto>> GetById(Guid? id)
         {
             throw new NotImplementedException();
         }
+
     }
 }

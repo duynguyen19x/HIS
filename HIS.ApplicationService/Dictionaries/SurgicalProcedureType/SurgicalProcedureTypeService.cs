@@ -1,35 +1,36 @@
-﻿using HIS.Dtos.Commons;
+﻿using AutoMapper;
+using HIS.Application.Core.Services;
+using HIS.Application.Core.Services.Dto;
 using HIS.Dtos.Dictionaries.SurgicalProcedureType;
 using HIS.EntityFrameworkCore;
-using HIS.Models.Commons;
-using Microsoft.Extensions.Configuration;
 
 namespace HIS.ApplicationService.Dictionaries.SurgicalProcedureType
 {
-    public class SurgicalProcedureTypeService : BaseSerivce, ISurgicalProcedureTypeService
+    public class SurgicalProcedureTypeService : BaseCrudAppService<SSurgicalProcedureTypeDto, int?, GetAllSurgicalProcedureTypeInput>, ISurgicalProcedureTypeService
     {
-        public SurgicalProcedureTypeService(HISDbContext dbContext, IConfiguration config) : base(dbContext, config)
+        public SurgicalProcedureTypeService(HISDbContext dbContext, IMapper mapper) 
+            : base(dbContext, mapper)
         {
 
         }
 
-        public Task<ApiResult<SSurgicalProcedureTypeDto>> CreateOrEdit(SSurgicalProcedureTypeDto input)
+        public override Task<ResultDto<SSurgicalProcedureTypeDto>> Create(SSurgicalProcedureTypeDto input)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ApiResult<SSurgicalProcedureTypeDto>> Delete(int id)
+        public override Task<ResultDto<SSurgicalProcedureTypeDto>> Delete(int? id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<ApiResultList<SSurgicalProcedureTypeDto>> GetAll(GetAllSurgicalProcedureTypeInput input)
+        public override async Task<PagedResultDto<SSurgicalProcedureTypeDto>> GetAll(GetAllSurgicalProcedureTypeInput input)
         {
-            var result = new ApiResultList<SSurgicalProcedureTypeDto>();
+            var result = new PagedResultDto<SSurgicalProcedureTypeDto>();
 
             try
             {
-                result.Result = (from r in _dbContext.SurgicalProcedureTypes
+                result.Items = (from r in Context.SurgicalProcedureTypes
                                  select new SSurgicalProcedureTypeDto()
                                  {
                                      Id = r.Id,
@@ -38,18 +39,23 @@ namespace HIS.ApplicationService.Dictionaries.SurgicalProcedureType
                                      SortOrder = r.SortOrder,
                                  }).OrderBy(o => o.SortOrder).ToList();
 
-                result.TotalCount = result.Result.Count;
+                result.TotalCount = result.Items.Count;
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
+                result.IsSucceeded = false;
                 result.Message = ex.Message;
             }
 
             return await Task.FromResult(result);
         }
 
-        public Task<ApiResult<SSurgicalProcedureTypeDto>> GetById(int id)
+        public override Task<ResultDto<SSurgicalProcedureTypeDto>> GetById(int? id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<ResultDto<SSurgicalProcedureTypeDto>> Update(SSurgicalProcedureTypeDto input)
         {
             throw new NotImplementedException();
         }

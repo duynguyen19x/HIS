@@ -1,9 +1,9 @@
-﻿using HIS.ApplicationService.Base;
+﻿using HIS.Application.Core.Services;
 using HIS.Dtos.Dictionaries.ItemPricePolicies;
 
 namespace HIS.ApplicationService.Dictionaries.ItemPricePolicies
 {
-    public interface IItemPricePolicyService : IBaseDictionaryService<ItemPricePolicyDto, GetAllItemPricePolicyInput, Guid>
+    public interface IItemPricePolicyService : IBaseCrudAppService<ItemPricePolicyDto, Guid?, GetAllItemPricePolicyInput>
     {
          
     }

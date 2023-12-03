@@ -1,36 +1,36 @@
 ﻿using AutoMapper;
+using HIS.Application.Core.Services;
+using HIS.Application.Core.Services.Dto;
 using HIS.Core.Linq;
 using HIS.Dtos.Business.InOutStockTypes;
-using HIS.Dtos.Commons;
 using HIS.EntityFrameworkCore;
-using HIS.Models.Commons;
 
 namespace HIS.ApplicationService.Business.InOutStockType
 {
-    public class InOutStockTypeService : BaseSerivce, IInOutStockTypeService
+    public class InOutStockTypeService : BaseAppService, IInOutStockTypeService
     {
         public InOutStockTypeService(HISDbContext dbContext, IMapper mapper)
             : base(dbContext, mapper)
         {
         }
 
-        public Task<ApiResult<InOutStockTypeDto>> CreateOrEdit(InOutStockTypeDto input)
+        public Task<ResultDto<InOutStockTypeDto>> CreateOrEdit(InOutStockTypeDto input)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ApiResult<InOutStockTypeDto>> Delete(Guid id)
+        public Task<ResultDto<InOutStockTypeDto>> Delete(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<ApiResultList<InOutStockTypeDto>> GetAll(GetAllInOutStockTypeInput input)
+        public async Task<PagedResultDto<InOutStockTypeDto>> GetAll(GetAllInOutStockTypeInput input)
         {
-            var result = new ApiResultList<InOutStockTypeDto>();
+            var result = new PagedResultDto<InOutStockTypeDto>();
 
             try
             {
-                result.Result = (from t in _dbContext.InOutStockTypes
+                result.Items = (from t in Context.InOutStockTypes
                                  select new InOutStockTypeDto()
                                  {
                                      Id = t.Id,
@@ -41,18 +41,18 @@ namespace HIS.ApplicationService.Business.InOutStockType
                                  .WhereIf(input.InactiveFilter != null, w => w.Inactive == input.InactiveFilter)
                                  .ToList();
 
-                result.TotalCount = result.Result.Count;
+                result.TotalCount = result.Items.Count;
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
+                result.IsSucceeded = false;
                 result.Message = ex.Message;
             }
 
             return await Task.FromResult(result);
         }
 
-        public Task<ApiResult<InOutStockTypeDto>> GetById(Guid id)
+        public Task<ResultDto<InOutStockTypeDto>> GetById(Guid id)
         {
             throw new NotImplementedException();
         }

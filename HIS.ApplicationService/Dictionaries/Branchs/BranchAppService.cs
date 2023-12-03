@@ -108,7 +108,7 @@ namespace HIS.ApplicationService.Dictionaries.Branchs
 
                 result.TotalCount = await filter.CountAsync();
                 result.Items = ObjectMapper.Map<IList<BranchDto>>(paged.ToList());
-                result.IsSuccessed = true;
+                result.IsSucceeded = true;
             }
             catch (Exception ex)
             {

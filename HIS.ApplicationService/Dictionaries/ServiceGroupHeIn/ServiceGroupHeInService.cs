@@ -1,51 +1,41 @@
-﻿using HIS.Core.Linq;
-using HIS.Dtos.Commons;
+﻿using AutoMapper;
+using HIS.Application.Core.Services;
+using HIS.Application.Core.Services.Dto;
+using HIS.Core.Linq;
 using HIS.Dtos.Dictionaries.ServiceGroupHeIn;
-using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore;
-using HIS.Models.Commons;
-using HIS.Utilities.Helpers;
-using Microsoft.Extensions.Configuration;
 
 namespace HIS.ApplicationService.Dictionaries.ServiceGroupHeIn
 {
-    public class ServiceGroupHeInService : BaseSerivce, IServiceGroupHeInService
+    public class ServiceGroupHeInService : BaseCrudAppService<ServiceGroupHeInDto, Guid, GetAllServiceGroupHeInInput>, IServiceGroupHeInService
     {
-        public ServiceGroupHeInService(HISDbContext dbContext, IConfiguration config) : base(dbContext, config)
+        public ServiceGroupHeInService(HISDbContext dbContext, IMapper mapper) 
+            : base(dbContext, mapper)
         {
         }
 
-        public async Task<ApiResult<ServiceGroupHeInDto>> CreateOrEdit(ServiceGroupHeInDto input)
+        public override async Task<ResultDto<ServiceGroupHeInDto>> Create(ServiceGroupHeInDto input)
         {
-            if (GuidHelper.IsNullOrEmpty(input.Id))
-                return await Create(input);
-            else
-                return await Update(input);
-        }
-
-        private async Task<ApiResult<ServiceGroupHeInDto>> Create(ServiceGroupHeInDto input)
-        {
-            var result = new ApiResult<ServiceGroupHeInDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<ServiceGroupHeInDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
 
-                    var data = _mapper.Map<EntityFrameworkCore.Entities.Categories.Services.ServiceGroupHeIn>(input);
+                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Categories.Services.ServiceGroupHeIn>(input);
 
-                    _dbContext.ServiceGroupHeIns.Add(data);
-                    await _dbContext.SaveChangesAsync();
+                    Context.ServiceGroupHeIns.Add(data);
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
-                    result.Result = input;
+                    result.IsSucceeded = true;
+                    result.Item = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -55,28 +45,27 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroupHeIn
             return await Task.FromResult(result);
         }
 
-        private async Task<ApiResult<ServiceGroupHeInDto>> Update(ServiceGroupHeInDto input)
+        public override async Task<ResultDto<ServiceGroupHeInDto>> Update(ServiceGroupHeInDto input)
         {
-            var result = new ApiResult<ServiceGroupHeInDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<ServiceGroupHeInDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var sServiceGroupHeIn = _dbContext.ServiceGroupHeIns.FirstOrDefault(f => f.Id == input.Id);
+                    var sServiceGroupHeIn = Context.ServiceGroupHeIns.FirstOrDefault(f => f.Id == input.Id);
                     if (sServiceGroupHeIn == null)
-                        _mapper.Map(input, sServiceGroupHeIn);
+                        ObjectMapper.Map(input, sServiceGroupHeIn);
 
-                    await _dbContext.SaveChangesAsync();
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
-                    result.Result = input;
+                    result.IsSucceeded = true;
+                    result.Item = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -86,27 +75,26 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroupHeIn
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<ServiceGroupHeInDto>> Delete(Guid id)
+        public override async Task<ResultDto<ServiceGroupHeInDto>> Delete(Guid id)
         {
-            var result = new ApiResult<ServiceGroupHeInDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<ServiceGroupHeInDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var sServiceGroupHeIn = _dbContext.ServiceGroupHeIns.SingleOrDefault(x => x.Id == id);
+                    var sServiceGroupHeIn = Context.ServiceGroupHeIns.SingleOrDefault(x => x.Id == id);
                     if (sServiceGroupHeIn != null)
                     {
-                        _dbContext.ServiceGroupHeIns.Remove(sServiceGroupHeIn);
-                        await _dbContext.SaveChangesAsync();
-                        result.IsSuccessed = true;
+                        Context.ServiceGroupHeIns.Remove(sServiceGroupHeIn);
+                        await Context.SaveChangesAsync();
+                        result.IsSucceeded = true;
 
                         transaction.Commit();
                     }
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -117,13 +105,13 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroupHeIn
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<ServiceGroupHeInDto>> GetAll(GetAllServiceGroupHeInInput input)
+        public override async Task<PagedResultDto<ServiceGroupHeInDto>> GetAll(GetAllServiceGroupHeInInput input)
         {
-            var result = new ApiResultList<ServiceGroupHeInDto>();
+            var result = new PagedResultDto<ServiceGroupHeInDto>();
 
             try
             {
-                result.Result = (from r in _dbContext.ServiceGroupHeIns
+                result.Items = (from r in Context.ServiceGroupHeIns
                                  select new ServiceGroupHeInDto()
                                  {
                                      Id = r.Id,
@@ -135,29 +123,29 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroupHeIn
                                  .WhereIf(input.InactiveFilter != null, w => w.Inactive == input.InactiveFilter)
                                  .OrderBy(o => o.SortOrder).ToList();
 
-                result.TotalCount = result.Result.Count;
+                result.TotalCount = result.Items.Count;
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
+                result.IsSucceeded = false;
                 result.Message = ex.Message;
             }
 
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<ServiceGroupHeInDto>> GetById(Guid id)
+        public override async Task<ResultDto<ServiceGroupHeInDto>> GetById(Guid id)
         {
-            var result = new ApiResult<ServiceGroupHeInDto>();
+            var result = new ResultDto<ServiceGroupHeInDto>();
 
             try
             {
-                var service = _dbContext.ServiceGroupHeIns.FirstOrDefault(s => s.Id == id);
-                result.Result = _mapper.Map<ServiceGroupHeInDto>(service);
+                var service = Context.ServiceGroupHeIns.FirstOrDefault(s => s.Id == id);
+                result.Item = ObjectMapper.Map<ServiceGroupHeInDto>(service);
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
+                result.IsSucceeded = false;
                 result.Message = ex.Message;
             }
 

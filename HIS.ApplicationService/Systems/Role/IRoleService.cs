@@ -1,20 +1,13 @@
-﻿using HIS.Dtos.Commons;
-using HIS.Dtos.Systems.Login;
+﻿using HIS.Application.Core.Services.Dto;
 using HIS.Dtos.Systems.Role;
-using HIS.Models.Commons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Systems.Role
 {
     public interface IRoleService
     {
-        Task<ApiResultList<RoleDto>> GetAll(GetAllRoleInput input);
-        Task<ApiResult<RoleDto>> GetById(Guid id);
-        Task<ApiResult<RoleDto>> CreateOrEdit(RoleDto input);
-        Task<ApiResult<RoleDto>> Delete(Guid id);
+        Task<PagedResultDto<RoleDto>> GetAll(GetAllRoleInput input);
+        Task<ResultDto<RoleDto>> GetById(Guid id);
+        Task<ResultDto<RoleDto>> CreateOrEdit(RoleDto input);
+        Task<ResultDto<RoleDto>> Delete(Guid id);
     }
 }

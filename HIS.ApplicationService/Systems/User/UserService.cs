@@ -1,35 +1,39 @@
 ﻿using AutoMapper;
+using HIS.Application.Core.Services;
 using HIS.Application.Core.Services.Dto;
-using HIS.Dtos.Commons;
 using HIS.Dtos.Systems.User;
 using HIS.EntityFrameworkCore;
-using HIS.Models.Commons;
 using Microsoft.Extensions.Configuration;
 
 namespace HIS.ApplicationService.Systems.User
 {
-    public class UserService : BaseSerivce, IUserService
+    public class UserService : BaseCrudAppService<UserDto, Guid?, GetAllUserInput>, IUserService
     {
         public UserService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
-            : base(dbContext, config, mapper) { }
+            : base(dbContext, mapper) { }
 
-        public Task<ApiResult<UserDto>> CreateOrEdit(UserDto input)
+        public override Task<ResultDto<UserDto>> Create(UserDto input)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ApiResult<UserDto>> Delete(Guid id)
+        public override Task<ResultDto<UserDto>> Update(UserDto input)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<ApiResultList<UserDto>> GetAll(GetAllUserInput input)
+        public override Task<ResultDto<UserDto>> Delete(Guid? id)
         {
-            var result = new ApiResultList<UserDto>();
+            throw new NotImplementedException();
+        }
+
+        public override async Task<PagedResultDto<UserDto>> GetAll(GetAllUserInput input)
+        {
+            var result = new PagedResultDto<UserDto>();
             try
             {
-                result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.Users
+                result.IsSucceeded = true;
+                result.Items = (from r in Context.Users
                                  select new UserDto()
                                  {
                                      Id = r.Id,
@@ -49,20 +53,21 @@ namespace HIS.ApplicationService.Systems.User
                                      WardId = r.WardId
                                  }).OrderBy(o => o.UserName).ToList();
 
-                result.TotalCount = result.Result.Count;
+                result.TotalCount = result.Items.Count;
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
-                result.Message = ex.Message;
+                result.Exception(ex);
             }
 
             return await Task.FromResult(result);
         }
 
-        public Task<ApiResult<UserDto>> GetById(Guid id)
+        public override Task<ResultDto<UserDto>> GetById(Guid? id)
         {
             throw new NotImplementedException();
         }
+
+        
     }
 }

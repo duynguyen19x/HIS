@@ -1,11 +1,11 @@
-﻿using HIS.ApplicationService.Base;
+﻿using HIS.Application.Core.Services;
+using HIS.Application.Core.Services.Dto;
 using HIS.Dtos.Dictionaries.ItemTypes;
-using HIS.Models.Commons;
 
 namespace HIS.ApplicationService.Dictionaries.ItemTypes
 {
-    public interface IItemTypeService : IBaseDictionaryService<ItemTypeDto, GetAllItemTypeInput>
+    public interface IItemTypeService : IBaseCrudAppService<ItemTypeDto, Guid?, GetAllItemTypeInput>
     {
-        Task<ApiResult<bool>> Import(IList<ItemTypeDto> input);
+        Task<ResultDto<bool>> Import(IList<ItemTypeDto> input);
     }
 }

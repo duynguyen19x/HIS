@@ -1,9 +1,6 @@
-﻿using HIS.ApplicationService.Dictionaries.Icd;
-using HIS.ApplicationService.Systems.DbOption;
-using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.Icd;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Systems.DbOptions;
 using HIS.Dtos.Systems.DbOption;
-using HIS.Models.Commons;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Systems.DbOption
@@ -20,31 +17,31 @@ namespace HIS.BackendApi.Controllers.Systems.DbOption
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<DbOptionDto>> GetAll([FromQuery] GetAllDbOptionInput input)
+        public async Task<PagedResultDto<DbOptionDto>> GetAll([FromQuery] GetAllDbOptionInput input)
         {
             return await _iDbOptionAppService.GetAll(input);
         }
 
         [HttpGet("GetById")]
-        public async Task<ApiResult<DbOptionDto>> GetById(Guid id)
+        public async Task<ResultDto<DbOptionDto>> GetById(Guid id)
         {
             return await _iDbOptionAppService.GetById(id);
         }
 
         [HttpGet("GetMapOptions")]
-        public async Task<ApiResult<OptionValueDto>> GetMapOptions()
+        public async Task<ResultDto<OptionValueDto>> GetMapOptions()
         {
             return await _iDbOptionAppService.GetMapOptions();
         }
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ApiResult<DbOptionDto>> CreateOrEdit(DbOptionDto input)
+        public async Task<ResultDto<DbOptionDto>> CreateOrEdit(DbOptionDto input)
         {
             return await _iDbOptionAppService.CreateOrEdit(input);
         }
 
         [HttpDelete("Delete")]
-        public async Task<ApiResult<DbOptionDto>> Delete(Guid id)
+        public async Task<ResultDto<DbOptionDto>> Delete(Guid id)
         {
             return await _iDbOptionAppService.Delete(id);
         }

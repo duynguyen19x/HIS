@@ -1,7 +1,6 @@
-﻿using HIS.ApplicationService.Dictionaries.Ward;
-using HIS.Dtos.Commons;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Dictionaries.Wards;
 using HIS.Dtos.Dictionaries.Ward;
-using HIS.Models.Commons;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
@@ -10,33 +9,33 @@ namespace HIS.BackendApi.Controllers.Dictionaries
     [ApiController]
     public class WardController : ControllerBase
     {
-        private readonly IWardService _wardService;
+        private readonly IWardAppService _wardService;
 
-        public WardController(IWardService wardService)
+        public WardController(IWardAppService wardService)
         {
             _wardService = wardService;
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<WardDto>> GetAll([FromQuery] GetAllWardInput input)
+        public async Task<PagedResultDto<WardDto>> GetAll([FromQuery] GetAllWardInput input)
         {
             return await _wardService.GetAll(input);
         }
 
         [HttpGet("GetById")]
-        public async Task<ApiResult<WardDto>> GetById(Guid id)
+        public async Task<ResultDto<WardDto>> GetById(Guid id)
         {
             return await _wardService.GetById(id);
         }
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ApiResult<WardDto>> CreateOrEdit(WardDto input)
+        public async Task<ResultDto<WardDto>> CreateOrEdit(WardDto input)
         {
             return await _wardService.CreateOrEdit(input);
         }
 
         [HttpDelete("Delete")]
-        public async Task<ApiResult<WardDto>> Delete(Guid id)
+        public async Task<ResultDto<WardDto>> Delete(Guid id)
         {
             return await _wardService.Delete(id);
         }

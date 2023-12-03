@@ -1,6 +1,8 @@
-﻿namespace HIS.Dtos.Dictionaries.ItemTypes
+﻿using HIS.Application.Core.Services.Dto;
+
+namespace HIS.Dtos.Dictionaries.ItemTypes
 {
-    public class GetAllItemTypeInput
+    public class GetAllItemTypeInput : PagedResultRequestDto
     {
         public string CodeFilter { get; set; }
         public string HeInCodeFilter { get; set; }

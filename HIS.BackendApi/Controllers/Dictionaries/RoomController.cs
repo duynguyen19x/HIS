@@ -1,7 +1,6 @@
-﻿using HIS.ApplicationService.Dictionaries.Room;
-using HIS.Dtos.Commons;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Dictionaries.Room;
 using HIS.Dtos.Dictionaries.Room;
-using HIS.Models.Commons;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
@@ -10,39 +9,39 @@ namespace HIS.BackendApi.Controllers.Dictionaries
     [ApiController]
     public class RoomController : ControllerBase
     {
-        private readonly IRoomService _roomService;
+        private readonly IRoomAppService _roomService;
 
-        public RoomController(IRoomService roomService)
+        public RoomController(IRoomAppService roomService)
         {
             _roomService = roomService;
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<RoomDto>> GetAll([FromQuery] GetAllRoomInput input)
+        public async Task<PagedResultDto<RoomDto>> GetAll([FromQuery] GetAllRoomInput input)
         {
             return await _roomService.GetAll(input);
         }
 
         [HttpGet("GetById")]
-        public async Task<ApiResult<RoomDto>> GetById(Guid id)
+        public async Task<ResultDto<RoomDto>> GetById(Guid id)
         {
             return await _roomService.GetById(id);
         }
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ApiResult<RoomDto>> CreateOrEdit(RoomDto input)
+        public async Task<ResultDto<RoomDto>> CreateOrEdit(RoomDto input)
         {
             return await _roomService.CreateOrEdit(input);
         }
 
         [HttpDelete("Delete")]
-        public async Task<ApiResult<RoomDto>> Delete(Guid id)
+        public async Task<ResultDto<RoomDto>> Delete(Guid id)
         {
             return await _roomService.Delete(id);
         }
 
         [HttpGet("GetByStocks")]
-        public async Task<ApiResultList<RoomDto>> GetByStocks()
+        public async Task<PagedResultDto<RoomDto>> GetByStocks()
         {
             return await _roomService.GetByStocks();
         }

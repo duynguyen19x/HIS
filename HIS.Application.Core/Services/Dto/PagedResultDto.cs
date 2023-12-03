@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace HIS.Application.Core.Services.Dto
 {
     [Serializable]
-    public class PagedResultDto<T> : ListResultDto<T>, IPagedResult<T>, IListResult<T>
+    public class PagedResultDto<T> : ListResultDto<T>, IPagedResult<T>
     {
         public virtual int TotalCount { get; set; }
 
@@ -23,7 +23,7 @@ namespace HIS.Application.Core.Services.Dto
 
         public virtual void Exception(Exception ex)
         {
-            this.IsSuccessed = false;
+            this.IsSucceeded = false;
             this.Message = ex.Message;
         }
     }

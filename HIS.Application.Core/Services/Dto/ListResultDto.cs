@@ -11,7 +11,7 @@ namespace HIS.Application.Core.Services.Dto
     {
         private IList<T> _items;
 
-        public IList<T> Items
+        public virtual IList<T> Items
         {
             get
             {
@@ -24,8 +24,8 @@ namespace HIS.Application.Core.Services.Dto
                 _items = value;
             }
         }
-        public bool IsSuccessed { get; set; } = true;
-        public string Message { get; set; }
+        public virtual bool IsSucceeded { get; set; } = true;
+        public virtual string Message { get; set; }
 
         public ListResultDto()
         {

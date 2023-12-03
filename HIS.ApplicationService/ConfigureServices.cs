@@ -1,22 +1,20 @@
 ﻿using HIS.ApplicationService.Business.InOutStockType;
 using HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks;
 using HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks;
-using HIS.ApplicationService.Business.Patients;
-using HIS.ApplicationService.Business.Receptions;
 using HIS.ApplicationService.Dictionaries.Career;
 using HIS.ApplicationService.Dictionaries.ChapterICD10;
 using HIS.ApplicationService.Dictionaries.Country;
 using HIS.ApplicationService.Dictionaries.Department;
 using HIS.ApplicationService.Dictionaries.DepartmentType;
-using HIS.ApplicationService.Dictionaries.District;
+using HIS.ApplicationService.Dictionaries.Districts;
 using HIS.ApplicationService.Dictionaries.Gender;
 using HIS.ApplicationService.Dictionaries.Hospital;
-using HIS.ApplicationService.Dictionaries.Icd;
+using HIS.ApplicationService.Dictionaries.Icds;
 using HIS.ApplicationService.Dictionaries.ItemGroups;
 using HIS.ApplicationService.Dictionaries.ItemLines;
 using HIS.ApplicationService.Dictionaries.ItemPricePolicies;
 using HIS.ApplicationService.Dictionaries.ItemTypes;
-using HIS.ApplicationService.Dictionaries.Province;
+using HIS.ApplicationService.Dictionaries.Provinces;
 using HIS.ApplicationService.Dictionaries.Room;
 using HIS.ApplicationService.Dictionaries.RoomType;
 using HIS.ApplicationService.Dictionaries.Service;
@@ -26,23 +24,14 @@ using HIS.ApplicationService.Dictionaries.ServicePricePolicy;
 using HIS.ApplicationService.Dictionaries.Supplier;
 using HIS.ApplicationService.Dictionaries.SurgicalProcedureType;
 using HIS.ApplicationService.Dictionaries.Unit;
-using HIS.ApplicationService.Dictionaries.Ward;
+using HIS.ApplicationService.Dictionaries.Wards;
 using HIS.ApplicationService.Systems.Login;
 using HIS.ApplicationService.Systems.Role;
 using HIS.ApplicationService.Systems.User;
 using Microsoft.Extensions.DependencyInjection;
-using HIS.ApplicationService.Business.ServiceRequests;
-using HIS.ApplicationService.Systems.DbOption;
-using HIS.ApplicationService.Dictionaries.PatientTypes;
-using HIS.ApplicationService.Dictionaries.RelativeCategories;
-using HIS.ApplicationService.Dictionaries.Relatives;
-using HIS.ApplicationService.Dictionaries.DeathCauses;
-using HIS.ApplicationService.Dictionaries.Ethnicities;
-using HIS.ApplicationService.Dictionaries.DeathWithins;
-using HIS.ApplicationService.Dictionaries.TreatmentEndTypes;
-using HIS.ApplicationService.Dictionaries.TreatmentResults;
+using HIS.ApplicationService.Systems.DbOptions;
+using HIS.ApplicationService.Dictionaries.Ethnics;
 using HIS.ApplicationService.Dictionaries.Branchs;
-using HIS.ApplicationService.Dictionaries.ReceptionTypes;
 
 namespace HIS.ApplicationService
 {
@@ -61,13 +50,13 @@ namespace HIS.ApplicationService
             services.AddTransient<IDistrictService, DistrictService>();
             
             services.AddTransient<IGenderService, GenderService>();
-            services.AddTransient<IRoomService, RoomService>();
+            services.AddTransient<IRoomAppService, RoomAppService>();
             services.AddTransient<IRoomTypeService, RoomTypeService>();
             services.AddTransient<IHospitalService, HospitalService>();
 
             services.AddTransient<IIcdService, IcdService>();
-            services.AddTransient<IProvinceService, ProvinceService>();
-            services.AddTransient<IWardService, WardService>();
+            services.AddTransient<IProvinceAppService, ProvinceAppService>();
+            services.AddTransient<IWardAppService, WardAppService>();
             services.AddTransient<IServicePricePolicyService, ServicePricePolicyService>();
             services.AddTransient<IServiceService, ServiceService>();
             services.AddTransient<ISurgicalProcedureTypeService, SurgicalProcedureTypeService>();
@@ -87,23 +76,14 @@ namespace HIS.ApplicationService
             services.AddTransient<IInOutStockService, InOutStockService>();
             services.AddTransient<IItemStockService, ItemStockService>();
 
-            #region - nghiệp vụ
-            services.AddTransient<IPatientAppService, PatientAppService>();
-            services.AddTransient<IReceptionAppService, ReceptionAppService>();
-            #endregion
 
             #region - danh mục
-            services.AddTransient<IDeathCauseAppService, DeathCauseAppService>();
-            services.AddTransient<IDeathWithinAppService, DeathWithinAppService>();
-            services.AddTransient<IEthnicityAppService, EthnicityAppService>();
-            services.AddTransient<IPatientTypeAppService, PatientTypeAppService>();
-            services.AddTransient<IReceptionTypeAppService, ReceptionTypeAppService>();
-            services.AddTransient<IRelativeCategoryAppService, RelativeCategoryAppService>();
-            services.AddTransient<IRelativeAppService, RelativeAppService>();
-            services.AddTransient<ITreatmentEndTypeAppService, TreatmentEndTypeAppService>();
-            services.AddTransient<ITreatmentResultAppService, TreatmentResultAppService>();
+
+            services.AddTransient<IEthnicAppService, EthnicAppService>();
+
+            #endregion
+
             #region Sys
-            services.AddTransient<ISYSAutoNumberAppService, SYSAutoNumberAppService>();
             services.AddTransient<IDbOptionAppService, DbOptionAppService>();
             #endregion
         }

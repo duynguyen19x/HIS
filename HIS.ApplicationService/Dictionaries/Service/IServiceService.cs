@@ -1,20 +1,13 @@
-﻿using HIS.ApplicationService.Base;
-using HIS.Dtos.Dictionaries.ExecutionRoom;
+﻿using HIS.Application.Core.Services;
+using HIS.Application.Core.Services.Dto;
 using HIS.Dtos.Dictionaries.Service;
-using HIS.Dtos.Dictionaries.ServicePricePolicy;
 using HIS.Dtos.Dictionaries.ServiceResultIndex;
-using HIS.Models.Commons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Dictionaries.Service
 {
-    public interface IServiceService : IBaseDictionaryService<ServiceDto, GetAllServiceInput>
+    public interface IServiceService : IBaseCrudAppService<ServiceDto, Guid?, GetAllServiceInput>
     {
-        Task<ApiResult<bool>> Import(IList<ServiceImportExcelDto> input);
-        Task<ApiResult<bool>> ImportServiceResultIndices(IList<ServiceResultIndiceDto> sServiceResultIndexs);
+        Task<ResultDto<bool>> Import(IList<ServiceImportExcelDto> input);
+        Task<ResultDto<bool>> ImportServiceResultIndices(IList<ServiceResultIndiceDto> sServiceResultIndexs);
     }
 }

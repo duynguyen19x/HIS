@@ -1,49 +1,42 @@
-﻿using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.Country;
-using HIS.Models.Commons;
+﻿using HIS.Dtos.Dictionaries.Country;
 using Microsoft.Extensions.Configuration;
 using AutoMapper;
 using HIS.EntityFrameworkCore;
+using HIS.Application.Core.Services;
+using HIS.Application.Core.Services.Dto;
+using Microsoft.EntityFrameworkCore;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 
 namespace HIS.ApplicationService.Dictionaries.Country
 {
-    public class CountryService : BaseSerivce, ICountryService
+    public class CountryService : BaseCrudAppService<CountryDto, Guid?, GetAllCountryInput>, ICountryService
     {
         public CountryService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
-            : base(dbContext, config, mapper)
+            : base(dbContext, mapper)
         {
 
         }
 
-        public async Task<ApiResult<CountryDto>> CreateOrEdit(CountryDto input)
+        public override async Task<ResultDto<CountryDto>> Create(CountryDto input)
         {
-            if (input.Id == null)
-                return await Create(input);
-            else
-                return await Update(input);
-        }
-
-        public async Task<ApiResult<CountryDto>> Create(CountryDto input)
-        {
-            var result = new ApiResult<CountryDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<CountryDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Country>(input); 
-                    _dbContext.Countries.Add(data);
-                    await _dbContext.SaveChangesAsync();
+                    var data = ObjectMapper.Map<National>(input);
+                    Context.Nationals.Add(data);
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
-                    result.Result = input;
+                    result.IsSucceeded = true;
+                    result.Item = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -53,26 +46,25 @@ namespace HIS.ApplicationService.Dictionaries.Country
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<CountryDto>> Update(CountryDto input)
+        public override async Task<ResultDto<CountryDto>> Update(CountryDto input)
         {
-            var result = new ApiResult<CountryDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<CountryDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Country>(input);
-                    _dbContext.Countries.Update(data);
-                    await _dbContext.SaveChangesAsync();
+                    var data = ObjectMapper.Map<National>(input);
+                    Context.Nationals.Update(data);
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
-                    result.Result = input;
+                    result.IsSucceeded = true;
+                    result.Item = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -82,27 +74,26 @@ namespace HIS.ApplicationService.Dictionaries.Country
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<CountryDto>> Delete(Guid id)
+        public override async Task<ResultDto<CountryDto>> Delete(Guid? id)
         {
-            var result = new ApiResult<CountryDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<CountryDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var job = _dbContext.Countries.SingleOrDefault(x => x.Id == id);
+                    var job = Context.Nationals.SingleOrDefault(x => x.Id == id);
                     if (job != null)
                     {
-                        _dbContext.Countries.Remove(job);
-                        await _dbContext.SaveChangesAsync();
-                        result.IsSuccessed = true;
+                        Context.Nationals.Remove(job);
+                        await Context.SaveChangesAsync();
+                        result.IsSucceeded = true;
 
                         transaction.Commit();
                     }
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -112,13 +103,13 @@ namespace HIS.ApplicationService.Dictionaries.Country
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<CountryDto>> GetAll(GetAllCountryInput input)
+        public override async Task<PagedResultDto<CountryDto>> GetAll(GetAllCountryInput input)
         {
-            var result = new ApiResultList<CountryDto>();
+            var result = new PagedResultDto<CountryDto>();
             try
             {
-                result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.Countries
+                result.IsSucceeded = true;
+                result.Items = (from r in Context.Nationals
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -129,26 +120,26 @@ namespace HIS.ApplicationService.Dictionaries.Country
                                      Name = r.Name,
                                      Inactive = r.Inactive
                                  }).OrderBy(o => o.Code).ToList();
-                result.TotalCount = result.Result.Count;
+                result.TotalCount = result.Items.Count;
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
+                result.IsSucceeded = false;
                 result.Message = ex.Message;
             }
 
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<CountryDto>> GetById(Guid id)
+        public override async Task<ResultDto<CountryDto>> GetById(Guid? id)
         {
-            var result = new ApiResult<CountryDto>();
+            var result = new ResultDto<CountryDto>();
 
-            var data = _dbContext.Countries.SingleOrDefault(s => s.Id == id);
+            var data = Context.Nationals.SingleOrDefault(s => s.Id == id);
             if (data != null)
             {
-                result.IsSuccessed = true;
-                result.Result = _mapper.Map<CountryDto>(data);
+                result.IsSucceeded = true;
+                result.Item = ObjectMapper.Map<CountryDto>(data);
             }
 
             return await Task.FromResult(result);

@@ -1,40 +1,39 @@
 ﻿using AutoMapper;
+using HIS.Application.Core.Services;
+using HIS.Application.Core.Services.Dto;
 using HIS.Core.Linq;
-using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ItemPricePolicies;
 using HIS.EntityFrameworkCore;
-using HIS.Models.Commons;
-using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
 
 namespace HIS.ApplicationService.Dictionaries.ItemPricePolicies
 {
-    public class ItemPricePolicyService : BaseSerivce, IItemPricePolicyService
+    public class ItemPricePolicyService : BaseCrudAppService<ItemPricePolicyDto, Guid?, GetAllItemPricePolicyInput>, IItemPricePolicyService
     {
         public ItemPricePolicyService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
-           : base(dbContext, config, mapper)
+           : base(dbContext, mapper)
         {
 
         }
 
-        public Task<ApiResult<ItemPricePolicyDto>> CreateOrEdit(ItemPricePolicyDto input)
+        public override Task<ResultDto<ItemPricePolicyDto>> Create(ItemPricePolicyDto input)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ApiResult<ItemPricePolicyDto>> Delete(Guid id)
+        public override Task<ResultDto<ItemPricePolicyDto>> Delete(Guid? id)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<ApiResultList<ItemPricePolicyDto>> GetAll(GetAllItemPricePolicyInput input)
+        public override async Task<PagedResultDto<ItemPricePolicyDto>> GetAll(GetAllItemPricePolicyInput input)
         {
-            var result = new ApiResultList<ItemPricePolicyDto>();
+            var result = new PagedResultDto<ItemPricePolicyDto>();
 
             try
             {
-                result.Result = (from r in _dbContext.PatientTypes
+                result.Items = (from r in Context.PatientTypes
                                  select new ItemPricePolicyDto()
                                  {
                                      PatientTypeId = r.Id,
@@ -48,18 +47,22 @@ namespace HIS.ApplicationService.Dictionaries.ItemPricePolicies
                                  .WhereIf(input.PatientTypeIdFilter != null, w => w.PatientTypeId == input.PatientTypeIdFilter)
                                  .OrderBy(o => o.PatientTypeCode).ToList();
 
-                result.TotalCount = result.Result.Count;
+                result.TotalCount = result.Items.Count;
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
-                result.Message = ex.Message;
+                result.Exception(ex);
             }
 
             return await Task.FromResult(result);
         }
 
-        public Task<ApiResult<ItemPricePolicyDto>> GetById(Guid id)
+        public override Task<ResultDto<ItemPricePolicyDto>> GetById(Guid? id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override Task<ResultDto<ItemPricePolicyDto>> Update(ItemPricePolicyDto input)
         {
             throw new NotImplementedException();
         }

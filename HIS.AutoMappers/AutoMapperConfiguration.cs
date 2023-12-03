@@ -34,10 +34,8 @@ using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Dtos.Systems.DbOption;
 using HIS.EntityFrameworkCore.Entities.Systems;
-using HIS.Dtos.Dictionaries.PatientTypes;
-using HIS.Dtos.Dictionaries.Ethnicities;
+using HIS.Dtos.Dictionaries.Ethnics;
 using HIS.Dtos.Dictionaries.Branchs;
-using HIS.Dtos.Dictionaries.ReceptionObjectTypes;
 
 namespace HIS.AutoMappers
 {
@@ -46,7 +44,7 @@ namespace HIS.AutoMappers
         public AutoMapperConfiguration()
         {
             CreateMap<Career, CareerDto>().ReverseMap();
-            CreateMap<Country, CountryDto>().ReverseMap();
+            CreateMap<National, CountryDto>().ReverseMap();
             CreateMap<DepartmentDto, Department>()
                 //.ForMember(dest => dest.DepartmentType, opt => opt.Ignore())
                 //.ForMember(dest => dest.Branch, opt => opt.Ignore())
@@ -66,7 +64,7 @@ namespace HIS.AutoMappers
             CreateMap<RoomTypeDto, RoomType>()
                 .ForMember(dest => dest.SRooms, opt => opt.Ignore())
                 .ReverseMap();
-            CreateMap<SWard, WardDto>().ReverseMap();
+            CreateMap<Ward, WardDto>().ReverseMap();
             CreateMap<ServiceGroupDto, ServiceGroup>()
                 .ReverseMap();
             CreateMap<ServiceGroupHeInDto, ServiceGroupHeIn>()
@@ -155,9 +153,7 @@ namespace HIS.AutoMappers
             #region - danh mục
 
             CreateMap<Branch, BranchDto>().ReverseMap();
-            CreateMap<Ethnicity, EthnicityDto>().ReverseMap();
-            CreateMap<PatientType, PatientTypeDto>().ReverseMap();
-            CreateMap<ReceptionObjectType, ReceptionObjectTypeDto>().ReverseMap();
+            CreateMap<Ethnic, EthnicDto>().ReverseMap();
 
             #endregion
         }

@@ -1,6 +1,6 @@
-﻿using HIS.ApplicationService.Business.InOutStockType;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Business.InOutStockType;
 using HIS.Dtos.Business.InOutStockTypes;
-using HIS.Dtos.Commons;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
@@ -17,7 +17,7 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<InOutStockTypeDto>> GetAll([FromQuery] GetAllInOutStockTypeInput input)
+        public async Task<PagedResultDto<InOutStockTypeDto>> GetAll([FromQuery] GetAllInOutStockTypeInput input)
         {
             return await _inOutStockTypeService.GetAll(input);
         }

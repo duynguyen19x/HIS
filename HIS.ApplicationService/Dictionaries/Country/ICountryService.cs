@@ -1,15 +1,9 @@
-﻿using HIS.ApplicationService.Base;
+﻿using HIS.Application.Core.Services;
 using HIS.Dtos.Dictionaries.Country;
-using HIS.Dtos.Dictionaries.Department;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Dictionaries.Country
 {
-    public interface ICountryService : IBaseDictionaryService<CountryDto, GetAllCountryInput>
+    public interface ICountryService : IBaseCrudAppService<CountryDto, Guid?, GetAllCountryInput>
     {
     }
 }

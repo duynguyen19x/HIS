@@ -1,5 +1,5 @@
-﻿using HIS.ApplicationService.Dictionaries.SurgicalProcedureType;
-using HIS.Dtos.Commons;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Dictionaries.SurgicalProcedureType;
 using HIS.Dtos.Dictionaries.SurgicalProcedureType;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +17,7 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<SSurgicalProcedureTypeDto>> GetAll([FromQuery] GetAllSurgicalProcedureTypeInput input)
+        public async Task<PagedResultDto<SSurgicalProcedureTypeDto>> GetAll([FromQuery] GetAllSurgicalProcedureTypeInput input)
         {
             return await _surgicalProcedureTypeService.GetAll(input);
         }

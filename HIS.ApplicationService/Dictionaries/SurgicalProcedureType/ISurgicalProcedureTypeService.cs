@@ -1,9 +1,9 @@
-﻿using HIS.ApplicationService.Base;
+﻿using HIS.Application.Core.Services;
 using HIS.Dtos.Dictionaries.SurgicalProcedureType;
 
 namespace HIS.ApplicationService.Dictionaries.SurgicalProcedureType
 {
-    public interface ISurgicalProcedureTypeService : IBaseDictionaryService<SSurgicalProcedureTypeDto, GetAllSurgicalProcedureTypeInput, int>
+    public interface ISurgicalProcedureTypeService : IBaseCrudAppService<SSurgicalProcedureTypeDto, int?, GetAllSurgicalProcedureTypeInput>
     {
     }
 }
