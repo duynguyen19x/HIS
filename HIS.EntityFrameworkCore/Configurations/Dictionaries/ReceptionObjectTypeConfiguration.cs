@@ -14,7 +14,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<ReceptionObjectType> builder)
         {
-            builder.ToTable("ReceptionType");
+            builder.ToTable("ReceptionObjectType");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.ReceptionTypeCode).HasMaxLength(20).IsRequired();
             builder.Property(x => x.ReceptionTypeName).HasMaxLength(128).IsRequired();

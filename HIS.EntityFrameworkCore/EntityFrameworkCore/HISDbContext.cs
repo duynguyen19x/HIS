@@ -52,6 +52,10 @@ namespace HIS.EntityFrameworkCore
         public DbSet<InOutStock> InOutStocks { get; set; }
         public DbSet<InOutStockItem> InOutStockItems { get; set; }
 
+        #region - hệ thống
+        public DbSet<DbOption> DbOptions { get; set; }
+        #endregion
+
         #region - danh mục
 
         public DbSet<BloodType> BloodTypes { get; set; }
@@ -85,10 +89,6 @@ namespace HIS.EntityFrameworkCore
         public DbSet<Insurance> Insurances { get; set; }
         public DbSet<ServiceRequest> ServiceRequests { get; set; }
         public DbSet<ServiceRequestData> ServiceRequestDatas { get; set; }
-        #endregion
-
-        #region - hệ thống
-        public DbSet<DbOption> DbOptions { get; set; }
         #endregion
 
 
