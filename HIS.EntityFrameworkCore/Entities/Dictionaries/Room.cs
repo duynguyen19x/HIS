@@ -20,8 +20,8 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public bool Inactive { get; set; }
 
         [Ignore]
-        public virtual RoomType RoomType { get; set; }
+        public RoomType RoomType { get; set; }
         [Ignore]
-        public virtual Department Department { get; set; }
+        public Department Department { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using HIS.Dtos.Dictionaries.Country;
+﻿using HIS.Dtos.Dictionaries.Nationals;
 using Microsoft.Extensions.Configuration;
 using AutoMapper;
 using HIS.EntityFrameworkCore;
@@ -9,7 +9,7 @@ using HIS.EntityFrameworkCore.Entities.Dictionaries;
 
 namespace HIS.ApplicationService.Dictionaries.Country
 {
-    public class CountryService : BaseCrudAppService<CountryDto, Guid?, GetAllCountryInput>, ICountryService
+    public class CountryService : BaseCrudAppService<NationalDto, Guid?, GetAllNationalInputDto>, ICountryService
     {
         public CountryService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
             : base(dbContext, mapper)
@@ -17,9 +17,9 @@ namespace HIS.ApplicationService.Dictionaries.Country
 
         }
 
-        public override async Task<ResultDto<CountryDto>> Create(CountryDto input)
+        public override async Task<ResultDto<NationalDto>> Create(NationalDto input)
         {
-            var result = new ResultDto<CountryDto>();
+            var result = new ResultDto<NationalDto>();
             using (var transaction = Context.Database.BeginTransaction())
             {
                 try
@@ -46,9 +46,9 @@ namespace HIS.ApplicationService.Dictionaries.Country
             return await Task.FromResult(result);
         }
 
-        public override async Task<ResultDto<CountryDto>> Update(CountryDto input)
+        public override async Task<ResultDto<NationalDto>> Update(NationalDto input)
         {
-            var result = new ResultDto<CountryDto>();
+            var result = new ResultDto<NationalDto>();
             using (var transaction = Context.Database.BeginTransaction())
             {
                 try
@@ -74,9 +74,9 @@ namespace HIS.ApplicationService.Dictionaries.Country
             return await Task.FromResult(result);
         }
 
-        public override async Task<ResultDto<CountryDto>> Delete(Guid? id)
+        public override async Task<ResultDto<NationalDto>> Delete(Guid? id)
         {
-            var result = new ResultDto<CountryDto>();
+            var result = new ResultDto<NationalDto>();
             using (var transaction = Context.Database.BeginTransaction())
             {
                 try
@@ -103,9 +103,9 @@ namespace HIS.ApplicationService.Dictionaries.Country
             return await Task.FromResult(result);
         }
 
-        public override async Task<PagedResultDto<CountryDto>> GetAll(GetAllCountryInput input)
+        public override async Task<PagedResultDto<NationalDto>> GetAll(GetAllNationalInputDto input)
         {
-            var result = new PagedResultDto<CountryDto>();
+            var result = new PagedResultDto<NationalDto>();
             try
             {
                 result.IsSucceeded = true;
@@ -113,7 +113,7 @@ namespace HIS.ApplicationService.Dictionaries.Country
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
-                                 select new CountryDto()
+                                 select new NationalDto()
                                  {
                                      Id = r.Id,
                                      Code = r.Code,
@@ -131,15 +131,15 @@ namespace HIS.ApplicationService.Dictionaries.Country
             return await Task.FromResult(result);
         }
 
-        public override async Task<ResultDto<CountryDto>> GetById(Guid? id)
+        public override async Task<ResultDto<NationalDto>> GetById(Guid? id)
         {
-            var result = new ResultDto<CountryDto>();
+            var result = new ResultDto<NationalDto>();
 
             var data = Context.Nationals.SingleOrDefault(s => s.Id == id);
             if (data != null)
             {
                 result.IsSucceeded = true;
-                result.Result = ObjectMapper.Map<CountryDto>(data);
+                result.Result = ObjectMapper.Map<NationalDto>(data);
             }
 
             return await Task.FromResult(result);

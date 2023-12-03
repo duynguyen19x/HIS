@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Dictionaries.Country
+namespace HIS.Dtos.Dictionaries.Nationals
 {
-    public class GetAllCountryInput : PagedResultRequestDto
+    public class GetAllNationalInputDto : PagedResultRequestDto
     {
         public string CodeFilter { get; set; }
         public string NameFilter { get; set; }
