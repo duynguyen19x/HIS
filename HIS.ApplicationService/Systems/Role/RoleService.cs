@@ -22,7 +22,7 @@ namespace HIS.ApplicationService.Systems.Role
             try
             {
                 result.IsSucceeded = true;
-                result.Items = (from r in _dbContext.Roles
+                result.Result = (from r in _dbContext.Roles
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -34,7 +34,7 @@ namespace HIS.ApplicationService.Systems.Role
                                      Description = r.Description,
                                      Inactive = r.Inactive
                                  }).ToList();
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
@@ -51,7 +51,7 @@ namespace HIS.ApplicationService.Systems.Role
             var role = _dbContext.Roles.SingleOrDefault(s => s.Id == id);
             if (role != null)
             {
-                result.Item = new RoleDto()
+                result.Result = new RoleDto()
                 {
                     Id = role.Id,
                     Code = role.Code,

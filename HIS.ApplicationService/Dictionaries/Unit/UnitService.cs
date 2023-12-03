@@ -31,7 +31,7 @@ namespace HIS.ApplicationService.Dictionaries.Unit
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -61,7 +61,7 @@ namespace HIS.ApplicationService.Dictionaries.Unit
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -113,7 +113,7 @@ namespace HIS.ApplicationService.Dictionaries.Unit
 
             try
             {
-                result.Items = (from r in Context.Units
+                result.Result = (from r in Context.Units
                                  select new UnitDto()
                                  {
                                      Id = r.Id,
@@ -123,7 +123,7 @@ namespace HIS.ApplicationService.Dictionaries.Unit
                                      SortOrder = r.SortOrder,
                                  }).WhereIf(input.InactiveFilter != null, w => w.Inactive == input.InactiveFilter).OrderBy(o => o.SortOrder).ToList();
 
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
@@ -140,7 +140,7 @@ namespace HIS.ApplicationService.Dictionaries.Unit
             try
             {
                 var service = Context.ServiceGroups.FirstOrDefault(s => s.Id == id);
-                result.Item = ObjectMapper.Map<UnitDto>(service);
+                result.Result = ObjectMapper.Map<UnitDto>(service);
             }
             catch (Exception ex)
             {

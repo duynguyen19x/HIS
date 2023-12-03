@@ -30,7 +30,7 @@ namespace HIS.ApplicationService.Business.InOutStockType
 
             try
             {
-                result.Items = (from t in Context.InOutStockTypes
+                result.Result = (from t in Context.InOutStockTypes
                                  select new InOutStockTypeDto()
                                  {
                                      Id = t.Id,
@@ -41,7 +41,7 @@ namespace HIS.ApplicationService.Business.InOutStockType
                                  .WhereIf(input.InactiveFilter != null, w => w.Inactive == input.InactiveFilter)
                                  .ToList();
 
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {

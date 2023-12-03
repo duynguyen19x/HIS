@@ -33,7 +33,7 @@ namespace HIS.ApplicationService.Dictionaries.Ethnics
                     await transaction.CommitAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
                 }
                 catch (Exception ex)
                 {
@@ -61,7 +61,7 @@ namespace HIS.ApplicationService.Dictionaries.Ethnics
                     await transaction.CommitAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
                 }
                 catch (Exception ex)
                 {
@@ -107,7 +107,7 @@ namespace HIS.ApplicationService.Dictionaries.Ethnics
                 var paged = filter.OrderBy(s => s.SortOrder).PageBy(input);
 
                 result.TotalCount = await filter.CountAsync();
-                result.Items = ObjectMapper.Map<IList<EthnicDto>>(paged.ToList());
+                result.Result = ObjectMapper.Map<IList<EthnicDto>>(paged.ToList());
                 result.IsSucceeded = true;
             }
             catch (Exception ex)
@@ -123,7 +123,7 @@ namespace HIS.ApplicationService.Dictionaries.Ethnics
             try
             {
                 var ethnicity = await Context.Ethnicities.FindAsync(id);
-                result.Item = ObjectMapper.Map<EthnicDto>(ethnicity);
+                result.Result = ObjectMapper.Map<EthnicDto>(ethnicity);
                 result.IsSucceeded = true;
             }
             catch (Exception ex)

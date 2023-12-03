@@ -33,7 +33,7 @@ namespace HIS.ApplicationService.Systems.User
             try
             {
                 result.IsSucceeded = true;
-                result.Items = (from r in Context.Users
+                result.Result = (from r in Context.Users
                                  select new UserDto()
                                  {
                                      Id = r.Id,
@@ -53,7 +53,7 @@ namespace HIS.ApplicationService.Systems.User
                                      WardId = r.WardId
                                  }).OrderBy(o => o.UserName).ToList();
 
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {

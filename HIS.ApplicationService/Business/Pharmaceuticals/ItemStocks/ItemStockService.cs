@@ -23,7 +23,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
 
             try
             {
-                result.Items = (from mediStock in Context.ItemStocks
+                result.Result = (from mediStock in Context.ItemStocks
                                  join stock in Context.Rooms on mediStock.StockId equals stock.Id
                                  join Item in Context.Items on mediStock.ItemId equals Item.Id
                                  select new ItemStockDto()
@@ -45,7 +45,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
                                  .WhereIf(input.CommodityTypeFilter != null, w => w.CommodityType == input.CommodityTypeFilter)
                                  .OrderBy(o => o.StockCode).ToList();
 
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
@@ -62,7 +62,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
 
             try
             {
-                result.Items = (from dItemStock in Context.ItemStocks
+                result.Result = (from dItemStock in Context.ItemStocks
                                  join sItem in Context.Items on dItemStock.ItemId equals sItem.Id
 
                                  where dItemStock.IsDeleted == false
@@ -153,7 +153,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
 
                 if (isGroup)
                 {
-                    result.Items = itemStockDtos.GroupBy(g => new
+                    result.Result = itemStockDtos.GroupBy(g => new
                     {
                         g.ItemTypeId,
                         g.StockId,
@@ -211,10 +211,10 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
                 }
                 else
                 {
-                    result.Items = itemStockDtos;
+                    result.Result = itemStockDtos;
                 }
 
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {

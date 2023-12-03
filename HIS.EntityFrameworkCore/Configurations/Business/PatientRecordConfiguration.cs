@@ -15,8 +15,9 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
         {
             builder.ToTable("PatientRecord");
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.PatientRecordCode).HasMaxLength(20);
-            builder.Property(x => x.PatientName).HasMaxLength(255);
+            builder.Property(x => x.PatientId).IsRequired();
+            builder.Property(x => x.PatientRecordCode).IsRequired().HasMaxLength(20);
+            builder.Property(x => x.PatientName).IsRequired().HasMaxLength(255);
             builder.Property(x => x.Birthplace).HasMaxLength(512);
             builder.Property(x => x.Address).HasMaxLength(512);
             builder.Property(x => x.Workplace).HasMaxLength(512);

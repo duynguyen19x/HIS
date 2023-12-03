@@ -105,7 +105,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -203,7 +203,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                     Context.SaveChanges();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -256,7 +256,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
 
             try
             {
-                result.Items = (from r in Context.Services
+                result.Result = (from r in Context.Services
 
                                  join r1 in Context.Units on r.UnitId equals r1.Id
                                  join r2 in Context.ServiceGroups on r.ServiceGroupId equals r2.Id
@@ -284,7 +284,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                      ServiceGroupHeInName = r3.Name,
                                  }).WhereIf(input.InactiveFilter != null, w => w.Inactive == input.InactiveFilter).OrderBy(o => o.Code).ToList();
 
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
@@ -381,7 +381,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                     serviceDto.SExecutionRooms = sExecutionRooms;
                 }
 
-                result.Item = serviceDto;
+                result.Result = serviceDto;
             }
             catch (Exception ex)
             {

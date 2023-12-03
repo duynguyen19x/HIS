@@ -29,7 +29,7 @@ namespace HIS.ApplicationService.Dictionaries.Wards
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -53,7 +53,7 @@ namespace HIS.ApplicationService.Dictionaries.Wards
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -109,7 +109,7 @@ namespace HIS.ApplicationService.Dictionaries.Wards
                 var paged = await filter.OrderBy(s => s.SortOrder).PageBy(input).ToListAsync();
 
                 result.TotalCount = await filter.CountAsync();
-                result.Items = ObjectMapper.Map<IList<WardDto>>(paged);
+                result.Result = ObjectMapper.Map<IList<WardDto>>(paged);
             }
             catch (Exception ex)
             {
@@ -126,7 +126,7 @@ namespace HIS.ApplicationService.Dictionaries.Wards
             var data = Context.Wards.SingleOrDefault(s => s.Id == id);
             if (data != null)
             {
-                result.Item = ObjectMapper.Map<WardDto>(data);
+                result.Result = ObjectMapper.Map<WardDto>(data);
             }
 
             return await Task.FromResult(result);

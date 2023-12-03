@@ -30,7 +30,7 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroup
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -60,7 +60,7 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroup
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -111,7 +111,7 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroup
 
             try
             {
-                result.Items = (from r in Context.ServiceGroups
+                result.Result = (from r in Context.ServiceGroups
                                  select new ServiceGroupDto()
                                  {
                                      Id = r.Id,
@@ -123,7 +123,7 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroup
                                  .WhereIf(input.InactiveFilter != null, r => r.Inactive == input.InactiveFilter)
                                  .OrderBy(o => o.SortOrder).ToList();
 
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
@@ -140,7 +140,7 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroup
             try
             {
                 var service = Context.ServiceGroups.FirstOrDefault(s => s.Id == id);
-                result.Item = ObjectMapper.Map<ServiceGroupDto>(service);
+                result.Result = ObjectMapper.Map<ServiceGroupDto>(service);
             }
             catch (Exception ex)
             {

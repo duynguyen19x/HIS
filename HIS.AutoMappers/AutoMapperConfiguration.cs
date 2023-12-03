@@ -36,6 +36,8 @@ using HIS.Dtos.Systems.DbOption;
 using HIS.EntityFrameworkCore.Entities.Systems;
 using HIS.Dtos.Dictionaries.Ethnics;
 using HIS.Dtos.Dictionaries.Branchs;
+using HIS.Dtos.Business.Patients;
+using HIS.Dtos.Business.PatientRecords;
 
 namespace HIS.AutoMappers
 {
@@ -147,6 +149,10 @@ namespace HIS.AutoMappers
                 .ReverseMap();
 
             #region - nghiệp vụ
+
+            CreateMap<Patient, PatientDto>().ReverseMap();
+            CreateMap<Patient, PatientRecordDto>().ForMember(des => des.PatientId, act => act.MapFrom(s => s.Id)).ReverseMap();
+            CreateMap<PatientRecord, PatientRecordDto>().ReverseMap();
 
             #endregion
 

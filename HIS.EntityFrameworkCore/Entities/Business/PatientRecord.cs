@@ -67,23 +67,23 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public DateTime? TransferInTimeTo { get; set; } // đến ngày
         public string TransferInIcdCode { get; set; } // chẩn đoán của nơi chuyển đến
         public string TransferInIcdName { get; set; } // tên chẩn đoán của nơi chuyển đến
-        public Guid? TransferInFormID { get; set; } // hình thức chuyển viện
-        public Guid? TransferInReasonID { get; set; } // lý do chuyển viện
+        public Guid? TransferInFormId { get; set; } // hình thức chuyển viện
+        public Guid? TransferInReasonId { get; set; } // lý do chuyển viện
         public bool TransferInRightRoute { get; set; } // chuyển đúng tuyến CMKT
         public bool TransferInOverRoute { get; set; } // chuyển vượt tuyến CMKT
 
         // thông tin khám bệnh và điều trị
         public DateTime? ClinicalTime { get; set; } // thời bắt đầu gian khám
-        public Guid? ClinicalDepartmentID { get; set; } // khoa khám bệnh
-        public Guid? ClinicalRoomID { get; set; } // phòng khám
-        public Guid? ClinicalUserID { get; set; } // bác sỹ khám bệnh
+        public Guid? ClinicalDepartmentId { get; set; } // khoa khám bệnh
+        public Guid? ClinicalRoomId { get; set; } // phòng khám
+        public Guid? ClinicalUserId { get; set; } // bác sỹ khám bệnh
 
 
         public DateTime? InTime { get; set; } // thời gian nhập viện
         public string InCode { get; set; } // số vào viện
-        public Guid? InDepartmentID { get; set; } // khoa nhập viện
-        public Guid? InRoomID { get; set; } // phòng nhập viện
-        public Guid? InUserID { get; set; } // người tiếp nhận
+        public Guid? InDepartmentId { get; set; } // khoa nhập viện
+        public Guid? InRoomId { get; set; } // phòng nhập viện
+        public Guid? InUserId { get; set; } // người tiếp nhận
         public string InIcdCode { get; set; } 
         public string InIcdName { get; set; }
         public string InIcdSubCode { get; set; }
@@ -91,14 +91,14 @@ namespace HIS.EntityFrameworkCore.Entities.Business
 
 
         public DateTime? OutTime { get; set; } // thời gian kết thúc điều trị, khám bệnh
-        public Guid? OutDepartmentID { get; set; } // khoa kết thúc
-        public Guid? OutRoomID { get; set; } // phòng kết thúc
-        public Guid? OutUserID { get; set; } // bác sỹ
+        public Guid? OutDepartmentId { get; set; } // khoa kết thúc
+        public Guid? OutRoomId { get; set; } // phòng kết thúc
+        public Guid? OutUserId { get; set; } // bác sỹ
 
         #region IV. tình trạng ra viện
 
-        public int TreatmentResultTypeID { get; set; } // kết quả điều trị
-        public int TreatmentEndTypeID { get; set; } // hình thức xử trí
+        public int TreatmentResultTypeId { get; set; } // kết quả điều trị
+        public int TreatmentEndTypeId { get; set; } // hình thức xử trí
         public string OutIcdCode { get; set; } // bệnh chính
         public string OutIcdName { get; set; } // tên bệnh chính
         public string OutIcdSubCode { get; set; } // bệnh kèm theo
@@ -112,21 +112,21 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public DateTime? AppointmentTime { get; set; } // thời gian hẹn khám
 
         public DateTime? TransferTime { get; set; }
-        public int TransferTypeID { get; set; } // chuyển tuyến: khám bệnh, điều trị
+        public int TransferTypeId { get; set; } // chuyển tuyến: khám bệnh, điều trị
         public string TransferMediOrgCode { get; set; }
         public string TransferMediOrgName { get; set; }
         public string Transporter {  get; set; } // người vận chuyển
         public string TransportVehicle {  get; set; } // phương tiện vận chuyển
-        public Guid? TransferFormID { get; set; } // hình thức chuyển viện
-        public Guid? TransferReasonID { get; set; } //lý do chuyển viện
+        public Guid? TransferFormId { get; set; } // hình thức chuyển viện
+        public Guid? TransferReasonId { get; set; } //lý do chuyển viện
         public bool TransferRouteRight { get; set; } // chuyển đúng tuyến CMKT
         public bool TransferRouteOver { get; set; } // chuyển vượt tuyến CMKT
 
         public DateTime? DeathTime { get; set; } // thời điểm tử vong
-        public Guid? DeathCertBookID { get; set; } // sổ giấy tử vong
+        public Guid? DeathCertBookId { get; set; } // sổ giấy tử vong
         public int DeathCertNum { get; set; } // số tử vong
-        public Guid? DeathWithinID { get; set; } // thời gian tử vong
-        public Guid? DeathCauseID { get; set; } // nguyên nhân tử vong
+        public Guid? DeathWithinId { get; set; } // thời gian tử vong
+        public Guid? DeathCauseId { get; set; } // nguyên nhân tử vong
         public bool IsHasAutopsy { get; set; } // có khám nghiệm tử thi
         public string AutopsyIcdCode { get; set; } // chẩn đoán giải phẫu tử thi
         public string AutopsyIcdName { get; set; } // tên chẩn đoán giải phẫu tử thi

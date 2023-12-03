@@ -29,7 +29,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemLines
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -57,7 +57,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemLines
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -108,7 +108,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemLines
             var result = new PagedResultDto<ItemLineDto>();
             try
             {
-                result.Items = (from r in Context.ItemLines
+                result.Result = (from r in Context.ItemLines
                                  select new ItemLineDto()
                                  {
                                      Id = r.Id,
@@ -122,7 +122,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemLines
                                  .WhereIf(input.InactiveFilter != null, r => r.Inactive == input.InactiveFilter)
                                  .OrderBy(o => o.SortOrder).ToList();
 
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
@@ -139,7 +139,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemLines
             var ItemLine = Context.ItemLines.SingleOrDefault(s => s.Id == id);
             if (ItemLine != null)
             {
-                result.Item = ObjectMapper.Map<ItemLineDto>(ItemLine);
+                result.Result = ObjectMapper.Map<ItemLineDto>(ItemLine);
             }
 
             return await Task.FromResult(result);

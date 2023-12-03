@@ -28,7 +28,7 @@ namespace HIS.ApplicationService.Dictionaries.DepartmentType
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -56,7 +56,7 @@ namespace HIS.ApplicationService.Dictionaries.DepartmentType
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -107,7 +107,7 @@ namespace HIS.ApplicationService.Dictionaries.DepartmentType
             try
             {
                 result.IsSucceeded = true;
-                result.Items = (from r in Context.DepartmentTypes
+                result.Result = (from r in Context.DepartmentTypes
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -123,7 +123,7 @@ namespace HIS.ApplicationService.Dictionaries.DepartmentType
                                  .OrderBy(o => o.SortOrder)
                                  .ThenBy(o => o.Code)
                                  .ToList();
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
@@ -141,7 +141,7 @@ namespace HIS.ApplicationService.Dictionaries.DepartmentType
             if (data != null)
             {
                 result.IsSucceeded = true;
-                result.Item = new DepartmentTypeDto()
+                result.Result = new DepartmentTypeDto()
                 {
                     Id = data.Id,
                     Code = data.Code,

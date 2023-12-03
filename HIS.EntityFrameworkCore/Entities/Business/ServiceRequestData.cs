@@ -1,4 +1,6 @@
-﻿using HIS.Core.Entities.Auditing;
+﻿using AutoMapper.Configuration.Annotations;
+using HIS.Core.Entities.Auditing;
+using HIS.EntityFrameworkCore.Entities.Categories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +24,12 @@ namespace HIS.EntityFrameworkCore.Entities.Business
 
         public int PatientTypeId { get; set; } // đối tượng
         public string Description { get; set; }
+
+        [Ignore]
+        public virtual ServiceRequest ServiceRequest { get; set; }
+        [Ignore]
+        public virtual Service Service { get; set; }
+
 
         public ServiceRequestData() { }
     }

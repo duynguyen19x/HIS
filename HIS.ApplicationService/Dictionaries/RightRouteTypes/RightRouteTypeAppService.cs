@@ -35,7 +35,7 @@ namespace HIS.ApplicationService.Dictionaries.RightRouteTypes
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -59,7 +59,7 @@ namespace HIS.ApplicationService.Dictionaries.RightRouteTypes
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
                     transaction.Commit();
                 }
                 catch (Exception ex)
@@ -105,7 +105,7 @@ namespace HIS.ApplicationService.Dictionaries.RightRouteTypes
                 var paged = filter.OrderBy(o => o.SortOrder).PageBy(input).ToList();
 
                 result.TotalCount = await filter.CountAsync();
-                result.Items = ObjectMapper.Map<IList<RightRouteTypeDto>>(paged);
+                result.Result = ObjectMapper.Map<IList<RightRouteTypeDto>>(paged);
             }
             catch (Exception ex)
             {
@@ -119,7 +119,7 @@ namespace HIS.ApplicationService.Dictionaries.RightRouteTypes
             var result = new ResultDto<RightRouteTypeDto>();
             try
             {
-                result.Item = ObjectMapper.Map<RightRouteTypeDto>(await Context.RightRouteTypes.FindAsync(id));
+                result.Result = ObjectMapper.Map<RightRouteTypeDto>(await Context.RightRouteTypes.FindAsync(id));
             }
             catch (Exception ex)
             {

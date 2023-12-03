@@ -34,7 +34,7 @@ namespace HIS.ApplicationService.Dictionaries.RelativeTypes
                     Context.RelativeTypes.Add(data);
                     await Context.SaveChangesAsync();
 
-                    result.Item = input;
+                    result.Result = input;
                     result.IsSucceeded = true;
 
                     transaction.Commit();
@@ -58,7 +58,7 @@ namespace HIS.ApplicationService.Dictionaries.RelativeTypes
                     Context.RelativeTypes.Update(data);
                     await Context.SaveChangesAsync();
 
-                    result.Item = input;
+                    result.Result = input;
                     result.IsSucceeded = true;
 
                     transaction.Commit();
@@ -85,7 +85,7 @@ namespace HIS.ApplicationService.Dictionaries.RelativeTypes
                         await Context.SaveChangesAsync();
 
                         result.IsSucceeded = true;
-                        result.Item = ObjectMapper.Map<RelativeTypeDto>(data);    
+                        result.Result = ObjectMapper.Map<RelativeTypeDto>(data);    
 
                         transaction.Commit();
                     }
@@ -116,7 +116,7 @@ namespace HIS.ApplicationService.Dictionaries.RelativeTypes
                 var data = paged.ToList();
 
                 result.TotalCount = await filter.CountAsync();
-                result.Items = ObjectMapper.Map<IList<RelativeTypeDto>>(data);
+                result.Result = ObjectMapper.Map<IList<RelativeTypeDto>>(data);
             }
             catch (Exception ex)
             {
@@ -131,7 +131,7 @@ namespace HIS.ApplicationService.Dictionaries.RelativeTypes
             try
             {
                 var data = await Context.RelativeTypes.FindAsync(id);
-                result.Item = ObjectMapper.Map<RelativeTypeDto>(data);
+                result.Result = ObjectMapper.Map<RelativeTypeDto>(data);
             }
             catch (Exception ex)
             {

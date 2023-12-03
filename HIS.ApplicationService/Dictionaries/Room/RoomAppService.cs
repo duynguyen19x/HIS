@@ -28,7 +28,7 @@ namespace HIS.ApplicationService.Dictionaries.Room
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -56,7 +56,7 @@ namespace HIS.ApplicationService.Dictionaries.Room
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -107,7 +107,7 @@ namespace HIS.ApplicationService.Dictionaries.Room
             try
             {
                 result.IsSucceeded = true;
-                result.Items = (from r in Context.Rooms
+                result.Result = (from r in Context.Rooms
                                  join t in Context.RoomTypes on r.RoomTypeId equals t.Id
                                  join d in Context.Departments on r.DepartmentId equals d.Id 
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.RoomName == input.NameFilter)
@@ -121,8 +121,8 @@ namespace HIS.ApplicationService.Dictionaries.Room
                                      MohCode = r.MohCode,
                                      RoomName = r.RoomName,
                                      RoomTypeId = r.RoomTypeId,
-                                     RoomTypeCode = t.Code,
-                                     RoomTypeName = t.Name,
+                                     RoomTypeCode = t.RoomTypeCode,
+                                     RoomTypeName = t.RoomTypeName,
                                      DepartmentId = r.DepartmentId,
                                      DepartmentCode = d.DepartmentCode,
                                      DepartmentName = d.DepartmentName,
@@ -133,7 +133,7 @@ namespace HIS.ApplicationService.Dictionaries.Room
                                  .OrderBy(o => o.SortOrder)
                                  .ThenBy(o => o.DepartmentCode)
                                  .ToList();
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
@@ -149,7 +149,7 @@ namespace HIS.ApplicationService.Dictionaries.Room
             try
             {
                 result.IsSucceeded = true;
-                result.Item = (from r in Context.Rooms
+                result.Result = (from r in Context.Rooms
                                  join t in Context.RoomTypes on r.RoomTypeId equals t.Id
                                  join d in Context.Departments on r.DepartmentId equals d.Id
                                  where r.Id == id
@@ -160,8 +160,8 @@ namespace HIS.ApplicationService.Dictionaries.Room
                                      MohCode = r.MohCode,
                                      RoomName = r.RoomName,
                                      RoomTypeId = r.RoomTypeId,
-                                     RoomTypeCode = t.Code,
-                                     RoomTypeName = t.Name,
+                                     RoomTypeCode = t.RoomTypeCode,
+                                     RoomTypeName = t.RoomTypeName,
                                      DepartmentId = r.DepartmentId,
                                      DepartmentCode = d.DepartmentCode,
                                      DepartmentName = d.DepartmentName,
@@ -184,7 +184,7 @@ namespace HIS.ApplicationService.Dictionaries.Room
             var result = new PagedResultDto<RoomDto>();
             try
             {
-                result.Items = (from r in Context.Rooms
+                result.Result = (from r in Context.Rooms
                                  join t in Context.RoomTypes on r.RoomTypeId equals t.Id
                                  join d in Context.Departments on r.DepartmentId equals d.Id
                                  where d.DepartmentTypeId == (int)DepartmentTypes.PharmacyDepartment
@@ -195,8 +195,8 @@ namespace HIS.ApplicationService.Dictionaries.Room
                                      MohCode = r.MohCode,
                                      RoomName = r.RoomName,
                                      RoomTypeId = r.RoomTypeId,
-                                     RoomTypeCode = t.Code,
-                                     RoomTypeName = t.Name,
+                                     RoomTypeCode = t.RoomTypeCode,
+                                     RoomTypeName = t.RoomTypeName,
                                      DepartmentId = r.DepartmentId,
                                      DepartmentCode = d.DepartmentCode,
                                      DepartmentName = d.DepartmentName,
@@ -207,7 +207,7 @@ namespace HIS.ApplicationService.Dictionaries.Room
                                  .OrderBy(o => o.SortOrder)
                                  .ThenBy(o => o.DepartmentCode)
                                  .ToList();
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {

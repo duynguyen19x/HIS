@@ -12,23 +12,23 @@ namespace HIS.Application.Core.Services.Dto
 
         public virtual string Message { get; set; }
 
-        public virtual T Item { get; set; }
+        public virtual T Result { get; set; }
 
         public ResultDto() 
         {
             IsSucceeded = true;
         }
 
-        public ResultDto(T item) 
+        public ResultDto(T result) 
             : this()
         {
-            Item = item;
+            Result = result;
         }
 
-        public virtual void Succeeded(T item)
+        public virtual void Succeeded(T result)
         {
             this.IsSucceeded = true;
-            this.Item = item;
+            this.Result = result;
         }
 
         public virtual void Exception(Exception ex)

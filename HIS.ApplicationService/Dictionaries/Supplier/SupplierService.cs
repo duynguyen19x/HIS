@@ -29,7 +29,7 @@ namespace HIS.ApplicationService.Dictionaries.Supplier
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -58,7 +58,7 @@ namespace HIS.ApplicationService.Dictionaries.Supplier
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -113,7 +113,7 @@ namespace HIS.ApplicationService.Dictionaries.Supplier
 
             try
             {
-                result.Items = (from r in Context.Suppliers
+                result.Result = (from r in Context.Suppliers
                                  where r.IsDeleted == false
                                  select new SupplierDto()
                                  {
@@ -131,7 +131,7 @@ namespace HIS.ApplicationService.Dictionaries.Supplier
                                  .WhereIf(input.InactiveFilter != null, w => w.Inactive == input.InactiveFilter)
                                  .OrderBy(o => o.Code).ToList();
 
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
@@ -151,7 +151,7 @@ namespace HIS.ApplicationService.Dictionaries.Supplier
                 var sSuppliers = Context.Suppliers.FirstOrDefault(s => s.Id == id);
                 if (sSuppliers != null)
                 {
-                    result.Item = ObjectMapper.Map<SupplierDto>(sSuppliers);
+                    result.Result = ObjectMapper.Map<SupplierDto>(sSuppliers);
                 }
             }
             catch (Exception ex)

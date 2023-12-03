@@ -33,7 +33,7 @@ namespace HIS.ApplicationService.Dictionaries.Provinces
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -61,7 +61,7 @@ namespace HIS.ApplicationService.Dictionaries.Provinces
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -112,7 +112,7 @@ namespace HIS.ApplicationService.Dictionaries.Provinces
             try
             {
                 result.IsSucceeded = true;
-                result.Items = (from r in Context.Provinces
+                result.Result = (from r in Context.Provinces
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.ProvinceName == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.ProvinceCode == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -123,7 +123,7 @@ namespace HIS.ApplicationService.Dictionaries.Provinces
                                      Name = r.ProvinceName,
                                      Inactive = r.Inactive
                                  }).OrderBy(o => o.Code).ToList();
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
@@ -141,7 +141,7 @@ namespace HIS.ApplicationService.Dictionaries.Provinces
             if (data != null)
             {
                 result.IsSucceeded = true;
-                result.Item = ObjectMapper.Map<ProvinceDto>(data);
+                result.Result = ObjectMapper.Map<ProvinceDto>(data);
             }
 
             return await Task.FromResult(result);

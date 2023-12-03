@@ -27,7 +27,7 @@ namespace HIS.ApplicationService.Dictionaries.Career
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -55,7 +55,7 @@ namespace HIS.ApplicationService.Dictionaries.Career
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -106,7 +106,7 @@ namespace HIS.ApplicationService.Dictionaries.Career
             try
             {
                 result.IsSucceeded = true;
-                result.Items = (from r in Context.Careers
+                result.Result = (from r in Context.Careers
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -118,7 +118,7 @@ namespace HIS.ApplicationService.Dictionaries.Career
                                      Description = r.Description,
                                      Inactive = r.Inactive
                                  }).OrderBy(o => o.Code).ToList();
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
@@ -137,7 +137,7 @@ namespace HIS.ApplicationService.Dictionaries.Career
             if (data != null)
             {
                 result.IsSucceeded = true;
-                result.Item = ObjectMapper.Map<CareerDto>(data);
+                result.Result = ObjectMapper.Map<CareerDto>(data);
             }
 
             return await Task.FromResult(result);

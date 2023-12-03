@@ -30,7 +30,7 @@ namespace HIS.ApplicationService.Dictionaries.Department
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -58,7 +58,7 @@ namespace HIS.ApplicationService.Dictionaries.Department
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -109,7 +109,7 @@ namespace HIS.ApplicationService.Dictionaries.Department
             try
             {
                 result.IsSucceeded = true;
-                result.Items = (from d in Context.Departments
+                result.Result = (from d in Context.Departments
                                  join b in Context.Branchs on d.BranchId equals b.Id 
                                  where (string.IsNullOrEmpty(input.DepartmentNameFilter) || d.DepartmentName == input.DepartmentNameFilter)
                                      && (string.IsNullOrEmpty(input.DepartmentCodeFilter) || d.DepartmentCode == input.DepartmentCodeFilter)
@@ -129,7 +129,7 @@ namespace HIS.ApplicationService.Dictionaries.Department
                                      Inactive = d.Inactive,
                                      SortOrder = d.SortOrder,
                                  }).ToList();
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
@@ -164,7 +164,7 @@ namespace HIS.ApplicationService.Dictionaries.Department
             if (department != null)
             {
                 result.IsSucceeded = true;
-                result.Item = department;
+                result.Result = department;
             }
 
             return await Task.FromResult(result);

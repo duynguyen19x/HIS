@@ -28,7 +28,7 @@ namespace HIS.ApplicationService.Dictionaries.Genders
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -56,7 +56,7 @@ namespace HIS.ApplicationService.Dictionaries.Genders
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -107,7 +107,7 @@ namespace HIS.ApplicationService.Dictionaries.Genders
             try
             {
                 result.IsSucceeded = true;
-                result.Items = (from r in Context.Genders
+                result.Result = (from r in Context.Genders
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.GenderName == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.GenderCode == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -122,7 +122,7 @@ namespace HIS.ApplicationService.Dictionaries.Genders
                                  })
                                  .OrderBy(x => x.SortOrder)
                                  .ToList();
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
@@ -140,7 +140,7 @@ namespace HIS.ApplicationService.Dictionaries.Genders
             if (data != null)
             {
                 result.IsSucceeded = true;
-                result.Item = new GenderDto()
+                result.Result = new GenderDto()
                 {
                     Id = data.Id,
                     Code = data.GenderCode,

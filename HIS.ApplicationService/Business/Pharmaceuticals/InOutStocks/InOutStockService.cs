@@ -33,7 +33,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                 DateTime fromDateTime = DateTime.ParseExact(fromDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None);
                 DateTime toDateTime = DateTime.ParseExact(toDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None);
 
-                result.Items = (from inOutStock in Context.InOutStocks
+                result.Result = (from inOutStock in Context.InOutStocks
 
                                  join imStock in Context.Rooms on inOutStock.ImpStockId equals imStock.Id into imStockDefaults
                                  from imStockDefault in imStockDefaults.DefaultIfEmpty()
@@ -174,7 +174,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                     }
                 }
 
-                result.Item = inOutStockDto;
+                result.Result = inOutStockDto;
             }
             catch (Exception ex)
             {
@@ -775,7 +775,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                     }
                 }
 
-                result.Item = inOutStockDto;
+                result.Result = inOutStockDto;
             }
             catch (Exception ex)
             {
@@ -1374,7 +1374,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
                     if (!GuidHelper.IsNullOrEmpty(id))
                     {
-                        result.Item = (await ImportFromAnotherStockGetById(id)).Item;
+                        result.Result = (await ImportFromAnotherStockGetById(id)).Result;
                     }
 
                     transaction.Commit();
@@ -1511,7 +1511,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
                     if (result.IsSucceeded)
                     {
-                        result.Item = (await ImportFromAnotherStockGetById(input.Id.GetValueOrDefault())).Item;
+                        result.Result = (await ImportFromAnotherStockGetById(input.Id.GetValueOrDefault())).Result;
                     }
 
                     transaction.Commit();

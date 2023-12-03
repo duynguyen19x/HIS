@@ -38,7 +38,7 @@ namespace HIS.ApplicationService.Dictionaries.Hospital
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -78,7 +78,7 @@ namespace HIS.ApplicationService.Dictionaries.Hospital
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -129,7 +129,7 @@ namespace HIS.ApplicationService.Dictionaries.Hospital
             try
             {
                 result.IsSucceeded = true;
-                result.Items = (from r in Context.Hospitals
+                result.Result = (from r in Context.Hospitals
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -145,7 +145,7 @@ namespace HIS.ApplicationService.Dictionaries.Hospital
                                      Grade = r.Grade,
                                      Line = r.Line
                                  }).ToList();
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
@@ -163,7 +163,7 @@ namespace HIS.ApplicationService.Dictionaries.Hospital
             if (hospital != null)
             {
                 result.IsSucceeded = true;
-                result.Item = new HospitalDto()
+                result.Result = new HospitalDto()
                 {
                     Id = hospital.Id,
                     Code = hospital.Code,

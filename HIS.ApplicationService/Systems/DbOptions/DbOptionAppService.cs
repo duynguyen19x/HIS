@@ -30,7 +30,7 @@ namespace HIS.ApplicationService.Systems.DbOptions
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -60,7 +60,7 @@ namespace HIS.ApplicationService.Systems.DbOptions
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -112,7 +112,7 @@ namespace HIS.ApplicationService.Systems.DbOptions
 
             try
             {
-                result.Items = (from r in Context.DbOptions
+                result.Result = (from r in Context.DbOptions
                                  select new DbOptionDto()
                                  {
                                      Id = r.Id,
@@ -124,7 +124,7 @@ namespace HIS.ApplicationService.Systems.DbOptions
                                      IsParent = r.IsParent,
                                  }).OrderBy(o => o.DbOptionId).ToList();
 
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
@@ -141,7 +141,7 @@ namespace HIS.ApplicationService.Systems.DbOptions
             try
             {
                 var service = Context.DbOptions.FirstOrDefault(s => s.Id == id);
-                result.Item = ObjectMapper.Map<DbOptionDto>(service);
+                result.Result = ObjectMapper.Map<DbOptionDto>(service);
             }
             catch (Exception ex)
             {

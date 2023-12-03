@@ -30,7 +30,7 @@ namespace HIS.ApplicationService.Dictionaries.Country
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -58,7 +58,7 @@ namespace HIS.ApplicationService.Dictionaries.Country
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -109,7 +109,7 @@ namespace HIS.ApplicationService.Dictionaries.Country
             try
             {
                 result.IsSucceeded = true;
-                result.Items = (from r in Context.Nationals
+                result.Result = (from r in Context.Nationals
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -120,7 +120,7 @@ namespace HIS.ApplicationService.Dictionaries.Country
                                      Name = r.Name,
                                      Inactive = r.Inactive
                                  }).OrderBy(o => o.Code).ToList();
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
@@ -139,7 +139,7 @@ namespace HIS.ApplicationService.Dictionaries.Country
             if (data != null)
             {
                 result.IsSucceeded = true;
-                result.Item = ObjectMapper.Map<CountryDto>(data);
+                result.Result = ObjectMapper.Map<CountryDto>(data);
             }
 
             return await Task.FromResult(result);

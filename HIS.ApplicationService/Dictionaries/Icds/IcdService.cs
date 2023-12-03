@@ -52,7 +52,7 @@ namespace HIS.ApplicationService.Dictionaries.Icds
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -105,7 +105,7 @@ namespace HIS.ApplicationService.Dictionaries.Icds
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -156,7 +156,7 @@ namespace HIS.ApplicationService.Dictionaries.Icds
             try
             {
                 result.IsSucceeded = true;
-                result.Items = (from r in Context.Icds
+                result.Result = (from r in Context.Icds
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -186,7 +186,7 @@ namespace HIS.ApplicationService.Dictionaries.Icds
                                      TypeName = r.TypeName,
                                      TypeNameEnglish = r.TypeNameEnglish
                                  }).OrderBy(o => o.Code).ToList();
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
@@ -204,7 +204,7 @@ namespace HIS.ApplicationService.Dictionaries.Icds
             if (icd != null)
             {
                 result.IsSucceeded = true;
-                result.Item = new IcdDto()
+                result.Result = new IcdDto()
                 {
                     Id = icd.Id,
                     Code = icd.Code,

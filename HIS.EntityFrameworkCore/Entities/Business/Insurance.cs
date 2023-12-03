@@ -17,7 +17,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public string InsuranceCode { get; set; }
         public string MediOrgCode { get; set; }
         public string MediOrgName { get; set; }
-        public int LiveAreaId { get; set; }
+        public Guid LiveAreaId { get; set; }
         public DateTime FromDate { get; set; }
         public DateTime ToDate { get; set; }
         public string Address { get; set; } // địa chỉ

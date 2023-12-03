@@ -30,7 +30,7 @@ namespace HIS.ApplicationService.Dictionaries.SurgicalProcedureType
 
             try
             {
-                result.Items = (from r in Context.SurgicalProcedureTypes
+                result.Result = (from r in Context.SurgicalProcedureTypes
                                  select new SSurgicalProcedureTypeDto()
                                  {
                                      Id = r.Id,
@@ -39,7 +39,7 @@ namespace HIS.ApplicationService.Dictionaries.SurgicalProcedureType
                                      SortOrder = r.SortOrder,
                                  }).OrderBy(o => o.SortOrder).ToList();
 
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {

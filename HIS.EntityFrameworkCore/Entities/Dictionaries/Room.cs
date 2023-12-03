@@ -1,4 +1,5 @@
-﻿using HIS.Core.Entities.Auditing;
+﻿using AutoMapper.Configuration.Annotations;
+using HIS.Core.Entities.Auditing;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +13,15 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public string RoomCode { get; set; }
         public string RoomName { get; set; }
         public string MohCode { get; set; }
-        public int? RoomTypeId { get; set; }
-        public Guid? DepartmentId { get; set; }
+        public int RoomTypeId { get; set; }
+        public Guid DepartmentId { get; set; }
         public string Description { get; set; }
-        public int? SortOrder { get; set; }
+        public int SortOrder { get; set; }
         public bool Inactive { get; set; }
 
+        [Ignore]
         public virtual RoomType RoomType { get; set; }
+        [Ignore]
         public virtual Department Department { get; set; }
     }
 }

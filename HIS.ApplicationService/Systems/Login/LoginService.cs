@@ -52,7 +52,7 @@ namespace HIS.ApplicationService.Systems.Login
                     };
 
                     apiResult.IsSucceeded = true;
-                    apiResult.Item = token;
+                    apiResult.Result = token;
 
                     // Save token
                     var sToken = new SToken()
@@ -100,7 +100,7 @@ namespace HIS.ApplicationService.Systems.Login
                     var user = _dbContext.Users.FirstOrDefault(f => f.UserName == request.UserName);
                     if (user != null)
                     {
-                        apiResult.Item = false;
+                        apiResult.Result = false;
                         apiResult.IsSucceeded = false;
                         apiResult.Message = "Tài khoản đã tồn tại";
 
@@ -110,7 +110,7 @@ namespace HIS.ApplicationService.Systems.Login
                     user = _dbContext.Users.FirstOrDefault(f => f.Email == request.UserName);
                     if (user != null)
                     {
-                        apiResult.Item = false;
+                        apiResult.Result = false;
                         apiResult.IsSucceeded = false;
                         apiResult.Message = "Emai đã tồn tại";
 
@@ -139,7 +139,7 @@ namespace HIS.ApplicationService.Systems.Login
                     if (result != null)
                     {
                         apiResult.Message = "Đăng ký thằng công!";
-                        apiResult.Item = true;
+                        apiResult.Result = true;
                         apiResult.IsSucceeded = true;
 
                         return await Task.FromResult(apiResult);
@@ -148,7 +148,7 @@ namespace HIS.ApplicationService.Systems.Login
                 catch (Exception ex)
                 {
                     apiResult.Message = ex.Message;
-                    apiResult.Item = false;
+                    apiResult.Result = false;
                     apiResult.IsSucceeded = false;
                 }
             }
@@ -319,7 +319,7 @@ namespace HIS.ApplicationService.Systems.Login
                     storedToken.Jti = acceptToken.Id;
                     _dbContext.Update(storedToken);
 
-                    apiResult.Item = new TokenResultDto()
+                    apiResult.Result = new TokenResultDto()
                     {
                         AcceptToken = new JwtSecurityTokenHandler().WriteToken(acceptToken),
                         RefreshToken = token.RefreshToken

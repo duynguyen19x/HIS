@@ -45,7 +45,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -74,7 +74,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -186,7 +186,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
             var result = new PagedResultDto<ItemTypeDto>();
             try
             {
-                result.Items = (from medi in Context.ItemTypes
+                result.Result = (from medi in Context.ItemTypes
                                  join unit in Context.Units on medi.UnitId equals unit.Id into units
                                  from u in units.DefaultIfEmpty()
                                  where medi.IsDeleted == false
@@ -256,7 +256,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
                                  .WhereIf(input.CommodityTypeFilter != null, w => w.CommodityType == (CommodityTypes)input.CommodityTypeFilter)
                                  .OrderBy(o => o.SortOrder).ToList();
 
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
@@ -275,7 +275,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
             if (ItemType != null)
             {
                 result.IsSucceeded = true;
-                result.Item = ObjectMapper.Map<ItemTypeDto>(ItemType);
+                result.Result = ObjectMapper.Map<ItemTypeDto>(ItemType);
             }
 
             return await Task.FromResult(result);

@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
 using HIS.Application.Core.Services.Dto;
+using HIS.Core.Linq;
 using HIS.Dtos.Dictionaries.RoomType;
 using HIS.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace HIS.ApplicationService.Dictionaries.RoomType
@@ -28,7 +30,7 @@ namespace HIS.ApplicationService.Dictionaries.RoomType
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -56,7 +58,7 @@ namespace HIS.ApplicationService.Dictionaries.RoomType
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -106,24 +108,15 @@ namespace HIS.ApplicationService.Dictionaries.RoomType
             var result = new PagedResultDto<RoomTypeDto>();
             try
             {
-                result.IsSucceeded = true;
-                result.Items = (from r in Context.RoomTypes
-                                 where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
-                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
-                                     && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
-                                 select new RoomTypeDto()
-                                 {
-                                     Id = r.Id,
-                                     Code = r.Code,
-                                     Name = r.Name,
-                                     Description = r.Description,
-                                     SortOrder = r.SortOrder,
-                                     Inactive = r.Inactive
-                                 })
-                                 .OrderBy(o => o.SortOrder)
-                                 .ThenBy(o => o.Code)
-                                 .ToList();
-                result.TotalCount = result.Items.Count;
+                var filter = Context.RoomTypes.AsNoTracking()
+                    .WhereIf(!string.IsNullOrEmpty(input.RoomTypeCodeFilter), x => x.RoomTypeCode == input.RoomTypeCodeFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.RoomTypeNameFilter), x => x.RoomTypeName == input.RoomTypeNameFilter)
+                    .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
+
+                var paged = filter.OrderBy(x => x.SortOrder).PageBy(input).ToList();
+
+                result.TotalCount = await filter.CountAsync();
+                result.Result = ObjectMapper.Map<IList<RoomTypeDto>>(paged);
             }
             catch (Exception ex)
             {
@@ -138,26 +131,13 @@ namespace HIS.ApplicationService.Dictionaries.RoomType
             var result = new ResultDto<RoomTypeDto>();
             try
             {
-                result.IsSucceeded = true;
-                result.Item = (from r in Context.RoomTypes
-                                 where r.Id == id
-                                 select new RoomTypeDto()
-                                 {
-                                     Id = r.Id,
-                                     Code = r.Code,
-                                     Name = r.Name,
-                                     Description = r.Description,
-                                     SortOrder = r.SortOrder,
-                                     Inactive = r.Inactive
-                                 })
-                                 .SingleOrDefault();
+                result.Result = ObjectMapper.Map<RoomTypeDto>(await Context.RoomTypes.SingleOrDefaultAsync(x => x.Id == id));
             }
             catch (Exception ex)
             {
-                result.Message = ex.Message;
+                result.Exception(ex);
             }
-
-            return await Task.FromResult(result);
+            return result;
         }
     }
 }

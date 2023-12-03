@@ -37,7 +37,7 @@ namespace HIS.ApplicationService.Dictionaries.ServicePricePolicy
 
             try
             {
-                result.Items = (from r in Context.PatientTypes
+                result.Result = (from r in Context.PatientTypes
                                  select new ServicePricePolicyDto()
                                  {
                                      PatientTypeId = r.Id,
@@ -48,7 +48,7 @@ namespace HIS.ApplicationService.Dictionaries.ServicePricePolicy
                                  .WhereIf(input.InactiveFilter != null, w => w.Inactive == input.InactiveFilter)
                                  .OrderBy(o => o.PatientTypeCode).ToList();
 
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {

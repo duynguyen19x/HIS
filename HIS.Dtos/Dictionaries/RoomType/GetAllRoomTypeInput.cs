@@ -9,8 +9,8 @@ namespace HIS.Dtos.Dictionaries.RoomType
 {
     public class GetAllRoomTypeInput : PagedResultRequestDto
     {
-        public string CodeFilter { get; set; }
-        public string NameFilter { get; set; }
+        public string RoomTypeCodeFilter { get; set; }
+        public string RoomTypeNameFilter { get; set; }
         public bool? InactiveFilter { get; set; }
     }
 }

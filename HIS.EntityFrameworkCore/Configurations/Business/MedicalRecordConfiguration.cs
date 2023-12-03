@@ -15,6 +15,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
         {
             builder.ToTable("MedicalRecord");
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.MedicalRecordDate).IsRequired();
         }
     }
 }

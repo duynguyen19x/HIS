@@ -14,19 +14,19 @@ namespace HIS.EntityFrameworkCore.Entities.Business
     {
         public string MedicalRecordCode { get; set; }
         public DateTime MedicalRecordDate { get; set; } // thời gian gửi yêu cầu tiếp nhận từ tiếp đón hoặc khoa khác
-        public int MedicalRecordTypeID { get; set; } // loại bệnh án
-        public int MedicalRecordStatusID { get; set; } // trạng thái: 0 - chờ, 100 - đang điều trị, 200 - đã kết thúc điều trị
-        public int TreatmentResultTypeID { get; set; } // kết quả điều trị
-        public int TreatmentEndTypeID { get; set; } // hình thức xử trí
-        public Guid? PreviusMedicalRecordID { get; set; } // khoa trước đó (nếu có)
-        public Guid? NextMedicalRecordID { get; set; } // khoa tiếp theo (nếu có)
+        public int MedicalRecordTypeId { get; set; } // loại bệnh án
+        public int MedicalRecordStatusId { get; set; } // trạng thái: 0 - chờ, 100 - đang điều trị, 200 - đã kết thúc điều trị
+        public int TreatmentResultTypeId { get; set; } // kết quả điều trị
+        public int TreatmentEndTypeId { get; set; } // hình thức xử trí
+        public Guid? PreviusMedicalRecordId { get; set; } // khoa trước đó (nếu có)
+        public Guid? NextMedicalRecordId { get; set; } // khoa tiếp theo (nếu có)
 
-        public Guid PatientRecordID { get; set; } // mã hồ sơ bệnh án
-        public Guid DepartmentID { get; set; } // khoa (bắt buộc)
-        public Guid? RoomID { get; set; } // phòng (bắt buộc khi tiếp nhận bệnh nhân nhập viện)
-        public Guid? BedID { get; set; } // giường
-        public Guid? UserID { get; set; } // nguoi tiep nhan nhap khoa
-        public Guid? DoctorUserID { get; set; } // bác sỹ (bắt buộc khi tiếp nhận bệnh nhân nhập viện) 
+        public Guid PatientRecordId { get; set; } // mã hồ sơ bệnh án
+        public Guid DepartmentId { get; set; } // khoa (bắt buộc)
+        public Guid? RoomId { get; set; } // phòng (bắt buộc khi tiếp nhận bệnh nhân nhập viện)
+        public Guid? BedId { get; set; } // giường
+        public Guid? UserId { get; set; } // nguoi tiep nhan nhap khoa
+        public Guid? DoctorUserId { get; set; } // bác sỹ (bắt buộc khi tiếp nhận bệnh nhân nhập viện) 
 
         public DateTime? InTime { get; set; } // thời gian tiếp nhận
         public string InIcdCode { get; set; }  // chẩn đoán vào khoa

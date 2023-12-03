@@ -16,11 +16,12 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.ToTable("Room");
 
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).ValueGeneratedOnAdd();
             builder.Property(x => x.RoomCode).HasMaxLength(20).IsRequired(); 
-            builder.Property(x => x.RoomName).HasMaxLength(512).IsRequired();
-            builder.Property(x => x.MohCode).HasMaxLength(20).IsRequired();
+            builder.Property(x => x.RoomName).HasMaxLength(255).IsRequired();
+            builder.Property(x => x.MohCode).HasMaxLength(20);
             builder.Property(x => x.Description).HasMaxLength(512);
+            builder.Property(x => x.RoomTypeId).IsRequired();
+            builder.Property(x => x.DepartmentId).IsRequired();
 
             builder.HasOne(t => t.RoomType).WithMany().HasForeignKey(p => p.RoomTypeId);
             builder.HasOne(t => t.Department).WithMany().HasForeignKey(p => p.DepartmentId);

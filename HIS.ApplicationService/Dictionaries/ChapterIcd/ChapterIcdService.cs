@@ -32,7 +32,7 @@ namespace HIS.ApplicationService.Dictionaries.ChapterICD10
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -62,7 +62,7 @@ namespace HIS.ApplicationService.Dictionaries.ChapterICD10
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -114,7 +114,7 @@ namespace HIS.ApplicationService.Dictionaries.ChapterICD10
 
             try
             {
-                result.Items = (from r in Context.ChapterIcds
+                result.Result = (from r in Context.ChapterIcds
                                  select new ChapterIcdDto()
                                  {
                                      Id = r.Id,
@@ -124,7 +124,7 @@ namespace HIS.ApplicationService.Dictionaries.ChapterICD10
                                      SortOrder = r.SortOrder,
                                  }).WhereIf(input.InactiveFilter != null, w => w.Inactive == input.InactiveFilter).OrderBy(o => o.SortOrder).ToList();
 
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
@@ -142,7 +142,7 @@ namespace HIS.ApplicationService.Dictionaries.ChapterICD10
             try
             {
                 var service = Context.ChapterIcds.FirstOrDefault(s => s.Id == id);
-                result.Item = ObjectMapper.Map<ChapterIcdDto>(service);
+                result.Result = ObjectMapper.Map<ChapterIcdDto>(service);
             }
             catch (Exception ex)
             {

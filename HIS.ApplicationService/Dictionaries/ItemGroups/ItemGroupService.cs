@@ -40,7 +40,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemGroups
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -68,7 +68,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemGroups
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
 
                     transaction.Commit();
                 }
@@ -171,7 +171,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemGroups
             try
             {
                 result.IsSucceeded = true;
-                result.Items = (from r in Context.ItemGroups
+                result.Result = (from r in Context.ItemGroups
 
                                  select new ItemGroupDto()
                                  {
@@ -189,7 +189,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemGroups
                                  .WhereIf(input.CommodityTypeFilter != null, r => r.CommodityType == input.CommodityTypeFilter)
                                  .OrderBy(o => o.SortOrder).ToList();
 
-                result.TotalCount = result.Items.Count;
+                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
@@ -207,7 +207,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemGroups
             if (ItemGroup != null)
             {
                 result.IsSucceeded = true;
-                result.Item = ObjectMapper.Map<ItemGroupDto>(ItemGroup);
+                result.Result = ObjectMapper.Map<ItemGroupDto>(ItemGroup);
             }
 
             return await Task.FromResult(result);

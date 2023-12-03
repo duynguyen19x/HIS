@@ -33,7 +33,7 @@ namespace HIS.ApplicationService.Dictionaries.Branchs
                     await transaction.CommitAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
                 }
                 catch (Exception ex)
                 {
@@ -61,7 +61,7 @@ namespace HIS.ApplicationService.Dictionaries.Branchs
                     await transaction.CommitAsync();
 
                     result.IsSucceeded = true;
-                    result.Item = input;
+                    result.Result = input;
                 }
                 catch (Exception ex)
                 {
@@ -107,7 +107,7 @@ namespace HIS.ApplicationService.Dictionaries.Branchs
                 var paged = filter.OrderBy(s => s.SortOrder).ThenBy(t => t.BranchCode).ThenBy(t => t.BranchName).PageBy(input);
 
                 result.TotalCount = await filter.CountAsync();
-                result.Items = ObjectMapper.Map<IList<BranchDto>>(paged.ToList());
+                result.Result = ObjectMapper.Map<IList<BranchDto>>(paged.ToList());
                 result.IsSucceeded = true;
             }
             catch (Exception ex)
@@ -123,7 +123,7 @@ namespace HIS.ApplicationService.Dictionaries.Branchs
             try
             {
                 var branch = await Context.Branchs.FindAsync(id);
-                result.Item = ObjectMapper.Map<BranchDto>(branch);
+                result.Result = ObjectMapper.Map<BranchDto>(branch);
                 result.IsSucceeded = true;
             }
             catch (Exception ex)

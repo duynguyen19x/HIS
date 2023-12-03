@@ -35,4 +35,8 @@
     <ProjectReference Include="..\HIS.EntityFrameworkCore\HIS.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Business\Patients\" />
+  </ItemGroup>
+
 </Project>
