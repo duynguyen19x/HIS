@@ -22,8 +22,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Items
 
             builder.HasOne(t => t.Item)
                 .WithMany()
-                .HasForeignKey(pc => pc.ItemId)
-                ;
+                .HasForeignKey(pc => pc.ItemId);
         }
     }
 }

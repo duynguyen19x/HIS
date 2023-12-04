@@ -22,8 +22,6 @@ namespace HIS.EntityFrameworkCore.Data
             ProvinceBuilder.Seed(modelBuilder);
             GenderBuilder.Seed(modelBuilder);
             EthnicityBuilder.Seed(modelBuilder);
-            
-            
         }
     }
 }

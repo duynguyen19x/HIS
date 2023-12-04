@@ -16,8 +16,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Services
 
             builder.HasOne(t => t.Service)
                 .WithMany()
-                .HasForeignKey(pc => pc.ServiceId)
-                ; 
+                .HasForeignKey(pc => pc.ServiceId);
         }
     }
 }
