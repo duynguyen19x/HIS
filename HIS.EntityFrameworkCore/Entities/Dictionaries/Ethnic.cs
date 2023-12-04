@@ -1,16 +1,11 @@
-﻿using HIS.Core.Entities.Auditing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HIS.Core.Entities;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
     /// Dân tộc
     /// </summary>
-    public class Ethnic : AuditedEntity<Guid>
+    public class Ethnic : Entity<Guid>
     {
         public string EthnicCode { get; set; } // mã dân tộc
         public string EthnicName { get; set; } // tên dân tộc

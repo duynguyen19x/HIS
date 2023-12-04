@@ -1,9 +1,8 @@
 ﻿using HIS.Core.Entities;
-using HIS.Core.Entities.Auditing;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
-    public class Gender : AuditedEntity<Guid>
+    public class Gender : Entity<Guid>
     {
         public string GenderCode { get; set; }
         public string GenderName { get; set; }
