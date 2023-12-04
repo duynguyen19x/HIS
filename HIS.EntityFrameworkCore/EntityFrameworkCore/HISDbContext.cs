@@ -1,4 +1,5 @@
 ﻿using HIS.Core.Entities;
+using HIS.EntityFrameworkCore.Configurations;
 using HIS.EntityFrameworkCore.Data;
 using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Categories;
@@ -101,9 +102,10 @@ namespace HIS.EntityFrameworkCore
         {
             base.OnModelCreating(builder);
 
-            //builder.ApplyConfiguration();
+            builder.ApplyConfiguration();
+
             // load config
-            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            //builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             builder.Seed();
         }
