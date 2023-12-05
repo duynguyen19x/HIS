@@ -1,7 +1,6 @@
-﻿using HIS.ApplicationService.Dictionaries.RoomType;
-using HIS.Dtos.Commons;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Dictionaries.RoomType;
 using HIS.Dtos.Dictionaries.RoomType;
-using HIS.Models.Commons;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
@@ -18,25 +17,25 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<RoomTypeDto>> GetAll([FromQuery] GetAllRoomTypeInput input)
+        public async Task<PagedResultDto<RoomTypeDto>> GetAll([FromQuery] GetAllRoomTypeInput input)
         {
             return await _roomTypeService.GetAll(input);
         }
 
         [HttpGet("GetById")]
-        public async Task<ApiResult<RoomTypeDto>> GetById(int id)
+        public async Task<ResultDto<RoomTypeDto>> GetById(int id)
         {
             return await _roomTypeService.GetById(id);
         }
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ApiResult<RoomTypeDto>> CreateOrEdit(RoomTypeDto input)
+        public async Task<ResultDto<RoomTypeDto>> CreateOrEdit(RoomTypeDto input)
         {
             return await _roomTypeService.CreateOrEdit(input);
         }
 
         [HttpDelete("Delete")]
-        public async Task<ApiResult<RoomTypeDto>> Delete(int id)
+        public async Task<ResultDto<RoomTypeDto>> Delete(int id)
         {
             return await _roomTypeService.Delete(id);
         }

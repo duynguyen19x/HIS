@@ -1,6 +1,6 @@
 using HIS.ApplicationService;
 using HIS.AutoMappers;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;

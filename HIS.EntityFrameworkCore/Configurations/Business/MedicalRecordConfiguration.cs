@@ -1,12 +1,11 @@
-﻿using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using HIS.EntityFrameworkCore.Entities.Business;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using HIS.EntityFrameworkCore.Entities.Business;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business
 {
@@ -16,8 +15,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
         {
             builder.ToTable("MedicalRecord");
             builder.HasKey(x => x.Id);
-
-            builder.HasOne(x => x.PatientRecordFk).WithMany().HasForeignKey(x => x.PatientRecordID).OnDelete(DeleteBehavior.Restrict);
+            builder.Property(x => x.MedicalRecordDate).IsRequired();
         }
     }
 }

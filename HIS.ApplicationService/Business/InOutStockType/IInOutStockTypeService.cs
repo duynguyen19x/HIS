@@ -1,9 +1,11 @@
-﻿using HIS.Dtos.Business.InOutStockTypes;
+﻿using HIS.Application.Core.Services;
+using HIS.Application.Core.Services.Dto;
+using HIS.Dtos.Business.InOutStockTypes;
 
 namespace HIS.ApplicationService.Business.InOutStockType
 {
-    public interface IInOutStockTypeService: IBaseService<InOutStockTypeDto, GetAllInOutStockTypeInput>
+    public interface IInOutStockTypeService: IBaseAppService
     {
-
+        Task<PagedResultDto<InOutStockTypeDto>> GetAll(GetAllInOutStockTypeInput input);
     }
 }

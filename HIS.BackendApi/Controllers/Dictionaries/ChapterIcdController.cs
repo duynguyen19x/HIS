@@ -1,7 +1,6 @@
-﻿using HIS.ApplicationService.Dictionaries.ChapterICD10;
-using HIS.Dtos.Commons;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Dictionaries.ChapterICD10;
 using HIS.Dtos.Dictionaries.ChapterICD10;
-using HIS.Models.Commons;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
@@ -18,25 +17,25 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ApiResult<ChapterIcdDto>> CreateOrEdit(ChapterIcdDto input)
+        public async Task<ResultDto<ChapterIcdDto>> CreateOrEdit(ChapterIcdDto input)
         {
             return await _sServiceChapterIcdService.CreateOrEdit(input);
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<ChapterIcdDto>> GetAll([FromQuery] GetAllChapterIcdInput input)
+        public async Task<PagedResultDto<ChapterIcdDto>> GetAll([FromQuery] GetAllChapterIcdInput input)
         {
             return await _sServiceChapterIcdService.GetAll(input);
         }
 
         [HttpGet("GetById")]
-        public async Task<ApiResult<ChapterIcdDto>> GetById(Guid id)
+        public async Task<ResultDto<ChapterIcdDto>> GetById(Guid id)
         {
             return await _sServiceChapterIcdService.GetById(id);
         }
 
         [HttpDelete("Delete")]
-        public async Task<ApiResult<ChapterIcdDto>> Delete(Guid id)
+        public async Task<ResultDto<ChapterIcdDto>> Delete(Guid id)
         {
             return await _sServiceChapterIcdService.Delete(id);
         }

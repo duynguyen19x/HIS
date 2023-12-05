@@ -1,14 +1,12 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services.Dto;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
-using Microsoft.Identity.Client;
-using System.Runtime.InteropServices;
+using HIS.EntityFrameworkCore;
 
 namespace HIS.Application.Core.Services
 {
-    public abstract class BaseCrudAppService<TEntityDto, TKey, TPagedRequestDto> : BaseAppService, IBaseCrudAppService<TEntityDto, TKey, TPagedRequestDto>
-        where TEntityDto : IEntityDto<TKey>
-        where TPagedRequestDto : IPagedResultRequest
+    public abstract class BaseCrudAppService<TEntityDto, TPrimaryKey, TPagedRequestDto> : BaseAppService, IBaseCrudAppService<TEntityDto, TPrimaryKey, TPagedRequestDto>
+        where TEntityDto : IEntityDto<TPrimaryKey>
+        where TPagedRequestDto : IPagedResultRequestDto
     {
         public BaseCrudAppService(HISDbContext context, IMapper mapper)
             : base(context, mapper)
@@ -17,7 +15,7 @@ namespace HIS.Application.Core.Services
 
         public virtual async Task<ResultDto<TEntityDto>> CreateOrEdit(TEntityDto input)
         {
-            TKey key = default(TKey);
+            TPrimaryKey key = default(TPrimaryKey);
             if (Equals(input.Id, key))
                 return await Create(input);
             else
@@ -26,14 +24,14 @@ namespace HIS.Application.Core.Services
 
         public abstract Task<ResultDto<TEntityDto>> Create(TEntityDto input);
         public abstract Task<ResultDto<TEntityDto>> Update(TEntityDto input);
-        public abstract Task<ResultDto<TEntityDto>> Delete(TKey id);
+        public abstract Task<ResultDto<TEntityDto>> Delete(TPrimaryKey id);
         public abstract Task<PagedResultDto<TEntityDto>> GetAll(TPagedRequestDto input);
-        public abstract Task<ResultDto<TEntityDto>> GetById(TKey id);
+        public abstract Task<ResultDto<TEntityDto>> GetById(TPrimaryKey id);
     }
 
     public abstract class BaseCrudAppService<TEntityDto, TPagedRequestDto> : BaseCrudAppService<TEntityDto, Guid, TPagedRequestDto>
         where TEntityDto : IEntityDto<Guid>
-        where TPagedRequestDto : IPagedResultRequest
+        where TPagedRequestDto : IPagedResultRequestDto
     {
         public BaseCrudAppService(HISDbContext context, IMapper mapper)
             : base(context, mapper)

@@ -1,11 +1,5 @@
-﻿using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.Utilities.Enums;
+﻿using HIS.Utilities.Enums;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Data.Builders
 {

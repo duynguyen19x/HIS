@@ -1,11 +1,7 @@
-﻿using HIS.ApplicationService.Systems.Role;
-using HIS.Dtos.Commons;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Systems.Role;
 using HIS.Dtos.Systems.Role;
-using HIS.Models.Commons;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Runtime.InteropServices;
 
 namespace HIS.BackendApi.Controllers.Systems.Role
 {
@@ -21,25 +17,25 @@ namespace HIS.BackendApi.Controllers.Systems.Role
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<RoleDto>> GetAll([FromQuery] GetAllRoleInput input)
+        public async Task<PagedResultDto<RoleDto>> GetAll([FromQuery] GetAllRoleInput input)
         {
             return await _roleService.GetAll(input);
         }
 
         [HttpGet("GetById")]
-        public async Task<ApiResult<RoleDto>> GetById(Guid id)
+        public async Task<ResultDto<RoleDto>> GetById(Guid id)
         {
             return await _roleService.GetById(id);
         }
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ApiResult<RoleDto>> CreateOrEdit(RoleDto input)
+        public async Task<ResultDto<RoleDto>> CreateOrEdit(RoleDto input)
         {
             return await _roleService.CreateOrEdit(input);
         }
 
         [HttpDelete("Delete")]
-        public async Task<ApiResult<RoleDto>> Delete(Guid input)
+        public async Task<ResultDto<RoleDto>> Delete(Guid input)
         {
             return await _roleService.Delete(input);
         }

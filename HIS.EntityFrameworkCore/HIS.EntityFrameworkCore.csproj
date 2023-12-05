@@ -8,8 +8,11 @@
 
   <ItemGroup>
     <Compile Remove="Configurations\Others\**" />
+    <Compile Remove="EntityFrameworkCore\Seeds\**" />
     <EmbeddedResource Remove="Configurations\Others\**" />
+    <EmbeddedResource Remove="EntityFrameworkCore\Seeds\**" />
     <None Remove="Configurations\Others\**" />
+    <None Remove="EntityFrameworkCore\Seeds\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,7 +40,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="EntityFrameworkCore\Seeds\Systems\" />
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
   </ItemGroup>
 
 </Project>

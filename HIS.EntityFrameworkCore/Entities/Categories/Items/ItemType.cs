@@ -152,6 +152,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public Unit Unit { get; set; }
         public ItemLine ItemLine { get; set; }
         public ItemGroup ItemGroup { get; set; }
-        public Country Country { get; set; }
+        public National Country { get; set; }
     }
 }

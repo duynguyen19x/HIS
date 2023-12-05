@@ -1,23 +1,17 @@
-﻿using HIS.Dtos.Business.InOutStocks;
-using HIS.Dtos.Commons;
-using HIS.Models.Commons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.Dtos.Business.InOutStocks;
 
 namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 {
     public interface IInOutStockService
     {
-        Task<ApiResultList<InOutStockDto>> GetByStocks(Guid stockId, string fromDate, string toDate);
+        Task<PagedResultDto<InOutStockDto>> GetByStocks(Guid stockId, string fromDate, string toDate);
 
-        Task<ApiResult<InOutStockDto>> ImportFromSupplierGetById(Guid id);
-        Task<ApiResult<InOutStockDto>> ImportFromSupplierCanceled(InOutStockDto input);
-        Task<ApiResult<InOutStockDto>> ImportFromSupplierSaveAsDraft(InOutStockDto input);
-        Task<ApiResult<InOutStockDto>> ImportFromSupplierStockIn(InOutStockDto input);
-        Task<ApiResult<bool>> ImportFromSupplierDeleted(Guid id);
+        Task<ResultDto<InOutStockDto>> ImportFromSupplierGetById(Guid id);
+        Task<ResultDto<InOutStockDto>> ImportFromSupplierCanceled(InOutStockDto input);
+        Task<ResultDto<InOutStockDto>> ImportFromSupplierSaveAsDraft(InOutStockDto input);
+        Task<ResultDto<InOutStockDto>> ImportFromSupplierStockIn(InOutStockDto input);
+        Task<ResultDto<bool>> ImportFromSupplierDeleted(Guid id);
 
         Task<ApiResult<InOutStockDto>> ImportFromAnotherStockGetById(Guid id);
         Task<ApiResult<InOutStockDto>> ImportFromAnotherStockSaveAsDraft(InOutStockDto input);

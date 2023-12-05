@@ -13,7 +13,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<Icd> builder)
         {
-            builder.ToTable("Icds");
+            builder.ToTable("Icd");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50).IsRequired();

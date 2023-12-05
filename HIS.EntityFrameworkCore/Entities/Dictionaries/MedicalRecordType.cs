@@ -2,8 +2,6 @@
 using HIS.Core.Entities.Auditing;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,34 +13,24 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// </summary>
     public class MedicalRecordType : AuditedEntity<int>
     {
-        [MaxLength(50)]
-        public virtual string Code { get; set; }
+        public string MedicalRecordTypeCode { get; set; }
+        public string MedicalRecordTypeName { get; set; }
+        public string Description { get; set; }
+        public int SortOrder { get; set; }
+        public bool Inactive { get; set; }
+        public int MedicalRecordTypeGroupID { get; set; }
 
-        [MaxLength(250)]
-        public virtual string Name { get; set; }
-
-        public virtual int GroupTypeId { get; set; }
-
-        [MaxLength(250)]
-        public virtual string Description { get; set; }
-
-        public virtual int SortOrder { get; set; }
-
-        public virtual bool Inactive { get; set; }
+        [Ignore]
+        public virtual MedicalRecordTypeGroup MedicalRecordTypeGroup { get; set; }
 
         public MedicalRecordType() { }
-
-        public MedicalRecordType(int id, string code, string name, int groupTypeId, string description, int sortOrder, bool inactive)
+        public MedicalRecordType(int id, string name, int groupType, int order)
         {
             this.Id = id;
-            this.Code = code;
-            this.Name = name;
-            this.GroupTypeId = groupTypeId;
-            this.Description = description;
-            this.SortOrder = sortOrder;
-            this.Inactive = inactive;
-
-            this.CreatedDate = new DateTime(1975, 01, 01);
+            this.MedicalRecordTypeCode = id.ToString();
+            this.MedicalRecordTypeName = name;
+            this.MedicalRecordTypeGroupID = groupType;
+            this.SortOrder = order;
         }
     }
 }

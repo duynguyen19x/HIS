@@ -1,9 +1,9 @@
-﻿using HIS.ApplicationService.Base;
+﻿using HIS.Application.Core.Services;
 using HIS.Dtos.Dictionaries.Supplier;
 
 namespace HIS.ApplicationService.Dictionaries.Supplier
 {
-    public interface ISupplierService : IBaseDictionaryService<SupplierDto, GetAllSupplierInput>
+    public interface ISupplierService : IBaseCrudAppService<SupplierDto, Guid?, GetAllSupplierInput>
     {
 
     }

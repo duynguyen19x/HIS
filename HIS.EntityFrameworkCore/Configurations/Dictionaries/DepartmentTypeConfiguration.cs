@@ -13,7 +13,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<DepartmentType> builder)
         {
-            builder.ToTable("DepartmentTypes");
+            builder.ToTable("DepartmentType");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();

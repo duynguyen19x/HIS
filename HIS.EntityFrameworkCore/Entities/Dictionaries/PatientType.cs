@@ -1,29 +1,30 @@
 ﻿using HIS.Core.Entities.Auditing;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
-    /// Đói tượng bệnh nhân.
+    /// Loại bệnh nhân (đối tượng bệnh nhân).
     /// </summary>
     public class PatientType : AuditedEntity<int>
     {
-        public virtual string Code { get; set; }
-        public virtual string Name { get; set; }
-        public virtual string Description { get; set; }
-        public virtual int SortOrder { get; set; }
-        public virtual bool Inactive { get; set; }
+        public string PatientTypeCode { get; set; }
+        public string PatientTypeName { get; set; }
+        public string Description { get; set; }
+        public int SortOrder { get; set; }
+        public bool Inactive { get; set; }
 
         public PatientType() { }
-        public PatientType(int id, string code, string name, string description, int sortOrder, bool inactive)
+        public PatientType(int id, string name, int order)
         {
             this.Id = id;
-            this.Code = code;
-            this.Name = name;
-            this.Description = description;
-            this.SortOrder = sortOrder;
-            this.Inactive = inactive;
-
-            this.CreatedDate = new DateTime(1975, 01, 01);
+            this.PatientTypeCode = id.ToString();
+            this.PatientTypeName = name;
+            this.SortOrder = order;
         }
     }
 }

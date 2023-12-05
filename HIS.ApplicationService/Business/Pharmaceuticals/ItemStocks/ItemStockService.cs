@@ -1,32 +1,31 @@
 ﻿using AutoMapper;
+using HIS.Application.Core.Services;
+using HIS.Application.Core.Services.Dto;
 using HIS.Core.Linq;
 using HIS.Dtos.Business.ItemStocks;
-using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Items;
-using HIS.EntityFrameworkCore.Entities.Business;
+using HIS.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.Entities.Categories;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
 using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
-using System.Linq;
 
 namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
 {
-    public class ItemStockService : BaseSerivce, IItemStockService
+    public class ItemStockService : BaseAppService, IItemStockService
     {
         public ItemStockService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
-          : base(dbContext, config, mapper) { }
+          : base(dbContext, mapper) { }
 
-        public async Task<ApiResultList<ItemStockDto>> GetAll(GetAllItemStockInput input)
+        public async Task<PagedResultDto<ItemStockDto>> GetAll(GetAllItemStockInput input)
         {
-            var result = new ApiResultList<ItemStockDto>();
+            var result = new PagedResultDto<ItemStockDto>();
 
             try
             {
-                result.Result = (from mediStock in _dbContext.ItemStocks
-                                 join stock in _dbContext.Rooms on mediStock.StockId equals stock.Id
-                                 join Item in _dbContext.Items on mediStock.ItemId equals Item.Id
+                result.Result = (from mediStock in Context.ItemStocks
+                                 join stock in Context.Rooms on mediStock.StockId equals stock.Id
+                                 join Item in Context.Items on mediStock.ItemId equals Item.Id
                                  select new ItemStockDto()
                                  {
                                      Id = mediStock.Id,
@@ -37,8 +36,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
 
                                      ItemCode = Item.Code,
                                      ItemName = Item.Name,
-                                     StockCode = stock.Code,
-                                     StockName = stock.Name,
+                                     StockCode = stock.RoomCode,
+                                     StockName = stock.RoomName,
                                      CommodityType = Item.CommodityType
                                  })
                                  .WhereIf(!GuidHelper.IsNullOrEmpty(input.StockIdFilter), w => w.StockId == input.StockIdFilter)
@@ -50,21 +49,21 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
+                result.IsSucceeded = false;
                 result.Message = ex.Message;
             }
 
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<ItemStockDto>> GetItemByStocks(Guid stockId)
+        public async Task<PagedResultDto<ItemStockDto>> GetItemByStocks(Guid stockId)
         {
-            var result = new ApiResultList<ItemStockDto>();
+            var result = new PagedResultDto<ItemStockDto>();
 
             try
             {
-                result.Result = (from dItemStock in _dbContext.ItemStocks
-                                 join sItem in _dbContext.Items on dItemStock.ItemId equals sItem.Id
+                result.Result = (from dItemStock in Context.ItemStocks
+                                 join sItem in Context.Items on dItemStock.ItemId equals sItem.Id
 
                                  where dItemStock.IsDeleted == false
                                     && dItemStock.AvailableQuantity > 0
@@ -79,28 +78,27 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
                                      ItemId = dItemStock.ItemId,
                                      Quantity = dItemStock.Quantity,
                                      AvailableQuantity = dItemStock.AvailableQuantity,
-                                     Item = _mapper.Map<ItemDto>(sItem)
+                                     Item = ObjectMapper.Map<ItemDto>(sItem)
                                  }).ToList();
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
-                result.Message = ex.Message;
+                result.Exception(ex);
             }
 
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<ItemStockDto>> GetItemStockByStocks(Guid stockId, CommodityTypes? commodityType, bool isGroup = false, bool isAvailableQuantity = false)
+        public async Task<PagedResultDto<ItemStockDto>> GetItemStockByStocks(Guid stockId, CommodityTypes? commodityType, bool isGroup = false, bool isAvailableQuantity = false)
         {
-            var result = new ApiResultList<ItemStockDto>();
+            var result = new PagedResultDto<ItemStockDto>();
 
             try
             {
-                var itemStockDtos = (from itemStock in _dbContext.ItemStocks
-                                     join stock in _dbContext.Rooms on itemStock.StockId equals stock.Id
-                                     join item in _dbContext.Items on itemStock.ItemId equals item.Id
-                                     join itemType in _dbContext.ItemTypes on item.ItemTypeId equals itemType.Id
+                var itemStockDtos = (from itemStock in Context.ItemStocks
+                                     join stock in Context.Rooms on itemStock.StockId equals stock.Id
+                                     join item in Context.Items on itemStock.ItemId equals item.Id
+                                     join itemType in Context.ItemTypes on item.ItemTypeId equals itemType.Id
 
                                      where itemStock.IsDeleted == false
                                         && itemStock.StockId == stockId
@@ -115,8 +113,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
 
                                          ItemCode = itemType.Code,
                                          ItemName = itemType.Name,
-                                         StockCode = stock.Code,
-                                         StockName = stock.Name,
+                                         StockCode = stock.RoomCode,
+                                         StockName = stock.RoomName,
 
                                          // Phần Item
                                          CommodityType = item.CommodityType,
@@ -220,8 +218,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
-                result.Message = ex.Message;
+                result.Exception(ex);
             }
 
             return await Task.FromResult(result);

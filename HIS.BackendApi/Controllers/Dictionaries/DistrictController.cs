@@ -1,7 +1,6 @@
-﻿using HIS.ApplicationService.Dictionaries.District;
-using HIS.Dtos.Commons;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Dictionaries.Districts;
 using HIS.Dtos.Dictionaries.District;
-using HIS.Models.Commons;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
@@ -18,25 +17,25 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<DistrictDto>> GetAll([FromQuery] GetAllDistrictInput input)
+        public async Task<PagedResultDto<DistrictDto>> GetAll([FromQuery] GetAllDistrictInput input)
         {
             return await _districtService.GetAll(input);
         }
 
         [HttpGet("GetById")]
-        public async Task<ApiResult<DistrictDto>> GetById(Guid id)
+        public async Task<ResultDto<DistrictDto>> GetById(Guid id)
         {
             return await _districtService.GetById(id);
         }
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ApiResult<DistrictDto>> CreateOrEdit(DistrictDto input)
+        public async Task<ResultDto<DistrictDto>> CreateOrEdit(DistrictDto input)
         {
             return await _districtService.CreateOrEdit(input);
         }
 
         [HttpDelete("Delete")]
-        public async Task<ApiResult<DistrictDto>> Delete(Guid id)
+        public async Task<ResultDto<DistrictDto>> Delete(Guid id)
         {
             return await _districtService.Delete(id);
         }

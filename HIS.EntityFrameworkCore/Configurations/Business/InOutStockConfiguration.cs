@@ -1,11 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using HIS.EntityFrameworkCore.Entities.Business;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HIS.EntityFrameworkCore.Entities.Business;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business
 {
@@ -65,7 +60,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
                 .HasForeignKey(e => e.ReqDepartmentId)
                 ;
 
-            builder.HasOne(e => e.PatientRecord)
+            builder.HasOne(e => e.MedicalRecord)
                 .WithMany()
                 .HasForeignKey(e => e.PatientRecordId)
                 ;

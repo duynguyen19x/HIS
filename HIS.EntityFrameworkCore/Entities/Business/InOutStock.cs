@@ -155,6 +155,6 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         [Ignore]
         public Patient Patient { get; set; }
         [Ignore]
-        public PatientRecord PatientRecord { get; set; }
+        public MedicalRecord MedicalRecord { get; set; }
     }
 }

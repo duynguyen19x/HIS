@@ -8,5 +8,6 @@ namespace HIS.Application.Core.Services.Dto
 {
     public interface IPagedResult<T> : IListResult<T>
     {
+        int TotalCount { get; set; }
     }
 }

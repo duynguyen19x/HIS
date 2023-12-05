@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HIS.Application.Core.Services.Dto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace HIS.Dtos.Dictionaries.Department
 {
-    public class GetAllDepartmentInput
+    public class GetAllDepartmentInput : PagedResultRequestDto
     {
-        public string CodeFilter { get; set; }
-        public string NameFilter { get; set; }
-        public Guid? BranchIdFilter { get; set; }
+        public string DepartmentCodeFilter { get; set; }
+        public string DepartmentNameFilter { get; set; }
+        public Guid? BranchFilter { get; set; }
         public bool? InactiveFilter { get; set; }
     }
 }

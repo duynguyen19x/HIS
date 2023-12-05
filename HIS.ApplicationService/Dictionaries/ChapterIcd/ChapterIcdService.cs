@@ -1,52 +1,44 @@
 ﻿using AutoMapper;
+using HIS.Application.Core.Services;
+using HIS.Application.Core.Services.Dto;
 using HIS.Core.Linq;
-using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ChapterICD10;
+using HIS.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
-using HIS.Models.Commons;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
 
 namespace HIS.ApplicationService.Dictionaries.ChapterICD10
 {
-    public class ChapterIcdService : BaseSerivce, IChapterIcdService
+    public class ChapterIcdService : BaseCrudAppService<ChapterIcdDto, Guid?, GetAllChapterIcdInput>, IChapterIcdService
     {
-        public ChapterIcdService(HISDbContext dbContext, IConfiguration config, IMapper mapper) : base(dbContext, config, mapper)
+        public ChapterIcdService(HISDbContext dbContext, IConfiguration config, IMapper mapper) 
+            : base(dbContext, mapper)
         {
         }
 
-        public async Task<ApiResult<ChapterIcdDto>> CreateOrEdit(ChapterIcdDto input)
+        public override async Task<ResultDto<ChapterIcdDto>> Create(ChapterIcdDto input)
         {
-            if (GuidHelper.IsNullOrEmpty(input.Id))
-                return await Create(input);
-            else
-                return await Update(input);
-        }
-
-        private async Task<ApiResult<ChapterIcdDto>> Create(ChapterIcdDto input)
-        {
-            var result = new ApiResult<ChapterIcdDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<ChapterIcdDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
 
-                    var data = _mapper.Map<ChapterIcd>(input);
+                    var data = ObjectMapper.Map<ChapterIcd>(input);
 
-                    _dbContext.ChapterIcds.Add(data);
-                    await _dbContext.SaveChangesAsync();
+                    Context.ChapterIcds.Add(data);
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
+                    result.IsSucceeded = true;
                     result.Result = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -56,28 +48,27 @@ namespace HIS.ApplicationService.Dictionaries.ChapterICD10
             return await Task.FromResult(result);
         }
 
-        private async Task<ApiResult<ChapterIcdDto>> Update(ChapterIcdDto input)
+        public override async Task<ResultDto<ChapterIcdDto>> Update(ChapterIcdDto input)
         {
-            var result = new ApiResult<ChapterIcdDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<ChapterIcdDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var sServiceChapterICD10 = _dbContext.ChapterIcds.FirstOrDefault(f => f.Id == input.Id);
+                    var sServiceChapterICD10 = Context.ChapterIcds.FirstOrDefault(f => f.Id == input.Id);
                     if (sServiceChapterICD10 == null)
-                        _mapper.Map(input, sServiceChapterICD10);
+                        ObjectMapper.Map(input, sServiceChapterICD10);
 
-                    await _dbContext.SaveChangesAsync();
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
+                    result.IsSucceeded = true;
                     result.Result = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -87,27 +78,26 @@ namespace HIS.ApplicationService.Dictionaries.ChapterICD10
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<ChapterIcdDto>> Delete(Guid id)
+        public override async Task<ResultDto<ChapterIcdDto>> Delete(Guid? id)
         {
-            var result = new ApiResult<ChapterIcdDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<ChapterIcdDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var sServiceChapterICD10 = _dbContext.ChapterIcds.SingleOrDefault(x => x.Id == id);
+                    var sServiceChapterICD10 = Context.ChapterIcds.SingleOrDefault(x => x.Id == id);
                     if (sServiceChapterICD10 != null)
                     {
-                        _dbContext.ChapterIcds.Remove(sServiceChapterICD10);
-                        await _dbContext.SaveChangesAsync();
-                        result.IsSuccessed = true;
+                        Context.ChapterIcds.Remove(sServiceChapterICD10);
+                        await Context.SaveChangesAsync();
+                        result.IsSucceeded = true;
 
                         transaction.Commit();
                     }
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -118,13 +108,13 @@ namespace HIS.ApplicationService.Dictionaries.ChapterICD10
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<ChapterIcdDto>> GetAll(GetAllChapterIcdInput input)
+        public override async Task<PagedResultDto<ChapterIcdDto>> GetAll(GetAllChapterIcdInput input)
         {
-            var result = new ApiResultList<ChapterIcdDto>();
+            var result = new PagedResultDto<ChapterIcdDto>();
 
             try
             {
-                result.Result = (from r in _dbContext.ChapterIcds
+                result.Result = (from r in Context.ChapterIcds
                                  select new ChapterIcdDto()
                                  {
                                      Id = r.Id,
@@ -138,26 +128,25 @@ namespace HIS.ApplicationService.Dictionaries.ChapterICD10
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
+                result.IsSucceeded = false;
                 result.Message = ex.Message;
             }
 
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<ChapterIcdDto>> GetById(Guid id)
+        public override async Task<ResultDto<ChapterIcdDto>> GetById(Guid? id)
         {
-            var result = new ApiResult<ChapterIcdDto>();
+            var result = new ResultDto<ChapterIcdDto>();
 
             try
             {
-                var service = _dbContext.ChapterIcds.FirstOrDefault(s => s.Id == id);
-                result.Result = _mapper.Map<ChapterIcdDto>(service);
+                var service = Context.ChapterIcds.FirstOrDefault(s => s.Id == id);
+                result.Result = ObjectMapper.Map<ChapterIcdDto>(service);
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
-                result.Message = ex.Message;
+                result.Exception(ex);
             }
 
             return await Task.FromResult(result);

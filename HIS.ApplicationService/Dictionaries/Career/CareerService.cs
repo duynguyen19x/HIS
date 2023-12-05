@@ -1,49 +1,39 @@
 ﻿using AutoMapper;
-using HIS.Dtos.Commons;
+using HIS.Application.Core.Services;
+using HIS.Application.Core.Services.Dto;
 using HIS.Dtos.Dictionaries.Career;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
-using HIS.Models.Commons;
+using HIS.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace HIS.ApplicationService.Dictionaries.Career
 {
-    public class CareerService : BaseSerivce, ICareerService
+    public class CareerService : BaseCrudAppService<CareerDto, Guid?, GetAllCareerInput>, ICareerService
     {
         public CareerService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
-            : base(dbContext, config, mapper)
+            : base(dbContext, mapper)
         {
         }
 
-        public async Task<ApiResult<CareerDto>> CreateOrEdit(CareerDto input)
+        public override async Task<ResultDto<CareerDto>> Create(CareerDto input)
         {
-            if (input.Id == null)
-                return await Create(input);
-            else
-                return await Update(input);
-        }
-
-        public async Task<ApiResult<CareerDto>> Create(CareerDto input)
-        {
-            var result = new ApiResult<CareerDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<CareerDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Career>(input);
-                    _dbContext.Careers.Add(data);
-                    await _dbContext.SaveChangesAsync();
+                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Career>(input);
+                    Context.Careers.Add(data);
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
+                    result.IsSucceeded = true;
                     result.Result = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -53,26 +43,25 @@ namespace HIS.ApplicationService.Dictionaries.Career
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<CareerDto>> Update(CareerDto input)
+        public override async Task<ResultDto<CareerDto>> Update(CareerDto input)
         {
-            var result = new ApiResult<CareerDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<CareerDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Career>(input);
-                    _dbContext.Careers.Update(data);
-                    await _dbContext.SaveChangesAsync();
+                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Career>(input);
+                    Context.Careers.Update(data);
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
+                    result.IsSucceeded = true;
                     result.Result = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -82,27 +71,26 @@ namespace HIS.ApplicationService.Dictionaries.Career
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<CareerDto>> Delete(Guid id)
+        public override async Task<ResultDto<CareerDto>> Delete(Guid? id)
         {
-            var result = new ApiResult<CareerDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<CareerDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var data = _dbContext.Careers.SingleOrDefault(x => x.Id == id);
+                    var data = Context.Careers.SingleOrDefault(x => x.Id == id);
                     if (data != null)
                     {
-                        _dbContext.Careers.Remove(data);
-                        await _dbContext.SaveChangesAsync();
-                        result.IsSuccessed = true;
+                        Context.Careers.Remove(data);
+                        await Context.SaveChangesAsync();
+                        result.IsSucceeded = true;
 
                         transaction.Commit();
                     }
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -112,13 +100,13 @@ namespace HIS.ApplicationService.Dictionaries.Career
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<CareerDto>> GetAll(GetAllCareerInput input)
+        public override async Task<PagedResultDto<CareerDto>> GetAll(GetAllCareerInput input)
         {
-            var result = new ApiResultList<CareerDto>();
+            var result = new PagedResultDto<CareerDto>();
             try
             {
-                result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.Careers
+                result.IsSucceeded = true;
+                result.Result = (from r in Context.Careers
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -134,22 +122,22 @@ namespace HIS.ApplicationService.Dictionaries.Career
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
+                result.IsSucceeded = false;
                 result.Message = ex.Message;
             }
 
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<CareerDto>> GetById(Guid id)
+        public override async Task<ResultDto<CareerDto>> GetById(Guid? id)
         {
-            var result = new ApiResult<CareerDto>();
+            var result = new ResultDto<CareerDto>();
 
-            var data = _dbContext.Careers.SingleOrDefault(s => s.Id == id);
+            var data = Context.Careers.SingleOrDefault(s => s.Id == id);
             if (data != null)
             {
-                result.IsSuccessed = true;
-                result.Result = _mapper.Map<CareerDto>(data);
+                result.IsSucceeded = true;
+                result.Result = ObjectMapper.Map<CareerDto>(data);
             }
 
             return await Task.FromResult(result);

@@ -1,7 +1,6 @@
-﻿using HIS.ApplicationService.Dictionaries.Career;
-using HIS.Dtos.Commons;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Dictionaries.Career;
 using HIS.Dtos.Dictionaries.Career;
-using HIS.Models.Commons;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
@@ -18,25 +17,25 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<CareerDto>> GetAll([FromQuery] GetAllCareerInput input)
+        public async Task<PagedResultDto<CareerDto>> GetAll([FromQuery] GetAllCareerInput input)
         {
             return await _jobService.GetAll(input);
         }
 
         [HttpGet("GetById")]
-        public async Task<ApiResult<CareerDto>> GetById(Guid id)
+        public async Task<ResultDto<CareerDto>> GetById(Guid id)
         {
             return await _jobService.GetById(id);
         }
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ApiResult<CareerDto>> CreateOrEdit(CareerDto input)
+        public async Task<ResultDto<CareerDto>> CreateOrEdit(CareerDto input)
         {
             return await _jobService.CreateOrEdit(input);
         }
 
         [HttpDelete("Delete")]
-        public async Task<ApiResult<CareerDto>> Delete(Guid id)
+        public async Task<ResultDto<CareerDto>> Delete(Guid id)
         {
             return await _jobService.Delete(id);
         }

@@ -1,10 +1,8 @@
-﻿using HIS.ApplicationService.Dictionaries.Department;
-using HIS.Dtos.Commons;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Dictionaries.Department;
 using HIS.Dtos.Dictionaries.Department;
-using HIS.Models.Commons;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
 {
@@ -21,28 +19,28 @@ namespace HIS.BackendApi.Controllers.Dictionaries
 
         [HttpGet("GetAll")]
         [Authorize]
-        public async Task<ApiResultList<DepartmentDto>> GetAll([FromQuery] GetAllDepartmentInput input)
+        public async Task<PagedResultDto<DepartmentDto>> GetAll([FromQuery] GetAllDepartmentInput input)
         {
             return await _departmentService.GetAll(input);
         }
 
         [HttpGet("GetById")]
         [Authorize]
-        public async Task<ApiResult<DepartmentDto>> GetById(Guid id)
+        public async Task<ResultDto<DepartmentDto>> GetById(Guid id)
         {
             return await _departmentService.GetById(id);
         }
 
         [HttpPost("CreateOrEdit")]
         [Authorize]
-        public async Task<ApiResult<DepartmentDto>> CreateOrEdit(DepartmentDto input)
+        public async Task<ResultDto<DepartmentDto>> CreateOrEdit(DepartmentDto input)
         {
             return await _departmentService.CreateOrEdit(input);
         }
 
         [HttpDelete("Delete")]
         [Authorize]
-        public async Task<ApiResult<DepartmentDto>> Delete(Guid id)
+        public async Task<ResultDto<DepartmentDto>> Delete(Guid id)
         {
             return await _departmentService.Delete(id);
         }

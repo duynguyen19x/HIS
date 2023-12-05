@@ -1,7 +1,6 @@
-﻿using HIS.ApplicationService.Dictionaries.DepartmentType;
-using HIS.Dtos.Commons;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Dictionaries.DepartmentType;
 using HIS.Dtos.Dictionaries.DepartmentType;
-using HIS.Models.Commons;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
@@ -18,25 +17,25 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<DepartmentTypeDto>> GetAll([FromQuery] GetAllDepartmentTypeInput input)
+        public async Task<PagedResultDto<DepartmentTypeDto>> GetAll([FromQuery] GetAllDepartmentTypeInput input)
         {
             return await _departmentTypeService.GetAll(input);
         }
 
         [HttpGet("GetById")]
-        public async Task<ApiResult<DepartmentTypeDto>> GetById(int id)
+        public async Task<ResultDto<DepartmentTypeDto>> GetById(int id)
         {
             return await _departmentTypeService.GetById(id);
         }
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ApiResult<DepartmentTypeDto>> CreateOrEdit(DepartmentTypeDto input)
+        public async Task<ResultDto<DepartmentTypeDto>> CreateOrEdit(DepartmentTypeDto input)
         {
             return await _departmentTypeService.CreateOrEdit(input);
         }
 
         [HttpDelete("Delete")]
-        public async Task<ApiResult<DepartmentTypeDto>> Delete(int id)
+        public async Task<ResultDto<DepartmentTypeDto>> Delete(int id)
         {
             return await _departmentTypeService.Delete(id);
         }

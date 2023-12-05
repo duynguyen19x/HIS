@@ -1,50 +1,41 @@
 ﻿using AutoMapper;
+using HIS.Application.Core.Services;
+using HIS.Application.Core.Services.Dto;
 using HIS.Core.Linq;
-using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ItemLines;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
-using HIS.Models.Commons;
+using HIS.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace HIS.ApplicationService.Dictionaries.ItemLines
 {
-    public class ItemLineService : BaseSerivce, IItemLineService
+    public class ItemLineService : BaseCrudAppService<ItemLineDto, Guid?, GetAllItemLineInput>, IItemLineService
     {
         public ItemLineService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
-          : base(dbContext, config, mapper)
+          : base(dbContext, mapper)
         {
 
         }
 
-        public async Task<ApiResult<ItemLineDto>> CreateOrEdit(ItemLineDto input)
+        public override async Task<ResultDto<ItemLineDto>> Create(ItemLineDto input)
         {
-            if (input.Id == null)
-                return await Create(input);
-            else
-                return await Update(input);
-        }
-
-        private async Task<ApiResult<ItemLineDto>> Create(ItemLineDto input)
-        {
-            var result = new ApiResult<ItemLineDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<ItemLineDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var ItemLine = _mapper.Map<EntityFrameworkCore.Entities.Categories.ItemLine>(input);
-                    _dbContext.ItemLines.Add(ItemLine);
-                    await _dbContext.SaveChangesAsync();
+                    var ItemLine = ObjectMapper.Map<EntityFrameworkCore.Entities.Categories.ItemLine>(input);
+                    Context.ItemLines.Add(ItemLine);
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
+                    result.IsSucceeded = true;
                     result.Result = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -54,26 +45,25 @@ namespace HIS.ApplicationService.Dictionaries.ItemLines
             return await Task.FromResult(result);
         }
 
-        private async Task<ApiResult<ItemLineDto>> Update(ItemLineDto input)
+        public override async Task<ResultDto<ItemLineDto>> Update(ItemLineDto input)
         {
-            var result = new ApiResult<ItemLineDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<ItemLineDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var ItemLine = _mapper.Map<EntityFrameworkCore.Entities.Categories.ItemLine>(input);
-                    _dbContext.ItemLines.Update(ItemLine);
-                    await _dbContext.SaveChangesAsync();
+                    var ItemLine = ObjectMapper.Map<EntityFrameworkCore.Entities.Categories.ItemLine>(input);
+                    Context.ItemLines.Update(ItemLine);
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
+                    result.IsSucceeded = true;
                     result.Result = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -83,26 +73,26 @@ namespace HIS.ApplicationService.Dictionaries.ItemLines
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<ItemLineDto>> Delete(Guid id)
+        public override async Task<ResultDto<ItemLineDto>> Delete(Guid? id)
         {
-            var result = new ApiResult<ItemLineDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<ItemLineDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var ItemLine = _dbContext.ItemLines.SingleOrDefault(x => x.Id == id);
+                    var ItemLine = Context.ItemLines.SingleOrDefault(x => x.Id == id);
                     if (ItemLine != null)
                     {
-                        _dbContext.ItemLines.Remove(ItemLine);
-                        await _dbContext.SaveChangesAsync();
-                        result.IsSuccessed = true;
+                        Context.ItemLines.Remove(ItemLine);
+                        await Context.SaveChangesAsync();
+                        result.IsSucceeded = true;
 
                         transaction.Commit();
                     }
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
+                    result.IsSucceeded = false;
                     result.Message = ex.Message;
                 }
                 finally
@@ -113,12 +103,12 @@ namespace HIS.ApplicationService.Dictionaries.ItemLines
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<ItemLineDto>> GetAll(GetAllItemLineInput input)
+        public override async Task<PagedResultDto<ItemLineDto>> GetAll(GetAllItemLineInput input)
         {
-            var result = new ApiResultList<ItemLineDto>();
+            var result = new PagedResultDto<ItemLineDto>();
             try
             {
-                result.Result = (from r in _dbContext.ItemLines
+                result.Result = (from r in Context.ItemLines
                                  select new ItemLineDto()
                                  {
                                      Id = r.Id,
@@ -136,21 +126,20 @@ namespace HIS.ApplicationService.Dictionaries.ItemLines
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
-                result.Message = ex.Message;
+                result.Exception(ex);
             }
 
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<ItemLineDto>> GetById(Guid id)
+        public override async Task<ResultDto<ItemLineDto>> GetById(Guid? id)
         {
-            var result = new ApiResult<ItemLineDto>();
+            var result = new ResultDto<ItemLineDto>();
 
-            var ItemLine = _dbContext.ItemLines.SingleOrDefault(s => s.Id == id);
+            var ItemLine = Context.ItemLines.SingleOrDefault(s => s.Id == id);
             if (ItemLine != null)
             {
-                result.Result = _mapper.Map<ItemLineDto>(ItemLine);
+                result.Result = ObjectMapper.Map<ItemLineDto>(ItemLine);
             }
 
             return await Task.FromResult(result);

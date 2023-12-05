@@ -8,6 +8,6 @@ namespace HIS.Application.Core.Services.Dto
 {
     public interface IListResult<T>
     {
-        IList<T> Items { get; set; }
+        IList<T> Result { get; set; }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using HIS.EntityFrameworkCore.Data.Builders;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using Microsoft.EntityFrameworkCore;
 
 namespace HIS.EntityFrameworkCore.Data
@@ -9,9 +8,7 @@ namespace HIS.EntityFrameworkCore.Data
         public static void Seed(this ModelBuilder modelBuilder)
         {
             ChapterIcdBuilder.Seed(modelBuilder);
-            CountryBuilder.Seed(modelBuilder);
-            DeathCauseBuilder.Seed(modelBuilder);
-            DeathWithinBuilder.Seed(modelBuilder);
+            NationalBuilder.Seed(modelBuilder);
             UserBuilder.Seed(modelBuilder);
             ServiceGroupBuilder.Seed(modelBuilder);
             ServiceGroupHeInBuilder.Seed(modelBuilder);
@@ -23,14 +20,8 @@ namespace HIS.EntityFrameworkCore.Data
             ItemLineBuilder.Seed(modelBuilder);
             InOutStockTypeBuilder.Seed(modelBuilder);
             ProvinceBuilder.Seed(modelBuilder);
-            ReceptionTypeBuilder.Seed(modelBuilder);
-
-            PatientTypeBuilder.Seed(modelBuilder);
-            PatientRecordTypeBuilder.Seed(modelBuilder);
-            MedicalRecordEndTypeBuilder.Seed(modelBuilder);
-            MedicalRecordResultBuilder.Seed(modelBuilder);
-            
-            
+            GenderBuilder.Seed(modelBuilder);
+            EthnicityBuilder.Seed(modelBuilder);
         }
     }
 }

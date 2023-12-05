@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
+using HIS.EntityFrameworkCore;
 
 namespace HIS.Application.Core.Services
 {

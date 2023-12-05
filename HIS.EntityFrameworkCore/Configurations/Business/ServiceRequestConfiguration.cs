@@ -15,8 +15,14 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
         {
             builder.ToTable("ServiceRequest");
             builder.HasKey(x => x.Id);
-            builder.Property(r => r.Code).IsRequired().HasMaxLength(50);
-            builder.Property(u => u.Description).HasMaxLength(500);
+            builder.Property(x => x.ServiceRequestCode).IsRequired().HasMaxLength(20);
+            builder.Property(x => x.ServiceRequestDate).IsRequired();
+            builder.Property(x => x.ServiceRequestUseDate).IsRequired();
+            builder.Property(x => x.Barcode).HasMaxLength(20);
+            builder.Property(x => x.IcdCode).HasMaxLength(20);
+            builder.Property(x => x.IcdName).HasMaxLength(512);
+            builder.Property(x => x.IcdSubCode).HasMaxLength(512);
+            builder.Property(x => x.IcdText).HasMaxLength(512);
         }
     }
 }

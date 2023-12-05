@@ -1,48 +1,41 @@
 ﻿using AutoMapper;
+using HIS.Application.Core.Services;
+using HIS.Application.Core.Services.Dto;
 using HIS.Core.Linq;
-using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.Supplier;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
-using HIS.Models.Commons;
+using HIS.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace HIS.ApplicationService.Dictionaries.Supplier
 {
-    public class SupplierService : BaseSerivce, ISupplierService
+    public class SupplierService : BaseCrudAppService<SupplierDto, Guid?, GetAllSupplierInput>, ISupplierService
     {
-        public SupplierService(HISDbContext dbContext, IConfiguration config, IMapper mapper) : base(dbContext, config, mapper)
+        public SupplierService(HISDbContext dbContext, IConfiguration config, IMapper mapper) 
+            : base(dbContext, mapper)
         {
 
         }
 
-        public async Task<ApiResult<SupplierDto>> CreateOrEdit(SupplierDto input)
+        public override async Task<ResultDto<SupplierDto>> Create(SupplierDto input)
         {
-            if (input.Id == null)
-                return await Create(input);
-            else
-                return await Update(input);
-        }
-
-        public async Task<ApiResult<SupplierDto>> Create(SupplierDto input)
-        {
-            var result = new ApiResult<SupplierDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<SupplierDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var sSupplier = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Supplier>(input);
-                    _dbContext.Suppliers.Add(sSupplier);
-                    await _dbContext.SaveChangesAsync();
+                    var sSupplier = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Supplier>(input);
+                    Context.Suppliers.Add(sSupplier);
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
+                    result.IsSucceeded = true;
                     result.Result = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
+                    result.IsSucceeded = false;
                     result.Message = ex.Message;
                 }
                 finally
@@ -53,25 +46,25 @@ namespace HIS.ApplicationService.Dictionaries.Supplier
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SupplierDto>> Update(SupplierDto input)
+        public override async Task<ResultDto<SupplierDto>> Update(SupplierDto input)
         {
-            var result = new ApiResult<SupplierDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<SupplierDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var sSupplier = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Supplier>(input);
-                    _dbContext.Suppliers.Update(sSupplier);
-                    await _dbContext.SaveChangesAsync();
+                    var sSupplier = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Supplier>(input);
+                    Context.Suppliers.Update(sSupplier);
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
+                    result.IsSucceeded = true;
                     result.Result = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
+                    result.IsSucceeded = false;
                     result.Message = ex.Message;
                 }
                 finally
@@ -82,27 +75,27 @@ namespace HIS.ApplicationService.Dictionaries.Supplier
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SupplierDto>> Delete(Guid id)
+        public override async Task<ResultDto<SupplierDto>> Delete(Guid? id)
         {
-            var result = new ApiResult<SupplierDto>();
+            var result = new ResultDto<SupplierDto>();
 
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var sSupplier = _dbContext.Suppliers.SingleOrDefault(x => x.Id == id);
+                    var sSupplier = Context.Suppliers.SingleOrDefault(x => x.Id == id);
                     if (sSupplier != null)
                     {
-                        _dbContext.Suppliers.Remove(sSupplier);
-                        await _dbContext.SaveChangesAsync();
-                        result.IsSuccessed = true;
+                        Context.Suppliers.Remove(sSupplier);
+                        await Context.SaveChangesAsync();
+                        result.IsSucceeded = true;
 
                         transaction.Commit();
                     }
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
+                    result.IsSucceeded = false;
                     result.Message = ex.Message;
                 }
                 finally
@@ -114,13 +107,13 @@ namespace HIS.ApplicationService.Dictionaries.Supplier
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<SupplierDto>> GetAll(GetAllSupplierInput input)
+        public override async Task<PagedResultDto<SupplierDto>> GetAll(GetAllSupplierInput input)
         {
-            var result = new ApiResultList<SupplierDto>();
+            var result = new PagedResultDto<SupplierDto>();
 
             try
             {
-                result.Result = (from r in _dbContext.Suppliers
+                result.Result = (from r in Context.Suppliers
                                  where r.IsDeleted == false
                                  select new SupplierDto()
                                  {
@@ -142,28 +135,28 @@ namespace HIS.ApplicationService.Dictionaries.Supplier
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
+                result.IsSucceeded = false;
                 result.Message = ex.Message;
             }
 
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<SupplierDto>> GetById(Guid id)
+        public override async Task<ResultDto<SupplierDto>> GetById(Guid? id)
         {
-            var result = new ApiResult<SupplierDto>();
+            var result = new ResultDto<SupplierDto>();
 
             try
             {
-                var sSuppliers = _dbContext.Suppliers.FirstOrDefault(s => s.Id == id);
+                var sSuppliers = Context.Suppliers.FirstOrDefault(s => s.Id == id);
                 if (sSuppliers != null)
                 {
-                    result.Result = _mapper.Map<SupplierDto>(sSuppliers);
+                    result.Result = ObjectMapper.Map<SupplierDto>(sSuppliers);
                 }
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
+                result.IsSucceeded = false;
                 result.Message = ex.Message;
             }
 

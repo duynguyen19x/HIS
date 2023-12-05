@@ -30,7 +30,7 @@ namespace HIS.EntityFrameworkCore.Configurations
             modelBuilder.ApplyConfiguration(new ItemGroupConfiguration());
             modelBuilder.ApplyConfiguration(new ItemLineConfiguration());
             modelBuilder.ApplyConfiguration(new ItemTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new CountryConfiguration());
+            modelBuilder.ApplyConfiguration(new NationalConfiguration());
             modelBuilder.ApplyConfiguration(new ProvinceConfiguration());
             modelBuilder.ApplyConfiguration(new DistrictConfiguration());
             modelBuilder.ApplyConfiguration(new WardConfiguration());
@@ -56,15 +56,15 @@ namespace HIS.EntityFrameworkCore.Configurations
             modelBuilder.ApplyConfiguration(new PatientConfiguration());
             modelBuilder.ApplyConfiguration(new PatientRecordConfiguration());
             modelBuilder.ApplyConfiguration(new MedicalRecordConfiguration());
-            modelBuilder.ApplyConfiguration(new MedicalRecordEndTypeConfiguration());
-            modelBuilder.ApplyConfiguration(new MedicalRecordResultConfiguration());
+            //modelBuilder.ApplyConfiguration(new MedicalRecordEndTypeConfiguration());
+            //modelBuilder.ApplyConfiguration(new MedicalRecordResultConfiguration());
             modelBuilder.ApplyConfiguration(new PatientRecordTypeConfiguration());
             modelBuilder.ApplyConfiguration(new MedicalRecordTypeConfiguration());
 
             modelBuilder.ApplyConfiguration(new InsuranceConfiguration());
-            modelBuilder.ApplyConfiguration(new ReceptionTypeConfiguration());
+            //modelBuilder.ApplyConfiguration(new ReceptionTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ServiceRequestConfiguration());
-            modelBuilder.ApplyConfiguration(new ServiceRequestServeConfiguration());
+            //modelBuilder.ApplyConfiguration(new ServiceRequestServeConfiguration());
             modelBuilder.ApplyConfiguration(new DbOptionConfigurations());
         }
     }
