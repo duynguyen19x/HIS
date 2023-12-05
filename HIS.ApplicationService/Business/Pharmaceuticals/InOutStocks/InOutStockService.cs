@@ -112,10 +112,10 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                     if (inOutStockDto.InOutStockTypeId == 1)
                     {
                         var inOutStockItemDtos = ObjectMapper.Map<IList<InOutStockItemDto>>(Context.InOutStockItems.Where(w => w.InOutStockId == id).ToList());
-                        var ItemIds = inOutStockItemDtos.Select(s => s.ItemId).ToList();
-                        var ItemDtos = ObjectMapper.Map<IList<Item>>(Context.Items.Where(w => ItemIds.Contains(w.Id)).ToList());
+                        var itemIds = inOutStockItemDtos.Select(s => s.ItemId).ToList();
+                        var itemDtos = ObjectMapper.Map<IList<Item>>(Context.Items.Where(w => itemIds.Contains(w.Id)).ToList());
 
-                        var ItemPricePolicyDtos = (from med in Context.ItemPricePolicies
+                        var itemPricePolicyDtos = (from med in Context.ItemPricePolicies
                                                    join pa in Context.PatientTypes on med.PatientTypeId equals pa.Id
                                                    select new ItemPricePolicyDto()
                                                    {
@@ -130,44 +130,44 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                                        PatientTypeCode = pa.PatientTypeCode,
                                                        PatientTypeName = pa.PatientTypeName,
                                                        IsHeIn = med.PatientTypeId == (int)PatientTypes.BHYT ? true : false,
-                                                   }).WhereIf(ItemIds != null, w => ItemIds.Contains(w.ItemId))
+                                                   }).WhereIf(itemIds != null, w => itemIds.Contains(w.ItemId))
                                                    .OrderBy(s => s.PatientTypeCode).ToList();
 
                         foreach (var inOutStockItem in inOutStockItemDtos)
                         {
-                            var sItem = ItemDtos.FirstOrDefault(f => f.Id == inOutStockItem.ItemId);
+                            var item = itemDtos.FirstOrDefault(f => f.Id == inOutStockItem.ItemId);
 
-                            if (!string.IsNullOrEmpty(sItem.Code))
-                                inOutStockItem.Code = sItem.Code.Split('.')?[0];
+                            if (!string.IsNullOrEmpty(item.Code))
+                                inOutStockItem.Code = item.Code.Split('.')?[0];
 
-                            inOutStockItem.HeInCode = sItem.HeInCode;
-                            inOutStockItem.Name = sItem.Name;
-                            inOutStockItem.SortOrder = sItem.SortOrder;
-                            inOutStockItem.ItemLineId = sItem.ItemLineId;
-                            inOutStockItem.ItemGroupId = sItem.ItemGroupId;
-                            inOutStockItem.ItemTypeId = sItem.ItemTypeId;
-                            inOutStockItem.UnitId = sItem.UnitId;
-                            inOutStockItem.Tutorial = sItem.Tutorial;
-                            inOutStockItem.CountryId = sItem.CountryId;
-                            inOutStockItem.ImpPrice = sItem.ImpPrice;
-                            inOutStockItem.ImpVatRate = sItem.ImpVatRate;
-                            inOutStockItem.ImpTaxRate = sItem.ImpTaxRate;
-                            inOutStockItem.Description = sItem.Description;
-                            inOutStockItem.ActiveSubstance = sItem.ActiveSubstance;
-                            inOutStockItem.Concentration = sItem.Concentration;
-                            inOutStockItem.Content = sItem.Content;
-                            inOutStockItem.Manufacturer = sItem.Manufacturer;
-                            inOutStockItem.PackagingSpecifications = sItem.PackagingSpecifications;
-                            inOutStockItem.Dosage = sItem.Dosage;
-                            inOutStockItem.Lot = sItem.Lot;
-                            inOutStockItem.DueDate = sItem.DueDate;
-                            inOutStockItem.TenderDecision = sItem.TenderDecision;
-                            inOutStockItem.TenderPackage = sItem.TenderPackage;
-                            inOutStockItem.TenderGroup = sItem.TenderGroup;
-                            inOutStockItem.TenderYear = sItem.TenderYear;
-                            inOutStockItem.CommodityType = sItem.CommodityType;
+                            inOutStockItem.HeInCode = item.HeInCode;
+                            inOutStockItem.Name = item.Name;
+                            inOutStockItem.SortOrder = item.SortOrder;
+                            inOutStockItem.ItemLineId = item.ItemLineId;
+                            inOutStockItem.ItemGroupId = item.ItemGroupId;
+                            inOutStockItem.ItemTypeId = item.ItemTypeId;
+                            inOutStockItem.UnitId = item.UnitId;
+                            inOutStockItem.Tutorial = item.Tutorial;
+                            inOutStockItem.CountryId = item.CountryId;
+                            inOutStockItem.ImpPrice = item.ImpPrice;
+                            inOutStockItem.ImpVatRate = item.ImpVatRate;
+                            inOutStockItem.ImpTaxRate = item.ImpTaxRate;
+                            inOutStockItem.Description = item.Description;
+                            inOutStockItem.ActiveSubstance = item.ActiveSubstance;
+                            inOutStockItem.Concentration = item.Concentration;
+                            inOutStockItem.Content = item.Content;
+                            inOutStockItem.Manufacturer = item.Manufacturer;
+                            inOutStockItem.PackagingSpecifications = item.PackagingSpecifications;
+                            inOutStockItem.Dosage = item.Dosage;
+                            inOutStockItem.Lot = item.Lot;
+                            inOutStockItem.DueDate = item.DueDate;
+                            inOutStockItem.TenderDecision = item.TenderDecision;
+                            inOutStockItem.TenderPackage = item.TenderPackage;
+                            inOutStockItem.TenderGroup = item.TenderGroup;
+                            inOutStockItem.TenderYear = item.TenderYear;
+                            inOutStockItem.CommodityType = item.CommodityType;
 
-                            inOutStockItem.ItemPricePolicies = ItemPricePolicyDtos.Where(w => w.ItemId == inOutStockItem.ItemId).ToList();
+                            inOutStockItem.ItemPricePolicies = itemPricePolicyDtos.Where(w => w.ItemId == inOutStockItem.ItemId).ToList();
                         }
 
                         inOutStockDto.InOutStockItems = inOutStockItemDtos;
@@ -661,7 +661,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
         #region Nhập từ kho khác
         /// <summary>
-        /// Lấy phiếu nhập NCC
+        /// Lấy phiếu nhập từ kho khác
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
@@ -1264,7 +1264,6 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                                     else
                                                         inOutStockItem.RequestQuantity = inOutStockItemDto.RequestQuantity;
                                                     inOutStockItem.ApprovedQuantity = itemStock.AvailableQuantity;
-                                                    inOutStockItem.ApprovedQuantity = itemStock.AvailableQuantity;
                                                 }
 
                                                 inOutStockItemDto.RequestQuantity -= inOutStockItem.ApprovedQuantity;
@@ -1528,5 +1527,569 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
             return await Task.FromResult(result);
         }
         #endregion
+
+        #region Xuất trả nhà cung cấp
+
+        /// <summary>
+        /// Lấy phiếu xuất trả nhà cung cấp
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<ResultDto<InOutStockDto>> ExportToSupplierGetById(Guid id)
+        {
+            var result = new ResultDto<InOutStockDto>();
+
+            try
+            {
+                var inOutStockDto = ObjectMapper.Map<InOutStockDto>(Context.InOutStocks.FirstOrDefault(d => d.Id == id));
+                if (inOutStockDto != null)
+                {
+                    if (inOutStockDto.InOutStockTypeId == (int)Utilities.Enums.InOutStockType.ExportFormSupplier)
+                    {
+                        var inOutStockItemDtos = (from inOutStockItem in Context.InOutStockItems
+
+                                                  join item in Context.Items on inOutStockItem.ItemId equals item.Id into itemDefaults
+                                                  from itemDefault in itemDefaults.DefaultIfEmpty()
+
+                                                  join itemType in Context.ItemTypes on inOutStockItem.ItemTypeId equals itemType.Id into itemTypeDefaults
+                                                  from itemTypeDefault in itemTypeDefaults.DefaultIfEmpty()
+
+                                                  where inOutStockItem.InOutStockId == id
+
+                                                  select new InOutStockItemDto()
+                                                  {
+                                                      Id = inOutStockItem.Id,
+                                                      Code = itemDefault == null ? (itemTypeDefault == null ? null : itemTypeDefault.Code) : itemDefault.Code,
+                                                      HeInCode = itemTypeDefault == null ? null : itemTypeDefault.HeInCode,
+                                                      Name = itemTypeDefault == null ? null : itemTypeDefault.Name,
+                                                      ItemId = inOutStockItem.ItemId,
+                                                      SortOrder = inOutStockItem.SortOrder,
+                                                      ItemLineId = itemTypeDefault == null ? null : itemTypeDefault.ItemLineId,
+                                                      ItemGroupId = itemTypeDefault == null ? null : itemTypeDefault.ItemGroupId,
+                                                      ItemTypeId = inOutStockItem.ItemTypeId,
+                                                      UnitId = itemTypeDefault == null ? null : itemTypeDefault.UnitId,
+                                                      Tutorial = itemDefault == null ? null : itemDefault.Tutorial,
+                                                      CountryId = itemDefault == null ? null : itemDefault.CountryId,
+                                                      ImpPrice = itemDefault == null ? (itemTypeDefault == null ? null : itemTypeDefault.ImpPrice) : itemDefault.ImpPrice,
+                                                      RequestQuantity = inOutStockItem.RequestQuantity,
+                                                      ApprovedQuantity = inOutStockItem.ApprovedQuantity,
+                                                      ImpVatRate = itemDefault == null ? null : itemDefault.ImpVatRate,
+                                                      ImpTaxRate = itemDefault == null ? null : itemDefault.ImpTaxRate,
+                                                      Description = itemDefault == null ? null : itemDefault.Description,
+                                                      ActiveSubstance = itemDefault == null ? null : itemDefault.ActiveSubstance,
+                                                      Concentration = itemDefault == null ? null : itemDefault.Concentration,
+                                                      Content = itemDefault == null ? null : itemDefault.Content,
+                                                      Manufacturer = itemDefault == null ? null : itemDefault.Manufacturer,
+                                                      PackagingSpecifications = itemDefault == null ? null : itemDefault.PackagingSpecifications,
+                                                      Dosage = itemDefault == null ? null : itemDefault.Dosage,
+                                                      Lot = itemDefault == null ? null : itemDefault.Lot,
+                                                      DueDate = itemDefault == null ? null : itemDefault.DueDate,
+                                                      TenderDecision = itemDefault == null ? null : itemDefault.TenderDecision,
+                                                      TenderPackage = itemDefault == null ? null : itemDefault.TenderPackage,
+                                                      TenderGroup = itemDefault == null ? null : itemDefault.TenderGroup,
+                                                      TenderYear = itemDefault == null ? null : itemDefault.TenderYear,
+                                                      CommodityType = itemTypeDefault == null ? CommodityTypes.Medicine : itemTypeDefault.CommodityType,
+                                                  }).OrderBy(o => o.SortOrder).ToList();
+
+                        switch (inOutStockDto.Status)
+                        {
+                            case InOutStatusType.New:
+                                {
+                                    inOutStockItemDtos = inOutStockItemDtos.GroupBy(g => new
+                                    {
+                                        g.HeInCode,
+                                        g.CommodityType,
+                                        g.ItemTypeId,
+                                        g.ItemLineId,
+                                        g.ItemGroupId,
+                                        g.UnitId,
+                                    }).Select(s => new InOutStockItemDto()
+                                    {
+                                        HeInCode = s.Key.HeInCode,
+                                        CommodityType = s.Key.CommodityType,
+                                        ItemTypeId = s.Key.ItemTypeId,
+                                        ItemLineId = s.Key.ItemLineId,
+                                        ItemGroupId = s.Key.ItemGroupId,
+                                        UnitId = s.Key.UnitId,
+
+                                        ItemId = s.Max(m => m.ItemId),
+                                        Code = s.Max(m => m.Code),
+                                        Name = s.Max(m => m.Name),
+                                        CountryId = s.FirstOrDefault().CountryId,
+                                        Tutorial = s.FirstOrDefault().Tutorial,
+                                        ImpPrice = s.FirstOrDefault().ImpPrice,
+                                        RequestQuantity = s.Sum(o => o.RequestQuantity.GetValueOrDefault()),
+                                        ApprovedQuantity = s.Sum(o => o.ApprovedQuantity.GetValueOrDefault()),
+                                        ImpVatRate = s.FirstOrDefault().ImpVatRate,
+                                        ImpTaxRate = s.FirstOrDefault().ImpTaxRate,
+                                        Description = s.FirstOrDefault().Description,
+                                        ActiveSubstance = s.FirstOrDefault().ActiveSubstance,
+                                        Concentration = s.FirstOrDefault().Concentration,
+                                        Content = s.FirstOrDefault().Content,
+                                        Manufacturer = s.FirstOrDefault().Manufacturer,
+                                        PackagingSpecifications = s.FirstOrDefault().PackagingSpecifications,
+                                        Dosage = s.FirstOrDefault().Dosage,
+                                        Lot = s.FirstOrDefault().Lot,
+                                        DueDate = s.FirstOrDefault().DueDate,
+                                        TenderDecision = s.FirstOrDefault().TenderDecision,
+                                        TenderPackage = s.FirstOrDefault().TenderPackage,
+                                        TenderGroup = s.FirstOrDefault().TenderGroup,
+                                        TenderYear = s.FirstOrDefault().TenderYear,
+                                        SortOrder = s.Min(s => s.SortOrder),
+                                    }).ToList();
+                                }
+                                break;
+                        }
+
+                        inOutStockDto.InOutStockItems = inOutStockItemDtos;
+                    }
+                }
+
+                result.Result = inOutStockDto;
+            }
+            catch (Exception ex)
+            {
+                result.IsSucceeded = false;
+                result.Message = ex.Message;
+            }
+
+            return await Task.FromResult(result);
+        }
+
+        /// <summary>
+        /// Lưu tạm phiếu xuất trả ncc
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<ResultDto<InOutStockDto>> ExportToSupplierSaveAsDraft(InOutStockDto input)
+        {
+            input.Status = InOutStatusType.New;
+            return await ExportToSupplier(input);
+        }
+
+        public async Task<ResultDto<InOutStockDto>> ExportToSupplierStockOut(InOutStockDto input)
+        {
+            input.Status = InOutStatusType.ReceivedOutStock;
+            return await ExportToSupplier(input);
+        }
+
+        /// <summary>
+        /// Lưu phiếu xuất kho trả nhà cung cấp
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public async Task<ResultDto<InOutStockDto>> ExportToSupplierCanCelStockOut(InOutStockDto input)
+        {
+            var result = new ResultDto<InOutStockDto>();
+
+            using (var transaction = Context.BeginTransaction())
+            {
+                input.InOutStockTypeId = (int)Utilities.Enums.InOutStockType.ImportFromAnotherStock;
+
+                try
+                {
+                    var inOutStock = Context.InOutStocks.FirstOrDefault(f => f.Id == input.Id);
+                    if (inOutStock != null)
+                    {
+                        switch (input.Status)
+                        {
+                            case InOutStatusType.ReceivedOutStock:
+                                {
+                                    input.Status = InOutStatusType.New;
+                                    input.ApproverTime = null;
+                                    input.ApproverUserId = null;
+                                    input.StockImpTime = null;
+                                    input.StockExpUserId = null;
+                                    input.StockExpTime = null;
+                                    input.StockExpUserId = null;
+
+                                    var inOutStockItems = Context.InOutStockItems.Where(w => w.InOutStockId == input.Id).ToList();
+                                    if (inOutStockItems != null && inOutStockItems.Count > 0)
+                                    {
+                                        var itemIds = inOutStockItems.Select(s => s.ItemId).ToList();
+                                        var itemStocks = Context.ItemStocks.Where(w => w.StockId == inOutStock.ExpStockId && itemIds.Contains(w.ItemId)).ToList();
+
+                                        foreach (var item in itemStocks)
+                                        {
+                                            var inOutStockItem = inOutStockItems.FirstOrDefault(f => f.ItemId == item.ItemId);
+                                            if (inOutStockItem != null)
+                                            {
+                                                item.AvailableQuantity += inOutStockItem.ApprovedQuantity.GetValueOrDefault();
+                                                item.Quantity += inOutStockItem.ApprovedQuantity.GetValueOrDefault();
+                                            }
+                                        }
+                                    }
+                                }
+                                break;
+                        }
+
+                        ObjectMapper.Map(input, inOutStock);
+                    }
+                    else
+                    {
+                        result.IsSucceeded = false;
+                        result.Message = $"Không tìm thấy phiếu [{input.Code}]. Xin vui lòng kiểm tra lại!";
+                    }
+
+                    Context.SaveChanges();
+
+                    if (result.IsSucceeded)
+                    {
+                        result.Result = (await ImportFromAnotherStockGetById(input.Id.GetValueOrDefault())).Result;
+                    }
+
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    result.IsSucceeded = false;
+                    result.Message = ex.Message;
+
+                    transaction.Rollback();
+                }
+                finally { transaction.Dispose(); }
+            }
+
+            return await Task.FromResult(result);
+        }
+
+        /// <summary>
+        /// Hủy phiếu (xóa phiếu)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<ResultDto<bool>> ExportToSupplierDeleted(Guid id)
+        {
+            var result = new ResultDto<bool>();
+
+            using (var transaction = Context.BeginTransaction())
+            {
+                try
+                {
+                    var timeNow = DateTime.Now;
+
+                    var inOutStock = Context.InOutStocks.FirstOrDefault(f => f.Id == id);
+                    if (inOutStock != null)
+                    {
+                        inOutStock.Status = InOutStatusType.Canceled;
+                        inOutStock.DeletedBy = SessionExtensions.Login?.Id;
+                        inOutStock.DeletedDate = timeNow;
+                        inOutStock.IsDeleted = true;
+                    }
+
+                    Context.SaveChanges();
+                    transaction.Commit();
+                }
+                catch (Exception ex)
+                {
+                    result.IsSucceeded = false;
+                    result.Message = ex.Message;
+                }
+                finally
+                {
+                    transaction.Dispose();
+                }
+            }
+
+            return await Task.FromResult(result);
+        }
+
+        private async Task<ResultDto<InOutStockDto>> ExportToSupplier(InOutStockDto input)
+        {
+            var result = new ResultDto<InOutStockDto>();
+
+            result = await ExportToSupplierValid(input);
+            if (!result.IsSucceeded)
+            {
+                return result;
+            }
+
+            using (var transaction = Context.BeginTransaction())
+            {
+                try
+                {
+                    var dateNow = DateTime.Now;
+                    var id = Guid.Empty;
+                    input.InOutStockTypeId = (int)Utilities.Enums.InOutStockType.ExportFormSupplier;
+
+                    if (GuidHelper.IsNullOrEmpty(input.Id))
+                    {
+                        var inOutStockItems = new List<InOutStockItem>();
+
+                        var inOutStock = ObjectMapper.Map<InOutStock>(input);
+                        inOutStock.Id = Guid.NewGuid();
+                        inOutStock.ModifiedDate = dateNow;
+                        inOutStock.CreatedBy = SessionExtensions.Login?.Id;
+                        id = inOutStock.Id;
+
+                        switch (input.Status)
+                        {
+                            case InOutStatusType.New:
+                                {
+                                    foreach (var inOutStockItemDto in input.InOutStockItems)
+                                    {
+                                        var inOutStockItem = ObjectMapper.Map<InOutStockItem>(inOutStockItemDto);
+                                        inOutStockItem.Id = Guid.NewGuid();
+                                        inOutStockItem.InOutStockId = inOutStock.Id;
+
+                                        inOutStockItems.Add(inOutStockItem);
+                                    }
+                                }
+                                break;
+                        }
+
+                        Context.InOutStocks.Add(inOutStock);
+                        Context.InOutStockItems.AddRange(inOutStockItems);
+                    }
+                    else
+                    {
+                        var inOutStockItems = new List<InOutStockItem>();
+                        var inOutStock = Context.InOutStocks.FirstOrDefault(d => d.Id == input.Id);
+                        id = inOutStock.Id;
+
+                        // Xóa bản ghi cũ
+                        var inOutStockItemOlds = Context.InOutStockItems.Where(s => s.InOutStockId == input.Id).ToList();
+                        if (inOutStockItemOlds != null)
+                            Context.InOutStockItems.RemoveRange(inOutStockItemOlds);
+
+                        switch (input.Status)
+                        {
+                            case InOutStatusType.New:
+                                {
+                                    foreach (var inOutStockItemDto in input.InOutStockItems)
+                                    {
+                                        var inOutStockItem = ObjectMapper.Map<InOutStockItem>(inOutStockItemDto);
+                                        inOutStockItem.Id = Guid.NewGuid();
+                                        inOutStockItem.InOutStockId = inOutStock.Id;
+
+                                        inOutStockItems.Add(inOutStockItem);
+                                    }
+                                }
+                                break;
+
+                            case InOutStatusType.ReceivedOutStock:
+                                {
+                                    input.ApproverTime = dateNow;
+                                    input.ApproverUserId = SessionExtensions.Login?.Id;
+                                    input.StockExpTime = dateNow;
+                                    input.StockExpUserId = SessionExtensions.Login?.Id;
+                                    input.Status = InOutStatusType.ReceivedOutStock;
+
+                                    var itemTypeIds = input.InOutStockItems.Select(x => x.ItemTypeId).ToList();
+
+                                    #region Chi tiết phiếu nhập xuất
+                                    var itemStockDtos = (from itemStock in Context.ItemStocks
+                                                         join item in Context.Items on itemStock.ItemId equals item.Id
+
+                                                         where itemStock.IsDeleted == false
+                                                           && item.IsDeleted == false
+                                                           && itemStock.AvailableQuantity > 0
+
+                                                         select new ItemStockDto()
+                                                         {
+                                                             Id = itemStock.Id,
+                                                             StockId = itemStock.StockId,
+                                                             ItemId = itemStock.ItemId,
+                                                             Code = item.Code,
+                                                             AvailableQuantity = itemStock.AvailableQuantity,
+                                                             Quantity = itemStock.Quantity,
+                                                             ItemTypeId = item.ItemTypeId,
+                                                             ItemCode = item.Code,
+                                                             ImpPrice = item.ImpPrice,
+                                                             ImpVatRate = item.ImpVatRate,
+                                                             ImpTaxRate = item.ImpTaxRate,
+                                                             DueDate = item.DueDate,
+                                                         }).WhereIf(itemTypeIds != null && itemTypeIds.Count > 0, w => itemTypeIds.Contains(w.ItemTypeId)).OrderBy(o => o.DueDate).ThenBy(t => t.Code).ToList();
+
+                                    foreach (var inOutStockItemDto in input.InOutStockItems)
+                                    {
+                                        var itemStockByItemTypes = itemStockDtos.Where(w => w.ItemTypeId == inOutStockItemDto.ItemTypeId).ToList();
+                                        if (itemStockByItemTypes != null && itemStockByItemTypes.Count() > 0)
+                                        {
+                                            int index = 0;
+
+                                            foreach (var itemStock in itemStockByItemTypes)
+                                            {
+                                                var inOutStockItem = new InOutStockItem()
+                                                {
+                                                    Id = Guid.NewGuid(),
+                                                    InOutStockId = inOutStock.Id,
+                                                    SortOrder = index,
+                                                    ItemTypeId = inOutStockItemDto.ItemTypeId
+                                                };
+
+                                                /* 
+                                                 * Kiểm tra xem số lượng yêu cầu có lớn hơn hoặc bằng số lượng khả dụng của thuốc theo lô hay không
+                                                 * 1: Nếu lớn hơn hoặc bằng thì tạo 1 dòng xuất thuốc
+                                                 * 2: Nhỏ hơn thì lấy số lượng của lô thuốc tiếp theo => Kiểm tra theo bước 1 => khi nào đủ số lượng xuất hoặc hết thuốc thì thôi
+                                                */
+                                                if (itemStock.AvailableQuantity >= inOutStockItemDto.RequestQuantity)
+                                                {
+                                                    inOutStockItem.ItemId = itemStock.ItemId;
+                                                    inOutStockItem.ImpPrice = itemStock.ImpPrice;
+                                                    inOutStockItem.ImpVatRate = itemStock.ImpVatRate;
+                                                    inOutStockItem.ImpTaxRate = itemStock.ImpTaxRate;
+                                                    inOutStockItem.RequestQuantity = inOutStockItemDto.RequestQuantity;
+                                                    inOutStockItem.ApprovedQuantity = inOutStockItemDto.RequestQuantity;
+                                                }
+                                                else
+                                                {
+                                                    inOutStockItem.ItemId = itemStock.ItemId;
+                                                    inOutStockItem.ImpPrice = itemStock.ImpPrice;
+                                                    inOutStockItem.ImpVatRate = itemStock.ImpVatRate;
+                                                    inOutStockItem.ImpTaxRate = itemStock.ImpTaxRate;
+                                                    if (index < itemStockByItemTypes.Count - 1)
+                                                    {
+                                                        inOutStockItem.RequestQuantity = itemStock.AvailableQuantity;
+                                                    }
+                                                    else
+                                                    {
+                                                        inOutStockItem.RequestQuantity = inOutStockItemDto.RequestQuantity;
+                                                    }
+                                                    inOutStockItem.ApprovedQuantity = itemStock.AvailableQuantity;
+                                                }
+
+                                                inOutStockItemDto.RequestQuantity -= inOutStockItem.ApprovedQuantity;
+                                                index += 1;
+
+                                                inOutStockItems.Add(inOutStockItem);
+                                            }
+                                        }
+                                    }
+                                    #endregion
+
+                                    #region Trừ khả dụng và tồn kho của kho xuất 
+                                    var itemIds = inOutStockItems.Select(s => s.ItemId).ToList();
+                                    var itemStocks = Context.ItemStocks.Where(w => w.StockId == input.ExpStockId && itemIds.Contains(w.ItemId)).ToList();
+
+                                    foreach (var itemStock in itemStocks)
+                                    {
+                                        var item = inOutStockItems.FirstOrDefault(f => f.ItemId == itemStock.ItemId);
+                                        if (item != null)
+                                        {
+                                            itemStock.AvailableQuantity -= item.ApprovedQuantity.GetValueOrDefault();
+                                            itemStock.Quantity -= item.ApprovedQuantity.GetValueOrDefault();
+                                        }
+                                    }
+                                    #endregion
+                                }
+                                break;
+                        }
+
+                        ObjectMapper.Map(input, inOutStock);
+                        Context.AddRange(inOutStockItems);
+
+                        inOutStock.ModifiedDate = dateNow;
+                        inOutStock.ModifiedBy = SessionExtensions.Login?.Id;
+                    }
+
+                    Context.SaveChanges();
+                    transaction.Commit();
+
+                    if (!GuidHelper.IsNullOrEmpty(id))
+                    {
+                        result.Result = (await ExportToSupplierGetById(id)).Result;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    result.IsSucceeded = false;
+                    result.Message = ex.Message;
+                }
+                finally
+                {
+                    transaction.Dispose();
+                }
+            }
+
+            return await Task.FromResult(result);
+        }
+
+        private async Task<ResultDto<InOutStockDto>> ExportToSupplierValid(InOutStockDto input)
+        {
+            var result = new ResultDto<InOutStockDto>();
+
+            try
+            {
+                var erros = new List<string>();
+
+                var erroMasters = new List<string>();
+
+                if (GuidHelper.IsNullOrEmpty(input.ExpStockId))
+                    erroMasters.Add("Kho Xuất");
+                if (DatetimeHelper.IsNullOrEmpty(input.ReqTime))
+                    erroMasters.Add("Ngày lập");
+                if (DatetimeHelper.IsNullOrEmpty(input.InvTime))
+                    erroMasters.Add("Ngày hóa đơn");
+                if (GuidHelper.IsNullOrEmpty(input.CreationUserId))
+                    erroMasters.Add("Người lập");
+
+                if (erroMasters.Count > 0)
+                    erros.Add(string.Format("{0} không được bỏ trống!", string.Join(", ", erroMasters)));
+
+                if (input.InOutStockItems == null && input.InOutStockItems.Count == 0)
+                    erros.Add("Không có thuốc nào được chọn trong danh sách!");
+
+                foreach (var detail in input.InOutStockItems)
+                {
+                    var erroItems = new List<string>();
+
+                    if (detail.RequestQuantity == 0)
+                        erroItems.Add("Số lượng");
+                    if (DatetimeHelper.IsNullOrEmpty(detail.DueDate))
+                        erroItems.Add("Hạn dùng");
+
+                    if (erroItems.Count > 0)
+                    {
+                        var erro = string.Format("Mã thuốc {0}: {1} không được để trống!", detail.Code, string.Join(", ", erroItems));
+                        erros.Add(erro);
+                    }
+                }
+
+                if (input.Status == InOutStatusType.ReceivedOutStock)
+                {
+                    // Ktra SL tồn, khả dụng có đủ để xuất ko
+                    var itemIds = input.InOutStockItems.Select(s => s.ItemId).ToList();
+                    if (itemIds != null && itemIds.Count > 0)
+                    {
+                        var itemStocks = Context.ItemStocks.Where(w => itemIds.Contains(w.ItemId) && w.StockId == input.ExpStockId).ToList();
+                        if (itemStocks != null)
+                        {
+                            foreach (var item in input.InOutStockItems)
+                            {
+                                var itemStock = itemStocks.FirstOrDefault(f => f.ItemId == item.ItemId);
+                                if (itemStock != null)
+                                {
+                                    if (item.RequestQuantity > itemStock.AvailableQuantity)
+                                    {
+                                        erros.Add(string.Format("Mã thuốc [{0}]: Số lượng nhập phải nhỏ hơn số lượng tồn kho!", item.Code));
+                                    }
+                                }
+                                else
+                                {
+                                    erros.Add(string.Format("Mã thuốc [{0}] không tồn tại trong kho!", item.Code));
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (erros.Count > 0)
+                {
+                    result.Message = string.Join(", ", erros);
+                    result.IsSucceeded = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.IsSucceeded = false;
+                result.Message = ex.Message;
+            }
+
+            return await Task.FromResult(result);
+        }
+
+        #endregion
     }
 }
+
