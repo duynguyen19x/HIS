@@ -112,10 +112,10 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                     if (inOutStockDto.InOutStockTypeId == 1)
                     {
                         var inOutStockItemDtos = ObjectMapper.Map<IList<InOutStockItemDto>>(Context.InOutStockItems.Where(w => w.InOutStockId == id).ToList());
-                        var ItemIds = inOutStockItemDtos.Select(s => s.ItemId).ToList();
-                        var ItemDtos = ObjectMapper.Map<IList<Item>>(Context.Items.Where(w => ItemIds.Contains(w.Id)).ToList());
+                        var itemIds = inOutStockItemDtos.Select(s => s.ItemId).ToList();
+                        var itemDtos = ObjectMapper.Map<IList<Item>>(Context.Items.Where(w => itemIds.Contains(w.Id)).ToList());
 
-                        var ItemPricePolicyDtos = (from med in Context.ItemPricePolicies
+                        var itemPricePolicyDtos = (from med in Context.ItemPricePolicies
                                                    join pa in Context.PatientTypes on med.PatientTypeId equals pa.Id
                                                    select new ItemPricePolicyDto()
                                                    {
@@ -130,42 +130,42 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                                        PatientTypeCode = pa.PatientTypeCode,
                                                        PatientTypeName = pa.PatientTypeName,
                                                        IsHeIn = med.PatientTypeId == (int)PatientTypes.BHYT ? true : false,
-                                                   }).WhereIf(ItemIds != null, w => ItemIds.Contains(w.ItemId))
+                                                   }).WhereIf(itemIds != null, w => itemIds.Contains(w.ItemId))
                                                    .OrderBy(s => s.PatientTypeCode).ToList();
 
                         foreach (var inOutStockItem in inOutStockItemDtos)
                         {
-                            var sItem = ItemDtos.FirstOrDefault(f => f.Id == inOutStockItem.ItemId);
+                            var item = itemDtos.FirstOrDefault(f => f.Id == inOutStockItem.ItemId);
 
-                            if (!string.IsNullOrEmpty(sItem.Code))
-                                inOutStockItem.Code = sItem.Code.Split('.')?[0];
+                            if (!string.IsNullOrEmpty(item.Code))
+                                inOutStockItem.Code = item.Code.Split('.')?[0];
 
-                            inOutStockItem.HeInCode = sItem.HeInCode;
-                            inOutStockItem.Name = sItem.Name;
-                            inOutStockItem.SortOrder = sItem.SortOrder;
-                            inOutStockItem.ItemLineId = sItem.ItemLineId;
-                            inOutStockItem.ItemGroupId = sItem.ItemGroupId;
-                            inOutStockItem.ItemTypeId = sItem.ItemTypeId;
-                            inOutStockItem.UnitId = sItem.UnitId;
-                            inOutStockItem.Tutorial = sItem.Tutorial;
-                            inOutStockItem.CountryId = sItem.CountryId;
-                            inOutStockItem.ImpPrice = sItem.ImpPrice;
-                            inOutStockItem.ImpVatRate = sItem.ImpVatRate;
-                            inOutStockItem.ImpTaxRate = sItem.ImpTaxRate;
-                            inOutStockItem.Description = sItem.Description;
-                            inOutStockItem.ActiveSubstance = sItem.ActiveSubstance;
-                            inOutStockItem.Concentration = sItem.Concentration;
-                            inOutStockItem.Content = sItem.Content;
-                            inOutStockItem.Manufacturer = sItem.Manufacturer;
-                            inOutStockItem.PackagingSpecifications = sItem.PackagingSpecifications;
-                            inOutStockItem.Dosage = sItem.Dosage;
-                            inOutStockItem.Lot = sItem.Lot;
-                            inOutStockItem.DueDate = sItem.DueDate;
-                            inOutStockItem.TenderDecision = sItem.TenderDecision;
-                            inOutStockItem.TenderPackage = sItem.TenderPackage;
-                            inOutStockItem.TenderGroup = sItem.TenderGroup;
-                            inOutStockItem.TenderYear = sItem.TenderYear;
-                            inOutStockItem.CommodityType = sItem.CommodityType;
+                            inOutStockItem.HeInCode = item.HeInCode;
+                            inOutStockItem.Name = item.Name;
+                            inOutStockItem.SortOrder = item.SortOrder;
+                            inOutStockItem.ItemLineId = item.ItemLineId;
+                            inOutStockItem.ItemGroupId = item.ItemGroupId;
+                            inOutStockItem.ItemTypeId = item.ItemTypeId;
+                            inOutStockItem.UnitId = item.UnitId;
+                            inOutStockItem.Tutorial = item.Tutorial;
+                            inOutStockItem.CountryId = item.CountryId;
+                            inOutStockItem.ImpPrice = item.ImpPrice;
+                            inOutStockItem.ImpVatRate = item.ImpVatRate;
+                            inOutStockItem.ImpTaxRate = item.ImpTaxRate;
+                            inOutStockItem.Description = item.Description;
+                            inOutStockItem.ActiveSubstance = item.ActiveSubstance;
+                            inOutStockItem.Concentration = item.Concentration;
+                            inOutStockItem.Content = item.Content;
+                            inOutStockItem.Manufacturer = item.Manufacturer;
+                            inOutStockItem.PackagingSpecifications = item.PackagingSpecifications;
+                            inOutStockItem.Dosage = item.Dosage;
+                            inOutStockItem.Lot = item.Lot;
+                            inOutStockItem.DueDate = item.DueDate;
+                            inOutStockItem.TenderDecision = item.TenderDecision;
+                            inOutStockItem.TenderPackage = item.TenderPackage;
+                            inOutStockItem.TenderGroup = item.TenderGroup;
+                            inOutStockItem.TenderYear = item.TenderYear;
+                            inOutStockItem.CommodityType = item.CommodityType;
 
                             inOutStockItem.ItemPricePolicies = itemPricePolicyDtos.Where(w => w.ItemId == inOutStockItem.ItemId).ToList();
                         }
@@ -1535,23 +1535,23 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<ApiResult<InOutStockDto>> ExportToSupplierGetById(Guid id)
+        public async Task<ResultDto<InOutStockDto>> ExportToSupplierGetById(Guid id)
         {
-            var result = new ApiResult<InOutStockDto>();
+            var result = new ResultDto<InOutStockDto>();
 
             try
             {
-                var inOutStockDto = _mapper.Map<InOutStockDto>(_dbContext.InOutStocks.FirstOrDefault(d => d.Id == id));
+                var inOutStockDto = ObjectMapper.Map<InOutStockDto>(Context.InOutStocks.FirstOrDefault(d => d.Id == id));
                 if (inOutStockDto != null)
                 {
                     if (inOutStockDto.InOutStockTypeId == (int)Utilities.Enums.InOutStockType.ExportFormSupplier)
                     {
-                        var inOutStockItemDtos = (from inOutStockItem in _dbContext.InOutStockItems
+                        var inOutStockItemDtos = (from inOutStockItem in Context.InOutStockItems
 
-                                                  join item in _dbContext.Items on inOutStockItem.ItemId equals item.Id into itemDefaults
+                                                  join item in Context.Items on inOutStockItem.ItemId equals item.Id into itemDefaults
                                                   from itemDefault in itemDefaults.DefaultIfEmpty()
 
-                                                  join itemType in _dbContext.ItemTypes on inOutStockItem.ItemTypeId equals itemType.Id into itemTypeDefaults
+                                                  join itemType in Context.ItemTypes on inOutStockItem.ItemTypeId equals itemType.Id into itemTypeDefaults
                                                   from itemTypeDefault in itemTypeDefaults.DefaultIfEmpty()
 
                                                   where inOutStockItem.InOutStockId == id
@@ -1649,7 +1649,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
+                result.IsSucceeded = false;
                 result.Message = ex.Message;
             }
 
@@ -1661,13 +1661,13 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<ApiResult<InOutStockDto>> ExportToSupplierSaveAsDraft(InOutStockDto input)
+        public async Task<ResultDto<InOutStockDto>> ExportToSupplierSaveAsDraft(InOutStockDto input)
         {
             input.Status = InOutStatusType.New;
             return await ExportToSupplier(input);
         }
 
-        public async Task<ApiResult<InOutStockDto>> ExportToSupplierStockOut(InOutStockDto input)
+        public async Task<ResultDto<InOutStockDto>> ExportToSupplierStockOut(InOutStockDto input)
         {
             input.Status = InOutStatusType.ReceivedOutStock;
             return await ExportToSupplier(input);
@@ -1678,17 +1678,17 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async Task<ApiResult<InOutStockDto>> ExportToSupplierCanCelStockOut(InOutStockDto input)
+        public async Task<ResultDto<InOutStockDto>> ExportToSupplierCanCelStockOut(InOutStockDto input)
         {
-            var result = new ApiResult<InOutStockDto>();
+            var result = new ResultDto<InOutStockDto>();
 
-            using (var transaction = _dbContext.BeginTransaction())
+            using (var transaction = Context.BeginTransaction())
             {
                 input.InOutStockTypeId = (int)Utilities.Enums.InOutStockType.ImportFromAnotherStock;
 
                 try
                 {
-                    var inOutStock = _dbContext.InOutStocks.FirstOrDefault(f => f.Id == input.Id);
+                    var inOutStock = Context.InOutStocks.FirstOrDefault(f => f.Id == input.Id);
                     if (inOutStock != null)
                     {
                         switch (input.Status)
@@ -1703,11 +1703,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     input.StockExpTime = null;
                                     input.StockExpUserId = null;
 
-                                    var inOutStockItems = _dbContext.InOutStockItems.Where(w => w.InOutStockId == input.Id).ToList();
+                                    var inOutStockItems = Context.InOutStockItems.Where(w => w.InOutStockId == input.Id).ToList();
                                     if (inOutStockItems != null && inOutStockItems.Count > 0)
                                     {
                                         var itemIds = inOutStockItems.Select(s => s.ItemId).ToList();
-                                        var itemStocks = _dbContext.ItemStocks.Where(w => w.StockId == inOutStock.ExpStockId && itemIds.Contains(w.ItemId)).ToList();
+                                        var itemStocks = Context.ItemStocks.Where(w => w.StockId == inOutStock.ExpStockId && itemIds.Contains(w.ItemId)).ToList();
 
                                         foreach (var item in itemStocks)
                                         {
@@ -1723,17 +1723,17 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                 break;
                         }
 
-                        _mapper.Map(input, inOutStock);
+                        ObjectMapper.Map(input, inOutStock);
                     }
                     else
                     {
-                        result.IsSuccessed = false;
+                        result.IsSucceeded = false;
                         result.Message = $"Không tìm thấy phiếu [{input.Code}]. Xin vui lòng kiểm tra lại!";
                     }
 
-                    _dbContext.SaveChanges();
+                    Context.SaveChanges();
 
-                    if (result.IsSuccessed)
+                    if (result.IsSucceeded)
                     {
                         result.Result = (await ImportFromAnotherStockGetById(input.Id.GetValueOrDefault())).Result;
                     }
@@ -1742,7 +1742,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
+                    result.IsSucceeded = false;
                     result.Message = ex.Message;
 
                     transaction.Rollback();
@@ -1758,17 +1758,17 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public async Task<ApiResult<bool>> ExportToSupplierDeleted(Guid id)
+        public async Task<ResultDto<bool>> ExportToSupplierDeleted(Guid id)
         {
-            var result = new ApiResult<bool>();
+            var result = new ResultDto<bool>();
 
-            using (var transaction = _dbContext.BeginTransaction())
+            using (var transaction = Context.BeginTransaction())
             {
                 try
                 {
                     var timeNow = DateTime.Now;
 
-                    var inOutStock = _dbContext.InOutStocks.FirstOrDefault(f => f.Id == id);
+                    var inOutStock = Context.InOutStocks.FirstOrDefault(f => f.Id == id);
                     if (inOutStock != null)
                     {
                         inOutStock.Status = InOutStatusType.Canceled;
@@ -1777,12 +1777,12 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                         inOutStock.IsDeleted = true;
                     }
 
-                    _dbContext.SaveChanges();
+                    Context.SaveChanges();
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
+                    result.IsSucceeded = false;
                     result.Message = ex.Message;
                 }
                 finally
@@ -1794,17 +1794,17 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
             return await Task.FromResult(result);
         }
 
-        private async Task<ApiResult<InOutStockDto>> ExportToSupplier(InOutStockDto input)
+        private async Task<ResultDto<InOutStockDto>> ExportToSupplier(InOutStockDto input)
         {
-            var result = new ApiResult<InOutStockDto>();
+            var result = new ResultDto<InOutStockDto>();
 
             result = await ExportToSupplierValid(input);
-            if (!result.IsSuccessed)
+            if (!result.IsSucceeded)
             {
                 return result;
             }
 
-            using (var transaction = _dbContext.BeginTransaction())
+            using (var transaction = Context.BeginTransaction())
             {
                 try
                 {
@@ -1816,7 +1816,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                     {
                         var inOutStockItems = new List<InOutStockItem>();
 
-                        var inOutStock = _mapper.Map<InOutStock>(input);
+                        var inOutStock = ObjectMapper.Map<InOutStock>(input);
                         inOutStock.Id = Guid.NewGuid();
                         inOutStock.ModifiedDate = dateNow;
                         inOutStock.CreatedBy = SessionExtensions.Login?.Id;
@@ -1828,7 +1828,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                 {
                                     foreach (var inOutStockItemDto in input.InOutStockItems)
                                     {
-                                        var inOutStockItem = _mapper.Map<InOutStockItem>(inOutStockItemDto);
+                                        var inOutStockItem = ObjectMapper.Map<InOutStockItem>(inOutStockItemDto);
                                         inOutStockItem.Id = Guid.NewGuid();
                                         inOutStockItem.InOutStockId = inOutStock.Id;
 
@@ -1838,19 +1838,19 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                 break;
                         }
 
-                        _dbContext.InOutStocks.Add(inOutStock);
-                        _dbContext.InOutStockItems.AddRange(inOutStockItems);
+                        Context.InOutStocks.Add(inOutStock);
+                        Context.InOutStockItems.AddRange(inOutStockItems);
                     }
                     else
                     {
                         var inOutStockItems = new List<InOutStockItem>();
-                        var inOutStock = _dbContext.InOutStocks.FirstOrDefault(d => d.Id == input.Id);
+                        var inOutStock = Context.InOutStocks.FirstOrDefault(d => d.Id == input.Id);
                         id = inOutStock.Id;
 
                         // Xóa bản ghi cũ
-                        var inOutStockItemOlds = _dbContext.InOutStockItems.Where(s => s.InOutStockId == input.Id).ToList();
+                        var inOutStockItemOlds = Context.InOutStockItems.Where(s => s.InOutStockId == input.Id).ToList();
                         if (inOutStockItemOlds != null)
-                            _dbContext.InOutStockItems.RemoveRange(inOutStockItemOlds);
+                            Context.InOutStockItems.RemoveRange(inOutStockItemOlds);
 
                         switch (input.Status)
                         {
@@ -1858,7 +1858,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                 {
                                     foreach (var inOutStockItemDto in input.InOutStockItems)
                                     {
-                                        var inOutStockItem = _mapper.Map<InOutStockItem>(inOutStockItemDto);
+                                        var inOutStockItem = ObjectMapper.Map<InOutStockItem>(inOutStockItemDto);
                                         inOutStockItem.Id = Guid.NewGuid();
                                         inOutStockItem.InOutStockId = inOutStock.Id;
 
@@ -1878,8 +1878,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     var itemTypeIds = input.InOutStockItems.Select(x => x.ItemTypeId).ToList();
 
                                     #region Chi tiết phiếu nhập xuất
-                                    var itemStockDtos = (from itemStock in _dbContext.ItemStocks
-                                                         join item in _dbContext.Items on itemStock.ItemId equals item.Id
+                                    var itemStockDtos = (from itemStock in Context.ItemStocks
+                                                         join item in Context.Items on itemStock.ItemId equals item.Id
 
                                                          where itemStock.IsDeleted == false
                                                            && item.IsDeleted == false
@@ -1960,7 +1960,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
                                     #region Trừ khả dụng và tồn kho của kho xuất 
                                     var itemIds = inOutStockItems.Select(s => s.ItemId).ToList();
-                                    var itemStocks = _dbContext.ItemStocks.Where(w => w.StockId == input.ExpStockId && itemIds.Contains(w.ItemId)).ToList();
+                                    var itemStocks = Context.ItemStocks.Where(w => w.StockId == input.ExpStockId && itemIds.Contains(w.ItemId)).ToList();
 
                                     foreach (var itemStock in itemStocks)
                                     {
@@ -1976,14 +1976,14 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                 break;
                         }
 
-                        _mapper.Map(input, inOutStock);
-                        _dbContext.AddRange(inOutStockItems);
+                        ObjectMapper.Map(input, inOutStock);
+                        Context.AddRange(inOutStockItems);
 
                         inOutStock.ModifiedDate = dateNow;
                         inOutStock.ModifiedBy = SessionExtensions.Login?.Id;
                     }
 
-                    _dbContext.SaveChanges();
+                    Context.SaveChanges();
                     transaction.Commit();
 
                     if (!GuidHelper.IsNullOrEmpty(id))
@@ -1993,7 +1993,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
+                    result.IsSucceeded = false;
                     result.Message = ex.Message;
                 }
                 finally
@@ -2005,9 +2005,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
             return await Task.FromResult(result);
         }
 
-        private async Task<ApiResult<InOutStockDto>> ExportToSupplierValid(InOutStockDto input)
+        private async Task<ResultDto<InOutStockDto>> ExportToSupplierValid(InOutStockDto input)
         {
-            var result = new ApiResult<InOutStockDto>();
+            var result = new ResultDto<InOutStockDto>();
 
             try
             {
@@ -2052,7 +2052,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                     var itemIds = input.InOutStockItems.Select(s => s.ItemId).ToList();
                     if (itemIds != null && itemIds.Count > 0)
                     {
-                        var itemStocks = _dbContext.ItemStocks.Where(w => itemIds.Contains(w.ItemId) && w.StockId == input.ExpStockId).ToList();
+                        var itemStocks = Context.ItemStocks.Where(w => itemIds.Contains(w.ItemId) && w.StockId == input.ExpStockId).ToList();
                         if (itemStocks != null)
                         {
                             foreach (var item in input.InOutStockItems)
@@ -2077,12 +2077,12 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                 if (erros.Count > 0)
                 {
                     result.Message = string.Join(", ", erros);
-                    result.IsSuccessed = false;
+                    result.IsSucceeded = false;
                 }
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
+                result.IsSucceeded = false;
                 result.Message = ex.Message;
             }
 

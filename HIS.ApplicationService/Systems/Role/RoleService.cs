@@ -7,12 +7,12 @@ namespace HIS.ApplicationService.Systems.Role
 {
     public class RoleService : IRoleService
     {
-        private readonly HISDbContext _dbContext;
+        private readonly HISDbContext Context;
         private readonly IConfiguration _config;
 
         public RoleService(HISDbContext dbContext, IConfiguration config)
         {
-            _dbContext = dbContext;
+            Context = dbContext;
             _config = config;
         }
 
@@ -22,7 +22,7 @@ namespace HIS.ApplicationService.Systems.Role
             try
             {
                 result.IsSucceeded = true;
-                result.Result = (from r in _dbContext.Roles
+                result.Result = (from r in Context.Roles
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -48,7 +48,7 @@ namespace HIS.ApplicationService.Systems.Role
         {
             var result = new ResultDto<RoleDto>();
 
-            var role = _dbContext.Roles.SingleOrDefault(s => s.Id == id);
+            var role = Context.Roles.SingleOrDefault(s => s.Id == id);
             if (role != null)
             {
                 result.Result = new RoleDto()
@@ -75,12 +75,12 @@ namespace HIS.ApplicationService.Systems.Role
         private async Task<ResultDto<RoleDto>> Create(RoleDto input)
         {
             var result = new ResultDto<RoleDto>();
-            await _dbContext.Roles.AddAsync(new EntityFrameworkCore.Entities.Systems.Role()
+            await Context.Roles.AddAsync(new EntityFrameworkCore.Entities.Systems.Role()
             {
 
             });
 
-            _dbContext.SaveChanges();
+            Context.SaveChanges();
             return result;
         }
 
