@@ -22,6 +22,14 @@ namespace HIS.EntityFrameworkCore.Data
             ProvinceBuilder.Seed(modelBuilder);
             GenderBuilder.Seed(modelBuilder);
             EthnicityBuilder.Seed(modelBuilder);
+            TreatmentResultBuilder.Seed(modelBuilder);
+            TreatmentEndTypeBuilder.Seed(modelBuilder);
+            TransferReasonBuilder.Seed(modelBuilder);
+            TransferFormBuilder.Seed(modelBuilder);
+            TransactionTypeBuilder.Seed(modelBuilder);
+            RightRouteTypeBuilder.Seed(modelBuilder);
+            ReligionBuilder.Seed(modelBuilder);
+
         }
     }
 }

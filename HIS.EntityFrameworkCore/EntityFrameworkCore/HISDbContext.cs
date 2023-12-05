@@ -102,10 +102,10 @@ namespace HIS.EntityFrameworkCore
         {
             base.OnModelCreating(builder);
 
-            builder.ApplyConfiguration();
+            //builder.ApplyConfiguration();
 
             // load config
-            //builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             builder.Seed();
         }
