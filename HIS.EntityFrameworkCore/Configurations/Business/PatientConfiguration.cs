@@ -1,11 +1,6 @@
 ﻿using HIS.EntityFrameworkCore.Entities.Business;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business
 {
@@ -13,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
     {
         public void Configure(EntityTypeBuilder<Patient> builder)
         {
-            builder.ToTable("Patient");
+            builder.ToTable("Patients");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.PatientCode).HasMaxLength(20);
             builder.Property(x => x.PatientName).HasMaxLength(255);

@@ -1,11 +1,6 @@
 ﻿using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
@@ -13,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<DeathWithin> builder)
         {
-            builder.ToTable("DeathWithin");
+            builder.ToTable("DeathWithins");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.DeathWithinCode).HasMaxLength(20).IsRequired();

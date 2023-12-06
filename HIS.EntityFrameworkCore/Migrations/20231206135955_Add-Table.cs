@@ -14,6 +14,28 @@ namespace HIS.EntityFrameworkCore.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "BirthCertBooks",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BirthCertBookCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    BirthCertBookName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Total = table.Column<int>(type: "int", nullable: false),
+                    StartNumOrder = table.Column<int>(type: "int", nullable: false),
+                    SortOrder = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Inactive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BirthCertBooks", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "BloodTypeRhs",
                 columns: table => new
                 {
@@ -38,9 +60,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Code = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -54,7 +76,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Career",
+                name: "Careers",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -70,7 +92,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Career", x => x.Id);
+                    table.PrimaryKey("PK_Careers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -110,9 +132,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DeathCauseCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DeathCauseName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DeathCauseCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    DeathCauseName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -126,13 +148,36 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DeathCertBooks",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BranchID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DeathCertBookCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    DeathCertBookName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Total = table.Column<int>(type: "int", nullable: false),
+                    StartNumOrder = table.Column<int>(type: "int", nullable: false),
+                    SortOrder = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    Inactive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DeathCertBooks", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DeathWithins",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DeathWithinCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DeathWithinName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DeathWithinCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    DeathWithinName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -146,7 +191,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DepartmentType",
+                name: "DepartmentTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -159,11 +204,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DepartmentType", x => x.Id);
+                    table.PrimaryKey("PK_DepartmentTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ethnic",
+                name: "Ethnics",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -176,11 +221,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ethnic", x => x.Id);
+                    table.PrimaryKey("PK_Ethnics", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Gender",
+                name: "Genders",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -192,11 +237,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Gender", x => x.Id);
+                    table.PrimaryKey("PK_Genders", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Hospital",
+                name: "Hospitals",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -216,7 +261,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Hospital", x => x.Id);
+                    table.PrimaryKey("PK_Hospitals", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -288,7 +333,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MedicalRecord",
+                name: "MedicalRecords",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -338,7 +383,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MedicalRecord", x => x.Id);
+                    table.PrimaryKey("PK_MedicalRecords", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -362,14 +407,14 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MedicalRecordTypeGroups",
+                name: "MedicalRecordTypeCategorys",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MedicalRecordTypeGroupCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MedicalRecordTypeGroupName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MedicalRecordTypeGroupCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    MedicalRecordTypeGroupName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -379,11 +424,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MedicalRecordTypeGroups", x => x.Id);
+                    table.PrimaryKey("PK_MedicalRecordTypeCategorys", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "National",
+                name: "Nationals",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -396,17 +441,17 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_National", x => x.Id);
+                    table.PrimaryKey("PK_Nationals", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "PatientRecordStatuses",
+                name: "PatientRecordStatus",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PatientRecordStatusName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PatientRecordStatusName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -416,11 +461,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PatientRecordStatuses", x => x.Id);
+                    table.PrimaryKey("PK_PatientRecordStatus", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "PatientRecordType",
+                name: "PatientRecordTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -437,7 +482,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PatientRecordType", x => x.Id);
+                    table.PrimaryKey("PK_PatientRecordTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -466,9 +511,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PaymentMethodCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PaymentMethodName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PaymentMethodCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    PaymentMethodName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -495,7 +540,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Province",
+                name: "Provinces",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -507,7 +552,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Province", x => x.Id);
+                    table.PrimaryKey("PK_Provinces", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -536,9 +581,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RelativeTypeCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RelativeTypeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RelativeTypeCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    RelativeTypeName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -556,9 +601,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ReligionCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ReligionName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ReligionCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    ReligionName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -577,9 +622,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RightRouteTypeCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RightRouteTypeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RightRouteTypeCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    RightRouteTypeName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -609,7 +654,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RoomType",
+                name: "RoomTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -622,7 +667,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RoomType", x => x.Id);
+                    table.PrimaryKey("PK_RoomTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -656,7 +701,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ServiceRequest",
+                name: "ServiceRequests",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -691,11 +736,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ServiceRequest", x => x.Id);
+                    table.PrimaryKey("PK_ServiceRequests", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Supplier",
+                name: "Suppliers",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -716,7 +761,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Supplier", x => x.Id);
+                    table.PrimaryKey("PK_Suppliers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -735,16 +780,77 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TransactionTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TransactionTypeCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    TransactionTypeName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    SortOrder = table.Column<int>(type: "int", nullable: false),
+                    Inactive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TransactionTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TransferForms",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TransferFormCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    TransferFormName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    SortOrder = table.Column<int>(type: "int", nullable: false),
+                    Inactive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TransferForms", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TransferReasons",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TransferReasonCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    TransferReasonName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    SortOrder = table.Column<int>(type: "int", nullable: false),
+                    Inactive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TransferReasons", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TreatmentEndTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TreatmentEndTypeCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TreatmentEndTypeName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TreatmentEndTypeCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    TreatmentEndTypeName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
                     IsForOutPatient = table.Column<bool>(type: "bit", nullable: false),
                     IsForInPatient = table.Column<bool>(type: "bit", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -763,9 +869,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TreatmentResultCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TreatmentResultName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TreatmentResultCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    TreatmentResultName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -863,7 +969,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MedicalRecordType",
+                name: "MedicalRecordTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -881,17 +987,17 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MedicalRecordType", x => x.Id);
+                    table.PrimaryKey("PK_MedicalRecordTypes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_MedicalRecordType_MedicalRecordTypeGroups_MedicalRecordTypeGroupID",
+                        name: "FK_MedicalRecordTypes_MedicalRecordTypeCategorys_MedicalRecordTypeGroupID",
                         column: x => x.MedicalRecordTypeGroupID,
-                        principalTable: "MedicalRecordTypeGroups",
+                        principalTable: "MedicalRecordTypeCategorys",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "District",
+                name: "Districts",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -908,11 +1014,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_District", x => x.Id);
+                    table.PrimaryKey("PK_Districts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_District_Province_ProvinceId",
+                        name: "FK_Districts_Provinces_ProvinceId",
                         column: x => x.ProvinceId,
-                        principalTable: "Province",
+                        principalTable: "Provinces",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -991,9 +1097,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                         principalTable: "ItemLines",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_ItemTypes_National_CountryId",
+                        name: "FK_ItemTypes_Nationals_CountryId",
                         column: x => x.CountryId,
-                        principalTable: "National",
+                        principalTable: "Nationals",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_ItemTypes_Units_UnitId",
@@ -1098,7 +1204,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Ward",
+                name: "Wards",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -1116,11 +1222,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ward", x => x.Id);
+                    table.PrimaryKey("PK_Wards", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Ward_District_DistrictId",
+                        name: "FK_Wards_Districts_DistrictId",
                         column: x => x.DistrictId,
-                        principalTable: "District",
+                        principalTable: "Districts",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -1181,9 +1287,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                         principalTable: "ItemTypes",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Items_National_CountryId",
+                        name: "FK_Items_Nationals_CountryId",
                         column: x => x.CountryId,
-                        principalTable: "National",
+                        principalTable: "Nationals",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Items_Units_UnitId",
@@ -1235,7 +1341,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ServiceRequestId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     InsuranceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ServiceName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ServiceName = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     StartTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     EndTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -1243,7 +1349,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     DiscountAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     PatientTypeId = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -1256,9 +1362,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     table.PrimaryKey("PK_ServiceRequestDatas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ServiceRequestDatas_ServiceRequest_ServiceRequestId",
+                        name: "FK_ServiceRequestDatas_ServiceRequests_ServiceRequestId",
                         column: x => x.ServiceRequestId,
-                        principalTable: "ServiceRequest",
+                        principalTable: "ServiceRequests",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -1281,6 +1387,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     MaleTo = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     FemaleFrom = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     FemaleTo = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Normal = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: true),
                     Inactive = table.Column<bool>(type: "bit", nullable: false)
@@ -1296,7 +1403,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Branch",
+                name: "Branchs",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -1323,105 +1430,26 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Branch", x => x.Id);
+                    table.PrimaryKey("PK_Branchs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Branch_District_DistrictId",
+                        name: "FK_Branchs_Districts_DistrictId",
                         column: x => x.DistrictId,
-                        principalTable: "District",
+                        principalTable: "Districts",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Branch_Province_ProvinceId",
+                        name: "FK_Branchs_Provinces_ProvinceId",
                         column: x => x.ProvinceId,
-                        principalTable: "Province",
+                        principalTable: "Provinces",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Branch_Ward_WardId",
+                        name: "FK_Branchs_Wards_WardId",
                         column: x => x.WardId,
-                        principalTable: "Ward",
+                        principalTable: "Wards",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Patient",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PatientCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    PatientName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    BirthYear = table.Column<int>(type: "int", nullable: false),
-                    Birthplace = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    GenderId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    EthnicId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ReligionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    NationalId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ProvinceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DistrictId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    WardId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Address = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    CareerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    Workplace = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    IdentificationNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    IssueDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    IssueBy = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
-                    Tel = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    Mobile = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Patient", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Patient_Career_CareerId",
-                        column: x => x.CareerId,
-                        principalTable: "Career",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Patient_District_DistrictId",
-                        column: x => x.DistrictId,
-                        principalTable: "District",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Patient_Ethnic_EthnicId",
-                        column: x => x.EthnicId,
-                        principalTable: "Ethnic",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Patient_Gender_GenderId",
-                        column: x => x.GenderId,
-                        principalTable: "Gender",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Patient_National_NationalId",
-                        column: x => x.NationalId,
-                        principalTable: "National",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Patient_Province_ProvinceId",
-                        column: x => x.ProvinceId,
-                        principalTable: "Province",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Patient_Religions_ReligionId",
-                        column: x => x.ReligionId,
-                        principalTable: "Religions",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Patient_Ward_WardId",
-                        column: x => x.WardId,
-                        principalTable: "Ward",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PatientRecord",
+                name: "PatientRecords",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -1537,46 +1565,125 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PatientRecord", x => x.Id);
+                    table.PrimaryKey("PK_PatientRecords", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PatientRecord_Career_CareerId",
+                        name: "FK_PatientRecords_Careers_CareerId",
                         column: x => x.CareerId,
-                        principalTable: "Career",
+                        principalTable: "Careers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_PatientRecord_District_DistrictId",
+                        name: "FK_PatientRecords_Districts_DistrictId",
                         column: x => x.DistrictId,
-                        principalTable: "District",
+                        principalTable: "Districts",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_PatientRecord_Ethnic_EthnicId",
+                        name: "FK_PatientRecords_Ethnics_EthnicId",
                         column: x => x.EthnicId,
-                        principalTable: "Ethnic",
+                        principalTable: "Ethnics",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_PatientRecord_Gender_GenderId",
+                        name: "FK_PatientRecords_Genders_GenderId",
                         column: x => x.GenderId,
-                        principalTable: "Gender",
+                        principalTable: "Genders",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_PatientRecord_National_NationalId",
+                        name: "FK_PatientRecords_Nationals_NationalId",
                         column: x => x.NationalId,
-                        principalTable: "National",
+                        principalTable: "Nationals",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_PatientRecord_Province_ProvinceId",
+                        name: "FK_PatientRecords_Provinces_ProvinceId",
                         column: x => x.ProvinceId,
-                        principalTable: "Province",
+                        principalTable: "Provinces",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_PatientRecord_Religions_ReligionId",
+                        name: "FK_PatientRecords_Religions_ReligionId",
                         column: x => x.ReligionId,
                         principalTable: "Religions",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_PatientRecord_Ward_WardId",
+                        name: "FK_PatientRecords_Wards_WardId",
                         column: x => x.WardId,
-                        principalTable: "Ward",
+                        principalTable: "Wards",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Patients",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PatientCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    PatientName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    BirthYear = table.Column<int>(type: "int", nullable: false),
+                    Birthplace = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    GenderId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    EthnicId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ReligionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    NationalId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ProvinceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DistrictId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    WardId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Address = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    CareerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Workplace = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    IdentificationNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    IssueDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IssueBy = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    Tel = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    Mobile = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Patients", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Patients_Careers_CareerId",
+                        column: x => x.CareerId,
+                        principalTable: "Careers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Patients_Districts_DistrictId",
+                        column: x => x.DistrictId,
+                        principalTable: "Districts",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Patients_Ethnics_EthnicId",
+                        column: x => x.EthnicId,
+                        principalTable: "Ethnics",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Patients_Genders_GenderId",
+                        column: x => x.GenderId,
+                        principalTable: "Genders",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Patients_Nationals_NationalId",
+                        column: x => x.NationalId,
+                        principalTable: "Nationals",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Patients_Provinces_ProvinceId",
+                        column: x => x.ProvinceId,
+                        principalTable: "Provinces",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Patients_Religions_ReligionId",
+                        column: x => x.ReligionId,
+                        principalTable: "Religions",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Patients_Wards_WardId",
+                        column: x => x.WardId,
+                        principalTable: "Wards",
                         principalColumn: "Id");
                 });
 
@@ -1616,7 +1723,32 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Department",
+                name: "ServiceResultDatas",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ServiceResultIndiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Result = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    ResultType = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ServiceResultDatas", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ServiceResultDatas_ServiceResultIndices_ServiceResultIndiceId",
+                        column: x => x.ServiceResultIndiceId,
+                        principalTable: "ServiceResultIndices",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ServiceResultDatas_Services_ServiceId",
+                        column: x => x.ServiceId,
+                        principalTable: "Services",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Departments",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -1635,16 +1767,16 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Department", x => x.Id);
+                    table.PrimaryKey("PK_Departments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Department_Branch_BranchId",
+                        name: "FK_Departments_Branchs_BranchId",
                         column: x => x.BranchId,
-                        principalTable: "Branch",
+                        principalTable: "Branchs",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Department_DepartmentType_DepartmentTypeId",
+                        name: "FK_Departments_DepartmentTypes_DepartmentTypeId",
                         column: x => x.DepartmentTypeId,
-                        principalTable: "DepartmentType",
+                        principalTable: "DepartmentTypes",
                         principalColumn: "Id");
                 });
 
@@ -1660,9 +1792,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     table.PrimaryKey("PK_RolePermissionBranchs", x => new { x.RoleId, x.PermissionId });
                     table.ForeignKey(
-                        name: "FK_RolePermissionBranchs_Branch_BranchId",
+                        name: "FK_RolePermissionBranchs_Branchs_BranchId",
                         column: x => x.BranchId,
-                        principalTable: "Branch",
+                        principalTable: "Branchs",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_RolePermissionBranchs_Permissions_PermissionId",
@@ -1679,7 +1811,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Insurance",
+                name: "Insurances",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -1706,27 +1838,27 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Insurance", x => x.Id);
+                    table.PrimaryKey("PK_Insurances", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Insurance_LiveArea_LiveAreaId",
+                        name: "FK_Insurances_LiveArea_LiveAreaId",
                         column: x => x.LiveAreaId,
                         principalTable: "LiveArea",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Insurance_PatientRecord_PatientRecordId",
+                        name: "FK_Insurances_PatientRecords_PatientRecordId",
                         column: x => x.PatientRecordId,
-                        principalTable: "PatientRecord",
+                        principalTable: "PatientRecords",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Insurance_Patient_PatientId",
+                        name: "FK_Insurances_Patients_PatientId",
                         column: x => x.PatientId,
-                        principalTable: "Patient",
+                        principalTable: "Patients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Insurance_RightRouteTypes_RightRouteTypeId",
+                        name: "FK_Insurances_RightRouteTypes_RightRouteTypeId",
                         column: x => x.RightRouteTypeId,
                         principalTable: "RightRouteTypes",
                         principalColumn: "Id",
@@ -1734,7 +1866,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Room",
+                name: "Rooms",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -1753,17 +1885,17 @@ namespace HIS.EntityFrameworkCore.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Room", x => x.Id);
+                    table.PrimaryKey("PK_Rooms", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Room_Department_DepartmentId",
+                        name: "FK_Rooms_Departments_DepartmentId",
                         column: x => x.DepartmentId,
-                        principalTable: "Department",
+                        principalTable: "Departments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Room_RoomType_RoomTypeId",
+                        name: "FK_Rooms_RoomTypes_RoomTypeId",
                         column: x => x.RoomTypeId,
-                        principalTable: "RoomType",
+                        principalTable: "RoomTypes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -1781,9 +1913,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     table.PrimaryKey("PK_ExecutionRooms", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ExecutionRooms_Room_RoomId",
+                        name: "FK_ExecutionRooms_Rooms_RoomId",
                         column: x => x.RoomId,
-                        principalTable: "Room",
+                        principalTable: "Rooms",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_ExecutionRooms_Services_ServiceId",
@@ -1834,9 +1966,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     table.PrimaryKey("PK_InOutStocks", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InOutStocks_Department_ReqDepartmentId",
+                        name: "FK_InOutStocks_Departments_ReqDepartmentId",
                         column: x => x.ReqDepartmentId,
-                        principalTable: "Department",
+                        principalTable: "Departments",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_InOutStocks_InOutStockTypes_InOutStockTypeId",
@@ -1844,34 +1976,34 @@ namespace HIS.EntityFrameworkCore.Migrations
                         principalTable: "InOutStockTypes",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_InOutStocks_MedicalRecord_PatientRecordId",
+                        name: "FK_InOutStocks_MedicalRecords_PatientRecordId",
                         column: x => x.PatientRecordId,
-                        principalTable: "MedicalRecord",
+                        principalTable: "MedicalRecords",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_InOutStocks_Patient_PatientId",
+                        name: "FK_InOutStocks_Patients_PatientId",
                         column: x => x.PatientId,
-                        principalTable: "Patient",
+                        principalTable: "Patients",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_InOutStocks_Room_ExpStockId",
+                        name: "FK_InOutStocks_Rooms_ExpStockId",
                         column: x => x.ExpStockId,
-                        principalTable: "Room",
+                        principalTable: "Rooms",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_InOutStocks_Room_ImpStockId",
+                        name: "FK_InOutStocks_Rooms_ImpStockId",
                         column: x => x.ImpStockId,
-                        principalTable: "Room",
+                        principalTable: "Rooms",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_InOutStocks_Room_ReqRoomId",
+                        name: "FK_InOutStocks_Rooms_ReqRoomId",
                         column: x => x.ReqRoomId,
-                        principalTable: "Room",
+                        principalTable: "Rooms",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_InOutStocks_Supplier_SupplierId",
+                        name: "FK_InOutStocks_Suppliers_SupplierId",
                         column: x => x.SupplierId,
-                        principalTable: "Supplier",
+                        principalTable: "Suppliers",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_InOutStocks_Users_ApproverUserId",
@@ -1926,9 +2058,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                         principalTable: "Items",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_ItemStocks_Room_StockId",
+                        name: "FK_ItemStocks_Rooms_StockId",
                         column: x => x.StockId,
-                        principalTable: "Room",
+                        principalTable: "Rooms",
                         principalColumn: "Id");
                 });
 
@@ -2016,7 +2148,28 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "DepartmentType",
+                table: "DeathCauses",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "DeathCauseCode", "DeathCauseName", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "SortOrder" },
+                values: new object[,]
+                {
+                    { new Guid("4333ca55-4d7c-4be0-b9a2-2125624f0229"), null, new DateTime(2023, 12, 6, 20, 59, 54, 608, DateTimeKind.Local).AddTicks(2146), "DO_TAI_BIEN", "Do tai biến điều trị", null, false, null, null, 2 },
+                    { new Guid("4d5b5c50-6be0-434e-8baa-a528af4a58b5"), null, new DateTime(2023, 12, 6, 20, 59, 54, 608, DateTimeKind.Local).AddTicks(2148), "KHAC", "Khác", null, false, null, null, 3 },
+                    { new Guid("c0a4d767-7ba9-4006-a0a9-020b6322c2ef"), null, new DateTime(2023, 12, 6, 20, 59, 54, 608, DateTimeKind.Local).AddTicks(2113), "DO_BENH", "Do bệnh", null, false, null, null, 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "DeathWithins",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "DeathWithinCode", "DeathWithinName", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "SortOrder" },
+                values: new object[,]
+                {
+                    { new Guid("66c3a43b-f9d0-4876-81e2-b13c5f188589"), null, new DateTime(2023, 12, 6, 20, 59, 54, 608, DateTimeKind.Local).AddTicks(3307), "TRONG_24H", "Trong 24h vào", null, false, null, null, 1 },
+                    { new Guid("7693d6ec-cf0f-44c1-a9d7-fb997335ae10"), null, new DateTime(2023, 12, 6, 20, 59, 54, 608, DateTimeKind.Local).AddTicks(3321), "TRONG_72H", "Trong 72h vào", null, false, null, null, 3 },
+                    { new Guid("8f2b1eeb-a4bd-4f84-b59c-98145c58b1ab"), null, new DateTime(2023, 12, 6, 20, 59, 54, 608, DateTimeKind.Local).AddTicks(3323), "KHAC", "Khác", null, false, null, null, 4 },
+                    { new Guid("f91d8342-619c-435b-b51c-8b3d7f541222"), null, new DateTime(2023, 12, 6, 20, 59, 54, 608, DateTimeKind.Local).AddTicks(3318), "TRONG_48H", "Trong 48h vào", null, false, null, null, 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "DepartmentTypes",
                 columns: new[] { "Id", "Code", "Description", "Inactive", "Name", "SortOrder" },
                 values: new object[,]
                 {
@@ -2027,7 +2180,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Ethnic",
+                table: "Ethnics",
                 columns: new[] { "Id", "Description", "EthnicCode", "EthnicName", "Inactive", "MohCode", "SortOrder" },
                 values: new object[,]
                 {
@@ -2089,7 +2242,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Gender",
+                table: "Genders",
                 columns: new[] { "Id", "Description", "GenderCode", "GenderName", "Inactive", "SortOrder" },
                 values: new object[,]
                 {
@@ -2217,36 +2370,17 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "MedicalRecordType",
-                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "MedicalRecordTypeCode", "MedicalRecordTypeGroupID", "MedicalRecordTypeName", "ModifiedBy", "ModifiedDate", "SortOrder" },
+                table: "MedicalRecordTypeCategorys",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "MedicalRecordTypeGroupCode", "MedicalRecordTypeGroupName", "ModifiedBy", "ModifiedDate", "SortOrder" },
                 values: new object[,]
                 {
-                    { 100, null, new DateTime(2023, 12, 4, 22, 26, 5, 634, DateTimeKind.Local).AddTicks(544), null, false, "100", 1, "Khám Bệnh", null, null, 1 },
-                    { 200, null, new DateTime(2023, 12, 4, 22, 26, 5, 634, DateTimeKind.Local).AddTicks(567), null, false, "200", 2, "Bệnh Án Ngoại Trú (Chung)", null, null, 1 },
-                    { 201, null, new DateTime(2023, 12, 4, 22, 26, 5, 634, DateTimeKind.Local).AddTicks(571), null, false, "201", 2, "Bệnh Án Ngoại Trú (Răng - Hàm - Mặt)", null, null, 2 },
-                    { 202, null, new DateTime(2023, 12, 4, 22, 26, 5, 634, DateTimeKind.Local).AddTicks(576), null, false, "202", 2, "Bệnh Án Ngoại Trú (Tai - Mũi - Họng)", null, null, 3 },
-                    { 203, null, new DateTime(2023, 12, 4, 22, 26, 5, 634, DateTimeKind.Local).AddTicks(581), null, false, "203", 2, "Bệnh Án Ngoại Trú (Y Học Cổ Truyền)", null, null, 4 },
-                    { 204, null, new DateTime(2023, 12, 4, 22, 26, 5, 634, DateTimeKind.Local).AddTicks(585), null, false, "204", 2, "Bệnh Án Ngoại Trú (Mắt)", null, null, 5 },
-                    { 301, null, new DateTime(2023, 12, 4, 22, 26, 5, 634, DateTimeKind.Local).AddTicks(589), null, false, "301", 3, "Bệnh Án Nội Khoa", null, null, 2 },
-                    { 302, null, new DateTime(2023, 12, 4, 22, 26, 5, 634, DateTimeKind.Local).AddTicks(593), null, false, "302", 3, "Bệnh Án Nhi Khoa", null, null, 3 },
-                    { 303, null, new DateTime(2023, 12, 4, 22, 26, 5, 634, DateTimeKind.Local).AddTicks(596), null, false, "303", 3, "Bệnh Án Truyền Nhiễm", null, null, 4 },
-                    { 304, null, new DateTime(2023, 12, 4, 22, 26, 5, 634, DateTimeKind.Local).AddTicks(599), null, false, "304", 3, "Bệnh Án Phụ Khoa", null, null, 5 },
-                    { 305, null, new DateTime(2023, 12, 4, 22, 26, 5, 634, DateTimeKind.Local).AddTicks(604), null, false, "305", 3, "Bệnh Án Sản Khoa", null, null, 6 },
-                    { 306, null, new DateTime(2023, 12, 4, 22, 26, 5, 634, DateTimeKind.Local).AddTicks(608), null, false, "306", 3, "Bệnh Án Sơ Sinh", null, null, 7 },
-                    { 307, null, new DateTime(2023, 12, 4, 22, 26, 5, 634, DateTimeKind.Local).AddTicks(612), null, false, "307", 3, "Bệnh Án Tâm Thần", null, null, 8 },
-                    { 308, null, new DateTime(2023, 12, 4, 22, 26, 5, 634, DateTimeKind.Local).AddTicks(616), null, false, "308", 3, "Bệnh Án Da Liễu", null, null, 9 },
-                    { 309, null, new DateTime(2023, 12, 4, 22, 26, 5, 634, DateTimeKind.Local).AddTicks(620), null, false, "309", 3, "Bệnh Án Điều Dưỡng - Phục Hồi Chức Năng", null, null, 10 },
-                    { 310, null, new DateTime(2023, 12, 4, 22, 26, 5, 634, DateTimeKind.Local).AddTicks(623), null, false, "310", 3, "Bệnh Án Huyết Học - Truyền Máu", null, null, 11 },
-                    { 311, null, new DateTime(2023, 12, 4, 22, 26, 5, 634, DateTimeKind.Local).AddTicks(626), null, false, "311", 3, "Bệnh Án Ngoại Khoa", null, null, 12 },
-                    { 312, null, new DateTime(2023, 12, 4, 22, 26, 5, 634, DateTimeKind.Local).AddTicks(630), null, false, "312", 3, "Bệnh Án Bỏng", null, null, 13 },
-                    { 313, null, new DateTime(2023, 12, 4, 22, 26, 5, 634, DateTimeKind.Local).AddTicks(633), null, false, "313", 3, "Bệnh Án Ung Bướu", null, null, 14 },
-                    { 314, null, new DateTime(2023, 12, 4, 22, 26, 5, 634, DateTimeKind.Local).AddTicks(637), null, false, "314", 3, "Bệnh Án Răng-Hàm-Mặt", null, null, 15 },
-                    { 315, null, new DateTime(2023, 12, 4, 22, 26, 5, 634, DateTimeKind.Local).AddTicks(640), null, false, "315", 3, "Bệnh Án Tai-Mũi-Họng", null, null, 16 },
-                    { 316, null, new DateTime(2023, 12, 4, 22, 26, 5, 634, DateTimeKind.Local).AddTicks(668), null, false, "316", 3, "Bệnh Án Mắt", null, null, 17 }
+                    { 1, null, new DateTime(2023, 12, 6, 20, 59, 54, 608, DateTimeKind.Local).AddTicks(4401), null, false, "1", "Khám bệnh", null, null, 3 },
+                    { 2, null, new DateTime(2023, 12, 6, 20, 59, 54, 608, DateTimeKind.Local).AddTicks(4399), null, false, "2", "Ngoại trú", null, null, 2 },
+                    { 3, null, new DateTime(2023, 12, 6, 20, 59, 54, 608, DateTimeKind.Local).AddTicks(4381), null, false, "3", "Nội trú", null, null, 1 }
                 });
 
             migrationBuilder.InsertData(
-                table: "National",
+                table: "Nationals",
                 columns: new[] { "Id", "Code", "Description", "HeInCode", "Inactive", "Name", "SortOrder" },
                 values: new object[,]
                 {
@@ -2506,13 +2640,23 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "PatientRecordType",
+                table: "PatientRecordStatus",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "PatientRecordStatusName", "SortOrder" },
+                values: new object[,]
+                {
+                    { 1, null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Mới", 1 },
+                    { 2, null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Đang điều trị", 2 },
+                    { 3, null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Kết thúc", 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "PatientRecordTypes",
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "PatientRecordTypeCode", "PatientRecordTypeName", "SortOrder" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2023, 12, 4, 22, 26, 5, 633, DateTimeKind.Local).AddTicks(6156), null, false, null, null, "1", "Ngoại trú", 1 },
-                    { 2, null, new DateTime(2023, 12, 4, 22, 26, 5, 633, DateTimeKind.Local).AddTicks(6186), null, false, null, null, "2", "Nội trú", 2 },
-                    { 3, null, new DateTime(2023, 12, 4, 22, 26, 5, 633, DateTimeKind.Local).AddTicks(6193), null, false, null, null, "3", "Dịch vụ", 3 }
+                    { 1, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(2571), null, false, null, null, "1", "Ngoại trú", 1 },
+                    { 2, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(2583), null, false, null, null, "2", "Nội trú", 2 },
+                    { 3, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(2585), null, false, null, null, "3", "Dịch vụ", 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -2520,15 +2664,25 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "PatientTypeCode", "PatientTypeName", "SortOrder" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2023, 12, 4, 22, 26, 5, 628, DateTimeKind.Local).AddTicks(5056), null, false, null, null, "1", "Bảo hiểm y tế", 1 },
-                    { 2, null, new DateTime(2023, 12, 4, 22, 26, 5, 628, DateTimeKind.Local).AddTicks(5081), null, false, null, null, "2", "Viện phí", 2 },
-                    { 3, null, new DateTime(2023, 12, 4, 22, 26, 5, 628, DateTimeKind.Local).AddTicks(5083), null, false, null, null, "3", "Dịch vụ", 3 },
-                    { 4, null, new DateTime(2023, 12, 4, 22, 26, 5, 628, DateTimeKind.Local).AddTicks(5085), null, false, null, null, "4", "Người nước ngoài", 4 },
-                    { 5, null, new DateTime(2023, 12, 4, 22, 26, 5, 628, DateTimeKind.Local).AddTicks(5086), null, false, null, null, "5", "Miễn phí", 5 }
+                    { 1, null, new DateTime(2023, 12, 6, 20, 59, 54, 617, DateTimeKind.Local).AddTicks(8577), null, false, null, null, "1", "Bảo hiểm y tế", 1 },
+                    { 2, null, new DateTime(2023, 12, 6, 20, 59, 54, 617, DateTimeKind.Local).AddTicks(8603), null, false, null, null, "2", "Viện phí", 2 },
+                    { 3, null, new DateTime(2023, 12, 6, 20, 59, 54, 617, DateTimeKind.Local).AddTicks(8605), null, false, null, null, "3", "Dịch vụ", 3 },
+                    { 4, null, new DateTime(2023, 12, 6, 20, 59, 54, 617, DateTimeKind.Local).AddTicks(8606), null, false, null, null, "4", "Người nước ngoài", 4 },
+                    { 5, null, new DateTime(2023, 12, 6, 20, 59, 54, 617, DateTimeKind.Local).AddTicks(8608), null, false, null, null, "5", "Miễn phí", 5 }
                 });
 
             migrationBuilder.InsertData(
-                table: "Province",
+                table: "PaymentMethods",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "PaymentMethodCode", "PaymentMethodName", "SortOrder" },
+                values: new object[,]
+                {
+                    { new Guid("0b348363-c888-4c9a-b145-c3389fdcca37"), null, new DateTime(2023, 12, 6, 20, 59, 54, 608, DateTimeKind.Local).AddTicks(5336), null, false, null, null, "TM/CK", "Tiền mặt hoặc chuyển khoản", 3 },
+                    { new Guid("8bff9824-1df2-419e-88ab-e098a6fc4e7e"), null, new DateTime(2023, 12, 6, 20, 59, 54, 608, DateTimeKind.Local).AddTicks(5322), null, false, null, null, "TM", "Tiền mặt", 1 },
+                    { new Guid("dd39afc0-1de0-4287-a126-4dada6788508"), null, new DateTime(2023, 12, 6, 20, 59, 54, 608, DateTimeKind.Local).AddTicks(5333), null, false, null, null, "CK", "Chuyển khoản", 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Provinces",
                 columns: new[] { "Id", "Description", "Inactive", "ProvinceCode", "ProvinceName", "SortOrder" },
                 values: new object[,]
                 {
@@ -2598,7 +2752,60 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "RoomType",
+                table: "RelativeTypes",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "RelativeTypeCode", "RelativeTypeName", "SortOrder" },
+                values: new object[,]
+                {
+                    { new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f01"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "01", "Bố đẻ", 1 },
+                    { new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f02"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "02", "Mẹ đẻ", 2 },
+                    { new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f03"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "03", "Bố nuôi", 3 },
+                    { new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f04"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "04", "Mẹ nuôi", 4 },
+                    { new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f05"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "05", "Anh ruột", 5 },
+                    { new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f06"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "06", "Chị ruột", 6 },
+                    { new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f07"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "07", "Em ruột", 7 },
+                    { new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f08"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "08", "Ông", 8 },
+                    { new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f09"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "09", "Bà", 9 },
+                    { new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f10"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "10", "Vợ", 10 },
+                    { new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f11"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "11", "Chồng", 11 },
+                    { new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f12"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "12", "Con", 12 },
+                    { new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f13"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "13", "Cháu", 13 },
+                    { new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f14"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "14", "Bác, chú, cậu", 14 },
+                    { new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f15"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "15", "Bác, cô, dì", 15 },
+                    { new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f99"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "99", "Khác", 99 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Religions",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "ReligionCode", "ReligionName", "SortOrder" },
+                values: new object[,]
+                {
+                    { new Guid("2ad4c6c6-d381-443b-8892-5e39b945de0f"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "3", "Phật Giáo Hòa Hảo", 4 },
+                    { new Guid("2d9b484c-a190-4288-a337-a35fb5345b9e"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "1", "Phật Giáo", 2 },
+                    { new Guid("84c8b191-8825-41f3-9a8b-ac73bc7b437b"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "6", "Tin Lành", 7 },
+                    { new Guid("a2690804-6608-4a5a-9fc8-5268b211086c"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "4", "Cơ đốc giao La Mã", 5 },
+                    { new Guid("bfea8c9a-7d0f-456b-b226-3dc17e230e8c"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "2", "Công giáo", 3 },
+                    { new Guid("d480ad5b-3cc3-4c87-8914-bad32c6bc04a"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "0", "Không tôn giáo", 1 },
+                    { new Guid("e105dd3e-9f3d-4e10-8eda-e49f8631eec7"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "99", "Tôn giáo khác", 99 },
+                    { new Guid("e72b5425-aac6-4226-9b4d-f8202b3ad47f"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "5", "Cao Đài", 6 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RightRouteTypes",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "RightRouteTypeCode", "RightRouteTypeName", "SortOrder" },
+                values: new object[,]
+                {
+                    { 1, null, new DateTime(2023, 12, 6, 20, 59, 54, 608, DateTimeKind.Local).AddTicks(8339), "Không chọn", false, null, null, "00", "", 1 },
+                    { 2, null, new DateTime(2023, 12, 6, 20, 59, 54, 608, DateTimeKind.Local).AddTicks(8346), "", false, null, null, "01", "Đúng tuyến", 2 },
+                    { 3, null, new DateTime(2023, 12, 6, 20, 59, 54, 608, DateTimeKind.Local).AddTicks(8356), "", false, null, null, "02", "Đúng tuyến (giới thiệu)", 3 },
+                    { 4, null, new DateTime(2023, 12, 6, 20, 59, 54, 608, DateTimeKind.Local).AddTicks(8359), "", false, null, null, "03", "Đúng tuyến (giấy hẹn)", 4 },
+                    { 5, null, new DateTime(2023, 12, 6, 20, 59, 54, 608, DateTimeKind.Local).AddTicks(8361), "", false, null, null, "04", "Đúng tuyến (cấp cứu)", 5 },
+                    { 6, null, new DateTime(2023, 12, 6, 20, 59, 54, 608, DateTimeKind.Local).AddTicks(8363), "", false, null, null, "05", "Thông tuyến huyện", 6 },
+                    { 7, null, new DateTime(2023, 12, 6, 20, 59, 54, 608, DateTimeKind.Local).AddTicks(8366), "", false, null, null, "06", "Trái tuyến", 7 },
+                    { 8, null, new DateTime(2023, 12, 6, 20, 59, 54, 608, DateTimeKind.Local).AddTicks(8368), "", false, null, null, "07", "Trái tuyến (thông tuyến tỉnh)", 8 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "RoomTypes",
                 columns: new[] { "Id", "Description", "Inactive", "RoomTypeCode", "RoomTypeName", "SortOrder" },
                 values: new object[,]
                 {
@@ -2697,6 +2904,71 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "TransactionTypes",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "SortOrder", "TransactionTypeCode", "TransactionTypeName" },
+                values: new object[,]
+                {
+                    { 1, null, new DateTime(2023, 12, 6, 20, 59, 54, 609, DateTimeKind.Local).AddTicks(8117), null, false, null, null, 1, "1", "Thu tiền" },
+                    { 2, null, new DateTime(2023, 12, 6, 20, 59, 54, 609, DateTimeKind.Local).AddTicks(8128), null, false, null, null, 2, "2", "Hoàn tiền" },
+                    { 3, null, new DateTime(2023, 12, 6, 20, 59, 54, 609, DateTimeKind.Local).AddTicks(8130), null, false, null, null, 3, "3", "Tạm ứng" },
+                    { 4, null, new DateTime(2023, 12, 6, 20, 59, 54, 609, DateTimeKind.Local).AddTicks(8132), null, false, null, null, 4, "4", "Hoàn ứng" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TransferForms",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "SortOrder", "TransferFormCode", "TransferFormName" },
+                values: new object[,]
+                {
+                    { new Guid("1442d51a-072c-49a4-a5a5-2e5c8fbd25f9"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, 1, "1a", "Chuyển người bệnh từ tuyến dưới lên tuyến trên liền kề (theo trình tự)" },
+                    { new Guid("2bd53019-a0bd-4491-a65b-a675228b1a7f"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, 4, "3", "Chuyển người bệnh giữa các cơ sở khám bệnh, chữa bệnh trong cùng tuyến" },
+                    { new Guid("435e227f-fcf6-4400-8e6f-b19ed91a7145"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, 2, "1b", "Chuyển người bệnh từ tuyến dưới lên tuyến trên không qua tuyến liền kề (không theo trình tự)" },
+                    { new Guid("d103f775-ff29-47ed-aa1d-6d847a2153f0"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, 3, "2", "Chuyển người bệnh từ tuyến trên về tuyến dưới" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TransferReasons",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "SortOrder", "TransferReasonCode", "TransferReasonName" },
+                values: new object[,]
+                {
+                    { new Guid("14f21e7e-54d2-40af-ab18-417468e1cadb"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, 2, "5", "Chuyển theo yêu cầu của người bệnh hoặc đại diện hợp pháp của người bệnh" },
+                    { new Guid("d6fa811f-0ea0-4303-bb6c-6bdcb7d18970"), null, new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, 1, "4", "Chuyển người bệnh đi các tuyến khi đủ điều kiện" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TreatmentEndTypes",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "IsForInPatient", "IsForOutPatient", "ModifiedBy", "ModifiedDate", "SortOrder", "TreatmentEndTypeCode", "TreatmentEndTypeName" },
+                values: new object[,]
+                {
+                    { 1, null, new DateTime(2023, 12, 6, 20, 59, 54, 611, DateTimeKind.Local).AddTicks(7270), null, false, false, true, null, null, 1, "CAPTOACHOVE", "Cấp toa cho về" },
+                    { 2, null, new DateTime(2023, 12, 6, 20, 59, 54, 611, DateTimeKind.Local).AddTicks(7354), null, false, false, true, null, null, 1, "HEN", "Hẹn" },
+                    { 3, null, new DateTime(2023, 12, 6, 20, 59, 54, 611, DateTimeKind.Local).AddTicks(7357), null, false, false, true, null, null, 2, "CHUYEN_PHONGKHAM", "Chuyển phòng khám" },
+                    { 4, null, new DateTime(2023, 12, 6, 20, 59, 54, 611, DateTimeKind.Local).AddTicks(7360), null, false, false, true, null, null, 3, "DTRI_NGOAITRU", "Điều trị ngoại trú" },
+                    { 5, null, new DateTime(2023, 12, 6, 20, 59, 54, 611, DateTimeKind.Local).AddTicks(7363), null, false, false, true, null, null, 4, "NHAPVIEN", "Nhập viện" },
+                    { 6, null, new DateTime(2023, 12, 6, 20, 59, 54, 611, DateTimeKind.Local).AddTicks(7366), null, false, false, true, null, null, 5, "BOKHAM", "Bỏ khám" },
+                    { 7, null, new DateTime(2023, 12, 6, 20, 59, 54, 611, DateTimeKind.Local).AddTicks(7369), null, false, true, true, null, null, 8, "CHUYEN_KHOA", "Chuyển khoa" },
+                    { 8, null, new DateTime(2023, 12, 6, 20, 59, 54, 611, DateTimeKind.Local).AddTicks(7372), null, false, true, false, null, null, 1, "RAVIEN", "Ra viện" },
+                    { 9, null, new DateTime(2023, 12, 6, 20, 59, 54, 611, DateTimeKind.Local).AddTicks(7375), null, false, true, false, null, null, 2, "XINVE", "Xin về" },
+                    { 10, null, new DateTime(2023, 12, 6, 20, 59, 54, 611, DateTimeKind.Local).AddTicks(7378), null, false, true, false, null, null, 3, "DUAVE", "Đưa về" },
+                    { 11, null, new DateTime(2023, 12, 6, 20, 59, 54, 611, DateTimeKind.Local).AddTicks(7388), null, false, true, false, null, null, 4, "TRONVIEN", "Trốn viện" },
+                    { 12, null, new DateTime(2023, 12, 6, 20, 59, 54, 611, DateTimeKind.Local).AddTicks(7391), null, false, false, true, null, null, 6, "CHUYEN_TUYEN", "Chuyển tuyến" },
+                    { 13, null, new DateTime(2023, 12, 6, 20, 59, 54, 611, DateTimeKind.Local).AddTicks(7394), null, false, true, true, null, null, 7, "TUVONG", "Tử vong" },
+                    { 99, null, new DateTime(2023, 12, 6, 20, 59, 54, 611, DateTimeKind.Local).AddTicks(7397), null, false, true, true, null, null, 99, "KHAC", "Khác" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "TreatmentResults",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "SortOrder", "TreatmentResultCode", "TreatmentResultName" },
+                values: new object[,]
+                {
+                    { 1, null, new DateTime(2023, 12, 6, 20, 59, 54, 611, DateTimeKind.Local).AddTicks(8382), null, false, null, null, 1, "KHOI", "Khỏi" },
+                    { 2, null, new DateTime(2023, 12, 6, 20, 59, 54, 611, DateTimeKind.Local).AddTicks(8428), null, false, null, null, 2, "DO_GIAM", "Đỡ, giảm" },
+                    { 3, null, new DateTime(2023, 12, 6, 20, 59, 54, 611, DateTimeKind.Local).AddTicks(8432), null, false, null, null, 3, "KHONGTHAYDOI", "Không thay đổi" },
+                    { 4, null, new DateTime(2023, 12, 6, 20, 59, 54, 611, DateTimeKind.Local).AddTicks(8434), null, false, null, null, 4, "NANGHON", "Nặng hơn" },
+                    { 5, null, new DateTime(2023, 12, 6, 20, 59, 54, 611, DateTimeKind.Local).AddTicks(8437), null, false, null, null, 5, "TUVONG", "Tử vong" },
+                    { 99, null, new DateTime(2023, 12, 6, 20, 59, 54, 611, DateTimeKind.Local).AddTicks(8439), null, false, null, null, 6, "KHAC", "Khác" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Units",
                 columns: new[] { "Id", "Code", "Inactive", "Name", "SortOrder", "UnitType" },
                 values: new object[,]
@@ -2733,34 +3005,63 @@ namespace HIS.EntityFrameworkCore.Migrations
                     { new Guid("49ba7fd4-2edb-4482-a419-00c81f023f5c"), null, null, null, "nghiemhai293@gmail.com", "Hai", null, "Nghiem", "46F94C8DE14FB36680850768FF1B7F2A", null, null, 1, 0, "hainx", null }
                 });
 
+            migrationBuilder.InsertData(
+                table: "MedicalRecordTypes",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "MedicalRecordTypeCode", "MedicalRecordTypeGroupID", "MedicalRecordTypeName", "ModifiedBy", "ModifiedDate", "SortOrder" },
+                values: new object[,]
+                {
+                    { 100, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(4435), null, false, "100", 1, "Khám Bệnh", null, null, 1 },
+                    { 200, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(4444), null, false, "200", 2, "Bệnh Án Ngoại Trú (Chung)", null, null, 1 },
+                    { 201, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(4446), null, false, "201", 2, "Bệnh Án Ngoại Trú (Răng - Hàm - Mặt)", null, null, 2 },
+                    { 202, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(4448), null, false, "202", 2, "Bệnh Án Ngoại Trú (Tai - Mũi - Họng)", null, null, 3 },
+                    { 203, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(4450), null, false, "203", 2, "Bệnh Án Ngoại Trú (Y Học Cổ Truyền)", null, null, 4 },
+                    { 204, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(4451), null, false, "204", 2, "Bệnh Án Ngoại Trú (Mắt)", null, null, 5 },
+                    { 301, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(4453), null, false, "301", 3, "Bệnh Án Nội Khoa", null, null, 2 },
+                    { 302, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(4454), null, false, "302", 3, "Bệnh Án Nhi Khoa", null, null, 3 },
+                    { 303, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(4456), null, false, "303", 3, "Bệnh Án Truyền Nhiễm", null, null, 4 },
+                    { 304, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(4458), null, false, "304", 3, "Bệnh Án Phụ Khoa", null, null, 5 },
+                    { 305, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(4459), null, false, "305", 3, "Bệnh Án Sản Khoa", null, null, 6 },
+                    { 306, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(4460), null, false, "306", 3, "Bệnh Án Sơ Sinh", null, null, 7 },
+                    { 307, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(4462), null, false, "307", 3, "Bệnh Án Tâm Thần", null, null, 8 },
+                    { 308, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(4464), null, false, "308", 3, "Bệnh Án Da Liễu", null, null, 9 },
+                    { 309, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(4465), null, false, "309", 3, "Bệnh Án Điều Dưỡng - Phục Hồi Chức Năng", null, null, 10 },
+                    { 310, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(4486), null, false, "310", 3, "Bệnh Án Huyết Học - Truyền Máu", null, null, 11 },
+                    { 311, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(4487), null, false, "311", 3, "Bệnh Án Ngoại Khoa", null, null, 12 },
+                    { 312, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(4489), null, false, "312", 3, "Bệnh Án Bỏng", null, null, 13 },
+                    { 313, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(4490), null, false, "313", 3, "Bệnh Án Ung Bướu", null, null, 14 },
+                    { 314, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(4499), null, false, "314", 3, "Bệnh Án Răng-Hàm-Mặt", null, null, 15 },
+                    { 315, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(4501), null, false, "315", 3, "Bệnh Án Tai-Mũi-Họng", null, null, 16 },
+                    { 316, null, new DateTime(2023, 12, 6, 20, 59, 54, 621, DateTimeKind.Local).AddTicks(4502), null, false, "316", 3, "Bệnh Án Mắt", null, null, 17 }
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_Branch_DistrictId",
-                table: "Branch",
+                name: "IX_Branchs_DistrictId",
+                table: "Branchs",
                 column: "DistrictId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Branch_ProvinceId",
-                table: "Branch",
+                name: "IX_Branchs_ProvinceId",
+                table: "Branchs",
                 column: "ProvinceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Branch_WardId",
-                table: "Branch",
+                name: "IX_Branchs_WardId",
+                table: "Branchs",
                 column: "WardId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Department_BranchId",
-                table: "Department",
+                name: "IX_Departments_BranchId",
+                table: "Departments",
                 column: "BranchId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Department_DepartmentTypeId",
-                table: "Department",
+                name: "IX_Departments_DepartmentTypeId",
+                table: "Departments",
                 column: "DepartmentTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_District_ProvinceId",
-                table: "District",
+                name: "IX_Districts_ProvinceId",
+                table: "Districts",
                 column: "ProvinceId");
 
             migrationBuilder.CreateIndex(
@@ -2859,23 +3160,23 @@ namespace HIS.EntityFrameworkCore.Migrations
                 column: "SupplierId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Insurance_LiveAreaId",
-                table: "Insurance",
+                name: "IX_Insurances_LiveAreaId",
+                table: "Insurances",
                 column: "LiveAreaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Insurance_PatientId",
-                table: "Insurance",
+                name: "IX_Insurances_PatientId",
+                table: "Insurances",
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Insurance_PatientRecordId",
-                table: "Insurance",
+                name: "IX_Insurances_PatientRecordId",
+                table: "Insurances",
                 column: "PatientRecordId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Insurance_RightRouteTypeId",
-                table: "Insurance",
+                name: "IX_Insurances_RightRouteTypeId",
+                table: "Insurances",
                 column: "RightRouteTypeId");
 
             migrationBuilder.CreateIndex(
@@ -2939,88 +3240,88 @@ namespace HIS.EntityFrameworkCore.Migrations
                 column: "UnitId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_MedicalRecordType_MedicalRecordTypeGroupID",
-                table: "MedicalRecordType",
+                name: "IX_MedicalRecordTypes_MedicalRecordTypeGroupID",
+                table: "MedicalRecordTypes",
                 column: "MedicalRecordTypeGroupID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Patient_CareerId",
-                table: "Patient",
+                name: "IX_PatientRecords_CareerId",
+                table: "PatientRecords",
                 column: "CareerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Patient_DistrictId",
-                table: "Patient",
+                name: "IX_PatientRecords_DistrictId",
+                table: "PatientRecords",
                 column: "DistrictId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Patient_EthnicId",
-                table: "Patient",
+                name: "IX_PatientRecords_EthnicId",
+                table: "PatientRecords",
                 column: "EthnicId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Patient_GenderId",
-                table: "Patient",
+                name: "IX_PatientRecords_GenderId",
+                table: "PatientRecords",
                 column: "GenderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Patient_NationalId",
-                table: "Patient",
+                name: "IX_PatientRecords_NationalId",
+                table: "PatientRecords",
                 column: "NationalId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Patient_ProvinceId",
-                table: "Patient",
+                name: "IX_PatientRecords_ProvinceId",
+                table: "PatientRecords",
                 column: "ProvinceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Patient_ReligionId",
-                table: "Patient",
+                name: "IX_PatientRecords_ReligionId",
+                table: "PatientRecords",
                 column: "ReligionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Patient_WardId",
-                table: "Patient",
+                name: "IX_PatientRecords_WardId",
+                table: "PatientRecords",
                 column: "WardId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PatientRecord_CareerId",
-                table: "PatientRecord",
+                name: "IX_Patients_CareerId",
+                table: "Patients",
                 column: "CareerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PatientRecord_DistrictId",
-                table: "PatientRecord",
+                name: "IX_Patients_DistrictId",
+                table: "Patients",
                 column: "DistrictId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PatientRecord_EthnicId",
-                table: "PatientRecord",
+                name: "IX_Patients_EthnicId",
+                table: "Patients",
                 column: "EthnicId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PatientRecord_GenderId",
-                table: "PatientRecord",
+                name: "IX_Patients_GenderId",
+                table: "Patients",
                 column: "GenderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PatientRecord_NationalId",
-                table: "PatientRecord",
+                name: "IX_Patients_NationalId",
+                table: "Patients",
                 column: "NationalId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PatientRecord_ProvinceId",
-                table: "PatientRecord",
+                name: "IX_Patients_ProvinceId",
+                table: "Patients",
                 column: "ProvinceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PatientRecord_ReligionId",
-                table: "PatientRecord",
+                name: "IX_Patients_ReligionId",
+                table: "Patients",
                 column: "ReligionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PatientRecord_WardId",
-                table: "PatientRecord",
+                name: "IX_Patients_WardId",
+                table: "Patients",
                 column: "WardId");
 
             migrationBuilder.CreateIndex(
@@ -3034,13 +3335,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                 column: "PermissionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Room_DepartmentId",
-                table: "Room",
+                name: "IX_Rooms_DepartmentId",
+                table: "Rooms",
                 column: "DepartmentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Room_RoomTypeId",
-                table: "Room",
+                name: "IX_Rooms_RoomTypeId",
+                table: "Rooms",
                 column: "RoomTypeId");
 
             migrationBuilder.CreateIndex(
@@ -3062,6 +3363,16 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "IX_ServiceRequestDatas_ServiceRequestId",
                 table: "ServiceRequestDatas",
                 column: "ServiceRequestId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ServiceResultDatas_ServiceId",
+                table: "ServiceResultDatas",
+                column: "ServiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ServiceResultDatas_ServiceResultIndiceId",
+                table: "ServiceResultDatas",
+                column: "ServiceResultIndiceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ServiceResultIndices_ServiceId",
@@ -3099,14 +3410,17 @@ namespace HIS.EntityFrameworkCore.Migrations
                 column: "RoleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ward_DistrictId",
-                table: "Ward",
+                name: "IX_Wards_DistrictId",
+                table: "Wards",
                 column: "DistrictId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "BirthCertBooks");
+
             migrationBuilder.DropTable(
                 name: "BloodTypeRhs");
 
@@ -3120,13 +3434,16 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "DeathCauses");
 
             migrationBuilder.DropTable(
+                name: "DeathCertBooks");
+
+            migrationBuilder.DropTable(
                 name: "DeathWithins");
 
             migrationBuilder.DropTable(
                 name: "ExecutionRooms");
 
             migrationBuilder.DropTable(
-                name: "Hospital");
+                name: "Hospitals");
 
             migrationBuilder.DropTable(
                 name: "Icd");
@@ -3135,7 +3452,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "InOutStockItems");
 
             migrationBuilder.DropTable(
-                name: "Insurance");
+                name: "Insurances");
 
             migrationBuilder.DropTable(
                 name: "ItemPricePolicies");
@@ -3147,13 +3464,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "MedicalRecordStatuses");
 
             migrationBuilder.DropTable(
-                name: "MedicalRecordType");
+                name: "MedicalRecordTypes");
 
             migrationBuilder.DropTable(
-                name: "PatientRecordStatuses");
+                name: "PatientRecordStatus");
 
             migrationBuilder.DropTable(
-                name: "PatientRecordType");
+                name: "PatientRecordTypes");
 
             migrationBuilder.DropTable(
                 name: "PaymentMethods");
@@ -3174,10 +3491,19 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "ServiceRequestDatas");
 
             migrationBuilder.DropTable(
-                name: "ServiceResultIndices");
+                name: "ServiceResultDatas");
 
             migrationBuilder.DropTable(
                 name: "Tokens");
+
+            migrationBuilder.DropTable(
+                name: "TransactionTypes");
+
+            migrationBuilder.DropTable(
+                name: "TransferForms");
+
+            migrationBuilder.DropTable(
+                name: "TransferReasons");
 
             migrationBuilder.DropTable(
                 name: "TreatmentEndTypes");
@@ -3198,7 +3524,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "LiveArea");
 
             migrationBuilder.DropTable(
-                name: "PatientRecord");
+                name: "PatientRecords");
 
             migrationBuilder.DropTable(
                 name: "RightRouteTypes");
@@ -3207,7 +3533,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "Items");
 
             migrationBuilder.DropTable(
-                name: "MedicalRecordTypeGroups");
+                name: "MedicalRecordTypeCategorys");
 
             migrationBuilder.DropTable(
                 name: "Permissions");
@@ -3216,10 +3542,10 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "PatientType");
 
             migrationBuilder.DropTable(
-                name: "ServiceRequest");
+                name: "ServiceRequests");
 
             migrationBuilder.DropTable(
-                name: "Services");
+                name: "ServiceResultIndices");
 
             migrationBuilder.DropTable(
                 name: "Roles");
@@ -3228,22 +3554,52 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "InOutStockTypes");
 
             migrationBuilder.DropTable(
-                name: "MedicalRecord");
+                name: "MedicalRecords");
 
             migrationBuilder.DropTable(
-                name: "Patient");
+                name: "Patients");
 
             migrationBuilder.DropTable(
-                name: "Room");
+                name: "Rooms");
 
             migrationBuilder.DropTable(
-                name: "Supplier");
+                name: "Suppliers");
 
             migrationBuilder.DropTable(
                 name: "Users");
 
             migrationBuilder.DropTable(
                 name: "ItemTypes");
+
+            migrationBuilder.DropTable(
+                name: "Services");
+
+            migrationBuilder.DropTable(
+                name: "Careers");
+
+            migrationBuilder.DropTable(
+                name: "Ethnics");
+
+            migrationBuilder.DropTable(
+                name: "Genders");
+
+            migrationBuilder.DropTable(
+                name: "Religions");
+
+            migrationBuilder.DropTable(
+                name: "Departments");
+
+            migrationBuilder.DropTable(
+                name: "RoomTypes");
+
+            migrationBuilder.DropTable(
+                name: "ItemGroups");
+
+            migrationBuilder.DropTable(
+                name: "ItemLines");
+
+            migrationBuilder.DropTable(
+                name: "Nationals");
 
             migrationBuilder.DropTable(
                 name: "ServiceGroupHeIns");
@@ -3255,49 +3611,22 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SurgicalProcedureTypes");
 
             migrationBuilder.DropTable(
-                name: "Career");
-
-            migrationBuilder.DropTable(
-                name: "Ethnic");
-
-            migrationBuilder.DropTable(
-                name: "Gender");
-
-            migrationBuilder.DropTable(
-                name: "Religions");
-
-            migrationBuilder.DropTable(
-                name: "Department");
-
-            migrationBuilder.DropTable(
-                name: "RoomType");
-
-            migrationBuilder.DropTable(
-                name: "ItemGroups");
-
-            migrationBuilder.DropTable(
-                name: "ItemLines");
-
-            migrationBuilder.DropTable(
-                name: "National");
-
-            migrationBuilder.DropTable(
                 name: "Units");
 
             migrationBuilder.DropTable(
-                name: "Branch");
+                name: "Branchs");
 
             migrationBuilder.DropTable(
-                name: "DepartmentType");
+                name: "DepartmentTypes");
 
             migrationBuilder.DropTable(
-                name: "Ward");
+                name: "Wards");
 
             migrationBuilder.DropTable(
-                name: "District");
+                name: "Districts");
 
             migrationBuilder.DropTable(
-                name: "Province");
+                name: "Provinces");
         }
     }
 }

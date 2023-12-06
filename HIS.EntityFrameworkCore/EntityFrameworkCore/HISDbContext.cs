@@ -15,6 +15,11 @@ namespace HIS.EntityFrameworkCore
 {
     public class HISDbContext : DbContext
     {
+        public HISDbContext(DbContextOptions options) : base(options)
+        {
+
+        }
+
         public DbSet<Gender> Genders { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
@@ -47,11 +52,6 @@ namespace HIS.EntityFrameworkCore
         public DbSet<ItemLine> ItemLines { get; set; }
         public DbSet<ItemType> ItemTypes { get; set; }
         public DbSet<ItemPricePolicy> ItemPricePolicies { get; set; }
-
-        public DbSet<InOutStockType> InOutStockTypes { get; set; }
-        public DbSet<ItemStock> ItemStocks { get; set; }
-        public DbSet<InOutStock> InOutStocks { get; set; }
-        public DbSet<InOutStockItem> InOutStockItems { get; set; }
 
         #region - hệ thống
         public DbSet<DbOption> DbOptions { get; set; }
@@ -90,13 +90,13 @@ namespace HIS.EntityFrameworkCore
         public DbSet<Insurance> Insurances { get; set; }
         public DbSet<ServiceRequest> ServiceRequests { get; set; }
         public DbSet<ServiceRequestData> ServiceRequestDatas { get; set; }
+        public DbSet<ServiceResultData> ServiceResultDatas { get; set; }
+
+        public DbSet<InOutStockType> InOutStockTypes { get; set; }
+        public DbSet<ItemStock> ItemStocks { get; set; }
+        public DbSet<InOutStock> InOutStocks { get; set; }
+        public DbSet<InOutStockItem> InOutStockItems { get; set; }
         #endregion
-
-
-        public HISDbContext(DbContextOptions options) : base(options)
-        {
-
-        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -1,11 +1,6 @@
 ﻿using HIS.EntityFrameworkCore.Entities.Business;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business
 {
@@ -13,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
     {
         public void Configure(EntityTypeBuilder<ServiceRequestData> builder)
         {
-            builder.ToTable("ServiceRequestData");
+            builder.ToTable("ServiceRequestDatas");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.ServiceRequestId).IsRequired();
             builder.Property(x => x.ServiceId).IsRequired();

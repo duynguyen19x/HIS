@@ -8,7 +8,8 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<BirthCertBook> builder)
         {
-            builder.ToTable("BirthCertBook");
+            builder.ToTable("BirthCertBooks");
+
             builder.HasKey(x => x.Id);
             builder.Property(x => x.BirthCertBookCode).HasMaxLength(20).IsRequired();
             builder.Property(x => x.BirthCertBookName).HasMaxLength(128).IsRequired();

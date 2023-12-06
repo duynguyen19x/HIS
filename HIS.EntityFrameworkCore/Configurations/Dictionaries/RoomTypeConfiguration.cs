@@ -1,11 +1,6 @@
 ﻿using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
@@ -13,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<RoomType> builder)
         {
-            builder.ToTable("RoomType");
+            builder.ToTable("RoomTypes");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.RoomTypeCode).HasMaxLength(20).IsRequired(); 
             builder.Property(x => x.RoomTypeName).HasMaxLength(255).IsRequired(); 

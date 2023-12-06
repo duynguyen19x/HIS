@@ -1,5 +1,4 @@
 ﻿using HIS.EntityFrameworkCore.Entities.Business;
-using HIS.EntityFrameworkCore.Entities.Categories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

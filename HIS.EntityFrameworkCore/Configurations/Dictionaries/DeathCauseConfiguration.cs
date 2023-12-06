@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<DeathCause> builder)
         {
-            builder.ToTable("DeathCause");
+            builder.ToTable("DeathCauses");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.DeathCauseCode).HasMaxLength(20).IsRequired();

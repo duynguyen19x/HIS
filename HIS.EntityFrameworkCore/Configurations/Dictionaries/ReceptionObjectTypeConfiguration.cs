@@ -1,12 +1,7 @@
-﻿using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using HIS.Core.Enums;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HIS.Core.Enums;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
@@ -14,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<ReceptionObjectType> builder)
         {
-            builder.ToTable("ReceptionObjectType");
+            builder.ToTable("ReceptionObjectTypes");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.ReceptionTypeCode).HasMaxLength(20).IsRequired();
             builder.Property(x => x.ReceptionTypeName).HasMaxLength(128).IsRequired();

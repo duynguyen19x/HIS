@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<Branch> builder)
         {
-            builder.ToTable("Branch");
+            builder.ToTable("Branchs");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.BranchCode).HasMaxLength(50).IsRequired(); 
             builder.Property(x => x.BranchName).HasMaxLength(255).IsRequired(); 

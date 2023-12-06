@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<TransactionType> builder) 
         {
-            builder.ToTable("TransactionType");
+            builder.ToTable("TransactionTypes");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.TransactionTypeCode).HasMaxLength(20).IsRequired();

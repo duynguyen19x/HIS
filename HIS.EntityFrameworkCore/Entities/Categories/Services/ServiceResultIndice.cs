@@ -11,6 +11,10 @@ namespace HIS.EntityFrameworkCore.Entities.Categories.Services
         public decimal? MaleTo { get; set; }
         public decimal? FemaleFrom { get; set; }
         public decimal? FemaleTo { get; set; }
+        /// <summary>
+        /// Giá trị bình thường dùng cho các TH xét nghiệp tự nhập kết quả (Âm tính, dương tính ....)
+        /// </summary>
+        public string Normal { get; set; }
         public Guid? ServiceId { get; set; }
         public int? SortOrder { get; set; }
         public bool Inactive { get; set; }

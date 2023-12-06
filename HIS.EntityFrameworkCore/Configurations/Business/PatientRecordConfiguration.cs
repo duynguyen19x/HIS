@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
     {
         public void Configure(EntityTypeBuilder<PatientRecord> builder)
         {
-            builder.ToTable("PatientRecord");
+            builder.ToTable("PatientRecords");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.PatientId).IsRequired();
             builder.Property(x => x.PatientRecordCode).IsRequired().HasMaxLength(20);

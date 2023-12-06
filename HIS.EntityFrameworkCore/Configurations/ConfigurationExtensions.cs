@@ -46,6 +46,21 @@ namespace HIS.EntityFrameworkCore.Configurations
             modelBuilder.ApplyConfiguration(new ServiceResultIndexConfiguration());
             modelBuilder.ApplyConfiguration(new ExecutionRoomConfiguration());
             modelBuilder.ApplyConfiguration(new SupplierConfiguration());
+            modelBuilder.ApplyConfiguration(new BirthCertBookConfiguration());
+            modelBuilder.ApplyConfiguration(new BloodTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new DeathCertBookConfiguration());
+            modelBuilder.ApplyConfiguration(new DeathCauseConfiguration());
+            modelBuilder.ApplyConfiguration(new DeathWithinConfiguration());
+            modelBuilder.ApplyConfiguration(new MedicalRecordTypeCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new PaymentMethodConfiguration());
+            modelBuilder.ApplyConfiguration(new RelativeTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new ReligionConfiguration());
+            modelBuilder.ApplyConfiguration(new RightRouteTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new TransactionTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new TransferFormConfiguration());
+            modelBuilder.ApplyConfiguration(new TransferReasonConfiguration());
+            modelBuilder.ApplyConfiguration(new TreatmentEndTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new TreatmentResultConfiguration());
 
             modelBuilder.ApplyConfiguration(new InOutStockTypeConfiguration());
             modelBuilder.ApplyConfiguration(new ItemStockConfiguration());
@@ -66,6 +81,9 @@ namespace HIS.EntityFrameworkCore.Configurations
             modelBuilder.ApplyConfiguration(new ServiceRequestConfiguration());
             //modelBuilder.ApplyConfiguration(new ServiceRequestServeConfiguration());
             modelBuilder.ApplyConfiguration(new DbOptionConfigurations());
+            modelBuilder.ApplyConfiguration(new ServiceResultDataConfiguration());
+            modelBuilder.ApplyConfiguration(new ServiceRequestDataConfiguration());
+            modelBuilder.ApplyConfiguration(new PatientRecordStatusConfiguration());
         }
     }
 }

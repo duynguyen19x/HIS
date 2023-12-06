@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<National> builder)
         {
-            builder.ToTable("National");
+            builder.ToTable("Nationals");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(20).IsRequired();
