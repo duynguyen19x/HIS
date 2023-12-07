@@ -35,6 +35,10 @@ namespace HIS.ApplicationService.Systems.DbOption
                     var data = _mapper.Map<EntityFrameworkCore.Entities.Systems.DbOption>(input);
 
                     _dbContext.DbOptions.Add(data);
+
+                    var dataParent = _dbContext.DbOptions.FirstOrDefault(w => w.Id == input.ParentId);
+                    if (dataParent != null) { dataParent.IsParent = true; }
+                    _dbContext.DbOptions.Update(dataParent);
                     await _dbContext.SaveChangesAsync();
 
                     result.IsSuccessed = true;
@@ -63,8 +67,20 @@ namespace HIS.ApplicationService.Systems.DbOption
                 try
                 {
                     var sServiceDbOption = _dbContext.DbOptions.FirstOrDefault(f => f.Id == input.Id);
-                    if (sServiceDbOption == null)
+                    if (sServiceDbOption != null)
+                    {
+                        if (sServiceDbOption.ParentId != input.ParentId && !_dbContext.DbOptions.Any(a => a.Id == sServiceDbOption.ParentId))
+                        {
+                            var dataOldParent = _dbContext.DbOptions.FirstOrDefault(w => w.Id == sServiceDbOption.ParentId);
+                            if (dataOldParent != null) { dataOldParent.IsParent = false; }
+                            _dbContext.DbOptions.Update(dataOldParent);
+                        }
                         _mapper.Map(input, sServiceDbOption);
+                    }    
+
+                    var dataParent = _dbContext.DbOptions.FirstOrDefault(w => w.Id == input.ParentId);
+                    if (dataParent != null) { dataParent.IsParent = true; }
+                    _dbContext.DbOptions.Update(dataParent);
 
                     await _dbContext.SaveChangesAsync();
 
