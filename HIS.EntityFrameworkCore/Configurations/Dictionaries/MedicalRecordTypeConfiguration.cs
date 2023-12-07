@@ -2,12 +2,6 @@
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
@@ -15,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<MedicalRecordType> builder)
         {
-            builder.ToTable("MedicalRecordType");
+            builder.ToTable("DIC_MedicalRecordType");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.MedicalRecordTypeCode).HasMaxLength(20).IsRequired();

@@ -7,8 +7,8 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// </summary>
     public class Ethnic : Entity<Guid>
     {
-        public string EthnicCode { get; set; } // mã dân tộc
-        public string EthnicName { get; set; } // tên dân tộc
+        public string Code { get; set; } // mã dân tộc
+        public string Name { get; set; } // tên dân tộc
         public string MohCode { get; set; } // mã theo BYT
         public string Description { get; set; } // ghi chú
         public int SortOrder { get; set; } // thứ tự hiển thị
@@ -18,8 +18,8 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public Ethnic(Guid id, string code, string mohCode, string name, int sortOrder)
         {
             this.Id = id;
-            this.EthnicCode = code;
-            this.EthnicName = name;
+            this.Code = code;
+            this.Name = name;
             this.MohCode = mohCode;
             this.SortOrder = sortOrder;
         }

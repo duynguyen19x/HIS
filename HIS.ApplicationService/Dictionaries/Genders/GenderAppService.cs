@@ -108,14 +108,14 @@ namespace HIS.ApplicationService.Dictionaries.Genders
             {
                 result.IsSucceeded = true;
                 result.Result = (from r in Context.Genders
-                                 where (string.IsNullOrEmpty(input.NameFilter) || r.GenderName == input.NameFilter)
-                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.GenderCode == input.CodeFilter)
+                                 where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
+                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
                                  select new GenderDto()
                                  {
                                      Id = r.Id,
-                                     Code = r.GenderCode,
-                                     Name = r.GenderName,
+                                     Code = r.Code,
+                                     Name = r.Name,
                                      Description = r.Description,
                                      Inactive = r.Inactive,
                                      SortOrder = r.SortOrder
@@ -143,8 +143,8 @@ namespace HIS.ApplicationService.Dictionaries.Genders
                 result.Result = new GenderDto()
                 {
                     Id = data.Id,
-                    Code = data.GenderCode,
-                    Name = data.GenderName,
+                    Code = data.Code,
+                    Name = data.Name,
                     Description = data.Description,
                     SortOrder = data.SortOrder,
                     Inactive = data.Inactive

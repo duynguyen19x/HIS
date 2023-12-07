@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<Hospital> builder)
         {
-            builder.ToTable("Hospital");
+            builder.ToTable("DIC_Hospital");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(20).IsRequired(); 

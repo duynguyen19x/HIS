@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations
     {
         public void Configure(EntityTypeBuilder<Permission> builder)
         {
-            builder.ToTable("Permissions");
+            builder.ToTable("SYS_Permission");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(100);

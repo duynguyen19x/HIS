@@ -13,8 +13,8 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// </summary>
     public class DeathWithin : AuditedEntity<Guid>
     {
-        public string DeathWithinCode { get; set; }
-        public string DeathWithinName { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
         public int SortOrder { get; set; }
         public bool Inactive { get; set; }

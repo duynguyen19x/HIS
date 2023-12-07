@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations
     {
         public void Configure(EntityTypeBuilder<UserRole> builder)
         {
-            builder.ToTable("UserRoles");
+            builder.ToTable("SYS_UserRole");
             builder.HasKey(t => new { t.UserId, t.RoleId });
 
             builder.HasOne(t => t.User).WithMany(pc => pc.UserRoles)

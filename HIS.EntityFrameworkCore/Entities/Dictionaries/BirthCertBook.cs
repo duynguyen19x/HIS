@@ -12,8 +12,8 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// </summary>
     public class BirthCertBook : AuditedEntity<Guid>
     {
-        public string BirthCertBookCode { get; set; }
-        public string BirthCertBookName { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
         public int Total { get; set; }
         public int StartNumOrder { get; set; }
         public int SortOrder { get; set; }

@@ -12,8 +12,8 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// </summary>
     public class DeathCause : AuditedEntity<Guid>
     {
-        public string DeathCauseCode { get; set; }
-        public string DeathCauseName { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
         public int SortOrder { get; set; }
         public bool Inactive { get; set; }

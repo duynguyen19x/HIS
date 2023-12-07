@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations
     {
         public void Configure(EntityTypeBuilder<SToken> builder)
         {
-            builder.ToTable("Tokens");
+            builder.ToTable("SYS_Token");
 
             builder.HasKey(x => x.Id);
 

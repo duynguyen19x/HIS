@@ -4,6 +4,7 @@ using HIS.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,16 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(HISDbContext))]
-    partial class HISDbContextModelSnapshot : ModelSnapshot
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+    [Migration("20231205134452_Init")]
+    partial class Init
+========
+    [Migration("20231207141056_Add-Table")]
+    partial class AddTable
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -680,7 +688,37 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                    b.ToTable("MedicalRecordStatus", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Inactive = false,
+                            MedicalRecordStatusName = "Mới",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Inactive = false,
+                            MedicalRecordStatusName = "Đang điều trị",
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Inactive = false,
+                            MedicalRecordStatusName = "Kết thúc",
+                            SortOrder = 3
+                        });
+========
                     b.ToTable("BUS_MedicalRecordStatus", (string)null);
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.Patient", b =>
@@ -1239,7 +1277,11 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                    b.ToTable("PatientRecordStatus", (string)null);
+========
                     b.ToTable("BUS_PatientRecordStatus", (string)null);
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
 
                     b.HasData(
                         new
@@ -1441,6 +1483,9 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("ServiceRequestId");
 
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                    b.ToTable("ServiceRequestData", (string)null);
+========
                     b.ToTable("BUS_ServiceRequestData", (string)null);
                 });
 
@@ -1470,6 +1515,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasIndex("ServiceResultIndiceId");
 
                     b.ToTable("BUS_ServiceResultData", (string)null);
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Item", b =>
@@ -3333,10 +3379,22 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                    b.Property<string>("BirthCertBookCode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("BirthCertBookName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+========
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
 
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
@@ -3347,6 +3405,53 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<string>("Description")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StartNumOrder")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Total")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BirthCertBook", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.BloodType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+========
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
 
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
@@ -3359,6 +3464,10 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+========
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
 
@@ -3410,13 +3519,18 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .IsRequired()
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
 
                     b.Property<int>("SortOrder")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                    b.ToTable("BloodType", (string)null);
+========
                     b.ToTable("DIC_BloodType", (string)null);
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.BloodTypeRh", b =>
@@ -3967,6 +4081,19 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                    b.Property<string>("DeathCauseCode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("DeathCauseName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+========
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                     b.Property<string>("Description")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
@@ -3990,34 +4117,59 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                    b.ToTable("DeathCause", (string)null);
+========
                     b.ToTable("DIC_DeathCause", (string)null);
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
 
                     b.HasData(
                         new
                         {
                             Id = new Guid("c0a4d767-7ba9-4006-a0a9-020b6322c2ef"),
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 383, DateTimeKind.Local).AddTicks(1088),
+                            DeathCauseCode = "DO_BENH",
+                            DeathCauseName = "Do bệnh",
+                            Inactive = false,
+========
                             Code = "DO_BENH",
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 536, DateTimeKind.Local).AddTicks(9357),
                             Inactive = false,
                             Name = "Do bệnh",
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             SortOrder = 1
                         },
                         new
                         {
                             Id = new Guid("4333ca55-4d7c-4be0-b9a2-2125624f0229"),
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 383, DateTimeKind.Local).AddTicks(1119),
+                            DeathCauseCode = "DO_TAI_BIEN",
+                            DeathCauseName = "Do tai biến điều trị",
+                            Inactive = false,
+========
                             Code = "DO_TAI_BIEN",
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 536, DateTimeKind.Local).AddTicks(9371),
                             Inactive = false,
                             Name = "Do tai biến điều trị",
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             SortOrder = 2
                         },
                         new
                         {
                             Id = new Guid("4d5b5c50-6be0-434e-8baa-a528af4a58b5"),
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 383, DateTimeKind.Local).AddTicks(1121),
+                            DeathCauseCode = "KHAC",
+                            DeathCauseName = "Khác",
+                            Inactive = false,
+========
                             Code = "KHAC",
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 536, DateTimeKind.Local).AddTicks(9375),
                             Inactive = false,
                             Name = "Khác",
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             SortOrder = 3
                         });
                 });
@@ -4031,17 +4183,33 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid>("BranchID")
                         .HasColumnType("uniqueidentifier");
 
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+========
                     b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                    b.Property<string>("DeathCertBookCode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("DeathCertBookName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+========
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                     b.Property<string>("Description")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
@@ -4055,11 +4223,14 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+========
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(128)
                         .HasColumnType("nvarchar(128)");
 
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                     b.Property<int>("SortOrder")
                         .HasColumnType("int");
 
@@ -4071,7 +4242,11 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                    b.ToTable("DeathCertBook", (string)null);
+========
                     b.ToTable("DIC_DeathCertBook", (string)null);
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.DeathWithin", b =>
@@ -4091,6 +4266,19 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                    b.Property<string>("DeathWithinCode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("DeathWithinName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+========
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                     b.Property<string>("Description")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
@@ -4114,43 +4302,75 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                    b.ToTable("DeathWithin", (string)null);
+========
                     b.ToTable("DIC_DeathWithin", (string)null);
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
 
                     b.HasData(
                         new
                         {
                             Id = new Guid("66c3a43b-f9d0-4876-81e2-b13c5f188589"),
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 384, DateTimeKind.Local).AddTicks(3793),
+                            DeathWithinCode = "TRONG_24H",
+                            DeathWithinName = "Trong 24h vào",
+                            Inactive = false,
+========
                             Code = "TRONG_24H",
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 538, DateTimeKind.Local).AddTicks(3719),
                             Inactive = false,
                             Name = "Trong 24h vào",
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             SortOrder = 1
                         },
                         new
                         {
                             Id = new Guid("f91d8342-619c-435b-b51c-8b3d7f541222"),
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 384, DateTimeKind.Local).AddTicks(3803),
+                            DeathWithinCode = "TRONG_48H",
+                            DeathWithinName = "Trong 48h vào",
+                            Inactive = false,
+========
                             Code = "TRONG_48H",
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 538, DateTimeKind.Local).AddTicks(3732),
                             Inactive = false,
                             Name = "Trong 48h vào",
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             SortOrder = 2
                         },
                         new
                         {
                             Id = new Guid("7693d6ec-cf0f-44c1-a9d7-fb997335ae10"),
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 384, DateTimeKind.Local).AddTicks(3805),
+                            DeathWithinCode = "TRONG_72H",
+                            DeathWithinName = "Trong 72h vào",
+                            Inactive = false,
+========
                             Code = "TRONG_72H",
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 538, DateTimeKind.Local).AddTicks(3735),
                             Inactive = false,
                             Name = "Trong 72h vào",
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             SortOrder = 3
                         },
                         new
                         {
                             Id = new Guid("8f2b1eeb-a4bd-4f84-b59c-98145c58b1ab"),
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 384, DateTimeKind.Local).AddTicks(3807),
+                            DeathWithinCode = "KHAC",
+                            DeathWithinName = "Khác",
+                            Inactive = false,
+========
                             Code = "KHAC",
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 538, DateTimeKind.Local).AddTicks(3737),
                             Inactive = false,
                             Name = "Khác",
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             SortOrder = 4
                         });
                 });
@@ -5219,7 +5439,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 100,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(9047),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(6974),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeCode = "100",
                             MedicalRecordTypeGroupID = 1,
@@ -5229,7 +5453,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 200,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(9055),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(6987),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeCode = "200",
                             MedicalRecordTypeGroupID = 2,
@@ -5239,7 +5467,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 201,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(9056),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(6989),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeCode = "201",
                             MedicalRecordTypeGroupID = 2,
@@ -5249,7 +5481,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 202,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(9057),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(6991),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeCode = "202",
                             MedicalRecordTypeGroupID = 2,
@@ -5259,7 +5495,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 203,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(9059),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(6993),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeCode = "203",
                             MedicalRecordTypeGroupID = 2,
@@ -5269,7 +5509,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 204,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(9060),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(6995),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeCode = "204",
                             MedicalRecordTypeGroupID = 2,
@@ -5279,7 +5523,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 301,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(9061),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(6996),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeCode = "301",
                             MedicalRecordTypeGroupID = 3,
@@ -5289,7 +5537,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 302,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(9063),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(6998),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeCode = "302",
                             MedicalRecordTypeGroupID = 3,
@@ -5299,7 +5551,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 303,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(9064),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(7000),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeCode = "303",
                             MedicalRecordTypeGroupID = 3,
@@ -5309,7 +5565,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 304,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(9065),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(7002),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeCode = "304",
                             MedicalRecordTypeGroupID = 3,
@@ -5319,7 +5579,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 305,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(9067),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(7003),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeCode = "305",
                             MedicalRecordTypeGroupID = 3,
@@ -5329,7 +5593,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 306,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(9068),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(7005),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeCode = "306",
                             MedicalRecordTypeGroupID = 3,
@@ -5339,7 +5607,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 307,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(9069),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(7006),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeCode = "307",
                             MedicalRecordTypeGroupID = 3,
@@ -5349,7 +5621,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 308,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(9083),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(7007),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeCode = "308",
                             MedicalRecordTypeGroupID = 3,
@@ -5359,7 +5635,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 309,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(9093),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(7009),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeCode = "309",
                             MedicalRecordTypeGroupID = 3,
@@ -5369,7 +5649,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 310,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(9095),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(7010),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeCode = "310",
                             MedicalRecordTypeGroupID = 3,
@@ -5379,7 +5663,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 311,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(9096),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(7024),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeCode = "311",
                             MedicalRecordTypeGroupID = 3,
@@ -5389,7 +5677,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 312,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(9097),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(7037),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeCode = "312",
                             MedicalRecordTypeGroupID = 3,
@@ -5399,7 +5691,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 313,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(9099),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(7040),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeCode = "313",
                             MedicalRecordTypeGroupID = 3,
@@ -5409,7 +5705,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 314,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(9100),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(7041),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeCode = "314",
                             MedicalRecordTypeGroupID = 3,
@@ -5419,7 +5719,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 315,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(9101),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(7043),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeCode = "315",
                             MedicalRecordTypeGroupID = 3,
@@ -5429,7 +5733,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 316,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(9103),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(7044),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeCode = "316",
                             MedicalRecordTypeGroupID = 3,
@@ -5480,13 +5788,21 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                    b.ToTable("MedicalRecordTypeCategory", (string)null);
+========
                     b.ToTable("DIC_MedicalRecordTypeGroup", (string)null);
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
 
                     b.HasData(
                         new
                         {
                             Id = 3,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(6221),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(3733),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeGroupCode = "3",
                             MedicalRecordTypeGroupName = "Nội trú",
@@ -5495,7 +5811,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 2,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(6232),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(3748),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeGroupCode = "2",
                             MedicalRecordTypeGroupName = "Ngoại trú",
@@ -5504,7 +5824,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 1,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 386, DateTimeKind.Local).AddTicks(6234),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 541, DateTimeKind.Local).AddTicks(3750),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             MedicalRecordTypeGroupCode = "1",
                             MedicalRecordTypeGroupName = "Khám bệnh",
@@ -7875,7 +8199,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 1,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 388, DateTimeKind.Local).AddTicks(276),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 544, DateTimeKind.Local).AddTicks(3811),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             PatientRecordTypeCode = "1",
                             PatientRecordTypeName = "Ngoại trú",
@@ -7884,7 +8212,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 2,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 388, DateTimeKind.Local).AddTicks(286),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 544, DateTimeKind.Local).AddTicks(3830),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             PatientRecordTypeCode = "2",
                             PatientRecordTypeName = "Nội trú",
@@ -7893,7 +8225,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 3,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 388, DateTimeKind.Local).AddTicks(288),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 544, DateTimeKind.Local).AddTicks(3833),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             PatientRecordTypeCode = "3",
                             PatientRecordTypeName = "Dịch vụ",
@@ -7949,7 +8285,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 1,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 388, DateTimeKind.Local).AddTicks(2278),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 544, DateTimeKind.Local).AddTicks(6600),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             PatientTypeCode = "1",
                             PatientTypeName = "Bảo hiểm y tế",
@@ -7958,7 +8298,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 2,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 388, DateTimeKind.Local).AddTicks(2285),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 544, DateTimeKind.Local).AddTicks(6610),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             PatientTypeCode = "2",
                             PatientTypeName = "Viện phí",
@@ -7967,7 +8311,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 3,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 388, DateTimeKind.Local).AddTicks(2294),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 544, DateTimeKind.Local).AddTicks(6622),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             PatientTypeCode = "3",
                             PatientTypeName = "Dịch vụ",
@@ -7976,7 +8324,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 4,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 388, DateTimeKind.Local).AddTicks(2302),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 544, DateTimeKind.Local).AddTicks(6624),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             PatientTypeCode = "4",
                             PatientTypeName = "Người nước ngoài",
@@ -7985,7 +8337,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 5,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 388, DateTimeKind.Local).AddTicks(2303),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 544, DateTimeKind.Local).AddTicks(6626),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             PatientTypeCode = "5",
                             PatientTypeName = "Miễn phí",
@@ -8033,13 +8389,21 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                    b.ToTable("PaymentMethod", (string)null);
+========
                     b.ToTable("DIC_PaymentMethod", (string)null);
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
 
                     b.HasData(
                         new
                         {
                             Id = new Guid("8bff9824-1df2-419e-88ab-e098a6fc4e7e"),
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 388, DateTimeKind.Local).AddTicks(4199),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 544, DateTimeKind.Local).AddTicks(9093),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             PaymentMethodCode = "TM",
                             PaymentMethodName = "Tiền mặt",
@@ -8048,7 +8412,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd39afc0-1de0-4287-a126-4dada6788508"),
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 388, DateTimeKind.Local).AddTicks(4213),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 544, DateTimeKind.Local).AddTicks(9110),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             PaymentMethodCode = "CK",
                             PaymentMethodName = "Chuyển khoản",
@@ -8057,7 +8425,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("0b348363-c888-4c9a-b145-c3389fdcca37"),
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 388, DateTimeKind.Local).AddTicks(4215),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 544, DateTimeKind.Local).AddTicks(9113),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             PaymentMethodCode = "TM/CK",
                             PaymentMethodName = "Tiền mặt hoặc chuyển khoản",
@@ -8644,13 +9016,21 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                    b.ToTable("ReceptionObjectType", (string)null);
+========
                     b.ToTable("DIC_ReceptionObjectType", (string)null);
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
 
                     b.HasData(
                         new
                         {
                             Id = 1,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 388, DateTimeKind.Local).AddTicks(7938),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 545, DateTimeKind.Local).AddTicks(3815),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             ReceptionTypeCode = "1",
                             ReceptionTypeName = "Khám bệnh",
@@ -8659,7 +9039,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 2,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 388, DateTimeKind.Local).AddTicks(7945),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 545, DateTimeKind.Local).AddTicks(3827),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             ReceptionTypeCode = "2",
                             ReceptionTypeName = "Cấp cứu",
@@ -8707,7 +9091,11 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                    b.ToTable("RelativeType", (string)null);
+========
                     b.ToTable("DIC_RelativeType", (string)null);
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
 
                     b.HasData(
                         new
@@ -8896,7 +9284,11 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                    b.ToTable("Religion", (string)null);
+========
                     b.ToTable("DIC_Religion", (string)null);
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
 
                     b.HasData(
                         new
@@ -9015,13 +9407,21 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                    b.ToTable("RightRouteType", (string)null);
+========
                     b.ToTable("DIC_RightRouteType", (string)null);
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
 
                     b.HasData(
                         new
                         {
                             Id = 1,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(7003),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 546, DateTimeKind.Local).AddTicks(784),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Description = "Không chọn",
                             Inactive = false,
                             RightRouteTypeCode = "00",
@@ -9031,7 +9431,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 2,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(7005),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 546, DateTimeKind.Local).AddTicks(791),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Description = "",
                             Inactive = false,
                             RightRouteTypeCode = "01",
@@ -9041,7 +9445,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 3,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(7007),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 546, DateTimeKind.Local).AddTicks(793),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Description = "",
                             Inactive = false,
                             RightRouteTypeCode = "02",
@@ -9051,7 +9459,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 4,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(7008),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 546, DateTimeKind.Local).AddTicks(794),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Description = "",
                             Inactive = false,
                             RightRouteTypeCode = "03",
@@ -9061,7 +9473,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 5,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(7010),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 546, DateTimeKind.Local).AddTicks(796),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Description = "",
                             Inactive = false,
                             RightRouteTypeCode = "04",
@@ -9071,7 +9487,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 6,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(7011),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 546, DateTimeKind.Local).AddTicks(798),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Description = "",
                             Inactive = false,
                             RightRouteTypeCode = "05",
@@ -9081,7 +9501,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 7,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(7013),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 546, DateTimeKind.Local).AddTicks(800),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Description = "",
                             Inactive = false,
                             RightRouteTypeCode = "06",
@@ -9091,7 +9515,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 8,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(7014),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 546, DateTimeKind.Local).AddTicks(802),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Description = "",
                             Inactive = false,
                             RightRouteTypeCode = "07",
@@ -9605,6 +10033,233 @@ namespace HIS.EntityFrameworkCore.Migrations
                         });
                 });
 
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.TransactionType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TransactionTypeCode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("TransactionTypeName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TransactionType", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6983),
+                            Inactive = false,
+                            SortOrder = 1,
+                            TransactionTypeCode = "1",
+                            TransactionTypeName = "Thu tiền"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6987),
+                            Inactive = false,
+                            SortOrder = 2,
+                            TransactionTypeCode = "2",
+                            TransactionTypeName = "Hoàn tiền"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6988),
+                            Inactive = false,
+                            SortOrder = 3,
+                            TransactionTypeCode = "3",
+                            TransactionTypeName = "Tạm ứng"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6989),
+                            Inactive = false,
+                            SortOrder = 4,
+                            TransactionTypeCode = "4",
+                            TransactionTypeName = "Hoàn ứng"
+                        });
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.TransferForm", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TransferFormCode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("TransferFormName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TransferForm", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("1442d51a-072c-49a4-a5a5-2e5c8fbd25f9"),
+                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Inactive = false,
+                            SortOrder = 1,
+                            TransferFormCode = "1a",
+                            TransferFormName = "Chuyển người bệnh từ tuyến dưới lên tuyến trên liền kề (theo trình tự)"
+                        },
+                        new
+                        {
+                            Id = new Guid("435e227f-fcf6-4400-8e6f-b19ed91a7145"),
+                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Inactive = false,
+                            SortOrder = 2,
+                            TransferFormCode = "1b",
+                            TransferFormName = "Chuyển người bệnh từ tuyến dưới lên tuyến trên không qua tuyến liền kề (không theo trình tự)"
+                        },
+                        new
+                        {
+                            Id = new Guid("d103f775-ff29-47ed-aa1d-6d847a2153f0"),
+                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Inactive = false,
+                            SortOrder = 3,
+                            TransferFormCode = "2",
+                            TransferFormName = "Chuyển người bệnh từ tuyến trên về tuyến dưới"
+                        },
+                        new
+                        {
+                            Id = new Guid("2bd53019-a0bd-4491-a65b-a675228b1a7f"),
+                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Inactive = false,
+                            SortOrder = 4,
+                            TransferFormCode = "3",
+                            TransferFormName = "Chuyển người bệnh giữa các cơ sở khám bệnh, chữa bệnh trong cùng tuyến"
+                        });
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.TransferReason", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TransferReasonCode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("TransferReasonName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TransferReason", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("d6fa811f-0ea0-4303-bb6c-6bdcb7d18970"),
+                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Inactive = false,
+                            SortOrder = 1,
+                            TransferReasonCode = "4",
+                            TransferReasonName = "Chuyển người bệnh đi các tuyến khi đủ điều kiện"
+                        },
+                        new
+                        {
+                            Id = new Guid("14f21e7e-54d2-40af-ab18-417468e1cadb"),
+                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Inactive = false,
+                            SortOrder = 2,
+                            TransferReasonCode = "5",
+                            TransferReasonName = "Chuyển theo yêu cầu của người bệnh hoặc đại diện hợp pháp của người bệnh"
+                        });
+                });
+
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.TreatmentEndType", b =>
                 {
                     b.Property<int>("Id")
@@ -9653,13 +10308,21 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                    b.ToTable("TreatmentEndType", (string)null);
+========
                     b.ToTable("DIC_TreatmentEndType", (string)null);
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
 
                     b.HasData(
                         new
                         {
                             Id = 1,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6845),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 551, DateTimeKind.Local).AddTicks(2116),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             IsForInPatient = false,
                             IsForOutPatient = true,
@@ -9670,7 +10333,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 2,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6878),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 551, DateTimeKind.Local).AddTicks(2203),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             IsForInPatient = false,
                             IsForOutPatient = true,
@@ -9681,7 +10348,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 3,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6880),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 551, DateTimeKind.Local).AddTicks(2206),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             IsForInPatient = false,
                             IsForOutPatient = true,
@@ -9692,7 +10363,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 4,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6882),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 551, DateTimeKind.Local).AddTicks(2209),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             IsForInPatient = false,
                             IsForOutPatient = true,
@@ -9703,7 +10378,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 5,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6885),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 551, DateTimeKind.Local).AddTicks(2212),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             IsForInPatient = false,
                             IsForOutPatient = true,
@@ -9714,7 +10393,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 6,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6887),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 551, DateTimeKind.Local).AddTicks(2215),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             IsForInPatient = false,
                             IsForOutPatient = true,
@@ -9725,7 +10408,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 7,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6889),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 551, DateTimeKind.Local).AddTicks(2218),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = true,
@@ -9736,7 +10423,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 8,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6891),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 551, DateTimeKind.Local).AddTicks(2221),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = false,
@@ -9747,7 +10438,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 9,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6893),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 551, DateTimeKind.Local).AddTicks(2224),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = false,
@@ -9758,7 +10453,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 10,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6895),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 551, DateTimeKind.Local).AddTicks(2227),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = false,
@@ -9769,7 +10468,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 11,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6898),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 551, DateTimeKind.Local).AddTicks(2236),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = false,
@@ -9780,7 +10483,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 12,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6900),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 551, DateTimeKind.Local).AddTicks(2239),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             IsForInPatient = false,
                             IsForOutPatient = true,
@@ -9791,7 +10498,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 13,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6902),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 551, DateTimeKind.Local).AddTicks(2241),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = true,
@@ -9802,7 +10513,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 99,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6904),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 551, DateTimeKind.Local).AddTicks(2244),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = true,
@@ -9854,13 +10569,21 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                    b.ToTable("TreatmentResult", (string)null);
+========
                     b.ToTable("DIC_TreatmentResult", (string)null);
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
 
                     b.HasData(
                         new
                         {
                             Id = 1,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6744),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 551, DateTimeKind.Local).AddTicks(4550),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             SortOrder = 1,
                             TreatmentResultCode = "KHOI",
@@ -9869,7 +10592,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 2,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6817),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 551, DateTimeKind.Local).AddTicks(4602),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             SortOrder = 2,
                             TreatmentResultCode = "DO_GIAM",
@@ -9878,7 +10605,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 3,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6820),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 551, DateTimeKind.Local).AddTicks(4605),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             SortOrder = 3,
                             TreatmentResultCode = "KHONGTHAYDOI",
@@ -9887,7 +10618,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 4,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6822),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 551, DateTimeKind.Local).AddTicks(4607),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             SortOrder = 4,
                             TreatmentResultCode = "NANGHON",
@@ -9896,7 +10631,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 5,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6824),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 551, DateTimeKind.Local).AddTicks(4610),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             SortOrder = 5,
                             TreatmentResultCode = "TUVONG",
@@ -9905,7 +10644,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 99,
+<<<<<<<< HEAD:HIS.EntityFrameworkCore/Migrations/20231205134452_Init.Designer.cs
+                            CreatedDate = new DateTime(2023, 12, 5, 20, 44, 52, 399, DateTimeKind.Local).AddTicks(6826),
+========
                             CreatedDate = new DateTime(2023, 12, 7, 21, 10, 55, 551, DateTimeKind.Local).AddTicks(4612),
+>>>>>>>> duynv:HIS.EntityFrameworkCore/Migrations/20231207141056_Add-Table.Designer.cs
                             Inactive = false,
                             SortOrder = 6,
                             TreatmentResultCode = "KHAC",
