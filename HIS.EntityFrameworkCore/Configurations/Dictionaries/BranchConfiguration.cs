@@ -8,10 +8,10 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<Branch> builder)
         {
-            builder.ToTable("Branch");
+            builder.ToTable("DIC_Branch");
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.BranchCode).HasMaxLength(50).IsRequired(); 
-            builder.Property(x => x.BranchName).HasMaxLength(255).IsRequired(); 
+            builder.Property(x => x.Code).HasMaxLength(50).IsRequired(); 
+            builder.Property(x => x.Name).HasMaxLength(255).IsRequired(); 
             builder.Property(x => x.MediOrgCode).HasMaxLength(20);
             builder.Property(x => x.MediOrgAcceptCode).HasMaxLength(4000);
             builder.Property(x => x.Level).HasMaxLength(20);

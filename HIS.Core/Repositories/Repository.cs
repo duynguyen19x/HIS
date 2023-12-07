@@ -15,13 +15,13 @@ namespace HIS.Core.Repositories
         where TDbContext : DbContext 
         where TEntity : class, IEntity<TPrimaryKey>
     {
-        private readonly TDbContext _dbContext;
+        private readonly TDbContext Context;
         private readonly DbSet<TEntity> _dbSet;
 
         public Repository(TDbContext dbContext)
         {
-            _dbContext = dbContext;
-            _dbSet = _dbContext.Set<TEntity>();
+            Context = dbContext;
+            _dbSet = Context.Set<TEntity>();
         }
 
 
@@ -138,7 +138,7 @@ namespace HIS.Core.Repositories
         
         public virtual TDbContext GetContext()
         {
-            return _dbContext;
+            return Context;
         }
         public virtual DbSet<TEntity> GetTable()
         {
@@ -146,7 +146,7 @@ namespace HIS.Core.Repositories
         }
         protected virtual void AttachIfNot(TEntity entity)
         {
-            if (_dbContext.ChangeTracker.Entries().FirstOrDefault((EntityEntry ent) => ent.Entity == entity) == null)
+            if (Context.ChangeTracker.Entries().FirstOrDefault((EntityEntry ent) => ent.Entity == entity) == null)
             {
                 _dbSet.Attach(entity);
             }

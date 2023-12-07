@@ -14,7 +14,7 @@ namespace HIS.Dtos.Business.InOutStocks
         /// <summary>
         /// Trạng thái phiếu
         /// </summary>
-        public InOutStatusType Status { get; set; }
+        public InOutStatusTypes Status { get; set; }
 
         /// <summary>
         /// Loại phiếu: 0 - Nhập, 1 - xuất

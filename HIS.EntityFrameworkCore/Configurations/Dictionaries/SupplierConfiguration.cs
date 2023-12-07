@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<Supplier> builder)
         {
-            builder.ToTable("Supplier");
+            builder.ToTable("DIC_Supplier");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50);

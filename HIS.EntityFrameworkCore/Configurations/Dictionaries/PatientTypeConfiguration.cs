@@ -1,13 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HIS.Core.Enums;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using System.Reflection.Emit;
-using HIS.Core.Enums;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
@@ -15,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<PatientType> builder)
         {
-            builder.ToTable("PatientType");
+            builder.ToTable("DIC_PatientType");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.PatientTypeCode).HasMaxLength(20).IsRequired();
             builder.Property(x => x.PatientTypeName).HasMaxLength(128).IsRequired();

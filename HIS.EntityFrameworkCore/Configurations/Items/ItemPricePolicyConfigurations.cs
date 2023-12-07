@@ -1,13 +1,6 @@
-﻿using HIS.EntityFrameworkCore.Entities.Categories.Services;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using HIS.EntityFrameworkCore.Entities.Categories.Items;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HIS.EntityFrameworkCore.Entities.Categories.Items;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations.Items
 {
@@ -15,10 +8,10 @@ namespace HIS.EntityFrameworkCore.Configurations.Items
     {
         public void Configure(EntityTypeBuilder<ItemPricePolicy> builder)
         {
-            builder.ToTable("ItemPricePolicies");
+            builder.ToTable("DIC_ItemPricePolicy");
             builder.HasKey(x => x.Id);
 
-            builder.HasOne<PatientType>(t => t.PatientType).WithMany().HasForeignKey(pc => pc.PatientTypeId);
+            builder.HasOne(t => t.PatientType).WithMany().HasForeignKey(pc => pc.PatientTypeId);
 
             builder.HasOne(t => t.Item)
                 .WithMany()

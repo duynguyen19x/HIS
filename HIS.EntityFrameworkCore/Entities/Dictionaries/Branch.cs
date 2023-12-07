@@ -9,8 +9,8 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// </summary>
     public class Branch : AuditedEntity<Guid>
     {
-        public string BranchCode { get; set; }
-        public string BranchName { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
         public string MediOrgCode { get; set; } // mã khám chữa bệnh ban đầu
         public string MediOrgAcceptCode { get; set; } // mã KCBBĐ đúng tuyến (ngăn cách bởi dấu ;)
         public string Level { get; set; } // hạng bệnh viện
