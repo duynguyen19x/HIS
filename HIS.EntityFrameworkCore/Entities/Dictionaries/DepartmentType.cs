@@ -1,4 +1,5 @@
 ﻿using HIS.Core.Entities;
+using HIS.Core.Entities.Auditing;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {

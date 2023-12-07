@@ -8,40 +8,32 @@ namespace HIS.Application.Core.Services.Dto
 {
     public class ResultDto<T>
     {
-        public virtual bool IsSuccessed { get; set; }
+        public virtual bool IsSucceeded { get; set; }
 
         public virtual string Message { get; set; }
 
-        public virtual T Item { get; set; }
-
-        public virtual IList<ResultErrorDto> Errors { get; set; }
-
-        public virtual bool HasErrors => Errors != null && Errors.Count > 0;
+        public virtual T Result { get; set; }
 
         public ResultDto() 
         {
-            IsSuccessed = true;
-            Errors = new List<ResultErrorDto>();
-        }
-        public ResultDto(T item) 
-            : this()
-        {
-            Item = item;
+            IsSucceeded = true;
         }
 
-        public virtual void Error(string field, string message)
+        public ResultDto(T result) 
+            : this()
         {
-            if (Errors == null)
-                Errors = new List<ResultErrorDto>();
-            Errors.Add(new ResultErrorDto(field, message));
+            Result = result;
         }
-        public virtual void RemoveError()
+
+        public virtual void Succeeded(T result)
         {
-            this.Errors = new List<ResultErrorDto>();
+            this.IsSucceeded = true;
+            this.Result = result;
         }
+
         public virtual void Exception(Exception ex)
         {
-            this.IsSuccessed = false;
+            this.IsSucceeded = false;
             this.Message = ex.Message;
         }
     }

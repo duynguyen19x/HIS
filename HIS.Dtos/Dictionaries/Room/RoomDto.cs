@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.Core.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace HIS.Dtos.Dictionaries.Room
 {
-    public class RoomDto
+    public class RoomDto : EntityDto<Guid?>
     {
-        public Guid? Id { get; set; }
-        public string Code { get; set; }
+        public string RoomCode { get; set; }
+        public string RoomName { get; set; }
         public string MohCode { get; set; }
-        public string Name { get; set; }
         public int? RoomTypeId { get; set; }
         public string RoomTypeCode { get; set; }
         public string RoomTypeName { get; set; }

@@ -1,7 +1,6 @@
-﻿using HIS.ApplicationService.Dictionaries.Hospital;
-using HIS.Dtos.Commons;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Dictionaries.Hospital;
 using HIS.Dtos.Dictionaries.Hospital;
-using HIS.Models.Commons;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
@@ -18,25 +17,25 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<HospitalDto>> GetAll([FromQuery] GetAllHospitalInput input)
+        public async Task<PagedResultDto<HospitalDto>> GetAll([FromQuery] GetAllHospitalInput input)
         {
             return await _hospitalService.GetAll(input);
         }
 
         [HttpGet("GetById")]
-        public async Task<ApiResult<HospitalDto>> GetById(Guid id)
+        public async Task<ResultDto<HospitalDto>> GetById(Guid id)
         {
             return await _hospitalService.GetById(id);
         }
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ApiResult<HospitalDto>> CreateOrEdit(HospitalDto input)
+        public async Task<ResultDto<HospitalDto>> CreateOrEdit(HospitalDto input)
         {
             return await _hospitalService.CreateOrEdit(input);
         }
 
         [HttpDelete("Delete")]
-        public async Task<ApiResult<HospitalDto>> Delete(Guid id)
+        public async Task<ResultDto<HospitalDto>> Delete(Guid id)
         {
             return await _hospitalService.Delete(id);
         }

@@ -1,6 +1,6 @@
-﻿using HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks;
 using HIS.Dtos.Business.ItemStocks;
-using HIS.Dtos.Commons;
 using HIS.Utilities.Enums;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,19 +18,19 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<ItemStockDto>> GetAll([FromQuery] GetAllItemStockInput input)
+        public async Task<PagedResultDto<ItemStockDto>> GetAll([FromQuery] GetAllItemStockInput input)
         {
             return await _dItemStockService.GetAll(input);
         }
 
         [HttpGet("GetItemByStocks")]
-        public async Task<ApiResultList<ItemStockDto>> GetItemByStocks(Guid stockId)
+        public async Task<PagedResultDto<ItemStockDto>> GetItemByStocks(Guid stockId)
         {
             return await _dItemStockService.GetItemByStocks(stockId);
         }
 
         [HttpGet("GetItemStockByStocks")]
-        public async Task<ApiResultList<ItemStockDto>> GetItemStockByStocks(Guid stockId, CommodityTypes? commodityType, bool isGroup = false, bool isAvailableQuantity = false)
+        public async Task<PagedResultDto<ItemStockDto>> GetItemStockByStocks(Guid stockId, CommodityTypes? commodityType, bool isGroup = false, bool isAvailableQuantity = false)
         {
             return await _dItemStockService.GetItemStockByStocks(stockId, commodityType, isGroup, isAvailableQuantity);
         }

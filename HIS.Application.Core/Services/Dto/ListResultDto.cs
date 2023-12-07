@@ -9,23 +9,23 @@ namespace HIS.Application.Core.Services.Dto
     [Serializable]
     public class ListResultDto<T> : IListResult<T>
     {
-        private IList<T> _items;
+        private IList<T> _result;
 
-        public IList<T> Items
+        public virtual IList<T> Result
         {
             get
             {
-                if (_items == null)
-                    _items = new List<T>();
-                return _items;
+                if (_result == null)
+                    _result = new List<T>();
+                return _result;
             }
             set
             {
-                _items = value;
+                _result = value;
             }
         }
-        public bool IsSuccessed { get; set; } = true;
-        public string Message { get; set; }
+        public virtual bool IsSucceeded { get; set; } = true;
+        public virtual string Message { get; set; }
 
         public ListResultDto()
         {
@@ -33,7 +33,7 @@ namespace HIS.Application.Core.Services.Dto
 
         public ListResultDto(IList<T> items)
         {
-            Items = items;
+            Result = items;
         }
     }
 }

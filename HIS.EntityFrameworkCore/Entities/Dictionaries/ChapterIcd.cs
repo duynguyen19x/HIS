@@ -1,17 +1,11 @@
 ﻿using HIS.Core.Entities;
-using HIS.EntityFrameworkCore.Entities.Categories;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     public class ChapterIcd : Entity<Guid>
     {
-        [Description("ID")]
+        [Description("Code")]
         public string Code { get; set; }
 
         [Description("Tên Chương")]

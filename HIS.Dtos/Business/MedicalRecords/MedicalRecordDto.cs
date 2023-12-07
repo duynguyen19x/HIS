@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HIS.Dtos.Business.MedicalRecords
 {
-    public class MedicalRecordDto : EntityDto
+    public class MedicalRecordDto : EntityDto<Guid>
     {
     }
 }

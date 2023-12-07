@@ -1,30 +1,28 @@
-﻿using HIS.Dtos.Commons;
+﻿using HIS.Application.Core.Services.Dto;
 using HIS.Dtos.Systems.Role;
-using HIS.EntityFrameworkCore.Entities.Systems;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
-using HIS.Models.Commons;
+using HIS.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace HIS.ApplicationService.Systems.Role
 {
     public class RoleService : IRoleService
     {
-        private readonly HISDbContext _dbContext;
+        private readonly HISDbContext Context;
         private readonly IConfiguration _config;
 
         public RoleService(HISDbContext dbContext, IConfiguration config)
         {
-            _dbContext = dbContext;
+            Context = dbContext;
             _config = config;
         }
 
-        public async Task<ApiResultList<RoleDto>> GetAll(GetAllRoleInput input)
+        public async Task<PagedResultDto<RoleDto>> GetAll(GetAllRoleInput input)
         {
-            var result = new ApiResultList<RoleDto>();
+            var result = new PagedResultDto<RoleDto>();
             try
             {
-                result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.Roles
+                result.IsSucceeded = true;
+                result.Result = (from r in Context.Roles
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -40,18 +38,17 @@ namespace HIS.ApplicationService.Systems.Role
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
-                result.Message = ex.Message;
+                result.Exception(ex);
             }
 
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<RoleDto>> GetById(Guid id)
+        public async Task<ResultDto<RoleDto>> GetById(Guid id)
         {
-            var result = new ApiResult<RoleDto>();
+            var result = new ResultDto<RoleDto>();
 
-            var role = _dbContext.Roles.SingleOrDefault(s => s.Id == id);
+            var role = Context.Roles.SingleOrDefault(s => s.Id == id);
             if (role != null)
             {
                 result.Result = new RoleDto()
@@ -67,7 +64,7 @@ namespace HIS.ApplicationService.Systems.Role
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<RoleDto>> CreateOrEdit(RoleDto input)
+        public async Task<ResultDto<RoleDto>> CreateOrEdit(RoleDto input)
         {
             if (input.Id == null)
                 return await Create(input);
@@ -75,24 +72,24 @@ namespace HIS.ApplicationService.Systems.Role
                 return await Update(input);
         }
 
-        private async Task<ApiResult<RoleDto>> Create(RoleDto input)
+        private async Task<ResultDto<RoleDto>> Create(RoleDto input)
         {
-            var result = new ApiResult<RoleDto>();
-            await _dbContext.Roles.AddAsync(new EntityFrameworkCore.Entities.Systems.Role()
+            var result = new ResultDto<RoleDto>();
+            await Context.Roles.AddAsync(new EntityFrameworkCore.Entities.Systems.Role()
             {
 
             });
 
-            _dbContext.SaveChanges();
+            Context.SaveChanges();
             return result;
         }
 
-        private Task<ApiResult<RoleDto>> Update(RoleDto input)
+        private Task<ResultDto<RoleDto>> Update(RoleDto input)
         {
             throw new NotImplementedException();
         }
 
-        public Task<ApiResult<RoleDto>> Delete(Guid id)
+        public Task<ResultDto<RoleDto>> Delete(Guid id)
         {
             throw new NotImplementedException();
         }

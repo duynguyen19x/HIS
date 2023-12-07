@@ -1,7 +1,6 @@
-﻿using HIS.ApplicationService.Dictionaries.Unit;
-using HIS.Dtos.Commons;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Dictionaries.Unit;
 using HIS.Dtos.Dictionaries.ServiceUnit;
-using HIS.Models.Commons;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
@@ -18,25 +17,25 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ApiResult<UnitDto>> CreateOrEdit(UnitDto input)
+        public async Task<ResultDto<UnitDto>> CreateOrEdit(UnitDto input)
         {
             return await _sServiceUnitService.CreateOrEdit(input);
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<UnitDto>> GetAll([FromQuery] GetAllUnitInput input)
+        public async Task<PagedResultDto<UnitDto>> GetAll([FromQuery] GetAllUnitInput input)
         {
             return await _sServiceUnitService.GetAll(input);
         }
 
         [HttpGet("GetById")]
-        public async Task<ApiResult<UnitDto>> GetById(Guid id)
+        public async Task<ResultDto<UnitDto>> GetById(Guid id)
         {
             return await _sServiceUnitService.GetById(id);
         }
 
         [HttpDelete("Delete")]
-        public async Task<ApiResult<UnitDto>> Delete(Guid id)
+        public async Task<ResultDto<UnitDto>> Delete(Guid id)
         {
             return await _sServiceUnitService.Delete(id);
         }

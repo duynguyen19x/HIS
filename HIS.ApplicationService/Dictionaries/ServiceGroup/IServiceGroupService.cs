@@ -1,9 +1,9 @@
-﻿using HIS.ApplicationService.Base;
+﻿using HIS.Application.Core.Services;
 using HIS.Dtos.Dictionaries.ServiceGroup;
 
 namespace HIS.ApplicationService.Dictionaries.ServiceGroup
 {
-    public interface IServiceGroupService : IBaseDictionaryService<ServiceGroupDto, GetAllServiceGroupInput>
+    public interface IServiceGroupService : IBaseCrudAppService<ServiceGroupDto, Guid, GetAllServiceGroupInput>
     {
     }
 }

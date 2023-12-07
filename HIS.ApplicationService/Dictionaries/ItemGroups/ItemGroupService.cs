@@ -1,25 +1,24 @@
 ﻿using AutoMapper;
+using HIS.Application.Core.Services;
+using HIS.Application.Core.Services.Dto;
 using HIS.Core.Linq;
-using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ItemGroups;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
-using HIS.Models.Commons;
+using HIS.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace HIS.ApplicationService.Dictionaries.ItemGroups
 {
-    public class ItemGroupService : BaseSerivce, IItemGroupService
+    public class ItemGroupService : BaseCrudAppService<ItemGroupDto, Guid?, GetAllItemGroupInput>, IItemGroupService
     {
         public ItemGroupService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
-           : base(dbContext, config, mapper)
+           : base(dbContext, mapper)
         {
-
         }
 
-        public async Task<ApiResult<ItemGroupDto>> CreateOrEdit(ItemGroupDto input)
+        public override async Task<ResultDto<ItemGroupDto>> CreateOrEdit(ItemGroupDto input)
         {
             var result = await ValidSave(input);
-            if (!result.IsSuccessed)
+            if (!result.IsSucceeded)
                 return result;
 
             if (input.Id == null)
@@ -28,27 +27,26 @@ namespace HIS.ApplicationService.Dictionaries.ItemGroups
                 return await Update(input);
         }
 
-        public async Task<ApiResult<ItemGroupDto>> Create(ItemGroupDto input)
+        public override async Task<ResultDto<ItemGroupDto>> Create(ItemGroupDto input)
         {
-            var result = new ApiResult<ItemGroupDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<ItemGroupDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var ItemGroup = _mapper.Map<EntityFrameworkCore.Entities.Categories.ItemGroup>(input);
-                    _dbContext.ItemGroups.Add(ItemGroup);
-                    await _dbContext.SaveChangesAsync();
+                    var ItemGroup = ObjectMapper.Map<EntityFrameworkCore.Entities.Categories.ItemGroup>(input);
+                    Context.ItemGroups.Add(ItemGroup);
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
+                    result.IsSucceeded = true;
                     result.Result = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -58,25 +56,25 @@ namespace HIS.ApplicationService.Dictionaries.ItemGroups
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<ItemGroupDto>> Update(ItemGroupDto input)
+        public override async Task<ResultDto<ItemGroupDto>> Update(ItemGroupDto input)
         {
-            var result = new ApiResult<ItemGroupDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<ItemGroupDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var ItemGroup = _mapper.Map<EntityFrameworkCore.Entities.Categories.ItemGroup>(input);
-                    _dbContext.ItemGroups.Update(ItemGroup);
-                    await _dbContext.SaveChangesAsync();
+                    var ItemGroup = ObjectMapper.Map<EntityFrameworkCore.Entities.Categories.ItemGroup>(input);
+                    Context.ItemGroups.Update(ItemGroup);
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
+                    result.IsSucceeded = true;
                     result.Result = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
+                    result.IsSucceeded = false;
                     result.Message = ex.Message;
                 }
                 finally
@@ -87,9 +85,9 @@ namespace HIS.ApplicationService.Dictionaries.ItemGroups
             return await Task.FromResult(result);
         }
 
-        private async Task<ApiResult<ItemGroupDto>> ValidSave(ItemGroupDto input)
+        private async Task<ResultDto<ItemGroupDto>> ValidSave(ItemGroupDto input)
         {
-            var result = new ApiResult<ItemGroupDto>();
+            var result = new ResultDto<ItemGroupDto>();
 
             try
             {
@@ -116,7 +114,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemGroups
 
                 #endregion
 
-                var ItemGroup = _dbContext.ItemGroups.FirstOrDefault(w => w.Code == input.Code && w.Id != input.Id);
+                var ItemGroup = Context.ItemGroups.FirstOrDefault(w => w.Code == input.Code && w.Id != input.Id);
                 if (ItemGroup != null)
                 {
                     errs.Add(string.Format("Mã nhóm thuốc [{0}] đã tồn tại trên hệ thống!", input.Code));
@@ -124,39 +122,39 @@ namespace HIS.ApplicationService.Dictionaries.ItemGroups
 
                 if (errs.Count > 0)
                 {
-                    result.IsSuccessed = false;
+                    result.IsSucceeded = false;
                     result.Message = string.Join("\n", errs);
                 }
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
+                result.IsSucceeded = false;
                 result.Message = ex.Message;
             }
 
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<ItemGroupDto>> Delete(Guid id)
+        public override async Task<ResultDto<ItemGroupDto>> Delete(Guid? id)
         {
-            var result = new ApiResult<ItemGroupDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<ItemGroupDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var ItemGroup = _dbContext.ItemGroups.SingleOrDefault(x => x.Id == id);
+                    var ItemGroup = Context.ItemGroups.SingleOrDefault(x => x.Id == id);
                     if (ItemGroup != null)
                     {
-                        _dbContext.ItemGroups.Remove(ItemGroup);
-                        await _dbContext.SaveChangesAsync();
-                        result.IsSuccessed = true;
+                        Context.ItemGroups.Remove(ItemGroup);
+                        await Context.SaveChangesAsync();
+                        result.IsSucceeded = true;
 
                         transaction.Commit();
                     }
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
+                    result.IsSucceeded = false;
                     result.Message = ex.Message;
                 }
                 finally
@@ -167,13 +165,13 @@ namespace HIS.ApplicationService.Dictionaries.ItemGroups
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<ItemGroupDto>> GetAll(GetAllItemGroupInput input)
+        public override async Task<PagedResultDto<ItemGroupDto>> GetAll(GetAllItemGroupInput input)
         {
-            var result = new ApiResultList<ItemGroupDto>();
+            var result = new PagedResultDto<ItemGroupDto>();
             try
             {
-                result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.ItemGroups
+                result.IsSucceeded = true;
+                result.Result = (from r in Context.ItemGroups
 
                                  select new ItemGroupDto()
                                  {
@@ -195,22 +193,21 @@ namespace HIS.ApplicationService.Dictionaries.ItemGroups
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
-                result.Message = ex.Message;
+                result.Exception(ex);
             }
 
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<ItemGroupDto>> GetById(Guid id)
+        public override async Task<ResultDto<ItemGroupDto>> GetById(Guid? id)
         {
-            var result = new ApiResult<ItemGroupDto>();
+            var result = new ResultDto<ItemGroupDto>();
 
-            var ItemGroup = _dbContext.ItemGroups.SingleOrDefault(s => s.Id == id);
+            var ItemGroup = Context.ItemGroups.SingleOrDefault(s => s.Id == id);
             if (ItemGroup != null)
             {
-                result.IsSuccessed = true;
-                result.Result = _mapper.Map<ItemGroupDto>(ItemGroup);
+                result.IsSucceeded = true;
+                result.Result = ObjectMapper.Map<ItemGroupDto>(ItemGroup);
             }
 
             return await Task.FromResult(result);

@@ -1,44 +1,16 @@
-﻿using HIS.ApplicationService.Dictionaries.Ethnic;
-using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.Ethnic;
-using HIS.Models.Commons;
+﻿using HIS.ApplicationService.Dictionaries.Ethnics;
+using HIS.Dtos.Dictionaries.Ethnics;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EthnicController : ControllerBase
+    public class EthnicController : BaseCrudController<IEthnicAppService, EthnicDto, Guid, GetAllEthnicInputDto>
     {
-        private readonly IEthnicService _ethnicService;
-
-        public EthnicController(IEthnicService ethnicService)
+        public EthnicController(IEthnicAppService appService) 
+            : base(appService)
         {
-            _ethnicService = ethnicService;
-        }
-
-        [HttpGet("GetAll")]
-        public async Task<ApiResultList<EthnicDto>> GetAll([FromQuery] GetAllEthnicInput input)
-        {
-            return await _ethnicService.GetAll(input);
-        }
-
-        [HttpGet("GetById")]
-        public async Task<ApiResult<EthnicDto>> GetById(Guid id)
-        {
-            return await _ethnicService.GetById(id);
-        }
-
-        [HttpPost("CreateOrEdit")]
-        public async Task<ApiResult<EthnicDto>> CreateOrEdit(EthnicDto input)
-        {
-            return await _ethnicService.CreateOrEdit(input);
-        }
-
-        [HttpDelete("Delete")]
-        public async Task<ApiResult<EthnicDto>> Delete(Guid id)
-        {
-            return await _ethnicService.Delete(id);
         }
     }
 }

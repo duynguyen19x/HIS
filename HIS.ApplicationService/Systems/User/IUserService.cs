@@ -1,8 +1,9 @@
-﻿using HIS.Dtos.Systems.User;
+﻿using HIS.Application.Core.Services;
+using HIS.Dtos.Systems.User;
 
 namespace HIS.ApplicationService.Systems.User
 {
-    public interface IUserService : IBaseService<UserDto, GetAllUserInput>
+    public interface IUserService : IBaseCrudAppService<UserDto, Guid?, GetAllUserInput>
     {
     }
 }

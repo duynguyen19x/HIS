@@ -1,8 +1,9 @@
-﻿using HIS.Utilities.Enums;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.Utilities.Enums;
 
 namespace HIS.Dtos.Dictionaries.ItemGroups
 {
-    public class GetAllItemGroupInput
+    public class GetAllItemGroupInput : PagedResultRequestDto
     {
         public string CodeFilter { get; set; }
         public string NameFilter { get; set; }

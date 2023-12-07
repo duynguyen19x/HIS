@@ -1,46 +1,45 @@
 ﻿using HIS.Dtos.Systems.Login;
 using HIS.EntityFrameworkCore.Entities.Systems;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
-using HIS.Models.Commons;
+using HIS.EntityFrameworkCore;
 using HIS.Utilities.Commons;
 using HIS.Utilities.Enums;
 using HIS.Utilities.Sections;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using HIS.Application.Core.Services.Dto;
 
 namespace HIS.ApplicationService.Systems.Login
 {
     public class LoginService : ILoginService
     {
-        private readonly HISDbContext _dbContext;
+        private readonly HISDbContext Context;
         private readonly IConfiguration _config;
 
         public LoginService(HISDbContext dbContext,
             IConfiguration config)
         {
-            _dbContext = dbContext;
+            Context = dbContext;
             _config = config;
         }
 
-        public async Task<ApiResult<TokenResultDto>> Authenticate(LoginDto request)
+        public async Task<ResultDto<TokenResultDto>> Authenticate(LoginDto request)
         {
-            var apiResult = new ApiResult<TokenResultDto>();
+            var ResultDto = new ResultDto<TokenResultDto>();
 
-            using (var transaction = _dbContext.BeginTransaction())
+            using (var transaction = Context.BeginTransaction())
             {
                 try
                 {
-                    var user = _dbContext.Users.Where(w => w.UserName == request.UserName && w.Password.ToUpper() == request.Password.ToUpper()).FirstOrDefault();
+                    var user = Context.Users.Where(w => w.UserName == request.UserName && w.Password.ToUpper() == request.Password.ToUpper()).FirstOrDefault();
                     if (user == null)
                     {
-                        apiResult.IsSuccessed = false;
-                        apiResult.Message = "Tài khoản hoặc mật khẩu không đúng!";
+                        ResultDto.IsSucceeded = false;
+                        ResultDto.Message = "Tài khoản hoặc mật khẩu không đúng!";
 
-                        return apiResult;
+                        return ResultDto;
                     }
 
                     var acceptToken = await CreateTokenAsync(await CreateClaimsAsync(user), AppConst.AcceptTokenExpiration);
@@ -52,8 +51,8 @@ namespace HIS.ApplicationService.Systems.Login
                         RefreshToken = new JwtSecurityTokenHandler().WriteToken(refreshToken),
                     };
 
-                    apiResult.IsSuccessed = true;
-                    apiResult.Result = token;
+                    ResultDto.IsSucceeded = true;
+                    ResultDto.Result = token;
 
                     // Save token
                     var sToken = new SToken()
@@ -68,8 +67,8 @@ namespace HIS.ApplicationService.Systems.Login
                         ExpiredAt = refreshToken.ValidTo
                     };
 
-                    await _dbContext.Tokens.AddAsync(sToken);
-                    _dbContext.SaveChanges();
+                    await Context.Tokens.AddAsync(sToken);
+                    Context.SaveChanges();
 
                     // Lưu thông tin đăng nhập
                     SessionExtensions.Login = new LoginSecsion
@@ -82,40 +81,40 @@ namespace HIS.ApplicationService.Systems.Login
                 }
                 catch (Exception)
                 {
-                    apiResult.IsSuccessed = false;
+                    ResultDto.IsSucceeded = false;
                     transaction.Dispose();
                 }
             }
 
-            return await Task.FromResult(apiResult);
+            return await Task.FromResult(ResultDto);
         }
 
-        public async Task<ApiResult<bool>> Register(RegisterDto request)
+        public async Task<ResultDto<bool>> Register(RegisterDto request)
         {
-            var apiResult = new ApiResult<bool>();
+            var ResultDto = new ResultDto<bool>();
 
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var user = _dbContext.Users.FirstOrDefault(f => f.UserName == request.UserName);
+                    var user = Context.Users.FirstOrDefault(f => f.UserName == request.UserName);
                     if (user != null)
                     {
-                        apiResult.Result = false;
-                        apiResult.IsSuccessed = false;
-                        apiResult.Message = "Tài khoản đã tồn tại";
+                        ResultDto.Result = false;
+                        ResultDto.IsSucceeded = false;
+                        ResultDto.Message = "Tài khoản đã tồn tại";
 
-                        return await Task.FromResult(apiResult);
+                        return await Task.FromResult(ResultDto);
                     }
 
-                    user = _dbContext.Users.FirstOrDefault(f => f.Email == request.UserName);
+                    user = Context.Users.FirstOrDefault(f => f.Email == request.UserName);
                     if (user != null)
                     {
-                        apiResult.Result = false;
-                        apiResult.IsSuccessed = false;
-                        apiResult.Message = "Emai đã tồn tại";
+                        ResultDto.Result = false;
+                        ResultDto.IsSucceeded = false;
+                        ResultDto.Message = "Emai đã tồn tại";
 
-                        return await Task.FromResult(apiResult);
+                        return await Task.FromResult(ResultDto);
                     }
 
                     var userSave = new EntityFrameworkCore.Entities.Systems.User()
@@ -136,25 +135,25 @@ namespace HIS.ApplicationService.Systems.Login
                         DistrictId = request.District,
                         WardId = request.WardsId,
                     };
-                    var result = _dbContext.Users.Add(userSave);
+                    var result = Context.Users.Add(userSave);
                     if (result != null)
                     {
-                        apiResult.Message = "Đăng ký thằng công!";
-                        apiResult.Result = true;
-                        apiResult.IsSuccessed = true;
+                        ResultDto.Message = "Đăng ký thằng công!";
+                        ResultDto.Result = true;
+                        ResultDto.IsSucceeded = true;
 
-                        return await Task.FromResult(apiResult);
+                        return await Task.FromResult(ResultDto);
                     }
                 }
                 catch (Exception ex)
                 {
-                    apiResult.Message = ex.Message;
-                    apiResult.Result = false;
-                    apiResult.IsSuccessed = false;
+                    ResultDto.Message = ex.Message;
+                    ResultDto.Result = false;
+                    ResultDto.IsSucceeded = false;
                 }
             }
 
-            return await Task.FromResult(apiResult);
+            return await Task.FromResult(ResultDto);
         }
 
         private DateTime ConvertUnixTimeToDateTime(long utcExpireDate)
@@ -167,8 +166,8 @@ namespace HIS.ApplicationService.Systems.Login
 
         private async Task<IList<Claim>> CreateClaimsAsync(EntityFrameworkCore.Entities.Systems.User user, TokenTypes tokenType = TokenTypes.AcceptToken)
         {
-            var roleIds = _dbContext.UserRoles.Where(w => w.UserId == user.Id).Select(s => s.RoleId).ToList();
-            var roles = _dbContext.Roles.Where(w => roleIds.Contains(w.Id)).ToList();
+            var roleIds = Context.UserRoles.Where(w => w.UserId == user.Id).Select(s => s.RoleId).ToList();
+            var roles = Context.Roles.Where(w => roleIds.Contains(w.Id)).ToList();
 
             var claims = new List<Claim>()
             {
@@ -201,20 +200,20 @@ namespace HIS.ApplicationService.Systems.Login
             return await Task.FromResult(token);
         }
 
-        public async Task<ApiResult<TokenResultDto>> RefreshToken(TokenResultDto token)
+        public async Task<ResultDto<TokenResultDto>> RefreshToken(TokenResultDto token)
         {
-            var apiResult = new ApiResult<TokenResultDto>();
+            var ResultDto = new ResultDto<TokenResultDto>();
 
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
                     if (string.IsNullOrEmpty(token.RefreshToken))
                     {
-                        apiResult.IsSuccessed = false;
-                        apiResult.Message = "Refresh token is not valid!";
+                        ResultDto.IsSucceeded = false;
+                        ResultDto.Message = "Refresh token is not valid!";
 
-                        return apiResult;
+                        return ResultDto;
                     }
 
                     var key = Encoding.UTF8.GetBytes(_config["Tokens:Key"]);
@@ -246,10 +245,10 @@ namespace HIS.ApplicationService.Systems.Login
                         var isCheckToken = jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha512, StringComparison.InvariantCultureIgnoreCase);
                         if (!isCheckToken)
                         {
-                            apiResult.Message = "Invalid token";
-                            apiResult.IsSuccessed = false;
+                            ResultDto.Message = "Invalid token";
+                            ResultDto.IsSucceeded = false;
 
-                            return apiResult;
+                            return ResultDto;
                         }
                     }
 
@@ -257,48 +256,48 @@ namespace HIS.ApplicationService.Systems.Login
                     var utcExpireDate = long.Parse(tokenInVerification.Claims.FirstOrDefault(f => f.Type == JwtRegisteredClaimNames.Exp).Value);
                     if (ConvertUnixTimeToDateTime(utcExpireDate) >= DateTime.UtcNow)
                     {
-                        apiResult.Message = "The access token has expired!";
-                        apiResult.IsSuccessed = false;
+                        ResultDto.Message = "The access token has expired!";
+                        ResultDto.IsSucceeded = false;
 
-                        return apiResult;
+                        return ResultDto;
                     }
 
                     // Kiểm tra refreshToken có trong database ko?
-                    var storedToken = _dbContext.Tokens.Where(w => w.TokenValue == token.RefreshToken).FirstOrDefault(); // RefreshToken = RefreshToken trong database
+                    var storedToken = Context.Tokens.Where(w => w.TokenValue == token.RefreshToken).FirstOrDefault(); // RefreshToken = RefreshToken trong database
                     if (storedToken == null)
                     {
-                        apiResult.Message = "Refresh token does not exist";
-                        apiResult.IsSuccessed = false;
+                        ResultDto.Message = "Refresh token does not exist";
+                        ResultDto.IsSucceeded = false;
 
-                        return apiResult;
+                        return ResultDto;
                     }
                     else
                     {
                         // Kiểm tra hạn sử dụng
                         if (storedToken.ExpiredAt < DateTime.Now)
                         {
-                            apiResult.Message = "Refresh token token has expired!";
-                            apiResult.IsSuccessed = false;
+                            ResultDto.Message = "Refresh token token has expired!";
+                            ResultDto.IsSucceeded = false;
 
-                            return apiResult;
+                            return ResultDto;
                         }
 
                         // Kiểm tra refreshToken đã sử dụng chưa
                         if (storedToken.IsUsed)
                         {
-                            apiResult.Message = "Refresh token has been used";
-                            apiResult.IsSuccessed = false;
+                            ResultDto.Message = "Refresh token has been used";
+                            ResultDto.IsSucceeded = false;
 
-                            return apiResult;
+                            return ResultDto;
                         }
 
                         // Kiểm tra refreshToken đã thu hổi chưa
                         if (storedToken.IsRevoked)
                         {
-                            apiResult.Message = "Refresh token has been revoked";
-                            apiResult.IsSuccessed = false;
+                            ResultDto.Message = "Refresh token has been revoked";
+                            ResultDto.IsSucceeded = false;
 
-                            return apiResult;
+                            return ResultDto;
                         }
                     }
 
@@ -306,38 +305,38 @@ namespace HIS.ApplicationService.Systems.Login
                     var jti = tokenInVerification.Claims.FirstOrDefault(f => f.Type == JwtRegisteredClaimNames.Jti).Value;
                     if (storedToken.Jti != jti)
                     {
-                        apiResult.Message = "Token doesn't match";
-                        apiResult.IsSuccessed = false;
+                        ResultDto.Message = "Token doesn't match";
+                        ResultDto.IsSucceeded = false;
 
-                        return apiResult;
+                        return ResultDto;
                     }
 
                     // Tạo token mới
-                    var userById = _dbContext.Users.FirstOrDefault(f => f.Id == storedToken.UserId.GetValueOrDefault());
+                    var userById = Context.Users.FirstOrDefault(f => f.Id == storedToken.UserId.GetValueOrDefault());
                     var acceptToken = await CreateTokenAsync(await CreateClaimsAsync(userById), AppConst.AcceptTokenExpiration);
 
                     // Update token
                     storedToken.Jti = acceptToken.Id;
-                    _dbContext.Update(storedToken);
+                    Context.Update(storedToken);
 
-                    apiResult.Result = new TokenResultDto()
+                    ResultDto.Result = new TokenResultDto()
                     {
                         AcceptToken = new JwtSecurityTokenHandler().WriteToken(acceptToken),
                         RefreshToken = token.RefreshToken
                     };
 
-                    _dbContext.SaveChanges();
+                    Context.SaveChanges();
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    apiResult.Message = ex.Message;
-                    apiResult.IsSuccessed = false;
+                    ResultDto.Message = ex.Message;
+                    ResultDto.IsSucceeded = false;
                     transaction.Dispose();
                 }
             }
 
-            return apiResult;
+            return ResultDto;
         }
     }
 }

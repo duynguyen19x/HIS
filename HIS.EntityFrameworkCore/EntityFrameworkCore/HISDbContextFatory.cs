@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.EntityFrameworkCore
+namespace HIS.EntityFrameworkCore
 {
     public class HISDbContextFatory : IDesignTimeDbContextFactory<HISDbContext>
     {

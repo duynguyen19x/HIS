@@ -1,12 +1,6 @@
-﻿using HIS.EntityFrameworkCore.Entities.Categories;
-using HIS.EntityFrameworkCore.Entities.Categories.Services;
+﻿using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Services
 {
@@ -14,12 +8,13 @@ namespace HIS.EntityFrameworkCore.Configurations.Services
     {
         public void Configure(EntityTypeBuilder<ServiceResultIndice> builder)
         {
-            builder.ToTable("ServiceResultIndices");
+            builder.ToTable("DIC_ServiceResultIndice");
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Code).HasMaxLength(50);
-            builder.Property(x => x.Name).HasMaxLength(500);
-            builder.Property(x => x.Unit).HasMaxLength(100);
+            builder.Property(x => x.Name).HasMaxLength(512);
+            builder.Property(x => x.Unit).HasMaxLength(128);
+            builder.Property(x => x.Normal).HasMaxLength(128);
 
             builder.HasOne(t => t.Service).WithMany().HasForeignKey(pc => pc.ServiceId);
         }

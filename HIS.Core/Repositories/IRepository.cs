@@ -12,9 +12,10 @@ namespace HIS.Core.Repositories
     public interface IRepository<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey>
     {
         IQueryable<TEntity> GetAll();
+
         List<TEntity> GetAllList();
-        List<TEntity> GetAllList(Expression<Func<TEntity, bool>> predicate);
         Task<List<TEntity>> GetAllListAsync();
+        List<TEntity> GetAllList(Expression<Func<TEntity, bool>> predicate);
         Task<List<TEntity>> GetAllListAsync(Expression<Func<TEntity, bool>> predicate);
 
         TEntity Get(TPrimaryKey id);
@@ -24,15 +25,15 @@ namespace HIS.Core.Repositories
         Task<TEntity> InsertAsync(TEntity entity);
 
         TEntity Update(TEntity entity);
-        TEntity Update(TPrimaryKey id, Action<TEntity> updateAction);
         Task<TEntity> UpdateAsync(TEntity entity);
+        TEntity Update(TPrimaryKey id, Action<TEntity> updateAction);
         Task<TEntity> UpdateAsync(TPrimaryKey id, Func<TEntity, Task> updateAction);
 
         void Delete(TEntity entity);
-        void Delete(TPrimaryKey id);
-        void Delete(Expression<Func<TEntity, bool>> predicate);
         Task DeleteAsync(TEntity entity);
+        void Delete(TPrimaryKey id);
         Task DeleteAsync(TPrimaryKey id);
+        void Delete(Expression<Func<TEntity, bool>> predicate);
         Task DeleteAsync(Expression<Func<TEntity, bool>> predicate);
     }
 }

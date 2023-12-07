@@ -10,12 +10,13 @@ namespace HIS.Core.Enums
     {
         KHAMBENH = 100,
 
-        DTRI_NGOAITRU__CHUNG = 200,
+        DTRI_NGOAITRU = 200,
         DTRI_NGOAITRU__RHM = 201,
         DTRI_NGOAITRU__TMH = 202,
-        DTRI_NGOAITRU__MAT = 203,
+        DTRI_NGOAITRU__YHCT = 203,
+        DTRI_NGOAITRU__MAT = 204,
 
-        DTRI_NOITRU__CHUNG = 300,
+        DTRI_NOITRU = 300,
         DTRI_NOITRU__NOIKHOA = 301,
         DTRI_NOITRU__NHIKHOA = 302,
         DTRI_NOITRU__TRUYENNHIEM = 303,

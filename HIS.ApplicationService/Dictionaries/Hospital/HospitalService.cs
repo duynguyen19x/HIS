@@ -1,32 +1,23 @@
-﻿using HIS.Dtos.Commons;
+﻿using AutoMapper;
+using HIS.Application.Core.Services;
+using HIS.Application.Core.Services.Dto;
 using HIS.Dtos.Dictionaries.Hospital;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
-using HIS.Models.Commons;
+using HIS.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace HIS.ApplicationService.Dictionaries.Hospital
 {
-    public class HospitalService : BaseSerivce, IHospitalService
+    public class HospitalService : BaseCrudAppService<HospitalDto, Guid?, GetAllHospitalInput>, IHospitalService
     {
-        public HospitalService(HISDbContext dbContext, IConfiguration config)
-            : base(dbContext, config)
+        public HospitalService(HISDbContext dbContext, IMapper mapper)
+            : base(dbContext, mapper)
         {
-
         }
 
-        public async Task<ApiResult<HospitalDto>> CreateOrEdit(HospitalDto input)
+        public override async Task<ResultDto<HospitalDto>> Create(HospitalDto input)
         {
-            if (input.Id == null)
-                return await Create(input);
-            else
-                return await Update(input);
-        }
-
-        public async Task<ApiResult<HospitalDto>> Create(HospitalDto input)
-        {
-            var result = new ApiResult<HospitalDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<HospitalDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
@@ -43,18 +34,17 @@ namespace HIS.ApplicationService.Dictionaries.Hospital
                         Line = input.Line,
                         CreatedDate = DateTime.Now
                     };
-                    _dbContext.Hospitals.Add(data);
-                    await _dbContext.SaveChangesAsync();
+                    Context.Hospitals.Add(data);
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
+                    result.IsSucceeded = true;
                     result.Result = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -64,10 +54,10 @@ namespace HIS.ApplicationService.Dictionaries.Hospital
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<HospitalDto>> Update(HospitalDto input)
+        public override async Task<ResultDto<HospitalDto>> Update(HospitalDto input)
         {
-            var result = new ApiResult<HospitalDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<HospitalDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
@@ -84,18 +74,17 @@ namespace HIS.ApplicationService.Dictionaries.Hospital
                         MohCode = input.MohCode,
                         ModifiedDate = DateTime.Now
                     };
-                    _dbContext.Hospitals.Update(data);
-                    await _dbContext.SaveChangesAsync();
+                    Context.Hospitals.Update(data);
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
+                    result.IsSucceeded = true;
                     result.Result = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -105,27 +94,26 @@ namespace HIS.ApplicationService.Dictionaries.Hospital
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<HospitalDto>> Delete(Guid id)
+        public override async Task<ResultDto<HospitalDto>> Delete(Guid? id)
         {
-            var result = new ApiResult<HospitalDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<HospitalDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var data = _dbContext.Hospitals.SingleOrDefault(x => x.Id == id);
+                    var data = Context.Hospitals.SingleOrDefault(x => x.Id == id);
                     if (data != null)
                     {
-                        _dbContext.Hospitals.Remove(data);
-                        await _dbContext.SaveChangesAsync();
-                        result.IsSuccessed = true;
+                        Context.Hospitals.Remove(data);
+                        await Context.SaveChangesAsync();
+                        result.IsSucceeded = true;
 
                         transaction.Commit();
                     }
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -135,13 +123,13 @@ namespace HIS.ApplicationService.Dictionaries.Hospital
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<HospitalDto>> GetAll(GetAllHospitalInput input)
+        public override async Task<PagedResultDto<HospitalDto>> GetAll(GetAllHospitalInput input)
         {
-            var result = new ApiResultList<HospitalDto>();
+            var result = new PagedResultDto<HospitalDto>();
             try
             {
-                result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.Hospitals
+                result.IsSucceeded = true;
+                result.Result = (from r in Context.Hospitals
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -161,21 +149,20 @@ namespace HIS.ApplicationService.Dictionaries.Hospital
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
-                result.Message = ex.Message;
+                result.Exception(ex);
             }
 
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<HospitalDto>> GetById(Guid id)
+        public override async Task<ResultDto<HospitalDto>> GetById(Guid? id)
         {
-            var result = new ApiResult<HospitalDto>();
+            var result = new ResultDto<HospitalDto>();
 
-            var hospital = _dbContext.Hospitals.SingleOrDefault(s => s.Id == id);
+            var hospital = Context.Hospitals.SingleOrDefault(s => s.Id == id);
             if (hospital != null)
             {
-                result.IsSuccessed = true;
+                result.IsSucceeded = true;
                 result.Result = new HospitalDto()
                 {
                     Id = hospital.Id,

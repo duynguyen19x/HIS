@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HIS.Dtos.Dictionaries.Ward
 {
-    public class WardDto : EntityDto<Guid?>
+    public class WardDto : EntityDto<Guid>
     {
         public string Code { get; set; }
         public string Name { get; set; }

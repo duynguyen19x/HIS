@@ -1,51 +1,43 @@
 ﻿using AutoMapper;
+using HIS.Application.Core.Services;
+using HIS.Application.Core.Services.Dto;
 using HIS.Core.Linq;
-using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ServiceUnit;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
-using HIS.Models.Commons;
+using HIS.EntityFrameworkCore;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
 
 namespace HIS.ApplicationService.Dictionaries.Unit
 {
-    public class UnitService : BaseSerivce, IUnitService
+    public class UnitService : BaseCrudAppService<UnitDto, Guid?, GetAllUnitInput>, IUnitService
     {
-        public UnitService(HISDbContext dbContext, IConfiguration config, IMapper mapper) : base(dbContext, config, mapper)
+        public UnitService(HISDbContext dbContext, IConfiguration config, IMapper mapper) 
+            : base(dbContext, mapper)
         {
         }
 
-        public async Task<ApiResult<UnitDto>> CreateOrEdit(UnitDto input)
+        public override async Task<ResultDto<UnitDto>> Create(UnitDto input)
         {
-            if (GuidHelper.IsNullOrEmpty(input.Id))
-                return await Create(input);
-            else
-                return await Update(input);
-        }
-
-        private async Task<ApiResult<UnitDto>> Create(UnitDto input)
-        {
-            var result = new ApiResult<UnitDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<UnitDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
 
-                    var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.Unit>(input);
+                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Unit>(input);
 
-                    _dbContext.Units.Add(data);
-                    await _dbContext.SaveChangesAsync();
+                    Context.Units.Add(data);
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
+                    result.IsSucceeded = true;
                     result.Result = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -55,28 +47,27 @@ namespace HIS.ApplicationService.Dictionaries.Unit
             return await Task.FromResult(result);
         }
 
-        private async Task<ApiResult<UnitDto>> Update(UnitDto input)
+        public override async Task<ResultDto<UnitDto>> Update(UnitDto input)
         {
-            var result = new ApiResult<UnitDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<UnitDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var sServiceUnit = _dbContext.Units.FirstOrDefault(f => f.Id == input.Id);
+                    var sServiceUnit = Context.Units.FirstOrDefault(f => f.Id == input.Id);
                     if (sServiceUnit == null)
-                        _mapper.Map(input, sServiceUnit);
+                        ObjectMapper.Map(input, sServiceUnit);
 
-                    await _dbContext.SaveChangesAsync();
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
+                    result.IsSucceeded = true;
                     result.Result = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -86,27 +77,26 @@ namespace HIS.ApplicationService.Dictionaries.Unit
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<UnitDto>> Delete(Guid id)
+        public override async Task<ResultDto<UnitDto>> Delete(Guid? id)
         {
-            var result = new ApiResult<UnitDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<UnitDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var sServiceUnit = _dbContext.Units.SingleOrDefault(x => x.Id == id);
+                    var sServiceUnit = Context.Units.SingleOrDefault(x => x.Id == id);
                     if (sServiceUnit != null)
                     {
-                        _dbContext.Units.Remove(sServiceUnit);
-                        await _dbContext.SaveChangesAsync();
-                        result.IsSuccessed = true;
+                        Context.Units.Remove(sServiceUnit);
+                        await Context.SaveChangesAsync();
+                        result.IsSucceeded = true;
 
                         transaction.Commit();
                     }
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -117,13 +107,13 @@ namespace HIS.ApplicationService.Dictionaries.Unit
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<UnitDto>> GetAll(GetAllUnitInput input)
+        public override async Task<PagedResultDto<UnitDto>> GetAll(GetAllUnitInput input)
         {
-            var result = new ApiResultList<UnitDto>();
+            var result = new PagedResultDto<UnitDto>();
 
             try
             {
-                result.Result = (from r in _dbContext.Units
+                result.Result = (from r in Context.Units
                                  select new UnitDto()
                                  {
                                      Id = r.Id,
@@ -137,26 +127,24 @@ namespace HIS.ApplicationService.Dictionaries.Unit
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
-                result.Message = ex.Message;
+                result.Exception(ex);
             }
 
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<UnitDto>> GetById(Guid id)
+        public override async Task<ResultDto<UnitDto>> GetById(Guid? id)
         {
-            var result = new ApiResult<UnitDto>();
+            var result = new ResultDto<UnitDto>();
 
             try
             {
-                var service = _dbContext.ServiceGroups.FirstOrDefault(s => s.Id == id);
-                result.Result = _mapper.Map<UnitDto>(service);
+                var service = Context.ServiceGroups.FirstOrDefault(s => s.Id == id);
+                result.Result = ObjectMapper.Map<UnitDto>(service);
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
-                result.Message = ex.Message;
+                result.Exception(ex);
             }
 
             return await Task.FromResult(result);

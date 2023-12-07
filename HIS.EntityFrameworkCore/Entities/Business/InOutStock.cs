@@ -16,7 +16,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         /// <summary>
         /// Trạng thái phiếu
         /// </summary>
-        public InOutStatusType Status { get; set; }
+        public InOutStatusTypes Status { get; set; }
 
         /// <summary>
         /// Loại phiếu: 0 - Nhập, 1 - xuất
@@ -155,6 +155,6 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         [Ignore]
         public Patient Patient { get; set; }
         [Ignore]
-        public PatientRecord PatientRecord { get; set; }
+        public MedicalRecord MedicalRecord { get; set; }
     }
 }

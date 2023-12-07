@@ -1,11 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
@@ -13,14 +8,15 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<Room> builder)
         {
-            builder.ToTable("Rooms");
+            builder.ToTable("DIC_Room");
 
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).ValueGeneratedOnAdd();
-            builder.Property(x => x.Code).HasMaxLength(50).IsRequired(); 
-            builder.Property(x => x.MohCode).HasMaxLength(50).IsRequired(); 
-            builder.Property(x => x.Name).HasMaxLength(512).IsRequired();
+            builder.Property(x => x.RoomCode).HasMaxLength(20).IsRequired(); 
+            builder.Property(x => x.RoomName).HasMaxLength(255).IsRequired();
+            builder.Property(x => x.MohCode).HasMaxLength(20);
             builder.Property(x => x.Description).HasMaxLength(512);
+            builder.Property(x => x.RoomTypeId).IsRequired();
+            builder.Property(x => x.DepartmentId).IsRequired();
 
             builder.HasOne(t => t.RoomType).WithMany().HasForeignKey(p => p.RoomTypeId);
             builder.HasOne(t => t.Department).WithMany().HasForeignKey(p => p.DepartmentId);

@@ -1,11 +1,6 @@
 ﻿using HIS.EntityFrameworkCore.Entities.Business;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business
 {
@@ -13,10 +8,16 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
     {
         public void Configure(EntityTypeBuilder<ServiceRequest> builder)
         {
-            builder.ToTable("ServiceRequest");
+            builder.ToTable("BUS_ServiceRequest");
             builder.HasKey(x => x.Id);
-            builder.Property(r => r.Code).IsRequired().HasMaxLength(50);
-            builder.Property(u => u.Description).HasMaxLength(500);
+            builder.Property(x => x.ServiceRequestCode).IsRequired().HasMaxLength(20);
+            builder.Property(x => x.ServiceRequestDate).IsRequired();
+            builder.Property(x => x.ServiceRequestUseDate).IsRequired();
+            builder.Property(x => x.Barcode).HasMaxLength(20);
+            builder.Property(x => x.IcdCode).HasMaxLength(20);
+            builder.Property(x => x.IcdName).HasMaxLength(512);
+            builder.Property(x => x.IcdSubCode).HasMaxLength(512);
+            builder.Property(x => x.IcdText).HasMaxLength(512);
         }
     }
 }

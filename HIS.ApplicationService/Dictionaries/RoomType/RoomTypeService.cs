@@ -1,49 +1,42 @@
 ﻿using AutoMapper;
-using HIS.Dtos.Commons;
+using HIS.Application.Core.Services;
+using HIS.Application.Core.Services.Dto;
+using HIS.Core.Linq;
 using HIS.Dtos.Dictionaries.RoomType;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
-using HIS.Models.Commons;
+using HIS.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace HIS.ApplicationService.Dictionaries.RoomType
 {
-    public class RoomTypeService : BaseSerivce, IRoomTypeService
+    public class RoomTypeService : BaseCrudAppService<RoomTypeDto, int, GetAllRoomTypeInput>, IRoomTypeService
     {
         public RoomTypeService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
-            : base(dbContext, config, mapper)
+            : base(dbContext, mapper)
         {
 
         }
 
-        public async Task<ApiResult<RoomTypeDto>> CreateOrEdit(RoomTypeDto input)
+        public override async Task<ResultDto<RoomTypeDto>> Create(RoomTypeDto input)
         {
-            if (input.Id == null)
-                return await Create(input);
-            else
-                return await Update(input);
-        }
-
-        public async Task<ApiResult<RoomTypeDto>> Create(RoomTypeDto input)
-        {
-            var result = new ApiResult<RoomTypeDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<RoomTypeDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
                     //input.Id = Guid.NewGuid();
-                    var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.RoomType>(input);
-                    _dbContext.RoomTypes.Add(data);
-                    await _dbContext.SaveChangesAsync();
+                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.RoomType>(input);
+                    Context.RoomTypes.Add(data);
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
+                    result.IsSucceeded = true;
                     result.Result = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -53,26 +46,25 @@ namespace HIS.ApplicationService.Dictionaries.RoomType
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<RoomTypeDto>> Update(RoomTypeDto input)
+        public override async Task<ResultDto<RoomTypeDto>> Update(RoomTypeDto input)
         {
-            var result = new ApiResult<RoomTypeDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<RoomTypeDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var data = _mapper.Map<EntityFrameworkCore.Entities.Dictionaries.RoomType>(input);
-                    _dbContext.RoomTypes.Update(data);
-                    await _dbContext.SaveChangesAsync();
+                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.RoomType>(input);
+                    Context.RoomTypes.Update(data);
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
+                    result.IsSucceeded = true;
                     result.Result = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -82,27 +74,26 @@ namespace HIS.ApplicationService.Dictionaries.RoomType
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<RoomTypeDto>> Delete(int id)
+        public override async Task<ResultDto<RoomTypeDto>> Delete(int id)
         {
-            var result = new ApiResult<RoomTypeDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<RoomTypeDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var data = _dbContext.RoomTypes.SingleOrDefault(x => x.Id == id);
+                    var data = Context.RoomTypes.SingleOrDefault(x => x.Id == id);
                     if (data != null)
                     {
-                        _dbContext.RoomTypes.Remove(data);
-                        await _dbContext.SaveChangesAsync();
+                        Context.RoomTypes.Remove(data);
+                        await Context.SaveChangesAsync();
 
-                        result.IsSuccessed = true;
+                        result.IsSucceeded = true;
                         transaction.Commit();
                     }
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -112,64 +103,41 @@ namespace HIS.ApplicationService.Dictionaries.RoomType
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<RoomTypeDto>> GetAll(GetAllRoomTypeInput input)
+        public override async Task<PagedResultDto<RoomTypeDto>> GetAll(GetAllRoomTypeInput input)
         {
-            var result = new ApiResultList<RoomTypeDto>();
+            var result = new PagedResultDto<RoomTypeDto>();
             try
             {
-                result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.RoomTypes
-                                 where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
-                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
-                                     && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
-                                 select new RoomTypeDto()
-                                 {
-                                     Id = r.Id,
-                                     Code = r.Code,
-                                     Name = r.Name,
-                                     Description = r.Description,
-                                     SortOrder = r.SortOrder,
-                                     Inactive = r.Inactive
-                                 })
-                                 .OrderBy(o => o.SortOrder)
-                                 .ThenBy(o => o.Code)
-                                 .ToList();
-                result.TotalCount = result.Result.Count;
+                var filter = Context.RoomTypes.AsNoTracking()
+                    .WhereIf(!string.IsNullOrEmpty(input.RoomTypeCodeFilter), x => x.RoomTypeCode == input.RoomTypeCodeFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.RoomTypeNameFilter), x => x.RoomTypeName == input.RoomTypeNameFilter)
+                    .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
+
+                var paged = filter.OrderBy(x => x.SortOrder).PageBy(input).ToList();
+
+                result.TotalCount = await filter.CountAsync();
+                result.Result = ObjectMapper.Map<IList<RoomTypeDto>>(paged);
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
-                result.Message = ex.Message;
+                result.Exception(ex);
             }
 
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<RoomTypeDto>> GetById(int id)
+        public override async Task<ResultDto<RoomTypeDto>> GetById(int id)
         {
-            var result = new ApiResult<RoomTypeDto>();
+            var result = new ResultDto<RoomTypeDto>();
             try
             {
-                result.IsSuccessed = true;
-                result.Result = (from r in _dbContext.RoomTypes
-                                 where r.Id == id
-                                 select new RoomTypeDto()
-                                 {
-                                     Id = r.Id,
-                                     Code = r.Code,
-                                     Name = r.Name,
-                                     Description = r.Description,
-                                     SortOrder = r.SortOrder,
-                                     Inactive = r.Inactive
-                                 })
-                                 .SingleOrDefault();
+                result.Result = ObjectMapper.Map<RoomTypeDto>(await Context.RoomTypes.SingleOrDefaultAsync(x => x.Id == id));
             }
             catch (Exception ex)
             {
-                result.Message = ex.Message;
+                result.Exception(ex);
             }
-
-            return await Task.FromResult(result);
+            return result;
         }
     }
 }

@@ -1,11 +1,6 @@
 ﻿using HIS.EntityFrameworkCore.Entities.Systems;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations
 {
@@ -13,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations
     {
         public void Configure(EntityTypeBuilder<RolePermissionBranch> builder)
         {
-            builder.ToTable("RolePermissionBranchs");
+            builder.ToTable("SYS_RolePermissionBranch");
             builder.HasKey(t => new { t.RoleId, t.PermissionId });
 
             builder.HasOne(t => t.Role).WithMany(pc => pc.RolePermissions)

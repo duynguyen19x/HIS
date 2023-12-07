@@ -1,58 +1,42 @@
 ﻿using AutoMapper;
+using HIS.Application.Core.Services;
+using HIS.Application.Core.Services.Dto;
 using HIS.Core.Linq;
-using HIS.Dtos.Commons;
-using HIS.Dtos.Dictionaries.Service;
 using HIS.Dtos.Dictionaries.ServiceGroup;
-using HIS.EntityFrameworkCore.Entities.Categories;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
-using HIS.Models.Commons;
-using HIS.Utilities.Helpers;
+using HIS.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Dictionaries.ServiceGroup
 {
-    public class ServiceGroupService : BaseSerivce, IServiceGroupService
+    public class ServiceGroupService : BaseCrudAppService<ServiceGroupDto, Guid, GetAllServiceGroupInput>, IServiceGroupService
     {
-        public ServiceGroupService(HISDbContext dbContext, IConfiguration config, IMapper mapper) : base(dbContext, config, mapper)
+        public ServiceGroupService(HISDbContext dbContext, IConfiguration config, IMapper mapper) 
+            : base(dbContext, mapper)
         {
         }
 
-        public async Task<ApiResult<ServiceGroupDto>> CreateOrEdit(ServiceGroupDto input)
+        public override async Task<ResultDto<ServiceGroupDto>> Create(ServiceGroupDto input)
         {
-            if (GuidHelper.IsNullOrEmpty(input.Id))
-                return await Create(input);
-            else
-                return await Update(input);
-        }
-
-        private async Task<ApiResult<ServiceGroupDto>> Create(ServiceGroupDto input)
-        {
-            var result = new ApiResult<ServiceGroupDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<ServiceGroupDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
 
-                    var data = _mapper.Map<EntityFrameworkCore.Entities.Categories.ServiceGroup>(input);
+                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Categories.ServiceGroup>(input);
 
-                    _dbContext.ServiceGroups.Add(data);
-                    await _dbContext.SaveChangesAsync();
+                    Context.ServiceGroups.Add(data);
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
+                    result.IsSucceeded = true;
                     result.Result = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -62,28 +46,27 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroup
             return await Task.FromResult(result);
         }
 
-        private async Task<ApiResult<ServiceGroupDto>> Update(ServiceGroupDto input)
+        public override async Task<ResultDto<ServiceGroupDto>> Update(ServiceGroupDto input)
         {
-            var result = new ApiResult<ServiceGroupDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<ServiceGroupDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var sServiceGroup = _dbContext.ServiceGroups.FirstOrDefault(f => f.Id == input.Id);
+                    var sServiceGroup = Context.ServiceGroups.FirstOrDefault(f => f.Id == input.Id);
                     if (sServiceGroup == null)
-                        _mapper.Map(input, sServiceGroup);
+                        ObjectMapper.Map(input, sServiceGroup);
 
-                    await _dbContext.SaveChangesAsync();
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
+                    result.IsSucceeded = true;
                     result.Result = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -93,27 +76,26 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroup
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<ServiceGroupDto>> Delete(Guid id)
+        public override async Task<ResultDto<ServiceGroupDto>> Delete(Guid id)
         {
-            var result = new ApiResult<ServiceGroupDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<ServiceGroupDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var serviceGroup = _dbContext.ServiceGroups.SingleOrDefault(x => x.Id == id);
+                    var serviceGroup = Context.ServiceGroups.SingleOrDefault(x => x.Id == id);
                     if (serviceGroup != null)
                     {
-                        _dbContext.ServiceGroups.Remove(serviceGroup);
-                        await _dbContext.SaveChangesAsync();
-                        result.IsSuccessed = true;
+                        Context.ServiceGroups.Remove(serviceGroup);
+                        await Context.SaveChangesAsync();
+                        result.IsSucceeded = true;
 
                         transaction.Commit();
                     }
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -123,13 +105,13 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroup
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<ServiceGroupDto>> GetAll(GetAllServiceGroupInput input)
+        public override async Task<PagedResultDto<ServiceGroupDto>> GetAll(GetAllServiceGroupInput input)
         {
-            var result = new ApiResultList<ServiceGroupDto>();
+            var result = new PagedResultDto<ServiceGroupDto>();
 
             try
             {
-                result.Result = (from r in _dbContext.ServiceGroups
+                result.Result = (from r in Context.ServiceGroups
                                  select new ServiceGroupDto()
                                  {
                                      Id = r.Id,
@@ -145,26 +127,24 @@ namespace HIS.ApplicationService.Dictionaries.ServiceGroup
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
-                result.Message = ex.Message;
+                result.Exception(ex);
             }
 
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<ServiceGroupDto>> GetById(Guid id)
+        public override async Task<ResultDto<ServiceGroupDto>> GetById(Guid id)
         {
-            var result = new ApiResult<ServiceGroupDto>();
+            var result = new ResultDto<ServiceGroupDto>();
 
             try
             {
-                var service = _dbContext.ServiceGroups.FirstOrDefault(s => s.Id == id);
-                result.Result = _mapper.Map<ServiceGroupDto>(service);
+                var service = Context.ServiceGroups.FirstOrDefault(s => s.Id == id);
+                result.Result = ObjectMapper.Map<ServiceGroupDto>(service);
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
-                result.Message = ex.Message;
+                result.Exception(ex);
             }
 
             return await Task.FromResult(result);

@@ -1,7 +1,6 @@
-﻿using HIS.ApplicationService.Systems.Login;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Systems.Login;
 using HIS.Dtos.Systems.Login;
-using HIS.Models.Commons;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Systems.Login
@@ -18,19 +17,19 @@ namespace HIS.BackendApi.Controllers.Systems.Login
         }
 
         [HttpPost("Authenticate")]
-        public async Task<ApiResult<TokenResultDto>> Authenticate(LoginDto request)
+        public async Task<ResultDto<TokenResultDto>> Authenticate(LoginDto request)
         {
             return await _loginService.Authenticate(request);
         }
 
         [HttpPost("Register")]
-        public async Task<ApiResult<bool>> Register(RegisterDto request)
+        public async Task<ResultDto<bool>> Register(RegisterDto request)
         {
             return await _loginService.Register(request);
         }
 
         [HttpPost("RefreshToken")]
-        public async Task<ApiResult<TokenResultDto>> RefreshToken(TokenResultDto token)
+        public async Task<ResultDto<TokenResultDto>> RefreshToken(TokenResultDto token)
         {
             return await _loginService.RefreshToken(token);
         }

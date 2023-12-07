@@ -1,8 +1,6 @@
-﻿using HIS.ApplicationService.Dictionaries.ItemTypes;
-using HIS.Dtos.Commons;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Dictionaries.ItemTypes;
 using HIS.Dtos.Dictionaries.ItemTypes;
-using HIS.Dtos.Dictionaries.Service;
-using HIS.Models.Commons;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
@@ -19,31 +17,31 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<ItemTypeDto>> GetAll([FromQuery] GetAllItemTypeInput input)
+        public async Task<PagedResultDto<ItemTypeDto>> GetAll([FromQuery] GetAllItemTypeInput input)
         {
             return await _sItemTypeService.GetAll(input);
         }
 
         [HttpGet("GetById")]
-        public async Task<ApiResult<ItemTypeDto>> GetById(Guid id)
+        public async Task<ResultDto<ItemTypeDto>> GetById(Guid id)
         {
             return await _sItemTypeService.GetById(id);
         }
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ApiResult<ItemTypeDto>> CreateOrEdit(ItemTypeDto input)
+        public async Task<ResultDto<ItemTypeDto>> CreateOrEdit(ItemTypeDto input)
         {
             return await _sItemTypeService.CreateOrEdit(input);
         }
 
         [HttpPost("Import")]
-        public async Task<ApiResult<bool>> Import(IList<ItemTypeDto> input)
+        public async Task<ResultDto<bool>> Import(IList<ItemTypeDto> input)
         {
             return await _sItemTypeService.Import(input);
         }
 
         [HttpDelete("Delete")]
-        public async Task<ApiResult<ItemTypeDto>> Delete(Guid id)
+        public async Task<ResultDto<ItemTypeDto>> Delete(Guid id)
         {
             return await _sItemTypeService.Delete(id);
         }

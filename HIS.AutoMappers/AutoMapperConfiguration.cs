@@ -1,18 +1,15 @@
 ﻿using AutoMapper;
-using HIS.Dtos.Business;
 using HIS.Dtos.Business.InOutStockItems;
 using HIS.Dtos.Business.InOutStocks;
 using HIS.Dtos.Business.ItemStocks;
-using HIS.Dtos.Dictionaries.Branch;
 using HIS.Dtos.Dictionaries.Career;
 using HIS.Dtos.Dictionaries.ChapterICD10;
-using HIS.Dtos.Dictionaries.Country;
+using HIS.Dtos.Dictionaries.Nationals;
 using HIS.Dtos.Dictionaries.Department;
 using HIS.Dtos.Dictionaries.DepartmentType;
 using HIS.Dtos.Dictionaries.District;
-using HIS.Dtos.Dictionaries.Ethnic;
 using HIS.Dtos.Dictionaries.ExecutionRoom;
-using HIS.Dtos.Dictionaries.Gender;
+using HIS.Dtos.Dictionaries.Genders;
 using HIS.Dtos.Dictionaries.Hospital;
 using HIS.Dtos.Dictionaries.Icd;
 using HIS.Dtos.Dictionaries.ItemGroups;
@@ -35,11 +32,12 @@ using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Items;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.Dtos.Business.Patients;
-using HIS.Dtos.Business.PatientRecords;
-using HIS.Dtos.Business.Receptions;
 using HIS.Dtos.Systems.DbOption;
 using HIS.EntityFrameworkCore.Entities.Systems;
+using HIS.Dtos.Dictionaries.Ethnics;
+using HIS.Dtos.Dictionaries.Branchs;
+using HIS.Dtos.Business.Patients;
+using HIS.Dtos.Business.PatientRecords;
 
 namespace HIS.AutoMappers
 {
@@ -47,9 +45,8 @@ namespace HIS.AutoMappers
     {
         public AutoMapperConfiguration()
         {
-            CreateMap<Branch, BranchDto>().ReverseMap();
             CreateMap<Career, CareerDto>().ReverseMap();
-            CreateMap<Country, CountryDto>().ReverseMap();
+            CreateMap<National, NationalDto>().ReverseMap();
             CreateMap<DepartmentDto, Department>()
                 //.ForMember(dest => dest.DepartmentType, opt => opt.Ignore())
                 //.ForMember(dest => dest.Branch, opt => opt.Ignore())
@@ -57,7 +54,6 @@ namespace HIS.AutoMappers
             CreateMap<DepartmentType, DepartmentTypeDto>().ReverseMap();
             CreateMap<ChapterIcdDto, ChapterIcd>().ReverseMap();
             CreateMap<District, DistrictDto>().ReverseMap();
-            CreateMap<Ethnic, EthnicDto>().ReverseMap();
             CreateMap<Gender, GenderDto>().ReverseMap();
             CreateMap<Hospital, HospitalDto>().ReverseMap();
             CreateMap<Icd, IcdDto>().ReverseMap();
@@ -67,10 +63,8 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.RoomType, opt => opt.Ignore())
                 .ForMember(dest => dest.Department, opt => opt.Ignore())
                 .ReverseMap();
-            CreateMap<RoomTypeDto, RoomType>()
-                .ForMember(dest => dest.SRooms, opt => opt.Ignore())
-                .ReverseMap();
-            CreateMap<SWard, WardDto>().ReverseMap();
+            CreateMap<RoomTypeDto, RoomType>().ReverseMap();
+            CreateMap<Ward, WardDto>().ReverseMap();
             CreateMap<ServiceGroupDto, ServiceGroup>()
                 .ReverseMap();
             CreateMap<ServiceGroupHeInDto, ServiceGroupHeIn>()
@@ -140,7 +134,7 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.ReqDepartment, opt => opt.Ignore())
                 .ForMember(dest => dest.Supplier, opt => opt.Ignore())
                 .ForMember(dest => dest.Patient, opt => opt.Ignore())
-                .ForMember(dest => dest.PatientRecord, opt => opt.Ignore())
+                .ForMember(dest => dest.MedicalRecord, opt => opt.Ignore())
                 .ReverseMap();
             CreateMap<InOutStockItemDto, InOutStockItem>()
                 .ForMember(dest => dest.InOutStock, opt => opt.Ignore())
@@ -152,22 +146,20 @@ namespace HIS.AutoMappers
                 .ForMember(dest => dest.Stock, opt => opt.Ignore())
                 .ReverseMap();
 
+            #region - nghiệp vụ
 
-            CreateMap<ReceptionDto, PatientDto>()
-                .ForMember(d => d.Id, o => o.MapFrom(s => s.PatientId))
-                .ForMember(d => d.Code, o => o.MapFrom(s => s.PatientCode))
-                .ForMember(d => d.Name, o => o.MapFrom(s => s.PatientName))
-                .ReverseMap();
-            CreateMap<ReceptionDto, Patient>()
-                .ForMember(d => d.Id, o => o.MapFrom(s => s.PatientId))
-                .ForMember(d => d.Code, o => o.MapFrom(s => s.PatientCode))
-                .ForMember(d => d.Name, o => o.MapFrom(s => s.PatientName))
-                .ReverseMap();
-            CreateMap<ReceptionDto, PatientRecordDto>().ReverseMap();
-            CreateMap<ReceptionDto, PatientRecord>().ReverseMap();
-            
-            CreateMap<PatientDto, Patient>().ReverseMap();
-            CreateMap<PatientRecordDto, PatientRecord>().ReverseMap();
+            CreateMap<Patient, PatientDto>().ReverseMap();
+            CreateMap<Patient, PatientRecordDto>().ForMember(des => des.PatientId, act => act.MapFrom(s => s.Id)).ReverseMap();
+            CreateMap<PatientRecord, PatientRecordDto>().ReverseMap();
+
+            #endregion
+
+            #region - danh mục
+
+            CreateMap<Branch, BranchDto>().ReverseMap();
+            CreateMap<Ethnic, EthnicDto>().ReverseMap();
+
+            #endregion
         }
     }
 }

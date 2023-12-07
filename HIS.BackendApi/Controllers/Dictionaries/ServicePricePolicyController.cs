@@ -1,5 +1,5 @@
-﻿using HIS.ApplicationService.Dictionaries.ServicePricePolicy;
-using HIS.Dtos.Commons;
+﻿using HIS.Application.Core.Services.Dto;
+using HIS.ApplicationService.Dictionaries.ServicePricePolicy;
 using HIS.Dtos.Dictionaries.ServicePricePolicy;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,7 +17,7 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpGet("GetAll")]
-        public async Task<ApiResultList<ServicePricePolicyDto>> GetAll([FromQuery] GetAllServicePricePolicyInput input)
+        public async Task<PagedResultDto<ServicePricePolicyDto>> GetAll([FromQuery] GetAllServicePricePolicyInput input)
         {
             return await _sServicePricePolicyService.GetAll(input);
         }

@@ -1,27 +1,27 @@
 ﻿using AutoMapper;
+using HIS.Application.Core.Services;
+using HIS.Application.Core.Services.Dto;
 using HIS.Core.Linq;
-using HIS.Dtos.Commons;
 using HIS.Dtos.Dictionaries.ItemTypes;
-using HIS.EntityFrameworkCore.EntityFrameworkCore;
-using HIS.Models.Commons;
+using HIS.EntityFrameworkCore;
 using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
 
 namespace HIS.ApplicationService.Dictionaries.ItemTypes
 {
-    public class ItemTypeService : BaseSerivce, IItemTypeService
+    public class ItemTypeService : BaseCrudAppService<ItemTypeDto, Guid?, GetAllItemTypeInput>, IItemTypeService
     {
         public ItemTypeService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
-           : base(dbContext, config, mapper)
+           : base(dbContext, mapper)
         {
 
         }
 
-        public async Task<ApiResult<ItemTypeDto>> CreateOrEdit(ItemTypeDto input)
+        public override async Task<ResultDto<ItemTypeDto>> CreateOrEdit(ItemTypeDto input)
         {
             var result = await ValidSave(input);
-            if (!result.IsSuccessed)
+            if (!result.IsSucceeded)
                 return result;
 
             if (input.Id == null)
@@ -30,29 +30,28 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
                 return await Update(input);
         }
 
-        public async Task<ApiResult<ItemTypeDto>> Create(ItemTypeDto input)
+        public override async Task<ResultDto<ItemTypeDto>> Create(ItemTypeDto input)
         {
-            var result = new ApiResult<ItemTypeDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<ItemTypeDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var ItemType = _mapper.Map<EntityFrameworkCore.Entities.Categories.ItemType>(input);
+                    var ItemType = ObjectMapper.Map<EntityFrameworkCore.Entities.Categories.ItemType>(input);
                     ItemType.CreatedDate = DateTime.Now;
 
-                    _dbContext.ItemTypes.Add(ItemType);
-                    await _dbContext.SaveChangesAsync();
+                    Context.ItemTypes.Add(ItemType);
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
+                    result.IsSucceeded = true;
                     result.Result = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -62,27 +61,26 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<ItemTypeDto>> Update(ItemTypeDto input)
+        public override async Task<ResultDto<ItemTypeDto>> Update(ItemTypeDto input)
         {
-            var result = new ApiResult<ItemTypeDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<ItemTypeDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var ItemType = _mapper.Map<EntityFrameworkCore.Entities.Categories.ItemType>(input);
+                    var ItemType = ObjectMapper.Map<EntityFrameworkCore.Entities.Categories.ItemType>(input);
                     ItemType.ModifiedDate = DateTime.Now;
-                    _dbContext.ItemTypes.Update(ItemType);
-                    await _dbContext.SaveChangesAsync();
+                    Context.ItemTypes.Update(ItemType);
+                    await Context.SaveChangesAsync();
 
-                    result.IsSuccessed = true;
+                    result.IsSucceeded = true;
                     result.Result = input;
 
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -92,9 +90,9 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
             return await Task.FromResult(result);
         }
 
-        private async Task<ApiResult<ItemTypeDto>> ValidSave(ItemTypeDto input)
+        private async Task<ResultDto<ItemTypeDto>> ValidSave(ItemTypeDto input)
         {
-            var result = new ApiResult<ItemTypeDto>();
+            var result = new ResultDto<ItemTypeDto>();
 
             try
             {
@@ -126,13 +124,13 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
 
                 #endregion
 
-                var ItemType = _dbContext.ItemTypes.FirstOrDefault(w => w.Code == input.Code && w.Id != input.Id);
+                var ItemType = Context.ItemTypes.FirstOrDefault(w => w.Code == input.Code && w.Id != input.Id);
                 if (ItemType != null)
                 {
                     errs.Add(string.Format("Mã thuốc [{0}] đã tồn tại trên hệ thống!", input.Code));
                 }
 
-                ItemType = _dbContext.ItemTypes.FirstOrDefault(w => w.HeInCode == input.HeInCode && w.Id != input.Id);
+                ItemType = Context.ItemTypes.FirstOrDefault(w => w.HeInCode == input.HeInCode && w.Id != input.Id);
                 if (ItemType != null)
                 {
                     errs.Add(string.Format("Mã BHYT [{0}] đã tồn tại trên hệ thống!", input.HeInCode));
@@ -140,42 +138,40 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
 
                 if (errs.Count > 0)
                 {
-                    result.IsSuccessed = false;
+                    result.IsSucceeded = false;
                     result.Message = string.Join("\n", errs);
                 }
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
-                result.Message = ex.Message;
+                result.Exception(ex);
             }
 
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<ItemTypeDto>> Delete(Guid id)
+        public override async Task<ResultDto<ItemTypeDto>> Delete(Guid? id)
         {
-            var result = new ApiResult<ItemTypeDto>();
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            var result = new ResultDto<ItemTypeDto>();
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var ItemType = _dbContext.ItemTypes.SingleOrDefault(x => x.Id == id);
+                    var ItemType = Context.ItemTypes.SingleOrDefault(x => x.Id == id);
                     if (ItemType != null)
                     {
                         ItemType.IsDeleted = true;
                         ItemType.DeletedDate = DateTime.Now;
 
-                        await _dbContext.SaveChangesAsync();
-                        result.IsSuccessed = true;
+                        await Context.SaveChangesAsync();
+                        result.IsSucceeded = true;
 
                         transaction.Commit();
                     }
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
-                    result.Message = ex.Message;
+                    result.Exception(ex);
                 }
                 finally
                 {
@@ -185,13 +181,13 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResultList<ItemTypeDto>> GetAll(GetAllItemTypeInput input)
+        public override async Task<PagedResultDto<ItemTypeDto>> GetAll(GetAllItemTypeInput input)
         {
-            var result = new ApiResultList<ItemTypeDto>();
+            var result = new PagedResultDto<ItemTypeDto>();
             try
             {
-                result.Result = (from medi in _dbContext.ItemTypes
-                                 join unit in _dbContext.Units on medi.UnitId equals unit.Id into units
+                result.Result = (from medi in Context.ItemTypes
+                                 join unit in Context.Units on medi.UnitId equals unit.Id into units
                                  from u in units.DefaultIfEmpty()
                                  where medi.IsDeleted == false
                                  select new ItemTypeDto()
@@ -264,39 +260,39 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
             }
             catch (Exception ex)
             {
-                result.IsSuccessed = false;
+                result.IsSucceeded = false;
                 result.Message = ex.Message;
             }
 
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<ItemTypeDto>> GetById(Guid id)
+        public override async Task<ResultDto<ItemTypeDto>> GetById(Guid? id)
         {
-            var result = new ApiResult<ItemTypeDto>();
+            var result = new ResultDto<ItemTypeDto>();
 
-            var ItemType = _dbContext.ItemTypes.SingleOrDefault(s => s.Id == id);
+            var ItemType = Context.ItemTypes.SingleOrDefault(s => s.Id == id);
             if (ItemType != null)
             {
-                result.IsSuccessed = true;
-                result.Result = _mapper.Map<ItemTypeDto>(ItemType);
+                result.IsSucceeded = true;
+                result.Result = ObjectMapper.Map<ItemTypeDto>(ItemType);
             }
 
             return await Task.FromResult(result);
         }
 
-        public async Task<ApiResult<bool>> Import(IList<ItemTypeDto> input)
+        public async Task<ResultDto<bool>> Import(IList<ItemTypeDto> input)
         {
-            var result = new ApiResult<bool>();
+            var result = new ResultDto<bool>();
 
-            using (var transaction = _dbContext.Database.BeginTransaction())
+            using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var units = _mapper.Map<List<EntityFrameworkCore.Entities.Dictionaries.Unit>>(_dbContext.Units).OrderBy(o => o.Code);
-                    var itemGroups = _mapper.Map<List<EntityFrameworkCore.Entities.Categories.ItemGroup>>(_dbContext.ItemGroups).OrderBy(o => o.Code);
-                    var itemLines = _mapper.Map<List<EntityFrameworkCore.Entities.Categories.ItemLine>>(_dbContext.ItemLines).OrderBy(o => o.Code);
-                    var serviceGroupHeIns = _mapper.Map<List<EntityFrameworkCore.Entities.Categories.Services.ServiceGroupHeIn>>(_dbContext.ServiceGroupHeIns).OrderBy(o => o.Code);
+                    var units = ObjectMapper.Map<List<EntityFrameworkCore.Entities.Dictionaries.Unit>>(Context.Units).OrderBy(o => o.Code);
+                    var itemGroups = ObjectMapper.Map<List<EntityFrameworkCore.Entities.Categories.ItemGroup>>(Context.ItemGroups).OrderBy(o => o.Code);
+                    var itemLines = ObjectMapper.Map<List<EntityFrameworkCore.Entities.Categories.ItemLine>>(Context.ItemLines).OrderBy(o => o.Code);
+                    var serviceGroupHeIns = ObjectMapper.Map<List<EntityFrameworkCore.Entities.Categories.Services.ServiceGroupHeIn>>(Context.ServiceGroupHeIns).OrderBy(o => o.Code);
                     foreach (var item in input)
                     {
                         //Đơn vị tính
@@ -314,14 +310,14 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
                         if (item.ItemLineId == null)
                             item.ItemLineId = itemLines?.FirstOrDefault()?.Id;
                     }
-                    var ItemTypes = _mapper.Map<List<EntityFrameworkCore.Entities.Categories.ItemType>>(input);
-                    _dbContext.ItemTypes.AddRange(ItemTypes);
-                    await _dbContext.SaveChangesAsync();
+                    var ItemTypes = ObjectMapper.Map<List<EntityFrameworkCore.Entities.Categories.ItemType>>(input);
+                    Context.ItemTypes.AddRange(ItemTypes);
+                    await Context.SaveChangesAsync();
                     transaction.Commit();
                 }
                 catch (Exception ex)
                 {
-                    result.IsSuccessed = false;
+                    result.IsSucceeded = false;
                     result.Message = ex.Message;
                     transaction.Rollback();
                 }
