@@ -4,6 +4,7 @@ using HIS.Application.Core.Services.Dto;
 using HIS.Dtos.Systems.DbOption;
 using HIS.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.Entities.Systems;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace HIS.ApplicationService.Systems.DbOptions
@@ -14,7 +15,7 @@ namespace HIS.ApplicationService.Systems.DbOptions
             : base(dbContext, mapper)
         {
         }
-
+        
         public override async Task<ResultDto<DbOptionDto>> Create(DbOptionDto input)
         {
             var result = new ResultDto<DbOptionDto>();
@@ -25,8 +26,12 @@ namespace HIS.ApplicationService.Systems.DbOptions
                     input.Id = Guid.NewGuid();
 
                     var data = ObjectMapper.Map<DbOption>(input);
-
                     Context.DbOptions.Add(data);
+
+                    var dataParent = Context.DbOptions.FirstOrDefault(w => w.Id == input.ParentId);
+                    if (dataParent != null) { dataParent.IsParent = true; }
+                    Context.DbOptions.Update(dataParent);
+                    
                     await Context.SaveChangesAsync();
 
                     result.IsSucceeded = true;
@@ -54,11 +59,23 @@ namespace HIS.ApplicationService.Systems.DbOptions
                 try
                 {
                     var sServiceDbOption = Context.DbOptions.FirstOrDefault(f => f.Id == input.Id);
-                    if (sServiceDbOption == null)
+                    if (sServiceDbOption != null)
+                    {
+                        if (sServiceDbOption.ParentId != input.ParentId && !Context.DbOptions.Any(a => a.Id == sServiceDbOption.ParentId))
+                        {
+                            var dataOldParent = Context.DbOptions.FirstOrDefault(w => w.Id == sServiceDbOption.ParentId);
+                            if (dataOldParent != null) { dataOldParent.IsParent = false; }
+                            Context.DbOptions.Update(dataOldParent);
+                        }
                         ObjectMapper.Map(input, sServiceDbOption);
+                    }
+
+                    var dataParent = Context.DbOptions.FirstOrDefault(w => w.Id == input.ParentId);
+                    if (dataParent != null) { dataParent.IsParent = true; }
+                    Context.DbOptions.Update(dataParent);
 
                     await Context.SaveChangesAsync();
-
+                    
                     result.IsSucceeded = true;
                     result.Result = input;
 
