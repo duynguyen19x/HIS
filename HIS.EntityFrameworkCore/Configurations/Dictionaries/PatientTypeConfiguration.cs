@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<PatientType> builder)
         {
-            builder.ToTable("PatientType");
+            builder.ToTable("DIC_PatientType");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.PatientTypeCode).HasMaxLength(20).IsRequired();
             builder.Property(x => x.PatientTypeName).HasMaxLength(128).IsRequired();

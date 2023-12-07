@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Services
     {
         public void Configure(EntityTypeBuilder<ServicePricePolicy> builder)
         {
-            builder.ToTable("ServicePricePolicies");
+            builder.ToTable("DIC_ServicePricePolicy");
             builder.HasKey(x => x.Id);
 
             builder.HasOne<PatientType>(t => t.PatientType).WithMany().HasForeignKey(pc => pc.PatientTypeId);

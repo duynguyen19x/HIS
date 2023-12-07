@@ -8,7 +8,8 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
     {
         public void Configure(EntityTypeBuilder<ServiceRequestData> builder)
         {
-            builder.ToTable("ServiceRequestDatas");
+            builder.ToTable("BUS_ServiceRequestData");
+
             builder.HasKey(x => x.Id);
             builder.Property(x => x.ServiceRequestId).IsRequired();
             builder.Property(x => x.ServiceId).IsRequired();

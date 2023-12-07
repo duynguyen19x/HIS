@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<TreatmentEndType> builder)
         {
-            builder.ToTable("TreatmentEndTypes");
+            builder.ToTable("DIC_TreatmentEndType");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.TreatmentEndTypeCode).HasMaxLength(20).IsRequired();

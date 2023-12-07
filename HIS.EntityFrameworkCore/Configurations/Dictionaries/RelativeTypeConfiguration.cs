@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<RelativeType> builder)
         {
-            builder.ToTable("RelativeTypes");
+            builder.ToTable("DIC_RelativeType");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.RelativeTypeCode).HasMaxLength(20).IsRequired();

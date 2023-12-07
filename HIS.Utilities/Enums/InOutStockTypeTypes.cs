@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HIS.Utilities.Enums
+﻿namespace HIS.Utilities.Enums
 {
-    public enum InOutStockType
+    public enum InOutStockTypeTypes
     {
         /// <summary>
         /// Nhập từ NCC

@@ -100,8 +100,8 @@ namespace HIS.ApplicationService.Dictionaries.Ethnics
             try
             {
                 var filter = Context.Ethnicities.AsQueryable()
-                    .WhereIf(!string.IsNullOrEmpty(input.EthnicCodeFilter), x => x.EthnicCode == input.EthnicCodeFilter)
-                    .WhereIf(!string.IsNullOrEmpty(input.EthnicNameFilter), x => x.EthnicName == input.EthnicNameFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.EthnicCodeFilter), x => x.Code == input.EthnicCodeFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.EthnicNameFilter), x => x.Name == input.EthnicNameFilter)
                     .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
 
                 var paged = filter.OrderBy(s => s.SortOrder).PageBy(input);

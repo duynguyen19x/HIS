@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<Religion> builder)
         {
-            builder.ToTable("Religions");
+            builder.ToTable("DIC_Religion");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.ReligionCode).HasMaxLength(20).IsRequired();
             builder.Property(x => x.ReligionName).HasMaxLength(128).IsRequired();

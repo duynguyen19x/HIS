@@ -231,7 +231,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                         }
                         else
                         {
-                            inOutStocks.Status = InOutStatusType.New;
+                            inOutStocks.Status = InOutStatusTypes.New;
                             inOutStocks.ModifiedDate = timeNow;
                             inOutStocks.ModifiedBy = SessionExtensions.Login?.Id;
                             inOutStocks.StockExpTime = null;
@@ -280,7 +280,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         /// <returns></returns>
         public async Task<ResultDto<InOutStockDto>> ImportFromSupplierStockIn(InOutStockDto input)
         {
-            input.Status = InOutStatusType.ReceivedInStock;
+            input.Status = InOutStatusTypes.ReceivedInStock;
             return await ImportFromSupplier(input);
         }
 
@@ -302,7 +302,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                     var inOutStock = Context.InOutStocks.FirstOrDefault(f => f.Id == id);
                     if (inOutStock != null)
                     {
-                        inOutStock.Status = InOutStatusType.Canceled;
+                        inOutStock.Status = InOutStatusTypes.Canceled;
                         inOutStock.DeletedBy = SessionExtensions.Login?.Id;
                         inOutStock.DeletedDate = timeNow;
                         inOutStock.IsDeleted = true;
@@ -369,7 +369,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                 {
                     var dateNow = DateTime.Now;
                     var id = Guid.NewGuid();
-                    input.InOutStockTypeId = (int)Utilities.Enums.InOutStockType.ImportFromSupplier;
+                    input.InOutStockTypeId = (int)Utilities.Enums.InOutStockTypeTypes.ImportFromSupplier;
 
                     var inOutStockItems = new List<InOutStockItem>();
                     var items = new List<Item>();
@@ -419,7 +419,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                             }
 
                             // Trạng thái nhập kho mới thêm vào thuốc trong kho
-                            if (input.Status == InOutStatusType.ReceivedInStock)
+                            if (input.Status == InOutStatusTypes.ReceivedInStock)
                             {
                                 inOutStock.ApproverTime = dateNow;
                                 inOutStock.ApproverUserId = SessionExtensions.Login?.Id;
@@ -540,7 +540,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                             }
 
                             // Trạng thái nhập kho mới thêm vào thuốc trong kho
-                            if (input.Status == InOutStatusType.ReceivedInStock)
+                            if (input.Status == InOutStatusTypes.ReceivedInStock)
                             {
                                 input.ApproverTime = dateNow;
                                 input.ApproverUserId = SessionExtensions.Login?.Id;
@@ -674,7 +674,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                 var inOutStockDto = ObjectMapper.Map<InOutStockDto>(Context.InOutStocks.FirstOrDefault(d => d.Id == id));
                 if (inOutStockDto != null)
                 {
-                    if (inOutStockDto.InOutStockTypeId == (int)Utilities.Enums.InOutStockType.ImportFromAnotherStock)
+                    if (inOutStockDto.InOutStockTypeId == (int)Utilities.Enums.InOutStockTypeTypes.ImportFromAnotherStock)
                     {
                         var inOutStockItemDtos = (from inOutStockItem in Context.InOutStockItems
 
@@ -723,7 +723,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
                         switch (inOutStockDto.Status)
                         {
-                            case InOutStatusType.New:
+                            case InOutStatusTypes.New:
                                 {
                                     inOutStockItemDtos = inOutStockItemDtos.GroupBy(g => new
                                     {
@@ -793,7 +793,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         /// <returns></returns>
         public async Task<ResultDto<InOutStockDto>> ImportFromAnotherStockSaveAsDraft(InOutStockDto input)
         {
-            input.Status = InOutStatusType.New;
+            input.Status = InOutStatusTypes.New;
             return await ImportFromAnotherStocks(input);
         }
 
@@ -804,7 +804,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         /// <returns></returns>
         public async Task<ResultDto<InOutStockDto>> ImportFromAnotherStockRequest(InOutStockDto input)
         {
-            input.Status = InOutStatusType.Request;
+            input.Status = InOutStatusTypes.Request;
             return await ImportFromAnotherStocks(input);
         }
 
@@ -815,7 +815,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         /// <returns></returns>
         public async Task<ResultDto<InOutStockDto>> ImportFromAnotherStockCancelRequest(InOutStockDto input)
         {
-            input.Status = InOutStatusType.Request;
+            input.Status = InOutStatusTypes.Request;
             return await ImportFromAnotherStockCancels(input);
         }
 
@@ -826,7 +826,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         /// <returns></returns>
         public async Task<ResultDto<InOutStockDto>> ImportFromAnotherStockApproved(InOutStockDto input)
         {
-            input.Status = InOutStatusType.Approved;
+            input.Status = InOutStatusTypes.Approved;
             return await ImportFromAnotherStocks(input);
         }
 
@@ -837,7 +837,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         /// <returns></returns>
         public async Task<ResultDto<InOutStockDto>> ImportFromAnotherStockCancelApproved(InOutStockDto input)
         {
-            input.Status = InOutStatusType.Approved;
+            input.Status = InOutStatusTypes.Approved;
             return await ImportFromAnotherStockCancels(input);
         }
 
@@ -848,7 +848,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         /// <returns></returns>
         public async Task<ResultDto<InOutStockDto>> ImportFromAnotherStockStockOut(InOutStockDto input)
         {
-            input.Status = InOutStatusType.ReceivedOutStock;
+            input.Status = InOutStatusTypes.ReceivedOutStock;
             return await ImportFromAnotherStocks(input);
         }
 
@@ -859,7 +859,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         /// <returns></returns>
         public async Task<ResultDto<InOutStockDto>> ImportFromAnotherStockCanCelStockOut(InOutStockDto input)
         {
-            input.Status = InOutStatusType.ReceivedOutStock;
+            input.Status = InOutStatusTypes.ReceivedOutStock;
             return await ImportFromAnotherStockCancels(input);
         }
 
@@ -870,7 +870,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         /// <returns></returns>
         public async Task<ResultDto<InOutStockDto>> ImportFromAnotherStockStockIn(InOutStockDto input)
         {
-            input.Status = InOutStatusType.ReceivedInStock;
+            input.Status = InOutStatusTypes.ReceivedInStock;
             return await ImportFromAnotherStocks(input);
         }
 
@@ -881,7 +881,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         /// <returns></returns>
         public async Task<ResultDto<InOutStockDto>> ImportFromAnotherStockCancelStockIn(InOutStockDto input)
         {
-            input.Status = InOutStatusType.ReceivedInStock;
+            input.Status = InOutStatusTypes.ReceivedInStock;
             return await ImportFromAnotherStockCancels(input);
         }
 
@@ -903,7 +903,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                     var inOutStock = Context.InOutStocks.FirstOrDefault(f => f.Id == id);
                     if (inOutStock != null)
                     {
-                        inOutStock.Status = InOutStatusType.Canceled;
+                        inOutStock.Status = InOutStatusTypes.Canceled;
                         inOutStock.DeletedBy = SessionExtensions.Login?.Id;
                         inOutStock.DeletedDate = timeNow;
                         inOutStock.IsDeleted = true;
@@ -972,7 +972,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                     }
                 }
 
-                if (input.Status == InOutStatusType.Request)
+                if (input.Status == InOutStatusTypes.Request)
                 {
                     // Ktra SL tồn, khả dụng có đủ để xuất ko
                     var itemIds = input.InOutStockItems.Select(s => s.ItemId).ToList();
@@ -1035,7 +1035,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                 var dateNow = DateTime.Now;
                 var id = Guid.Empty;
 
-                input.InOutStockTypeId = (int)Utilities.Enums.InOutStockType.ImportFromAnotherStock;
+                input.InOutStockTypeId = (int)Utilities.Enums.InOutStockTypeTypes.ImportFromAnotherStock;
 
                 try
                 {
@@ -1049,7 +1049,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
                         switch (input.Status)
                         {
-                            case InOutStatusType.New:
+                            case InOutStatusTypes.New:
                                 {
                                     foreach (var inOutStockItemDto in input.InOutStockItems)
                                     {
@@ -1061,7 +1061,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     }
                                 }
                                 break;
-                            case InOutStatusType.Request:
+                            case InOutStatusTypes.Request:
                                 {
                                     var itemTypeIds = input.InOutStockItems.Select(x => x.ItemTypeId).ToList();
 
@@ -1168,9 +1168,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
                         switch (input.Status)
                         {
-                            case InOutStatusType.New:
+                            case InOutStatusTypes.New:
                                 {
-                                    input.Status = InOutStatusType.New;
+                                    input.Status = InOutStatusTypes.New;
 
                                     // Xóa bản ghi cũ
                                     var inOutStockItemOlds = Context.InOutStockItems.Where(s => s.InOutStockId == input.Id).ToList();
@@ -1187,9 +1187,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     }
                                 }
                                 break;
-                            case InOutStatusType.Request:
+                            case InOutStatusTypes.Request:
                                 {
-                                    input.Status = InOutStatusType.Request;
+                                    input.Status = InOutStatusTypes.Request;
 
                                     var itemTypeIds = input.InOutStockItems.Select(x => x.ItemTypeId).ToList();
 
@@ -1288,18 +1288,18 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     #endregion
                                 }
                                 break;
-                            case InOutStatusType.Approved:
+                            case InOutStatusTypes.Approved:
                                 {
                                     input.ApproverTime = dateNow;
                                     input.ApproverUserId = SessionExtensions.Login?.Id;
-                                    input.Status = InOutStatusType.Approved;
+                                    input.Status = InOutStatusTypes.Approved;
                                 }
                                 break;
-                            case InOutStatusType.ReceivedOutStock:
+                            case InOutStatusTypes.ReceivedOutStock:
                                 {
                                     input.StockExpTime = dateNow;
                                     input.StockExpUserId = SessionExtensions.Login?.Id;
-                                    input.Status = InOutStatusType.ReceivedOutStock;
+                                    input.Status = InOutStatusTypes.ReceivedOutStock;
 
                                     #region Trừ tồn kho của kho xuất khi xuất kho
                                     var itemIds = input.InOutStockItems.Select(s => s.ItemId).ToList();
@@ -1318,11 +1318,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     #endregion
                                 }
                                 break;
-                            case InOutStatusType.ReceivedInStock:
+                            case InOutStatusTypes.ReceivedInStock:
                                 {
                                     input.StockImpTime = dateNow;
                                     input.StockImpUserId = SessionExtensions.Login?.Id;
-                                    input.Status = InOutStatusType.ReceivedInStock;
+                                    input.Status = InOutStatusTypes.ReceivedInStock;
 
                                     #region Cộng tồn kho của kho nhập
                                     var itemIds = input.InOutStockItems.Select(s => s.ItemId).ToList();
@@ -1401,7 +1401,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
             using (var transaction = Context.BeginTransaction())
             {
-                input.InOutStockTypeId = (int)Utilities.Enums.InOutStockType.ImportFromAnotherStock;
+                input.InOutStockTypeId = (int)Utilities.Enums.InOutStockTypeTypes.ImportFromAnotherStock;
 
                 try
                 {
@@ -1410,9 +1410,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                     {
                         switch (input.Status)
                         {
-                            case InOutStatusType.Request:
+                            case InOutStatusTypes.Request:
                                 {
-                                    input.Status = InOutStatusType.New;
+                                    input.Status = InOutStatusTypes.New;
                                     input.ApproverTime = null;
                                     input.ApproverUserId = null;
                                     input.StockImpTime = null;
@@ -1437,9 +1437,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     }
                                 }
                                 break;
-                            case InOutStatusType.Approved:
+                            case InOutStatusTypes.Approved:
                                 {
-                                    input.Status = InOutStatusType.Request;
+                                    input.Status = InOutStatusTypes.Request;
                                     input.ApproverTime = null;
                                     input.ApproverUserId = null;
                                     input.StockImpTime = null;
@@ -1448,9 +1448,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     input.StockExpUserId = null;
                                 }
                                 break;
-                            case InOutStatusType.ReceivedOutStock:
+                            case InOutStatusTypes.ReceivedOutStock:
                                 {
-                                    input.Status = InOutStatusType.Approved;
+                                    input.Status = InOutStatusTypes.Approved;
                                     input.StockExpTime = null;
                                     input.StockExpUserId = null;
 
@@ -1472,9 +1472,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     }
                                 }
                                 break;
-                            case InOutStatusType.ReceivedInStock:
+                            case InOutStatusTypes.ReceivedInStock:
                                 {
-                                    input.Status = InOutStatusType.ReceivedOutStock;
+                                    input.Status = InOutStatusTypes.ReceivedOutStock;
                                     input.StockImpTime = null;
                                     input.StockImpUserId = null;
 
@@ -1544,7 +1544,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                 var inOutStockDto = ObjectMapper.Map<InOutStockDto>(Context.InOutStocks.FirstOrDefault(d => d.Id == id));
                 if (inOutStockDto != null)
                 {
-                    if (inOutStockDto.InOutStockTypeId == (int)Utilities.Enums.InOutStockType.ExportFormSupplier)
+                    if (inOutStockDto.InOutStockTypeId == (int)Utilities.Enums.InOutStockTypeTypes.ExportFormSupplier)
                     {
                         var inOutStockItemDtos = (from inOutStockItem in Context.InOutStockItems
 
@@ -1593,7 +1593,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
                         switch (inOutStockDto.Status)
                         {
-                            case InOutStatusType.New:
+                            case InOutStatusTypes.New:
                                 {
                                     inOutStockItemDtos = inOutStockItemDtos.GroupBy(g => new
                                     {
@@ -1663,13 +1663,13 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         /// <returns></returns>
         public async Task<ResultDto<InOutStockDto>> ExportToSupplierSaveAsDraft(InOutStockDto input)
         {
-            input.Status = InOutStatusType.New;
+            input.Status = InOutStatusTypes.New;
             return await ExportToSupplier(input);
         }
 
         public async Task<ResultDto<InOutStockDto>> ExportToSupplierStockOut(InOutStockDto input)
         {
-            input.Status = InOutStatusType.ReceivedOutStock;
+            input.Status = InOutStatusTypes.ReceivedOutStock;
             return await ExportToSupplier(input);
         }
 
@@ -1684,7 +1684,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
             using (var transaction = Context.BeginTransaction())
             {
-                input.InOutStockTypeId = (int)Utilities.Enums.InOutStockType.ImportFromAnotherStock;
+                input.InOutStockTypeId = (int)Utilities.Enums.InOutStockTypeTypes.ImportFromAnotherStock;
 
                 try
                 {
@@ -1693,9 +1693,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                     {
                         switch (input.Status)
                         {
-                            case InOutStatusType.ReceivedOutStock:
+                            case InOutStatusTypes.ReceivedOutStock:
                                 {
-                                    input.Status = InOutStatusType.New;
+                                    input.Status = InOutStatusTypes.New;
                                     input.ApproverTime = null;
                                     input.ApproverUserId = null;
                                     input.StockImpTime = null;
@@ -1771,7 +1771,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                     var inOutStock = Context.InOutStocks.FirstOrDefault(f => f.Id == id);
                     if (inOutStock != null)
                     {
-                        inOutStock.Status = InOutStatusType.Canceled;
+                        inOutStock.Status = InOutStatusTypes.Canceled;
                         inOutStock.DeletedBy = SessionExtensions.Login?.Id;
                         inOutStock.DeletedDate = timeNow;
                         inOutStock.IsDeleted = true;
@@ -1810,7 +1810,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                 {
                     var dateNow = DateTime.Now;
                     var id = Guid.Empty;
-                    input.InOutStockTypeId = (int)Utilities.Enums.InOutStockType.ExportFormSupplier;
+                    input.InOutStockTypeId = (int)Utilities.Enums.InOutStockTypeTypes.ExportFormSupplier;
 
                     if (GuidHelper.IsNullOrEmpty(input.Id))
                     {
@@ -1824,7 +1824,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
                         switch (input.Status)
                         {
-                            case InOutStatusType.New:
+                            case InOutStatusTypes.New:
                                 {
                                     foreach (var inOutStockItemDto in input.InOutStockItems)
                                     {
@@ -1854,7 +1854,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
                         switch (input.Status)
                         {
-                            case InOutStatusType.New:
+                            case InOutStatusTypes.New:
                                 {
                                     foreach (var inOutStockItemDto in input.InOutStockItems)
                                     {
@@ -1867,13 +1867,13 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                 }
                                 break;
 
-                            case InOutStatusType.ReceivedOutStock:
+                            case InOutStatusTypes.ReceivedOutStock:
                                 {
                                     input.ApproverTime = dateNow;
                                     input.ApproverUserId = SessionExtensions.Login?.Id;
                                     input.StockExpTime = dateNow;
                                     input.StockExpUserId = SessionExtensions.Login?.Id;
-                                    input.Status = InOutStatusType.ReceivedOutStock;
+                                    input.Status = InOutStatusTypes.ReceivedOutStock;
 
                                     var itemTypeIds = input.InOutStockItems.Select(x => x.ItemTypeId).ToList();
 
@@ -2046,7 +2046,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                     }
                 }
 
-                if (input.Status == InOutStatusType.ReceivedOutStock)
+                if (input.Status == InOutStatusTypes.ReceivedOutStock)
                 {
                     // Ktra SL tồn, khả dụng có đủ để xuất ko
                     var itemIds = input.InOutStockItems.Select(s => s.ItemId).ToList();

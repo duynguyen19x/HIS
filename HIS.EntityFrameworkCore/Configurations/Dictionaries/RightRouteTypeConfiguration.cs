@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<RightRouteType> builder)
         {
-            builder.ToTable("RightRouteTypes");
+            builder.ToTable("DIC_RightRouteType");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.RightRouteTypeCode).HasMaxLength(50).IsRequired();
             builder.Property(x => x.RightRouteTypeName).HasMaxLength(255).IsRequired();

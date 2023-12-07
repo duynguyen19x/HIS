@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<TransferReason> builder)
         {
-            builder.ToTable("TransferReasons");
+            builder.ToTable("DIC_TransferReason");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.TransferReasonCode).HasMaxLength(20).IsRequired();
             builder.Property(x => x.TransferReasonName).HasMaxLength(128).IsRequired();

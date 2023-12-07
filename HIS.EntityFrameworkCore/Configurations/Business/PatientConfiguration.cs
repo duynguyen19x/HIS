@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
     {
         public void Configure(EntityTypeBuilder<Patient> builder)
         {
-            builder.ToTable("Patients");
+            builder.ToTable("BUS_Patient");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.PatientCode).HasMaxLength(20);
             builder.Property(x => x.PatientName).HasMaxLength(255);

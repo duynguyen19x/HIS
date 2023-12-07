@@ -124,8 +124,8 @@ namespace HIS.ApplicationService.Dictionaries.Room
                                      RoomTypeCode = t.RoomTypeCode,
                                      RoomTypeName = t.RoomTypeName,
                                      DepartmentId = r.DepartmentId,
-                                     DepartmentCode = d.DepartmentCode,
-                                     DepartmentName = d.DepartmentName,
+                                     DepartmentCode = d.Code,
+                                     DepartmentName = d.Name,
                                      Description = r.Description,
                                      SortOrder = r.SortOrder,
                                      Inactive = r.Inactive
@@ -163,8 +163,8 @@ namespace HIS.ApplicationService.Dictionaries.Room
                                      RoomTypeCode = t.RoomTypeCode,
                                      RoomTypeName = t.RoomTypeName,
                                      DepartmentId = r.DepartmentId,
-                                     DepartmentCode = d.DepartmentCode,
-                                     DepartmentName = d.DepartmentName,
+                                     DepartmentCode = d.Code,
+                                     DepartmentName = d.Name,
                                      Description = r.Description,
                                      SortOrder = r.SortOrder,
                                      Inactive = r.Inactive
@@ -198,8 +198,8 @@ namespace HIS.ApplicationService.Dictionaries.Room
                                      RoomTypeCode = t.RoomTypeCode,
                                      RoomTypeName = t.RoomTypeName,
                                      DepartmentId = r.DepartmentId,
-                                     DepartmentCode = d.DepartmentCode,
-                                     DepartmentName = d.DepartmentName,
+                                     DepartmentCode = d.Code,
+                                     DepartmentName = d.Name,
                                      Description = r.Description,
                                      SortOrder = r.SortOrder,
                                      Inactive = r.Inactive

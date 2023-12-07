@@ -108,14 +108,14 @@ namespace HIS.ApplicationService.Dictionaries.Districts
             {
                 result.IsSucceeded = true;
                 result.Result = (from r in Context.Districts
-                                 where (string.IsNullOrEmpty(input.NameFilter) || r.DistrictName == input.NameFilter)
-                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.DistrictCode == input.CodeFilter)
+                                 where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
+                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
                                  select new DistrictDto()
                                  {
                                      Id = r.Id,
-                                     Code = r.DistrictCode,
-                                     Name = r.DistrictName,
+                                     Code = r.Code,
+                                     Name = r.Name,
                                      Description = r.Description,
                                      Inactive = r.Inactive
                                  }).OrderBy(o => o.Code).ToList();

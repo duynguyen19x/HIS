@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace HIS.Utilities.Enums
 {
-    public enum InOutStatusType
+    public enum InOutStatusTypes
     {
         [Description("Đã hủy")]
         Canceled = -1,

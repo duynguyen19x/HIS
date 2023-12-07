@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<TransferForm> builder)
         {
-            builder.ToTable("TransferForms");
+            builder.ToTable("DIC_TransferForm");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.TransferFormCode).HasMaxLength(20).IsRequired();
             builder.Property(x => x.TransferFormName).HasMaxLength(128).IsRequired();

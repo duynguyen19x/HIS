@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
     {
         public void Configure(EntityTypeBuilder<ServiceResultData> builder)
         {
-            builder.ToTable("ServiceResultDatas");
+            builder.ToTable("BUS_ServiceResultData");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Result).HasMaxLength(128);

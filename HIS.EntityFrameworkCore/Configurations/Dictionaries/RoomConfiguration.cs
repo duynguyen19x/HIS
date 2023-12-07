@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<Room> builder)
         {
-            builder.ToTable("Rooms");
+            builder.ToTable("DIC_Room");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.RoomCode).HasMaxLength(20).IsRequired(); 

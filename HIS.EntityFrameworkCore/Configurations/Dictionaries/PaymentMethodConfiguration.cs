@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<PaymentMethod> builder)
         {
-            builder.ToTable("PaymentMethods");
+            builder.ToTable("DIC_PaymentMethod");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.PaymentMethodCode).HasMaxLength(20).IsRequired();

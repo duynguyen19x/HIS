@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<ReceptionObjectType> builder)
         {
-            builder.ToTable("ReceptionObjectTypes");
+            builder.ToTable("DIC_ReceptionObjectType");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.ReceptionTypeCode).HasMaxLength(20).IsRequired();
             builder.Property(x => x.ReceptionTypeName).HasMaxLength(128).IsRequired();

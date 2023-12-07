@@ -100,11 +100,11 @@ namespace HIS.ApplicationService.Dictionaries.Branchs
             try
             {
                 var filter = Context.Branchs.AsQueryable()
-                    .WhereIf(!string.IsNullOrEmpty(input.BranchCodeFilter), x => x.BranchCode == input.BranchCodeFilter)
-                    .WhereIf(!string.IsNullOrEmpty(input.BranchNameFilter), x => x.BranchName == input.BranchNameFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.BranchCodeFilter), x => x.Code == input.BranchCodeFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.BranchNameFilter), x => x.Name == input.BranchNameFilter)
                     .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
 
-                var paged = filter.OrderBy(s => s.SortOrder).ThenBy(t => t.BranchCode).ThenBy(t => t.BranchName).PageBy(input);
+                var paged = filter.OrderBy(s => s.SortOrder).ThenBy(t => t.Code).ThenBy(t => t.Name).PageBy(input);
 
                 result.TotalCount = await filter.CountAsync();
                 result.Result = ObjectMapper.Map<IList<BranchDto>>(paged.ToList());
