@@ -550,6 +550,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                                    ServiceId = service.Id,
                                                    Inactive = resultIndex.Inactive,
                                                    SortOrder = resultIndex.SortOrder,
+                                                   Normal = resultIndex.Normal,
                                                }).ToList();
 
                     Context.ServiceResultIndices.AddRange(serviceResultIndexs);
