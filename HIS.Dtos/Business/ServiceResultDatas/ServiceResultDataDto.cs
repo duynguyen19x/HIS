@@ -13,9 +13,8 @@ namespace HIS.Dtos.Business.ServiceResultDatas
 
         public ServiceResultDataType ResultType { get; set; }
 
-        public Guid? ServiceResultIndiceCode { get; set; }
-        public Guid? ServiceResultIndiceName { get; set; }
-        public Guid? ServiceResultIndicUnit { get; set; }
-
+        public string ServiceResultIndiceCode { get; set; }
+        public string ServiceResultIndiceName { get; set; }
+        public string ServiceResultIndicUnit { get; set; }
     }
 }
