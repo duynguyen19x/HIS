@@ -1,11 +1,6 @@
 ﻿using AutoMapper.Configuration.Annotations;
 using HIS.Core.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Categories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Business
 {
