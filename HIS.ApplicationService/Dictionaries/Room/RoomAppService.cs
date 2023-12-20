@@ -110,16 +110,16 @@ namespace HIS.ApplicationService.Dictionaries.Room
                 result.Result = (from r in Context.Rooms
                                  join t in Context.RoomTypes on r.RoomTypeId equals t.Id
                                  join d in Context.Departments on r.DepartmentId equals d.Id 
-                                 where (string.IsNullOrEmpty(input.NameFilter) || r.RoomName == input.NameFilter)
-                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.RoomCode == input.CodeFilter)
+                                 where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
+                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.DepartmentIdFilter == null || r.DepartmentId == input.DepartmentIdFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
                                  select new RoomDto()
                                  {
                                      Id = r.Id,
-                                     RoomCode = r.RoomCode,
+                                     Code = r.Code,
                                      MohCode = r.MohCode,
-                                     RoomName = r.RoomName,
+                                     Name = r.Name,
                                      RoomTypeId = r.RoomTypeId,
                                      RoomTypeCode = t.Code,
                                      RoomTypeName = t.Name,
@@ -156,9 +156,9 @@ namespace HIS.ApplicationService.Dictionaries.Room
                                  select new RoomDto()
                                  {
                                      Id = r.Id,
-                                     RoomCode = r.RoomCode,
+                                     Code = r.Code,
                                      MohCode = r.MohCode,
-                                     RoomName = r.RoomName,
+                                     Name = r.Name,
                                      RoomTypeId = r.RoomTypeId,
                                      RoomTypeCode = t.Code,
                                      RoomTypeName = t.Name,
@@ -191,9 +191,9 @@ namespace HIS.ApplicationService.Dictionaries.Room
                                  select new RoomDto()
                                  {
                                      Id = r.Id,
-                                     RoomCode = r.RoomCode,
+                                     Code = r.Code,
                                      MohCode = r.MohCode,
-                                     RoomName = r.RoomName,
+                                     Name = r.Name,
                                      RoomTypeId = r.RoomTypeId,
                                      RoomTypeCode = t.Code,
                                      RoomTypeName = t.Name,
