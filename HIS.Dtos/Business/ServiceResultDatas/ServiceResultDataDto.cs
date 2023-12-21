@@ -9,7 +9,11 @@ namespace HIS.Dtos.Business.ServiceResultDatas
 
         public Guid? ServiceId { get; set; }
 
-        public string Result { get; set; }
+        public string Result { get; set; } // Kết quả
+
+        public string NormalRange { get; set; } // Khoảng bình thường
+
+        public string TestingMachine { get; set; } // Máy xét nghiệm
 
         public ServiceResultDataType ResultType { get; set; }
 

@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
-using HIS.Core.Extensions;
 using HIS.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.Identity.Client;
 
 namespace HIS.Application.Core.Services
 {
