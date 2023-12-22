@@ -159,7 +159,16 @@ namespace HIS.ApplicationService.Business.PatientRecords
         public override async Task<PagedResultDto<PatientRecordDto>> GetAll(GetAllPatientRecordInputDto input)
         {
             var result = new PagedResultDto<PatientRecordDto>();
-
+            result.Result = new List<PatientRecordDto>()
+            {
+                new PatientRecordDto() { PatientCode = "BN-01", PatientRecordCode = "BA-01", PatientName = "Bệnh nhân 01", BirthDate = DateTime.Now },
+                new PatientRecordDto() { PatientCode = "BN-02", PatientRecordCode = "BA-02", PatientName = "Bệnh nhân 02", BirthDate = DateTime.Now },
+                new PatientRecordDto() { PatientCode = "BN-03", PatientRecordCode = "BA-03", PatientName = "Bệnh nhân 03", BirthDate = DateTime.Now },
+                new PatientRecordDto() { PatientCode = "BN-04", PatientRecordCode = "BA-04", PatientName = "Bệnh nhân 04", BirthDate = DateTime.Now },
+                new PatientRecordDto() { PatientCode = "BN-05", PatientRecordCode = "BA-05", PatientName = "Bệnh nhân 05", BirthDate = DateTime.Now },
+                new PatientRecordDto() { PatientCode = "BN-06", PatientRecordCode = "BA-06", PatientName = "Bệnh nhân 06", BirthDate = DateTime.Now }
+            };
+            result.TotalCount = 6;
             return result;
         }
 
