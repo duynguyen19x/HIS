@@ -27,6 +27,20 @@ namespace HIS.Dtos.Business.ServiceRequests
         public Guid ExecuteRoomId { get; set; } // phòng thực hiện
         public Guid? ExecuteUserId { get; set; } // người thực hiện
 
+        public string PatientCode { get; set; }
+        public string PatientName { get; set; }
+
+        public string DepartmentCode { get; set; }
+        public string DepartmentName { get; set; }
+
+        public string RoomCode { get; set; }
+        public string RoomName { get; set; }
+
+        public string ExecuteRoomCode { get; set; }
+        public string ExecuteRoomName { get; set; }
+
+        public string ExecuteUserCode { get; set; }
+        public string ExecuteUserName { get; set; }
 
         public IList<ServiceRequestDataDto> ServiceRequestDatas { get; set; }
     }
