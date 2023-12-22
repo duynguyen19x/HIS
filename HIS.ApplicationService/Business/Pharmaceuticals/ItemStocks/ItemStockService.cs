@@ -36,8 +36,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
 
                                      ItemCode = Item.Code,
                                      ItemName = Item.Name,
-                                     StockCode = stock.RoomCode,
-                                     StockName = stock.RoomName,
+                                     StockCode = stock.Code,
+                                     StockName = stock.Name,
                                      CommodityType = Item.CommodityType
                                  })
                                  .WhereIf(!GuidHelper.IsNullOrEmpty(input.StockIdFilter), w => w.StockId == input.StockIdFilter)
@@ -113,8 +113,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
 
                                          ItemCode = itemType.Code,
                                          ItemName = itemType.Name,
-                                         StockCode = stock.RoomCode,
-                                         StockName = stock.RoomName,
+                                         StockCode = stock.Code,
+                                         StockName = stock.Name,
 
                                          // Phần Item
                                          CommodityType = item.CommodityType,

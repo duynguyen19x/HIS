@@ -10,8 +10,8 @@ namespace HIS.Dtos.Dictionaries.Department
 {
     public class DepartmentDto : EntityDto<Guid?>
     {
-        public string DepartmentCode { get; set; }
-        public string DepartmentName { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
         public string MohCode { get; set; }
         public int? DepartmentTypeId { get; set; }
         public string DepartmentTypeCode { get; set; }

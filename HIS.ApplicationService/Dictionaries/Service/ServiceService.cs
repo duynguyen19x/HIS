@@ -340,8 +340,8 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                                   Id = s != null ? s.Id : null,
                                                   RoomId = room.Id,
                                                   ServiceId = s != null ? s.ServiceId : null,
-                                                  RoomCode = room.RoomCode,
-                                                  RoomName = room.RoomName,
+                                                  RoomCode = room.Code,
+                                                  RoomName = room.Name,
                                                   IsMain = s != null ? s.IsMain : false,
                                                   IsCheck = s != null ? true : false,
                                               }).OrderBy(s => s.RoomCode).ToList();
@@ -373,8 +373,8 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                            select new ExecutionRoomDto()
                                            {
                                                RoomId = room.Id,
-                                               RoomCode = room.RoomCode,
-                                               RoomName = room.RoomName,
+                                               RoomCode = room.Code,
+                                               RoomName = room.Name,
                                            }).OrderBy(s => s.RoomCode).ToList();
 
                     serviceDto.SServicePricePolicies = sServicePricePolicys;
@@ -497,7 +497,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
 
                     var executionRoomDtos = sServiceDtos.SelectMany(s => s.SExecutionRooms).ToList();
                     var executionRooms = (from executionRoom in executionRoomDtos
-                                          join sRoom in sRooms on executionRoom.RoomCode equals sRoom.RoomCode
+                                          join sRoom in sRooms on executionRoom.RoomCode equals sRoom.Code
                                           select new ExecutionRoom()
                                           {
                                               Id = executionRoom.Id.GetValueOrDefault(),
@@ -550,6 +550,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                                    ServiceId = service.Id,
                                                    Inactive = resultIndex.Inactive,
                                                    SortOrder = resultIndex.SortOrder,
+                                                   Normal = resultIndex.Normal,
                                                }).ToList();
 
                     Context.ServiceResultIndices.AddRange(serviceResultIndexs);

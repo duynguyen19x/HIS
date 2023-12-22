@@ -1,16 +1,11 @@
 ﻿using HIS.Application.Core.Services.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.Dtos.Dictionaries.Branchs
 {
     public class BranchDto : EntityDto<Guid>
     {
-        public string BranchCode { get; set; }
-        public string BranchName { get; set; }
+        public string Code { get; set; }
+        public string Name { get; set; }
         public string HeinMediOrgCode { get; set; } // mã khám chữa bệnh ban đầu
         public string HeinMediOrgAcceptCode { get; set; } // mã KCBBĐ đúng tuyến (ngăn cách bởi dấu ;)
         public string Level { get; set; } // hạng bệnh viện

@@ -1,10 +1,4 @@
-﻿using HIS.Core.Entities;
-using HIS.Core.Entities.Auditing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HIS.Core.Entities.Auditing;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {

@@ -11,8 +11,8 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.ToTable("DIC_Room");
 
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.RoomCode).HasMaxLength(20).IsRequired(); 
-            builder.Property(x => x.RoomName).HasMaxLength(255).IsRequired();
+            builder.Property(x => x.Code).HasMaxLength(20).IsRequired(); 
+            builder.Property(x => x.Name).HasMaxLength(255).IsRequired();
             builder.Property(x => x.MohCode).HasMaxLength(20);
             builder.Property(x => x.Description).HasMaxLength(512);
             builder.Property(x => x.RoomTypeId).IsRequired();

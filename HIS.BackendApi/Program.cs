@@ -1,6 +1,7 @@
 using HIS.ApplicationService;
 using HIS.AutoMappers;
 using HIS.EntityFrameworkCore;
+using HIS.EntityFrameworkCore.EntityFrameworkCore.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -25,6 +26,7 @@ void ConfigureService()
     }));
 
     builder.Services.ServiceCollection();
+    builder.Services.AddTransient(typeof(IBulkRepository<,>), typeof(HISBulkRepository<,>));
 
     string issuer = builder.Configuration.GetValue<string>("Tokens:Issuer");
     string signingKey = builder.Configuration.GetValue<string>("Tokens:Key");
@@ -71,22 +73,22 @@ void ConfigureService()
         });
 
         c.AddSecurityRequirement(new OpenApiSecurityRequirement()
-    {
         {
-            new OpenApiSecurityScheme
             {
-                Reference = new OpenApiReference
+                new OpenApiSecurityScheme
                 {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
+                    Reference = new OpenApiReference
+                    {
+                        Type = ReferenceType.SecurityScheme,
+                        Id = "Bearer"
+                    },
+                    Scheme = "oauth2",
+                    Name = "Bearer",
+                    In = ParameterLocation.Header,
                 },
-                Scheme = "oauth2",
-                Name = "Bearer",
-                In = ParameterLocation.Header,
-            },
-            new List<string>()
-        }
-    });
+                new List<string>()
+            }
+        });
     });
 }
 
@@ -101,7 +103,6 @@ void Configure()
 
     app.UseCors("CorsPolicy");
     app.UseAuthentication();
-    //app.UseAuthorization();
     app.UseHttpsRedirection();
     app.UseAuthorization();
     app.MapControllers();
