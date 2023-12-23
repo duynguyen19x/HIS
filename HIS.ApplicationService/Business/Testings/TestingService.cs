@@ -55,6 +55,8 @@ namespace HIS.ApplicationService.Business.Testings
                 .WhereIf(!DatetimeHelper.IsNullOrEmpty(input.ServiceRequestUseDateToFilter), w => w.ServiceRequestUseDate <= input.ServiceRequestUseDateToFilter)
                 .ToList();
 
+            pagedResults.Result = ObjectMapper.Map<List<ServiceRequestDto>>(serviceRequests);
+
             return await Task.FromResult(pagedResults);
         }
     }
