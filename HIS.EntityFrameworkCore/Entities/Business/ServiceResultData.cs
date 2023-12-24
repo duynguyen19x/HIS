@@ -10,6 +10,8 @@ namespace HIS.EntityFrameworkCore.Entities.Business
     {
         public Guid? ServiceResultIndiceId { get; set; }
 
+        public Guid? ServiceRequestDataId { get; set; }
+
         public Guid? ServiceId { get; set; }
 
         public string Result { get; set; }
@@ -18,6 +20,10 @@ namespace HIS.EntityFrameworkCore.Entities.Business
 
         [Ignore]
         public Service Service { get; set; }
+
+        [Ignore]
+        public ServiceRequestData ServiceRequestData { get; set; }
+
         [Ignore]
         public ServiceResultIndice ServiceResultIndice { get; set; }
     }

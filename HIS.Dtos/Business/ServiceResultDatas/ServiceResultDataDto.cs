@@ -7,6 +7,8 @@ namespace HIS.Dtos.Business.ServiceResultDatas
     {
         public Guid? ServiceResultIndiceId { get; set; }
 
+        public Guid? ServiceRequestDataId { get; set; }
+
         public Guid? ServiceId { get; set; }
 
         public string Result { get; set; } // Kết quả
@@ -19,6 +21,8 @@ namespace HIS.Dtos.Business.ServiceResultDatas
 
         public string ServiceResultIndiceCode { get; set; }
         public string ServiceResultIndiceName { get; set; }
-        public string ServiceResultIndicUnit { get; set; }
+        public string ServiceResultIndiceUnit { get; set; }
+
+        public IList<ServiceResultDataDto> ServiceResultDatas { get; set; }
     }
 }
