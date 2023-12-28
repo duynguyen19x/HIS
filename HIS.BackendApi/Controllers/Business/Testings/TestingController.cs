@@ -37,5 +37,11 @@ namespace HIS.BackendApi.Controllers.Business.Testings
         {
             return await _testingService.GetServiceResultDataByServiceRequestDataId(serviceRequestDataId, genderType);
         }
+
+        [HttpGet("GetServiceResultDataByServiceRequestId")]
+        public async Task<ListResultDto<ServiceResultDataDto>> GetServiceResultDataByServiceRequestId(Guid serviceRequestId, GenderTypes genderType)
+        {
+            return await _testingService.GetServiceResultDataByServiceRequestId(serviceRequestId, genderType);
+        }
     }
 }
