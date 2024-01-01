@@ -3,7 +3,7 @@ using HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks;
 using HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks;
 using HIS.ApplicationService.Dictionaries.Career;
 using HIS.ApplicationService.Dictionaries.ChapterICD10;
-using HIS.ApplicationService.Dictionaries.Country;
+using HIS.ApplicationService.Dictionaries.Countries;
 using HIS.ApplicationService.Dictionaries.Department;
 using HIS.ApplicationService.Dictionaries.DepartmentType;
 using HIS.ApplicationService.Dictionaries.Districts;

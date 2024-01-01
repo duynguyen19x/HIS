@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Dictionaries.Nationals
+namespace HIS.Dtos.Dictionaries.Countries
 {
-    public class NationalDto : EntityDto<Guid?>
+    public class CountryDto : EntityDto<Guid?>
     {
         public string Code { get; set; }
         public string Name { get; set; }
