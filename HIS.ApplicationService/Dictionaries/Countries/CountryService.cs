@@ -1,31 +1,28 @@
-﻿using HIS.Dtos.Dictionaries.Nationals;
-using Microsoft.Extensions.Configuration;
-using AutoMapper;
+﻿using AutoMapper;
 using HIS.EntityFrameworkCore;
 using HIS.Application.Core.Services;
 using HIS.Application.Core.Services.Dto;
-using Microsoft.EntityFrameworkCore;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.Dtos.Dictionaries.Countries;
 
-namespace HIS.ApplicationService.Dictionaries.Country
+namespace HIS.ApplicationService.Dictionaries.Countries
 {
-    public class CountryService : BaseCrudAppService<NationalDto, Guid?, GetAllNationalInputDto>, ICountryService
+    public class CountryService : BaseCrudAppService<CountryDto, Guid?, GetAllCountryInputDto>, ICountryAppService
     {
-        public CountryService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
+        public CountryService(HISDbContext dbContext, IMapper mapper)
             : base(dbContext, mapper)
         {
 
         }
 
-        public override async Task<ResultDto<NationalDto>> Create(NationalDto input)
+        public override async Task<ResultDto<CountryDto>> Create(CountryDto input)
         {
-            var result = new ResultDto<NationalDto>();
+            var result = new ResultDto<CountryDto>();
             using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = ObjectMapper.Map<National>(input);
+                    var data = base.ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Country>(input);
                     Context.Nationals.Add(data);
                     await Context.SaveChangesAsync();
 
@@ -46,14 +43,14 @@ namespace HIS.ApplicationService.Dictionaries.Country
             return await Task.FromResult(result);
         }
 
-        public override async Task<ResultDto<NationalDto>> Update(NationalDto input)
+        public override async Task<ResultDto<CountryDto>> Update(CountryDto input)
         {
-            var result = new ResultDto<NationalDto>();
+            var result = new ResultDto<CountryDto>();
             using (var transaction = Context.Database.BeginTransaction())
             {
                 try
                 {
-                    var data = ObjectMapper.Map<National>(input);
+                    var data = base.ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Country>(input);
                     Context.Nationals.Update(data);
                     await Context.SaveChangesAsync();
 
@@ -74,9 +71,9 @@ namespace HIS.ApplicationService.Dictionaries.Country
             return await Task.FromResult(result);
         }
 
-        public override async Task<ResultDto<NationalDto>> Delete(Guid? id)
+        public override async Task<ResultDto<CountryDto>> Delete(Guid? id)
         {
-            var result = new ResultDto<NationalDto>();
+            var result = new ResultDto<CountryDto>();
             using (var transaction = Context.Database.BeginTransaction())
             {
                 try
@@ -103,9 +100,9 @@ namespace HIS.ApplicationService.Dictionaries.Country
             return await Task.FromResult(result);
         }
 
-        public override async Task<PagedResultDto<NationalDto>> GetAll(GetAllNationalInputDto input)
+        public override async Task<PagedResultDto<CountryDto>> GetAll(GetAllCountryInputDto input)
         {
-            var result = new PagedResultDto<NationalDto>();
+            var result = new PagedResultDto<CountryDto>();
             try
             {
                 result.IsSucceeded = true;
@@ -113,7 +110,7 @@ namespace HIS.ApplicationService.Dictionaries.Country
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
-                                 select new NationalDto()
+                                 select new CountryDto()
                                  {
                                      Id = r.Id,
                                      Code = r.Code,
@@ -131,15 +128,15 @@ namespace HIS.ApplicationService.Dictionaries.Country
             return await Task.FromResult(result);
         }
 
-        public override async Task<ResultDto<NationalDto>> GetById(Guid? id)
+        public override async Task<ResultDto<CountryDto>> GetById(Guid? id)
         {
-            var result = new ResultDto<NationalDto>();
+            var result = new ResultDto<CountryDto>();
 
             var data = Context.Nationals.SingleOrDefault(s => s.Id == id);
             if (data != null)
             {
                 result.IsSucceeded = true;
-                result.Result = ObjectMapper.Map<NationalDto>(data);
+                result.Result = ObjectMapper.Map<CountryDto>(data);
             }
 
             return await Task.FromResult(result);

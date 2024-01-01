@@ -32,7 +32,7 @@ namespace HIS.EntityFrameworkCore
         public DbSet<District> Districts { get; set; }
         public DbSet<MedicalRecordType> MedicalRecordTypes { get; set; }
         public DbSet<MedicalRecordTypeGroup> MedicalRecordTypeGroups { get; set; }
-        public DbSet<National> Nationals { get; set; }
+        public DbSet<Country> Nationals { get; set; }
         public DbSet<PatientType> PatientTypes { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Province> Provinces { get; set; }
