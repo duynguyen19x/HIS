@@ -18,13 +18,11 @@ namespace HIS.Dtos.Business.ServiceResultDatas
         public string TestingMachine { get; set; } // Máy xét nghiệm
 
         public ServiceResultDataType ResultType { get; set; }
-
+        
         public string ServiceCode { get; set; }
         public string ServiceName { get; set; }
         public string ServiceResultIndiceCode { get; set; }
         public string ServiceResultIndiceName { get; set; }
         public string ServiceResultIndiceUnit { get; set; }
-
-        public IList<ServiceResultDataDto> ServiceResultDatas { get; set; }
     }
 }
