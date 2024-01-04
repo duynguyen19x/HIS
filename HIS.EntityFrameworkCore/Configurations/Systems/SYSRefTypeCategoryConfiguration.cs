@@ -18,7 +18,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Systems
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.RefTypeCategoryName).IsRequired().HasMaxLength(255);
-            builder.Property(x => x.Description).IsRequired().HasMaxLength(255);
+            builder.Property(x => x.Description).HasMaxLength(255);
 
 
             builder.HasData(
