@@ -18,7 +18,9 @@ namespace HIS.Dtos.Business.ServiceResultDatas
         public string TestingMachine { get; set; } // Máy xét nghiệm
 
         public ServiceResultDataType ResultType { get; set; }
-        
+
+        public bool IsNumber { get; set; } // Kết quả dạng chữ hoặc số
+
         public string ServiceCode { get; set; }
         public string ServiceName { get; set; }
         public string ServiceResultIndiceCode { get; set; }
