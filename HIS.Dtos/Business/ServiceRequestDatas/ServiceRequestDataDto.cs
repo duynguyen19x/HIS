@@ -1,9 +1,5 @@
 ﻿using HIS.Application.Core.Services.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HIS.Dtos.Business.ServiceResultDatas;
 
 namespace HIS.Dtos.Business.ServiceRequestDatas
 {
@@ -22,5 +18,7 @@ namespace HIS.Dtos.Business.ServiceRequestDatas
 
         public int PatientTypeId { get; set; } // đối tượng
         public string Description { get; set; }
+
+        public IList<ServiceResultDataDto> ServiceResultDatas { get; set; }
     }
 }

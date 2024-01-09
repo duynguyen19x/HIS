@@ -118,8 +118,8 @@ namespace HIS.ApplicationService.Dictionaries.Department
                                  select new DepartmentDto()
                                  {
                                      Id = d.Id,
-                                     DepartmentCode = d.Code,
-                                     DepartmentName = d.Name,
+                                     Code = d.Code,
+                                     Name = d.Name,
                                      MohCode = d.MohCode,
                                      Description = d.Description,
                                      DepartmentTypeId = d.DepartmentTypeId,
@@ -148,8 +148,8 @@ namespace HIS.ApplicationService.Dictionaries.Department
                                     select new DepartmentDto()
                                     {
                                         Id = d.Id,
-                                        DepartmentCode = d.Code,
-                                        DepartmentName = d.Name,
+                                        Code = d.Code,
+                                        Name = d.Name,
                                         MohCode = d.MohCode,
                                         Description = d.Description,
                                         DepartmentTypeId = d.DepartmentTypeId,

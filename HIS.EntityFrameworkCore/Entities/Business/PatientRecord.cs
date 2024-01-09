@@ -145,7 +145,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         [Ignore]
         public Religion Religion { get; set; }
         [Ignore]
-        public National National { get; set; }
+        public Country National { get; set; }
         [Ignore]
         public Province Province { get; set; }
         [Ignore]

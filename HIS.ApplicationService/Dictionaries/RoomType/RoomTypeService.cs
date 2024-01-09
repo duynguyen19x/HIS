@@ -109,8 +109,8 @@ namespace HIS.ApplicationService.Dictionaries.RoomType
             try
             {
                 var filter = Context.RoomTypes.AsNoTracking()
-                    .WhereIf(!string.IsNullOrEmpty(input.RoomTypeCodeFilter), x => x.RoomTypeCode == input.RoomTypeCodeFilter)
-                    .WhereIf(!string.IsNullOrEmpty(input.RoomTypeNameFilter), x => x.RoomTypeName == input.RoomTypeNameFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.RoomTypeCodeFilter), x => x.Code == input.RoomTypeCodeFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.RoomTypeNameFilter), x => x.Name == input.RoomTypeNameFilter)
                     .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
 
                 var paged = filter.OrderBy(x => x.SortOrder).PageBy(input).ToList();
