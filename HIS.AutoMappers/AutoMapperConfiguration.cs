@@ -38,6 +38,8 @@ using HIS.Dtos.Dictionaries.Ethnics;
 using HIS.Dtos.Dictionaries.Branchs;
 using HIS.Dtos.Business.Patients;
 using HIS.Dtos.Business.PatientRecords;
+using HIS.Dtos.Systems;
+using HIS.Dtos.Systems.RefTypeCategory;
 
 namespace HIS.AutoMappers
 {
@@ -159,6 +161,13 @@ namespace HIS.AutoMappers
             CreateMap<Branch, BranchDto>().ReverseMap();
             CreateMap<Ethnic, EthnicDto>().ReverseMap();
 
+            #endregion
+
+            #region - hệ thống
+
+            CreateMap<SYSRefTypeCategoryDto, SYSRefTypeCategory>().ReverseMap();
+            CreateMap<SYSRefTypeDto, SYSRefType>().ReverseMap();
+            
             #endregion
         }
     }

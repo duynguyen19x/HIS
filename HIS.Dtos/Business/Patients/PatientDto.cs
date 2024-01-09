@@ -17,7 +17,7 @@ namespace HIS.Dtos.Business.Patients
         public Guid? GenderId { get; set; }
         public Guid? EthnicId { get; set; }
         public Guid? ReligionId { get; set; }
-        public Guid? NationalId { get; set; }
+        public Guid? CountryId { get; set; }
         public Guid? ProvinceId { get; set; }
         public Guid? DistrictId { get; set; }
         public Guid? WardId { get; set; }
@@ -30,5 +30,6 @@ namespace HIS.Dtos.Business.Patients
         public string Tel { get; set; }
         public string Mobile { get; set; }
         public string Email { get; set; }
+        public string Description { get; set; }
     }
 }

@@ -7,19 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Business\Patients\**" />
     <Compile Remove="Business\Pharmaceuticals\DExpMests\**" />
     <Compile Remove="Business\Pharmaceuticals\DImpMests\**" />
     <Compile Remove="Categories\**" />
     <Compile Remove="Patient\**" />
     <Compile Remove="Systems\Permistion\**" />
-    <EmbeddedResource Remove="Business\Patients\**" />
     <EmbeddedResource Remove="Business\Pharmaceuticals\DExpMests\**" />
     <EmbeddedResource Remove="Business\Pharmaceuticals\DImpMests\**" />
     <EmbeddedResource Remove="Categories\**" />
     <EmbeddedResource Remove="Patient\**" />
     <EmbeddedResource Remove="Systems\Permistion\**" />
-    <None Remove="Business\Patients\**" />
     <None Remove="Business\Pharmaceuticals\DExpMests\**" />
     <None Remove="Business\Pharmaceuticals\DImpMests\**" />
     <None Remove="Categories\**" />

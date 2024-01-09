@@ -4,9 +4,14 @@ namespace HIS.Core.Uow
 {
     public class UnitOfWorkManager : IUnitOfWorkManager
     {
+        private readonly IUnitOfWork _unitOfWork;
+
         public IUnitOfWork Begin()
         {
-            throw new NotImplementedException();
+            if (_unitOfWork != null)
+                return _unitOfWork;
+
+            return _unitOfWork;
         }
 
         public IUnitOfWork Begin(TransactionScopeOption option)

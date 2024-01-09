@@ -1,25 +1,24 @@
 ﻿using HIS.Application.Core.Services;
 using HIS.Dtos.Systems.RefType;
 using HIS.Dtos.Systems;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HIS.Application.Core.Services.Dto;
 using HIS.EntityFrameworkCore;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using HIS.Core.Linq;
-using HIS.Dtos.Dictionaries.Branchs;
+using HIS.Core.Repositories;
+using HIS.EntityFrameworkCore.Entities.Systems;
 
 namespace HIS.ApplicationService.Systems.RefType
 {
     public class SYSRefTypeAppService : BaseCrudAppService<SYSRefTypeDto, int, GetAllSYSRefTypeInputDto>, ISYSRefTypeAppService
     {
-        public SYSRefTypeAppService(HISDbContext context, IMapper mapper) 
+        private readonly IRepository<SYSRefType, int> _sysRefTypeRepository;
+
+        public SYSRefTypeAppService(HISDbContext context, IMapper mapper, IRepository<SYSRefType, int> sysRefTypeRepository) 
             : base(context, mapper)
         {
+            _sysRefTypeRepository = sysRefTypeRepository;
         }
 
         public override Task<ResultDto<SYSRefTypeDto>> Create(SYSRefTypeDto input)
@@ -42,7 +41,8 @@ namespace HIS.ApplicationService.Systems.RefType
             var result = new PagedResultDto<SYSRefTypeDto>();
             try
             {
-                var filter = Context.SYSRefTypes.AsNoTracking()
+                //var filter = Context.SYSRefTypes.AsNoTracking()
+                var filter = _sysRefTypeRepository.GetAll()
                     .WhereIf(!string.IsNullOrEmpty(input.RefTypeNameFilter), x => x.RefTypeName == input.RefTypeNameFilter)
                     .WhereIf(input.RefTypeCategoryFilter != null, x => x.RefTypeCategoryID == input.RefTypeCategoryFilter);
 

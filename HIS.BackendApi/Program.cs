@@ -1,9 +1,13 @@
 using HIS.ApplicationService;
 using HIS.AutoMappers;
+using HIS.Core.EntityFrameworkCore;
+using HIS.Core.Repositories;
 using HIS.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.EntityFrameworkCore.Repositories;
+using HIS.EntityFrameworkCore.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -25,8 +29,10 @@ void ConfigureService()
         builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
     }));
 
-    builder.Services.ServiceCollection();
+    builder.Services.TryAddScoped(typeof(IDbContextProvider<>), typeof(DbContextProvider<>));
+    builder.Services.TryAddScoped(typeof(IRepository<,>), typeof(HISRepository<,>));
     builder.Services.AddTransient(typeof(IBulkRepository<,>), typeof(HISBulkRepository<,>));
+    builder.Services.ServiceCollection();
 
     string issuer = builder.Configuration.GetValue<string>("Tokens:Issuer");
     string signingKey = builder.Configuration.GetValue<string>("Tokens:Key");

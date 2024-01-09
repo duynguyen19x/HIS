@@ -19,7 +19,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public Guid? GenderId { get; set; }
         public Guid? EthnicId { get; set; }
         public Guid? ReligionId { get; set; }
-        public Guid? NationalId { get; set; }
+        public Guid? CountryId { get; set; }
         public Guid? ProvinceId { get; set; }
         public Guid? DistrictId { get; set; }
         public Guid? WardId { get; set; }
@@ -32,6 +32,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public string Tel { get; set; }
         public string Mobile { get; set; }
         public string Email { get; set; }
+        public string Description { get; set; }
 
         [Ignore]
         public Gender Gender { get; set; }
