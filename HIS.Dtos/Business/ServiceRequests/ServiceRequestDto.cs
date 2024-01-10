@@ -1,5 +1,7 @@
 ﻿using HIS.Application.Core.Services.Dto;
 using HIS.Dtos.Business.ServiceRequestDatas;
+using HIS.Dtos.Business.ServiceResultDatas;
+using HIS.Utilities.Enums;
 
 namespace HIS.Dtos.Business.ServiceRequests
 {
@@ -27,6 +29,8 @@ namespace HIS.Dtos.Business.ServiceRequests
         public Guid ExecuteRoomId { get; set; } // phòng thực hiện
         public Guid? ExecuteUserId { get; set; } // người thực hiện
 
+        public ServiceRequestStatusTypes Status { get; set; } // trạng thái
+
         public string UserCode { get; set; }
         public string UserName { get; set; }
 
@@ -46,5 +50,6 @@ namespace HIS.Dtos.Business.ServiceRequests
         public string ExecuteUserName { get; set; }
 
         public IList<ServiceRequestDataDto> ServiceRequestDatas { get; set; }
+        public IList<ServiceResultDataDto> ServiceResultDatas { get; set; }
     }
 }

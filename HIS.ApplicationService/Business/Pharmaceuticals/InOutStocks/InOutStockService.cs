@@ -1810,7 +1810,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                 {
                     var dateNow = DateTime.Now;
                     var id = Guid.Empty;
-                    input.InOutStockTypeId = (int)Utilities.Enums.InOutStockTypeTypes.ExportFormSupplier;
+                    input.InOutStockTypeId = (int)InOutStockTypeTypes.ExportFormSupplier;
 
                     if (GuidHelper.IsNullOrEmpty(input.Id))
                     {

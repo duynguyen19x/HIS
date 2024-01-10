@@ -3,6 +3,7 @@ using HIS.ApplicationService.Business.Testings;
 using HIS.Dtos.Business.ServiceRequestDatas;
 using HIS.Dtos.Business.ServiceRequests;
 using HIS.Dtos.Business.ServiceResultDatas;
+using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.Utilities.Enums;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,6 +42,12 @@ namespace HIS.BackendApi.Controllers.Business.Testings
         public async Task<ListResultDto<ServiceResultDataDto>> GetServiceResultDataByServiceRequestId(Guid serviceRequestId, GenderTypes genderType)
         {
             return await _testingService.GetServiceResultDataByServiceRequestId(serviceRequestId, genderType);
+        }
+
+        [HttpPost("UpdateTestingStatus")]
+        public async Task<ResultDto<ServiceRequestDto>> UpdateTestingStatus(ServiceRequestDto input)
+        {
+            return await _testingService.UpdateTestingStatus(input);
         }
     }
 }

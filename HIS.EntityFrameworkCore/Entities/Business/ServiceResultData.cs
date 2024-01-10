@@ -12,9 +12,13 @@ namespace HIS.EntityFrameworkCore.Entities.Business
 
         public Guid? ServiceRequestDataId { get; set; }
 
+        public Guid? ServiceRequestId { get; set; }
+
         public Guid? ServiceId { get; set; }
 
         public string Result { get; set; }
+
+        public string TestingMachine { get; set; }
 
         public ServiceResultDataType ResultType { get; set; }
 
@@ -23,6 +27,9 @@ namespace HIS.EntityFrameworkCore.Entities.Business
 
         [Ignore]
         public ServiceRequestData ServiceRequestData { get; set; }
+
+        [Ignore]
+        public ServiceRequest ServiceRequests { get; set; }
 
         [Ignore]
         public ServiceResultIndice ServiceResultIndice { get; set; }
