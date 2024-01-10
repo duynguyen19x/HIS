@@ -12,10 +12,11 @@ namespace HIS.Core.Entities.Auditing
 
         public CreationAuditedEntity()
         {
-            if (CreatedDate == (DateTime)default)
+            if (DatetimeHelper.IsNullOrEmpty(CreatedDate))
             {
                 CreatedDate = DateTime.Now;
             }
+
             if (GuidHelper.IsNullOrEmpty(CreatedBy))
             {
                 CreatedBy = SessionExtensions.Login?.Id;
