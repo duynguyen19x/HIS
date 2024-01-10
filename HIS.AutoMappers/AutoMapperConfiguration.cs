@@ -4,7 +4,7 @@ using HIS.Dtos.Business.InOutStocks;
 using HIS.Dtos.Business.ItemStocks;
 using HIS.Dtos.Dictionaries.Career;
 using HIS.Dtos.Dictionaries.ChapterICD10;
-using HIS.Dtos.Dictionaries.Nationals;
+using HIS.Dtos.Dictionaries.Countries;
 using HIS.Dtos.Dictionaries.Department;
 using HIS.Dtos.Dictionaries.DepartmentType;
 using HIS.Dtos.Dictionaries.District;
@@ -48,7 +48,7 @@ namespace HIS.AutoMappers
         public AutoMapperConfiguration()
         {
             CreateMap<Career, CareerDto>().ReverseMap();
-            CreateMap<National, NationalDto>().ReverseMap();
+            CreateMap<Country, CountryDto>().ReverseMap();
             CreateMap<DepartmentDto, Department>()
                 //.ForMember(dest => dest.DepartmentType, opt => opt.Ignore())
                 //.ForMember(dest => dest.Branch, opt => opt.Ignore())

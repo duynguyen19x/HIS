@@ -5,7 +5,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// <summary>
     /// Quốc tịch.
     /// </summary>
-    public class National : Entity<Guid>
+    public class Country : Entity<Guid>
     {
         public string Code { get; set; }
         public string HeInCode { get; set; }
