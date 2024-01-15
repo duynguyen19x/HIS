@@ -8,6 +8,9 @@ namespace HIS.Application.Core.Services
         where TEntityDto : IEntityDto<TPrimaryKey>
         where TPagedRequestDto : IPagedResultRequestDto
     {
+
+
+
         public BaseCrudAppService(HISDbContext context, IMapper mapper)
             : base(context, mapper)
         {

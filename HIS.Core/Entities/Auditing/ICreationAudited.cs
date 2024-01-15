@@ -2,7 +2,7 @@
 {
     public interface ICreationAudited
     {
-        DateTime CreatedDate { get; set; }
+        DateTime? CreatedDate { get; set; }
         Guid? CreatedBy { get; set; }
     }
 }

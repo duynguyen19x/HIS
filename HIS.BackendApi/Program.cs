@@ -1,13 +1,13 @@
 using HIS.ApplicationService;
 using HIS.AutoMappers;
-using HIS.Core.EntityFrameworkCore;
-using HIS.Core.Repositories;
+using HIS.Core.Domain.EntityFramework;
+using HIS.Core.Domain.Repositories;
+using HIS.Core.Domain.Uow;
 using HIS.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.EntityFrameworkCore.Repositories;
 using HIS.EntityFrameworkCore.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
@@ -29,9 +29,13 @@ void ConfigureService()
         builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
     }));
 
-    builder.Services.TryAddScoped(typeof(IDbContextProvider<>), typeof(DbContextProvider<>));
-    builder.Services.TryAddScoped(typeof(IRepository<,>), typeof(HISRepository<,>));
+    builder.Services.AddScoped(typeof(IDbContextProvider<>), typeof(DbContextProvider<>));
+    builder.Services.AddTransient(typeof(ICurrentUnitOfWorkProvider), typeof(CurrentUnitOfWorkProvider));
+    builder.Services.AddTransient(typeof(IUnitOfWorkManager), typeof(UnitOfWorkManager));
+    builder.Services.AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork<HISDbContext>));
+    builder.Services.AddTransient(typeof(IRepository<,>), typeof(HISRepository<,>));
     builder.Services.AddTransient(typeof(IBulkRepository<,>), typeof(HISBulkRepository<,>));
+    
     builder.Services.ServiceCollection();
 
     string issuer = builder.Configuration.GetValue<string>("Tokens:Issuer");

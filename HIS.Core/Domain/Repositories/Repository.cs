@@ -1,10 +1,10 @@
-﻿using HIS.Core.Entities;
-using HIS.Core.EntityFrameworkCore;
+﻿using HIS.Core.Domain.EntityFramework;
+using HIS.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq.Expressions;
 
-namespace HIS.Core.Repositories
+namespace HIS.Core.Domain.Repositories
 {
     public abstract class Repository<TDbContext, TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey>
         where TDbContext : DbContext
@@ -30,7 +30,16 @@ namespace HIS.Core.Repositories
         public virtual async Task<TEntity> GetAsync(TPrimaryKey id) => await FirstOrDefaultAsync(id) ?? throw new Exception($"There is no such an entity. Entity type: {typeof(TEntity).FullName}, id: {id}");
 
         public virtual TEntity Insert(TEntity entity) => _dbSet.Add(entity).Entity;
+        public virtual TPrimaryKey InsertAndGetId(TEntity entity)
+        {
+            return Insert(entity).Id;
+        }
         public virtual async Task<TEntity> InsertAsync(TEntity entity) => await Task.FromResult(Insert(entity));
+        public virtual async Task<TPrimaryKey> InsertAndGetIdAsync(TEntity entity)
+        {
+            var insertedEntity = await InsertAsync(entity);
+            return insertedEntity.Id;
+        }
 
         public virtual TEntity Update(TEntity entity)
         {
@@ -120,24 +129,14 @@ namespace HIS.Core.Repositories
         }
         protected virtual void AttachIfNot(TEntity entity)
         {
-            if (_dbContext.ChangeTracker.Entries().FirstOrDefault((EntityEntry ent) => ent.Entity == entity) == null)
+            if (_dbContext.ChangeTracker.Entries().FirstOrDefault((ent) => ent.Entity == entity) == null)
             {
                 _dbSet.Attach(entity);
             }
         }
         protected virtual TEntity GetFromChangeTrackerOrNull(TPrimaryKey id)
         {
-            return _dbContext.ChangeTracker.Entries().FirstOrDefault((EntityEntry ent) => ent.Entity is TEntity && EqualityComparer<TPrimaryKey>.Default.Equals(id, (ent.Entity as TEntity).Id))?.Entity as TEntity;
-        }
-    }
-
-    public class Repository<TDbContext, TEntity> : Repository<TDbContext, TEntity, int>
-        where TDbContext : DbContext
-        where TEntity : class, IEntity<int>
-    {
-        public Repository(IDbContextProvider<TDbContext> dbContextProvider) 
-            : base(dbContextProvider)
-        {
+            return _dbContext.ChangeTracker.Entries().FirstOrDefault((ent) => ent.Entity is TEntity && EqualityComparer<TPrimaryKey>.Default.Equals(id, (ent.Entity as TEntity).Id))?.Entity as TEntity;
         }
     }
 }

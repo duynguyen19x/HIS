@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
 using HIS.Application.Core.Services.Dto;
+using HIS.Core.Domain.Repositories;
+using HIS.Core.Domain.Uow;
 using HIS.Core.Linq;
 using HIS.Dtos.Dictionaries.Branchs;
 using HIS.EntityFrameworkCore;
@@ -10,11 +12,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HIS.ApplicationService.Dictionaries.Branchs
 {
-    public class BranchAppService : BaseCrudAppService<BranchDto, Guid, GetAllBranchInput>, IBranchAppService
+    public class DIBranchAppService : BaseCrudAppService<BranchDto, Guid, GetAllBranchInput>, IDIBranchAppService
     {
-        public BranchAppService(HISDbContext context, IMapper mapper) 
+        private readonly IRepository<Branch, Guid> _diBranchRepository;
+
+        public DIBranchAppService(HISDbContext context, IMapper mapper,
+            IRepository<Branch, Guid> diBranchRepository) 
             : base(context, mapper)
         {
+            _diBranchRepository = diBranchRepository;
         }
 
         public async override Task<ResultDto<BranchDto>> Create(BranchDto input)
@@ -28,8 +34,15 @@ namespace HIS.ApplicationService.Dictionaries.Branchs
                     var data = ObjectMapper.Map<Branch>(input);
                     data.CreatedDate = DateTime.Now;
                     data.CreatedBy = SessionExtensions.Login?.Id;
-                    Context.Branchs.Add(data);
-                    await SaveChangesAsync();
+
+                    data.ProvinceId = null;
+                    data.DistrictId = null;
+                    data.WardId = null;
+
+                    await _diBranchRepository.InsertAsync(data);
+
+                    //Context.Branchs.Add(data);
+                    //await SaveChangesAsync();
                     await transaction.CommitAsync();
 
                     result.IsSucceeded = true;
@@ -38,6 +51,7 @@ namespace HIS.ApplicationService.Dictionaries.Branchs
                 catch (Exception ex)
                 {
                     result.Exception(ex);
+                    //transaction.Rollback();
                 }
             }
             return result;

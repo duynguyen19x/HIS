@@ -1,6 +1,6 @@
-﻿using HIS.Core.Entities;
-using HIS.Core.EntityFrameworkCore;
-using HIS.Core.Repositories;
+﻿using HIS.Core.Domain.EntityFramework;
+using HIS.Core.Domain.Repositories;
+using HIS.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 

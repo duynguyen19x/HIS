@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Core.EntityFrameworkCore
+namespace HIS.Core.Domain.EntityFramework
 {
     public interface IDbContextProvider<TDbContext> where TDbContext : DbContext
     {
-        Task<TDbContext> GetDbContextAsync();
         TDbContext GetDbContext();
+        Task<TDbContext> GetDbContextAsync();
     }
 }

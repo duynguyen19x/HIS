@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Core.EntityFrameworkCore
+namespace HIS.Core.Domain.EntityFramework
 {
-    public class DbContextProvider<TDbContext> : IDbContextProvider<TDbContext>
-        where TDbContext : DbContext
+    public class DbContextProvider<TDbContext> : IDbContextProvider<TDbContext> where TDbContext : DbContext
     {
         public TDbContext DbContext { get; }
 
@@ -17,14 +16,24 @@ namespace HIS.Core.EntityFrameworkCore
             DbContext = dbContext;
         }
 
-        public TDbContext GetDbContext()
+        TDbContext IDbContextProvider<TDbContext>.GetDbContext()
         {
             return DbContext;
         }
 
-        public Task<TDbContext> GetDbContextAsync()
+        Task<TDbContext> IDbContextProvider<TDbContext>.GetDbContextAsync()
         {
             return Task.FromResult(DbContext);
         }
+
+        public void Dispose()
+        {
+            if (DbContext != null)
+            {
+                DbContext.Dispose();
+            }
+        }
+
+
     }
 }
