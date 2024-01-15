@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     /// <inheritdoc />
-    public partial class AddTable : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -69,7 +69,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     IsProcedure = table.Column<bool>(type: "bit", nullable: false),
                     IsStroke = table.Column<bool>(type: "bit", nullable: false),
                     IsComplication = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -92,7 +92,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -112,7 +112,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -148,7 +148,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ExecuteDepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ExecuteRoomId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ExecuteUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -173,7 +174,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -193,7 +194,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -213,7 +214,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -233,7 +234,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: true),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -259,6 +260,23 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DIC_Country",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    HeInCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
+                    SortOrder = table.Column<int>(type: "int", nullable: false),
+                    Inactive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DIC_Country", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DIC_DeathCause",
                 columns: table => new
                 {
@@ -268,7 +286,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -291,7 +309,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -311,7 +329,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -385,7 +403,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Address = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -438,7 +456,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -459,7 +477,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -467,23 +485,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DIC_MedicalRecordTypeGroup", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DIC_National",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Code = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    HeInCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    SortOrder = table.Column<int>(type: "int", nullable: false),
-                    Inactive = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DIC_National", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -497,7 +498,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -518,7 +519,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -538,7 +539,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -575,7 +576,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -595,7 +596,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -615,7 +616,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -636,7 +637,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -652,8 +653,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoomTypeCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    RoomTypeName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false)
@@ -705,7 +706,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: true),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -744,7 +745,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -764,7 +765,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -784,7 +785,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -807,7 +808,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -828,7 +829,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -926,6 +927,21 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SYSRefTypeCategory",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RefTypeCategoryName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    SortOrder = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SYSRefTypeCategory", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DIC_Icd",
                 columns: table => new
                 {
@@ -953,7 +969,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     TypeNameEnglish = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -980,7 +996,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
                     MedicalRecordTypeGroupID = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -1007,7 +1023,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
                     ProvinceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -1075,7 +1091,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     QualityStandards = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     AutoNumber = table.Column<int>(type: "int", nullable: false),
                     CommodityType = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -1087,6 +1103,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     table.PrimaryKey("PK_DIC_ItemType", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_DIC_ItemType_DIC_Country_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "DIC_Country",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_DIC_ItemType_DIC_ItemGroup_ItemGroupId",
                         column: x => x.ItemGroupId,
                         principalTable: "DIC_ItemGroup",
@@ -1095,11 +1116,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_DIC_ItemType_DIC_ItemLine_ItemLineId",
                         column: x => x.ItemLineId,
                         principalTable: "DIC_ItemLine",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_DIC_ItemType_DIC_National_CountryId",
-                        column: x => x.CountryId,
-                        principalTable: "DIC_National",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_DIC_ItemType_DIC_Unit_UnitId",
@@ -1123,7 +1139,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ServiceGroupId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ServiceGroupHeInId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     SurgicalProcedureTypeId = table.Column<int>(type: "int", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -1204,6 +1220,28 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SYSRefType",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RefTypeName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    RefTypeCategoryId = table.Column<int>(type: "int", nullable: true),
+                    ParentId = table.Column<int>(type: "int", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
+                    SortOrder = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SYSRefType", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SYSRefType_SYSRefTypeCategory_RefTypeCategoryId",
+                        column: x => x.RefTypeCategoryId,
+                        principalTable: "SYSRefTypeCategory",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DIC_Ward",
                 columns: table => new
                 {
@@ -1215,7 +1253,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
                     DistrictId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -1265,7 +1303,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     TenderYear = table.Column<int>(type: "int", nullable: true),
                     CommodityType = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -1277,6 +1315,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     table.PrimaryKey("PK_DIC_Item", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_DIC_Item_DIC_Country_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "DIC_Country",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_DIC_Item_DIC_ItemLine_ItemLineId",
                         column: x => x.ItemLineId,
                         principalTable: "DIC_ItemLine",
@@ -1285,11 +1328,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_DIC_Item_DIC_ItemType_ItemTypeId",
                         column: x => x.ItemTypeId,
                         principalTable: "DIC_ItemType",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_DIC_Item_DIC_National_CountryId",
-                        column: x => x.CountryId,
-                        principalTable: "DIC_National",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_DIC_Item_DIC_Unit_UnitId",
@@ -1315,7 +1353,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     DiscountAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     PatientTypeId = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -1352,7 +1390,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     CeilingPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     PaymentRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     ExecutionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -1415,7 +1453,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     GenderId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     EthnicId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ReligionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    NationalId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CountryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ProvinceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     DistrictId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     WardId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -1428,7 +1466,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Tel = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     Mobile = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -1445,6 +1484,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         principalTable: "DIC_Career",
                         principalColumn: "Id");
                     table.ForeignKey(
+                        name: "FK_BUS_Patient_DIC_Country_CountryId",
+                        column: x => x.CountryId,
+                        principalTable: "DIC_Country",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_BUS_Patient_DIC_District_DistrictId",
                         column: x => x.DistrictId,
                         principalTable: "DIC_District",
@@ -1458,11 +1502,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_BUS_Patient_DIC_Gender_GenderId",
                         column: x => x.GenderId,
                         principalTable: "DIC_Gender",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_BUS_Patient_DIC_National_NationalId",
-                        column: x => x.NationalId,
-                        principalTable: "DIC_National",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_BUS_Patient_DIC_Province_ProvinceId",
@@ -1588,7 +1627,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     AutopsyIcdName = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     StoreTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     StoreCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -1605,6 +1644,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         principalTable: "DIC_Career",
                         principalColumn: "Id");
                     table.ForeignKey(
+                        name: "FK_BUS_PatientRecord_DIC_Country_NationalId",
+                        column: x => x.NationalId,
+                        principalTable: "DIC_Country",
+                        principalColumn: "Id");
+                    table.ForeignKey(
                         name: "FK_BUS_PatientRecord_DIC_District_DistrictId",
                         column: x => x.DistrictId,
                         principalTable: "DIC_District",
@@ -1618,11 +1662,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_BUS_PatientRecord_DIC_Gender_GenderId",
                         column: x => x.GenderId,
                         principalTable: "DIC_Gender",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_BUS_PatientRecord_DIC_National_NationalId",
-                        column: x => x.NationalId,
-                        principalTable: "DIC_National",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_BUS_PatientRecord_DIC_Province_ProvinceId",
@@ -1662,7 +1701,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -1699,7 +1738,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     PaymentRate = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     ExecutionTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -1728,13 +1767,26 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ServiceResultIndiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ServiceRequestDataId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ServiceRequestId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Result = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
+                    TestingMachine = table.Column<string>(type: "nvarchar(1024)", maxLength: 1024, nullable: true),
                     ResultType = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BUS_ServiceResultData", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BUS_ServiceResultData_BUS_ServiceRequestData_ServiceRequestDataId",
+                        column: x => x.ServiceRequestDataId,
+                        principalTable: "BUS_ServiceRequestData",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_BUS_ServiceResultData_BUS_ServiceRequest_ServiceRequestId",
+                        column: x => x.ServiceRequestId,
+                        principalTable: "BUS_ServiceRequest",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_BUS_ServiceResultData_DIC_ServiceResultIndice_ServiceResultIndiceId",
                         column: x => x.ServiceResultIndiceId,
@@ -1765,7 +1817,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     HasBirthCertificate = table.Column<bool>(type: "bit", nullable: false),
                     PatientRecordId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PatientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -1815,7 +1867,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: true),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -1870,15 +1922,15 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RoomCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    RoomName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     MohCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     RoomTypeId = table.Column<int>(type: "int", nullable: false),
                     DepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
@@ -1930,7 +1982,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     StockExpTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     StockExpUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CommodityType = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -2017,7 +2069,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ItemId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     AvailableQuantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ModifiedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -2183,214 +2235,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "DIC_DeathCause",
-                columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
-                values: new object[,]
-                {
-                    { new Guid("4333ca55-4d7c-4be0-b9a2-2125624f0229"), "DO_TAI_BIEN", null, new DateTime(2023, 12, 7, 21, 18, 39, 713, DateTimeKind.Local).AddTicks(5134), null, false, null, null, "Do tai biến điều trị", 2 },
-                    { new Guid("4d5b5c50-6be0-434e-8baa-a528af4a58b5"), "KHAC", null, new DateTime(2023, 12, 7, 21, 18, 39, 713, DateTimeKind.Local).AddTicks(5137), null, false, null, null, "Khác", 3 },
-                    { new Guid("c0a4d767-7ba9-4006-a0a9-020b6322c2ef"), "DO_BENH", null, new DateTime(2023, 12, 7, 21, 18, 39, 713, DateTimeKind.Local).AddTicks(5115), null, false, null, null, "Do bệnh", 1 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "DIC_DeathWithin",
-                columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
-                values: new object[,]
-                {
-                    { new Guid("66c3a43b-f9d0-4876-81e2-b13c5f188589"), "TRONG_24H", null, new DateTime(2023, 12, 7, 21, 18, 39, 715, DateTimeKind.Local).AddTicks(969), null, false, null, null, "Trong 24h vào", 1 },
-                    { new Guid("7693d6ec-cf0f-44c1-a9d7-fb997335ae10"), "TRONG_72H", null, new DateTime(2023, 12, 7, 21, 18, 39, 715, DateTimeKind.Local).AddTicks(988), null, false, null, null, "Trong 72h vào", 3 },
-                    { new Guid("8f2b1eeb-a4bd-4f84-b59c-98145c58b1ab"), "KHAC", null, new DateTime(2023, 12, 7, 21, 18, 39, 715, DateTimeKind.Local).AddTicks(990), null, false, null, null, "Khác", 4 },
-                    { new Guid("f91d8342-619c-435b-b51c-8b3d7f541222"), "TRONG_48H", null, new DateTime(2023, 12, 7, 21, 18, 39, 715, DateTimeKind.Local).AddTicks(985), null, false, null, null, "Trong 48h vào", 2 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "DIC_DepartmentType",
-                columns: new[] { "Id", "Code", "Description", "Inactive", "Name", "SortOrder" },
-                values: new object[,]
-                {
-                    { 1, "LS", null, false, "Khoa lâm sàng", 1 },
-                    { 2, "CLS", null, false, "Khoa cận lâm sàng", 2 },
-                    { 3, "DUOC", null, false, "Khoa dược", 3 },
-                    { 4, "KHTH", null, false, "Kế hoạch tổng hợp", 4 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "DIC_Ethnic",
-                columns: new[] { "Id", "Code", "Description", "Inactive", "MohCode", "Name", "SortOrder" },
-                values: new object[,]
-                {
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170901"), "01", null, false, "13", "Ba na", 1 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170902"), "02", null, false, "49", "Bố y", 2 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170903"), "03", null, false, "52", "Brâu", 3 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170904"), "04", null, false, "17", "Chăm", 4 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170905"), "05", null, false, "32", "Chơ ro", 5 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170906"), "06", null, false, "36", "Chu ru", 6 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170907"), "07", null, false, "44", "Chứt", 7 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170908"), "08", null, false, "30", "Co", 8 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170909"), "09", null, false, "48", "Cống", 9 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170910"), "10", null, false, "16", "Cơ ho", 10 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170911"), "11", null, false, "47", "Cờ lao", 11 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170912"), "12", null, false, "9", "Dao", 12 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170913"), "13", null, false, "12", "Ê đê", 13 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170914"), "14", null, false, "10", "Gia rai", 14 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170915"), "15", null, false, "25", "Giấy", 15 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170916"), "16", null, false, "27", "Gié triêng", 16 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170917"), "17", null, false, "8", "H mông", 17 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170918"), "18", null, false, "19", "H rê", 18 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170919"), "19", null, false, "35", "Hà nhì", 19 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170920"), "20", null, false, "4", "Hoa", 20 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170921"), "21", null, false, "26", "K tu", 21 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170922"), "22", null, false, "33", "Kháng", 22 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170923"), "23", null, false, "5", "Khơ me", 23 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170924"), "24", null, false, "29", "Khơ mú", 24 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170925"), "25", null, false, "1", "Kinh", 25 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170926"), "26", null, false, "38", "La chí", 26 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170927"), "27", null, false, "39", "La ha", 27 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170928"), "28", null, false, "41", "La hù", 28 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170929"), "29", null, false, "37", "Lào", 29 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170930"), "30", null, false, "43", "Lô lô", 30 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170931"), "31", null, false, "42", "Lự", 31 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170932"), "32", null, false, "20", "M nông", 32 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170933"), "33", null, false, "28", "Mạ", 33 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170934"), "34", null, false, "45", "Mảng", 34 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170935"), "35", null, false, "6", "Mường", 35 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170936"), "36", null, false, "11", "Ngái", 36 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170937"), "37", null, false, "7", "Nùng", 37 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170938"), "38", null, false, "53", "Ơ đu", 38 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170939"), "39", null, false, "46", "Pà thén", 39 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170940"), "40", null, false, "40", "Phù lá", 40 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170941"), "41", null, false, "51", "Pu péo", 41 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170942"), "42", null, false, "21", "Rag lai", 42 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170943"), "43", null, false, "54", "Rơ man", 43 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170944"), "44", null, false, "15", "Sán chay", 44 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170945"), "45", null, false, "18", "Sán dìu", 45 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170946"), "46", null, false, "50", "Si la", 46 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170947"), "47", null, false, "31", "Tà ôi", 47 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170948"), "48", null, false, "2", "Tày", 48 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170949"), "49", null, false, "3", "Thái", 49 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170950"), "50", null, false, "24", "Thố", 50 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170951"), "51", null, false, "23", "Vân kiều", 51 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170952"), "52", null, false, "22", "X tiêng", 52 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170953"), "53", null, false, "34", "Xinh mun", 53 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170954"), "54", null, false, "14", "Xơ đăng", 54 },
-                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170999"), "99", null, false, "55", "Nước ngoài", 99 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "DIC_Gender",
-                columns: new[] { "Id", "Code", "Description", "Inactive", "Name", "SortOrder" },
-                values: new object[,]
-                {
-                    { new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"), "KXD", null, false, "Chưa xác định", 0 },
-                    { new Guid("e9497984-d355-41af-b917-091500956be9"), "NU", null, false, "Nữ", 2 },
-                    { new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"), "NAM", null, false, "Nam", 1 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "DIC_ItemGroup",
-                columns: new[] { "Id", "Code", "CommodityType", "Inactive", "IsSystem", "Name", "SortOrder" },
-                values: new object[,]
-                {
-                    { new Guid("00be783e-d679-4f1c-9ae2-a4f4c79de0ef"), "TKSV", 0, false, true, "Thuốc kháng sinh viên", 4 },
-                    { new Guid("05a24915-0bed-4f61-b53d-b5e52482e44c"), "TK", 0, false, true, "Thuốc khác", 21 },
-                    { new Guid("077fe8b3-03d1-4c4c-b7be-5f7fb2015957"), "VTAC", 1, false, true, "Vật tư ấn chỉ", 27 },
-                    { new Guid("18b82fb4-2ba8-4713-871f-3ba51c031b42"), "VTTH", 1, false, true, "Vật tư tiêu hoa", 23 },
-                    { new Guid("25454ce7-bff0-4fd5-a47a-069554c1535a"), "VC", 0, false, true, "Vaccine", 19 },
-                    { new Guid("27988a81-eeab-41f0-a279-c774259ecdcf"), "VTCC", 1, false, true, "Vật tư công cụ - dụng cụ", 30 },
-                    { new Guid("2a8c130b-8170-4776-b3bc-51eb9da01d35"), "VTNV", 1, false, true, "Vật tư nẹp vít", 26 },
-                    { new Guid("2f5148cb-8adf-45ec-88ee-f84530cfa164"), "THTT", 0, false, true, "Thuốc hướng tâm thần", 10 },
-                    { new Guid("2fd41f93-ddb9-47dd-9833-4507ce71128c"), "TV", 0, false, true, "Thuốc viên", 1 },
-                    { new Guid("3144745c-477c-4ce2-9c33-a38eb2153057"), "SP", 0, false, true, "Sinh phẩm", 18 },
-                    { new Guid("31d26ca7-2b5f-4dfd-b961-f3609e6a0b69"), "TCO", 0, false, true, "Nhóm thuốc corticoid", 12 },
-                    { new Guid("35df3868-8db6-440d-809f-f4c345d804a7"), "TS", 0, false, true, "Thuốc siro", 6 },
-                    { new Guid("54eed868-2c02-46b3-acdf-e064a4ddb893"), "VTXH", 1, false, true, "Vật tư xã hội hóa", 31 },
-                    { new Guid("58215bd0-ff85-45b4-90bb-4550f7e97838"), "VTHC", 1, false, true, "Vật tư hóa chất", 25 },
-                    { new Guid("58291959-c2ca-45d6-b68d-ef81568fc163"), "VTXH", 1, false, true, "Vật tư khác", 32 },
-                    { new Guid("6375b8a1-b6e7-4724-a1b4-8cc3acc98e43"), "KCVI", 0, false, true, "Khoáng chất và Vitamin", 5 },
-                    { new Guid("8590ae3d-351c-4438-bfe5-3f69dcf97349"), "TB", 0, false, true, "Thuốc bột", 8 },
-                    { new Guid("891ad741-f6dc-48ee-be99-3e678b5e8f6c"), "VTTT", 1, false, true, "Vật tư thay thế", 24 },
-                    { new Guid("914ca65d-6579-4590-b963-fee8a743bae1"), "DC", 0, false, true, "Dịch truyền", 3 },
-                    { new Guid("9e144dff-29f6-47da-b7ed-b55abd1a2cd3"), "VTNT", 0, false, true, "Vật tư nhà thuốc", 20 },
-                    { new Guid("a15b74b8-1a38-42de-b958-a62bbd5d8a02"), "VTTB", 1, false, true, "Vật tư thiết bị y tế", 28 },
-                    { new Guid("a28fb46e-e9b9-410e-9c31-d8ebfd22015c"), "TKTT", 0, false, true, "Thuốc kê tự túc", 16 },
-                    { new Guid("ae04abd7-d012-470d-9b8a-f38d9c5c94a8"), "TG", 0, false, true, "Thuốc gói", 14 },
-                    { new Guid("b5f03233-d733-4349-93df-db562b7d4376"), "THD", 0, false, true, "Thuốc hỗn dịch", 6 },
-                    { new Guid("c987b9d2-e599-49cc-99f3-d075d27cee7c"), "TDY", 0, false, true, "Thuốc đông y", 5 },
-                    { new Guid("c9c64187-bf8c-49f4-8b5b-2a04c9aafb5b"), "VTYT", 1, false, true, "Vật tư y tế", 22 },
-                    { new Guid("cc48bb40-fbf0-4054-818c-eb49545aaeea"), "TDN", 0, false, true, "Thuốc dùng ngoài", 7 },
-                    { new Guid("cd5d7538-b1d2-448d-b6ff-c139c35f9dc7"), "TGTM", 0, false, true, "Thuốc gây tê, mê", 13 },
-                    { new Guid("d3ee2c41-ac9f-4356-8b76-a9b319929970"), "VTDC", 1, false, true, "Vật tư dụng cụ", 29 },
-                    { new Guid("ddf105e8-6534-46e4-832b-598daa84c4d5"), "TGN", 0, false, true, "Thuốc gây nghiện", 9 },
-                    { new Guid("e47ab5de-9ea5-4075-8da5-7ae9f36538e2"), "TUT", 0, false, true, "Thuốc ung thư", 15 },
-                    { new Guid("e482e866-9243-49d8-8676-403377de353c"), "TKSO", 0, false, true, "Thuốc kháng sinh ống", 11 },
-                    { new Guid("ea57a262-6647-4e88-880c-82bc4227e916"), "TNM", 0, false, true, "Thuốc nhỏ mắt", 17 },
-                    { new Guid("ff9be71e-a958-4244-9df1-1582229c67d5"), "TU", 0, false, true, "Thuốc uống", 2 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "DIC_ItemLine",
-                columns: new[] { "Id", "Code", "Inactive", "Name", "SortOrder" },
-                values: new object[,]
-                {
-                    { new Guid("03bd1fdc-d2b8-4969-a029-5022ca68f31e"), "1.02", false, "Ngậm", 2 },
-                    { new Guid("05a24915-0bed-4f61-b53d-b5e52482e44c"), "1.01", false, "Uống", 1 },
-                    { new Guid("08f7b3c2-09da-4b4a-9c98-75c8562807ee"), "6.09", false, "Dung dịch", 44 },
-                    { new Guid("0c8ba522-0e4b-40a0-9d93-936f5350853e"), "5.08", false, "Xịt họng", 38 },
-                    { new Guid("0df82239-15dd-41ee-afc8-67cb51d5f3f6"), "5.03", false, "Bột hít", 33 },
-                    { new Guid("13165217-8025-44e0-a92b-1f8318d56282"), "2.13", false, "Tiêm vào khối u", 18 },
-                    { new Guid("1ef26d8f-57d7-423c-a8c6-e3a20a249b37"), "6.01", false, "Nhỏ mũi", 40 },
-                    { new Guid("229172a9-7464-4216-8b11-4e587e4c280c"), "5.01", false, "Phun mù", 31 },
-                    { new Guid("2bd555b2-74ae-4b3f-9d27-de30e10bf16f"), "3.01", false, "Bôi", 21 },
-                    { new Guid("2f6e29a1-9a1f-44b0-8f9e-ea1c8716c23b"), "2.10", false, "Tiêm", 15 },
-                    { new Guid("379c8a46-145d-4956-af5d-2d48d9d55087"), "6.03", false, "Tra mắt", 42 },
-                    { new Guid("3df25942-afc9-4ed5-88b3-a0ff7b0ad968"), "4.02", false, "Đặt hậu môn", 26 },
-                    { new Guid("41c24ffd-81f8-44f4-92f7-b3e5d418c8c7"), "2.15", false, "Tiêm truyền", 20 },
-                    { new Guid("49783593-80ca-4a9f-8ff9-5d359307498c"), "4.03", false, "Thụt hậu môn - trực tràng", 27 },
-                    { new Guid("5a807206-9aef-481d-87b6-88f464e6fd46"), "3.04", false, "Xịt ngoài da", 24 },
-                    { new Guid("5d6b6689-0dc3-4f11-94ef-02d288cce18a"), "2.03", false, "Tiêm trong da", 8 },
-                    { new Guid("5eada7db-843c-453b-8a44-3de2dacaa27b"), "1.05", false, "Ngậm dưới lưỡi", 5 },
-                    { new Guid("5ef14843-323d-4fe9-a424-46ca3120fca9"), "2.02", false, "Tiêm dưới da", 7 },
-                    { new Guid("60f3158e-73f2-453f-af90-072b6b25c644"), "3.05", false, "Dùng ngoài", 1 },
-                    { new Guid("65ca8fd8-fb9b-4dea-9c0e-c9a3b6b8fbd8"), "2.11", false, "Tiêm động mạch khối u", 16 },
-                    { new Guid("6cdf2301-9621-4f73-9c62-f48ab80245c8"), "5.02", false, "Dạng hít", 32 },
-                    { new Guid("6edba7a9-20fe-49c0-9925-ba3b32ed32a0"), "2.14", false, "Tiêm truyền tĩnh mạch", 19 },
-                    { new Guid("6f90ecfe-4ede-4241-918b-b18245208f56"), "2.01", false, "Tiêm bặp", 6 },
-                    { new Guid("71edc6f8-3db6-4375-9005-c5328627fa28"), "3.03", false, "Dán trên da", 23 },
-                    { new Guid("75017c25-2ad7-4cce-b206-38735fd3584d"), "3.02", false, "Xoa ngoài", 22 },
-                    { new Guid("7990c54f-dc34-4a62-a8da-201d22c1069d"), "4.05", false, "Đặt tử cung", 29 },
-                    { new Guid("7b3a86dc-9b0c-43f8-94a9-e4eec9916e30"), "5.09", false, "Thuốc mũi", 39 },
-                    { new Guid("7d92b632-0ccf-4be5-a044-c3ee549fdb9f"), "6.04", false, "Nhỏ tai", 43 },
-                    { new Guid("8d9cd0b1-2407-4cc3-9d94-314602e26508"), "5.07", false, "Xịt mũi", 37 },
-                    { new Guid("8f65d7cf-bbd9-44f4-b556-20472aa4a5f0"), "4.06", false, "Thụt", 30 },
-                    { new Guid("a26814e4-da59-4317-a297-5ca089ef2dad"), "1.04", false, "Đặt dưới lưỡi", 4 },
-                    { new Guid("a29889f5-4943-4520-85fa-441c3ea9e979"), "1.03", false, "Nhai", 3 },
-                    { new Guid("b12f310c-c12a-4f8f-a9bd-ddd38b4eebcf"), "5.06", false, "Đường hô hấp", 36 },
-                    { new Guid("c0097373-f633-4bee-b670-2d2c35b5d172"), "2.12", false, "Tiêm vào khoang tự nhiên", 17 },
-                    { new Guid("c6ffa735-8813-41ea-8984-5700dbee1ea7"), "2.09", false, "Tiêm vào các khoang của cơ thế", 14 },
-                    { new Guid("ca37423b-25c7-4a84-a32d-8767bf14352b"), "5.04", false, "Xịt", 34 },
-                    { new Guid("cae9f723-e795-48d5-9730-f19edceaa5b6"), "2.04", false, "Tiêm tĩnh mạch", 9 },
-                    { new Guid("cb51640d-bd7e-4cba-b64d-191d4162efa4"), "4.01", false, "Đặt âm đạo", 25 },
-                    { new Guid("d075055e-4ed2-4d37-82ae-c9c20cb4f08f"), "2.06", false, "Tiêm vào ổ khớp", 11 },
-                    { new Guid("d36d932c-00db-451d-9a02-a401dbd89408"), "2.07", false, "Tiêm nội nhãn cầu", 12 },
-                    { new Guid("d558492b-6628-40ca-aadf-5dda7701681a"), "4.04", false, "Đặt", 28 },
-                    { new Guid("d81efde6-f750-4a66-adf3-a9092bb8ea9b"), "5.05", false, "Khí dung", 35 },
-                    { new Guid("e485d3cc-5a96-48c9-9ed3-8725bb0136ef"), "6.02", false, "Nhỏ mắt", 41 },
-                    { new Guid("e578f37b-9f1b-4098-8659-ac510ced491a"), "2.08", false, "Tiêm trong dịch kích của mắt", 13 },
-                    { new Guid("febb52a6-15bc-4e28-bc84-e928b43b126b"), "2.05", false, "Tiêm truyền tĩnh mạch", 10 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "DIC_MedicalRecordTypeGroup",
-                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "MedicalRecordTypeGroupCode", "MedicalRecordTypeGroupName", "ModifiedBy", "ModifiedDate", "SortOrder" },
-                values: new object[,]
-                {
-                    { 1, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(2306), null, false, "1", "Khám bệnh", null, null, 3 },
-                    { 2, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(2305), null, false, "2", "Ngoại trú", null, null, 2 },
-                    { 3, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(2284), null, false, "3", "Nội trú", null, null, 1 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "DIC_National",
+                table: "DIC_Country",
                 columns: new[] { "Id", "Code", "Description", "HeInCode", "Inactive", "Name", "SortOrder" },
                 values: new object[,]
                 {
@@ -2650,13 +2495,220 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "DIC_DeathCause",
+                columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
+                values: new object[,]
+                {
+                    { new Guid("4333ca55-4d7c-4be0-b9a2-2125624f0229"), "DO_TAI_BIEN", null, new DateTime(2024, 1, 16, 0, 27, 36, 334, DateTimeKind.Local).AddTicks(3912), null, false, null, null, "Do tai biến điều trị", 2 },
+                    { new Guid("4d5b5c50-6be0-434e-8baa-a528af4a58b5"), "KHAC", null, new DateTime(2024, 1, 16, 0, 27, 36, 334, DateTimeKind.Local).AddTicks(3914), null, false, null, null, "Khác", 3 },
+                    { new Guid("c0a4d767-7ba9-4006-a0a9-020b6322c2ef"), "DO_BENH", null, new DateTime(2024, 1, 16, 0, 27, 36, 334, DateTimeKind.Local).AddTicks(3894), null, false, null, null, "Do bệnh", 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "DIC_DeathWithin",
+                columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
+                values: new object[,]
+                {
+                    { new Guid("66c3a43b-f9d0-4876-81e2-b13c5f188589"), "TRONG_24H", null, new DateTime(2024, 1, 16, 0, 27, 36, 335, DateTimeKind.Local).AddTicks(6640), null, false, null, null, "Trong 24h vào", 1 },
+                    { new Guid("7693d6ec-cf0f-44c1-a9d7-fb997335ae10"), "TRONG_72H", null, new DateTime(2024, 1, 16, 0, 27, 36, 335, DateTimeKind.Local).AddTicks(6654), null, false, null, null, "Trong 72h vào", 3 },
+                    { new Guid("8f2b1eeb-a4bd-4f84-b59c-98145c58b1ab"), "KHAC", null, new DateTime(2024, 1, 16, 0, 27, 36, 335, DateTimeKind.Local).AddTicks(6663), null, false, null, null, "Khác", 4 },
+                    { new Guid("f91d8342-619c-435b-b51c-8b3d7f541222"), "TRONG_48H", null, new DateTime(2024, 1, 16, 0, 27, 36, 335, DateTimeKind.Local).AddTicks(6652), null, false, null, null, "Trong 48h vào", 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "DIC_DepartmentType",
+                columns: new[] { "Id", "Code", "Description", "Inactive", "Name", "SortOrder" },
+                values: new object[,]
+                {
+                    { 1, "LS", null, false, "Khoa lâm sàng", 1 },
+                    { 2, "CLS", null, false, "Khoa cận lâm sàng", 2 },
+                    { 3, "DUOC", null, false, "Khoa dược", 3 },
+                    { 4, "KHTH", null, false, "Kế hoạch tổng hợp", 4 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "DIC_Ethnic",
+                columns: new[] { "Id", "Code", "Description", "Inactive", "MohCode", "Name", "SortOrder" },
+                values: new object[,]
+                {
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170901"), "01", null, false, "13", "Ba na", 1 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170902"), "02", null, false, "49", "Bố y", 2 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170903"), "03", null, false, "52", "Brâu", 3 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170904"), "04", null, false, "17", "Chăm", 4 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170905"), "05", null, false, "32", "Chơ ro", 5 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170906"), "06", null, false, "36", "Chu ru", 6 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170907"), "07", null, false, "44", "Chứt", 7 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170908"), "08", null, false, "30", "Co", 8 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170909"), "09", null, false, "48", "Cống", 9 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170910"), "10", null, false, "16", "Cơ ho", 10 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170911"), "11", null, false, "47", "Cờ lao", 11 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170912"), "12", null, false, "9", "Dao", 12 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170913"), "13", null, false, "12", "Ê đê", 13 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170914"), "14", null, false, "10", "Gia rai", 14 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170915"), "15", null, false, "25", "Giấy", 15 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170916"), "16", null, false, "27", "Gié triêng", 16 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170917"), "17", null, false, "8", "H mông", 17 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170918"), "18", null, false, "19", "H rê", 18 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170919"), "19", null, false, "35", "Hà nhì", 19 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170920"), "20", null, false, "4", "Hoa", 20 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170921"), "21", null, false, "26", "K tu", 21 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170922"), "22", null, false, "33", "Kháng", 22 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170923"), "23", null, false, "5", "Khơ me", 23 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170924"), "24", null, false, "29", "Khơ mú", 24 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170925"), "25", null, false, "1", "Kinh", 25 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170926"), "26", null, false, "38", "La chí", 26 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170927"), "27", null, false, "39", "La ha", 27 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170928"), "28", null, false, "41", "La hù", 28 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170929"), "29", null, false, "37", "Lào", 29 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170930"), "30", null, false, "43", "Lô lô", 30 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170931"), "31", null, false, "42", "Lự", 31 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170932"), "32", null, false, "20", "M nông", 32 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170933"), "33", null, false, "28", "Mạ", 33 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170934"), "34", null, false, "45", "Mảng", 34 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170935"), "35", null, false, "6", "Mường", 35 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170936"), "36", null, false, "11", "Ngái", 36 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170937"), "37", null, false, "7", "Nùng", 37 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170938"), "38", null, false, "53", "Ơ đu", 38 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170939"), "39", null, false, "46", "Pà thén", 39 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170940"), "40", null, false, "40", "Phù lá", 40 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170941"), "41", null, false, "51", "Pu péo", 41 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170942"), "42", null, false, "21", "Rag lai", 42 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170943"), "43", null, false, "54", "Rơ man", 43 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170944"), "44", null, false, "15", "Sán chay", 44 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170945"), "45", null, false, "18", "Sán dìu", 45 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170946"), "46", null, false, "50", "Si la", 46 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170947"), "47", null, false, "31", "Tà ôi", 47 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170948"), "48", null, false, "2", "Tày", 48 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170949"), "49", null, false, "3", "Thái", 49 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170950"), "50", null, false, "24", "Thố", 50 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170951"), "51", null, false, "23", "Vân kiều", 51 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170952"), "52", null, false, "22", "X tiêng", 52 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170953"), "53", null, false, "34", "Xinh mun", 53 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170954"), "54", null, false, "14", "Xơ đăng", 54 },
+                    { new Guid("9c01ca1a-fb5b-4620-a217-0046c3170999"), "99", null, false, "55", "Nước ngoài", 99 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "DIC_Gender",
+                columns: new[] { "Id", "Code", "Description", "Inactive", "Name", "SortOrder" },
+                values: new object[,]
+                {
+                    { new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"), "KXD", null, false, "Chưa xác định", 0 },
+                    { new Guid("e9497984-d355-41af-b917-091500956be9"), "NU", null, false, "Nữ", 2 },
+                    { new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"), "NAM", null, false, "Nam", 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "DIC_ItemGroup",
+                columns: new[] { "Id", "Code", "CommodityType", "Inactive", "IsSystem", "Name", "SortOrder" },
+                values: new object[,]
+                {
+                    { new Guid("00be783e-d679-4f1c-9ae2-a4f4c79de0ef"), "TKSV", 0, false, true, "Thuốc kháng sinh viên", 4 },
+                    { new Guid("05a24915-0bed-4f61-b53d-b5e52482e44c"), "TK", 0, false, true, "Thuốc khác", 21 },
+                    { new Guid("077fe8b3-03d1-4c4c-b7be-5f7fb2015957"), "VTAC", 1, false, true, "Vật tư ấn chỉ", 27 },
+                    { new Guid("18b82fb4-2ba8-4713-871f-3ba51c031b42"), "VTTH", 1, false, true, "Vật tư tiêu hoa", 23 },
+                    { new Guid("25454ce7-bff0-4fd5-a47a-069554c1535a"), "VC", 0, false, true, "Vaccine", 19 },
+                    { new Guid("27988a81-eeab-41f0-a279-c774259ecdcf"), "VTCC", 1, false, true, "Vật tư công cụ - dụng cụ", 30 },
+                    { new Guid("2a8c130b-8170-4776-b3bc-51eb9da01d35"), "VTNV", 1, false, true, "Vật tư nẹp vít", 26 },
+                    { new Guid("2f5148cb-8adf-45ec-88ee-f84530cfa164"), "THTT", 0, false, true, "Thuốc hướng tâm thần", 10 },
+                    { new Guid("2fd41f93-ddb9-47dd-9833-4507ce71128c"), "TV", 0, false, true, "Thuốc viên", 1 },
+                    { new Guid("3144745c-477c-4ce2-9c33-a38eb2153057"), "SP", 0, false, true, "Sinh phẩm", 18 },
+                    { new Guid("31d26ca7-2b5f-4dfd-b961-f3609e6a0b69"), "TCO", 0, false, true, "Nhóm thuốc corticoid", 12 },
+                    { new Guid("35df3868-8db6-440d-809f-f4c345d804a7"), "TS", 0, false, true, "Thuốc siro", 6 },
+                    { new Guid("54eed868-2c02-46b3-acdf-e064a4ddb893"), "VTXH", 1, false, true, "Vật tư xã hội hóa", 31 },
+                    { new Guid("58215bd0-ff85-45b4-90bb-4550f7e97838"), "VTHC", 1, false, true, "Vật tư hóa chất", 25 },
+                    { new Guid("58291959-c2ca-45d6-b68d-ef81568fc163"), "VTXH", 1, false, true, "Vật tư khác", 32 },
+                    { new Guid("6375b8a1-b6e7-4724-a1b4-8cc3acc98e43"), "KCVI", 0, false, true, "Khoáng chất và Vitamin", 5 },
+                    { new Guid("8590ae3d-351c-4438-bfe5-3f69dcf97349"), "TB", 0, false, true, "Thuốc bột", 8 },
+                    { new Guid("891ad741-f6dc-48ee-be99-3e678b5e8f6c"), "VTTT", 1, false, true, "Vật tư thay thế", 24 },
+                    { new Guid("914ca65d-6579-4590-b963-fee8a743bae1"), "DC", 0, false, true, "Dịch truyền", 3 },
+                    { new Guid("9e144dff-29f6-47da-b7ed-b55abd1a2cd3"), "VTNT", 0, false, true, "Vật tư nhà thuốc", 20 },
+                    { new Guid("a15b74b8-1a38-42de-b958-a62bbd5d8a02"), "VTTB", 1, false, true, "Vật tư thiết bị y tế", 28 },
+                    { new Guid("a28fb46e-e9b9-410e-9c31-d8ebfd22015c"), "TKTT", 0, false, true, "Thuốc kê tự túc", 16 },
+                    { new Guid("ae04abd7-d012-470d-9b8a-f38d9c5c94a8"), "TG", 0, false, true, "Thuốc gói", 14 },
+                    { new Guid("b5f03233-d733-4349-93df-db562b7d4376"), "THD", 0, false, true, "Thuốc hỗn dịch", 6 },
+                    { new Guid("c987b9d2-e599-49cc-99f3-d075d27cee7c"), "TDY", 0, false, true, "Thuốc đông y", 5 },
+                    { new Guid("c9c64187-bf8c-49f4-8b5b-2a04c9aafb5b"), "VTYT", 1, false, true, "Vật tư y tế", 22 },
+                    { new Guid("cc48bb40-fbf0-4054-818c-eb49545aaeea"), "TDN", 0, false, true, "Thuốc dùng ngoài", 7 },
+                    { new Guid("cd5d7538-b1d2-448d-b6ff-c139c35f9dc7"), "TGTM", 0, false, true, "Thuốc gây tê, mê", 13 },
+                    { new Guid("d3ee2c41-ac9f-4356-8b76-a9b319929970"), "VTDC", 1, false, true, "Vật tư dụng cụ", 29 },
+                    { new Guid("ddf105e8-6534-46e4-832b-598daa84c4d5"), "TGN", 0, false, true, "Thuốc gây nghiện", 9 },
+                    { new Guid("e47ab5de-9ea5-4075-8da5-7ae9f36538e2"), "TUT", 0, false, true, "Thuốc ung thư", 15 },
+                    { new Guid("e482e866-9243-49d8-8676-403377de353c"), "TKSO", 0, false, true, "Thuốc kháng sinh ống", 11 },
+                    { new Guid("ea57a262-6647-4e88-880c-82bc4227e916"), "TNM", 0, false, true, "Thuốc nhỏ mắt", 17 },
+                    { new Guid("ff9be71e-a958-4244-9df1-1582229c67d5"), "TU", 0, false, true, "Thuốc uống", 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "DIC_ItemLine",
+                columns: new[] { "Id", "Code", "Inactive", "Name", "SortOrder" },
+                values: new object[,]
+                {
+                    { new Guid("03bd1fdc-d2b8-4969-a029-5022ca68f31e"), "1.02", false, "Ngậm", 2 },
+                    { new Guid("05a24915-0bed-4f61-b53d-b5e52482e44c"), "1.01", false, "Uống", 1 },
+                    { new Guid("08f7b3c2-09da-4b4a-9c98-75c8562807ee"), "6.09", false, "Dung dịch", 44 },
+                    { new Guid("0c8ba522-0e4b-40a0-9d93-936f5350853e"), "5.08", false, "Xịt họng", 38 },
+                    { new Guid("0df82239-15dd-41ee-afc8-67cb51d5f3f6"), "5.03", false, "Bột hít", 33 },
+                    { new Guid("13165217-8025-44e0-a92b-1f8318d56282"), "2.13", false, "Tiêm vào khối u", 18 },
+                    { new Guid("1ef26d8f-57d7-423c-a8c6-e3a20a249b37"), "6.01", false, "Nhỏ mũi", 40 },
+                    { new Guid("229172a9-7464-4216-8b11-4e587e4c280c"), "5.01", false, "Phun mù", 31 },
+                    { new Guid("2bd555b2-74ae-4b3f-9d27-de30e10bf16f"), "3.01", false, "Bôi", 21 },
+                    { new Guid("2f6e29a1-9a1f-44b0-8f9e-ea1c8716c23b"), "2.10", false, "Tiêm", 15 },
+                    { new Guid("379c8a46-145d-4956-af5d-2d48d9d55087"), "6.03", false, "Tra mắt", 42 },
+                    { new Guid("3df25942-afc9-4ed5-88b3-a0ff7b0ad968"), "4.02", false, "Đặt hậu môn", 26 },
+                    { new Guid("41c24ffd-81f8-44f4-92f7-b3e5d418c8c7"), "2.15", false, "Tiêm truyền", 20 },
+                    { new Guid("49783593-80ca-4a9f-8ff9-5d359307498c"), "4.03", false, "Thụt hậu môn - trực tràng", 27 },
+                    { new Guid("5a807206-9aef-481d-87b6-88f464e6fd46"), "3.04", false, "Xịt ngoài da", 24 },
+                    { new Guid("5d6b6689-0dc3-4f11-94ef-02d288cce18a"), "2.03", false, "Tiêm trong da", 8 },
+                    { new Guid("5eada7db-843c-453b-8a44-3de2dacaa27b"), "1.05", false, "Ngậm dưới lưỡi", 5 },
+                    { new Guid("5ef14843-323d-4fe9-a424-46ca3120fca9"), "2.02", false, "Tiêm dưới da", 7 },
+                    { new Guid("60f3158e-73f2-453f-af90-072b6b25c644"), "3.05", false, "Dùng ngoài", 1 },
+                    { new Guid("65ca8fd8-fb9b-4dea-9c0e-c9a3b6b8fbd8"), "2.11", false, "Tiêm động mạch khối u", 16 },
+                    { new Guid("6cdf2301-9621-4f73-9c62-f48ab80245c8"), "5.02", false, "Dạng hít", 32 },
+                    { new Guid("6edba7a9-20fe-49c0-9925-ba3b32ed32a0"), "2.14", false, "Tiêm truyền tĩnh mạch", 19 },
+                    { new Guid("6f90ecfe-4ede-4241-918b-b18245208f56"), "2.01", false, "Tiêm bặp", 6 },
+                    { new Guid("71edc6f8-3db6-4375-9005-c5328627fa28"), "3.03", false, "Dán trên da", 23 },
+                    { new Guid("75017c25-2ad7-4cce-b206-38735fd3584d"), "3.02", false, "Xoa ngoài", 22 },
+                    { new Guid("7990c54f-dc34-4a62-a8da-201d22c1069d"), "4.05", false, "Đặt tử cung", 29 },
+                    { new Guid("7b3a86dc-9b0c-43f8-94a9-e4eec9916e30"), "5.09", false, "Thuốc mũi", 39 },
+                    { new Guid("7d92b632-0ccf-4be5-a044-c3ee549fdb9f"), "6.04", false, "Nhỏ tai", 43 },
+                    { new Guid("8d9cd0b1-2407-4cc3-9d94-314602e26508"), "5.07", false, "Xịt mũi", 37 },
+                    { new Guid("8f65d7cf-bbd9-44f4-b556-20472aa4a5f0"), "4.06", false, "Thụt", 30 },
+                    { new Guid("a26814e4-da59-4317-a297-5ca089ef2dad"), "1.04", false, "Đặt dưới lưỡi", 4 },
+                    { new Guid("a29889f5-4943-4520-85fa-441c3ea9e979"), "1.03", false, "Nhai", 3 },
+                    { new Guid("b12f310c-c12a-4f8f-a9bd-ddd38b4eebcf"), "5.06", false, "Đường hô hấp", 36 },
+                    { new Guid("c0097373-f633-4bee-b670-2d2c35b5d172"), "2.12", false, "Tiêm vào khoang tự nhiên", 17 },
+                    { new Guid("c6ffa735-8813-41ea-8984-5700dbee1ea7"), "2.09", false, "Tiêm vào các khoang của cơ thế", 14 },
+                    { new Guid("ca37423b-25c7-4a84-a32d-8767bf14352b"), "5.04", false, "Xịt", 34 },
+                    { new Guid("cae9f723-e795-48d5-9730-f19edceaa5b6"), "2.04", false, "Tiêm tĩnh mạch", 9 },
+                    { new Guid("cb51640d-bd7e-4cba-b64d-191d4162efa4"), "4.01", false, "Đặt âm đạo", 25 },
+                    { new Guid("d075055e-4ed2-4d37-82ae-c9c20cb4f08f"), "2.06", false, "Tiêm vào ổ khớp", 11 },
+                    { new Guid("d36d932c-00db-451d-9a02-a401dbd89408"), "2.07", false, "Tiêm nội nhãn cầu", 12 },
+                    { new Guid("d558492b-6628-40ca-aadf-5dda7701681a"), "4.04", false, "Đặt", 28 },
+                    { new Guid("d81efde6-f750-4a66-adf3-a9092bb8ea9b"), "5.05", false, "Khí dung", 35 },
+                    { new Guid("e485d3cc-5a96-48c9-9ed3-8725bb0136ef"), "6.02", false, "Nhỏ mắt", 41 },
+                    { new Guid("e578f37b-9f1b-4098-8659-ac510ced491a"), "2.08", false, "Tiêm trong dịch kích của mắt", 13 },
+                    { new Guid("febb52a6-15bc-4e28-bc84-e928b43b126b"), "2.05", false, "Tiêm truyền tĩnh mạch", 10 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "DIC_MedicalRecordTypeGroup",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "MedicalRecordTypeGroupCode", "MedicalRecordTypeGroupName", "ModifiedBy", "ModifiedDate", "SortOrder" },
+                values: new object[,]
+                {
+                    { 1, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(529), null, false, "1", "Khám bệnh", null, null, 3 },
+                    { 2, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(528), null, false, "2", "Ngoại trú", null, null, 2 },
+                    { 3, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(513), null, false, "3", "Nội trú", null, null, 1 }
+                });
+
+            migrationBuilder.InsertData(
                 table: "DIC_PatientRecordType",
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "PatientRecordTypeCode", "PatientRecordTypeName", "SortOrder" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2023, 12, 7, 21, 18, 39, 720, DateTimeKind.Local).AddTicks(335), null, false, null, null, "1", "Ngoại trú", 1 },
-                    { 2, null, new DateTime(2023, 12, 7, 21, 18, 39, 720, DateTimeKind.Local).AddTicks(346), null, false, null, null, "2", "Nội trú", 2 },
-                    { 3, null, new DateTime(2023, 12, 7, 21, 18, 39, 720, DateTimeKind.Local).AddTicks(349), null, false, null, null, "3", "Dịch vụ", 3 }
+                    { 1, null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(2096), null, false, null, null, "1", "Ngoại trú", 1 },
+                    { 2, null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(2107), null, false, null, null, "2", "Nội trú", 2 },
+                    { 3, null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(2109), null, false, null, null, "3", "Dịch vụ", 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -2664,11 +2716,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "PatientTypeCode", "PatientTypeName", "SortOrder" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2023, 12, 7, 21, 18, 39, 720, DateTimeKind.Local).AddTicks(2652), null, false, null, null, "1", "Bảo hiểm y tế", 1 },
-                    { 2, null, new DateTime(2023, 12, 7, 21, 18, 39, 720, DateTimeKind.Local).AddTicks(2662), null, false, null, null, "2", "Viện phí", 2 },
-                    { 3, null, new DateTime(2023, 12, 7, 21, 18, 39, 720, DateTimeKind.Local).AddTicks(2674), null, false, null, null, "3", "Dịch vụ", 3 },
-                    { 4, null, new DateTime(2023, 12, 7, 21, 18, 39, 720, DateTimeKind.Local).AddTicks(2676), null, false, null, null, "4", "Người nước ngoài", 4 },
-                    { 5, null, new DateTime(2023, 12, 7, 21, 18, 39, 720, DateTimeKind.Local).AddTicks(2678), null, false, null, null, "5", "Miễn phí", 5 }
+                    { 1, null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(4014), null, false, null, null, "1", "Bảo hiểm y tế", 1 },
+                    { 2, null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(4021), null, false, null, null, "2", "Viện phí", 2 },
+                    { 3, null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(4034), null, false, null, null, "3", "Dịch vụ", 3 },
+                    { 4, null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(4036), null, false, null, null, "4", "Người nước ngoài", 4 },
+                    { 5, null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(4037), null, false, null, null, "5", "Miễn phí", 5 }
                 });
 
             migrationBuilder.InsertData(
@@ -2676,9 +2728,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "PaymentMethodCode", "PaymentMethodName", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("0b348363-c888-4c9a-b145-c3389fdcca37"), null, new DateTime(2023, 12, 7, 21, 18, 39, 720, DateTimeKind.Local).AddTicks(4883), null, false, null, null, "TM/CK", "Tiền mặt hoặc chuyển khoản", 3 },
-                    { new Guid("8bff9824-1df2-419e-88ab-e098a6fc4e7e"), null, new DateTime(2023, 12, 7, 21, 18, 39, 720, DateTimeKind.Local).AddTicks(4861), null, false, null, null, "TM", "Tiền mặt", 1 },
-                    { new Guid("dd39afc0-1de0-4287-a126-4dada6788508"), null, new DateTime(2023, 12, 7, 21, 18, 39, 720, DateTimeKind.Local).AddTicks(4881), null, false, null, null, "CK", "Chuyển khoản", 2 }
+                    { new Guid("0b348363-c888-4c9a-b145-c3389fdcca37"), null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(5902), null, false, null, null, "TM/CK", "Tiền mặt hoặc chuyển khoản", 3 },
+                    { new Guid("8bff9824-1df2-419e-88ab-e098a6fc4e7e"), null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(5891), null, false, null, null, "TM", "Tiền mặt", 1 },
+                    { new Guid("dd39afc0-1de0-4287-a126-4dada6788508"), null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(5900), null, false, null, null, "CK", "Chuyển khoản", 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -2756,8 +2808,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "ReceptionTypeCode", "ReceptionTypeName", "SortOrder" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2023, 12, 7, 21, 18, 39, 720, DateTimeKind.Local).AddTicks(9615), null, false, null, null, "1", "Khám bệnh", 1 },
-                    { 2, null, new DateTime(2023, 12, 7, 21, 18, 39, 720, DateTimeKind.Local).AddTicks(9628), null, false, null, null, "2", "Cấp cứu", 2 }
+                    { 1, null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(9802), null, false, null, null, "1", "Khám bệnh", 1 },
+                    { 2, null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(9810), null, false, null, null, "2", "Cấp cứu", 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -2785,25 +2837,25 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             migrationBuilder.InsertData(
                 table: "DIC_RoomType",
-                columns: new[] { "Id", "Description", "Inactive", "RoomTypeCode", "RoomTypeName", "SortOrder" },
+                columns: new[] { "Id", "Code", "Description", "Inactive", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { 1, null, false, "TD", "Tiếp đón", 1 },
-                    { 2, null, false, "HC", "Hành chính", 2 },
-                    { 3, null, false, "KHAM", "Khám bệnh", 3 },
-                    { 4, null, false, "NT", "Nội trú", 4 },
-                    { 5, null, false, "NgT", "Ngoại trú", 5 },
-                    { 6, null, false, "XN", "Xét nghiệm", 6 },
-                    { 7, null, false, "CDHA", "Chẩn đoán hình ảnh", 7 },
-                    { 8, null, false, "KHO-TONG", "Kho tổng", 8 },
-                    { 9, null, false, "KHO-NgT", "Kho thuốc ngoại trú", 9 },
-                    { 10, null, false, "KHO-NT", "Kho thuốc nội trú", 10 },
-                    { 11, null, false, "TT-TH", "Tủ trực thuốc", 11 },
-                    { 12, null, false, "KHO-VTYT", "Kho vật tự y tế", 12 },
-                    { 13, null, false, "KHO-MAU", "Kho máu", 13 },
-                    { 14, null, false, "TT-VT", "Tủ trực VTYT", 14 },
-                    { 15, null, false, "QLT", "Quản lý thuốc", 15 },
-                    { 16, null, false, "QLVT", "Quản lý vật tư", 16 }
+                    { 1, "TD", null, false, "Tiếp đón", 1 },
+                    { 2, "HC", null, false, "Hành chính", 2 },
+                    { 3, "KHAM", null, false, "Khám bệnh", 3 },
+                    { 4, "NT", null, false, "Nội trú", 4 },
+                    { 5, "NgT", null, false, "Ngoại trú", 5 },
+                    { 6, "XN", null, false, "Xét nghiệm", 6 },
+                    { 7, "CDHA", null, false, "Chẩn đoán hình ảnh", 7 },
+                    { 8, "KHO-TONG", null, false, "Kho tổng", 8 },
+                    { 9, "KHO-NgT", null, false, "Kho thuốc ngoại trú", 9 },
+                    { 10, "KHO-NT", null, false, "Kho thuốc nội trú", 10 },
+                    { 11, "TT-TH", null, false, "Tủ trực thuốc", 11 },
+                    { 12, "KHO-VTYT", null, false, "Kho vật tự y tế", 12 },
+                    { 13, "KHO-MAU", null, false, "Kho máu", 13 },
+                    { 14, "TT-VT", null, false, "Tủ trực VTYT", 14 },
+                    { 15, "QLT", null, false, "Quản lý thuốc", 15 },
+                    { 16, "QLVT", null, false, "Quản lý vật tư", 16 }
                 });
 
             migrationBuilder.InsertData(
@@ -2911,6 +2963,18 @@ namespace HIS.EntityFrameworkCore.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "SYSRefTypeCategory",
+                columns: new[] { "Id", "Description", "RefTypeCategoryName", "SortOrder" },
+                values: new object[,]
+                {
+                    { 1, "Các chức năng quản lý và xử lý hệ thống", "Hệ thống", 1 },
+                    { 2, "Các chức năng người dùng khai báo", "Danh mục", 2 },
+                    { 3, "Các chức năng tiếp đón", "Đón tiếp", 3 },
+                    { 4, "Các chức năng khám bệnh", "Khám bệnh", 4 },
+                    { 99, "Khác", "Khác", 99 }
+                });
+
+            migrationBuilder.InsertData(
                 table: "SYS_User",
                 columns: new[] { "Id", "Address", "DistrictId", "Dob", "Email", "FirstName", "GenderId", "LastName", "Password", "PhoneNumber", "ProvinceId", "Status", "UseType", "UserName", "WardId" },
                 values: new object[,]
@@ -2924,28 +2988,54 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "MedicalRecordTypeCode", "MedicalRecordTypeGroupID", "MedicalRecordTypeName", "ModifiedBy", "ModifiedDate", "SortOrder" },
                 values: new object[,]
                 {
-                    { 100, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(5795), null, false, "100", 1, "Khám Bệnh", null, null, 1 },
-                    { 200, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(5807), null, false, "200", 2, "Bệnh Án Ngoại Trú (Chung)", null, null, 1 },
-                    { 201, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(5810), null, false, "201", 2, "Bệnh Án Ngoại Trú (Răng - Hàm - Mặt)", null, null, 2 },
-                    { 202, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(5812), null, false, "202", 2, "Bệnh Án Ngoại Trú (Tai - Mũi - Họng)", null, null, 3 },
-                    { 203, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(5814), null, false, "203", 2, "Bệnh Án Ngoại Trú (Y Học Cổ Truyền)", null, null, 4 },
-                    { 204, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(5816), null, false, "204", 2, "Bệnh Án Ngoại Trú (Mắt)", null, null, 5 },
-                    { 301, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(5818), null, false, "301", 3, "Bệnh Án Nội Khoa", null, null, 2 },
-                    { 302, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(5820), null, false, "302", 3, "Bệnh Án Nhi Khoa", null, null, 3 },
-                    { 303, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(5822), null, false, "303", 3, "Bệnh Án Truyền Nhiễm", null, null, 4 },
-                    { 304, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(5824), null, false, "304", 3, "Bệnh Án Phụ Khoa", null, null, 5 },
-                    { 305, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(5826), null, false, "305", 3, "Bệnh Án Sản Khoa", null, null, 6 },
-                    { 306, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(5828), null, false, "306", 3, "Bệnh Án Sơ Sinh", null, null, 7 },
-                    { 307, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(5830), null, false, "307", 3, "Bệnh Án Tâm Thần", null, null, 8 },
-                    { 308, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(5832), null, false, "308", 3, "Bệnh Án Da Liễu", null, null, 9 },
-                    { 309, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(5833), null, false, "309", 3, "Bệnh Án Điều Dưỡng - Phục Hồi Chức Năng", null, null, 10 },
-                    { 310, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(5835), null, false, "310", 3, "Bệnh Án Huyết Học - Truyền Máu", null, null, 11 },
-                    { 311, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(5852), null, false, "311", 3, "Bệnh Án Ngoại Khoa", null, null, 12 },
-                    { 312, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(5864), null, false, "312", 3, "Bệnh Án Bỏng", null, null, 13 },
-                    { 313, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(5866), null, false, "313", 3, "Bệnh Án Ung Bướu", null, null, 14 },
-                    { 314, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(5868), null, false, "314", 3, "Bệnh Án Răng-Hàm-Mặt", null, null, 15 },
-                    { 315, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(5870), null, false, "315", 3, "Bệnh Án Tai-Mũi-Họng", null, null, 16 },
-                    { 316, null, new DateTime(2023, 12, 7, 21, 18, 39, 718, DateTimeKind.Local).AddTicks(5872), null, false, "316", 3, "Bệnh Án Mắt", null, null, 17 }
+                    { 100, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3108), null, false, "100", 1, "Khám Bệnh", null, null, 1 },
+                    { 200, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3117), null, false, "200", 2, "Bệnh Án Ngoại Trú (Chung)", null, null, 1 },
+                    { 201, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3118), null, false, "201", 2, "Bệnh Án Ngoại Trú (Răng - Hàm - Mặt)", null, null, 2 },
+                    { 202, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3120), null, false, "202", 2, "Bệnh Án Ngoại Trú (Tai - Mũi - Họng)", null, null, 3 },
+                    { 203, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3121), null, false, "203", 2, "Bệnh Án Ngoại Trú (Y Học Cổ Truyền)", null, null, 4 },
+                    { 204, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3123), null, false, "204", 2, "Bệnh Án Ngoại Trú (Mắt)", null, null, 5 },
+                    { 301, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3124), null, false, "301", 3, "Bệnh Án Nội Khoa", null, null, 2 },
+                    { 302, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3126), null, false, "302", 3, "Bệnh Án Nhi Khoa", null, null, 3 },
+                    { 303, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3127), null, false, "303", 3, "Bệnh Án Truyền Nhiễm", null, null, 4 },
+                    { 304, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3129), null, false, "304", 3, "Bệnh Án Phụ Khoa", null, null, 5 },
+                    { 305, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3130), null, false, "305", 3, "Bệnh Án Sản Khoa", null, null, 6 },
+                    { 306, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3132), null, false, "306", 3, "Bệnh Án Sơ Sinh", null, null, 7 },
+                    { 307, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3140), null, false, "307", 3, "Bệnh Án Tâm Thần", null, null, 8 },
+                    { 308, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3141), null, false, "308", 3, "Bệnh Án Da Liễu", null, null, 9 },
+                    { 309, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3148), null, false, "309", 3, "Bệnh Án Điều Dưỡng - Phục Hồi Chức Năng", null, null, 10 },
+                    { 310, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3149), null, false, "310", 3, "Bệnh Án Huyết Học - Truyền Máu", null, null, 11 },
+                    { 311, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3165), null, false, "311", 3, "Bệnh Án Ngoại Khoa", null, null, 12 },
+                    { 312, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3186), null, false, "312", 3, "Bệnh Án Bỏng", null, null, 13 },
+                    { 313, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3188), null, false, "313", 3, "Bệnh Án Ung Bướu", null, null, 14 },
+                    { 314, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3189), null, false, "314", 3, "Bệnh Án Răng-Hàm-Mặt", null, null, 15 },
+                    { 315, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3191), null, false, "315", 3, "Bệnh Án Tai-Mũi-Họng", null, null, 16 },
+                    { 316, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3192), null, false, "316", 3, "Bệnh Án Mắt", null, null, 17 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SYSRefType",
+                columns: new[] { "Id", "Description", "ParentId", "RefTypeCategoryId", "RefTypeName", "SortOrder" },
+                values: new object[,]
+                {
+                    { 101, null, null, 1, "Quản lý người dùng", 2 },
+                    { 102, null, null, 1, "Loại đối tượng bệnh nhân", 3 },
+                    { 103, null, null, 1, "Loại đối tượng đăng ký khám", 4 },
+                    { 104, null, null, 1, "Loại bệnh án", 5 },
+                    { 199, null, null, 1, "Tùy chọn", 9 },
+                    { 201, null, null, 2, "Chi nhánh", 1 },
+                    { 202, null, null, 2, "Khoa", 2 },
+                    { 203, null, null, 2, "Phòng", 3 },
+                    { 204, null, null, 2, "Quốc tịch", 4 },
+                    { 205, null, null, 2, "Tỉnh, thành phố", 5 },
+                    { 206, null, null, 2, "Quận, huyện", 6 },
+                    { 207, null, null, 2, "Xã, phường", 7 },
+                    { 208, null, null, 2, "Dân tộc", 8 },
+                    { 209, null, null, 2, "Giới tính", 9 },
+                    { 210, null, null, 2, "Nghề nghiệp", 10 },
+                    { 211, null, null, 2, "Tôn giáo", 11 },
+                    { 212, null, null, 2, "Nơi sống", 12 },
+                    { 301, null, null, 3, "Đón tiếp", 1 },
+                    { 401, null, null, 4, "Khám bệnh", 3 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -3064,6 +3154,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                 column: "CareerId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_BUS_Patient_CountryId",
+                table: "BUS_Patient",
+                column: "CountryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_BUS_Patient_DistrictId",
                 table: "BUS_Patient",
                 column: "DistrictId");
@@ -3077,11 +3172,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "IX_BUS_Patient_GenderId",
                 table: "BUS_Patient",
                 column: "GenderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_BUS_Patient_NationalId",
-                table: "BUS_Patient",
-                column: "NationalId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BUS_Patient_ProvinceId",
@@ -3152,6 +3242,16 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "IX_BUS_ServiceResultData_ServiceId",
                 table: "BUS_ServiceResultData",
                 column: "ServiceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BUS_ServiceResultData_ServiceRequestDataId",
+                table: "BUS_ServiceResultData",
+                column: "ServiceRequestDataId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BUS_ServiceResultData_ServiceRequestId",
+                table: "BUS_ServiceResultData",
+                column: "ServiceRequestId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_BUS_ServiceResultData_ServiceResultIndiceId",
@@ -3327,6 +3427,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "IX_SYS_UserRole_RoleId",
                 table: "SYS_UserRole",
                 column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SYSRefType_RefTypeCategoryId",
+                table: "SYSRefType",
+                column: "RefTypeCategoryId");
         }
 
         /// <inheritdoc />
@@ -3346,9 +3451,6 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "BUS_PatientRecordStatus");
-
-            migrationBuilder.DropTable(
-                name: "BUS_ServiceRequestData");
 
             migrationBuilder.DropTable(
                 name: "BUS_ServiceResultData");
@@ -3429,6 +3531,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SYS_UserRole");
 
             migrationBuilder.DropTable(
+                name: "SYSRefType");
+
+            migrationBuilder.DropTable(
                 name: "BUS_InOutStock");
 
             migrationBuilder.DropTable(
@@ -3441,7 +3546,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "DIC_RightRouteType");
 
             migrationBuilder.DropTable(
-                name: "BUS_ServiceRequest");
+                name: "BUS_ServiceRequestData");
 
             migrationBuilder.DropTable(
                 name: "DIC_ServiceResultIndice");
@@ -3465,6 +3570,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SYS_Role");
 
             migrationBuilder.DropTable(
+                name: "SYSRefTypeCategory");
+
+            migrationBuilder.DropTable(
                 name: "BUS_InOutStockType");
 
             migrationBuilder.DropTable(
@@ -3481,6 +3589,9 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "SYS_User");
+
+            migrationBuilder.DropTable(
+                name: "BUS_ServiceRequest");
 
             migrationBuilder.DropTable(
                 name: "DIC_Service");
@@ -3516,13 +3627,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "DIC_SurgicalProcedureType");
 
             migrationBuilder.DropTable(
+                name: "DIC_Country");
+
+            migrationBuilder.DropTable(
                 name: "DIC_ItemGroup");
 
             migrationBuilder.DropTable(
                 name: "DIC_ItemLine");
-
-            migrationBuilder.DropTable(
-                name: "DIC_National");
 
             migrationBuilder.DropTable(
                 name: "DIC_Unit");

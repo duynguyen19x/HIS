@@ -6,9 +6,9 @@ namespace HIS.BackendApi.Controllers.Dictionaries
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BranchController : BaseCrudController<IBranchAppService, BranchDto, Guid, GetAllBranchInput>
+    public class BranchController : BaseCrudController<IDIBranchAppService, BranchDto, Guid, GetAllBranchInput>
     {
-        public BranchController(IBranchAppService appService) 
+        public BranchController(IDIBranchAppService appService) 
             : base(appService)
         {
         }

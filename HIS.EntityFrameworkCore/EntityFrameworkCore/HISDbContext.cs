@@ -23,6 +23,10 @@ namespace HIS.EntityFrameworkCore
 
         #region - Hệ thống
         public DbSet<DbOption> DbOptions { get; set; }
+
+        public DbSet<SYSRefType> SYSRefTypes { get; set; }
+        public DbSet<SYSRefTypeCategory> SYSRefTypeCategories { get; set; }
+
         #endregion
 
         #region - Danh mục
@@ -35,7 +39,7 @@ namespace HIS.EntityFrameworkCore
         public DbSet<District> Districts { get; set; }
         public DbSet<MedicalRecordType> MedicalRecordTypes { get; set; }
         public DbSet<MedicalRecordTypeGroup> MedicalRecordTypeGroups { get; set; }
-        public DbSet<Country> Nationals { get; set; }
+        public DbSet<Country> Countries { get; set; }
         public DbSet<PatientType> PatientTypes { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Province> Provinces { get; set; }
