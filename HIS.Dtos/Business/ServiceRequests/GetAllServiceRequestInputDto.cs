@@ -1,13 +1,17 @@
 ﻿using HIS.Application.Core.Services.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.Dtos.Business.ServiceRequests
 {
     public class GetAllServiceRequestInputDto : PagedResultRequestDto
     {
+        public Guid? ExecuteRoomIdFilter { get; set; }
+        public Guid? ExecuteDepartmentIdFilter { get; set; }
+        public int? ServiceRequestStatusIdFilter { get; set; }
+
+        public DateTime? ServiceRequestUseDateFromFilter { get; set; }
+        public DateTime? ServiceRequestUseDateToFilter { get; set; }
+
+        public string ServiceRequestDateFromFilter { get; set; }
+        public string ServiceRequestDateToFilter { get; set; }
     }
 }

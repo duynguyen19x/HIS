@@ -114,6 +114,7 @@ namespace HIS.ApplicationService.Dictionaries.Room
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.DepartmentIdFilter == null || r.DepartmentId == input.DepartmentIdFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
+                                     && (input.RoomTypeIdFilter == null || r.RoomTypeId == input.RoomTypeIdFilter)
                                  select new RoomDto()
                                  {
                                      Id = r.Id,

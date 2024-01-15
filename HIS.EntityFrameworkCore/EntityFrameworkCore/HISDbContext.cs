@@ -5,9 +5,12 @@ using HIS.EntityFrameworkCore.Entities.Categories.Items;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.Systems;
+using HIS.EntityFrameworkCore.Views;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Reflection;
+using System.Reflection.Emit;
+using HIS.EntityFrameworkCore.Configurations;
 
 namespace HIS.EntityFrameworkCore
 {
@@ -97,15 +100,19 @@ namespace HIS.EntityFrameworkCore
         public DbSet<InOutStockItem> InOutStockItems { get; set; }
         #endregion
 
+        #region - Views
+        public DbSet<ServiceRequestView> ServiceRequestViews { get; set; }
+        #endregion
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             // Load config
-            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            builder.ApplyConfiguration();
 
-            //builder.ApplyConfiguration();
-            //builder.Seed();
+            // Add View
+            builder.Entity<ServiceRequestView>().ToView("V_BUS_ServiceRequest");
         }
 
         public virtual IDbContextTransaction BeginTransaction()

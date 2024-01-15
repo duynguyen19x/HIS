@@ -1,4 +1,5 @@
 ﻿using HIS.Core.Entities.Auditing;
+using HIS.Utilities.Enums;
 
 namespace HIS.EntityFrameworkCore.Entities.Business
 {
@@ -25,5 +26,6 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public Guid ExecuteDepartmentId { get; set; } // khoa thực hiện
         public Guid ExecuteRoomId { get; set; } // phòng thực hiện
         public Guid? ExecuteUserId { get; set; } // người thực hiện
+        public ServiceRequestStatusTypes Status { get; set; } // trạng thái
     }
 }

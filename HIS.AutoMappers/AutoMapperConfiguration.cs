@@ -40,6 +40,8 @@ using HIS.Dtos.Business.Patients;
 using HIS.Dtos.Business.PatientRecords;
 using HIS.Dtos.Systems;
 using HIS.Dtos.Systems.RefTypeCategory;
+using HIS.Dtos.Business.ServiceRequests;
+using HIS.EntityFrameworkCore.Views;
 
 namespace HIS.AutoMappers
 {
@@ -153,6 +155,7 @@ namespace HIS.AutoMappers
             CreateMap<Patient, PatientDto>().ReverseMap();
             CreateMap<Patient, PatientRecordDto>().ForMember(des => des.PatientId, act => act.MapFrom(s => s.Id)).ReverseMap();
             CreateMap<PatientRecord, PatientRecordDto>().ReverseMap();
+            CreateMap<ServiceRequestDto, ServiceRequestView>().ReverseMap();
 
             #endregion
 
