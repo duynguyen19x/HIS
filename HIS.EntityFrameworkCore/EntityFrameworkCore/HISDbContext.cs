@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Reflection;
 using System.Reflection.Emit;
+using HIS.EntityFrameworkCore.Configurations;
 
 namespace HIS.EntityFrameworkCore
 {
@@ -104,8 +105,9 @@ namespace HIS.EntityFrameworkCore
             base.OnModelCreating(builder);
 
             // Load config
-            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            builder.ApplyConfiguration();
 
+            // Add View
             builder.Entity<ServiceRequestView>().ToView("V_BUS_ServiceRequest");
         }
 

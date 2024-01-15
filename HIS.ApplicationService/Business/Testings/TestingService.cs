@@ -10,7 +10,9 @@ using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
+using Microsoft.SqlServer.Server;
 using NetTopologySuite.Algorithm;
+using System.Globalization;
 using System.Linq;
 
 namespace HIS.ApplicationService.Business.Testings
@@ -23,6 +25,9 @@ namespace HIS.ApplicationService.Business.Testings
         public async Task<PagedResultDto<ServiceRequestDto>> GetAll(GetAllServiceRequestInputDto input)
         {
             var pagedResults = new PagedResultDto<ServiceRequestDto>();
+
+            DateTime result = DateTime.ParseExact(input.ServiceRequestDateFromFilter, "dd/M/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+            DateTime results = DateTime.ParseExact(input.ServiceRequestDateToFilter, "dd/M/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
 
             //var serviceRequests = (from serviceRequest in Context.ServiceRequests
 
@@ -55,8 +60,8 @@ namespace HIS.ApplicationService.Business.Testings
                 .WhereIf(input.ServiceRequestStatusIdFilter != null, w => w.ServiceRequestStatusId == input.ServiceRequestStatusIdFilter)
                 .WhereIf(!GuidHelper.IsNullOrEmpty(input.ExecuteRoomIdFilter), w => w.ExecuteRoomId == input.ExecuteRoomIdFilter)
                 .WhereIf(!GuidHelper.IsNullOrEmpty(input.ExecuteDepartmentIdFilter), w => w.ExecuteDepartmentId == input.ExecuteDepartmentIdFilter)
-                .WhereIf(!DatetimeHelper.IsNullOrEmpty(input.ServiceRequestDateFromFilter), w => w.ServiceRequestDate >= input.ServiceRequestDateFromFilter)
-                .WhereIf(!DatetimeHelper.IsNullOrEmpty(input.ServiceRequestDateToFilter), w => w.ServiceRequestDate <= input.ServiceRequestDateToFilter)
+                //.WhereIf(!DatetimeHelper.IsNullOrEmpty(input.ServiceRequestDateFromFilter), w => w.ServiceRequestDate >= input.ServiceRequestDateFromFilter)
+                //.WhereIf(!DatetimeHelper.IsNullOrEmpty(input.ServiceRequestDateToFilter), w => w.ServiceRequestDate <= input.ServiceRequestDateToFilter)
                 .WhereIf(!DatetimeHelper.IsNullOrEmpty(input.ServiceRequestUseDateFromFilter), w => w.ServiceRequestUseDate >= input.ServiceRequestUseDateFromFilter)
                 .WhereIf(!DatetimeHelper.IsNullOrEmpty(input.ServiceRequestUseDateToFilter), w => w.ServiceRequestUseDate <= input.ServiceRequestUseDateToFilter)
                 .ToList();

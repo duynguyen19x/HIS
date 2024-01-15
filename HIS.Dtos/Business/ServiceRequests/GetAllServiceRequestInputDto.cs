@@ -11,7 +11,7 @@ namespace HIS.Dtos.Business.ServiceRequests
         public DateTime? ServiceRequestUseDateFromFilter { get; set; }
         public DateTime? ServiceRequestUseDateToFilter { get; set; }
 
-        public DateTime? ServiceRequestDateFromFilter { get; set; }
-        public DateTime? ServiceRequestDateToFilter { get; set; }
+        public string ServiceRequestDateFromFilter { get; set; }
+        public string ServiceRequestDateToFilter { get; set; }
     }
 }
