@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HIS.ApplicationService.Dictionaries.Branchs
 {
-    public class DIBranchAppService : BaseCrudAppService<BranchDto, Guid, GetAllBranchInput>, IDIBranchAppService
+    public class DIBranchAppService : BaseCrudAppService<BranchDto, Guid?, GetAllBranchInput>, IDIBranchAppService
     {
         private readonly IRepository<Branch, Guid> _diBranchRepository;
 
@@ -85,7 +85,7 @@ namespace HIS.ApplicationService.Dictionaries.Branchs
             return result;
         }
 
-        public async override Task<ResultDto<BranchDto>> Delete(Guid id)
+        public async override Task<ResultDto<BranchDto>> Delete(Guid? id)
         {
             var result = new ResultDto<BranchDto>();
             using (var transaction = BeginTransaction())
@@ -131,7 +131,7 @@ namespace HIS.ApplicationService.Dictionaries.Branchs
             return result;
         }
 
-        public async override Task<ResultDto<BranchDto>> GetById(Guid id)
+        public async override Task<ResultDto<BranchDto>> GetById(Guid? id)
         {
             var result = new ResultDto<BranchDto>();
             try
