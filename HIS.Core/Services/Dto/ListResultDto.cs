@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Application.Core.Services.Dto
+namespace HIS.Core.Services.Dto
 {
     [Serializable]
-    public class ListResultDto<T> : IListResult<T>
+    public class ListResultDto<T> : ResultDto, IListResult<T>
     {
         private IList<T> _result;
 
@@ -24,8 +24,6 @@ namespace HIS.Application.Core.Services.Dto
                 _result = value;
             }
         }
-        public virtual bool IsSucceeded { get; set; } = true;
-        public virtual string Message { get; set; }
 
         public ListResultDto()
         {

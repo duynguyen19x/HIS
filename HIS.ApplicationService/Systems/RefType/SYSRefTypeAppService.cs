@@ -1,47 +1,34 @@
 ﻿using HIS.Application.Core.Services;
 using HIS.Dtos.Systems.RefType;
 using HIS.Dtos.Systems;
-using HIS.Application.Core.Services.Dto;
 using HIS.EntityFrameworkCore;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using HIS.Core.Linq;
 using HIS.EntityFrameworkCore.Entities.Systems;
 using HIS.Core.Domain.Repositories;
-using System.Transactions;
 using HIS.Core.Domain.Uow;
-using HIS.ApplicationService.Dictionaries.Unit;
+using HIS.Core.Services.Dto;
+using HIS.Core.Linq.Extensions;
 
 namespace HIS.ApplicationService.Systems.RefType
 {
-    public class SYSRefTypeAppService : BaseCrudAppService<SYSRefTypeDto, int, GetAllSYSRefTypeInputDto>, ISYSRefTypeAppService
+    public class SYSRefTypeAppService : HIS.Core.Services.BaseCrudAppService2<SYSRefType, SYSRefTypeDto, int, GetAllSYSRefTypeInputDto>, ISYSRefTypeAppService
     {
-        private readonly IRepository<SYSRefType, int> _sysRefTypeRepository;
-        private readonly IUnitOfWorkManager _unitOfWorkManager;
-        private readonly IUnitService _unitService;
-
-        public SYSRefTypeAppService(HISDbContext context, 
-            IMapper mapper, 
-            IRepository<SYSRefType, int> sysRefTypeRepository,
-            IUnitService unitService,
-            IUnitOfWorkManager unitOfWorkManager) 
-            : base(context, mapper)
+        public SYSRefTypeAppService(IRepository<SYSRefType, int> sysRefTypeRepository) 
+            : base(sysRefTypeRepository)
         {
-            _sysRefTypeRepository = sysRefTypeRepository;
-            _unitOfWorkManager = unitOfWorkManager;
-            _unitService = unitService;
         }
 
         public override async Task<ResultDto<SYSRefTypeDto>> Create(SYSRefTypeDto input)
         {
             var result = new ResultDto<SYSRefTypeDto>();
-            using (var unitOfWork = _unitOfWorkManager.Begin())
+            using (var unitOfWork = UnitOfWorkManager.Begin())
             {
                 try
                 {
                     //input.Id = Context.NewID<SYSRefType>();
                     var data = ObjectMapper.Map<SYSRefType>(input);
-                    input.Id = await _sysRefTypeRepository.InsertAndGetIdAsync(data);
+                    input.Id = await Repository.InsertAndGetIdAsync(data);
 
                     unitOfWork.Complete();
                     result.Result = input;
@@ -58,13 +45,13 @@ namespace HIS.ApplicationService.Systems.RefType
         public override async Task<ResultDto<SYSRefTypeDto>> Update(SYSRefTypeDto input)
         {
             var result = new ResultDto<SYSRefTypeDto>();
-            using (var unitOfWork = _unitOfWorkManager.Begin())
+            using (var unitOfWork = UnitOfWorkManager.Begin())
             {
                 try
                 {
                     //input.Id = Context.NewID<SYSRefType>();
                     var data = ObjectMapper.Map<SYSRefType>(input);
-                    _sysRefTypeRepository.Update(data);
+                    Repository.Update(data);
 
                     unitOfWork.Complete();
                     result.Result = input;
@@ -78,9 +65,15 @@ namespace HIS.ApplicationService.Systems.RefType
             return await Task.FromResult(result);
         }
 
-        public override Task<ResultDto<SYSRefTypeDto>> Delete(int id)
+        public override async Task<ResultDto<SYSRefTypeDto>> Delete(int id)
         {
-            throw new NotImplementedException();
+            var result = new ResultDto<SYSRefTypeDto>();
+            using (var unitOfWork = UnitOfWorkManager.Begin())
+            {
+                var entity = await Repository.GetAsync(id);
+                Repository.Delete(entity);
+            }
+            return result;
         }
 
         public override async Task<PagedResultDto<SYSRefTypeDto>> GetAll(GetAllSYSRefTypeInputDto input)
@@ -88,7 +81,7 @@ namespace HIS.ApplicationService.Systems.RefType
             var result = new PagedResultDto<SYSRefTypeDto>();
             try
             {
-                var filter = _sysRefTypeRepository.GetAll()
+                var filter = Repository.GetAll()
                     .WhereIf(!string.IsNullOrEmpty(input.RefTypeNameFilter), x => x.RefTypeName == input.RefTypeNameFilter)
                     .WhereIf(input.RefTypeCategoryFilter != null, x => x.RefTypeCategoryId == input.RefTypeCategoryFilter);
 
@@ -105,7 +98,7 @@ namespace HIS.ApplicationService.Systems.RefType
             return result;
         }
 
-        public override Task<ResultDto<SYSRefTypeDto>> GetById(int id)
+        public override Task<ResultDto<SYSRefTypeDto>> Get(int id)
         {
             throw new NotImplementedException();
         }

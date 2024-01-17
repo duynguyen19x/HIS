@@ -1,4 +1,4 @@
-﻿using HIS.Application.Core.Services.Dto;
+﻿using HIS.Core.Services.Dto;
 using HIS.ApplicationService.Systems.Role;
 using HIS.Dtos.Systems.Role;
 using Microsoft.AspNetCore.Mvc;

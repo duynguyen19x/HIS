@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Application.Core.ObjectMapping
+namespace HIS.Core.Services.Dto
 {
-    public class NullObjectMapper : IObjectMapper
+    public interface IListResult<T>
     {
+        IList<T> Result { get; set; }
     }
 }

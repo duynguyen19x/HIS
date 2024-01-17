@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using HIS.EntityFrameworkCore;
 using HIS.Application.Core.Services;
-using HIS.Application.Core.Services.Dto;
+using HIS.Core.Services.Dto;
 using HIS.Dtos.Dictionaries.Countries;
 
 namespace HIS.ApplicationService.Dictionaries.Countries

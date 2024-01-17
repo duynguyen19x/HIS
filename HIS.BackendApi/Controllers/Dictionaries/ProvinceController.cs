@@ -1,4 +1,4 @@
-﻿using HIS.Application.Core.Services.Dto;
+﻿using HIS.Core.Services.Dto;
 using HIS.ApplicationService.Dictionaries.Provinces;
 using HIS.Dtos.Dictionaries.Province;
 using Microsoft.AspNetCore.Mvc;

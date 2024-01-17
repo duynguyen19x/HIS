@@ -9,7 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using HIS.Application.Core.Services.Dto;
+using HIS.Core.Services.Dto;
 
 namespace HIS.ApplicationService.Systems.Login
 {

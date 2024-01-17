@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Application.Core.Services.Dto
+namespace HIS.Core.Services.Dto
 {
-    public interface IPagedResult<T> : IListResult<T>
+    public interface IHasTotalCount
     {
         int TotalCount { get; set; }
     }

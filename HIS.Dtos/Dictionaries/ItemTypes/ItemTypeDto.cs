@@ -1,4 +1,4 @@
-﻿using HIS.Application.Core.Services.Dto;
+﻿using HIS.Core.Services.Dto;
 using HIS.Dtos.Dictionaries.Items;
 using HIS.Utilities.Enums;
 using System.ComponentModel;

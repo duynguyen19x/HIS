@@ -1,4 +1,4 @@
-﻿using HIS.Application.Core.Services.Dto;
+﻿using HIS.Core.Services.Dto;
 using HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks;
 using HIS.Dtos.Business.InOutStocks;
 using Microsoft.AspNetCore.Authorization;

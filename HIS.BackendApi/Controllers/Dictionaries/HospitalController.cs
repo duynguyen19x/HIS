@@ -1,4 +1,4 @@
-﻿using HIS.Application.Core.Services.Dto;
+﻿using HIS.Core.Services.Dto;
 using HIS.ApplicationService.Dictionaries.Hospital;
 using HIS.Dtos.Dictionaries.Hospital;
 using Microsoft.AspNetCore.Mvc;

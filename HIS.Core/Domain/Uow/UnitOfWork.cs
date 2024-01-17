@@ -149,6 +149,10 @@ namespace HIS.Core.Domain.Uow
             if (CurrentTransaction != null)
             {
                 CurrentTransaction.Dispose();
+                if (_succeed)
+                {
+
+                }
             }
         }
 

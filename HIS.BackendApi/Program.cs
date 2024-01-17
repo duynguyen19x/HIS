@@ -1,8 +1,8 @@
 using HIS.ApplicationService;
-using HIS.AutoMappers;
 using HIS.Core.Domain.EntityFramework;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Domain.Uow;
+using HIS.Core.ObjectMapping;
 using HIS.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.EntityFrameworkCore.Repositories;
 using HIS.EntityFrameworkCore.Repositories;
@@ -23,12 +23,13 @@ void ConfigureService()
         => options.UseSqlServer(builder.Configuration["ConnectionStrings:HIS"]));
 
     // auto mapper
-    builder.Services.AddAutoMapper(typeof(AutoMapperConfiguration).Assembly);
+    builder.Services.AddAutoMapper(typeof(MapProfile));
     builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
     {
         builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
     }));
 
+    builder.Services.AddSingleton(typeof(IObjectMapper), typeof(AutoMapperObjectMapper));
     builder.Services.AddScoped(typeof(IDbContextProvider<>), typeof(DbContextProvider<>));
     builder.Services.AddTransient(typeof(ICurrentUnitOfWorkProvider), typeof(CurrentUnitOfWorkProvider));
     builder.Services.AddTransient(typeof(IUnitOfWorkManager), typeof(UnitOfWorkManager));
