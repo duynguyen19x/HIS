@@ -3,7 +3,7 @@ using IObjectMapper = HIS.Core.ObjectMapping.IObjectMapper;
 
 namespace HIS.Core.Services
 {
-    public class BaseAppService : IAppService
+    public abstract class BaseAppService : IAppService
     {
         /// <summary>
         /// Reference to <see cref="IUnitOfWorkManager"/>.

@@ -28,7 +28,7 @@ namespace HIS.ApplicationService
                     services.AddTransient(interfaceType, provider =>
                     {
                         var imp = provider.GetService(implementingType);
-
+                        // đặt giá trị cho service
                         if (imp is Core.Services.BaseAppService appService)
                         {
                             appService.ObjectMapper = provider.GetService(typeof(IObjectMapper)) as IObjectMapper;

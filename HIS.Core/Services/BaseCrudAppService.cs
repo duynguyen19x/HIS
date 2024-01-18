@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HIS.Core.Services
 {
-    public class BaseCrudAppService2<TEntity, TEntityDto, TPrimaryKey, TPagedResultRequest> : BaseAppService, ICrudAppService<TEntityDto, TPrimaryKey, TPagedResultRequest>
+    public abstract class BaseCrudAppService2<TEntity, TEntityDto, TPrimaryKey, TPagedResultRequest> : BaseAppService, ICrudAppService<TEntityDto, TPrimaryKey, TPagedResultRequest>
         where TEntity : class, IEntity<TPrimaryKey>
         where TEntityDto : class, IEntityDto<TPrimaryKey>
         where TPagedResultRequest : IPagedResultRequest
