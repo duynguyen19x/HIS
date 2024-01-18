@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
-using HIS.Application.Core.Utils;
 using HIS.Core.Enums;
 using HIS.Core.Services.Dto;
 using HIS.Dtos.Business.PatientRecords;
@@ -24,7 +23,7 @@ namespace HIS.ApplicationService.Business.PatientRecords
                 try
                 {
                     // thông tin bệnh nhân
-                    if (DataHelper.IsNullOrDefault(input.PatientId))
+                    if (input.PatientId != default(Guid))
                     {
                         input.PatientId = Guid.NewGuid();
                         input.PatientCode = "BN";

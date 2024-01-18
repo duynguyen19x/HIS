@@ -1,4 +1,5 @@
 ﻿using HIS.Core.Entities;
+using HIS.EntityFrameworkCore.Configurations;
 using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Items;
@@ -8,9 +9,6 @@ using HIS.EntityFrameworkCore.Entities.Systems;
 using HIS.EntityFrameworkCore.Views;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using System.Reflection;
-using System.Reflection.Emit;
-using HIS.EntityFrameworkCore.Configurations;
 
 namespace HIS.EntityFrameworkCore
 {

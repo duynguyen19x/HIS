@@ -66,9 +66,22 @@ namespace HIS.Core.Services
             throw new NotImplementedException();
         }
 
-        public virtual Task<ResultDto<TEntityDto>> Delete(TPrimaryKey id)
+        public virtual async Task<ResultDto<TEntityDto>> Delete(TPrimaryKey id)
         {
-            throw new NotImplementedException();
+            var result = new ResultDto<TEntityDto>();
+            using (var unitOfWork = UnitOfWorkManager.Begin())
+            {
+                try
+                {
+                    var entity = Repository.Get(id);
+                    await Repository.DeleteAsync(entity);
+                }
+                catch (Exception ex)
+                {
+                    result.Exception(ex);
+                }
+            }
+            return result;
         }
 
 
