@@ -2,7 +2,7 @@
 
 namespace HIS.Dtos.Systems.RefType
 {
-    public class GetAllSYSRefTypeInputDto : PagedResultRequestDto
+    public class GetAllSYSRefTypeInputDto : PagedAndSortedResultRequestDto
     {
         public string RefTypeNameFilter { get; set; }
         public int? RefTypeCategoryFilter { get; set; }

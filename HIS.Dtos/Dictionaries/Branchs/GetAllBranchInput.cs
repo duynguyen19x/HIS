@@ -2,7 +2,7 @@
 
 namespace HIS.Dtos.Dictionaries.Branchs
 {
-    public class GetAllBranchInput : PagedResultRequestDto
+    public class GetAllBranchInput : PagedAndSortedResultRequestDto
     {
         public string BranchCodeFilter { get; set; }
         public string BranchNameFilter { get; set; }

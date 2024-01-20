@@ -1,18 +1,15 @@
-﻿using HIS.Core.Domain.Repositories;
-using HIS.Core.Entities;
+﻿using HIS.Core.Domain.Entities;
+using HIS.Core.Domain.Repositories;
+using HIS.Core.Linq.Extensions;
 using HIS.Core.Services.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace HIS.Core.Services
 {
-    public class BaseAsyncCrudAppService<TEntity, TEntityDto, TPrimaryKey, TPagedResultRequest> : BaseAppService, IAsyncCrudAppService<TEntityDto, TPrimaryKey, TPagedResultRequest>
+    public class BaseAsyncCrudAppService<TEntity, TEntityDto, TPrimaryKey, TPagedAndSortedResultRequest> : BaseAppService, IAsyncCrudAppService<TEntityDto, TPrimaryKey, TPagedAndSortedResultRequest>
         where TEntity : class, IEntity<TPrimaryKey>
         where TEntityDto : class, IEntityDto<TPrimaryKey>
-        where TPagedResultRequest : IPagedResultRequest
+        where TPagedAndSortedResultRequest : IPagedAndSortedResultRequest
     {
         protected readonly IRepository<TEntity, TPrimaryKey> Repository;
 
@@ -22,9 +19,15 @@ namespace HIS.Core.Services
             Repository = repository;
         }
 
-        public virtual Task<PagedResultDto<TEntityDto>> GetAllAsync(TPagedResultRequest input)
+        public virtual async Task<PagedResultDto<TEntityDto>> GetAllAsync(TPagedAndSortedResultRequest input)
         {
-            throw new NotImplementedException();
+            var result = new PagedResultDto<TEntityDto>();
+            var query = CreateFilteredQuery(input);
+
+            var totalCount = await query.CountAsync();
+            var paged = query.SortBy(input).PageBy(input);
+
+            return result;
         }
 
         public virtual Task<ResultDto<TEntityDto>> GetAsync(TPrimaryKey id)
@@ -32,9 +35,23 @@ namespace HIS.Core.Services
             throw new NotImplementedException();
         }
 
-        public virtual Task<ResultDto<TEntityDto>> CreateOrEditAsync(TEntityDto input)
+        public virtual async Task<ResultDto<TEntityDto>> CreateOrEditAsync(TEntityDto input)
         {
-            throw new NotImplementedException();
+            TPrimaryKey key = default(TPrimaryKey);
+            if (Equals(input.Id, key))
+                return await CreateAsync(input);
+            else
+                return await UpdateAsync(input);
+        }
+
+        public virtual Task<ResultDto<TEntityDto>> CreateAsync(TEntityDto input)
+        {
+            throw new NullReferenceException();
+        }
+
+        public virtual Task<ResultDto<TEntityDto>> UpdateAsync(TEntityDto input)
+        {
+            throw new NullReferenceException();
         }
 
         public virtual async Task<ResultDto<TEntityDto>> DeleteAsync(TPrimaryKey id)
@@ -53,6 +70,11 @@ namespace HIS.Core.Services
                 }
             }
             return result;
+        }
+
+        protected virtual IQueryable<TEntity> CreateFilteredQuery(TPagedAndSortedResultRequest input)
+        {
+            return Repository.GetAll();
         }
     }
 }

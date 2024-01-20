@@ -1,4 +1,4 @@
-﻿namespace HIS.Core.Entities.Auditing
+﻿namespace HIS.Core.Domain.Entities.Auditing
 {
     [Serializable]
     public abstract class AuditedEntity<TPrimaryKey> : CreationAuditedEntity<TPrimaryKey>, IAudited

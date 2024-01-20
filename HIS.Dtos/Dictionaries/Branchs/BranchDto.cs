@@ -2,7 +2,7 @@
 
 namespace HIS.Dtos.Dictionaries.Branchs
 {
-    public class BranchDto : EntityDto<Guid?>
+    public class BranchDto : EntityDto<Guid>
     {
         public string Code { get; set; }
         public string Name { get; set; }

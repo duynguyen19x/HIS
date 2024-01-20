@@ -1,5 +1,5 @@
 ﻿using AutoMapper.Configuration.Annotations;
-using HIS.Core.Entities.Auditing;
+using HIS.Core.Domain.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Categories;
 
 namespace HIS.EntityFrameworkCore.Entities.Business

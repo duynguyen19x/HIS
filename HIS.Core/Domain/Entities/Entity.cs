@@ -1,4 +1,4 @@
-﻿namespace HIS.Core.Entities
+﻿namespace HIS.Core.Domain.Entities
 {
     [Serializable]
     public abstract class Entity : IEntity

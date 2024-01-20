@@ -1,4 +1,4 @@
-﻿using HIS.Core.Entities.Auditing;
+﻿using HIS.Core.Domain.Entities.Auditing;
 using HIS.Utilities.Enums;
 
 namespace HIS.EntityFrameworkCore.Entities.Business

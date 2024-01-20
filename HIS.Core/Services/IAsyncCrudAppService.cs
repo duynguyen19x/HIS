@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace HIS.Core.Services
 {
-    public interface IAsyncCrudAppService<TEntityDto, TPrimaryKey, in TPagedResultRequest>
+    public interface IAsyncCrudAppService<TEntityDto, TPrimaryKey, in TPagedAndSortedResultRequest>
         : IAppService
         where TEntityDto : IEntityDto<TPrimaryKey>
-        where TPagedResultRequest : IPagedResultRequest
+        where TPagedAndSortedResultRequest : IPagedAndSortedResultRequest
     {
         Task<ResultDto<TEntityDto>> GetAsync(TPrimaryKey id);
 
-        Task<PagedResultDto<TEntityDto>> GetAllAsync(TPagedResultRequest input);
+        Task<PagedResultDto<TEntityDto>> GetAllAsync(TPagedAndSortedResultRequest input);
 
         Task<ResultDto<TEntityDto>> CreateOrEditAsync(TEntityDto input);
 

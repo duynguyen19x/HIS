@@ -1,8 +1,9 @@
-﻿using HIS.Utilities.Helpers;
+﻿using HIS.Core.Domain.Entities;
+using HIS.Utilities.Helpers;
 using HIS.Utilities.Sections;
 using System.Reflection.Metadata;
 
-namespace HIS.Core.Entities.Auditing
+namespace HIS.Core.Domain.Entities.Auditing
 {
     [Serializable]
     public abstract class CreationAuditedEntity<TPrimaryKey> : Entity<TPrimaryKey>, ICreationAudited

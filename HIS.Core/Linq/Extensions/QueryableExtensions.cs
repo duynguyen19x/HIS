@@ -10,21 +10,6 @@ namespace HIS.Core.Linq.Extensions
 {
     public static class QueryableExtensions
     {
-        public static IQueryable<TSource> PageBy<TSource>(this IQueryable<TSource> query, int skip, int take)
-        {
-            if (query == null)
-            {
-                throw new ArgumentNullException("query");
-            }
-
-            return query.Skip(skip).Take(take);
-        }
-
-        public static IQueryable<TSource> PageBy<TSource>(this IQueryable<TSource> query, IPagedResultRequest input)
-        {
-            return query.PageBy(input.SkipCount, input.MaxResultCount);
-        }
-
         public static IQueryable<TSource> WhereIf<TSource>(this IQueryable<TSource> query, bool condition, Expression<Func<TSource, bool>> predicate)
         {
             if (!condition)
@@ -43,7 +28,22 @@ namespace HIS.Core.Linq.Extensions
             return query.Where(predicate);
         }
 
-        public static IQueryable<TSource> OrderBy<TSource>(this IQueryable<TSource> query, IPagedResultRequest input)
+        public static IQueryable<TSource> PageBy<TSource>(this IQueryable<TSource> query, int skip, int take)
+        {
+            if (query == null)
+            {
+                throw new ArgumentNullException("query");
+            }
+
+            return query.Skip(skip).Take(take);
+        }
+
+        public static IQueryable<TSource> PageBy<TSource>(this IQueryable<TSource> query, IPagedResultRequest input)
+        {
+            return query.PageBy(input.SkipCount, input.MaxResultCount);
+        }
+
+        public static IQueryable<TSource> SortBy<TSource>(this IQueryable<TSource> query, ISortedResultRequest input)
         {
             if (input != null 
                 && input.Sorting != null && !string.IsNullOrWhiteSpace(input.Sorting))
@@ -53,6 +53,11 @@ namespace HIS.Core.Linq.Extensions
 
             return query;
         }    
+
+        public static IQueryable<TSource> ApplySortingAndPaging<TSource>(this IQueryable<TSource> query, IPagedAndSortedResultRequest input)
+        {
+            return query.SortBy(input).PageBy(input);
+        }
 
 
         public static IQueryable<TSource> InternalOrderBy<TSource>(this IQueryable<TSource> query, string key, bool ascending = true)

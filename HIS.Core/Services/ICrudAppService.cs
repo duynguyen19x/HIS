@@ -2,18 +2,18 @@
 
 namespace HIS.Core.Services
 {
-    public interface ICrudAppService<TEntityDto, TPrimaryKey, in TPagedResultRequest>
+    public interface ICrudAppService<TEntityDto, TPrimaryKey, in TPagedAndSortedResultRequest>
         : IAppService
         where TEntityDto : IEntityDto<TPrimaryKey>
-        where TPagedResultRequest : IPagedResultRequest
+        where TPagedAndSortedResultRequest : IPagedAndSortedResultRequest
     {
-        Task<ResultDto<TEntityDto>> Get(TPrimaryKey id);
+        ResultDto<TEntityDto> Get(TPrimaryKey id);
 
-        Task<PagedResultDto<TEntityDto>> GetAll(TPagedResultRequest input);
+        PagedResultDto<TEntityDto> GetAll(TPagedAndSortedResultRequest input);
 
-        Task<ResultDto<TEntityDto>> CreateOrEdit(TEntityDto input);
+        ResultDto<TEntityDto> CreateOrEdit(TEntityDto input);
 
-        Task<ResultDto<TEntityDto>> Delete(TPrimaryKey id);
+        ResultDto<TEntityDto> Delete(TPrimaryKey id);
 
     }
 }
