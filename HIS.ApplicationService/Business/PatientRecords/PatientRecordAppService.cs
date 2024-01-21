@@ -62,8 +62,8 @@ namespace HIS.ApplicationService.Business.PatientRecords
                     {
                         dto.Id = Guid.NewGuid();
                         dto.ServiceRequestCode = "KB";
-                        dto.ServiceRequestDate = patientRecord.PatientRecordDate;
-                        dto.ServiceRequestUseDate = patientRecord.PatientRecordDate;
+                        //dto.ServiceRequestDate = patientRecord.PatientRecordDate;
+                        //dto.ServiceRequestUseDate = patientRecord.PatientRecordDate;
                         dto.NumOrder = 1;
                         dto.PatientRecordId = patientRecord.Id;
                         dto.MedicalRecordId = medicalRecord.Id;
