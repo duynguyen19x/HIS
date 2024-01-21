@@ -5,6 +5,7 @@ using HIS.Dtos.Systems;
 using HIS.Dtos.Systems.RefType;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using HIS.Dtos.Dictionaries.Branchs;
 
 namespace HIS.BackendApi.Controllers.Systems
 {
@@ -12,17 +13,23 @@ namespace HIS.BackendApi.Controllers.Systems
     [ApiController]
     public class SYSRefTypeController : ControllerBase //BaseCrudController<ISYSRefTypeAppService, SYSRefTypeDto, int, GetAllSYSRefTypeInputDto>
     {
-        private readonly ISYSRefTypeAppService sYSRefTypeAppService;
+        private readonly ISYSRefTypeAppService _sysRefTypeAppService;
 
         public SYSRefTypeController(ISYSRefTypeAppService appService) 
         {
-            sYSRefTypeAppService = appService;
+            _sysRefTypeAppService = appService;
         }
 
         [HttpGet("GetAll")]
-        public async Task<PagedResultDto<SYSRefTypeDto>> GetAll([FromQuery] GetAllSYSRefTypeInputDto input)
-        {
-            return await sYSRefTypeAppService.GetAll(input);
-        }
+        public async Task<PagedResultDto<SYSRefTypeDto>> GetAll([FromQuery] GetAllSYSRefTypeInputDto input) => await _sysRefTypeAppService.GetAllAsync(input);
+
+        [HttpGet("GetById")]
+        public async Task<ResultDto<SYSRefTypeDto>> GetById(int id) => await _sysRefTypeAppService.GetAsync(id);
+
+        [HttpPost("CreateOrEdit")]
+        public async Task<ResultDto<SYSRefTypeDto>> CreateOrEdit(SYSRefTypeDto input) => await _sysRefTypeAppService.CreateOrEditAsync(input);
+
+        [HttpDelete("Delete")]
+        public async Task<ResultDto<SYSRefTypeDto>> Delete(int id) => await _sysRefTypeAppService.DeleteAsync(id);
     }
 }

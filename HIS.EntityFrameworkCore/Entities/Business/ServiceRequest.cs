@@ -6,8 +6,8 @@ namespace HIS.EntityFrameworkCore.Entities.Business
     public class ServiceRequest : FullAuditedEntity<Guid>
     {
         public string ServiceRequestCode { get; set; }
-        public DateTime ServiceRequestDate { get; set; } // ngày chỉ định (tạo phiếu)
-        public DateTime ServiceRequestUseDate { get; set; } // ngày y lệnh
+        public long ServiceRequestDate { get; set; } // ngày chỉ định (tạo phiếu)
+        public long ServiceRequestUseDate { get; set; } // ngày y lệnh
         public string Barcode { get; set; }
         public int NumOrder { get; set; } // số thứ tự chỉ định trong ngày (số thứ tự thực hiện)
         public bool IsPriority { get; set; } // ưu tiên
