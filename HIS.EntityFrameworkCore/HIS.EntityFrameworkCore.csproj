@@ -20,7 +20,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<!--<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.14">
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.14">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
@@ -28,10 +28,10 @@
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.14">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-		</PackageReference>-->
+		</PackageReference>
 		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="8.0.0-preview.1.23110.8" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0-preview.1.23110.8" />
-		<!--<PackageReference Include="EFCore.BulkExtensions" Version="6.5.6" />-->
+		<PackageReference Include="EFCore.BulkExtensions" Version="6.5.6" />
 	</ItemGroup>
 
 	<ItemGroup>
