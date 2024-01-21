@@ -16,6 +16,17 @@ namespace HIS.ApplicationService.Systems.RefType
         {
         }
 
+        public override async Task<PagedResultDto<SYSRefTypeDto>> GetAllAsync(GetAllSYSRefTypeInputDto input)
+        {
+            var result = new PagedResultDto<SYSRefTypeDto>();
+            var query = CreateFilteredQuery(input);
+            var paged = query.ApplySortingAndPaging(input);
+
+            result.TotalCount = await query.CountAsync();
+            result.Result = ObjectMapper.Map<IList<SYSRefTypeDto>>(paged.ToList());
+            return result;
+        }
+
         //public override async Task<ResultDto<SYSRefTypeDto>> Create(SYSRefTypeDto input)
         //{
         //    var result = new ResultDto<SYSRefTypeDto>();
@@ -100,6 +111,6 @@ namespace HIS.ApplicationService.Systems.RefType
         //    throw new NotImplementedException();
         //}
 
-        
+
     }
 }

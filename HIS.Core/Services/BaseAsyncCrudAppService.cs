@@ -23,10 +23,10 @@ namespace HIS.Core.Services
         {
             var result = new PagedResultDto<TEntityDto>();
             var query = CreateFilteredQuery(input);
+            var paged = query.ApplySortingAndPaging(input);
 
-            var totalCount = await query.CountAsync();
-            var paged = query.SortBy(input).PageBy(input);
-
+            result.TotalCount = await query.CountAsync();
+            result.Result = ObjectMapper.Map<IList<TEntityDto>>(paged.ToList());
             return result;
         }
 

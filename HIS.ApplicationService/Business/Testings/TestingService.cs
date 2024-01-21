@@ -62,8 +62,8 @@ namespace HIS.ApplicationService.Business.Testings
                 .WhereIf(!GuidHelper.IsNullOrEmpty(input.ExecuteDepartmentIdFilter), w => w.ExecuteDepartmentId == input.ExecuteDepartmentIdFilter)
                 //.WhereIf(!DatetimeHelper.IsNullOrEmpty(input.ServiceRequestDateFromFilter), w => w.ServiceRequestDate >= input.ServiceRequestDateFromFilter)
                 //.WhereIf(!DatetimeHelper.IsNullOrEmpty(input.ServiceRequestDateToFilter), w => w.ServiceRequestDate <= input.ServiceRequestDateToFilter)
-                .WhereIf(!DatetimeHelper.IsNullOrEmpty(input.ServiceRequestUseDateFromFilter), w => w.ServiceRequestUseDate >= input.ServiceRequestUseDateFromFilter)
-                .WhereIf(!DatetimeHelper.IsNullOrEmpty(input.ServiceRequestUseDateToFilter), w => w.ServiceRequestUseDate <= input.ServiceRequestUseDateToFilter)
+                .WhereIf(input.ServiceRequestUseDateFromFilter > 0, w => w.ServiceRequestUseDate >= input.ServiceRequestUseDateFromFilter)
+                .WhereIf(input.ServiceRequestUseDateToFilter > 0, w => w.ServiceRequestUseDate <= input.ServiceRequestUseDateToFilter)
                 .ToList();
 
             pagedResults.Result = ObjectMapper.Map<List<ServiceRequestDto>>(serviceRequests);

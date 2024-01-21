@@ -48,7 +48,36 @@ namespace HIS.Core.Linq.Extensions
             if (input != null 
                 && input.Sorting != null && !string.IsNullOrWhiteSpace(input.Sorting))
             {
+                var i = 0;
+                var props = typeof(TSource).GetProperties();
+
                 var conditions = input.Sorting.Split(',');
+                foreach (var condition in conditions)
+                {
+                    var order = condition.Trim().Split(' ');
+                    var prop = typeof(TSource).GetProperties().FirstOrDefault(x => x.Name.ToUpper() == order[0].ToUpper());
+                    //var prop = typeof(TSource).GetProperty(order[0]);
+                    if (prop != null)
+                    {
+                        var expression = ToLambda<TSource>(order[0]);
+
+                        var descending = false;
+                        if (order.Length > 1 && order[1] != null && order[1].ToUpper().Equals("DESC"))
+                            descending = true;
+
+                        if (i == 0)
+                        {
+                            
+                            query = descending ? query.OrderByDescending(expression) : query.OrderBy(expression);
+                        }
+                        else
+                        {
+                            query = descending ? ((IOrderedQueryable<TSource>)query).ThenByDescending(expression) : ((IOrderedQueryable<TSource>)query).ThenBy(expression);
+                        }
+
+                        i++;
+                    }
+                }
             }
 
             return query;
@@ -60,18 +89,13 @@ namespace HIS.Core.Linq.Extensions
         }
 
 
-        public static IQueryable<TSource> InternalOrderBy<TSource>(this IQueryable<TSource> query, string key, bool ascending = true)
+        private static Expression<Func<T, object>> ToLambda<T>(string propertyName)
         {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                return query;
-            }
+            var parameter = Expression.Parameter(typeof(T));
+            var property = Expression.Property(parameter, propertyName);
+            var propAsObject = Expression.Convert(property, typeof(object));
 
-            var lambda = (dynamic)CreateExpression(typeof(TSource), key);
-
-            return ascending
-                ? Queryable.OrderBy(query, lambda)
-                : Queryable.OrderByDescending(query, lambda);
+            return Expression.Lambda<Func<T, object>>(propAsObject, parameter);
         }
 
         private static LambdaExpression CreateExpression(Type type, string propertyName)

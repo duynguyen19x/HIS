@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace HIS.EntityFrameworkCore
 {
-    public class HISDbContextFatory : IDesignTimeDbContextFactory<HISDbContext>
+    public class HISDbContextFactory : IDesignTimeDbContextFactory<HISDbContext>
     {
         public HISDbContext CreateDbContext(string[] args)
         {
