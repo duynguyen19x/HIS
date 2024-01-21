@@ -1,5 +1,5 @@
 ﻿using HIS.Application.Core.Services;
-using HIS.Application.Core.Services.Dto;
+using HIS.Core.Services.Dto;
 using HIS.Dtos.Dictionaries.Room;
 
 namespace HIS.ApplicationService.Dictionaries.Room

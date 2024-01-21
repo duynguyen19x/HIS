@@ -1,5 +1,5 @@
 ﻿using AutoMapper.Configuration.Annotations;
-using HIS.Core.Entities;
+using HIS.Core.Domain.Entities;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using System.ComponentModel;
 

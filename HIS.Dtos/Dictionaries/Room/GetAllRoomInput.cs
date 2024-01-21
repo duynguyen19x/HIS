@@ -1,4 +1,4 @@
-﻿using HIS.Application.Core.Services.Dto;
+﻿using HIS.Core.Services.Dto;
 
 namespace HIS.Dtos.Dictionaries.Room
 {

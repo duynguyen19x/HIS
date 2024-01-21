@@ -1,5 +1,5 @@
 ﻿using HIS.Application.Core.Services;
-using HIS.Application.Core.Services.Dto;
+using HIS.Core.Services.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers
@@ -8,7 +8,7 @@ namespace HIS.BackendApi.Controllers
     [ApiController]
     public class BaseCrudController<TAppService, TEntityDto, TPrimaryKey, TPagedRequestDto> : ControllerBase
         where TEntityDto : IEntityDto<TPrimaryKey>
-        where TPagedRequestDto : IPagedResultRequestDto
+        where TPagedRequestDto : IPagedResultRequest
         where TAppService : IBaseCrudAppService<TEntityDto, TPrimaryKey, TPagedRequestDto>
     {
         private readonly TAppService _appService;

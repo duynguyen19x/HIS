@@ -1,4 +1,4 @@
-﻿using HIS.Core.Entities;
+﻿using HIS.Core.Domain.Entities;
 
 namespace HIS.EntityFrameworkCore.Entities.Systems
 {

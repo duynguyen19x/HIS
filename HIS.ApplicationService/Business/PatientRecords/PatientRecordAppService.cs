@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
-using HIS.Application.Core.Services.Dto;
-using HIS.Application.Core.Utils;
 using HIS.Core.Enums;
+using HIS.Core.Services.Dto;
 using HIS.Dtos.Business.PatientRecords;
 using HIS.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.Entities.Business;
@@ -24,7 +23,7 @@ namespace HIS.ApplicationService.Business.PatientRecords
                 try
                 {
                     // thông tin bệnh nhân
-                    if (DataHelper.IsNullOrDefault(input.PatientId))
+                    if (input.PatientId != default(Guid))
                     {
                         input.PatientId = Guid.NewGuid();
                         input.PatientCode = "BN";
@@ -159,6 +158,7 @@ namespace HIS.ApplicationService.Business.PatientRecords
         public override async Task<PagedResultDto<PatientRecordDto>> GetAll(GetAllPatientRecordInputDto input)
         {
             var result = new PagedResultDto<PatientRecordDto>();
+
             result.Result = new List<PatientRecordDto>()
             {
                 new PatientRecordDto() { PatientCode = "BN-01", PatientRecordCode = "BA-01", PatientName = "Bệnh nhân 01", BirthDate = DateTime.Now },

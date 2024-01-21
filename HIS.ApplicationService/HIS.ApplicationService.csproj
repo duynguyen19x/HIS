@@ -25,12 +25,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\HIS.Application.Core\HIS.Application.Core.csproj" />
-    <ProjectReference Include="..\HIS.AutoMappers\HIS.AutoMappers.csproj" />
     <ProjectReference Include="..\HIS.Dtos\HIS.Dtos.csproj" />
     <ProjectReference Include="..\HIS.EntityFrameworkCore\HIS.EntityFrameworkCore.csproj" />
   </ItemGroup>

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
-using HIS.Application.Core.Services.Dto;
+using HIS.Core.Services.Dto;
 using HIS.Dtos.Dictionaries.Room;
 using HIS.EntityFrameworkCore;
 using HIS.Utilities.Enums;

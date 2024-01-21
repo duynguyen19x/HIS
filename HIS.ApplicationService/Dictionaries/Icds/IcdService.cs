@@ -1,6 +1,6 @@
 ﻿using HIS.Dtos.Dictionaries.Icd;
 using HIS.EntityFrameworkCore;
-using HIS.Application.Core.Services.Dto;
+using HIS.Core.Services.Dto;
 using HIS.Application.Core.Services;
 using AutoMapper;
 

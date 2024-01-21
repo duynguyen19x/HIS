@@ -1,4 +1,4 @@
-﻿using HIS.Application.Core.Services.Dto;
+﻿using HIS.Core.Services.Dto;
 using HIS.Dtos.Systems.Role;
 using HIS.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

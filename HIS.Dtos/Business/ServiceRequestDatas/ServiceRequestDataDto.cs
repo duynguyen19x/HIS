@@ -1,4 +1,4 @@
-﻿using HIS.Application.Core.Services.Dto;
+﻿using HIS.Core.Services.Dto;
 using HIS.Dtos.Business.ServiceResultDatas;
 
 namespace HIS.Dtos.Business.ServiceRequestDatas

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
-using HIS.Application.Core.Services.Dto;
-using HIS.Core.Linq;
+using HIS.Core.Services.Dto;
+using HIS.Core.Linq.Extensions;
 using HIS.Dtos.Dictionaries.Ethnics;
 using HIS.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;

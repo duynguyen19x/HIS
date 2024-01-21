@@ -1,5 +1,5 @@
 ﻿using AutoMapper.Configuration.Annotations;
-using HIS.Core.Entities.Auditing;
+using HIS.Core.Domain.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Categories;
 
 namespace HIS.EntityFrameworkCore.Entities.Business
@@ -10,8 +10,12 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public Guid? InsuranceId { get; set; } // bảo hiểm
         public Guid ServiceId { get; set; } // dịch vụ
         public string ServiceName { get; set; }
-        public DateTime? StartTime { get; set; }
-        public DateTime? EndTime { get; set; }
+        public long StartTime { get; set; } // thời gian bắt đầu thực hiện
+        public long EndTime { get; set; } // thời gian kết thúc
+        public bool IsSampled { get; set; } // lấy mẫu bệnh phẩm
+        public long SampleTime { get; set; } // thời gian lấy mẫu bệnh phẩm
+        public Guid? SampleRoomId { get; set; } // phòng lấy mẫu bệnh phẩm
+        public decimal OriginalPrice { get; set; }
         public decimal Price { get; set; } // đơn giá
         public decimal Quantity { get; set; } // số lượng
         public decimal Amount { get; set; } // thành tiền
