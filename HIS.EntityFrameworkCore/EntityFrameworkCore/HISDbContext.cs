@@ -110,8 +110,7 @@ namespace HIS.EntityFrameworkCore
             builder.ApplyConfiguration();
 
             // Add View
-            //builder.Entity<ServiceRequestView>().ToView("V_BUS_ServiceRequest");
-            builder.AddViews();
+            builder.Entity<ServiceRequestView>().ToView("V_BUS_ServiceRequest");
         }
 
         public virtual IDbContextTransaction BeginTransaction()
