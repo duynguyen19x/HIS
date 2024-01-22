@@ -18,8 +18,5 @@ namespace HIS.EntityFrameworkCore.Views
 
         public string ExecuteRoomCode { get; set; }
         public string ExecuteRoomName { get; set; }
-
-        public string ExecuteUserCode { get; set; }
-        public string ExecuteUserName { get; set; }
     }
 }

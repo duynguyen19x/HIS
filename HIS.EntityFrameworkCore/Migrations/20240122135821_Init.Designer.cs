@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(HISDbContext))]
-    [Migration("20240115172737_Init")]
+    [Migration("20240122135821_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -1299,13 +1299,16 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid>("DepartmentId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<long>("EndTime")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid?>("EndUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("ExecuteDepartmentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ExecuteRoomId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ExecuteUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("IcdCode")
@@ -1353,8 +1356,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ServiceRequestDate")
-                        .HasColumnType("datetime2");
+                    b.Property<long>("ServiceRequestDate")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("ServiceRequestStatusId")
                         .HasColumnType("int");
@@ -1362,8 +1365,14 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<int>("ServiceRequestTypeId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ServiceRequestUseDate")
-                        .HasColumnType("datetime2");
+                    b.Property<long>("ServiceRequestUseDate")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("StartTime")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid?>("StartUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -1407,8 +1416,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<decimal>("DiscountAmount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime?>("EndTime")
-                        .HasColumnType("datetime2");
+                    b.Property<long>("EndTime")
+                        .HasColumnType("bigint");
 
                     b.Property<Guid?>("InsuranceId")
                         .HasColumnType("uniqueidentifier");
@@ -1416,11 +1425,17 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsSampled")
+                        .HasColumnType("bit");
+
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<decimal>("OriginalPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("PatientTypeId")
                         .HasColumnType("int");
@@ -1430,6 +1445,12 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Property<decimal>("Quantity")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("SampleRoomId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<long>("SampleTime")
+                        .HasColumnType("bigint");
 
                     b.Property<Guid>("ServiceId")
                         .HasColumnType("uniqueidentifier");
@@ -1441,8 +1462,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid>("ServiceRequestId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("StartTime")
-                        .HasColumnType("datetime2");
+                    b.Property<long>("StartTime")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -6335,7 +6356,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("c0a4d767-7ba9-4006-a0a9-020b6322c2ef"),
                             Code = "DO_BENH",
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 334, DateTimeKind.Local).AddTicks(3894),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 681, DateTimeKind.Local).AddTicks(8084),
                             Inactive = false,
                             Name = "Do bệnh",
                             SortOrder = 1
@@ -6344,7 +6365,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("4333ca55-4d7c-4be0-b9a2-2125624f0229"),
                             Code = "DO_TAI_BIEN",
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 334, DateTimeKind.Local).AddTicks(3912),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 681, DateTimeKind.Local).AddTicks(8099),
                             Inactive = false,
                             Name = "Do tai biến điều trị",
                             SortOrder = 2
@@ -6353,7 +6374,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("4d5b5c50-6be0-434e-8baa-a528af4a58b5"),
                             Code = "KHAC",
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 334, DateTimeKind.Local).AddTicks(3914),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 681, DateTimeKind.Local).AddTicks(8102),
                             Inactive = false,
                             Name = "Khác",
                             SortOrder = 3
@@ -6459,7 +6480,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("66c3a43b-f9d0-4876-81e2-b13c5f188589"),
                             Code = "TRONG_24H",
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 335, DateTimeKind.Local).AddTicks(6640),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 683, DateTimeKind.Local).AddTicks(2663),
                             Inactive = false,
                             Name = "Trong 24h vào",
                             SortOrder = 1
@@ -6468,7 +6489,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("f91d8342-619c-435b-b51c-8b3d7f541222"),
                             Code = "TRONG_48H",
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 335, DateTimeKind.Local).AddTicks(6652),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 683, DateTimeKind.Local).AddTicks(2676),
                             Inactive = false,
                             Name = "Trong 48h vào",
                             SortOrder = 2
@@ -6477,7 +6498,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("7693d6ec-cf0f-44c1-a9d7-fb997335ae10"),
                             Code = "TRONG_72H",
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 335, DateTimeKind.Local).AddTicks(6654),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 683, DateTimeKind.Local).AddTicks(2679),
                             Inactive = false,
                             Name = "Trong 72h vào",
                             SortOrder = 3
@@ -6486,7 +6507,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("8f2b1eeb-a4bd-4f84-b59c-98145c58b1ab"),
                             Code = "KHAC",
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 335, DateTimeKind.Local).AddTicks(6663),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 683, DateTimeKind.Local).AddTicks(2682),
                             Inactive = false,
                             Name = "Khác",
                             SortOrder = 4
@@ -7557,7 +7578,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 100,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3108),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4124),
                             Inactive = false,
                             MedicalRecordTypeCode = "100",
                             MedicalRecordTypeGroupID = 1,
@@ -7567,7 +7588,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 200,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3117),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4135),
                             Inactive = false,
                             MedicalRecordTypeCode = "200",
                             MedicalRecordTypeGroupID = 2,
@@ -7577,7 +7598,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 201,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3118),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4137),
                             Inactive = false,
                             MedicalRecordTypeCode = "201",
                             MedicalRecordTypeGroupID = 2,
@@ -7587,7 +7608,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 202,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3120),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4139),
                             Inactive = false,
                             MedicalRecordTypeCode = "202",
                             MedicalRecordTypeGroupID = 2,
@@ -7597,7 +7618,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 203,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3121),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4142),
                             Inactive = false,
                             MedicalRecordTypeCode = "203",
                             MedicalRecordTypeGroupID = 2,
@@ -7607,7 +7628,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 204,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3123),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4144),
                             Inactive = false,
                             MedicalRecordTypeCode = "204",
                             MedicalRecordTypeGroupID = 2,
@@ -7617,7 +7638,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 301,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3124),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4153),
                             Inactive = false,
                             MedicalRecordTypeCode = "301",
                             MedicalRecordTypeGroupID = 3,
@@ -7627,7 +7648,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 302,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3126),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4155),
                             Inactive = false,
                             MedicalRecordTypeCode = "302",
                             MedicalRecordTypeGroupID = 3,
@@ -7637,7 +7658,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 303,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3127),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4157),
                             Inactive = false,
                             MedicalRecordTypeCode = "303",
                             MedicalRecordTypeGroupID = 3,
@@ -7647,7 +7668,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 304,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3129),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4159),
                             Inactive = false,
                             MedicalRecordTypeCode = "304",
                             MedicalRecordTypeGroupID = 3,
@@ -7657,7 +7678,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 305,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3130),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4160),
                             Inactive = false,
                             MedicalRecordTypeCode = "305",
                             MedicalRecordTypeGroupID = 3,
@@ -7667,7 +7688,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 306,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3132),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4162),
                             Inactive = false,
                             MedicalRecordTypeCode = "306",
                             MedicalRecordTypeGroupID = 3,
@@ -7677,7 +7698,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 307,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3140),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4164),
                             Inactive = false,
                             MedicalRecordTypeCode = "307",
                             MedicalRecordTypeGroupID = 3,
@@ -7687,7 +7708,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 308,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3141),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4165),
                             Inactive = false,
                             MedicalRecordTypeCode = "308",
                             MedicalRecordTypeGroupID = 3,
@@ -7697,7 +7718,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 309,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3148),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4172),
                             Inactive = false,
                             MedicalRecordTypeCode = "309",
                             MedicalRecordTypeGroupID = 3,
@@ -7707,7 +7728,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 310,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3149),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4174),
                             Inactive = false,
                             MedicalRecordTypeCode = "310",
                             MedicalRecordTypeGroupID = 3,
@@ -7717,7 +7738,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 311,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3165),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4188),
                             Inactive = false,
                             MedicalRecordTypeCode = "311",
                             MedicalRecordTypeGroupID = 3,
@@ -7727,7 +7748,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 312,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3186),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4214),
                             Inactive = false,
                             MedicalRecordTypeCode = "312",
                             MedicalRecordTypeGroupID = 3,
@@ -7737,7 +7758,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 313,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3188),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4216),
                             Inactive = false,
                             MedicalRecordTypeCode = "313",
                             MedicalRecordTypeGroupID = 3,
@@ -7747,7 +7768,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 314,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3189),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4218),
                             Inactive = false,
                             MedicalRecordTypeCode = "314",
                             MedicalRecordTypeGroupID = 3,
@@ -7757,7 +7778,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 315,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3191),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4220),
                             Inactive = false,
                             MedicalRecordTypeCode = "315",
                             MedicalRecordTypeGroupID = 3,
@@ -7767,7 +7788,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 316,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3192),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4221),
                             Inactive = false,
                             MedicalRecordTypeCode = "316",
                             MedicalRecordTypeGroupID = 3,
@@ -7824,7 +7845,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(513),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(1126),
                             Inactive = false,
                             MedicalRecordTypeGroupCode = "3",
                             MedicalRecordTypeGroupName = "Nội trú",
@@ -7833,7 +7854,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(528),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(1140),
                             Inactive = false,
                             MedicalRecordTypeGroupCode = "2",
                             MedicalRecordTypeGroupName = "Ngoại trú",
@@ -7842,7 +7863,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(529),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(1142),
                             Inactive = false,
                             MedicalRecordTypeGroupCode = "1",
                             MedicalRecordTypeGroupName = "Khám bệnh",
@@ -7898,7 +7919,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(2096),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 688, DateTimeKind.Local).AddTicks(4173),
                             Inactive = false,
                             PatientRecordTypeCode = "1",
                             PatientRecordTypeName = "Ngoại trú",
@@ -7907,7 +7928,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(2107),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 688, DateTimeKind.Local).AddTicks(4182),
                             Inactive = false,
                             PatientRecordTypeCode = "2",
                             PatientRecordTypeName = "Nội trú",
@@ -7916,7 +7937,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(2109),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 688, DateTimeKind.Local).AddTicks(4185),
                             Inactive = false,
                             PatientRecordTypeCode = "3",
                             PatientRecordTypeName = "Dịch vụ",
@@ -7972,7 +7993,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(4014),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 688, DateTimeKind.Local).AddTicks(6348),
                             Inactive = false,
                             PatientTypeCode = "1",
                             PatientTypeName = "Bảo hiểm y tế",
@@ -7981,7 +8002,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(4021),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 688, DateTimeKind.Local).AddTicks(6358),
                             Inactive = false,
                             PatientTypeCode = "2",
                             PatientTypeName = "Viện phí",
@@ -7990,7 +8011,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(4034),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 688, DateTimeKind.Local).AddTicks(6370),
                             Inactive = false,
                             PatientTypeCode = "3",
                             PatientTypeName = "Dịch vụ",
@@ -7999,7 +8020,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(4036),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 688, DateTimeKind.Local).AddTicks(6373),
                             Inactive = false,
                             PatientTypeCode = "4",
                             PatientTypeName = "Người nước ngoài",
@@ -8008,7 +8029,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(4037),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 688, DateTimeKind.Local).AddTicks(6375),
                             Inactive = false,
                             PatientTypeCode = "5",
                             PatientTypeName = "Miễn phí",
@@ -8062,7 +8083,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("8bff9824-1df2-419e-88ab-e098a6fc4e7e"),
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(5891),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 688, DateTimeKind.Local).AddTicks(8536),
                             Inactive = false,
                             PaymentMethodCode = "TM",
                             PaymentMethodName = "Tiền mặt",
@@ -8071,7 +8092,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd39afc0-1de0-4287-a126-4dada6788508"),
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(5900),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 688, DateTimeKind.Local).AddTicks(8548),
                             Inactive = false,
                             PaymentMethodCode = "CK",
                             PaymentMethodName = "Chuyển khoản",
@@ -8080,7 +8101,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("0b348363-c888-4c9a-b145-c3389fdcca37"),
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(5902),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 688, DateTimeKind.Local).AddTicks(8551),
                             Inactive = false,
                             PaymentMethodCode = "TM/CK",
                             PaymentMethodName = "Tiền mặt hoặc chuyển khoản",
@@ -8673,7 +8694,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(9802),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 689, DateTimeKind.Local).AddTicks(3035),
                             Inactive = false,
                             ReceptionTypeCode = "1",
                             ReceptionTypeName = "Khám bệnh",
@@ -8682,7 +8703,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(9810),
+                            CreatedDate = new DateTime(2024, 1, 22, 20, 58, 20, 689, DateTimeKind.Local).AddTicks(3045),
                             Inactive = false,
                             ReceptionTypeCode = "2",
                             ReceptionTypeName = "Cấp cứu",
@@ -10226,12 +10247,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ExecuteRoomName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ExecuteUserCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ExecuteUserName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PatientCode")

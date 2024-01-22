@@ -72,14 +72,14 @@ namespace HIS.ApplicationService.Business.PatientRecords
                         dto.UserId = patientRecord.UserId;
                         dto.ExecuteDepartmentId = patientRecord.ClinicalDepartmentId.GetValueOrDefault();
                         dto.ExecuteRoomId = patientRecord.ClinicalRoomId.GetValueOrDefault();
-                        dto.ExecuteUserId = patientRecord.ClinicalUserId;
+                        dto.StartUserId = patientRecord.ClinicalUserId;
                         var serviceRequest = ObjectMapper.Map<ServiceRequest>(dto);
                         lstServiceRequest.Add(serviceRequest);
 
                         foreach (var dataDto in dto.ServiceRequestDatas)
                         {
                             dataDto.Id = Guid.NewGuid();
-                            dataDto.ServiceRequestId = dto.Id;
+                            dataDto.ServiceRequestId = dto.Id.GetValueOrDefault();
                             var serviceRequestData = ObjectMapper.Map<ServiceRequestData>(dataDto);
                             lstServiceRequestData.Add(serviceRequestData);
                         }    

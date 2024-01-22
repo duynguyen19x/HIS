@@ -29,7 +29,6 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public Guid? EndUserId { get; set; } // người kết thúc (trả kết quả)
         public Guid ExecuteDepartmentId { get; set; } // khoa thực hiện
         public Guid ExecuteRoomId { get; set; } // phòng thực hiện
-        public Guid? ExecuteUserId { get; set; } // người thực hiện
         public ServiceRequestStatusTypes Status { get; set; } // trạng thái
     }
 }
