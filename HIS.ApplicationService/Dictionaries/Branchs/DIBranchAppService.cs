@@ -1,5 +1,5 @@
 ﻿using HIS.Core.Domain.Repositories;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.Dtos.Dictionaries.Branchs;
 using HIS.Core.Services;
 using HIS.Core.Services.Dto;
 using HIS.Dtos.Systems;
@@ -10,6 +10,10 @@ using Microsoft.EntityFrameworkCore;
 using System.Transactions;
 using HIS.Utilities.Helpers;
 using HIS.Core.Extensions;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.Utilities.Sections;
+using Microsoft.EntityFrameworkCore;
+using HIS.Core.Services;
 
 namespace HIS.ApplicationService.Dictionaries.Branchs
 {

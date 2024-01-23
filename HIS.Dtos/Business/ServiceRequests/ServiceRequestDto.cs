@@ -5,11 +5,13 @@ using HIS.Utilities.Enums;
 
 namespace HIS.Dtos.Business.ServiceRequests
 {
-    public class ServiceRequestDto : EntityDto<Guid>
+    public class ServiceRequestDto : EntityDto<Guid?>
     {
         public string ServiceRequestCode { get; set; }
-        public DateTime ServiceRequestDate { get; set; } // ngày chỉ định (tạo phiếu)
-        public DateTime ServiceRequestUseDate { get; set; } // ngày y lệnh
+        public long RequestTime { get; set; } // ngày chỉ định (tạo phiếu)
+        public long UseTime { get; set; } // ngày y lệnh
+        public long StartTime { get; set; } // Ngày bắt đầu
+        public long EndTime { get; set; } // Ngày kết thúc
         public string Barcode { get; set; }
         public int NumOrder { get; set; } // số thứ tự chỉ định trong ngày (số thứ tự thực hiện)
         public bool IsPriority { get; set; } // ưu tiên
@@ -25,9 +27,10 @@ namespace HIS.Dtos.Business.ServiceRequests
         public Guid DepartmentId { get; set; } // khoa chỉ định
         public Guid RoomId { get; set; } // phòng chỉ định
         public Guid UserId { get; set; } // người chỉ định
+        public Guid? StartUserId { get; set; } // người bắt đầu thực hiện
+        public Guid? EndUserId { get; set; } // người kết thúc (trả kết quả)
         public Guid ExecuteDepartmentId { get; set; } // khoa thực hiện
         public Guid ExecuteRoomId { get; set; } // phòng thực hiện
-        public Guid? ExecuteUserId { get; set; } // người thực hiện
 
         public ServiceRequestStatusTypes Status { get; set; } // trạng thái
 
@@ -46,8 +49,11 @@ namespace HIS.Dtos.Business.ServiceRequests
         public string ExecuteRoomCode { get; set; }
         public string ExecuteRoomName { get; set; }
 
-        public string ExecuteUserCode { get; set; }
-        public string ExecuteUserName { get; set; }
+        public string StartUserCode { get; set; }
+        public string StartUserName { get; set; }
+
+        public string EndUserCode { get; set; }
+        public string EndUserName { get; set; }
 
         public IList<ServiceRequestDataDto> ServiceRequestDatas { get; set; }
         public IList<ServiceResultDataDto> ServiceResultDatas { get; set; }

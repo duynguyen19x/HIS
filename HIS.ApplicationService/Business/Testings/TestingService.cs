@@ -6,14 +6,9 @@ using HIS.Dtos.Business.ServiceRequestDatas;
 using HIS.Dtos.Business.ServiceRequests;
 using HIS.Dtos.Business.ServiceResultDatas;
 using HIS.EntityFrameworkCore;
-using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
-using Microsoft.SqlServer.Server;
-using NetTopologySuite.Algorithm;
-using System.Globalization;
-using System.Linq;
 
 namespace HIS.ApplicationService.Business.Testings
 {
@@ -26,47 +21,29 @@ namespace HIS.ApplicationService.Business.Testings
         {
             var pagedResults = new PagedResultDto<ServiceRequestDto>();
 
-            DateTime result = DateTime.ParseExact(input.ServiceRequestDateFromFilter, "dd/M/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
-            DateTime results = DateTime.ParseExact(input.ServiceRequestDateToFilter, "dd/M/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+            try
+            {
+                var serviceRequests = Context.ServiceRequestViews
+                    .WhereIf(input.StatusFilter != null, w => w.Status == input.StatusFilter)
+                    .WhereIf(!GuidHelper.IsNullOrEmpty(input.ExecuteRoomIdFilter), w => w.ExecuteRoomId == input.ExecuteRoomIdFilter)
+                    .WhereIf(!GuidHelper.IsNullOrEmpty(input.ExecuteDepartmentIdFilter), w => w.ExecuteDepartmentId == input.ExecuteDepartmentIdFilter)
+                    .WhereIf(input.RequestTimeFromFilter != null && input.RequestTimeFromFilter > 0, w => w.RequestTime >= input.RequestTimeFromFilter)
+                    .WhereIf(input.RequestTimeToFilter != null && input.RequestTimeToFilter > 0, w => w.RequestTime <= input.RequestTimeToFilter)
+                    .WhereIf(input.UseTimeFromFilter != null && input.UseTimeFromFilter > 0, w => w.UseTime >= input.UseTimeFromFilter)
+                    .WhereIf(input.UseTimeToFilter != null && input.UseTimeToFilter > 0, w => w.UseTime <= input.UseTimeToFilter)
+                    .WhereIf(input.StartTimeFromFilter != null && input.StartTimeFromFilter > 0, w => w.StartTime >= input.StartTimeFromFilter)
+                    .WhereIf(input.StartTimeToFilter != null && input.StartTimeToFilter > 0, w => w.StartTime <= input.StartTimeToFilter)
+                    .WhereIf(input.EndTimeFromFilter != null && input.EndTimeFromFilter > 0, w => w.EndTime >= input.EndTimeFromFilter)
+                    .WhereIf(input.EndTimeToFilter != null && input.EndTimeToFilter > 0, w => w.EndTime <= input.EndTimeToFilter)
+                    .OrderBy(o => o.Status).ThenBy(t => t.UseTime).ToList();
 
-            //var serviceRequests = (from serviceRequest in Context.ServiceRequests
-
-            //                       select new ServiceRequestDto()
-            //                       {
-            //                           ServiceRequestCode = serviceRequest.ServiceRequestCode,
-            //                           ServiceRequestDate = serviceRequest.ServiceRequestDate,
-            //                           ServiceRequestUseDate = serviceRequest.ServiceRequestUseDate,
-            //                           Barcode = serviceRequest.Barcode,
-            //                           NumOrder = serviceRequest.NumOrder,
-            //                           IsPriority = serviceRequest.IsPriority,
-            //                           IcdCode = serviceRequest.IcdCode,
-            //                           IcdName = serviceRequest.IcdName,
-            //                           IcdSubCode = serviceRequest.IcdSubCode,
-            //                           IcdText = serviceRequest.IcdText,
-            //                           ServiceRequestTypeId = serviceRequest.ServiceRequestTypeId,
-            //                           ServiceRequestStatusId = serviceRequest.ServiceRequestStatusId,
-            //                           PatientRecordId = serviceRequest.PatientRecordId,
-            //                           MedicalRecordId = serviceRequest.MedicalRecordId,
-            //                           TreatmentId = serviceRequest.TreatmentId,
-            //                           DepartmentId = serviceRequest.DepartmentId,
-            //                           RoomId = serviceRequest.RoomId,
-            //                           UserId = serviceRequest.UserId,
-            //                           ExecuteDepartmentId = serviceRequest.ExecuteDepartmentId,
-            //                           ExecuteRoomId = serviceRequest.ExecuteRoomId,
-            //                           ExecuteUserId = serviceRequest.ExecuteUserId,
-            //                       }).ToList();
-
-            var serviceRequests = Context.ServiceRequestViews
-                .WhereIf(input.ServiceRequestStatusIdFilter != null, w => w.ServiceRequestStatusId == input.ServiceRequestStatusIdFilter)
-                .WhereIf(!GuidHelper.IsNullOrEmpty(input.ExecuteRoomIdFilter), w => w.ExecuteRoomId == input.ExecuteRoomIdFilter)
-                .WhereIf(!GuidHelper.IsNullOrEmpty(input.ExecuteDepartmentIdFilter), w => w.ExecuteDepartmentId == input.ExecuteDepartmentIdFilter)
-                //.WhereIf(!DatetimeHelper.IsNullOrEmpty(input.ServiceRequestDateFromFilter), w => w.ServiceRequestDate >= input.ServiceRequestDateFromFilter)
-                //.WhereIf(!DatetimeHelper.IsNullOrEmpty(input.ServiceRequestDateToFilter), w => w.ServiceRequestDate <= input.ServiceRequestDateToFilter)
-                .WhereIf(input.ServiceRequestUseDateFromFilter > 0, w => w.ServiceRequestUseDate >= input.ServiceRequestUseDateFromFilter)
-                .WhereIf(input.ServiceRequestUseDateToFilter > 0, w => w.ServiceRequestUseDate <= input.ServiceRequestUseDateToFilter)
-                .ToList();
-
-            pagedResults.Result = ObjectMapper.Map<List<ServiceRequestDto>>(serviceRequests);
+                pagedResults.Result = ObjectMapper.Map<List<ServiceRequestDto>>(serviceRequests);
+            }
+            catch (Exception ex)
+            {
+                pagedResults.IsSucceeded = false;
+                pagedResults.Message = ex.Message;
+            }
 
             return await Task.FromResult(pagedResults);
         }

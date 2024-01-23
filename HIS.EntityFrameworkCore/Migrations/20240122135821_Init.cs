@@ -128,8 +128,10 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ServiceRequestCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    ServiceRequestDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ServiceRequestUseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ServiceRequestDate = table.Column<long>(type: "bigint", nullable: false),
+                    ServiceRequestUseDate = table.Column<long>(type: "bigint", nullable: false),
+                    StartTime = table.Column<long>(type: "bigint", nullable: false),
+                    EndTime = table.Column<long>(type: "bigint", nullable: false),
                     Barcode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     NumOrder = table.Column<int>(type: "int", nullable: false),
                     IsPriority = table.Column<bool>(type: "bit", nullable: false),
@@ -145,9 +147,10 @@ namespace HIS.EntityFrameworkCore.Migrations
                     DepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RoomId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StartUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    EndUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ExecuteDepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ExecuteRoomId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ExecuteUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -1345,8 +1348,12 @@ namespace HIS.EntityFrameworkCore.Migrations
                     InsuranceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ServiceName = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
-                    StartTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    EndTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    StartTime = table.Column<long>(type: "bigint", nullable: false),
+                    EndTime = table.Column<long>(type: "bigint", nullable: false),
+                    IsSampled = table.Column<bool>(type: "bit", nullable: false),
+                    SampleTime = table.Column<long>(type: "bigint", nullable: false),
+                    SampleRoomId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    OriginalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Quantity = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -2499,9 +2506,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("4333ca55-4d7c-4be0-b9a2-2125624f0229"), "DO_TAI_BIEN", null, new DateTime(2024, 1, 16, 0, 27, 36, 334, DateTimeKind.Local).AddTicks(3912), null, false, null, null, "Do tai biến điều trị", 2 },
-                    { new Guid("4d5b5c50-6be0-434e-8baa-a528af4a58b5"), "KHAC", null, new DateTime(2024, 1, 16, 0, 27, 36, 334, DateTimeKind.Local).AddTicks(3914), null, false, null, null, "Khác", 3 },
-                    { new Guid("c0a4d767-7ba9-4006-a0a9-020b6322c2ef"), "DO_BENH", null, new DateTime(2024, 1, 16, 0, 27, 36, 334, DateTimeKind.Local).AddTicks(3894), null, false, null, null, "Do bệnh", 1 }
+                    { new Guid("4333ca55-4d7c-4be0-b9a2-2125624f0229"), "DO_TAI_BIEN", null, new DateTime(2024, 1, 22, 20, 58, 20, 681, DateTimeKind.Local).AddTicks(8099), null, false, null, null, "Do tai biến điều trị", 2 },
+                    { new Guid("4d5b5c50-6be0-434e-8baa-a528af4a58b5"), "KHAC", null, new DateTime(2024, 1, 22, 20, 58, 20, 681, DateTimeKind.Local).AddTicks(8102), null, false, null, null, "Khác", 3 },
+                    { new Guid("c0a4d767-7ba9-4006-a0a9-020b6322c2ef"), "DO_BENH", null, new DateTime(2024, 1, 22, 20, 58, 20, 681, DateTimeKind.Local).AddTicks(8084), null, false, null, null, "Do bệnh", 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -2509,10 +2516,10 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("66c3a43b-f9d0-4876-81e2-b13c5f188589"), "TRONG_24H", null, new DateTime(2024, 1, 16, 0, 27, 36, 335, DateTimeKind.Local).AddTicks(6640), null, false, null, null, "Trong 24h vào", 1 },
-                    { new Guid("7693d6ec-cf0f-44c1-a9d7-fb997335ae10"), "TRONG_72H", null, new DateTime(2024, 1, 16, 0, 27, 36, 335, DateTimeKind.Local).AddTicks(6654), null, false, null, null, "Trong 72h vào", 3 },
-                    { new Guid("8f2b1eeb-a4bd-4f84-b59c-98145c58b1ab"), "KHAC", null, new DateTime(2024, 1, 16, 0, 27, 36, 335, DateTimeKind.Local).AddTicks(6663), null, false, null, null, "Khác", 4 },
-                    { new Guid("f91d8342-619c-435b-b51c-8b3d7f541222"), "TRONG_48H", null, new DateTime(2024, 1, 16, 0, 27, 36, 335, DateTimeKind.Local).AddTicks(6652), null, false, null, null, "Trong 48h vào", 2 }
+                    { new Guid("66c3a43b-f9d0-4876-81e2-b13c5f188589"), "TRONG_24H", null, new DateTime(2024, 1, 22, 20, 58, 20, 683, DateTimeKind.Local).AddTicks(2663), null, false, null, null, "Trong 24h vào", 1 },
+                    { new Guid("7693d6ec-cf0f-44c1-a9d7-fb997335ae10"), "TRONG_72H", null, new DateTime(2024, 1, 22, 20, 58, 20, 683, DateTimeKind.Local).AddTicks(2679), null, false, null, null, "Trong 72h vào", 3 },
+                    { new Guid("8f2b1eeb-a4bd-4f84-b59c-98145c58b1ab"), "KHAC", null, new DateTime(2024, 1, 22, 20, 58, 20, 683, DateTimeKind.Local).AddTicks(2682), null, false, null, null, "Khác", 4 },
+                    { new Guid("f91d8342-619c-435b-b51c-8b3d7f541222"), "TRONG_48H", null, new DateTime(2024, 1, 22, 20, 58, 20, 683, DateTimeKind.Local).AddTicks(2676), null, false, null, null, "Trong 48h vào", 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -2696,9 +2703,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "MedicalRecordTypeGroupCode", "MedicalRecordTypeGroupName", "ModifiedBy", "ModifiedDate", "SortOrder" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(529), null, false, "1", "Khám bệnh", null, null, 3 },
-                    { 2, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(528), null, false, "2", "Ngoại trú", null, null, 2 },
-                    { 3, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(513), null, false, "3", "Nội trú", null, null, 1 }
+                    { 1, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(1142), null, false, "1", "Khám bệnh", null, null, 3 },
+                    { 2, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(1140), null, false, "2", "Ngoại trú", null, null, 2 },
+                    { 3, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(1126), null, false, "3", "Nội trú", null, null, 1 }
                 });
 
             migrationBuilder.InsertData(
@@ -2706,9 +2713,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "PatientRecordTypeCode", "PatientRecordTypeName", "SortOrder" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(2096), null, false, null, null, "1", "Ngoại trú", 1 },
-                    { 2, null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(2107), null, false, null, null, "2", "Nội trú", 2 },
-                    { 3, null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(2109), null, false, null, null, "3", "Dịch vụ", 3 }
+                    { 1, null, new DateTime(2024, 1, 22, 20, 58, 20, 688, DateTimeKind.Local).AddTicks(4173), null, false, null, null, "1", "Ngoại trú", 1 },
+                    { 2, null, new DateTime(2024, 1, 22, 20, 58, 20, 688, DateTimeKind.Local).AddTicks(4182), null, false, null, null, "2", "Nội trú", 2 },
+                    { 3, null, new DateTime(2024, 1, 22, 20, 58, 20, 688, DateTimeKind.Local).AddTicks(4185), null, false, null, null, "3", "Dịch vụ", 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -2716,11 +2723,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "PatientTypeCode", "PatientTypeName", "SortOrder" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(4014), null, false, null, null, "1", "Bảo hiểm y tế", 1 },
-                    { 2, null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(4021), null, false, null, null, "2", "Viện phí", 2 },
-                    { 3, null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(4034), null, false, null, null, "3", "Dịch vụ", 3 },
-                    { 4, null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(4036), null, false, null, null, "4", "Người nước ngoài", 4 },
-                    { 5, null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(4037), null, false, null, null, "5", "Miễn phí", 5 }
+                    { 1, null, new DateTime(2024, 1, 22, 20, 58, 20, 688, DateTimeKind.Local).AddTicks(6348), null, false, null, null, "1", "Bảo hiểm y tế", 1 },
+                    { 2, null, new DateTime(2024, 1, 22, 20, 58, 20, 688, DateTimeKind.Local).AddTicks(6358), null, false, null, null, "2", "Viện phí", 2 },
+                    { 3, null, new DateTime(2024, 1, 22, 20, 58, 20, 688, DateTimeKind.Local).AddTicks(6370), null, false, null, null, "3", "Dịch vụ", 3 },
+                    { 4, null, new DateTime(2024, 1, 22, 20, 58, 20, 688, DateTimeKind.Local).AddTicks(6373), null, false, null, null, "4", "Người nước ngoài", 4 },
+                    { 5, null, new DateTime(2024, 1, 22, 20, 58, 20, 688, DateTimeKind.Local).AddTicks(6375), null, false, null, null, "5", "Miễn phí", 5 }
                 });
 
             migrationBuilder.InsertData(
@@ -2728,9 +2735,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "PaymentMethodCode", "PaymentMethodName", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("0b348363-c888-4c9a-b145-c3389fdcca37"), null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(5902), null, false, null, null, "TM/CK", "Tiền mặt hoặc chuyển khoản", 3 },
-                    { new Guid("8bff9824-1df2-419e-88ab-e098a6fc4e7e"), null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(5891), null, false, null, null, "TM", "Tiền mặt", 1 },
-                    { new Guid("dd39afc0-1de0-4287-a126-4dada6788508"), null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(5900), null, false, null, null, "CK", "Chuyển khoản", 2 }
+                    { new Guid("0b348363-c888-4c9a-b145-c3389fdcca37"), null, new DateTime(2024, 1, 22, 20, 58, 20, 688, DateTimeKind.Local).AddTicks(8551), null, false, null, null, "TM/CK", "Tiền mặt hoặc chuyển khoản", 3 },
+                    { new Guid("8bff9824-1df2-419e-88ab-e098a6fc4e7e"), null, new DateTime(2024, 1, 22, 20, 58, 20, 688, DateTimeKind.Local).AddTicks(8536), null, false, null, null, "TM", "Tiền mặt", 1 },
+                    { new Guid("dd39afc0-1de0-4287-a126-4dada6788508"), null, new DateTime(2024, 1, 22, 20, 58, 20, 688, DateTimeKind.Local).AddTicks(8548), null, false, null, null, "CK", "Chuyển khoản", 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -2808,8 +2815,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "ReceptionTypeCode", "ReceptionTypeName", "SortOrder" },
                 values: new object[,]
                 {
-                    { 1, null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(9802), null, false, null, null, "1", "Khám bệnh", 1 },
-                    { 2, null, new DateTime(2024, 1, 16, 0, 27, 36, 340, DateTimeKind.Local).AddTicks(9810), null, false, null, null, "2", "Cấp cứu", 2 }
+                    { 1, null, new DateTime(2024, 1, 22, 20, 58, 20, 689, DateTimeKind.Local).AddTicks(3035), null, false, null, null, "1", "Khám bệnh", 1 },
+                    { 2, null, new DateTime(2024, 1, 22, 20, 58, 20, 689, DateTimeKind.Local).AddTicks(3045), null, false, null, null, "2", "Cấp cứu", 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -2988,28 +2995,28 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "MedicalRecordTypeCode", "MedicalRecordTypeGroupID", "MedicalRecordTypeName", "ModifiedBy", "ModifiedDate", "SortOrder" },
                 values: new object[,]
                 {
-                    { 100, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3108), null, false, "100", 1, "Khám Bệnh", null, null, 1 },
-                    { 200, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3117), null, false, "200", 2, "Bệnh Án Ngoại Trú (Chung)", null, null, 1 },
-                    { 201, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3118), null, false, "201", 2, "Bệnh Án Ngoại Trú (Răng - Hàm - Mặt)", null, null, 2 },
-                    { 202, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3120), null, false, "202", 2, "Bệnh Án Ngoại Trú (Tai - Mũi - Họng)", null, null, 3 },
-                    { 203, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3121), null, false, "203", 2, "Bệnh Án Ngoại Trú (Y Học Cổ Truyền)", null, null, 4 },
-                    { 204, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3123), null, false, "204", 2, "Bệnh Án Ngoại Trú (Mắt)", null, null, 5 },
-                    { 301, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3124), null, false, "301", 3, "Bệnh Án Nội Khoa", null, null, 2 },
-                    { 302, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3126), null, false, "302", 3, "Bệnh Án Nhi Khoa", null, null, 3 },
-                    { 303, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3127), null, false, "303", 3, "Bệnh Án Truyền Nhiễm", null, null, 4 },
-                    { 304, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3129), null, false, "304", 3, "Bệnh Án Phụ Khoa", null, null, 5 },
-                    { 305, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3130), null, false, "305", 3, "Bệnh Án Sản Khoa", null, null, 6 },
-                    { 306, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3132), null, false, "306", 3, "Bệnh Án Sơ Sinh", null, null, 7 },
-                    { 307, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3140), null, false, "307", 3, "Bệnh Án Tâm Thần", null, null, 8 },
-                    { 308, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3141), null, false, "308", 3, "Bệnh Án Da Liễu", null, null, 9 },
-                    { 309, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3148), null, false, "309", 3, "Bệnh Án Điều Dưỡng - Phục Hồi Chức Năng", null, null, 10 },
-                    { 310, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3149), null, false, "310", 3, "Bệnh Án Huyết Học - Truyền Máu", null, null, 11 },
-                    { 311, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3165), null, false, "311", 3, "Bệnh Án Ngoại Khoa", null, null, 12 },
-                    { 312, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3186), null, false, "312", 3, "Bệnh Án Bỏng", null, null, 13 },
-                    { 313, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3188), null, false, "313", 3, "Bệnh Án Ung Bướu", null, null, 14 },
-                    { 314, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3189), null, false, "314", 3, "Bệnh Án Răng-Hàm-Mặt", null, null, 15 },
-                    { 315, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3191), null, false, "315", 3, "Bệnh Án Tai-Mũi-Họng", null, null, 16 },
-                    { 316, null, new DateTime(2024, 1, 16, 0, 27, 36, 339, DateTimeKind.Local).AddTicks(3192), null, false, "316", 3, "Bệnh Án Mắt", null, null, 17 }
+                    { 100, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4124), null, false, "100", 1, "Khám Bệnh", null, null, 1 },
+                    { 200, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4135), null, false, "200", 2, "Bệnh Án Ngoại Trú (Chung)", null, null, 1 },
+                    { 201, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4137), null, false, "201", 2, "Bệnh Án Ngoại Trú (Răng - Hàm - Mặt)", null, null, 2 },
+                    { 202, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4139), null, false, "202", 2, "Bệnh Án Ngoại Trú (Tai - Mũi - Họng)", null, null, 3 },
+                    { 203, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4142), null, false, "203", 2, "Bệnh Án Ngoại Trú (Y Học Cổ Truyền)", null, null, 4 },
+                    { 204, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4144), null, false, "204", 2, "Bệnh Án Ngoại Trú (Mắt)", null, null, 5 },
+                    { 301, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4153), null, false, "301", 3, "Bệnh Án Nội Khoa", null, null, 2 },
+                    { 302, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4155), null, false, "302", 3, "Bệnh Án Nhi Khoa", null, null, 3 },
+                    { 303, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4157), null, false, "303", 3, "Bệnh Án Truyền Nhiễm", null, null, 4 },
+                    { 304, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4159), null, false, "304", 3, "Bệnh Án Phụ Khoa", null, null, 5 },
+                    { 305, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4160), null, false, "305", 3, "Bệnh Án Sản Khoa", null, null, 6 },
+                    { 306, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4162), null, false, "306", 3, "Bệnh Án Sơ Sinh", null, null, 7 },
+                    { 307, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4164), null, false, "307", 3, "Bệnh Án Tâm Thần", null, null, 8 },
+                    { 308, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4165), null, false, "308", 3, "Bệnh Án Da Liễu", null, null, 9 },
+                    { 309, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4172), null, false, "309", 3, "Bệnh Án Điều Dưỡng - Phục Hồi Chức Năng", null, null, 10 },
+                    { 310, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4174), null, false, "310", 3, "Bệnh Án Huyết Học - Truyền Máu", null, null, 11 },
+                    { 311, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4188), null, false, "311", 3, "Bệnh Án Ngoại Khoa", null, null, 12 },
+                    { 312, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4214), null, false, "312", 3, "Bệnh Án Bỏng", null, null, 13 },
+                    { 313, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4216), null, false, "313", 3, "Bệnh Án Ung Bướu", null, null, 14 },
+                    { 314, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4218), null, false, "314", 3, "Bệnh Án Răng-Hàm-Mặt", null, null, 15 },
+                    { 315, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4220), null, false, "315", 3, "Bệnh Án Tai-Mũi-Họng", null, null, 16 },
+                    { 316, null, new DateTime(2024, 1, 22, 20, 58, 20, 687, DateTimeKind.Local).AddTicks(4221), null, false, "316", 3, "Bệnh Án Mắt", null, null, 17 }
                 });
 
             migrationBuilder.InsertData(
