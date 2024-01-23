@@ -8,8 +8,8 @@ namespace HIS.Dtos.Business.ServiceRequests
     public class ServiceRequestDto : EntityDto<Guid?>
     {
         public string ServiceRequestCode { get; set; }
-        public long ServiceRequestDate { get; set; } // ngày chỉ định (tạo phiếu)
-        public long ServiceRequestUseDate { get; set; } // ngày y lệnh
+        public long RequestTime { get; set; } // ngày chỉ định (tạo phiếu)
+        public long UseTime { get; set; } // ngày y lệnh
         public long StartTime { get; set; } // Ngày bắt đầu
         public long EndTime { get; set; } // Ngày kết thúc
         public string Barcode { get; set; }
@@ -51,6 +51,7 @@ namespace HIS.Dtos.Business.ServiceRequests
 
         public string StartUserCode { get; set; }
         public string StartUserName { get; set; }
+
         public string EndUserCode { get; set; }
         public string EndUserName { get; set; }
 

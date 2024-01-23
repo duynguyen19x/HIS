@@ -6,8 +6,8 @@ namespace HIS.EntityFrameworkCore.Entities.Business
     public class ServiceRequest : FullAuditedEntity<Guid>
     {
         public string ServiceRequestCode { get; set; }
-        public long ServiceRequestDate { get; set; } // ngày chỉ định (tạo phiếu)
-        public long ServiceRequestUseDate { get; set; } // ngày y lệnh
+        public long RequestTime { get; set; } // ngày chỉ định (tạo phiếu)
+        public long UseTime { get; set; } // ngày y lệnh
         public long StartTime { get; set; }
         public long EndTime { get; set; }
         public string Barcode { get; set; }
@@ -18,7 +18,6 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public string IcdSubCode { get; set; } // bệnh kèm theo
         public string IcdText { get; set; } // danh sách bệnh kèm theo
         public int ServiceRequestTypeId { get; set; } // loại dịch vụ
-        public int ServiceRequestStatusId { get; set; } // trạng thái
         public Guid PatientRecordId { get; set; }
         public Guid MedicalRecordId { get; set; }
         public Guid? TreatmentId { get; set; }

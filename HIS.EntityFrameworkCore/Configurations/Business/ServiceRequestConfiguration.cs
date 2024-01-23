@@ -11,8 +11,8 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
             builder.ToTable("BUS_ServiceRequest");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.ServiceRequestCode).IsRequired().HasMaxLength(20);
-            builder.Property(x => x.ServiceRequestDate).IsRequired();
-            builder.Property(x => x.ServiceRequestUseDate).IsRequired();
+            builder.Property(x => x.RequestTime).IsRequired();
+            builder.Property(x => x.UseTime).IsRequired();
             builder.Property(x => x.Barcode).HasMaxLength(20);
             builder.Property(x => x.IcdCode).HasMaxLength(20);
             builder.Property(x => x.IcdName).HasMaxLength(512);
