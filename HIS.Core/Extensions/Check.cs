@@ -8,14 +8,47 @@ namespace HIS.Core.Extensions
 {
     public static class Check
     {
+        public static bool IsNullOrDefault(bool? value)
+        {
+            return value == null || value == default(bool);
+        }
+
         public static bool IsNullOrDefault(int? value)
         {
             return value == null || value == default(int);
         }
 
+        public static bool IsNullOrDefault(DateTime? value)
+        {
+            return value == null || value == default(DateTime);
+        }
+
         public static bool IsNullOrDefault(Guid? value)
         {
             return value == null || value == default(Guid);
+        }
+
+        public static bool IsNullOrEmpty<T>(this ICollection<T> source)
+        {
+            return source == null || source.Count <= 0;
+        }
+
+        /// <summary>
+        /// Kiểm tra chuỗi có trong mảng.
+        /// </summary>
+        /// <param name="str"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public static bool IsIn(this string str, params string[] data)
+        {
+            foreach (var item in data)
+            {
+                if (str == item)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

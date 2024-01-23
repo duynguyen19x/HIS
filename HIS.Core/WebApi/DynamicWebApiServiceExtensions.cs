@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Core.WebApi.Dynamic
+namespace HIS.Core.WebApi
 {
     public static class DynamicWebApiServiceExtensions
     {

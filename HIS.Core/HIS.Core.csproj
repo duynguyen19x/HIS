@@ -22,8 +22,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="WebApi\Dynamic\Attributes\" />
-	  <Folder Include="WebApi\Dynamic\Helpers\" />
+	  <Folder Include="WebApi\Attributes\" />
+	  <Folder Include="WebApi\Helpers\" />
 	</ItemGroup>
 
 </Project>
