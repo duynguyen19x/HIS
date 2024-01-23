@@ -27,7 +27,7 @@ namespace HIS.BackendApi.Controllers.Systems
         public async Task<ResultDto<SYSRefTypeDto>> GetById(int id) => await _sysRefTypeAppService.GetAsync(id);
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ResultDto<SYSRefTypeDto>> CreateOrEdit(SYSRefTypeDto input) => await _sysRefTypeAppService.CreateOrEditAsync(input);
+        public async Task<ResultDto<SYSRefTypeDto>> CreateOrEdit(SYSRefTypeDto input) => await _sysRefTypeAppService.CreateOrUpdateAsync(input);
 
         [HttpDelete("Delete")]
         public async Task<ResultDto<SYSRefTypeDto>> Delete(int id) => await _sysRefTypeAppService.DeleteAsync(id);

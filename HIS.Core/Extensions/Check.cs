@@ -8,5 +8,14 @@ namespace HIS.Core.Extensions
 {
     public static class Check
     {
+        public static bool IsNullOrDefault(int? value)
+        {
+            return value == null || value == default(int);
+        }
+
+        public static bool IsNullOrDefault(Guid? value)
+        {
+            return value == null || value == default(Guid);
+        }
     }
 }

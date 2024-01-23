@@ -3,6 +3,7 @@ using HIS.Core.Domain.EntityFramework;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Domain.Uow;
 using HIS.Core.ObjectMapping;
+using HIS.Core.WebApi.Dynamic;
 using HIS.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.EntityFrameworkCore.Repositories;
 using HIS.EntityFrameworkCore.Repositories;
@@ -101,6 +102,9 @@ void ConfigureService()
             }
         });
     });
+
+
+    builder.Services.AddDynamicWebApi();
 }
 
 void Configure()

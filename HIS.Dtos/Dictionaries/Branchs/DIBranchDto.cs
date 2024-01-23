@@ -2,7 +2,7 @@
 
 namespace HIS.Dtos.Dictionaries.Branchs
 {
-    public class BranchDto : EntityDto<Guid>
+    public class DIBranchDto : EntityDto<Guid>
     {
         public string Code { get; set; }
         public string Name { get; set; }
@@ -12,9 +12,9 @@ namespace HIS.Dtos.Dictionaries.Branchs
         public string Type { get; set; } // loại bệnh viện
         public string Line { get; set; } // tuyến bệnh viện
         public string ParentOrganizationName { get; set; } // tên đơn vị quản lý (sở y tế/bộ y tế)
-        public Guid? ProvinceOrCityID { get; set; }
-        public Guid? DistrictID { get; set; }
-        public Guid? WardOrCommuneID { get; set; }
+        public Guid? ProvinceId { get; set; }
+        public Guid? DistrictId { get; set; }
+        public Guid? WardId { get; set; }
         public string Tel { get; set; }
         public string Address { get; set; }
         public string Description { get; set; }

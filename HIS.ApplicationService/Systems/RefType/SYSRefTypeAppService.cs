@@ -6,111 +6,136 @@ using HIS.Core.Domain.Repositories;
 using HIS.Core.Services.Dto;
 using HIS.Core.Linq.Extensions;
 using HIS.Core.Services;
+using HIS.Core.Extensions;
+using System.Transactions;
+using HIS.Core.Runtime.Session;
 
 namespace HIS.ApplicationService.Systems.RefType
 {
-    public class SYSRefTypeAppService : BaseAsyncCrudAppService<SYSRefType, SYSRefTypeDto, int, GetAllSYSRefTypeInputDto>, ISYSRefTypeAppService
+    public class SYSRefTypeAppService : BaseAppService, ISYSRefTypeAppService
     {
+        private readonly IRepository<SYSRefType, int> _sysRefTypeRepository;
+
         public SYSRefTypeAppService(IRepository<SYSRefType, int> sysRefTypeRepository) 
-            : base(sysRefTypeRepository)
         {
+            _sysRefTypeRepository = sysRefTypeRepository;
         }
 
-        public override async Task<PagedResultDto<SYSRefTypeDto>> GetAllAsync(GetAllSYSRefTypeInputDto input)
+        public virtual async Task<PagedResultDto<SYSRefTypeDto>> GetAllAsync(GetAllSYSRefTypeInputDto input)
         {
             var result = new PagedResultDto<SYSRefTypeDto>();
-            var query = CreateFilteredQuery(input);
-            var paged = query.ApplySortingAndPaging(input);
+            try
+            {
+                var query = _sysRefTypeRepository.GetAll()
+                    .WhereIf(!string.IsNullOrEmpty(input.RefTypeNameFilter), x => x.RefTypeName == input.RefTypeNameFilter)
+                    .WhereIf(input.RefTypeCategoryFilter != null, x => x.RefTypeCategoryId == input.RefTypeCategoryFilter);
+                var paged = query.ApplySortingAndPaging(input);
 
-            result.TotalCount = await query.CountAsync();
-            result.Result = ObjectMapper.Map<IList<SYSRefTypeDto>>(paged.ToList());
+                result.TotalCount = await query.CountAsync();
+                result.Result = ObjectMapper.Map<IList<SYSRefTypeDto>>(paged.ToList());
+                result.IsSucceeded = true;
+            }
+            catch (Exception ex)
+            {
+                result.Exception(ex);
+            }
             return result;
         }
 
-        //public override async Task<ResultDto<SYSRefTypeDto>> Create(SYSRefTypeDto input)
-        //{
-        //    var result = new ResultDto<SYSRefTypeDto>();
-        //    using (var unitOfWork = UnitOfWorkManager.Begin())
-        //    {
-        //        try
-        //        {
-        //            //input.Id = Context.NewID<SYSRefType>();
-        //            var data = ObjectMapper.Map<SYSRefType>(input);
-        //            input.Id = await Repository.InsertAndGetIdAsync(data);
+        public virtual async Task<ResultDto<SYSRefTypeDto>> GetAsync(int id)
+        {
+            var result = new ResultDto<SYSRefTypeDto>();
+            try
+            {
+                var entity = await _sysRefTypeRepository.GetAsync(id);
 
-        //            unitOfWork.Complete();
-        //            result.Result = input;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            result.Exception(ex);
-        //            throw;
-        //        }
-        //    }
-        //    return result;
-        //}
+                result.Result = ObjectMapper.Map<SYSRefTypeDto>(entity);
+                result.IsSucceeded = true;
+            }
+            catch (Exception ex)
+            {
+                result.Exception(ex);
+            }
+            return result;
+        }
 
-        //public override async Task<ResultDto<SYSRefTypeDto>> Update(SYSRefTypeDto input)
-        //{
-        //    var result = new ResultDto<SYSRefTypeDto>();
-        //    using (var unitOfWork = UnitOfWorkManager.Begin())
-        //    {
-        //        try
-        //        {
-        //            //input.Id = Context.NewID<SYSRefType>();
-        //            var data = ObjectMapper.Map<SYSRefType>(input);
-        //            Repository.Update(data);
+        public virtual async Task<ResultDto<SYSRefTypeDto>> CreateOrUpdateAsync(SYSRefTypeDto input)
+        {
+            if (Check.IsNullOrDefault(input.Id))
+            {
+                return await CreateAsync(input);
+            }
+            else
+            {
+                return await UpdateAsync(input);
+            }
+        }
 
-        //            unitOfWork.Complete();
-        //            result.Result = input;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            result.Exception(ex);
-        //            throw;
-        //        }
-        //    }
-        //    return await Task.FromResult(result);
-        //}
+        public virtual async Task<ResultDto<SYSRefTypeDto>> CreateAsync(SYSRefTypeDto input)
+        {
+            var result = new ResultDto<SYSRefTypeDto>();
+            try
+            {
+                using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+                {
+                    var entity = ObjectMapper.Map<SYSRefType>(input);
 
-        //public override async Task<ResultDto<SYSRefTypeDto>> Delete(int id)
-        //{
-        //    var result = new ResultDto<SYSRefTypeDto>();
-        //    using (var unitOfWork = UnitOfWorkManager.Begin())
-        //    {
-        //        var entity = await Repository.GetAsync(id);
-        //        Repository.Delete(entity);
-        //    }
-        //    return result;
-        //}
+                    await _sysRefTypeRepository.InsertAsync(entity);
+                    unitOfWork.Complete();
 
-        //public override async Task<PagedResultDto<SYSRefTypeDto>> GetAll(GetAllSYSRefTypeInputDto input)
-        //{
-        //    var result = new PagedResultDto<SYSRefTypeDto>();
-        //    try
-        //    {
-        //        var filter = Repository.GetAll()
-        //            .WhereIf(!string.IsNullOrEmpty(input.RefTypeNameFilter), x => x.RefTypeName == input.RefTypeNameFilter)
-        //            .WhereIf(input.RefTypeCategoryFilter != null, x => x.RefTypeCategoryId == input.RefTypeCategoryFilter);
+                    result.Result = ObjectMapper.Map<SYSRefTypeDto>(entity);
+                    result.IsSucceeded = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Exception(ex);
+            }
+            return result;
+        }
 
-        //        var paged = filter.OrderBy(s => s.RefTypeCategoryId).ThenBy(t => t.SortOrder).PageBy(input);
+        public virtual async Task<ResultDto<SYSRefTypeDto>> UpdateAsync(SYSRefTypeDto input)
+        {
+            var result = new ResultDto<SYSRefTypeDto>();
+            try
+            {
+                using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+                {
+                    var entity = await _sysRefTypeRepository.GetAsync(input.Id);
 
-        //        result.TotalCount = await filter.CountAsync();
-        //        result.Result = ObjectMapper.Map<IList<SYSRefTypeDto>>(paged.ToList());
-        //        result.IsSucceeded = true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        result.Exception(ex);
-        //    }
-        //    return result;
-        //}
+                    ObjectMapper.Map(input, entity);
+                    unitOfWork.Complete();
 
-        //public override Task<ResultDto<SYSRefTypeDto>> Get(int id)
-        //{
-        //    throw new NotImplementedException();
-        //}
+                    result.Result = ObjectMapper.Map<SYSRefTypeDto>(entity);
+                    result.IsSucceeded = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Exception(ex);
+            }
+            return result;
+        }
 
+        public virtual async Task<ResultDto<SYSRefTypeDto>> DeleteAsync(int id)
+        {
+            var result = new ResultDto<SYSRefTypeDto>();
+            using (var unitOfWork = UnitOfWorkManager.Begin())
+            {
+                try
+                {
+                    var entity = _sysRefTypeRepository.Get(id);
+                    await _sysRefTypeRepository.DeleteAsync(entity);
 
+                    result.Result = ObjectMapper.Map<SYSRefTypeDto>(entity);
+                    result.IsSucceeded = true;
+                }
+                catch (Exception ex)
+                {
+                    result.Exception(ex);
+                }
+            }
+            return result;
+        }
     }
 }

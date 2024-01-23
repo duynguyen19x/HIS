@@ -10,21 +10,22 @@ namespace HIS.BackendApi.Controllers.Dictionaries
     public class BranchController : ControllerBase 
     {
         private readonly IDIBranchAppService _diBranchAppService;
+
         public BranchController(IDIBranchAppService diBranchAppService) 
         {
             _diBranchAppService = diBranchAppService;
         }
 
         [HttpGet("GetAll")]
-        public async Task<PagedResultDto<BranchDto>> GetAll([FromQuery] GetAllBranchInput input) => await _diBranchAppService.GetAllAsync(input);
+        public async Task<PagedResultDto<DIBranchDto>> GetAll([FromQuery] GetAllDIBranchInputDto input) => await _diBranchAppService.GetAllAsync(input);
 
         [HttpGet("GetById")]
-        public async Task<ResultDto<BranchDto>> GetById(Guid id)  => await _diBranchAppService.GetAsync(id);
+        public async Task<ResultDto<DIBranchDto>> GetById(Guid id)  => await _diBranchAppService.GetAsync(id);
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ResultDto<BranchDto>> CreateOrEdit(BranchDto input) => await _diBranchAppService.CreateOrEditAsync(input);
+        public async Task<ResultDto<DIBranchDto>> CreateOrEdit(DIBranchDto input) => await _diBranchAppService.CreateOrUpdateAsync(input);
 
         [HttpDelete("Delete")]
-        public async Task<ResultDto<BranchDto>> Delete(Guid id) => await _diBranchAppService.DeleteAsync(id);
+        public async Task<ResultDto<DIBranchDto>> Delete(Guid id) => await _diBranchAppService.DeleteAsync(id);
     }
 }

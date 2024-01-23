@@ -7,7 +7,8 @@ using HIS.Core.Domain.Entities;
 
 namespace HIS.Core.Services
 {
-    public abstract class BaseCrudAppService2<TEntity, TEntityDto, TPrimaryKey, TPagedAndSortedResultRequest> : BaseAppService, ICrudAppService<TEntityDto, TPrimaryKey, TPagedAndSortedResultRequest>
+    public abstract class BaseCrudAppService2<TEntity, TEntityDto, TPrimaryKey, TPagedAndSortedResultRequest> 
+        : BaseAppService, ICrudAppService<TEntityDto, TPrimaryKey, TPagedAndSortedResultRequest>
         where TEntity : class, IEntity<TPrimaryKey>
         where TEntityDto : class, IEntityDto<TPrimaryKey>
         where TPagedAndSortedResultRequest : IPagedAndSortedResultRequest

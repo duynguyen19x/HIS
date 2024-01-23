@@ -3,10 +3,12 @@ using HIS.Core.Domain.Repositories;
 using HIS.Core.Linq.Extensions;
 using HIS.Core.Services.Dto;
 using Microsoft.EntityFrameworkCore;
+using System.Transactions;
 
 namespace HIS.Core.Services
 {
-    public class BaseAsyncCrudAppService<TEntity, TEntityDto, TPrimaryKey, TPagedAndSortedResultRequest> : BaseAppService, IAsyncCrudAppService<TEntityDto, TPrimaryKey, TPagedAndSortedResultRequest>
+    public abstract class BaseAsyncCrudAppService<TEntity, TEntityDto, TPrimaryKey, TPagedAndSortedResultRequest, TCreateOrEditEntityDto> 
+        : BaseAppService, IAsyncCrudAppService<TEntityDto, TPrimaryKey, TPagedAndSortedResultRequest, TCreateOrEditEntityDto>
         where TEntity : class, IEntity<TPrimaryKey>
         where TEntityDto : class, IEntityDto<TPrimaryKey>
         where TPagedAndSortedResultRequest : IPagedAndSortedResultRequest
@@ -22,59 +24,58 @@ namespace HIS.Core.Services
         public virtual async Task<PagedResultDto<TEntityDto>> GetAllAsync(TPagedAndSortedResultRequest input)
         {
             var result = new PagedResultDto<TEntityDto>();
-            var query = CreateFilteredQuery(input);
-            var paged = query.ApplySortingAndPaging(input);
-
-            result.TotalCount = await query.CountAsync();
-            result.Result = ObjectMapper.Map<IList<TEntityDto>>(paged.ToList());
-            return result;
-        }
-
-        public virtual Task<ResultDto<TEntityDto>> GetAsync(TPrimaryKey id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual async Task<ResultDto<TEntityDto>> CreateOrEditAsync(TEntityDto input)
-        {
-            TPrimaryKey key = default(TPrimaryKey);
-            if (Equals(input.Id, key))
-                return await CreateAsync(input);
-            else
-                return await UpdateAsync(input);
-        }
-
-        public virtual Task<ResultDto<TEntityDto>> CreateAsync(TEntityDto input)
-        {
-            throw new NullReferenceException();
-        }
-
-        public virtual Task<ResultDto<TEntityDto>> UpdateAsync(TEntityDto input)
-        {
-            throw new NullReferenceException();
-        }
-
-        public virtual async Task<ResultDto<TEntityDto>> DeleteAsync(TPrimaryKey id)
-        {
-            var result = new ResultDto<TEntityDto>();
-            using (var unitOfWork = UnitOfWorkManager.Begin())
+            try
             {
-                try
-                {
-                    var entity = Repository.Get(id);
-                    await Repository.DeleteAsync(entity);
-                }
-                catch (Exception ex)
-                {
-                    result.Exception(ex);
-                }
+                var query = CreateFilteredQuery(input);
+                var paged = query.ApplySortingAndPaging(input);
+
+                result.TotalCount = await query.CountAsync();
+                result.Result = paged.Select(MapToEntityDto).ToList();
+                result.IsSucceeded = true;
+            }
+            catch (Exception ex)
+            {
+                result.Exception(ex);
             }
             return result;
         }
 
+        public virtual async Task<ResultDto<TEntityDto>> GetAsync(TPrimaryKey id)
+        {
+            var result = new ResultDto<TEntityDto>();
+            try
+            {
+                var entity = await Repository.GetAsync(id);
+
+                result.Result = ObjectMapper.Map<TEntityDto>(entity);
+                result.IsSucceeded = true;
+            }
+            catch (Exception ex)
+            {
+                result.Exception(ex);
+            }
+            return result;
+        }
+
+        public abstract Task<ResultDto<TEntityDto>> CreateAsync(TCreateOrEditEntityDto input);
+
+        public abstract Task<ResultDto<TEntityDto>> UpdateAsync(TCreateOrEditEntityDto input);
+
+        public abstract Task<ResultDto<TEntityDto>> DeleteAsync(TPrimaryKey id);
+
         protected virtual IQueryable<TEntity> CreateFilteredQuery(TPagedAndSortedResultRequest input)
         {
             return Repository.GetAll();
+        }
+
+        protected virtual TEntityDto MapToEntityDto(TEntity entity)
+        {
+            return ObjectMapper.Map<TEntityDto>(entity);
+        }
+
+        protected virtual TEntity MapToEntity(TCreateOrEditEntityDto entityDto)
+        {
+            return ObjectMapper.Map<TEntity>(entityDto);
         }
     }
 }

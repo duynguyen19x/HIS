@@ -160,7 +160,7 @@ namespace HIS.ApplicationService
 
             #region - danh mục
 
-            CreateMap<Branch, BranchDto>().ReverseMap();
+            CreateMap<Branch, DIBranchDto>().ReverseMap();
             CreateMap<Ethnic, EthnicDto>().ReverseMap();
 
             #endregion
