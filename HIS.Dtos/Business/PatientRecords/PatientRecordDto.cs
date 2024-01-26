@@ -1,4 +1,4 @@
-﻿using HIS.Core.Services.Dto;
+﻿using HIS.Core.Application.Services.Dto;
 using HIS.Dtos.Business.Insurances;
 using HIS.Dtos.Business.ServiceRequests;
 

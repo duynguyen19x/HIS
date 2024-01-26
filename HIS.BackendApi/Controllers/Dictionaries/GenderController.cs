@@ -1,5 +1,4 @@
-﻿using HIS.Core.Services.Dto;
-using HIS.ApplicationService.Dictionaries.Genders;
+﻿using HIS.ApplicationService.Dictionaries.Genders;
 using HIS.Dtos.Dictionaries.Genders;
 using Microsoft.AspNetCore.Mvc;
 

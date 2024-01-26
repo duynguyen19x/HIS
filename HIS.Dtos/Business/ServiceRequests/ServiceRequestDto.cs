@@ -1,4 +1,4 @@
-﻿using HIS.Core.Services.Dto;
+﻿using HIS.Core.Application.Services.Dto;
 using HIS.Dtos.Business.ServiceRequestDatas;
 using HIS.Dtos.Business.ServiceResultDatas;
 using HIS.Utilities.Enums;

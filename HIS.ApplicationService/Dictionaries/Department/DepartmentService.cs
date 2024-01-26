@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
-using HIS.Core.Services.Dto;
+using HIS.Core.Application.Services.Dto;
 using HIS.Dtos.Dictionaries.Department;
 using HIS.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -25,7 +25,7 @@ namespace HIS.ApplicationService.Dictionaries.Department
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Department>(input);
+                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.DIDepartment>(input);
                     Context.Departments.Add(data);
                     await Context.SaveChangesAsync();
 
@@ -53,7 +53,7 @@ namespace HIS.ApplicationService.Dictionaries.Department
             {
                 try
                 {
-                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Department>(input);
+                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.DIDepartment>(input);
                     Context.Departments.Update(data);
                     await Context.SaveChangesAsync();
 
@@ -111,21 +111,21 @@ namespace HIS.ApplicationService.Dictionaries.Department
                 result.IsSucceeded = true;
                 result.Result = (from d in Context.Departments
                                  join b in Context.Branchs on d.BranchId equals b.Id 
-                                 where (string.IsNullOrEmpty(input.DepartmentNameFilter) || d.Name == input.DepartmentNameFilter)
-                                     && (string.IsNullOrEmpty(input.DepartmentCodeFilter) || d.Code == input.DepartmentCodeFilter)
+                                 where (string.IsNullOrEmpty(input.DepartmentNameFilter) || d.DepartmentName == input.DepartmentNameFilter)
+                                     && (string.IsNullOrEmpty(input.DepartmentCodeFilter) || d.DepartmentCode == input.DepartmentCodeFilter)
                                      && (input.BranchFilter == null || d.BranchId == input.BranchFilter)
                                      && (input.InactiveFilter == null || d.Inactive == input.InactiveFilter)
                                  select new DepartmentDto()
                                  {
                                      Id = d.Id,
-                                     Code = d.Code,
-                                     Name = d.Name,
-                                     MohCode = d.MohCode,
+                                     Code = d.DepartmentCode,
+                                     Name = d.DepartmentName,
+                                     MohCode = d.MediCode,
                                      Description = d.Description,
-                                     DepartmentTypeId = d.DepartmentTypeId,
+                                     DepartmentTypeId = d.DepartmentTypeID,
                                      BranchId = d.BranchId,
-                                     BranchCode = b.Code,
-                                     BranchName = b.Name,
+                                     BranchCode = b.BranchCode,
+                                     BranchName = b.BranchName,
                                      Inactive = d.Inactive,
                                      SortOrder = d.SortOrder,
                                  }).ToList();
@@ -148,14 +148,14 @@ namespace HIS.ApplicationService.Dictionaries.Department
                                     select new DepartmentDto()
                                     {
                                         Id = d.Id,
-                                        Code = d.Code,
-                                        Name = d.Name,
-                                        MohCode = d.MohCode,
+                                        Code = d.DepartmentCode,
+                                        Name = d.DepartmentName,
+                                        MohCode = d.MediCode,
                                         Description = d.Description,
-                                        DepartmentTypeId = d.DepartmentTypeId,
+                                        DepartmentTypeId = d.DepartmentTypeID,
                                         BranchId = d.BranchId,
-                                        BranchCode = b.Code,
-                                        BranchName = b.Name,
+                                        BranchCode = b.BranchCode,
+                                        BranchName = b.BranchName,
                                         Inactive = d.Inactive,
                                         SortOrder = d.SortOrder,
                                     }).SingleOrDefaultAsync();

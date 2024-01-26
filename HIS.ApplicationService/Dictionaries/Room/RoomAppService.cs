@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
-using HIS.Core.Services.Dto;
+using HIS.Core.Application.Services.Dto;
 using HIS.Dtos.Dictionaries.Room;
 using HIS.EntityFrameworkCore;
 using HIS.Utilities.Enums;
@@ -23,7 +23,7 @@ namespace HIS.ApplicationService.Dictionaries.Room
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Room>(input);
+                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.DIRoom>(input);
                     Context.Rooms.Add(data);
                     await Context.SaveChangesAsync();
 
@@ -51,7 +51,7 @@ namespace HIS.ApplicationService.Dictionaries.Room
             {
                 try
                 {
-                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Room>(input);
+                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.DIRoom>(input);
                     Context.Rooms.Update(data);
                     await Context.SaveChangesAsync();
 
@@ -108,25 +108,25 @@ namespace HIS.ApplicationService.Dictionaries.Room
             {
                 result.IsSucceeded = true;
                 result.Result = (from r in Context.Rooms
-                                 join t in Context.RoomTypes on r.RoomTypeId equals t.Id
-                                 join d in Context.Departments on r.DepartmentId equals d.Id 
-                                 where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
-                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
-                                     && (input.DepartmentIdFilter == null || r.DepartmentId == input.DepartmentIdFilter)
+                                 join t in Context.RoomTypes on r.RoomTypeID equals t.Id
+                                 join d in Context.Departments on r.DepartmentID equals d.Id 
+                                 where (string.IsNullOrEmpty(input.NameFilter) || r.RoomName == input.NameFilter)
+                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.RoomCode == input.CodeFilter)
+                                     && (input.DepartmentIdFilter == null || r.DepartmentID == input.DepartmentIdFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
-                                     && (input.RoomTypeIdFilter == null || r.RoomTypeId == input.RoomTypeIdFilter)
+                                     && (input.RoomTypeIdFilter == null || r.RoomTypeID == input.RoomTypeIdFilter)
                                  select new RoomDto()
                                  {
                                      Id = r.Id,
-                                     Code = r.Code,
-                                     MohCode = r.MohCode,
-                                     Name = r.Name,
-                                     RoomTypeId = r.RoomTypeId,
+                                     Code = r.RoomCode,
+                                     MohCode = r.MediCode,
+                                     Name = r.RoomName,
+                                     RoomTypeId = r.RoomTypeID,
                                      RoomTypeCode = t.Code,
                                      RoomTypeName = t.Name,
-                                     DepartmentId = r.DepartmentId,
-                                     DepartmentCode = d.Code,
-                                     DepartmentName = d.Name,
+                                     DepartmentId = r.DepartmentID,
+                                     DepartmentCode = d.DepartmentCode,
+                                     DepartmentName = d.DepartmentName,
                                      Description = r.Description,
                                      SortOrder = r.SortOrder,
                                      Inactive = r.Inactive
@@ -151,21 +151,21 @@ namespace HIS.ApplicationService.Dictionaries.Room
             {
                 result.IsSucceeded = true;
                 result.Result = (from r in Context.Rooms
-                                 join t in Context.RoomTypes on r.RoomTypeId equals t.Id
-                                 join d in Context.Departments on r.DepartmentId equals d.Id
+                                 join t in Context.RoomTypes on r.RoomTypeID equals t.Id
+                                 join d in Context.Departments on r.DepartmentID equals d.Id
                                  where r.Id == id
                                  select new RoomDto()
                                  {
                                      Id = r.Id,
-                                     Code = r.Code,
-                                     MohCode = r.MohCode,
-                                     Name = r.Name,
-                                     RoomTypeId = r.RoomTypeId,
+                                     Code = r.RoomCode,
+                                     MohCode = r.MediCode,
+                                     Name = r.RoomName,
+                                     RoomTypeId = r.RoomTypeID,
                                      RoomTypeCode = t.Code,
                                      RoomTypeName = t.Name,
-                                     DepartmentId = r.DepartmentId,
-                                     DepartmentCode = d.Code,
-                                     DepartmentName = d.Name,
+                                     DepartmentId = r.DepartmentID,
+                                     DepartmentCode = d.DepartmentCode,
+                                     DepartmentName = d.DepartmentName,
                                      Description = r.Description,
                                      SortOrder = r.SortOrder,
                                      Inactive = r.Inactive
@@ -186,21 +186,21 @@ namespace HIS.ApplicationService.Dictionaries.Room
             try
             {
                 result.Result = (from r in Context.Rooms
-                                 join t in Context.RoomTypes on r.RoomTypeId equals t.Id
-                                 join d in Context.Departments on r.DepartmentId equals d.Id
-                                 where d.DepartmentTypeId == (int)DepartmentTypes.PharmacyDepartment
+                                 join t in Context.RoomTypes on r.RoomTypeID equals t.Id
+                                 join d in Context.Departments on r.DepartmentID equals d.Id
+                                 where d.DepartmentTypeID == (int)DepartmentTypes.PharmacyDepartment
                                  select new RoomDto()
                                  {
                                      Id = r.Id,
-                                     Code = r.Code,
-                                     MohCode = r.MohCode,
-                                     Name = r.Name,
-                                     RoomTypeId = r.RoomTypeId,
+                                     Code = r.RoomCode,
+                                     MohCode = r.MediCode,
+                                     Name = r.RoomName,
+                                     RoomTypeId = r.RoomTypeID,
                                      RoomTypeCode = t.Code,
                                      RoomTypeName = t.Name,
-                                     DepartmentId = r.DepartmentId,
-                                     DepartmentCode = d.Code,
-                                     DepartmentName = d.Name,
+                                     DepartmentId = r.DepartmentID,
+                                     DepartmentCode = d.DepartmentCode,
+                                     DepartmentName = d.DepartmentName,
                                      Description = r.Description,
                                      SortOrder = r.SortOrder,
                                      Inactive = r.Inactive

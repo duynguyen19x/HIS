@@ -1,5 +1,5 @@
 ﻿using HIS.Application.Core.Services;
-using HIS.Core.Services.Dto;
+using HIS.Core.Application.Services.Dto;
 using HIS.Dtos.Systems.DbOption;
 
 namespace HIS.ApplicationService.Systems.DbOptions

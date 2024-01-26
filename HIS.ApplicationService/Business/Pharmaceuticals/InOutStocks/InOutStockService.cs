@@ -15,7 +15,7 @@ using Microsoft.Extensions.Configuration;
 using System.Globalization;
 using HIS.Core.Enums;
 using HIS.Application.Core.Services;
-using HIS.Core.Services.Dto;
+using HIS.Core.Application.Services.Dto;
 
 namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 {
@@ -51,11 +51,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                      Type = inOutStock.Type,
                                      Status = inOutStock.Status,
                                      ImpStockId = inOutStock.ImpStockId,
-                                     ImpStockCode = imStockDefault != null ? imStockDefault.Code : null,
-                                     ImpStockName = imStockDefault != null ? imStockDefault.Name : null,
+                                     ImpStockCode = imStockDefault != null ? imStockDefault.RoomCode : null,
+                                     ImpStockName = imStockDefault != null ? imStockDefault.RoomName : null,
                                      ExpStockId = inOutStock.ExpStockId,
-                                     ExpStockCode = exStockDefault != null ? exStockDefault.Code : null,
-                                     ExpStockName = exStockDefault != null ? exStockDefault.Name : null,
+                                     ExpStockCode = exStockDefault != null ? exStockDefault.RoomCode : null,
+                                     ExpStockName = exStockDefault != null ? exStockDefault.RoomName : null,
                                      InOutStockTypeId = inOutStock.InOutStockTypeId,
                                      InOutStockTypeName = inOutStockTypeDefault != null ? inOutStockTypeDefault.Name : null,
                                      ReceiverUserId = inOutStock.ReceiverUserId,

@@ -3,12 +3,11 @@ using HIS.Dtos.Systems;
 using Microsoft.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.Entities.Systems;
 using HIS.Core.Domain.Repositories;
-using HIS.Core.Services.Dto;
 using HIS.Core.Linq.Extensions;
-using HIS.Core.Services;
 using HIS.Core.Extensions;
 using System.Transactions;
-using HIS.Core.Runtime.Session;
+using HIS.Core.Application.Services;
+using HIS.Core.Application.Services.Dto;
 
 namespace HIS.ApplicationService.Systems.RefType
 {
@@ -101,7 +100,7 @@ namespace HIS.ApplicationService.Systems.RefType
             {
                 using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
                 {
-                    var entity = await _sysRefTypeRepository.GetAsync(input.Id);
+                    var entity = await _sysRefTypeRepository.GetAsync(input.Id.GetValueOrDefault());
 
                     ObjectMapper.Map(input, entity);
                     unitOfWork.Complete();

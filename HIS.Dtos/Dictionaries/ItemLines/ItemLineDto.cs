@@ -1,4 +1,4 @@
-﻿using HIS.Core.Services.Dto;
+﻿using HIS.Core.Application.Services.Dto;
 using System.ComponentModel;
 
 namespace HIS.Dtos.Dictionaries.ItemLines

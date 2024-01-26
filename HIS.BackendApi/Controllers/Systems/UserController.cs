@@ -1,7 +1,7 @@
-﻿using HIS.Core.Services.Dto;
-using HIS.ApplicationService.Systems.User;
+﻿using HIS.ApplicationService.Systems.User;
 using HIS.Dtos.Systems.User;
 using Microsoft.AspNetCore.Mvc;
+using HIS.Core.Application.Services.Dto;
 
 namespace HIS.BackendApi.Controllers.Systems
 {

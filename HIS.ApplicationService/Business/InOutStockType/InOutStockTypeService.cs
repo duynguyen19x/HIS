@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
-using HIS.Core.Services.Dto;
 using HIS.Core.Linq.Extensions;
 using HIS.Dtos.Business.InOutStockTypes;
 using HIS.EntityFrameworkCore;
+using HIS.Core.Application.Services.Dto;
 
 namespace HIS.ApplicationService.Business.InOutStockType
 {

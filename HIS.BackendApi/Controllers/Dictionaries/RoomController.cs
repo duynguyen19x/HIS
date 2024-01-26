@@ -1,7 +1,7 @@
-﻿using HIS.Core.Services.Dto;
-using HIS.ApplicationService.Dictionaries.Room;
+﻿using HIS.ApplicationService.Dictionaries.Room;
 using HIS.Dtos.Dictionaries.Room;
 using Microsoft.AspNetCore.Mvc;
+using HIS.Core.Application.Services.Dto;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
 {

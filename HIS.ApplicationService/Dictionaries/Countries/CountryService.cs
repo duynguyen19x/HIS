@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using HIS.EntityFrameworkCore;
 using HIS.Application.Core.Services;
-using HIS.Core.Services.Dto;
 using HIS.Dtos.Dictionaries.Countries;
+using HIS.Core.Application.Services.Dto;
 
 namespace HIS.ApplicationService.Dictionaries.Countries
 {
@@ -22,7 +22,7 @@ namespace HIS.ApplicationService.Dictionaries.Countries
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = base.ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Country>(input);
+                    var data = base.ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.DICountry>(input);
                     Context.Countries.Add(data);
                     await Context.SaveChangesAsync();
 
@@ -50,7 +50,7 @@ namespace HIS.ApplicationService.Dictionaries.Countries
             {
                 try
                 {
-                    var data = base.ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Country>(input);
+                    var data = base.ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.DICountry>(input);
                     Context.Countries.Update(data);
                     await Context.SaveChangesAsync();
 
@@ -107,14 +107,14 @@ namespace HIS.ApplicationService.Dictionaries.Countries
             {
                 result.IsSucceeded = true;
                 result.Result = (from r in Context.Countries
-                                 where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
-                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
+                                 where (string.IsNullOrEmpty(input.NameFilter) || r.CountryName == input.NameFilter)
+                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.CountryCode == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
                                  select new CountryDto()
                                  {
                                      Id = r.Id,
-                                     Code = r.Code,
-                                     Name = r.Name,
+                                     Code = r.CountryCode,
+                                     Name = r.CountryName,
                                      Inactive = r.Inactive
                                  }).OrderBy(o => o.Code).ToList();
                 result.TotalCount = result.Result.Count;

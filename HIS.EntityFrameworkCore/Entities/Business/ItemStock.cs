@@ -20,6 +20,6 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public decimal AvailableQuantity { get; set; }
 
         public Item Item { get; set; }
-        public Room Stock { get; set; }
+        public DIRoom Stock { get; set; }
     }
 }

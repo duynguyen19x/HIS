@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
-using HIS.Core.Services.Dto;
 using HIS.Core.Linq.Extensions;
 using HIS.Dtos.Business.ItemStocks;
 using HIS.Dtos.Dictionaries.Items;
@@ -9,6 +8,7 @@ using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
+using HIS.Core.Application.Services.Dto;
 
 namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
 {
@@ -36,8 +36,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
 
                                      ItemCode = Item.Code,
                                      ItemName = Item.Name,
-                                     StockCode = stock.Code,
-                                     StockName = stock.Name,
+                                     StockCode = stock.RoomCode,
+                                     StockName = stock.RoomName,
                                      CommodityType = Item.CommodityType
                                  })
                                  .WhereIf(!GuidHelper.IsNullOrEmpty(input.StockIdFilter), w => w.StockId == input.StockIdFilter)
@@ -113,8 +113,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
 
                                          ItemCode = itemType.Code,
                                          ItemName = itemType.Name,
-                                         StockCode = stock.Code,
-                                         StockName = stock.Name,
+                                         StockCode = stock.RoomCode,
+                                         StockName = stock.RoomName,
 
                                          // Phần Item
                                          CommodityType = item.CommodityType,

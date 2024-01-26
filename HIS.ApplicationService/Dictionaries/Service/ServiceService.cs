@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.Extensions.Configuration;
 using System.Globalization;
 using HIS.Application.Core.Services;
-using HIS.Core.Services.Dto;
+using HIS.Core.Application.Services.Dto;
 
 namespace HIS.ApplicationService.Dictionaries.Service
 {
@@ -334,14 +334,14 @@ namespace HIS.ApplicationService.Dictionaries.Service
                     var sExecutionRoomDtos = (from room in Context.Rooms
                                               join exec in Context.ExecutionRooms.Where(w => w.ServiceId == id) on room.Id equals exec.RoomId into SExecutionRooms
                                               from s in SExecutionRooms.DefaultIfEmpty()
-                                              where rommTypes.Contains(room.RoomTypeId)
+                                              where rommTypes.Contains(room.RoomTypeID)
                                               select new ExecutionRoomDto()
                                               {
                                                   Id = s != null ? s.Id : null,
                                                   RoomId = room.Id,
                                                   ServiceId = s != null ? s.ServiceId : null,
-                                                  RoomCode = room.Code,
-                                                  RoomName = room.Name,
+                                                  RoomCode = room.RoomCode,
+                                                  RoomName = room.RoomName,
                                                   IsMain = s != null ? s.IsMain : false,
                                                   IsCheck = s != null ? true : false,
                                               }).OrderBy(s => s.RoomCode).ToList();
@@ -369,12 +369,12 @@ namespace HIS.ApplicationService.Dictionaries.Service
 
                     var sExecutionRooms = (from room in Context.Rooms
                                            where room.Inactive == false
-                                                && rommTypes.Contains(room.RoomTypeId)
+                                                && rommTypes.Contains(room.RoomTypeID)
                                            select new ExecutionRoomDto()
                                            {
                                                RoomId = room.Id,
-                                               RoomCode = room.Code,
-                                               RoomName = room.Name,
+                                               RoomCode = room.RoomCode,
+                                               RoomName = room.RoomName,
                                            }).OrderBy(s => s.RoomCode).ToList();
 
                     serviceDto.SServicePricePolicies = sServicePricePolicys;
@@ -497,7 +497,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
 
                     var executionRoomDtos = sServiceDtos.SelectMany(s => s.SExecutionRooms).ToList();
                     var executionRooms = (from executionRoom in executionRoomDtos
-                                          join sRoom in sRooms on executionRoom.RoomCode equals sRoom.Code
+                                          join sRoom in sRooms on executionRoom.RoomCode equals sRoom.RoomCode
                                           select new ExecutionRoom()
                                           {
                                               Id = executionRoom.Id.GetValueOrDefault(),

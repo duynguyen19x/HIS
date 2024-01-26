@@ -10,6 +10,6 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
 
         public Role Role { get; set; }
         public Permission Permission { get; set; }
-        public Branch Branch { get; set; }
+        public DIBranch Branch { get; set; }
     }
 }

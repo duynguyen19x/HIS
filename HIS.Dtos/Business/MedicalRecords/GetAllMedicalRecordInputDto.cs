@@ -1,4 +1,4 @@
-﻿using HIS.Core.Services.Dto;
+﻿using HIS.Core.Application.Services.Dto;
 
 namespace HIS.Dtos.Business.MedicalRecords
 {

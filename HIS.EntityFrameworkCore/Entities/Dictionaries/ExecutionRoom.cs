@@ -17,6 +17,6 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public bool IsMain { get; set; }
 
         public Service Service { get; set; }
-        public Room Room { get; set; }
+        public DIRoom Room { get; set; }
     }
 }

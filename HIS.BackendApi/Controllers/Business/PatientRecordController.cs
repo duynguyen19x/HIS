@@ -7,10 +7,9 @@ namespace HIS.BackendApi.Controllers.Business
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PatientRecordController : BaseCrudController<IPatientRecordAppService, PatientRecordDto, Guid, GetAllPatientRecordInputDto>
+    public class PatientRecordController : ControllerBase
     {
         public PatientRecordController(IPatientRecordAppService appService) 
-            : base(appService)
         {
         }
     }

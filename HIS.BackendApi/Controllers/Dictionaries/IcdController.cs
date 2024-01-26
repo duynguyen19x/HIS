@@ -1,7 +1,7 @@
-﻿using HIS.Core.Services.Dto;
-using HIS.ApplicationService.Dictionaries.Icds;
+﻿using HIS.ApplicationService.Dictionaries.Icds;
 using HIS.Dtos.Dictionaries.Icd;
 using Microsoft.AspNetCore.Mvc;
+using HIS.Core.Application.Services.Dto;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
 {

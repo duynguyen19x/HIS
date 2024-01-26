@@ -1,8 +1,8 @@
-﻿using HIS.Core.Services.Dto;
+﻿using HIS.Core.Application.Services.Dto;
 
 namespace HIS.Dtos.Systems
 {
-    public class SYSRefTypeDto : EntityDto<int>
+    public class SYSRefTypeDto : EntityDto<int?>
     {
         public string RefTypeName { get; set; }
         public int? RefTypeCategoryId { get; set; }

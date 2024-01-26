@@ -1,5 +1,5 @@
 ﻿using HIS.Application.Core.Services;
-using HIS.Core.Services.Dto;
+using HIS.Core.Application.Services.Dto;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers

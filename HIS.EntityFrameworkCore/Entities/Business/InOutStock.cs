@@ -131,9 +131,9 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public CommodityTypes CommodityType { get; set; }
 
         [Ignore]
-        public Room ImpStock { get; set; }
+        public DIRoom ImpStock { get; set; }
         [Ignore]
-        public Room ExpStock { get; set; }
+        public DIRoom ExpStock { get; set; }
         [Ignore]
         public InOutStockType InOutStockType { get; set; }
         [Ignore]
@@ -147,9 +147,9 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         [Ignore]
         public User StockExpUser { get; set; }
         [Ignore]
-        public Room ReqRoom { get; set; }
+        public DIRoom ReqRoom { get; set; }
         [Ignore]
-        public Department ReqDepartment { get; set; }
+        public DIDepartment ReqDepartment { get; set; }
         [Ignore]
         public Supplier Supplier { get; set; }
         [Ignore]

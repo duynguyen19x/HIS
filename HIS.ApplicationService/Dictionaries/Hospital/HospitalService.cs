@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
-using HIS.Core.Services.Dto;
+using HIS.Core.Application.Services.Dto;
 using HIS.Dtos.Dictionaries.Hospital;
 using HIS.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

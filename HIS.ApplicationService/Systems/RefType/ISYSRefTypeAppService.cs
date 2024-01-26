@@ -1,5 +1,5 @@
-﻿using HIS.Core.Services;
-using HIS.Core.Services.Dto;
+﻿using HIS.Core.Application.Services;
+using HIS.Core.Application.Services.Dto;
 using HIS.Dtos.Systems;
 using HIS.Dtos.Systems.RefType;
 

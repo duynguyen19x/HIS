@@ -2,7 +2,6 @@
 using HIS.Application.Core.Services;
 using HIS.Core.Domain.Uow;
 using HIS.Core.ObjectMapping;
-using HIS.Core.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
@@ -29,7 +28,7 @@ namespace HIS.ApplicationService
                     {
                         var imp = provider.GetService(implementingType);
                         // đặt giá trị cho service
-                        if (imp is Core.Services.BaseAppService appService)
+                        if (imp is Core.Application.Services.BaseAppService appService)
                         {
                             appService.ObjectMapper = provider.GetService(typeof(IObjectMapper)) as IObjectMapper;
                             appService.UnitOfWorkManager = provider.GetService(typeof(IUnitOfWorkManager)) as IUnitOfWorkManager;

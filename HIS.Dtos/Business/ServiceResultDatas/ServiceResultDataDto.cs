@@ -1,4 +1,4 @@
-﻿using HIS.Core.Services.Dto;
+﻿using HIS.Core.Application.Services.Dto;
 using HIS.Utilities.Enums;
 
 namespace HIS.Dtos.Business.ServiceResultDatas

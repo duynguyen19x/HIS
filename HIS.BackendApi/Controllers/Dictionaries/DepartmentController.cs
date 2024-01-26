@@ -1,8 +1,8 @@
-﻿using HIS.Core.Services.Dto;
-using HIS.ApplicationService.Dictionaries.Department;
+﻿using HIS.ApplicationService.Dictionaries.Department;
 using HIS.Dtos.Dictionaries.Department;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using HIS.Core.Application.Services.Dto;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
 {

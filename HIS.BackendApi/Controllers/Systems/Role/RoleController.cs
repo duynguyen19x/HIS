@@ -1,7 +1,7 @@
-﻿using HIS.Core.Services.Dto;
-using HIS.ApplicationService.Systems.Role;
+﻿using HIS.ApplicationService.Systems.Role;
 using HIS.Dtos.Systems.Role;
 using Microsoft.AspNetCore.Mvc;
+using HIS.Core.Application.Services.Dto;
 
 namespace HIS.BackendApi.Controllers.Systems.Role
 {

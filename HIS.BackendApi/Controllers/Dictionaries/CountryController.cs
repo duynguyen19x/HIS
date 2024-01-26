@@ -1,5 +1,4 @@
-﻿using HIS.Core.Services.Dto;
-using HIS.ApplicationService.Dictionaries.Countries;
+﻿using HIS.ApplicationService.Dictionaries.Countries;
 using HIS.Dtos.Dictionaries.Countries;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,8 +1,8 @@
-﻿using HIS.Core.Services.Dto;
+﻿using HIS.Core.Application.Services.Dto;
 
 namespace HIS.Dtos.Business.PatientRecords
 {
-    public class GetAllPatientRecordInputDto : PagedResultRequestDto
+    public class GetAllPatientRecordInputDto : PagedAndSortedResultRequestDto
     {
         public string PatientCodeFilter { get; set; }
         public string PatientNameFilter { get; set; }

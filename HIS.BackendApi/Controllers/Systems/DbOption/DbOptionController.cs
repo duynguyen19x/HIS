@@ -1,7 +1,7 @@
-﻿using HIS.Core.Services.Dto;
-using HIS.ApplicationService.Systems.DbOptions;
+﻿using HIS.ApplicationService.Systems.DbOptions;
 using HIS.Dtos.Systems.DbOption;
 using Microsoft.AspNetCore.Mvc;
+using HIS.Core.Application.Services.Dto;
 
 namespace HIS.BackendApi.Controllers.Systems.DbOption
 {

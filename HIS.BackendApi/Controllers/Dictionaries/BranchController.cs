@@ -1,5 +1,5 @@
 ﻿using HIS.ApplicationService.Dictionaries.Branchs;
-using HIS.Core.Services.Dto;
+using HIS.Core.Application.Services.Dto;
 using HIS.Dtos.Dictionaries.Branchs;
 using Microsoft.AspNetCore.Mvc;
 

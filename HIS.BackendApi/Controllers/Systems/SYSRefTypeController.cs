@@ -1,11 +1,8 @@
 ﻿using HIS.ApplicationService.Systems.RefType;
-using HIS.Core.Services.Dto;
-using HIS.Core.Services;
 using HIS.Dtos.Systems;
 using HIS.Dtos.Systems.RefType;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using HIS.Dtos.Dictionaries.Branchs;
+using HIS.Core.Application.Services.Dto;
 
 namespace HIS.BackendApi.Controllers.Systems
 {

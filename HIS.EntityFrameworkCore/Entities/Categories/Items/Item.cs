@@ -97,6 +97,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories
         public ItemType ItemType { get; set; }
         public Unit Unit { get; set; }
         public ItemLine ItemLine { get; set; }
-        public Country Country { get; set; }
+        public DICountry Country { get; set; }
     }
 }

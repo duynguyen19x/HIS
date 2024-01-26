@@ -1,8 +1,8 @@
 ﻿using HIS.Dtos.Dictionaries.Icd;
 using HIS.EntityFrameworkCore;
-using HIS.Core.Services.Dto;
 using HIS.Application.Core.Services;
 using AutoMapper;
+using HIS.Core.Application.Services.Dto;
 
 namespace HIS.ApplicationService.Dictionaries.Icds
 {
