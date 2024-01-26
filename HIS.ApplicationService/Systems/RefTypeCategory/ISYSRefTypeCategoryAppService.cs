@@ -1,14 +1,16 @@
-﻿using HIS.Application.Core.Services;
+﻿using HIS.Core.Application.Services.Dto;
 using HIS.Dtos.Systems.RefTypeCategory;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Systems.RefTypeCategory
 {
-    public interface ISYSRefTypeCategoryAppService : IBaseCrudAppService<SYSRefTypeCategoryDto, int, GetAllSYSRefTypeCategoryInputDto>
+    public interface ISYSRefTypeCategoryAppService 
     {
+        Task<PagedResultDto<SYSRefTypeCategoryDto>> GetAllAsync(GetAllSYSRefTypeCategoryInputDto input);
+
+        Task<ResultDto<SYSRefTypeCategoryDto>> GetAsync(int id);
+
+        Task<ResultDto<SYSRefTypeCategoryDto>> CreateOrUpdateAsync(SYSRefTypeCategoryDto input);
+
+        Task<ResultDto<SYSRefTypeCategoryDto>> DeleteAsync(int id);
     }
 }
