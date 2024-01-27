@@ -1,4 +1,5 @@
 ﻿using HIS.Core.Domain.Entities;
+using HIS.Core.Extensions;
 using HIS.EntityFrameworkCore.Configurations;
 using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Categories;
@@ -8,6 +9,7 @@ using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.Systems;
 using HIS.EntityFrameworkCore.Views;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace HIS.EntityFrameworkCore
@@ -112,6 +114,47 @@ namespace HIS.EntityFrameworkCore
             // Add View
             builder.Entity<ServiceRequestView>().ToView("V_BUS_ServiceRequest");
         }
+
+
+        public override int SaveChanges()
+        {
+            try
+            {
+                ApplyConcepts();
+                return base.SaveChanges();
+            }
+            catch 
+            {
+                throw;
+            }
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                ApplyConcepts();
+                return base.SaveChangesAsync(cancellationToken);
+            }
+            catch
+            {
+                throw;
+            } 
+        }
+
+        protected virtual void ApplyConcepts()
+        {
+            //foreach(EntityEntry item in ChangeTracker.Entries().ToList())
+            //{
+            //    if (item.State != EntityState.Modified && item.CheckOwnedEntityChange())
+            //    {
+
+            //    }    
+            //}    
+        }
+
+
+
 
         public virtual IDbContextTransaction BeginTransaction()
         {
