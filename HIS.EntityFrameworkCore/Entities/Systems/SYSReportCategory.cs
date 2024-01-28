@@ -1,5 +1,4 @@
-﻿using AutoMapper.Configuration.Annotations;
-using HIS.Core.Domain.Entities;
+﻿using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Entities.Auditing;
 using System;
 using System.Collections.Generic;
@@ -11,24 +10,18 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Systems
 {
-    [Table("SYSRefType")]
-    public class SYSRefType : AuditedEntity<int>
+    [Table("SYSReportCategory")]
+    public class SYSReportCategory : AuditedEntity<int>
     {
         [MaxLength(255)]
         [Required]
-        public string RefTypeName { get; set; }
-
-        public int? RefTypeCategoryId { get; set; }
-
-        public int? ParentId { get; set; }
+        public string ReportCategoryName { get; set; }
 
         [MaxLength(255)]
         public string Description { get; set; }
 
         public int SortOrder { get; set; }
 
-        [Ignore]
-        [ForeignKey("RefTypeCategoryId")]
-        public SYSRefTypeCategory RefTypeCategoryFk { get; set; }
+        public bool Inactive { get; set; }
     }
 }

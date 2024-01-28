@@ -1,5 +1,6 @@
 ﻿using HIS.Core.Domain.Entities;
 using HIS.Core.Domain.Entities.Auditing;
+using HIS.Core.EntityFrameworkCore;
 using HIS.Core.Extensions;
 using HIS.EntityFrameworkCore.Configurations;
 using HIS.EntityFrameworkCore.Entities.Business;
@@ -15,7 +16,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace HIS.EntityFrameworkCore
 {
-    public class HISDbContext : HIS.Core.EntityFrameworkCore.EfCoreDbContext //DbContext
+    public class HISDbContext : EfCoreDbContext //DbContext
     {
         public HISDbContext(DbContextOptions options) 
             : base(options) { }
@@ -23,9 +24,12 @@ namespace HIS.EntityFrameworkCore
         #region - Hệ thống
         public DbSet<DbOption> DbOptions { get; set; }
 
-        //public DbSet<SYSLayoutTemplate> SYSLayoutTemplates { get; set; }
-        public DbSet<SYSRefType> SYSRefTypes { get; set; }
-        public DbSet<SYSRefTypeCategory> SYSRefTypeCategories { get; set; }
+        public DbSet<SYSLayoutTemplate> SYSLayoutTemplate { get; set; }
+        public DbSet<SYSRefType> SYSRefType { get; set; }
+        public DbSet<SYSRefTypeCategory> SYSRefTypeCategory { get; set; }
+        public DbSet<SYSReport> SYSReport { get; set; }
+        public DbSet<SYSReportCategory> SYSReportGroup { get; set; }
+
 
         #endregion
 

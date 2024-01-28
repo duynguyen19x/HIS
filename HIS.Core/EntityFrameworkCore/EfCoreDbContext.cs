@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 namespace HIS.Core.EntityFrameworkCore
 {
+    /// <summary>
+    /// Base class for all DbContext classes in the application.
+    /// </summary>
     public abstract class EfCoreDbContext : DbContext
     {
         public IAppSession AppSession { get; set; }
@@ -29,8 +32,18 @@ namespace HIS.Core.EntityFrameworkCore
 
             foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
+                ConfigureKeys(modelBuilder, entityType);
                 ConfigureGlobalFilters(modelBuilder, entityType);
             }     
+        }
+
+        protected virtual void ConfigureKeys(ModelBuilder modelBuilder, IMutableEntityType entityType)
+        {
+            if (typeof(IEntity<>).IsAssignableFrom(entityType.ClrType))
+            {
+                modelBuilder.Entity(entityType.ClrType).HasKey("Id");
+                //entityType.SetPrimaryKey(entityType.FindProperty("Id"));
+            }
         }
 
         protected virtual void ConfigureGlobalFilters(ModelBuilder modelBuilder, IMutableEntityType entityType)
