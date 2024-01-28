@@ -21,10 +21,9 @@ namespace HIS.EntityFrameworkCore.Configurations.Systems
             builder.Property(x => x.RefTypeName).IsRequired().HasMaxLength(255);
             builder.Property(x => x.Description).HasMaxLength(255);
 
-            builder.HasOne(t => t.SYSRefTypeCategory).WithMany().HasForeignKey(p => p.RefTypeCategoryId);
+            builder.HasOne(t => t.RefTypeCategoryFk).WithMany().HasForeignKey(p => p.RefTypeCategoryId);
 
             builder.HasData(
-                
                 new SYSRefType { Id = 101, RefTypeName = "Quản lý người dùng", RefTypeCategoryId = 1, SortOrder = 2 },
                 new SYSRefType { Id = 102, RefTypeName = "Loại đối tượng bệnh nhân", RefTypeCategoryId = 1, SortOrder = 3 },
                 new SYSRefType { Id = 103, RefTypeName = "Loại đối tượng đăng ký khám", RefTypeCategoryId = 1, SortOrder = 4 },

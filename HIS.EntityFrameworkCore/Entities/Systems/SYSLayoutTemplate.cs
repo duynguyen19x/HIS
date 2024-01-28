@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HIS.Core.Domain.Entities.Auditing;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,10 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Systems
 {
-    public class SYSLayoutTemplate
+    /// <summary>
+    /// Cấu hình cột.
+    /// </summary>
+    public class SYSLayoutTemplate : AuditedEntity<Guid>
     {
         public string LayoutTemplateName { get; set; }
 

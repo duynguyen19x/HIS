@@ -8,5 +8,6 @@ namespace HIS.Core.Runtime.Session
 {
     public interface IAppSession
     {
+        Guid? UserId { get; }
     }
 }

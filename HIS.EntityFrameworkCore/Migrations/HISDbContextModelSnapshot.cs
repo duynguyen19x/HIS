@@ -140,6 +140,8 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("InOutStockTypeId");
 
+                    b.HasIndex("IsDeleted");
+
                     b.HasIndex("PatientId");
 
                     b.HasIndex("PatientRecordId");
@@ -428,6 +430,8 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IsDeleted");
+
                     b.HasIndex("LiveAreaId");
 
                     b.HasIndex("PatientId");
@@ -479,6 +483,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("ItemId");
 
@@ -641,6 +647,8 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IsDeleted");
+
                     b.ToTable("BUS_MedicalRecord", (string)null);
                 });
 
@@ -797,6 +805,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasIndex("EthnicId");
 
                     b.HasIndex("GenderId");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("ProvinceId");
 
@@ -1195,6 +1205,8 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("GenderId");
 
+                    b.HasIndex("IsDeleted");
+
                     b.HasIndex("NationalId");
 
                     b.HasIndex("ProvinceId");
@@ -1248,7 +1260,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 536, DateTimeKind.Local).AddTicks(5249),
                             Inactive = false,
                             PatientRecordStatusName = "Mới",
                             SortOrder = 1
@@ -1256,7 +1268,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 536, DateTimeKind.Local).AddTicks(5262),
                             Inactive = false,
                             PatientRecordStatusName = "Đang điều trị",
                             SortOrder = 2
@@ -1264,7 +1276,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 536, DateTimeKind.Local).AddTicks(5264),
                             Inactive = false,
                             PatientRecordStatusName = "Kết thúc",
                             SortOrder = 3
@@ -1379,6 +1391,8 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IsDeleted");
+
                     b.ToTable("BUS_ServiceRequest", (string)null);
                 });
 
@@ -1460,6 +1474,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("ServiceId");
 
@@ -1642,6 +1658,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CountryId");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("ItemLineId");
 
@@ -2606,6 +2624,8 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("CountryId");
 
+                    b.HasIndex("IsDeleted");
+
                     b.HasIndex("ItemGroupId");
 
                     b.HasIndex("ItemLineId");
@@ -2664,6 +2684,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("ItemId");
 
@@ -2734,6 +2756,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.HasIndex("ServiceGroupHeInId");
 
@@ -3226,6 +3250,8 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IsDeleted");
+
                     b.HasIndex("PatientTypeId");
 
                     b.HasIndex("ServiceId");
@@ -3498,96 +3524,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DIC_BloodTypeRh", (string)null);
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Branch", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Address")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<Guid?>("DistrictId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Level")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("Line")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("MediOrgAcceptCode")
-                        .HasMaxLength(4000)
-                        .HasColumnType("nvarchar(4000)");
-
-                    b.Property<string>("MediOrgCode")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("ParentOrganizationName")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<Guid?>("ProvinceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("SortOrder")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Tel")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("Type")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<Guid?>("WardId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DistrictId");
-
-                    b.HasIndex("ProvinceId");
-
-                    b.HasIndex("WardId");
-
-                    b.ToTable("DIC_Branch", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Career", b =>
@@ -3988,33 +3924,134 @@ namespace HIS.EntityFrameworkCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Country", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.DIBranch", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Code")
+                    b.Property<string>("Address")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("BranchCode")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("BranchName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
 
-                    b.Property<string>("HeInCode")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                    b.Property<Guid?>("DirectorFkId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("DirectorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("DistrictId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Level")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Line")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("MediOrgAcceptCode")
+                        .HasMaxLength(4000)
+                        .HasColumnType("nvarchar(4000)");
+
+                    b.Property<string>("MediOrgCode")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ParentOrganizationName")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<Guid?>("ProvinceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Tel")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Type")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<Guid?>("WardId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DirectorFkId");
+
+                    b.HasIndex("DistrictId");
+
+                    b.HasIndex("ProvinceId");
+
+                    b.HasIndex("WardId");
+
+                    b.ToTable("DIBranch", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.DICountry", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("CountryCode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("CountryName")
                         .IsRequired()
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MediCode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("SortOrder")
                         .HasColumnType("int");
@@ -4027,2280 +4064,2447 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("6b24b562-1294-4537-a69a-26ac34c41521"),
-                            Code = "AD",
-                            HeInCode = "105",
+                            CountryCode = "AD",
+                            CountryName = "Andorra",
                             Inactive = false,
-                            Name = "Andorra",
+                            MediCode = "105",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("fb10ce71-e68a-4a70-bf7e-5edee9388d48"),
-                            Code = "AE",
-                            HeInCode = "137",
+                            CountryCode = "AE",
+                            CountryName = "Các Tiểu Vương quốc Ả Rập Thống nhất",
                             Inactive = false,
-                            Name = "Các Tiểu Vương quốc Ả Rập Thống nhất",
+                            MediCode = "137",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("8592d87f-720b-48e7-82ee-e82d64cbf984"),
-                            Code = "AG",
-                            HeInCode = "108",
+                            CountryCode = "AG",
+                            CountryName = "Antigua và Barbuda",
                             Inactive = false,
-                            Name = "Antigua và Barbuda",
+                            MediCode = "108",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("e4c05566-0c8d-42a4-a2e9-ad4d6d33b35f"),
-                            Code = "AI",
-                            HeInCode = "AI",
+                            CountryCode = "AI",
+                            CountryName = "Anguilla",
                             Inactive = false,
-                            Name = "Anguilla",
+                            MediCode = "AI",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("66533605-d826-4aec-9536-e4d30effefda"),
-                            Code = "AL",
-                            HeInCode = "103",
+                            CountryCode = "AL",
+                            CountryName = "Albania",
                             Inactive = false,
-                            Name = "Albania",
+                            MediCode = "103",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("af3badc9-b6da-4eb0-8a42-ecf8dfd6ae19"),
-                            Code = "AM",
-                            HeInCode = "112",
+                            CountryCode = "AM",
+                            CountryName = "Armenia",
                             Inactive = false,
-                            Name = "Armenia",
+                            MediCode = "112",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("25b7ed9b-8bfd-4601-a4c5-a59dfe5a3fab"),
-                            Code = "AN",
-                            HeInCode = "AN",
+                            CountryCode = "AN",
+                            CountryName = "Netherlands antilles",
                             Inactive = false,
-                            Name = "Netherlands antilles",
+                            MediCode = "AN",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("5701a860-793e-4660-9302-005b27d4348e"),
-                            Code = "AO",
-                            HeInCode = "106",
+                            CountryCode = "AO",
+                            CountryName = "Angola",
                             Inactive = false,
-                            Name = "Angola",
+                            MediCode = "106",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("9eb57842-f592-4080-affd-71b43f7d0517"),
-                            Code = "AQ",
-                            HeInCode = "AQ",
+                            CountryCode = "AQ",
+                            CountryName = "Antarctica",
                             Inactive = false,
-                            Name = "Antarctica",
+                            MediCode = "AQ",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("fd32d265-24dd-4073-a4b8-59e6358b59ed"),
-                            Code = "AR",
-                            HeInCode = "111",
+                            CountryCode = "AR",
+                            CountryName = "Argentina",
                             Inactive = false,
-                            Name = "Argentina",
+                            MediCode = "111",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("21668f2b-b3d0-4927-9d67-3f9eee4736d6"),
-                            Code = "AS",
-                            HeInCode = "AS",
+                            CountryCode = "AS",
+                            CountryName = "Samoa thuộc Hoa Kỳ",
                             Inactive = false,
-                            Name = "Samoa thuộc Hoa Kỳ",
+                            MediCode = "AS",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("6c408b50-b4be-4eca-a710-11a6d914cf4f"),
-                            Code = "AT",
-                            HeInCode = "109",
+                            CountryCode = "AT",
+                            CountryName = "Áo",
                             Inactive = false,
-                            Name = "Áo",
+                            MediCode = "109",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("fc5a0c05-ebac-4906-8a9f-dddcdbcc0a9d"),
-                            Code = "AU",
-                            HeInCode = "284",
+                            CountryCode = "AU",
+                            CountryName = "Úc",
                             Inactive = false,
-                            Name = "Úc",
+                            MediCode = "284",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("e5837adb-d926-41f1-8434-73fed9db7504"),
-                            Code = "AW",
-                            HeInCode = "AW",
+                            CountryCode = "AW",
+                            CountryName = "Aruba việt nam",
                             Inactive = false,
-                            Name = "Aruba việt nam",
+                            MediCode = "AW",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("1c3907c5-3cd4-4530-a28c-6d4acceec175"),
-                            Code = "AZ",
-                            HeInCode = "113",
+                            CountryCode = "AZ",
+                            CountryName = "Azerbaijan",
                             Inactive = false,
-                            Name = "Azerbaijan",
+                            MediCode = "113",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("45a0ebe0-51be-423b-8885-7a7bf06e6f95"),
-                            Code = "BA",
-                            HeInCode = "127",
+                            CountryCode = "BA",
+                            CountryName = "Bosna và Hercegovina",
                             Inactive = false,
-                            Name = "Bosna và Hercegovina",
+                            MediCode = "127",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("332e0e9e-0182-47a0-b894-ade71da83708"),
-                            Code = "BB",
-                            HeInCode = "120",
+                            CountryCode = "BB",
+                            CountryName = "Barbados",
                             Inactive = false,
-                            Name = "Barbados",
+                            MediCode = "120",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("7f233816-fe94-4941-8125-b62c88410fa9"),
-                            Code = "BD",
-                            HeInCode = "119",
+                            CountryCode = "BD",
+                            CountryName = "Bangladesh",
                             Inactive = false,
-                            Name = "Bangladesh",
+                            MediCode = "119",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("720aaa71-3cc0-470f-b56c-472ac37a6574"),
-                            Code = "BE",
-                            HeInCode = "125",
+                            CountryCode = "BE",
+                            CountryName = "Bỉ",
                             Inactive = false,
-                            Name = "Bỉ",
+                            MediCode = "125",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("e369137c-1730-4809-88e4-e43031327233"),
-                            Code = "BF",
-                            HeInCode = "134",
+                            CountryCode = "BF",
+                            CountryName = "Burkina Faso",
                             Inactive = false,
-                            Name = "Burkina Faso",
+                            MediCode = "134",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("e180ff8a-4e49-4edd-9168-21b372b8d9b7"),
-                            Code = "BG",
-                            HeInCode = "133",
+                            CountryCode = "BG",
+                            CountryName = "Bulgaria",
                             Inactive = false,
-                            Name = "Bulgaria",
+                            MediCode = "133",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("1bd96043-4837-4ab4-8812-0230d7cdc37c"),
-                            Code = "BH",
-                            HeInCode = "117",
+                            CountryCode = "BH",
+                            CountryName = "Bahrain",
                             Inactive = false,
-                            Name = "Bahrain",
+                            MediCode = "117",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("09127bf0-ff5d-4660-8fef-18b3107bf295"),
-                            Code = "BI",
-                            HeInCode = "135",
+                            CountryCode = "BI",
+                            CountryName = "Burundi",
                             Inactive = false,
-                            Name = "Burundi",
+                            MediCode = "135",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("fd235817-1607-4f4c-83c7-ff5bd0012896"),
-                            Code = "BJ",
-                            HeInCode = "123",
+                            CountryCode = "BJ",
+                            CountryName = "Benin",
                             Inactive = false,
-                            Name = "Benin",
+                            MediCode = "123",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("7b0c9a9c-e730-4b96-9372-e9ef8ab5339b"),
-                            Code = "BM",
-                            HeInCode = "BM",
+                            CountryCode = "BM",
+                            CountryName = "Bermuda",
                             Inactive = false,
-                            Name = "Bermuda",
+                            MediCode = "BM",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("c5c14db2-753f-4e28-88b5-3b9e502fa0c6"),
-                            Code = "BN",
-                            HeInCode = "132",
+                            CountryCode = "BN",
+                            CountryName = "Brunei",
                             Inactive = false,
-                            Name = "Brunei",
+                            MediCode = "132",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("aa745539-b444-49d2-ad13-14149f8a1645"),
-                            Code = "BO",
-                            HeInCode = "126",
+                            CountryCode = "BO",
+                            CountryName = "Bolivia",
                             Inactive = false,
-                            Name = "Bolivia",
+                            MediCode = "126",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("1d374c8c-88c5-49ae-9c9c-0b2b362b1198"),
-                            Code = "BR",
-                            HeInCode = "131",
+                            CountryCode = "BR",
+                            CountryName = "Brasil",
                             Inactive = false,
-                            Name = "Brasil",
+                            MediCode = "131",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("8764ee96-c950-44cf-a1f4-7636126c671b"),
-                            Code = "BS",
-                            HeInCode = "116",
+                            CountryCode = "BS",
+                            CountryName = "Bahamas",
                             Inactive = false,
-                            Name = "Bahamas",
+                            MediCode = "116",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("d94b5935-e6d2-4aa7-b9f7-d332badacd8d"),
-                            Code = "BT",
-                            HeInCode = "124",
+                            CountryCode = "BT",
+                            CountryName = "Bhutan",
                             Inactive = false,
-                            Name = "Bhutan",
+                            MediCode = "124",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("5f4a7dfd-c3ed-4796-bde2-94199e595ef0"),
-                            Code = "BV",
-                            HeInCode = "BV",
+                            CountryCode = "BV",
+                            CountryName = "Bouvet island",
                             Inactive = false,
-                            Name = "Bouvet island",
+                            MediCode = "BV",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("ddf4ecad-6f97-4bde-84fe-2b9dc51f0ffd"),
-                            Code = "BW",
-                            HeInCode = "128",
+                            CountryCode = "BW",
+                            CountryName = "Botswana",
                             Inactive = false,
-                            Name = "Botswana",
+                            MediCode = "128",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("53fdbb96-c808-4474-83bc-084e422a8b95"),
-                            Code = "BY",
-                            HeInCode = "121",
+                            CountryCode = "BY",
+                            CountryName = "Belarus",
                             Inactive = false,
-                            Name = "Belarus",
+                            MediCode = "121",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("76c42f0f-bfb2-4a11-b5a4-e854f74e72cd"),
-                            Code = "BZ",
-                            HeInCode = "122",
+                            CountryCode = "BZ",
+                            CountryName = "Belize",
                             Inactive = false,
-                            Name = "Belize",
+                            MediCode = "122",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("686b79de-db2f-4ccd-946c-1bef80cd503e"),
-                            Code = "CA",
-                            HeInCode = "140",
+                            CountryCode = "CA",
+                            CountryName = "Canada",
                             Inactive = false,
-                            Name = "Canada",
+                            MediCode = "140",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("2facb682-01d5-4798-bf0a-928bd471ecb3"),
-                            Code = "CC",
-                            HeInCode = "CC",
+                            CountryCode = "CC",
+                            CountryName = "Cocos (keeling) islands",
                             Inactive = false,
-                            Name = "Cocos (keeling) islands",
+                            MediCode = "CC",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("484be820-41ff-4911-94c6-2d2969764ac4"),
-                            Code = "CD",
-                            HeInCode = "145",
+                            CountryCode = "CD",
+                            CountryName = "Cộng hòa Dân chủ Congo",
                             Inactive = false,
-                            Name = "Cộng hòa Dân chủ Congo",
+                            MediCode = "145",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("46651a82-3d63-4a24-baff-9bb1ee8ac492"),
-                            Code = "CF",
-                            HeInCode = "280",
+                            CountryCode = "CF",
+                            CountryName = "Trung Phi",
                             Inactive = false,
-                            Name = "Trung Phi",
+                            MediCode = "280",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("75de9dea-ef0f-4492-890a-f5af36cce7aa"),
-                            Code = "CG",
-                            HeInCode = "144",
+                            CountryCode = "CG",
+                            CountryName = "Cộng hòa Congo",
                             Inactive = false,
-                            Name = "Cộng hòa Congo",
+                            MediCode = "144",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("1df44627-4127-48c0-bbc7-2afc64cb75d2"),
-                            Code = "CH",
-                            HeInCode = "274",
+                            CountryCode = "CH",
+                            CountryName = "Thụy Sĩ",
                             Inactive = false,
-                            Name = "Thụy Sĩ",
+                            MediCode = "274",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("4452efd3-9727-4c5c-9cc9-76f7270c673d"),
-                            Code = "CI",
-                            HeInCode = "130",
+                            CountryCode = "CI",
+                            CountryName = "Bờ Biển Ngà",
                             Inactive = false,
-                            Name = "Bờ Biển Ngà",
+                            MediCode = "130",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("b4e019b1-042b-465c-baf9-60d525d9b85c"),
-                            Code = "CK",
-                            HeInCode = "CK",
+                            CountryCode = "CK",
+                            CountryName = "Cook islands",
                             Inactive = false,
-                            Name = "Cook islands",
+                            MediCode = "CK",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("067dbcfb-9729-4016-aa0f-526f43657542"),
-                            Code = "CL",
-                            HeInCode = "141",
+                            CountryCode = "CL",
+                            CountryName = "Chile",
                             Inactive = false,
-                            Name = "Chile",
+                            MediCode = "141",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("f5874f17-6c1e-4c07-b8bf-41b76546f6f0"),
-                            Code = "CM",
-                            HeInCode = "138",
+                            CountryCode = "CM",
+                            CountryName = "Cameroon",
                             Inactive = false,
-                            Name = "Cameroon",
+                            MediCode = "138",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("3de67d92-a46e-4113-bd12-2e89a48aa1f0"),
-                            Code = "CN",
-                            HeInCode = "279",
+                            CountryCode = "CN",
+                            CountryName = "Trung Quốc",
                             Inactive = false,
-                            Name = "Trung Quốc",
+                            MediCode = "279",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("19b9d4e2-dd04-4d66-ba70-e71a800b8563"),
-                            Code = "CO",
-                            HeInCode = "142",
+                            CountryCode = "CO",
+                            CountryName = "Colombia",
                             Inactive = false,
-                            Name = "Colombia",
+                            MediCode = "142",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("d576474f-de6a-45fc-bd19-e18a2915f1a4"),
-                            Code = "CR",
-                            HeInCode = "146",
+                            CountryCode = "CR",
+                            CountryName = "Costa Rica",
                             Inactive = false,
-                            Name = "Costa Rica",
+                            MediCode = "146",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("be946a16-a1af-499c-9bd8-ca12a22fb69c"),
-                            Code = "CU",
-                            HeInCode = "149",
+                            CountryCode = "CU",
+                            CountryName = "Cuba",
                             Inactive = false,
-                            Name = "Cuba",
+                            MediCode = "149",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("93fc49be-bd23-41c3-8538-4b424a7806da"),
-                            Code = "CV",
-                            HeInCode = "CV",
+                            CountryCode = "CV",
+                            CountryName = "Cape verde",
                             Inactive = false,
-                            Name = "Cape verde",
+                            MediCode = "CV",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("02cd862f-7bf2-4dee-9d8d-869f67659eac"),
-                            Code = "CX",
-                            HeInCode = "CX",
+                            CountryCode = "CX",
+                            CountryName = "Christmas island",
                             Inactive = false,
-                            Name = "Christmas island",
+                            MediCode = "CX",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("7ef68b6d-2d6b-4688-95bc-d0fd79ffb6c5"),
-                            Code = "CY",
-                            HeInCode = "191",
+                            CountryCode = "CY",
+                            CountryName = "Síp",
                             Inactive = false,
-                            Name = "Síp",
+                            MediCode = "191",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("23063395-5d36-41c9-9711-66722ab8849f"),
-                            Code = "CZ",
-                            HeInCode = "252",
+                            CountryCode = "CZ",
+                            CountryName = "Séc",
                             Inactive = false,
-                            Name = "Séc",
+                            MediCode = "252",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("9d5769fe-b3ae-4697-9150-44674e8008ba"),
-                            Code = "DE",
-                            HeInCode = "155",
+                            CountryCode = "DE",
+                            CountryName = "Đức",
                             Inactive = false,
-                            Name = "Đức",
+                            MediCode = "155",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("a1080c01-e5bb-4e3f-8784-f0678f1eff58"),
-                            Code = "DJ",
-                            HeInCode = "150",
+                            CountryCode = "DJ",
+                            CountryName = "Djibouti",
                             Inactive = false,
-                            Name = "Djibouti",
+                            MediCode = "150",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("502c14cb-18ea-461f-9bc0-9591b056284c"),
-                            Code = "DK",
-                            HeInCode = "153",
+                            CountryCode = "DK",
+                            CountryName = "Đan Mạch",
                             Inactive = false,
-                            Name = "Đan Mạch",
+                            MediCode = "153",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("7bea406c-221d-45dd-aca6-a2ceb90741aa"),
-                            Code = "DM",
-                            HeInCode = "151",
+                            CountryCode = "DM",
+                            CountryName = "Dominica",
                             Inactive = false,
-                            Name = "Dominica",
+                            MediCode = "151",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("58d12ab1-4946-45f9-bef5-354e5803f357"),
-                            Code = "DO",
-                            HeInCode = "152",
+                            CountryCode = "DO",
+                            CountryName = "Cộng hòa Dominicana",
                             Inactive = false,
-                            Name = "Cộng hòa Dominicana",
+                            MediCode = "152",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("e6e7518f-73eb-4010-b0cf-6dcc5c8f8e01"),
-                            Code = "DZ",
-                            HeInCode = "104",
+                            CountryCode = "DZ",
+                            CountryName = "Algérie",
                             Inactive = false,
-                            Name = "Algérie",
+                            MediCode = "104",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("a3597652-cc84-40ff-b143-208ee8473e93"),
-                            Code = "EA",
-                            HeInCode = "154",
+                            CountryCode = "EA",
+                            CountryName = "Đông Timor",
                             Inactive = false,
-                            Name = "Đông Timor",
+                            MediCode = "154",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("c6f6287f-39f6-4470-ad46-ac539eef3052"),
-                            Code = "EC",
-                            HeInCode = "156",
+                            CountryCode = "EC",
+                            CountryName = "Ecuador",
                             Inactive = false,
-                            Name = "Ecuador",
+                            MediCode = "156",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("abdfeb5b-a4b8-4ab1-b6b8-83f7fb72ec23"),
-                            Code = "EE",
-                            HeInCode = "159",
+                            CountryCode = "EE",
+                            CountryName = "Estonia",
                             Inactive = false,
-                            Name = "Estonia",
+                            MediCode = "159",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("8f800608-e254-418d-8163-78f71be4873f"),
-                            Code = "EG",
-                            HeInCode = "102",
+                            CountryCode = "EG",
+                            CountryName = "Ai Cập",
                             Inactive = false,
-                            Name = "Ai Cập",
+                            MediCode = "102",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("fe657d37-7960-4bb3-8f15-81666fca928d"),
-                            Code = "EH",
-                            HeInCode = "EH",
+                            CountryCode = "EH",
+                            CountryName = "Western sahara",
                             Inactive = false,
-                            Name = "Western sahara",
+                            MediCode = "EH",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("4dcd4bda-0da9-415d-8f7e-ecd5841ad250"),
-                            Code = "ER",
-                            HeInCode = "158",
+                            CountryCode = "ER",
+                            CountryName = "Eritrea",
                             Inactive = false,
-                            Name = "Eritrea",
+                            MediCode = "158",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("5dc567de-1249-4aaa-9d49-04dcd3501220"),
-                            Code = "ES",
-                            HeInCode = "269",
+                            CountryCode = "ES",
+                            CountryName = "Tây Ban Nha",
                             Inactive = false,
-                            Name = "Tây Ban Nha",
+                            MediCode = "269",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("ba7304bd-7e25-4731-a60f-10c13589c71a"),
-                            Code = "ET",
-                            HeInCode = "160",
+                            CountryCode = "ET",
+                            CountryName = "Ethiopia",
                             Inactive = false,
-                            Name = "Ethiopia",
+                            MediCode = "160",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("10a98338-7167-4e5b-b3e4-9515f63bb43d"),
-                            Code = "FI",
-                            HeInCode = "241",
+                            CountryCode = "FI",
+                            CountryName = "Phần Lan",
                             Inactive = false,
-                            Name = "Phần Lan",
+                            MediCode = "241",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("da333d92-e16c-4b49-b9d8-669df9032f82"),
-                            Code = "FJ",
-                            HeInCode = "161",
+                            CountryCode = "FJ",
+                            CountryName = "Fiji",
                             Inactive = false,
-                            Name = "Fiji",
+                            MediCode = "161",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("f36eb030-510e-4ca0-b7c4-a1c1ef656dd6"),
-                            Code = "FK",
-                            HeInCode = "FK",
+                            CountryCode = "FK",
+                            CountryName = "Falkland islands (malvinas)",
                             Inactive = false,
-                            Name = "Falkland islands (malvinas)",
+                            MediCode = "FK",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("c4065df0-2539-4046-bb77-7d699a072734"),
-                            Code = "FM",
-                            HeInCode = "214",
+                            CountryCode = "FM",
+                            CountryName = "Micronesia",
                             Inactive = false,
-                            Name = "Micronesia",
+                            MediCode = "214",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("b83be42b-cde9-4dc3-a838-d8197d2c678f"),
-                            Code = "FO",
-                            HeInCode = "FO",
+                            CountryCode = "FO",
+                            CountryName = "Faroe islands",
                             Inactive = false,
-                            Name = "Faroe islands",
+                            MediCode = "FO",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("226d663e-46ee-4ab2-b385-b062345debd9"),
-                            Code = "FR",
-                            HeInCode = "240",
+                            CountryCode = "FR",
+                            CountryName = "Pháp",
                             Inactive = false,
-                            Name = "Pháp",
+                            MediCode = "240",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("24c5f9fa-e493-43a1-9d2a-c6d25dc2ea89"),
-                            Code = "FY",
-                            HeInCode = "254",
+                            CountryCode = "FY",
+                            CountryName = "Serbia",
                             Inactive = false,
-                            Name = "Serbia",
+                            MediCode = "254",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("f1c02c7d-3154-4e55-817c-1e24f6eef729"),
-                            Code = "GA",
-                            HeInCode = "162",
+                            CountryCode = "GA",
+                            CountryName = "Gabon",
                             Inactive = false,
-                            Name = "Gabon",
+                            MediCode = "162",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("e9455b51-bd57-482f-a979-5ecf6c8c4afd"),
-                            Code = "GB",
-                            HeInCode = "107",
+                            CountryCode = "GB",
+                            CountryName = "Vương quốc Liên hiệp Anh và Bắc Ireland",
                             Inactive = false,
-                            Name = "Vương quốc Liên hiệp Anh và Bắc Ireland",
+                            MediCode = "107",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("573dec77-5908-42b2-b1a5-8a5ee8407dee"),
-                            Code = "GD",
-                            HeInCode = "165",
+                            CountryCode = "GD",
+                            CountryName = "Grenada",
                             Inactive = false,
-                            Name = "Grenada",
+                            MediCode = "165",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("9ded845f-06a1-4651-8903-bc46f7978c84"),
-                            Code = "GE",
-                            HeInCode = "GE",
+                            CountryCode = "GE",
+                            CountryName = "Georgia",
                             Inactive = false,
-                            Name = "Georgia",
+                            MediCode = "GE",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("212573b7-ec34-4844-b150-74f567de2c5d"),
-                            Code = "GF",
-                            HeInCode = "GF",
+                            CountryCode = "GF",
+                            CountryName = "French guiana",
                             Inactive = false,
-                            Name = "French guiana",
+                            MediCode = "GF",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("d34d65e5-253f-4324-9aee-f74045802e47"),
-                            Code = "GG",
-                            HeInCode = "GG",
+                            CountryCode = "GG",
+                            CountryName = "Guernsey",
                             Inactive = false,
-                            Name = "Guernsey",
+                            MediCode = "GG",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("62b0c6c0-4a45-4f33-b35e-d184d815518e"),
-                            Code = "GH",
-                            HeInCode = "164",
+                            CountryCode = "GH",
+                            CountryName = "Ghana",
                             Inactive = false,
-                            Name = "Ghana",
+                            MediCode = "164",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("cdd52492-d981-4972-9f41-4b1774c002ee"),
-                            Code = "GI",
-                            HeInCode = "GI",
+                            CountryCode = "GI",
+                            CountryName = "Gibraltar",
                             Inactive = false,
-                            Name = "Gibraltar",
+                            MediCode = "GI",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("f9375017-9897-4487-8916-c98d22fd05b9"),
-                            Code = "GL",
-                            HeInCode = "GL",
+                            CountryCode = "GL",
+                            CountryName = "Greenland",
                             Inactive = false,
-                            Name = "Greenland",
+                            MediCode = "GL",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("347a0e24-276d-4a54-b92b-4b88b60179af"),
-                            Code = "GM",
-                            HeInCode = "163",
+                            CountryCode = "GM",
+                            CountryName = "Gambia",
                             Inactive = false,
-                            Name = "Gambia",
+                            MediCode = "163",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("25df127f-9fb7-4f1d-8a4f-484364e15f91"),
-                            Code = "GN",
-                            HeInCode = "170",
+                            CountryCode = "GN",
+                            CountryName = "Guinea",
                             Inactive = false,
-                            Name = "Guinea",
+                            MediCode = "170",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("98062645-5015-4d8c-886e-3fb70c247ada"),
-                            Code = "GP",
-                            HeInCode = "GP",
+                            CountryCode = "GP",
+                            CountryName = "Guadeloupe",
                             Inactive = false,
-                            Name = "Guadeloupe",
+                            MediCode = "GP",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("298cf3d9-cf13-401f-86b5-368d1c71ec77"),
-                            Code = "GQ",
-                            HeInCode = "169",
+                            CountryCode = "GQ",
+                            CountryName = "Guinea Xích Đạo",
                             Inactive = false,
-                            Name = "Guinea Xích Đạo",
+                            MediCode = "169",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("8a6a8442-1533-4bba-9a05-ed707122573e"),
-                            Code = "GR",
-                            HeInCode = "178",
+                            CountryCode = "GR",
+                            CountryName = "Hy Lạp",
                             Inactive = false,
-                            Name = "Hy Lạp",
+                            MediCode = "178",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("3adb70b0-ae40-4ac0-8a27-15398cc79d49"),
-                            Code = "GS",
-                            HeInCode = "GS",
+                            CountryCode = "GS",
+                            CountryName = "South georgia and the south sandwich islands",
                             Inactive = false,
-                            Name = "South georgia and the south sandwich islands",
+                            MediCode = "GS",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("4dbc51c5-3faa-4e76-b0d5-a28df95c5c01"),
-                            Code = "GT",
-                            HeInCode = "167",
+                            CountryCode = "GT",
+                            CountryName = "Guatemala",
                             Inactive = false,
-                            Name = "Guatemala",
+                            MediCode = "167",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("e4acc3fd-7e2d-4927-b7e8-797cb8a29a86"),
-                            Code = "GU",
-                            HeInCode = "GU",
+                            CountryCode = "GU",
+                            CountryName = "Guam",
                             Inactive = false,
-                            Name = "Guam",
+                            MediCode = "GU",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("d892c6c0-bf86-4487-ab8b-5af35cc32a0c"),
-                            Code = "GV",
-                            HeInCode = "171",
+                            CountryCode = "GV",
+                            CountryName = "Guyana",
                             Inactive = false,
-                            Name = "Guyana",
+                            MediCode = "171",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("3dac050e-a2a6-469b-b0bb-def2e17544a5"),
-                            Code = "GW",
-                            HeInCode = "168",
+                            CountryCode = "GW",
+                            CountryName = "Guinea-Bissau",
                             Inactive = false,
-                            Name = "Guinea-Bissau",
+                            MediCode = "168",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("d3c10501-b94f-4a0e-b871-80d4b3d7bbbb"),
-                            Code = "HK",
-                            HeInCode = "HK",
+                            CountryCode = "HK",
+                            CountryName = "Hong kong",
                             Inactive = false,
-                            Name = "Hong kong",
+                            MediCode = "HK",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("3edffd99-5e14-4466-9f3e-a72ab48711d7"),
-                            Code = "HM",
-                            HeInCode = "HM",
+                            CountryCode = "HM",
+                            CountryName = "Heard and mc donald islands",
                             Inactive = false,
-                            Name = "Heard and mc donald islands",
+                            MediCode = "HM",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("d50a063a-82ef-4b56-858e-1a8794b32878"),
-                            Code = "HN",
-                            HeInCode = "176",
+                            CountryCode = "HN",
+                            CountryName = "Honduras",
                             Inactive = false,
-                            Name = "Honduras",
+                            MediCode = "176",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("fd0ac376-bf65-4bf8-9067-245691aa1827"),
-                            Code = "HR",
-                            HeInCode = "147",
+                            CountryCode = "HR",
+                            CountryName = "Croatia",
                             Inactive = false,
-                            Name = "Croatia",
+                            MediCode = "147",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("c831fb16-910b-4939-804a-1052b8f8adc1"),
-                            Code = "HT",
-                            HeInCode = "172",
+                            CountryCode = "HT",
+                            CountryName = "Haiti",
                             Inactive = false,
-                            Name = "Haiti",
+                            MediCode = "172",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("1a52542a-e4e8-4514-b84f-d8f7a0ce8bf5"),
-                            Code = "HU",
-                            HeInCode = "177",
+                            CountryCode = "HU",
+                            CountryName = "Hungary",
                             Inactive = false,
-                            Name = "Hungary",
+                            MediCode = "177",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("e3a2237c-9d57-462f-bad8-7a78856303c8"),
-                            Code = "ID",
-                            HeInCode = "180",
+                            CountryCode = "ID",
+                            CountryName = "Indonesia",
                             Inactive = false,
-                            Name = "Indonesia",
+                            MediCode = "180",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("4e6e77af-56d6-4314-ac68-c39713511d70"),
-                            Code = "IE",
-                            HeInCode = "183",
+                            CountryCode = "IE",
+                            CountryName = "Ireland",
                             Inactive = false,
-                            Name = "Ireland",
+                            MediCode = "183",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("060539cd-d169-45c2-bec2-28a91e41bcb3"),
-                            Code = "IL",
-                            HeInCode = "184",
+                            CountryCode = "IL",
+                            CountryName = "Israel",
                             Inactive = false,
-                            Name = "Israel",
+                            MediCode = "184",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("4bab2495-c861-47e7-82e6-1806fd87b767"),
-                            Code = "IM",
-                            HeInCode = "IM",
+                            CountryCode = "IM",
+                            CountryName = "Isle of man",
                             Inactive = false,
-                            Name = "Isle of man",
+                            MediCode = "IM",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("edcecb3c-ffcb-451f-8e24-02a0bf6499ae"),
-                            Code = "IN",
-                            HeInCode = "115",
+                            CountryCode = "IN",
+                            CountryName = "Cộng hòa Ấn Độ",
                             Inactive = false,
-                            Name = "Cộng hòa Ấn Độ",
+                            MediCode = "115",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("d200b4b5-7435-41a9-be8b-b6a80e14120b"),
-                            Code = "IO",
-                            HeInCode = "IO",
+                            CountryCode = "IO",
+                            CountryName = "British indian ocean territory",
                             Inactive = false,
-                            Name = "British indian ocean territory",
+                            MediCode = "IO",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("b16a509f-5c70-42b1-a05e-6d4426c721ca"),
-                            Code = "IQ",
-                            HeInCode = "182",
+                            CountryCode = "IQ",
+                            CountryName = "Iraq",
                             Inactive = false,
-                            Name = "Iraq",
+                            MediCode = "182",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("58357a87-d3a9-4ea4-82ea-eb7775f1c568"),
-                            Code = "IR",
-                            HeInCode = "181",
+                            CountryCode = "IR",
+                            CountryName = "Iran",
                             Inactive = false,
-                            Name = "Iran",
+                            MediCode = "181",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("10f310c4-857b-431b-934c-19ebc560571c"),
-                            Code = "IS",
-                            HeInCode = "179",
+                            CountryCode = "IS",
+                            CountryName = "Iceland",
                             Inactive = false,
-                            Name = "Iceland",
+                            MediCode = "179",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("aa3d56b9-f398-4be1-b8ae-9f8563101b6e"),
-                            Code = "IT",
-                            HeInCode = "292",
+                            CountryCode = "IT",
+                            CountryName = "Ý",
                             Inactive = false,
-                            Name = "Ý",
+                            MediCode = "292",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("50202b21-f7c0-42eb-89bd-4470e82f3943"),
-                            Code = "JE",
-                            HeInCode = "JE",
+                            CountryCode = "JE",
+                            CountryName = "Jersey",
                             Inactive = false,
-                            Name = "Jersey",
+                            MediCode = "JE",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("cbf1c521-494b-4981-9dc9-b6a1b229c01d"),
-                            Code = "JM",
-                            HeInCode = "185",
+                            CountryCode = "JM",
+                            CountryName = "Jamaica",
                             Inactive = false,
-                            Name = "Jamaica",
+                            MediCode = "185",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("665d03c6-346e-43d8-ad21-31492b4382aa"),
-                            Code = "JO",
-                            HeInCode = "186",
+                            CountryCode = "JO",
+                            CountryName = "Jordan",
                             Inactive = false,
-                            Name = "Jordan",
+                            MediCode = "186",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("9601fc62-41b1-44af-af8e-8a03c91c96b8"),
-                            Code = "JP",
-                            HeInCode = "232",
+                            CountryCode = "JP",
+                            CountryName = "Nhật Bản",
                             Inactive = false,
-                            Name = "Nhật Bản",
+                            MediCode = "232",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("66400b32-893a-489c-a5e1-180d55fb20d4"),
-                            Code = "KE",
-                            HeInCode = "188",
+                            CountryCode = "KE",
+                            CountryName = "Kenya",
                             Inactive = false,
-                            Name = "Kenya",
+                            MediCode = "188",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("509f7d40-e740-472f-8a7a-84b5a527eb96"),
-                            Code = "KG",
-                            HeInCode = "192",
+                            CountryCode = "KG",
+                            CountryName = "Kyrgyzstan",
                             Inactive = false,
-                            Name = "Kyrgyzstan",
+                            MediCode = "192",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("f468cb27-57fb-4b75-b3b7-70bb33ca2705"),
-                            Code = "KH",
-                            HeInCode = "139",
+                            CountryCode = "KH",
+                            CountryName = "Campuchia",
                             Inactive = false,
-                            Name = "Campuchia",
+                            MediCode = "139",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("62947f31-4a3e-441b-a9d2-9642ce61de2f"),
-                            Code = "KI",
-                            HeInCode = "189",
+                            CountryCode = "KI",
+                            CountryName = "Kiribati",
                             Inactive = false,
-                            Name = "Kiribati",
+                            MediCode = "189",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("7afaefc0-9aa8-4ba7-98ae-618682a5be7f"),
-                            Code = "KM",
-                            HeInCode = "143",
+                            CountryCode = "KM",
+                            CountryName = "Comoros",
                             Inactive = false,
-                            Name = "Comoros",
+                            MediCode = "143",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("506ddd2c-4f81-4d6d-806c-4c9e605bab3f"),
-                            Code = "KN",
-                            HeInCode = "246",
+                            CountryCode = "KN",
+                            CountryName = "Saint Kitts và Nevis",
                             Inactive = false,
-                            Name = "Saint Kitts và Nevis",
+                            MediCode = "246",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("07c04d8d-4e1c-4896-ba8a-7d8172562b37"),
-                            Code = "KP",
-                            HeInCode = "277",
+                            CountryCode = "KP",
+                            CountryName = "Triều Tiên",
                             Inactive = false,
-                            Name = "Triều Tiên",
+                            MediCode = "277",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("39ef7fcd-b539-46be-90a6-bc3f6d1524d8"),
-                            Code = "KR",
-                            HeInCode = "174",
+                            CountryCode = "KR",
+                            CountryName = "Hàn Quốc",
                             Inactive = false,
-                            Name = "Hàn Quốc",
+                            MediCode = "174",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("90b2a6a0-bacd-4175-80e9-b8fde9233786"),
-                            Code = "KW",
-                            HeInCode = "190",
+                            CountryCode = "KW",
+                            CountryName = "Kuwait",
                             Inactive = false,
-                            Name = "Kuwait",
+                            MediCode = "190",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("994cf06f-b833-4415-84e0-94f3847b6dd8"),
-                            Code = "KY",
-                            HeInCode = "KY",
+                            CountryCode = "KY",
+                            CountryName = "Cayman islands",
                             Inactive = false,
-                            Name = "Cayman islands",
+                            MediCode = "KY",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("1cc02fda-f061-49ad-a4f1-ecb564a28c88"),
-                            Code = "KZ",
-                            HeInCode = "187",
+                            CountryCode = "KZ",
+                            CountryName = "Kazakhstan",
                             Inactive = false,
-                            Name = "Kazakhstan",
+                            MediCode = "187",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("18be6a2d-0cc9-4e57-9b95-0fd5e0999094"),
-                            Code = "LA",
-                            HeInCode = "193",
+                            CountryCode = "LA",
+                            CountryName = "Lào",
                             Inactive = false,
-                            Name = "Lào",
+                            MediCode = "193",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("66169c75-2aa7-409a-a7b9-d8cfe6ac80c0"),
-                            Code = "LB",
-                            HeInCode = "196",
+                            CountryCode = "LB",
+                            CountryName = "Li ban",
                             Inactive = false,
-                            Name = "Li ban",
+                            MediCode = "196",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("2eab2085-d20b-4cc4-a85b-7567c9ce6ea9"),
-                            Code = "LC",
-                            HeInCode = "247",
+                            CountryCode = "LC",
+                            CountryName = "Saint Lucia",
                             Inactive = false,
-                            Name = "Saint Lucia",
+                            MediCode = "247",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("9412c9e0-c4fe-442f-8b13-ea064bf48703"),
-                            Code = "LI",
-                            HeInCode = "199",
+                            CountryCode = "LI",
+                            CountryName = "Liechtenstein",
                             Inactive = false,
-                            Name = "Liechtenstein",
+                            MediCode = "199",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("affdf19e-5ed4-497a-97d0-0fc95a547785"),
-                            Code = "LK",
-                            HeInCode = "262",
+                            CountryCode = "LK",
+                            CountryName = "Sri Lanka",
                             Inactive = false,
-                            Name = "Sri Lanka",
+                            MediCode = "262",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("54ca17f4-f6f7-4bcf-9809-8d45153c2271"),
-                            Code = "LR",
-                            HeInCode = "197",
+                            CountryCode = "LR",
+                            CountryName = "Liberia",
                             Inactive = false,
-                            Name = "Liberia",
+                            MediCode = "197",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("426516a2-46e9-4103-8b44-22b4a30b21ae"),
-                            Code = "LS",
-                            HeInCode = "195",
+                            CountryCode = "LS",
+                            CountryName = "Lesotho",
                             Inactive = false,
-                            Name = "Lesotho",
+                            MediCode = "195",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("58486abc-86a6-4bb8-a610-eb0e4bdf0b73"),
-                            Code = "LT",
-                            HeInCode = "200",
+                            CountryCode = "LT",
+                            CountryName = "Litva",
                             Inactive = false,
-                            Name = "Litva",
+                            MediCode = "200",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("f034e368-335c-4a9f-a039-b7ea83f8a315"),
-                            Code = "LU",
-                            HeInCode = "201",
+                            CountryCode = "LU",
+                            CountryName = "Luxembourg",
                             Inactive = false,
-                            Name = "Luxembourg",
+                            MediCode = "201",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("882c80ef-806d-4370-9fb1-f00a13a7a5c1"),
-                            Code = "LV",
-                            HeInCode = "194",
+                            CountryCode = "LV",
+                            CountryName = "Latvia",
                             Inactive = false,
-                            Name = "Latvia",
+                            MediCode = "194",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("f5fdcb6c-e0c5-4a57-adca-e743ba60ccee"),
-                            Code = "LY",
-                            HeInCode = "198",
+                            CountryCode = "LY",
+                            CountryName = "Libya",
                             Inactive = false,
-                            Name = "Libya",
+                            MediCode = "198",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("1d41f179-ba78-41d6-8ecf-595c7d6de65a"),
-                            Code = "MA",
-                            HeInCode = "209",
+                            CountryCode = "MA",
+                            CountryName = "Maroc",
                             Inactive = false,
-                            Name = "Maroc",
+                            MediCode = "209",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("5b526a49-1694-4eb8-b602-4e150d12184d"),
-                            Code = "MC",
-                            HeInCode = "216",
+                            CountryCode = "MC",
+                            CountryName = "Monaco",
                             Inactive = false,
-                            Name = "Monaco",
+                            MediCode = "216",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("cc2a4d3b-bae2-4602-9d23-4d4d2d918699"),
-                            Code = "MD",
-                            HeInCode = "215",
+                            CountryCode = "MD",
+                            CountryName = "Moldova",
                             Inactive = false,
-                            Name = "Moldova",
+                            MediCode = "215",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("b1829e62-c3dd-4f65-8c41-fdbe26aedb93"),
-                            Code = "MG",
-                            HeInCode = "203",
+                            CountryCode = "MG",
+                            CountryName = "Madagascar",
                             Inactive = false,
-                            Name = "Madagascar",
+                            MediCode = "203",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("bcb96598-0e05-4316-86d3-80413326555a"),
-                            Code = "MH",
-                            HeInCode = "210",
+                            CountryCode = "MH",
+                            CountryName = "Quần đảo Marshall",
                             Inactive = false,
-                            Name = "Quần đảo Marshall",
+                            MediCode = "210",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("b83926c4-6963-4f82-97f7-dffa6e87ea7d"),
-                            Code = "MK",
-                            HeInCode = "202",
+                            CountryCode = "MK",
+                            CountryName = "Macedonia",
                             Inactive = false,
-                            Name = "Macedonia",
+                            MediCode = "202",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("b171e933-4b7d-46f5-802a-14c5c9234ed7"),
-                            Code = "ML",
-                            HeInCode = "207",
+                            CountryCode = "ML",
+                            CountryName = "Mali",
                             Inactive = false,
-                            Name = "Mali",
+                            MediCode = "207",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("cf8c2ebc-2ed1-404c-875c-d2151d54ab9e"),
-                            Code = "MM",
-                            HeInCode = "220",
+                            CountryCode = "MM",
+                            CountryName = "Myanma",
                             Inactive = false,
-                            Name = "Myanma",
+                            MediCode = "220",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("fd21963c-7b5e-44a8-8d70-2edbda437946"),
-                            Code = "MN",
-                            HeInCode = "217",
+                            CountryCode = "MN",
+                            CountryName = "Mông Cổ",
                             Inactive = false,
-                            Name = "Mông Cổ",
+                            MediCode = "217",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("6477d7a3-465e-4277-a4eb-ef09b13f5eca"),
-                            Code = "MO",
-                            HeInCode = "MO",
+                            CountryCode = "MO",
+                            CountryName = "Macau",
                             Inactive = false,
-                            Name = "Macau",
+                            MediCode = "MO",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("3af1daa8-65e1-4502-823d-3c8530608104"),
-                            Code = "MP",
-                            HeInCode = "MP",
+                            CountryCode = "MP",
+                            CountryName = "Northern mariana islands",
                             Inactive = false,
-                            Name = "Northern mariana islands",
+                            MediCode = "MP",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("77365013-80d7-44d5-bd8d-472542cac431"),
-                            Code = "MQ",
-                            HeInCode = "MQ",
+                            CountryCode = "MQ",
+                            CountryName = "Martinique",
                             Inactive = false,
-                            Name = "Martinique",
+                            MediCode = "MQ",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("aa4399ec-1ff3-4837-a68e-0df0720162cb"),
-                            Code = "MR",
-                            HeInCode = "211",
+                            CountryCode = "MR",
+                            CountryName = "Mauritanie",
                             Inactive = false,
-                            Name = "Mauritanie",
+                            MediCode = "211",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("d2ebac27-3463-40cb-9eb2-86e1da12a3ba"),
-                            Code = "MS",
-                            HeInCode = "MS",
+                            CountryCode = "MS",
+                            CountryName = "Montserrat",
                             Inactive = false,
-                            Name = "Montserrat",
+                            MediCode = "MS",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("78dcfd52-de7b-4c1d-9ded-0e5d3f7a8a35"),
-                            Code = "MT",
-                            HeInCode = "208",
+                            CountryCode = "MT",
+                            CountryName = "Malta",
                             Inactive = false,
-                            Name = "Malta",
+                            MediCode = "208",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("f1218849-b5cf-43c8-b3c4-b1ff145f27fc"),
-                            Code = "MU",
-                            HeInCode = "212",
+                            CountryCode = "MU",
+                            CountryName = "Mauritius",
                             Inactive = false,
-                            Name = "Mauritius",
+                            MediCode = "212",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("8a003437-323c-451c-b211-1886f79c25f1"),
-                            Code = "MV",
-                            HeInCode = "206",
+                            CountryCode = "MV",
+                            CountryName = "Maldives",
                             Inactive = false,
-                            Name = "Maldives",
+                            MediCode = "206",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("52595376-4b2b-4746-bb17-16f7ba234a33"),
-                            Code = "MW",
-                            HeInCode = "204",
+                            CountryCode = "MW",
+                            CountryName = "Malawi",
                             Inactive = false,
-                            Name = "Malawi",
+                            MediCode = "204",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("92b69f82-f3e2-4ea9-9d4b-1763b1a75dec"),
-                            Code = "MX",
-                            HeInCode = "213",
+                            CountryCode = "MX",
+                            CountryName = "Mexico",
                             Inactive = false,
-                            Name = "Mexico",
+                            MediCode = "213",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("22174cd0-7b2d-4c6b-bb6c-5273e63d28f0"),
-                            Code = "MY",
-                            HeInCode = "205",
+                            CountryCode = "MY",
+                            CountryName = "Malaysia",
                             Inactive = false,
-                            Name = "Malaysia",
+                            MediCode = "205",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("4589f414-2018-4196-a42a-68fa60b41dae"),
-                            Code = "MZ",
-                            HeInCode = "219",
+                            CountryCode = "MZ",
+                            CountryName = "Mozambique",
                             Inactive = false,
-                            Name = "Mozambique",
+                            MediCode = "219",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("ee707e39-4195-426c-abf9-1ce21a771350"),
-                            Code = "NA",
-                            HeInCode = "221",
+                            CountryCode = "NA",
+                            CountryName = "Namibia",
                             Inactive = false,
-                            Name = "Namibia",
+                            MediCode = "221",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("f5f9c1ed-f4fb-4cff-aee3-2bcb0d8eed3e"),
-                            Code = "NC",
-                            HeInCode = "NC",
+                            CountryCode = "NC",
+                            CountryName = "New Caledonia",
                             Inactive = false,
-                            Name = "New Caledonia",
+                            MediCode = "NC",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("264432ff-ba3d-4402-ae05-d3cbbdf7eef4"),
-                            Code = "NE",
-                            HeInCode = "229",
+                            CountryCode = "NE",
+                            CountryName = "Niger",
                             Inactive = false,
-                            Name = "Niger",
+                            MediCode = "229",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("6d5a6761-432b-4bd2-9b04-5e01c421de23"),
-                            Code = "NF",
-                            HeInCode = "NF",
+                            CountryCode = "NF",
+                            CountryName = "Norfolk Island",
                             Inactive = false,
-                            Name = "Norfolk Island",
+                            MediCode = "NF",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("9acb769e-d2de-479c-b66a-424ce710a036"),
-                            Code = "NG",
-                            HeInCode = "230",
+                            CountryCode = "NG",
+                            CountryName = "Nigeria",
                             Inactive = false,
-                            Name = "Nigeria",
+                            MediCode = "230",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("2eb9de76-3d99-43a5-b17d-ba2f0e08c64a"),
-                            Code = "NI",
-                            HeInCode = "228",
+                            CountryCode = "NI",
+                            CountryName = "Nicaragua",
                             Inactive = false,
-                            Name = "Nicaragua",
+                            MediCode = "228",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("ab16a3ed-00cd-4445-8e7c-770b1965232e"),
-                            Code = "NL",
-                            HeInCode = "173",
+                            CountryCode = "NL",
+                            CountryName = "Hà Lan",
                             Inactive = false,
-                            Name = "Hà Lan",
+                            MediCode = "173",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("8ff51ea0-476b-4dec-8736-70cc36ea1d2c"),
-                            Code = "NO",
-                            HeInCode = "225",
+                            CountryCode = "NO",
+                            CountryName = "Na Uy",
                             Inactive = false,
-                            Name = "Na Uy",
+                            MediCode = "225",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("2f4455d6-efee-4959-8dfd-6f7db81faadd"),
-                            Code = "NP",
-                            HeInCode = "226",
+                            CountryCode = "NP",
+                            CountryName = "Nepal",
                             Inactive = false,
-                            Name = "Nepal",
+                            MediCode = "226",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("1f0c0c80-dceb-47c4-9bfb-d9e2b29e8010"),
-                            Code = "NR",
-                            HeInCode = "224",
+                            CountryCode = "NR",
+                            CountryName = "Nauru",
                             Inactive = false,
-                            Name = "Nauru",
+                            MediCode = "224",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("50c044c3-6cd1-46ad-b10a-e879291806f2"),
-                            Code = "NU",
-                            HeInCode = "NU",
+                            CountryCode = "NU",
+                            CountryName = "Niue",
                             Inactive = false,
-                            Name = "Niue",
+                            MediCode = "NU",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("1bb67a2c-65b1-4437-b7db-61bb5c5c945a"),
-                            Code = "NZ",
-                            HeInCode = "227",
+                            CountryCode = "NZ",
+                            CountryName = "New Zealand",
                             Inactive = false,
-                            Name = "New Zealand",
+                            MediCode = "227",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("1137907c-6292-4973-8a6a-5a8a55216701"),
-                            Code = "OM",
-                            HeInCode = "233",
+                            CountryCode = "OM",
+                            CountryName = "Oman",
                             Inactive = false,
-                            Name = "Oman",
+                            MediCode = "233",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("561d896e-c3c5-4dfc-b13c-790aa25fbd5d"),
-                            Code = "PA",
-                            HeInCode = "236",
+                            CountryCode = "PA",
+                            CountryName = "Panama",
                             Inactive = false,
-                            Name = "Panama",
+                            MediCode = "236",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("5a68453d-81d4-4417-a579-33d6a1c27ea6"),
-                            Code = "PE",
-                            HeInCode = "239",
+                            CountryCode = "PE",
+                            CountryName = "Peru",
                             Inactive = false,
-                            Name = "Peru",
+                            MediCode = "239",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("58776bc3-ee4b-44ae-ac9e-a501437bde2f"),
-                            Code = "PF",
-                            HeInCode = "PF",
+                            CountryCode = "PF",
+                            CountryName = "French Polynesia",
                             Inactive = false,
-                            Name = "French Polynesia",
+                            MediCode = "PF",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("26d0e10a-43ea-4654-93be-00a21f60b760"),
-                            Code = "PG",
-                            HeInCode = "237",
+                            CountryCode = "PG",
+                            CountryName = "Papua New Guinea",
                             Inactive = false,
-                            Name = "Papua New Guinea",
+                            MediCode = "237",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("7a384197-d55e-44b8-b389-a65f17e74e1f"),
-                            Code = "PH",
-                            HeInCode = "242",
+                            CountryCode = "PH",
+                            CountryName = "Philippines",
                             Inactive = false,
-                            Name = "Philippines",
+                            MediCode = "242",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("5bd03273-5b23-4181-892c-397126e8da56"),
-                            Code = "PK",
-                            HeInCode = "234",
+                            CountryCode = "PK",
+                            CountryName = "Pakistan",
                             Inactive = false,
-                            Name = "Pakistan",
+                            MediCode = "234",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("d1fef153-87bc-403a-9590-0ec4cc8d676e"),
-                            Code = "PL",
-                            HeInCode = "118",
+                            CountryCode = "PL",
+                            CountryName = "Ba Lan",
                             Inactive = false,
-                            Name = "Ba Lan",
+                            MediCode = "118",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("788693d2-4ac9-4f85-94bf-13d021bc000d"),
-                            Code = "PM",
-                            HeInCode = "PM",
+                            CountryCode = "PM",
+                            CountryName = "St. Pierre and Miquelon",
                             Inactive = false,
-                            Name = "St. Pierre and Miquelon",
+                            MediCode = "PM",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("79bc1ba0-a0f6-4065-9783-9e01ade32cde"),
-                            Code = "PN",
-                            HeInCode = "PN",
+                            CountryCode = "PN",
+                            CountryName = "Pitcairn",
                             Inactive = false,
-                            Name = "Pitcairn",
+                            MediCode = "PN",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("0d9bf5f6-20bb-4b4f-8c3e-0b7205eabe19"),
-                            Code = "PR",
-                            HeInCode = "PR",
+                            CountryCode = "PR",
+                            CountryName = "Puerto Rico",
                             Inactive = false,
-                            Name = "Puerto Rico",
+                            MediCode = "PR",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("0105cfd9-5265-4dcc-b2d8-790abecd5577"),
-                            Code = "PS",
-                            HeInCode = "PS",
+                            CountryCode = "PS",
+                            CountryName = "Palestinian Authority",
                             Inactive = false,
-                            Name = "Palestinian Authority",
+                            MediCode = "PS",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("4b12f61e-5980-415f-a62b-b296753fd70d"),
-                            Code = "PT",
-                            HeInCode = "129",
+                            CountryCode = "PT",
+                            CountryName = "Bồ Đào Nha",
                             Inactive = false,
-                            Name = "Bồ Đào Nha",
+                            MediCode = "129",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("a3c5c224-a013-4e23-8655-641a0a76b38a"),
-                            Code = "PW",
-                            HeInCode = "235",
+                            CountryCode = "PW",
+                            CountryName = "Palau",
                             Inactive = false,
-                            Name = "Palau",
+                            MediCode = "235",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("af9c2425-679e-4459-8c68-2d357f4f93e5"),
-                            Code = "PY",
-                            HeInCode = "238",
+                            CountryCode = "PY",
+                            CountryName = "Paraguay",
                             Inactive = false,
-                            Name = "Paraguay",
+                            MediCode = "238",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("dd951a03-c803-4351-aac5-ed4ec9922bab"),
-                            Code = "QA",
-                            HeInCode = "243",
+                            CountryCode = "QA",
+                            CountryName = "Qatar",
                             Inactive = false,
-                            Name = "Qatar",
+                            MediCode = "243",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("6d2d2371-8785-4a7b-94ba-84c804b2b0a2"),
-                            Code = "RE",
-                            HeInCode = "RE",
+                            CountryCode = "RE",
+                            CountryName = "Reunion",
                             Inactive = false,
-                            Name = "Reunion",
+                            MediCode = "RE",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("de0d7be8-8a87-4358-b93e-e809ab17f238"),
-                            Code = "RO",
-                            HeInCode = "244",
+                            CountryCode = "RO",
+                            CountryName = "Romania",
                             Inactive = false,
-                            Name = "Romania",
+                            MediCode = "244",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("1c1e8f0d-fa36-4dd5-a349-51f8f8cf1e11"),
-                            Code = "RU",
-                            HeInCode = "231",
+                            CountryCode = "RU",
+                            CountryName = "Nga",
                             Inactive = false,
-                            Name = "Nga",
+                            MediCode = "231",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("f21a86da-a1de-4023-93c9-3a23d315a8cd"),
-                            Code = "RW",
-                            HeInCode = "245",
+                            CountryCode = "RW",
+                            CountryName = "Rwanda",
                             Inactive = false,
-                            Name = "Rwanda",
+                            MediCode = "245",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("33aeb885-ea5c-4343-8011-b1dccebdd65f"),
-                            Code = "SA",
-                            HeInCode = "110",
+                            CountryCode = "SA",
+                            CountryName = "Ả Rập Saudi",
                             Inactive = false,
-                            Name = "Ả Rập Saudi",
+                            MediCode = "110",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("7e27cb42-41fb-4b20-b26b-3c1ea9b4ff5c"),
-                            Code = "SB",
-                            HeInCode = "260",
+                            CountryCode = "SB",
+                            CountryName = "Solomon",
                             Inactive = false,
-                            Name = "Solomon",
+                            MediCode = "260",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("63c8621a-fc44-4abe-ba08-8d80520280cf"),
-                            Code = "SC",
-                            HeInCode = "255",
+                            CountryCode = "SC",
+                            CountryName = "Seychelles",
                             Inactive = false,
-                            Name = "Seychelles",
+                            MediCode = "255",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("a30f588b-166d-4118-9d33-b8294e15ad44"),
-                            Code = "SD",
-                            HeInCode = "263",
+                            CountryCode = "SD",
+                            CountryName = "Sudan",
                             Inactive = false,
-                            Name = "Sudan",
+                            MediCode = "263",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("0f42743d-f2ae-4d4d-9e9c-6dcd785204ff"),
-                            Code = "SE",
-                            HeInCode = "273",
+                            CountryCode = "SE",
+                            CountryName = "Thụy Điển",
                             Inactive = false,
-                            Name = "Thụy Điển",
+                            MediCode = "273",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("57c01cf1-7f20-4a6c-bec9-bcc9a3a039fe"),
-                            Code = "SG",
-                            HeInCode = "257",
+                            CountryCode = "SG",
+                            CountryName = "Singapore",
                             Inactive = false,
-                            Name = "Singapore",
+                            MediCode = "257",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("5300fbb8-1d3b-48c2-b251-c9daab165b94"),
-                            Code = "SH",
-                            HeInCode = "SH",
+                            CountryCode = "SH",
+                            CountryName = "St. Helena",
                             Inactive = false,
-                            Name = "St. Helena",
+                            MediCode = "SH",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("92aea1da-5cf2-40fa-92a2-cce297949451"),
-                            Code = "SI",
-                            HeInCode = "259",
+                            CountryCode = "SI",
+                            CountryName = "Slovenia",
                             Inactive = false,
-                            Name = "Slovenia",
+                            MediCode = "259",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("99cfce62-6540-4525-97b8-9a2e62618e05"),
-                            Code = "SJ",
-                            HeInCode = "SJ",
+                            CountryCode = "SJ",
+                            CountryName = "Svalbard and Jan Mayen Islands",
                             Inactive = false,
-                            Name = "Svalbard and Jan Mayen Islands",
+                            MediCode = "SJ",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("b6169a90-920f-425d-a275-82601862a220"),
-                            Code = "SK",
-                            HeInCode = "258",
+                            CountryCode = "SK",
+                            CountryName = "Slovakia",
                             Inactive = false,
-                            Name = "Slovakia",
+                            MediCode = "258",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("45696681-b325-4d55-b4ea-56a920227907"),
-                            Code = "SL",
-                            HeInCode = "256",
+                            CountryCode = "SL",
+                            CountryName = "Sierra Leone",
                             Inactive = false,
-                            Name = "Sierra Leone",
+                            MediCode = "256",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("4b7309a1-de33-4f43-a2ff-3f11e0e5869b"),
-                            Code = "SM",
-                            HeInCode = "250",
+                            CountryCode = "SM",
+                            CountryName = "San Marino",
                             Inactive = false,
-                            Name = "San Marino",
+                            MediCode = "250",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("cba207c9-9ee4-4a20-876b-ecb1160d0845"),
-                            Code = "SN",
-                            HeInCode = "253",
+                            CountryCode = "SN",
+                            CountryName = "Sénégal",
                             Inactive = false,
-                            Name = "Sénégal",
+                            MediCode = "253",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("72d527d4-00df-4f9a-b0e1-e1fa84a4ba6d"),
-                            Code = "SO",
-                            HeInCode = "261",
+                            CountryCode = "SO",
+                            CountryName = "Somalia",
                             Inactive = false,
-                            Name = "Somalia",
+                            MediCode = "261",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("3671801a-1c88-4dc6-9e75-d766644c2af9"),
-                            Code = "SR",
-                            HeInCode = "264",
+                            CountryCode = "SR",
+                            CountryName = "SuriCountryName",
                             Inactive = false,
-                            Name = "Suriname",
+                            MediCode = "264",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("3f3e1d5e-ca7b-45ef-9e1e-f3c471e8894f"),
-                            Code = "ST",
-                            HeInCode = "251",
+                            CountryCode = "ST",
+                            CountryName = "São Tomé và Príncipe",
                             Inactive = false,
-                            Name = "São Tomé và Príncipe",
+                            MediCode = "251",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("e5439053-279d-4094-852d-0c2edc6992ed"),
-                            Code = "SV",
-                            HeInCode = "157",
+                            CountryCode = "SV",
+                            CountryName = "El Salvador",
                             Inactive = false,
-                            Name = "El Salvador",
+                            MediCode = "157",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("44ff82d4-3356-4f71-9aa2-dc5f161537f0"),
-                            Code = "SY",
-                            HeInCode = "266",
+                            CountryCode = "SY",
+                            CountryName = "Syria",
                             Inactive = false,
-                            Name = "Syria",
+                            MediCode = "266",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("8562fd7f-49aa-46cf-bbc9-71f7460c6ba7"),
-                            Code = "SZ",
-                            HeInCode = "265",
+                            CountryCode = "SZ",
+                            CountryName = "Swaziland",
                             Inactive = false,
-                            Name = "Swaziland",
+                            MediCode = "265",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("716a0688-0378-4941-af8f-c11dc4c45ac2"),
-                            Code = "TC",
-                            HeInCode = "TC",
+                            CountryCode = "TC",
+                            CountryName = "Turks and Caicos Islands",
                             Inactive = false,
-                            Name = "Turks and Caicos Islands",
+                            MediCode = "TC",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("36299397-b100-420b-bd1b-3f18eda310fa"),
-                            Code = "TD",
-                            HeInCode = "270",
+                            CountryCode = "TD",
+                            CountryName = "Tchad",
                             Inactive = false,
-                            Name = "Tchad",
+                            MediCode = "270",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("2eead3fb-8c57-4699-a48d-b9eb2a781d23"),
-                            Code = "TF",
-                            HeInCode = "TF",
+                            CountryCode = "TF",
+                            CountryName = "French Southern Territories",
                             Inactive = false,
-                            Name = "French Southern Territories",
+                            MediCode = "TF",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("ba947c48-36fb-420b-b2d9-663fe308b18c"),
-                            Code = "TG",
-                            HeInCode = "275",
+                            CountryCode = "TG",
+                            CountryName = "Togo",
                             Inactive = false,
-                            Name = "Togo",
+                            MediCode = "275",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("f07d3dde-aea1-4f0a-ba9d-310cda4fa6e9"),
-                            Code = "TH",
-                            HeInCode = "271",
+                            CountryCode = "TH",
+                            CountryName = "Thái Lan",
                             Inactive = false,
-                            Name = "Thái Lan",
+                            MediCode = "271",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("53b7d739-4b49-4a35-9d04-93520d79d105"),
-                            Code = "TJ",
-                            HeInCode = "267",
+                            CountryCode = "TJ",
+                            CountryName = "Tajikistan",
                             Inactive = false,
-                            Name = "Tajikistan",
+                            MediCode = "267",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("5351587c-9713-44c9-9088-9626d01300c8"),
-                            Code = "TK",
-                            HeInCode = "TK",
+                            CountryCode = "TK",
+                            CountryName = "Tokelau",
                             Inactive = false,
-                            Name = "Tokelau",
+                            MediCode = "TK",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("6b8836aa-2476-4d82-98f1-0b7f56e66f7a"),
-                            Code = "TL",
-                            HeInCode = "TL",
+                            CountryCode = "TL",
+                            CountryName = "Timor Leste",
                             Inactive = false,
-                            Name = "Timor Leste",
+                            MediCode = "TL",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("7af80a81-41e5-47de-abd3-7ce25f9c39b4"),
-                            Code = "TM",
-                            HeInCode = "282",
+                            CountryCode = "TM",
+                            CountryName = "Turkmenistan",
                             Inactive = false,
-                            Name = "Turkmenistan",
+                            MediCode = "282",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("1cb83a16-11a1-438b-8fd9-22e661c5904a"),
-                            Code = "TN",
-                            HeInCode = "281",
+                            CountryCode = "TN",
+                            CountryName = "Tunisia",
                             Inactive = false,
-                            Name = "Tunisia",
+                            MediCode = "281",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("05f8a24e-3764-41af-b79b-3e05da6964ad"),
-                            Code = "TO",
-                            HeInCode = "276",
+                            CountryCode = "TO",
+                            CountryName = "Tonga",
                             Inactive = false,
-                            Name = "Tonga",
+                            MediCode = "276",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("ee02aa87-f8dc-44ac-9ac9-830120f05656"),
-                            Code = "TR",
-                            HeInCode = "272",
+                            CountryCode = "TR",
+                            CountryName = "Thổ Nhĩ Kỳ",
                             Inactive = false,
-                            Name = "Thổ Nhĩ Kỳ",
+                            MediCode = "272",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("36ddc306-adf0-4897-a200-6377ff0d9042"),
-                            Code = "TT",
-                            HeInCode = "278",
+                            CountryCode = "TT",
+                            CountryName = "Trinidad và Tobago",
                             Inactive = false,
-                            Name = "Trinidad và Tobago",
+                            MediCode = "278",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("f79baaf7-6191-4ba9-b38a-2f1b50d05598"),
-                            Code = "TV",
-                            HeInCode = "283",
+                            CountryCode = "TV",
+                            CountryName = "Tuvalu",
                             Inactive = false,
-                            Name = "Tuvalu",
+                            MediCode = "283",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("bf1bf333-4604-4974-838f-886100c006f3"),
-                            Code = "TW",
-                            HeInCode = "TW",
+                            CountryCode = "TW",
+                            CountryName = "Đài Loan",
                             Inactive = false,
-                            Name = "Đài Loan",
+                            MediCode = "TW",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("ff78779a-45cd-4076-8c61-442a9a3873f2"),
-                            Code = "TZ",
-                            HeInCode = "268",
+                            CountryCode = "TZ",
+                            CountryName = "Tanzania",
                             Inactive = false,
-                            Name = "Tanzania",
+                            MediCode = "268",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("af24512b-01ae-4420-96cb-62051ede96cc"),
-                            Code = "UA",
-                            HeInCode = "286",
+                            CountryCode = "UA",
+                            CountryName = "Ukraina",
                             Inactive = false,
-                            Name = "Ukraina",
+                            MediCode = "286",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("ad4ef5f1-e823-4ed4-9ad5-cec4a2cae6af"),
-                            Code = "UG",
-                            HeInCode = "285",
+                            CountryCode = "UG",
+                            CountryName = "Uganda",
                             Inactive = false,
-                            Name = "Uganda",
+                            MediCode = "285",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("05600686-62bc-4be9-b009-58ae6fac5dc2"),
-                            Code = "UM",
-                            HeInCode = "UM",
+                            CountryCode = "UM",
+                            CountryName = "United States Minor Outlying Islands",
                             Inactive = false,
-                            Name = "United States Minor Outlying Islands",
+                            MediCode = "UM",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("97bc234b-7d4c-4870-801b-74f1998741be"),
-                            Code = "US",
-                            HeInCode = "175",
+                            CountryCode = "US",
+                            CountryName = "Hoa Kỳ",
                             Inactive = false,
-                            Name = "Hoa Kỳ",
+                            MediCode = "175",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("edb5a6e1-b084-4e46-87ab-22d38da9cf0a"),
-                            Code = "UY",
-                            HeInCode = "287",
+                            CountryCode = "UY",
+                            CountryName = "Uruguay",
                             Inactive = false,
-                            Name = "Uruguay",
+                            MediCode = "287",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("9ee7b166-4c6f-4136-8928-c6246c3e76d5"),
-                            Code = "UZ",
-                            HeInCode = "288",
+                            CountryCode = "UZ",
+                            CountryName = "Uzbekistan",
                             Inactive = false,
-                            Name = "Uzbekistan",
+                            MediCode = "288",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("1760cdb2-5d9e-4a4d-a422-9d2d54333b72"),
-                            Code = "VA",
-                            HeInCode = "290",
+                            CountryCode = "VA",
+                            CountryName = "Thành Vatican",
                             Inactive = false,
-                            Name = "Thành Vatican",
+                            MediCode = "290",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("a1f120ed-4785-486e-b796-dd8cd569a415"),
-                            Code = "VC",
-                            HeInCode = "248",
+                            CountryCode = "VC",
+                            CountryName = "Saint Vincent và Grenadines",
                             Inactive = false,
-                            Name = "Saint Vincent và Grenadines",
+                            MediCode = "248",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("a7a696de-3fd8-48c2-b87a-6464b222af87"),
-                            Code = "VE",
-                            HeInCode = "291",
+                            CountryCode = "VE",
+                            CountryName = "Venezuela",
                             Inactive = false,
-                            Name = "Venezuela",
+                            MediCode = "291",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("539247ef-f9a9-4893-b250-2aa204a87640"),
-                            Code = "VG",
-                            HeInCode = "VG",
+                            CountryCode = "VG",
+                            CountryName = "Virgin Islands (British)",
                             Inactive = false,
-                            Name = "Virgin Islands (British)",
+                            MediCode = "VG",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("fb67b422-6903-494e-945d-fa09f031b4f1"),
-                            Code = "VI",
-                            HeInCode = "VI",
+                            CountryCode = "VI",
+                            CountryName = "Virgin Islands (U.S.)",
                             Inactive = false,
-                            Name = "Virgin Islands (U.S.)",
+                            MediCode = "VI",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
-                            Code = "VN",
-                            HeInCode = "000",
+                            CountryCode = "VN",
+                            CountryName = "Việt Nam",
                             Inactive = false,
-                            Name = "Việt Nam",
+                            MediCode = "000",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("3d9d9ca5-3356-48b3-b518-eb806a6128ee"),
-                            Code = "VU",
-                            HeInCode = "289",
+                            CountryCode = "VU",
+                            CountryName = "Vanuatu",
                             Inactive = false,
-                            Name = "Vanuatu",
+                            MediCode = "289",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("ffd3fabd-a5f1-4442-837b-d53b5d89272e"),
-                            Code = "WF",
-                            HeInCode = "WF",
+                            CountryCode = "WF",
+                            CountryName = "Wallis and Futuna Islands",
                             Inactive = false,
-                            Name = "Wallis and Futuna Islands",
+                            MediCode = "WF",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("74c266fd-7287-4525-aca3-6bb66ddcf61f"),
-                            Code = "WS",
-                            HeInCode = "249",
+                            CountryCode = "WS",
+                            CountryName = "Samoa",
                             Inactive = false,
-                            Name = "Samoa",
+                            MediCode = "249",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("a695b824-cfc2-40a3-b5a1-35243a6e2116"),
-                            Code = "YE",
-                            HeInCode = "293",
+                            CountryCode = "YE",
+                            CountryName = "Yemen",
                             Inactive = false,
-                            Name = "Yemen",
+                            MediCode = "293",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("c7f500b0-be15-4ab8-ae5c-1db430d19b8c"),
-                            Code = "YT",
-                            HeInCode = "YT",
+                            CountryCode = "YT",
+                            CountryName = "Mayotte",
                             Inactive = false,
-                            Name = "Mayotte",
+                            MediCode = "YT",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("a1ba5be8-fef9-470a-a5f7-efcf7fc900a4"),
-                            Code = "ME",
-                            HeInCode = "218",
+                            CountryCode = "ME",
+                            CountryName = "Montenegro",
                             Inactive = false,
-                            Name = "Montenegro",
+                            MediCode = "218",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("16bfb332-7ffe-4d31-a2a2-05e7cc250969"),
-                            Code = "Z1",
-                            HeInCode = "Z1",
+                            CountryCode = "Z1",
+                            CountryName = "Sovereign Military Order of Malta (SMOM)",
                             Inactive = false,
-                            Name = "Sovereign Military Order of Malta (SMOM)",
+                            MediCode = "Z1",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("e43c3f5c-e8d7-430a-9869-e61337bd4188"),
-                            Code = "Z2",
-                            HeInCode = "Z2",
+                            CountryCode = "Z2",
+                            CountryName = "British Southern and Antarctic Territories",
                             Inactive = false,
-                            Name = "British Southern and Antarctic Territories",
+                            MediCode = "Z2",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("5d60e969-8387-42e4-b866-31dfb209f433"),
-                            Code = "Z3",
-                            HeInCode = "Z3",
+                            CountryCode = "Z3",
+                            CountryName = "England",
                             Inactive = false,
-                            Name = "England",
+                            MediCode = "Z3",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("20aa6e3b-0838-45fc-9769-161b291e5e24"),
-                            Code = "Z4",
-                            HeInCode = "Z4",
+                            CountryCode = "Z4",
+                            CountryName = "Scotland",
                             Inactive = false,
-                            Name = "Scotland",
+                            MediCode = "Z4",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("d0357290-582a-47cd-984c-8815d38454be"),
-                            Code = "Z5",
-                            HeInCode = "Z5",
+                            CountryCode = "Z5",
+                            CountryName = "Northern Ireland",
                             Inactive = false,
-                            Name = "Northern Ireland",
+                            MediCode = "Z5",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("2e24284d-fe7b-477b-a3e9-23505ccbe379"),
-                            Code = "Z6",
-                            HeInCode = "Z6",
+                            CountryCode = "Z6",
+                            CountryName = "Great Britain (See United Kingdom)",
                             Inactive = false,
-                            Name = "Great Britain (See United Kingdom)",
+                            MediCode = "Z6",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("c8766416-ed13-4631-a9c4-e89e782055c9"),
-                            Code = "Z7",
-                            HeInCode = "Z7",
+                            CountryCode = "Z7",
+                            CountryName = "Wales",
                             Inactive = false,
-                            Name = "Wales",
+                            MediCode = "Z7",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("59e93599-98e9-44de-b9d1-bbbf17c599bf"),
-                            Code = "ZA",
-                            HeInCode = "223",
+                            CountryCode = "ZA",
+                            CountryName = "Nam Phi",
                             Inactive = false,
-                            Name = "Nam Phi",
+                            MediCode = "223",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("e1fc9395-73b5-4fd6-8c31-37fef3a3e866"),
-                            Code = "ZM",
-                            HeInCode = "294",
+                            CountryCode = "ZM",
+                            CountryName = "Zambia",
                             Inactive = false,
-                            Name = "Zambia",
+                            MediCode = "294",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("90ef0553-8520-4d57-ae3b-112ebf28b313"),
-                            Code = "ZW",
-                            HeInCode = "295",
+                            CountryCode = "ZW",
+                            CountryName = "Zimbabwe",
                             Inactive = false,
-                            Name = "Zimbabwe",
+                            MediCode = "295",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("39351753-1af5-4797-89e2-b97589db8d2e"),
-                            Code = "AZ",
-                            HeInCode = "114",
+                            CountryCode = "AZ",
+                            CountryName = "Cộng hòa Azerbaijan",
                             Inactive = false,
-                            Name = "Cộng hòa Azerbaijan",
+                            MediCode = "114",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("dd79ead4-6e12-4cb8-aff5-8f00d8bf9e99"),
-                            Code = "SD",
-                            HeInCode = "222",
+                            CountryCode = "SD",
+                            CountryName = "Nam Sudan",
                             Inactive = false,
-                            Name = "Nam Sudan",
+                            MediCode = "222",
                             SortOrder = 0
                         },
                         new
                         {
                             Id = new Guid("a8b38e56-d3ea-435f-907a-615ed7ced805"),
-                            Code = "AF",
-                            HeInCode = "101",
+                            CountryCode = "AF",
+                            CountryName = "Afghanistan",
                             Inactive = false,
-                            Name = "Afghanistan",
+                            MediCode = "101",
                             SortOrder = 0
                         });
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.DIDepartment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BranchId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ChiefFkId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ChiefID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DepartmentCode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("DepartmentName")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<int>("DepartmentTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MediCode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Tel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BranchId");
+
+                    b.HasIndex("ChiefFkId");
+
+                    b.HasIndex("DepartmentTypeID");
+
+                    b.ToTable("DIC_Department", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.DIEmployee", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmployeeCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmployeeName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DIEmployee", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.DIRoom", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("DepartmentID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MediCode")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("RoomCode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("RoomName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("RoomTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentID");
+
+                    b.HasIndex("RoomTypeID");
+
+                    b.ToTable("DIC_Room", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.DeathCause", b =>
@@ -6350,7 +6554,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("c0a4d767-7ba9-4006-a0a9-020b6322c2ef"),
                             Code = "DO_BENH",
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 507, DateTimeKind.Local).AddTicks(7995),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 540, DateTimeKind.Local).AddTicks(7955),
                             Inactive = false,
                             Name = "Do bệnh",
                             SortOrder = 1
@@ -6359,7 +6563,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("4333ca55-4d7c-4be0-b9a2-2125624f0229"),
                             Code = "DO_TAI_BIEN",
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 507, DateTimeKind.Local).AddTicks(8015),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 540, DateTimeKind.Local).AddTicks(7970),
                             Inactive = false,
                             Name = "Do tai biến điều trị",
                             SortOrder = 2
@@ -6368,7 +6572,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("4d5b5c50-6be0-434e-8baa-a528af4a58b5"),
                             Code = "KHAC",
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 507, DateTimeKind.Local).AddTicks(8018),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 540, DateTimeKind.Local).AddTicks(7973),
                             Inactive = false,
                             Name = "Khác",
                             SortOrder = 3
@@ -6474,7 +6678,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("66c3a43b-f9d0-4876-81e2-b13c5f188589"),
                             Code = "TRONG_24H",
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 509, DateTimeKind.Local).AddTicks(4991),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 541, DateTimeKind.Local).AddTicks(9588),
                             Inactive = false,
                             Name = "Trong 24h vào",
                             SortOrder = 1
@@ -6483,7 +6687,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("f91d8342-619c-435b-b51c-8b3d7f541222"),
                             Code = "TRONG_48H",
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 509, DateTimeKind.Local).AddTicks(5026),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 541, DateTimeKind.Local).AddTicks(9600),
                             Inactive = false,
                             Name = "Trong 48h vào",
                             SortOrder = 2
@@ -6492,7 +6696,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("7693d6ec-cf0f-44c1-a9d7-fb997335ae10"),
                             Code = "TRONG_72H",
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 509, DateTimeKind.Local).AddTicks(5029),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 541, DateTimeKind.Local).AddTicks(9603),
                             Inactive = false,
                             Name = "Trong 72h vào",
                             SortOrder = 3
@@ -6501,69 +6705,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("8f2b1eeb-a4bd-4f84-b59c-98145c58b1ab"),
                             Code = "KHAC",
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 509, DateTimeKind.Local).AddTicks(5032),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 541, DateTimeKind.Local).AddTicks(9605),
                             Inactive = false,
                             Name = "Khác",
                             SortOrder = 4
                         });
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Department", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("BranchId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("DepartmentTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("MohCode")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<int?>("SortOrder")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BranchId");
-
-                    b.HasIndex("DepartmentTypeId");
-
-                    b.ToTable("DIC_Department", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.DepartmentType", b =>
@@ -7572,7 +7718,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 100,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(610),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 546, DateTimeKind.Local).AddTicks(993),
                             Inactive = false,
                             MedicalRecordTypeCode = "100",
                             MedicalRecordTypeGroupID = 1,
@@ -7582,7 +7728,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 200,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(622),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 546, DateTimeKind.Local).AddTicks(1002),
                             Inactive = false,
                             MedicalRecordTypeCode = "200",
                             MedicalRecordTypeGroupID = 2,
@@ -7592,7 +7738,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 201,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(624),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 546, DateTimeKind.Local).AddTicks(1003),
                             Inactive = false,
                             MedicalRecordTypeCode = "201",
                             MedicalRecordTypeGroupID = 2,
@@ -7602,7 +7748,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 202,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(627),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 546, DateTimeKind.Local).AddTicks(1005),
                             Inactive = false,
                             MedicalRecordTypeCode = "202",
                             MedicalRecordTypeGroupID = 2,
@@ -7612,7 +7758,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 203,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(628),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 546, DateTimeKind.Local).AddTicks(1006),
                             Inactive = false,
                             MedicalRecordTypeCode = "203",
                             MedicalRecordTypeGroupID = 2,
@@ -7622,7 +7768,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 204,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(630),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 546, DateTimeKind.Local).AddTicks(1008),
                             Inactive = false,
                             MedicalRecordTypeCode = "204",
                             MedicalRecordTypeGroupID = 2,
@@ -7632,7 +7778,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 301,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(632),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 546, DateTimeKind.Local).AddTicks(1009),
                             Inactive = false,
                             MedicalRecordTypeCode = "301",
                             MedicalRecordTypeGroupID = 3,
@@ -7642,7 +7788,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 302,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(634),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 546, DateTimeKind.Local).AddTicks(1010),
                             Inactive = false,
                             MedicalRecordTypeCode = "302",
                             MedicalRecordTypeGroupID = 3,
@@ -7652,7 +7798,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 303,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(636),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 546, DateTimeKind.Local).AddTicks(1012),
                             Inactive = false,
                             MedicalRecordTypeCode = "303",
                             MedicalRecordTypeGroupID = 3,
@@ -7662,7 +7808,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 304,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(638),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 546, DateTimeKind.Local).AddTicks(1013),
                             Inactive = false,
                             MedicalRecordTypeCode = "304",
                             MedicalRecordTypeGroupID = 3,
@@ -7672,7 +7818,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 305,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(640),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 546, DateTimeKind.Local).AddTicks(1015),
                             Inactive = false,
                             MedicalRecordTypeCode = "305",
                             MedicalRecordTypeGroupID = 3,
@@ -7682,7 +7828,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 306,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(641),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 546, DateTimeKind.Local).AddTicks(1024),
                             Inactive = false,
                             MedicalRecordTypeCode = "306",
                             MedicalRecordTypeGroupID = 3,
@@ -7692,7 +7838,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 307,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(643),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 546, DateTimeKind.Local).AddTicks(1025),
                             Inactive = false,
                             MedicalRecordTypeCode = "307",
                             MedicalRecordTypeGroupID = 3,
@@ -7702,7 +7848,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 308,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(645),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 546, DateTimeKind.Local).AddTicks(1027),
                             Inactive = false,
                             MedicalRecordTypeCode = "308",
                             MedicalRecordTypeGroupID = 3,
@@ -7712,7 +7858,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 309,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(655),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 546, DateTimeKind.Local).AddTicks(1028),
                             Inactive = false,
                             MedicalRecordTypeCode = "309",
                             MedicalRecordTypeGroupID = 3,
@@ -7722,7 +7868,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 310,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(657),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 546, DateTimeKind.Local).AddTicks(1029),
                             Inactive = false,
                             MedicalRecordTypeCode = "310",
                             MedicalRecordTypeGroupID = 3,
@@ -7732,7 +7878,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 311,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(669),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 546, DateTimeKind.Local).AddTicks(1046),
                             Inactive = false,
                             MedicalRecordTypeCode = "311",
                             MedicalRecordTypeGroupID = 3,
@@ -7742,7 +7888,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 312,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(687),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 546, DateTimeKind.Local).AddTicks(1063),
                             Inactive = false,
                             MedicalRecordTypeCode = "312",
                             MedicalRecordTypeGroupID = 3,
@@ -7752,7 +7898,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 313,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(690),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 546, DateTimeKind.Local).AddTicks(1065),
                             Inactive = false,
                             MedicalRecordTypeCode = "313",
                             MedicalRecordTypeGroupID = 3,
@@ -7762,7 +7908,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 314,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(692),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 546, DateTimeKind.Local).AddTicks(1066),
                             Inactive = false,
                             MedicalRecordTypeCode = "314",
                             MedicalRecordTypeGroupID = 3,
@@ -7772,7 +7918,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 315,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(694),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 546, DateTimeKind.Local).AddTicks(1068),
                             Inactive = false,
                             MedicalRecordTypeCode = "315",
                             MedicalRecordTypeGroupID = 3,
@@ -7782,7 +7928,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 316,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(696),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 546, DateTimeKind.Local).AddTicks(1069),
                             Inactive = false,
                             MedicalRecordTypeCode = "316",
                             MedicalRecordTypeGroupID = 3,
@@ -7839,7 +7985,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 513, DateTimeKind.Local).AddTicks(7314),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 545, DateTimeKind.Local).AddTicks(7939),
                             Inactive = false,
                             MedicalRecordTypeGroupCode = "3",
                             MedicalRecordTypeGroupName = "Nội trú",
@@ -7848,7 +7994,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 513, DateTimeKind.Local).AddTicks(7337),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 545, DateTimeKind.Local).AddTicks(7957),
                             Inactive = false,
                             MedicalRecordTypeGroupCode = "2",
                             MedicalRecordTypeGroupName = "Ngoại trú",
@@ -7857,7 +8003,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 513, DateTimeKind.Local).AddTicks(7339),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 545, DateTimeKind.Local).AddTicks(7958),
                             Inactive = false,
                             MedicalRecordTypeGroupCode = "1",
                             MedicalRecordTypeGroupName = "Khám bệnh",
@@ -7913,7 +8059,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 515, DateTimeKind.Local).AddTicks(1882),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 547, DateTimeKind.Local).AddTicks(599),
                             Inactive = false,
                             PatientRecordTypeCode = "1",
                             PatientRecordTypeName = "Ngoại trú",
@@ -7922,7 +8068,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 515, DateTimeKind.Local).AddTicks(1900),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 547, DateTimeKind.Local).AddTicks(607),
                             Inactive = false,
                             PatientRecordTypeCode = "2",
                             PatientRecordTypeName = "Nội trú",
@@ -7931,7 +8077,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 515, DateTimeKind.Local).AddTicks(1902),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 547, DateTimeKind.Local).AddTicks(609),
                             Inactive = false,
                             PatientRecordTypeCode = "3",
                             PatientRecordTypeName = "Dịch vụ",
@@ -7987,7 +8133,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 515, DateTimeKind.Local).AddTicks(4415),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 547, DateTimeKind.Local).AddTicks(2597),
                             Inactive = false,
                             PatientTypeCode = "1",
                             PatientTypeName = "Bảo hiểm y tế",
@@ -7996,7 +8142,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 515, DateTimeKind.Local).AddTicks(4425),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 547, DateTimeKind.Local).AddTicks(2604),
                             Inactive = false,
                             PatientTypeCode = "2",
                             PatientTypeName = "Viện phí",
@@ -8005,7 +8151,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 515, DateTimeKind.Local).AddTicks(4438),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 547, DateTimeKind.Local).AddTicks(2616),
                             Inactive = false,
                             PatientTypeCode = "3",
                             PatientTypeName = "Dịch vụ",
@@ -8014,7 +8160,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 515, DateTimeKind.Local).AddTicks(4441),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 547, DateTimeKind.Local).AddTicks(2626),
                             Inactive = false,
                             PatientTypeCode = "4",
                             PatientTypeName = "Người nước ngoài",
@@ -8023,7 +8169,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 515, DateTimeKind.Local).AddTicks(4443),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 547, DateTimeKind.Local).AddTicks(2627),
                             Inactive = false,
                             PatientTypeCode = "5",
                             PatientTypeName = "Miễn phí",
@@ -8077,7 +8223,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("8bff9824-1df2-419e-88ab-e098a6fc4e7e"),
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 515, DateTimeKind.Local).AddTicks(6822),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 547, DateTimeKind.Local).AddTicks(4544),
                             Inactive = false,
                             PaymentMethodCode = "TM",
                             PaymentMethodName = "Tiền mặt",
@@ -8086,7 +8232,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd39afc0-1de0-4287-a126-4dada6788508"),
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 515, DateTimeKind.Local).AddTicks(6846),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 547, DateTimeKind.Local).AddTicks(4556),
                             Inactive = false,
                             PaymentMethodCode = "CK",
                             PaymentMethodName = "Chuyển khoản",
@@ -8095,7 +8241,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("0b348363-c888-4c9a-b145-c3389fdcca37"),
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 515, DateTimeKind.Local).AddTicks(6849),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 547, DateTimeKind.Local).AddTicks(4559),
                             Inactive = false,
                             PaymentMethodCode = "TM/CK",
                             PaymentMethodName = "Tiền mặt hoặc chuyển khoản",
@@ -8688,7 +8834,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 516, DateTimeKind.Local).AddTicks(1621),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 547, DateTimeKind.Local).AddTicks(8558),
                             Inactive = false,
                             ReceptionTypeCode = "1",
                             ReceptionTypeName = "Khám bệnh",
@@ -8697,7 +8843,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 516, DateTimeKind.Local).AddTicks(1631),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 547, DateTimeKind.Local).AddTicks(8566),
                             Inactive = false,
                             ReceptionTypeCode = "2",
                             ReceptionTypeName = "Cấp cứu",
@@ -8751,7 +8897,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f01"),
-                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 548, DateTimeKind.Local).AddTicks(519),
                             Inactive = false,
                             RelativeTypeCode = "01",
                             RelativeTypeName = "Bố đẻ",
@@ -8760,7 +8906,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f02"),
-                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 548, DateTimeKind.Local).AddTicks(529),
                             Inactive = false,
                             RelativeTypeCode = "02",
                             RelativeTypeName = "Mẹ đẻ",
@@ -8769,7 +8915,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f03"),
-                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 548, DateTimeKind.Local).AddTicks(531),
                             Inactive = false,
                             RelativeTypeCode = "03",
                             RelativeTypeName = "Bố nuôi",
@@ -8778,7 +8924,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f04"),
-                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 548, DateTimeKind.Local).AddTicks(533),
                             Inactive = false,
                             RelativeTypeCode = "04",
                             RelativeTypeName = "Mẹ nuôi",
@@ -8787,7 +8933,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f05"),
-                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 548, DateTimeKind.Local).AddTicks(535),
                             Inactive = false,
                             RelativeTypeCode = "05",
                             RelativeTypeName = "Anh ruột",
@@ -8796,7 +8942,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f06"),
-                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 548, DateTimeKind.Local).AddTicks(537),
                             Inactive = false,
                             RelativeTypeCode = "06",
                             RelativeTypeName = "Chị ruột",
@@ -8805,7 +8951,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f07"),
-                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 548, DateTimeKind.Local).AddTicks(539),
                             Inactive = false,
                             RelativeTypeCode = "07",
                             RelativeTypeName = "Em ruột",
@@ -8814,7 +8960,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f08"),
-                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 548, DateTimeKind.Local).AddTicks(541),
                             Inactive = false,
                             RelativeTypeCode = "08",
                             RelativeTypeName = "Ông",
@@ -8823,7 +8969,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f09"),
-                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 548, DateTimeKind.Local).AddTicks(543),
                             Inactive = false,
                             RelativeTypeCode = "09",
                             RelativeTypeName = "Bà",
@@ -8832,7 +8978,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f10"),
-                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 548, DateTimeKind.Local).AddTicks(545),
                             Inactive = false,
                             RelativeTypeCode = "10",
                             RelativeTypeName = "Vợ",
@@ -8841,7 +8987,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f11"),
-                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 548, DateTimeKind.Local).AddTicks(547),
                             Inactive = false,
                             RelativeTypeCode = "11",
                             RelativeTypeName = "Chồng",
@@ -8850,7 +8996,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f12"),
-                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 548, DateTimeKind.Local).AddTicks(550),
                             Inactive = false,
                             RelativeTypeCode = "12",
                             RelativeTypeName = "Con",
@@ -8859,7 +9005,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f13"),
-                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 548, DateTimeKind.Local).AddTicks(552),
                             Inactive = false,
                             RelativeTypeCode = "13",
                             RelativeTypeName = "Cháu",
@@ -8868,7 +9014,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f14"),
-                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 548, DateTimeKind.Local).AddTicks(554),
                             Inactive = false,
                             RelativeTypeCode = "14",
                             RelativeTypeName = "Bác, chú, cậu",
@@ -8877,7 +9023,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f15"),
-                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 548, DateTimeKind.Local).AddTicks(556),
                             Inactive = false,
                             RelativeTypeCode = "15",
                             RelativeTypeName = "Bác, cô, dì",
@@ -8886,7 +9032,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f99"),
-                            CreatedDate = new DateTime(1753, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CreatedDate = new DateTime(2024, 1, 28, 10, 32, 10, 548, DateTimeKind.Local).AddTicks(558),
                             Inactive = false,
                             RelativeTypeCode = "99",
                             RelativeTypeName = "Khác",
@@ -8980,63 +9126,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("DIC_RightRouteType", (string)null);
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Room", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("DepartmentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("MohCode")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<int>("RoomTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SortOrder")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.HasIndex("RoomTypeId");
-
-                    b.ToTable("DIC_Room", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.RoomType", b =>
@@ -9256,6 +9345,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("nvarchar(128)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IsDeleted");
 
                     b.ToTable("DIC_Supplier", (string)null);
                 });
@@ -10229,19 +10320,65 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Views.ServiceRequestView", b =>
                 {
-                    b.HasBaseType("HIS.EntityFrameworkCore.Entities.Business.ServiceRequest");
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Barcode")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DepartmentCode")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("DepartmentId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("DepartmentName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("EndTime")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("EndUserCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("EndUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("EndUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ExecuteDepartmentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ExecuteRoomCode")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("ExecuteRoomId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("ExecuteRoomName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IcdCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IcdName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IcdSubCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IcdText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsPriority")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("MedicalRecordId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("NumOrder")
+                        .HasColumnType("int");
 
                     b.Property<string>("PatientCode")
                         .HasColumnType("nvarchar(max)");
@@ -10249,17 +10386,61 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<string>("PatientName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("PatientRecordId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<long>("RequestTime")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("RoomCode")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("RoomId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("RoomName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ServiceRequestCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ServiceRequestStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceRequestTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<long>("StartTime")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("StartUserCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("StartUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("StartUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("TreatmentId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<long>("UseTime")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("UserCode")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
 
                     b.ToTable((string)null);
 
@@ -10276,11 +10457,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .WithMany()
                         .HasForeignKey("CreationUserId");
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Room", "ExpStock")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.DIRoom", "ExpStock")
                         .WithMany()
                         .HasForeignKey("ExpStockId");
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Room", "ImpStock")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.DIRoom", "ImpStock")
                         .WithMany()
                         .HasForeignKey("ImpStockId");
 
@@ -10300,11 +10481,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .WithMany()
                         .HasForeignKey("ReceiverUserId");
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Department", "ReqDepartment")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.DIDepartment", "ReqDepartment")
                         .WithMany()
                         .HasForeignKey("ReqDepartmentId");
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Room", "ReqRoom")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.DIRoom", "ReqRoom")
                         .WithMany()
                         .HasForeignKey("ReqRoomId");
 
@@ -10409,7 +10590,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .WithMany()
                         .HasForeignKey("ItemId");
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Room", "Stock")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.DIRoom", "Stock")
                         .WithMany()
                         .HasForeignKey("StockId");
 
@@ -10424,7 +10605,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .WithMany()
                         .HasForeignKey("CareerId");
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Country", "National")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.DICountry", "National")
                         .WithMany()
                         .HasForeignKey("CountryId");
 
@@ -10487,7 +10668,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .WithMany()
                         .HasForeignKey("GenderId");
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Country", "National")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.DICountry", "National")
                         .WithMany()
                         .HasForeignKey("NationalId");
 
@@ -10568,7 +10749,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Item", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Country", "Country")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.DICountry", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId");
 
@@ -10595,7 +10776,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.ItemType", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Country", "Country")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.DICountry", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId");
 
@@ -10686,40 +10867,75 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("Service");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Branch", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.DIBranch", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.District", "District")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.DIEmployee", "DirectorFk")
+                        .WithMany()
+                        .HasForeignKey("DirectorFkId");
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.District", "DistrictFk")
                         .WithMany()
                         .HasForeignKey("DistrictId");
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Province", "Province")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Province", "ProvinceFk")
                         .WithMany()
                         .HasForeignKey("ProvinceId");
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Ward", "Ward")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Ward", "WardFk")
                         .WithMany()
                         .HasForeignKey("WardId");
 
-                    b.Navigation("District");
+                    b.Navigation("DirectorFk");
 
-                    b.Navigation("Province");
+                    b.Navigation("DistrictFk");
 
-                    b.Navigation("Ward");
+                    b.Navigation("ProvinceFk");
+
+                    b.Navigation("WardFk");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Department", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.DIDepartment", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Branch", "Branch")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.DIBranch", "BranchFk")
                         .WithMany()
-                        .HasForeignKey("BranchId");
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.DepartmentType", "DepartmentType")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.DIEmployee", "ChiefFk")
                         .WithMany()
-                        .HasForeignKey("DepartmentTypeId");
+                        .HasForeignKey("ChiefFkId");
 
-                    b.Navigation("Branch");
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.DepartmentType", "DepartmentTypeFk")
+                        .WithMany()
+                        .HasForeignKey("DepartmentTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("DepartmentType");
+                    b.Navigation("BranchFk");
+
+                    b.Navigation("ChiefFk");
+
+                    b.Navigation("DepartmentTypeFk");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.DIRoom", b =>
+                {
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.DIDepartment", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.RoomType", "RoomType")
+                        .WithMany()
+                        .HasForeignKey("RoomTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Department");
+
+                    b.Navigation("RoomType");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.District", b =>
@@ -10735,7 +10951,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.ExecutionRoom", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Room", "Room")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.DIRoom", "Room")
                         .WithMany()
                         .HasForeignKey("RoomId");
 
@@ -10768,25 +10984,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("MedicalRecordTypeGroup");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Room", b =>
-                {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Department", "Department")
-                        .WithMany()
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.RoomType", "RoomType")
-                        .WithMany()
-                        .HasForeignKey("RoomTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Department");
-
-                    b.Navigation("RoomType");
-                });
-
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Ward", b =>
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.District", "District")
@@ -10800,7 +10997,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.RolePermissionBranch", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Branch", "Branch")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.DIBranch", "Branch")
                         .WithMany()
                         .HasForeignKey("BranchId");
 
@@ -10834,11 +11031,11 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.SYSRefType", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SYSRefTypeCategory", "SYSRefTypeCategory")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SYSRefTypeCategory", "RefTypeCategoryFk")
                         .WithMany()
                         .HasForeignKey("RefTypeCategoryId");
 
-                    b.Navigation("SYSRefTypeCategory");
+                    b.Navigation("RefTypeCategoryFk");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.UserRole", b =>

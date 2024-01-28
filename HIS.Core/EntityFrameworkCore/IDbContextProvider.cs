@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Core.Domain.EntityFramework
+namespace HIS.Core.EntityFrameworkCore
 {
     public interface IDbContextProvider<TDbContext> where TDbContext : DbContext
     {

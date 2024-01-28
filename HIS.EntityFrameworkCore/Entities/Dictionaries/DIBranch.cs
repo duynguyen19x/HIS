@@ -1,5 +1,6 @@
 ﻿using AutoMapper.Configuration.Annotations;
 using HIS.Core.Domain.Entities.Auditing;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
@@ -51,22 +52,22 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         /// <summary>
         /// Tỉnh, thành phố.
         /// </summary>
-        public Guid? ProvinceID { get; set; }
+        public Guid? ProvinceId { get; set; }
 
         /// <summary>
         /// Quận, huyện.
         /// </summary>
-        public Guid? DistrictID { get; set; }
+        public Guid? DistrictId { get; set; }
 
         /// <summary>
         /// Xã, phường.
         /// </summary>
-        public Guid? WardID { get; set; }
+        public Guid? WardId { get; set; }
 
         /// <summary>
         /// Lãnh đạo.
         /// </summary>
-        public Guid? DirectorID { get; set; }
+        public Guid? DirectorId { get; set; }
 
         /// <summary>
         /// Điện thoại.

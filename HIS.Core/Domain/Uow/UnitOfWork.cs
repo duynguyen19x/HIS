@@ -1,8 +1,8 @@
-﻿using HIS.Core.Domain.EntityFramework;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using System;
 using System.Transactions;
+using HIS.Core.EntityFrameworkCore;
 
 namespace HIS.Core.Domain.Uow
 {

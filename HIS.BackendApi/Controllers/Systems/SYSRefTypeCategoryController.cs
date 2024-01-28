@@ -7,10 +7,9 @@ namespace HIS.BackendApi.Controllers.Systems
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SYSRefTypeCategoryController : BaseCrudController<ISYSRefTypeCategoryAppService, SYSRefTypeCategoryDto, int, GetAllSYSRefTypeCategoryInputDto>
+    public class SYSRefTypeCategoryController : ControllerBase
     {
         public SYSRefTypeCategoryController(ISYSRefTypeCategoryAppService appService) 
-            : base(appService)
         {
         }
     }

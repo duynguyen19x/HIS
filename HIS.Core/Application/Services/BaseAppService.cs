@@ -1,4 +1,5 @@
 ﻿using HIS.Core.Domain.Uow;
+using HIS.Core.Runtime.Session;
 using IObjectMapper = HIS.Core.ObjectMapping.IObjectMapper;
 
 namespace HIS.Core.Application.Services
@@ -28,11 +29,16 @@ namespace HIS.Core.Application.Services
         /// </summary>
         protected IActiveUnitOfWork CurrentUnitOfWork { get { return UnitOfWorkManager.Current; } }
 
+        public IAppSession AppSession { get; set; }
+
         /// <summary>
         /// Reference to the object to object mapper.
         /// </summary>
         public IObjectMapper ObjectMapper { get; set; }
 
-
+        protected BaseAppService()
+        {
+            AppSession = NullAppSession.Instance;
+        }
     }
 }

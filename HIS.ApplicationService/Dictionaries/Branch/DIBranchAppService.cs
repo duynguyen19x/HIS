@@ -77,6 +77,7 @@ namespace HIS.ApplicationService.Dictionaries.Branchs
             {
                 using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
                 {
+                    input.Id = Guid.NewGuid();
                     var entity = ObjectMapper.Map<DIBranch>(input);
 
                     await _diBranchRepository.InsertAsync(entity);

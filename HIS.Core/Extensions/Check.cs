@@ -28,6 +28,37 @@ namespace HIS.Core.Extensions
             return value == null || value == default(Guid);
         }
 
+        public static bool IsNullOrEmpty(string value)
+        {
+            return value == null || string.IsNullOrWhiteSpace(value);
+        }
+
+        public static bool IsNotNullOrDefault(bool? value)
+        {
+            return value != null && value != default(bool);
+        }
+
+        public static bool IsNotNullOrDefault(int? value)
+        {
+            return value != null && value != default(int);
+        }
+
+        public static bool IsNotNullOrDefault(DateTime? value)
+        {
+            return value != null && value != default(DateTime);
+        }
+
+        public static bool IsNotNullOrDefault(Guid? value)
+        {
+            return value != null && value != default(Guid);
+        }
+
+        public static bool IsNotNullOrEmpty(string value)
+        {
+            return value != null && value.Length > 0;
+        }
+
+
         public static bool IsNullOrEmpty<T>(this ICollection<T> source)
         {
             return source == null || source.Count <= 0;

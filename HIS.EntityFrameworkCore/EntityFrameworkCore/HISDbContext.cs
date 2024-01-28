@@ -1,4 +1,5 @@
 ﻿using HIS.Core.Domain.Entities;
+using HIS.Core.Domain.Entities.Auditing;
 using HIS.Core.Extensions;
 using HIS.EntityFrameworkCore.Configurations;
 using HIS.EntityFrameworkCore.Entities.Business;
@@ -14,16 +15,15 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 namespace HIS.EntityFrameworkCore
 {
-    public class HISDbContext : DbContext
+    public class HISDbContext : HIS.Core.EntityFrameworkCore.EfCoreDbContext //DbContext
     {
-        public HISDbContext(DbContextOptions options) : base(options)
-        {
-
-        }
+        public HISDbContext(DbContextOptions options) 
+            : base(options) { }
 
         #region - Hệ thống
         public DbSet<DbOption> DbOptions { get; set; }
 
+        //public DbSet<SYSLayoutTemplate> SYSLayoutTemplates { get; set; }
         public DbSet<SYSRefType> SYSRefTypes { get; set; }
         public DbSet<SYSRefTypeCategory> SYSRefTypeCategories { get; set; }
 
@@ -114,46 +114,6 @@ namespace HIS.EntityFrameworkCore
             // Add View
             builder.Entity<ServiceRequestView>().ToView("V_BUS_ServiceRequest");
         }
-
-
-        public override int SaveChanges()
-        {
-            try
-            {
-                ApplyConcepts();
-                return base.SaveChanges();
-            }
-            catch 
-            {
-                throw;
-            }
-        }
-
-        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-        {
-            try
-            {
-                ApplyConcepts();
-                return base.SaveChangesAsync(cancellationToken);
-            }
-            catch
-            {
-                throw;
-            } 
-        }
-
-        protected virtual void ApplyConcepts()
-        {
-            //foreach(EntityEntry item in ChangeTracker.Entries().ToList())
-            //{
-            //    if (item.State != EntityState.Modified && item.CheckOwnedEntityChange())
-            //    {
-
-            //    }    
-            //}    
-        }
-
-
 
 
         public virtual IDbContextTransaction BeginTransaction()

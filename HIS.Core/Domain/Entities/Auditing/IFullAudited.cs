@@ -1,9 +1,6 @@
 ﻿namespace HIS.Core.Domain.Entities.Auditing
 {
-    public interface IFullAudited : IAudited
+    public interface IFullAudited : IAudited, ISoftDelete
     {
-        DateTime? DeletedDate { get; set; }
-        Guid? DeletedBy { get; set; }
-        bool IsDeleted { get; set; }
     }
 }

@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace HIS.Core.Domain.EntityFramework
+namespace HIS.Core.EntityFrameworkCore
 {
-    public class DbContextProvider<TDbContext> : IDbContextProvider<TDbContext> where TDbContext : DbContext
+    public class EfCoreDbContextProvider<TDbContext> : IDbContextProvider<TDbContext> where TDbContext : DbContext
     {
         public TDbContext DbContext { get; }
 
-        public DbContextProvider(TDbContext dbContext)
+        public EfCoreDbContextProvider(TDbContext dbContext)
         {
             DbContext = dbContext;
         }

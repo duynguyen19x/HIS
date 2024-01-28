@@ -12,9 +12,9 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
     {
         public string RefTypeName { get; set; }
 
-        public int? RefTypeCategoryID { get; set; }
+        public int? RefTypeCategoryId { get; set; }
 
-        public int? ParentID { get; set; }
+        public int? ParentId { get; set; }
 
         public string Description { get; set; }
 

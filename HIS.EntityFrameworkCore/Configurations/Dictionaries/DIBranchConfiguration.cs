@@ -22,9 +22,10 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.Property(x => x.Address).HasMaxLength(512);
             builder.Property(x => x.Description).HasMaxLength(512);
 
-            builder.HasOne(x => x.ProvinceFk).WithMany().HasForeignKey(pc => pc.ProvinceID);
-            builder.HasOne(x => x.DistrictFk).WithMany().HasForeignKey(pc => pc.DistrictID);
-            builder.HasOne(x => x.WardFk).WithMany().HasForeignKey(pc => pc.WardID);
+            builder.HasOne(x => x.ProvinceFk).WithMany().HasForeignKey(pc => pc.ProvinceId);
+            builder.HasOne(x => x.DistrictFk).WithMany().HasForeignKey(pc => pc.DistrictId);
+            builder.HasOne(x => x.WardFk).WithMany().HasForeignKey(pc => pc.WardId);
+            builder.HasOne(x => x.DirectorFk).WithMany().HasForeignKey(pc => pc.DirectorId);
         }
     }
 }

@@ -13,5 +13,10 @@ namespace HIS.Core.WebApi
         {
             return services;
         }
+
+        public static IServiceCollection UseDynamicWebApi(this IServiceCollection services)
+        {
+            return services;
+        }
     }
 }

@@ -1,10 +1,12 @@
 using HIS.ApplicationService;
-using HIS.Core.Domain.EntityFramework;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Domain.Uow;
+using HIS.Core.EntityFrameworkCore;
 using HIS.Core.ObjectMapping;
+using HIS.Core.Runtime.Session;
 using HIS.Core.WebApi;
 using HIS.EntityFrameworkCore;
+using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.EntityFrameworkCore.Repositories;
 using HIS.EntityFrameworkCore.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -20,25 +22,22 @@ app.Run();
 
 void ConfigureService()
 {
-    builder.Services.AddDbContext<HISDbContext>(options
-        => options.UseSqlServer(builder.Configuration["ConnectionStrings:HIS"]));
-
-    // auto mapper
-    builder.Services.AddAutoMapper(typeof(MapProfile));
+    builder.Services.AddDbContext<HISDbContext>(options => options.UseSqlServer(builder.Configuration["ConnectionStrings:HIS"]));
     builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
     {
         builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
     }));
 
+    builder.Services.AddAutoMapper(typeof(MapProfile));
     builder.Services.AddSingleton(typeof(IObjectMapper), typeof(AutoMapperObjectMapper));
-    builder.Services.AddScoped(typeof(IDbContextProvider<>), typeof(DbContextProvider<>));
+    builder.Services.AddSingleton(typeof(IAppSession), typeof(AppSession));
+    builder.Services.AddScoped(typeof(IDbContextProvider<>), typeof(EfCoreDbContextProvider<>));
     builder.Services.AddTransient(typeof(ICurrentUnitOfWorkProvider), typeof(CurrentUnitOfWorkProvider));
     builder.Services.AddTransient(typeof(IUnitOfWorkManager), typeof(UnitOfWorkManager));
     builder.Services.AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork<HISDbContext>));
     builder.Services.AddTransient(typeof(IRepository<,>), typeof(HISRepository<,>));
     builder.Services.AddTransient(typeof(IBulkRepository<,>), typeof(HISBulkRepository<,>));
-    
-    builder.Services.ServiceCollection();
+    builder.Services.AddService();
 
     string issuer = builder.Configuration.GetValue<string>("Tokens:Issuer");
     string signingKey = builder.Configuration.GetValue<string>("Tokens:Key");

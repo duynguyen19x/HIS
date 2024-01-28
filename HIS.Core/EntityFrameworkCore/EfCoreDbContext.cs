@@ -1,0 +1,107 @@
+﻿using HIS.Core.Domain.Entities;
+using HIS.Core.Domain.Entities.Auditing;
+using HIS.Core.Extensions;
+using HIS.Core.Runtime.Session;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Metadata;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HIS.Core.EntityFrameworkCore
+{
+    public abstract class EfCoreDbContext : DbContext
+    {
+        public IAppSession AppSession { get; set; }
+
+        public EfCoreDbContext(DbContextOptions options)
+            : base(options) 
+        { 
+            AppSession = NullAppSession.Instance;
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
+            {
+                ConfigureGlobalFilters(modelBuilder, entityType);
+            }     
+        }
+
+        protected virtual void ConfigureGlobalFilters(ModelBuilder modelBuilder, IMutableEntityType entityType)
+        {
+            // loại bỏ các cột có trạng thái là đã xóa (IsDeleted).
+            if (typeof(ISoftDelete).IsAssignableFrom(entityType.ClrType))
+                entityType.AddSoftDeleteQueryFilter();
+        }
+
+        public override int SaveChanges()
+        {
+            ApplyConcepts();
+            return base.SaveChanges();
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            ApplyConcepts();
+            return base.SaveChangesAsync(cancellationToken);
+        }
+
+        protected virtual void ApplyConcepts()
+        {
+            foreach (EntityEntry entry in ChangeTracker.Entries().ToList())
+            {
+                //if (entry.State != EntityState.Modified && entry.CheckOwnedEntityChange())
+                //{
+                //    Entry(entry.Entity).State = EntityState.Modified;
+                //}
+
+                var userId = GetAuditUserId();
+
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        {
+                            if (entry.Entity is ICreationAudited creation)
+                            {
+                                creation.CreatedBy = userId;
+                                creation.CreatedDate = DateTime.Now;
+                            }    
+                            break;
+                        }
+                    case EntityState.Modified:
+                        {
+                            if (entry.Entity is IAudited audited)
+                            {
+                                audited.ModifiedBy = userId;
+                                audited.ModifiedDate = DateTime.Now;
+                            }
+                            break;
+                        }
+                    case EntityState.Deleted:
+                        {
+                            if (entry.Entity is ISoftDelete delete)
+                            {
+                                entry.Reload();
+                                entry.State = EntityState.Modified;
+                                delete.IsDeleted = true;
+                                delete.DeletedBy = userId;
+                                delete.DeletedDate = DateTime.Now;
+                            } 
+                            break;
+                        }
+                }
+            }
+        }
+
+        protected virtual Guid? GetAuditUserId()
+        {
+            return AppSession.UserId;
+        }
+    }
+}
