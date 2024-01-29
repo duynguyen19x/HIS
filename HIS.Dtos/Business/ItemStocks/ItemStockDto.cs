@@ -1,7 +1,5 @@
-﻿using HIS.Application.Core.Services.Dto;
-using HIS.Dtos.Dictionaries.Items;
+﻿using HIS.Dtos.Dictionaries.Items;
 using HIS.Dtos.Dictionaries.Room;
-using HIS.Utilities.Enums;
 
 namespace HIS.Dtos.Business.ItemStocks
 {

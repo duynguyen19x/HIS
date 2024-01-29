@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using HIS.Core.Linq;
+using HIS.Core.Linq.Extensions;
 using HIS.Dtos.Business.InOutStockItems;
 using HIS.Dtos.Business.InOutStocks;
 using HIS.Dtos.Business.ItemStocks;
@@ -15,7 +15,7 @@ using Microsoft.Extensions.Configuration;
 using System.Globalization;
 using HIS.Core.Enums;
 using HIS.Application.Core.Services;
-using HIS.Application.Core.Services.Dto;
+using HIS.Core.Services.Dto;
 
 namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 {
@@ -1810,7 +1810,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                 {
                     var dateNow = DateTime.Now;
                     var id = Guid.Empty;
-                    input.InOutStockTypeId = (int)Utilities.Enums.InOutStockTypeTypes.ExportFormSupplier;
+                    input.InOutStockTypeId = (int)InOutStockTypeTypes.ExportFormSupplier;
 
                     if (GuidHelper.IsNullOrEmpty(input.Id))
                     {

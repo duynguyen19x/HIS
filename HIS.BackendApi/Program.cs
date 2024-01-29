@@ -1,7 +1,12 @@
 using HIS.ApplicationService;
-using HIS.AutoMappers;
+using HIS.Core.Domain.EntityFramework;
+using HIS.Core.Domain.Repositories;
+using HIS.Core.Domain.Uow;
+using HIS.Core.ObjectMapping;
+using HIS.Core.WebApi.Dynamic;
 using HIS.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.EntityFrameworkCore.Repositories;
+using HIS.EntityFrameworkCore.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -19,14 +24,21 @@ void ConfigureService()
         => options.UseSqlServer(builder.Configuration["ConnectionStrings:HIS"]));
 
     // auto mapper
-    builder.Services.AddAutoMapper(typeof(AutoMapperConfiguration).Assembly);
+    builder.Services.AddAutoMapper(typeof(MapProfile));
     builder.Services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
     {
         builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
     }));
 
-    builder.Services.ServiceCollection();
+    builder.Services.AddSingleton(typeof(IObjectMapper), typeof(AutoMapperObjectMapper));
+    builder.Services.AddScoped(typeof(IDbContextProvider<>), typeof(DbContextProvider<>));
+    builder.Services.AddTransient(typeof(ICurrentUnitOfWorkProvider), typeof(CurrentUnitOfWorkProvider));
+    builder.Services.AddTransient(typeof(IUnitOfWorkManager), typeof(UnitOfWorkManager));
+    builder.Services.AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork<HISDbContext>));
+    builder.Services.AddTransient(typeof(IRepository<,>), typeof(HISRepository<,>));
     builder.Services.AddTransient(typeof(IBulkRepository<,>), typeof(HISBulkRepository<,>));
+    
+    builder.Services.ServiceCollection();
 
     string issuer = builder.Configuration.GetValue<string>("Tokens:Issuer");
     string signingKey = builder.Configuration.GetValue<string>("Tokens:Key");
@@ -90,6 +102,9 @@ void ConfigureService()
             }
         });
     });
+
+
+    builder.Services.AddDynamicWebApi();
 }
 
 void Configure()

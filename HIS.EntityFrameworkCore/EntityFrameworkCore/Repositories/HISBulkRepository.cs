@@ -1,10 +1,13 @@
 ﻿using EFCore.BulkExtensions;
-using HIS.Core.Entities;
+using HIS.Core.Domain.Entities;
+using HIS.Core.Domain.EntityFramework;
+using HIS.Core.Domain.Repositories;
 using HIS.EntityFrameworkCore.Repositories;
 
 namespace HIS.EntityFrameworkCore.EntityFrameworkCore.Repositories
 {
-    public interface IBulkRepository<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey>
+    public interface IBulkRepository<TEntity, TPrimaryKey> : IRepository<TEntity, TPrimaryKey> 
+        where TEntity : class, IEntity<TPrimaryKey>
     {
         public void BulkDelete(IList<TEntity> entities, BulkConfig bulkConfig = null, Action<decimal> progress = null, Type type = null);
 
@@ -59,10 +62,10 @@ namespace HIS.EntityFrameworkCore.EntityFrameworkCore.Repositories
         public Task Truncate(Type type = null, CancellationToken cancellationToken = default);
     }
 
-    public class HISBulkRepository<TEntity, TPrimaryKey> : HISRepositoryBase<TEntity, TPrimaryKey>, IBulkRepository<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey>
+    public class HISBulkRepository<TEntity, TPrimaryKey> : HISRepository<TEntity, TPrimaryKey>, IBulkRepository<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey>
     {
-        public HISBulkRepository(HISDbContext dbContext)
-            : base(dbContext)
+        public HISBulkRepository(IDbContextProvider<HISDbContext> dbContextProvider)
+            : base(dbContextProvider)
         {
 
         }

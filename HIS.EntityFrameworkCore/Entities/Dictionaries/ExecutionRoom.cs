@@ -1,4 +1,4 @@
-﻿using HIS.Core.Entities;
+﻿using HIS.Core.Domain.Entities;
 using HIS.EntityFrameworkCore.Entities.Categories;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries

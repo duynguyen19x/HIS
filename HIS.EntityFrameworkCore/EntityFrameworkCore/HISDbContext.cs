@@ -1,13 +1,14 @@
-﻿using HIS.Core.Entities;
+﻿using HIS.Core.Domain.Entities;
+using HIS.EntityFrameworkCore.Configurations;
 using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Items;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.Systems;
+using HIS.EntityFrameworkCore.Views;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
-using System.Reflection;
 
 namespace HIS.EntityFrameworkCore
 {
@@ -20,6 +21,10 @@ namespace HIS.EntityFrameworkCore
 
         #region - Hệ thống
         public DbSet<DbOption> DbOptions { get; set; }
+
+        public DbSet<SYSRefType> SYSRefTypes { get; set; }
+        public DbSet<SYSRefTypeCategory> SYSRefTypeCategories { get; set; }
+
         #endregion
 
         #region - Danh mục
@@ -32,7 +37,7 @@ namespace HIS.EntityFrameworkCore
         public DbSet<District> Districts { get; set; }
         public DbSet<MedicalRecordType> MedicalRecordTypes { get; set; }
         public DbSet<MedicalRecordTypeGroup> MedicalRecordTypeGroups { get; set; }
-        public DbSet<Country> Nationals { get; set; }
+        public DbSet<Country> Countries { get; set; }
         public DbSet<PatientType> PatientTypes { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<Province> Provinces { get; set; }
@@ -93,15 +98,19 @@ namespace HIS.EntityFrameworkCore
         public DbSet<InOutStockItem> InOutStockItems { get; set; }
         #endregion
 
+        #region - Views
+        public DbSet<ServiceRequestView> ServiceRequestViews { get; set; }
+        #endregion
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
 
             // Load config
-            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            builder.ApplyConfiguration();
 
-            //builder.ApplyConfiguration();
-            //builder.Seed();
+            // Add View
+            builder.Entity<ServiceRequestView>().ToView("V_BUS_ServiceRequest");
         }
 
         public virtual IDbContextTransaction BeginTransaction()

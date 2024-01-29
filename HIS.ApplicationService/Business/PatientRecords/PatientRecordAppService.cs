@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
-using HIS.Application.Core.Services.Dto;
-using HIS.Application.Core.Utils;
 using HIS.Core.Enums;
+using HIS.Core.Services.Dto;
 using HIS.Dtos.Business.PatientRecords;
 using HIS.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.Entities.Business;
@@ -24,7 +23,7 @@ namespace HIS.ApplicationService.Business.PatientRecords
                 try
                 {
                     // thông tin bệnh nhân
-                    if (DataHelper.IsNullOrDefault(input.PatientId))
+                    if (input.PatientId != default(Guid))
                     {
                         input.PatientId = Guid.NewGuid();
                         input.PatientCode = "BN";
@@ -63,8 +62,8 @@ namespace HIS.ApplicationService.Business.PatientRecords
                     {
                         dto.Id = Guid.NewGuid();
                         dto.ServiceRequestCode = "KB";
-                        dto.ServiceRequestDate = patientRecord.PatientRecordDate;
-                        dto.ServiceRequestUseDate = patientRecord.PatientRecordDate;
+                        //dto.ServiceRequestDate = patientRecord.PatientRecordDate;
+                        //dto.ServiceRequestUseDate = patientRecord.PatientRecordDate;
                         dto.NumOrder = 1;
                         dto.PatientRecordId = patientRecord.Id;
                         dto.MedicalRecordId = medicalRecord.Id;
@@ -73,14 +72,14 @@ namespace HIS.ApplicationService.Business.PatientRecords
                         dto.UserId = patientRecord.UserId;
                         dto.ExecuteDepartmentId = patientRecord.ClinicalDepartmentId.GetValueOrDefault();
                         dto.ExecuteRoomId = patientRecord.ClinicalRoomId.GetValueOrDefault();
-                        dto.ExecuteUserId = patientRecord.ClinicalUserId;
+                        dto.StartUserId = patientRecord.ClinicalUserId;
                         var serviceRequest = ObjectMapper.Map<ServiceRequest>(dto);
                         lstServiceRequest.Add(serviceRequest);
 
                         foreach (var dataDto in dto.ServiceRequestDatas)
                         {
                             dataDto.Id = Guid.NewGuid();
-                            dataDto.ServiceRequestId = dto.Id;
+                            dataDto.ServiceRequestId = dto.Id.GetValueOrDefault();
                             var serviceRequestData = ObjectMapper.Map<ServiceRequestData>(dataDto);
                             lstServiceRequestData.Add(serviceRequestData);
                         }    
@@ -159,6 +158,7 @@ namespace HIS.ApplicationService.Business.PatientRecords
         public override async Task<PagedResultDto<PatientRecordDto>> GetAll(GetAllPatientRecordInputDto input)
         {
             var result = new PagedResultDto<PatientRecordDto>();
+
             result.Result = new List<PatientRecordDto>()
             {
                 new PatientRecordDto() { PatientCode = "BN-01", PatientRecordCode = "BA-01", PatientName = "Bệnh nhân 01", BirthDate = DateTime.Now },

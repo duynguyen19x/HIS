@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using HIS.Application.Core.Services.Dto;
+using HIS.Core.Services.Dto;
 using HIS.EntityFrameworkCore;
 
 namespace HIS.Application.Core.Services
 {
     public abstract class BaseCrudAppService<TEntityDto, TPrimaryKey, TPagedRequestDto> : BaseAppService, IBaseCrudAppService<TEntityDto, TPrimaryKey, TPagedRequestDto>
         where TEntityDto : IEntityDto<TPrimaryKey>
-        where TPagedRequestDto : IPagedResultRequestDto
+        where TPagedRequestDto : IPagedResultRequest
     {
         public BaseCrudAppService(HISDbContext context, IMapper mapper)
             : base(context, mapper)
@@ -31,7 +31,7 @@ namespace HIS.Application.Core.Services
 
     public abstract class BaseCrudAppService<TEntityDto, TPagedRequestDto> : BaseCrudAppService<TEntityDto, Guid, TPagedRequestDto>
         where TEntityDto : IEntityDto<Guid>
-        where TPagedRequestDto : IPagedResultRequestDto
+        where TPagedRequestDto : IPagedResultRequest
     {
         public BaseCrudAppService(HISDbContext context, IMapper mapper)
             : base(context, mapper)

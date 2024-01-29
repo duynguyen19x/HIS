@@ -1,4 +1,4 @@
-﻿using HIS.Application.Core.Services.Dto;
+﻿using HIS.Core.Services.Dto;
 using HIS.ApplicationService.Dictionaries.Room;
 using HIS.Dtos.Dictionaries.Room;
 using Microsoft.AspNetCore.Mvc;

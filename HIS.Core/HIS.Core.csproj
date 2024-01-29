@@ -1,23 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>disable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Utils\**" />
-    <EmbeddedResource Remove="Utils\**" />
-    <None Remove="Utils\**" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Utils\**" />
+		<EmbeddedResource Remove="Utils\**" />
+		<None Remove="Utils\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="12.0.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="12.0.1" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.14" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\HIS.Utilities\HIS.Utilities.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\HIS.Utilities\HIS.Utilities.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="WebApi\Dynamic\Attributes\" />
+	  <Folder Include="WebApi\Dynamic\Helpers\" />
+	</ItemGroup>
 
 </Project>

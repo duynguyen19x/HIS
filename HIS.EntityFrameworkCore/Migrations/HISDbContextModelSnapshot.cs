@@ -44,7 +44,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("CreationUserId")
@@ -368,7 +368,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("DeletedBy")
@@ -451,7 +451,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("DeletedBy")
@@ -499,7 +499,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("DeletedBy")
@@ -655,7 +655,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -706,10 +706,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CareerId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CountryId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("DeletedBy")
@@ -717,6 +720,9 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("DistrictId")
                         .HasColumnType("uniqueidentifier");
@@ -755,9 +761,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("NationalId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("PatientCode")
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
@@ -787,13 +790,13 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("CareerId");
 
+                    b.HasIndex("CountryId");
+
                     b.HasIndex("DistrictId");
 
                     b.HasIndex("EthnicId");
 
                     b.HasIndex("GenderId");
-
-                    b.HasIndex("NationalId");
 
                     b.HasIndex("ProvinceId");
 
@@ -860,7 +863,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("DeathCauseId")
@@ -1214,7 +1217,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -1281,7 +1284,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("DeletedBy")
@@ -1293,13 +1296,16 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid>("DepartmentId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<long>("EndTime")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid?>("EndUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid>("ExecuteDepartmentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("ExecuteRoomId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ExecuteUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("IcdCode")
@@ -1339,6 +1345,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid>("PatientRecordId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<long>("RequestTime")
+                        .HasColumnType("bigint");
+
                     b.Property<Guid>("RoomId")
                         .HasColumnType("uniqueidentifier");
 
@@ -1347,20 +1356,23 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<DateTime>("ServiceRequestDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("ServiceRequestStatusId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ServiceRequestTypeId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("ServiceRequestUseDate")
-                        .HasColumnType("datetime2");
+                    b.Property<long>("StartTime")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid?>("StartUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.Property<Guid?>("TreatmentId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<long>("UseTime")
+                        .HasColumnType("bigint");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -1382,7 +1394,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("DeletedBy")
@@ -1398,8 +1410,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<decimal>("DiscountAmount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime?>("EndTime")
-                        .HasColumnType("datetime2");
+                    b.Property<long>("EndTime")
+                        .HasColumnType("bigint");
 
                     b.Property<Guid?>("InsuranceId")
                         .HasColumnType("uniqueidentifier");
@@ -1407,11 +1419,17 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsSampled")
+                        .HasColumnType("bit");
+
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<decimal>("OriginalPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("PatientTypeId")
                         .HasColumnType("int");
@@ -1421,6 +1439,12 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Property<decimal>("Quantity")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid?>("SampleRoomId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<long>("SampleTime")
+                        .HasColumnType("bigint");
 
                     b.Property<Guid>("ServiceId")
                         .HasColumnType("uniqueidentifier");
@@ -1432,8 +1456,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid>("ServiceRequestId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("StartTime")
-                        .HasColumnType("datetime2");
+                    b.Property<long>("StartTime")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
@@ -1460,12 +1484,26 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("ServiceId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("ServiceRequestDataId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ServiceRequestId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("ServiceResultIndiceId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("TestingMachine")
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar(1024)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ServiceId");
+
+                    b.HasIndex("ServiceRequestDataId");
+
+                    b.HasIndex("ServiceRequestId");
 
                     b.HasIndex("ServiceResultIndiceId");
 
@@ -1503,7 +1541,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("DeletedBy")
@@ -2408,7 +2446,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("DeletedBy")
@@ -2589,7 +2627,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("DeletedBy")
@@ -2647,7 +2685,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("DeletedBy")
@@ -3150,7 +3188,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("DeletedBy")
@@ -3341,7 +3379,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -3390,7 +3428,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -3433,7 +3471,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -3480,7 +3518,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -3566,7 +3604,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -3950,1569 +3988,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         });
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.DeathCause", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<int>("SortOrder")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DIC_DeathCause", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("c0a4d767-7ba9-4006-a0a9-020b6322c2ef"),
-                            Code = "DO_BENH",
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 882, DateTimeKind.Local).AddTicks(1585),
-                            Inactive = false,
-                            Name = "Do bệnh",
-                            SortOrder = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("4333ca55-4d7c-4be0-b9a2-2125624f0229"),
-                            Code = "DO_TAI_BIEN",
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 882, DateTimeKind.Local).AddTicks(1601),
-                            Inactive = false,
-                            Name = "Do tai biến điều trị",
-                            SortOrder = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("4d5b5c50-6be0-434e-8baa-a528af4a58b5"),
-                            Code = "KHAC",
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 882, DateTimeKind.Local).AddTicks(1604),
-                            Inactive = false,
-                            Name = "Khác",
-                            SortOrder = 3
-                        });
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.DeathCertBook", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("BranchID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<int>("SortOrder")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StartNumOrder")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Total")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DIC_DeathCertBook", (string)null);
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.DeathWithin", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<int>("SortOrder")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DIC_DeathWithin", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("66c3a43b-f9d0-4876-81e2-b13c5f188589"),
-                            Code = "TRONG_24H",
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 883, DateTimeKind.Local).AddTicks(6036),
-                            Inactive = false,
-                            Name = "Trong 24h vào",
-                            SortOrder = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("f91d8342-619c-435b-b51c-8b3d7f541222"),
-                            Code = "TRONG_48H",
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 883, DateTimeKind.Local).AddTicks(6047),
-                            Inactive = false,
-                            Name = "Trong 48h vào",
-                            SortOrder = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("7693d6ec-cf0f-44c1-a9d7-fb997335ae10"),
-                            Code = "TRONG_72H",
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 883, DateTimeKind.Local).AddTicks(6050),
-                            Inactive = false,
-                            Name = "Trong 72h vào",
-                            SortOrder = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("8f2b1eeb-a4bd-4f84-b59c-98145c58b1ab"),
-                            Code = "KHAC",
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 883, DateTimeKind.Local).AddTicks(6053),
-                            Inactive = false,
-                            Name = "Khác",
-                            SortOrder = 4
-                        });
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Department", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("BranchId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("DepartmentTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("MohCode")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<int?>("SortOrder")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("BranchId");
-
-                    b.HasIndex("DepartmentTypeId");
-
-                    b.ToTable("DIC_Department", (string)null);
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.DepartmentType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<int?>("SortOrder")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DIC_DepartmentType", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Code = "LS",
-                            Inactive = false,
-                            Name = "Khoa lâm sàng",
-                            SortOrder = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Code = "CLS",
-                            Inactive = false,
-                            Name = "Khoa cận lâm sàng",
-                            SortOrder = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Code = "DUOC",
-                            Inactive = false,
-                            Name = "Khoa dược",
-                            SortOrder = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Code = "KHTH",
-                            Inactive = false,
-                            Name = "Kế hoạch tổng hợp",
-                            SortOrder = 4
-                        });
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.District", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<Guid>("ProvinceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("SortOrder")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProvinceId");
-
-                    b.ToTable("DIC_District", (string)null);
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Ethnic", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("MohCode")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<int>("SortOrder")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DIC_Ethnic", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170901"),
-                            Code = "01",
-                            Inactive = false,
-                            MohCode = "13",
-                            Name = "Ba na",
-                            SortOrder = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170902"),
-                            Code = "02",
-                            Inactive = false,
-                            MohCode = "49",
-                            Name = "Bố y",
-                            SortOrder = 2
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170903"),
-                            Code = "03",
-                            Inactive = false,
-                            MohCode = "52",
-                            Name = "Brâu",
-                            SortOrder = 3
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170904"),
-                            Code = "04",
-                            Inactive = false,
-                            MohCode = "17",
-                            Name = "Chăm",
-                            SortOrder = 4
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170905"),
-                            Code = "05",
-                            Inactive = false,
-                            MohCode = "32",
-                            Name = "Chơ ro",
-                            SortOrder = 5
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170906"),
-                            Code = "06",
-                            Inactive = false,
-                            MohCode = "36",
-                            Name = "Chu ru",
-                            SortOrder = 6
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170907"),
-                            Code = "07",
-                            Inactive = false,
-                            MohCode = "44",
-                            Name = "Chứt",
-                            SortOrder = 7
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170908"),
-                            Code = "08",
-                            Inactive = false,
-                            MohCode = "30",
-                            Name = "Co",
-                            SortOrder = 8
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170909"),
-                            Code = "09",
-                            Inactive = false,
-                            MohCode = "48",
-                            Name = "Cống",
-                            SortOrder = 9
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170910"),
-                            Code = "10",
-                            Inactive = false,
-                            MohCode = "16",
-                            Name = "Cơ ho",
-                            SortOrder = 10
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170911"),
-                            Code = "11",
-                            Inactive = false,
-                            MohCode = "47",
-                            Name = "Cờ lao",
-                            SortOrder = 11
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170912"),
-                            Code = "12",
-                            Inactive = false,
-                            MohCode = "9",
-                            Name = "Dao",
-                            SortOrder = 12
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170913"),
-                            Code = "13",
-                            Inactive = false,
-                            MohCode = "12",
-                            Name = "Ê đê",
-                            SortOrder = 13
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170914"),
-                            Code = "14",
-                            Inactive = false,
-                            MohCode = "10",
-                            Name = "Gia rai",
-                            SortOrder = 14
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170915"),
-                            Code = "15",
-                            Inactive = false,
-                            MohCode = "25",
-                            Name = "Giấy",
-                            SortOrder = 15
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170916"),
-                            Code = "16",
-                            Inactive = false,
-                            MohCode = "27",
-                            Name = "Gié triêng",
-                            SortOrder = 16
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170917"),
-                            Code = "17",
-                            Inactive = false,
-                            MohCode = "8",
-                            Name = "H mông",
-                            SortOrder = 17
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170918"),
-                            Code = "18",
-                            Inactive = false,
-                            MohCode = "19",
-                            Name = "H rê",
-                            SortOrder = 18
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170919"),
-                            Code = "19",
-                            Inactive = false,
-                            MohCode = "35",
-                            Name = "Hà nhì",
-                            SortOrder = 19
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170920"),
-                            Code = "20",
-                            Inactive = false,
-                            MohCode = "4",
-                            Name = "Hoa",
-                            SortOrder = 20
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170921"),
-                            Code = "21",
-                            Inactive = false,
-                            MohCode = "26",
-                            Name = "K tu",
-                            SortOrder = 21
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170922"),
-                            Code = "22",
-                            Inactive = false,
-                            MohCode = "33",
-                            Name = "Kháng",
-                            SortOrder = 22
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170923"),
-                            Code = "23",
-                            Inactive = false,
-                            MohCode = "5",
-                            Name = "Khơ me",
-                            SortOrder = 23
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170924"),
-                            Code = "24",
-                            Inactive = false,
-                            MohCode = "29",
-                            Name = "Khơ mú",
-                            SortOrder = 24
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170925"),
-                            Code = "25",
-                            Inactive = false,
-                            MohCode = "1",
-                            Name = "Kinh",
-                            SortOrder = 25
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170926"),
-                            Code = "26",
-                            Inactive = false,
-                            MohCode = "38",
-                            Name = "La chí",
-                            SortOrder = 26
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170927"),
-                            Code = "27",
-                            Inactive = false,
-                            MohCode = "39",
-                            Name = "La ha",
-                            SortOrder = 27
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170928"),
-                            Code = "28",
-                            Inactive = false,
-                            MohCode = "41",
-                            Name = "La hù",
-                            SortOrder = 28
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170929"),
-                            Code = "29",
-                            Inactive = false,
-                            MohCode = "37",
-                            Name = "Lào",
-                            SortOrder = 29
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170930"),
-                            Code = "30",
-                            Inactive = false,
-                            MohCode = "43",
-                            Name = "Lô lô",
-                            SortOrder = 30
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170931"),
-                            Code = "31",
-                            Inactive = false,
-                            MohCode = "42",
-                            Name = "Lự",
-                            SortOrder = 31
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170932"),
-                            Code = "32",
-                            Inactive = false,
-                            MohCode = "20",
-                            Name = "M nông",
-                            SortOrder = 32
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170933"),
-                            Code = "33",
-                            Inactive = false,
-                            MohCode = "28",
-                            Name = "Mạ",
-                            SortOrder = 33
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170934"),
-                            Code = "34",
-                            Inactive = false,
-                            MohCode = "45",
-                            Name = "Mảng",
-                            SortOrder = 34
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170935"),
-                            Code = "35",
-                            Inactive = false,
-                            MohCode = "6",
-                            Name = "Mường",
-                            SortOrder = 35
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170936"),
-                            Code = "36",
-                            Inactive = false,
-                            MohCode = "11",
-                            Name = "Ngái",
-                            SortOrder = 36
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170937"),
-                            Code = "37",
-                            Inactive = false,
-                            MohCode = "7",
-                            Name = "Nùng",
-                            SortOrder = 37
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170938"),
-                            Code = "38",
-                            Inactive = false,
-                            MohCode = "53",
-                            Name = "Ơ đu",
-                            SortOrder = 38
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170939"),
-                            Code = "39",
-                            Inactive = false,
-                            MohCode = "46",
-                            Name = "Pà thén",
-                            SortOrder = 39
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170940"),
-                            Code = "40",
-                            Inactive = false,
-                            MohCode = "40",
-                            Name = "Phù lá",
-                            SortOrder = 40
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170941"),
-                            Code = "41",
-                            Inactive = false,
-                            MohCode = "51",
-                            Name = "Pu péo",
-                            SortOrder = 41
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170942"),
-                            Code = "42",
-                            Inactive = false,
-                            MohCode = "21",
-                            Name = "Rag lai",
-                            SortOrder = 42
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170943"),
-                            Code = "43",
-                            Inactive = false,
-                            MohCode = "54",
-                            Name = "Rơ man",
-                            SortOrder = 43
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170944"),
-                            Code = "44",
-                            Inactive = false,
-                            MohCode = "15",
-                            Name = "Sán chay",
-                            SortOrder = 44
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170945"),
-                            Code = "45",
-                            Inactive = false,
-                            MohCode = "18",
-                            Name = "Sán dìu",
-                            SortOrder = 45
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170946"),
-                            Code = "46",
-                            Inactive = false,
-                            MohCode = "50",
-                            Name = "Si la",
-                            SortOrder = 46
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170947"),
-                            Code = "47",
-                            Inactive = false,
-                            MohCode = "31",
-                            Name = "Tà ôi",
-                            SortOrder = 47
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170948"),
-                            Code = "48",
-                            Inactive = false,
-                            MohCode = "2",
-                            Name = "Tày",
-                            SortOrder = 48
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170949"),
-                            Code = "49",
-                            Inactive = false,
-                            MohCode = "3",
-                            Name = "Thái",
-                            SortOrder = 49
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170950"),
-                            Code = "50",
-                            Inactive = false,
-                            MohCode = "24",
-                            Name = "Thố",
-                            SortOrder = 50
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170951"),
-                            Code = "51",
-                            Inactive = false,
-                            MohCode = "23",
-                            Name = "Vân kiều",
-                            SortOrder = 51
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170952"),
-                            Code = "52",
-                            Inactive = false,
-                            MohCode = "22",
-                            Name = "X tiêng",
-                            SortOrder = 52
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170953"),
-                            Code = "53",
-                            Inactive = false,
-                            MohCode = "34",
-                            Name = "Xinh mun",
-                            SortOrder = 53
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170954"),
-                            Code = "54",
-                            Inactive = false,
-                            MohCode = "14",
-                            Name = "Xơ đăng",
-                            SortOrder = 54
-                        },
-                        new
-                        {
-                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170999"),
-                            Code = "99",
-                            Inactive = false,
-                            MohCode = "55",
-                            Name = "Nước ngoài",
-                            SortOrder = 99
-                        });
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.ExecutionRoom", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<bool>("IsMain")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("RoomId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ServiceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoomId");
-
-                    b.HasIndex("ServiceId");
-
-                    b.ToTable("DIC_ExecutionRoom", (string)null);
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Gender", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<int?>("SortOrder")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DIC_Gender", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"),
-                            Code = "KXD",
-                            Inactive = false,
-                            Name = "Chưa xác định",
-                            SortOrder = 0
-                        },
-                        new
-                        {
-                            Id = new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"),
-                            Code = "NAM",
-                            Inactive = false,
-                            Name = "Nam",
-                            SortOrder = 1
-                        },
-                        new
-                        {
-                            Id = new Guid("e9497984-d355-41af-b917-091500956be9"),
-                            Code = "NU",
-                            Inactive = false,
-                            Name = "Nữ",
-                            SortOrder = 2
-                        });
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Hospital", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Address")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("Grade")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Line")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("MohCode")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<string>("Type")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DIC_Hospital", (string)null);
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Icd", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ChapterCode")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("ChapterIcdId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ChapterName")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<string>("ChapterNameEnglish")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("MainGroupCode")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("MainGroupName")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<string>("MainGroupNameEnglish")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("MohReportCode")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<string>("NameCommon")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<string>("NameEnglish")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<string>("SubGroup1Code")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("SubGroup1Name")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<string>("SubGroup1NameEnglish")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<string>("SubGroup2Code")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("SubGroup2Name")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<string>("SubGroup2NameEnglish")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<string>("TypeCode")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("TypeName")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.Property<string>("TypeNameEnglish")
-                        .HasMaxLength(512)
-                        .HasColumnType("nvarchar(512)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ChapterIcdId");
-
-                    b.ToTable("DIC_Icd", (string)null);
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.LiveArea", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("MohCode")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<int>("SortOrder")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DIC_LiveArea", (string)null);
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.MedicalRecordType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("MedicalRecordTypeCode")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<int>("MedicalRecordTypeGroupID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("MedicalRecordTypeName")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("SortOrder")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MedicalRecordTypeGroupID");
-
-                    b.ToTable("DIC_MedicalRecordType", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 100,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(8252),
-                            Inactive = false,
-                            MedicalRecordTypeCode = "100",
-                            MedicalRecordTypeGroupID = 1,
-                            MedicalRecordTypeName = "Khám Bệnh",
-                            SortOrder = 1
-                        },
-                        new
-                        {
-                            Id = 200,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(8261),
-                            Inactive = false,
-                            MedicalRecordTypeCode = "200",
-                            MedicalRecordTypeGroupID = 2,
-                            MedicalRecordTypeName = "Bệnh Án Ngoại Trú (Chung)",
-                            SortOrder = 1
-                        },
-                        new
-                        {
-                            Id = 201,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(8263),
-                            Inactive = false,
-                            MedicalRecordTypeCode = "201",
-                            MedicalRecordTypeGroupID = 2,
-                            MedicalRecordTypeName = "Bệnh Án Ngoại Trú (Răng - Hàm - Mặt)",
-                            SortOrder = 2
-                        },
-                        new
-                        {
-                            Id = 202,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(8265),
-                            Inactive = false,
-                            MedicalRecordTypeCode = "202",
-                            MedicalRecordTypeGroupID = 2,
-                            MedicalRecordTypeName = "Bệnh Án Ngoại Trú (Tai - Mũi - Họng)",
-                            SortOrder = 3
-                        },
-                        new
-                        {
-                            Id = 203,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(8266),
-                            Inactive = false,
-                            MedicalRecordTypeCode = "203",
-                            MedicalRecordTypeGroupID = 2,
-                            MedicalRecordTypeName = "Bệnh Án Ngoại Trú (Y Học Cổ Truyền)",
-                            SortOrder = 4
-                        },
-                        new
-                        {
-                            Id = 204,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(8268),
-                            Inactive = false,
-                            MedicalRecordTypeCode = "204",
-                            MedicalRecordTypeGroupID = 2,
-                            MedicalRecordTypeName = "Bệnh Án Ngoại Trú (Mắt)",
-                            SortOrder = 5
-                        },
-                        new
-                        {
-                            Id = 301,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(8269),
-                            Inactive = false,
-                            MedicalRecordTypeCode = "301",
-                            MedicalRecordTypeGroupID = 3,
-                            MedicalRecordTypeName = "Bệnh Án Nội Khoa",
-                            SortOrder = 2
-                        },
-                        new
-                        {
-                            Id = 302,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(8272),
-                            Inactive = false,
-                            MedicalRecordTypeCode = "302",
-                            MedicalRecordTypeGroupID = 3,
-                            MedicalRecordTypeName = "Bệnh Án Nhi Khoa",
-                            SortOrder = 3
-                        },
-                        new
-                        {
-                            Id = 303,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(8274),
-                            Inactive = false,
-                            MedicalRecordTypeCode = "303",
-                            MedicalRecordTypeGroupID = 3,
-                            MedicalRecordTypeName = "Bệnh Án Truyền Nhiễm",
-                            SortOrder = 4
-                        },
-                        new
-                        {
-                            Id = 304,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(8275),
-                            Inactive = false,
-                            MedicalRecordTypeCode = "304",
-                            MedicalRecordTypeGroupID = 3,
-                            MedicalRecordTypeName = "Bệnh Án Phụ Khoa",
-                            SortOrder = 5
-                        },
-                        new
-                        {
-                            Id = 305,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(8277),
-                            Inactive = false,
-                            MedicalRecordTypeCode = "305",
-                            MedicalRecordTypeGroupID = 3,
-                            MedicalRecordTypeName = "Bệnh Án Sản Khoa",
-                            SortOrder = 6
-                        },
-                        new
-                        {
-                            Id = 306,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(8279),
-                            Inactive = false,
-                            MedicalRecordTypeCode = "306",
-                            MedicalRecordTypeGroupID = 3,
-                            MedicalRecordTypeName = "Bệnh Án Sơ Sinh",
-                            SortOrder = 7
-                        },
-                        new
-                        {
-                            Id = 307,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(8280),
-                            Inactive = false,
-                            MedicalRecordTypeCode = "307",
-                            MedicalRecordTypeGroupID = 3,
-                            MedicalRecordTypeName = "Bệnh Án Tâm Thần",
-                            SortOrder = 8
-                        },
-                        new
-                        {
-                            Id = 308,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(8282),
-                            Inactive = false,
-                            MedicalRecordTypeCode = "308",
-                            MedicalRecordTypeGroupID = 3,
-                            MedicalRecordTypeName = "Bệnh Án Da Liễu",
-                            SortOrder = 9
-                        },
-                        new
-                        {
-                            Id = 309,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(8283),
-                            Inactive = false,
-                            MedicalRecordTypeCode = "309",
-                            MedicalRecordTypeGroupID = 3,
-                            MedicalRecordTypeName = "Bệnh Án Điều Dưỡng - Phục Hồi Chức Năng",
-                            SortOrder = 10
-                        },
-                        new
-                        {
-                            Id = 310,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(8284),
-                            Inactive = false,
-                            MedicalRecordTypeCode = "310",
-                            MedicalRecordTypeGroupID = 3,
-                            MedicalRecordTypeName = "Bệnh Án Huyết Học - Truyền Máu",
-                            SortOrder = 11
-                        },
-                        new
-                        {
-                            Id = 311,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(8299),
-                            Inactive = false,
-                            MedicalRecordTypeCode = "311",
-                            MedicalRecordTypeGroupID = 3,
-                            MedicalRecordTypeName = "Bệnh Án Ngoại Khoa",
-                            SortOrder = 12
-                        },
-                        new
-                        {
-                            Id = 312,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(8312),
-                            Inactive = false,
-                            MedicalRecordTypeCode = "312",
-                            MedicalRecordTypeGroupID = 3,
-                            MedicalRecordTypeName = "Bệnh Án Bỏng",
-                            SortOrder = 13
-                        },
-                        new
-                        {
-                            Id = 313,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(8315),
-                            Inactive = false,
-                            MedicalRecordTypeCode = "313",
-                            MedicalRecordTypeGroupID = 3,
-                            MedicalRecordTypeName = "Bệnh Án Ung Bướu",
-                            SortOrder = 14
-                        },
-                        new
-                        {
-                            Id = 314,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(8316),
-                            Inactive = false,
-                            MedicalRecordTypeCode = "314",
-                            MedicalRecordTypeGroupID = 3,
-                            MedicalRecordTypeName = "Bệnh Án Răng-Hàm-Mặt",
-                            SortOrder = 15
-                        },
-                        new
-                        {
-                            Id = 315,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(8318),
-                            Inactive = false,
-                            MedicalRecordTypeCode = "315",
-                            MedicalRecordTypeGroupID = 3,
-                            MedicalRecordTypeName = "Bệnh Án Tai-Mũi-Họng",
-                            SortOrder = 16
-                        },
-                        new
-                        {
-                            Id = 316,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(8319),
-                            Inactive = false,
-                            MedicalRecordTypeCode = "316",
-                            MedicalRecordTypeGroupID = 3,
-                            MedicalRecordTypeName = "Bệnh Án Mắt",
-                            SortOrder = 17
-                        });
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.MedicalRecordTypeGroup", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<bool>("Inactive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("MedicalRecordTypeGroupCode")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("MedicalRecordTypeGroupName")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("SortOrder")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DIC_MedicalRecordTypeGroup", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 3,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(5201),
-                            Inactive = false,
-                            MedicalRecordTypeGroupCode = "3",
-                            MedicalRecordTypeGroupName = "Nội trú",
-                            SortOrder = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(5217),
-                            Inactive = false,
-                            MedicalRecordTypeGroupCode = "2",
-                            MedicalRecordTypeGroupName = "Ngoại trú",
-                            SortOrder = 2
-                        },
-                        new
-                        {
-                            Id = 1,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 886, DateTimeKind.Local).AddTicks(5219),
-                            Inactive = false,
-                            MedicalRecordTypeGroupCode = "1",
-                            MedicalRecordTypeGroupName = "Khám bệnh",
-                            SortOrder = 3
-                        });
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.National", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Country", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -5545,7 +4021,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DIC_National", (string)null);
+                    b.ToTable("DIC_Country", (string)null);
 
                     b.HasData(
                         new
@@ -7827,6 +6303,1568 @@ namespace HIS.EntityFrameworkCore.Migrations
                         });
                 });
 
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.DeathCause", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DIC_DeathCause", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("c0a4d767-7ba9-4006-a0a9-020b6322c2ef"),
+                            Code = "DO_BENH",
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 507, DateTimeKind.Local).AddTicks(7995),
+                            Inactive = false,
+                            Name = "Do bệnh",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("4333ca55-4d7c-4be0-b9a2-2125624f0229"),
+                            Code = "DO_TAI_BIEN",
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 507, DateTimeKind.Local).AddTicks(8015),
+                            Inactive = false,
+                            Name = "Do tai biến điều trị",
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("4d5b5c50-6be0-434e-8baa-a528af4a58b5"),
+                            Code = "KHAC",
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 507, DateTimeKind.Local).AddTicks(8018),
+                            Inactive = false,
+                            Name = "Khác",
+                            SortOrder = 3
+                        });
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.DeathCertBook", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BranchID")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StartNumOrder")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Total")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DIC_DeathCertBook", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.DeathWithin", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DIC_DeathWithin", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("66c3a43b-f9d0-4876-81e2-b13c5f188589"),
+                            Code = "TRONG_24H",
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 509, DateTimeKind.Local).AddTicks(4991),
+                            Inactive = false,
+                            Name = "Trong 24h vào",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("f91d8342-619c-435b-b51c-8b3d7f541222"),
+                            Code = "TRONG_48H",
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 509, DateTimeKind.Local).AddTicks(5026),
+                            Inactive = false,
+                            Name = "Trong 48h vào",
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("7693d6ec-cf0f-44c1-a9d7-fb997335ae10"),
+                            Code = "TRONG_72H",
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 509, DateTimeKind.Local).AddTicks(5029),
+                            Inactive = false,
+                            Name = "Trong 72h vào",
+                            SortOrder = 3
+                        },
+                        new
+                        {
+                            Id = new Guid("8f2b1eeb-a4bd-4f84-b59c-98145c58b1ab"),
+                            Code = "KHAC",
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 509, DateTimeKind.Local).AddTicks(5032),
+                            Inactive = false,
+                            Name = "Khác",
+                            SortOrder = 4
+                        });
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Department", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("BranchId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("DepartmentTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MohCode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<int?>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BranchId");
+
+                    b.HasIndex("DepartmentTypeId");
+
+                    b.ToTable("DIC_Department", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.DepartmentType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<int?>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DIC_DepartmentType", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "LS",
+                            Inactive = false,
+                            Name = "Khoa lâm sàng",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "CLS",
+                            Inactive = false,
+                            Name = "Khoa cận lâm sàng",
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Code = "DUOC",
+                            Inactive = false,
+                            Name = "Khoa dược",
+                            SortOrder = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Code = "KHTH",
+                            Inactive = false,
+                            Name = "Kế hoạch tổng hợp",
+                            SortOrder = 4
+                        });
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.District", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<Guid>("ProvinceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProvinceId");
+
+                    b.ToTable("DIC_District", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Ethnic", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MohCode")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DIC_Ethnic", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170901"),
+                            Code = "01",
+                            Inactive = false,
+                            MohCode = "13",
+                            Name = "Ba na",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170902"),
+                            Code = "02",
+                            Inactive = false,
+                            MohCode = "49",
+                            Name = "Bố y",
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170903"),
+                            Code = "03",
+                            Inactive = false,
+                            MohCode = "52",
+                            Name = "Brâu",
+                            SortOrder = 3
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170904"),
+                            Code = "04",
+                            Inactive = false,
+                            MohCode = "17",
+                            Name = "Chăm",
+                            SortOrder = 4
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170905"),
+                            Code = "05",
+                            Inactive = false,
+                            MohCode = "32",
+                            Name = "Chơ ro",
+                            SortOrder = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170906"),
+                            Code = "06",
+                            Inactive = false,
+                            MohCode = "36",
+                            Name = "Chu ru",
+                            SortOrder = 6
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170907"),
+                            Code = "07",
+                            Inactive = false,
+                            MohCode = "44",
+                            Name = "Chứt",
+                            SortOrder = 7
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170908"),
+                            Code = "08",
+                            Inactive = false,
+                            MohCode = "30",
+                            Name = "Co",
+                            SortOrder = 8
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170909"),
+                            Code = "09",
+                            Inactive = false,
+                            MohCode = "48",
+                            Name = "Cống",
+                            SortOrder = 9
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170910"),
+                            Code = "10",
+                            Inactive = false,
+                            MohCode = "16",
+                            Name = "Cơ ho",
+                            SortOrder = 10
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170911"),
+                            Code = "11",
+                            Inactive = false,
+                            MohCode = "47",
+                            Name = "Cờ lao",
+                            SortOrder = 11
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170912"),
+                            Code = "12",
+                            Inactive = false,
+                            MohCode = "9",
+                            Name = "Dao",
+                            SortOrder = 12
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170913"),
+                            Code = "13",
+                            Inactive = false,
+                            MohCode = "12",
+                            Name = "Ê đê",
+                            SortOrder = 13
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170914"),
+                            Code = "14",
+                            Inactive = false,
+                            MohCode = "10",
+                            Name = "Gia rai",
+                            SortOrder = 14
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170915"),
+                            Code = "15",
+                            Inactive = false,
+                            MohCode = "25",
+                            Name = "Giấy",
+                            SortOrder = 15
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170916"),
+                            Code = "16",
+                            Inactive = false,
+                            MohCode = "27",
+                            Name = "Gié triêng",
+                            SortOrder = 16
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170917"),
+                            Code = "17",
+                            Inactive = false,
+                            MohCode = "8",
+                            Name = "H mông",
+                            SortOrder = 17
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170918"),
+                            Code = "18",
+                            Inactive = false,
+                            MohCode = "19",
+                            Name = "H rê",
+                            SortOrder = 18
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170919"),
+                            Code = "19",
+                            Inactive = false,
+                            MohCode = "35",
+                            Name = "Hà nhì",
+                            SortOrder = 19
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170920"),
+                            Code = "20",
+                            Inactive = false,
+                            MohCode = "4",
+                            Name = "Hoa",
+                            SortOrder = 20
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170921"),
+                            Code = "21",
+                            Inactive = false,
+                            MohCode = "26",
+                            Name = "K tu",
+                            SortOrder = 21
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170922"),
+                            Code = "22",
+                            Inactive = false,
+                            MohCode = "33",
+                            Name = "Kháng",
+                            SortOrder = 22
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170923"),
+                            Code = "23",
+                            Inactive = false,
+                            MohCode = "5",
+                            Name = "Khơ me",
+                            SortOrder = 23
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170924"),
+                            Code = "24",
+                            Inactive = false,
+                            MohCode = "29",
+                            Name = "Khơ mú",
+                            SortOrder = 24
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170925"),
+                            Code = "25",
+                            Inactive = false,
+                            MohCode = "1",
+                            Name = "Kinh",
+                            SortOrder = 25
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170926"),
+                            Code = "26",
+                            Inactive = false,
+                            MohCode = "38",
+                            Name = "La chí",
+                            SortOrder = 26
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170927"),
+                            Code = "27",
+                            Inactive = false,
+                            MohCode = "39",
+                            Name = "La ha",
+                            SortOrder = 27
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170928"),
+                            Code = "28",
+                            Inactive = false,
+                            MohCode = "41",
+                            Name = "La hù",
+                            SortOrder = 28
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170929"),
+                            Code = "29",
+                            Inactive = false,
+                            MohCode = "37",
+                            Name = "Lào",
+                            SortOrder = 29
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170930"),
+                            Code = "30",
+                            Inactive = false,
+                            MohCode = "43",
+                            Name = "Lô lô",
+                            SortOrder = 30
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170931"),
+                            Code = "31",
+                            Inactive = false,
+                            MohCode = "42",
+                            Name = "Lự",
+                            SortOrder = 31
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170932"),
+                            Code = "32",
+                            Inactive = false,
+                            MohCode = "20",
+                            Name = "M nông",
+                            SortOrder = 32
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170933"),
+                            Code = "33",
+                            Inactive = false,
+                            MohCode = "28",
+                            Name = "Mạ",
+                            SortOrder = 33
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170934"),
+                            Code = "34",
+                            Inactive = false,
+                            MohCode = "45",
+                            Name = "Mảng",
+                            SortOrder = 34
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170935"),
+                            Code = "35",
+                            Inactive = false,
+                            MohCode = "6",
+                            Name = "Mường",
+                            SortOrder = 35
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170936"),
+                            Code = "36",
+                            Inactive = false,
+                            MohCode = "11",
+                            Name = "Ngái",
+                            SortOrder = 36
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170937"),
+                            Code = "37",
+                            Inactive = false,
+                            MohCode = "7",
+                            Name = "Nùng",
+                            SortOrder = 37
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170938"),
+                            Code = "38",
+                            Inactive = false,
+                            MohCode = "53",
+                            Name = "Ơ đu",
+                            SortOrder = 38
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170939"),
+                            Code = "39",
+                            Inactive = false,
+                            MohCode = "46",
+                            Name = "Pà thén",
+                            SortOrder = 39
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170940"),
+                            Code = "40",
+                            Inactive = false,
+                            MohCode = "40",
+                            Name = "Phù lá",
+                            SortOrder = 40
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170941"),
+                            Code = "41",
+                            Inactive = false,
+                            MohCode = "51",
+                            Name = "Pu péo",
+                            SortOrder = 41
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170942"),
+                            Code = "42",
+                            Inactive = false,
+                            MohCode = "21",
+                            Name = "Rag lai",
+                            SortOrder = 42
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170943"),
+                            Code = "43",
+                            Inactive = false,
+                            MohCode = "54",
+                            Name = "Rơ man",
+                            SortOrder = 43
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170944"),
+                            Code = "44",
+                            Inactive = false,
+                            MohCode = "15",
+                            Name = "Sán chay",
+                            SortOrder = 44
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170945"),
+                            Code = "45",
+                            Inactive = false,
+                            MohCode = "18",
+                            Name = "Sán dìu",
+                            SortOrder = 45
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170946"),
+                            Code = "46",
+                            Inactive = false,
+                            MohCode = "50",
+                            Name = "Si la",
+                            SortOrder = 46
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170947"),
+                            Code = "47",
+                            Inactive = false,
+                            MohCode = "31",
+                            Name = "Tà ôi",
+                            SortOrder = 47
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170948"),
+                            Code = "48",
+                            Inactive = false,
+                            MohCode = "2",
+                            Name = "Tày",
+                            SortOrder = 48
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170949"),
+                            Code = "49",
+                            Inactive = false,
+                            MohCode = "3",
+                            Name = "Thái",
+                            SortOrder = 49
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170950"),
+                            Code = "50",
+                            Inactive = false,
+                            MohCode = "24",
+                            Name = "Thố",
+                            SortOrder = 50
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170951"),
+                            Code = "51",
+                            Inactive = false,
+                            MohCode = "23",
+                            Name = "Vân kiều",
+                            SortOrder = 51
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170952"),
+                            Code = "52",
+                            Inactive = false,
+                            MohCode = "22",
+                            Name = "X tiêng",
+                            SortOrder = 52
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170953"),
+                            Code = "53",
+                            Inactive = false,
+                            MohCode = "34",
+                            Name = "Xinh mun",
+                            SortOrder = 53
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170954"),
+                            Code = "54",
+                            Inactive = false,
+                            MohCode = "14",
+                            Name = "Xơ đăng",
+                            SortOrder = 54
+                        },
+                        new
+                        {
+                            Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170999"),
+                            Code = "99",
+                            Inactive = false,
+                            MohCode = "55",
+                            Name = "Nước ngoài",
+                            SortOrder = 99
+                        });
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.ExecutionRoom", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("RoomId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ServiceId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
+
+                    b.HasIndex("ServiceId");
+
+                    b.ToTable("DIC_ExecutionRoom", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Gender", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<int?>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DIC_Gender", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"),
+                            Code = "KXD",
+                            Inactive = false,
+                            Name = "Chưa xác định",
+                            SortOrder = 0
+                        },
+                        new
+                        {
+                            Id = new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"),
+                            Code = "NAM",
+                            Inactive = false,
+                            Name = "Nam",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("e9497984-d355-41af-b917-091500956be9"),
+                            Code = "NU",
+                            Inactive = false,
+                            Name = "Nữ",
+                            SortOrder = 2
+                        });
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Hospital", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("Grade")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Line")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MohCode")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("Type")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DIC_Hospital", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.Icd", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ChapterCode")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid?>("ChapterIcdId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ChapterName")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("ChapterNameEnglish")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MainGroupCode")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("MainGroupName")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("MainGroupNameEnglish")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MohReportCode")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("NameCommon")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("NameEnglish")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("SubGroup1Code")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("SubGroup1Name")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("SubGroup1NameEnglish")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("SubGroup2Code")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("SubGroup2Name")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("SubGroup2NameEnglish")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("TypeCode")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("TypeName")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.Property<string>("TypeNameEnglish")
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChapterIcdId");
+
+                    b.ToTable("DIC_Icd", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.LiveArea", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MohCode")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DIC_LiveArea", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.MedicalRecordType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MedicalRecordTypeCode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<int>("MedicalRecordTypeGroupID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MedicalRecordTypeName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicalRecordTypeGroupID");
+
+                    b.ToTable("DIC_MedicalRecordType", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 100,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(610),
+                            Inactive = false,
+                            MedicalRecordTypeCode = "100",
+                            MedicalRecordTypeGroupID = 1,
+                            MedicalRecordTypeName = "Khám Bệnh",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 200,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(622),
+                            Inactive = false,
+                            MedicalRecordTypeCode = "200",
+                            MedicalRecordTypeGroupID = 2,
+                            MedicalRecordTypeName = "Bệnh Án Ngoại Trú (Chung)",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 201,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(624),
+                            Inactive = false,
+                            MedicalRecordTypeCode = "201",
+                            MedicalRecordTypeGroupID = 2,
+                            MedicalRecordTypeName = "Bệnh Án Ngoại Trú (Răng - Hàm - Mặt)",
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 202,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(627),
+                            Inactive = false,
+                            MedicalRecordTypeCode = "202",
+                            MedicalRecordTypeGroupID = 2,
+                            MedicalRecordTypeName = "Bệnh Án Ngoại Trú (Tai - Mũi - Họng)",
+                            SortOrder = 3
+                        },
+                        new
+                        {
+                            Id = 203,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(628),
+                            Inactive = false,
+                            MedicalRecordTypeCode = "203",
+                            MedicalRecordTypeGroupID = 2,
+                            MedicalRecordTypeName = "Bệnh Án Ngoại Trú (Y Học Cổ Truyền)",
+                            SortOrder = 4
+                        },
+                        new
+                        {
+                            Id = 204,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(630),
+                            Inactive = false,
+                            MedicalRecordTypeCode = "204",
+                            MedicalRecordTypeGroupID = 2,
+                            MedicalRecordTypeName = "Bệnh Án Ngoại Trú (Mắt)",
+                            SortOrder = 5
+                        },
+                        new
+                        {
+                            Id = 301,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(632),
+                            Inactive = false,
+                            MedicalRecordTypeCode = "301",
+                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeName = "Bệnh Án Nội Khoa",
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 302,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(634),
+                            Inactive = false,
+                            MedicalRecordTypeCode = "302",
+                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeName = "Bệnh Án Nhi Khoa",
+                            SortOrder = 3
+                        },
+                        new
+                        {
+                            Id = 303,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(636),
+                            Inactive = false,
+                            MedicalRecordTypeCode = "303",
+                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeName = "Bệnh Án Truyền Nhiễm",
+                            SortOrder = 4
+                        },
+                        new
+                        {
+                            Id = 304,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(638),
+                            Inactive = false,
+                            MedicalRecordTypeCode = "304",
+                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeName = "Bệnh Án Phụ Khoa",
+                            SortOrder = 5
+                        },
+                        new
+                        {
+                            Id = 305,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(640),
+                            Inactive = false,
+                            MedicalRecordTypeCode = "305",
+                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeName = "Bệnh Án Sản Khoa",
+                            SortOrder = 6
+                        },
+                        new
+                        {
+                            Id = 306,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(641),
+                            Inactive = false,
+                            MedicalRecordTypeCode = "306",
+                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeName = "Bệnh Án Sơ Sinh",
+                            SortOrder = 7
+                        },
+                        new
+                        {
+                            Id = 307,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(643),
+                            Inactive = false,
+                            MedicalRecordTypeCode = "307",
+                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeName = "Bệnh Án Tâm Thần",
+                            SortOrder = 8
+                        },
+                        new
+                        {
+                            Id = 308,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(645),
+                            Inactive = false,
+                            MedicalRecordTypeCode = "308",
+                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeName = "Bệnh Án Da Liễu",
+                            SortOrder = 9
+                        },
+                        new
+                        {
+                            Id = 309,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(655),
+                            Inactive = false,
+                            MedicalRecordTypeCode = "309",
+                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeName = "Bệnh Án Điều Dưỡng - Phục Hồi Chức Năng",
+                            SortOrder = 10
+                        },
+                        new
+                        {
+                            Id = 310,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(657),
+                            Inactive = false,
+                            MedicalRecordTypeCode = "310",
+                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeName = "Bệnh Án Huyết Học - Truyền Máu",
+                            SortOrder = 11
+                        },
+                        new
+                        {
+                            Id = 311,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(669),
+                            Inactive = false,
+                            MedicalRecordTypeCode = "311",
+                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeName = "Bệnh Án Ngoại Khoa",
+                            SortOrder = 12
+                        },
+                        new
+                        {
+                            Id = 312,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(687),
+                            Inactive = false,
+                            MedicalRecordTypeCode = "312",
+                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeName = "Bệnh Án Bỏng",
+                            SortOrder = 13
+                        },
+                        new
+                        {
+                            Id = 313,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(690),
+                            Inactive = false,
+                            MedicalRecordTypeCode = "313",
+                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeName = "Bệnh Án Ung Bướu",
+                            SortOrder = 14
+                        },
+                        new
+                        {
+                            Id = 314,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(692),
+                            Inactive = false,
+                            MedicalRecordTypeCode = "314",
+                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeName = "Bệnh Án Răng-Hàm-Mặt",
+                            SortOrder = 15
+                        },
+                        new
+                        {
+                            Id = 315,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(694),
+                            Inactive = false,
+                            MedicalRecordTypeCode = "315",
+                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeName = "Bệnh Án Tai-Mũi-Họng",
+                            SortOrder = 16
+                        },
+                        new
+                        {
+                            Id = 316,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 514, DateTimeKind.Local).AddTicks(696),
+                            Inactive = false,
+                            MedicalRecordTypeCode = "316",
+                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeName = "Bệnh Án Mắt",
+                            SortOrder = 17
+                        });
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.MedicalRecordTypeGroup", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<bool>("Inactive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MedicalRecordTypeGroupCode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("MedicalRecordTypeGroupName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DIC_MedicalRecordTypeGroup", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 3,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 513, DateTimeKind.Local).AddTicks(7314),
+                            Inactive = false,
+                            MedicalRecordTypeGroupCode = "3",
+                            MedicalRecordTypeGroupName = "Nội trú",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 513, DateTimeKind.Local).AddTicks(7337),
+                            Inactive = false,
+                            MedicalRecordTypeGroupCode = "2",
+                            MedicalRecordTypeGroupName = "Ngoại trú",
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 513, DateTimeKind.Local).AddTicks(7339),
+                            Inactive = false,
+                            MedicalRecordTypeGroupCode = "1",
+                            MedicalRecordTypeGroupName = "Khám bệnh",
+                            SortOrder = 3
+                        });
+                });
+
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Dictionaries.PatientRecordType", b =>
                 {
                     b.Property<int>("Id")
@@ -7838,7 +7876,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -7875,7 +7913,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 888, DateTimeKind.Local).AddTicks(1290),
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 515, DateTimeKind.Local).AddTicks(1882),
                             Inactive = false,
                             PatientRecordTypeCode = "1",
                             PatientRecordTypeName = "Ngoại trú",
@@ -7884,7 +7922,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 888, DateTimeKind.Local).AddTicks(1304),
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 515, DateTimeKind.Local).AddTicks(1900),
                             Inactive = false,
                             PatientRecordTypeCode = "2",
                             PatientRecordTypeName = "Nội trú",
@@ -7893,7 +7931,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 888, DateTimeKind.Local).AddTicks(1306),
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 515, DateTimeKind.Local).AddTicks(1902),
                             Inactive = false,
                             PatientRecordTypeCode = "3",
                             PatientRecordTypeName = "Dịch vụ",
@@ -7912,7 +7950,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -7949,7 +7987,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 888, DateTimeKind.Local).AddTicks(3378),
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 515, DateTimeKind.Local).AddTicks(4415),
                             Inactive = false,
                             PatientTypeCode = "1",
                             PatientTypeName = "Bảo hiểm y tế",
@@ -7958,7 +7996,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 888, DateTimeKind.Local).AddTicks(3388),
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 515, DateTimeKind.Local).AddTicks(4425),
                             Inactive = false,
                             PatientTypeCode = "2",
                             PatientTypeName = "Viện phí",
@@ -7967,7 +8005,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 888, DateTimeKind.Local).AddTicks(3401),
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 515, DateTimeKind.Local).AddTicks(4438),
                             Inactive = false,
                             PatientTypeCode = "3",
                             PatientTypeName = "Dịch vụ",
@@ -7976,7 +8014,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 888, DateTimeKind.Local).AddTicks(3403),
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 515, DateTimeKind.Local).AddTicks(4441),
                             Inactive = false,
                             PatientTypeCode = "4",
                             PatientTypeName = "Người nước ngoài",
@@ -7985,7 +8023,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 888, DateTimeKind.Local).AddTicks(3411),
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 515, DateTimeKind.Local).AddTicks(4443),
                             Inactive = false,
                             PatientTypeCode = "5",
                             PatientTypeName = "Miễn phí",
@@ -8002,7 +8040,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -8039,7 +8077,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("8bff9824-1df2-419e-88ab-e098a6fc4e7e"),
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 888, DateTimeKind.Local).AddTicks(5527),
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 515, DateTimeKind.Local).AddTicks(6822),
                             Inactive = false,
                             PaymentMethodCode = "TM",
                             PaymentMethodName = "Tiền mặt",
@@ -8048,7 +8086,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd39afc0-1de0-4287-a126-4dada6788508"),
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 888, DateTimeKind.Local).AddTicks(5542),
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 515, DateTimeKind.Local).AddTicks(6846),
                             Inactive = false,
                             PaymentMethodCode = "CK",
                             PaymentMethodName = "Chuyển khoản",
@@ -8057,7 +8095,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("0b348363-c888-4c9a-b145-c3389fdcca37"),
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 888, DateTimeKind.Local).AddTicks(5545),
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 515, DateTimeKind.Local).AddTicks(6849),
                             Inactive = false,
                             PaymentMethodCode = "TM/CK",
                             PaymentMethodName = "Tiền mặt hoặc chuyển khoản",
@@ -8613,7 +8651,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -8650,7 +8688,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 888, DateTimeKind.Local).AddTicks(9866),
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 516, DateTimeKind.Local).AddTicks(1621),
                             Inactive = false,
                             ReceptionTypeCode = "1",
                             ReceptionTypeName = "Khám bệnh",
@@ -8659,7 +8697,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 12, 20, 20, 38, 24, 888, DateTimeKind.Local).AddTicks(9875),
+                            CreatedDate = new DateTime(2024, 1, 23, 21, 27, 46, 516, DateTimeKind.Local).AddTicks(1631),
                             Inactive = false,
                             ReceptionTypeCode = "2",
                             ReceptionTypeName = "Cấp cứu",
@@ -8676,7 +8714,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -8865,7 +8903,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -8910,7 +8948,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -8958,7 +8996,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("DepartmentId")
@@ -9181,7 +9219,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid?>("DeletedBy")
@@ -9233,7 +9271,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -9276,7 +9314,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -9319,7 +9357,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -9364,7 +9402,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -9415,7 +9453,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -9677,7 +9715,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreatedDate")
+                    b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
@@ -9857,6 +9895,236 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.ToTable("SYS_Token", (string)null);
                 });
 
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.SYSRefType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RefTypeCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("RefTypeName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RefTypeCategoryId");
+
+                    b.ToTable("SYSRefType", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 101,
+                            RefTypeCategoryId = 1,
+                            RefTypeName = "Quản lý người dùng",
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 102,
+                            RefTypeCategoryId = 1,
+                            RefTypeName = "Loại đối tượng bệnh nhân",
+                            SortOrder = 3
+                        },
+                        new
+                        {
+                            Id = 103,
+                            RefTypeCategoryId = 1,
+                            RefTypeName = "Loại đối tượng đăng ký khám",
+                            SortOrder = 4
+                        },
+                        new
+                        {
+                            Id = 104,
+                            RefTypeCategoryId = 1,
+                            RefTypeName = "Loại bệnh án",
+                            SortOrder = 5
+                        },
+                        new
+                        {
+                            Id = 199,
+                            RefTypeCategoryId = 1,
+                            RefTypeName = "Tùy chọn",
+                            SortOrder = 9
+                        },
+                        new
+                        {
+                            Id = 201,
+                            RefTypeCategoryId = 2,
+                            RefTypeName = "Chi nhánh",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 202,
+                            RefTypeCategoryId = 2,
+                            RefTypeName = "Khoa",
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 203,
+                            RefTypeCategoryId = 2,
+                            RefTypeName = "Phòng",
+                            SortOrder = 3
+                        },
+                        new
+                        {
+                            Id = 204,
+                            RefTypeCategoryId = 2,
+                            RefTypeName = "Quốc tịch",
+                            SortOrder = 4
+                        },
+                        new
+                        {
+                            Id = 205,
+                            RefTypeCategoryId = 2,
+                            RefTypeName = "Tỉnh, thành phố",
+                            SortOrder = 5
+                        },
+                        new
+                        {
+                            Id = 206,
+                            RefTypeCategoryId = 2,
+                            RefTypeName = "Quận, huyện",
+                            SortOrder = 6
+                        },
+                        new
+                        {
+                            Id = 207,
+                            RefTypeCategoryId = 2,
+                            RefTypeName = "Xã, phường",
+                            SortOrder = 7
+                        },
+                        new
+                        {
+                            Id = 208,
+                            RefTypeCategoryId = 2,
+                            RefTypeName = "Dân tộc",
+                            SortOrder = 8
+                        },
+                        new
+                        {
+                            Id = 209,
+                            RefTypeCategoryId = 2,
+                            RefTypeName = "Giới tính",
+                            SortOrder = 9
+                        },
+                        new
+                        {
+                            Id = 210,
+                            RefTypeCategoryId = 2,
+                            RefTypeName = "Nghề nghiệp",
+                            SortOrder = 10
+                        },
+                        new
+                        {
+                            Id = 211,
+                            RefTypeCategoryId = 2,
+                            RefTypeName = "Tôn giáo",
+                            SortOrder = 11
+                        },
+                        new
+                        {
+                            Id = 212,
+                            RefTypeCategoryId = 2,
+                            RefTypeName = "Nơi sống",
+                            SortOrder = 12
+                        },
+                        new
+                        {
+                            Id = 301,
+                            RefTypeCategoryId = 3,
+                            RefTypeName = "Đón tiếp",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 401,
+                            RefTypeCategoryId = 4,
+                            RefTypeName = "Khám bệnh",
+                            SortOrder = 3
+                        });
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.SYSRefTypeCategory", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("RefTypeCategoryName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SYSRefTypeCategory", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "Các chức năng quản lý và xử lý hệ thống",
+                            RefTypeCategoryName = "Hệ thống",
+                            SortOrder = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Các chức năng người dùng khai báo",
+                            RefTypeCategoryName = "Danh mục",
+                            SortOrder = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "Các chức năng tiếp đón",
+                            RefTypeCategoryName = "Đón tiếp",
+                            SortOrder = 3
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Description = "Các chức năng khám bệnh",
+                            RefTypeCategoryName = "Khám bệnh",
+                            SortOrder = 4
+                        },
+                        new
+                        {
+                            Id = 99,
+                            Description = "Khác",
+                            RefTypeCategoryName = "Khác",
+                            SortOrder = 99
+                        });
+                });
+
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -9957,6 +10225,45 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("SYS_UserRole", (string)null);
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Views.ServiceRequestView", b =>
+                {
+                    b.HasBaseType("HIS.EntityFrameworkCore.Entities.Business.ServiceRequest");
+
+                    b.Property<string>("DepartmentCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DepartmentName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExecuteRoomCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ExecuteRoomName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PatientCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PatientName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoomCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoomName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("V_BUS_ServiceRequest", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.InOutStock", b =>
@@ -10117,6 +10424,10 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .WithMany()
                         .HasForeignKey("CareerId");
 
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Country", "National")
+                        .WithMany()
+                        .HasForeignKey("CountryId");
+
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.District", "District")
                         .WithMany()
                         .HasForeignKey("DistrictId");
@@ -10128,10 +10439,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Gender", "Gender")
                         .WithMany()
                         .HasForeignKey("GenderId");
-
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.National", "National")
-                        .WithMany()
-                        .HasForeignKey("NationalId");
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Province", "Province")
                         .WithMany()
@@ -10180,7 +10487,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .WithMany()
                         .HasForeignKey("GenderId");
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.National", "National")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Country", "National")
                         .WithMany()
                         .HasForeignKey("NationalId");
 
@@ -10238,18 +10545,30 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .WithMany()
                         .HasForeignKey("ServiceId");
 
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.ServiceRequestData", "ServiceRequestData")
+                        .WithMany()
+                        .HasForeignKey("ServiceRequestDataId");
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.ServiceRequest", "ServiceRequests")
+                        .WithMany()
+                        .HasForeignKey("ServiceRequestId");
+
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Services.ServiceResultIndice", "ServiceResultIndice")
                         .WithMany()
                         .HasForeignKey("ServiceResultIndiceId");
 
                     b.Navigation("Service");
 
+                    b.Navigation("ServiceRequestData");
+
+                    b.Navigation("ServiceRequests");
+
                     b.Navigation("ServiceResultIndice");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Item", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.National", "Country")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId");
 
@@ -10276,7 +10595,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.ItemType", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.National", "Country")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Dictionaries.Country", "Country")
                         .WithMany()
                         .HasForeignKey("CountryId");
 
@@ -10511,6 +10830,15 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.SYSRefType", b =>
+                {
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Systems.SYSRefTypeCategory", "SYSRefTypeCategory")
+                        .WithMany()
+                        .HasForeignKey("RefTypeCategoryId");
+
+                    b.Navigation("SYSRefTypeCategory");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Systems.UserRole", b =>

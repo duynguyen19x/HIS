@@ -1,4 +1,4 @@
-﻿using HIS.Core.Entities.Auditing;
+﻿using HIS.Core.Domain.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 
 namespace HIS.EntityFrameworkCore.Entities.Categories.Items

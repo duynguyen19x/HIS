@@ -24,7 +24,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
             builder.HasOne(e => e.Gender).WithMany().HasForeignKey(e => e.GenderId);
             builder.HasOne(e => e.Ethnic).WithMany().HasForeignKey(e => e.EthnicId);
             builder.HasOne(e => e.Religion).WithMany().HasForeignKey(e => e.ReligionId);
-            builder.HasOne(e => e.National).WithMany().HasForeignKey(e => e.NationalId);
+            builder.HasOne(e => e.National).WithMany().HasForeignKey(e => e.CountryId);
             builder.HasOne(e => e.Province).WithMany().HasForeignKey(e => e.ProvinceId);
             builder.HasOne(e => e.District).WithMany().HasForeignKey(e => e.DistrictId);
             builder.HasOne(e => e.Ward).WithMany().HasForeignKey(e => e.WardId);

@@ -1,13 +1,6 @@
-﻿using HIS.Application.Core.Services.Dto;
+﻿using HIS.Core.Services.Dto;
 using HIS.Dtos.Business.Insurances;
-using HIS.Dtos.Business.MedicalRecords;
 using HIS.Dtos.Business.ServiceRequests;
-using HIS.EntityFrameworkCore.Entities.Categories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.Dtos.Business.PatientRecords
 {

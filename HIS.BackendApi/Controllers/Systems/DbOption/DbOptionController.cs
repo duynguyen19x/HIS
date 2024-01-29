@@ -1,4 +1,4 @@
-﻿using HIS.Application.Core.Services.Dto;
+﻿using HIS.Core.Services.Dto;
 using HIS.ApplicationService.Systems.DbOptions;
 using HIS.Dtos.Systems.DbOption;
 using Microsoft.AspNetCore.Mvc;

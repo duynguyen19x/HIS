@@ -1,4 +1,4 @@
-﻿using HIS.Application.Core.Services.Dto;
+﻿using HIS.Core.Services.Dto;
 using HIS.Dtos.Business.ServiceResultDatas;
 
 namespace HIS.Dtos.Business.ServiceRequestDatas
@@ -8,9 +8,8 @@ namespace HIS.Dtos.Business.ServiceRequestDatas
         public Guid ServiceRequestId { get; set; } // phiếu chỉ định
         public Guid? InsuranceId { get; set; } // bảo hiểm
         public Guid ServiceId { get; set; } // dịch vụ
-        public string ServiceName { get; set; }
-        public DateTime? StartTime { get; set; }
-        public DateTime? EndTime { get; set; }
+        public long StartTime { get; set; }
+        public long EndTime { get; set; }
         public decimal Price { get; set; } // đơn giá
         public decimal Quantity { get; set; } // số lượng
         public decimal Amount { get; set; } // thành tiền
@@ -18,6 +17,9 @@ namespace HIS.Dtos.Business.ServiceRequestDatas
 
         public int PatientTypeId { get; set; } // đối tượng
         public string Description { get; set; }
+
+        public string ServiceCode { get; set; }
+        public string ServiceName { get; set; }
 
         public IList<ServiceResultDataDto> ServiceResultDatas { get; set; }
     }

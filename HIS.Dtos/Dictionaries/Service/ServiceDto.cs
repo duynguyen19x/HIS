@@ -1,13 +1,7 @@
-﻿using HIS.Application.Core.Services.Dto;
+﻿using HIS.Core.Services.Dto;
 using HIS.Dtos.Dictionaries.ExecutionRoom;
 using HIS.Dtos.Dictionaries.ServicePricePolicy;
 using HIS.Dtos.Dictionaries.ServiceResultIndex;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.Dtos.Dictionaries.Service
 {

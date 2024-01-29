@@ -12,9 +12,12 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Result).HasMaxLength(128);
+            builder.Property(x => x.TestingMachine).HasMaxLength(1024);
 
             builder.HasOne(e => e.Service).WithMany().HasForeignKey(e => e.ServiceId);
             builder.HasOne(e => e.ServiceResultIndice).WithMany().HasForeignKey(e => e.ServiceResultIndiceId);
+            builder.HasOne(e => e.ServiceRequestData).WithMany().HasForeignKey(e => e.ServiceRequestDataId);
+            builder.HasOne(e => e.ServiceRequests).WithMany().HasForeignKey(e => e.ServiceRequestId);
         }
     }
 }

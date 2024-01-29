@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
-using HIS.Application.Core.Services.Dto;
+using HIS.Core.Services.Dto;
 using HIS.Dtos.Dictionaries.Room;
 using HIS.EntityFrameworkCore;
 using HIS.Utilities.Enums;
@@ -114,6 +114,7 @@ namespace HIS.ApplicationService.Dictionaries.Room
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.DepartmentIdFilter == null || r.DepartmentId == input.DepartmentIdFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
+                                     && (input.RoomTypeIdFilter == null || r.RoomTypeId == input.RoomTypeIdFilter)
                                  select new RoomDto()
                                  {
                                      Id = r.Id,

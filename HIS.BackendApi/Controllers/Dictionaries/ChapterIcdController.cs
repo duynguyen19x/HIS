@@ -1,4 +1,4 @@
-﻿using HIS.Application.Core.Services.Dto;
+﻿using HIS.Core.Services.Dto;
 using HIS.ApplicationService.Dictionaries.ChapterICD10;
 using HIS.Dtos.Dictionaries.ChapterICD10;
 using Microsoft.AspNetCore.Mvc;
