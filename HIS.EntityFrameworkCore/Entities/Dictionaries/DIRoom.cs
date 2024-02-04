@@ -1,11 +1,13 @@
 ﻿using AutoMapper.Configuration.Annotations;
 using HIS.Core.Domain.Entities.Auditing;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
     /// Phòng, buồng.
     /// </summary>
+    [Table("DIRoom")]
     public class DIRoom : AuditedEntity<Guid>
     {
         /// <summary>

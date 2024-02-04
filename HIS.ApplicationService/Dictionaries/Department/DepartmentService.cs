@@ -111,21 +111,21 @@ namespace HIS.ApplicationService.Dictionaries.Department
                 result.IsSucceeded = true;
                 result.Result = (from d in Context.Departments
                                  join b in Context.Branchs on d.BranchId equals b.Id 
-                                 where (string.IsNullOrEmpty(input.DepartmentNameFilter) || d.DepartmentName == input.DepartmentNameFilter)
-                                     && (string.IsNullOrEmpty(input.DepartmentCodeFilter) || d.DepartmentCode == input.DepartmentCodeFilter)
+                                 where (string.IsNullOrEmpty(input.DepartmentNameFilter) || d.Name == input.DepartmentNameFilter)
+                                     && (string.IsNullOrEmpty(input.DepartmentCodeFilter) || d.Code == input.DepartmentCodeFilter)
                                      && (input.BranchFilter == null || d.BranchId == input.BranchFilter)
                                      && (input.InactiveFilter == null || d.Inactive == input.InactiveFilter)
                                  select new DepartmentDto()
                                  {
                                      Id = d.Id,
-                                     Code = d.DepartmentCode,
-                                     Name = d.DepartmentName,
+                                     Code = d.Code,
+                                     Name = d.Name,
                                      MohCode = d.MediCode,
                                      Description = d.Description,
-                                     DepartmentTypeId = d.DepartmentTypeID,
+                                     DepartmentTypeId = d.DepartmentTypeId,
                                      BranchId = d.BranchId,
-                                     BranchCode = b.BranchCode,
-                                     BranchName = b.BranchName,
+                                     BranchCode = b.Code,
+                                     BranchName = b.Name,
                                      Inactive = d.Inactive,
                                      SortOrder = d.SortOrder,
                                  }).ToList();
@@ -148,14 +148,14 @@ namespace HIS.ApplicationService.Dictionaries.Department
                                     select new DepartmentDto()
                                     {
                                         Id = d.Id,
-                                        Code = d.DepartmentCode,
-                                        Name = d.DepartmentName,
+                                        Code = d.Code,
+                                        Name = d.Name,
                                         MohCode = d.MediCode,
                                         Description = d.Description,
-                                        DepartmentTypeId = d.DepartmentTypeID,
+                                        DepartmentTypeId = d.DepartmentTypeId,
                                         BranchId = d.BranchId,
-                                        BranchCode = b.BranchCode,
-                                        BranchName = b.BranchName,
+                                        BranchCode = b.Code,
+                                        BranchName = b.Name,
                                         Inactive = d.Inactive,
                                         SortOrder = d.SortOrder,
                                     }).SingleOrDefaultAsync();

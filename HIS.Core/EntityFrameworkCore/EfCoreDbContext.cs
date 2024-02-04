@@ -39,10 +39,10 @@ namespace HIS.Core.EntityFrameworkCore
 
         protected virtual void ConfigureKeys(ModelBuilder modelBuilder, IMutableEntityType entityType)
         {
+            // đặt khóa chính với kiểu dữ liệu xác định
             if (typeof(IEntity<>).IsAssignableFrom(entityType.ClrType))
             {
                 modelBuilder.Entity(entityType.ClrType).HasKey("Id");
-                //entityType.SetPrimaryKey(entityType.FindProperty("Id"));
             }
         }
 

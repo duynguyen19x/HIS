@@ -11,8 +11,8 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.ToTable("DIC_Department");
 
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.DepartmentCode).HasMaxLength(20).IsRequired();
-            builder.Property(x => x.DepartmentName).HasMaxLength(512).IsRequired();
+            builder.Property(x => x.Code).HasMaxLength(20).IsRequired();
+            builder.Property(x => x.Name).HasMaxLength(512).IsRequired();
             builder.Property(x => x.MediCode).HasMaxLength(20).IsRequired();
             builder.Property(x => x.Description).HasMaxLength(512);
 

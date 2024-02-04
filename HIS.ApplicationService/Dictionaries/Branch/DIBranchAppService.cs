@@ -25,8 +25,8 @@ namespace HIS.ApplicationService.Dictionaries.Branchs
             try
             {
                 var query = _diBranchRepository.GetAll()
-                    .WhereIf(!string.IsNullOrEmpty(input.BranchCodeFilter), x => x.BranchCode == input.BranchCodeFilter)
-                    .WhereIf(!string.IsNullOrEmpty(input.BranchNameFilter), x => x.BranchName == input.BranchNameFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.BranchCodeFilter), x => x.Code == input.BranchCodeFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.BranchNameFilter), x => x.Name == input.BranchNameFilter)
                     .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
                 var paged = query.ApplySortingAndPaging(input);
 
