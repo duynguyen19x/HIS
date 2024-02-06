@@ -24,7 +24,7 @@ namespace HIS.ApplicationService.Dictionaries.Wards
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = ObjectMapper.Map<Ward>(input);
+                    var data = ObjectMapper.Map<DIWard>(input);
                     Context.Wards.Add(data);
                     await Context.SaveChangesAsync();
 
@@ -48,7 +48,7 @@ namespace HIS.ApplicationService.Dictionaries.Wards
             {
                 try
                 {
-                    var data = ObjectMapper.Map<Ward>(input);
+                    var data = ObjectMapper.Map<DIWard>(input);
                     Context.Wards.Update(data);
                     await Context.SaveChangesAsync();
 
@@ -100,9 +100,9 @@ namespace HIS.ApplicationService.Dictionaries.Wards
             try
             {
                 var filter = Context.Wards.AsNoTracking()
-                    .WhereIf(string.IsNullOrEmpty(input.WardCodeFilter), x => x.WardCode == input.WardCodeFilter)
-                    .WhereIf(string.IsNullOrEmpty(input.WardNameFilter), x => x.WardName == input.WardNameFilter)
-                    .WhereIf(string.IsNullOrEmpty(input.ShortTextFilter), x => x.ShortText == input.ShortTextFilter)
+                    .WhereIf(string.IsNullOrEmpty(input.WardCodeFilter), x => x.Code == input.WardCodeFilter)
+                    .WhereIf(string.IsNullOrEmpty(input.WardNameFilter), x => x.Name == input.WardNameFilter)
+                    .WhereIf(string.IsNullOrEmpty(input.ShortTextFilter), x => x.SearchText == input.ShortTextFilter)
                     .WhereIf(input.DistrictFilter != null, x => x.DistrictId == input.DistrictFilter)
                     .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
 

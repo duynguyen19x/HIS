@@ -60,7 +60,7 @@ namespace HIS.ApplicationService
             CreateMap<DIDepartmentType, DepartmentTypeDto>().ReverseMap();
             CreateMap<ChapterIcdDto, ChapterIcd>().ReverseMap();
             CreateMap<DIDistrict, DistrictDto>().ReverseMap();
-            CreateMap<Gender, GenderDto>().ReverseMap();
+            CreateMap<DIGender, GenderDto>().ReverseMap();
             CreateMap<Hospital, HospitalDto>().ReverseMap();
             CreateMap<Icd, IcdDto>().ReverseMap();
             CreateMap<DbOption, DbOptionDto>().ReverseMap();
@@ -70,7 +70,7 @@ namespace HIS.ApplicationService
                 .ForMember(dest => dest.DepartmentFk, opt => opt.Ignore())
                 .ReverseMap();
             CreateMap<RoomTypeDto, DIRoomType>().ReverseMap();
-            CreateMap<Ward, WardDto>().ReverseMap();
+            CreateMap<DIWard, WardDto>().ReverseMap();
             CreateMap<ServiceGroupDto, ServiceGroup>().ReverseMap();
             CreateMap<ServiceGroupHeInDto, ServiceGroupHeIn>().ReverseMap();
             CreateMap<UnitDto, Unit>().ReverseMap();

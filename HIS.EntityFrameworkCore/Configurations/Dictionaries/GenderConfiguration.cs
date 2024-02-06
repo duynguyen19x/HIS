@@ -6,9 +6,9 @@ using System.Reflection.Emit;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class GenderConfiguration : IEntityTypeConfiguration<Gender>
+    public class GenderConfiguration : IEntityTypeConfiguration<DIGender>
     {
-        public void Configure(EntityTypeBuilder<Gender> builder)
+        public void Configure(EntityTypeBuilder<DIGender> builder)
         {
             builder.ToTable("DIC_Gender");
             builder.HasKey(x => x.Id);
@@ -17,21 +17,21 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.Property(x => x.Description).HasMaxLength(255);
 
             builder.HasData(
-                new Gender()
+                new DIGender()
                 {
                     Id = new Guid("97AC7FD8-EDFA-4243-97FC-98468F492DF1"),
                     Code = "KXD",
                     Name = "Chưa xác định",
                     SortOrder = (int)GenderTypes.None
                 },
-                new Gender()
+                new DIGender()
                 {
                     Id = new Guid("FC153433-BF89-4E95-8523-DF3D8CEC8676"),
                     Code = "NAM",
                     Name = "Nam",
                     SortOrder = (int)GenderTypes.Male
                 },
-                new Gender()
+                new DIGender()
                 {
                     Id = new Guid("E9497984-D355-41AF-B917-091500956BE9"),
                     Code = "NU",

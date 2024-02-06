@@ -126,7 +126,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 
         [Ignore]
         [ForeignKey("WardId")]
-        public Ward WardFk { get; set; }
+        public DIWard WardFk { get; set; }
 
         [Ignore]
         [ForeignKey("DirectorId")]

@@ -139,11 +139,11 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         #endregion
 
         [Ignore]
-        public Gender Gender { get; set; }
+        public DIGender Gender { get; set; }
         [Ignore]
         public DIEthnicity Ethnic { get; set; }
         [Ignore]
-        public Religion Religion { get; set; }
+        public DIReligion Religion { get; set; }
         [Ignore]
         public DICountry National { get; set; }
         [Ignore]
@@ -151,7 +151,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         [Ignore]
         public DIDistrict District { get; set; }
         [Ignore]
-        public Ward Ward { get; set; }
+        public DIWard Ward { get; set; }
         [Ignore]
         public DICareer Career { get; set; }
     }

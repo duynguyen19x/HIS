@@ -49,12 +49,12 @@ namespace HIS.EntityFrameworkCore
         public DbSet<DIProvince> Provinces { get; set; }
         public DbSet<ReceptionObjectType> ReceptionTypes { get; set; }
         public DbSet<RelativeType> RelativeTypes { get; set; }
-        public DbSet<Religion> Religions { get; set; }
+        public DbSet<DIReligion> Religions { get; set; }
         public DbSet<RightRouteType> RightRouteTypes { get; set; }
         public DbSet<TreatmentEndType> TreatmentEndTypes { get; set; }
         public DbSet<TreatmentResult> TreatmentResults { get; set; }
-        public DbSet<Ward> Wards { get; set; }
-        public DbSet<Gender> Genders { get; set; }
+        public DbSet<DIWard> Wards { get; set; }
+        public DbSet<DIGender> Genders { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
