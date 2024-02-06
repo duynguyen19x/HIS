@@ -1,15 +1,14 @@
-﻿using HIS.Core.Domain.Entities;
-using HIS.Core.Domain.Entities.Auditing;
+﻿using HIS.Core.Domain.Entities.Auditing;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
-    /// Quốc tịch.
+    /// Nhóm máu.
     /// </summary>
-    [Table("DICountry")]
-    public class DICountry : AuditedEntity<Guid>
+    [Table("DIBloodType")]
+    public class DIBloodType : AuditedEntity<Guid>
     {
         [Required]
         [MaxLength(50)]
@@ -18,9 +17,6 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         [Required]
         [MaxLength(255)]
         public virtual string Name { get; set; }
-
-        [MaxLength(50)]
-        public virtual string MediCode { get; set; }
 
         [MaxLength(255)]
         public virtual string Description { get; set; }

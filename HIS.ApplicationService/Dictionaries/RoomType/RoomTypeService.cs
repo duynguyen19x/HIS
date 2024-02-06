@@ -25,7 +25,7 @@ namespace HIS.ApplicationService.Dictionaries.RoomType
                 try
                 {
                     //input.Id = Guid.NewGuid();
-                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.RoomType>(input);
+                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.DIRoomType>(input);
                     Context.RoomTypes.Add(data);
                     await Context.SaveChangesAsync();
 
@@ -53,7 +53,7 @@ namespace HIS.ApplicationService.Dictionaries.RoomType
             {
                 try
                 {
-                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.RoomType>(input);
+                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.DIRoomType>(input);
                     Context.RoomTypes.Update(data);
                     await Context.SaveChangesAsync();
 

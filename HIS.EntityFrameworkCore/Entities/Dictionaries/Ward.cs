@@ -15,6 +15,6 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public bool Inactive { get; set; } // khóa
         public Guid DistrictId { get; set; }
 
-        public virtual District District { get; set; }
+        public virtual DIDistrict District { get; set; }
     }
 }

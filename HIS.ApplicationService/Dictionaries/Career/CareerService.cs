@@ -22,7 +22,7 @@ namespace HIS.ApplicationService.Dictionaries.Career
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Career>(input);
+                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.DICareer>(input);
                     Context.Careers.Add(data);
                     await Context.SaveChangesAsync();
 
@@ -50,7 +50,7 @@ namespace HIS.ApplicationService.Dictionaries.Career
             {
                 try
                 {
-                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Career>(input);
+                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.DICareer>(input);
                     Context.Careers.Update(data);
                     await Context.SaveChangesAsync();
 

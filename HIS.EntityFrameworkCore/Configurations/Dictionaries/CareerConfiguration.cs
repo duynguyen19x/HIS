@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class CareerConfiguration : IEntityTypeConfiguration<Career>
+    public class CareerConfiguration : IEntityTypeConfiguration<DICareer>
     {
-        public void Configure(EntityTypeBuilder<Career> builder)
+        public void Configure(EntityTypeBuilder<DICareer> builder)
         {
             builder.ToTable("DIC_Career");
 

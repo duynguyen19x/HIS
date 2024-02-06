@@ -37,19 +37,19 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         [Ignore]
         public Gender Gender { get; set; }
         [Ignore]
-        public Ethnic Ethnic { get; set; }
+        public DIEthnicity Ethnic { get; set; }
         [Ignore]
         public Religion Religion { get; set; }
         [Ignore]
         public DICountry National { get; set; }
         [Ignore]
-        public Province Province { get; set; }
+        public DIProvince Province { get; set; }
         [Ignore]
-        public District District { get; set; }
+        public DIDistrict District { get; set; }
         [Ignore]
         public Ward Ward { get; set; }
         [Ignore]
-        public Career Career { get; set; }
+        public DICareer Career { get; set; }
 
         public Patient() { }
     }

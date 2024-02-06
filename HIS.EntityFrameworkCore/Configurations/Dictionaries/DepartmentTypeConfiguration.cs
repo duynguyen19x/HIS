@@ -6,9 +6,9 @@ using System.Reflection.Emit;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class DepartmentTypeConfiguration : IEntityTypeConfiguration<DepartmentType>
+    public class DepartmentTypeConfiguration : IEntityTypeConfiguration<DIDepartmentType>
     {
-        public void Configure(EntityTypeBuilder<DepartmentType> builder)
+        public void Configure(EntityTypeBuilder<DIDepartmentType> builder)
         {
             builder.ToTable("DIC_DepartmentType");
 
@@ -19,28 +19,28 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.Property(x => x.Description).HasMaxLength(512);
 
             builder.HasData(
-                new DepartmentType()
+                new DIDepartmentType()
                 {
                     Id = (int)DepartmentTypes.ClinicalDepartment,
                     Code = "LS",
                     Name = "Khoa lâm sàng",
                     SortOrder = (int)DepartmentTypes.ClinicalDepartment
                 },
-                new DepartmentType()
+                new DIDepartmentType()
                 {
                     Id = (int)DepartmentTypes.ClinicalLaboratoryDepartment,
                     Code = "CLS",
                     Name = "Khoa cận lâm sàng",
                     SortOrder = (int)DepartmentTypes.ClinicalLaboratoryDepartment
                 },
-                new DepartmentType()
+                new DIDepartmentType()
                 {
                     Id = (int)DepartmentTypes.PharmacyDepartment,
                     Code = "DUOC",
                     Name = "Khoa dược",
                     SortOrder = (int)DepartmentTypes.PharmacyDepartment
                 },
-                new DepartmentType()
+                new DIDepartmentType()
                 {
                     Id = (int)DepartmentTypes.ComprehensivePlan,
                     Code = "KHTH",

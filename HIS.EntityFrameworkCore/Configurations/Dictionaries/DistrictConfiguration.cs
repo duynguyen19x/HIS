@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class DistrictConfiguration : IEntityTypeConfiguration<District>
+    public class DistrictConfiguration : IEntityTypeConfiguration<DIDistrict>
     {
-        public void Configure(EntityTypeBuilder<District> builder)
+        public void Configure(EntityTypeBuilder<DIDistrict> builder)
         {
             builder.ToTable("DIC_District");
 
@@ -15,7 +15,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.Property(x => x.Name).HasMaxLength(512).IsRequired();
             builder.Property(x => x.Description).HasMaxLength(512);
 
-            builder.HasOne(t => t.Province).WithMany().HasForeignKey(pc => pc.ProvinceId);
+            builder.HasOne(t => t.ProvinceFk).WithMany().HasForeignKey(pc => pc.ProvinceId);
         }
     }
 }

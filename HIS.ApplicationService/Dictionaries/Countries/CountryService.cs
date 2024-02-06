@@ -107,14 +107,14 @@ namespace HIS.ApplicationService.Dictionaries.Countries
             {
                 result.IsSucceeded = true;
                 result.Result = (from r in Context.Countries
-                                 where (string.IsNullOrEmpty(input.NameFilter) || r.CountryName == input.NameFilter)
-                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.CountryCode == input.CodeFilter)
+                                 where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
+                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
                                  select new CountryDto()
                                  {
                                      Id = r.Id,
-                                     Code = r.CountryCode,
-                                     Name = r.CountryName,
+                                     Code = r.Code,
+                                     Name = r.Name,
                                      Inactive = r.Inactive
                                  }).OrderBy(o => o.Code).ToList();
                 result.TotalCount = result.Result.Count;

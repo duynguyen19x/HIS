@@ -25,7 +25,7 @@ namespace HIS.ApplicationService.Dictionaries.Ethnics
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = ObjectMapper.Map<Ethnic>(input);
+                    var data = ObjectMapper.Map<DIEthnicity>(input);
                     //data.CreatedDate = DateTime.Now;
                     //data.CreatedBy = SessionExtensions.Login?.Id;
                     Context.Ethnicities.Add(data);
@@ -51,7 +51,7 @@ namespace HIS.ApplicationService.Dictionaries.Ethnics
                 try
                 {
                     var ethnicity = await Context.Ethnicities.FindAsync(input.Id);
-                    var data = ObjectMapper.Map<Ethnic>(input);
+                    var data = ObjectMapper.Map<DIEthnicity>(input);
                     //data.CreatedDate = ethnicity.CreatedDate;
                     //data.CreatedBy = ethnicity.CreatedBy;
                     //data.ModifiedDate = DateTime.Now;

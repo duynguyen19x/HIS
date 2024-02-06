@@ -23,7 +23,7 @@ namespace HIS.ApplicationService.Dictionaries.Districts
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = ObjectMapper.Map<District>(input);
+                    var data = ObjectMapper.Map<DIDistrict>(input);
                     Context.Districts.Add(data);
                     await Context.SaveChangesAsync();
 
@@ -51,7 +51,7 @@ namespace HIS.ApplicationService.Dictionaries.Districts
             {
                 try
                 {
-                    var data = ObjectMapper.Map<District>(input);
+                    var data = ObjectMapper.Map<DIDistrict>(input);
                     Context.Districts.Update(data);
                     await Context.SaveChangesAsync();
 

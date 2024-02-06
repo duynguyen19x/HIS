@@ -16,67 +16,67 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         /// </summary>
         [Required]
         [MaxLength(50)]
-        public string Code { get; set; }
+        public virtual string Code { get; set; }
 
         /// <summary>
         /// Tên khoa
         /// </summary>
         [Required]
         [MaxLength(255)]
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         /// <summary>
         /// Mã khoa (BYT)
         /// </summary>
         [MaxLength(50)]
-        public string MediCode { get; set; }
+        public virtual string MediCode { get; set; }
 
         /// <summary>
         /// Loại khoa
         /// </summary>
-        public int DepartmentTypeId { get; set; }
+        public virtual int DepartmentTypeId { get; set; }
 
         /// <summary>
         /// Thuộc chi nhánh
         /// </summary>
-        public Guid BranchId { get; set; }
+        public virtual Guid BranchId { get; set; }
 
         /// <summary>
         /// Trưởng khoa
         /// </summary>
-        public Guid? ChiefId { get; set; }
+        public virtual Guid? ChiefId { get; set; }
 
         /// <summary>
         /// Điện thoại
         /// </summary>
         [MaxLength(50)]
-        public string Tel { get; set; }
+        public virtual string Tel { get; set; }
 
         /// <summary>
         /// Địa chỉ
         /// </summary>
         [MaxLength(50)]
-        public string Email { get; set; }
+        public virtual string Email { get; set; }
 
         /// <summary>
         /// Ghi chú
         /// </summary>
         [MaxLength(255)]
-        public string Description { get; set; }
+        public virtual string Description { get; set; }
 
         /// <summary>
         /// Số thứ tự hiển thị
         /// </summary>
-        public int SortOrder { get; set; }
+        public virtual int SortOrder { get; set; }
 
         /// <summary>
         /// Khóa
         /// </summary>
-        public bool Inactive { get; set; }
+        public virtual bool Inactive { get; set; }
 
         [Ignore]
         [ForeignKey("DepartmentTypeId")]
-        public virtual DepartmentType DepartmentTypeFk { get; set; }
+        public virtual DIDepartmentType DepartmentTypeFk { get; set; }
 
         [Ignore]
         [ForeignKey("BranchId")]

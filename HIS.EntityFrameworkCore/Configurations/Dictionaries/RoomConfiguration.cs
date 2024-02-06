@@ -18,8 +18,8 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.Property(x => x.RoomTypeId).IsRequired();
             builder.Property(x => x.DepartmentId).IsRequired();
 
-            builder.HasOne(t => t.RoomType).WithMany().HasForeignKey(p => p.RoomTypeId);
-            builder.HasOne(t => t.Department).WithMany().HasForeignKey(p => p.DepartmentId);
+            builder.HasOne(t => t.RoomTypeFk).WithMany().HasForeignKey(p => p.RoomTypeId);
+            builder.HasOne(t => t.DepartmentFk).WithMany().HasForeignKey(p => p.DepartmentId);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
-    /// Phòng, buồng.
+    /// Phòng.
     /// </summary>
     [Table("DIRoom")]
     public class DIRoom : AuditedEntity<Guid>
@@ -16,43 +16,45 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         /// </summary>
         [Required]
         [MaxLength(50)]
-        public string Code { get; set; }
+        public virtual string Code { get; set; }
 
         /// <summary>
         /// Tên phòng, buồng.
         /// </summary>
         [Required]
         [MaxLength(255)]
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         /// <summary>
         /// Mã phòng (BYT)
         /// </summary>
         [Required]
         [MaxLength(50)]
-        public string MediCode { get; set; }
+        public virtual string MediCode { get; set; }
 
         /// <summary>
         /// Loại phòng.
         /// </summary>
-        public int RoomTypeId { get; set; }
+        public virtual int RoomTypeId { get; set; }
 
         /// <summary>
         /// Khoa.
         /// </summary>
-        public Guid DepartmentId { get; set; }
+        public virtual Guid DepartmentId { get; set; }
 
         [MaxLength(255)]
-        public string Description { get; set; }
+        public virtual string Description { get; set; }
 
-        public int SortOrder { get; set; }
+        public virtual int SortOrder { get; set; }
 
-        public bool Inactive { get; set; }
-
-        [Ignore]
-        public RoomType RoomType { get; set; }
+        public virtual bool Inactive { get; set; }
 
         [Ignore]
-        public DIDepartment Department { get; set; }
+        [ForeignKey("RoomTypeId")]
+        public DIRoomType RoomTypeFk { get; set; }
+
+        [Ignore]
+        [ForeignKey("DepartmentId")]
+        public DIDepartment DepartmentFk { get; set; }
     }
 }

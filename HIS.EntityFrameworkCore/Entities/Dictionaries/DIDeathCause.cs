@@ -1,15 +1,19 @@
-﻿using HIS.Core.Domain.Entities;
-using HIS.Core.Domain.Entities.Auditing;
+﻿using HIS.Core.Domain.Entities.Auditing;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
-    /// Quốc tịch.
+    /// Nguyên nhân tử vong.
     /// </summary>
-    [Table("DICountry")]
-    public class DICountry : AuditedEntity<Guid>
+    [Table("DIDeathCause")]
+    public class DIDeathCause : AuditedEntity<Guid>
     {
         [Required]
         [MaxLength(50)]
@@ -18,9 +22,6 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         [Required]
         [MaxLength(255)]
         public virtual string Name { get; set; }
-
-        [MaxLength(50)]
-        public virtual string MediCode { get; set; }
 
         [MaxLength(255)]
         public virtual string Description { get; set; }

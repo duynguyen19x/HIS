@@ -6,10 +6,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
-    /// Quốc tịch.
+    /// Tỉnh, thành phố.
     /// </summary>
-    [Table("DICountry")]
-    public class DICountry : AuditedEntity<Guid>
+    [Table("DIProvince")]
+    public class DIProvince : AuditedEntity<Guid>
     {
         [Required]
         [MaxLength(50)]
@@ -18,9 +18,6 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         [Required]
         [MaxLength(255)]
         public virtual string Name { get; set; }
-
-        [MaxLength(50)]
-        public virtual string MediCode { get; set; }
 
         [MaxLength(255)]
         public virtual string Description { get; set; }

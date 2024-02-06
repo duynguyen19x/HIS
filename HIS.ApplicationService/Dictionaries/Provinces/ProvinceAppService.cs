@@ -22,11 +22,11 @@ namespace HIS.ApplicationService.Dictionaries.Provinces
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var branch = new EntityFrameworkCore.Entities.Dictionaries.Province()
+                    var branch = new EntityFrameworkCore.Entities.Dictionaries.DIProvince()
                     {
                         Id = input.Id.GetValueOrDefault(),
-                        ProvinceCode = input.Code,
-                        ProvinceName = input.Name,
+                        Code = input.Code,
+                        Name = input.Name,
                         Inactive = input.Inactive
                     };
                     Context.Provinces.Add(branch);
@@ -56,7 +56,7 @@ namespace HIS.ApplicationService.Dictionaries.Provinces
             {
                 try
                 {
-                    var data = ObjectMapper.Map<Province>(input); 
+                    var data = ObjectMapper.Map<DIProvince>(input); 
                     Context.Provinces.Update(data);
                     await Context.SaveChangesAsync();
 
@@ -113,14 +113,14 @@ namespace HIS.ApplicationService.Dictionaries.Provinces
             {
                 result.IsSucceeded = true;
                 result.Result = (from r in Context.Provinces
-                                 where (string.IsNullOrEmpty(input.NameFilter) || r.ProvinceName == input.NameFilter)
-                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.ProvinceCode == input.CodeFilter)
+                                 where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
+                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
                                  select new ProvinceDto()
                                  {
                                      Id = r.Id,
-                                     Code = r.ProvinceCode,
-                                     Name = r.ProvinceName,
+                                     Code = r.Code,
+                                     Name = r.Name,
                                      Inactive = r.Inactive
                                  }).OrderBy(o => o.Code).ToList();
                 result.TotalCount = result.Result.Count;

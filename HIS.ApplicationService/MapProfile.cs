@@ -54,22 +54,22 @@ namespace HIS.ApplicationService
     {
         public MapProfile()
         {
-            CreateMap<Career, CareerDto>().ReverseMap();
+            CreateMap<DICareer, CareerDto>().ReverseMap();
             CreateMap<DICountry, CountryDto>().ReverseMap();
             CreateMap<DepartmentDto, DIDepartment>().ReverseMap();
-            CreateMap<DepartmentType, DepartmentTypeDto>().ReverseMap();
+            CreateMap<DIDepartmentType, DepartmentTypeDto>().ReverseMap();
             CreateMap<ChapterIcdDto, ChapterIcd>().ReverseMap();
-            CreateMap<District, DistrictDto>().ReverseMap();
+            CreateMap<DIDistrict, DistrictDto>().ReverseMap();
             CreateMap<Gender, GenderDto>().ReverseMap();
             CreateMap<Hospital, HospitalDto>().ReverseMap();
             CreateMap<Icd, IcdDto>().ReverseMap();
             CreateMap<DbOption, DbOptionDto>().ReverseMap();
-            CreateMap<Province, ProvinceDto>().ReverseMap();
+            CreateMap<DIProvince, ProvinceDto>().ReverseMap();
             CreateMap<RoomDto, DIRoom>()
-                .ForMember(dest => dest.RoomType, opt => opt.Ignore())
-                .ForMember(dest => dest.Department, opt => opt.Ignore())
+                .ForMember(dest => dest.RoomTypeFk, opt => opt.Ignore())
+                .ForMember(dest => dest.DepartmentFk, opt => opt.Ignore())
                 .ReverseMap();
-            CreateMap<RoomTypeDto, RoomType>().ReverseMap();
+            CreateMap<RoomTypeDto, DIRoomType>().ReverseMap();
             CreateMap<Ward, WardDto>().ReverseMap();
             CreateMap<ServiceGroupDto, ServiceGroup>().ReverseMap();
             CreateMap<ServiceGroupHeInDto, ServiceGroupHeIn>().ReverseMap();
@@ -161,7 +161,7 @@ namespace HIS.ApplicationService
             #region - danh mục
 
             CreateMap<DIBranch, DIBranchDto>().ReverseMap();
-            CreateMap<Ethnic, EthnicDto>().ReverseMap();
+            CreateMap<DIEthnicity, EthnicDto>().ReverseMap();
 
             #endregion
 

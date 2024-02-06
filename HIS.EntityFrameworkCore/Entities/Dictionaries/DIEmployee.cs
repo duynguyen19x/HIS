@@ -1,12 +1,6 @@
-﻿using HIS.Core.Domain.Entities;
-using HIS.Core.Domain.Entities.Auditing;
-using System;
-using System.Collections.Generic;
+﻿using HIS.Core.Domain.Entities.Auditing;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
@@ -21,29 +15,29 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         /// </summary>
         [Required]
         [MaxLength(50)]
-        public string EmployeeCode { get; set; }
+        public virtual string Code { get; set; }
 
         /// <summary>
         /// Tên nhân viên.
         /// </summary>
         [Required]
         [MaxLength(255)]
-        public string EmployeeName { get; set; }
+        public virtual string Name { get; set; }
 
         /// <summary>
         /// Ghi chú
         /// </summary>
         [MaxLength(255)]
-        public string Description { get; set; }
+        public virtual string Description { get; set; }
 
         /// <summary>
         /// Số thứ tự hiển thị
         /// </summary>
-        public int SortOrder { get; set; }
+        public virtual int SortOrder { get; set; }
 
         /// <summary>
         /// Khóa
         /// </summary>
-        public bool Inactive { get; set; }
+        public virtual bool Inactive { get; set; }
     }
 }

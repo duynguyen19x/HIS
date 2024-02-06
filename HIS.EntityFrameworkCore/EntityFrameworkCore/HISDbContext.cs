@@ -35,18 +35,18 @@ namespace HIS.EntityFrameworkCore
 
         #region - Danh mục
 
-        public DbSet<BloodType> BloodTypes { get; set; }
-        public DbSet<BloodTypeRh> BloodTypeRhs { get; set; }
+        public DbSet<DIBloodType> BloodTypes { get; set; }
+        public DbSet<DIBloodTypeRh> BloodTypeRhs { get; set; }
         public DbSet<DIBranch> Branchs { get; set; }
-        public DbSet<DeathCause> DeathCauses { get; set; }
-        public DbSet<DeathWithin> DeathWithins { get; set; }
-        public DbSet<District> Districts { get; set; }
+        public DbSet<DIDeathCause> DeathCauses { get; set; }
+        public DbSet<DIDeathWithin> DeathWithins { get; set; }
+        public DbSet<DIDistrict> Districts { get; set; }
         public DbSet<MedicalRecordType> MedicalRecordTypes { get; set; }
         public DbSet<MedicalRecordTypeGroup> MedicalRecordTypeGroups { get; set; }
         public DbSet<DICountry> Countries { get; set; }
         public DbSet<PatientType> PatientTypes { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
-        public DbSet<Province> Provinces { get; set; }
+        public DbSet<DIProvince> Provinces { get; set; }
         public DbSet<ReceptionObjectType> ReceptionTypes { get; set; }
         public DbSet<RelativeType> RelativeTypes { get; set; }
         public DbSet<Religion> Religions { get; set; }
@@ -61,11 +61,11 @@ namespace HIS.EntityFrameworkCore
         public DbSet<SToken> Tokens { get; set; }
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<DIDepartment> Departments { get; set; }
-        public DbSet<DepartmentType> DepartmentTypes { get; set; }
-        public DbSet<Ethnic> Ethnicities { get; set; }
+        public DbSet<DIDepartmentType> DepartmentTypes { get; set; }
+        public DbSet<DIEthnicity> Ethnicities { get; set; }
         public DbSet<DIRoom> Rooms { get; set; }
-        public DbSet<RoomType> RoomTypes { get; set; }
-        public DbSet<Career> Careers { get; set; }
+        public DbSet<DIRoomType> RoomTypes { get; set; }
+        public DbSet<DICareer> Careers { get; set; }
         public DbSet<Hospital> Hospitals { get; set; }
         public DbSet<Icd> Icds { get; set; }
         public DbSet<ChapterIcd> ChapterIcds { get; set; }
