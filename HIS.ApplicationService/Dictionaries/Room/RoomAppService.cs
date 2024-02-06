@@ -108,23 +108,23 @@ namespace HIS.ApplicationService.Dictionaries.Room
             {
                 result.IsSucceeded = true;
                 result.Result = (from r in Context.Rooms
-                                 join t in Context.RoomTypes on r.RoomTypeID equals t.Id
-                                 join d in Context.Departments on r.DepartmentID equals d.Id 
-                                 where (string.IsNullOrEmpty(input.NameFilter) || r.RoomName == input.NameFilter)
-                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.RoomCode == input.CodeFilter)
-                                     && (input.DepartmentIdFilter == null || r.DepartmentID == input.DepartmentIdFilter)
+                                 join t in Context.RoomTypes on r.RoomTypeId equals t.Id
+                                 join d in Context.Departments on r.DepartmentId equals d.Id 
+                                 where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
+                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
+                                     && (input.DepartmentIdFilter == null || r.DepartmentId == input.DepartmentIdFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
-                                     && (input.RoomTypeIdFilter == null || r.RoomTypeID == input.RoomTypeIdFilter)
+                                     && (input.RoomTypeIdFilter == null || r.RoomTypeId == input.RoomTypeIdFilter)
                                  select new RoomDto()
                                  {
                                      Id = r.Id,
-                                     Code = r.RoomCode,
+                                     Code = r.Code,
                                      MohCode = r.MediCode,
-                                     Name = r.RoomName,
-                                     RoomTypeId = r.RoomTypeID,
+                                     Name = r.Name,
+                                     RoomTypeId = r.RoomTypeId,
                                      RoomTypeCode = t.Code,
                                      RoomTypeName = t.Name,
-                                     DepartmentId = r.DepartmentID,
+                                     DepartmentId = r.DepartmentId,
                                      DepartmentCode = d.Code,
                                      DepartmentName = d.Name,
                                      Description = r.Description,
@@ -151,19 +151,19 @@ namespace HIS.ApplicationService.Dictionaries.Room
             {
                 result.IsSucceeded = true;
                 result.Result = (from r in Context.Rooms
-                                 join t in Context.RoomTypes on r.RoomTypeID equals t.Id
-                                 join d in Context.Departments on r.DepartmentID equals d.Id
+                                 join t in Context.RoomTypes on r.RoomTypeId equals t.Id
+                                 join d in Context.Departments on r.DepartmentId equals d.Id
                                  where r.Id == id
                                  select new RoomDto()
                                  {
                                      Id = r.Id,
-                                     Code = r.RoomCode,
+                                     Code = r.Code,
                                      MohCode = r.MediCode,
-                                     Name = r.RoomName,
-                                     RoomTypeId = r.RoomTypeID,
+                                     Name = r.Name,
+                                     RoomTypeId = r.RoomTypeId,
                                      RoomTypeCode = t.Code,
                                      RoomTypeName = t.Name,
-                                     DepartmentId = r.DepartmentID,
+                                     DepartmentId = r.DepartmentId,
                                      DepartmentCode = d.Code,
                                      DepartmentName = d.Name,
                                      Description = r.Description,
@@ -186,8 +186,8 @@ namespace HIS.ApplicationService.Dictionaries.Room
             try
             {
                 result.Result = (from r in Context.Rooms
-                                 join t in Context.RoomTypes on r.RoomTypeID equals t.Id
-                                 join d in Context.Departments on r.DepartmentID equals d.Id
+                                 join t in Context.RoomTypes on r.RoomTypeId equals t.Id
+                                 join d in Context.Departments on r.DepartmentId equals d.Id
                                  where d.DepartmentTypeID == (int)DepartmentTypes.PharmacyDepartment
                                  select new RoomDto()
                                  {

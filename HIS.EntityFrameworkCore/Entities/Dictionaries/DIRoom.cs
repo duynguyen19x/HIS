@@ -1,5 +1,6 @@
 ﻿using AutoMapper.Configuration.Annotations;
 using HIS.Core.Domain.Entities.Auditing;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
@@ -13,28 +14,35 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         /// <summary>
         /// Mã phòng, buồng.
         /// </summary>
-        public string RoomCode { get; set; }
+        [Required]
+        [MaxLength(50)]
+        public string Code { get; set; }
 
         /// <summary>
         /// Tên phòng, buồng.
         /// </summary>
-        public string RoomName { get; set; }
+        [Required]
+        [MaxLength(255)]
+        public string Name { get; set; }
 
         /// <summary>
         /// Mã phòng (BYT)
         /// </summary>
+        [Required]
+        [MaxLength(50)]
         public string MediCode { get; set; }
 
         /// <summary>
         /// Loại phòng.
         /// </summary>
-        public int RoomTypeID { get; set; }
+        public int RoomTypeId { get; set; }
 
         /// <summary>
         /// Khoa.
         /// </summary>
-        public Guid DepartmentID { get; set; }
+        public Guid DepartmentId { get; set; }
 
+        [MaxLength(255)]
         public string Description { get; set; }
 
         public int SortOrder { get; set; }

@@ -334,14 +334,14 @@ namespace HIS.ApplicationService.Dictionaries.Service
                     var sExecutionRoomDtos = (from room in Context.Rooms
                                               join exec in Context.ExecutionRooms.Where(w => w.ServiceId == id) on room.Id equals exec.RoomId into SExecutionRooms
                                               from s in SExecutionRooms.DefaultIfEmpty()
-                                              where rommTypes.Contains(room.RoomTypeID)
+                                              where rommTypes.Contains(room.RoomTypeId)
                                               select new ExecutionRoomDto()
                                               {
                                                   Id = s != null ? s.Id : null,
                                                   RoomId = room.Id,
                                                   ServiceId = s != null ? s.ServiceId : null,
-                                                  RoomCode = room.RoomCode,
-                                                  RoomName = room.RoomName,
+                                                  RoomCode = room.Code,
+                                                  RoomName = room.Name,
                                                   IsMain = s != null ? s.IsMain : false,
                                                   IsCheck = s != null ? true : false,
                                               }).OrderBy(s => s.RoomCode).ToList();
@@ -369,12 +369,12 @@ namespace HIS.ApplicationService.Dictionaries.Service
 
                     var sExecutionRooms = (from room in Context.Rooms
                                            where room.Inactive == false
-                                                && rommTypes.Contains(room.RoomTypeID)
+                                                && rommTypes.Contains(room.RoomTypeId)
                                            select new ExecutionRoomDto()
                                            {
                                                RoomId = room.Id,
-                                               RoomCode = room.RoomCode,
-                                               RoomName = room.RoomName,
+                                               RoomCode = room.Code,
+                                               RoomName = room.Name,
                                            }).OrderBy(s => s.RoomCode).ToList();
 
                     serviceDto.SServicePricePolicies = sServicePricePolicys;
@@ -497,7 +497,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
 
                     var executionRoomDtos = sServiceDtos.SelectMany(s => s.SExecutionRooms).ToList();
                     var executionRooms = (from executionRoom in executionRoomDtos
-                                          join sRoom in sRooms on executionRoom.RoomCode equals sRoom.RoomCode
+                                          join sRoom in sRooms on executionRoom.RoomCode equals sRoom.Code
                                           select new ExecutionRoom()
                                           {
                                               Id = executionRoom.Id.GetValueOrDefault(),

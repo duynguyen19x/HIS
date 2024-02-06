@@ -39,18 +39,26 @@ namespace HIS.Core.EntityFrameworkCore
 
         protected virtual void ConfigureKeys(ModelBuilder modelBuilder, IMutableEntityType entityType)
         {
+            var entityTypeBuilder = modelBuilder.Entity(entityType.ClrType);
+
             // đặt khóa chính với kiểu dữ liệu xác định
             if (typeof(IEntity<>).IsAssignableFrom(entityType.ClrType))
             {
-                modelBuilder.Entity(entityType.ClrType).HasKey("Id");
+                entityTypeBuilder.HasKey("Id");
             }
+            //else if (typeof(IEntity).IsAssignableFrom(entityType.ClrType) && entityType.FindProperty(entityType.Name + "Id") != null)
+            //{
+            //    entityTypeBuilder.HasKey(entityType.Name + "Id");
+            //}    
         }
 
         protected virtual void ConfigureGlobalFilters(ModelBuilder modelBuilder, IMutableEntityType entityType)
         {
             // loại bỏ các cột có trạng thái là đã xóa (IsDeleted).
             if (typeof(ISoftDelete).IsAssignableFrom(entityType.ClrType))
+            {
                 entityType.AddSoftDeleteQueryFilter();
+            }    
         }
 
         public override int SaveChanges()
