@@ -5,15 +5,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class TreatmentResultConfiguration : IEntityTypeConfiguration<TreatmentResult>
+    public class DITreatmentResultConfiguration : IEntityTypeConfiguration<DITreatmentResult>
     {
-        public void Configure(EntityTypeBuilder<TreatmentResult> builder)
+        public void Configure(EntityTypeBuilder<DITreatmentResult> builder)
         {
             builder.ToTable("DIC_TreatmentResult");
 
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.TreatmentResultCode).HasMaxLength(20).IsRequired();
-            builder.Property(x => x.TreatmentResultName).HasMaxLength(128).IsRequired();
+            builder.Property(x => x.Code).HasMaxLength(20).IsRequired();
+            builder.Property(x => x.Name).HasMaxLength(128).IsRequired();
             builder.Property(x => x.Description).HasMaxLength(255);
 
             //builder.HasData(

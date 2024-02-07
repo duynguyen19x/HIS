@@ -41,8 +41,8 @@ namespace HIS.ApplicationService.Dictionaries.ServicePricePolicy
                                  select new ServicePricePolicyDto()
                                  {
                                      PatientTypeId = r.Id,
-                                     PatientTypeCode = r.PatientTypeCode,
-                                     PatientTypeName = r.PatientTypeName,
+                                     PatientTypeCode = r.Code,
+                                     PatientTypeName = r.Name,
                                      Inactive = r.Inactive,
                                  })
                                  .WhereIf(input.InactiveFilter != null, w => w.Inactive == input.InactiveFilter)

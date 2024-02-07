@@ -127,8 +127,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                                        CeilingPrice = med.CeilingPrice,
                                                        PaymentRate = med.PaymentRate,
                                                        ExecutionTime = med.ExecutionTime,
-                                                       PatientTypeCode = pa.PatientTypeCode,
-                                                       PatientTypeName = pa.PatientTypeName,
+                                                       PatientTypeCode = pa.Code,
+                                                       PatientTypeName = pa.Name,
                                                        IsHeIn = med.PatientTypeId == (int)PatientTypes.BHYT ? true : false,
                                                    }).WhereIf(itemIds != null, w => itemIds.Contains(w.ItemId))
                                                    .OrderBy(s => s.PatientTypeCode).ToList();

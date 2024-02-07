@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class DIDepartmentConfiguration : IEntityTypeConfiguration<DIDepartment>
+    public class DIDistrictConfiguration : IEntityTypeConfiguration<DIDistrict>
     {
-        public void Configure(EntityTypeBuilder<DIDepartment> builder)
+        public void Configure(EntityTypeBuilder<DIDistrict> builder)
         {
         }
     }

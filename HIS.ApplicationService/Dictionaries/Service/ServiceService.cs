@@ -326,8 +326,8 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                                        PaymentRate = ser.PaymentRate,
                                                        ExecutionTime = ser.ExecutionTime,
                                                        ExecutionTimeString = ser.ExecutionTime == null ? null : ser.ExecutionTime.Value.ToString("dd/MM/yyyy"),
-                                                       PatientTypeCode = pa.PatientTypeCode,
-                                                       PatientTypeName = pa.PatientTypeName,
+                                                       PatientTypeCode = pa.Code,
+                                                       PatientTypeName = pa.Name,
                                                        IsHeIn = ser.PatientTypeId == (int)HIS.Core.Enums.PatientTypes.BHYT ? true : false,
                                                    }).OrderBy(s => s.PatientTypeCode).ToList();
 
@@ -362,8 +362,8 @@ namespace HIS.ApplicationService.Dictionaries.Service
                                                 select new ServicePricePolicyDto()
                                                 {
                                                     PatientTypeId = r.Id,
-                                                    PatientTypeCode = r.PatientTypeCode,
-                                                    PatientTypeName = r.PatientTypeName,
+                                                    PatientTypeCode = r.Code,
+                                                    PatientTypeName = r.Name,
                                                     IsHeIn = r.Id == (int)HIS.Core.Enums.PatientTypes.BHYT ? true : false,
                                                 }).OrderBy(o => o.PatientTypeCode).ToList();
 
@@ -482,7 +482,7 @@ namespace HIS.ApplicationService.Dictionaries.Service
 
                     var servicePricePolicieDtos = sServiceDtos.SelectMany(s => s.SServicePricePolicies).ToList();
                     var servicePricePolicie = (from servicePricePolicy in servicePricePolicieDtos
-                                               join sPatientType in sPatientTypes on servicePricePolicy.PatientTypeCode equals sPatientType.PatientTypeCode
+                                               join sPatientType in sPatientTypes on servicePricePolicy.PatientTypeCode equals sPatientType.Code
                                                select new EntityFrameworkCore.Entities.Categories.Services.ServicePricePolicy()
                                                {
                                                    Id = servicePricePolicy.Id.GetValueOrDefault(),

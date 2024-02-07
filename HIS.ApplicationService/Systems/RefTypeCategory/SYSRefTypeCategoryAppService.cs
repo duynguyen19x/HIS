@@ -33,7 +33,7 @@ namespace HIS.ApplicationService.Systems.RefTypeCategory
             try
             {
                 var query = _sysRefTypeCategoryRepository.GetAll()
-                    .WhereIf(!string.IsNullOrEmpty(input.RefTypeCategoryNameFilter), x => x.RefTypeCategoryName == input.RefTypeCategoryNameFilter);
+                    .WhereIf(!string.IsNullOrEmpty(input.RefTypeCategoryNameFilter), x => x.Name == input.RefTypeCategoryNameFilter);
                 var paged = query.ApplySortingAndPaging(input);
 
                 result.TotalCount = await query.CountAsync();

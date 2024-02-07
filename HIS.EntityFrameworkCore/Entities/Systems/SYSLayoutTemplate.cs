@@ -16,10 +16,10 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
     public class SYSLayoutTemplate : AuditedEntity<Guid>
     {
         [MaxLength(50)]
-        public string LayoutTemplateCode { get; set; }
+        public string Code { get; set; }
 
         [MaxLength(255)]
-        public string LayoutTemplateName { get; set; }
+        public string Name { get; set; }
 
         public int RefTypeId { get; set; }
 

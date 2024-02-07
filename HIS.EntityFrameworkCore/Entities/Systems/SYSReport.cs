@@ -1,23 +1,18 @@
-﻿using HIS.Core.Application.Services.Dto;
-using HIS.Core.Domain.Entities.Auditing;
-using System;
-using System.Collections.Generic;
+﻿using HIS.Core.Domain.Entities.Auditing;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Systems
 {
+    /// <summary>
+    /// Báo cáo.
+    /// </summary>
     [Table("SYSReport")]
     public class SYSReport : AuditedEntity<int>
     {
-        [MaxLength(50)]
-        public string ReportCode { get; set; }
-
+        [Required]
         [MaxLength(255)]
-        public string ReportName { get; set; }
+        public string Name { get; set; }
 
         [MaxLength(255)]
         public string Description { get; set; }

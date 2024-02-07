@@ -188,17 +188,17 @@ namespace HIS.ApplicationService.Dictionaries.Room
                 result.Result = (from r in Context.Rooms
                                  join t in Context.RoomTypes on r.RoomTypeId equals t.Id
                                  join d in Context.Departments on r.DepartmentId equals d.Id
-                                 where d.DepartmentTypeID == (int)DepartmentTypes.PharmacyDepartment
+                                 where d.DepartmentTypeId == (int)DepartmentTypes.PharmacyDepartment
                                  select new RoomDto()
                                  {
                                      Id = r.Id,
-                                     Code = r.RoomCode,
+                                     Code = r.Code,
                                      MohCode = r.MediCode,
-                                     Name = r.RoomName,
-                                     RoomTypeId = r.RoomTypeID,
+                                     Name = r.Name,
+                                     RoomTypeId = r.RoomTypeId,
                                      RoomTypeCode = t.Code,
                                      RoomTypeName = t.Name,
-                                     DepartmentId = r.DepartmentID,
+                                     DepartmentId = r.DepartmentId,
                                      DepartmentCode = d.Code,
                                      DepartmentName = d.Name,
                                      Description = r.Description,

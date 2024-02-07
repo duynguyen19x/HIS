@@ -44,15 +44,15 @@ namespace HIS.EntityFrameworkCore
         public DbSet<MedicalRecordType> MedicalRecordTypes { get; set; }
         public DbSet<MedicalRecordTypeGroup> MedicalRecordTypeGroups { get; set; }
         public DbSet<DICountry> Countries { get; set; }
-        public DbSet<PatientType> PatientTypes { get; set; }
+        public DbSet<DIPatientObjectType> PatientTypes { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
         public DbSet<DIProvince> Provinces { get; set; }
         public DbSet<ReceptionObjectType> ReceptionTypes { get; set; }
         public DbSet<RelativeType> RelativeTypes { get; set; }
         public DbSet<DIReligion> Religions { get; set; }
         public DbSet<RightRouteType> RightRouteTypes { get; set; }
-        public DbSet<TreatmentEndType> TreatmentEndTypes { get; set; }
-        public DbSet<TreatmentResult> TreatmentResults { get; set; }
+        public DbSet<DITreatmentEndType> TreatmentEndTypes { get; set; }
+        public DbSet<DITreatmentResult> TreatmentResults { get; set; }
         public DbSet<DIWard> Wards { get; set; }
         public DbSet<DIGender> Genders { get; set; }
         public DbSet<User> Users { get; set; }

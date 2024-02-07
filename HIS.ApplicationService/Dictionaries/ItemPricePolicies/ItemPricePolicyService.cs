@@ -37,8 +37,8 @@ namespace HIS.ApplicationService.Dictionaries.ItemPricePolicies
                                  select new ItemPricePolicyDto()
                                  {
                                      PatientTypeId = r.Id,
-                                     PatientTypeCode = r.PatientTypeCode,
-                                     PatientTypeName = r.PatientTypeName,
+                                     PatientTypeCode = r.Code,
+                                     PatientTypeName = r.Name,
                                      IsHeIn = r.Id == (int)HIS.Core.Enums.PatientTypes.BHYT ? true : false,
                                      Inactive = r.Inactive,
                                  })

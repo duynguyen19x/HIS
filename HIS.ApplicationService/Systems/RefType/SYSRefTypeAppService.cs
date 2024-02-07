@@ -26,7 +26,7 @@ namespace HIS.ApplicationService.Systems.RefType
             try
             {
                 var query = _sysRefTypeRepository.GetAll()
-                    .WhereIf(!string.IsNullOrEmpty(input.RefTypeNameFilter), x => x.RefTypeName == input.RefTypeNameFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.RefTypeNameFilter), x => x.Name == input.RefTypeNameFilter)
                     .WhereIf(input.RefTypeCategoryFilter != null, x => x.RefTypeCategoryId == input.RefTypeCategoryFilter);
                 var paged = query.ApplySortingAndPaging(input);
 
