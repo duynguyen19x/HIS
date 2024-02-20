@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace HIS.Core.Domain.Entities
 {
-    public interface IEntity
+    public interface IEntity<TPrimaryKey> : IEntity
     {
+        TPrimaryKey Id { get; set; }
     }
 }

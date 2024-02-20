@@ -32,6 +32,8 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
 
         public bool IsPublic { get; set; }
 
+        public bool IsDefault { get; set; }
+
         [ForeignKey("RefTypeId")]
         public SYSRefType RefTypeFk { get; set; }
 

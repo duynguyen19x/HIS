@@ -7,8 +7,14 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Compile Remove="Api\Attributes\**" />
+		<Compile Remove="Api\Helpers\**" />
 		<Compile Remove="Utils\**" />
+		<EmbeddedResource Remove="Api\Attributes\**" />
+		<EmbeddedResource Remove="Api\Helpers\**" />
 		<EmbeddedResource Remove="Utils\**" />
+		<None Remove="Api\Attributes\**" />
+		<None Remove="Api\Helpers\**" />
 		<None Remove="Utils\**" />
 	</ItemGroup>
 
@@ -19,11 +25,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\HIS.Utilities\HIS.Utilities.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Api\Attributes\" />
-	  <Folder Include="Api\Helpers\" />
 	</ItemGroup>
 
 </Project>

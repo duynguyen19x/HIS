@@ -75,15 +75,10 @@ namespace HIS.Core.EntityFrameworkCore
 
         protected virtual void ApplyConcepts()
         {
+            var userId = GetAuditUserId();
+
             foreach (EntityEntry entry in ChangeTracker.Entries().ToList())
             {
-                //if (entry.State != EntityState.Modified && entry.CheckOwnedEntityChange())
-                //{
-                //    Entry(entry.Entity).State = EntityState.Modified;
-                //}
-
-                var userId = GetAuditUserId();
-
                 switch (entry.State)
                 {
                     case EntityState.Added:
@@ -111,7 +106,8 @@ namespace HIS.Core.EntityFrameworkCore
                                 entry.Reload();
                                 entry.State = EntityState.Modified;
                                 delete.IsDeleted = true;
-                                delete.DeletedBy = userId;
+                                if (Check.IsNullOrDefault(delete.DeletedBy)) // neu chua co audit thi them vao
+                                    delete.DeletedBy = userId;
                                 delete.DeletedDate = DateTime.Now;
                             } 
                             break;
