@@ -15,29 +15,27 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
     [Table("SYSLayoutTemplate")]
     public class SYSLayoutTemplate : AuditedEntity<Guid>
     {
-        [MaxLength(50)]
-        public string Code { get; set; }
-
+        [Required]
         [MaxLength(255)]
         public string Name { get; set; }
 
-        public int RefTypeId { get; set; }
-
-        public string TemplateConfig { get; set; }
+        [Required]
+        public string TemplateValue { get; set; }
 
         [MaxLength(255)]
         public string Description { get; set; }
 
-        public Guid? UserId { get; set; }
-
+        /// <summary>
+        /// Chia sẻ mẫu cho những người dùng khác.
+        /// </summary>
         public bool IsPublic { get; set; }
 
-        public bool IsDefault { get; set; }
+        /// <summary>
+        /// Người tạo mẫu.
+        /// </summary>
+        public Guid? UserID { get; set; }
 
-        [ForeignKey("RefTypeId")]
-        public SYSRefType RefTypeFk { get; set; }
-
-        [ForeignKey("UserId")]
-        public User UserFk { get; set; }
+        [ForeignKey("UserID")]
+        public SYSUser UserFk { get; set; }
     }
 }

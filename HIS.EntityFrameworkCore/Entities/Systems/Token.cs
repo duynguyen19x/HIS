@@ -12,6 +12,6 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
         public DateTime IssueAt { get; set; }
         public DateTime ExpiredAt { get; set; }
 
-        public User User { get; set; }
+        public SYSUser User { get; set; }
     }
 }

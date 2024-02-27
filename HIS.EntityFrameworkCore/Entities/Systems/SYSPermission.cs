@@ -10,17 +10,19 @@ using System.Threading.Tasks;
 namespace HIS.EntityFrameworkCore.Entities.Systems
 {
     /// <summary>
-    /// Nhóm tùy chọn.
+    /// Quyền hạn.
     /// </summary>
-    [Table("SYSOptionCategory")]
-    public class SYSOptionCategory : Entity<int>
+    [Table("SYSPermission")]
+    public class SYSPermission : Entity<string>
     {
         [Required]
-        [MaxLength(128)]
+        [MaxLength(255)]
         public string Name { get; set; }
 
         [MaxLength(255)]
         public string Description { get; set; }
+
+        public string ParentID { get; set; }
 
         public int SortOrder { get; set; }
     }

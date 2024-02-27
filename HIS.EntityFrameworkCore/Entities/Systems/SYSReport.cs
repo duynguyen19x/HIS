@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
     /// Báo cáo.
     /// </summary>
     [Table("SYSReport")]
-    public class SYSReport : AuditedEntity<int>
+    public class SYSReport : AuditedEntity<string>
     {
         [Required]
         [MaxLength(255)]
@@ -17,13 +17,15 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
         [MaxLength(255)]
         public string Description { get; set; }
 
+        public string ParentID { get; set; }
+
         public int SortOrder { get; set; }
 
         public bool Inactive { get; set; }
 
-        public int ReportCategoryId { get; set; }
+        public int ReportCategoryID { get; set; }
 
-        [ForeignKey("ReportCategoryId")]
+        [ForeignKey("ReportCategoryID")]
         public SYSReportCategory ReportCategoryFk { get; set; }
     }
 }

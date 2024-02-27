@@ -137,15 +137,15 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         [Ignore]
         public InOutStockType InOutStockType { get; set; }
         [Ignore]
-        public User CreationUser { get; set; }
+        public SYSUser CreationUser { get; set; }
         [Ignore]
-        public User ReceiverUser { get; set; }
+        public SYSUser ReceiverUser { get; set; }
         [Ignore]
-        public User ApproverUser { get; set; }
+        public SYSUser ApproverUser { get; set; }
         [Ignore]
-        public User StockImpUser { get; set; }
+        public SYSUser StockImpUser { get; set; }
         [Ignore]
-        public User StockExpUser { get; set; }
+        public SYSUser StockExpUser { get; set; }
         [Ignore]
         public DIRoom ReqRoom { get; set; }
         [Ignore]

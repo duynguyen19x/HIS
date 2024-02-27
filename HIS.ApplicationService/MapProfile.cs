@@ -47,6 +47,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using HIS.ApplicationService.Systems.Role.Dtos;
 
 namespace HIS.ApplicationService
 {
@@ -167,8 +168,7 @@ namespace HIS.ApplicationService
 
             #region - hệ thống
 
-            CreateMap<SYSRefTypeCategoryDto, SYSRefTypeCategory>().ReverseMap();
-            CreateMap<SYSRefTypeDto, SYSRefType>().ReverseMap();
+            CreateMap<SYSRole, SYSRoleDto>().ReverseMap();
 
             #endregion
         }

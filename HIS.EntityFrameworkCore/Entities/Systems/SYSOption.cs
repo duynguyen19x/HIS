@@ -28,12 +28,12 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
         /// <summary>
         /// Giá trị
         /// </summary>
-        public string Data { get; set; }
+        public string OptionValue { get; set; }
 
         /// <summary>
         /// Loại giá trị
         /// </summary>
-        public int DataType { get; set; }
+        public int ValueType { get; set; }
 
         [MaxLength(512)]
         public string Description { get; set; }
@@ -50,19 +50,24 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
         /// </summary>
         public bool IsUserOption { get; set; }
 
-        public int OptionCategoryId { get; set; }
+        /// <summary>
+        /// Là cấu hình mặc định của hệ thống (khi thêm mới tùy chọn theo chi nhánh hay người dùng thì thì sao chép từ tùy chọn này).
+        /// </summary>
+        public bool IsDefault { get; set; }
 
-        [ForeignKey("OptionCategoryId")]
+        public int OptionCategoryID { get; set; }
+
+        public Guid? BranchID { get; set; }
+
+        public Guid? UserID { get; set; }
+
+        [ForeignKey("OptionCategoryID")]
         public SYSOptionCategory OptionCategoryFk { get; set; }
 
-        public Guid? BranchId { get; set; }
-
-        [ForeignKey("BranchId")]
+        [ForeignKey("BranchID")]
         public DIBranch BranchFk { get; set; }
 
-        public Guid? UserId { get; set; }
-
-        [ForeignKey("UserId")]
-        public User UserFk { get; set; }
+        [ForeignKey("UserID")]
+        public SYSUser UserFk { get; set; }
     }
 }

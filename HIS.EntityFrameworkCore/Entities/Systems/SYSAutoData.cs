@@ -11,5 +11,6 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
     [Table("SYSAutoData")]
     public class SYSAutoData : AuditedEntity<Guid>
     {
+
     }
 }

@@ -3,7 +3,7 @@ using HIS.Utilities.Enums;
 
 namespace HIS.EntityFrameworkCore.Entities.Systems
 {
-    public class User : Entity<Guid>
+    public class SYSUser : Entity<Guid>
     {
         public string UserName { get; set; }
         public string Password { get; set; }

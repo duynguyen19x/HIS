@@ -1,4 +1,4 @@
-﻿using HIS.Core.Domain.Entities;
+﻿using HIS.Core.Domain.Entities.Auditing;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,18 +10,24 @@ using System.Threading.Tasks;
 namespace HIS.EntityFrameworkCore.Entities.Systems
 {
     /// <summary>
-    /// Nhóm tùy chọn.
+    /// Vai trò.
     /// </summary>
-    [Table("SYSOptionCategory")]
-    public class SYSOptionCategory : Entity<int>
+    [Table("SYSRole")]
+    public class SYSRole : AuditedEntity<Guid>
     {
         [Required]
-        [MaxLength(128)]
+        [MaxLength(50)]
+        public string Code { get; set; }
+
+        [Required]
+        [MaxLength(255)]
         public string Name { get; set; }
 
         [MaxLength(255)]
         public string Description { get; set; }
 
         public int SortOrder { get; set; }
+
+        public bool Inactive { get; set; }
     }
 }

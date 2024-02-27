@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations
 {
-    public class UserConfigurations : IEntityTypeConfiguration<User>
+    public class UserConfigurations : IEntityTypeConfiguration<SYSUser>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<SYSUser> builder)
         {
             builder.ToTable("SYS_User");
             builder.HasKey(x => x.Id);
@@ -27,7 +27,7 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.Property(x => x.Password).IsRequired(false).HasMaxLength(1020);
 
             builder.HasData(
-                new User()
+                new SYSUser()
                 {
                     Id = new Guid("3382BE1C-2836-4246-99DB-C4E1C781E868"),
                     UserName = "Administrator",
@@ -38,7 +38,7 @@ namespace HIS.EntityFrameworkCore.Configurations
                     UseType = Utilities.Enums.UseTypes.Admin,
                     Status = Utilities.Enums.UserStatusTypes.Active,
                 },
-                new User
+                new SYSUser
                 {
                     Id = new Guid("49BA7FD4-2EDB-4482-A419-00C81F023F5C"),
                     UserName = "hainx",

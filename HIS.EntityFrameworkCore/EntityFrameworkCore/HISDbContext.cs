@@ -25,10 +25,8 @@ namespace HIS.EntityFrameworkCore
         public DbSet<DbOption> DbOptions { get; set; }
 
         public DbSet<SYSLayoutTemplate> SYSLayoutTemplate { get; set; }
-        public DbSet<SYSRefType> SYSRefType { get; set; }
-        public DbSet<SYSRefTypeCategory> SYSRefTypeCategory { get; set; }
         public DbSet<SYSReport> SYSReport { get; set; }
-        public DbSet<SYSReportCategory> SYSReportGroup { get; set; }
+        public DbSet<SYSReportCategory> SYSReportCategory { get; set; }
 
 
         #endregion
@@ -55,7 +53,7 @@ namespace HIS.EntityFrameworkCore
         public DbSet<DITreatmentResult> TreatmentResults { get; set; }
         public DbSet<DIWard> Wards { get; set; }
         public DbSet<DIGender> Genders { get; set; }
-        public DbSet<User> Users { get; set; }
+        public DbSet<SYSUser> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<SToken> Tokens { get; set; }
