@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Systems
 {
-    public class SYSPermissionConfiguration : IEntityTypeConfiguration<SYSPermission>
+    public class SYSLayoutTemplateConfiguration : IEntityTypeConfiguration<SYSLayoutTemplate>
     {
-        public void Configure(EntityTypeBuilder<SYSPermission> builder)
+        public void Configure(EntityTypeBuilder<SYSLayoutTemplate> builder)
         {
-            //builder.HasData();
+            
         }
     }
 }

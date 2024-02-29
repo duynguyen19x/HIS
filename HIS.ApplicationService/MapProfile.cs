@@ -33,8 +33,6 @@ using HIS.Dtos.Dictionaries.ServiceUnit;
 using HIS.Dtos.Dictionaries.Supplier;
 using HIS.Dtos.Dictionaries.Ward;
 using HIS.Dtos.Systems.DbOption;
-using HIS.Dtos.Systems.RefTypeCategory;
-using HIS.Dtos.Systems;
 using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Categories.Items;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
@@ -42,12 +40,8 @@ using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.Systems;
 using HIS.EntityFrameworkCore.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using HIS.ApplicationService.Systems.Role.Dtos;
+using HIS.ApplicationService.Systems.LayoutTemplate.Dtos;
 
 namespace HIS.ApplicationService
 {
@@ -168,6 +162,7 @@ namespace HIS.ApplicationService
 
             #region - hệ thống
 
+            CreateMap<SYSLayoutTemplate, SYSLayoutTemplateDto>().ReverseMap();
             CreateMap<SYSRole, SYSRoleDto>().ReverseMap();
 
             #endregion

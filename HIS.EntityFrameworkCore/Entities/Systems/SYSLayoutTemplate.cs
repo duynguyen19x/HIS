@@ -1,4 +1,5 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,6 +17,10 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
     public class SYSLayoutTemplate : AuditedEntity<Guid>
     {
         [Required]
+        [MaxLength(50)]
+        public string Code { get; set; }
+
+        [Required]
         [MaxLength(255)]
         public string Name { get; set; }
 
@@ -26,12 +31,12 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
         public string Description { get; set; }
 
         /// <summary>
-        /// Chia sẻ mẫu cho những người dùng khác.
+        /// Chia sẻ mẫu tùy chỉnh của người dùng cho những người dùng khác.
         /// </summary>
         public bool IsPublic { get; set; }
 
         /// <summary>
-        /// Người tạo mẫu.
+        /// Mẫu tùy chỉnh của người dùng.
         /// </summary>
         public Guid? UserID { get; set; }
 

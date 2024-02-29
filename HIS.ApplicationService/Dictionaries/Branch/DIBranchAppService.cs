@@ -127,6 +127,8 @@ namespace HIS.ApplicationService.Dictionaries.Branchs
                     var entity = _diBranchRepository.Get(id);
                     await _diBranchRepository.DeleteAsync(entity);
 
+                    unitOfWork.Complete();
+
                     result.Result = ObjectMapper.Map<DIBranchDto>(entity);
                     result.IsSucceeded = true;
                 }

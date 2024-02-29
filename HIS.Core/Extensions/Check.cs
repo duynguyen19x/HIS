@@ -81,5 +81,15 @@ namespace HIS.Core.Extensions
             }
             return false;
         }
+
+        public static bool IsEquals(object objA, object objB)
+        {
+            return Equals(objA, objB);
+        }
+
+        public static bool IsNotEquals(object objA, object objB)
+        {
+            return !Equals(objA, objB);
+        }
     }
 }

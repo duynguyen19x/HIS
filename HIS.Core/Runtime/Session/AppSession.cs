@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HIS.Utilities.Sections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,11 @@ namespace HIS.Core.Runtime.Session
 {
     public class AppSession : IAppSession
     {
-        public Guid? UserId
+        public Guid? UserID
         {
             get
             {
-                return null;
+                return SessionExtensions.Login?.Id;
             }
         }
     }

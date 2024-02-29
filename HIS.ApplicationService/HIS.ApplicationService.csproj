@@ -37,6 +37,7 @@
 
   <ItemGroup>
     <Folder Include="Business\Patients\Dtos\" />
+    <Folder Include="Systems\OptionCategory\" />
   </ItemGroup>
 
 </Project>

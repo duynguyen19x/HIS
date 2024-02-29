@@ -1,43 +1,23 @@
 ﻿using HIS.Core.Application.Services.Dto;
-using HIS.Core.Domain.Entities.Auditing;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Systems
+namespace HIS.ApplicationService.Systems.Option.Dtos
 {
-    /// <summary>
-    /// Tùy chọn.
-    /// </summary>
-    [Table("SYSOption")]
-    public class SYSOption : AuditedEntity<Guid>
+    public class SYSOptionDto : EntityDto<Guid?>
     {
-        [Required]
-        [MaxLength(128)]
         public string Code { get; set; }
 
-        [Required]
-        [MaxLength(255)]
         public string Name { get; set; }
 
-        /// <summary>
-        /// Nhóm tùy chọn.
-        /// </summary>
         public int OptionCategoryID { get; set; }
 
-        /// <summary>
-        /// Tùy chọn của chi nhánh.
-        /// </summary>
         public Guid? BranchID { get; set; }
 
-        /// <summary>
-        /// Tùy chọn của người dùng.
-        /// </summary>
         public Guid? UserID { get; set; }
 
         /// <summary>
@@ -53,7 +33,7 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
         /// <summary>
         /// Là cấu hình hình dùng chung (cho chi nhánh).
         /// </summary>
-        public bool IsGlobalOption { get; set; } 
+        public bool IsGlobalOption { get; set; }
 
         /// <summary>
         /// Là cấu hình của người dùng.
@@ -65,18 +45,8 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
         /// </summary>
         public bool IsDefault { get; set; }
 
-        [MaxLength(512)]
         public string Description { get; set; }
 
         public int SortOrder { get; set; }
-
-        [ForeignKey("OptionCategoryID")]
-        public SYSOptionCategory OptionCategoryFk { get; set; }
-
-        [ForeignKey("BranchID")]
-        public DIBranch BranchFk { get; set; }
-
-        [ForeignKey("UserID")]
-        public SYSUser UserFk { get; set; }
     }
 }

@@ -1,16 +1,10 @@
 ﻿using HIS.ApplicationService.Systems.Permission.Dtos;
-using HIS.ApplicationService.Systems.Role.Dtos;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Linq.Extensions;
 using HIS.EntityFrameworkCore.Entities.Systems;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Systems.Permission
 {

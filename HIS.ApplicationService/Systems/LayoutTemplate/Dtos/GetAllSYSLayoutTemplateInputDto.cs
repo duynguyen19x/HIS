@@ -9,5 +9,12 @@ namespace HIS.ApplicationService.Systems.LayoutTemplate.Dtos
 {
     public class GetAllSYSLayoutTemplateInputDto : PagedAndSortedResultRequestDto
     {
+        public string LayoutTemplateCodeFilter { get; set; }
+
+        public string LayoutTemplateNameFilter { get; set; }
+
+        public bool? IsPublicFilter { get; set; }
+
+        public Guid? UserFilter { get; set; }
     }
 }

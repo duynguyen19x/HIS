@@ -1,6 +1,4 @@
-﻿using HIS.Dtos.Systems.RefType;
-using HIS.Dtos.Systems;
-using HIS.Dtos.Dictionaries.Branchs;
+﻿using HIS.Dtos.Dictionaries.Branchs;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 
