@@ -90,6 +90,7 @@ namespace HIS.EntityFrameworkCore
         public DbSet<ItemLine> ItemLines { get; set; }
         public DbSet<ItemType> ItemTypes { get; set; }
         public DbSet<ItemPricePolicy> ItemPricePolicies { get; set; }
+        public DbSet<Machine> Machines { get; set; }
 
         #endregion
 
