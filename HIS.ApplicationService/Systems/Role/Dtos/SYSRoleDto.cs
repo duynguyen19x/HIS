@@ -1,4 +1,5 @@
-﻿using HIS.ApplicationService.Systems.Permission.Dtos;
+﻿using AutoMapper.Configuration.Annotations;
+using HIS.ApplicationService.Systems.Permission.Dtos;
 using HIS.Core.Application.Services.Dto;
 using HIS.EntityFrameworkCore.Entities.Systems;
 using System;
@@ -22,8 +23,8 @@ namespace HIS.ApplicationService.Systems.Role.Dtos
 
         public bool Inactive { get; set; }
 
-        public IList<SYSUser> Users { get; set; }
-
         public IList<SYSPermissionDto> Permissions { get; set; }
+
+        public IList<SYSUser> Users { get; set; }
     }
 }

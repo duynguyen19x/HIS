@@ -96,13 +96,13 @@ namespace HIS.ApplicationService.Systems.LayoutTemplate
 
                     // kiểm tra dữ liệu
                     // không được phép xóa mẫu thuộc hệ thống.
-                    if (Check.IsNullOrDefault(entity.UserID))
+                    if (Check.IsNullOrDefault(entity.UserId))
                     {
                         throw new Exception($"<{entity.Name}> là mẫu thuộc hệ thống. Bạn không được phép xóa!");
                     }
 
                     // người dùng chỉ được phép xóa mẫu tùy chỉnh của người dùng.
-                    if (Check.IsNotEquals(entity.UserID, AppSession.UserID))
+                    if (Check.IsNotEquals(entity.UserId, AppSession.UserID))
                     {
                         throw new Exception($"<{entity.Name}> là mẫu thuộc người dùng khác. Bạn không được phép xóa!");
                     }
@@ -131,7 +131,7 @@ namespace HIS.ApplicationService.Systems.LayoutTemplate
                     .WhereIf(!string.IsNullOrEmpty(input.LayoutTemplateCodeFilter), x => x.Code == input.LayoutTemplateCodeFilter)
                     .WhereIf(!string.IsNullOrEmpty(input.LayoutTemplateNameFilter), x => x.Name == input.LayoutTemplateNameFilter)
                     .WhereIf(input.IsPublicFilter != null, x => x.IsPublic == input.IsPublicFilter)
-                    .WhereIf(input.UserFilter != null, x => x.UserID == input.UserFilter);
+                    .WhereIf(input.UserFilter != null, x => x.UserId == input.UserFilter);
                 var paged = query.ApplySortingAndPaging(input);
 
                 result.TotalCount = await query.CountAsync();

@@ -15,18 +15,20 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
     [Table("SYSRole")]
     public class SYSRole : AuditedEntity<Guid>
     {
-        [Required]
         [MaxLength(50)]
+        [Required]
         public string Code { get; set; }
 
-        [Required]
         [MaxLength(255)]
+        [Required]
         public string Name { get; set; }
 
         [MaxLength(255)]
         public string Description { get; set; }
 
         public int SortOrder { get; set; }
+
+        public bool IsSystem { get; set; }
 
         public bool Inactive { get; set; }
     }

@@ -11,16 +11,19 @@
     <Compile Remove="Business\Pharmaceuticals\DImpMests\**" />
     <Compile Remove="Categories\**" />
     <Compile Remove="Patient\**" />
+    <Compile Remove="Systems\OptionCategory\**" />
     <Compile Remove="Systems\Permistion\**" />
     <EmbeddedResource Remove="Business\Pharmaceuticals\DExpMests\**" />
     <EmbeddedResource Remove="Business\Pharmaceuticals\DImpMests\**" />
     <EmbeddedResource Remove="Categories\**" />
     <EmbeddedResource Remove="Patient\**" />
+    <EmbeddedResource Remove="Systems\OptionCategory\**" />
     <EmbeddedResource Remove="Systems\Permistion\**" />
     <None Remove="Business\Pharmaceuticals\DExpMests\**" />
     <None Remove="Business\Pharmaceuticals\DImpMests\**" />
     <None Remove="Categories\**" />
     <None Remove="Patient\**" />
+    <None Remove="Systems\OptionCategory\**" />
     <None Remove="Systems\Permistion\**" />
   </ItemGroup>
 
@@ -37,7 +40,6 @@
 
   <ItemGroup>
     <Folder Include="Business\Patients\Dtos\" />
-    <Folder Include="Systems\OptionCategory\" />
   </ItemGroup>
 
 </Project>

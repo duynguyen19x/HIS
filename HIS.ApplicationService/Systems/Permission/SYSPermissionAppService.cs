@@ -10,10 +10,10 @@ namespace HIS.ApplicationService.Systems.Permission
 {
     public class SYSPermissionAppService : BaseAppService, ISYSPermissionAppService
     {
-        private readonly IRepository<SYSPermission, string> _sysPermissionRepository;
+        private readonly IRepository<SYSPermission, Guid> _sysPermissionRepository;
 
         public SYSPermissionAppService(
-            IRepository<SYSPermission, string> sysPermissionRepository)
+            IRepository<SYSPermission, Guid> sysPermissionRepository)
         {
             _sysPermissionRepository = sysPermissionRepository;
         }

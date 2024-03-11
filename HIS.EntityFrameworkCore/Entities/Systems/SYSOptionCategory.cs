@@ -15,8 +15,8 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
     [Table("SYSOptionCategory")]
     public class SYSOptionCategory : Entity<int>
     {
-        [Required]
         [MaxLength(128)]
+        [Required]
         public string Name { get; set; }
 
         [MaxLength(255)]

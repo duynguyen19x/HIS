@@ -1,5 +1,6 @@
 ﻿using Azure;
 using HIS.ApplicationService.Systems.Role.Dtos;
+using HIS.ApplicationService.Systems.User.Dtos;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
@@ -17,28 +18,18 @@ namespace HIS.ApplicationService.Systems.Role
 {
     public class SYSRoleAppService : BaseAppService, ISYSRoleAppService
     {
-        private readonly IRepository<SYSPermission, string> _sysPermissionRepository;
+        private readonly IRepository<SYSPermission, Guid> _sysPermissionRepository;
         private readonly IRepository<SYSRole, Guid> _sysRoleRepository;
-        private readonly IRepository<SYSRolePermissionMaping, Guid> _sysRolePermissionMapingRepository;
+        private readonly IRepository<SYSRolePermissionMapping, Guid> _sysRolePermissionMapingRepository;
 
         public SYSRoleAppService(
-            IRepository<SYSPermission, string> sysPermissionRepository,
+            IRepository<SYSPermission, Guid> sysPermissionRepository,
             IRepository<SYSRole, Guid> sysRoleRepository,
-            IRepository<SYSRolePermissionMaping, Guid> sysRolePermissionMapingRepository) 
+            IRepository<SYSRolePermissionMapping, Guid> sysRolePermissionMapingRepository) 
         {
             _sysPermissionRepository = sysPermissionRepository;
             _sysRoleRepository = sysRoleRepository;
             _sysRolePermissionMapingRepository = sysRolePermissionMapingRepository;
-        }
-
-        public Task<ResultDto<SYSRoleDto>> CreateOrUpdateAsync(SYSRoleDto input)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<ResultDto<SYSRoleDto>> DeleteAsync(Guid id)
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<PagedResultDto<SYSRoleDto>> GetAllAsync(GetAllSYSRoleInputDto input)
@@ -65,7 +56,41 @@ namespace HIS.ApplicationService.Systems.Role
 
         public async Task<ResultDto<SYSRoleDto>> GetAsync(Guid id)
         {
+            var result = new ResultDto<SYSRoleDto>();
+            try
+            {
+                var entity = await _sysRoleRepository.GetAsync(id);
+
+                result.Result = ObjectMapper.Map<SYSRoleDto>(entity);
+                result.IsSucceeded = true;
+            }
+            catch (Exception ex)
+            {
+                result.Exception(ex);
+            }
+            return result;
+        }
+
+        public async Task<ResultDto<SYSRoleDto>> CreateOrUpdateAsync(SYSRoleDto input)
+        {
             throw new NotImplementedException();
         }
+
+        public async Task<ResultDto<SYSRoleDto>> CreateAsync(SYSRoleDto input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<ResultDto<SYSRoleDto>> UpdateAsync(SYSRoleDto input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ResultDto<SYSRoleDto>> DeleteAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        
     }
 }

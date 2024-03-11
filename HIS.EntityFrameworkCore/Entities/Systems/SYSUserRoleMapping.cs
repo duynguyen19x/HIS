@@ -1,4 +1,5 @@
-﻿using HIS.Core.Domain.Entities;
+﻿using AutoMapper.Configuration.Annotations;
+using HIS.Core.Domain.Entities;
 using HIS.Core.Domain.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using System;
@@ -13,21 +14,26 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
     /// <summary>
     /// Người dùng và vai trò.
     /// </summary>
-    public class SYSUserRoleMaping : Entity<Guid>
+    [Table("SYSUserRoleMapping")]
+    public class SYSUserRoleMapping : Entity<Guid>
     {
-        public Guid UserID { get; set; }
+        public Guid UserId { get; set; }
 
-        public Guid RoleID { get; set; }
+        public Guid RoleId { get; set; }
 
-        public Guid? BranchID { get; set; }
+        public Guid? BranchId { get; set; }
 
-        [ForeignKey("UserID")]
+
+        [ForeignKey(nameof(UserId))]
+        [Ignore]
         public SYSUser UserFk { get; set; }
 
-        [ForeignKey("RoleID")]
+        [ForeignKey(nameof(RoleId))]
+        [Ignore]
         public SYSRole RoleFk { get; set; }
 
-        [ForeignKey("BranchID")]
+        [ForeignKey(nameof(BranchId))]
+        [Ignore]
         public DIBranch BranchFk { get; set; }
     }
 }

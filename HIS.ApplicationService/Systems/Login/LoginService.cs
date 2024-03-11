@@ -33,7 +33,7 @@ namespace HIS.ApplicationService.Systems.Login
             {
                 try
                 {
-                    var user = Context.Users.Where(w => w.UserName == request.UserName && w.Password.ToUpper() == request.Password.ToUpper()).FirstOrDefault();
+                    var user = Context.SYSUser.Where(w => w.UserName == request.UserName && w.Password.ToUpper() == request.Password.ToUpper()).FirstOrDefault();
                     if (user == null)
                     {
                         ResultDto.IsSucceeded = false;
@@ -97,7 +97,7 @@ namespace HIS.ApplicationService.Systems.Login
             {
                 try
                 {
-                    var user = Context.Users.FirstOrDefault(f => f.UserName == request.UserName);
+                    var user = Context.SYSUser.FirstOrDefault(f => f.UserName == request.UserName);
                     if (user != null)
                     {
                         ResultDto.Result = false;
@@ -107,7 +107,7 @@ namespace HIS.ApplicationService.Systems.Login
                         return await Task.FromResult(ResultDto);
                     }
 
-                    user = Context.Users.FirstOrDefault(f => f.Email == request.UserName);
+                    user = Context.SYSUser.FirstOrDefault(f => f.Email == request.UserName);
                     if (user != null)
                     {
                         ResultDto.Result = false;
@@ -135,7 +135,7 @@ namespace HIS.ApplicationService.Systems.Login
                         DistrictId = request.District,
                         WardId = request.WardsId,
                     };
-                    var result = Context.Users.Add(userSave);
+                    var result = Context.SYSUser.Add(userSave);
                     if (result != null)
                     {
                         ResultDto.Message = "Đăng ký thằng công!";
@@ -164,7 +164,7 @@ namespace HIS.ApplicationService.Systems.Login
             return dateTimeInterval;
         }
 
-        private async Task<IList<Claim>> CreateClaimsAsync(EntityFrameworkCore.Entities.Systems.SYSUser user, TokenTypes tokenType = TokenTypes.AcceptToken)
+        private async Task<IList<Claim>> CreateClaimsAsync(SYSUser user, TokenTypes tokenType = TokenTypes.AcceptToken)
         {
             var roleIds = Context.UserRoles.Where(w => w.UserId == user.Id).Select(s => s.RoleId).ToList();
             var roles = Context.Roles.Where(w => roleIds.Contains(w.Id)).ToList();
@@ -312,7 +312,7 @@ namespace HIS.ApplicationService.Systems.Login
                     }
 
                     // Tạo token mới
-                    var userById = Context.Users.FirstOrDefault(f => f.Id == storedToken.UserId.GetValueOrDefault());
+                    var userById = Context.SYSUser.FirstOrDefault(f => f.Id == storedToken.UserId.GetValueOrDefault());
                     var acceptToken = await CreateTokenAsync(await CreateClaimsAsync(userById), AppConst.AcceptTokenExpiration);
 
                     // Update token

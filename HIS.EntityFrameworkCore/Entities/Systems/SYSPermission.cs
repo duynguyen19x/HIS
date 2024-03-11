@@ -13,16 +13,20 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
     /// Quyền hạn.
     /// </summary>
     [Table("SYSPermission")]
-    public class SYSPermission : Entity<string>
+    public class SYSPermission : Entity<Guid>
     {
+        [MaxLength(50)]
         [Required]
+        public string Code { get; set; }
+
         [MaxLength(255)]
+        [Required]
         public string Name { get; set; }
 
         [MaxLength(255)]
         public string Description { get; set; }
 
-        public string ParentID { get; set; }
+        public Guid? ParentId { get; set; }
 
         public int SortOrder { get; set; }
     }

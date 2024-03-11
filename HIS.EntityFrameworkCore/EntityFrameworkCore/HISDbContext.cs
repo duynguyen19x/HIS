@@ -21,12 +21,24 @@ namespace HIS.EntityFrameworkCore
         public HISDbContext(DbContextOptions options) 
             : base(options) { }
 
-        #region - Hệ thống
+        #region - SYS
+
         public DbSet<DbOption> DbOptions { get; set; }
 
         public DbSet<SYSLayoutTemplate> SYSLayoutTemplate { get; set; }
+
+        public DbSet<SYSOption> SYSOption { get; set; }
+        public DbSet<SYSOptionCategory> SYSOptionCategory { get; set; }
+
         public DbSet<SYSReport> SYSReport { get; set; }
         public DbSet<SYSReportCategory> SYSReportCategory { get; set; }
+
+        public DbSet<SYSPermission> SYSPermission { get; set; }
+        public DbSet<SYSRole> SYSRole { get; set; }
+        public DbSet<SYSUser> SYSUser { get; set; }
+        public DbSet<SYSRolePermissionMapping> SYSRolePermissionMaping { get; set; }
+        public DbSet<SYSUserRoleMapping> SYSUserRoleMaping { get; set; }
+        public DbSet<SToken> Tokens { get; set; }
 
 
         #endregion
@@ -53,11 +65,8 @@ namespace HIS.EntityFrameworkCore
         public DbSet<DITreatmentResult> TreatmentResults { get; set; }
         public DbSet<DIWard> Wards { get; set; }
         public DbSet<DIGender> Genders { get; set; }
-        public DbSet<SYSUser> Users { get; set; }
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<UserRole> UserRoles { get; set; }
-        public DbSet<SToken> Tokens { get; set; }
-        public DbSet<Permission> Permissions { get; set; }
+        
+        
         public DbSet<DIDepartment> Departments { get; set; }
         public DbSet<DIDepartmentType> DepartmentTypes { get; set; }
         public DbSet<DIEthnicity> Ethnicities { get; set; }
@@ -67,7 +76,6 @@ namespace HIS.EntityFrameworkCore
         public DbSet<Hospital> Hospitals { get; set; }
         public DbSet<Icd> Icds { get; set; }
         public DbSet<ChapterIcd> ChapterIcds { get; set; }
-        public DbSet<RolePermissionBranch> RolePermissionBranchs { get; set; }
         public DbSet<Unit> Units { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Service> Services { get; set; }

@@ -24,20 +24,11 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         [MaxLength(255)]
         public virtual string Name { get; set; }
 
-        /// <summary>
-        /// Ghi chú
-        /// </summary>
         [MaxLength(255)]
         public virtual string Description { get; set; }
 
-        /// <summary>
-        /// Số thứ tự hiển thị
-        /// </summary>
         public virtual int SortOrder { get; set; }
 
-        /// <summary>
-        /// Khóa
-        /// </summary>
         public virtual bool Inactive { get; set; }
     }
 }

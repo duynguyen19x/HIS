@@ -1,4 +1,5 @@
-﻿using HIS.Core.Domain.Entities.Auditing;
+﻿using AutoMapper.Configuration.Annotations;
+using HIS.Core.Domain.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using System;
 using System.Collections.Generic;
@@ -38,9 +39,10 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
         /// <summary>
         /// Mẫu tùy chỉnh của người dùng.
         /// </summary>
-        public Guid? UserID { get; set; }
+        public Guid? UserId { get; set; }
 
-        [ForeignKey("UserID")]
+        [ForeignKey("UserId")]
+        [Ignore]
         public SYSUser UserFk { get; set; }
     }
 }
