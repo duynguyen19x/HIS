@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Systems
+namespace HIS.EntityFrameworkCore.Entities.System
 {
     /// <summary>
     /// Người dùng và vai trò.

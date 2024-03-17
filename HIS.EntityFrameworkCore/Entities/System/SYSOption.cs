@@ -4,7 +4,7 @@ using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities.Systems
+namespace HIS.EntityFrameworkCore.Entities.System
 {
     /// <summary>
     /// Tùy chọn.

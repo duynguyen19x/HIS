@@ -10,6 +10,8 @@ namespace HIS.EntityFrameworkCore.Constants
     {
         #region - Hệ thống
 
+        public const string HIS_SYSTEM = "HIS_SYSTEM_USER";
+
         public const string HIS_SYSTEM__USER = "HIS_SYSTEM_USER";
         public const string HIS_SYSTEM__USER__CREATE = "HIS_SYSTEM_USER__CREATE";
         public const string HIS_SYSTEM__USER__EDIT = "HIS_SYSTEM_USER__EDIT";
@@ -21,9 +23,6 @@ namespace HIS.EntityFrameworkCore.Constants
         public const string HIS_SYSTEM__ROLE__DELETE = "HIS_SYSTEM_ROLE__DELETE";
 
         public const string HIS_SYSTEM__OPTION = "HIS_SYSTEM_OPTION";
-        public const string HIS_SYSTEM__OPTION__CREATE = "HIS_SYSTEM_OPTION__CREATE";
-        public const string HIS_SYSTEM__OPTION__EDIT = "HIS_SYSTEM_OPTION__EDIT";
-        public const string HIS_SYSTEM__OPTION__DELETE = "HIS_SYSTEM_OPTION__DELETE";
                                         
         public const string HIS_SYSTEM__ACCESS_LOG = "HIS_SYSTEM_ACCESS_LOG";
         public const string HIS_SYSTEM__ACCESS_LOG__CREATE = "HIS_SYSTEM_ACCESS_LOG__CREATE";
@@ -51,6 +50,16 @@ namespace HIS.EntityFrameworkCore.Constants
 
         #endregion
 
+        #region - Nghiệp vụ
 
+        #endregion
+
+        #region - Báo cáo
+
+        #endregion
+
+        #region - Khác
+
+        #endregion
     }
 }

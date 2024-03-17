@@ -6,7 +6,7 @@ using HIS.Utilities.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities.Systems
+namespace HIS.EntityFrameworkCore.Entities.System
 {
     [Table("SYSUser")]
     public class SYSUser : AuditedEntity<Guid>

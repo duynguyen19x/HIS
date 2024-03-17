@@ -3,7 +3,7 @@ using HIS.Core.Domain.Entities.Auditing;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities.Systems
+namespace HIS.EntityFrameworkCore.Entities.System
 {
     /// <summary>
     /// Báo cáo.
@@ -12,7 +12,6 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
     public class SYSReport : AuditedEntity<string>
     {
         [MaxLength(100)]
-        [Required]
         public override string Id { get; set; }
 
         [MaxLength(255)]

@@ -7,20 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Systems
+namespace HIS.EntityFrameworkCore.Entities.System
 {
     /// <summary>
-    /// Nhóm tùy chọn.
+    /// Quyền hạn.
     /// </summary>
-    [Table("SYSOptionCategory")]
-    public class SYSOptionCategory : Entity<int>
+    [Table("SYSPermission")]
+    public class SYSPermission : Entity<string>
     {
-        [MaxLength(128)]
+        [MaxLength(100)]
+        public override string Id { get; set; }
+
+        [MaxLength(255)]
         [Required]
         public string Name { get; set; }
 
         [MaxLength(255)]
         public string Description { get; set; }
+
+        public string ParentId { get; set; }
 
         public int SortOrder { get; set; }
     }
