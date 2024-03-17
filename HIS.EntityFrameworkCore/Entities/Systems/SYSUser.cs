@@ -12,38 +12,51 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
     public class SYSUser : AuditedEntity<Guid>
     {
         /// <summary>
-        /// Tên người dùng
+        /// Họ và tên người dùng
         /// </summary>
         [MaxLength(255)]
-        public string Name { get; set; }
+        [Required]
+        public virtual string FullName { get; set; }
+
+        /// <summary>
+        /// Tên người dùng
+        /// </summary>
+        [MaxLength(128)]
+        public virtual string FirstName { get; set; }
+
+        /// <summary>
+        /// Họ và tên đệm
+        /// </summary>
+        [MaxLength(128)]
+        public virtual string LastName { get; set; }
 
         /// <summary>
         /// Tên đăng nhập
         /// </summary>
         [MaxLength(50)]
-        public string Username { get; set; }
+        public virtual string Username { get; set; }
 
         /// <summary>
         /// Mật khẩu
         /// </summary>
         [MaxLength(255)]
-        public string Password { get; set; }
+        public virtual string Password { get; set; }
 
         [MaxLength(255)]
-        public string Email { get; set; }
+        public virtual string Email { get; set; }
 
         [MaxLength(50)]
-        public string Tel { get; set; }
+        public virtual string Tel { get; set; }
 
         [MaxLength(50)]
-        public string Mobile { get; set; }
+        public virtual string Mobile { get; set; }
 
         [MaxLength(255)]
-        public string Description { get; set; }
+        public virtual string Description { get; set; }
 
-        public Guid? EmployeeId { get; set; }
+        public virtual Guid? EmployeeId { get; set; }
 
-        public bool Inactive { get; set; }
+        public virtual bool Inactive { get; set; }
 
         [ForeignKey(nameof(EmployeeId))]
         [Ignore]
@@ -78,6 +91,6 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
         //public Guid? WardId { get; set; }
 
         //public IList<UserRole> UserRoles { get; set; }
-        public IList<SToken> UserTokens { get; set; }
+        public virtual IList<SToken> UserTokens { get; set; }
     }
 }

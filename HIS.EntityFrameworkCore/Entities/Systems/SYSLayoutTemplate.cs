@@ -25,6 +25,12 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
         [MaxLength(255)]
         public string Name { get; set; }
 
+        /// <summary>
+        /// Loại mẫu (0 là cấu hình cột, các trường hợp khác bổ sung sau)
+        /// </summary>
+        [Required]
+        public int TemplateType { get; set; }
+
         [Required]
         public string TemplateValue { get; set; }
 

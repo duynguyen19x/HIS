@@ -118,7 +118,7 @@ namespace HIS.Core.EntityFrameworkCore
 
         protected virtual Guid? GetAuditUserId()
         {
-            return AppSession.UserID;
+            return AppSession.UserId;
         }
     }
 }

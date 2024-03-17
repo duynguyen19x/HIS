@@ -23,8 +23,8 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public bool Inactive { get; set; }
 
         [Ignore]
-        public Room Room { get; set; }
+        public DIRoom Room { get; set; }
         [Ignore]
-        public Department Department { get; set; }
+        public DIDepartment Department { get; set; }
     }
 }

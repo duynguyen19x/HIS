@@ -11,20 +11,20 @@
     <Compile Remove="Business\Pharmaceuticals\DImpMests\**" />
     <Compile Remove="Categories\**" />
     <Compile Remove="Patient\**" />
-    <Compile Remove="Systems\OptionCategory\**" />
-    <Compile Remove="Systems\Permistion\**" />
+    <Compile Remove="System\OptionCategory\**" />
+    <Compile Remove="System\Permistion\**" />
     <EmbeddedResource Remove="Business\Pharmaceuticals\DExpMests\**" />
     <EmbeddedResource Remove="Business\Pharmaceuticals\DImpMests\**" />
     <EmbeddedResource Remove="Categories\**" />
     <EmbeddedResource Remove="Patient\**" />
-    <EmbeddedResource Remove="Systems\OptionCategory\**" />
-    <EmbeddedResource Remove="Systems\Permistion\**" />
+    <EmbeddedResource Remove="System\OptionCategory\**" />
+    <EmbeddedResource Remove="System\Permistion\**" />
     <None Remove="Business\Pharmaceuticals\DExpMests\**" />
     <None Remove="Business\Pharmaceuticals\DImpMests\**" />
     <None Remove="Categories\**" />
     <None Remove="Patient\**" />
-    <None Remove="Systems\OptionCategory\**" />
-    <None Remove="Systems\Permistion\**" />
+    <None Remove="System\OptionCategory\**" />
+    <None Remove="System\Permistion\**" />
   </ItemGroup>
 
   <ItemGroup>

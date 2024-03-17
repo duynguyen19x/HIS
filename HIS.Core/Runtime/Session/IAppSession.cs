@@ -8,6 +8,15 @@ namespace HIS.Core.Runtime.Session
 {
     public interface IAppSession
     {
-        Guid? UserID { get; }
+        /// <summary>
+        /// Người dùng.
+        /// </summary>
+        Guid? UserId { get; }
+
+        /// <summary>
+        /// Chi nhánh làm việc.
+        /// </summary>
+        Guid? BranchId { get; }
+
     }
 }

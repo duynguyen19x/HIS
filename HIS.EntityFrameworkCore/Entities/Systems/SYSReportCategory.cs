@@ -12,11 +12,11 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
     {
         [Required]
         [MaxLength(255)]
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         [MaxLength(255)]
-        public string Description { get; set; }
+        public virtual string Description { get; set; }
 
-        public int SortOrder { get; set; }
+        public virtual int SortOrder { get; set; }
     }
 }

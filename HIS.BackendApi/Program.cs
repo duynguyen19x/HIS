@@ -1,4 +1,5 @@
 using HIS.ApplicationService;
+using HIS.Core.Authorization;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Domain.Uow;
 using HIS.Core.EntityFrameworkCore;
@@ -6,6 +7,7 @@ using HIS.Core.ObjectMapping;
 using HIS.Core.Runtime.Session;
 using HIS.Core.WebApi;
 using HIS.EntityFrameworkCore;
+using HIS.EntityFrameworkCore.Authorization;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.EntityFrameworkCore.Repositories;
 using HIS.EntityFrameworkCore.Repositories;
@@ -29,14 +31,15 @@ void ConfigureService()
     }));
 
     builder.Services.AddAutoMapper(typeof(MapProfile));
-    builder.Services.AddSingleton(typeof(IObjectMapper), typeof(AutoMapperObjectMapper));
-    builder.Services.AddSingleton(typeof(IAppSession), typeof(AppSession));
     builder.Services.AddScoped(typeof(IDbContextProvider<>), typeof(EfCoreDbContextProvider<>));
     builder.Services.AddTransient(typeof(ICurrentUnitOfWorkProvider), typeof(CurrentUnitOfWorkProvider));
     builder.Services.AddTransient(typeof(IUnitOfWorkManager), typeof(UnitOfWorkManager));
     builder.Services.AddTransient(typeof(IUnitOfWork), typeof(UnitOfWork<HISDbContext>));
     builder.Services.AddTransient(typeof(IRepository<,>), typeof(HISRepository<,>));
     builder.Services.AddTransient(typeof(IBulkRepository<,>), typeof(HISBulkRepository<,>));
+    builder.Services.AddSingleton(typeof(IObjectMapper), typeof(AutoMapperObjectMapper));
+    builder.Services.AddSingleton(typeof(IAppSession), typeof(AppSession));
+    builder.Services.AddSingleton(typeof(IPermissionChecker), typeof(PermissionChecker));
     builder.Services.AddService();
 
     string issuer = builder.Configuration.GetValue<string>("Tokens:Issuer");

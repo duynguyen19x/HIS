@@ -1,13 +1,8 @@
-﻿using HIS.Core.Services.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using HIS.Core.Application.Services.Dto;
 
 namespace HIS.Dtos.Dictionaries.Machines
 {
-    public class GetAllMachineInput : PagedResultRequestDto
+    public class GetAllMachineInput : PagedAndSortedResultRequestDto
     {
         public string CodeFilter { get; set; }
         public string NameFilter { get; set; }

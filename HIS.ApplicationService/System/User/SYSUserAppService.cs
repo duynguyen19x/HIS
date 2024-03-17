@@ -6,6 +6,7 @@ using HIS.Core.Domain.Repositories;
 using HIS.Core.Extensions;
 using HIS.Core.Linq.Extensions;
 using HIS.Dtos.Dictionaries.Branchs;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.Systems;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
@@ -14,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace HIS.ApplicationService.Systems.User
 {
@@ -49,7 +51,7 @@ namespace HIS.ApplicationService.Systems.User
             return result;
         }
 
-        public async Task<ResultDto<SYSUserDto>> GetByIdAsync(Guid id)
+        public async Task<ResultDto<SYSUserDto>> GetAsync(Guid id)
         {
             var result = new ResultDto<SYSUserDto>();
             try
@@ -66,7 +68,7 @@ namespace HIS.ApplicationService.Systems.User
             return result;
         }
 
-        public async Task<ResultDto<SYSUserDto>> CreateOrEditAsync(SYSUserDto input)
+        public async Task<ResultDto<SYSUserDto>> CreateOrUpdateAsync(SYSUserDto input)
         {
             if (Check.IsNullOrDefault(input.Id))
             {
@@ -74,7 +76,7 @@ namespace HIS.ApplicationService.Systems.User
             }    
             else
             {
-                return await EditAsync(input);
+                return await UpdateAsync(input);
             }    
         }
 
@@ -85,7 +87,14 @@ namespace HIS.ApplicationService.Systems.User
             {
                 try
                 {
+                    input.Id = Guid.NewGuid();
+                    var entity = ObjectMapper.Map<SYSUser>(input);
 
+                    await _sysUserRepository.InsertAsync(entity);
+                    unitOfWork.Complete();
+
+                    result.Result = ObjectMapper.Map<SYSUserDto>(entity);
+                    result.IsSucceeded = true;
                 }
                 catch (Exception ex)
                 {
@@ -95,14 +104,20 @@ namespace HIS.ApplicationService.Systems.User
             return result;
         }
 
-        public async Task<ResultDto<SYSUserDto>> EditAsync(SYSUserDto input) 
+        public async Task<ResultDto<SYSUserDto>> UpdateAsync(SYSUserDto input) 
         {
             var result = new ResultDto<SYSUserDto>();
             using (var unitOfWork = UnitOfWorkManager.Begin())
             {
                 try
                 {
+                    var entity = await _sysUserRepository.GetAsync(input.Id.GetValueOrDefault());
 
+                    ObjectMapper.Map(input, entity);
+                    unitOfWork.Complete();
+
+                    result.Result = ObjectMapper.Map<SYSUserDto>(entity);
+                    result.IsSucceeded = true;
                 }
                 catch (Exception ex)
                 {

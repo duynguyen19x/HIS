@@ -13,11 +13,11 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
     /// Quyền hạn.
     /// </summary>
     [Table("SYSPermission")]
-    public class SYSPermission : Entity<Guid>
+    public class SYSPermission : Entity<string>
     {
-        [MaxLength(50)]
+        [MaxLength(100)]
         [Required]
-        public string Code { get; set; }
+        public override string Id { get; set; }
 
         [MaxLength(255)]
         [Required]
@@ -26,7 +26,8 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
         [MaxLength(255)]
         public string Description { get; set; }
 
-        public Guid? ParentId { get; set; }
+        [MaxLength(100)]
+        public string ParentId { get; set; }
 
         public int SortOrder { get; set; }
     }

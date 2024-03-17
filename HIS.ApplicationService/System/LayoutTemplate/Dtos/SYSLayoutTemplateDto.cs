@@ -1,7 +1,10 @@
-﻿using HIS.Core.Application.Services.Dto;
+﻿using AutoMapper.Configuration.Annotations;
+using HIS.Core.Application.Services.Dto;
+using HIS.EntityFrameworkCore.Entities.Systems;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +17,9 @@ namespace HIS.ApplicationService.Systems.LayoutTemplate.Dtos
 
         public string Name { get; set; }
 
-        public string TemplateValue { get; set; }
+        public int TemplateType { get; set; }
+
+        //public string TemplateValue { get; set; }
 
         public string Description { get; set; }
 
@@ -26,6 +31,8 @@ namespace HIS.ApplicationService.Systems.LayoutTemplate.Dtos
         /// <summary>
         /// Mẫu tùy chỉnh của người dùng.
         /// </summary>
-        public Guid? UserID { get; set; }
+        public Guid? UserId { get; set; }
+
+        public IList<SYSLayoutTemplateValueColumnDto> TemplateValueColumn {  get; set; }
     }
 }

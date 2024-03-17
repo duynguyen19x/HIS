@@ -56,13 +56,13 @@ namespace HIS.EntityFrameworkCore.Configurations
                     Id = new Guid("3382BE1C-2836-4246-99DB-C4E1C781E868"),
                     Username = "Administrator",
                     Password = Security.EncryptMd5("Ihs123456a@"),
-                    Name = "Admin",
+                    FullName = "Admin",
                     Email = "administrator@gmail.com"
                 },
                 new SYSUser()
                 {
                     Id = new Guid("49BA7FD4-2EDB-4482-A419-00C81F023F5C"),
-                    Name = "ADMIN",
+                    FullName = "ADMIN",
                     Username = "ADMIN",
                     Password = Security.EncryptMd5("123qwe"),
                     Email = "administrator@gmail.com",

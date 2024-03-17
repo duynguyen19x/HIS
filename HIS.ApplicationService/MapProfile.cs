@@ -42,6 +42,7 @@ using HIS.EntityFrameworkCore.Entities.Systems;
 using HIS.EntityFrameworkCore.Views;
 using HIS.ApplicationService.Systems.Role.Dtos;
 using HIS.ApplicationService.Systems.LayoutTemplate.Dtos;
+using HIS.ApplicationService.Systems.User.Dtos;
 
 namespace HIS.ApplicationService
 {
@@ -164,6 +165,7 @@ namespace HIS.ApplicationService
 
             CreateMap<SYSLayoutTemplate, SYSLayoutTemplateDto>().ReverseMap();
             CreateMap<SYSRole, SYSRoleDto>().ReverseMap();
+            CreateMap<SYSUser, SYSUserDto>().ReverseMap();
 
             #endregion
         }

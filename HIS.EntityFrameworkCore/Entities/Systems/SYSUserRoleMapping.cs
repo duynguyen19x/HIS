@@ -17,23 +17,23 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
     [Table("SYSUserRoleMapping")]
     public class SYSUserRoleMapping : Entity<Guid>
     {
-        public Guid UserId { get; set; }
+        public virtual Guid UserId { get; set; }
 
-        public Guid RoleId { get; set; }
+        public virtual Guid RoleId { get; set; }
 
-        public Guid? BranchId { get; set; }
+        public virtual Guid? BranchId { get; set; }
 
 
         [ForeignKey(nameof(UserId))]
         [Ignore]
-        public SYSUser UserFk { get; set; }
+        public virtual SYSUser UserFk { get; set; }
 
         [ForeignKey(nameof(RoleId))]
         [Ignore]
-        public SYSRole RoleFk { get; set; }
+        public virtual SYSRole RoleFk { get; set; }
 
         [ForeignKey(nameof(BranchId))]
         [Ignore]
-        public DIBranch BranchFk { get; set; }
+        public virtual DIBranch BranchFk { get; set; }
     }
 }

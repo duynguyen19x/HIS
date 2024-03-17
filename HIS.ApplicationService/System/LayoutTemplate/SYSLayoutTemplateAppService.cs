@@ -102,7 +102,7 @@ namespace HIS.ApplicationService.Systems.LayoutTemplate
                     }
 
                     // người dùng chỉ được phép xóa mẫu tùy chỉnh của người dùng.
-                    if (Check.IsNotEquals(entity.UserId, AppSession.UserID))
+                    if (Check.IsNotEquals(entity.UserId, AppSession.UserId))
                     {
                         throw new Exception($"<{entity.Name}> là mẫu thuộc người dùng khác. Bạn không được phép xóa!");
                     }

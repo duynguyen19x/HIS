@@ -1,4 +1,5 @@
-﻿using HIS.Core.Domain.Entities;
+﻿using AutoMapper.Configuration.Annotations;
+using HIS.Core.Domain.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HIS.EntityFrameworkCore.Entities.Systems
@@ -9,15 +10,17 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
     [Table("SYSRolePermissionMapping")]
     public class SYSRolePermissionMapping : Entity<Guid>
     {
-        public Guid RoleId { get; set; }
+        public virtual Guid RoleId { get; set; }
 
-        public Guid PermissionId { get; set; }
+        public virtual Guid PermissionId { get; set; }
 
         [ForeignKey(nameof(PermissionId))]
-        public SYSPermission PermissionFk { get; set; }
+        [Ignore]
+        public virtual SYSPermission PermissionFk { get; set; }
 
         [ForeignKey(nameof(RoleId))]
-        public SYSRole RoleFk { get; set; }
+        [Ignore]
+        public virtual SYSRole RoleFk { get; set; }
 
     }
 }

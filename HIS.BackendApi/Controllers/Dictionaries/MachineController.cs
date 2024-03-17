@@ -1,5 +1,5 @@
 ﻿using HIS.ApplicationService.Dictionaries.Machines;
-using HIS.Core.Services.Dto;
+using HIS.Core.Application.Services.Dto;
 using HIS.Dtos.Dictionaries.Machines;
 using Microsoft.AspNetCore.Mvc;
 

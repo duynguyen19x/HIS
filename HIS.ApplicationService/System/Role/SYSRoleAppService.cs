@@ -4,8 +4,10 @@ using HIS.ApplicationService.Systems.User.Dtos;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
+using HIS.Core.Extensions;
 using HIS.Core.Linq.Extensions;
 using HIS.Dtos.Dictionaries.Branchs;
+using HIS.EntityFrameworkCore.Constants;
 using HIS.EntityFrameworkCore.Entities.Systems;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,12 +20,12 @@ namespace HIS.ApplicationService.Systems.Role
 {
     public class SYSRoleAppService : BaseAppService, ISYSRoleAppService
     {
-        private readonly IRepository<SYSPermission, Guid> _sysPermissionRepository;
+        private readonly IRepository<SYSPermission, string> _sysPermissionRepository;
         private readonly IRepository<SYSRole, Guid> _sysRoleRepository;
         private readonly IRepository<SYSRolePermissionMapping, Guid> _sysRolePermissionMapingRepository;
 
         public SYSRoleAppService(
-            IRepository<SYSPermission, Guid> sysPermissionRepository,
+            IRepository<SYSPermission, string> sysPermissionRepository,
             IRepository<SYSRole, Guid> sysRoleRepository,
             IRepository<SYSRolePermissionMapping, Guid> sysRolePermissionMapingRepository) 
         {
@@ -73,7 +75,14 @@ namespace HIS.ApplicationService.Systems.Role
 
         public async Task<ResultDto<SYSRoleDto>> CreateOrUpdateAsync(SYSRoleDto input)
         {
-            throw new NotImplementedException();
+            if (Check.IsNullOrDefault(input.Id))
+            {
+                return await CreateAsync(input);
+            }    
+            else
+            {
+                return await UpdateAsync(input);
+            }    
         }
 
         public async Task<ResultDto<SYSRoleDto>> CreateAsync(SYSRoleDto input)
@@ -86,7 +95,7 @@ namespace HIS.ApplicationService.Systems.Role
             throw new NotImplementedException();
         }
 
-        public Task<ResultDto<SYSRoleDto>> DeleteAsync(Guid id)
+        public async Task<ResultDto<SYSRoleDto>> DeleteAsync(Guid id)
         {
             throw new NotImplementedException();
         }

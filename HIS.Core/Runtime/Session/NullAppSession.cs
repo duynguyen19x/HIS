@@ -13,7 +13,9 @@ namespace HIS.Core.Runtime.Session
         /// </summary>
         public static NullAppSession Instance { get; } = new NullAppSession();
 
-        public Guid? UserID => null;
+        public Guid? UserId => null;
+
+        public Guid? BranchId => null;
 
         private NullAppSession()
         {

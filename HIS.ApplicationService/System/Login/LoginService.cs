@@ -33,7 +33,7 @@ namespace HIS.ApplicationService.Systems.Login
             {
                 try
                 {
-                    var user = Context.SYSUser.Where(w => w.UserName == request.UserName && w.Password.ToUpper() == request.Password.ToUpper()).FirstOrDefault();
+                    var user = Context.SYSUser.Where(w => w.Username == request.UserName && w.Password.ToUpper() == request.Password.ToUpper()).FirstOrDefault();
                     if (user == null)
                     {
                         ResultDto.IsSucceeded = false;
@@ -74,7 +74,7 @@ namespace HIS.ApplicationService.Systems.Login
                     SessionExtensions.Login = new LoginSecsion
                     {
                         Id = user.Id,
-                        UserName = user.UserName
+                        UserName = user.Username
                     };
 
                     transaction.Commit();
@@ -97,7 +97,7 @@ namespace HIS.ApplicationService.Systems.Login
             {
                 try
                 {
-                    var user = Context.SYSUser.FirstOrDefault(f => f.UserName == request.UserName);
+                    var user = Context.SYSUser.FirstOrDefault(f => f.Username == request.UserName);
                     if (user != null)
                     {
                         ResultDto.Result = false;
@@ -120,20 +120,20 @@ namespace HIS.ApplicationService.Systems.Login
                     var userSave = new EntityFrameworkCore.Entities.Systems.SYSUser()
                     {
                         Id = Guid.NewGuid(),
-                        UserName = request.UserName,
+                        Username = request.UserName,
                         Password = request.Password,
-                        PhoneNumber = request.PhoneNumber,
+                        Mobile = request.PhoneNumber,
                         Email = request.Email,
                         FirstName = request.FirstName,
                         LastName = request.LastName,
-                        Address = request.Address,
-                        Dob = request.Dob,
-                        UseType = request.UseType,
-                        Status = request.Status,
-                        GenderId = request.GenderId,
-                        ProvinceId = request.ProvinceId,
-                        DistrictId = request.District,
-                        WardId = request.WardsId,
+                        //Address = request.Address,
+                        //Dob = request.Dob,
+                        //UseType = request.UseType,
+                        //Status = request.Status,
+                        //GenderId = request.GenderId,
+                        //ProvinceId = request.ProvinceId,
+                        //DistrictId = request.District,
+                        //WardId = request.WardsId,
                     };
                     var result = Context.SYSUser.Add(userSave);
                     if (result != null)
@@ -166,16 +166,16 @@ namespace HIS.ApplicationService.Systems.Login
 
         private async Task<IList<Claim>> CreateClaimsAsync(SYSUser user, TokenTypes tokenType = TokenTypes.AcceptToken)
         {
-            var roleIds = Context.UserRoles.Where(w => w.UserId == user.Id).Select(s => s.RoleId).ToList();
-            var roles = Context.Roles.Where(w => roleIds.Contains(w.Id)).ToList();
+            var roleIds = Context.SYSUserRoleMaping.Where(w => w.UserId == user.Id).Select(s => s.RoleId).ToList();
+            var roles = Context.SYSRole.Where(w => roleIds.Contains(w.Id)).ToList();
 
             var claims = new List<Claim>()
             {
                 new Claim("Id", user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.GivenName, user.FirstName),
+                new Claim(ClaimTypes.GivenName, user.FullName),
                 new Claim(ClaimTypes.Role, string.Join(";", roles)),
-                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim(ClaimTypes.Name, user.Username),
                 new Claim("TokenType", ((int)tokenType).ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };

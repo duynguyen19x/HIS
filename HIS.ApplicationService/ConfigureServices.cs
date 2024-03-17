@@ -10,6 +10,7 @@ using HIS.EntityFrameworkCore.Repositories;
 using HIS.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using HIS.Core.Authorization;
 
 namespace HIS.ApplicationService
 {
@@ -39,6 +40,7 @@ namespace HIS.ApplicationService
                             appService.ObjectMapper = provider.GetService(typeof(IObjectMapper)) as IObjectMapper;
                             appService.UnitOfWorkManager = provider.GetService(typeof(IUnitOfWorkManager)) as IUnitOfWorkManager;
                             appService.AppSession = provider.GetService(typeof(IAppSession)) as IAppSession;
+                            appService.PermissionChecker = provider.GetService(typeof(IPermissionChecker)) as IPermissionChecker;
                         }
 
                         return imp;

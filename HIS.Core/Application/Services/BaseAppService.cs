@@ -1,4 +1,5 @@
-﻿using HIS.Core.Domain.Uow;
+﻿using HIS.Core.Authorization;
+using HIS.Core.Domain.Uow;
 using HIS.Core.Runtime.Session;
 using IObjectMapper = HIS.Core.ObjectMapping.IObjectMapper;
 
@@ -6,9 +7,6 @@ namespace HIS.Core.Application.Services
 {
     public abstract class BaseAppService : IAppService
     {
-        /// <summary>
-        /// Reference to <see cref="IUnitOfWorkManager"/>.
-        /// </summary>
         public IUnitOfWorkManager UnitOfWorkManager
         {
             get
@@ -24,21 +22,28 @@ namespace HIS.Core.Application.Services
         }
         private IUnitOfWorkManager _unitOfWorkManager;
 
-        /// <summary>
-        /// Gets current unit of work.
-        /// </summary>
         protected IActiveUnitOfWork CurrentUnitOfWork { get { return UnitOfWorkManager.Current; } }
 
         public IAppSession AppSession { get; set; }
 
-        /// <summary>
-        /// Reference to the object to object mapper.
-        /// </summary>
         public IObjectMapper ObjectMapper { get; set; }
+
+        public IPermissionChecker PermissionChecker { get; set; }
 
         protected BaseAppService()
         {
             AppSession = NullAppSession.Instance;
+            PermissionChecker = NullPermissionChecker.Instance;
+        }
+
+        protected virtual void CheckPermission(bool requireAll, params string[] permissionNames)
+        {
+            var userIndentifier = new UserIdentifier(AppSession.BranchId, AppSession.UserId.GetValueOrDefault());
+            var isGranted = PermissionChecker.IsGranted(userIndentifier, requireAll, permissionNames);
+            if (!isGranted)
+            {
+                throw new Exception("Người dùng không được cấp quyền!");
+            }
         }
     }
 }

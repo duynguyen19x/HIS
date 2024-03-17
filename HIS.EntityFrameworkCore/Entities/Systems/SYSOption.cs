@@ -1,13 +1,8 @@
-﻿using HIS.Core.Application.Services.Dto;
+﻿using AutoMapper.Configuration.Annotations;
 using HIS.Core.Domain.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Systems
 {
@@ -28,17 +23,17 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
         /// <summary>
         /// Nhóm tùy chọn.
         /// </summary>
-        public int OptionCategoryID { get; set; }
+        public int OptionCategoryId { get; set; }
 
         /// <summary>
         /// Tùy chọn của chi nhánh.
         /// </summary>
-        public Guid? BranchID { get; set; }
+        public Guid? BranchId { get; set; }
 
         /// <summary>
         /// Tùy chọn của người dùng.
         /// </summary>
-        public Guid? UserID { get; set; }
+        public Guid? UserId { get; set; }
 
         /// <summary>
         /// Giá trị
@@ -70,13 +65,16 @@ namespace HIS.EntityFrameworkCore.Entities.Systems
 
         public int SortOrder { get; set; }
 
-        [ForeignKey("OptionCategoryID")]
+        [ForeignKey(nameof(OptionCategoryId))]
+        [Ignore]
         public SYSOptionCategory OptionCategoryFk { get; set; }
 
-        [ForeignKey("BranchID")]
+        [ForeignKey(nameof(BranchId))]
+        [Ignore]
         public DIBranch BranchFk { get; set; }
 
-        [ForeignKey("UserID")]
+        [ForeignKey(nameof(UserId))]
+        [Ignore]
         public SYSUser UserFk { get; set; }
     }
 }

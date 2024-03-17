@@ -1,9 +1,9 @@
 ﻿using HIS.EntityFrameworkCore;
-using HIS.Core.Services.Dto;
 using HIS.Application.Core.Services;
 using AutoMapper;
 using HIS.ApplicationService.Dictionaries.Machines;
 using HIS.Dtos.Dictionaries.Machines;
+using HIS.Core.Application.Services.Dto;
 
 namespace HIS.ApplicationService.Dictionaries.Machines
 {
