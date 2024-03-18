@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace HIS.EntityFrameworkCore.Entities.System
 {
     /// <summary>
-    /// Cấu hình cột.
+    /// Cấu hình mẫu hiển thị.
     /// </summary>
     [Table("SYSLayoutTemplate")]
     public class SYSLayoutTemplate : AuditedEntity<Guid>
@@ -41,7 +41,7 @@ namespace HIS.EntityFrameworkCore.Entities.System
         /// </summary>
         public Guid? UserId { get; set; }
 
-        [ForeignKey("UserId")]
+        [ForeignKey(nameof(UserId))]
         [Ignore]
         public SYSUser UserFk { get; set; }
     }

@@ -38,7 +38,7 @@ namespace HIS.EntityFrameworkCore
         public DbSet<SYSUser> SYSUser { get; set; }
         public DbSet<SYSRolePermissionMapping> SYSRolePermissionMaping { get; set; }
         public DbSet<SYSUserRoleMapping> SYSUserRoleMaping { get; set; }
-        public DbSet<SToken> Tokens { get; set; }
+        public DbSet<SYSToken> Tokens { get; set; }
 
 
         #endregion

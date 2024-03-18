@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations
 {
-    public class TokenConfiguration : IEntityTypeConfiguration<SToken>
+    public class SYSTokenConfiguration : IEntityTypeConfiguration<SYSToken>
     {
-        public void Configure(EntityTypeBuilder<SToken> builder)
+        public void Configure(EntityTypeBuilder<SYSToken> builder)
         {
             builder.ToTable("SYS_Token");
 

@@ -2,7 +2,7 @@
 
 namespace HIS.EntityFrameworkCore.Entities.System
 {
-    public class SToken : Entity<Guid>
+    public class SYSToken : Entity<Guid>
     {
         public Guid? UserId { get; set; }
         public string TokenValue { get; set; }

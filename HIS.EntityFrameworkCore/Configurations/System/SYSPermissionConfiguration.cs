@@ -15,9 +15,26 @@ namespace HIS.EntityFrameworkCore.Configurations.Systems
         public void Configure(EntityTypeBuilder<SYSPermission> builder)
         {
             builder.HasData(
-                new SYSPermission() { Id = PermissionConst.HIS_SYSTEM, Name= "Hệ thống", SortOrder = 1 },
+                new SYSPermission() { SubSystemId = "SYSUser", Id = "SYSUser", Name= "Sử dụng", SortOrder = 1 },
+                new SYSPermission() { SubSystemId = "SYSUser", Id = "SYSUser.Create", Name= "Thêm", SortOrder = 2 },
+                new SYSPermission() { SubSystemId = "SYSUser", Id = "SYSUser.Edit", Name= "Sửa", SortOrder = 3 },
+                new SYSPermission() { SubSystemId = "SYSUser", Id = "SYSUser.Delete", Name= "Xóa", SortOrder = 4 },
+                new SYSPermission() { SubSystemId = "SYSUser", Id = "SYSUser.ExportExcel", Name= "Xuất khẩu excel", SortOrder = 5 },
 
-                new SYSPermission() { Id = PermissionConst.HIS_SYSTEM__OPTION, Name = "Tùy chọn", ParentId = PermissionConst.HIS_SYSTEM, SortOrder = 99 }
+                new SYSPermission() { SubSystemId = "SYSRole", Id = "SYSRole", Name = "Sử dụng", SortOrder = 1 },
+                new SYSPermission() { SubSystemId = "SYSRole", Id = "SYSRole.Create", Name = "Thêm", SortOrder = 2 },
+                new SYSPermission() { SubSystemId = "SYSRole", Id = "SYSRole.Edit", Name = "Sửa", SortOrder = 3 },
+                new SYSPermission() { SubSystemId = "SYSRole", Id = "SYSRole.Delete", Name = "Xóa", SortOrder = 4 },
+                new SYSPermission() { SubSystemId = "SYSRole", Id = "SYSRole.ExportExcel", Name = "Xuất khẩu excel", SortOrder = 5 },
+
+                new SYSPermission() { SubSystemId = "SYSAuditLog", Id = "SYSAuditLog", Name = "Sử dụng", SortOrder = 1 },
+                new SYSPermission() { SubSystemId = "SYSAuditLog", Id = "SYSAuditLog.Delete", Name = "Xóa", SortOrder = 2 },
+                new SYSPermission() { SubSystemId = "SYSAuditLog", Id = "SYSAuditLog.ExportExcel", Name = "Xuất khẩu excel", SortOrder = 3 },
+
+                new SYSPermission() { SubSystemId = "SYSOption", Id = "SYSOption", Name = "Sử dụng", SortOrder = 90 },
+                new SYSPermission() { SubSystemId = "SYSOption", Id = "SYSOption", Name = "Sử dụng", SortOrder = 91 },
+                new SYSPermission() { SubSystemId = "SYSOption", Id = "SYSLayoutTemplate", Name = "Sử dụn", SortOrder = 99 }
+
                 );
         }
     }

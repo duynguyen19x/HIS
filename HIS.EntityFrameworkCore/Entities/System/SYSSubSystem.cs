@@ -1,5 +1,4 @@
-﻿using AutoMapper.Configuration.Annotations;
-using HIS.Core.Domain.Entities;
+﻿using HIS.Core.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,28 +10,27 @@ using System.Threading.Tasks;
 namespace HIS.EntityFrameworkCore.Entities.System
 {
     /// <summary>
-    /// Quyền hạn.
+    /// Chức năng của phần mềm.
     /// </summary>
-    [Table("SYSPermission")]
-    public class SYSPermission : Entity<string>
+    [Table("SYSSubSystem")]
+    public class SYSSubSystem : Entity<string>
     {
         [MaxLength(100)]
         public override string Id { get; set; }
-
-        [MaxLength(100)]
-        [Required]
-        public virtual string SubSystemId { get; set; }
 
         [MaxLength(255)]
         [Required]
         public virtual string Name { get; set; }
 
+        [MaxLength(100)]
+        public virtual string ParentId { get; set; }
+
         [MaxLength(255)]
         public virtual string Description { get; set; }
 
+        public virtual bool Inactive { get; set; }
+
         public virtual int SortOrder { get; set; }
 
-        [ForeignKey(nameof(SubSystemId))]
-        public virtual SYSSubSystem SubSystem { get; set; }
     }
 }
