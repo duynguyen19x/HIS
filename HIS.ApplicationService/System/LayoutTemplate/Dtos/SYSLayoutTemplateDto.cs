@@ -1,6 +1,6 @@
 ﻿using AutoMapper.Configuration.Annotations;
 using HIS.Core.Application.Services.Dto;
-using HIS.EntityFrameworkCore.Entities.Systems;
+using HIS.EntityFrameworkCore.Entities.System;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

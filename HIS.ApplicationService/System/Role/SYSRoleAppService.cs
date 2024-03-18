@@ -1,20 +1,11 @@
-﻿using Azure;
-using HIS.ApplicationService.Systems.Role.Dtos;
-using HIS.ApplicationService.Systems.User.Dtos;
+﻿using HIS.ApplicationService.Systems.Role.Dtos;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Extensions;
 using HIS.Core.Linq.Extensions;
-using HIS.Dtos.Dictionaries.Branchs;
-using HIS.EntityFrameworkCore.Constants;
-using HIS.EntityFrameworkCore.Entities.Systems;
+using HIS.EntityFrameworkCore.Entities.System;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Systems.Role
 {

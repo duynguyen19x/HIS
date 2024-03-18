@@ -1,6 +1,6 @@
 ﻿using HIS.Core.Domain.Entities;
 
-namespace HIS.EntityFrameworkCore.Entities.Systems
+namespace HIS.EntityFrameworkCore.Entities.System
 {
     public class DbOption : Entity<Guid>
     {

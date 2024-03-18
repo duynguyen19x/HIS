@@ -3,7 +3,7 @@ using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Linq.Extensions;
-using HIS.EntityFrameworkCore.Entities.Systems;
+using HIS.EntityFrameworkCore.Entities.System;
 using Microsoft.EntityFrameworkCore;
 
 namespace HIS.ApplicationService.Systems.Permission

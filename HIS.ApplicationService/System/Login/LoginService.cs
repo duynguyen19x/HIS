@@ -1,5 +1,5 @@
 ﻿using HIS.Dtos.Systems.Login;
-using HIS.EntityFrameworkCore.Entities.Systems;
+using HIS.EntityFrameworkCore.Entities.System;
 using HIS.EntityFrameworkCore;
 using HIS.Utilities.Commons;
 using HIS.Utilities.Enums;
@@ -117,7 +117,7 @@ namespace HIS.ApplicationService.Systems.Login
                         return await Task.FromResult(ResultDto);
                     }
 
-                    var userSave = new EntityFrameworkCore.Entities.Systems.SYSUser()
+                    var userSave = new SYSUser()
                     {
                         Id = Guid.NewGuid(),
                         Username = request.UserName,

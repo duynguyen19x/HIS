@@ -2,7 +2,7 @@
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Dtos.Dictionaries.Branchs;
-using HIS.EntityFrameworkCore.Entities.Systems;
+using HIS.EntityFrameworkCore.Entities.System;
 using System;
 using System.Collections.Generic;
 using System.Linq;

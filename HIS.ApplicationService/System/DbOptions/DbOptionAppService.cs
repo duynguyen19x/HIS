@@ -3,7 +3,7 @@ using HIS.Application.Core.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Dtos.Systems.DbOption;
 using HIS.EntityFrameworkCore;
-using HIS.EntityFrameworkCore.Entities.Systems;
+using HIS.EntityFrameworkCore.Entities.System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 

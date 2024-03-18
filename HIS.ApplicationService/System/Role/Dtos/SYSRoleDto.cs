@@ -1,13 +1,6 @@
-﻿using AutoMapper.Configuration.Annotations;
-using HIS.ApplicationService.Systems.Permission.Dtos;
+﻿using HIS.ApplicationService.Systems.Permission.Dtos;
 using HIS.Core.Application.Services.Dto;
-using HIS.EntityFrameworkCore.Entities.Systems;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using HIS.EntityFrameworkCore.Entities.System;
 
 namespace HIS.ApplicationService.Systems.Role.Dtos
 {

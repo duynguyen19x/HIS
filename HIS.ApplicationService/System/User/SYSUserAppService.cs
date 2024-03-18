@@ -7,7 +7,7 @@ using HIS.Core.Extensions;
 using HIS.Core.Linq.Extensions;
 using HIS.Dtos.Dictionaries.Branchs;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.EntityFrameworkCore.Entities.Systems;
+using HIS.EntityFrameworkCore.Entities.System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using System;
