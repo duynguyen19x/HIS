@@ -127,7 +127,7 @@ namespace HIS.ApplicationService.Systems.LayoutTemplate
             try
             {
                 var query = _sysLayoutTemplateRepository.GetAll()
-                    .WhereIf(!string.IsNullOrEmpty(input.LayoutTemplateCodeFilter), x => x.Code == input.LayoutTemplateCodeFilter)
+                    //.WhereIf(!string.IsNullOrEmpty(input.LayoutTemplateCodeFilter), x => x.Code == input.LayoutTemplateCodeFilter)
                     .WhereIf(!string.IsNullOrEmpty(input.LayoutTemplateNameFilter), x => x.Name == input.LayoutTemplateNameFilter)
                     .WhereIf(input.IsPublicFilter != null, x => x.IsPublic == input.IsPublicFilter)
                     .WhereIf(input.UserFilter != null, x => x.UserId == input.UserFilter);

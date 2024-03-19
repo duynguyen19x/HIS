@@ -15,21 +15,24 @@ namespace HIS.EntityFrameworkCore.Entities.System
     [Table("SYSRole")]
     public class SYSRole : AuditedEntity<Guid>
     {
+        [Required]
         [MaxLength(50)]
+        public string Code { get; set; }
+
         [Required]
-        public virtual string Code { get; set; }
+        [MaxLength(255)]
+        public string Name { get; set; }
 
         [MaxLength(255)]
-        [Required]
-        public virtual string Name { get; set; }
+        public string Description { get; set; }
 
-        [MaxLength(255)]
-        public virtual string Description { get; set; }
+        /// <summary>
+        /// Là quyền mặc định của hệ thống (người dùng không được phép chỉnh sửa)
+        /// </summary>
+        public bool IsDefault { get; set; }
 
-        public virtual int SortOrder { get; set; }
+        public bool Inactive { get; set; }
 
-        public virtual bool IsSystem { get; set; }
-
-        public virtual bool Inactive { get; set; }
+        public int SortOrder { get; set; }
     }
 }

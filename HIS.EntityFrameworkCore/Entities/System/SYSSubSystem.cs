@@ -15,22 +15,21 @@ namespace HIS.EntityFrameworkCore.Entities.System
     [Table("SYSSubSystem")]
     public class SYSSubSystem : Entity<string>
     {
-        [MaxLength(100)]
+        [MaxLength(255)]
         public override string Id { get; set; }
 
         [MaxLength(255)]
         [Required]
-        public virtual string Name { get; set; }
-
-        [MaxLength(100)]
-        public virtual string ParentId { get; set; }
+        public string Name { get; set; }
 
         [MaxLength(255)]
-        public virtual string Description { get; set; }
+        public string ParentId { get; set; }
 
-        public virtual bool Inactive { get; set; }
+        [MaxLength(255)]
+        public string Description { get; set; }
 
-        public virtual int SortOrder { get; set; }
+        public int SortOrder { get; set; }
+
 
     }
 }

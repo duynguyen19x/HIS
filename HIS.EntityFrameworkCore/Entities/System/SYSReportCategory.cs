@@ -10,13 +10,13 @@ namespace HIS.EntityFrameworkCore.Entities.System
     [Table("SYSReportCategory")]
     public class SYSReportCategory : AuditedEntity<int>
     {
+        [MaxLength(255)]
         [Required]
-        [MaxLength(255)]
-        public virtual string Name { get; set; }
+        public string Name { get; set; }
 
         [MaxLength(255)]
-        public virtual string Description { get; set; }
+        public string Description { get; set; }
 
-        public virtual int SortOrder { get; set; }
+        public int SortOrder { get; set; }
     }
 }

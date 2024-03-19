@@ -16,21 +16,21 @@ namespace HIS.EntityFrameworkCore.Entities.System
     [Table("SYSPermission")]
     public class SYSPermission : Entity<string>
     {
-        [MaxLength(100)]
+        [MaxLength(255)]
         public override string Id { get; set; }
 
-        [MaxLength(100)]
+        [MaxLength(255)]
         [Required]
-        public virtual string SubSystemId { get; set; }
+        public string SubSystemId { get; set; }
 
         [MaxLength(255)]
         [Required]
-        public virtual string Name { get; set; }
+        public string Name { get; set; }
 
         [MaxLength(255)]
-        public virtual string Description { get; set; }
+        public string Description { get; set; }
 
-        public virtual int SortOrder { get; set; }
+        public int SortOrder { get; set; }
 
         [ForeignKey(nameof(SubSystemId))]
         public virtual SYSSubSystem SubSystem { get; set; }

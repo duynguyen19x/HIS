@@ -12,11 +12,16 @@ namespace HIS.EntityFrameworkCore.Entities.System
     public class SYSUser : AuditedEntity<Guid>
     {
         /// <summary>
-        /// Họ và tên người dùng
+        /// Tên đăng nhập
+        /// </summary>
+        [MaxLength(50)]
+        public virtual string Username { get; set; }
+
+        /// <summary>
+        /// Mật khẩu
         /// </summary>
         [MaxLength(255)]
-        [Required]
-        public virtual string FullName { get; set; }
+        public virtual string Password { get; set; }
 
         /// <summary>
         /// Tên người dùng
@@ -31,16 +36,11 @@ namespace HIS.EntityFrameworkCore.Entities.System
         public virtual string LastName { get; set; }
 
         /// <summary>
-        /// Tên đăng nhập
-        /// </summary>
-        [MaxLength(50)]
-        public virtual string Username { get; set; }
-
-        /// <summary>
-        /// Mật khẩu
+        /// Họ và tên người dùng
         /// </summary>
         [MaxLength(255)]
-        public virtual string Password { get; set; }
+        [Required]
+        public virtual string FullName { get; set; }
 
         [MaxLength(255)]
         public virtual string Email { get; set; }
@@ -59,8 +59,7 @@ namespace HIS.EntityFrameworkCore.Entities.System
         public virtual bool Inactive { get; set; }
 
         [ForeignKey(nameof(EmployeeId))]
-        [Ignore]
-        public virtual DIEmployee Employee { get; set; }
+        public virtual DIEmployee EmployeeFk { get; set; }
 
         //public string UserName { get; set; }
 
@@ -91,6 +90,6 @@ namespace HIS.EntityFrameworkCore.Entities.System
         //public Guid? WardId { get; set; }
 
         //public IList<UserRole> UserRoles { get; set; }
-        public virtual IList<SYSToken> UserTokens { get; set; }
+        public virtual IList<SYSUserToken> UserTokens { get; set; }
     }
 }

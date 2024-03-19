@@ -11,9 +11,13 @@ namespace HIS.EntityFrameworkCore.Entities.System
     [Table("SYSLayoutTemplate")]
     public class SYSLayoutTemplate : AuditedEntity<Guid>
     {
-        [Required]
-        [MaxLength(50)]
-        public string Code { get; set; }
+        /// <summary>
+        /// Mẫu tùy chỉnh của người dùng.
+        /// </summary>
+        public Guid? UserId { get; set; }
+
+        [MaxLength(255)]
+        public string SubSystemId { get; set; }
 
         [Required]
         [MaxLength(255)]
@@ -25,6 +29,9 @@ namespace HIS.EntityFrameworkCore.Entities.System
         [Required]
         public int TemplateType { get; set; }
 
+        /// <summary>
+        /// Giá trị (lưu chuỗi json)
+        /// </summary>
         [Required]
         public string TemplateValue { get; set; }
 
@@ -32,17 +39,21 @@ namespace HIS.EntityFrameworkCore.Entities.System
         public string Description { get; set; }
 
         /// <summary>
+        /// Là cấu hình mẫu hiển thị của hệ thống (người dùng không được phép chỉnh sửa)
+        /// </summary>
+        public bool IsDefault { get; set; } 
+
+        /// <summary>
         /// Chia sẻ mẫu tùy chỉnh của người dùng cho những người dùng khác.
         /// </summary>
         public bool IsPublic { get; set; }
 
-        /// <summary>
-        /// Mẫu tùy chỉnh của người dùng.
-        /// </summary>
-        public Guid? UserId { get; set; }
+
+        [ForeignKey(nameof(SubSystemId))]
+        public virtual SYSSubSystem SubSystemFk { get; set; }
 
         [ForeignKey(nameof(UserId))]
-        [Ignore]
-        public SYSUser UserFk { get; set; }
+        public virtual SYSUser UserFk { get; set; }
+
     }
 }

@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations
 {
-    public class SYSTokenConfiguration : IEntityTypeConfiguration<SYSToken>
+    public class SYSTokenConfiguration : IEntityTypeConfiguration<SYSUserToken>
     {
-        public void Configure(EntityTypeBuilder<SYSToken> builder)
+        public void Configure(EntityTypeBuilder<SYSUserToken> builder)
         {
             builder.ToTable("SYS_Token");
 
@@ -15,7 +15,7 @@ namespace HIS.EntityFrameworkCore.Configurations
             builder.Property(x => x.TokenValue);
             builder.Property(x => x.Jti).HasMaxLength(125);
 
-            builder.HasOne(t => t.User).WithMany(pc => pc.UserTokens)
+            builder.HasOne(t => t.UserFk).WithMany(pc => pc.UserTokens)
               .HasForeignKey(pc => pc.UserId);
         }
     }

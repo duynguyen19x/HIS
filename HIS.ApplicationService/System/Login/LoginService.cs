@@ -55,7 +55,7 @@ namespace HIS.ApplicationService.Systems.Login
                     ResultDto.Result = token;
 
                     // Save token
-                    var sToken = new SYSToken()
+                    var sToken = new SYSUserToken()
                     {
                         Id = Guid.NewGuid(),
                         UserId = user.Id,
