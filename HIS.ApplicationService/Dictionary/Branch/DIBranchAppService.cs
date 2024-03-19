@@ -1,6 +1,5 @@
 ﻿using HIS.Core.Domain.Repositories;
 using HIS.Dtos.Dictionaries.Branchs;
-using HIS.Core.Linq.Extensions;
 using Microsoft.EntityFrameworkCore;
 using System.Transactions;
 using HIS.Core.Extensions;

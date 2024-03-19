@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
-using HIS.Core.Linq.Extensions;
 using HIS.Dtos.Business.ItemStocks;
 using HIS.Dtos.Dictionaries.Items;
 using HIS.EntityFrameworkCore;
@@ -9,6 +8,7 @@ using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
 using HIS.Core.Application.Services.Dto;
+using HIS.Core.Extensions;
 
 namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
 {

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace HIS.Core.WebApi
 {
+    /// <summary>
+    /// Đang phát triển.
+    /// </summary>
     public static class DynamicWebApiServiceExtensions
     {
         public static IServiceCollection AddDynamicWebApi(this IServiceCollection services)

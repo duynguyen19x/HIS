@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using HIS.Core.Linq.Extensions;
 using HIS.Dtos.Dictionaries.ExecutionRoom;
 using HIS.Dtos.Dictionaries.Service;
 using HIS.Dtos.Dictionaries.ServicePricePolicy;
@@ -14,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using System.Globalization;
 using HIS.Application.Core.Services;
 using HIS.Core.Application.Services.Dto;
+using HIS.Core.Extensions;
 
 namespace HIS.ApplicationService.Dictionaries.Service
 {

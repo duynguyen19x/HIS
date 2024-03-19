@@ -20,6 +20,11 @@ namespace HIS.Core.Extensions
             return value == null || value == default(bool);
         }
 
+        public static bool IsNullOrDefault(string value)
+        {
+            return value == null || string.IsNullOrWhiteSpace(value);
+        }
+
         public static bool IsNullOrDefault(int? value)
         {
             return value == null || value == default(int);
@@ -28,6 +33,11 @@ namespace HIS.Core.Extensions
         public static bool IsNullOrDefault(long? value)
         {
             return value == null || value == default(long);
+        }
+
+        public static bool IsNullOrDefault(decimal? value)
+        {
+            return value == null || value == default(decimal);
         }
 
         public static bool IsNullOrDefault(DateTime? value)
@@ -40,11 +50,6 @@ namespace HIS.Core.Extensions
             return value == null || value == default(Guid);
         }
 
-        public static bool IsNullOrDefault(string value)
-        {
-            return value == null || string.IsNullOrWhiteSpace(value);
-        }
-
         #endregion
 
         #region - is not null and default
@@ -52,6 +57,11 @@ namespace HIS.Core.Extensions
         public static bool IsNotNullAndDefault(bool? value)
         {
             return value != null && value != default(bool);
+        }
+
+        public static bool IsNotNullAndDefault(string value)
+        {
+            return value != null && value.Length > 0;
         }
 
         public static bool IsNotNullAndDefault(int? value)
@@ -64,6 +74,11 @@ namespace HIS.Core.Extensions
             return value != null && value != default(long);
         }
 
+        public static bool IsNotNullAndDefault(decimal? value)
+        {
+            return value != null && value != default(decimal);
+        }
+
         public static bool IsNotNullAndDefault(DateTime? value)
         {
             return value != null && value != default(DateTime);
@@ -72,11 +87,6 @@ namespace HIS.Core.Extensions
         public static bool IsNotNullAndDefault(Guid? value)
         {
             return value != null && value != default(Guid);
-        }
-
-        public static bool IsNotNullAndDefault(string value)
-        {
-            return value != null && value.Length > 0;
         }
 
         #endregion

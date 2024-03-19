@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
-using HIS.Core.Linq.Extensions;
 using HIS.Dtos.Dictionaries.RoomType;
 using HIS.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using HIS.Core.Application.Services.Dto;
+using HIS.Core.Extensions;
 
 namespace HIS.ApplicationService.Dictionaries.RoomType
 {

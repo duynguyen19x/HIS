@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using HIS.Application.Core.Services;
-using HIS.Core.Linq.Extensions;
 using HIS.Dtos.Dictionaries.ItemPricePolicies;
 using HIS.EntityFrameworkCore;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
 using HIS.Core.Application.Services.Dto;
+using HIS.Core.Extensions;
 
 namespace HIS.ApplicationService.Dictionaries.ItemPricePolicies
 {

@@ -1,12 +1,15 @@
 ﻿using HIS.Core.Application.Services.Dto;
+using HIS.Core.Domain.Entities.Auditing;
+using Microsoft.EntityFrameworkCore.Metadata;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Core.Linq.Extensions
+namespace HIS.Core.Extensions
 {
     public static class QueryableExtensions
     {
@@ -45,7 +48,7 @@ namespace HIS.Core.Linq.Extensions
 
         public static IQueryable<TSource> SortBy<TSource>(this IQueryable<TSource> query, ISortedResultRequest input)
         {
-            if (input != null 
+            if (input != null
                 && input.Sorting != null && !string.IsNullOrWhiteSpace(input.Sorting))
             {
                 var i = 0;
@@ -67,7 +70,6 @@ namespace HIS.Core.Linq.Extensions
 
                         if (i == 0)
                         {
-                            
                             query = descending ? query.OrderByDescending(expression) : query.OrderBy(expression);
                         }
                         else
@@ -81,7 +83,7 @@ namespace HIS.Core.Linq.Extensions
             }
 
             return query;
-        }    
+        }
 
         public static IQueryable<TSource> ApplySortingAndPaging<TSource>(this IQueryable<TSource> query, IPagedAndSortedResultRequest input)
         {
@@ -98,15 +100,36 @@ namespace HIS.Core.Linq.Extensions
             return Expression.Lambda<Func<T, object>>(propAsObject, parameter);
         }
 
-        private static LambdaExpression CreateExpression(Type type, string propertyName)
+        //private static LambdaExpression CreateExpression(Type type, string propertyName)
+        //{
+        //    var param = Expression.Parameter(type, "x");
+        //    Expression body = param;
+        //    foreach (var member in propertyName.Split('.'))
+        //    {
+        //        body = Expression.PropertyOrField(body, member);
+        //    }
+        //    return Expression.Lambda(body, param);
+        //}
+
+        #region - soft delete
+
+        public static void AddSoftDeleteQueryFilter(this IMutableEntityType entityData)
         {
-            var param = Expression.Parameter(type, "x");
-            Expression body = param;
-            foreach (var member in propertyName.Split('.'))
-            {
-                body = Expression.PropertyOrField(body, member);
-            }
-            return Expression.Lambda(body, param);
+            var methodToCall = typeof(QueryableExtensions)
+                .GetMethod(nameof(GetSoftDeleteFilter), BindingFlags.NonPublic | BindingFlags.Static)
+                .MakeGenericMethod(entityData.ClrType);
+            var filter = methodToCall.Invoke(null, new object[] { });
+            entityData.SetQueryFilter((LambdaExpression)filter);
+            entityData.AddIndex(entityData.FindProperty(nameof(ISoftDelete.IsDeleted)));
         }
+
+        private static LambdaExpression GetSoftDeleteFilter<TEntity>()
+            where TEntity : class, ISoftDelete
+        {
+            Expression<Func<TEntity, bool>> filter = x => !x.IsDeleted;
+            return filter;
+        }
+
+        #endregion
     }
 }

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using HIS.Core.Linq.Extensions;
 using HIS.Dtos.Business.InOutStockItems;
 using HIS.Dtos.Business.InOutStocks;
 using HIS.Dtos.Business.ItemStocks;
@@ -16,6 +15,7 @@ using System.Globalization;
 using HIS.Core.Enums;
 using HIS.Application.Core.Services;
 using HIS.Core.Application.Services.Dto;
+using HIS.Core.Extensions;
 
 namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 {

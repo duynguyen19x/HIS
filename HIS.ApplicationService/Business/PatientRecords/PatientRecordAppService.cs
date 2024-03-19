@@ -4,7 +4,6 @@ using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Enums;
 using HIS.Core.Extensions;
-using HIS.Core.Linq.Extensions;
 using HIS.Dtos.Business.PatientRecords;
 using HIS.Dtos.Business.Patients;
 using HIS.EntityFrameworkCore;

@@ -3,7 +3,6 @@ using HIS.Application.Core.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Extensions;
-using HIS.Core.Linq.Extensions;
 using HIS.Dtos.Business.Patients;
 using HIS.Dtos.Systems;
 using HIS.EntityFrameworkCore;
