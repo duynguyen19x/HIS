@@ -1,4 +1,5 @@
-﻿using HIS.ApplicationService.Systems.Authorization.Dtos;
+﻿using HIS.ApplicationService.System.Authorization.Dtos;
+using HIS.ApplicationService.Systems.Authorization.Dtos;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Dtos.Systems.Login;
@@ -14,8 +15,5 @@ namespace HIS.ApplicationService.Systems.Authorization
     {
         Task<ResultDto<TokenResultDto>> LoginAsync(LoginDto request);
         Task<ResultDto<TokenResultDto>> RefreshTokenAsync(TokenResultDto token);
-
-        Task<ResultDto<bool>> RegisterAsync(RegisterDto request);
-        
     }
 }

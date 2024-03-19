@@ -29,9 +29,6 @@ namespace HIS.ApplicationService.Systems.Authorization
             throw new NotImplementedException();
         }
 
-        public Task<ResultDto<bool>> RegisterAsync(RegisterDto request)
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }
