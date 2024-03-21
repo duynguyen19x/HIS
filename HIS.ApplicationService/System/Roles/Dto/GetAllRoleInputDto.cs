@@ -9,9 +9,9 @@ namespace HIS.ApplicationService.Systems.Roles.Dto
 {
     public class GetAllRoleInputDto : PagedAndSortedResultRequestDto
     {
-        public string RoleCodeFilter { get; set; }
+        public string CodeFilter { get; set; }
 
-        public string RoleNameFilter { get; set; }
+        public string NameFilter { get; set; }
 
         public bool? InactiveFilter { get; set; }
     }

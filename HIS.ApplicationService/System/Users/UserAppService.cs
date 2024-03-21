@@ -1,4 +1,5 @@
-﻿using HIS.ApplicationService.Systems.Users.Dto;
+﻿using HIS.ApplicationService.System.Permissions.Dto;
+using HIS.ApplicationService.Systems.Users.Dto;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
@@ -11,15 +12,18 @@ namespace HIS.ApplicationService.System.Users
 {
     public class UserAppService : BaseAppService, IUserAppService
     {
-        private readonly IRepository<User, Guid> _sysUserRepository;
-        private readonly IRepository<Role, Guid> _sysRoleRepository;
+        private readonly IRepository<Role, Guid> _roleRepository;
+        private readonly IRepository<User, Guid> _userRepository;
+        private readonly IRepository<Permission, string> _permissionRepository;
 
         public UserAppService(
-            IRepository<User, Guid> sysUserRepository,
-            IRepository<Role, Guid> sysRoleRepository) 
+            IRepository<User, Guid> userRepository,
+            IRepository<Role, Guid> roleRepository,
+            IRepository<Permission, string> permissionRepository) 
         {
-            _sysRoleRepository = sysRoleRepository;
-            _sysUserRepository = sysUserRepository;
+            _roleRepository = roleRepository;
+            _userRepository = userRepository;
+            _permissionRepository = permissionRepository;
         }
 
         public async Task<PagedResultDto<UserDto>> GetAllAsync(GetAllUserInputDto input)
@@ -27,7 +31,7 @@ namespace HIS.ApplicationService.System.Users
             var result = new PagedResultDto<UserDto>();
             try
             {
-                var filter = _sysUserRepository.GetAll();
+                var filter = _userRepository.GetAll();
                 var pagedAndSorted = filter.ApplySortingAndPaging(input);
 
                 result.TotalCount = await filter.CountAsync();
@@ -46,7 +50,7 @@ namespace HIS.ApplicationService.System.Users
             var result = new ResultDto<UserDto>();
             try
             {
-                var entity = await _sysUserRepository.GetAsync(id);
+                var entity = await _userRepository.GetAsync(id);
 
                 result.Result = ObjectMapper.Map<UserDto>(entity);
                 result.IsSucceeded = true;
@@ -80,7 +84,7 @@ namespace HIS.ApplicationService.System.Users
                     input.Id = Guid.NewGuid();
                     var entity = ObjectMapper.Map<User>(input);
 
-                    await _sysUserRepository.InsertAsync(entity);
+                    await _userRepository.InsertAsync(entity);
                     unitOfWork.Complete();
 
                     result.Result = ObjectMapper.Map<UserDto>(entity);
@@ -101,7 +105,7 @@ namespace HIS.ApplicationService.System.Users
             {
                 try
                 {
-                    var entity = await _sysUserRepository.GetAsync(input.Id.GetValueOrDefault());
+                    var entity = await _userRepository.GetAsync(input.Id.GetValueOrDefault());
 
                     ObjectMapper.Map(input, entity);
                     unitOfWork.Complete();
@@ -124,8 +128,8 @@ namespace HIS.ApplicationService.System.Users
             {
                 try
                 {
-                    var entity = _sysUserRepository.Get(id);
-                    await _sysUserRepository.DeleteAsync(entity);
+                    var entity = _userRepository.Get(id);
+                    await _userRepository.DeleteAsync(entity);
 
                     unitOfWork.Complete();
 
@@ -139,5 +143,7 @@ namespace HIS.ApplicationService.System.Users
             }
             return result;
         }
+
+        
     }
 }

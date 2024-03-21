@@ -21,18 +21,18 @@ namespace HIS.EntityFrameworkCore.Entities.System
 
         [MaxLength(255)]
         [Required]
-        public string SubSystemId { get; set; }
+        public virtual string SubSystemId { get; set; }
 
         [MaxLength(255)]
         [Required]
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
         [MaxLength(255)]
-        public string Description { get; set; }
+        public virtual string Description { get; set; }
 
-        public int SortOrder { get; set; }
+        public virtual int SortOrder { get; set; }
 
         [ForeignKey(nameof(SubSystemId))]
-        public virtual SubSystem SubSystem { get; set; }
+        public SubSystem SubSystem { get; set; }
     }
 }

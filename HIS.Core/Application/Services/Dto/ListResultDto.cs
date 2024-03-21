@@ -33,5 +33,11 @@ namespace HIS.Core.Application.Services.Dto
         {
             Result = items;
         }
+
+        public virtual void Exception(Exception ex)
+        {
+            IsSucceeded = false;
+            Message = ex.Message;
+        }
     }
 }
