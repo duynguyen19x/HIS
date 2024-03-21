@@ -1,8 +1,7 @@
-﻿using HIS.ApplicationService.Systems.User;
-using HIS.Dtos.Systems.User;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using HIS.Core.Application.Services.Dto;
-using HIS.ApplicationService.Systems.User.Dtos;
+using HIS.ApplicationService.System.Users;
+using HIS.ApplicationService.Systems.Users.Dto;
 
 namespace HIS.BackendApi.Controllers.Systems
 {
@@ -10,33 +9,33 @@ namespace HIS.BackendApi.Controllers.Systems
     [ApiController]
     public class SYSUserController : ControllerBase
     {
-        private readonly ISYSUserAppService _sysUserAppService;
+        private readonly IUserAppService _sysUserAppService;
 
-        public SYSUserController(ISYSUserAppService sysUserAppService)
+        public SYSUserController(IUserAppService sysUserAppService)
         {
             _sysUserAppService = sysUserAppService;
         }
 
         [HttpGet("GetAll")]
-        public async Task<PagedResultDto<SYSUserDto>> GetAll([FromQuery] GetAllSYSUserInputDto input)
+        public async Task<PagedResultDto<UserDto>> GetAll([FromQuery] GetAllUserInputDto input)
         {
             return await _sysUserAppService.GetAllAsync(input);
         }
 
         [HttpGet("GetById")]
-        public async Task<ResultDto<SYSUserDto>> GetById(Guid id)
+        public async Task<ResultDto<UserDto>> GetById(Guid id)
         {
             return await _sysUserAppService.GetAsync(id);
         }
 
         [HttpPost("CreateOrUpdate")]
-        public async Task<ResultDto<SYSUserDto>> CreateOrUpdate(SYSUserDto input)
+        public async Task<ResultDto<UserDto>> CreateOrUpdate(UserDto input)
         {
             return await _sysUserAppService.CreateOrUpdateAsync(input);
         }
 
         [HttpDelete("Delete")]
-        public async Task<ResultDto<SYSUserDto>> Delete(Guid id)
+        public async Task<ResultDto<UserDto>> Delete(Guid id)
         {
             return await _sysUserAppService.DeleteAsync(id);
         }

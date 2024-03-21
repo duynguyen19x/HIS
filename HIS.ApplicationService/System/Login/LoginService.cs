@@ -117,7 +117,7 @@ namespace HIS.ApplicationService.Systems.Login
                         return await Task.FromResult(ResultDto);
                     }
 
-                    var userSave = new SYSUser()
+                    var userSave = new EntityFrameworkCore.Entities.System.User()
                     {
                         Id = Guid.NewGuid(),
                         Username = request.UserName,
@@ -164,7 +164,7 @@ namespace HIS.ApplicationService.Systems.Login
             return dateTimeInterval;
         }
 
-        private async Task<IList<Claim>> CreateClaimsAsync(SYSUser user, TokenTypes tokenType = TokenTypes.AcceptToken)
+        private async Task<IList<Claim>> CreateClaimsAsync(EntityFrameworkCore.Entities.System.User user, TokenTypes tokenType = TokenTypes.AcceptToken)
         {
             var roleIds = Context.SYSUserRoleMaping.Where(w => w.UserId == user.Id).Select(s => s.RoleId).ToList();
             var roles = Context.SYSRole.Where(w => roleIds.Contains(w.Id)).ToList();

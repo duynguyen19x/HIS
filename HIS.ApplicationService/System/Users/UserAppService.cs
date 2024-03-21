@@ -1,46 +1,37 @@
-﻿using HIS.ApplicationService.Systems.Permission.Dtos;
-using HIS.ApplicationService.Systems.User.Dtos;
+﻿using HIS.ApplicationService.Systems.Users.Dto;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Extensions;
-using HIS.Dtos.Dictionaries.Branchs;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
 
-namespace HIS.ApplicationService.Systems.User
+namespace HIS.ApplicationService.System.Users
 {
-    public class SYSUserAppService : BaseAppService, ISYSUserAppService
+    public class UserAppService : BaseAppService, IUserAppService
     {
-        private readonly IRepository<SYSUser, Guid> _sysUserRepository;
-        private readonly IRepository<SYSRole, Guid> _sysRoleRepository;
+        private readonly IRepository<User, Guid> _sysUserRepository;
+        private readonly IRepository<Role, Guid> _sysRoleRepository;
 
-        public SYSUserAppService(
-            IRepository<SYSUser, Guid> sysUserRepository,
-            IRepository<SYSRole, Guid> sysRoleRepository) 
+        public UserAppService(
+            IRepository<User, Guid> sysUserRepository,
+            IRepository<Role, Guid> sysRoleRepository) 
         {
             _sysRoleRepository = sysRoleRepository;
             _sysUserRepository = sysUserRepository;
         }
 
-        public async Task<PagedResultDto<SYSUserDto>> GetAllAsync(GetAllSYSUserInputDto input)
+        public async Task<PagedResultDto<UserDto>> GetAllAsync(GetAllUserInputDto input)
         {
-            var result = new PagedResultDto<SYSUserDto>();
+            var result = new PagedResultDto<UserDto>();
             try
             {
                 var filter = _sysUserRepository.GetAll();
                 var pagedAndSorted = filter.ApplySortingAndPaging(input);
 
                 result.TotalCount = await filter.CountAsync();
-                result.Result = ObjectMapper.Map<IList<SYSUserDto>>(pagedAndSorted.ToList());
+                result.Result = ObjectMapper.Map<IList<UserDto>>(pagedAndSorted.ToList());
                 result.IsSucceeded = true;
             }
             catch (Exception ex)
@@ -50,14 +41,14 @@ namespace HIS.ApplicationService.Systems.User
             return result;
         }
 
-        public async Task<ResultDto<SYSUserDto>> GetAsync(Guid id)
+        public async Task<ResultDto<UserDto>> GetAsync(Guid id)
         {
-            var result = new ResultDto<SYSUserDto>();
+            var result = new ResultDto<UserDto>();
             try
             {
                 var entity = await _sysUserRepository.GetAsync(id);
 
-                result.Result = ObjectMapper.Map<SYSUserDto>(entity);
+                result.Result = ObjectMapper.Map<UserDto>(entity);
                 result.IsSucceeded = true;
             }
             catch (Exception ex)
@@ -67,7 +58,7 @@ namespace HIS.ApplicationService.Systems.User
             return result;
         }
 
-        public async Task<ResultDto<SYSUserDto>> CreateOrUpdateAsync(SYSUserDto input)
+        public async Task<ResultDto<UserDto>> CreateOrUpdateAsync(UserDto input)
         {
             if (Check.IsNullOrDefault(input.Id))
             {
@@ -79,20 +70,20 @@ namespace HIS.ApplicationService.Systems.User
             }    
         }
 
-        public async Task<ResultDto<SYSUserDto>> CreateAsync(SYSUserDto input) 
+        public async Task<ResultDto<UserDto>> CreateAsync(UserDto input) 
         {
-            var result = new ResultDto<SYSUserDto>();
+            var result = new ResultDto<UserDto>();
             using (var unitOfWork = UnitOfWorkManager.Begin())
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var entity = ObjectMapper.Map<SYSUser>(input);
+                    var entity = ObjectMapper.Map<User>(input);
 
                     await _sysUserRepository.InsertAsync(entity);
                     unitOfWork.Complete();
 
-                    result.Result = ObjectMapper.Map<SYSUserDto>(entity);
+                    result.Result = ObjectMapper.Map<UserDto>(entity);
                     result.IsSucceeded = true;
                 }
                 catch (Exception ex)
@@ -103,9 +94,9 @@ namespace HIS.ApplicationService.Systems.User
             return result;
         }
 
-        public async Task<ResultDto<SYSUserDto>> UpdateAsync(SYSUserDto input) 
+        public async Task<ResultDto<UserDto>> UpdateAsync(UserDto input) 
         {
-            var result = new ResultDto<SYSUserDto>();
+            var result = new ResultDto<UserDto>();
             using (var unitOfWork = UnitOfWorkManager.Begin())
             {
                 try
@@ -115,7 +106,7 @@ namespace HIS.ApplicationService.Systems.User
                     ObjectMapper.Map(input, entity);
                     unitOfWork.Complete();
 
-                    result.Result = ObjectMapper.Map<SYSUserDto>(entity);
+                    result.Result = ObjectMapper.Map<UserDto>(entity);
                     result.IsSucceeded = true;
                 }
                 catch (Exception ex)
@@ -126,9 +117,9 @@ namespace HIS.ApplicationService.Systems.User
             return result;
         }
 
-        public async Task<ResultDto<SYSUserDto>> DeleteAsync(Guid id)
+        public async Task<ResultDto<UserDto>> DeleteAsync(Guid id)
         {
-            var result = new ResultDto<SYSUserDto>();
+            var result = new ResultDto<UserDto>();
             using (var unitOfWork = UnitOfWorkManager.Begin())
             {
                 try
@@ -138,7 +129,7 @@ namespace HIS.ApplicationService.Systems.User
 
                     unitOfWork.Complete();
 
-                    result.Result = ObjectMapper.Map<SYSUserDto>(entity);
+                    result.Result = ObjectMapper.Map<UserDto>(entity);
                     result.IsSucceeded = true;
                 }
                 catch (Exception ex)

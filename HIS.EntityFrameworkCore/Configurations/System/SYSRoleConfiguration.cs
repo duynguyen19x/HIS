@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Systems
 {
-    public class SYSRoleConfiguration : IEntityTypeConfiguration<SYSUser>
+    public class SYSRoleConfiguration : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<SYSUser> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
             
         }

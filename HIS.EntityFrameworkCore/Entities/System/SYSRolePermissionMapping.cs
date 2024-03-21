@@ -20,7 +20,7 @@ namespace HIS.EntityFrameworkCore.Entities.System
         public virtual SYSPermission PermissionFk { get; set; }
 
         [ForeignKey(nameof(RoleId))]
-        public virtual SYSRole RoleFk { get; set; }
+        public virtual Role RoleFk { get; set; }
 
     }
 }

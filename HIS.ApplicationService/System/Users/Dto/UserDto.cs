@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.ApplicationService.Systems.User.Dtos
+namespace HIS.ApplicationService.Systems.Users.Dto
 {
-    public class SYSUserDto : EntityDto<Guid?>
+    public class UserDto : EntityDto<Guid?>
     {
         public string FullName { get; set; }
 

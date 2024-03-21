@@ -40,9 +40,9 @@ using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.System;
 using HIS.EntityFrameworkCore.Views;
-using HIS.ApplicationService.Systems.Role.Dtos;
 using HIS.ApplicationService.Systems.LayoutTemplate.Dtos;
-using HIS.ApplicationService.Systems.User.Dtos;
+using HIS.ApplicationService.Systems.Roles.Dto;
+using HIS.ApplicationService.Systems.Users.Dto;
 
 namespace HIS.ApplicationService
 {
@@ -164,8 +164,8 @@ namespace HIS.ApplicationService
             #region - hệ thống
 
             CreateMap<SYSLayoutTemplate, SYSLayoutTemplateDto>().ReverseMap();
-            CreateMap<SYSRole, SYSRoleDto>().ReverseMap();
-            CreateMap<SYSUser, SYSUserDto>().ReverseMap();
+            CreateMap<Role, RoleDto>().ReverseMap();
+            CreateMap<User, UserDto>().ReverseMap();
 
             #endregion
         }

@@ -26,11 +26,11 @@ namespace HIS.EntityFrameworkCore.Entities.System
 
         [ForeignKey(nameof(UserId))]
         [Ignore]
-        public virtual SYSUser UserFk { get; set; }
+        public virtual User UserFk { get; set; }
 
         [ForeignKey(nameof(RoleId))]
         [Ignore]
-        public virtual SYSRole RoleFk { get; set; }
+        public virtual Role RoleFk { get; set; }
 
         [ForeignKey(nameof(BranchId))]
         [Ignore]

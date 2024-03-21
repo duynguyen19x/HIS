@@ -1,4 +1,4 @@
-﻿using HIS.ApplicationService.Systems.Role.Dtos;
+﻿using HIS.ApplicationService.Systems.Roles.Dto;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
@@ -6,17 +6,17 @@ using HIS.Core.Extensions;
 using HIS.EntityFrameworkCore.Entities.System;
 using Microsoft.EntityFrameworkCore;
 
-namespace HIS.ApplicationService.Systems.Role
+namespace HIS.ApplicationService.System.Roles
 {
-    public class SYSRoleAppService : BaseAppService, ISYSRoleAppService
+    public class RoleAppService : BaseAppService, IRoleAppService
     {
         private readonly IRepository<SYSPermission, string> _sysPermissionRepository;
-        private readonly IRepository<SYSRole, Guid> _sysRoleRepository;
+        private readonly IRepository<Role, Guid> _sysRoleRepository;
         private readonly IRepository<SYSRolePermissionMapping, Guid> _sysRolePermissionMapingRepository;
 
-        public SYSRoleAppService(
+        public RoleAppService(
             IRepository<SYSPermission, string> sysPermissionRepository,
-            IRepository<SYSRole, Guid> sysRoleRepository,
+            IRepository<Role, Guid> sysRoleRepository,
             IRepository<SYSRolePermissionMapping, Guid> sysRolePermissionMapingRepository) 
         {
             _sysPermissionRepository = sysPermissionRepository;
@@ -24,9 +24,9 @@ namespace HIS.ApplicationService.Systems.Role
             _sysRolePermissionMapingRepository = sysRolePermissionMapingRepository;
         }
 
-        public async Task<PagedResultDto<SYSRoleDto>> GetAllAsync(GetAllSYSRoleInputDto input)
+        public async Task<PagedResultDto<RoleDto>> GetAllAsync(GetAllRoleInputDto input)
         {
-            var result = new PagedResultDto<SYSRoleDto>();
+            var result = new PagedResultDto<RoleDto>();
             try
             {
                 var filter = _sysRoleRepository.GetAll()
@@ -36,7 +36,7 @@ namespace HIS.ApplicationService.Systems.Role
                 var pagedAndSorted = filter.ApplySortingAndPaging(input);
 
                 result.TotalCount = await filter.CountAsync();
-                result.Result = ObjectMapper.Map<IList<SYSRoleDto>>(pagedAndSorted.ToList());
+                result.Result = ObjectMapper.Map<IList<RoleDto>>(pagedAndSorted.ToList());
                 result.IsSucceeded = true;
             }
             catch (Exception ex)
@@ -46,14 +46,14 @@ namespace HIS.ApplicationService.Systems.Role
             return result;
         }
 
-        public async Task<ResultDto<SYSRoleDto>> GetAsync(Guid id)
+        public async Task<ResultDto<RoleDto>> GetAsync(Guid id)
         {
-            var result = new ResultDto<SYSRoleDto>();
+            var result = new ResultDto<RoleDto>();
             try
             {
                 var entity = await _sysRoleRepository.GetAsync(id);
 
-                result.Result = ObjectMapper.Map<SYSRoleDto>(entity);
+                result.Result = ObjectMapper.Map<RoleDto>(entity);
                 result.IsSucceeded = true;
             }
             catch (Exception ex)
@@ -63,7 +63,7 @@ namespace HIS.ApplicationService.Systems.Role
             return result;
         }
 
-        public async Task<ResultDto<SYSRoleDto>> CreateOrUpdateAsync(SYSRoleDto input)
+        public async Task<ResultDto<RoleDto>> CreateOrUpdateAsync(RoleDto input)
         {
             if (Check.IsNullOrDefault(input.Id))
             {
@@ -75,17 +75,17 @@ namespace HIS.ApplicationService.Systems.Role
             }    
         }
 
-        public async Task<ResultDto<SYSRoleDto>> CreateAsync(SYSRoleDto input)
+        public async Task<ResultDto<RoleDto>> CreateAsync(RoleDto input)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<ResultDto<SYSRoleDto>> UpdateAsync(SYSRoleDto input)
+        public async Task<ResultDto<RoleDto>> UpdateAsync(RoleDto input)
         {
             throw new NotImplementedException();
         }
 
-        public async Task<ResultDto<SYSRoleDto>> DeleteAsync(Guid id)
+        public async Task<ResultDto<RoleDto>> DeleteAsync(Guid id)
         {
             throw new NotImplementedException();
         }

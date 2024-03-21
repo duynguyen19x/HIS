@@ -53,7 +53,7 @@ namespace HIS.EntityFrameworkCore.Entities.System
         public virtual SYSSubSystem SubSystemFk { get; set; }
 
         [ForeignKey(nameof(UserId))]
-        public virtual SYSUser UserFk { get; set; }
+        public virtual User UserFk { get; set; }
 
     }
 }

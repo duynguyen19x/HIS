@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations
 {
-    public class SYSUserConfigurations : IEntityTypeConfiguration<SYSUser>
+    public class SYSUserConfigurations : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<SYSUser> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
             //builder.ToTable("SYS_User");
             //builder.HasKey(x => x.Id);
@@ -51,7 +51,7 @@ namespace HIS.EntityFrameworkCore.Configurations
             //    });
 
             builder.HasData(
-                new SYSUser()
+                new User()
                 {
                     Id = new Guid("3382BE1C-2836-4246-99DB-C4E1C781E868"),
                     Username = "Administrator",
@@ -59,7 +59,7 @@ namespace HIS.EntityFrameworkCore.Configurations
                     FullName = "Admin",
                     Email = "administrator@gmail.com"
                 },
-                new SYSUser()
+                new User()
                 {
                     Id = new Guid("49BA7FD4-2EDB-4482-A419-00C81F023F5C"),
                     FullName = "ADMIN",

@@ -34,8 +34,8 @@ namespace HIS.EntityFrameworkCore
         public DbSet<SYSReportCategory> SYSReportCategory { get; set; }
 
         public DbSet<SYSPermission> SYSPermission { get; set; }
-        public DbSet<SYSRole> SYSRole { get; set; }
-        public DbSet<SYSUser> SYSUser { get; set; }
+        public DbSet<Role> SYSRole { get; set; }
+        public DbSet<User> SYSUser { get; set; }
         public DbSet<SYSRolePermissionMapping> SYSRolePermissionMaping { get; set; }
         public DbSet<SYSUserRoleMapping> SYSUserRoleMaping { get; set; }
         public DbSet<SYSUserToken> Tokens { get; set; }

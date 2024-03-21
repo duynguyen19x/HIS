@@ -1,10 +1,11 @@
-﻿using HIS.ApplicationService.Systems.Permission.Dtos;
+﻿using HIS.ApplicationService.System.Roles.Dto;
+using HIS.ApplicationService.Systems.Users.Dto;
 using HIS.Core.Application.Services.Dto;
 using HIS.EntityFrameworkCore.Entities.System;
 
-namespace HIS.ApplicationService.Systems.Role.Dtos
+namespace HIS.ApplicationService.Systems.Roles.Dto
 {
-    public class SYSRoleDto : EntityDto<Guid>
+    public class RoleDto : EntityDto<Guid>
     {
         public string Code { get; set; }
 
@@ -16,8 +17,8 @@ namespace HIS.ApplicationService.Systems.Role.Dtos
 
         public bool Inactive { get; set; }
 
-        public IList<SYSPermissionDto> Permissions { get; set; }
+        public IList<PermissionDto> Permissions { get; set; }
 
-        public IList<SYSUser> Users { get; set; }
+        public IList<UserDto> Users { get; set; }
     }
 }

@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace HIS.EntityFrameworkCore.Entities.System
 {
     [Table("SYSUser")]
-    public class SYSUser : AuditedEntity<Guid>
+    public class User : AuditedEntity<Guid>
     {
         /// <summary>
         /// Tên đăng nhập

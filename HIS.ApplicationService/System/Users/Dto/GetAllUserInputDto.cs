@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.ApplicationService.Systems.User.Dtos
+namespace HIS.ApplicationService.Systems.Users.Dto
 {
-    public class GetAllSYSUserInputDto : PagedAndSortedResultRequestDto
+    public class GetAllUserInputDto : PagedAndSortedResultRequestDto
     {
         public string FullNameFilter { get; set; }
         public string FirstNameFilter { get; set; }

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.ApplicationService.Systems.Role.Dtos
+namespace HIS.ApplicationService.Systems.Roles.Dto
 {
-    public class GetAllSYSRoleInputDto : PagedAndSortedResultRequestDto
+    public class GetAllRoleInputDto : PagedAndSortedResultRequestDto
     {
         public string RoleCodeFilter { get; set; }
 

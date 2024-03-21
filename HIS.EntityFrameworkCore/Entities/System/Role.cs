@@ -1,11 +1,6 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.System
 {
@@ -13,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Entities.System
     /// Vai trò.
     /// </summary>
     [Table("SYSRole")]
-    public class SYSRole : AuditedEntity<Guid>
+    public class Role : AuditedEntity<Guid>
     {
         [Required]
         [MaxLength(50)]
