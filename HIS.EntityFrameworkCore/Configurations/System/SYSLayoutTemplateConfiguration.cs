@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Systems
 {
-    public class SYSLayoutTemplateConfiguration : IEntityTypeConfiguration<SYSLayoutTemplate>
+    public class SYSLayoutTemplateConfiguration : IEntityTypeConfiguration<LayoutTemplate>
     {
-        public void Configure(EntityTypeBuilder<SYSLayoutTemplate> builder)
+        public void Configure(EntityTypeBuilder<LayoutTemplate> builder)
         {
             
         }

@@ -10,7 +10,7 @@ namespace HIS.EntityFrameworkCore.Entities.System
     /// Tùy chọn.
     /// </summary>
     [Table("SYSOption")]
-    public class SYSOption : AuditedEntity<Guid>
+    public class Option : AuditedEntity<Guid>
     {
         [MaxLength(128)]
         [Required]
@@ -66,7 +66,7 @@ namespace HIS.EntityFrameworkCore.Entities.System
         public int SortOrder { get; set; }
 
         [ForeignKey(nameof(OptionCategoryId))]
-        public virtual SYSOptionCategory OptionCategoryFk { get; set; }
+        public virtual OptionCategory OptionCategoryFk { get; set; }
 
         [ForeignKey(nameof(BranchId))]
         public virtual DIBranch BranchFk { get; set; }

@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Systems
 {
-    public class SYSOptionConfiguration : IEntityTypeConfiguration<SYSOption>
+    public class SYSOptionConfiguration : IEntityTypeConfiguration<Option>
     {
-        public void Configure(EntityTypeBuilder<SYSOption> builder)
+        public void Configure(EntityTypeBuilder<Option> builder)
         {
             
         }

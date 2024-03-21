@@ -25,20 +25,20 @@ namespace HIS.EntityFrameworkCore
 
         public DbSet<DbOption> DbOptions { get; set; }
 
-        public DbSet<SYSLayoutTemplate> SYSLayoutTemplate { get; set; }
+        public DbSet<LayoutTemplate> SYSLayoutTemplate { get; set; }
 
-        public DbSet<SYSOption> SYSOption { get; set; }
-        public DbSet<SYSOptionCategory> SYSOptionCategory { get; set; }
+        public DbSet<Option> SYSOption { get; set; }
+        public DbSet<OptionCategory> SYSOptionCategory { get; set; }
 
-        public DbSet<SYSReport> SYSReport { get; set; }
-        public DbSet<SYSReportCategory> SYSReportCategory { get; set; }
+        public DbSet<Report> SYSReport { get; set; }
+        public DbSet<ReportCategory> SYSReportCategory { get; set; }
 
-        public DbSet<SYSPermission> SYSPermission { get; set; }
+        public DbSet<Permission> SYSPermission { get; set; }
         public DbSet<Role> SYSRole { get; set; }
         public DbSet<User> SYSUser { get; set; }
-        public DbSet<SYSRolePermissionMapping> SYSRolePermissionMaping { get; set; }
-        public DbSet<SYSUserRoleMapping> SYSUserRoleMaping { get; set; }
-        public DbSet<SYSUserToken> Tokens { get; set; }
+        public DbSet<RolePermissionMapping> SYSRolePermissionMaping { get; set; }
+        public DbSet<UserRoleMapping> SYSUserRoleMaping { get; set; }
+        public DbSet<UserToken> Tokens { get; set; }
 
 
         #endregion

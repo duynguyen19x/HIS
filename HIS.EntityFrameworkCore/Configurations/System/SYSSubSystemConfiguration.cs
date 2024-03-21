@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.System
 {
-    public class SYSSubSystemConfiguration : IEntityTypeConfiguration<SYSSubSystem>
+    public class SYSSubSystemConfiguration : IEntityTypeConfiguration<SubSystem>
     {
-        public void Configure(EntityTypeBuilder<SYSSubSystem> builder)
+        public void Configure(EntityTypeBuilder<SubSystem> builder)
         {
-            var data = new List<SYSSubSystem>
+            var data = new List<SubSystem>
             {
                 
             };

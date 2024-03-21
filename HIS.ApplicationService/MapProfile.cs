@@ -163,7 +163,7 @@ namespace HIS.ApplicationService
 
             #region - hệ thống
 
-            CreateMap<SYSLayoutTemplate, SYSLayoutTemplateDto>().ReverseMap();
+            CreateMap<LayoutTemplate, SYSLayoutTemplateDto>().ReverseMap();
             CreateMap<Role, RoleDto>().ReverseMap();
             CreateMap<User, UserDto>().ReverseMap();
 

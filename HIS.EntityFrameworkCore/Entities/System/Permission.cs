@@ -14,7 +14,7 @@ namespace HIS.EntityFrameworkCore.Entities.System
     /// Quyền hạn.
     /// </summary>
     [Table("SYSPermission")]
-    public class SYSPermission : Entity<string>
+    public class Permission : Entity<string>
     {
         [MaxLength(255)]
         public override string Id { get; set; }
@@ -33,6 +33,6 @@ namespace HIS.EntityFrameworkCore.Entities.System
         public int SortOrder { get; set; }
 
         [ForeignKey(nameof(SubSystemId))]
-        public virtual SYSSubSystem SubSystem { get; set; }
+        public virtual SubSystem SubSystem { get; set; }
     }
 }

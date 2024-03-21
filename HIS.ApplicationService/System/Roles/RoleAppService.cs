@@ -10,14 +10,14 @@ namespace HIS.ApplicationService.System.Roles
 {
     public class RoleAppService : BaseAppService, IRoleAppService
     {
-        private readonly IRepository<SYSPermission, string> _sysPermissionRepository;
+        private readonly IRepository<Permission, string> _sysPermissionRepository;
         private readonly IRepository<Role, Guid> _sysRoleRepository;
-        private readonly IRepository<SYSRolePermissionMapping, Guid> _sysRolePermissionMapingRepository;
+        private readonly IRepository<RolePermissionMapping, Guid> _sysRolePermissionMapingRepository;
 
         public RoleAppService(
-            IRepository<SYSPermission, string> sysPermissionRepository,
+            IRepository<Permission, string> sysPermissionRepository,
             IRepository<Role, Guid> sysRoleRepository,
-            IRepository<SYSRolePermissionMapping, Guid> sysRolePermissionMapingRepository) 
+            IRepository<RolePermissionMapping, Guid> sysRolePermissionMapingRepository) 
         {
             _sysPermissionRepository = sysPermissionRepository;
             _sysRoleRepository = sysRoleRepository;

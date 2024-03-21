@@ -18,9 +18,9 @@ namespace HIS.ApplicationService.Systems.LayoutTemplate
 {
     public class SYSLayoutTemplateAppService : BaseAppService, ISYSLayoutTemplateAppService
     {
-        private readonly IRepository<SYSLayoutTemplate, Guid> _sysLayoutTemplateRepository;
+        private readonly IRepository<EntityFrameworkCore.Entities.System.LayoutTemplate, Guid> _sysLayoutTemplateRepository;
 
-        public SYSLayoutTemplateAppService(IRepository<SYSLayoutTemplate, Guid> sysLayoutTemplateRepository) 
+        public SYSLayoutTemplateAppService(IRepository<EntityFrameworkCore.Entities.System.LayoutTemplate, Guid> sysLayoutTemplateRepository) 
         {
             _sysLayoutTemplateRepository = sysLayoutTemplateRepository;
         }
@@ -45,7 +45,7 @@ namespace HIS.ApplicationService.Systems.LayoutTemplate
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var entity = ObjectMapper.Map<SYSLayoutTemplate>(input);
+                    var entity = ObjectMapper.Map<EntityFrameworkCore.Entities.System.LayoutTemplate>(input);
 
                     await _sysLayoutTemplateRepository.InsertAsync(entity);
                     unitOfWork.Complete();

@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Entities.System
     /// Vai trò và quyền hạn.
     /// </summary>
     [Table("SYSRolePermissionMapping")]
-    public class SYSRolePermissionMapping : Entity<Guid>
+    public class RolePermissionMapping : Entity<Guid>
     {
         public Guid RoleId { get; set; }
 
@@ -17,7 +17,7 @@ namespace HIS.EntityFrameworkCore.Entities.System
         public string PermissionId { get; set; }
 
         [ForeignKey(nameof(PermissionId))]
-        public virtual SYSPermission PermissionFk { get; set; }
+        public virtual Permission PermissionFk { get; set; }
 
         [ForeignKey(nameof(RoleId))]
         public virtual Role RoleFk { get; set; }

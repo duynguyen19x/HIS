@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Entities.System
     /// Báo cáo.
     /// </summary>
     [Table("SYSReport")]
-    public class SYSReport : AuditedEntity<string>
+    public class Report : AuditedEntity<string>
     {
         [MaxLength(255)]
         public override string Id { get; set; }
@@ -31,6 +31,6 @@ namespace HIS.EntityFrameworkCore.Entities.System
         public int ReportCategoryId { get; set; }
 
         [ForeignKey(nameof(ReportCategoryId))]
-        public virtual SYSReportCategory ReportCategoryFk { get; set; }
+        public virtual ReportCategory ReportCategoryFk { get; set; }
     }
 }

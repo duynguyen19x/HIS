@@ -90,6 +90,6 @@ namespace HIS.EntityFrameworkCore.Entities.System
         //public Guid? WardId { get; set; }
 
         //public IList<UserRole> UserRoles { get; set; }
-        public virtual IList<SYSUserToken> UserTokens { get; set; }
+        public virtual IList<UserToken> UserTokens { get; set; }
     }
 }

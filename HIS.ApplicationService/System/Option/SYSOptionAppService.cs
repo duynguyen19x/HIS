@@ -14,9 +14,9 @@ namespace HIS.ApplicationService.Systems.Option
 {
     public class SYSOptionAppService : BaseAppService, ISYSOptionAppService
     {
-        private readonly IRepository<SYSOption, Guid> _sysOptionRepository;
+        private readonly IRepository<EntityFrameworkCore.Entities.System.Option, Guid> _sysOptionRepository;
 
-        public SYSOptionAppService(IRepository<SYSOption, Guid> sysOptionRepository)
+        public SYSOptionAppService(IRepository<EntityFrameworkCore.Entities.System.Option, Guid> sysOptionRepository)
         {
             _sysOptionRepository = sysOptionRepository;
         }

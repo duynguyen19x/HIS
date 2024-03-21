@@ -1,16 +1,21 @@
-﻿using HIS.Core.Domain.Entities.Auditing;
+﻿using HIS.Core.Domain.Entities;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.System
 {
     /// <summary>
-    /// Nhóm báo cáo.
+    /// Nhóm tùy chọn.
     /// </summary>
-    [Table("SYSReportCategory")]
-    public class SYSReportCategory : AuditedEntity<int>
+    [Table("SYSOptionCategory")]
+    public class OptionCategory : Entity<int>
     {
-        [MaxLength(255)]
+        [MaxLength(128)]
         [Required]
         public string Name { get; set; }
 

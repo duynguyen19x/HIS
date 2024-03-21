@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Entities.System
     /// Cấu hình mẫu hiển thị.
     /// </summary>
     [Table("SYSLayoutTemplate")]
-    public class SYSLayoutTemplate : AuditedEntity<Guid>
+    public class LayoutTemplate : AuditedEntity<Guid>
     {
         /// <summary>
         /// Mẫu tùy chỉnh của người dùng.
@@ -50,7 +50,7 @@ namespace HIS.EntityFrameworkCore.Entities.System
 
 
         [ForeignKey(nameof(SubSystemId))]
-        public virtual SYSSubSystem SubSystemFk { get; set; }
+        public virtual SubSystem SubSystemFk { get; set; }
 
         [ForeignKey(nameof(UserId))]
         public virtual User UserFk { get; set; }

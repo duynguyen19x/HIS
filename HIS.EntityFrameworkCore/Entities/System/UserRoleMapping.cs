@@ -15,7 +15,7 @@ namespace HIS.EntityFrameworkCore.Entities.System
     /// Người dùng và vai trò.
     /// </summary>
     [Table("SYSUserRoleMapping")]
-    public class SYSUserRoleMapping : Entity<Guid>
+    public class UserRoleMapping : Entity<Guid>
     {
         public virtual Guid UserId { get; set; }
 

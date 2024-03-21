@@ -13,7 +13,7 @@ namespace HIS.EntityFrameworkCore.Entities.System
     /// Chức năng của phần mềm.
     /// </summary>
     [Table("SYSSubSystem")]
-    public class SYSSubSystem : Entity<string>
+    public class SubSystem : Entity<string>
     {
         [MaxLength(255)]
         public override string Id { get; set; }
