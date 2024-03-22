@@ -14,11 +14,8 @@ namespace HIS.EntityFrameworkCore.Entities.System
     /// Quyền hạn.
     /// </summary>
     [Table("SYSPermission")]
-    public class Permission : Entity<string>
+    public class Permission : Entity<int>
     {
-        [MaxLength(255)]
-        public override string Id { get; set; }
-
         [MaxLength(255)]
         [Required]
         public virtual string SubSystemId { get; set; }

@@ -9,8 +9,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace HIS.EntityFrameworkCore.Entities.System
 {
     [Table("SYSUser")]
-    public class User : AuditedEntity<Guid>
+    public class User : FullAuditedEntity<Guid>
     {
+        public const string DefaultPassword = "123qwe";
+        public const string AdminUserName = "admin";
+
         /// <summary>
         /// Tên đăng nhập
         /// </summary>
@@ -54,12 +57,31 @@ namespace HIS.EntityFrameworkCore.Entities.System
         [MaxLength(255)]
         public virtual string Description { get; set; }
 
+        /// <summary>
+        /// Nhân viên sử dụng tài khoản người dùng
+        /// </summary>
         public virtual Guid? EmployeeId { get; set; }
 
+        /// <summary>
+        /// Chi nhánh khởi tạo tài khoản người dùng (mặc định quyền đăng nhập vào chi nhánh khi tài khoản không bị khóa)
+        /// </summary>
+        public virtual Guid? BranchId { get; set; }
+
+        /// <summary>
+        /// Số lần đăng nhập thất bại (khi quá số lần cho phép trong cấu hình thì khóa tài khoản, kho đăng nhập thành công thì làm gán bằng 0)
+        /// </summary>
+        public virtual int AccessFailedCount { get; set; }
+
+        /// <summary>
+        /// Khóa tài khoản người dùng
+        /// </summary>
         public virtual bool Inactive { get; set; }
 
         [ForeignKey(nameof(EmployeeId))]
         public virtual DIEmployee EmployeeFk { get; set; }
+
+        [ForeignKey(nameof(BranchId))]
+        public virtual DIBranch BranchFk { get; set; }
 
         //public string UserName { get; set; }
 

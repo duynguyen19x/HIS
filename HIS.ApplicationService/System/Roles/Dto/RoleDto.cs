@@ -17,6 +17,9 @@ namespace HIS.ApplicationService.Systems.Roles.Dto
 
         public bool Inactive { get; set; }
 
-        public IList<PermissionDto> Permissions { get; set; }
+        /// <summary>
+        /// danh sách quyền
+        /// </summary>
+        public IList<int> GrantedPermissions { get; set; }
     }
 }

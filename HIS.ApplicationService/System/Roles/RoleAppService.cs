@@ -12,12 +12,12 @@ namespace HIS.ApplicationService.System.Roles
 {
     public class RoleAppService : BaseAppService, IRoleAppService
     {
-        private readonly IRepository<Permission, string> _permissionRepository;
+        private readonly IRepository<Permission, int> _permissionRepository;
         private readonly IRepository<Role, Guid> _roleRepository;
         private readonly IRepository<RolePermissionMapping, Guid> _rolePermissionMapingRepository;
 
         public RoleAppService(
-            IRepository<Permission, string> permissionRepository,
+            IRepository<Permission, int> permissionRepository,
             IRepository<Role, Guid> roleRepository,
             IRepository<RolePermissionMapping, Guid> rolePermissionMapingRepository) 
         {

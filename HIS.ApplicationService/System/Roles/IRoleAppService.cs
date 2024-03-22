@@ -1,4 +1,5 @@
-﻿using HIS.ApplicationService.Systems.Roles.Dto;
+﻿using HIS.ApplicationService.System.Permissions.Dto;
+using HIS.ApplicationService.Systems.Roles.Dto;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 

@@ -1,4 +1,5 @@
 ﻿using HIS.ApplicationService.System.Permissions.Dto;
+using HIS.ApplicationService.System.Users.Dto;
 using HIS.ApplicationService.Systems.Users.Dto;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
@@ -14,12 +15,12 @@ namespace HIS.ApplicationService.System.Users
     {
         private readonly IRepository<Role, Guid> _roleRepository;
         private readonly IRepository<User, Guid> _userRepository;
-        private readonly IRepository<Permission, string> _permissionRepository;
+        private readonly IRepository<Permission, int> _permissionRepository;
 
         public UserAppService(
             IRepository<User, Guid> userRepository,
             IRepository<Role, Guid> roleRepository,
-            IRepository<Permission, string> permissionRepository) 
+            IRepository<Permission, int> permissionRepository) 
         {
             _roleRepository = roleRepository;
             _userRepository = userRepository;
@@ -144,6 +145,19 @@ namespace HIS.ApplicationService.System.Users
             return result;
         }
 
-        
+        public Task DeActivate(EntityDto<long> user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task Activate(EntityDto<long> user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> ChangePassword(ChangePasswordDto input)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
