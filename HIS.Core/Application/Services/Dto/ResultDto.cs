@@ -33,7 +33,7 @@ namespace HIS.Core.Application.Services.Dto
             Result = result;
         }
 
-        public virtual void Succeeded(T result)
+        public virtual void Success(T result)
         {
             IsSucceeded = true;
             Result = result;

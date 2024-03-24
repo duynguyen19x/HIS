@@ -1,5 +1,6 @@
 ﻿using HIS.Core.Domain.Entities;
 using HIS.EntityFrameworkCore.Entities.Categories;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
@@ -17,6 +18,6 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public bool IsMain { get; set; }
 
         public Service Service { get; set; }
-        public DIRoom Room { get; set; }
+        public Room Room { get; set; }
     }
 }

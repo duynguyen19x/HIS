@@ -2,6 +2,7 @@
 using HIS.Core.Domain.Entities;
 using HIS.Core.Domain.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 using HIS.Utilities.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -68,6 +69,11 @@ namespace HIS.EntityFrameworkCore.Entities.System
         public virtual Guid? BranchId { get; set; }
 
         /// <summary>
+        /// Chi nhánh người dùng làm việc cuối cùng (mặc định là chi nhánh khởi tạo người dùng)
+        /// </summary>
+        public virtual Guid? LastWorkingBranchId { get; set; }
+
+        /// <summary>
         /// Số lần đăng nhập thất bại (khi quá số lần cho phép trong cấu hình thì khóa tài khoản, kho đăng nhập thành công thì làm gán bằng 0)
         /// </summary>
         public virtual int AccessFailedCount { get; set; }
@@ -78,10 +84,10 @@ namespace HIS.EntityFrameworkCore.Entities.System
         public virtual bool Inactive { get; set; }
 
         [ForeignKey(nameof(EmployeeId))]
-        public virtual DIEmployee EmployeeFk { get; set; }
+        public virtual Employee EmployeeFk { get; set; }
 
         [ForeignKey(nameof(BranchId))]
-        public virtual DIBranch BranchFk { get; set; }
+        public virtual Branch BranchFk { get; set; }
 
         //public string UserName { get; set; }
 

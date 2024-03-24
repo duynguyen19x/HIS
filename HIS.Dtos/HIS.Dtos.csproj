@@ -26,4 +26,8 @@
     <ProjectReference Include="..\HIS.Utilities\HIS.Utilities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Business\ItemStocks\" />
+  </ItemGroup>
+
 </Project>

@@ -1,7 +1,7 @@
-﻿using HIS.ApplicationService.Dictionaries.Career;
-using HIS.Dtos.Dictionaries.Career;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using HIS.Core.Application.Services.Dto;
+using HIS.ApplicationService.Dictionary.Careers;
+using HIS.ApplicationService.Dictionary.Careers.Dto;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
 {
@@ -9,35 +9,35 @@ namespace HIS.BackendApi.Controllers.Dictionaries
     [ApiController]
     public class CareerController : ControllerBase
     {
-        private readonly ICareerService _jobService;
+        private readonly ICareerAppService _careerService;
 
-        public CareerController(ICareerService jobService)
+        public CareerController(ICareerAppService careerService)
         {
-            _jobService = jobService;
+            _careerService = careerService;
         }
 
         [HttpGet("GetAll")]
         public async Task<PagedResultDto<CareerDto>> GetAll([FromQuery] GetAllCareerInput input)
         {
-            return await _jobService.GetAll(input);
+            return await _careerService.GetAllAsync(input);
         }
 
         [HttpGet("GetById")]
         public async Task<ResultDto<CareerDto>> GetById(Guid id)
         {
-            return await _jobService.GetById(id);
+            return await _careerService.GetAsync(id);
         }
 
         [HttpPost("CreateOrEdit")]
         public async Task<ResultDto<CareerDto>> CreateOrEdit(CareerDto input)
         {
-            return await _jobService.CreateOrEdit(input);
+            return await _careerService.CreateOrUpdateAsync(input);
         }
 
         [HttpDelete("Delete")]
         public async Task<ResultDto<CareerDto>> Delete(Guid id)
         {
-            return await _jobService.Delete(id);
+            return await _careerService.DeleteAsync(id);
         }
     }
 }

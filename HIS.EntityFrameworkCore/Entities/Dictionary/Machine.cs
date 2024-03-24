@@ -1,5 +1,6 @@
 ﻿using AutoMapper.Configuration.Annotations;
 using HIS.Core.Domain.Entities.Auditing;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,8 +24,8 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public bool Inactive { get; set; }
 
         [Ignore]
-        public DIRoom Room { get; set; }
+        public Room Room { get; set; }
         [Ignore]
-        public DIDepartment Department { get; set; }
+        public Department Department { get; set; }
     }
 }

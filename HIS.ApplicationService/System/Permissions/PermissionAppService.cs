@@ -15,9 +15,9 @@ namespace HIS.ApplicationService.System.Permissions
 {
     public class PermissionAppService : BaseAppService, IPermissionAppService
     {
-        private readonly IRepository<Permission, int> _permissionRepository;
+        private readonly IRepository<Permission, string> _permissionRepository;
 
-        public PermissionAppService(IRepository<Permission, int> permissionRepository) 
+        public PermissionAppService(IRepository<Permission, string> permissionRepository) 
         {
             _permissionRepository = permissionRepository;
         }

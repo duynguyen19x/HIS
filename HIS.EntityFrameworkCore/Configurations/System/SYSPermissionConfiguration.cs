@@ -1,4 +1,6 @@
-﻿using HIS.EntityFrameworkCore.Constants;
+﻿using HIS.EntityFrameworkCore.Authorization;
+using HIS.EntityFrameworkCore.Configurations.Dictionaries;
+using HIS.EntityFrameworkCore.Constants;
 using HIS.EntityFrameworkCore.Entities.System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -14,28 +16,82 @@ namespace HIS.EntityFrameworkCore.Configurations.Systems
     {
         public void Configure(EntityTypeBuilder<Permission> builder)
         {
-            //builder.HasData(
-                //new Permission() { SubSystemId = "SYSUser", Id = "SYSUser", Name= "Sử dụng", SortOrder = 1 },
-                //new Permission() { SubSystemId = "SYSUser", Id = "SYSUser.Create", Name= "Thêm", SortOrder = 2 },
-                //new Permission() { SubSystemId = "SYSUser", Id = "SYSUser.Edit", Name= "Sửa", SortOrder = 3 },
-                //new Permission() { SubSystemId = "SYSUser", Id = "SYSUser.Delete", Name= "Xóa", SortOrder = 4 },
-                //new Permission() { SubSystemId = "SYSUser", Id = "SYSUser.ExportExcel", Name= "Xuất khẩu excel", SortOrder = 5 },
+            var permission = new Permission(PermissionNames.Pages, "HIS", null);
 
-                //new Permission() { SubSystemId = "SYSRole", Id = "SYSRole", Name = "Sử dụng", SortOrder = 1 },
-                //new Permission() { SubSystemId = "SYSRole", Id = "SYSRole.Create", Name = "Thêm", SortOrder = 2 },
-                //new Permission() { SubSystemId = "SYSRole", Id = "SYSRole.Edit", Name = "Sửa", SortOrder = 3 },
-                //new Permission() { SubSystemId = "SYSRole", Id = "SYSRole.Delete", Name = "Xóa", SortOrder = 4 },
-                //new Permission() { SubSystemId = "SYSRole", Id = "SYSRole.ExportExcel", Name = "Xuất khẩu excel", SortOrder = 5 },
+            #region - hệ thống 
 
-                //new Permission() { SubSystemId = "SYSAuditLog", Id = "SYSAuditLog", Name = "Sử dụng", SortOrder = 1 },
-                //new Permission() { SubSystemId = "SYSAuditLog", Id = "SYSAuditLog.Delete", Name = "Xóa", SortOrder = 2 },
-                //new Permission() { SubSystemId = "SYSAuditLog", Id = "SYSAuditLog.ExportExcel", Name = "Xuất khẩu excel", SortOrder = 3 },
+            var sytem = permission.CreateChildPermission(PermissionNames.Pages_System, "Hệ thống");
 
-                //new Permission() { SubSystemId = "SYSOption", Id = "SYSOption", Name = "Sử dụng", SortOrder = 90 },
-                //new Permission() { SubSystemId = "SYSOption", Id = "SYSOption", Name = "Sử dụng", SortOrder = 91 },
-                //new Permission() { SubSystemId = "SYSOption", Id = "SYSLayoutTemplate", Name = "Sử dụn", SortOrder = 99 }
+            var user = sytem.CreateChildPermission("SYSUser", "Quản lý người dùng");
+            user.CreateChildPermission("SYSUser.Use", "Sử dụng");
+            user.CreateChildPermission("SYSUser.Create", "Thêm mới");
+            user.CreateChildPermission("SYSUser.Edit", "Sửa");
+            user.CreateChildPermission("SYSUser.Delete", "Xóa");
 
-                //);
+            var role = sytem.CreateChildPermission("SYSRole", "Vai trò và quyền hạn");
+            role.CreateChildPermission("SYSRole.Use", "Sử dụng");
+            role.CreateChildPermission("SYSRole.Create", "Thêm");
+            role.CreateChildPermission("SYSRole.Edit", "Sửa");
+            role.CreateChildPermission("SYSRole.Delete", "Xóa");
+
+            var auditingLog = sytem.CreateChildPermission("SYSAuditingLog", "Nhật ký truy cập");
+            auditingLog.CreateChildPermission("SYSAuditingLog.Use", "Sử dụng");
+            auditingLog.CreateChildPermission("SYSAuditingLog.Delete", "Xóa");
+            auditingLog.CreateChildPermission("SYSAuditingLog.ExportExcel", "Xuất khẩu excel");
+
+            var option = sytem.CreateChildPermission("SYSOption", "Tùy chọn");
+            option.CreateChildPermission("SYSOptionUser", "Tùy chọn riêng");
+            option.CreateChildPermission("SYSOptionGeneral", "Tùy chọn chung");
+            option.CreateChildPermission("SYSOptionAutoNumber", "Quy tác đánh số tự động");
+            option.CreateChildPermission("SYSOptionNumberFormat", "Định dạng số");
+            option.CreateChildPermission("SYSOptionReport", "Báo cáo");
+
+            #endregion
+
+            #region - danh mục
+
+            var dictionary = permission.CreateChildPermission(PermissionNames.Pages_Dictionary, "Danh mục");
+            var branch = dictionary.CreateChildPermission("DIBranch", "Chi nhánh");
+            branch.CreateChildPermission("DIBranch.Use", "Sử dụng");
+            branch.CreateChildPermission("DIBranch.Create", "Thêm mới");
+            branch.CreateChildPermission("DIBranch.Edit", "Sửa");
+            branch.CreateChildPermission("DIBranch.Delete", "Xóa");
+
+            var department = dictionary.CreateChildPermission("DIDepartment", "Khoa");
+            department.CreateChildPermission("DIBranch.Use", "Sử dụng");
+            department.CreateChildPermission("DIBranch.Create", "Thêm mới");
+            department.CreateChildPermission("DIBranch.Edit", "Sửa");
+            department.CreateChildPermission("DIBranch.Delete", "Xóa");
+
+            var room = dictionary.CreateChildPermission("DIRoom", "Phòng");
+            room.CreateChildPermission("DIBranch.Use", "Sử dụng");
+            room.CreateChildPermission("DIBranch.Create", "Thêm mới");
+            room.CreateChildPermission("DIBranch.Edit", "Sửa");
+            room.CreateChildPermission("DIBranch.Delete", "Xóa");
+
+            var chamber = dictionary.CreateChildPermission("DIChamber", "Buồng");
+            chamber.CreateChildPermission("DIBranch.Use", "Sử dụng");
+            chamber.CreateChildPermission("DIBranch.Create", "Thêm mới");
+            chamber.CreateChildPermission("DIBranch.Edit", "Sửa");
+            chamber.CreateChildPermission("DIBranch.Delete", "Xóa");
+
+            var bed = dictionary.CreateChildPermission("DIBed", "Giường");
+            bed.CreateChildPermission("DIBranch.Use", "Sử dụng");
+            bed.CreateChildPermission("DIBranch.Create", "Thêm mới");
+            bed.CreateChildPermission("DIBranch.Edit", "Sửa");
+            bed.CreateChildPermission("DIBranch.Delete", "Xóa");
+
+            #endregion
+
+            #region - nghiệp vụ
+
+            var business = permission.CreateChildPermission(PermissionNames.Pages_Business, "Nghiệp vụ");
+
+            #endregion
+
+            #region - báo cáo
+
+            #endregion
         }
     }
 }

@@ -20,6 +20,6 @@ namespace HIS.ApplicationService.Systems.Roles.Dto
         /// <summary>
         /// danh sách quyền
         /// </summary>
-        public IList<int> GrantedPermissions { get; set; }
+        public IList<string> GrantedPermissions { get; set; }
     }
 }

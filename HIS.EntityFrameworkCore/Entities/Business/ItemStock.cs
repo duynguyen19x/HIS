@@ -1,6 +1,7 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 
 namespace HIS.EntityFrameworkCore.Entities.Business
 {
@@ -20,6 +21,6 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public decimal AvailableQuantity { get; set; }
 
         public Item Item { get; set; }
-        public DIRoom Stock { get; set; }
+        public Room Stock { get; set; }
     }
 }

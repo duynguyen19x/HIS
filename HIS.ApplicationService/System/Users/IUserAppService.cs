@@ -21,6 +21,5 @@ namespace HIS.ApplicationService.System.Users
         Task Activate(EntityDto<long> user);
 
         Task<bool> ChangePassword(ChangePasswordDto input);
-
     }
 }

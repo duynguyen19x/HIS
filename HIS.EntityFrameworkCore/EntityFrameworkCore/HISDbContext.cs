@@ -8,6 +8,7 @@ using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Items;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 using HIS.EntityFrameworkCore.Entities.System;
 using HIS.EntityFrameworkCore.Views;
 using Microsoft.EntityFrameworkCore;
@@ -21,33 +22,32 @@ namespace HIS.EntityFrameworkCore
         public HISDbContext(DbContextOptions options) 
             : base(options) { }
 
-        #region - SYS
+        #region - Hệ thống
 
         public DbSet<DbOption> DbOptions { get; set; }
 
-        public DbSet<LayoutTemplate> SYSLayoutTemplate { get; set; }
-
-        public DbSet<Option> SYSOption { get; set; }
-        public DbSet<OptionCategory> SYSOptionCategory { get; set; }
-
-        public DbSet<Report> SYSReport { get; set; }
-        public DbSet<ReportCategory> SYSReportCategory { get; set; }
-
-        public DbSet<Permission> SYSPermission { get; set; }
-        public DbSet<Role> SYSRole { get; set; }
-        public DbSet<User> SYSUser { get; set; }
-        public DbSet<RolePermissionMapping> SYSRolePermissionMaping { get; set; }
-        public DbSet<UserRoleMapping> SYSUserRoleMaping { get; set; }
+        public DbSet<ListLayoutTemplate> ListLayoutTemplate { get; set; }
+        public DbSet<Option> Option { get; set; }
+        public DbSet<OptionCategory> OptionCategory { get; set; }
+        public DbSet<Report> Report { get; set; }
+        public DbSet<ReportCategory> ReportCategory { get; set; }
+        public DbSet<User> User { get; set; }
+        public DbSet<Role> Role { get; set; }
+        public DbSet<Permission> Permission { get; set; }
+        public DbSet<UserRoleMapping> UserRoleMapping { get; set; }
+        public DbSet<UserRoomMapping> UserRoomMapping { get; set; }
+        public DbSet<RolePermissionMapping> RolePermissionMapping { get; set; }
         public DbSet<UserToken> Tokens { get; set; }
 
+        
 
         #endregion
 
         #region - Danh mục
 
-        public DbSet<DIBloodType> BloodTypes { get; set; }
-        public DbSet<DIBloodTypeRh> BloodTypeRhs { get; set; }
-        public DbSet<DIBranch> Branchs { get; set; }
+        public DbSet<BloodType> BloodTypes { get; set; }
+        public DbSet<BloodTypeRh> BloodTypeRhs { get; set; }
+        public DbSet<Branch> Branchs { get; set; }
         public DbSet<DIDeathCause> DeathCauses { get; set; }
         public DbSet<DIDeathWithin> DeathWithins { get; set; }
         public DbSet<DIDistrict> Districts { get; set; }
@@ -67,12 +67,12 @@ namespace HIS.EntityFrameworkCore
         public DbSet<DIGender> Genders { get; set; }
         
         
-        public DbSet<DIDepartment> Departments { get; set; }
-        public DbSet<DIDepartmentType> DepartmentTypes { get; set; }
-        public DbSet<DIEthnicity> Ethnicities { get; set; }
-        public DbSet<DIRoom> Rooms { get; set; }
-        public DbSet<DIRoomType> RoomTypes { get; set; }
-        public DbSet<DICareer> Careers { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<DepartmentType> DepartmentTypes { get; set; }
+        public DbSet<Ethnicity> Ethnicities { get; set; }
+        public DbSet<Room> Rooms { get; set; }
+        public DbSet<RoomType> RoomTypes { get; set; }
+        public DbSet<Career> Careers { get; set; }
         public DbSet<Hospital> Hospitals { get; set; }
         public DbSet<Icd> Icds { get; set; }
         public DbSet<ChapterIcd> ChapterIcds { get; set; }

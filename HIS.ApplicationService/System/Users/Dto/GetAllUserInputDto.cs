@@ -13,7 +13,6 @@ namespace HIS.ApplicationService.Systems.Users.Dto
         public string FirstNameFilter { get; set; }
         public string LastNameFilter { get; set; }
         public string UsernameFilter { get; set; }
-        public string PasswordFilter { get; set; }
         public string EmailFilter { get; set; }
         public string TelFilter { get; set; }
         public string MobileFilter { get; set; }

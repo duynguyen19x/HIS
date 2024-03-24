@@ -1,6 +1,7 @@
 ﻿using AutoMapper.Configuration.Annotations;
 using HIS.Core.Domain.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         [Ignore]
         public DIGender Gender { get; set; }
         [Ignore]
-        public DIEthnicity Ethnic { get; set; }
+        public Ethnicity Ethnic { get; set; }
         [Ignore]
         public DIReligion Religion { get; set; }
         [Ignore]
@@ -49,7 +50,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         [Ignore]
         public DIWard Ward { get; set; }
         [Ignore]
-        public DICareer Career { get; set; }
+        public Career Career { get; set; }
 
         public Patient() { }
     }

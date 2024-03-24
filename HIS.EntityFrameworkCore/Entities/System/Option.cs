@@ -1,6 +1,7 @@
 ﻿using AutoMapper.Configuration.Annotations;
 using HIS.Core.Domain.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -69,7 +70,7 @@ namespace HIS.EntityFrameworkCore.Entities.System
         public virtual OptionCategory OptionCategoryFk { get; set; }
 
         [ForeignKey(nameof(BranchId))]
-        public virtual DIBranch BranchFk { get; set; }
+        public virtual Branch BranchFk { get; set; }
 
         [ForeignKey(nameof(UserId))]
         public virtual User UserFk { get; set; }

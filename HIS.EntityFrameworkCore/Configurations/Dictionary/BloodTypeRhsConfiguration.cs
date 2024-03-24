@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class BloodTypeRhsConfiguration : IEntityTypeConfiguration<DIBloodTypeRh>
+    public class BloodTypeRhsConfiguration : IEntityTypeConfiguration<BloodTypeRh>
     {
-        public void Configure(EntityTypeBuilder<DIBloodTypeRh> builder)
+        public void Configure(EntityTypeBuilder<BloodTypeRh> builder)
         {
             builder.ToTable("DIC_BloodTypeRh");
 

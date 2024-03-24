@@ -22,5 +22,13 @@ namespace HIS.EntityFrameworkCore.Entities.System
         [ForeignKey(nameof(RoleId))]
         public virtual Role RoleFk { get; set; }
 
+        public RolePermissionMapping() { }
+
+        public RolePermissionMapping(Guid roleId, string permissionId)
+        {
+            Id = Guid.NewGuid();
+            RoleId = roleId;
+            PermissionId = permissionId;
+        }
     }
 }

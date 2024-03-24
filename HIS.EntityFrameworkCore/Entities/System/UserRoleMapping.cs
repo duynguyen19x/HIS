@@ -1,13 +1,7 @@
 ﻿using AutoMapper.Configuration.Annotations;
 using HIS.Core.Domain.Entities;
-using HIS.Core.Domain.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.System
 {
@@ -21,19 +15,19 @@ namespace HIS.EntityFrameworkCore.Entities.System
 
         public virtual Guid RoleId { get; set; }
 
-        public virtual Guid? BranchId { get; set; }
-
-
-        [ForeignKey(nameof(UserId))]
-        [Ignore]
-        public virtual User UserFk { get; set; }
-
-        [ForeignKey(nameof(RoleId))]
-        [Ignore]
+        [ForeignKey("RoleId")]
         public virtual Role RoleFk { get; set; }
 
-        [ForeignKey(nameof(BranchId))]
-        [Ignore]
-        public virtual DIBranch BranchFk { get; set; }
+        [ForeignKey("UserId")]
+        public virtual User UserFk { get; set; }
+
+        public UserRoleMapping() { }
+
+        public UserRoleMapping(Guid userId, Guid roleId)
+        {
+            Id = Guid.NewGuid();
+            UserId = userId;
+            RoleId = roleId;
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper.Configuration.Annotations;
 using HIS.Core.Domain.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 using HIS.EntityFrameworkCore.Entities.System;
 using HIS.Utilities.Enums;
 
@@ -131,9 +132,9 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public CommodityTypes CommodityType { get; set; }
 
         [Ignore]
-        public DIRoom ImpStock { get; set; }
+        public Room ImpStock { get; set; }
         [Ignore]
-        public DIRoom ExpStock { get; set; }
+        public Room ExpStock { get; set; }
         [Ignore]
         public InOutStockType InOutStockType { get; set; }
         [Ignore]
@@ -147,9 +148,9 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         [Ignore]
         public User StockExpUser { get; set; }
         [Ignore]
-        public DIRoom ReqRoom { get; set; }
+        public Room ReqRoom { get; set; }
         [Ignore]
-        public DIDepartment ReqDepartment { get; set; }
+        public Department ReqDepartment { get; set; }
         [Ignore]
         public Supplier Supplier { get; set; }
         [Ignore]

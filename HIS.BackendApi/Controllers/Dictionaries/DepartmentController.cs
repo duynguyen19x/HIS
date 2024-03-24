@@ -1,8 +1,8 @@
-﻿using HIS.ApplicationService.Dictionaries.Department;
-using HIS.Dtos.Dictionaries.Department;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using HIS.Core.Application.Services.Dto;
+using HIS.ApplicationService.Dictionary.Departments;
+using HIS.ApplicationService.Dictionary.Departments.Dto;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
 {
@@ -10,39 +10,39 @@ namespace HIS.BackendApi.Controllers.Dictionaries
     [ApiController]
     public class DepartmentController : ControllerBase
     {
-        private readonly IDepartmentService _departmentService;
+        private readonly IDepartmentAppService _departmentService;
 
-        public DepartmentController(IDepartmentService departmentService)
+        public DepartmentController(IDepartmentAppService departmentService)
         {
             _departmentService = departmentService;
         }
 
         [HttpGet("GetAll")]
         [Authorize]
-        public async Task<PagedResultDto<DepartmentDto>> GetAll([FromQuery] GetAllDepartmentInput input)
+        public async Task<PagedResultDto<DepartmentDto>> GetAll([FromQuery] GetAllDepartmentInputDto input)
         {
-            return await _departmentService.GetAll(input);
+            return await _departmentService.GetAllAsync(input);
         }
 
         [HttpGet("GetById")]
         [Authorize]
         public async Task<ResultDto<DepartmentDto>> GetById(Guid id)
         {
-            return await _departmentService.GetById(id);
+            return await _departmentService.GetAsync(id);
         }
 
         [HttpPost("CreateOrEdit")]
         [Authorize]
         public async Task<ResultDto<DepartmentDto>> CreateOrEdit(DepartmentDto input)
         {
-            return await _departmentService.CreateOrEdit(input);
+            return await _departmentService.CreateOrUpdateAsync(input);
         }
 
         [HttpDelete("Delete")]
         [Authorize]
         public async Task<ResultDto<DepartmentDto>> Delete(Guid id)
         {
-            return await _departmentService.Delete(id);
+            return await _departmentService.DeleteAsync(id);
         }
     }
 }

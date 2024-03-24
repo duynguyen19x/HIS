@@ -1,7 +1,7 @@
-﻿using HIS.ApplicationService.Dictionaries.DepartmentType;
-using HIS.Dtos.Dictionaries.DepartmentType;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using HIS.Core.Application.Services.Dto;
+using HIS.ApplicationService.Dictionary.DepartmentTypes;
+using HIS.ApplicationService.Dictionary.DepartmentTypes.Dto;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
 {
@@ -9,9 +9,9 @@ namespace HIS.BackendApi.Controllers.Dictionaries
     [ApiController]
     public class DepartmentTypeController : ControllerBase
     {
-        private readonly IDepartmentTypeService _departmentTypeService;
+        private readonly IDepartmentTypeAppService _departmentTypeService;
 
-        public DepartmentTypeController(IDepartmentTypeService departmentTypeService)
+        public DepartmentTypeController(IDepartmentTypeAppService departmentTypeService)
         {
             _departmentTypeService = departmentTypeService;
         }
@@ -19,25 +19,25 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         [HttpGet("GetAll")]
         public async Task<PagedResultDto<DepartmentTypeDto>> GetAll([FromQuery] GetAllDepartmentTypeInput input)
         {
-            return await _departmentTypeService.GetAll(input);
+            return await _departmentTypeService.GetAllAsync(input);
         }
 
         [HttpGet("GetById")]
         public async Task<ResultDto<DepartmentTypeDto>> GetById(int id)
         {
-            return await _departmentTypeService.GetById(id);
+            return await _departmentTypeService.GetAsync(id);
         }
 
         [HttpPost("CreateOrEdit")]
         public async Task<ResultDto<DepartmentTypeDto>> CreateOrEdit(DepartmentTypeDto input)
         {
-            return await _departmentTypeService.CreateOrEdit(input);
+            return await _departmentTypeService.CreateOrUpdateAsync(input);
         }
 
         [HttpDelete("Delete")]
         public async Task<ResultDto<DepartmentTypeDto>> Delete(int id)
         {
-            return await _departmentTypeService.Delete(id);
+            return await _departmentTypeService.DeleteAsync(id);
         }
     }
 }

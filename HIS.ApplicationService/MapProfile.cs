@@ -5,14 +5,9 @@ using HIS.Dtos.Business.ItemStocks;
 using HIS.Dtos.Business.PatientRecords;
 using HIS.Dtos.Business.Patients;
 using HIS.Dtos.Business.ServiceRequests;
-using HIS.Dtos.Dictionaries.Branchs;
-using HIS.Dtos.Dictionaries.Career;
 using HIS.Dtos.Dictionaries.ChapterICD10;
 using HIS.Dtos.Dictionaries.Countries;
-using HIS.Dtos.Dictionaries.Department;
-using HIS.Dtos.Dictionaries.DepartmentType;
 using HIS.Dtos.Dictionaries.District;
-using HIS.Dtos.Dictionaries.Ethnics;
 using HIS.Dtos.Dictionaries.ExecutionRoom;
 using HIS.Dtos.Dictionaries.Genders;
 using HIS.Dtos.Dictionaries.Hospital;
@@ -22,8 +17,6 @@ using HIS.Dtos.Dictionaries.ItemPricePolicies;
 using HIS.Dtos.Dictionaries.Items;
 using HIS.Dtos.Dictionaries.ItemTypes;
 using HIS.Dtos.Dictionaries.Province;
-using HIS.Dtos.Dictionaries.Room;
-using HIS.Dtos.Dictionaries.RoomType;
 using HIS.Dtos.Dictionaries.Service;
 using HIS.Dtos.Dictionaries.ServiceGroup;
 using HIS.Dtos.Dictionaries.ServiceGroupHeIn;
@@ -40,9 +33,17 @@ using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.System;
 using HIS.EntityFrameworkCore.Views;
-using HIS.ApplicationService.Systems.LayoutTemplate.Dtos;
 using HIS.ApplicationService.Systems.Roles.Dto;
 using HIS.ApplicationService.Systems.Users.Dto;
+using HIS.ApplicationService.Dictionary.Careers.Dto;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
+using HIS.ApplicationService.Dictionary.Branchs.Dto;
+using HIS.ApplicationService.Dictionary.Departments.Dto;
+using HIS.ApplicationService.Dictionary.DepartmentTypes.Dto;
+using HIS.ApplicationService.Dictionary.Ethnicities.Dto;
+using HIS.ApplicationService.Systems.LayoutTemplates.Dto;
+using HIS.ApplicationService.Dictionary.Rooms.Dto;
+using HIS.ApplicationService.Dictionary.RoomTypes.Dto;
 
 namespace HIS.ApplicationService
 {
@@ -50,10 +51,9 @@ namespace HIS.ApplicationService
     {
         public MapProfile()
         {
-            CreateMap<DICareer, CareerDto>().ReverseMap();
+            CreateMap<Career, CareerDto>().ReverseMap();
             CreateMap<DICountry, CountryDto>().ReverseMap();
-            CreateMap<DepartmentDto, DIDepartment>().ReverseMap();
-            CreateMap<DIDepartmentType, DepartmentTypeDto>().ReverseMap();
+            
             CreateMap<ChapterIcdDto, ChapterIcd>().ReverseMap();
             CreateMap<DIDistrict, DistrictDto>().ReverseMap();
             CreateMap<DIGender, GenderDto>().ReverseMap();
@@ -61,11 +61,7 @@ namespace HIS.ApplicationService
             CreateMap<Icd, IcdDto>().ReverseMap();
             CreateMap<DbOption, DbOptionDto>().ReverseMap();
             CreateMap<DIProvince, ProvinceDto>().ReverseMap();
-            CreateMap<RoomDto, DIRoom>()
-                .ForMember(dest => dest.RoomTypeFk, opt => opt.Ignore())
-                .ForMember(dest => dest.DepartmentFk, opt => opt.Ignore())
-                .ReverseMap();
-            CreateMap<RoomTypeDto, DIRoomType>().ReverseMap();
+            
             CreateMap<DIWard, WardDto>().ReverseMap();
             CreateMap<ServiceGroupDto, ServiceGroup>().ReverseMap();
             CreateMap<ServiceGroupHeInDto, ServiceGroupHeIn>().ReverseMap();
@@ -156,14 +152,26 @@ namespace HIS.ApplicationService
 
             #region - danh mục
 
-            CreateMap<DIBranch, DIBranchDto>().ReverseMap();
-            CreateMap<DIEthnicity, EthnicDto>().ReverseMap();
+            CreateMap<Branch, BranchDto>().ReverseMap();
+            CreateMap<DepartmentType, DepartmentTypeDto>().ReverseMap();
+            CreateMap<DepartmentDto, Department>()
+                .ForMember(dest => dest.BranchFk, opt => opt.Ignore())
+                .ForMember(dest => dest.ChiefFk, opt => opt.Ignore())
+                .ForMember(dest => dest.DepartmentTypeFk, opt => opt.Ignore())
+                .ReverseMap();
+            CreateMap<RoomTypeDto, RoomType>().ReverseMap();
+            CreateMap<RoomDto, Room>()
+                .ForMember(dest => dest.RoomTypeFk, opt => opt.Ignore())
+                .ForMember(dest => dest.DepartmentFk, opt => opt.Ignore())
+                .ReverseMap();
+            
+            CreateMap<Ethnicity, EthnicityDto>().ReverseMap();
 
             #endregion
 
             #region - hệ thống
 
-            CreateMap<LayoutTemplate, SYSLayoutTemplateDto>().ReverseMap();
+            CreateMap<ListLayoutTemplate, ListLayoutTemplateDto>().ReverseMap();
             CreateMap<Role, RoleDto>().ReverseMap();
             CreateMap<User, UserDto>().ReverseMap();
 

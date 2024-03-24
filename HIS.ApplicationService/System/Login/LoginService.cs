@@ -33,7 +33,7 @@ namespace HIS.ApplicationService.Systems.Login
             {
                 try
                 {
-                    var user = Context.SYSUser.Where(w => w.Username == request.UserName && w.Password.ToUpper() == request.Password.ToUpper()).FirstOrDefault();
+                    var user = Context.User.Where(w => w.Username == request.UserName && w.Password.ToUpper() == request.Password.ToUpper()).FirstOrDefault();
                     if (user == null)
                     {
                         ResultDto.IsSucceeded = false;
@@ -97,7 +97,7 @@ namespace HIS.ApplicationService.Systems.Login
             {
                 try
                 {
-                    var user = Context.SYSUser.FirstOrDefault(f => f.Username == request.UserName);
+                    var user = Context.User.FirstOrDefault(f => f.Username == request.UserName);
                     if (user != null)
                     {
                         ResultDto.Result = false;
@@ -107,7 +107,7 @@ namespace HIS.ApplicationService.Systems.Login
                         return await Task.FromResult(ResultDto);
                     }
 
-                    user = Context.SYSUser.FirstOrDefault(f => f.Email == request.UserName);
+                    user = Context.User.FirstOrDefault(f => f.Email == request.UserName);
                     if (user != null)
                     {
                         ResultDto.Result = false;
@@ -135,7 +135,7 @@ namespace HIS.ApplicationService.Systems.Login
                         //DistrictId = request.District,
                         //WardId = request.WardsId,
                     };
-                    var result = Context.SYSUser.Add(userSave);
+                    var result = Context.User.Add(userSave);
                     if (result != null)
                     {
                         ResultDto.Message = "Đăng ký thằng công!";
@@ -166,8 +166,8 @@ namespace HIS.ApplicationService.Systems.Login
 
         private async Task<IList<Claim>> CreateClaimsAsync(EntityFrameworkCore.Entities.System.User user, TokenTypes tokenType = TokenTypes.AcceptToken)
         {
-            var roleIds = Context.SYSUserRoleMaping.Where(w => w.UserId == user.Id).Select(s => s.RoleId).ToList();
-            var roles = Context.SYSRole.Where(w => roleIds.Contains(w.Id)).ToList();
+            var roleIds = Context.UserRoleMapping.Where(w => w.UserId == user.Id).Select(s => s.RoleId).ToList();
+            var roles = Context.Role.Where(w => roleIds.Contains(w.Id)).ToList();
 
             var claims = new List<Claim>()
             {
@@ -312,7 +312,7 @@ namespace HIS.ApplicationService.Systems.Login
                     }
 
                     // Tạo token mới
-                    var userById = Context.SYSUser.FirstOrDefault(f => f.Id == storedToken.UserId.GetValueOrDefault());
+                    var userById = Context.User.FirstOrDefault(f => f.Id == storedToken.UserId.GetValueOrDefault());
                     var acceptToken = await CreateTokenAsync(await CreateClaimsAsync(userById), AppConst.AcceptTokenExpiration);
 
                     // Update token
