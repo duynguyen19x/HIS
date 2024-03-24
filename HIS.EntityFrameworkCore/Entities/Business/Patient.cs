@@ -36,19 +36,19 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public string Description { get; set; }
 
         [Ignore]
-        public DIGender Gender { get; set; }
+        public Gender Gender { get; set; }
         [Ignore]
         public Ethnicity Ethnic { get; set; }
         [Ignore]
-        public DIReligion Religion { get; set; }
+        public Religion Religion { get; set; }
         [Ignore]
-        public DICountry National { get; set; }
+        public Country National { get; set; }
         [Ignore]
-        public DIProvince Province { get; set; }
+        public Province Province { get; set; }
         [Ignore]
-        public DIDistrict District { get; set; }
+        public District District { get; set; }
         [Ignore]
-        public DIWard Ward { get; set; }
+        public Ward Ward { get; set; }
         [Ignore]
         public Career Career { get; set; }
 

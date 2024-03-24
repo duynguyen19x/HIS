@@ -1,6 +1,8 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,14 +12,23 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// <summary>
     /// Phương thức thanh toán.
     /// </summary>
+    [Table("DIPaymentMethod")]
     public class PaymentMethod : AuditedEntity<Guid>
     {
-        public string PaymentMethodCode { get; set; }
-        public string PaymentMethodName { get; set; }
-        public string Description { get; set; }
-        public int SortOrder { get; set; }
-        public bool Inactive { get; set; }
+        [Required]
+        [MaxLength(50)]
+        public virtual string Code { get; set; }
 
-        public PaymentMethod() { }
+        [Required]
+        [MaxLength(255)]
+        public virtual string Name { get; set; }
+
+        [MaxLength(255)]
+        public virtual string Description { get; set; }
+
+        public virtual int SortOrder { get; set; }
+
+        public virtual bool Inactive { get; set; }
+
     }
 }

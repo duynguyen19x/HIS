@@ -9,30 +9,30 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<RelativeType> builder)
         {
-            builder.ToTable("DIC_RelativeType");
+            //builder.ToTable("DIC_RelativeType");
 
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.RelativeTypeCode).HasMaxLength(20).IsRequired();
-            builder.Property(x => x.RelativeTypeName).HasMaxLength(128).IsRequired();
-            builder.Property(x => x.Description).HasMaxLength(255);
+            //builder.HasKey(x => x.Id);
+            //builder.Property(x => x.RelativeTypeCode).HasMaxLength(20).IsRequired();
+            //builder.Property(x => x.RelativeTypeName).HasMaxLength(128).IsRequired();
+            //builder.Property(x => x.Description).HasMaxLength(255);
 
             builder.HasData(
-                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F01"), RelativeTypeCode = "01", RelativeTypeName = "Bố đẻ", SortOrder = 1 },
-                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F02"), RelativeTypeCode = "02", RelativeTypeName = "Mẹ đẻ", SortOrder = 2 },
-                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F03"), RelativeTypeCode = "03", RelativeTypeName = "Bố nuôi", SortOrder = 3 },
-                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F04"), RelativeTypeCode = "04", RelativeTypeName = "Mẹ nuôi", SortOrder = 4 },
-                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F05"), RelativeTypeCode = "05", RelativeTypeName = "Anh ruột", SortOrder = 5 },
-                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F06"), RelativeTypeCode = "06", RelativeTypeName = "Chị ruột", SortOrder = 6 },
-                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F07"), RelativeTypeCode = "07", RelativeTypeName = "Em ruột", SortOrder = 7 },
-                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F08"), RelativeTypeCode = "08", RelativeTypeName = "Ông", SortOrder = 8 },
-                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F09"), RelativeTypeCode = "09", RelativeTypeName = "Bà", SortOrder = 9 },
-                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F10"), RelativeTypeCode = "10", RelativeTypeName = "Vợ", SortOrder = 10 },
-                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F11"), RelativeTypeCode = "11", RelativeTypeName = "Chồng", SortOrder = 11 },
-                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F12"), RelativeTypeCode = "12", RelativeTypeName = "Con", SortOrder = 12 },
-                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F13"), RelativeTypeCode = "13", RelativeTypeName = "Cháu", SortOrder = 13 },
-                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F14"), RelativeTypeCode = "14", RelativeTypeName = "Bác, chú, cậu", SortOrder = 14 },
-                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F15"), RelativeTypeCode = "15", RelativeTypeName = "Bác, cô, dì", SortOrder = 15 },
-                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F99"), RelativeTypeCode = "99", RelativeTypeName = "Khác", SortOrder = 99 }
+                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F01"), Code = "01", Name = "Bố đẻ", SortOrder = 1 },
+                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F02"), Code = "02", Name = "Mẹ đẻ", SortOrder = 2 },
+                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F03"), Code = "03", Name = "Bố nuôi", SortOrder = 3 },
+                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F04"), Code = "04", Name = "Mẹ nuôi", SortOrder = 4 },
+                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F05"), Code = "05", Name = "Anh ruột", SortOrder = 5 },
+                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F06"), Code = "06", Name = "Chị ruột", SortOrder = 6 },
+                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F07"), Code = "07", Name = "Em ruột", SortOrder = 7 },
+                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F08"), Code = "08", Name = "Ông", SortOrder = 8 },
+                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F09"), Code = "09", Name = "Bà", SortOrder = 9 },
+                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F10"), Code = "10", Name = "Vợ", SortOrder = 10 },
+                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F11"), Code = "11", Name = "Chồng", SortOrder = 11 },
+                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F12"), Code = "12", Name = "Con", SortOrder = 12 },
+                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F13"), Code = "13", Name = "Cháu", SortOrder = 13 },
+                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F14"), Code = "14", Name = "Bác, chú, cậu", SortOrder = 14 },
+                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F15"), Code = "15", Name = "Bác, cô, dì", SortOrder = 15 },
+                new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F99"), Code = "99", Name = "Khác", SortOrder = 99 }
                 );
         }
     }

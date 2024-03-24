@@ -119,15 +119,15 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionary
 
         [Ignore]
         [ForeignKey("ProvinceId")]
-        public virtual DIProvince ProvinceFk { get; set; }
+        public virtual Province ProvinceFk { get; set; }
 
         [Ignore]
         [ForeignKey("DistrictId")]
-        public virtual DIDistrict DistrictFk { get; set; }
+        public virtual District DistrictFk { get; set; }
 
         [Ignore]
         [ForeignKey("WardId")]
-        public virtual DIWard WardFk { get; set; }
+        public virtual Ward WardFk { get; set; }
 
         [Ignore]
         [ForeignKey("DirectorId")]

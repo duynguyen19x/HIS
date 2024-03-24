@@ -48,23 +48,23 @@ namespace HIS.EntityFrameworkCore
         public DbSet<BloodType> BloodTypes { get; set; }
         public DbSet<BloodTypeRh> BloodTypeRhs { get; set; }
         public DbSet<Branch> Branchs { get; set; }
-        public DbSet<DIDeathCause> DeathCauses { get; set; }
-        public DbSet<DIDeathWithin> DeathWithins { get; set; }
-        public DbSet<DIDistrict> Districts { get; set; }
+        public DbSet<DeathCause> DeathCauses { get; set; }
+        public DbSet<DeathWithin> DeathWithins { get; set; }
+        public DbSet<District> Districts { get; set; }
         public DbSet<MedicalRecordType> MedicalRecordTypes { get; set; }
         public DbSet<MedicalRecordTypeGroup> MedicalRecordTypeGroups { get; set; }
-        public DbSet<DICountry> Countries { get; set; }
-        public DbSet<DIPatientObjectType> PatientTypes { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<PatientObjectType> PatientTypes { get; set; }
         public DbSet<PaymentMethod> PaymentMethods { get; set; }
-        public DbSet<DIProvince> Provinces { get; set; }
+        public DbSet<Province> Provinces { get; set; }
         public DbSet<ReceptionObjectType> ReceptionTypes { get; set; }
         public DbSet<RelativeType> RelativeTypes { get; set; }
-        public DbSet<DIReligion> Religions { get; set; }
+        public DbSet<Religion> Religions { get; set; }
         public DbSet<RightRouteType> RightRouteTypes { get; set; }
-        public DbSet<DITreatmentEndType> TreatmentEndTypes { get; set; }
-        public DbSet<DITreatmentResult> TreatmentResults { get; set; }
-        public DbSet<DIWard> Wards { get; set; }
-        public DbSet<DIGender> Genders { get; set; }
+        public DbSet<TreatmentEndType> TreatmentEndTypes { get; set; }
+        public DbSet<TreatmentResult> TreatmentResults { get; set; }
+        public DbSet<Ward> Wards { get; set; }
+        public DbSet<Gender> Genders { get; set; }
         
         
         public DbSet<Department> Departments { get; set; }

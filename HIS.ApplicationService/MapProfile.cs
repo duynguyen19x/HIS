@@ -52,17 +52,17 @@ namespace HIS.ApplicationService
         public MapProfile()
         {
             CreateMap<Career, CareerDto>().ReverseMap();
-            CreateMap<DICountry, CountryDto>().ReverseMap();
+            CreateMap<Country, CountryDto>().ReverseMap();
             
             CreateMap<ChapterIcdDto, ChapterIcd>().ReverseMap();
-            CreateMap<DIDistrict, DistrictDto>().ReverseMap();
-            CreateMap<DIGender, GenderDto>().ReverseMap();
+            CreateMap<District, DistrictDto>().ReverseMap();
+            CreateMap<Gender, GenderDto>().ReverseMap();
             CreateMap<Hospital, HospitalDto>().ReverseMap();
             CreateMap<Icd, IcdDto>().ReverseMap();
             CreateMap<DbOption, DbOptionDto>().ReverseMap();
-            CreateMap<DIProvince, ProvinceDto>().ReverseMap();
+            CreateMap<Province, ProvinceDto>().ReverseMap();
             
-            CreateMap<DIWard, WardDto>().ReverseMap();
+            CreateMap<Ward, WardDto>().ReverseMap();
             CreateMap<ServiceGroupDto, ServiceGroup>().ReverseMap();
             CreateMap<ServiceGroupHeInDto, ServiceGroupHeIn>().ReverseMap();
             CreateMap<UnitDto, Unit>().ReverseMap();

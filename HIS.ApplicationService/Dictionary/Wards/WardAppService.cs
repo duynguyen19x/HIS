@@ -24,7 +24,7 @@ namespace HIS.ApplicationService.Dictionaries.Wards
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = ObjectMapper.Map<DIWard>(input);
+                    var data = ObjectMapper.Map<Ward>(input);
                     Context.Wards.Add(data);
                     await Context.SaveChangesAsync();
 
@@ -48,7 +48,7 @@ namespace HIS.ApplicationService.Dictionaries.Wards
             {
                 try
                 {
-                    var data = ObjectMapper.Map<DIWard>(input);
+                    var data = ObjectMapper.Map<Ward>(input);
                     Context.Wards.Update(data);
                     await Context.SaveChangesAsync();
 

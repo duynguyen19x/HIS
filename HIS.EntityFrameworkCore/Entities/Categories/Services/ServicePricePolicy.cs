@@ -34,6 +34,6 @@ namespace HIS.EntityFrameworkCore.Entities.Categories.Services
         public DateTime? ExecutionTime { get; set; }
 
         public Service Service { get; set; }
-        public DIPatientObjectType PatientType { get; set; }
+        public PatientObjectType PatientType { get; set; }
     }
 }

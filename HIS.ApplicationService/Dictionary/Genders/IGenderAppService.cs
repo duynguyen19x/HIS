@@ -3,7 +3,7 @@ using HIS.Dtos.Dictionaries.Genders;
 
 namespace HIS.ApplicationService.Dictionaries.Genders
 {
-    public interface IGenderAppService : IBaseCrudAppService<GenderDto, Guid?, GetAllGenderInput>
+    public interface IGenderAppService : IBaseCrudAppService<GenderDto, Guid?, GetAllGenderInputDto>
     {
     }
 }

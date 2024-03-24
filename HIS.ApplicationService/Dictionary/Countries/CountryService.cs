@@ -22,7 +22,7 @@ namespace HIS.ApplicationService.Dictionaries.Countries
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = base.ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.DICountry>(input);
+                    var data = base.ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Country>(input);
                     Context.Countries.Add(data);
                     await Context.SaveChangesAsync();
 
@@ -50,7 +50,7 @@ namespace HIS.ApplicationService.Dictionaries.Countries
             {
                 try
                 {
-                    var data = base.ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.DICountry>(input);
+                    var data = base.ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Country>(input);
                     Context.Countries.Update(data);
                     await Context.SaveChangesAsync();
 

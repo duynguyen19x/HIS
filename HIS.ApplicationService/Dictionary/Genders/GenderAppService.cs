@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 
 namespace HIS.ApplicationService.Dictionaries.Genders
 {
-    public class GenderAppService : BaseCrudAppService<GenderDto, Guid?, GetAllGenderInput>, IGenderAppService
+    public class GenderAppService : BaseCrudAppService<GenderDto, Guid?, GetAllGenderInputDto>, IGenderAppService
     {
         public GenderAppService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
             : base(dbContext, mapper)
@@ -23,7 +23,7 @@ namespace HIS.ApplicationService.Dictionaries.Genders
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.DIGender>(input);
+                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Gender>(input);
                     Context.Genders.Add(data);
                     await Context.SaveChangesAsync();
 
@@ -51,7 +51,7 @@ namespace HIS.ApplicationService.Dictionaries.Genders
             {
                 try
                 {
-                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.DIGender>(input);
+                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Gender>(input);
                     Context.Genders.Update(data);
                     await Context.SaveChangesAsync();
 
@@ -101,7 +101,7 @@ namespace HIS.ApplicationService.Dictionaries.Genders
             return await Task.FromResult(result);
         }
 
-        public override async Task<PagedResultDto<GenderDto>> GetAll(GetAllGenderInput input)
+        public override async Task<PagedResultDto<GenderDto>> GetAll(GetAllGenderInputDto input)
         {
             var result = new PagedResultDto<GenderDto>();
             try

@@ -6,7 +6,7 @@ namespace HIS.BackendApi.Controllers.Dictionaries
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GenderController : BaseCrudController<IGenderAppService, GenderDto, Guid?, GetAllGenderInput>
+    public class GenderController : BaseCrudController<IGenderAppService, GenderDto, Guid?, GetAllGenderInputDto>
     {
         public GenderController(IGenderAppService appService) 
             : base(appService)

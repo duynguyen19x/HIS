@@ -102,8 +102,8 @@ namespace HIS.ApplicationService.Dictionaries.RelativeTypes
             try
             {
                 var filter = Context.RelativeTypes.AsNoTracking()
-                    .WhereIf(!string.IsNullOrEmpty(input.RelativeTypeCodeFilter), x => x.RelativeTypeCode == input.RelativeTypeCodeFilter)
-                    .WhereIf(!string.IsNullOrEmpty(input.RelativeTypeNameFilter), x => x.RelativeTypeName == input.RelativeTypeNameFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.RelativeTypeCodeFilter), x => x.Code == input.RelativeTypeCodeFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.RelativeTypeNameFilter), x => x.Name == input.RelativeTypeNameFilter)
                     .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
 
                 var paged = filter.OrderBy(o => o.SortOrder).PageBy(input);

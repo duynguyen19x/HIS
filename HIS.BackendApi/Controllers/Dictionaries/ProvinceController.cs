@@ -17,7 +17,7 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpGet("GetAll")]
-        public async Task<PagedResultDto<ProvinceDto>> GetAll([FromQuery] GetAllProvinceInput input)
+        public async Task<PagedResultDto<ProvinceDto>> GetAll([FromQuery] GetAllProvinceInputDto input)
         {
             return await _provinceService.GetAll(input);
         }

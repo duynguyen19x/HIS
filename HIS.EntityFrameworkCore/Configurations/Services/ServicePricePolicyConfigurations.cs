@@ -12,7 +12,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Services
             builder.ToTable("DIC_ServicePricePolicy");
             builder.HasKey(x => x.Id);
 
-            builder.HasOne<DIPatientObjectType>(t => t.PatientType).WithMany().HasForeignKey(pc => pc.PatientTypeId);
+            builder.HasOne<PatientObjectType>(t => t.PatientType).WithMany().HasForeignKey(pc => pc.PatientTypeId);
 
             builder.HasOne(t => t.Service)
                 .WithMany()

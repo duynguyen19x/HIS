@@ -17,7 +17,7 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpGet("GetAll")]
-        public async Task<PagedResultDto<HospitalDto>> GetAll([FromQuery] GetAllHospitalInput input)
+        public async Task<PagedResultDto<HospitalDto>> GetAll([FromQuery] GetAllHospitalInputDto input)
         {
             return await _hospitalService.GetAll(input);
         }

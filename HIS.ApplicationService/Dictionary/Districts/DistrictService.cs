@@ -7,7 +7,7 @@ using HIS.EntityFrameworkCore.Entities.Dictionaries;
 
 namespace HIS.ApplicationService.Dictionaries.Districts
 {
-    public class DistrictService : BaseCrudAppService<DistrictDto, Guid?, GetAllDistrictInput>, IDistrictService
+    public class DistrictService : BaseCrudAppService<DistrictDto, Guid?, GetAllDistrictInputDto>, IDistrictService
     {
         public DistrictService(HISDbContext dbContext, IMapper mapper)
             : base(dbContext, mapper)
@@ -23,7 +23,7 @@ namespace HIS.ApplicationService.Dictionaries.Districts
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = ObjectMapper.Map<DIDistrict>(input);
+                    var data = ObjectMapper.Map<District>(input);
                     Context.Districts.Add(data);
                     await Context.SaveChangesAsync();
 
@@ -51,7 +51,7 @@ namespace HIS.ApplicationService.Dictionaries.Districts
             {
                 try
                 {
-                    var data = ObjectMapper.Map<DIDistrict>(input);
+                    var data = ObjectMapper.Map<District>(input);
                     Context.Districts.Update(data);
                     await Context.SaveChangesAsync();
 
@@ -101,7 +101,7 @@ namespace HIS.ApplicationService.Dictionaries.Districts
             return await Task.FromResult(result);
         }
 
-        public override async Task<PagedResultDto<DistrictDto>> GetAll(GetAllDistrictInput input)
+        public override async Task<PagedResultDto<DistrictDto>> GetAll(GetAllDistrictInputDto input)
         {
             var result = new PagedResultDto<DistrictDto>();
             try

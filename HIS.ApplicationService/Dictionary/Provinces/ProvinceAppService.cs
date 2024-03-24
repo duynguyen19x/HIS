@@ -7,7 +7,7 @@ using HIS.EntityFrameworkCore.Entities.Dictionaries;
 
 namespace HIS.ApplicationService.Dictionaries.Provinces
 {
-    public class ProvinceAppService : BaseCrudAppService<ProvinceDto, Guid?, GetAllProvinceInput>, IProvinceAppService
+    public class ProvinceAppService : BaseCrudAppService<ProvinceDto, Guid?, GetAllProvinceInputDto>, IProvinceAppService
     {
         public ProvinceAppService(HISDbContext dbContext, IMapper mapper)
             : base(dbContext, mapper)
@@ -22,7 +22,7 @@ namespace HIS.ApplicationService.Dictionaries.Provinces
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var branch = new EntityFrameworkCore.Entities.Dictionaries.DIProvince()
+                    var branch = new EntityFrameworkCore.Entities.Dictionaries.Province()
                     {
                         Id = input.Id.GetValueOrDefault(),
                         Code = input.Code,
@@ -56,7 +56,7 @@ namespace HIS.ApplicationService.Dictionaries.Provinces
             {
                 try
                 {
-                    var data = ObjectMapper.Map<DIProvince>(input); 
+                    var data = ObjectMapper.Map<Province>(input); 
                     Context.Provinces.Update(data);
                     await Context.SaveChangesAsync();
 
@@ -106,7 +106,7 @@ namespace HIS.ApplicationService.Dictionaries.Provinces
             return await Task.FromResult(result);
         }
 
-        public override async Task<PagedResultDto<ProvinceDto>> GetAll(GetAllProvinceInput input)
+        public override async Task<PagedResultDto<ProvinceDto>> GetAll(GetAllProvinceInputDto input)
         {
             var result = new PagedResultDto<ProvinceDto>();
             try
