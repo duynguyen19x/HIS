@@ -1,15 +1,10 @@
-﻿using AutoMapper;
-using HIS.ApplicationService.Dictionary.Branchs.Dto;
-using HIS.ApplicationService.Dictionary.Careers.Dto;
+﻿using HIS.ApplicationService.Dictionary.Careers.Dto;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Extensions;
-using HIS.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.Entities.Dictionary;
-using HIS.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using System.Transactions;
 
 namespace HIS.ApplicationService.Dictionary.Careers

@@ -29,7 +29,7 @@ namespace HIS.ApplicationService.Dictionary.Ethnicities
                     .WhereIf(!string.IsNullOrEmpty(input.NameFilter), x => x.Name == input.NameFilter)
                     .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
 
-                var paged = filter.OrderBy(s => s.SortOrder).PageBy(input);
+                var paged = filter.ApplySortingAndPaging(input);
 
                 result.TotalCount = await filter.CountAsync();
                 result.Result = ObjectMapper.Map<IList<EthnicityDto>>(paged.ToList());

@@ -3,10 +3,7 @@ using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Extensions;
-using HIS.Dtos.Dictionaries.Branchs;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.System;
-using HIS.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore;
 
 namespace HIS.ApplicationService.System.Roles
