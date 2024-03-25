@@ -98,6 +98,11 @@ namespace HIS.Core.Extensions
             return source == null || source.Count <= 0;
         }
 
+        public static bool IsNotNullOrEmpty<T>(this ICollection<T> source)
+        {
+            return source != null && source.Count > 0;
+        }
+
         /// <summary>
         /// Kiểm tra chuỗi có trong mảng.
         /// </summary>

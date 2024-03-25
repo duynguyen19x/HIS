@@ -17,7 +17,7 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpGet("GetAll")]
-        public async Task<PagedResultDto<DepartmentTypeDto>> GetAll([FromQuery] GetAllDepartmentTypeInput input)
+        public async Task<PagedResultDto<DepartmentTypeDto>> GetAll([FromQuery] GetAllDepartmentTypeInputDto input)
         {
             return await _departmentTypeService.GetAllAsync(input);
         }

@@ -1,7 +1,5 @@
-﻿using HIS.Application.Core.Services;
+﻿using HIS.ApplicationService.Business.PatientRecords.Dto;
 using HIS.Core.Application.Services.Dto;
-using HIS.Dtos.Business.PatientRecords;
-using HIS.Dtos.Business.Patients;
 
 namespace HIS.ApplicationService.Business.PatientRecords
 {

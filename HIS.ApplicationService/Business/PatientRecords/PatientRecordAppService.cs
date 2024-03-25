@@ -1,18 +1,14 @@
-﻿using AutoMapper;
-using HIS.Application.Core.Services;
+﻿using HIS.ApplicationService.Business.PatientRecords.Dto;
+using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
-using HIS.Core.Enums;
 using HIS.Core.Extensions;
-using HIS.Dtos.Business.PatientRecords;
-using HIS.Dtos.Business.Patients;
-using HIS.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.Entities.Business;
 using Microsoft.EntityFrameworkCore;
 
 namespace HIS.ApplicationService.Business.PatientRecords
 {
-    public class PatientRecordAppService : HIS.Core.Application.Services.BaseAppService, IPatientRecordAppService
+    public class PatientRecordAppService :BaseAppService, IPatientRecordAppService
     {
         private readonly IRepository<PatientRecord, Guid> _hisPatientRecordRepository;
         private readonly IRepository<Patient, Guid> _hisPatientRepository;

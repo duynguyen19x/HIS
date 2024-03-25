@@ -2,7 +2,7 @@
 
 namespace HIS.Dtos.Dictionaries.Countries
 {
-    public class GetAllCountryInputDto : PagedResultRequestDto
+    public class GetAllCountryInputDto : PagedAndSortedResultRequestDto
     {
         public string CodeFilter { get; set; }
         public string NameFilter { get; set; }

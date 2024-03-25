@@ -9,9 +9,9 @@ namespace HIS.BackendApi.Controllers.Dictionaries
     [ApiController]
     public class SupplierController : ControllerBase
     {
-        private readonly ISupplierService _sSupplierService;
+        private readonly ISupplierAppService _sSupplierService;
 
-        public SupplierController(ISupplierService sSupplierService)
+        public SupplierController(ISupplierAppService sSupplierService)
         {
             _sSupplierService = sSupplierService;
         }

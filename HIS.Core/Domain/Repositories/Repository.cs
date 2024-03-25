@@ -24,6 +24,22 @@ namespace HIS.Core.Domain.Repositories
         public virtual async Task<List<TEntity>> GetAllListAsync() => await _dbSet.ToListAsync().ConfigureAwait(continueOnCapturedContext: false);
         public virtual List<TEntity> GetAllList(Expression<Func<TEntity, bool>> predicate) => _dbSet.Where(predicate).ToList();
         public virtual async Task<List<TEntity>> GetAllListAsync(Expression<Func<TEntity, bool>> predicate) => await _dbSet.Where(predicate).ToListAsync().ConfigureAwait(continueOnCapturedContext: false);
+        public virtual TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate)
+        {
+            return GetAll().FirstOrDefault(predicate);
+        }
+        public virtual Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return Task.FromResult(FirstOrDefault(predicate));
+        }
+        public virtual TEntity FirstOrDefault(TPrimaryKey id)
+        {
+            return GetAll().FirstOrDefault(CreateEqualityExpressionForId(id));
+        }
+        public virtual Task<TEntity> FirstOrDefaultAsync(TPrimaryKey id)
+        {
+            return Task.FromResult(FirstOrDefault(id));
+        }
 
         public virtual TEntity Get(TPrimaryKey id) => FirstOrDefault(id) ?? throw new Exception($"There is no such an entity. Entity type: {typeof(TEntity).FullName}, id: {id}");
         public virtual async Task<TEntity> GetAsync(TPrimaryKey id) => await FirstOrDefaultAsync(id) ?? throw new Exception($"There is no such an entity. Entity type: {typeof(TEntity).FullName}, id: {id}");
@@ -110,14 +126,6 @@ namespace HIS.Core.Domain.Repositories
             return _dbContext;
         }
 
-        public virtual TEntity FirstOrDefault(TPrimaryKey id)
-        {
-            return GetAll().FirstOrDefault(CreateEqualityExpressionForId(id));
-        }
-        public virtual async Task<TEntity> FirstOrDefaultAsync(TPrimaryKey id)
-        {
-            return await GetAll().FirstOrDefaultAsync(CreateEqualityExpressionForId(id)).ConfigureAwait(false);
-        }
         protected virtual Expression<Func<TEntity, bool>> CreateEqualityExpressionForId(TPrimaryKey id)
         {
             ParameterExpression parameterExpression = Expression.Parameter(typeof(TEntity));

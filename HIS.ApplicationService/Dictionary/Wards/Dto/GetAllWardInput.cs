@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HIS.Dtos.Dictionaries.Ward
 {
-    public class GetAllWardInput : PagedResultRequestDto
+    public class GetAllWardInput : PagedAndSortedResultRequestDto
     {
         public string WardCodeFilter { get; set; }
         public string WardNameFilter { get; set; }

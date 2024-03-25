@@ -9,6 +9,7 @@ using HIS.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.Entities.Dictionary;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Linq;
 using System.Transactions;
 
 namespace HIS.ApplicationService.Dictionary.DepartmentTypes
@@ -22,7 +23,7 @@ namespace HIS.ApplicationService.Dictionary.DepartmentTypes
             _departmentTypeRepository = departmentTypeRepository;
         }
 
-        public virtual async Task<PagedResultDto<DepartmentTypeDto>> GetAllAsync(GetAllDepartmentTypeInput input)
+        public virtual async Task<PagedResultDto<DepartmentTypeDto>> GetAllAsync(GetAllDepartmentTypeInputDto input)
         {
             var result = new PagedResultDto<DepartmentTypeDto>();
             try
@@ -81,6 +82,7 @@ namespace HIS.ApplicationService.Dictionary.DepartmentTypes
                 try
                 {
                     //input.Id = Guid.NewGuid();
+                    input.Id = _departmentTypeRepository.GetAll().DefaultIfEmpty().Max(x => x.Id) + 1;
                     var departmentType = ObjectMapper.Map<DepartmentType>(input);
 
                     await _departmentTypeRepository.InsertAsync(departmentType);

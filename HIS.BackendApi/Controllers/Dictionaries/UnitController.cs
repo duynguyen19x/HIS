@@ -9,9 +9,9 @@ namespace HIS.BackendApi.Controllers.Dictionaries
     [ApiController]
     public class UnitController : ControllerBase
     {
-        private readonly IUnitService _sServiceUnitService;
+        private readonly IUnitAppService _sServiceUnitService;
 
-        public UnitController(IUnitService sServiceUnitService)
+        public UnitController(IUnitAppService sServiceUnitService)
         {
             _sServiceUnitService = sServiceUnitService;
         }

@@ -1,4 +1,5 @@
 ﻿using HIS.Core.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
 namespace HIS.Core.Domain.Repositories
@@ -11,6 +12,10 @@ namespace HIS.Core.Domain.Repositories
         Task<List<TEntity>> GetAllListAsync();
         List<TEntity> GetAllList(Expression<Func<TEntity, bool>> predicate);
         Task<List<TEntity>> GetAllListAsync(Expression<Func<TEntity, bool>> predicate);
+        TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate);
+        Task<TEntity> FirstOrDefaultAsync(Expression<Func<TEntity, bool>> predicate);
+        TEntity FirstOrDefault(TPrimaryKey id);
+        Task<TEntity> FirstOrDefaultAsync(TPrimaryKey id);
 
         TEntity Get(TPrimaryKey id);
         Task<TEntity> GetAsync(TPrimaryKey id);

@@ -1,135 +1,141 @@
 ﻿using AutoMapper;
-using HIS.Application.Core.Services;
+using HIS.ApplicationService.Dictionary.DepartmentTypes.Dto;
+using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
+using HIS.Core.Domain.Repositories;
+using HIS.Core.Extensions;
 using HIS.Dtos.Systems.DbOption;
 using HIS.EntityFrameworkCore;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 using HIS.EntityFrameworkCore.Entities.System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Transactions;
 
 namespace HIS.ApplicationService.Systems.DbOptions
 {
-    public class DbOptionAppService : BaseCrudAppService<DbOptionDto, Guid?, GetAllDbOptionInput>, IDbOptionAppService
+    public class DbOptionAppService : BaseAppService, IDbOptionAppService
     {
-        public DbOptionAppService(HISDbContext dbContext, IConfiguration config, IMapper mapper) 
-            : base(dbContext, mapper)
+        private readonly IBulkRepository<DbOption, Guid> _dbOptionRepository;
+
+        public DbOptionAppService(IBulkRepository<DbOption, Guid> dbOptionRepository) 
         {
+            _dbOptionRepository = dbOptionRepository;
         }
-        
-        public override async Task<ResultDto<DbOptionDto>> Create(DbOptionDto input)
+
+        public virtual async Task<ResultDto<DbOptionDto>> CreateOrEdit(DbOptionDto input)
+        {
+            if (Check.IsNullOrDefault(input.Id))
+            {
+                return await Create(input);
+            }
+            else
+            {
+                return await Update(input);
+            }
+        }
+
+        public virtual async Task<ResultDto<DbOptionDto>> Create(DbOptionDto input)
         {
             var result = new ResultDto<DbOptionDto>();
-            using (var transaction = Context.Database.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
 
                     var data = ObjectMapper.Map<DbOption>(input);
-                    Context.DbOptions.Add(data);
+                    await _dbOptionRepository.InsertAsync(data);
 
-                    var dataParent = Context.DbOptions.FirstOrDefault(w => w.Id == input.ParentId);
-                    if (dataParent != null) { dataParent.IsParent = true; }
-                    Context.DbOptions.Update(dataParent);
-                    
-                    await Context.SaveChangesAsync();
+                    var dataParent = await _dbOptionRepository.FirstOrDefaultAsync(w => w.Id == input.ParentId);
+                    if (dataParent != null) 
+                    {
+                        dataParent.IsParent = true;
+                        await _dbOptionRepository.UpdateAsync(dataParent);
+                    }
 
-                    result.IsSucceeded = true;
-                    result.Result = input;
-
-                    transaction.Commit();
+                    unitOfWork.Complete();
+                    result.Success(input);
                 }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
             }
             return await Task.FromResult(result);
         }
 
-        public override async Task<ResultDto<DbOptionDto>> Update(DbOptionDto input)
+        public virtual async Task<ResultDto<DbOptionDto>> Update(DbOptionDto input)
         {
             var result = new ResultDto<DbOptionDto>();
-            using (var transaction = Context.Database.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
-                    var sServiceDbOption = Context.DbOptions.FirstOrDefault(f => f.Id == input.Id);
+                    var sServiceDbOption = await _dbOptionRepository.FirstOrDefaultAsync(x => x.Id == input.Id);
                     if (sServiceDbOption != null)
                     {
-                        if (sServiceDbOption.ParentId != input.ParentId && !Context.DbOptions.Any(a => a.Id == sServiceDbOption.ParentId))
+                        if (sServiceDbOption.ParentId != input.ParentId && !_dbOptionRepository.GetAll().Any(a => a.Id == sServiceDbOption.ParentId))
                         {
-                            var dataOldParent = Context.DbOptions.FirstOrDefault(w => w.Id == sServiceDbOption.ParentId);
-                            if (dataOldParent != null) { dataOldParent.IsParent = false; }
-                            Context.DbOptions.Update(dataOldParent);
+                            var dataOldParent = _dbOptionRepository.FirstOrDefault(w => w.Id == sServiceDbOption.ParentId);
+                            if (dataOldParent != null) 
+                            { 
+                                dataOldParent.IsParent = false; 
+                            }
+                            _dbOptionRepository.Update(dataOldParent);
                         }
                         ObjectMapper.Map(input, sServiceDbOption);
                     }
 
-                    var dataParent = Context.DbOptions.FirstOrDefault(w => w.Id == input.ParentId);
-                    if (dataParent != null) { dataParent.IsParent = true; }
-                    Context.DbOptions.Update(dataParent);
+                    var dataParent = _dbOptionRepository.FirstOrDefault(w => w.Id == input.ParentId);
+                    if (dataParent != null) 
+                    { 
+                        dataParent.IsParent = true; 
+                    }
+                    _dbOptionRepository.Update(dataParent);
 
-                    await Context.SaveChangesAsync();
-                    
-                    result.IsSucceeded = true;
-                    result.Result = input;
-
-                    transaction.Commit();
+                    unitOfWork.Complete();
+                    result.Success(input);
                 }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
             }
             return await Task.FromResult(result);
         }
 
-        public override async Task<ResultDto<DbOptionDto>> Delete(Guid? id)
+        public virtual async Task<ResultDto<DbOptionDto>> Delete(Guid id)
         {
             var result = new ResultDto<DbOptionDto>();
-            using (var transaction = Context.Database.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
-                    var sServiceDbOption10 = Context.DbOptions.SingleOrDefault(x => x.Id == id);
+                    var sServiceDbOption10 = await _dbOptionRepository.GetAsync(id);
                     if (sServiceDbOption10 != null)
                     {
-                        Context.DbOptions.Remove(sServiceDbOption10);
-                        await Context.SaveChangesAsync();
-                        result.IsSucceeded = true;
-
-                        transaction.Commit();
+                        await _dbOptionRepository.DeleteAsync(sServiceDbOption10);
+                        unitOfWork.Complete();
+                        result.Success(null);
                     }
                 }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
             }
 
             return await Task.FromResult(result);
         }
 
-        public override async Task<PagedResultDto<DbOptionDto>> GetAll(GetAllDbOptionInput input)
+        public virtual async Task<PagedResultDto<DbOptionDto>> GetAll(GetAllDbOptionInput input)
         {
             var result = new PagedResultDto<DbOptionDto>();
 
             try
             {
-                result.Result = (from r in Context.DbOptions
+                result.Result = (from r in _dbOptionRepository.GetAll()
                                  select new DbOptionDto()
                                  {
                                      Id = r.Id,
@@ -151,13 +157,13 @@ namespace HIS.ApplicationService.Systems.DbOptions
             return await Task.FromResult(result);
         }
 
-        public override async Task<ResultDto<DbOptionDto>> GetById(Guid? id)
+        public virtual async Task<ResultDto<DbOptionDto>> GetById(Guid id)
         {
             var result = new ResultDto<DbOptionDto>();
 
             try
             {
-                var service = Context.DbOptions.FirstOrDefault(s => s.Id == id);
+                var service = await _dbOptionRepository.GetAsync(id);
                 result.Result = ObjectMapper.Map<DbOptionDto>(service);
             }
             catch (Exception ex)
@@ -165,7 +171,7 @@ namespace HIS.ApplicationService.Systems.DbOptions
                 result.Exception(ex);
             }
 
-            return await Task.FromResult(result);
+            return result;
         }
 
         public async Task<ResultDto<OptionValueDto>> GetMapOptions()

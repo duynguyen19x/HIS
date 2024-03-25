@@ -45,11 +45,14 @@ namespace HIS.Core.EntityFrameworkCore
             if (typeof(IEntity<>).IsAssignableFrom(entityType.ClrType))
             {
                 entityTypeBuilder.HasKey("Id");
+                //entityTypeBuilder.Property("Id").ValueGeneratedOnAdd();
             }
             //else if (typeof(IEntity).IsAssignableFrom(entityType.ClrType) && entityType.FindProperty(entityType.Name + "Id") != null)
             //{
             //    entityTypeBuilder.HasKey(entityType.Name + "Id");
             //}    
+
+
         }
 
         protected virtual void ConfigureGlobalFilters(ModelBuilder modelBuilder, IMutableEntityType entityType)

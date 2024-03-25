@@ -1,68 +1,69 @@
 ﻿using AutoMapper;
-using HIS.Dtos.Dictionaries.Ward;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Extensions;
+using HIS.ApplicationService.Dictionary.Units.Dto;
 using HIS.Core.Domain.Repositories;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Core.Application.Services;
-using System.Transactions;
 using HIS.Dtos.Dictionaries.Countries;
+using Microsoft.EntityFrameworkCore;
+using System.Transactions;
 
-namespace HIS.ApplicationService.Dictionaries.Wards
+namespace HIS.ApplicationService.Dictionary.Units
 {
-    public class WardAppService : BaseAppService, IWardAppService
+    public class UnitAppService : BaseAppService, IUnitAppService
     {
-        private readonly IRepository<Ward, Guid> _wardRepository;
+        private readonly IRepository<Unit, Guid> _unitRepository;
 
-        public WardAppService(IRepository<Ward, Guid> wardRepository)
+        public UnitAppService(IRepository<Unit, Guid> unitRepository) 
         {
-            _wardRepository = wardRepository;
+            _unitRepository = unitRepository;
         }
 
-        public virtual async Task<PagedResultDto<WardDto>> GetAll(GetAllWardInput input)
+        public virtual async Task<PagedResultDto<UnitDto>> GetAll(GetAllUnitInput input)
         {
-            var result = new PagedResultDto<WardDto>();
+            var result = new PagedResultDto<UnitDto>();
+
             try
             {
-                var filter = _wardRepository.GetAll()
-                    .WhereIf(string.IsNullOrEmpty(input.WardCodeFilter), x => x.Code == input.WardCodeFilter)
-                    .WhereIf(string.IsNullOrEmpty(input.WardNameFilter), x => x.Name == input.WardNameFilter)
-                    .WhereIf(string.IsNullOrEmpty(input.ShortTextFilter), x => x.SearchText == input.ShortTextFilter)
-                    .WhereIf(input.DistrictFilter != null, x => x.DistrictId == input.DistrictFilter)
+                var filter = _unitRepository.GetAll()
                     .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
 
                 var paged = filter.ApplySortingAndPaging(input);
 
                 result.TotalCount = await filter.CountAsync();
-                result.Result = ObjectMapper.Map<IList<WardDto>>(paged.ToList());
-            }
-            catch (Exception ex)
-            {
-                result.Exception(ex);
-            }
-
-            return result;
-        }
-
-        public virtual async Task<ResultDto<WardDto>> GetById(Guid id)
-        {
-            var result = new ResultDto<WardDto>();
-            try
-            {
-                var entity = await _wardRepository.GetAsync(id);
-
-                result.Result = ObjectMapper.Map<WardDto>(entity);
+                result.Result = ObjectMapper.Map<IList<UnitDto>>(paged.ToList());
                 result.IsSucceeded = true;
             }
             catch (Exception ex)
             {
                 result.Exception(ex);
             }
-            return result;
+
+            return await Task.FromResult(result);
         }
 
-        public virtual async Task<ResultDto<WardDto>> CreateOrEdit(WardDto input)
+        public virtual async Task<ResultDto<UnitDto>> GetById(Guid id)
+        {
+            var result = new ResultDto<UnitDto>();
+
+            try
+            {
+                var entity = await _unitRepository.GetAsync(id);
+
+                result.Result = ObjectMapper.Map<UnitDto>(entity);
+                result.IsSucceeded = true;
+            }
+            catch (Exception ex)
+            {
+                result.Exception(ex);
+            }
+
+            return await Task.FromResult(result);
+        }
+
+        public virtual async Task<ResultDto<UnitDto>> CreateOrEdit(UnitDto input)
         {
             if (Check.IsNullOrDefault(input.Id))
             {
@@ -74,17 +75,17 @@ namespace HIS.ApplicationService.Dictionaries.Wards
             }
         }
 
-        public virtual async Task<ResultDto<WardDto>> Create(WardDto input)
+        public virtual async Task<ResultDto<UnitDto>> Create(UnitDto input)
         {
-            var result = new ResultDto<WardDto>();
+            var result = new ResultDto<UnitDto>();
             using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var entity = ObjectMapper.Map<Ward>(input);
+                    var entity = ObjectMapper.Map<Unit>(input);
 
-                    await _wardRepository.InsertAsync(entity);
+                    await _unitRepository.InsertAsync(entity);
 
                     await unitOfWork.CompleteAsync();
                     result.Success(input);
@@ -97,14 +98,14 @@ namespace HIS.ApplicationService.Dictionaries.Wards
             return result;
         }
 
-        public virtual async Task<ResultDto<WardDto>> Update(WardDto input)
+        public virtual async Task<ResultDto<UnitDto>> Update(UnitDto input)
         {
-            var result = new ResultDto<WardDto>();
+            var result = new ResultDto<UnitDto>();
             using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
-                    var entity = await _wardRepository.GetAsync(input.Id.GetValueOrDefault());
+                    var entity = await _unitRepository.GetAsync(input.Id.GetValueOrDefault());
 
                     ObjectMapper.Map(input, entity);
 
@@ -116,19 +117,19 @@ namespace HIS.ApplicationService.Dictionaries.Wards
                     result.Exception(ex);
                 }
             }
-            return await Task.FromResult(result);
+            return result;
         }
 
-        public virtual async Task<ResultDto<WardDto>> Delete(Guid id)
+        public virtual async Task<ResultDto<UnitDto>> Delete(Guid id)
         {
-            var result = new ResultDto<WardDto>();
+            var result = new ResultDto<UnitDto>();
             using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
-                    var entity = _wardRepository.Get(id);
+                    var entity = _unitRepository.Get(id);
 
-                    await _wardRepository.DeleteAsync(entity);
+                    await _unitRepository.DeleteAsync(entity);
 
                     unitOfWork.Complete();
                     result.Success(null);
@@ -141,5 +142,6 @@ namespace HIS.ApplicationService.Dictionaries.Wards
             return result;
         }
 
+        
     }
 }

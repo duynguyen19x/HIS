@@ -1,26 +1,38 @@
-﻿using AutoMapper;
-using HIS.Application.Core.Services;
-using HIS.Dtos.Dictionaries.ChapterICD10;
-using HIS.EntityFrameworkCore;
+﻿using HIS.Dtos.Dictionaries.ChapterICD10;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.Utilities.Helpers;
-using Microsoft.Extensions.Configuration;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Extensions;
+using HIS.Core.Domain.Repositories;
+using HIS.Core.Application.Services;
+using System.Transactions;
 
 namespace HIS.ApplicationService.Dictionaries.ChapterICD10
 {
-    public class ChapterIcdService : BaseCrudAppService<ChapterIcdDto, Guid?, GetAllChapterIcdInput>, IChapterIcdService
+    public class ChapterIcdService : BaseAppService, IChapterIcdService
     {
-        public ChapterIcdService(HISDbContext dbContext, IConfiguration config, IMapper mapper) 
-            : base(dbContext, mapper)
+        private readonly IRepository<ChapterIcd, Guid> _chapterIcdRepository;
+
+        public ChapterIcdService(IRepository<ChapterIcd, Guid> chapterIcdRepository) 
         {
+            _chapterIcdRepository = chapterIcdRepository;
         }
 
-        public override async Task<ResultDto<ChapterIcdDto>> Create(ChapterIcdDto input)
+        public virtual async Task<ResultDto<ChapterIcdDto>> CreateOrEdit(ChapterIcdDto input)
+        {
+            if (Check.IsNullOrDefault(input.Id))
+            {
+                return await Create(input);
+            }
+            else
+            {
+                return await Update(input);
+            }
+        }
+
+        public virtual async Task<ResultDto<ChapterIcdDto>> Create(ChapterIcdDto input)
         {
             var result = new ResultDto<ChapterIcdDto>();
-            using (var transaction = Context.Database.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
@@ -28,93 +40,72 @@ namespace HIS.ApplicationService.Dictionaries.ChapterICD10
 
                     var data = ObjectMapper.Map<ChapterIcd>(input);
 
-                    Context.ChapterIcds.Add(data);
-                    await Context.SaveChangesAsync();
+                    await _chapterIcdRepository.InsertAsync(data);
 
-                    result.IsSucceeded = true;
-                    result.Result = input;
-
-                    transaction.Commit();
+                    await unitOfWork.CompleteAsync();
+                    result.Success(input);
                 }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
             }
             return await Task.FromResult(result);
         }
 
-        public override async Task<ResultDto<ChapterIcdDto>> Update(ChapterIcdDto input)
+        public virtual async Task<ResultDto<ChapterIcdDto>> Update(ChapterIcdDto input)
         {
             var result = new ResultDto<ChapterIcdDto>();
-            using (var transaction = Context.Database.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
-                    var sServiceChapterICD10 = Context.ChapterIcds.FirstOrDefault(f => f.Id == input.Id);
+                    var sServiceChapterICD10 = _chapterIcdRepository.FirstOrDefault(f => f.Id == input.Id);
                     if (sServiceChapterICD10 == null)
                         ObjectMapper.Map(input, sServiceChapterICD10);
 
-                    await Context.SaveChangesAsync();
-
-                    result.IsSucceeded = true;
-                    result.Result = input;
-
-                    transaction.Commit();
+                    await unitOfWork.CompleteAsync();
+                    result.Success(input);
                 }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
             }
-            return await Task.FromResult(result);
+            return result;
         }
 
-        public override async Task<ResultDto<ChapterIcdDto>> Delete(Guid? id)
+        public virtual async Task<ResultDto<ChapterIcdDto>> Delete(Guid id)
         {
             var result = new ResultDto<ChapterIcdDto>();
-            using (var transaction = Context.Database.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
-                    var sServiceChapterICD10 = Context.ChapterIcds.SingleOrDefault(x => x.Id == id);
+                    var sServiceChapterICD10 = await _chapterIcdRepository.FirstOrDefaultAsync(x => x.Id == id);
                     if (sServiceChapterICD10 != null)
                     {
-                        Context.ChapterIcds.Remove(sServiceChapterICD10);
-                        await Context.SaveChangesAsync();
-                        result.IsSucceeded = true;
+                        _chapterIcdRepository.Delete(sServiceChapterICD10);
 
-                        transaction.Commit();
+                        await unitOfWork.CompleteAsync();
+                        result.Success(null);
                     }
                 }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
             }
-
-            return await Task.FromResult(result);
+            return result;
         }
 
-        public override async Task<PagedResultDto<ChapterIcdDto>> GetAll(GetAllChapterIcdInput input)
+        public virtual async Task<PagedResultDto<ChapterIcdDto>> GetAll(GetAllChapterIcdInput input)
         {
             var result = new PagedResultDto<ChapterIcdDto>();
 
             try
             {
-                result.Result = (from r in Context.ChapterIcds
+                result.Result = (from r in _chapterIcdRepository.GetAll()
                                  select new ChapterIcdDto()
                                  {
                                      Id = r.Id,
@@ -128,20 +119,19 @@ namespace HIS.ApplicationService.Dictionaries.ChapterICD10
             }
             catch (Exception ex)
             {
-                result.IsSucceeded = false;
-                result.Message = ex.Message;
+                result.Exception(ex);
             }
 
             return await Task.FromResult(result);
         }
 
-        public override async Task<ResultDto<ChapterIcdDto>> GetById(Guid? id)
+        public virtual async Task<ResultDto<ChapterIcdDto>> GetById(Guid id)
         {
             var result = new ResultDto<ChapterIcdDto>();
 
             try
             {
-                var service = Context.ChapterIcds.FirstOrDefault(s => s.Id == id);
+                var service = await _chapterIcdRepository.FirstOrDefaultAsync(s => s.Id == id);
                 result.Result = ObjectMapper.Map<ChapterIcdDto>(service);
             }
             catch (Exception ex)
