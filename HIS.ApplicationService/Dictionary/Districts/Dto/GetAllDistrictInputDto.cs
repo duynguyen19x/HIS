@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Dictionaries.District
+namespace HIS.ApplicationService.Dictionary.Districts.Dto
 {
-    public class GetAllDistrictInputDto : PagedResultRequestDto
+    public class GetAllDistrictInputDto : PagedAndSortedResultRequestDto
     {
         public string CodeFilter { get; set; }
         public string NameFilter { get; set; }

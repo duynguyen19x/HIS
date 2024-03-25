@@ -7,8 +7,8 @@ namespace HIS.ApplicationService.Dictionary.SurgicalProcedureTypes
     public interface ISurgicalProcedureTypeAppService : IAppService
     {
         Task<ResultDto<SSurgicalProcedureTypeDto>> CreateOrEdit(SSurgicalProcedureTypeDto input);
-        Task<ResultDto<SSurgicalProcedureTypeDto>> Delete(Guid id);
+        Task<ResultDto<SSurgicalProcedureTypeDto>> Delete(int id);
         Task<PagedResultDto<SSurgicalProcedureTypeDto>> GetAll(GetAllSurgicalProcedureTypeInput input);
-        Task<ResultDto<SSurgicalProcedureTypeDto>> GetById(Guid id);
+        Task<ResultDto<SSurgicalProcedureTypeDto>> GetById(int id);
     }
 }

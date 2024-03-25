@@ -1,6 +1,6 @@
-﻿using HIS.Core.Application.Services.Dto;
+﻿using HIS.ApplicationService.Dictionary.ServicePricePolicies.Dto;
+using HIS.Core.Application.Services.Dto;
 using HIS.Dtos.Dictionaries.ExecutionRoom;
-using HIS.Dtos.Dictionaries.ServicePricePolicy;
 using HIS.Dtos.Dictionaries.ServiceResultIndex;
 
 namespace HIS.ApplicationService.Dictionary.Services.Dto

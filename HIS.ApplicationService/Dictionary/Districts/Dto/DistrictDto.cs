@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Dictionaries.District
+namespace HIS.ApplicationService.Dictionary.Districts.Dto
 {
     public class DistrictDto : EntityDto<Guid?>
     {

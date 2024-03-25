@@ -9,9 +9,9 @@ namespace HIS.BackendApi.Controllers.Dictionaries
     [ApiController]
     public class DistrictController : ControllerBase
     {
-        private readonly IDistrictService _districtService;
+        private readonly IDistrictAppService _districtService;
 
-        public DistrictController(IDistrictService districtService)
+        public DistrictController(IDistrictAppService districtService)
         {
             _districtService = districtService;
         }

@@ -27,7 +27,7 @@ namespace HIS.ApplicationService.Dictionary.SurgicalProcedureTypes
             throw new NotImplementedException();
         }
 
-        public virtual Task<ResultDto<SSurgicalProcedureTypeDto>> Delete(int? id)
+        public virtual Task<ResultDto<SSurgicalProcedureTypeDto>> Delete(int id)
         {
             throw new NotImplementedException();
         }
@@ -58,7 +58,7 @@ namespace HIS.ApplicationService.Dictionary.SurgicalProcedureTypes
             return await Task.FromResult(result);
         }
 
-        public virtual Task<ResultDto<SSurgicalProcedureTypeDto>> GetById(int? id)
+        public virtual Task<ResultDto<SSurgicalProcedureTypeDto>> GetById(int id)
         {
             throw new NotImplementedException();
         }
