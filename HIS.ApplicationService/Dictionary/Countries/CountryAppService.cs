@@ -1,17 +1,11 @@
-﻿using AutoMapper;
-using HIS.EntityFrameworkCore;
-using HIS.Dtos.Dictionaries.Countries;
+﻿using HIS.Dtos.Dictionaries.Countries;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Extensions;
-using HIS.Dtos.Dictionaries.ChapterICD10;
 using HIS.Core.Domain.Repositories;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Core.Application.Services;
 using System.Transactions;
 using Microsoft.EntityFrameworkCore;
-using HIS.ApplicationService.Dictionary.DepartmentTypes.Dto;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
-using HIS.EntityFrameworkCore.Migrations;
 
 namespace HIS.ApplicationService.Dictionaries.Countries
 {
