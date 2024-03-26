@@ -1,157 +1,144 @@
 ﻿using AutoMapper;
-using HIS.Application.Core.Services;
+using HIS.ApplicationService.Dictionary.Districts.Dto;
+using HIS.ApplicationService.Dictionary.Genders.Dto;
+using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
-using HIS.Dtos.Dictionaries.Genders;
-using HIS.EntityFrameworkCore;
+using HIS.Core.Domain.Repositories;
+using HIS.Core.Extensions;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Transactions;
 
-namespace HIS.ApplicationService.Dictionaries.Genders
+namespace HIS.ApplicationService.Dictionary.Genders
 {
-    public class GenderAppService : BaseCrudAppService<GenderDto, Guid?, GetAllGenderInputDto>, IGenderAppService
+    public class GenderAppService : BaseAppService, IGenderAppService
     {
-        public GenderAppService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
-            : base(dbContext, mapper)
-        {
+        private readonly IRepository<Gender, Guid> _genderRepository;
 
+        public GenderAppService(IRepository<Gender, Guid> genderRepository)
+        {
+            _genderRepository = genderRepository;
         }
 
-        public override async Task<ResultDto<GenderDto>> Create(GenderDto input)
-        {
-            var result = new ResultDto<GenderDto>();
-            using (var transaction = Context.Database.BeginTransaction())
-            {
-                try
-                {
-                    input.Id = Guid.NewGuid();
-                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Gender>(input);
-                    Context.Genders.Add(data);
-                    await Context.SaveChangesAsync();
-
-                    result.IsSucceeded = true;
-                    result.Result = input;
-
-                    transaction.Commit();
-                }
-                catch (Exception ex)
-                {
-                    result.Exception(ex);
-                }
-                finally
-                {
-                    transaction.Dispose();
-                }
-            }
-            return await Task.FromResult(result);
-        }
-
-        public override async Task<ResultDto<GenderDto>> Update(GenderDto input)
-        {
-            var result = new ResultDto<GenderDto>();
-            using (var transaction = Context.Database.BeginTransaction())
-            {
-                try
-                {
-                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Dictionaries.Gender>(input);
-                    Context.Genders.Update(data);
-                    await Context.SaveChangesAsync();
-
-                    result.IsSucceeded = true;
-                    result.Result = input;
-
-                    transaction.Commit();
-                }
-                catch (Exception ex)
-                {
-                    result.Exception(ex);
-                }
-                finally
-                {
-                    transaction.Dispose();
-                }
-            }
-            return await Task.FromResult(result);
-        }
-
-        public override async Task<ResultDto<GenderDto>> Delete(Guid? id)
-        {
-            var result = new ResultDto<GenderDto>();
-            using (var transaction = Context.Database.BeginTransaction())
-            {
-                try
-                {
-                    var data = Context.Genders.SingleOrDefault(x => x.Id == id);
-                    if (data != null)
-                    {
-                        Context.Genders.Remove(data);
-                        await Context.SaveChangesAsync();
-                        result.IsSucceeded = true;
-
-                        transaction.Commit();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    result.Exception(ex);
-                }
-                finally
-                {
-                    transaction.Dispose();
-                }
-            }
-            return await Task.FromResult(result);
-        }
-
-        public override async Task<PagedResultDto<GenderDto>> GetAll(GetAllGenderInputDto input)
+        public virtual async Task<PagedResultDto<GenderDto>> GetAll(GetAllGenderInputDto input)
         {
             var result = new PagedResultDto<GenderDto>();
             try
             {
+                var filter = _genderRepository.GetAll()
+                    .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), x => x.Code == input.CodeFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.NameFilter), x => x.Name == input.NameFilter)
+                    .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
+
+                var paged = filter.ApplySortingAndPaging(input);
+
+                result.TotalCount = await filter.CountAsync();
+                result.Result = ObjectMapper.Map<IList<GenderDto>>(paged.ToList());
                 result.IsSucceeded = true;
-                result.Result = (from r in Context.Genders
-                                 where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
-                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
-                                     && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
-                                 select new GenderDto()
-                                 {
-                                     Id = r.Id,
-                                     Code = r.Code,
-                                     Name = r.Name,
-                                     Description = r.Description,
-                                     Inactive = r.Inactive,
-                                     SortOrder = r.SortOrder
-                                 })
-                                 .OrderBy(x => x.SortOrder)
-                                 .ToList();
-                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
                 result.Exception(ex);
             }
 
-            return await Task.FromResult(result);
+            return result;
         }
 
-        public override async Task<ResultDto<GenderDto>> GetById(Guid? id)
+        public virtual async Task<ResultDto<GenderDto>> GetById(Guid id)
         {
             var result = new ResultDto<GenderDto>();
-
-            var data = Context.Genders.SingleOrDefault(s => s.Id == id);
-            if (data != null)
+            try
             {
-                result.IsSucceeded = true;
-                result.Result = new GenderDto()
-                {
-                    Id = data.Id,
-                    Code = data.Code,
-                    Name = data.Name,
-                    Description = data.Description,
-                    SortOrder = data.SortOrder,
-                    Inactive = data.Inactive
-                };
-            }
+                var entity = await _genderRepository.GetAsync(id);
 
-            return await Task.FromResult(result);
+                result.Result = ObjectMapper.Map<GenderDto>(entity);
+                result.IsSucceeded = true;
+            }
+            catch (Exception ex)
+            {
+                result.Exception(ex);
+            }
+            return result;
+        }
+
+        public virtual async Task<ResultDto<GenderDto>> CreateOrEdit(GenderDto input)
+        {
+            if (Check.IsNullOrDefault(input.Id))
+            {
+                return await Create(input);
+            }
+            else
+            {
+                return await Update(input);
+            }
+        }
+
+        public virtual async Task<ResultDto<GenderDto>> Create(GenderDto input)
+        {
+            var result = new ResultDto<GenderDto>();
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+            {
+                try
+                {
+                    input.Id = Guid.NewGuid();
+                    var entity = ObjectMapper.Map<Gender>(input);
+
+                    await _genderRepository.InsertAsync(entity);
+
+                    unitOfWork.Complete();
+                    result.Success(input);
+                }
+                catch (Exception ex)
+                {
+                    result.Exception(ex);
+                }
+            }
+            return result;
+        }
+
+        public virtual async Task<ResultDto<GenderDto>> Update(GenderDto input)
+        {
+            var result = new ResultDto<GenderDto>();
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+            {
+                try
+                {
+                    var entity = await _genderRepository.GetAsync(input.Id.GetValueOrDefault());
+
+                    ObjectMapper.Map(input, entity);
+
+                    unitOfWork.Complete();
+                    result.Success(input);
+                }
+                catch (Exception ex)
+                {
+                    result.Exception(ex);
+                }
+            }
+            return result;
+        }
+
+        public virtual async Task<ResultDto<GenderDto>> Delete(Guid id)
+        {
+            var result = new ResultDto<GenderDto>();
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+            {
+                try
+                {
+                    var entity = _genderRepository.Get(id);
+
+                    await _genderRepository.DeleteAsync(entity);
+
+                    unitOfWork.Complete();
+                    result.Success(null);
+                }
+                catch (Exception ex)
+                {
+                    result.Exception(ex);
+                }
+            }
+            return result;
         }
 
     }

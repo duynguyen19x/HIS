@@ -1,14 +1,16 @@
 ﻿using AutoMapper;
-using HIS.Application.Core.Services;
+using HIS.ApplicationService.Dictionary.Departments.Dto;
 using HIS.ApplicationService.Dictionary.Districts.Dto;
-using HIS.ApplicationService.Dictionary.Units.Dto;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
+using HIS.Core.Domain.Entities;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Extensions;
-using HIS.Dtos.Dictionaries.District;
-using HIS.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
+using Microsoft.EntityFrameworkCore;
+using System.Transactions;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace HIS.ApplicationService.Dictionary.Districts
 {
@@ -26,20 +28,16 @@ namespace HIS.ApplicationService.Dictionary.Districts
             var result = new PagedResultDto<DistrictDto>();
             try
             {
+                var filter = _districtRepository.GetAll()
+                    .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), x => x.Code == input.CodeFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.NameFilter), x => x.Name == input.NameFilter)
+                    .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
+
+                var paged = filter.ApplySortingAndPaging(input);
+
+                result.TotalCount = await filter.CountAsync();
+                result.Result = ObjectMapper.Map<IList<DistrictDto>>(paged.ToList());
                 result.IsSucceeded = true;
-                result.Result = (from r in Context.Districts
-                                 where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
-                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
-                                     && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
-                                 select new DistrictDto()
-                                 {
-                                     Id = r.Id,
-                                     Code = r.Code,
-                                     Name = r.Name,
-                                     Description = r.Description,
-                                     Inactive = r.Inactive
-                                 }).OrderBy(o => o.Code).ToList();
-                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
@@ -52,15 +50,18 @@ namespace HIS.ApplicationService.Dictionary.Districts
         public virtual async Task<ResultDto<DistrictDto>> GetById(Guid id)
         {
             var result = new ResultDto<DistrictDto>();
-
-            var data = Context.Districts.SingleOrDefault(s => s.Id == id);
-            if (data != null)
+            try
             {
-                result.IsSucceeded = true;
-                result.Result = ObjectMapper.Map<DistrictDto>(data);
-            }
+                var entity = await _districtRepository.GetAsync(id);
 
-            return await Task.FromResult(result);
+                result.Result = ObjectMapper.Map<DistrictDto>(entity);
+                result.IsSucceeded = true;
+            }
+            catch (Exception ex)
+            {
+                result.Exception(ex);
+            }
+            return result;
         }
 
         public virtual async Task<ResultDto<DistrictDto>> CreateOrEdit(DistrictDto input)
@@ -78,87 +79,68 @@ namespace HIS.ApplicationService.Dictionary.Districts
         public virtual async Task<ResultDto<DistrictDto>> Create(DistrictDto input)
         {
             var result = new ResultDto<DistrictDto>();
-            using (var transaction = Context.Database.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = ObjectMapper.Map<District>(input);
-                    Context.Districts.Add(data);
-                    await Context.SaveChangesAsync();
+                    var entity = ObjectMapper.Map<District>(input);
 
-                    result.IsSucceeded = true;
-                    result.Result = input;
+                    await _districtRepository.InsertAsync(entity);
 
-                    transaction.Commit();
+                    unitOfWork.Complete();
+                    result.Success(input);
                 }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
             }
-            return await Task.FromResult(result);
+            return result;
         }
 
         public virtual async Task<ResultDto<DistrictDto>> Update(DistrictDto input)
         {
             var result = new ResultDto<DistrictDto>();
-            using (var transaction = Context.Database.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
-                    var data = ObjectMapper.Map<District>(input);
-                    Context.Districts.Update(data);
-                    await Context.SaveChangesAsync();
+                    var entity = await _districtRepository.GetAsync(input.Id.GetValueOrDefault());
 
-                    result.IsSucceeded = true;
-                    result.Result = input;
+                    ObjectMapper.Map(input, entity);
 
-                    transaction.Commit();
+                    unitOfWork.Complete();
+                    result.Success(input);
                 }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
             }
-            return await Task.FromResult(result);
+            return result;
         }
 
         public virtual async Task<ResultDto<DistrictDto>> Delete(Guid id)
         {
             var result = new ResultDto<DistrictDto>();
-            using (var transaction = Context.Database.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
-                    var job = Context.Districts.SingleOrDefault(x => x.Id == id);
-                    if (job != null)
-                    {
-                        Context.Districts.Remove(job);
-                        await Context.SaveChangesAsync();
-                        result.IsSucceeded = true;
+                    var entity = _districtRepository.Get(id);
 
-                        transaction.Commit();
-                    }
+                    await _districtRepository.DeleteAsync(entity);
+
+                    unitOfWork.Complete();
+                    result.Success(null);
                 }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
             }
-            return await Task.FromResult(result);
+            return result;
         }
 
         

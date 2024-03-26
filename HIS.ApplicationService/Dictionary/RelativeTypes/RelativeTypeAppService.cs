@@ -1,37 +1,49 @@
-﻿using AutoMapper;
-using HIS.Application.Core.Services;
-using HIS.Dtos.Dictionaries.RelativeTypes;
-using HIS.EntityFrameworkCore;
+﻿using HIS.Dtos.Dictionaries.RelativeTypes;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using Microsoft.EntityFrameworkCore;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Extensions;
+using HIS.Core.Domain.Repositories;
+using HIS.Core.Application.Services;
+using System.Transactions;
 
 namespace HIS.ApplicationService.Dictionaries.RelativeTypes
 {
-    public class RelativeTypeAppService : BaseCrudAppService<RelativeTypeDto, Guid, GetAllRelativeTypeInputDto>, IRelativeTypeAppService
+    public class RelativeTypeAppService : BaseAppService, IRelativeTypeAppService
     {
-        public RelativeTypeAppService(HISDbContext context, IMapper mapper) 
-            : base(context, mapper)
+        private readonly IRepository<RelativeType, Guid> _relativeTypeRepository;
+
+        public RelativeTypeAppService(IRepository<RelativeType, Guid> relativeTypeRepository)
         {
+            _relativeTypeRepository = relativeTypeRepository;
         }
 
-        public override async Task<ResultDto<RelativeTypeDto>> Create(RelativeTypeDto input)
+        public virtual async Task<ResultDto<RelativeTypeDto>> CreateOrEdit(RelativeTypeDto input)
+        {
+            if (Check.IsNullOrDefault(input.Id))
+            {
+                return await Create(input);
+            }
+            else
+            {
+                return await Update(input);
+            }
+        }
+
+        public virtual async Task<ResultDto<RelativeTypeDto>> Create(RelativeTypeDto input)
         {
             var result = new ResultDto<RelativeTypeDto>();
-            using (var transaction = Context.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = ObjectMapper.Map<RelativeType>(input);
-                    Context.RelativeTypes.Add(data);
-                    await Context.SaveChangesAsync();
+                    var entity = ObjectMapper.Map<RelativeType>(input);
 
-                    result.Result = input;
-                    result.IsSucceeded = true;
+                    await _relativeTypeRepository.InsertAsync(entity);
 
-                    transaction.Commit();
+                    await unitOfWork.CompleteAsync();
+                    result.Success(input);
                 }
                 catch (Exception ex)
                 {
@@ -41,21 +53,19 @@ namespace HIS.ApplicationService.Dictionaries.RelativeTypes
             return result;
         }
 
-        public override async Task<ResultDto<RelativeTypeDto>> Update(RelativeTypeDto input)
+        public virtual async Task<ResultDto<RelativeTypeDto>> Update(RelativeTypeDto input)
         {
             var result = new ResultDto<RelativeTypeDto>();
-            using (var transaction = Context.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
-                    var data = ObjectMapper.Map<RelativeType>(input);
-                    Context.RelativeTypes.Update(data);
-                    await Context.SaveChangesAsync();
+                    var entity = await _relativeTypeRepository.GetAsync(input.Id.GetValueOrDefault());
 
-                    result.Result = input;
-                    result.IsSucceeded = true;
+                    ObjectMapper.Map(input, entity);
 
-                    transaction.Commit();
+                    unitOfWork.Complete();
+                    result.Success(input);
                 }
                 catch (Exception ex)
                 {
@@ -65,45 +75,36 @@ namespace HIS.ApplicationService.Dictionaries.RelativeTypes
             return result;
         }
 
-        public override async Task<ResultDto<RelativeTypeDto>> Delete(Guid id)
+        public virtual async Task<ResultDto<RelativeTypeDto>> Delete(Guid id)
         {
             var result = new ResultDto<RelativeTypeDto>();
-            using (var transaction = Context.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
-                    var data = Context.Genders.SingleOrDefault(x => x.Id == id);
-                    if (data != null)
-                    {
-                        Context.Genders.Remove(data);
-                        await Context.SaveChangesAsync();
+                    var entity = _relativeTypeRepository.Get(id);
 
-                        result.IsSucceeded = true;
-                        result.Result = ObjectMapper.Map<RelativeTypeDto>(data);    
+                    await _relativeTypeRepository.DeleteAsync(entity);
 
-                        transaction.Commit();
-                    }
+                    unitOfWork.Complete();
+                    result.Success(null);
                 }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
             }
             return result;
         }
 
-        public override async Task<PagedResultDto<RelativeTypeDto>> GetAll(GetAllRelativeTypeInputDto input)
+        public virtual async Task<PagedResultDto<RelativeTypeDto>> GetAll(GetAllRelativeTypeInputDto input)
         {
             var result = new PagedResultDto<RelativeTypeDto>();
             try
             {
-                var filter = Context.RelativeTypes.AsNoTracking()
-                    .WhereIf(!string.IsNullOrEmpty(input.RelativeTypeCodeFilter), x => x.Code == input.RelativeTypeCodeFilter)
-                    .WhereIf(!string.IsNullOrEmpty(input.RelativeTypeNameFilter), x => x.Name == input.RelativeTypeNameFilter)
+                var filter = _relativeTypeRepository.GetAll()
+                    .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), x => x.Code == input.CodeFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.NameFilter), x => x.Name == input.NameFilter)
                     .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
 
                 var paged = filter.OrderBy(o => o.SortOrder).PageBy(input);
@@ -119,12 +120,12 @@ namespace HIS.ApplicationService.Dictionaries.RelativeTypes
             return result;
         }
 
-        public override async Task<ResultDto<RelativeTypeDto>> GetById(Guid id)
+        public virtual async Task<ResultDto<RelativeTypeDto>> GetById(Guid id)
         {
             var result = new ResultDto<RelativeTypeDto>();
             try
             {
-                var data = await Context.RelativeTypes.FindAsync(id);
+                var data = await _relativeTypeRepository.GetAsync(id);
                 result.Result = ObjectMapper.Map<RelativeTypeDto>(data);
             }
             catch (Exception ex)

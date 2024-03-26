@@ -1,13 +1,6 @@
-﻿using AutoMapper;
-using HIS.Application.Core.Services;
-using HIS.Core.Domain.Repositories;
-using HIS.Core.Domain.Uow;
-using HIS.Core.EntityFrameworkCore;
+﻿using HIS.Core.Domain.Uow;
 using HIS.Core.ObjectMapping;
 using HIS.Core.Runtime.Session;
-using HIS.EntityFrameworkCore.EntityFrameworkCore.Repositories;
-using HIS.EntityFrameworkCore.Repositories;
-using HIS.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using HIS.Core.Authorization;

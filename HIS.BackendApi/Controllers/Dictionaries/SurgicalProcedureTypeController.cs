@@ -1,7 +1,7 @@
-﻿using HIS.ApplicationService.Dictionaries.SurgicalProcedureType;
-using HIS.Dtos.Dictionaries.SurgicalProcedureType;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using HIS.Core.Application.Services.Dto;
+using HIS.ApplicationService.Dictionary.SurgicalProcedureTypes.Dto;
+using HIS.ApplicationService.Dictionary.SurgicalProcedureTypes;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
 {
@@ -9,9 +9,9 @@ namespace HIS.BackendApi.Controllers.Dictionaries
     [ApiController]
     public class SurgicalProcedureTypeController : ControllerBase
     {
-        private readonly ISurgicalProcedureTypeService _surgicalProcedureTypeService;
+        private readonly ISurgicalProcedureTypeAppService _surgicalProcedureTypeService;
 
-        public SurgicalProcedureTypeController(ISurgicalProcedureTypeService surgicalProcedureTypeService)
+        public SurgicalProcedureTypeController(ISurgicalProcedureTypeAppService surgicalProcedureTypeService)
         {
             _surgicalProcedureTypeService = surgicalProcedureTypeService;
         }

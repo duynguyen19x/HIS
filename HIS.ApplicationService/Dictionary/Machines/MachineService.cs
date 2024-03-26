@@ -1,29 +1,43 @@
-﻿using HIS.EntityFrameworkCore;
-using HIS.Application.Core.Services;
-using AutoMapper;
-using HIS.ApplicationService.Dictionaries.Machines;
-using HIS.Dtos.Dictionaries.Machines;
+﻿using HIS.Dtos.Dictionaries.Machines;
 using HIS.Core.Application.Services.Dto;
+using HIS.Core.Domain.Repositories;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.Core.Application.Services;
+using HIS.Core.Extensions;
+using System.Transactions;
 
 namespace HIS.ApplicationService.Dictionaries.Machines
 {
-    public class MachineService : BaseCrudAppService<MachineDto, Guid?, GetAllMachineInput>, IMachineService
+    public class MachineService : BaseAppService, IMachineService
     {
-        public MachineService(HISDbContext context, IMapper mapper)
-            : base(context, mapper)
-        {
+        private readonly IRepository<Machine, Guid> _machineRepository;
 
+        public MachineService(IRepository<Machine, Guid> machineRepository)
+        {
+            _machineRepository = machineRepository;
         }
 
-        public override async Task<ResultDto<MachineDto>> Create(MachineDto input)
+        public virtual async Task<ResultDto<MachineDto>> CreateOrEdit(MachineDto input)
+        {
+            if (Check.IsNullOrDefault(input.Id))
+            {
+                return await Create(input);
+            }
+            else
+            {
+                return await Update(input);
+            }
+        }
+
+        public virtual async Task<ResultDto<MachineDto>> Create(MachineDto input)
         {
             var result = new ResultDto<MachineDto>();
-            using (var transaction = Context.Database.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var data = new EntityFrameworkCore.Entities.Dictionaries.Machine()
+                    var data = new Machine()
                     {
                         Id = input.Id.GetValueOrDefault(),
                         Code = input.Code,
@@ -38,34 +52,27 @@ namespace HIS.ApplicationService.Dictionaries.Machines
                         Creator = input.Creator,
                         UsageStandard = input.UsageStandard,
                     };
-                    Context.Machines.Add(data);
-                    await Context.SaveChangesAsync();
+                    await _machineRepository.InsertAsync(data);
 
-                    result.IsSucceeded = true;
-                    result.Result = input;
-
-                    transaction.Commit();
+                    unitOfWork.Complete();
+                    result.Success(input);
                 }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
             }
             return await Task.FromResult(result);
         }
 
-        public override async Task<ResultDto<MachineDto>> Update(MachineDto input)
+        public virtual async Task<ResultDto<MachineDto>> Update(MachineDto input)
         {
             var result = new ResultDto<MachineDto>();
-            using (var transaction = Context.Database.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
-                    var data = new EntityFrameworkCore.Entities.Dictionaries.Machine()
+                    var data = new Machine()
                     {
                         Id = input.Id.GetValueOrDefault(),
                         Code = input.Code,
@@ -80,62 +87,49 @@ namespace HIS.ApplicationService.Dictionaries.Machines
                         Creator = input.Creator,
                         UsageStandard = input.UsageStandard,
                     };
-                    Context.Machines.Update(data);
-                    await Context.SaveChangesAsync();
 
-                    result.IsSucceeded = true;
-                    result.Result = input;
+                    await _machineRepository.UpdateAsync(data);
 
-                    transaction.Commit();
+                    unitOfWork.Complete();
+                    result.Success(input);
                 }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
             }
             return await Task.FromResult(result);
         }
 
-        public override async Task<ResultDto<MachineDto>> Delete(Guid? id)
+        public virtual async Task<ResultDto<MachineDto>> Delete(Guid id)
         {
             var result = new ResultDto<MachineDto>();
-            using (var transaction = Context.Database.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
-                    var machine = Context.Machines.SingleOrDefault(x => x.Id == id);
-                    if (machine != null)
-                    {
-                        Context.Machines.Remove(machine);
-                        await Context.SaveChangesAsync();
-                        result.IsSucceeded = true;
+                    var entity = _machineRepository.Get(id);
 
-                        transaction.Commit();
-                    }
+                    await _machineRepository.DeleteAsync(entity);
+
+                    unitOfWork.Complete();
+                    result.Success(null);
                 }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
             }
             return await Task.FromResult(result);
         }
 
-        public override async Task<PagedResultDto<MachineDto>> GetAll(GetAllMachineInput input)
+        public virtual async Task<PagedResultDto<MachineDto>> GetAll(GetAllMachineInput input)
         {
             var result = new PagedResultDto<MachineDto>();
             try
             {
                 result.IsSucceeded = true;
-                result.Result = (from r in Context.Machines
+                result.Result = (from r in _machineRepository.GetAll()
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -164,11 +158,11 @@ namespace HIS.ApplicationService.Dictionaries.Machines
             return await Task.FromResult(result);
         }
 
-        public override async Task<ResultDto<MachineDto>> GetById(Guid? id)
+        public virtual async Task<ResultDto<MachineDto>> GetById(Guid id)
         {
             var result = new ResultDto<MachineDto>();
 
-            var machine = Context.Machines.SingleOrDefault(s => s.Id == id);
+            var machine = _machineRepository.FirstOrDefault(s => s.Id == id);
             if (machine != null)
             {
                 result.IsSucceeded = true;

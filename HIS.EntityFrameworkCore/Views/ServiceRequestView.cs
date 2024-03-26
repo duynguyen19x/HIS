@@ -1,10 +1,11 @@
-﻿using HIS.Utilities.Enums;
+﻿using HIS.Core.Domain.Entities;
+using HIS.Utilities.Enums;
 
 namespace HIS.EntityFrameworkCore.Views
 {
-    public class ServiceRequestView 
+    public class ServiceRequestView : Entity<Guid>
     {
-        public Guid Id { get; set; }
+        //public Guid Id { get; set; }
         public string ServiceRequestCode { get; set; }
         public long RequestTime { get; set; } // ngày chỉ định (tạo phiếu)
         public long UseTime { get; set; } // ngày y lệnh

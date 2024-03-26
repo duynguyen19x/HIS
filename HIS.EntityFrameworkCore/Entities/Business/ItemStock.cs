@@ -5,7 +5,7 @@ using HIS.EntityFrameworkCore.Entities.Dictionary;
 
 namespace HIS.EntityFrameworkCore.Entities.Business
 {
-    public class ItemStock : FullAuditedEntity<Guid?>
+    public class ItemStock : FullAuditedEntity<Guid>
     {
         public Guid? StockId { get; set; }
         public Guid? ItemId { get; set; }

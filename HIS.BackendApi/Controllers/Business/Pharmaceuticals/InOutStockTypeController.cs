@@ -1,7 +1,7 @@
-﻿using HIS.ApplicationService.Business.InOutStockType;
-using HIS.Dtos.Business.InOutStockTypes;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using HIS.Core.Application.Services.Dto;
+using HIS.ApplicationService.Business.InOutStockTypes;
+using HIS.ApplicationService.Business.InOutStockTypes.Dto;
 
 namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
 {

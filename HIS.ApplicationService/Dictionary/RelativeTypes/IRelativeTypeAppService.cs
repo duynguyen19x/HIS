@@ -1,14 +1,14 @@
-﻿using HIS.Application.Core.Services;
+﻿using HIS.Core.Application.Services;
+using HIS.Core.Application.Services.Dto;
 using HIS.Dtos.Dictionaries.RelativeTypes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Dictionaries.RelativeTypes
 {
-    public interface IRelativeTypeAppService : IBaseCrudAppService<RelativeTypeDto, Guid, GetAllRelativeTypeInputDto>
+    public interface IRelativeTypeAppService : IAppService
     {
+        Task<ResultDto<RelativeTypeDto>> CreateOrEdit(RelativeTypeDto input);
+        Task<ResultDto<RelativeTypeDto>> Delete(Guid id);
+        Task<PagedResultDto<RelativeTypeDto>> GetAll(GetAllRelativeTypeInputDto input);
+        Task<ResultDto<RelativeTypeDto>> GetById(Guid id);
     }
 }

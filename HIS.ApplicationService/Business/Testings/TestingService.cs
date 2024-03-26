@@ -1,21 +1,44 @@
-﻿using AutoMapper;
-using HIS.Application.Core.Services;
-using HIS.Dtos.Business.ServiceRequestDatas;
+﻿using HIS.Dtos.Business.ServiceRequestDatas;
 using HIS.Dtos.Business.ServiceRequests;
 using HIS.Dtos.Business.ServiceResultDatas;
-using HIS.EntityFrameworkCore;
 using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;
-using Microsoft.Extensions.Configuration;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Extensions;
+using HIS.Core.Application.Services;
+using HIS.EntityFrameworkCore.Views;
+using HIS.Core.Domain.Repositories;
+using HIS.EntityFrameworkCore.Entities.Business;
+using HIS.EntityFrameworkCore.Entities.Categories;
+using HIS.EntityFrameworkCore.Entities.Categories.Services;
+using System.Transactions;
 
 namespace HIS.ApplicationService.Business.Testings
 {
     public class TestingService : BaseAppService, ITestingService
     {
-        public TestingService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
-           : base(dbContext, mapper) { }
+        private readonly IRepository<ServiceRequest, Guid> _serviceRequestRepository;
+        private readonly IRepository<ServiceRequestView, Guid> _serviceRequestViewRepository;
+        private readonly IRepository<ServiceRequestData, Guid> _serviceRequestDataRepository;
+        private readonly IRepository<ServiceResultData, Guid> _serviceResultDataRepository;
+        private readonly IRepository<ServiceResultIndice, Guid> _serviceResultIndiceRepository;
+        private readonly IRepository<Service, Guid> _serviceRepository;
+
+        public TestingService(
+            IRepository<ServiceRequest, Guid> serviceRequestRepository,
+            IRepository<ServiceRequestView, Guid> serviceRequestViewRepository,
+            IRepository<ServiceRequestData, Guid> serviceRequestDataRepository,
+            IRepository<ServiceResultData, Guid> serviceResultDataRepository,
+            IRepository<ServiceResultIndice, Guid> serviceResultIndiceRepository,
+            IRepository<Service, Guid> serviceRepository) 
+        {
+            _serviceRequestRepository = serviceRequestRepository;
+            _serviceRequestViewRepository = serviceRequestViewRepository;
+            _serviceRequestDataRepository = serviceRequestDataRepository;
+            _serviceResultDataRepository = serviceResultDataRepository;
+            _serviceResultIndiceRepository = serviceResultIndiceRepository;
+            _serviceRepository = serviceRepository;
+        }
 
         public async Task<PagedResultDto<ServiceRequestDto>> GetAll(GetAllServiceRequestInputDto input)
         {
@@ -23,7 +46,7 @@ namespace HIS.ApplicationService.Business.Testings
 
             try
             {
-                var serviceRequests = Context.ServiceRequestViews
+                var serviceRequests = _serviceRequestViewRepository.GetAll()
                     .WhereIf(input.StatusFilter != null, w => w.Status == input.StatusFilter)
                     .WhereIf(!GuidHelper.IsNullOrEmpty(input.ExecuteRoomIdFilter), w => w.ExecuteRoomId == input.ExecuteRoomIdFilter)
                     .WhereIf(!GuidHelper.IsNullOrEmpty(input.ExecuteDepartmentIdFilter), w => w.ExecuteDepartmentId == input.ExecuteDepartmentIdFilter)
@@ -52,8 +75,8 @@ namespace HIS.ApplicationService.Business.Testings
         {
             var listResultDto = new ListResultDto<ServiceRequestDataDto>();
 
-            listResultDto.Result = (from serviceRequest in Context.ServiceRequestDatas
-                                    join service in Context.Services on serviceRequest.ServiceId equals service.Id
+            listResultDto.Result = (from serviceRequest in _serviceRequestDataRepository.GetAll()
+                                    join service in _serviceRepository.GetAll() on serviceRequest.ServiceId equals service.Id
 
                                     where serviceRequest.ServiceRequestId == serviceRequestId
 
@@ -98,9 +121,9 @@ namespace HIS.ApplicationService.Business.Testings
         {
             var listResultDto = new ListResultDto<ServiceResultDataDto>();
 
-            listResultDto.Result = (from serviceResultData in Context.ServiceResultDatas
-                                    join service in Context.Services on serviceResultData.ServiceId equals service.Id
-                                    join serviceResultIndice in Context.ServiceResultIndices on serviceResultData.ServiceResultIndiceId equals serviceResultIndice.Id
+            listResultDto.Result = (from serviceResultData in _serviceResultDataRepository.GetAll() // Context.ServiceResultDatas
+                                    join service in _serviceRepository.GetAll() on serviceResultData.ServiceId equals service.Id
+                                    join serviceResultIndice in _serviceResultIndiceRepository.GetAll() on serviceResultData.ServiceResultIndiceId equals serviceResultIndice.Id
 
                                     where serviceResultData.ServiceRequestDataId == serviceRequestDataId
 
@@ -129,9 +152,9 @@ namespace HIS.ApplicationService.Business.Testings
         {
             var listResultDto = new ListResultDto<ServiceResultDataDto>();
 
-            listResultDto.Result = (from serviceResultData in Context.ServiceResultDatas
-                                    join service in Context.Services on serviceResultData.ServiceId equals service.Id
-                                    join serviceResultIndice in Context.ServiceResultIndices on serviceResultData.ServiceResultIndiceId equals serviceResultIndice.Id
+            listResultDto.Result = (from serviceResultData in _serviceResultDataRepository.GetAll() //Context.ServiceResultDatas
+                                    join service in _serviceRepository.GetAll() on serviceResultData.ServiceId equals service.Id
+                                    join serviceResultIndice in _serviceResultIndiceRepository.GetAll() on serviceResultData.ServiceResultIndiceId equals serviceResultIndice.Id
 
                                     where serviceRequestDataIds.Contains(serviceResultData.ServiceRequestDataId)
 
@@ -160,10 +183,10 @@ namespace HIS.ApplicationService.Business.Testings
         {
             var listResultDto = new ListResultDto<ServiceResultDataDto>();
 
-            listResultDto.Result = (from serviceRequestData in Context.ServiceRequestDatas
-                                    join serviceResultData in Context.ServiceResultDatas on serviceRequestData.Id equals serviceResultData.ServiceRequestDataId
-                                    join service in Context.Services on serviceResultData.ServiceId equals service.Id
-                                    join serviceResultIndice in Context.ServiceResultIndices on serviceResultData.ServiceResultIndiceId equals serviceResultIndice.Id
+            listResultDto.Result = (from serviceRequestData in _serviceRequestDataRepository.GetAll() // Context.ServiceRequestDatas
+                                    join serviceResultData in _serviceResultDataRepository.GetAll() on serviceRequestData.Id equals serviceResultData.ServiceRequestDataId
+                                    join service in _serviceRepository.GetAll() on serviceResultData.ServiceId equals service.Id
+                                    join serviceResultIndice in _serviceResultIndiceRepository.GetAll() on serviceResultData.ServiceResultIndiceId equals serviceResultIndice.Id
 
                                     where serviceRequestData.ServiceRequestId == serviceRequestId
 
@@ -193,7 +216,7 @@ namespace HIS.ApplicationService.Business.Testings
         {
             var result = new ResultDto<ServiceRequestDto>();
 
-            var serviceRequestView = Context.ServiceRequestViews.FirstOrDefault(f => f.Id == id);
+            var serviceRequestView = _serviceRequestViewRepository.FirstOrDefault(f => f.Id == id);
             result.Result = ObjectMapper.Map<ServiceRequestDto>(serviceRequestView);
 
             return await Task.FromResult(result);
@@ -203,7 +226,7 @@ namespace HIS.ApplicationService.Business.Testings
         {
             var result = new ResultDto<ServiceRequestDto>();
 
-            using (var transaction = Context.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
@@ -217,7 +240,7 @@ namespace HIS.ApplicationService.Business.Testings
                             break;
                         case ServiceRequestStatusTypes.Request:
                             {
-                                var serviceRequest = Context.ServiceRequests.FirstOrDefault(f => f.Id == input.Id);
+                                var serviceRequest = _serviceRequestRepository.FirstOrDefault(f => f.Id == input.Id);
                                 if (serviceRequest != null)
                                 {
                                     // Cập nhật lại ngày Lấy mẫu bệnh phẩm, Bắt đầu xử lý, Trả kết quả = null
@@ -226,7 +249,7 @@ namespace HIS.ApplicationService.Business.Testings
                             break;
                         case ServiceRequestStatusTypes.CollectingSpecimen:
                             {
-                                var serviceRequest = Context.ServiceRequests.FirstOrDefault(f => f.Id == input.Id);
+                                var serviceRequest = _serviceRequestRepository.FirstOrDefault(f => f.Id == input.Id);
                                 if (serviceRequest != null)
                                 {
                                     // Cập nhật lại ngày Lấy mẫu bệnh phẩm, Bắt đầu xử lý, Trả kết quả
@@ -237,12 +260,12 @@ namespace HIS.ApplicationService.Business.Testings
                             break;
                         case ServiceRequestStatusTypes.ProvideResults:
                             {
-                                var serviceRequest = Context.ServiceRequests.FirstOrDefault(f => f.Id == input.Id);
+                                var serviceRequest = _serviceRequestRepository.FirstOrDefault(f => f.Id == input.Id);
                                 if (serviceRequest != null)
                                 {
                                     // Cập nhật lại ngày Lấy mẫu bệnh phẩm, Bắt đầu xử lý, Trả kết quả
 
-                                    var serviceResultDatas = Context.ServiceResultDatas.Where(w => w.ServiceRequestId == input.Id).ToList();
+                                    var serviceResultDatas = _serviceResultDataRepository.GetAll().Where(w => w.ServiceRequestId == input.Id).ToList();
                                     foreach (var resultData in serviceResultDatas)
                                     {
                                         var resultDataDto = input.ServiceResultDatas.FirstOrDefault(f => f.Id == resultData.Id);
@@ -261,15 +284,11 @@ namespace HIS.ApplicationService.Business.Testings
                             break;
                     }
 
-                    transaction.Commit();
+                    await unitOfWork.CompleteAsync();
                 }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
-                }
-                finally
-                {
-                    transaction.Dispose();
                 }
             }
 

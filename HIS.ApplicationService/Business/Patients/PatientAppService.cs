@@ -1,19 +1,15 @@
-﻿using AutoMapper;
-using HIS.Application.Core.Services;
+﻿using HIS.ApplicationService.Business.Patients.Dto;
+using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Extensions;
-using HIS.Dtos.Business.Patients;
-using HIS.Dtos.Systems;
-using HIS.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.Entities.Business;
-using HIS.Utilities.Sections;
 using Microsoft.EntityFrameworkCore;
 using System.Transactions;
 
 namespace HIS.ApplicationService.Business.Patients
 {
-    public class PatientAppService : HIS.Core.Application.Services.BaseAppService, IPatientAppService
+    public class PatientAppService : BaseAppService, IPatientAppService
     {
         private readonly IRepository<Patient, Guid> _hisPatientRepository;
 
@@ -23,9 +19,9 @@ namespace HIS.ApplicationService.Business.Patients
             _hisPatientRepository = hisPatientRepository;
         }
 
-        public virtual async Task<PagedResultDto<HISPatientDto>> GetAllAsync(GetAllHISPatientInputDto input)
+        public virtual async Task<PagedResultDto<PatientDto>> GetAllAsync(GetAllPatientInputDto input)
         {
-            var result = new PagedResultDto<HISPatientDto>();
+            var result = new PagedResultDto<PatientDto>();
             try
             {
                 var filter = _hisPatientRepository.GetAll()
@@ -56,7 +52,7 @@ namespace HIS.ApplicationService.Business.Patients
                 var paged = filter.ApplySortingAndPaging(input);
 
                 result.TotalCount = await filter.CountAsync();
-                result.Result = ObjectMapper.Map<IList<HISPatientDto>>(paged.ToList());
+                result.Result = ObjectMapper.Map<IList<PatientDto>>(paged.ToList());
                 result.IsSucceeded = true;
             }
             catch (Exception ex)
@@ -66,14 +62,14 @@ namespace HIS.ApplicationService.Business.Patients
             return result;
         }
 
-        public virtual async Task<ResultDto<HISPatientDto>> GetAsync(Guid id)
+        public virtual async Task<ResultDto<PatientDto>> GetAsync(Guid id)
         {
-            var result = new ResultDto<HISPatientDto>();
+            var result = new ResultDto<PatientDto>();
             try
             {
                 var data = await _hisPatientRepository.GetAsync(id);
 
-                result.Result = ObjectMapper.Map<HISPatientDto>(data);
+                result.Result = ObjectMapper.Map<PatientDto>(data);
                 result.IsSucceeded = true;
             }
             catch (Exception ex)
@@ -83,7 +79,7 @@ namespace HIS.ApplicationService.Business.Patients
             return result;
         }
 
-        public virtual async Task<ResultDto<HISPatientDto>> CreateOrUpdateAsync(HISPatientDto input)
+        public virtual async Task<ResultDto<PatientDto>> CreateOrUpdateAsync(PatientDto input)
         {
             if (Check.IsNullOrDefault(input.Id))
             {
@@ -95,9 +91,9 @@ namespace HIS.ApplicationService.Business.Patients
             }    
         }
 
-        public virtual async Task<ResultDto<HISPatientDto>> CreateAsync(HISPatientDto input)
+        public virtual async Task<ResultDto<PatientDto>> CreateAsync(PatientDto input)
         {
-            var result = new ResultDto<HISPatientDto>();
+            var result = new ResultDto<PatientDto>();
             using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
@@ -120,9 +116,9 @@ namespace HIS.ApplicationService.Business.Patients
             return result;
         }
 
-        public virtual async Task<ResultDto<HISPatientDto>> UpdateAsync(HISPatientDto input)
+        public virtual async Task<ResultDto<PatientDto>> UpdateAsync(PatientDto input)
         {
-            var result = new ResultDto<HISPatientDto>();
+            var result = new ResultDto<PatientDto>();
             using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
@@ -132,7 +128,7 @@ namespace HIS.ApplicationService.Business.Patients
                     ObjectMapper.Map(input, entity);
                     unitOfWork.Complete();
 
-                    result.Result = ObjectMapper.Map<HISPatientDto>(entity);
+                    result.Result = ObjectMapper.Map<PatientDto>(entity);
                     result.IsSucceeded = true;
                 }
                 catch (Exception ex)
@@ -143,9 +139,9 @@ namespace HIS.ApplicationService.Business.Patients
             return result;
         }
 
-        public virtual async Task<ResultDto<HISPatientDto>> DeleteAsync(Guid id)
+        public virtual async Task<ResultDto<PatientDto>> DeleteAsync(Guid id)
         {
-            var result = new ResultDto<HISPatientDto>();
+            var result = new ResultDto<PatientDto>();
             using (var unitOfWork = UnitOfWorkManager.Begin())
             {
                 try
@@ -153,7 +149,7 @@ namespace HIS.ApplicationService.Business.Patients
                     var entity = _hisPatientRepository.Get(id);
                     await _hisPatientRepository.DeleteAsync(entity);
 
-                    result.Result = ObjectMapper.Map<HISPatientDto>(entity);
+                    result.Result = ObjectMapper.Map<PatientDto>(entity);
                     result.IsSucceeded = true;
                 }
                 catch (Exception ex)

@@ -123,9 +123,9 @@ namespace HIS.ApplicationService.Dictionary.Departments
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var department = ObjectMapper.Map<Department>(input);
+                    var entity = ObjectMapper.Map<Department>(input);
 
-                    await _departmentRepository.InsertAsync(department);
+                    await _departmentRepository.InsertAsync(entity);
 
                     unitOfWork.Complete();
                     result.Success(input);
@@ -167,9 +167,9 @@ namespace HIS.ApplicationService.Dictionary.Departments
             {
                 try
                 {
-                    var department = _departmentRepository.Get(id);
+                    var entity = _departmentRepository.Get(id);
 
-                    await _departmentRepository.DeleteAsync(department);
+                    await _departmentRepository.DeleteAsync(entity);
 
                     unitOfWork.Complete();
                     result.Success(null);

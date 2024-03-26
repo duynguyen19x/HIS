@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Dictionaries.Hospital
+namespace HIS.ApplicationService.Dictionary.Hospitals.Dto
 {
-    public class GetAllHospitalInputDto : PagedResultRequestDto
+    public class GetAllHospitalInputDto : PagedAndSortedResultRequestDto
     {
         public string CodeFilter { get; set; }
         public string NameFilter { get; set; }

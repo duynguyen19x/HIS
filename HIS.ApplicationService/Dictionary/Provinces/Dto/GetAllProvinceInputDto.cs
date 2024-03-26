@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HIS.Dtos.Dictionaries.Province
 {
-    public class GetAllProvinceInputDto : PagedResultRequestDto
+    public class GetAllProvinceInputDto : PagedAndSortedResultRequestDto
     {
         public string CodeFilter { get; set; }
         public string NameFilter { get; set; }

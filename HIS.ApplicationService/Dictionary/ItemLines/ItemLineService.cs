@@ -1,114 +1,28 @@
-﻿using AutoMapper;
-using HIS.Application.Core.Services;
-using HIS.Dtos.Dictionaries.ItemLines;
-using HIS.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using HIS.Dtos.Dictionaries.ItemLines;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Extensions;
+using HIS.Core.Domain.Repositories;
+using HIS.EntityFrameworkCore.Entities.Categories;
+using HIS.Core.Application.Services;
+using System.Transactions;
 
 namespace HIS.ApplicationService.Dictionaries.ItemLines
 {
-    public class ItemLineService : BaseCrudAppService<ItemLineDto, Guid?, GetAllItemLineInput>, IItemLineService
+    public class ItemLineService : BaseAppService, IItemLineService
     {
-        public ItemLineService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
-          : base(dbContext, mapper)
-        {
+        private readonly IRepository<ItemLine, Guid> _itemLineRepository;
 
+        public ItemLineService(IRepository<ItemLine, Guid> itemLineRepository)
+        {
+            _itemLineRepository = itemLineRepository;
         }
 
-        public override async Task<ResultDto<ItemLineDto>> Create(ItemLineDto input)
-        {
-            var result = new ResultDto<ItemLineDto>();
-            using (var transaction = Context.Database.BeginTransaction())
-            {
-                try
-                {
-                    input.Id = Guid.NewGuid();
-                    var ItemLine = ObjectMapper.Map<EntityFrameworkCore.Entities.Categories.ItemLine>(input);
-                    Context.ItemLines.Add(ItemLine);
-                    await Context.SaveChangesAsync();
-
-                    result.IsSucceeded = true;
-                    result.Result = input;
-
-                    transaction.Commit();
-                }
-                catch (Exception ex)
-                {
-                    result.Exception(ex);
-                }
-                finally
-                {
-                    transaction.Dispose();
-                }
-            }
-            return await Task.FromResult(result);
-        }
-
-        public override async Task<ResultDto<ItemLineDto>> Update(ItemLineDto input)
-        {
-            var result = new ResultDto<ItemLineDto>();
-            using (var transaction = Context.Database.BeginTransaction())
-            {
-                try
-                {
-                    var ItemLine = ObjectMapper.Map<EntityFrameworkCore.Entities.Categories.ItemLine>(input);
-                    Context.ItemLines.Update(ItemLine);
-                    await Context.SaveChangesAsync();
-
-                    result.IsSucceeded = true;
-                    result.Result = input;
-
-                    transaction.Commit();
-                }
-                catch (Exception ex)
-                {
-                    result.Exception(ex);
-                }
-                finally
-                {
-                    transaction.Dispose();
-                }
-            }
-            return await Task.FromResult(result);
-        }
-
-        public override async Task<ResultDto<ItemLineDto>> Delete(Guid? id)
-        {
-            var result = new ResultDto<ItemLineDto>();
-            using (var transaction = Context.Database.BeginTransaction())
-            {
-                try
-                {
-                    var ItemLine = Context.ItemLines.SingleOrDefault(x => x.Id == id);
-                    if (ItemLine != null)
-                    {
-                        Context.ItemLines.Remove(ItemLine);
-                        await Context.SaveChangesAsync();
-                        result.IsSucceeded = true;
-
-                        transaction.Commit();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    result.IsSucceeded = false;
-                    result.Message = ex.Message;
-                }
-                finally
-                {
-                    transaction.Dispose();
-                }
-            }
-            return await Task.FromResult(result);
-        }
-
-        public override async Task<PagedResultDto<ItemLineDto>> GetAll(GetAllItemLineInput input)
+        public virtual async Task<PagedResultDto<ItemLineDto>> GetAll(GetAllItemLineInput input)
         {
             var result = new PagedResultDto<ItemLineDto>();
             try
             {
-                result.Result = (from r in Context.ItemLines
+                result.Result = (from r in _itemLineRepository.GetAll()
                                  select new ItemLineDto()
                                  {
                                      Id = r.Id,
@@ -132,11 +46,11 @@ namespace HIS.ApplicationService.Dictionaries.ItemLines
             return await Task.FromResult(result);
         }
 
-        public override async Task<ResultDto<ItemLineDto>> GetById(Guid? id)
+        public virtual async Task<ResultDto<ItemLineDto>> GetById(Guid id)
         {
             var result = new ResultDto<ItemLineDto>();
 
-            var ItemLine = Context.ItemLines.SingleOrDefault(s => s.Id == id);
+            var ItemLine = _itemLineRepository.FirstOrDefault(s => s.Id == id);
             if (ItemLine != null)
             {
                 result.Result = ObjectMapper.Map<ItemLineDto>(ItemLine);
@@ -144,5 +58,82 @@ namespace HIS.ApplicationService.Dictionaries.ItemLines
 
             return await Task.FromResult(result);
         }
+
+        public virtual async Task<ResultDto<ItemLineDto>> CreateOrEdit(ItemLineDto input)
+        {
+            if (input.Id == null)
+                return await Create(input);
+            else
+                return await Update(input);
+        }
+
+        public virtual async Task<ResultDto<ItemLineDto>> Create(ItemLineDto input)
+        {
+            var result = new ResultDto<ItemLineDto>();
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+            {
+                try
+                {
+                    input.Id = Guid.NewGuid();
+                    var entity = ObjectMapper.Map<ItemLine>(input);
+
+                    await _itemLineRepository.InsertAsync(entity);
+
+                    unitOfWork.Complete();
+                    result.Success(input);
+                }
+                catch (Exception ex)
+                {
+                    result.Exception(ex);
+                }
+            }
+            return result;
+        }
+
+        public virtual async Task<ResultDto<ItemLineDto>> Update(ItemLineDto input)
+        {
+            var result = new ResultDto<ItemLineDto>();
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+            {
+                try
+                {
+                    var entity = await _itemLineRepository.GetAsync(input.Id.GetValueOrDefault());
+
+                    ObjectMapper.Map(input, entity);
+
+                    unitOfWork.Complete();
+                    result.Success(input);
+                }
+                catch (Exception ex)
+                {
+                    result.Exception(ex);
+                }
+            }
+            return result;
+        }
+
+        public virtual async Task<ResultDto<ItemLineDto>> Delete(Guid id)
+        {
+            var result = new ResultDto<ItemLineDto>();
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+            {
+                try
+                {
+                    var entity = _itemLineRepository.Get(id);
+
+                    await _itemLineRepository.DeleteAsync(entity);
+
+                    unitOfWork.Complete();
+                    result.Success(null);
+                }
+                catch (Exception ex)
+                {
+                    result.Exception(ex);
+                }
+            }
+            return result;
+        }
+
+        
     }
 }

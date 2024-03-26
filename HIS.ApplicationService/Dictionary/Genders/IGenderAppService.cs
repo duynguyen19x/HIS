@@ -1,9 +1,14 @@
-﻿using HIS.Application.Core.Services;
-using HIS.Dtos.Dictionaries.Genders;
+﻿using HIS.ApplicationService.Dictionary.Genders.Dto;
+using HIS.Core.Application.Services;
+using HIS.Core.Application.Services.Dto;
 
-namespace HIS.ApplicationService.Dictionaries.Genders
+namespace HIS.ApplicationService.Dictionary.Genders
 {
-    public interface IGenderAppService : IBaseCrudAppService<GenderDto, Guid?, GetAllGenderInputDto>
+    public interface IGenderAppService : IAppService
     {
+        Task<ResultDto<GenderDto>> CreateOrEdit(GenderDto input);
+        Task<ResultDto<GenderDto>> Delete(Guid id);
+        Task<PagedResultDto<GenderDto>> GetAll(GetAllGenderInputDto input);
+        Task<ResultDto<GenderDto>> GetById(Guid id);
     }
 }

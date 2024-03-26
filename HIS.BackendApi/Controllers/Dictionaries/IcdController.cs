@@ -1,7 +1,7 @@
-﻿using HIS.ApplicationService.Dictionaries.Icds;
-using HIS.Dtos.Dictionaries.Icd;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using HIS.Core.Application.Services.Dto;
+using HIS.ApplicationService.Dictionary.Icds;
+using HIS.ApplicationService.Dictionary.Icds.Dto;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
 {
@@ -9,9 +9,9 @@ namespace HIS.BackendApi.Controllers.Dictionaries
     [ApiController]
     public class IcdController : ControllerBase
     {
-        private readonly IIcdService _icdService;
+        private readonly IIcdAppService _icdService;
 
-        public IcdController(IIcdService icdService)
+        public IcdController(IIcdAppService icdService)
         {
             _icdService = icdService;
         }

@@ -1,39 +1,62 @@
 ﻿using AutoMapper;
-using HIS.Application.Core.Services;
 using HIS.Dtos.Dictionaries.ItemPricePolicies;
 using HIS.EntityFrameworkCore;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Extensions;
+using HIS.Core.Application.Services;
+using HIS.Core.Domain.Repositories;
+using HIS.EntityFrameworkCore.Entities.Categories;
+using HIS.EntityFrameworkCore.Entities.Categories.Items;
+using HIS.Dtos.Dictionaries.ItemLines;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 
-namespace HIS.ApplicationService.Dictionaries.ItemPricePolicies
+namespace HIS.ApplicationService.Dictionary.ItemPricePolicies
 {
-    public class ItemPricePolicyService : BaseCrudAppService<ItemPricePolicyDto, Guid?, GetAllItemPricePolicyInput>, IItemPricePolicyService
+    public class ItemPricePolicyService : BaseAppService, IItemPricePolicyService
     {
-        public ItemPricePolicyService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
-           : base(dbContext, mapper)
-        {
+        private readonly IRepository<ItemPricePolicy, Guid> _itemPricePolicyRepository;
+        private readonly IRepository<PatientObjectType, int> _patientObjectTypeRepository;
 
+        public ItemPricePolicyService(
+            IRepository<ItemPricePolicy, Guid> itemPricePolicyRepository,
+            IRepository<PatientObjectType, int> patientObjectTypeRepository)
+        {
+            _itemPricePolicyRepository = itemPricePolicyRepository;
+            _patientObjectTypeRepository = patientObjectTypeRepository;
         }
 
-        public override Task<ResultDto<ItemPricePolicyDto>> Create(ItemPricePolicyDto input)
+        public virtual async Task<ResultDto<ItemPricePolicyDto>> CreateOrEdit(ItemPricePolicyDto input)
+        {
+            if (input.Id == null)
+                return await Create(input);
+            else
+                return await Update(input);
+        }
+
+        public virtual Task<ResultDto<ItemPricePolicyDto>> Create(ItemPricePolicyDto input)
         {
             throw new NotImplementedException();
         }
 
-        public override Task<ResultDto<ItemPricePolicyDto>> Delete(Guid? id)
+        public virtual Task<ResultDto<ItemPricePolicyDto>> Update(ItemPricePolicyDto input)
         {
             throw new NotImplementedException();
         }
 
-        public override async Task<PagedResultDto<ItemPricePolicyDto>> GetAll(GetAllItemPricePolicyInput input)
+        public virtual Task<ResultDto<ItemPricePolicyDto>> Delete(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual async Task<PagedResultDto<ItemPricePolicyDto>> GetAll(GetAllItemPricePolicyInput input)
         {
             var result = new PagedResultDto<ItemPricePolicyDto>();
 
             try
             {
-                result.Result = (from r in Context.PatientTypes
+                result.Result = (from r in _patientObjectTypeRepository.GetAll()
                                  select new ItemPricePolicyDto()
                                  {
                                      PatientTypeId = r.Id,
@@ -57,14 +80,11 @@ namespace HIS.ApplicationService.Dictionaries.ItemPricePolicies
             return await Task.FromResult(result);
         }
 
-        public override Task<ResultDto<ItemPricePolicyDto>> GetById(Guid? id)
+        public virtual Task<ResultDto<ItemPricePolicyDto>> GetById(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public override Task<ResultDto<ItemPricePolicyDto>> Update(ItemPricePolicyDto input)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

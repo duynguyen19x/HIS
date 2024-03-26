@@ -1,9 +1,10 @@
-﻿using HIS.Core.Application.Services.Dto;
-using HIS.Dtos.Business.InOutStocks;
+﻿using HIS.ApplicationService.Business.InOutStocks.Dto;
+using HIS.Core.Application.Services;
+using HIS.Core.Application.Services.Dto;
 
 namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 {
-    public interface IInOutStockService
+    public interface IInOutStockService : IAppService
     {
         Task<PagedResultDto<InOutStockDto>> GetByStocks(Guid stockId, string fromDate, string toDate);
 

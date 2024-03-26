@@ -1,7 +1,7 @@
-﻿using HIS.ApplicationService.Dictionaries.Supplier;
-using HIS.Dtos.Dictionaries.Supplier;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using HIS.Core.Application.Services.Dto;
+using HIS.ApplicationService.Dictionary.Suppliers.Dto;
+using HIS.ApplicationService.Dictionary.Suppliers;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
 {

@@ -1,7 +1,7 @@
-﻿using HIS.ApplicationService.Dictionaries.ServiceGroupHeIn;
-using HIS.Dtos.Dictionaries.ServiceGroupHeIn;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using HIS.Core.Application.Services.Dto;
+using HIS.ApplicationService.Dictionary.ServiceGroupHeIns.Dto;
+using HIS.ApplicationService.Dictionary.ServiceGroupHeIns;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
 {

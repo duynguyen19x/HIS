@@ -1,24 +1,42 @@
 ﻿using AutoMapper;
-using HIS.Application.Core.Services;
 using HIS.Dtos.Dictionaries.ItemTypes;
-using HIS.EntityFrameworkCore;
 using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Extensions;
+using HIS.Core.Domain.Repositories;
+using HIS.EntityFrameworkCore.Entities.Categories;
+using HIS.Core.Application.Services;
+using System.Transactions;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities.Categories.Services;
 
 namespace HIS.ApplicationService.Dictionaries.ItemTypes
 {
-    public class ItemTypeService : BaseCrudAppService<ItemTypeDto, Guid?, GetAllItemTypeInput>, IItemTypeService
+    public class ItemTypeService : BaseAppService, IItemTypeService
     {
-        public ItemTypeService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
-           : base(dbContext, mapper)
-        {
+        private readonly IBulkRepository<ItemType, Guid> _itemTypeRepository;
+        private readonly IBulkRepository<ItemGroup, Guid> _itemGroupRepository;
+        private readonly IBulkRepository<ItemLine, Guid> _itemLineRepository;
+        private readonly IBulkRepository<ServiceGroupHeIn, Guid> _serviceGroupHeInRepository;
+        private readonly IBulkRepository<Unit, Guid> _unitRepository;
 
+        public ItemTypeService(
+            IBulkRepository<ItemType, Guid> itemTypeRepository,
+            IBulkRepository<ItemGroup, Guid> itemGroupRepository,
+            IBulkRepository<ItemLine, Guid> itemLineRepository,
+            IBulkRepository<ServiceGroupHeIn, Guid> serviceGroupHeInRepository,
+            IBulkRepository<Unit, Guid> unitRepository)
+        {
+            _itemTypeRepository = itemTypeRepository;
+            _itemGroupRepository = itemGroupRepository;
+            _itemLineRepository = itemLineRepository;
+            _serviceGroupHeInRepository = serviceGroupHeInRepository;
+            _unitRepository = unitRepository;
         }
 
-        public override async Task<ResultDto<ItemTypeDto>> CreateOrEdit(ItemTypeDto input)
+        public virtual async Task<ResultDto<ItemTypeDto>> CreateOrEdit(ItemTypeDto input)
         {
             var result = await ValidSave(input);
             if (!result.IsSucceeded)
@@ -30,64 +48,60 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
                 return await Update(input);
         }
 
-        public override async Task<ResultDto<ItemTypeDto>> Create(ItemTypeDto input)
+        public virtual async Task<ResultDto<ItemTypeDto>> Create(ItemTypeDto input)
         {
             var result = new ResultDto<ItemTypeDto>();
-            using (var transaction = Context.Database.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var ItemType = ObjectMapper.Map<EntityFrameworkCore.Entities.Categories.ItemType>(input);
+                    var ItemType = ObjectMapper.Map<ItemType>(input);
                     ItemType.CreatedDate = DateTime.Now;
 
-                    Context.ItemTypes.Add(ItemType);
-                    await Context.SaveChangesAsync();
+                    await _itemTypeRepository.InsertAsync(ItemType); // Context.ItemTypes.Add(ItemType);
+                    //await Context.SaveChangesAsync();
 
-                    result.IsSucceeded = true;
-                    result.Result = input;
+                    //result.IsSucceeded = true;
+                    //result.Result = input;
 
-                    transaction.Commit();
+                    //transaction.Commit();
+                    await unitOfWork.CompleteAsync();
+                    result.Success(input);
                 }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
             }
-            return await Task.FromResult(result);
+            return result;
         }
 
-        public override async Task<ResultDto<ItemTypeDto>> Update(ItemTypeDto input)
+        public virtual async Task<ResultDto<ItemTypeDto>> Update(ItemTypeDto input)
         {
             var result = new ResultDto<ItemTypeDto>();
-            using (var transaction = Context.Database.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
-                    var ItemType = ObjectMapper.Map<EntityFrameworkCore.Entities.Categories.ItemType>(input);
+                    var ItemType = ObjectMapper.Map<ItemType>(input);
                     ItemType.ModifiedDate = DateTime.Now;
-                    Context.ItemTypes.Update(ItemType);
-                    await Context.SaveChangesAsync();
+                    await _itemTypeRepository.UpdateAsync(ItemType);// Context.ItemTypes.Update(ItemType);
+                    //await Context.SaveChangesAsync();
 
-                    result.IsSucceeded = true;
-                    result.Result = input;
+                    //result.IsSucceeded = true;
+                    //result.Result = input;
 
-                    transaction.Commit();
+                    //transaction.Commit();
+                    await unitOfWork.CompleteAsync();
+                    result.Success(input);
                 }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
             }
-            return await Task.FromResult(result);
+            return result;
         }
 
         private async Task<ResultDto<ItemTypeDto>> ValidSave(ItemTypeDto input)
@@ -124,13 +138,13 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
 
                 #endregion
 
-                var ItemType = Context.ItemTypes.FirstOrDefault(w => w.Code == input.Code && w.Id != input.Id);
+                var ItemType = _itemTypeRepository.FirstOrDefault(w => w.Code == input.Code && w.Id != input.Id);
                 if (ItemType != null)
                 {
                     errs.Add(string.Format("Mã thuốc [{0}] đã tồn tại trên hệ thống!", input.Code));
                 }
 
-                ItemType = Context.ItemTypes.FirstOrDefault(w => w.HeInCode == input.HeInCode && w.Id != input.Id);
+                ItemType = _itemTypeRepository.FirstOrDefault(w => w.HeInCode == input.HeInCode && w.Id != input.Id);
                 if (ItemType != null)
                 {
                     errs.Add(string.Format("Mã BHYT [{0}] đã tồn tại trên hệ thống!", input.HeInCode));
@@ -150,44 +164,35 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
             return await Task.FromResult(result);
         }
 
-        public override async Task<ResultDto<ItemTypeDto>> Delete(Guid? id)
+        public virtual async Task<ResultDto<ItemTypeDto>> Delete(Guid id)
         {
             var result = new ResultDto<ItemTypeDto>();
-            using (var transaction = Context.Database.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
-                    var ItemType = Context.ItemTypes.SingleOrDefault(x => x.Id == id);
-                    if (ItemType != null)
-                    {
-                        ItemType.IsDeleted = true;
-                        ItemType.DeletedDate = DateTime.Now;
+                    var entity = _itemTypeRepository.Get(id);
 
-                        await Context.SaveChangesAsync();
-                        result.IsSucceeded = true;
+                    await _itemTypeRepository.DeleteAsync(entity);
 
-                        transaction.Commit();
-                    }
+                    unitOfWork.Complete();
+                    result.Success(null);
                 }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
             }
             return await Task.FromResult(result);
         }
 
-        public override async Task<PagedResultDto<ItemTypeDto>> GetAll(GetAllItemTypeInput input)
+        public virtual async Task<PagedResultDto<ItemTypeDto>> GetAll(GetAllItemTypeInput input)
         {
             var result = new PagedResultDto<ItemTypeDto>();
             try
             {
-                result.Result = (from medi in Context.ItemTypes
-                                 join unit in Context.Units on medi.UnitId equals unit.Id into units
+                result.Result = (from medi in _itemTypeRepository.GetAll() 
+                                 join unit in _unitRepository.GetAll() on medi.UnitId equals unit.Id into units
                                  from u in units.DefaultIfEmpty()
                                  where medi.IsDeleted == false
                                  select new ItemTypeDto()
@@ -267,11 +272,11 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
             return await Task.FromResult(result);
         }
 
-        public override async Task<ResultDto<ItemTypeDto>> GetById(Guid? id)
+        public virtual async Task<ResultDto<ItemTypeDto>> GetById(Guid id)
         {
             var result = new ResultDto<ItemTypeDto>();
 
-            var ItemType = Context.ItemTypes.SingleOrDefault(s => s.Id == id);
+            var ItemType = _itemTypeRepository.FirstOrDefault(s => s.Id == id);
             if (ItemType != null)
             {
                 result.IsSucceeded = true;
@@ -284,15 +289,14 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
         public async Task<ResultDto<bool>> Import(IList<ItemTypeDto> input)
         {
             var result = new ResultDto<bool>();
-
-            using (var transaction = Context.Database.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
-                    var units = ObjectMapper.Map<List<EntityFrameworkCore.Entities.Dictionaries.Unit>>(Context.Units).OrderBy(o => o.Code);
-                    var itemGroups = ObjectMapper.Map<List<EntityFrameworkCore.Entities.Categories.ItemGroup>>(Context.ItemGroups).OrderBy(o => o.Code);
-                    var itemLines = ObjectMapper.Map<List<EntityFrameworkCore.Entities.Categories.ItemLine>>(Context.ItemLines).OrderBy(o => o.Code);
-                    var serviceGroupHeIns = ObjectMapper.Map<List<EntityFrameworkCore.Entities.Categories.Services.ServiceGroupHeIn>>(Context.ServiceGroupHeIns).OrderBy(o => o.Code);
+                    var units = ObjectMapper.Map<List<Unit>>(_unitRepository.GetAllList()).OrderBy(o => o.Code);
+                    var itemGroups = ObjectMapper.Map<List<ItemGroup>>(_itemGroupRepository.GetAllList()).OrderBy(o => o.Code);
+                    var itemLines = ObjectMapper.Map<List<ItemLine>>(_itemLineRepository.GetAllList()).OrderBy(o => o.Code);
+                    var serviceGroupHeIns = ObjectMapper.Map<List<EntityFrameworkCore.Entities.Categories.Services.ServiceGroupHeIn>>(_serviceGroupHeInRepository.GetAllList()).OrderBy(o => o.Code);
                     foreach (var item in input)
                     {
                         //Đơn vị tính
@@ -311,18 +315,17 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
                             item.ItemLineId = itemLines?.FirstOrDefault()?.Id;
                     }
                     var ItemTypes = ObjectMapper.Map<List<EntityFrameworkCore.Entities.Categories.ItemType>>(input);
-                    Context.ItemTypes.AddRange(ItemTypes);
-                    await Context.SaveChangesAsync();
-                    transaction.Commit();
+                    await _itemTypeRepository.BulkInsertAsync(ItemTypes); // Context.ItemTypes.AddRange(ItemTypes);
+
+                    await unitOfWork.CompleteAsync();
                 }
                 catch (Exception ex)
                 {
                     result.IsSucceeded = false;
                     result.Message = ex.Message;
-                    transaction.Rollback();
                 }
             }
-            return await Task.FromResult(result);
+            return result;
         }
     }
 }

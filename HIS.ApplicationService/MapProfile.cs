@@ -1,23 +1,15 @@
 ﻿using AutoMapper;
 using HIS.Dtos.Business.InOutStockItems;
-using HIS.Dtos.Business.InOutStocks;
 using HIS.Dtos.Business.ItemStocks;
-using HIS.Dtos.Business.Patients;
 using HIS.Dtos.Business.ServiceRequests;
 using HIS.Dtos.Dictionaries.ChapterICD10;
 using HIS.Dtos.Dictionaries.Countries;
-using HIS.Dtos.Dictionaries.District;
 using HIS.Dtos.Dictionaries.ExecutionRoom;
-using HIS.Dtos.Dictionaries.Genders;
-using HIS.Dtos.Dictionaries.Hospital;
-using HIS.Dtos.Dictionaries.Icd;
 using HIS.Dtos.Dictionaries.ItemGroups;
 using HIS.Dtos.Dictionaries.ItemPricePolicies;
 using HIS.Dtos.Dictionaries.Items;
 using HIS.Dtos.Dictionaries.ItemTypes;
 using HIS.Dtos.Dictionaries.Province;
-using HIS.Dtos.Dictionaries.ServiceGroup;
-using HIS.Dtos.Dictionaries.ServiceGroupHeIn;
 using HIS.Dtos.Dictionaries.ServiceResultIndex;
 using HIS.Dtos.Dictionaries.Ward;
 using HIS.Dtos.Systems.DbOption;
@@ -44,6 +36,14 @@ using HIS.ApplicationService.Dictionary.Services.Dto;
 using HIS.ApplicationService.Dictionary.Suppliers.Dto;
 using HIS.ApplicationService.Business.PatientRecords.Dto;
 using HIS.ApplicationService.Dictionary.ServicePricePolicies.Dto;
+using HIS.ApplicationService.Dictionary.Districts.Dto;
+using HIS.ApplicationService.Dictionary.Genders.Dto;
+using HIS.ApplicationService.Dictionary.Hospitals.Dto;
+using HIS.ApplicationService.Dictionary.Icds.Dto;
+using HIS.ApplicationService.Business.InOutStocks.Dto;
+using HIS.ApplicationService.Dictionary.ServiceGroupHeIns.Dto;
+using HIS.ApplicationService.Business.Patients.Dto;
+using HIS.ApplicationService.Dictionary.ServiceGroups.Dto;
 
 namespace HIS.ApplicationService
 {
@@ -143,7 +143,7 @@ namespace HIS.ApplicationService
 
             #region - nghiệp vụ
 
-            CreateMap<Patient, HISPatientDto>().ReverseMap();
+            CreateMap<Patient, PatientDto>().ReverseMap();
             CreateMap<Patient, PatientRecordDto>().ForMember(des => des.PatientId, act => act.MapFrom(s => s.Id)).ReverseMap();
             CreateMap<PatientRecord, PatientRecordDto>().ReverseMap();
             CreateMap<ServiceRequestDto, ServiceRequestView>().ReverseMap();

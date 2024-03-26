@@ -1,8 +1,8 @@
 ﻿using HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks;
-using HIS.Dtos.Business.InOutStocks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using HIS.Core.Application.Services.Dto;
+using HIS.ApplicationService.Business.InOutStocks.Dto;
 
 namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
 {

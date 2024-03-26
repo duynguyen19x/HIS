@@ -1,7 +1,7 @@
-﻿using HIS.ApplicationService.Dictionaries.Hospital;
-using HIS.Dtos.Dictionaries.Hospital;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using HIS.Core.Application.Services.Dto;
+using HIS.ApplicationService.Dictionary.Hospitals;
+using HIS.ApplicationService.Dictionary.Hospitals.Dto;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
 {

@@ -1,6 +1,4 @@
 ﻿using HIS.ApplicationService.Business.PatientRecords;
-using HIS.Dtos.Business.PatientRecords;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Business

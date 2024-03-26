@@ -1,7 +1,7 @@
-﻿using HIS.ApplicationService.Dictionaries.ServicePricePolicy;
-using HIS.Dtos.Dictionaries.ServicePricePolicy;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using HIS.Core.Application.Services.Dto;
+using HIS.ApplicationService.Dictionary.ServicePricePolicies.Dto;
+using HIS.ApplicationService.Dictionary.ServicePricePolicies;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
 {

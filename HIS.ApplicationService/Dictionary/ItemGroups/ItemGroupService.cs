@@ -1,21 +1,23 @@
-﻿using AutoMapper;
-using HIS.Application.Core.Services;
-using HIS.Dtos.Dictionaries.ItemGroups;
-using HIS.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+﻿using HIS.Dtos.Dictionaries.ItemGroups;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Extensions;
+using HIS.Core.Application.Services;
+using HIS.Core.Domain.Repositories;
+using HIS.EntityFrameworkCore.Entities.Categories;
+using System.Transactions;
 
 namespace HIS.ApplicationService.Dictionaries.ItemGroups
 {
-    public class ItemGroupService : BaseCrudAppService<ItemGroupDto, Guid?, GetAllItemGroupInput>, IItemGroupService
+    public class ItemGroupService : BaseAppService, IItemGroupService
     {
-        public ItemGroupService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
-           : base(dbContext, mapper)
+        private readonly IRepository<ItemGroup, Guid> _itemGroupRepository;
+
+        public ItemGroupService(IRepository<ItemGroup, Guid> itemGroupRepository)
         {
+            _itemGroupRepository = itemGroupRepository;
         }
 
-        public override async Task<ResultDto<ItemGroupDto>> CreateOrEdit(ItemGroupDto input)
+        public virtual async Task<ResultDto<ItemGroupDto>> CreateOrEdit(ItemGroupDto input)
         {
             var result = await ValidSave(input);
             if (!result.IsSucceeded)
@@ -27,62 +29,49 @@ namespace HIS.ApplicationService.Dictionaries.ItemGroups
                 return await Update(input);
         }
 
-        public override async Task<ResultDto<ItemGroupDto>> Create(ItemGroupDto input)
+        public virtual async Task<ResultDto<ItemGroupDto>> Create(ItemGroupDto input)
         {
             var result = new ResultDto<ItemGroupDto>();
-            using (var transaction = Context.Database.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var ItemGroup = ObjectMapper.Map<EntityFrameworkCore.Entities.Categories.ItemGroup>(input);
-                    Context.ItemGroups.Add(ItemGroup);
-                    await Context.SaveChangesAsync();
+                    var entity = ObjectMapper.Map<ItemGroup>(input);
 
-                    result.IsSucceeded = true;
-                    result.Result = input;
+                    await _itemGroupRepository.InsertAsync(entity);
 
-                    transaction.Commit();
+                    unitOfWork.Complete();
+                    result.Success(input);
                 }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
             }
-            return await Task.FromResult(result);
+            return result;
         }
 
-        public override async Task<ResultDto<ItemGroupDto>> Update(ItemGroupDto input)
+        public virtual async Task<ResultDto<ItemGroupDto>> Update(ItemGroupDto input)
         {
             var result = new ResultDto<ItemGroupDto>();
-            using (var transaction = Context.Database.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
-                    var ItemGroup = ObjectMapper.Map<EntityFrameworkCore.Entities.Categories.ItemGroup>(input);
-                    Context.ItemGroups.Update(ItemGroup);
-                    await Context.SaveChangesAsync();
+                    var entity = await _itemGroupRepository.GetAsync(input.Id.GetValueOrDefault());
 
-                    result.IsSucceeded = true;
-                    result.Result = input;
+                    ObjectMapper.Map(input, entity);
 
-                    transaction.Commit();
+                    unitOfWork.Complete();
+                    result.Success(input);
                 }
                 catch (Exception ex)
                 {
-                    result.IsSucceeded = false;
-                    result.Message = ex.Message;
-                }
-                finally
-                {
-                    transaction.Dispose();
+                    result.Exception(ex);
                 }
             }
-            return await Task.FromResult(result);
+            return result;
         }
 
         private async Task<ResultDto<ItemGroupDto>> ValidSave(ItemGroupDto input)
@@ -114,7 +103,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemGroups
 
                 #endregion
 
-                var ItemGroup = Context.ItemGroups.FirstOrDefault(w => w.Code == input.Code && w.Id != input.Id);
+                var ItemGroup = _itemGroupRepository.FirstOrDefault(w => w.Code == input.Code && w.Id != input.Id);
                 if (ItemGroup != null)
                 {
                     errs.Add(string.Format("Mã nhóm thuốc [{0}] đã tồn tại trên hệ thống!", input.Code));
@@ -135,43 +124,35 @@ namespace HIS.ApplicationService.Dictionaries.ItemGroups
             return await Task.FromResult(result);
         }
 
-        public override async Task<ResultDto<ItemGroupDto>> Delete(Guid? id)
+        public virtual async Task<ResultDto<ItemGroupDto>> Delete(Guid id)
         {
             var result = new ResultDto<ItemGroupDto>();
-            using (var transaction = Context.Database.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
-                    var ItemGroup = Context.ItemGroups.SingleOrDefault(x => x.Id == id);
-                    if (ItemGroup != null)
-                    {
-                        Context.ItemGroups.Remove(ItemGroup);
-                        await Context.SaveChangesAsync();
-                        result.IsSucceeded = true;
+                    var entity = _itemGroupRepository.Get(id);
 
-                        transaction.Commit();
-                    }
+                    await _itemGroupRepository.DeleteAsync(entity);
+
+                    unitOfWork.Complete();
+                    result.Success(null);
                 }
                 catch (Exception ex)
                 {
-                    result.IsSucceeded = false;
-                    result.Message = ex.Message;
-                }
-                finally
-                {
-                    transaction.Dispose();
+                    result.Exception(ex);
                 }
             }
-            return await Task.FromResult(result);
+            return result;
         }
 
-        public override async Task<PagedResultDto<ItemGroupDto>> GetAll(GetAllItemGroupInput input)
+        public virtual async Task<PagedResultDto<ItemGroupDto>> GetAll(GetAllItemGroupInput input)
         {
             var result = new PagedResultDto<ItemGroupDto>();
             try
             {
                 result.IsSucceeded = true;
-                result.Result = (from r in Context.ItemGroups
+                result.Result = (from r in _itemGroupRepository.GetAll()
 
                                  select new ItemGroupDto()
                                  {
@@ -199,11 +180,11 @@ namespace HIS.ApplicationService.Dictionaries.ItemGroups
             return await Task.FromResult(result);
         }
 
-        public override async Task<ResultDto<ItemGroupDto>> GetById(Guid? id)
+        public virtual async Task<ResultDto<ItemGroupDto>> GetById(Guid id)
         {
             var result = new ResultDto<ItemGroupDto>();
 
-            var ItemGroup = Context.ItemGroups.SingleOrDefault(s => s.Id == id);
+            var ItemGroup = _itemGroupRepository.FirstOrDefault(s => s.Id == id);
             if (ItemGroup != null)
             {
                 result.IsSucceeded = true;

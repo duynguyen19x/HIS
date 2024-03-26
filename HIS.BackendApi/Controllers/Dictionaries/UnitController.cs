@@ -1,7 +1,7 @@
-﻿using HIS.ApplicationService.Dictionaries.Unit;
-using HIS.Dtos.Dictionaries.ServiceUnit;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using HIS.Core.Application.Services.Dto;
+using HIS.ApplicationService.Dictionary.Units.Dto;
+using HIS.ApplicationService.Dictionary.Units;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
 {

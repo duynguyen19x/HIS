@@ -1,21 +1,39 @@
 ﻿using AutoMapper;
-using HIS.Application.Core.Services;
 using HIS.Dtos.Business.ItemStocks;
 using HIS.Dtos.Dictionaries.Items;
 using HIS.EntityFrameworkCore;
-using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;
 using Microsoft.Extensions.Configuration;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Extensions;
+using HIS.Core.Application.Services;
+using HIS.Core.Domain.Repositories;
+using HIS.EntityFrameworkCore.Entities.Business;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
+using HIS.EntityFrameworkCore.Entities.Categories;
 
 namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
 {
     public class ItemStockService : BaseAppService, IItemStockService
     {
-        public ItemStockService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
-          : base(dbContext, mapper) { }
+        private readonly IRepository<Item, Guid> _itemRepository;
+        private readonly IRepository<ItemStock, Guid> _itemStockRepository;
+        private readonly IRepository<ItemType, Guid> _itemTypeRepository;
+        private readonly IRepository<Room, Guid> _roomRepository;
+        
+
+        public ItemStockService(
+            IRepository<Item, Guid> itemRepository,
+            IRepository<ItemStock, Guid> itemStockRepository,
+            IRepository<ItemType, Guid> itemTypeRepository,
+            IRepository<Room, Guid> roomRepository)
+        {
+            _itemRepository = itemRepository;
+            _itemStockRepository = itemStockRepository;
+            _itemTypeRepository = itemTypeRepository;
+            _roomRepository = roomRepository;
+        } 
 
         public async Task<PagedResultDto<ItemStockDto>> GetAll(GetAllItemStockInput input)
         {
@@ -23,9 +41,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
 
             try
             {
-                result.Result = (from mediStock in Context.ItemStocks
-                                 join stock in Context.Rooms on mediStock.StockId equals stock.Id
-                                 join Item in Context.Items on mediStock.ItemId equals Item.Id
+                result.Result = (from mediStock in _itemStockRepository.GetAll()
+                                 join stock in _roomRepository.GetAll() on mediStock.StockId equals stock.Id
+                                 join Item in _itemRepository.GetAll() on mediStock.ItemId equals Item.Id
                                  select new ItemStockDto()
                                  {
                                      Id = mediStock.Id,
@@ -62,8 +80,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
 
             try
             {
-                result.Result = (from dItemStock in Context.ItemStocks
-                                 join sItem in Context.Items on dItemStock.ItemId equals sItem.Id
+                result.Result = (from dItemStock in _itemStockRepository.GetAll() // Context.ItemStocks
+                                 join sItem in _itemRepository.GetAll() on dItemStock.ItemId equals sItem.Id
 
                                  where dItemStock.IsDeleted == false
                                     && dItemStock.AvailableQuantity > 0
@@ -95,10 +113,10 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.ItemStocks
 
             try
             {
-                var itemStockDtos = (from itemStock in Context.ItemStocks
-                                     join stock in Context.Rooms on itemStock.StockId equals stock.Id
-                                     join item in Context.Items on itemStock.ItemId equals item.Id
-                                     join itemType in Context.ItemTypes on item.ItemTypeId equals itemType.Id
+                var itemStockDtos = (from itemStock in _itemStockRepository.GetAll() // Context.ItemStocks
+                                     join stock in _roomRepository.GetAll() on itemStock.StockId equals stock.Id
+                                     join item in _itemRepository.GetAll() on itemStock.ItemId equals item.Id
+                                     join itemType in _itemTypeRepository.GetAll() on item.ItemTypeId equals itemType.Id
 
                                      where itemStock.IsDeleted == false
                                         && itemStock.StockId == stockId

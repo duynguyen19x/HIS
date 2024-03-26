@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using HIS.Dtos.Business.InOutStockItems;
-using HIS.Dtos.Business.InOutStocks;
 using HIS.Dtos.Business.ItemStocks;
 using HIS.Dtos.Dictionaries.ItemPricePolicies;
 using HIS.EntityFrameworkCore.Entities.Business;
@@ -13,16 +12,50 @@ using HIS.Utilities.Sections;
 using Microsoft.Extensions.Configuration;
 using System.Globalization;
 using HIS.Core.Enums;
-using HIS.Application.Core.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Extensions;
+using HIS.Core.Application.Services;
+using HIS.Core.Domain.Repositories;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using System.Transactions;
+using HIS.ApplicationService.Business.InOutStocks.Dto;
 
 namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 {
     public class InOutStockService : BaseAppService, IInOutStockService
     {
-        public InOutStockService(HISDbContext dbContext, IConfiguration config, IMapper mapper)
-            : base(dbContext, mapper) { }
+        private readonly IBulkRepository<InOutStock, Guid> _inOutStockRepository;
+        private readonly IBulkRepository<InOutStockType, int> _inOutStockTypeRepository;
+        private readonly IBulkRepository<InOutStockItem, Guid> _inOutStockItemRepository;
+        private readonly IBulkRepository<Item, Guid> _itemRepository;
+        private readonly IBulkRepository<ItemType, Guid> _itemTypeRepository;
+        private readonly IBulkRepository<ItemStock, Guid> _itemStockRepository;
+        private readonly IBulkRepository<ItemPricePolicy, Guid> _itemPricePolicyRepository;
+        private readonly IBulkRepository<PatientObjectType, int> _patientObjectTypeRepository;
+        private readonly IBulkRepository<Room, Guid> _roomRepository;
+
+        public InOutStockService(
+            IBulkRepository<InOutStock, Guid> inOutStockRepository,
+            IBulkRepository<InOutStockType, int> inOutStockTypeRepository,
+            IBulkRepository<InOutStockItem, Guid> inOutStockItemRepository,
+            IBulkRepository<Item, Guid> itemRepository,
+            IBulkRepository<ItemType, Guid> itemTypeRepository,
+            IBulkRepository<ItemStock, Guid> itemStockRepository,
+            IBulkRepository<ItemPricePolicy, Guid> itemPricePolicyRepository,
+            IBulkRepository<PatientObjectType, int> patientObjectTypeRepository,
+            IBulkRepository<Room, Guid> roomRepository)
+        {
+            _inOutStockRepository = inOutStockRepository;
+            _inOutStockTypeRepository = inOutStockTypeRepository;
+            _inOutStockItemRepository = inOutStockItemRepository;
+            _itemRepository = itemRepository;
+            _itemTypeRepository = itemTypeRepository;
+            _itemStockRepository = itemStockRepository;
+            _itemPricePolicyRepository = itemPricePolicyRepository;
+            _patientObjectTypeRepository = patientObjectTypeRepository;
+            _roomRepository = roomRepository;
+        }
 
         public async Task<PagedResultDto<InOutStockDto>> GetByStocks(Guid stockId, string fromDate, string toDate)
         {
@@ -33,15 +66,15 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                 DateTime fromDateTime = DateTime.ParseExact(fromDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None);
                 DateTime toDateTime = DateTime.ParseExact(toDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None);
 
-                result.Result = (from inOutStock in Context.InOutStocks
+                result.Result = (from inOutStock in _inOutStockRepository.GetAll() //Context.InOutStocks
 
-                                 join imStock in Context.Rooms on inOutStock.ImpStockId equals imStock.Id into imStockDefaults
+                                 join imStock in _roomRepository.GetAll() on inOutStock.ImpStockId equals imStock.Id into imStockDefaults
                                  from imStockDefault in imStockDefaults.DefaultIfEmpty()
 
-                                 join exStock in Context.Rooms on inOutStock.ExpStockId equals exStock.Id into exStockDefaults
+                                 join exStock in _roomRepository.GetAll() on inOutStock.ExpStockId equals exStock.Id into exStockDefaults
                                  from exStockDefault in exStockDefaults.DefaultIfEmpty()
 
-                                 join inOutStockType in Context.InOutStockTypes on inOutStock.InOutStockTypeId equals inOutStockType.Id into inOutStockTypeDefaults
+                                 join inOutStockType in _inOutStockTypeRepository.GetAll() on inOutStock.InOutStockTypeId equals inOutStockType.Id into inOutStockTypeDefaults
                                  from inOutStockTypeDefault in inOutStockTypeDefaults.DefaultIfEmpty()
 
                                  select new InOutStockDto()
@@ -94,6 +127,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         }
 
         #region Nhập từ nhà cung cấp
+
         /// <summary>
         /// Lấy phiếu nhập NCC
         /// </summary>
@@ -105,18 +139,18 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
             try
             {
-                var inOutStockDto = ObjectMapper.Map<InOutStockDto>(Context.InOutStocks.FirstOrDefault(d => d.Id == id));
+                var inOutStockDto = ObjectMapper.Map<InOutStockDto>(_inOutStockRepository.FirstOrDefault(d => d.Id == id));
                 if (inOutStockDto != null)
                 {
                     // Nhập thuốc NCC
                     if (inOutStockDto.InOutStockTypeId == 1)
                     {
-                        var inOutStockItemDtos = ObjectMapper.Map<IList<InOutStockItemDto>>(Context.InOutStockItems.Where(w => w.InOutStockId == id).ToList());
+                        var inOutStockItemDtos = ObjectMapper.Map<IList<InOutStockItemDto>>(_inOutStockItemRepository.GetAll().Where(w => w.InOutStockId == id).ToList());
                         var itemIds = inOutStockItemDtos.Select(s => s.ItemId).ToList();
-                        var itemDtos = ObjectMapper.Map<IList<Item>>(Context.Items.Where(w => itemIds.Contains(w.Id)).ToList());
+                        var itemDtos = ObjectMapper.Map<IList<Item>>(_itemRepository.GetAll().Where(w => itemIds.Contains(w.Id)).ToList());
 
-                        var itemPricePolicyDtos = (from med in Context.ItemPricePolicies
-                                                   join pa in Context.PatientTypes on med.PatientTypeId equals pa.Id
+                        var itemPricePolicyDtos = (from med in _itemPricePolicyRepository.GetAll()
+                                                   join pa in _patientObjectTypeRepository.GetAll() on med.PatientTypeId equals pa.Id
                                                    select new ItemPricePolicyDto()
                                                    {
                                                        Id = med.Id,
@@ -194,73 +228,75 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         {
             var result = new ResultDto<InOutStockDto>();
 
-            try
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
-                var timeNow = DateTime.Now;
-                var inOutStocks = Context.InOutStocks.FirstOrDefault(w => w.Id == input.Id);
-
-                // Nhập thuốc từ nhà cung cấp
-                if (inOutStocks.InOutStockTypeId == 1)
+                try
                 {
-                    var ItemOlds = (from inOutStock in Context.InOutStocks
-                                    join inOutStockItem in Context.InOutStockItems on inOutStock.Id equals inOutStockItem.InOutStockId
-                                    where inOutStock.Id == input.Id && inOutStock.IsDeleted == false
-                                    select new
-                                    {
-                                        inOutStockItem.Id,
-                                        inOutStockItem.ItemId,
-                                        inOutStockItem.RequestQuantity,
-                                        inOutStockItem.ApprovedQuantity,
-                                        inOutStock.ImpStockId,
-                                        inOutStock.InOutStockTypeId,
-                                    }).Distinct().ToList();
+                    var timeNow = DateTime.Now;
+                    var inOutStocks = _inOutStockRepository.GetAll().FirstOrDefault(w => w.Id == input.Id);
 
-
-                    if (ItemOlds != null && ItemOlds.Count > 0)
+                    // Nhập thuốc từ nhà cung cấp
+                    if (inOutStocks.InOutStockTypeId == 1)
                     {
-                        var stockId = ItemOlds.Select(s => s.ImpStockId).Distinct().ToList();
-                        var medicinIds = ItemOlds.Select(s => s.ItemId).Distinct().ToList();
-                        var ItemStocks = Context.ItemStocks.Where(w => stockId.Contains(w.StockId) && medicinIds.Contains(w.ItemId)).ToList();
+                        var ItemOlds = (from inOutStock in _inOutStockRepository.GetAll()
+                                        join inOutStockItem in _inOutStockItemRepository.GetAll() on inOutStock.Id equals inOutStockItem.InOutStockId
+                                        where inOutStock.Id == input.Id && inOutStock.IsDeleted == false
+                                        select new
+                                        {
+                                            inOutStockItem.Id,
+                                            inOutStockItem.ItemId,
+                                            inOutStockItem.RequestQuantity,
+                                            inOutStockItem.ApprovedQuantity,
+                                            inOutStock.ImpStockId,
+                                            inOutStock.InOutStockTypeId,
+                                        }).Distinct().ToList();
 
-                        // Ktra số lượng đã bị xuất nhập chưa để hủy phiếu
-                        bool anyExists = ItemStocks.Any(record => ItemOlds.Any(r => r.ApprovedQuantity < record.AvailableQuantity));
-                        if (anyExists)
-                        {
-                            result.Message = "Bạn không thể hủy nhập kho khi phiếu thuốc đã được sử dụng!";
-                            result.IsSucceeded = false;
-                        }
-                        else
-                        {
-                            inOutStocks.Status = InOutStatusTypes.New;
-                            inOutStocks.ModifiedDate = timeNow;
-                            inOutStocks.ModifiedBy = SessionExtensions.Login?.Id;
-                            inOutStocks.StockExpTime = null;
-                            inOutStocks.ApproverTime = null;
 
-                            foreach (var ItemStock in ItemStocks)
+                        if (ItemOlds != null && ItemOlds.Count > 0)
+                        {
+                            var stockId = ItemOlds.Select(s => s.ImpStockId).Distinct().ToList();
+                            var medicinIds = ItemOlds.Select(s => s.ItemId).Distinct().ToList();
+                            var ItemStocks = _itemStockRepository.GetAll().Where(w => stockId.Contains(w.StockId) && medicinIds.Contains(w.ItemId)).ToList();
+
+                            // Ktra số lượng đã bị xuất nhập chưa để hủy phiếu
+                            bool anyExists = ItemStocks.Any(record => ItemOlds.Any(r => r.ApprovedQuantity < record.AvailableQuantity));
+                            if (anyExists)
                             {
-                                var Item = ItemOlds.FirstOrDefault(s => s.ItemId == ItemStock.ItemId && s.ImpStockId == ItemStock.StockId);
-                                if (Item != null)
-                                {
-                                    ItemStock.ModifiedDate = timeNow;
-                                    ItemStock.ModifiedBy = SessionExtensions.Login?.Id;
+                                result.Message = "Bạn không thể hủy nhập kho khi phiếu thuốc đã được sử dụng!";
+                                result.IsSucceeded = false;
+                            }
+                            else
+                            {
+                                inOutStocks.Status = InOutStatusTypes.New;
+                                inOutStocks.ModifiedDate = timeNow;
+                                inOutStocks.ModifiedBy = SessionExtensions.Login?.Id;
+                                inOutStocks.StockExpTime = null;
+                                inOutStocks.ApproverTime = null;
 
-                                    ItemStock.Quantity -= Item.ApprovedQuantity.GetValueOrDefault();
-                                    ItemStock.AvailableQuantity -= Item.ApprovedQuantity.GetValueOrDefault();
+                                foreach (var ItemStock in ItemStocks)
+                                {
+                                    var Item = ItemOlds.FirstOrDefault(s => s.ItemId == ItemStock.ItemId && s.ImpStockId == ItemStock.StockId);
+                                    if (Item != null)
+                                    {
+                                        ItemStock.ModifiedDate = timeNow;
+                                        ItemStock.ModifiedBy = SessionExtensions.Login?.Id;
+
+                                        ItemStock.Quantity -= Item.ApprovedQuantity.GetValueOrDefault();
+                                        ItemStock.AvailableQuantity -= Item.ApprovedQuantity.GetValueOrDefault();
+                                    }
                                 }
                             }
-                        }
 
-                        Context.SaveChanges();
+                            await unitOfWork.CompleteAsync();
+                        }
                     }
                 }
+                catch (Exception ex)
+                {
+                    result.Exception(ex);
+                }
             }
-            catch (Exception ex)
-            {
-                result.Exception(ex);
-            }
-
-            return await Task.FromResult(result);
+            return result;
         }
 
         /// <summary>
@@ -293,13 +329,13 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         {
             var result = new ResultDto<bool>();
 
-            using (var transaction = Context.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
                     var timeNow = DateTime.Now;
 
-                    var inOutStock = Context.InOutStocks.FirstOrDefault(f => f.Id == id);
+                    var inOutStock = _inOutStockRepository.GetAll().FirstOrDefault(f => f.Id == id);
                     if (inOutStock != null)
                     {
                         inOutStock.Status = InOutStatusTypes.Canceled;
@@ -307,11 +343,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                         inOutStock.DeletedDate = timeNow;
                         inOutStock.IsDeleted = true;
 
-                        var inOutStockItems = Context.InOutStockItems.Where(w => w.InOutStockId == id).ToList();
+                        var inOutStockItems = _inOutStockItemRepository.GetAll().Where(w => w.InOutStockId == id).ToList();
                         if (inOutStockItems != null)
                         {
                             var ItemIds = inOutStockItems.Select(s => s.ItemId).ToList();
-                            var Items = Context.Items.Where(w => ItemIds.Contains(w.Id)).ToList();
+                            var Items = _itemRepository.GetAll().Where(w => ItemIds.Contains(w.Id)).ToList();
                             if (Items != null && Items.Count > 0)
                             {
                                 foreach (var Item in Items)
@@ -321,7 +357,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     Item.IsDeleted = true;
                                 }
 
-                                var ItemPricePolicies = Context.ItemPricePolicies.Where(w => ItemIds.Contains(w.ItemId)).ToList();
+                                var ItemPricePolicies = _itemPricePolicyRepository.GetAll().Where(w => ItemIds.Contains(w.ItemId)).ToList();
                                 foreach (var pricePolicy in ItemPricePolicies)
                                 {
                                     pricePolicy.DeletedBy = SessionExtensions.Login?.Id;
@@ -332,20 +368,14 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                         }
                     }
 
-                    Context.SaveChanges();
-                    transaction.Commit();
+                    await unitOfWork.CompleteAsync();
                 }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
             }
-
-            return await Task.FromResult(result);
+            return result;
         }
 
         /// <summary>
@@ -363,7 +393,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                 return result;
             }
 
-            using (var transaction = Context.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
@@ -445,7 +475,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                         if (items.Count > 0)
                         {
                             var ItemTypeIds = items.Select(s => s.ItemTypeId).ToList();
-                            var ItemTypes = Context.ItemTypes.Where(w => ItemTypeIds.Contains(w.Id)).ToList();
+                            var ItemTypes = _itemTypeRepository.GetAll().Where(w => ItemTypeIds.Contains(w.Id)).ToList();
                             if (ItemTypes != null && ItemTypes.Count > 0)
                             {
                                 foreach (var Item in items)
@@ -460,28 +490,29 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                             }
                         }
 
-                        Context.InOutStocks.Add(inOutStock);
+                        await _inOutStockRepository.InsertAsync(inOutStock);
+                        //Context.InOutStocks.Add(inOutStock);
                     }
                     else
                     {
-                        var dImMestOld = Context.InOutStocks.FirstOrDefault(d => d.Id == input.Id);
+                        var dImMestOld = _inOutStockRepository.FirstOrDefault(d => d.Id == input.Id);
 
                         // Xóa bản ghi cũ
-                        var inOutStockItemOlds = Context.InOutStockItems.Where(s => s.InOutStockId == input.Id).ToList();
+                        var inOutStockItemOlds = _inOutStockItemRepository.GetAll().Where(s => s.InOutStockId == input.Id).ToList();
                         var itemOldIds = inOutStockItemOlds.Select(s => s.ItemId).ToList();
-                        var itemOlds = Context.Items.Where(w => itemOldIds.Contains(w.Id)).ToList();
-                        var itemStockOlds = Context.ItemStocks.Where(w => itemOldIds.Contains(w.ItemId) && w.StockId == dImMestOld.ImpStockId).ToList();
-                        var itemPricePolicyOlds = Context.ItemPricePolicies.Where(w => itemOldIds.Contains(w.ItemId)).ToList();
+                        var itemOlds = _itemRepository.GetAll().Where(w => itemOldIds.Contains(w.Id)).ToList();
+                        var itemStockOlds = _itemStockRepository.GetAll().Where(w => itemOldIds.Contains(w.ItemId) && w.StockId == dImMestOld.ImpStockId).ToList();
+                        var itemPricePolicyOlds = _itemPricePolicyRepository.GetAll().Where(w => itemOldIds.Contains(w.ItemId)).ToList();
 
                         if (inOutStockItemOlds != null && itemOlds != null)
                         {
-                            Context.ItemPricePolicies.RemoveRange(itemPricePolicyOlds);
-                            Context.ItemStocks.RemoveRange(itemStockOlds);
-                            Context.InOutStockItems.RemoveRange(inOutStockItemOlds);
-                            Context.Items.RemoveRange(itemOlds);
+                            await _itemPricePolicyRepository.BulkDeleteAsync(itemPricePolicyOlds); // Context.ItemPricePolicies.RemoveRange(itemPricePolicyOlds);
+                            await _itemStockRepository.BulkDeleteAsync(itemStockOlds); // Context.ItemStocks.RemoveRange(itemStockOlds);
+                            await _inOutStockItemRepository.BulkDeleteAsync(inOutStockItemOlds); // Context.InOutStockItems.RemoveRange(inOutStockItemOlds);
+                            await _itemRepository.BulkDeleteAsync(itemOlds); // Context.Items.RemoveRange(itemOlds);
 
                             // Chưa biết nguyên nhân: Khi xóa bản ghi cũ và thêm bản ghi mới lại update khóa ngoại về NULL
-                            Context.SaveChanges();
+                            //Context.SaveChanges();
                         }
 
                         foreach (var inOutStockItemDto in input.InOutStockItems)
@@ -500,7 +531,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                             {
                                 item.Id = Guid.NewGuid();
 
-                                var ItemType = Context.ItemTypes.FirstOrDefault(f => f.Id == item.ItemTypeId);
+                                var ItemType = _itemTypeRepository.FirstOrDefault(f => f.Id == item.ItemTypeId);
                                 if (ItemType != null)
                                 {
                                     ItemType.AutoNumber += 1;
@@ -568,26 +599,20 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                         dImMestOld.ModifiedBy = SessionExtensions.Login?.Id;
                     }
 
-                    Context.Items.AddRange(items);
-                    Context.InOutStockItems.AddRange(inOutStockItems);
-                    Context.ItemStocks.AddRange(itemStocks);
-                    Context.ItemPricePolicies.AddRange(itemPricePolicies);
+                    await _itemRepository.BulkInsertAsync(items); // Context.Items.AddRange(items);
+                    await _inOutStockItemRepository.BulkInsertAsync(inOutStockItems); // Context.InOutStockItems.AddRange(inOutStockItems);
+                    await _itemStockRepository.BulkInsertAsync(itemStocks); // Context.ItemStocks.AddRange(itemStocks);
+                    await _itemPricePolicyRepository.BulkInsertAsync(itemPricePolicies); // Context.ItemPricePolicies.AddRange(itemPricePolicies);
 
-                    Context.SaveChanges();
-                    transaction.Commit();
+                    await unitOfWork.CompleteAsync();
                 }
                 catch (Exception ex)
                 {
                     result.IsSucceeded = false;
                     result.Message = ex.Message;
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
             }
-
-            return await Task.FromResult(result);
+            return result;
         }
 
         /// <summary>
@@ -598,7 +623,6 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         private async Task<ResultDto<InOutStockDto>> ImportFromSupplierValid(InOutStockDto input)
         {
             var result = new ResultDto<InOutStockDto>();
-
             try
             {
                 var erros = new List<string>();
@@ -619,7 +643,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
                 if (!string.IsNullOrEmpty(input.Code))
                 {
-                    var any = Context.InOutStocks.Any(a => a.Id != input.Id && a.Code == input.Code);
+                    var any = _inOutStockRepository.GetAll().Any(a => a.Id != input.Id && a.Code == input.Code);
                     if (any)
                         erros.Add(string.Format("Mã phiếu nhập [{0}] đã tồn tại trên hệ thống. Vui lòng kiểm tra lại!", input.Code));
                 }
@@ -671,17 +695,17 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
             try
             {
-                var inOutStockDto = ObjectMapper.Map<InOutStockDto>(Context.InOutStocks.FirstOrDefault(d => d.Id == id));
+                var inOutStockDto = ObjectMapper.Map<InOutStockDto>(_inOutStockRepository.FirstOrDefault(d => d.Id == id));
                 if (inOutStockDto != null)
                 {
                     if (inOutStockDto.InOutStockTypeId == (int)Utilities.Enums.InOutStockTypeTypes.ImportFromAnotherStock)
                     {
-                        var inOutStockItemDtos = (from inOutStockItem in Context.InOutStockItems
+                        var inOutStockItemDtos = (from inOutStockItem in _inOutStockItemRepository.GetAll() // Context.InOutStockItems
 
-                                                  join item in Context.Items on inOutStockItem.ItemId equals item.Id into itemDefaults
+                                                  join item in _itemRepository.GetAll() on inOutStockItem.ItemId equals item.Id into itemDefaults
                                                   from itemDefault in itemDefaults.DefaultIfEmpty()
 
-                                                  join itemType in Context.ItemTypes on inOutStockItem.ItemTypeId equals itemType.Id into itemTypeDefaults
+                                                  join itemType in _itemTypeRepository.GetAll() on inOutStockItem.ItemTypeId equals itemType.Id into itemTypeDefaults
                                                   from itemTypeDefault in itemTypeDefaults.DefaultIfEmpty()
 
                                                   where inOutStockItem.InOutStockId == id
@@ -893,14 +917,13 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         public async Task<ResultDto<bool>> ImportFromAnotherStockDeleted(Guid id)
         {
             var result = new ResultDto<bool>();
-
-            using (var transaction = Context.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
                     var timeNow = DateTime.Now;
 
-                    var inOutStock = Context.InOutStocks.FirstOrDefault(f => f.Id == id);
+                    var inOutStock = _inOutStockRepository.FirstOrDefault(f => f.Id == id);
                     if (inOutStock != null)
                     {
                         inOutStock.Status = InOutStatusTypes.Canceled;
@@ -909,17 +932,12 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                         inOutStock.IsDeleted = true;
                     }
 
-                    Context.SaveChanges();
-                    transaction.Commit();
+                    await unitOfWork.CompleteAsync();
                 }
                 catch (Exception ex)
                 {
                     result.IsSucceeded = false;
                     result.Message = ex.Message;
-                }
-                finally
-                {
-                    transaction.Dispose();
                 }
             }
 
@@ -978,7 +996,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                     var itemIds = input.InOutStockItems.Select(s => s.ItemId).ToList();
                     if (itemIds != null && itemIds.Count > 0)
                     {
-                        var itemStocks = Context.ItemStocks.Where(w => itemIds.Contains(w.ItemId) && w.StockId == input.ExpStockId).ToList();
+                        var itemStocks = _itemStockRepository.GetAll().Where(w => itemIds.Contains(w.ItemId) && w.StockId == input.ExpStockId).ToList();
                         if (itemStocks != null)
                         {
                             foreach (var item in input.InOutStockItems)
@@ -1030,7 +1048,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                 return result;
             }
 
-            using (var transaction = Context.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 var dateNow = DateTime.Now;
                 var id = Guid.Empty;
@@ -1066,8 +1084,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     var itemTypeIds = input.InOutStockItems.Select(x => x.ItemTypeId).ToList();
 
                                     #region Chi tiết phiếu nhập xuất
-                                    var itemStockDtos = (from itemStock in Context.ItemStocks
-                                                         join item in Context.Items on itemStock.ItemId equals item.Id
+                                    var itemStockDtos = (from itemStock in _itemStockRepository.GetAll()
+                                                         join item in _itemRepository.GetAll() on itemStock.ItemId equals item.Id
 
                                                          where itemStock.IsDeleted == false
                                                            && item.IsDeleted == false
@@ -1144,7 +1162,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
                                     #region Trừ khả dụng kho xuất
                                     var itemIds = inOutStockItems.Select(s => s.ItemId).ToList();
-                                    var itemStocks = Context.ItemStocks.Where(w => w.StockId == input.ExpStockId && itemIds.Contains(w.ItemId)).ToList();
+                                    var itemStocks = _itemStockRepository.GetAll().Where(w => w.StockId == input.ExpStockId && itemIds.Contains(w.ItemId)).ToList();
 
                                     foreach (var itemStock in itemStocks)
                                     {
@@ -1157,13 +1175,13 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                 break;
                         }
 
-                        Context.InOutStocks.Add(inOutStock);
-                        Context.InOutStockItems.AddRange(inOutStockItems);
+                        await _inOutStockRepository.InsertAsync(inOutStock);  //Context.InOutStocks.Add(inOutStock);
+                        await _inOutStockItemRepository.BulkInsertAsync(inOutStockItems); //Context.InOutStockItems.AddRange(inOutStockItems);
                     }
                     else
                     {
                         var inOutStockItems = new List<InOutStockItem>();
-                        var inOutStock = Context.InOutStocks.FirstOrDefault(d => d.Id == input.Id);
+                        var inOutStock = _inOutStockRepository.FirstOrDefault(d => d.Id == input.Id);
                         id = inOutStock.Id;
 
                         switch (input.Status)
@@ -1173,9 +1191,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     input.Status = InOutStatusTypes.New;
 
                                     // Xóa bản ghi cũ
-                                    var inOutStockItemOlds = Context.InOutStockItems.Where(s => s.InOutStockId == input.Id).ToList();
+                                    var inOutStockItemOlds = _inOutStockItemRepository.GetAll().Where(s => s.InOutStockId == input.Id).ToList();
                                     if (inOutStockItemOlds != null)
-                                        Context.InOutStockItems.RemoveRange(inOutStockItemOlds);
+                                        await _inOutStockItemRepository.BulkDeleteAsync(inOutStockItemOlds);
 
                                     foreach (var inOutStockItemDto in input.InOutStockItems)
                                     {
@@ -1194,13 +1212,13 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     var itemTypeIds = input.InOutStockItems.Select(x => x.ItemTypeId).ToList();
 
                                     // Xóa bản ghi cũ
-                                    var inOutStockItemOlds = Context.InOutStockItems.Where(s => s.InOutStockId == input.Id).ToList();
+                                    var inOutStockItemOlds = _inOutStockItemRepository.GetAll().Where(s => s.InOutStockId == input.Id).ToList();
                                     if (inOutStockItemOlds != null)
-                                        Context.InOutStockItems.RemoveRange(inOutStockItemOlds);
+                                        await _inOutStockItemRepository.BulkDeleteAsync(inOutStockItemOlds);  //Context.InOutStockItems.RemoveRange(inOutStockItemOlds);
 
                                     #region Chi tiết phiếu nhập xuất
-                                    var itemStockDtos = (from itemStock in Context.ItemStocks
-                                                         join item in Context.Items on itemStock.ItemId equals item.Id
+                                    var itemStockDtos = (from itemStock in _itemStockRepository.GetAll()
+                                                         join item in _itemRepository.GetAll() on itemStock.ItemId equals item.Id
 
                                                          where itemStock.IsDeleted == false
                                                            && item.IsDeleted == false
@@ -1277,7 +1295,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
                                     #region Trừ khả dụng kho xuất
                                     var itemIds = inOutStockItems.Select(s => s.ItemId).ToList();
-                                    var itemStocks = Context.ItemStocks.Where(w => w.StockId == input.ExpStockId && itemIds.Contains(w.ItemId)).ToList();
+                                    var itemStocks = _itemStockRepository.GetAll().Where(w => w.StockId == input.ExpStockId && itemIds.Contains(w.ItemId)).ToList();
 
                                     foreach (var itemStock in itemStocks)
                                     {
@@ -1303,7 +1321,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
                                     #region Trừ tồn kho của kho xuất khi xuất kho
                                     var itemIds = input.InOutStockItems.Select(s => s.ItemId).ToList();
-                                    var itemStocks = Context.ItemStocks.Where(w => w.StockId == input.ExpStockId && itemIds.Contains(w.ItemId)).ToList();
+                                    var itemStocks = _itemStockRepository.GetAll().Where(w => w.StockId == input.ExpStockId && itemIds.Contains(w.ItemId)).ToList();
                                     if (itemStocks != null && itemStocks.Count > 0)
                                     {
                                         foreach (var item in itemStocks)
@@ -1326,7 +1344,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
                                     #region Cộng tồn kho của kho nhập
                                     var itemIds = input.InOutStockItems.Select(s => s.ItemId).ToList();
-                                    var itemStocks = Context.ItemStocks.Where(w => w.StockId == input.ImpStockId && itemIds.Contains(w.ItemId)).ToList();
+                                    var itemStocks = _itemStockRepository.GetAll().Where(w => w.StockId == input.ImpStockId && itemIds.Contains(w.ItemId)).ToList();
                                     if (itemStocks != null)
                                     {
                                         var itemStockNews = new List<ItemStock>();
@@ -1354,7 +1372,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
                                         if (itemStockNews.Count > 0)
                                         {
-                                            Context.AddRange(itemStockNews);
+                                            await _itemStockRepository.BulkInsertAsync(itemStockNews);
+                                            //Context.AddRange(itemStockNews);
                                         }
                                     }
                                     #endregion
@@ -1363,31 +1382,29 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                         }
 
                         ObjectMapper.Map(input, inOutStock);
-                        Context.AddRange(inOutStockItems);
+                        await _inOutStockItemRepository.BulkInsertAsync(inOutStockItems);
+                        //Context.AddRange(inOutStockItems);
 
                         inOutStock.ModifiedDate = dateNow;
                         inOutStock.ModifiedBy = SessionExtensions.Login?.Id;
                     }
 
-                    Context.SaveChanges();
+                    //Context.SaveChanges();
 
                     if (!GuidHelper.IsNullOrEmpty(id))
                     {
                         result.Result = (await ImportFromAnotherStockGetById(id)).Result;
                     }
 
-                    transaction.Commit();
+                    await unitOfWork.CompleteAsync();
                 }
                 catch (Exception ex)
                 {
                     result.IsSucceeded = false;
                     result.Message = ex.Message;
-                    transaction.Rollback();
-                }
-                finally { transaction.Dispose(); }
+                } 
             }
-
-            return await Task.FromResult(result);
+            return result;
         }
 
         /// <summary>
@@ -1399,13 +1416,13 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         {
             var result = new ResultDto<InOutStockDto>();
 
-            using (var transaction = Context.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 input.InOutStockTypeId = (int)Utilities.Enums.InOutStockTypeTypes.ImportFromAnotherStock;
 
                 try
                 {
-                    var inOutStock = Context.InOutStocks.FirstOrDefault(f => f.Id == input.Id);
+                    var inOutStock = _inOutStockRepository.FirstOrDefault(f => f.Id == input.Id);
                     if (inOutStock != null)
                     {
                         switch (input.Status)
@@ -1420,11 +1437,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     input.StockExpTime = null;
                                     input.StockExpUserId = null;
 
-                                    var inOutStockItems = Context.InOutStockItems.Where(w => w.InOutStockId == input.Id).ToList();
+                                    var inOutStockItems = _inOutStockItemRepository.GetAll().Where(w => w.InOutStockId == input.Id).ToList();
                                     if (inOutStockItems != null && inOutStockItems.Count > 0)
                                     {
                                         var itemIds = inOutStockItems.Select(s => s.ItemId).ToList();
-                                        var itemStocks = Context.ItemStocks.Where(w => w.StockId == inOutStock.ExpStockId && itemIds.Contains(w.ItemId)).ToList();
+                                        var itemStocks = _itemStockRepository.GetAll().Where(w => w.StockId == inOutStock.ExpStockId && itemIds.Contains(w.ItemId)).ToList();
 
                                         foreach (var item in itemStocks)
                                         {
@@ -1454,11 +1471,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     input.StockExpTime = null;
                                     input.StockExpUserId = null;
 
-                                    var inOutStockItems = Context.InOutStockItems.Where(w => w.InOutStockId == input.Id).ToList();
+                                    var inOutStockItems = _inOutStockItemRepository.GetAll().Where(w => w.InOutStockId == input.Id).ToList();
                                     if (inOutStockItems != null && inOutStockItems.Count > 0)
                                     {
                                         var itemIds = inOutStockItems.Select(s => s.ItemId).ToList();
-                                        var itemStocks = Context.ItemStocks.Where(w => w.StockId == inOutStock.ExpStockId && itemIds.Contains(w.ItemId)).ToList();
+                                        var itemStocks = _itemStockRepository.GetAll().Where(w => w.StockId == inOutStock.ExpStockId && itemIds.Contains(w.ItemId)).ToList();
 
                                         foreach (var item in itemStocks)
                                         {
@@ -1478,11 +1495,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     input.StockImpTime = null;
                                     input.StockImpUserId = null;
 
-                                    var inOutStockItems = Context.InOutStockItems.Where(w => w.InOutStockId == input.Id).ToList();
+                                    var inOutStockItems = _inOutStockItemRepository.GetAll().Where(w => w.InOutStockId == input.Id).ToList();
                                     if (inOutStockItems != null && inOutStockItems.Count > 0)
                                     {
                                         var itemIds = inOutStockItems.Select(s => s.ItemId).ToList();
-                                        var itemStocks = Context.ItemStocks.Where(w => w.StockId == inOutStock.ImpStockId && itemIds.Contains(w.ItemId)).ToList();
+                                        var itemStocks = _itemStockRepository.GetAll().Where(w => w.StockId == inOutStock.ImpStockId && itemIds.Contains(w.ItemId)).ToList();
 
                                         foreach (var item in itemStocks)
                                         {
@@ -1506,22 +1523,18 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                         result.Message = $"Không tìm thấy phiếu [{input.Code}]. Xin vui lòng kiểm tra lại!";
                     }
 
-                    Context.SaveChanges();
-
                     if (result.IsSucceeded)
                     {
                         result.Result = (await ImportFromAnotherStockGetById(input.Id.GetValueOrDefault())).Result;
                     }
 
-                    transaction.Commit();
+                    await unitOfWork.CompleteAsync();
                 }
                 catch (Exception ex)
                 {
                     result.IsSucceeded = false;
                     result.Message = ex.Message;
-                    transaction.Rollback();
                 }
-                finally { transaction.Dispose(); }
             }
 
             return await Task.FromResult(result);
@@ -1541,17 +1554,17 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
             try
             {
-                var inOutStockDto = ObjectMapper.Map<InOutStockDto>(Context.InOutStocks.FirstOrDefault(d => d.Id == id));
+                var inOutStockDto = ObjectMapper.Map<InOutStockDto>(_inOutStockRepository.FirstOrDefault(d => d.Id == id));
                 if (inOutStockDto != null)
                 {
                     if (inOutStockDto.InOutStockTypeId == (int)Utilities.Enums.InOutStockTypeTypes.ExportFormSupplier)
                     {
-                        var inOutStockItemDtos = (from inOutStockItem in Context.InOutStockItems
+                        var inOutStockItemDtos = (from inOutStockItem in _inOutStockItemRepository.GetAll()
 
-                                                  join item in Context.Items on inOutStockItem.ItemId equals item.Id into itemDefaults
+                                                  join item in _itemRepository.GetAll() on inOutStockItem.ItemId equals item.Id into itemDefaults
                                                   from itemDefault in itemDefaults.DefaultIfEmpty()
 
-                                                  join itemType in Context.ItemTypes on inOutStockItem.ItemTypeId equals itemType.Id into itemTypeDefaults
+                                                  join itemType in _itemTypeRepository.GetAll() on inOutStockItem.ItemTypeId equals itemType.Id into itemTypeDefaults
                                                   from itemTypeDefault in itemTypeDefaults.DefaultIfEmpty()
 
                                                   where inOutStockItem.InOutStockId == id
@@ -1682,13 +1695,13 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         {
             var result = new ResultDto<InOutStockDto>();
 
-            using (var transaction = Context.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 input.InOutStockTypeId = (int)Utilities.Enums.InOutStockTypeTypes.ImportFromAnotherStock;
 
                 try
                 {
-                    var inOutStock = Context.InOutStocks.FirstOrDefault(f => f.Id == input.Id);
+                    var inOutStock = _inOutStockRepository.FirstOrDefault(f => f.Id == input.Id);
                     if (inOutStock != null)
                     {
                         switch (input.Status)
@@ -1703,11 +1716,11 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     input.StockExpTime = null;
                                     input.StockExpUserId = null;
 
-                                    var inOutStockItems = Context.InOutStockItems.Where(w => w.InOutStockId == input.Id).ToList();
+                                    var inOutStockItems = _inOutStockItemRepository.GetAll().Where(w => w.InOutStockId == input.Id).ToList();
                                     if (inOutStockItems != null && inOutStockItems.Count > 0)
                                     {
                                         var itemIds = inOutStockItems.Select(s => s.ItemId).ToList();
-                                        var itemStocks = Context.ItemStocks.Where(w => w.StockId == inOutStock.ExpStockId && itemIds.Contains(w.ItemId)).ToList();
+                                        var itemStocks = _itemStockRepository.GetAll().Where(w => w.StockId == inOutStock.ExpStockId && itemIds.Contains(w.ItemId)).ToList();
 
                                         foreach (var item in itemStocks)
                                         {
@@ -1731,23 +1744,20 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                         result.Message = $"Không tìm thấy phiếu [{input.Code}]. Xin vui lòng kiểm tra lại!";
                     }
 
-                    Context.SaveChanges();
+                    //Context.SaveChanges();
 
                     if (result.IsSucceeded)
                     {
                         result.Result = (await ImportFromAnotherStockGetById(input.Id.GetValueOrDefault())).Result;
                     }
 
-                    transaction.Commit();
+                    await unitOfWork.CompleteAsync();
                 }
                 catch (Exception ex)
                 {
                     result.IsSucceeded = false;
                     result.Message = ex.Message;
-
-                    transaction.Rollback();
                 }
-                finally { transaction.Dispose(); }
             }
 
             return await Task.FromResult(result);
@@ -1761,14 +1771,13 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
         public async Task<ResultDto<bool>> ExportToSupplierDeleted(Guid id)
         {
             var result = new ResultDto<bool>();
-
-            using (var transaction = Context.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
                     var timeNow = DateTime.Now;
 
-                    var inOutStock = Context.InOutStocks.FirstOrDefault(f => f.Id == id);
+                    var inOutStock = _inOutStockRepository.FirstOrDefault(f => f.Id == id);
                     if (inOutStock != null)
                     {
                         inOutStock.Status = InOutStatusTypes.Canceled;
@@ -1777,17 +1786,12 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                         inOutStock.IsDeleted = true;
                     }
 
-                    Context.SaveChanges();
-                    transaction.Commit();
+                    await unitOfWork.CompleteAsync();
                 }
                 catch (Exception ex)
                 {
                     result.IsSucceeded = false;
                     result.Message = ex.Message;
-                }
-                finally
-                {
-                    transaction.Dispose();
                 }
             }
 
@@ -1804,7 +1808,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                 return result;
             }
 
-            using (var transaction = Context.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
@@ -1838,19 +1842,19 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                 break;
                         }
 
-                        Context.InOutStocks.Add(inOutStock);
-                        Context.InOutStockItems.AddRange(inOutStockItems);
+                        await _inOutStockRepository.InsertAsync(inOutStock); //Context.InOutStocks.Add(inOutStock);
+                        await _inOutStockItemRepository.BulkInsertAsync(inOutStockItems); //Context.InOutStockItems.AddRange(inOutStockItems);
                     }
                     else
                     {
                         var inOutStockItems = new List<InOutStockItem>();
-                        var inOutStock = Context.InOutStocks.FirstOrDefault(d => d.Id == input.Id);
+                        var inOutStock = _inOutStockRepository.FirstOrDefault(d => d.Id == input.Id);
                         id = inOutStock.Id;
 
                         // Xóa bản ghi cũ
-                        var inOutStockItemOlds = Context.InOutStockItems.Where(s => s.InOutStockId == input.Id).ToList();
+                        var inOutStockItemOlds = _inOutStockItemRepository.GetAll().Where(s => s.InOutStockId == input.Id).ToList();
                         if (inOutStockItemOlds != null)
-                            Context.InOutStockItems.RemoveRange(inOutStockItemOlds);
+                            await _inOutStockItemRepository.BulkDeleteAsync(inOutStockItemOlds);
 
                         switch (input.Status)
                         {
@@ -1878,8 +1882,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                     var itemTypeIds = input.InOutStockItems.Select(x => x.ItemTypeId).ToList();
 
                                     #region Chi tiết phiếu nhập xuất
-                                    var itemStockDtos = (from itemStock in Context.ItemStocks
-                                                         join item in Context.Items on itemStock.ItemId equals item.Id
+                                    var itemStockDtos = (from itemStock in _itemStockRepository.GetAll() 
+                                                         join item in _itemRepository.GetAll() on itemStock.ItemId equals item.Id
 
                                                          where itemStock.IsDeleted == false
                                                            && item.IsDeleted == false
@@ -1960,7 +1964,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
                                     #region Trừ khả dụng và tồn kho của kho xuất 
                                     var itemIds = inOutStockItems.Select(s => s.ItemId).ToList();
-                                    var itemStocks = Context.ItemStocks.Where(w => w.StockId == input.ExpStockId && itemIds.Contains(w.ItemId)).ToList();
+                                    var itemStocks = _itemStockRepository.GetAll().Where(w => w.StockId == input.ExpStockId && itemIds.Contains(w.ItemId)).ToList();
 
                                     foreach (var itemStock in itemStocks)
                                     {
@@ -1977,14 +1981,15 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                         }
 
                         ObjectMapper.Map(input, inOutStock);
-                        Context.AddRange(inOutStockItems);
+                        await _inOutStockItemRepository.BulkInsertAsync(inOutStockItems); //Context.AddRange(inOutStockItems);
 
                         inOutStock.ModifiedDate = dateNow;
                         inOutStock.ModifiedBy = SessionExtensions.Login?.Id;
                     }
 
-                    Context.SaveChanges();
-                    transaction.Commit();
+                    //Context.SaveChanges();
+                    //transaction.Commit();
+                    await unitOfWork.CompleteAsync();
 
                     if (!GuidHelper.IsNullOrEmpty(id))
                     {
@@ -1995,10 +2000,6 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                 {
                     result.IsSucceeded = false;
                     result.Message = ex.Message;
-                }
-                finally
-                {
-                    transaction.Dispose();
                 }
             }
 
@@ -2052,7 +2053,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                     var itemIds = input.InOutStockItems.Select(s => s.ItemId).ToList();
                     if (itemIds != null && itemIds.Count > 0)
                     {
-                        var itemStocks = Context.ItemStocks.Where(w => itemIds.Contains(w.ItemId) && w.StockId == input.ExpStockId).ToList();
+                        var itemStocks = _itemStockRepository.GetAll().Where(w => itemIds.Contains(w.ItemId) && w.StockId == input.ExpStockId).ToList();
                         if (itemStocks != null)
                         {
                             foreach (var item in input.InOutStockItems)

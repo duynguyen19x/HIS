@@ -8,15 +8,12 @@
 
   <ItemGroup>
     <Compile Remove="Categories\**" />
-    <Compile Remove="Dictionaries\Branchs\**" />
     <Compile Remove="Systems\RefTypeCategory\**" />
     <Compile Remove="Systems\RefType\**" />
     <EmbeddedResource Remove="Categories\**" />
-    <EmbeddedResource Remove="Dictionaries\Branchs\**" />
     <EmbeddedResource Remove="Systems\RefTypeCategory\**" />
     <EmbeddedResource Remove="Systems\RefType\**" />
     <None Remove="Categories\**" />
-    <None Remove="Dictionaries\Branchs\**" />
     <None Remove="Systems\RefTypeCategory\**" />
     <None Remove="Systems\RefType\**" />
   </ItemGroup>
@@ -24,10 +21,6 @@
   <ItemGroup>
     <ProjectReference Include="..\HIS.Core\HIS.Core.csproj" />
     <ProjectReference Include="..\HIS.Utilities\HIS.Utilities.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Dictionaries\ServicePricePolicy\" />
   </ItemGroup>
 
 </Project>

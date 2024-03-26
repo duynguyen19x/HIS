@@ -1,6 +1,6 @@
 ﻿using HIS.Core.Application.Services.Dto;
 
-namespace HIS.Dtos.Dictionaries.Genders
+namespace HIS.ApplicationService.Dictionary.Genders.Dto
 {
     public class GenderDto : EntityDto<Guid?>
     {

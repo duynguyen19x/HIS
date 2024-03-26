@@ -1,7 +1,7 @@
-﻿using HIS.ApplicationService.Dictionaries.Districts;
-using HIS.Dtos.Dictionaries.District;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using HIS.Core.Application.Services.Dto;
+using HIS.ApplicationService.Dictionary.Districts;
+using HIS.ApplicationService.Dictionary.Districts.Dto;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
 {

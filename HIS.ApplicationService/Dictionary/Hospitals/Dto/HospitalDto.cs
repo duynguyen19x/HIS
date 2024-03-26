@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Dictionaries.Hospital
+namespace HIS.ApplicationService.Dictionary.Hospitals.Dto
 {
     public class HospitalDto : EntityDto<Guid?>
     {
         public string Code { get; set; } // mã bệnh viện
-        public string MohCode { get; set; } // mã đăng ký kcb ban đầu
+        public string MediOrgCode { get; set; } // mã đăng ký kcb ban đầu
         public string Name { get; set; }
         public string Grade { get; set; } // hạng bệnh viện
         public string Line { get; set; } // tuyến bệnh viện

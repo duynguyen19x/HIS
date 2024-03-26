@@ -1,183 +1,142 @@
-﻿using AutoMapper;
-using HIS.Application.Core.Services;
+﻿using HIS.ApplicationService.Dictionary.Hospitals.Dto;
+using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
-using HIS.Dtos.Dictionaries.Hospital;
-using HIS.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
+using HIS.Core.Domain.Repositories;
+using HIS.Core.Extensions;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using Microsoft.EntityFrameworkCore;
+using System.Transactions;
 
-namespace HIS.ApplicationService.Dictionaries.Hospital
+namespace HIS.ApplicationService.Dictionary.Hospitals
 {
-    public class HospitalService : BaseCrudAppService<HospitalDto, Guid?, GetAllHospitalInputDto>, IHospitalService
+    public class HospitalService : BaseAppService, IHospitalService
     {
-        public HospitalService(HISDbContext dbContext, IMapper mapper)
-            : base(dbContext, mapper)
+        private readonly IRepository<Hospital, Guid> _hospitalRepository;
+
+        public HospitalService(IRepository<Hospital, Guid> hospitalRepository)
         {
+            _hospitalRepository = hospitalRepository;
         }
 
-        public override async Task<ResultDto<HospitalDto>> Create(HospitalDto input)
-        {
-            var result = new ResultDto<HospitalDto>();
-            using (var transaction = Context.Database.BeginTransaction())
-            {
-                try
-                {
-                    input.Id = Guid.NewGuid();
-                    var data = new EntityFrameworkCore.Entities.Dictionaries.Hospital()
-                    {
-                        Id = input.Id.GetValueOrDefault(),
-                        Code = input.Code,
-                        Name = input.Name,
-                        Description = input.Description,
-                        Inactive = input.Inactive,
-                        Address = input.Address,
-                        Grade = input.Grade,
-                        Line = input.Line,
-                        CreatedDate = DateTime.Now
-                    };
-                    Context.Hospitals.Add(data);
-                    await Context.SaveChangesAsync();
-
-                    result.IsSucceeded = true;
-                    result.Result = input;
-
-                    transaction.Commit();
-                }
-                catch (Exception ex)
-                {
-                    result.Exception(ex);
-                }
-                finally
-                {
-                    transaction.Dispose();
-                }
-            }
-            return await Task.FromResult(result);
-        }
-
-        public override async Task<ResultDto<HospitalDto>> Update(HospitalDto input)
-        {
-            var result = new ResultDto<HospitalDto>();
-            using (var transaction = Context.Database.BeginTransaction())
-            {
-                try
-                {
-                    var data = new EntityFrameworkCore.Entities.Dictionaries.Hospital()
-                    {
-                        Id = input.Id.GetValueOrDefault(),
-                        Code = input.Code,
-                        Name = input.Name,
-                        Description = input.Description,
-                        Inactive = input.Inactive,
-                        Address = input.Address,
-                        Grade = input.Grade,
-                        Line = input.Line,
-                        MediOrgCode = input.MohCode,
-                        ModifiedDate = DateTime.Now
-                    };
-                    Context.Hospitals.Update(data);
-                    await Context.SaveChangesAsync();
-
-                    result.IsSucceeded = true;
-                    result.Result = input;
-
-                    transaction.Commit();
-                }
-                catch (Exception ex)
-                {
-                    result.Exception(ex);
-                }
-                finally
-                {
-                    transaction.Dispose();
-                }
-            }
-            return await Task.FromResult(result);
-        }
-
-        public override async Task<ResultDto<HospitalDto>> Delete(Guid? id)
-        {
-            var result = new ResultDto<HospitalDto>();
-            using (var transaction = Context.Database.BeginTransaction())
-            {
-                try
-                {
-                    var data = Context.Hospitals.SingleOrDefault(x => x.Id == id);
-                    if (data != null)
-                    {
-                        Context.Hospitals.Remove(data);
-                        await Context.SaveChangesAsync();
-                        result.IsSucceeded = true;
-
-                        transaction.Commit();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    result.Exception(ex);
-                }
-                finally
-                {
-                    transaction.Dispose();
-                }
-            }
-            return await Task.FromResult(result);
-        }
-
-        public override async Task<PagedResultDto<HospitalDto>> GetAll(GetAllHospitalInputDto input)
+        public virtual async Task<PagedResultDto<HospitalDto>> GetAll(GetAllHospitalInputDto input)
         {
             var result = new PagedResultDto<HospitalDto>();
             try
             {
+                var filter = _hospitalRepository.GetAll()
+                    .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), x => x.Code == input.CodeFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.NameFilter), x => x.Name == input.NameFilter)
+                    .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
+
+                var paged = filter.ApplySortingAndPaging(input);
+
+                result.TotalCount = await filter.CountAsync();
+                result.Result = ObjectMapper.Map<IList<HospitalDto>>(paged.ToList());
                 result.IsSucceeded = true;
-                result.Result = (from r in Context.Hospitals
-                                 where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
-                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
-                                     && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
-                                 select new HospitalDto()
-                                 {
-                                     Id = r.Id,
-                                     Code = r.Code,
-                                     Name = r.Name,
-                                     Description = r.Description,
-                                     Inactive = r.Inactive,
-                                     Address = r.Address,
-                                     MohCode = r.MediOrgCode,
-                                     Grade = r.Grade,
-                                     Line = r.Line
-                                 }).ToList();
-                result.TotalCount = result.Result.Count;
             }
             catch (Exception ex)
             {
                 result.Exception(ex);
             }
-
-            return await Task.FromResult(result);
+            return result;
         }
 
-        public override async Task<ResultDto<HospitalDto>> GetById(Guid? id)
+        public virtual async Task<ResultDto<HospitalDto>> GetById(Guid id)
         {
             var result = new ResultDto<HospitalDto>();
-
-            var hospital = Context.Hospitals.SingleOrDefault(s => s.Id == id);
-            if (hospital != null)
+            try
             {
-                result.IsSucceeded = true;
-                result.Result = new HospitalDto()
-                {
-                    Id = hospital.Id,
-                    Code = hospital.Code,
-                    Name = hospital.Name,
-                    Description = hospital.Description,
-                    Inactive = hospital.Inactive,
-                    MohCode= hospital.MediOrgCode,
-                    Grade = hospital.Grade,
-                    Line = hospital.Line,
-                    Address = hospital.Address
-                };
-            }
+                var entity = await _hospitalRepository.GetAsync(id);
 
-            return await Task.FromResult(result);
+                result.Result = ObjectMapper.Map<HospitalDto>(entity);
+                result.IsSucceeded = true;
+            }
+            catch (Exception ex)
+            {
+                result.Exception(ex);
+            }
+            return result;
         }
+
+        public virtual async Task<ResultDto<HospitalDto>> CreateOrEdit(HospitalDto input)
+        {
+            if (Check.IsNullOrDefault(input.Id))
+            {
+                return await Create(input);
+            }
+            else
+            {
+                return await Update(input);
+            }
+        }
+
+        public virtual async Task<ResultDto<HospitalDto>> Create(HospitalDto input)
+        {
+            var result = new ResultDto<HospitalDto>();
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+            {
+                try
+                {
+                    input.Id = Guid.NewGuid();
+                    var entity = ObjectMapper.Map<Hospital>(input);
+
+                    await _hospitalRepository.InsertAsync(entity);
+
+                    unitOfWork.Complete();
+                    result.Success(input);
+                }
+                catch (Exception ex)
+                {
+                    result.Exception(ex);
+                }
+            }
+            return result;
+        }
+
+        public virtual async Task<ResultDto<HospitalDto>> Update(HospitalDto input)
+        {
+            var result = new ResultDto<HospitalDto>();
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+            {
+                try
+                {
+                    var entity = await _hospitalRepository.GetAsync(input.Id.GetValueOrDefault());
+
+                    ObjectMapper.Map(input, entity);
+
+                    unitOfWork.Complete();
+                    result.Success(input);
+                }
+                catch (Exception ex)
+                {
+                    result.Exception(ex);
+                }
+            }
+            return result;
+        }
+
+        public virtual async Task<ResultDto<HospitalDto>> Delete(Guid id)
+        {
+            var result = new ResultDto<HospitalDto>();
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+            {
+                try
+                {
+                    var entity = _hospitalRepository.Get(id);
+
+                    await _hospitalRepository.DeleteAsync(entity);
+
+                    unitOfWork.Complete();
+                    result.Success(null);
+                }
+                catch (Exception ex)
+                {
+                    result.Exception(ex);
+                }
+            }
+            return result;
+        }
+
+        
     }
 }

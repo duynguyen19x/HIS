@@ -10,8 +10,11 @@ namespace HIS.ApplicationService.Dictionary.Districts.Dto
     public class DistrictDto : EntityDto<Guid?>
     {
         public string Code { get; set; }
+
         public string Name { get; set; }
+
         public string Description { get; set; }
+
         public bool Inactive { get; set; }
     }
 }

@@ -1,8 +1,8 @@
-﻿using HIS.ApplicationService.Dictionaries.Service;
-using HIS.Dtos.Dictionaries.Service;
-using HIS.Dtos.Dictionaries.ServiceResultIndex;
+﻿using HIS.Dtos.Dictionaries.ServiceResultIndex;
 using Microsoft.AspNetCore.Mvc;
 using HIS.Core.Application.Services.Dto;
+using HIS.ApplicationService.Dictionary.Services.Dto;
+using HIS.ApplicationService.Dictionary.Services;
 
 namespace HIS.BackendApi.Controllers.Dictionaries
 {
@@ -10,9 +10,9 @@ namespace HIS.BackendApi.Controllers.Dictionaries
     [ApiController]
     public class ServiceController : ControllerBase
     {
-        private readonly IServiceService _serviceService;
+        private readonly IServiceAppService _serviceService;
 
-        public ServiceController(IServiceService serviceService)
+        public ServiceController(IServiceAppService serviceService)
         {
             _serviceService = serviceService;
         }

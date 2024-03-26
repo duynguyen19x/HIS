@@ -1,118 +1,108 @@
-﻿using AutoMapper;
-using HIS.Application.Core.Services;
+﻿using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
+using HIS.Core.Domain.Repositories;
+using HIS.Core.Extensions;
 using HIS.Dtos.Dictionaries.Province;
-using HIS.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using System.Transactions;
 
 namespace HIS.ApplicationService.Dictionaries.Provinces
 {
-    public class ProvinceAppService : BaseCrudAppService<ProvinceDto, Guid?, GetAllProvinceInputDto>, IProvinceAppService
+    public class ProvinceAppService : BaseAppService, IProvinceAppService
     {
-        public ProvinceAppService(HISDbContext dbContext, IMapper mapper)
-            : base(dbContext, mapper)
+        private readonly IRepository<Province, Guid> _provinceRepository;
+
+        public ProvinceAppService(IRepository<Province, Guid> provinceRepository)
         {
+            _provinceRepository = provinceRepository;
         }
 
-        public override async Task<ResultDto<ProvinceDto>> Create(ProvinceDto input)
+        public virtual async Task<ResultDto<ProvinceDto>> CreateOrEdit(ProvinceDto input)
+        {
+            if (Check.IsNullOrDefault(input.Id))
+            {
+                return await Create(input);
+            }
+            else
+            {
+                return await Update(input);
+            }
+        }
+
+        public virtual async Task<ResultDto<ProvinceDto>> Create(ProvinceDto input)
         {
             var result = new ResultDto<ProvinceDto>();
-            using (var transaction = Context.Database.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var branch = new EntityFrameworkCore.Entities.Dictionaries.Province()
-                    {
-                        Id = input.Id.GetValueOrDefault(),
-                        Code = input.Code,
-                        Name = input.Name,
-                        Inactive = input.Inactive
-                    };
-                    Context.Provinces.Add(branch);
-                    await Context.SaveChangesAsync();
+                    var entity = ObjectMapper.Map<Province>(input);
 
-                    result.IsSucceeded = true;
-                    result.Result = input;
+                    await _provinceRepository.InsertAsync(entity);
 
-                    transaction.Commit();
+                    unitOfWork.Complete();
+                    result.Success(input);
                 }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
             }
-            return await Task.FromResult(result);
+            return result;
         }
 
-        public override async Task<ResultDto<ProvinceDto>> Update(ProvinceDto input)
+        public virtual async Task<ResultDto<ProvinceDto>> Update(ProvinceDto input)
         {
             var result = new ResultDto<ProvinceDto>();
-            using (var transaction = Context.Database.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
-                    var data = ObjectMapper.Map<Province>(input); 
-                    Context.Provinces.Update(data);
-                    await Context.SaveChangesAsync();
+                    var entity = await _provinceRepository.GetAsync(input.Id.GetValueOrDefault());
 
-                    result.IsSucceeded = true;
-                    result.Result = input;
+                    ObjectMapper.Map(input, entity);
 
-                    transaction.Commit();
+                    unitOfWork.Complete();
+                    result.Success(input);
                 }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
             }
-            return await Task.FromResult(result);
+            return result;
         }
 
-        public override async Task<ResultDto<ProvinceDto>> Delete(Guid? id)
+        public virtual async Task<ResultDto<ProvinceDto>> Delete(Guid id)
         {
             var result = new ResultDto<ProvinceDto>();
-            using (var transaction = Context.Database.BeginTransaction())
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
-                    var data = Context.Provinces.SingleOrDefault(x => x.Id == id);
-                    if (data != null)
-                    {
-                        Context.Provinces.Remove(data);
-                        await Context.SaveChangesAsync();
-                        result.IsSucceeded = true;
+                    var entity = _provinceRepository.Get(id);
 
-                        transaction.Commit();
-                    }
+                    await _provinceRepository.DeleteAsync(entity);
+
+                    unitOfWork.Complete();
+                    result.Success(null);
                 }
                 catch (Exception ex)
                 {
                     result.Exception(ex);
                 }
-                finally
-                {
-                    transaction.Dispose();
-                }
             }
-            return await Task.FromResult(result);
+            return result;
         }
 
-        public override async Task<PagedResultDto<ProvinceDto>> GetAll(GetAllProvinceInputDto input)
+        public virtual async Task<PagedResultDto<ProvinceDto>> GetAll(GetAllProvinceInputDto input)
         {
             var result = new PagedResultDto<ProvinceDto>();
             try
             {
                 result.IsSucceeded = true;
-                result.Result = (from r in Context.Provinces
+                result.Result = (from r in _provinceRepository.GetAll()
                                  where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
                                      && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
                                      && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
@@ -133,11 +123,11 @@ namespace HIS.ApplicationService.Dictionaries.Provinces
             return await Task.FromResult(result);
         }
 
-        public override async Task<ResultDto<ProvinceDto>> GetById(Guid? id)
+        public virtual async Task<ResultDto<ProvinceDto>> GetById(Guid id)
         {
             var result = new ResultDto<ProvinceDto>();
 
-            var data = Context.Provinces.SingleOrDefault(s => s.Id == id);
+            var data = _provinceRepository.FirstOrDefault(s => s.Id == id);
             if (data != null)
             {
                 result.IsSucceeded = true;

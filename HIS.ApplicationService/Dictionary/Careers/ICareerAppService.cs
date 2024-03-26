@@ -1,5 +1,4 @@
-﻿using HIS.Application.Core.Services;
-using HIS.ApplicationService.Dictionary.Careers.Dto;
+﻿using HIS.ApplicationService.Dictionary.Careers.Dto;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 
