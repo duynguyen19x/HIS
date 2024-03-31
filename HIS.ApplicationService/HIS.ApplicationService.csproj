@@ -36,7 +36,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HIS.Dtos\HIS.Dtos.csproj" />
     <ProjectReference Include="..\HIS.EntityFrameworkCore\HIS.EntityFrameworkCore.csproj" />
   </ItemGroup>
 

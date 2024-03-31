@@ -8,5 +8,11 @@ namespace HIS.ApplicationService.Authorization
     {
         Task<ResultDto<TokenResultDto>> LoginAsync(LoginDto request);
         Task<ResultDto<TokenResultDto>> RefreshTokenAsync(TokenResultDto token);
+
+        /// <summary>
+        /// Thay đổi chi nhánh làm việc.
+        /// </summary>
+        /// <returns></returns>
+        Task<ResultDto> ChangeWorkingBranch();
     }
 }
