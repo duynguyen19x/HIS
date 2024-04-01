@@ -2,6 +2,7 @@
 using HIS.Dtos.Systems.Login;
 using Microsoft.AspNetCore.Mvc;
 using HIS.Core.Application.Services.Dto;
+using HIS.ApplicationService.Authorization.Dto;
 
 namespace HIS.BackendApi.Controllers.Systems.Login
 {

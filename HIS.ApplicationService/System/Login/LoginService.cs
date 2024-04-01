@@ -10,6 +10,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using HIS.Core.Application.Services.Dto;
+using HIS.ApplicationService.Authorization.Dto;
 
 namespace HIS.ApplicationService.Systems.Login
 {
@@ -33,7 +34,7 @@ namespace HIS.ApplicationService.Systems.Login
             {
                 try
                 {
-                    var user = Context.User.Where(w => w.Username == request.UserName && w.Password.ToUpper() == request.Password.ToUpper()).FirstOrDefault();
+                    var user = Context.User.Where(w => w.Username == request.Username && w.Password.ToUpper() == request.Password.ToUpper()).FirstOrDefault();
                     if (user == null)
                     {
                         ResultDto.IsSucceeded = false;

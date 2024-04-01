@@ -1,4 +1,5 @@
-﻿using HIS.Core.Application.Services.Dto;
+﻿using HIS.ApplicationService.Authorization.Dto;
+using HIS.Core.Application.Services.Dto;
 using HIS.Dtos.Systems.Login;
 
 namespace HIS.ApplicationService.Systems.Login
