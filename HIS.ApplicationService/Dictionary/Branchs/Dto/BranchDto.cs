@@ -10,12 +10,12 @@ namespace HIS.ApplicationService.Dictionary.Branchs.Dto
         /// <summary>
         /// Mã chi nhánh.
         /// </summary>
-        public string BranchCode { get; set; }
+        public string Code { get; set; }
 
         /// <summary>
         /// Tên chi nhánh.
         /// </summary>
-        public string BranchName { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Mã khám chữa bệnh ban đầu.
@@ -33,9 +33,9 @@ namespace HIS.ApplicationService.Dictionary.Branchs.Dto
         public string Level { get; set; }
 
         /// <summary>
-        /// Loại bệnh viện.
+        /// Chuyên khoa.
         /// </summary>
-        public string Type { get; set; }
+        public string Specialty { get; set; }
 
         /// <summary>
         /// Tuyến bệnh viện.
@@ -47,15 +47,21 @@ namespace HIS.ApplicationService.Dictionary.Branchs.Dto
         /// </summary>
         public string ParentOrganizationName { get; set; }
 
-        public Guid? ProvinceId { get; set; }
-
-        public Guid? DistrictId { get; set; }
-
-        public Guid? WardId { get; set; }
-
         public string Tel { get; set; }
 
         public string Address { get; set; }
+
+        public Guid? ProvinceId { get; set; }
+
+        public string ProvinceName { get; set; }
+
+        public Guid? DistrictId { get; set; }
+
+        public string DistrictName { get; set; }
+
+        public Guid? WardId { get; set; }
+
+        public string WardName { get; set; }
 
         public string Description { get; set; }
 

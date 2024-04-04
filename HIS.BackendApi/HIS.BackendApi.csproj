@@ -15,5 +15,9 @@
   <ItemGroup>
   	<ProjectReference Include="..\HIS.ApplicationService\HIS.ApplicationService.csproj" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="Controllers\Report\" />
+  </ItemGroup>
 
 </Project>

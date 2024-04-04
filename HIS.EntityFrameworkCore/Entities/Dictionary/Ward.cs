@@ -10,21 +10,16 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     [Table("DIWard")]
     public class Ward : AuditedEntity<Guid>
     {
-        /// <summary>
-        /// Mã xã, phường
-        /// </summary>
         [Required]
         [MaxLength(50)]
-        public virtual string Code { get; set; } // mã xã, phường
+        public virtual string Code { get; set; } 
 
         [Required]
         [MaxLength(255)]
-        public virtual string Name { get; set; } // tên xã, phường
+        public virtual string Name { get; set; } 
 
         [MaxLength(2000)]
         public virtual string SearchText { get; set; } // viết tắt (T/H/X)
-
-        public virtual Guid DistrictId { get; set; }
 
         [MaxLength(255)]
         public virtual string Description { get; set; } // ghi chú
@@ -32,6 +27,8 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public virtual int SortOrder { get; set; } // số thứ tự hiển thị trên danh mục
 
         public virtual bool Inactive { get; set; } // khóa
+
+        public virtual Guid DistrictId { get; set; }
 
         [ForeignKey("DistrictId")]
         public virtual District DistrictFk { get; set; }

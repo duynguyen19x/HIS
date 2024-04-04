@@ -43,6 +43,10 @@ namespace HIS.Core.Application.Services.Dto
         {
             IsSucceeded = false;
             Message = ex.Message;
+            if (ex.InnerException != null)
+            {
+                Message += "\n" + ex.InnerException.Message;
+            }
         }
     }
 }

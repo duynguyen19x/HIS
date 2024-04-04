@@ -49,7 +49,8 @@ namespace HIS.ApplicationService.Authorization
             {
                 try
                 {
-                    var user = await _userRepository.FirstOrDefaultAsync(x => x.Username.ToUpper() == request.Username.ToUpper() && x.Password.ToUpper() == request.Password.ToUpper());  
+                    var user = await _userRepository.FirstOrDefaultAsync(x => x.Inactive == false 
+                        && x.Username.ToUpper() == request.Username.ToUpper() && x.Password.ToUpper() == request.Password.ToUpper());  
                     if (user == null)
                     {
                         throw new Exception("Tài khoản hoặc mật khẩu không đúng!");
@@ -63,7 +64,7 @@ namespace HIS.ApplicationService.Authorization
                         User = ObjectMapper.Map<UserDto>(user),
                         AccessToken = new JwtSecurityTokenHandler().WriteToken(acceptToken),
                         RefreshToken = new JwtSecurityTokenHandler().WriteToken(refreshToken),
-                        ExpireDate = Convert.ToInt64(acceptToken.ValidTo.ToString("yyyyMMddHHmmss")),
+                        ExpireDate = Convert.ToInt64(acceptToken.ValidTo.ToLocalTime().ToString("yyyyMMddHHmmss")),
                         TokenType = ""
                     };
 
@@ -77,7 +78,7 @@ namespace HIS.ApplicationService.Authorization
                         IsUsed = false,
                         IsRevoked = false,
                         IssueAt = refreshToken.ValidFrom,
-                        ExpiredAt = refreshToken.ValidTo
+                        ExpiredAt = refreshToken.ValidTo,
                     };
                     await _userTokenRepository.InsertAsync(sToken);
 
@@ -213,6 +214,7 @@ namespace HIS.ApplicationService.Authorization
         private async Task<JwtSecurityToken> CreateTokenAsync(IList<Claim> claims, TimeSpan? expriraton = null)
         {
             var now = DateTime.Now;
+            var x = now.Add(expriraton.Value);
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Tokens:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
 
