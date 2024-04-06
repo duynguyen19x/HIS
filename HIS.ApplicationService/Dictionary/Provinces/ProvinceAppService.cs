@@ -4,6 +4,7 @@ using HIS.Core.Domain.Repositories;
 using HIS.Core.Extensions;
 using HIS.Dtos.Dictionaries.Province;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using Microsoft.EntityFrameworkCore;
 using System.Transactions;
 
 namespace HIS.ApplicationService.Dictionaries.Provinces
@@ -15,6 +16,46 @@ namespace HIS.ApplicationService.Dictionaries.Provinces
         public ProvinceAppService(IRepository<Province, Guid> provinceRepository)
         {
             _provinceRepository = provinceRepository;
+        }
+
+        public virtual async Task<PagedResultDto<ProvinceDto>> GetAll(GetAllProvinceInputDto input)
+        {
+            var result = new PagedResultDto<ProvinceDto>();
+            try
+            {
+                var filter = _provinceRepository.GetAll()
+                    .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), x => x.Code == input.CodeFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.NameFilter), x => x.Name == input.NameFilter)
+                    .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
+
+                if (Check.IsNullOrDefault(input.Sorting))
+                    input.Sorting = "Code";
+
+                var paged = filter.ApplySortingAndPaging(input);
+
+                result.TotalCount = await filter.CountAsync();
+                result.Result = ObjectMapper.Map<IList<ProvinceDto>>(paged);
+                result.IsSucceeded = true;
+            }
+            catch (Exception ex)
+            {
+                result.Exception(ex);
+            }
+            return result;
+        }
+
+        public virtual async Task<ResultDto<ProvinceDto>> GetById(Guid id)
+        {
+            var result = new ResultDto<ProvinceDto>();
+
+            var data = _provinceRepository.FirstOrDefault(s => s.Id == id);
+            if (data != null)
+            {
+                result.IsSucceeded = true;
+                result.Result = ObjectMapper.Map<ProvinceDto>(data);
+            }
+
+            return await Task.FromResult(result);
         }
 
         public virtual async Task<ResultDto<ProvinceDto>> CreateOrEdit(ProvinceDto input)
@@ -94,47 +135,6 @@ namespace HIS.ApplicationService.Dictionaries.Provinces
                 }
             }
             return result;
-        }
-
-        public virtual async Task<PagedResultDto<ProvinceDto>> GetAll(GetAllProvinceInputDto input)
-        {
-            var result = new PagedResultDto<ProvinceDto>();
-            try
-            {
-                result.IsSucceeded = true;
-                result.Result = (from r in _provinceRepository.GetAll()
-                                 where (string.IsNullOrEmpty(input.NameFilter) || r.Name == input.NameFilter)
-                                     && (string.IsNullOrEmpty(input.CodeFilter) || r.Code == input.CodeFilter)
-                                     && (input.InactiveFilter == null || r.Inactive == input.InactiveFilter)
-                                 select new ProvinceDto()
-                                 {
-                                     Id = r.Id,
-                                     Code = r.Code,
-                                     Name = r.Name,
-                                     Inactive = r.Inactive
-                                 }).OrderBy(o => o.Code).ToList();
-                result.TotalCount = result.Result.Count;
-            }
-            catch (Exception ex)
-            {
-                result.Exception(ex);
-            }
-
-            return await Task.FromResult(result);
-        }
-
-        public virtual async Task<ResultDto<ProvinceDto>> GetById(Guid id)
-        {
-            var result = new ResultDto<ProvinceDto>();
-
-            var data = _provinceRepository.FirstOrDefault(s => s.Id == id);
-            if (data != null)
-            {
-                result.IsSucceeded = true;
-                result.Result = ObjectMapper.Map<ProvinceDto>(data);
-            }
-
-            return await Task.FromResult(result);
         }
     }
 }
