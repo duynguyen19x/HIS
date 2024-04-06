@@ -142,7 +142,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         [Ignore]
         public Gender Gender { get; set; }
         [Ignore]
-        public Ethnicity Ethnic { get; set; }
+        public Ethnic Ethnic { get; set; }
         [Ignore]
         public Religion Religion { get; set; }
         [Ignore]

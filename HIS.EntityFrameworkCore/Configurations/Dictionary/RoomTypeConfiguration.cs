@@ -9,12 +9,6 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<RoomType> builder)
         {
-            //builder.ToTable("DIC_RoomType");
-            //builder.HasKey(x => x.Id);
-            //builder.Property(x => x.Code).HasMaxLength(20).IsRequired(); 
-            //builder.Property(x => x.Name).HasMaxLength(255).IsRequired(); 
-            //builder.Property(x => x.Description).HasMaxLength(512);
-
             builder.HasData(
                 new RoomType { Id = (int)RoomTypes.Reception, Code = "TD", Name = "Tiếp đón", SortOrder = (int)RoomTypes.Reception },
                 new RoomType { Id = (int)RoomTypes.Administration, Code = "HC", Name = "Hành chính", SortOrder = (int)RoomTypes.Administration },

@@ -21,13 +21,11 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         [MaxLength(255)]
         public virtual string Description { get; set; }
 
-        public virtual Guid ProvinceId { get; set; }
-
-        public virtual int SortOrder { get; set; }
-
         public virtual bool Inactive { get; set; }
 
+        public virtual Guid ProvinceId { get; set; }
+
         [ForeignKey("ProvinceId")]
-        public virtual Province ProvinceFk { get; set; }
+        public Province ProvinceFk { get; set; }
     }
 }

@@ -8,13 +8,6 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<BloodType> builder)
         {
-            //builder.ToTable("DIC_BloodType");
-
-            //builder.HasKey(x => x.Id);
-            //builder.Property(x => x.Code).HasMaxLength(50).IsRequired();
-            //builder.Property(x => x.Name).HasMaxLength(512).IsRequired();
-            //builder.Property(x => x.Description).HasMaxLength(255);
-
             var data = new List<BloodType>();
             data.Add(new BloodType() { Id = new Guid("96FC1F86-2E95-4AAC-BB4B-BD5EB2EF09FE"), Code = "O", Name = "Nhóm máu O", SortOrder = 1 });
             data.Add(new BloodType() { Id = new Guid("BE2CD126-228C-4FBF-9470-C5CB8195465B"), Code = "A", Name = "Nhóm máu A", SortOrder = 2 });

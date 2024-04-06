@@ -7,8 +7,8 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionary
     /// <summary>
     /// Dân tộc.
     /// </summary>
-    [Table("DIEthnicity")]
-    public class Ethnicity : Entity<Guid>
+    [Table("DIEthnic")]
+    public class Ethnic : Entity<Guid>
     {
         /// <summary>
         /// Mã dân tộc
@@ -37,8 +37,8 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionary
 
         public virtual bool Inactive { get; set; } 
 
-        public Ethnicity() { }
-        public Ethnicity(Guid id, string code, string mohCode, string name, int sortOrder)
+        public Ethnic() { }
+        public Ethnic(Guid id, string code, string mohCode, string name, int sortOrder)
         {
             this.Id = id;
             this.Code = code;

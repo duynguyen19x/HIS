@@ -9,13 +9,6 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<RelativeType> builder)
         {
-            //builder.ToTable("DIC_RelativeType");
-
-            //builder.HasKey(x => x.Id);
-            //builder.Property(x => x.RelativeTypeCode).HasMaxLength(20).IsRequired();
-            //builder.Property(x => x.RelativeTypeName).HasMaxLength(128).IsRequired();
-            //builder.Property(x => x.Description).HasMaxLength(255);
-
             builder.HasData(
                 new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F01"), Code = "01", Name = "Bố đẻ", SortOrder = 1 },
                 new RelativeType { Id = new Guid("DD0FB418-CD3F-40CD-8C12-7FDA1CF56F02"), Code = "02", Name = "Mẹ đẻ", SortOrder = 2 },

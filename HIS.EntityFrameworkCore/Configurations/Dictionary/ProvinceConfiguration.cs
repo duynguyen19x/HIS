@@ -9,13 +9,6 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<Province> builder)
         {
-            //builder.ToTable("DIC_Province");
-
-            //builder.HasKey(x => x.Id);
-            //builder.Property(x => x.Code).HasMaxLength(20).IsRequired();
-            //builder.Property(x => x.Name).HasMaxLength(255).IsRequired();
-            //builder.Property(x => x.Description).HasMaxLength(512);
-
             builder.HasData(
                new Province() { Id = new Guid("889693ED-0453-4387-941B-D70DD4870DC5"), Code = "01", Name = "Thành phố Hà Nội" },
                new Province() { Id = new Guid("E7FE23CB-4304-4FB0-90A5-9FF4DA5048AA"), Code = "02", Name = "Tỉnh Hà Giang" },

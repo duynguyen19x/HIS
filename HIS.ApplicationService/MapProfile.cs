@@ -27,7 +27,7 @@ using HIS.EntityFrameworkCore.Entities.Dictionary;
 using HIS.ApplicationService.Dictionary.Branchs.Dto;
 using HIS.ApplicationService.Dictionary.Departments.Dto;
 using HIS.ApplicationService.Dictionary.DepartmentTypes.Dto;
-using HIS.ApplicationService.Dictionary.Ethnicities.Dto;
+using HIS.ApplicationService.Dictionary.Ethnics.Dto;
 using HIS.ApplicationService.Systems.LayoutTemplates.Dto;
 using HIS.ApplicationService.Dictionary.Rooms.Dto;
 using HIS.ApplicationService.Dictionary.RoomTypes.Dto;
@@ -165,7 +165,7 @@ namespace HIS.ApplicationService
                 .ForMember(dest => dest.DepartmentFk, opt => opt.Ignore())
                 .ReverseMap();
             
-            CreateMap<Ethnicity, EthnicityDto>().ReverseMap();
+            CreateMap<Ethnic, EthnicDto>().ReverseMap();
 
             #endregion
 

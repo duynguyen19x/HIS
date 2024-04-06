@@ -9,9 +9,9 @@ namespace HIS.Dtos.Dictionaries.Ward
 {
     public class GetAllWardInput : PagedAndSortedResultRequestDto
     {
-        public string WardCodeFilter { get; set; }
-        public string WardNameFilter { get; set; }
-        public string ShortTextFilter { get; set; }
+        public string CodeFilter { get; set; }
+        public string NameFilter { get; set; }
+        public string SearchCodeFilter { get; set; }
         public Guid? DistrictFilter {  get; set; }
         public bool? InactiveFilter { get; set; }
     }

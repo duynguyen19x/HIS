@@ -1,8 +1,8 @@
 ﻿using HIS.Core.Application.Services.Dto;
 
-namespace HIS.ApplicationService.Dictionary.Ethnicities.Dto
+namespace HIS.ApplicationService.Dictionary.Ethnics.Dto
 {
-    public class EthnicityDto : EntityDto<Guid?>
+    public class EthnicDto : EntityDto<Guid?>
     {
         public string Code { get; set; }
 

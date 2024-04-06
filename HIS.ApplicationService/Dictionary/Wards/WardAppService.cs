@@ -26,9 +26,9 @@ namespace HIS.ApplicationService.Dictionaries.Wards
             try
             {
                 var filter = _wardRepository.GetAll()
-                    .WhereIf(!string.IsNullOrEmpty(input.WardCodeFilter), x => x.Code == input.WardCodeFilter)
-                    .WhereIf(!string.IsNullOrEmpty(input.WardNameFilter), x => x.Name == input.WardNameFilter)
-                    .WhereIf(!string.IsNullOrEmpty(input.ShortTextFilter), x => x.SearchText == input.ShortTextFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), x => x.Code == input.CodeFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.NameFilter), x => x.Name == input.NameFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.SearchCodeFilter), x => x.SearchCode == input.SearchCodeFilter)
                     .WhereIf(input.DistrictFilter != null, x => x.DistrictId == input.DistrictFilter)
                     .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
 

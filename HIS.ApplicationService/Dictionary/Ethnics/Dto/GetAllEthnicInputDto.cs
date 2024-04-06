@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.ApplicationService.Dictionary.Ethnicities.Dto
+namespace HIS.ApplicationService.Dictionary.Ethnics.Dto
 {
-    public class GetAllEthnicityInputDto : PagedAndSortedResultRequestDto
+    public class GetAllEthnicInputDto : PagedAndSortedResultRequestDto
     {
         public string CodeFilter { get; set; }
 

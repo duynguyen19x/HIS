@@ -1,30 +1,29 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using HIS.Core.Extensions;
 using HIS.EntityFrameworkCore.Entities.Dictionary;
-using HIS.ApplicationService.Dictionary.Ethnicities.Dto;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
-using HIS.ApplicationService.Dictionary.DepartmentTypes.Dto;
 using System.Transactions;
+using HIS.ApplicationService.Dictionary.Ethnics.Dto;
 
-namespace HIS.ApplicationService.Dictionary.Ethnicities
+namespace HIS.ApplicationService.Dictionary.Ethnics
 {
-    public class EthnicityAppService : BaseAppService, IEthnicityAppService
+    public class EthnicAppService : BaseAppService, IEthnicAppService
     {
-        private readonly IRepository<Ethnicity, Guid> _ethnicityRepository;
+        private readonly IRepository<Ethnic, Guid> _ethnicRepository;
 
-        public EthnicityAppService(IRepository<Ethnicity, Guid> ethnicityRepository) 
+        public EthnicAppService(IRepository<Ethnic, Guid> ethnicRepository) 
         {
-            _ethnicityRepository = ethnicityRepository;
+            _ethnicRepository = ethnicRepository;
         }
 
-        public virtual async Task<PagedResultDto<EthnicityDto>> GetAllAsync(GetAllEthnicityInputDto input)
+        public virtual async Task<PagedResultDto<EthnicDto>> GetAllAsync(GetAllEthnicInputDto input)
         {
-            var result = new PagedResultDto<EthnicityDto>();
+            var result = new PagedResultDto<EthnicDto>();
             try
             {
-                var filter = _ethnicityRepository.GetAll()
+                var filter = _ethnicRepository.GetAll()
                     .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), x => x.Code == input.CodeFilter)
                     .WhereIf(!string.IsNullOrEmpty(input.NameFilter), x => x.Name == input.NameFilter)
                     .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
@@ -32,7 +31,7 @@ namespace HIS.ApplicationService.Dictionary.Ethnicities
                 var paged = filter.ApplySortingAndPaging(input);
 
                 result.TotalCount = await filter.CountAsync();
-                result.Result = ObjectMapper.Map<IList<EthnicityDto>>(paged.ToList());
+                result.Result = ObjectMapper.Map<IList<EthnicDto>>(paged.ToList());
                 result.IsSucceeded = true;
             }
             catch (Exception ex)
@@ -42,13 +41,13 @@ namespace HIS.ApplicationService.Dictionary.Ethnicities
             return result;
         }
 
-        public virtual async Task<ResultDto<EthnicityDto>> GetAsync(Guid id)
+        public virtual async Task<ResultDto<EthnicDto>> GetAsync(Guid id)
         {
-            var result = new ResultDto<EthnicityDto>();
+            var result = new ResultDto<EthnicDto>();
             try
             {
-                var ethnicity = await _ethnicityRepository.GetAsync(id);
-                result.Result = ObjectMapper.Map<EthnicityDto>(ethnicity);
+                var entity = await _ethnicRepository.GetAsync(id);
+                result.Result = ObjectMapper.Map<EthnicDto>(entity);
                 result.IsSucceeded = true;
             }
             catch (Exception ex)
@@ -58,7 +57,7 @@ namespace HIS.ApplicationService.Dictionary.Ethnicities
             return result;
         }
 
-        public virtual async Task<ResultDto<EthnicityDto>> CreateOrUpdateAsync(EthnicityDto input)
+        public virtual async Task<ResultDto<EthnicDto>> CreateOrUpdateAsync(EthnicDto input)
         {
             if (Check.IsNullOrDefault(input.Id))
             {
@@ -70,17 +69,17 @@ namespace HIS.ApplicationService.Dictionary.Ethnicities
             }
         }
 
-        public virtual async Task<ResultDto<EthnicityDto>> CreateAsync(EthnicityDto input)
+        public virtual async Task<ResultDto<EthnicDto>> CreateAsync(EthnicDto input)
         {
-            var result = new ResultDto<EthnicityDto>();
+            var result = new ResultDto<EthnicDto>();
             using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var entity = ObjectMapper.Map<Ethnicity>(input);
+                    var entity = ObjectMapper.Map<Ethnic>(input);
 
-                    await _ethnicityRepository.InsertAsync(entity);
+                    await _ethnicRepository.InsertAsync(entity);
 
                     unitOfWork.Complete();
                     result.Success(input);
@@ -93,14 +92,14 @@ namespace HIS.ApplicationService.Dictionary.Ethnicities
             return result;
         }
 
-        public virtual async Task<ResultDto<EthnicityDto>> UpdateAsync(EthnicityDto input)
+        public virtual async Task<ResultDto<EthnicDto>> UpdateAsync(EthnicDto input)
         {
-            var result = new ResultDto<EthnicityDto>();
+            var result = new ResultDto<EthnicDto>();
             using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
-                    var entity = await _ethnicityRepository.GetAsync(input.Id.Value);
+                    var entity = await _ethnicRepository.GetAsync(input.Id.Value);
 
                     ObjectMapper.Map(input, entity);
 
@@ -115,16 +114,16 @@ namespace HIS.ApplicationService.Dictionary.Ethnicities
             return result;
         }
 
-        public virtual async Task<ResultDto<EthnicityDto>> DeleteAsync(Guid id)
+        public virtual async Task<ResultDto<EthnicDto>> DeleteAsync(Guid id)
         {
-            var result = new ResultDto<EthnicityDto>();
+            var result = new ResultDto<EthnicDto>();
             using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
-                    var entity = _ethnicityRepository.Get(id);
+                    var entity = _ethnicRepository.Get(id);
 
-                    await _ethnicityRepository.DeleteAsync(entity);
+                    await _ethnicRepository.DeleteAsync(entity);
 
                     unitOfWork.Complete();
                     result.Success(null);

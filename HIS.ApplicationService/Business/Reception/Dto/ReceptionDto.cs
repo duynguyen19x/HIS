@@ -23,8 +23,8 @@ namespace HIS.ApplicationService.Business.Reception.Dto
         public string Age { get; set; }
         public Guid GenderId { get; set; }
         public string GenderName { get; set; }
-        public Guid EthnicityId { get; set; }
-        public string EthnicityName { get; set; }
+        public Guid EthnicId { get; set; }
+        public string EthnicName { get; set; }
         public Guid? CountryId { get; set; }
         public string CountryName { get; set; }
 

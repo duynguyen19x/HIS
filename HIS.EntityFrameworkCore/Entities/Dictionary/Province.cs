@@ -22,8 +22,6 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         [MaxLength(255)]
         public virtual string Description { get; set; }
 
-        public virtual int SortOrder { get; set; }
-
         public virtual bool Inactive { get; set; }
     }
 }

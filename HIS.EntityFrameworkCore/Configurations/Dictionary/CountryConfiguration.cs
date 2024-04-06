@@ -9,14 +9,6 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<Country> builder)
         {
-            //builder.ToTable("DIC_Country");
-
-            //builder.HasKey(x => x.Id);
-            //builder.Property(x => x.Code).HasMaxLength(20).IsRequired();
-            //builder.Property(x => x.Name).HasMaxLength(512).IsRequired();
-            //builder.Property(x => x.MediCode).HasMaxLength(20).IsRequired();
-            //builder.Property(x => x.Description).HasMaxLength(512);
-
             builder.HasData(
                 new Country() { Id = new Guid("6B24B562-1294-4537-A69A-26AC34C41521"), Code = "AD", MediCode = "105", Name = "Andorra", },
                 new Country() { Id = new Guid("FB10CE71-E68A-4A70-BF7E-5EDEE9388D48"), Code = "AE", MediCode = "137", Name = "Các Tiểu Vương quốc Ả Rập Thống nhất", },
