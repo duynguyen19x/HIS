@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionaries
+namespace HIS.EntityFrameworkCore.Entities.Dictionary
 {
     /// <summary>
     /// Quận, huyện
@@ -27,5 +27,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 
         [ForeignKey("ProvinceId")]
         public Province ProvinceFk { get; set; }
+
+        public District() { }
     }
 }

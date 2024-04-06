@@ -1,16 +1,11 @@
-﻿using AutoMapper;
-using HIS.ApplicationService.Dictionary.Departments.Dto;
-using HIS.ApplicationService.Dictionary.Districts.Dto;
+﻿using HIS.ApplicationService.Dictionary.Districts.Dto;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
-using HIS.Core.Domain.Entities;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Extensions;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.Dictionary;
 using Microsoft.EntityFrameworkCore;
 using System.Transactions;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace HIS.ApplicationService.Dictionary.Districts
 {
@@ -32,6 +27,9 @@ namespace HIS.ApplicationService.Dictionary.Districts
                     .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), x => x.Code == input.CodeFilter)
                     .WhereIf(!string.IsNullOrEmpty(input.NameFilter), x => x.Name == input.NameFilter)
                     .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
+
+                if (Check.IsNullOrDefault(input.Sorting))
+                    input.Sorting = "Code";
 
                 var paged = filter.ApplySortingAndPaging(input);
 

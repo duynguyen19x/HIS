@@ -3,7 +3,7 @@ using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Extensions;
 using HIS.Dtos.Dictionaries.Province;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 using Microsoft.EntityFrameworkCore;
 using System.Transactions;
 

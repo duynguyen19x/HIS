@@ -8,6 +8,7 @@ using HIS.Core.Domain.Repositories;
 using HIS.Core.Application.Services;
 using System.Transactions;
 using HIS.Dtos.Dictionaries.Countries;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 
 namespace HIS.ApplicationService.Dictionaries.Wards
 {
@@ -31,6 +32,9 @@ namespace HIS.ApplicationService.Dictionaries.Wards
                     .WhereIf(!string.IsNullOrEmpty(input.SearchCodeFilter), x => x.SearchCode == input.SearchCodeFilter)
                     .WhereIf(input.DistrictFilter != null, x => x.DistrictId == input.DistrictFilter)
                     .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
+
+                if (Check.IsNullOrDefault(input.Sorting))
+                    input.Sorting = "Code";
 
                 var paged = filter.ApplySortingAndPaging(input);
 
