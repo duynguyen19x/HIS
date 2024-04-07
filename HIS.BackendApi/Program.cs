@@ -1,4 +1,5 @@
 using HIS.ApplicationService;
+using HIS.BackendApi.Middleware;
 using HIS.Core.Domain.EntityFramework;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Domain.Uow;
@@ -121,4 +122,6 @@ void Configure()
     app.UseHttpsRedirection();
     app.UseAuthorization();
     app.MapControllers();
+    //app.UseRouting();
+    app.UseMiddleware<SessionMiddleware>();
 }
