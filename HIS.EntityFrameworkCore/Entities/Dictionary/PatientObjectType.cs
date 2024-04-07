@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionaries
+namespace HIS.EntityFrameworkCore.Entities.Dictionary
 {
     /// <summary>
     /// Loại bệnh nhân (đối tượng bệnh nhân).
@@ -15,12 +15,12 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     [Table("DIPatientObjectType")]
     public class PatientObjectType : AuditedEntity<int>
     {
-        [Required]
         [MaxLength(50)]
+        [Required]
         public virtual string Code { get; set; }
 
-        [Required]
         [MaxLength(255)]
+        [Required]
         public virtual string Name { get; set; }
 
         [MaxLength(255)]

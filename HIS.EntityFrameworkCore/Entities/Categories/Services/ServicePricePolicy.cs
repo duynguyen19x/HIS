@@ -1,5 +1,5 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 
 namespace HIS.EntityFrameworkCore.Entities.Categories.Services
 {
@@ -34,6 +34,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories.Services
         public DateTime? ExecutionTime { get; set; }
 
         public Service Service { get; set; }
+
         public PatientObjectType PatientType { get; set; }
     }
 }

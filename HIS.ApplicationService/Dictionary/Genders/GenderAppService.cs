@@ -31,6 +31,9 @@ namespace HIS.ApplicationService.Dictionary.Genders
                     .WhereIf(!string.IsNullOrEmpty(input.NameFilter), x => x.Name == input.NameFilter)
                     .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
 
+                if (Check.IsNullOrDefault(input.Sorting))
+                    input.Sorting = "SortOrder";
+
                 var paged = filter.ApplySortingAndPaging(input);
 
                 result.TotalCount = await filter.CountAsync();

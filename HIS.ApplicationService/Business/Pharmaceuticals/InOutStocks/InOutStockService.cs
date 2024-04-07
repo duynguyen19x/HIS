@@ -163,7 +163,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                                        ExecutionTime = med.ExecutionTime,
                                                        PatientTypeCode = pa.Code,
                                                        PatientTypeName = pa.Name,
-                                                       IsHeIn = med.PatientTypeId == (int)PatientTypes.BHYT ? true : false,
+                                                       IsHeIn = med.PatientTypeId == (int)DIPatientObjectType.BH ? true : false,
                                                    }).WhereIf(itemIds != null, w => itemIds.Contains(w.ItemId))
                                                    .OrderBy(s => s.PatientTypeCode).ToList();
 

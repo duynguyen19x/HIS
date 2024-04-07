@@ -14,11 +14,18 @@ namespace HIS.ApplicationService.Dictionaries.Wards
 {
     public class WardAppService : BaseAppService, IWardAppService
     {
+        private readonly IRepository<Province, Guid> _provinceRepository;
+        private readonly IRepository<District, Guid> _districtRepository;
         private readonly IRepository<Ward, Guid> _wardRepository;
 
-        public WardAppService(IRepository<Ward, Guid> wardRepository)
+        public WardAppService(
+            IRepository<Province, Guid> provinceRepository,
+            IRepository<District, Guid> districtRepository,
+            IRepository<Ward, Guid> wardRepository)
         {
-            _wardRepository = wardRepository;
+            _provinceRepository = provinceRepository;
+            _districtRepository = districtRepository;
+           _wardRepository = wardRepository;
         }
 
         public virtual async Task<PagedResultDto<WardDto>> GetAll(GetAllWardInput input)
@@ -36,7 +43,26 @@ namespace HIS.ApplicationService.Dictionaries.Wards
                 if (Check.IsNullOrDefault(input.Sorting))
                     input.Sorting = "Code";
 
-                var paged = filter.ApplySortingAndPaging(input);
+                filter = filter.ApplySortingAndPaging(input);
+
+                var paged = from o in filter
+                            join o1 in _districtRepository.GetAll() on o.DistrictId equals o1.Id
+                            join o2 in _provinceRepository.GetAll() on o1.ProvinceId equals o2.Id
+                            select new WardDto()
+                            {
+                                Id = o.Id,
+                                Code = o.Code,
+                                Name = o.Name,
+                                SearchCode = o.SearchCode,
+                                Description = o.Description,
+                                Inactive = o.Inactive,
+                                DistrictId = o1.Id,
+                                DistrictCode = o1.Code,
+                                DistrictName = o1.Name,
+                                ProvinceId = o2.Id,
+                                ProvinceCode = o1.Code,
+                                ProvinceName = o2.Name
+                            };
 
                 result.TotalCount = await filter.CountAsync();
                 result.Result = ObjectMapper.Map<IList<WardDto>>(paged.ToList());
@@ -120,7 +146,7 @@ namespace HIS.ApplicationService.Dictionaries.Wards
                     result.Exception(ex);
                 }
             }
-            return await Task.FromResult(result);
+            return result;
         }
 
         public virtual async Task<ResultDto<WardDto>> Delete(Guid id)

@@ -10,12 +10,11 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     [Table("DITreatmentEndType")]
     public class TreatmentEndType : AuditedEntity<int>
     {
-        [Required]
         [MaxLength(50)]
         public virtual string Code { get; set; }
 
-        [Required]
         [MaxLength(255)]
+        [Required]
         public virtual string Name { get; set; }
 
         /// <summary>

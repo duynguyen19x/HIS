@@ -10,29 +10,31 @@ using System.Threading.Tasks;
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
-    /// Nơi sống.
+    /// Nơi sống (khu vực: I, II, III)
     /// </summary>
     [Table("DILiveArea")]
     public class LiveArea : AuditedEntity<Guid>
     {
         [MaxLength(50)]
-        public string Code { get; set; }
+        [Required]
+        public virtual string Code { get; set; }
 
         [MaxLength(255)]
-        public string Name { get; set; }
+        [Required]
+        public virtual string Name { get; set; }
 
         /// <summary>
         /// Mã BYT
         /// </summary>
         [MaxLength(50)]
-        public string MediCode { get; set; }
+        public virtual string MediCode { get; set; }
 
-        [MaxLength(255)] 
-        public string Description { get; set; }
+        [MaxLength(255)]
+        public virtual string Description { get; set; }
 
-        public int SortOrder { get; set; }
+        public virtual int SortOrder { get; set; }
 
-        public bool Inactive { get; set; }
+        public virtual bool Inactive { get; set; }
 
     }
 }

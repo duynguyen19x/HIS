@@ -1,20 +1,20 @@
 ﻿using HIS.Core.Application.Services.Dto;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HIS.Dtos.Dictionaries.RightRouteTypes
+namespace HIS.ApplicationService.Dictionary.RightRouteTypes.Dto
 {
+    /// <summary>
+    /// Tuyến KCB
+    /// </summary>
     public class RightRouteTypeDto : EntityDto<int>
     {
-        public string RightRouteTypeCode { get; set; }
-        public string RightRouteTypeName { get; set; }
-        public string Description { get; set; }
-        public int SortOrder { get; set; }
-        public bool Inactive { get; set; }
+        public virtual string Code { get; set; }
 
-        public RightRouteTypeDto() { }
+        public virtual string Name { get; set; }
+
+        public virtual string Description { get; set; }
+
+        public virtual int SortOrder { get; set; }
+
+        public virtual bool Inactive { get; set; }
     }
 }

@@ -28,7 +28,6 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionary
         /// <summary>
         /// Mã phòng (BYT)
         /// </summary>
-        [Required]
         [MaxLength(50)]
         public virtual string MediCode { get; set; }
 
@@ -49,11 +48,9 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionary
 
         public virtual bool Inactive { get; set; }
 
-        [Ignore]
         [ForeignKey("RoomTypeId")]
         public RoomType RoomTypeFk { get; set; }
 
-        [Ignore]
         [ForeignKey("DepartmentId")]
         public Department DepartmentFk { get; set; }
     }

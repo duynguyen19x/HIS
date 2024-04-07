@@ -1,9 +1,7 @@
-﻿using Azure;
-using HIS.ApplicationService.Business.Reception;
-using HIS.ApplicationService.Business.Reception.Dto;
-using HIS.ApplicationService.Dictionary.Suppliers.Dto;
+﻿using HIS.ApplicationService.Business.Receptions;
+using HIS.ApplicationService.Business.Receptions.Dto;
+using HIS.ApplicationService.Dictionary.Rooms.Dto;
 using HIS.Core.Application.Services.Dto;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HIS.BackendApi.Controllers.Business
@@ -23,6 +21,24 @@ namespace HIS.BackendApi.Controllers.Business
         public async Task<PagedResultDto<ReceptionDto>> GetAll([FromQuery] GetAllReceptionInputDto input)
         {
             return await _receptionAppService.GetAll(input);
+        }
+
+        [HttpGet("GetById")]
+        public async Task<ResultDto<ReceptionDto>> GetById(Guid id)
+        {
+            return await _receptionAppService.GetById(id);
+        }
+
+        [HttpPost("CreateOrEdit")]
+        public async Task<ResultDto<ReceptionDto>> CreateOrEdit(ReceptionDto input)
+        {
+            return await _receptionAppService.CreateOrEdit(input);
+        }
+
+        [HttpDelete("Delete")]
+        public async Task<ResultDto<ReceptionDto>> Delete(Guid id)
+        {
+            return await _receptionAppService.Delete(id);
         }
 
     }

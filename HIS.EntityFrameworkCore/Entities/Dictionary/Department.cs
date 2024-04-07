@@ -75,15 +75,12 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionary
         /// </summary>
         public virtual bool Inactive { get; set; }
 
-        [Ignore]
         [ForeignKey("DepartmentTypeId")]
         public virtual DepartmentType DepartmentTypeFk { get; set; }
 
-        [Ignore]
         [ForeignKey("BranchId")]
         public virtual Branch BranchFk { get; set; }
 
-        [Ignore]
         [ForeignKey("ChiefId")]
         public virtual Employee ChiefFk { get; set; }
     }

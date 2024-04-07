@@ -18,28 +18,28 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpGet("GetAll")]
-        [Authorize]
+        //[Authorize]
         public async Task<PagedResultDto<DepartmentDto>> GetAll([FromQuery] GetAllDepartmentInputDto input)
         {
             return await _departmentService.GetAllAsync(input);
         }
 
         [HttpGet("GetById")]
-        [Authorize]
+        //[Authorize]
         public async Task<ResultDto<DepartmentDto>> GetById(Guid id)
         {
             return await _departmentService.GetAsync(id);
         }
 
         [HttpPost("CreateOrEdit")]
-        [Authorize]
+        //[Authorize]
         public async Task<ResultDto<DepartmentDto>> CreateOrEdit(DepartmentDto input)
         {
             return await _departmentService.CreateOrUpdateAsync(input);
         }
 
         [HttpDelete("Delete")]
-        [Authorize]
+        //[Authorize]
         public async Task<ResultDto<DepartmentDto>> Delete(Guid id)
         {
             return await _departmentService.DeleteAsync(id);

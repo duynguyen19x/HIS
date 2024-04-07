@@ -150,10 +150,10 @@ namespace HIS.ApplicationService.Business.PatientRecords
             try
             {
                 var filter = _hisPatientRecordRepository.GetAll()
-                    .WhereIf(!string.IsNullOrEmpty(input.PatientNameFilter), x => x.PatientName == input.PatientNameFilter);
+                    .WhereIf(!string.IsNullOrEmpty(input.PatientNameFilter), x => x.Name == input.PatientNameFilter);
 
                 var filterPatient = _hisPatientRepository.GetAll()
-                    .WhereIf(!string.IsNullOrEmpty(input.PatientNameFilter), x => x.PatientName == input.PatientNameFilter);
+                    .WhereIf(!string.IsNullOrEmpty(input.PatientNameFilter), x => x.Name == input.PatientNameFilter);
 
                 var paged = filter.ApplySortingAndPaging(input);
 

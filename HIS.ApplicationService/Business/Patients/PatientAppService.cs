@@ -25,13 +25,13 @@ namespace HIS.ApplicationService.Business.Patients
             try
             {
                 var filter = _hisPatientRepository.GetAll()
-                    .WhereIf(!string.IsNullOrEmpty(input.PatientCodeFilter), x => x.PatientCode == input.PatientCodeFilter)
-                    .WhereIf(!string.IsNullOrEmpty(input.PatientNameFilter), x => x.PatientName == input.PatientNameFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), x => x.Code == input.CodeFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.NameFilter), x => x.Name == input.NameFilter)
                     .WhereIf(input.MaxBirthYear != null, x => x.BirthYear <= input.MaxBirthYear)
                     .WhereIf(input.MinBirthYear != null, x => x.BirthYear >= input.MinBirthYear)
                     .WhereIf(input.MaxBirthDate != null, x => x.BirthDate <= input.MaxBirthDate)
                     .WhereIf(input.MinBirthDate != null, x => x.BirthDate >= input.MinBirthDate)
-                    .WhereIf(!string.IsNullOrEmpty(input.BirthplaceFilter), x => x.Birthplace == input.BirthplaceFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.BirthPlaceFilter), x => x.BirthPlace == input.BirthPlaceFilter)
                     .WhereIf(input.GenderFilter != null, x => x.GenderId == input.GenderFilter)
                     .WhereIf(input.EthnicFilter != null, x => x.EthnicId == input.EthnicFilter)
                     .WhereIf(input.ReligionFilter != null, x => x.ReligionId == input.ReligionFilter)
@@ -40,14 +40,22 @@ namespace HIS.ApplicationService.Business.Patients
                     .WhereIf(input.DistrictFilter != null, x => x.DistrictId == input.DistrictFilter)
                     .WhereIf(input.WardFilter != null, x => x.WardId == input.WardFilter)
                     .WhereIf(input.CareerFilter != null, x => x.CareerId == input.CareerFilter)
-                    .WhereIf(!string.IsNullOrEmpty(input.WorkplaceFilter), x => x.Workplace == input.WorkplaceFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.WorkPlaceFilter), x => x.WorkPlace == input.WorkPlaceFilter)
                     .WhereIf(!string.IsNullOrEmpty(input.IdentificationNumberFilter), x => x.IdentificationNumber == input.IdentificationNumberFilter)
                     .WhereIf(input.MaxIssueDateFilter != null, x => x.IssueDate <= input.MaxIssueDateFilter)
                     .WhereIf(input.MinIssueDateFilter != null, x => x.IssueDate >= input.MinIssueDateFilter)
                     .WhereIf(!string.IsNullOrEmpty(input.IssueByFilter), x => x.IssueBy == input.IssueByFilter)
                     .WhereIf(!string.IsNullOrEmpty(input.TelFilter), x => x.Tel == input.TelFilter)
                     .WhereIf(!string.IsNullOrEmpty(input.MobileFilter), x => x.Mobile == input.MobileFilter)
-                    .WhereIf(!string.IsNullOrEmpty(input.EmailFilter), x => x.Email == input.EmailFilter);
+                    .WhereIf(!string.IsNullOrEmpty(input.EmailFilter), x => x.Email == input.EmailFilter)
+                    .WhereIf(input.BloodTypeFilter != null, x => x.BloodTypeId == input.BloodTypeFilter)
+                    .WhereIf(input.BloodTypeRhFilter != null, x => x.BloodTypeRhId == input.BloodTypeRhFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.ContactNameFilter), x => x.ContactName == input.ContactNameFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.ContactTypeFilter), x => x.ContactType == input.ContactTypeFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.ContactIdentificationNumberFilter), x => x.ContactIdentificationNumber == input.ContactIdentificationNumberFilter);
+
+                if (Check.IsNullOrDefault(input.Sorting))
+                    input.Sorting = "Code";
 
                 var paged = filter.ApplySortingAndPaging(input);
 

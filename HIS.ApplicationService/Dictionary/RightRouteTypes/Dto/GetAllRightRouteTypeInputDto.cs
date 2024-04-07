@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Dtos.Dictionaries.RightRouteTypes
+namespace HIS.ApplicationService.Dictionary.RightRouteTypes.Dto
 {
     public class GetAllRightRouteTypeInputDto : PagedAndSortedResultRequestDto
     {
-        public string RightRouteTypeCodeFilter { get; set; }
-        public string RightRouteTypeNameFilter { get; set; }
-        public bool? InactiveFilter { get; set; }
+        public string CodeFilter { get; set; }
+        
+        public string NameFilter { get; set; }
     }
 }

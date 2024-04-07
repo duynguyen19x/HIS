@@ -137,7 +137,7 @@ namespace HIS.ApplicationService.Dictionary.Services
                                                        ExecutionTimeString = ser.ExecutionTime == null ? null : ser.ExecutionTime.Value.ToString("dd/MM/yyyy"),
                                                        PatientTypeCode = pa.Code,
                                                        PatientTypeName = pa.Name,
-                                                       IsHeIn = ser.PatientTypeId == (int)HIS.Core.Enums.PatientTypes.BHYT ? true : false,
+                                                       IsHeIn = ser.PatientTypeId == (int)HIS.Core.Enums.DIPatientObjectType.BH ? true : false,
                                                    }).OrderBy(s => s.PatientTypeCode).ToList();
 
                     var sExecutionRoomDtos = (from room in _roomRepository.GetAll()
@@ -173,7 +173,7 @@ namespace HIS.ApplicationService.Dictionary.Services
                                                     PatientTypeId = r.Id,
                                                     PatientTypeCode = r.Code,
                                                     PatientTypeName = r.Name,
-                                                    IsHeIn = r.Id == (int)HIS.Core.Enums.PatientTypes.BHYT ? true : false,
+                                                    IsHeIn = r.Id == (int)HIS.Core.Enums.DIPatientObjectType.BH ? true : false,
                                                 }).OrderBy(o => o.PatientTypeCode).ToList();
 
                     var sExecutionRooms = (from room in _roomRepository.GetAll()
@@ -443,7 +443,7 @@ namespace HIS.ApplicationService.Dictionary.Services
                                 Id = Guid.NewGuid(),
                                 ServiceId = serviceDto.Id,
                                 OldUnitPrice = serviceImport.HeInPrice,
-                                PatientTypeCode = HIS.Core.Enums.PatientTypes.BHYT.ToString(),
+                                PatientTypeCode = HIS.Core.Enums.DIPatientObjectType.BH.ToString(),
                                 PaymentRate = serviceImport.PaymentRate,
                                 CeilingPrice = serviceImport.CeilingPrice,
                                 ExecutionTime = string.IsNullOrEmpty( serviceImport.ExecutionTimeString) ? null : DateTime.ParseExact(serviceImport.ExecutionTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None),
@@ -453,7 +453,7 @@ namespace HIS.ApplicationService.Dictionary.Services
                                 Id = Guid.NewGuid(),
                                 ServiceId = serviceDto.Id,
                                 OldUnitPrice = serviceImport.ServicePrice,
-                                PatientTypeCode = HIS.Core.Enums.PatientTypes.DV.ToString(),
+                                PatientTypeCode = HIS.Core.Enums.DIPatientObjectType.DV.ToString(),
                                 ExecutionTime = string.IsNullOrEmpty( serviceImport.ExecutionTimeString) ? null : DateTime.ParseExact(serviceImport.ExecutionTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None),
                             },
                             new ServicePricePolicyDto()
@@ -461,7 +461,7 @@ namespace HIS.ApplicationService.Dictionary.Services
                                 Id = Guid.NewGuid(),
                                 ServiceId = serviceDto.Id,
                                 OldUnitPrice = serviceImport.PeoplePrice,
-                                PatientTypeCode = HIS.Core.Enums.PatientTypes.VP.ToString(),
+                                PatientTypeCode = HIS.Core.Enums.DIPatientObjectType.VP.ToString(),
                                 ExecutionTime = string.IsNullOrEmpty( serviceImport.ExecutionTimeString) ? null : DateTime.ParseExact(serviceImport.ExecutionTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None),
                             }
                         };

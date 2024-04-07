@@ -10,12 +10,12 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionary
     [Table("DICareer")]
     public class Career : AuditedEntity<Guid>
     {
-        [Required]
         [MaxLength(50)]
+        [Required]
         public virtual string Code { get; set; }
 
-        [Required]
         [MaxLength(255)]
+        [Required]
         public virtual string Name { get; set; }
 
         [MaxLength(255)]

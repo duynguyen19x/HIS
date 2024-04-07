@@ -1,5 +1,5 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 
 namespace HIS.EntityFrameworkCore.Entities.Categories.Items
 {
@@ -38,6 +38,7 @@ namespace HIS.EntityFrameworkCore.Entities.Categories.Items
         public Guid? ItemId { get; set; }
 
         public Item Item { get; set; }
+
         public PatientObjectType PatientType { get; set; }
     }
 }

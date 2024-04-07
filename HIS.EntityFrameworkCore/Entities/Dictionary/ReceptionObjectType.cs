@@ -1,36 +1,28 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionaries
+namespace HIS.EntityFrameworkCore.Entities.Dictionary
 {
     /// <summary>
     /// Đối tượng đăng ký khám.
     /// </summary>
+    [Table("DIReceptionObjectType")]
     public class ReceptionObjectType : AuditedEntity<int>
     {
-        [Required]
         [MaxLength(50)]
-        public string Code { get; set; }
-
         [Required]
-        [MaxLength(255)]
-        public string Name { get; set; }
+        public virtual string Code { get; set; }
 
         [MaxLength(255)]
-        public string Description { get; set; }
+        [Required]
+        public virtual string Name { get; set; }
 
-        public int SortOrder { get; set; }
+        [MaxLength(255)]
+        public virtual string Description { get; set; }
 
-        public bool Inactive { get; set; }
+        public virtual int SortOrder { get; set; }
 
-        public ReceptionObjectType() { }
-
-        public ReceptionObjectType(int id, string name, int order)
-        {
-            this.Id = id;
-            this.Code = id.ToString();
-            this.Name = name;
-            this.SortOrder = order;
-        }
+        public virtual bool Inactive { get; set; }
     }
 }

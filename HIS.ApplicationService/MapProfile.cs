@@ -44,6 +44,14 @@ using HIS.ApplicationService.Business.InOutStocks.Dto;
 using HIS.ApplicationService.Dictionary.ServiceGroupHeIns.Dto;
 using HIS.ApplicationService.Business.Patients.Dto;
 using HIS.ApplicationService.Dictionary.ServiceGroups.Dto;
+using HIS.ApplicationService.Dictionary.LiveAreas.Dto;
+using HIS.ApplicationService.Business.Receptions.Dto;
+using HIS.ApplicationService.Business.MedicalRecords.Dto;
+using HIS.ApplicationService.Business.Insurances.Dto;
+using HIS.ApplicationService.Business.Invoices.Dto;
+using HIS.ApplicationService.Dictionary.TransferForms.Dto;
+using HIS.ApplicationService.Dictionary.TransferReasons.Dto;
+using HIS.ApplicationService.Dictionary.RightRouteTypes.Dto;
 
 namespace HIS.ApplicationService
 {
@@ -61,6 +69,7 @@ namespace HIS.ApplicationService
             CreateMap<Icd, IcdDto>().ReverseMap();
             CreateMap<DbOption, DbOptionDto>().ReverseMap();
             CreateMap<Province, ProvinceDto>().ReverseMap();
+            CreateMap<LiveArea, LiveAreaDto>().ReverseMap();
             
             CreateMap<Ward, WardDto>().ReverseMap();
             CreateMap<ServiceGroupDto, ServiceGroup>().ReverseMap();
@@ -143,9 +152,14 @@ namespace HIS.ApplicationService
 
             #region - nghiệp vụ
 
+
+            CreateMap<Insurance, InsuranceDto>().ReverseMap();
+            CreateMap<Invoice, InvoiceDto>().ReverseMap();
+            CreateMap<MedicalRecord, MedicalRecordDto>().ReverseMap();
             CreateMap<Patient, PatientDto>().ReverseMap();
-            CreateMap<Patient, PatientRecordDto>().ForMember(des => des.PatientId, act => act.MapFrom(s => s.Id)).ReverseMap();
             CreateMap<PatientRecord, PatientRecordDto>().ReverseMap();
+            CreateMap<Reception, ReceptionDto>().ReverseMap();
+
             CreateMap<ServiceRequestDto, ServiceRequestView>().ReverseMap();
 
             #endregion
@@ -154,18 +168,14 @@ namespace HIS.ApplicationService
 
             CreateMap<Branch, BranchDto>().ReverseMap();
             CreateMap<DepartmentType, DepartmentTypeDto>().ReverseMap();
-            CreateMap<DepartmentDto, Department>()
-                .ForMember(dest => dest.BranchFk, opt => opt.Ignore())
-                .ForMember(dest => dest.ChiefFk, opt => opt.Ignore())
-                .ForMember(dest => dest.DepartmentTypeFk, opt => opt.Ignore())
-                .ReverseMap();
+            CreateMap<DepartmentDto, Department>().ReverseMap();
             CreateMap<RoomTypeDto, RoomType>().ReverseMap();
-            CreateMap<RoomDto, Room>()
-                .ForMember(dest => dest.RoomTypeFk, opt => opt.Ignore())
-                .ForMember(dest => dest.DepartmentFk, opt => opt.Ignore())
-                .ReverseMap();
+            CreateMap<RoomDto, Room>().ReverseMap();
             
             CreateMap<Ethnic, EthnicDto>().ReverseMap();
+            CreateMap<TransferForm, TransferFormDto>().ReverseMap();
+            CreateMap<TransferReason, TransferReasonDto>().ReverseMap();
+            CreateMap<RightRouteType, RightRouteTypeDto>().ReverseMap();
 
             #endregion
 

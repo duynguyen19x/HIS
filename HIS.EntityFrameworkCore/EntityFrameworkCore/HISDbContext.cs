@@ -45,62 +45,75 @@ namespace HIS.EntityFrameworkCore
 
         #region - Danh mục
 
-        public DbSet<BloodType> BloodTypes { get; set; }
-        public DbSet<BloodTypeRh> BloodTypeRhs { get; set; }
-        public DbSet<Branch> Branchs { get; set; }
-        public DbSet<DeathCause> DeathCauses { get; set; }
-        public DbSet<DeathWithin> DeathWithins { get; set; }
-        public DbSet<District> Districts { get; set; }
-        public DbSet<MedicalRecordType> MedicalRecordTypes { get; set; }
-        public DbSet<MedicalRecordTypeGroup> MedicalRecordTypeGroups { get; set; }
-        public DbSet<Country> Countries { get; set; }
-        public DbSet<PatientObjectType> PatientTypes { get; set; }
-        public DbSet<PaymentMethod> PaymentMethods { get; set; }
-        public DbSet<Province> Provinces { get; set; }
-        public DbSet<ReceptionObjectType> ReceptionTypes { get; set; }
-        public DbSet<RelativeType> RelativeTypes { get; set; }
-        public DbSet<Religion> Religions { get; set; }
-        public DbSet<RightRouteType> RightRouteTypes { get; set; }
-        public DbSet<TreatmentEndType> TreatmentEndTypes { get; set; }
-        public DbSet<TreatmentResult> TreatmentResults { get; set; }
-        public DbSet<Ward> Wards { get; set; }
-        public DbSet<Gender> Genders { get; set; }
+        public DbSet<BirthCertBook> BirthCertBook { get; set; }
+        public DbSet<BloodType> BloodType { get; set; }
+        public DbSet<BloodTypeRh> BloodTypeRh { get; set; }
+        public DbSet<Branch> Branch { get; set; }
+        public DbSet<Career> Career { get; set; }
+        public DbSet<Country> Country { get; set; }
+        public DbSet<ChapterIcd> ChapterIcd { get; set; }
+        public DbSet<DeathCause> DeathCause { get; set; }
+        public DbSet<DeathCertBook> DeathCertBook { get; set; }
+        public DbSet<DeathWithin> DeathWithin { get; set; }
+        public DbSet<Department> Department { get; set; }
+        public DbSet<DepartmentType> DepartmentType { get; set; }
+        public DbSet<District> District { get; set; }
+        public DbSet<Employee> Employee { get; set; }
+        public DbSet<Ethnic> Ethnic { get; set; }
+        public DbSet<ExecutionRoom> ExecutionRoom { get; set; }
+        public DbSet<Gender> Gender { get; set; }
+        public DbSet<Hospital> Hospital { get; set; }
+        public DbSet<Icd> Icd { get; set; }
+        public DbSet<InvoiceGroup> InvoiceGroup { get; set; }
+        public DbSet<InvoiceGroupBelongToUser> InvoiceGroupBelongToUser { get; set; }
+        public DbSet<InvoiceType> InvoiceType { get; set; }
+        public DbSet<LiveArea> LiveArea { get; set; }
+        public DbSet<Machine> Machines { get; set; }
+        public DbSet<MedicalRecordType> MedicalRecordType { get; set; }
+        public DbSet<MedicalRecordTypeGroup> MedicalRecordTypeGroup { get; set; }
+        public DbSet<PatientObjectType> PatientObjectType { get; set; }
+        public DbSet<PaymentMethod> PaymentMethod { get; set; }
+        public DbSet<Province> Province { get; set; }
+        public DbSet<ReceptionObjectType> ReceptionObjectType { get; set; }
+        public DbSet<Relative> Relative { get; set; }
+        public DbSet<Religion> Religion { get; set; }
+        public DbSet<RightRouteType> RightRouteType { get; set; }
+        public DbSet<Room> Room { get; set; }
+        public DbSet<RoomType> RoomType { get; set; }
+        public DbSet<Supplier> Supplier { get; set; }
+        public DbSet<TreatmentEndType> TreatmentEndType { get; set; }
+        public DbSet<TreatmentResultType> TreatmentResult { get; set; }
+        public DbSet<Unit> Unit { get; set; }
+        public DbSet<Ward> Ward { get; set; }
         
         
-        public DbSet<Department> Departments { get; set; }
-        public DbSet<DepartmentType> DepartmentTypes { get; set; }
-        public DbSet<Ethnic> Ethnics { get; set; }
-        public DbSet<Room> Rooms { get; set; }
-        public DbSet<RoomType> RoomTypes { get; set; }
-        public DbSet<Career> Careers { get; set; }
-        public DbSet<Hospital> Hospitals { get; set; }
-        public DbSet<Icd> Icds { get; set; }
-        public DbSet<ChapterIcd> ChapterIcds { get; set; }
-        public DbSet<Unit> Units { get; set; }
-        public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<ServiceGroup> ServiceGroups { get; set; }
         public DbSet<ServiceGroupHeIn> ServiceGroupHeIns { get; set; }
         public DbSet<ServicePricePolicy> ServicePricePolicies { get; set; }
         public DbSet<SurgicalProcedureType> SurgicalProcedureTypes { get; set; }
-        public DbSet<ExecutionRoom> ExecutionRooms { get; set; }
         public DbSet<ServiceResultIndice> ServiceResultIndices { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<ItemGroup> ItemGroups { get; set; }
         public DbSet<ItemLine> ItemLines { get; set; }
         public DbSet<ItemType> ItemTypes { get; set; }
         public DbSet<ItemPricePolicy> ItemPricePolicies { get; set; }
-        public DbSet<Machine> Machines { get; set; }
 
         #endregion
 
         #region - Nghiệp vụ
-        public DbSet<Patient> Patients { get; set; }
-        public DbSet<PatientRecord> PatientRecords { get; set; }
-        public DbSet<PatientRecordStatus> PatientRecordStatuses { get; set; }
-        public DbSet<MedicalRecord> MedicalRecords { get; set; }
-        public DbSet<MedicalRecordStatus> MedicalRecordStatuses { get; set; }
-        public DbSet<Insurance> Insurances { get; set; }
+
+        public DbSet<Insurance> Insurance { get; set; }
+        public DbSet<Invoice> Invoice { get; set; }
+        public DbSet<InvoiceDetail> InvoiceDetail { get; set; }
+        public DbSet<MedicalRecord> MedicalRecord { get; set; }
+        public DbSet<MedicalRecordDeath> MedicalRecordDeath { get; set; }
+        public DbSet<MedicalRecordExamination> MedicalRecordExamination { get; set; }
+        public DbSet<MedicalRecordTransfer> MedicalRecordTransfer { get; set; }
+        public DbSet<Patient> Patient { get; set; }
+        public DbSet<PatientRecord> PatientRecord { get; set; }
+        public DbSet<Reception> Reception { get; set; }
+        
         public DbSet<ServiceRequest> ServiceRequests { get; set; }
         public DbSet<ServiceRequestData> ServiceRequestDatas { get; set; }
         public DbSet<ServiceResultData> ServiceResultDatas { get; set; }

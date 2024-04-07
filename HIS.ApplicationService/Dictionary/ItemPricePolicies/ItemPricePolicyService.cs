@@ -11,6 +11,7 @@ using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Items;
 using HIS.Dtos.Dictionaries.ItemLines;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 
 namespace HIS.ApplicationService.Dictionary.ItemPricePolicies
 {
@@ -62,7 +63,7 @@ namespace HIS.ApplicationService.Dictionary.ItemPricePolicies
                                      PatientTypeId = r.Id,
                                      PatientTypeCode = r.Code,
                                      PatientTypeName = r.Name,
-                                     IsHeIn = r.Id == (int)HIS.Core.Enums.PatientTypes.BHYT ? true : false,
+                                     IsHeIn = r.Id == (int)HIS.Core.Enums.DIPatientObjectType.BH ? true : false,
                                      Inactive = r.Inactive,
                                  })
                                  .WhereIf(input.InactiveFilter != null, w => w.Inactive == input.InactiveFilter)
