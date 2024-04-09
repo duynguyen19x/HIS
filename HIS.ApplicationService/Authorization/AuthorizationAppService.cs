@@ -82,6 +82,13 @@ namespace HIS.ApplicationService.Authorization
                     };
                     await _userTokenRepository.InsertAsync(sToken);
 
+                    // Lưu thông tin đăng nhập
+                    SessionExtensions.Login = new LoginSecsion
+                    {
+                        Id = user.Id,
+                        UserName = user.Username
+                    };
+
                     unitOfWork.Complete();
                     result.Success(loginResult);
                 }

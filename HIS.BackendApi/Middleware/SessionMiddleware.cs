@@ -24,7 +24,9 @@ namespace HIS.BackendApi.Middleware
             }
             else
             {
-                if (context.Request.Path.StartsWithSegments(@"/api/Login/Authenticate"))
+                // Login thì không kiểm tra đăng nhập
+                if (context.Request.Path.StartsWithSegments(@"/api/Login/Authenticate") 
+                    || context.Request.Path.StartsWithSegments(@"/api/Authorization/Login"))
                 {
                     await _next(context);
                 }

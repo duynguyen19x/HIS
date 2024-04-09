@@ -1,6 +1,5 @@
 using HIS.ApplicationService;
 using HIS.BackendApi.Middleware;
-using HIS.Core.Domain.EntityFramework;
 using HIS.Core.Authorization;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Domain.Uow;
@@ -10,7 +9,6 @@ using HIS.Core.Runtime.Session;
 using HIS.Core.WebApi;
 using HIS.EntityFrameworkCore;
 using HIS.EntityFrameworkCore.Authorization;
-using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.EntityFrameworkCore.Repositories;
 using HIS.EntityFrameworkCore.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
