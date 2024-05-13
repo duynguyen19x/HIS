@@ -3,7 +3,7 @@ using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Extensions;
-using HIS.EntityFrameworkCore.Entities;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 using Microsoft.EntityFrameworkCore;
 
 namespace HIS.ApplicationService.Dictionary.ReceptionObjectTypes

@@ -1,4 +1,4 @@
-﻿using HIS.EntityFrameworkCore.Entities;
+﻿using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Utilities.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

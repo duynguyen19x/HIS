@@ -9,7 +9,7 @@ using HIS.Core.Domain.Repositories;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.Core.Application.Services;
 using System.Transactions;
-using HIS.EntityFrameworkCore.Entities;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 
 namespace HIS.ApplicationService.Dictionaries.ItemTypes

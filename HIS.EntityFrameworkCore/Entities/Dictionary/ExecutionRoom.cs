@@ -1,7 +1,8 @@
 ﻿using HIS.Core.Domain.Entities;
 using HIS.EntityFrameworkCore.Entities.Categories;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 
-namespace HIS.EntityFrameworkCore.Entities
+namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
     /// Phòng thực hiện

@@ -2,12 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities
+namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
     /// Kết quả điều trị.
     /// </summary>
-    [Table("STreatmentResultType")]
+    [Table("DITreatmentResultType")]
     public class TreatmentResultType : AuditedEntity<int>
     {
         [MaxLength(50)]

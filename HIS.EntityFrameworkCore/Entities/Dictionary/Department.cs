@@ -1,15 +1,14 @@
 ﻿using AutoMapper.Configuration.Annotations;
 using HIS.Core.Domain.Entities.Auditing;
-using HIS.EntityFrameworkCore.Entities.System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities
+namespace HIS.EntityFrameworkCore.Entities.Dictionary
 {
     /// <summary>
     /// Khoa.
     /// </summary>
-    [Table("SDepartment")]
+    [Table("DIDepartment")]
     public class Department : AuditedEntity<Guid>
     {
         /// <summary>
@@ -83,6 +82,6 @@ namespace HIS.EntityFrameworkCore.Entities
         public virtual Branch BranchFk { get; set; }
 
         [ForeignKey("ChiefId")]
-        public virtual User ChiefFk { get; set; }
+        public virtual Employee ChiefFk { get; set; }
     }
 }

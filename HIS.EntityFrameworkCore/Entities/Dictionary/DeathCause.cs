@@ -7,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities
+namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
     /// Nguyên nhân tử vong.
     /// </summary>
-    [Table("SDeathCause")]
+    [Table("DIDeathCause")]
     public class DeathCause : AuditedEntity<Guid>
     {
         [Required]

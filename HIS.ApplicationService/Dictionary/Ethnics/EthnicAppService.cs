@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using HIS.Core.Extensions;
-using HIS.EntityFrameworkCore.Entities;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
@@ -11,9 +11,9 @@ namespace HIS.ApplicationService.Dictionary.Ethnics
 {
     public class EthnicAppService : BaseAppService, IEthnicAppService
     {
-        private readonly IRepository<Ethnicity, Guid> _ethnicRepository;
+        private readonly IRepository<Ethnic, Guid> _ethnicRepository;
 
-        public EthnicAppService(IRepository<Ethnicity, Guid> ethnicRepository) 
+        public EthnicAppService(IRepository<Ethnic, Guid> ethnicRepository) 
         {
             _ethnicRepository = ethnicRepository;
         }
@@ -77,7 +77,7 @@ namespace HIS.ApplicationService.Dictionary.Ethnics
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var entity = ObjectMapper.Map<Ethnicity>(input);
+                    var entity = ObjectMapper.Map<Ethnic>(input);
 
                     await _ethnicRepository.InsertAsync(entity);
 

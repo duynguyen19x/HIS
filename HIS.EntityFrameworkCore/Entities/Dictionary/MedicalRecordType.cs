@@ -2,17 +2,15 @@
 using HIS.Core.Domain.Entities.Auditing;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities
+namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
     /// Loại bệnh án.
     /// </summary>
-    [Table("SMedicalRecordType")]
     public class MedicalRecordType : AuditedEntity<int>
     {
         public string MedicalRecordTypeCode { get; set; }

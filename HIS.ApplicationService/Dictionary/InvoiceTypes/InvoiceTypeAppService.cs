@@ -2,7 +2,7 @@
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
-using HIS.EntityFrameworkCore.Entities;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

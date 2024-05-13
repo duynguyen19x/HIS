@@ -5,7 +5,9 @@ using HIS.Core.Domain.Repositories;
 using HIS.Core.Extensions;
 using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Categories;
-using HIS.EntityFrameworkCore.Entities;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
+using HIS.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using System.Transactions;
@@ -46,53 +48,53 @@ namespace HIS.ApplicationService.Business.Receptions
                 var filter = _receptionRepository.GetAll()
                     .WhereIf(input.ReceptionFromDateFilter != null, x => x.ReceptionDate >= input.ReceptionFromDateFilter)
                     .WhereIf(input.ReceptionToDateFilter != null, x => x.ReceptionDate <= input.ReceptionToDateFilter)
-                    .WhereIf(input.ReceptionObjectTypeFilter != null, x => x.ReceptionObjectTypeID == input.ReceptionObjectTypeFilter)
-                    .WhereIf(input.PatientObjectTypeFilter != null, x => x.PatientObjectTypeID == input.PatientObjectTypeFilter)
-                    .WhereIf(input.BranchFilter != null, x => x.BranchID == input.BranchFilter)
-                    .WhereIf(input.DepartmentFilter != null, x => x.DepartmentID == input.DepartmentFilter)
-                    .WhereIf(input.RoomFilter != null, x => x.RoomID == input.RoomFilter)
-                    .WhereIf(input.UserFilter != null, x => x.UserID == input.UserFilter)
-                    .WhereIf(input.ExecuteDepartmentFilter != null, x => x.ExecuteDepartmentID == input.ExecuteDepartmentFilter)
-                    .WhereIf(input.ExecuteRoomFilter != null, x => x.ExecuteRoomID == input.ExecuteRoomFilter)
-                    .WhereIf(input.ExecuteUserFilter != null, x => x.ExecuteUserID == input.ExecuteUserFilter);
+                    .WhereIf(input.ReceptionObjectTypeFilter != null, x => x.ReceptionObjectTypeId == input.ReceptionObjectTypeFilter)
+                    .WhereIf(input.PatientObjectTypeFilter != null, x => x.PatientObjectTypeId == input.PatientObjectTypeFilter)
+                    .WhereIf(input.BranchFilter != null, x => x.BranchId == input.BranchFilter)
+                    .WhereIf(input.DepartmentFilter != null, x => x.DepartmentId == input.DepartmentFilter)
+                    .WhereIf(input.RoomFilter != null, x => x.RoomId == input.RoomFilter)
+                    .WhereIf(input.UserFilter != null, x => x.UserId == input.UserFilter)
+                    .WhereIf(input.ExecuteDepartmentFilter != null, x => x.ExecuteDepartmentId == input.ExecuteDepartmentFilter)
+                    .WhereIf(input.ExecuteRoomFilter != null, x => x.ExecuteRoomId == input.ExecuteRoomFilter)
+                    .WhereIf(input.ExecuteUserFilter != null, x => x.ExecuteUserId == input.ExecuteUserFilter);
 
                 filter = filter.ApplySortingAndPaging(input);
 
                 var paged = from o in filter
 
-                            join o1 in _patientRepository.GetAll() on o.PatientID equals o1.Id
+                            join o1 in _patientRepository.GetAll() on o.PatientId equals o1.Id
 
-                            join o2 in _patientRecordRepository.GetAll() on o.MedicalRecordID equals o2.Id
+                            join o2 in _patientRecordRepository.GetAll() on o.PatientRecordId equals o2.Id
 
-                            join s1 in _receptionObjectTypeRepository.GetAll() on o.ReceptionObjectTypeID equals s1.Id
+                            join s1 in _receptionObjectTypeRepository.GetAll() on o.ReceptionObjectTypeId equals s1.Id
 
-                            join s2 in _patientObjectTypeRepository.GetAll() on o.PatientObjectTypeID equals s2.Id
+                            join s2 in _patientObjectTypeRepository.GetAll() on o.PatientObjectTypeId equals s2.Id
 
                             select new ReceptionDto()
                             {
                                 Id = o.Id,
-                                PatientId = o.PatientID,
-                                PatientRecordId = o.MedicalRecordID,
-                                MedicalRecordId = o.TreatmentID,
-                                PatientCode = o1.PatientCode,
+                                PatientId = o.PatientId,
+                                PatientRecordId = o.PatientRecordId,
+                                MedicalRecordId = o.MedicalRecordId,
+                                PatientCode = o1.Code,
                                 PatientRecordCode = o2.Code,
                                 PatientName = o2.Name,
                                 ReceptionDate = o.ReceptionDate,
-                                ReceptionObjectTypeId = o.ReceptionObjectTypeID,
+                                ReceptionObjectTypeId = o.ReceptionObjectTypeId,
                                 ReceptionObjectTypeName = s1.Name,
-                                PatientObjectTypeId = o.PatientObjectTypeID,
+                                PatientObjectTypeId = o.PatientObjectTypeId,
                                 PatientObjectTypeName = s2.Name,
                                 HospitalizationReason = o.HospitalizationReason,
                                 Description = o.Description,
-                                BranchId = o.BranchID,
-                                DepartmentId = o.DepartmentID,
-                                RoomId = o.RoomID,
+                                BranchId = o.BranchId,
+                                DepartmentId = o.DepartmentId,
+                                RoomId = o.RoomId,
                                 Gate = o.Gate,
-                                UserId = o.UserID,
-                                ServiceId = o.ServiceID,
-                                ExecuteDepartmentId = o.ExecuteDepartmentID,
-                                ExecuteRoomId = o.ExecuteRoomID,
-                                ExecuteUserId = o.ExecuteUserID,
+                                UserId = o.UserId,
+                                ServiceId = o.ServiceId,
+                                ExecuteDepartmentId = o.ExecuteDepartmentId,
+                                ExecuteRoomId = o.ExecuteRoomId,
+                                ExecuteUserId = o.ExecuteUserId,
                             };
 
                 result.TotalCount = await filter.CountAsync();
@@ -135,7 +137,7 @@ namespace HIS.ApplicationService.Business.Receptions
                     {
                         input.PatientId = Guid.NewGuid();
                         var patient = ObjectMapper.Map<Patient>(input.PatientRecord);
-                        patient.PatientCode = "BN";
+                        patient.Code = "BN";
                     }   
                     
                     if (Check.IsNullOrDefault(input.PatientRecord.Id))
@@ -186,7 +188,7 @@ namespace HIS.ApplicationService.Business.Receptions
                 try
                 {
                     var reception = _receptionRepository.Get(id);
-                    var patientRecord = _patientRecordRepository.Get(reception.MedicalRecordID);
+                    var patientRecord = _patientRecordRepository.Get(reception.PatientRecordId);
                     if (patientRecord.PatientRecordStatusId > 0)
                     {
                         throw new Exception("Bệnh nhân đang điều trị!");

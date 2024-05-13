@@ -2,12 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities
+namespace HIS.EntityFrameworkCore.Entities.Dictionary
 {
     /// <summary>
     /// Nghề nghiệp.
     /// </summary>
-    [Table("SCareer")]
+    [Table("DICareer")]
     public class Career : AuditedEntity<Guid>
     {
         [MaxLength(50)]

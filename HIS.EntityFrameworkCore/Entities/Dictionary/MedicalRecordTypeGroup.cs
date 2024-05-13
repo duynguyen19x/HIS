@@ -1,12 +1,10 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities
+namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
     /// Nhóm loại bệnh án.
     /// </summary>
-    [Table("SMedicalRecordTypeGroup")]
     public class MedicalRecordTypeGroup : AuditedEntity<int>
     {
         public string MedicalRecordTypeGroupCode { get; set; }

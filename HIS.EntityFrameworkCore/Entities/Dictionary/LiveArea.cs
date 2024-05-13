@@ -7,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities
+namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
     /// Nơi sống (khu vực: I, II, III)
     /// </summary>
-    [Table("SLiveArea")]
+    [Table("DILiveArea")]
     public class LiveArea : AuditedEntity<Guid>
     {
         [MaxLength(50)]

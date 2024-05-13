@@ -1,7 +1,7 @@
 ﻿using HIS.Dtos.Dictionaries.ExecutionRoom;
 using HIS.Dtos.Dictionaries.ServiceResultIndex;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
-using HIS.EntityFrameworkCore.Entities;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Utilities.Helpers;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using System.Globalization;
@@ -12,6 +12,7 @@ using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.Core.Application.Services;
 using HIS.ApplicationService.Dictionary.Services.Dto;
 using Microsoft.EntityFrameworkCore;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 using System.Transactions;
 using HIS.ApplicationService.Dictionary.ServicePricePolicies.Dto;
 

@@ -1,6 +1,6 @@
 ﻿using AutoMapper.Configuration.Annotations;
 using HIS.Core.Domain.Entities;
-using HIS.EntityFrameworkCore.Entities;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HIS.EntityFrameworkCore.Entities.System

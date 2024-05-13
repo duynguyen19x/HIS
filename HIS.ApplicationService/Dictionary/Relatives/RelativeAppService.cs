@@ -5,7 +5,7 @@ using HIS.Core.Domain.Repositories;
 using HIS.Core.Application.Services;
 using System.Transactions;
 using HIS.ApplicationService.Dictionary.RelativeTypes;
-using HIS.EntityFrameworkCore.Entities;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 using HIS.ApplicationService.Dictionary.RelativeTypes.Dto;
 
 namespace HIS.ApplicationService.Dictionaries.RelativeTypes

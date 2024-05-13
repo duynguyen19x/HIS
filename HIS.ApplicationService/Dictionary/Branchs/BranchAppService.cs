@@ -5,7 +5,7 @@ using System.Transactions;
 using HIS.Core.Extensions;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
-using HIS.EntityFrameworkCore.Entities;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 using HIS.ApplicationService.Dictionary.Branchs.Dto;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 

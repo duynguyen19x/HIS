@@ -3,12 +3,12 @@ using HIS.Core.Domain.Entities.Auditing;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities
+namespace HIS.EntityFrameworkCore.Entities.Dictionary
 {
     /// <summary>
     /// Loại khoa.
     /// </summary>
-    [Table("SDepartmentType")]
+    [Table("DIDepartmentType")]
     public class DepartmentType : AuditedEntity<int>
     {
         [Required]

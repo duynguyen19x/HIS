@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities
+namespace HIS.EntityFrameworkCore.Entities.Dictionary
 {
-    [Table("SInvoiceGroupBelongToUser")]
+    [Table("DIInvoiceGroupBelongToUser")]
     public class InvoiceGroupBelongToUser : Entity<Guid>
     {
         public virtual Guid InvoiceGroupId { get; set; }

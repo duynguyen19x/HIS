@@ -17,12 +17,13 @@ using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Categories.Items;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.EntityFrameworkCore.Entities.Categories;
-using HIS.EntityFrameworkCore.Entities;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.System;
 using HIS.EntityFrameworkCore.Views;
 using HIS.ApplicationService.Systems.Roles.Dto;
 using HIS.ApplicationService.Systems.Users.Dto;
 using HIS.ApplicationService.Dictionary.Careers.Dto;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 using HIS.ApplicationService.Dictionary.Branchs.Dto;
 using HIS.ApplicationService.Dictionary.Departments.Dto;
 using HIS.ApplicationService.Dictionary.DepartmentTypes.Dto;
@@ -171,7 +172,7 @@ namespace HIS.ApplicationService
             CreateMap<RoomTypeDto, RoomType>().ReverseMap();
             CreateMap<RoomDto, Room>().ReverseMap();
             
-            CreateMap<Ethnicity, EthnicDto>().ReverseMap();
+            CreateMap<Ethnic, EthnicDto>().ReverseMap();
             CreateMap<TransferForm, TransferFormDto>().ReverseMap();
             CreateMap<TransferReason, TransferReasonDto>().ReverseMap();
             CreateMap<RightRouteType, RightRouteTypeDto>().ReverseMap();

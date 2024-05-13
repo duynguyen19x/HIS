@@ -1,5 +1,5 @@
 ﻿using HIS.Dtos.Dictionaries.ChapterICD10;
-using HIS.EntityFrameworkCore.Entities;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Extensions;
 using HIS.Core.Domain.Repositories;

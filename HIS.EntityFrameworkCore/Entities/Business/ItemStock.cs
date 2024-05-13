@@ -1,5 +1,7 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Categories;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 
 namespace HIS.EntityFrameworkCore.Entities.Business
 {

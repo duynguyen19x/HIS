@@ -1,17 +1,16 @@
 ﻿using AutoMapper.Configuration.Annotations;
 using HIS.Core.Domain.Entities.Auditing;
-using HIS.EntityFrameworkCore.Entities;
-using HIS.EntityFrameworkCore.Entities.System;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities
+namespace HIS.EntityFrameworkCore.Entities.Dictionary
 {
     /// <summary>
     /// Chi nhánh.
     /// </summary>
-    [Table("SBranch")]
+    [Table("DIBranch")]
     public class Branch : AuditedEntity<Guid>
     {
         /// <summary>
@@ -132,6 +131,6 @@ namespace HIS.EntityFrameworkCore.Entities
 
         [Ignore]
         [ForeignKey("DirectorId")]
-        public virtual User DirectorFk { get; set; }
+        public virtual Employee DirectorFk { get; set; }
     }
 }

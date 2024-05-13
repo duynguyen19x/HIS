@@ -3,12 +3,12 @@ using HIS.Core.Domain.Entities.Auditing;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities
+namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
     /// Quốc tịch.
     /// </summary>
-    [Table("SCountry")]
+    [Table("DICountry")]
     public class Country : AuditedEntity<Guid>
     {
         [Required]

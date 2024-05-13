@@ -8,7 +8,7 @@ using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.Core.Application.Services;
 using HIS.Dtos.Dictionaries.Province;
 using System.Transactions;
-using HIS.EntityFrameworkCore.Entities;
+using HIS.EntityFrameworkCore.Entities.Dictionaries;
 
 namespace HIS.ApplicationService.Dictionary.ServiceGroups
 {

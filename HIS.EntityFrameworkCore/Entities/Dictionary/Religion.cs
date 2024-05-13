@@ -2,12 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities
+namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
     /// Tôn giáo.
     /// </summary>
-    [Table("SReligion")]
+    [Table("DIReligion")]
     public class Religion : AuditedEntity<Guid>
     {
         [Required]

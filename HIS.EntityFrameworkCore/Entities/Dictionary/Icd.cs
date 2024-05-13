@@ -6,12 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities
+namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
     /// Mã bệnh
     /// </summary>
-    [Table("SIcd10")]
+    [Table("DIIcd10")]
     public class Icd : AuditedEntity<Guid>
     {
         public Guid? ChapterIcdId { get; set; }

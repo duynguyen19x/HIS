@@ -7,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities
+namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
     /// Hình thức chuyển viện
     /// </summary>
-    [Table("STransferForm")]
+    [Table("DITransferForm")]
     public class TransferForm : AuditedEntity<Guid>
     {
         [MaxLength(50)]
