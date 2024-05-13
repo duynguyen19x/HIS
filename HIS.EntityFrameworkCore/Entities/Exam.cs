@@ -19,5 +19,6 @@ namespace HIS.EntityFrameworkCore.Entities
         public Guid TreatmentID { get; set; }
 
 
+
     }
 }
