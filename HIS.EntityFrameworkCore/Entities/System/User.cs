@@ -1,9 +1,4 @@
-﻿using AutoMapper.Configuration.Annotations;
-using HIS.Core.Domain.Entities;
-using HIS.Core.Domain.Entities.Auditing;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
-using HIS.Utilities.Enums;
+﻿using HIS.Core.Domain.Entities.Auditing;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -59,11 +54,6 @@ namespace HIS.EntityFrameworkCore.Entities.System
         public virtual string Description { get; set; }
 
         /// <summary>
-        /// Nhân viên sử dụng tài khoản người dùng
-        /// </summary>
-        public virtual Guid? EmployeeId { get; set; }
-
-        /// <summary>
         /// Chi nhánh khởi tạo tài khoản người dùng (mặc định quyền đăng nhập vào chi nhánh khi tài khoản không bị khóa)
         /// </summary>
         public virtual Guid? BranchId { get; set; }
@@ -82,9 +72,6 @@ namespace HIS.EntityFrameworkCore.Entities.System
         /// Khóa tài khoản người dùng
         /// </summary>
         public virtual bool Inactive { get; set; }
-
-        [ForeignKey(nameof(EmployeeId))]
-        public virtual Employee EmployeeFk { get; set; }
 
         [ForeignKey(nameof(BranchId))]
         public virtual Branch BranchFk { get; set; }

@@ -1,6 +1,5 @@
 ﻿using HIS.EntityFrameworkCore.Entities.Categories.Services;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
+using HIS.EntityFrameworkCore.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

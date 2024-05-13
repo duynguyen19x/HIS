@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Extensions;
 using HIS.Core.Domain.Repositories;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities;
 using HIS.Core.Application.Services;
 using HIS.ApplicationService.Dictionary.Suppliers.Dto;
 using System.Transactions;

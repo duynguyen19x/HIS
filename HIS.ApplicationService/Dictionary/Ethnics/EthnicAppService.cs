@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using HIS.Core.Extensions;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
+using HIS.EntityFrameworkCore.Entities;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;

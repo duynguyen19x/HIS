@@ -12,6 +12,7 @@ using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using System.Transactions;
+using HIS.EntityFrameworkCore.Entities;
 
 namespace HIS.ApplicationService.Business.Testings
 {

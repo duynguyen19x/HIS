@@ -2,12 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionaries
+namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// Thời gian tử vong.
     /// </summary>
-    [Table("DIDeathWithin")]
+    [Table("SDeathWithin")]
     public class DeathWithin : AuditedEntity<Guid>
     {
         [Required]

@@ -7,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionaries
+namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// Lý do chuyển viện.
     /// </summary>
-    [Table("DITransferReason")]
+    [Table("STransferReason")]
     public class TransferReason : AuditedEntity<Guid>
     {
         [MaxLength(50)]

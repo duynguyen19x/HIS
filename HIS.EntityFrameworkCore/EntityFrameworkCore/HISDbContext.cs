@@ -1,18 +1,14 @@
 ﻿using HIS.Core.Domain.Entities;
-using HIS.Core.Domain.Entities.Auditing;
 using HIS.Core.EntityFrameworkCore;
-using HIS.Core.Extensions;
 using HIS.EntityFrameworkCore.Configurations;
 using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Items;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
+using HIS.EntityFrameworkCore.Entities;
 using HIS.EntityFrameworkCore.Entities.System;
 using HIS.EntityFrameworkCore.Views;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace HIS.EntityFrameworkCore
@@ -47,7 +43,7 @@ namespace HIS.EntityFrameworkCore
 
         public DbSet<BirthCertBook> BirthCertBook { get; set; }
         public DbSet<BloodType> BloodType { get; set; }
-        public DbSet<BloodTypeRh> BloodTypeRh { get; set; }
+        public DbSet<BloodRhType> BloodRhType { get; set; }
         public DbSet<Branch> Branch { get; set; }
         public DbSet<Career> Career { get; set; }
         public DbSet<Country> Country { get; set; }
@@ -58,8 +54,7 @@ namespace HIS.EntityFrameworkCore
         public DbSet<Department> Department { get; set; }
         public DbSet<DepartmentType> DepartmentType { get; set; }
         public DbSet<District> District { get; set; }
-        public DbSet<Employee> Employee { get; set; }
-        public DbSet<Ethnicity> Ethnic { get; set; }
+        public DbSet<Ethnicity> Ethnicity { get; set; }
         public DbSet<ExecutionRoom> ExecutionRoom { get; set; }
         public DbSet<Gender> Gender { get; set; }
         public DbSet<Hospital> Hospital { get; set; }

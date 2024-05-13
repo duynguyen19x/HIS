@@ -19,6 +19,11 @@ namespace HIS.EntityFrameworkCore.Entities
         public int InvoiceTypeID { get; set; }
         public int InvoiceStatusID { get; set; }
         public int PaymentMethodTypeID { get; set; }
-
+        public Guid InvoiceGroupID { get; set; }
+        public Guid MedicalRecordID { get; set; }
+        public Guid TreatmentID { get; set; }
+        public Guid BranchID { get; set; }
+        public Guid DepartmentID { get; set; }
+        public Guid RoomID { get; set; }
     }
 }

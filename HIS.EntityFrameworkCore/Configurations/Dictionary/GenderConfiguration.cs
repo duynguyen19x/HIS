@@ -1,8 +1,7 @@
-﻿using HIS.EntityFrameworkCore.Entities.Dictionaries;
+﻿using HIS.EntityFrameworkCore.Entities;
 using HIS.Utilities.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System.Reflection.Emit;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {

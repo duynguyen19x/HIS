@@ -2,7 +2,7 @@
 using HIS.EntityFrameworkCore.Entities.Categories;
 using System.ComponentModel;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionaries
+namespace HIS.EntityFrameworkCore.Entities
 {
     public class Unit : Entity<Guid>
     {

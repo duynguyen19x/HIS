@@ -2,12 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionary
+namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// Danh sách mối quan hệ gia đình.
     /// </summary>
-    [Table("DIRelative")]
+    [Table("SRelative")]
     public class Relative : AuditedEntity<Guid>
     {
         [MaxLength(50)]

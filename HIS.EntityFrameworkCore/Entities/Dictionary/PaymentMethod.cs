@@ -7,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionaries
+namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// Phương thức thanh toán.
     /// </summary>
-    [Table("DIPaymentMethod")]
+    [Table("SPaymentMethod")]
     public class PaymentMethod : AuditedEntity<Guid>
     {
         [Required]

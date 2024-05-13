@@ -1,5 +1,5 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,7 +13,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
     /// <summary>
     /// Thông tin bảo hiểm
     /// </summary>
-    [Table("HISInsurance")]
+    [Table("DInsurance")]
     public class Insurance : FullAuditedEntity<Guid>
     {
         public virtual Guid PatientId { get; set; }

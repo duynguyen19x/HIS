@@ -2,12 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionary
+namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// Đối tượng đăng ký khám.
     /// </summary>
-    [Table("DIReceptionObjectType")]
+    [Table("SReceptionObjectType")]
     public class ReceptionObjectType : AuditedEntity<int>
     {
         [MaxLength(50)]

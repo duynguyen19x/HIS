@@ -8,5 +8,7 @@ namespace HIS.EntityFrameworkCore.Constants
 {
     public class TreatmentConst
     {
+        public const int MaxTreatmentCodeLength = 50;
+        public const int MinTreatmentCodeLength = 0;
     }
 }

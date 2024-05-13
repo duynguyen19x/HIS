@@ -1,7 +1,5 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
 using HIS.EntityFrameworkCore.Constants;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -46,6 +44,8 @@ namespace HIS.EntityFrameworkCore.Entities
         public Guid? CountryID { get; set; }
 
         public Guid? ProvinceID { get; set; }
+
+        public Guid? DistrictID { get; set; }
 
         public Guid? WardID { get; set; }
 
@@ -94,7 +94,7 @@ namespace HIS.EntityFrameworkCore.Entities
         public virtual BloodType BloodTypeFK { get; set; }
 
         [ForeignKey(nameof(BloodRhTypeID))]
-        public virtual BloodTypeRh BloodTypeRhFK { get; set; }
+        public virtual BloodRhType BloodTypeRhFK { get; set; }
 
         [ForeignKey(nameof(CareerID))]
         public virtual Career CareerFK { get; set; }

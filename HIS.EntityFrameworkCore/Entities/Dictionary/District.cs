@@ -2,12 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionary
+namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// Quận, huyện
     /// </summary>
-    [Table("DIDistrict")]
+    [Table("SDistrict")]
     public class District : AuditedEntity<Guid>
     {
         [Required]

@@ -1,6 +1,4 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
@@ -9,7 +7,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
     /// <summary>
     /// Thông tin bệnh án
     /// </summary>
-    [Table("HISPatientRecord")]
+    [Table("DPatientRecord")]
     public class PatientRecord : FullAuditedEntity<Guid>
     {
         /// <summary>
@@ -310,6 +308,6 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public virtual BloodType BloodTypeFk { get; set; }
 
         [ForeignKey("BloodTypeRhId")]
-        public virtual BloodTypeRh BloodTypeRhFk { get; set; }
+        public virtual BloodRhType BloodTypeRhFk { get; set; }
     }
 }

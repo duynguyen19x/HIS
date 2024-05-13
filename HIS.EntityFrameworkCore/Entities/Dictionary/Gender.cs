@@ -3,12 +3,12 @@ using HIS.Core.Domain.Entities.Auditing;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionaries
+namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// Giới tính.
     /// </summary>
-    [Table("DIGender")]
+    [Table("SGender")]
     public class Gender : AuditedEntity<Guid>
     {
         [Required]

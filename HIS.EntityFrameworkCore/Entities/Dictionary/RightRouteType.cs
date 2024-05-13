@@ -7,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionaries
+namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// Tuyến KCB.
     /// </summary>
-    [Table("DIRightRouteType")]
+    [Table("SRightRouteType")]
     public class RightRouteType : AuditedEntity<int>
     {
         [MaxLength(50)]

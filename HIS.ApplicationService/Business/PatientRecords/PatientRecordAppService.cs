@@ -3,6 +3,7 @@ using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Extensions;
+using HIS.EntityFrameworkCore.Entities;
 using HIS.EntityFrameworkCore.Entities.Business;
 using Microsoft.EntityFrameworkCore;
 
@@ -153,7 +154,7 @@ namespace HIS.ApplicationService.Business.PatientRecords
                     .WhereIf(!string.IsNullOrEmpty(input.PatientNameFilter), x => x.Name == input.PatientNameFilter);
 
                 var filterPatient = _hisPatientRepository.GetAll()
-                    .WhereIf(!string.IsNullOrEmpty(input.PatientNameFilter), x => x.Name == input.PatientNameFilter);
+                    .WhereIf(!string.IsNullOrEmpty(input.PatientNameFilter), x => x.PatientName == input.PatientNameFilter);
 
                 var paged = filter.ApplySortingAndPaging(input);
 

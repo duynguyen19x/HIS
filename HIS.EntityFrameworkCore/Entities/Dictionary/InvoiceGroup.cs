@@ -7,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionary
+namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// Sổ thanh toán
     /// </summary>
-    [Table("DIInvoiceGroup")]
+    [Table("SInvoiceGroup")]
     public class InvoiceGroup : AuditedEntity<Guid>
     {
         [MaxLength(50)]

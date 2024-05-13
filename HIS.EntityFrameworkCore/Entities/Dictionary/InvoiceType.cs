@@ -7,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionary
+namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// Loại phiếu thu.
     /// </summary>
-    [Table("DIInvoiceType")]
+    [Table("SInvoiceType")]
     public class InvoiceType : AuditedEntity<int>
     {
         [MaxLength(50)]

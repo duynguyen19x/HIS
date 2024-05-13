@@ -4,7 +4,8 @@ using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Extensions;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
+using HIS.EntityFrameworkCore.Entities;
+using HIS.EntityFrameworkCore.Entities.System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using System.Transactions;
@@ -16,13 +17,13 @@ namespace HIS.ApplicationService.Dictionary.Departments
         private readonly IRepository<Department, Guid> _departmentRepository;
         private readonly IRepository<DepartmentType, int> _departmentTypeRepository;
         private readonly IRepository<Branch, Guid> _branchRepository;
-        private readonly IRepository<Employee, Guid> _employeeRepository;
+        private readonly IRepository<User, Guid> _employeeRepository;
 
         public DepartmentAppService(
             IRepository<Department, Guid> departmentRepository,
             IRepository<DepartmentType, int> departmentTypeRepository,
             IRepository<Branch, Guid> branchRepository,
-            IRepository<Employee, Guid> employeeRepository)
+            IRepository<User, Guid> employeeRepository)
         {
             _departmentRepository = departmentRepository;
             _departmentTypeRepository = departmentTypeRepository;
@@ -65,7 +66,7 @@ namespace HIS.ApplicationService.Dictionary.Departments
                                 BranchCode = s2.Code,
                                 BranchName = s2.Name,
                                 ChiefId = o.ChiefId,
-                                ChiefName = s3.Name,
+                                ChiefName = s3.FullName,
                                 Email = o.Email,
                                 Tel = o.Tel,
                                 Description = o.Description,

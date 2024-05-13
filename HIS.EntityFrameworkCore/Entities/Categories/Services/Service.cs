@@ -1,6 +1,6 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

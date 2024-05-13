@@ -1,19 +1,13 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionaries
+namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// Sổ giấy báo tử.
     /// </summary>
-    [Table("DIDeathCertBook")]
+    [Table("SDeathCertBook")]
     public class DeathCertBook : AuditedEntity<Guid>
     {
         /// <summary>

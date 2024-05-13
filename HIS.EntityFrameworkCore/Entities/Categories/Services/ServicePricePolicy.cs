@@ -1,5 +1,4 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
 
 namespace HIS.EntityFrameworkCore.Entities.Categories.Services
 {

@@ -3,12 +3,12 @@ using HIS.Core.Domain.Entities.Auditing;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionary
+namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// Tỉnh, thành phố.
     /// </summary>
-    [Table("DIProvince")]
+    [Table("SProvince")]
     public class Province : AuditedEntity<Guid>
     {
         [Required]
