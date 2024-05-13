@@ -59,7 +59,7 @@ namespace HIS.EntityFrameworkCore
         public DbSet<DepartmentType> DepartmentType { get; set; }
         public DbSet<District> District { get; set; }
         public DbSet<Employee> Employee { get; set; }
-        public DbSet<Ethnic> Ethnic { get; set; }
+        public DbSet<Ethnicity> Ethnic { get; set; }
         public DbSet<ExecutionRoom> ExecutionRoom { get; set; }
         public DbSet<Gender> Gender { get; set; }
         public DbSet<Hospital> Hospital { get; set; }

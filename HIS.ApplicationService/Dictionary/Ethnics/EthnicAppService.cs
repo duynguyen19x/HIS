@@ -11,9 +11,9 @@ namespace HIS.ApplicationService.Dictionary.Ethnics
 {
     public class EthnicAppService : BaseAppService, IEthnicAppService
     {
-        private readonly IRepository<Ethnic, Guid> _ethnicRepository;
+        private readonly IRepository<Ethnicity, Guid> _ethnicRepository;
 
-        public EthnicAppService(IRepository<Ethnic, Guid> ethnicRepository) 
+        public EthnicAppService(IRepository<Ethnicity, Guid> ethnicRepository) 
         {
             _ethnicRepository = ethnicRepository;
         }
@@ -77,7 +77,7 @@ namespace HIS.ApplicationService.Dictionary.Ethnics
                 try
                 {
                     input.Id = Guid.NewGuid();
-                    var entity = ObjectMapper.Map<Ethnic>(input);
+                    var entity = ObjectMapper.Map<Ethnicity>(input);
 
                     await _ethnicRepository.InsertAsync(entity);
 

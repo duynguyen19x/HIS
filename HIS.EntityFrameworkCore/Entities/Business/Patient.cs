@@ -161,7 +161,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public virtual Gender GenderFk { get; set; }
 
         [ForeignKey("EthnicId")]
-        public virtual Ethnic EthnicFk { get; set; }
+        public virtual Ethnicity EthnicFk { get; set; }
 
         [ForeignKey("ReligionId")]
         public virtual Religion ReligionFk { get; set; }
