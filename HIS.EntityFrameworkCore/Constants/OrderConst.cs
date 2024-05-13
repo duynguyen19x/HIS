@@ -8,5 +8,9 @@ namespace HIS.EntityFrameworkCore.Constants
 {
     public class OrderConst
     {
+        public const int MaxOrderCodeLength = 50;
+        public const int MinOrderCodeLength = 0;
+
+
     }
 }

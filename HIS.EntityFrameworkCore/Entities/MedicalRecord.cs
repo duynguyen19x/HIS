@@ -14,13 +14,26 @@ namespace HIS.EntityFrameworkCore.Entities
     /// </summary>
     public class MedicalRecord : AuditedEntity<Guid>
     {
+        [StringLength(MedicalRecordConst.MaxMedicalRecordCodeLength, MinimumLength = MedicalRecordConst.MinMedicalRecordCodeLength)]
         public string MedicalRecordCode { get; set; }
-
         public DateTime MedicalRecordDate { get; set; }
-
         public int MedicalRecordTypeID { get; set; }
-
         public int MedicalRecordStatusID { get; set; }
+        [StringLength(MedicalRecordConst.MaxDescriptionLength, MinimumLength = MedicalRecordConst.MinDescriptionLength)]
+        public string Description { get; set; }
+
+        public DateTime ReceptionDate { get; set; } // thời gian tiếp đón
+        public DateTime ClinicalDate { get; set; } // thời gian bắt đầu khám bệnh 
+        public DateTime InDate { get; set; } // thời gian tiếp nhận nhập viện
+        public DateTime DischargeDate { get; set; } // thời gian ra viện
+
+        public Guid TreatmentID_Clinical { get; set; }
+        public Guid TreatmentID_In { get; set; }
+        public Guid TreatmentID_Discharge { get; set; }
+
+
+
+
 
 
         [Required]
@@ -75,8 +88,5 @@ namespace HIS.EntityFrameworkCore.Entities
         public string IssueBy { get; set; }
 
         public DateTime? IssueDate { get; set; }
-
-        [StringLength(PatientConst.MaxDescriptionLength, MinimumLength = PatientConst.MinDescriptionLength)]
-        public string Description { get; set; }
     }
 }

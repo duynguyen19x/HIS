@@ -35,6 +35,24 @@ namespace HIS.EntityFrameworkCore.Constants
         public const int MaxIssueByLength = 120;
         public const int MinIssueByLength = 0;
 
+        public const int MaxFatherNameLength = 255;
+        public const int MinFatherNameLength = 0;
+
+        public const int MaxFatherEducationLevelLength = 255;
+        public const int MinFatherEducationLevelLength = 0;
+
+        public const int MaxFatherCareerLength = 255;
+        public const int MinFatherCareerLength = 0;
+
+        public const int MaxMotherNameLength = 255;
+        public const int MinMotherNameLength = 0;
+
+        public const int MaxMotherEducationLevelLength = 255;
+        public const int MinMotherEducationLevelLength = 0;
+
+        public const int MaxMotherCareerLength = 255;
+        public const int MinMotherCareerLength = 0;
+
         public const int MaxDescriptionLength = 120;
         public const int MinDescriptionLength = 0;
 

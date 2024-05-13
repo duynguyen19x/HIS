@@ -2,20 +2,15 @@
 using HIS.EntityFrameworkCore.Constants;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using HIS.EntityFrameworkCore.Entities.Dictionary;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
-    /// Bệnh nhân
+    /// Thông tin bệnh nhân
     /// </summary>
-    [Table("Patient")]
+    [Table("DPatient")]
     public class Patient : AuditedEntity<Guid>
     {
         [Required]
@@ -44,9 +39,9 @@ namespace HIS.EntityFrameworkCore.Entities
         [StringLength(PatientConst.MaxWorkPlaceLength, MinimumLength = PatientConst.MinWorkPlaceLength)]
         public string WorkPlace { get; set; }
 
-        public Guid? EthnicityID { get; set; }
-
         public Guid? ReligionID { get; set; }
+
+        public Guid? EthnicityID { get; set; }
 
         public Guid? CountryID { get; set; }
 
@@ -70,6 +65,24 @@ namespace HIS.EntityFrameworkCore.Entities
         public string IssueBy { get; set; }
 
         public DateTime? IssueDate { get; set; }
+
+        [StringLength(PatientConst.MaxFatherNameLength, MinimumLength = PatientConst.MinFatherNameLength)]
+        public string FatherName { get; set; }
+
+        [StringLength(PatientConst.MaxFatherEducationLevelLength, MinimumLength = PatientConst.MinFatherEducationLevelLength)]
+        public string FatherEducationLevel { get; set; }
+
+        [StringLength(PatientConst.MaxFatherCareerLength, MinimumLength = PatientConst.MinFatherCareerLength)]
+        public string FatherCareer { get; set; }
+
+        [StringLength(PatientConst.MaxMotherNameLength, MinimumLength = PatientConst.MinFatherNameLength)]
+        public string MotherName { get; set; }
+
+        [StringLength(PatientConst.MaxMotherEducationLevelLength, MinimumLength = PatientConst.MinMotherEducationLevelLength)]
+        public string MotherEducationLevel { get; set; }
+
+        [StringLength(PatientConst.MaxMotherCareerLength, MinimumLength = PatientConst.MinMotherCareerLength)]
+        public string MotherCareer { get; set; }
 
         [StringLength(PatientConst.MaxDescriptionLength, MinimumLength = PatientConst.MinDescriptionLength)]
         public string Description { get; set; }

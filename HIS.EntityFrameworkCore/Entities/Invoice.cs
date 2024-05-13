@@ -15,9 +15,10 @@ namespace HIS.EntityFrameworkCore.Entities
     public class Invoice : AuditedEntity<Guid>
     {
         public string InvoiceCode { get; set; }
-
         public DateTime InvoiceDate { get; set; }
-
+        public int InvoiceTypeID { get; set; }
+        public int InvoiceStatusID { get; set; }
+        public int PaymentMethodTypeID { get; set; }
 
     }
 }

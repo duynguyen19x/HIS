@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities
 {
-    public class InvoiceData
+    internal class ServiceInvoice
     {
     }
 }

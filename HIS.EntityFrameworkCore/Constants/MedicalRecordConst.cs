@@ -11,6 +11,7 @@ namespace HIS.EntityFrameworkCore.Constants
         public const int MaxMedicalRecordCodeLength = 50;
         public const int MinMedicalRecordCodeLength = 0;
 
-
+        public const int MaxDescriptionLength = 255;
+        public const int MinDescriptionLength = 0;
     }
 }
