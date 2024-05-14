@@ -20,11 +20,5 @@ namespace HIS.Core.Application.Services.Dto
         {
             TotalCount = totalCount;
         }
-
-        public virtual void Exception(Exception ex)
-        {
-            IsSucceeded = false;
-            Message = ex.Message;
-        }
     }
 }

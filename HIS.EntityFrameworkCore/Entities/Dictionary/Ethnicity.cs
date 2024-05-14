@@ -2,13 +2,13 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionary
+namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// Dân tộc.
     /// </summary>
-    [Table("DIEthnic")]
-    public class Ethnic : Entity<Guid>
+    [Table("SEthnicity")]
+    public class Ethnicity : Entity<Guid>
     {
         /// <summary>
         /// Mã dân tộc
@@ -37,8 +37,8 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionary
 
         public virtual bool Inactive { get; set; } 
 
-        public Ethnic() { }
-        public Ethnic(Guid id, string code, string mohCode, string name, int sortOrder)
+        public Ethnicity() { }
+        public Ethnicity(Guid id, string code, string mohCode, string name, int sortOrder)
         {
             this.Id = id;
             this.Code = code;

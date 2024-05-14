@@ -1,6 +1,7 @@
 ﻿using AutoMapper.Configuration.Annotations;
 using HIS.Core.Domain.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities.System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -131,6 +132,6 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionary
 
         [Ignore]
         [ForeignKey("DirectorId")]
-        public virtual Employee DirectorFk { get; set; }
+        public virtual User DirectorFk { get; set; }
     }
 }

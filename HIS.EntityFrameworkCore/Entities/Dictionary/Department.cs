@@ -1,5 +1,6 @@
 ﻿using AutoMapper.Configuration.Annotations;
 using HIS.Core.Domain.Entities.Auditing;
+using HIS.EntityFrameworkCore.Entities.System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -82,6 +83,6 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionary
         public virtual Branch BranchFk { get; set; }
 
         [ForeignKey("ChiefId")]
-        public virtual Employee ChiefFk { get; set; }
+        public virtual User ChiefFk { get; set; }
     }
 }

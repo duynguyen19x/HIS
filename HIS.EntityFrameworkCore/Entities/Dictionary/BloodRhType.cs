@@ -5,13 +5,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
     /// <summary>
-    /// Nhóm máu
+    /// Nhóm máu Rh
     /// </summary>
-    public class BloodType : AuditedEntity<Guid>
+    public class BloodRhType : AuditedEntity<Guid>
     {
-        public string BloodTypeCode { get; set; }
+        public string BloodRhTypeCode { get; set; }
 
-        public string BloodTypeName { get; set; }
+        public string BloodRhTypeName { get; set; }
 
         public string Description { get; set; }
 

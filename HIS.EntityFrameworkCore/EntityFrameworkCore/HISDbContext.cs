@@ -3,6 +3,7 @@ using HIS.Core.Domain.Entities.Auditing;
 using HIS.Core.EntityFrameworkCore;
 using HIS.Core.Extensions;
 using HIS.EntityFrameworkCore.Configurations;
+using HIS.EntityFrameworkCore.Entities;
 using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Items;
@@ -47,7 +48,7 @@ namespace HIS.EntityFrameworkCore
 
         public DbSet<BirthCertBook> BirthCertBook { get; set; }
         public DbSet<BloodType> BloodType { get; set; }
-        public DbSet<BloodTypeRh> BloodTypeRh { get; set; }
+        public DbSet<BloodRhType> BloodTypeRh { get; set; }
         public DbSet<Branch> Branch { get; set; }
         public DbSet<Career> Career { get; set; }
         public DbSet<Country> Country { get; set; }
@@ -58,8 +59,7 @@ namespace HIS.EntityFrameworkCore
         public DbSet<Department> Department { get; set; }
         public DbSet<DepartmentType> DepartmentType { get; set; }
         public DbSet<District> District { get; set; }
-        public DbSet<Employee> Employee { get; set; }
-        public DbSet<Ethnic> Ethnic { get; set; }
+        public DbSet<Ethnicity> Ethnicity { get; set; }
         public DbSet<ExecutionRoom> ExecutionRoom { get; set; }
         public DbSet<Gender> Gender { get; set; }
         public DbSet<Hospital> Hospital { get; set; }
@@ -75,7 +75,7 @@ namespace HIS.EntityFrameworkCore
         public DbSet<PaymentMethod> PaymentMethod { get; set; }
         public DbSet<Province> Province { get; set; }
         public DbSet<ReceptionObjectType> ReceptionObjectType { get; set; }
-        public DbSet<Relative> Relative { get; set; }
+        public DbSet<Relationship> Relationship { get; set; }
         public DbSet<Religion> Religion { get; set; }
         public DbSet<RightRouteType> RightRouteType { get; set; }
         public DbSet<Room> Room { get; set; }
@@ -104,17 +104,11 @@ namespace HIS.EntityFrameworkCore
         #region - Nghiệp vụ
 
         public DbSet<Insurance> Insurance { get; set; }
-        public DbSet<Invoice> Invoice { get; set; }
-        public DbSet<InvoiceDetail> InvoiceDetail { get; set; }
-        public DbSet<MedicalRecord> MedicalRecord { get; set; }
-        public DbSet<MedicalRecordDeath> MedicalRecordDeath { get; set; }
-        public DbSet<MedicalRecordExamination> MedicalRecordExamination { get; set; }
-        public DbSet<MedicalRecordTransfer> MedicalRecordTransfer { get; set; }
-        public DbSet<Patient> Patient { get; set; }
+        public DbSet<Entities.Business.Patient> Patient { get; set; }
         public DbSet<PatientRecord> PatientRecord { get; set; }
-        public DbSet<Reception> Reception { get; set; }
+        public DbSet<Entities.Business.Reception> Reception { get; set; }
         
-        public DbSet<ServiceRequest> ServiceRequests { get; set; }
+        public DbSet<Entities.Business.ServiceRequest> ServiceRequests { get; set; }
         public DbSet<ServiceRequestData> ServiceRequestDatas { get; set; }
         public DbSet<ServiceResultData> ServiceResultDatas { get; set; }
 

@@ -172,7 +172,7 @@ namespace HIS.ApplicationService
             CreateMap<RoomTypeDto, RoomType>().ReverseMap();
             CreateMap<RoomDto, Room>().ReverseMap();
             
-            CreateMap<Ethnic, EthnicDto>().ReverseMap();
+            CreateMap<Ethnicity, EthnicDto>().ReverseMap();
             CreateMap<TransferForm, TransferFormDto>().ReverseMap();
             CreateMap<TransferReason, TransferReasonDto>().ReverseMap();
             CreateMap<RightRouteType, RightRouteTypeDto>().ReverseMap();

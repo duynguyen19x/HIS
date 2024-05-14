@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Business
+namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
-    /// Thông tin bệnh án theo khoa
+    /// Thông tin bệnh án
     /// </summary>
-    public class MedicalRecord : FullAuditedEntity<Guid>
+    public class MedicalRecord : AuditedEntity<Guid>
     {
-
+        public Guid PatientID { get; set; }
     }
 }
