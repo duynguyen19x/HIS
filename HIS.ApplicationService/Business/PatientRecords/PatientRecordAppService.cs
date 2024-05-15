@@ -154,7 +154,7 @@ namespace HIS.ApplicationService.Business.PatientRecords
                     .WhereIf(!string.IsNullOrEmpty(input.PatientNameFilter), x => x.Name == input.PatientNameFilter);
 
                 var filterPatient = _hisPatientRepository.GetAll()
-                    .WhereIf(!string.IsNullOrEmpty(input.PatientNameFilter), x => x.Name == input.PatientNameFilter);
+                    .WhereIf(!string.IsNullOrEmpty(input.PatientNameFilter), x => x.PatientName == input.PatientNameFilter);
 
                 var paged = filter.ApplySortingAndPaging(input);
 

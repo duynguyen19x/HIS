@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Constants
 {
-    public class BloodTypeConst
+    public class SBloodTypeConst
     {
         public const int BloodTypeCodeLength = 50;
         public const int BloodTypeNameLength = 255;

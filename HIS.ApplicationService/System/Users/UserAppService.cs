@@ -52,7 +52,6 @@ namespace HIS.ApplicationService.System.Users
                     .WhereIf(!string.IsNullOrEmpty(input.TelFilter), x => x.Tel == input.TelFilter)
                     .WhereIf(!string.IsNullOrEmpty(input.MobileFilter), x => x.Mobile == input.MobileFilter)
                     .WhereIf(!string.IsNullOrEmpty(input.DescriptionFilter), x => x.Description == input.DescriptionFilter)
-                    .WhereIf(input.EmployeeFilter != null, x => x.EmployeeId == input.EmployeeFilter)
                     .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
                 var pagedAndSorted = filter.ApplySortingAndPaging(input);
 

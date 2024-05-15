@@ -9,12 +9,13 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business
 {
-    public class InsuranceConfig : IEntityTypeConfiguration<Insurance>
+    public class ServiceRequestConfig : IEntityTypeConfiguration<ServiceRequest>
     {
-        public void Configure(EntityTypeBuilder<Insurance> builder)
+        public void Configure(EntityTypeBuilder<ServiceRequest> builder)
         {
-            builder.ToTable("DInsurance");
+            builder.ToTable("DServiceRequest");
             builder.HasKey(x => x.Id);
+
 
         }
     }

@@ -17,22 +17,23 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
         public void Configure(EntityTypeBuilder<Patient> builder)
         {
             builder.ToTable("DPatient");
+            builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.PatientCode).IsRequired().HasMaxLength(PatientConst.PatientCodeLength);
-            builder.Property(x => x.PatientName).IsRequired().HasMaxLength(PatientConst.PatientNameLength);
-            builder.Property(x => x.BirthPlace).HasMaxLength(PatientConst.BirthPlaceLength);
-            builder.Property(x => x.Address).HasMaxLength(PatientConst.AddressLength);
-            builder.Property(x => x.PhoneNumber).HasMaxLength(PatientConst.PhoneNumberLength);
-            builder.Property(x => x.Email).HasMaxLength(PatientConst.EmailLength);
-            builder.Property(x => x.WorkPlace).HasMaxLength(PatientConst.WorkPlaceLength);
-            builder.Property(x => x.IdentificationNumber).HasMaxLength(PatientConst.IdentificationNumberLength);
-            builder.Property(x => x.IssueBy).HasMaxLength(PatientConst.IssueByLength);
-            builder.Property(x => x.ContactName).HasMaxLength(PatientConst.ContactNameLength);
-            builder.Property(x => x.ContactRelationshipName).HasMaxLength(PatientConst.ContactRelationshipNameLength);
-            builder.Property(x => x.ContactIdentificationNumber).HasMaxLength(PatientConst.ContactIdentificationNumberLength);
-            builder.Property(x => x.ContactPhoneNumber).HasMaxLength(PatientConst.ContactPhoneNumberLength);
-            builder.Property(x => x.ContactAddress).HasMaxLength(PatientConst.ContactAddressLength);
-            builder.Property(x => x.Description).HasMaxLength(PatientConst.DescriptionLength);
+            builder.Property(x => x.PatientCode).IsRequired().HasMaxLength(DPatientConst.PatientCodeLength);
+            builder.Property(x => x.PatientName).IsRequired().HasMaxLength(DPatientConst.PatientNameLength);
+            builder.Property(x => x.BirthPlace).HasMaxLength(DPatientConst.BirthPlaceLength);
+            builder.Property(x => x.Address).HasMaxLength(DPatientConst.AddressLength);
+            builder.Property(x => x.PhoneNumber).HasMaxLength(DPatientConst.PhoneNumberLength);
+            builder.Property(x => x.Email).HasMaxLength(DPatientConst.EmailLength);
+            builder.Property(x => x.WorkPlace).HasMaxLength(DPatientConst.WorkPlaceLength);
+            builder.Property(x => x.IdentificationNumber).HasMaxLength(DPatientConst.IdentificationNumberLength);
+            builder.Property(x => x.IssueBy).HasMaxLength(DPatientConst.IssueByLength);
+            builder.Property(x => x.ContactName).HasMaxLength(DPatientConst.ContactNameLength);
+            builder.Property(x => x.ContactRelationshipName).HasMaxLength(DPatientConst.ContactRelationshipNameLength);
+            builder.Property(x => x.ContactIdentificationNumber).HasMaxLength(DPatientConst.ContactIdentificationNumberLength);
+            builder.Property(x => x.ContactPhoneNumber).HasMaxLength(DPatientConst.ContactPhoneNumberLength);
+            builder.Property(x => x.ContactAddress).HasMaxLength(DPatientConst.ContactAddressLength);
+            builder.Property(x => x.Description).HasMaxLength(DPatientConst.DescriptionLength);
 
             builder.HasOne<BloodType>().WithMany().HasForeignKey(x => x.BloodTypeID);
             builder.HasOne<BloodRhType>().WithMany().HasForeignKey(x => x.BloodRhTypeID);

@@ -44,13 +44,13 @@ using HIS.ApplicationService.Dictionary.ServiceGroupHeIns.Dto;
 using HIS.ApplicationService.Business.Patients.Dto;
 using HIS.ApplicationService.Dictionary.ServiceGroups.Dto;
 using HIS.ApplicationService.Dictionary.LiveAreas.Dto;
-using HIS.ApplicationService.Business.Receptions.Dto;
 using HIS.ApplicationService.Business.MedicalRecords.Dto;
 using HIS.ApplicationService.Business.Insurances.Dto;
 using HIS.ApplicationService.Business.Invoices.Dto;
 using HIS.ApplicationService.Dictionary.TransferForms.Dto;
 using HIS.ApplicationService.Dictionary.TransferReasons.Dto;
 using HIS.ApplicationService.Dictionary.RightRouteTypes.Dto;
+using HIS.EntityFrameworkCore.Entities;
 
 namespace HIS.ApplicationService
 {
@@ -157,7 +157,6 @@ namespace HIS.ApplicationService
             CreateMap<MedicalRecord, MedicalRecordDto>().ReverseMap();
             CreateMap<Patient, PatientDto>().ReverseMap();
             CreateMap<PatientRecord, PatientRecordDto>().ReverseMap();
-            CreateMap<Reception, ReceptionDto>().ReverseMap();
 
             CreateMap<ServiceRequestDto, ServiceRequestView>().ReverseMap();
 
@@ -180,7 +179,6 @@ namespace HIS.ApplicationService
 
             #region - hệ thống
 
-            CreateMap<ListLayoutTemplate, ListLayoutTemplateDto>().ReverseMap();
             CreateMap<Role, RoleDto>().ReverseMap();
             CreateMap<User, UserDto>().ReverseMap();
 

@@ -20,7 +20,7 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public Guid PatientID { get; set; }
 
-        [StringLength(PatientConst.PatientNameLength)]
+        [StringLength(DPatientConst.PatientNameLength)]
         public string PatientName { get; set; }
 
         public DateTime? BirthDate { get; set; }
@@ -28,16 +28,16 @@ namespace HIS.EntityFrameworkCore.Entities
         public Guid? GenderID { get; set; }
 
         [Required]
-        [StringLength(InsuranceConst.MaxInsuranceCodeLength, MinimumLength = InsuranceConst.MinInsuranceCodeLength)]
+        [StringLength(DInsuranceConst.MaxInsuranceCodeLength, MinimumLength = DInsuranceConst.MinInsuranceCodeLength)]
         public string InsuranceCode { get; set; } // mã thẻ
 
-        [StringLength(InsuranceConst.MaxMediOrgCodeLength, MinimumLength = InsuranceConst.MinMediOrgCodeLength)]
+        [StringLength(DInsuranceConst.MaxMediOrgCodeLength, MinimumLength = DInsuranceConst.MinMediOrgCodeLength)]
         public string MediOrgCode { get; set; } // mã nơi KCBBĐ
 
-        [StringLength(InsuranceConst.MaxMediOrgNameLength, MinimumLength = InsuranceConst.MinMediOrgNameLength)]
+        [StringLength(DInsuranceConst.MaxMediOrgNameLength, MinimumLength = DInsuranceConst.MinMediOrgNameLength)]
         public string MediOrgName { get; set; } // tên nơi KCBBĐ
 
-        [StringLength(InsuranceConst.MaxAddressLength, MinimumLength = InsuranceConst.MinAddressLength)]
+        [StringLength(DInsuranceConst.MaxAddressLength, MinimumLength = DInsuranceConst.MinAddressLength)]
         public string Address { get; set; } // địa chỉ thẻ
          
         public DateTime? FromDate { get; set; } // hạn thẻ từ ngày
@@ -54,7 +54,7 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public bool HasBirthCertificate { get; set; } // trẻ em có giấy khai sinh
 
-        [StringLength(InsuranceConst.MaxDescriptionLength, MinimumLength = InsuranceConst.MinDescriptionLength)]
+        [StringLength(DInsuranceConst.MaxDescriptionLength, MinimumLength = DInsuranceConst.MinDescriptionLength)]
         public string Description { get; set; }
     }
 }
