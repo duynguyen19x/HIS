@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Business\InvoiceDetails\**" />
     <Compile Remove="Business\Patients\Dtos\**" />
     <Compile Remove="Business\Pharmaceuticals\DExpMests\**" />
     <Compile Remove="Business\Pharmaceuticals\DImpMests\**" />
@@ -14,6 +15,7 @@
     <Compile Remove="Patient\**" />
     <Compile Remove="System\OptionCategory\**" />
     <Compile Remove="System\Permistion\**" />
+    <EmbeddedResource Remove="Business\InvoiceDetails\**" />
     <EmbeddedResource Remove="Business\Patients\Dtos\**" />
     <EmbeddedResource Remove="Business\Pharmaceuticals\DExpMests\**" />
     <EmbeddedResource Remove="Business\Pharmaceuticals\DImpMests\**" />
@@ -21,6 +23,7 @@
     <EmbeddedResource Remove="Patient\**" />
     <EmbeddedResource Remove="System\OptionCategory\**" />
     <EmbeddedResource Remove="System\Permistion\**" />
+    <None Remove="Business\InvoiceDetails\**" />
     <None Remove="Business\Patients\Dtos\**" />
     <None Remove="Business\Pharmaceuticals\DExpMests\**" />
     <None Remove="Business\Pharmaceuticals\DImpMests\**" />
@@ -37,10 +40,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HIS.EntityFrameworkCore\HIS.EntityFrameworkCore.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Business\InvoiceDetails\Dto\" />
   </ItemGroup>
 
 </Project>

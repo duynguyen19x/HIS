@@ -28,7 +28,6 @@ using HIS.ApplicationService.Dictionary.Branchs.Dto;
 using HIS.ApplicationService.Dictionary.Departments.Dto;
 using HIS.ApplicationService.Dictionary.DepartmentTypes.Dto;
 using HIS.ApplicationService.Dictionary.Ethnics.Dto;
-using HIS.ApplicationService.Systems.LayoutTemplates.Dto;
 using HIS.ApplicationService.Dictionary.Rooms.Dto;
 using HIS.ApplicationService.Dictionary.RoomTypes.Dto;
 using HIS.ApplicationService.Dictionary.Units.Dto;

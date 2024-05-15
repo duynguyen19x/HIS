@@ -27,7 +27,6 @@ namespace HIS.EntityFrameworkCore
 
         public DbSet<DbOption> DbOptions { get; set; }
 
-        public DbSet<ListLayoutTemplate> ListLayoutTemplate { get; set; }
         public DbSet<Option> Option { get; set; }
         public DbSet<OptionCategory> OptionCategory { get; set; }
         public DbSet<Report> Report { get; set; }
@@ -104,9 +103,8 @@ namespace HIS.EntityFrameworkCore
         #region - Nghiệp vụ
 
         public DbSet<Insurance> Insurance { get; set; }
-        public DbSet<Entities.Business.Patient> Patient { get; set; }
+        public DbSet<Patient> Patient { get; set; }
         public DbSet<PatientRecord> PatientRecord { get; set; }
-        public DbSet<Entities.Business.Reception> Reception { get; set; }
         
         public DbSet<Entities.Business.ServiceRequest> ServiceRequests { get; set; }
         public DbSet<ServiceRequestData> ServiceRequestDatas { get; set; }

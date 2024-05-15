@@ -13,5 +13,24 @@ namespace HIS.EntityFrameworkCore.Entities
     public class MedicalRecord : AuditedEntity<Guid>
     {
         public Guid PatientID { get; set; }
+
+        public string MedicalRecordCode { get; set; }
+
+        public DateTime MedicalRecordDate { get; set; }
+
+        public int MedicalRecordTypeID { get; set; }
+
+        public int MedicalRecordStatusID { get; set; }
+
+        public Guid BranchID { get; set; }
+
+        public Guid DepartmentID { get; set; }
+
+        public Guid RoomID { get; set; }
+
+        public Guid UserID { get; set; }
+
+        public string Description { get; set; }
+        
     }
 }

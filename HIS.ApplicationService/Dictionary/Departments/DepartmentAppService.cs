@@ -16,18 +16,15 @@ namespace HIS.ApplicationService.Dictionary.Departments
         private readonly IRepository<Department, Guid> _departmentRepository;
         private readonly IRepository<DepartmentType, int> _departmentTypeRepository;
         private readonly IRepository<Branch, Guid> _branchRepository;
-        private readonly IRepository<Employee, Guid> _employeeRepository;
 
         public DepartmentAppService(
             IRepository<Department, Guid> departmentRepository,
             IRepository<DepartmentType, int> departmentTypeRepository,
-            IRepository<Branch, Guid> branchRepository,
-            IRepository<Employee, Guid> employeeRepository)
+            IRepository<Branch, Guid> branchRepository)
         {
             _departmentRepository = departmentRepository;
             _departmentTypeRepository = departmentTypeRepository;
             _branchRepository = branchRepository;
-            _employeeRepository = employeeRepository;
         }
 
         public virtual async Task<PagedResultDto<DepartmentDto>> GetAllAsync(GetAllDepartmentInputDto input)
@@ -49,9 +46,6 @@ namespace HIS.ApplicationService.Dictionary.Departments
                             join o2 in _branchRepository.GetAll() on o.BranchId equals o2.Id 
                             into j2 from s2 in j2.DefaultIfEmpty()
 
-                            join o3 in _employeeRepository.GetAll() on o.BranchId equals o3.Id
-                            into j3 from s3 in j3.DefaultIfEmpty()
-
                             select new DepartmentDto()
                             {
                                 Id = o.Id,
@@ -65,7 +59,6 @@ namespace HIS.ApplicationService.Dictionary.Departments
                                 BranchCode = s2.Code,
                                 BranchName = s2.Name,
                                 ChiefId = o.ChiefId,
-                                ChiefName = s3.Name,
                                 Email = o.Email,
                                 Tel = o.Tel,
                                 Description = o.Description,

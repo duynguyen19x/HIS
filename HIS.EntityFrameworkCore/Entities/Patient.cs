@@ -1,10 +1,4 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities
 {
@@ -61,10 +55,16 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public string ContactIdentificationNumber { get; set; } // số cmnd, cccd của người liên hệ
 
+        public string ContactIssueBy { get; set; }
+
+        public DateTime? ContactIssueDate { get; set; }
+
         public string ContactPhoneNumber { get; set; } // số điện thoại của người liên hệ
 
         public string ContactAddress { get; set; } // địa chỉ của người liên hệ
 
         public string Description { get; set; } // ghi chú
+
+        public Guid BranchID { get; set; } // chi nhánh làm việc
     }
 }

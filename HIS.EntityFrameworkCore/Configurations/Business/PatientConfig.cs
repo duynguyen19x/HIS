@@ -43,6 +43,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
             builder.HasOne<Country>().WithMany().HasForeignKey(x => x.CountryID);
             builder.HasOne<Province>().WithMany().HasForeignKey(x => x.ProvinceID);
             builder.HasOne<Ward>().WithMany().HasForeignKey(x => x.WardID);
+            builder.HasOne<Branch>().WithMany().HasForeignKey(x => x.BranchID);
         }
     }
 }
