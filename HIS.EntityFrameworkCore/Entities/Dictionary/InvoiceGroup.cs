@@ -12,7 +12,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionary
     /// <summary>
     /// Sổ thanh toán
     /// </summary>
-    [Table("DIInvoiceGroup")]
+    [Table("SInvoiceGroup")]
     public class InvoiceGroup : AuditedEntity<Guid>
     {
         [MaxLength(50)]

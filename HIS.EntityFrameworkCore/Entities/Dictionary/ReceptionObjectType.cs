@@ -7,7 +7,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionary
     /// <summary>
     /// Đối tượng đăng ký khám.
     /// </summary>
-    [Table("DIReceptionObjectType")]
+    [Table("SReceptionObjectType")]
     public class ReceptionObjectType : AuditedEntity<int>
     {
         [MaxLength(50)]

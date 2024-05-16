@@ -7,7 +7,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// <summary>
     /// Tôn giáo.
     /// </summary>
-    [Table("DIReligion")]
+    [Table("SReligion")]
     public class Religion : AuditedEntity<Guid>
     {
         [Required]

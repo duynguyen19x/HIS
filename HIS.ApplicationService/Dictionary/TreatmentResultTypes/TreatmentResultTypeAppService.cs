@@ -16,9 +16,9 @@ namespace HIS.ApplicationService.Dictionary.TreatmentResultTypes
 {
     public class TreatmentResultTypeAppService : BaseAppService, ITreatmentResultTypeAppService
     {
-        private readonly IRepository<TreatmentResultType, int> _treatmentResultTypeRepository;
+        private readonly IRepository<TreatmentResult, int> _treatmentResultTypeRepository;
 
-        public TreatmentResultTypeAppService(IRepository<TreatmentResultType, int> treatmentResultTypeRepository)
+        public TreatmentResultTypeAppService(IRepository<TreatmentResult, int> treatmentResultTypeRepository)
         {
             _treatmentResultTypeRepository = treatmentResultTypeRepository;
         }

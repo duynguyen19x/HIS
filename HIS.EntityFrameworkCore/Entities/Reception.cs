@@ -26,7 +26,7 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public Guid DepartmentID { get; set; }
 
-        public Guid RoomID { get; set; }
+        public Guid RoomID { get; set; } // phòng tiếp đón
 
         public string Gate { get; set; } // cửa
 

@@ -11,7 +11,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionary
     /// <summary>
     /// Chi nhánh.
     /// </summary>
-    [Table("DIBranch")]
+    [Table("SBranch")]
     public class Branch : AuditedEntity<Guid>
     {
         /// <summary>

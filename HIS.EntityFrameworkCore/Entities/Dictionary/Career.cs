@@ -7,7 +7,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionary
     /// <summary>
     /// Nghề nghiệp.
     /// </summary>
-    [Table("DICareer")]
+    [Table("SCareer")]
     public class Career : AuditedEntity<Guid>
     {
         [MaxLength(50)]

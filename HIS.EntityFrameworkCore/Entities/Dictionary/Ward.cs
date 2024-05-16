@@ -7,7 +7,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionary
     /// <summary>
     /// Xã, phường.
     /// </summary>
-    [Table("DIWard")]
+    [Table("SWard")]
     public class Ward : AuditedEntity<Guid>
     {
         [Required]

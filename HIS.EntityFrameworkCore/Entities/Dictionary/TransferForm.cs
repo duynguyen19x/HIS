@@ -12,7 +12,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// <summary>
     /// Hình thức chuyển viện
     /// </summary>
-    [Table("DITransferForm")]
+    [Table("STransferForm")]
     public class TransferForm : AuditedEntity<Guid>
     {
         [MaxLength(50)]

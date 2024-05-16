@@ -7,8 +7,8 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// <summary>
     /// Kết quả điều trị.
     /// </summary>
-    [Table("DITreatmentResultType")]
-    public class TreatmentResultType : AuditedEntity<int>
+    [Table("STreatmentResult")]
+    public class TreatmentResult : AuditedEntity<int>
     {
         [MaxLength(50)]
         public virtual string Code { get; set; }

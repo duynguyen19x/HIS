@@ -12,7 +12,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// <summary>
     /// Lý do chuyển viện.
     /// </summary>
-    [Table("DITransferReason")]
+    [Table("STransferReason")]
     public class TransferReason : AuditedEntity<Guid>
     {
         [MaxLength(50)]

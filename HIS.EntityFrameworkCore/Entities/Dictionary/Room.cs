@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionary
     /// <summary>
     /// Phòng.
     /// </summary>
-    [Table("DIRoom")]
+    [Table("SRoom")]
     public class Room : AuditedEntity<Guid>
     {
         /// <summary>

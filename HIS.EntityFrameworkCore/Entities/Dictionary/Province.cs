@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionary
     /// <summary>
     /// Tỉnh, thành phố.
     /// </summary>
-    [Table("DIProvince")]
+    [Table("SProvince")]
     public class Province : AuditedEntity<Guid>
     {
         [Required]

@@ -11,7 +11,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// <summary>
     /// Mã bệnh
     /// </summary>
-    [Table("DIIcd10")]
+    [Table("SIcd10")]
     public class Icd : AuditedEntity<Guid>
     {
         public Guid? ChapterIcdId { get; set; }

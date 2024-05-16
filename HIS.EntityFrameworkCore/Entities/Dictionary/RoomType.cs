@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionary
     /// <summary>
     /// Loại phòng.
     /// </summary>
-    [Table("DIRoomType")]
+    [Table("SRoomType")]
     public class RoomType : AuditedEntity<int>
     {
         [Required]

@@ -81,7 +81,7 @@ namespace HIS.EntityFrameworkCore
         public DbSet<RoomType> RoomType { get; set; }
         public DbSet<Supplier> Supplier { get; set; }
         public DbSet<TreatmentEndType> TreatmentEndType { get; set; }
-        public DbSet<TreatmentResultType> TreatmentResult { get; set; }
+        public DbSet<TreatmentResult> TreatmentResult { get; set; }
         public DbSet<Unit> Unit { get; set; }
         public DbSet<Ward> Ward { get; set; }
         

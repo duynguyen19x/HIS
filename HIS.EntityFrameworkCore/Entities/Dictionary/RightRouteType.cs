@@ -12,7 +12,7 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
     /// <summary>
     /// Tuyến KCB.
     /// </summary>
-    [Table("DIRightRouteType")]
+    [Table("SRightRouteType")]
     public class RightRouteType : AuditedEntity<int>
     {
         [MaxLength(50)]

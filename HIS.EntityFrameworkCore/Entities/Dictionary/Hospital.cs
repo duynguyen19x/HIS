@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HIS.EntityFrameworkCore.Entities.Dictionaries
 {
-    [Table("DIHospital")]
+    [Table("SHospital")]
     public class Hospital : AuditedEntity<Guid>
     {
         [Required]

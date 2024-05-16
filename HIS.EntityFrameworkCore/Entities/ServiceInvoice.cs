@@ -12,5 +12,6 @@ namespace HIS.EntityFrameworkCore.Entities
         public Guid InvoiceID { get; set; }
         public Guid ServiceRequestID { get; set; }
         public Guid ServiceID { get; set; }
+        public Guid BranchID { get; set; }
     }
 }
