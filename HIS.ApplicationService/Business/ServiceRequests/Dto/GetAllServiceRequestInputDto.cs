@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.ApplicationService.Business.Treatments.Dto
+namespace HIS.ApplicationService.Business.ServiceRequests.Dto
 {
-    public class TreatmentDto : EntityDto<Guid>
+    public class GetAllServiceRequestInputDto : PagedAndSortedResultRequestDto
     {
     }
 }
