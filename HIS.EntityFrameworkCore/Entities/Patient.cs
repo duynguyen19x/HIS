@@ -65,6 +65,8 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public string Description { get; set; } // ghi chú
 
+        public Guid PatientOrderID { get; set; } // mã số thứ tự bệnh nhân
+
         public Guid BranchID { get; set; } // chi nhánh làm việc
     }
 }

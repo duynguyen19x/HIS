@@ -2,7 +2,8 @@
 
 namespace HIS.ApplicationService.Business.Insurances.Dto
 {
-    public class GetAllInsuranceInputDto : PagedResultRequestDto
+    public class GetAllInsuranceInputDto : PagedAndSortedResultRequestDto
     {
+        public string InsuranceCodeFilter { get; set; }
     }
 }

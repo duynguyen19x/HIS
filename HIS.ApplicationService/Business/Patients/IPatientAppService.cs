@@ -6,12 +6,9 @@ namespace HIS.ApplicationService.Business.Patients
 {
     public interface IPatientAppService : IAppService
     {
-        Task<PagedResultDto<PatientDto>> GetAllAsync(GetAllPatientInputDto input);
-
-        Task<ResultDto<PatientDto>> GetAsync(Guid id);
-
-        Task<ResultDto<PatientDto>> CreateOrUpdateAsync(PatientDto input);
-
-        Task<ResultDto<PatientDto>> DeleteAsync(Guid id);
+        Task<ResultDto<PatientDto>> Get(Guid id);
+        Task<PagedResultDto<PatientDto>> GetAll(GetAllPatientInputDto input);
+        Task<ResultDto<PatientDto>> CreateOrEdit(PatientDto input);
+        Task<ResultDto<PatientDto>> Delete(Guid id);
     }
 }

@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\Report\**" />
+    <Content Remove="Controllers\Report\**" />
+    <EmbeddedResource Remove="Controllers\Report\**" />
+    <None Remove="Controllers\Report\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.8" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 	<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.14" />
@@ -14,10 +21,6 @@
   
   <ItemGroup>
   	<ProjectReference Include="..\HIS.ApplicationService\HIS.ApplicationService.csproj" />
-  </ItemGroup>
-  
-  <ItemGroup>
-    <Folder Include="Controllers\Report\" />
   </ItemGroup>
 
 </Project>

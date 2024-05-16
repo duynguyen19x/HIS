@@ -7,17 +7,16 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities
 {
-    /// <summary>
-    /// Hóa đơn thanh toán
-    /// </summary>
-    public class Invoice : AuditedEntity<Guid>
-    {
-        public string InvoiceCode { get; set; }
-        public DateTime InvoiceDate { get; set; }
-        public int InvoiceTypeID { get; set; }
 
+    public class Examination : AuditedEntity<Guid>
+    {
+        public DateTime ExaminationDate { get; set; }
+        public int ExaminationTypeID { get; set; }
+
+        public Guid ReceptionID { get; set; } 
         public Guid MedicalRecordID { get; set; }
         public Guid TreatmentID { get; set; }
+        public Guid OrderID { get; set; }
         public Guid BranchID { get; set; }
     }
 }
