@@ -19,7 +19,7 @@ namespace HIS.ApplicationService.Business.Patients
             _hisPatientRepository = hisPatientRepository;
         }
 
-        public virtual async Task<PagedResultDto<PatientDto>> GetAllAsync(GetAllPatientInputDto input)
+        public virtual async Task<PagedResultDto<PatientDto>> GetAll(GetAllPatientInputDto input)
         {
             var result = new PagedResultDto<PatientDto>();
             try
@@ -43,7 +43,7 @@ namespace HIS.ApplicationService.Business.Patients
             return result;
         }
 
-        public virtual async Task<ResultDto<PatientDto>> GetAsync(Guid id)
+        public virtual async Task<ResultDto<PatientDto>> Get(Guid id)
         {
             var result = new ResultDto<PatientDto>();
             try
@@ -60,7 +60,7 @@ namespace HIS.ApplicationService.Business.Patients
             return result;
         }
 
-        public virtual async Task<ResultDto<PatientDto>> CreateOrUpdateAsync(PatientDto input)
+        public virtual async Task<ResultDto<PatientDto>> CreateOrEdit(PatientDto input)
         {
             if (Check.IsNullOrDefault(input.Id))
             {
@@ -120,7 +120,7 @@ namespace HIS.ApplicationService.Business.Patients
             return result;
         }
 
-        public virtual async Task<ResultDto<PatientDto>> DeleteAsync(Guid id)
+        public virtual async Task<ResultDto<PatientDto>> Delete(Guid id)
         {
             var result = new ResultDto<PatientDto>();
             using (var unitOfWork = UnitOfWorkManager.Begin())

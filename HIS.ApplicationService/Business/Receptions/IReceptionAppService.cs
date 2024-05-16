@@ -12,8 +12,8 @@ namespace HIS.ApplicationService.Business.Receptions
 {
     public interface IReceptionAppService : IAppService
     {
+        Task<ResultDto<ReceptionDto>> Get(Guid id);
         Task<PagedResultDto<ReceptionDto>> GetAll(GetAllReceptionInputDto input);
-        Task<ResultDto<ReceptionDto>> GetById(Guid id);
         Task<ResultDto<ReceptionDto>> CreateOrEdit(ReceptionDto input);
         Task<ResultDto<ReceptionDto>> Delete(Guid id);
     }
