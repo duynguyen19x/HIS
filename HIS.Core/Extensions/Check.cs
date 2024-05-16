@@ -103,6 +103,11 @@ namespace HIS.Core.Extensions
             return source != null && source.Count > 0;
         }
 
+        public static bool Any<T>(ICollection<T> source)
+        {
+            return source != null && source.Any();
+        }
+
         /// <summary>
         /// Kiểm tra chuỗi có trong mảng.
         /// </summary>

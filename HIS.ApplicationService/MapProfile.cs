@@ -51,6 +51,7 @@ using HIS.ApplicationService.Dictionary.TransferForms.Dto;
 using HIS.ApplicationService.Dictionary.TransferReasons.Dto;
 using HIS.ApplicationService.Dictionary.RightRouteTypes.Dto;
 using HIS.EntityFrameworkCore.Entities;
+using HIS.ApplicationService.Business.Receptions.Dto;
 
 namespace HIS.ApplicationService
 {
@@ -151,6 +152,8 @@ namespace HIS.ApplicationService
 
             #region - nghiệp vụ
 
+
+            CreateMap<Reception, ReceptionDto>().ReverseMap();
 
             CreateMap<Insurance, InsuranceDto>().ReverseMap();
             CreateMap<Invoice, InvoiceDto>().ReverseMap();
