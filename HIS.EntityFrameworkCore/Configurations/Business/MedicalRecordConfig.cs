@@ -17,7 +17,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
             builder.ToTable("DMedicalRecord");
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.MedicalRecordCode).IsRequired().HasMaxLength(DMedicalRecordConst.MedicalRecordCodeLength);
+            builder.Property(x => x.MedicalRecordCode).IsRequired().HasMaxLength(MedicalRecordConst.MedicalRecordCodeLength);
 
             builder.HasOne<Patient>().WithMany().HasForeignKey(x => x.PatientID);
         }

@@ -14,8 +14,8 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
             builder.ToTable("DOrder");
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.OrderCode).IsRequired().HasMaxLength(DOrderConst.OrderCodeLength);
-            builder.Property(x => x.Barcode).HasMaxLength(DOrderConst.BarcodeLength);
+            builder.Property(x => x.OrderCode).IsRequired().HasMaxLength(OrderConst.OrderCodeLength);
+            builder.Property(x => x.Barcode).HasMaxLength(OrderConst.BarcodeLength);
             builder.Property(x => x.IcdCode).HasMaxLength(IcdConst.IcdCodeLength);
             builder.Property(x => x.IcdName).HasMaxLength(IcdConst.IcdNameLength);
             builder.Property(x => x.IcdSubCode).HasMaxLength(IcdConst.IcdSubCodeLength);

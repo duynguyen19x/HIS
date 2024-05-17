@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Constants
 {
-    public class SRelationshipConst
+    public class RelationshipConst
     {
         public const int MaxRelationshipCodeLength = 50;
         public const int MinRelationshipCodeLength = 0;
