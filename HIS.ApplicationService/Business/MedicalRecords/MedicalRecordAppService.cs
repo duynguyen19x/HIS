@@ -1,6 +1,9 @@
 ﻿using HIS.ApplicationService.Business.MedicalRecords.Dto;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
+using HIS.Core.Domain.Repositories;
+using HIS.Core.Extensions;
+using HIS.EntityFrameworkCore.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +14,32 @@ namespace HIS.ApplicationService.Business.MedicalRecords
 {
     public class MedicalRecordAppService : BaseAppService, IMedicalRecordAppService
     {
+        private readonly IRepository<MedicalRecord, Guid> _medicalRecordRepository;
 
-        public MedicalRecordAppService() 
-        { 
+
+        public MedicalRecordAppService(IRepository<MedicalRecord, Guid> medicalRecordRepository) 
+        {
+            _medicalRecordRepository = medicalRecordRepository;
         }
 
-        public Task<ResultDto<MedicalRecordDto>> CreateOrEdit(MedicalRecordDto input)
+        public async Task<ResultDto<MedicalRecordDto>> CreateOrEdit(MedicalRecordDto input)
+        {
+            if (Check.IsNullOrDefault(input.Id))
+            {
+                return await Create(input);
+            }    
+            else
+            {
+                return await Update(input);
+            }    
+        }
+
+        public Task<ResultDto<MedicalRecordDto>> Create(MedicalRecordDto input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ResultDto<MedicalRecordDto>> Update(MedicalRecordDto input)
         {
             throw new NotImplementedException();
         }
