@@ -1,4 +1,6 @@
-﻿using HIS.ApplicationService.Business.Patients.Dto;
+﻿using HIS.ApplicationService.Business.MedicalRecords;
+using HIS.ApplicationService.Business.Patients;
+using HIS.ApplicationService.Business.Patients.Dto;
 using HIS.ApplicationService.Business.Receptions.Dto;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
@@ -27,6 +29,9 @@ namespace HIS.ApplicationService.Business.Receptions
         private readonly IRepository<ServiceRequest, Guid> _serviceRequestRepository;
         private readonly IRepository<Invoice, Guid> _invoiceRepository;
 
+        private readonly IPatientAppService _patientAppService;
+        private readonly IMedicalRecordAppService _medicalRecordAppService;
+
         public ReceptionAppService(
             IRepository<Patient, Guid> patientRepository,
             IRepository<PatientOrder, Guid> patientOrderRepository,
@@ -35,7 +40,11 @@ namespace HIS.ApplicationService.Business.Receptions
             IRepository<Reception, Guid> receptionRepository,
             IRepository<Order, Guid> orderRepository,
             IRepository<ServiceRequest, Guid> serviceRequestRepository,
-            IRepository<Invoice, Guid> invoiceRepository) 
+            IRepository<Invoice, Guid> invoiceRepository,
+
+            IPatientAppService patientAppService,
+            IMedicalRecordAppService medicalRecordAppService
+            ) 
         {
             _patientRepository = patientRepository;
             _patientOrderRepository = patientOrderRepository;
@@ -45,6 +54,9 @@ namespace HIS.ApplicationService.Business.Receptions
             _orderRepository = orderRepository;
             _serviceRequestRepository = serviceRequestRepository;
             _invoiceRepository = invoiceRepository;
+
+            _patientAppService = patientAppService;
+            _medicalRecordAppService = medicalRecordAppService;
         }
 
         public async Task<ResultDto<ReceptionDto>> CreateOrEdit(ReceptionDto input)
@@ -61,12 +73,100 @@ namespace HIS.ApplicationService.Business.Receptions
 
         public async Task<ResultDto<ReceptionDto>> Create(ReceptionDto input)
         {
-            throw new NotImplementedException();
+            var result = new ResultDto<ReceptionDto>();
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+            {
+                try
+                {
+                    #region - check
+
+
+
+                    #endregion
+
+                    #region - xử lý dữ liệu
+
+                    #endregion
+
+                    #region - lưu
+
+                    var patientResult = await _patientAppService.CreateOrEdit(input.MedicalRecord.Patient);
+                    if (!patientResult.IsSucceeded)
+                    {
+                        throw new Exception(patientResult.Message);
+                    }
+
+                    var medicalRecordResult = await _medicalRecordAppService.CreateOrEdit(input.MedicalRecord);
+                    if (!medicalRecordResult.IsSucceeded)
+                    {
+                        throw new Exception(medicalRecordResult.Message);
+                    }
+
+                    #endregion
+
+                    #region - lưu log
+
+                    #endregion
+
+                    unitOfWork.Complete();
+                    result.Success(input);
+                }
+                catch (Exception ex)
+                {
+                    result.Exception(ex);
+                }
+            }
+
+            return result;
         }
 
         public async Task<ResultDto<ReceptionDto>> Update(ReceptionDto input)
         {
-            throw new NotImplementedException();
+            var result = new ResultDto<ReceptionDto>();
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+            {
+                try
+                {
+                    #region - check
+
+
+
+                    #endregion
+
+                    #region - xử lý dữ liệu
+
+                    #endregion
+
+                    #region - lưu
+
+                    var patientResult = await _patientAppService.CreateOrEdit(input.MedicalRecord.Patient);
+                    if (!patientResult.IsSucceeded)
+                    {
+                        throw new Exception(patientResult.Message);
+                    }
+
+                    var medicalRecordResult = await _medicalRecordAppService.CreateOrEdit(input.MedicalRecord);
+                    if (!medicalRecordResult.IsSucceeded)
+                    {
+                        throw new Exception(medicalRecordResult.Message);
+                    }
+
+                    #endregion
+
+                    #region - lưu log
+
+                    #endregion
+
+                    unitOfWork.Complete();
+                    result.Success(input);
+                }
+                catch (Exception ex)
+                {
+                    result.Exception(ex);
+                }
+            }
+
+            return result;
         }
 
         public async Task<ResultDto<ReceptionDto>> Delete(Guid id)
