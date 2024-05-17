@@ -1,25 +1,21 @@
-﻿using AutoMapper;
-using HIS.Dtos.Business.InOutStockItems;
+﻿using HIS.Dtos.Business.InOutStockItems;
 using HIS.Dtos.Business.ItemStocks;
 using HIS.Dtos.Dictionaries.ItemPricePolicies;
 using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Items;
-using HIS.EntityFrameworkCore;
 using HIS.Utilities.Enums;
 using HIS.Utilities.Helpers;
 using HIS.Utilities.Sections;
-using Microsoft.Extensions.Configuration;
 using System.Globalization;
 using HIS.Core.Enums;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Extensions;
 using HIS.Core.Application.Services;
 using HIS.Core.Domain.Repositories;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
 using System.Transactions;
 using HIS.ApplicationService.Business.InOutStocks.Dto;
+using HIS.EntityFrameworkCore.Entities;
 
 namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 {

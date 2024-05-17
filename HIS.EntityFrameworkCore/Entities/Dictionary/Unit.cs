@@ -2,8 +2,11 @@
 using HIS.EntityFrameworkCore.Entities.Categories;
 using System.ComponentModel;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionaries
+namespace HIS.EntityFrameworkCore.Entities
 {
+    /// <summary>
+    /// Đơn vị tính
+    /// </summary>
     public class Unit : Entity<Guid>
     {
         [Description("Mã ĐVT")]

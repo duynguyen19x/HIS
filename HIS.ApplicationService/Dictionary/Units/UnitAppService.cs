@@ -4,7 +4,7 @@ using HIS.Core.Application.Services.Dto;
 using HIS.Core.Extensions;
 using HIS.ApplicationService.Dictionary.Units.Dto;
 using HIS.Core.Domain.Repositories;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities;
 using HIS.Core.Application.Services;
 using HIS.Dtos.Dictionaries.Countries;
 using Microsoft.EntityFrameworkCore;

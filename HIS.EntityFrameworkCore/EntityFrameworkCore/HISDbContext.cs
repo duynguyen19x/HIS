@@ -1,19 +1,14 @@
 ﻿using HIS.Core.Domain.Entities;
-using HIS.Core.Domain.Entities.Auditing;
 using HIS.Core.EntityFrameworkCore;
-using HIS.Core.Extensions;
 using HIS.EntityFrameworkCore.Configurations;
 using HIS.EntityFrameworkCore.Entities;
 using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Items;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
 using HIS.EntityFrameworkCore.Entities.System;
 using HIS.EntityFrameworkCore.Views;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace HIS.EntityFrameworkCore

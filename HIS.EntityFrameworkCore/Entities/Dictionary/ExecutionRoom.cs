@@ -1,12 +1,13 @@
 ﻿using HIS.Core.Domain.Entities;
 using HIS.EntityFrameworkCore.Entities.Categories;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionaries
+namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// Phòng thực hiện
     /// </summary>
+    [Table("SExecutionRoom")]
     public class ExecutionRoom : Entity<Guid>
     {
         public Guid? ServiceId { get; set; }

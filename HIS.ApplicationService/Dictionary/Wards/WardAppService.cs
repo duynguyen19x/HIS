@@ -1,14 +1,11 @@
-﻿using AutoMapper;
-using HIS.Dtos.Dictionaries.Ward;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+﻿using HIS.Dtos.Dictionaries.Ward;
+using HIS.EntityFrameworkCore.Entities;
 using Microsoft.EntityFrameworkCore;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Extensions;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Application.Services;
 using System.Transactions;
-using HIS.Dtos.Dictionaries.Countries;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
 
 namespace HIS.ApplicationService.Dictionaries.Wards
 {

@@ -7,7 +7,7 @@ using HIS.ApplicationService.Dictionary.Rooms.Dto;
 using HIS.ApplicationService.Dictionary.RoomTypes.Dto;
 using HIS.Core.Application.Services;
 using HIS.Core.Domain.Repositories;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
+using HIS.EntityFrameworkCore.Entities;
 using HIS.ApplicationService.Dictionary.DepartmentTypes.Dto;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using System.Transactions;
