@@ -70,10 +70,13 @@ namespace HIS.ApplicationService.Business.Patients.Dto
 
         public Guid PatientOrderID { get; set; } // mã số thứ tự bệnh nhân
 
-        public DateTime PatientOrderDate { get; set; }
-
-        public int PatientOrderValue { get; set; }
-
         public Guid BranchID { get; set; } // chi nhánh làm việc
+
+        public PatientOrderDto PatientOrder { get; set; }
+
+        public PatientDto()
+        {
+            PatientOrder = new PatientOrderDto();
+        }
     }
 }

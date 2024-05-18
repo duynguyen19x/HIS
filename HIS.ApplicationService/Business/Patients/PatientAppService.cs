@@ -109,8 +109,7 @@ namespace HIS.ApplicationService.Business.Patients
                         if (patientOrderResult.IsSucceeded)
                         {
                             input.PatientOrderID = patientOrderResult.Result.Id;
-                            input.PatientOrderDate = patientOrderResult.Result.PatientOrderDate;
-                            input.PatientOrderValue = patientOrderResult.Result.SortOrder;
+                            input.PatientOrder = patientOrderResult.Result;
                         }    
                     }
 
