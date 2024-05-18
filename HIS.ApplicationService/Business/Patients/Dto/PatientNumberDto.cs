@@ -10,6 +10,7 @@ namespace HIS.ApplicationService.Business.Patients.Dto
     public class PatientNumberDto : EntityDto<Guid?>
     {
         public DateTime PatientNumberDate { get; set; }
-        public int SortOrder { get; set; }
+
+        public int NumOrder { get; set; }
     }
 }

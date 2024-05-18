@@ -78,19 +78,18 @@ namespace HIS.ApplicationService.Business.Receptions
             {
                 try
                 {
-                    #region - check
-
-
-
-                    #endregion
 
                     #region - xử lý dữ liệu
+
+                    var patientDto = ObjectMapper.Map<PatientDto>(input.MedicalRecord); 
+
+
 
                     #endregion
 
                     #region - lưu
 
-                    var patientResult = await _patientAppService.CreateOrEdit(input.MedicalRecord.Patient);
+                    var patientResult = await _patientAppService.CreateOrEdit(patientDto);
                     if (!patientResult.IsSucceeded)
                     {
                         throw new Exception(patientResult.Message);
@@ -135,11 +134,16 @@ namespace HIS.ApplicationService.Business.Receptions
 
                     #region - xử lý dữ liệu
 
+                    var patient = ObjectMapper.Map<PatientDto>(input.MedicalRecord);
+                    patient.Id = input.MedicalRecord.PatientID;
+
+                    
+
                     #endregion
 
                     #region - lưu
 
-                    var patientResult = await _patientAppService.CreateOrEdit(input.MedicalRecord.Patient);
+                    var patientResult = await _patientAppService.CreateOrEdit(patient);
                     if (!patientResult.IsSucceeded)
                     {
                         throw new Exception(patientResult.Message);

@@ -1,6 +1,7 @@
 ﻿using HIS.Core.Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,10 @@ namespace HIS.EntityFrameworkCore.Entities
     [Table("DPatientNumber")]
     public class PatientNumber : Entity<Guid>
     {
-        public DateTime PatientOrderDate { get; set; } // ngày cấp phát
-        public int SortOrder { get; set; } // số thứ tự
+        [Required]
+        public DateTime PatientNumberDate { get; set; } // ngày cấp phát
+
+        [Required]
+        public int NumOrder { get; set; } // số thứ tự
     }
 }

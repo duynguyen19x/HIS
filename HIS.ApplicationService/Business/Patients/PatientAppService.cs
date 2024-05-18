@@ -13,19 +13,19 @@ namespace HIS.ApplicationService.Business.Patients
     public class PatientAppService : BaseAppService, IPatientAppService
     {
         private readonly IRepository<Patient, Guid> _patientRepository;
-        private readonly IRepository<PatientNumber, Guid> _patientOrderRepository;
+        private readonly IRepository<PatientNumber, Guid> _patientNumberRepository;
 
-        private readonly IPatientOrderAppService _patientOrderAppService;
+        private readonly IPatientNumberAppService _patientNumberAppService;
 
         public PatientAppService(
             IRepository<Patient, Guid> patientRepository,
-            IRepository<PatientNumber, Guid> patientOrderRepository,
-            PatientOrderAppService patientOrderAppService) 
+            IRepository<PatientNumber, Guid> patientNumberRepository,
+            PatientNumberAppService patientNumberAppService) 
         {
             _patientRepository = patientRepository;
-            _patientOrderRepository = patientOrderRepository;
+            _patientNumberRepository = patientNumberRepository;
 
-            _patientOrderAppService = patientOrderAppService;
+            _patientNumberAppService = patientNumberAppService;
         }
 
         public virtual async Task<PagedResultDto<PatientDto>> GetAll(GetAllPatientInputDto input)
@@ -95,29 +95,22 @@ namespace HIS.ApplicationService.Business.Patients
                     var createdDate = DateTime.Now;
 
                     input.Id = Guid.NewGuid();
-
-                    // chi nhánh
-                    if (Check.IsNullOrDefault(input.BranchID))
-                    {
-                        //input.BranchID = SessionExtensions.Login.Te
-                    }
+                    input.PatientName = input.PatientName.ToUpper();    
 
                     // số thứ tự bệnh nhân
-                    if (Check.IsNullOrDefault(input.PatientOrderID))
+                    if (Check.IsNullOrDefault(input.PatientNumberID))
                     {
-                        var patientOrderResult = await _patientOrderAppService.CreateLastOrder(createdDate);
+                        var patientOrderResult = await _patientNumberAppService.CreateLastNumber(createdDate);
                         if (patientOrderResult.IsSucceeded)
                         {
-                            input.PatientOrderID = patientOrderResult.Result.Id.GetValueOrDefault();
-                            input.PatientOrder = patientOrderResult.Result;
+                            input.PatientNumberID = patientOrderResult.Result.Id;
                         }    
                     }
 
                     // mã bệnh nhân
                     if (Check.IsNullOrDefault(input.PatientCode))
                     {
-                        
-                        // input.PatientCode = GetPatientCode();
+                        input.PatientCode = GetPatientCode(createdDate, input.PatientNumberID.GetValueOrDefault());
                     }    
 
                     var patient = ObjectMapper.Map<Patient>(input);
@@ -180,12 +173,13 @@ namespace HIS.ApplicationService.Business.Patients
 
 
 
-        private string GetPatientCode(PatientNumber patientOrder)
+        private string GetPatientCode(DateTime createdDate, Guid patientNumberID)
         {
-            var year = patientOrder.PatientOrderDate.Year % 1000;
+            var year = createdDate.Year % 1000;
             if (year > 100)
                 year = year % 100;
-            return year.ToString().PadLeft(2, '0') + patientOrder.SortOrder.ToString().PadLeft(8, '0');
+            // return year.ToString().PadLeft(2, '0') + numOrder.ToString().PadLeft(8, '0');
+            return string.Empty;
         }
     }
 }

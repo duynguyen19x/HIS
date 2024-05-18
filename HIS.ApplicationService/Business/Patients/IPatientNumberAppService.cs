@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Business.Patients
 {
-    public interface IPatientOrderAppService : IAppService
+    public interface IPatientNumberAppService : IAppService
     {
-        Task<ResultDto<PatientNumberDto>> CreateLastOrder(DateTime patientOrderDate);
+        Task<ResultDto<PatientNumberDto>> CreateLastNumber(DateTime patientNumberDate);
     }
 }
