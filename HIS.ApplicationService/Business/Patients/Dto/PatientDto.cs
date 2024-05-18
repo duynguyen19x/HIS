@@ -68,15 +68,15 @@ namespace HIS.ApplicationService.Business.Patients.Dto
 
         public string Description { get; set; } // ghi chú
 
-        public Guid PatientOrderID { get; set; } // mã số thứ tự bệnh nhân
+        public Guid? PatientOrderID { get; set; } // mã số thứ tự bệnh nhân
 
-        public Guid BranchID { get; set; } // chi nhánh làm việc
+        public Guid? BranchID { get; set; } // chi nhánh làm việc
 
-        public PatientOrderDto PatientOrder { get; set; }
+        public PatientNumberDto PatientOrder { get; set; }
 
         public PatientDto()
         {
-            PatientOrder = new PatientOrderDto();
+            PatientOrder = new PatientNumberDto();
         }
     }
 }

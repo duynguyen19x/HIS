@@ -13,13 +13,13 @@ namespace HIS.ApplicationService.Business.Patients
     public class PatientAppService : BaseAppService, IPatientAppService
     {
         private readonly IRepository<Patient, Guid> _patientRepository;
-        private readonly IRepository<PatientOrder, Guid> _patientOrderRepository;
+        private readonly IRepository<PatientNumber, Guid> _patientOrderRepository;
 
         private readonly IPatientOrderAppService _patientOrderAppService;
 
         public PatientAppService(
             IRepository<Patient, Guid> patientRepository,
-            IRepository<PatientOrder, Guid> patientOrderRepository,
+            IRepository<PatientNumber, Guid> patientOrderRepository,
             PatientOrderAppService patientOrderAppService) 
         {
             _patientRepository = patientRepository;
@@ -180,7 +180,7 @@ namespace HIS.ApplicationService.Business.Patients
 
 
 
-        private string GetPatientCode(PatientOrder patientOrder)
+        private string GetPatientCode(PatientNumber patientOrder)
         {
             var year = patientOrder.PatientOrderDate.Year % 1000;
             if (year > 100)

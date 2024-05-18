@@ -14,16 +14,16 @@ namespace HIS.ApplicationService.Business.Patients
 {
     public class PatientOrderAppService : BaseAppService, IPatientOrderAppService
     {
-        private readonly IRepository<PatientOrder, Guid> _patientOrderRepository;
+        private readonly IRepository<PatientNumber, Guid> _patientOrderRepository;
 
-        public PatientOrderAppService(IRepository<PatientOrder, Guid> patientOrderRepository) 
+        public PatientOrderAppService(IRepository<PatientNumber, Guid> patientOrderRepository) 
         {
             _patientOrderRepository = patientOrderRepository;
         }
 
-        public async Task<ResultDto<PatientOrderDto>> CreateLastOrder(DateTime patientOrderDate)
+        public async Task<ResultDto<PatientNumberDto>> CreateLastOrder(DateTime patientOrderDate)
         {
-            var result = new ResultDto<PatientOrderDto>();
+            var result = new ResultDto<PatientNumberDto>();
             using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
@@ -34,14 +34,14 @@ namespace HIS.ApplicationService.Business.Patients
                         .Where(x => x.PatientOrderDate >= fromDate && x.PatientOrderDate < toDate)
                         .Max(x => x.SortOrder);
                         
-                    var patientOrder = new PatientOrder();
+                    var patientOrder = new PatientNumber();
                     patientOrder.Id = Guid.NewGuid();
                     patientOrder.PatientOrderDate = patientOrderDate;
                     patientOrder.SortOrder = lastOrderInYear + 1;
                     await _patientOrderRepository.InsertAsync(patientOrder);
 
                     unitOfWork.Complete();
-                    result.Success(ObjectMapper.Map<PatientOrderDto>(patientOrder));
+                    result.Success(ObjectMapper.Map<PatientNumberDto>(patientOrder));
                 }
                 catch (Exception ex)
                 {

@@ -8,12 +8,6 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<PaymentMethod> builder)
         {
-            //builder.ToTable("DIC_PaymentMethod");
-
-            //builder.HasKey(x => x.Id);
-            //builder.Property(x => x.PaymentMethodCode).HasMaxLength(20).IsRequired();
-            //builder.Property(x => x.PaymentMethodName).HasMaxLength(128).IsRequired();
-            //builder.Property(x => x.Description).HasMaxLength(255);
 
             builder.HasData(
                 new PaymentMethod { Id = new Guid("8BFF9824-1DF2-419E-88AB-E098A6FC4E7E"), Code = "TM", Name = "Tiền mặt", SortOrder = 1 },

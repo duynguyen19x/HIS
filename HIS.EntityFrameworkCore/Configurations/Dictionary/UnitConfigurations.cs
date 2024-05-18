@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<Unit> builder)
         {
-            builder.ToTable("DIC_Unit");
+            builder.ToTable("SUnit");
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Code).HasMaxLength(50);

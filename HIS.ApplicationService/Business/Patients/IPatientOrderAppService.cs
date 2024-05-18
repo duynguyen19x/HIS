@@ -11,6 +11,6 @@ namespace HIS.ApplicationService.Business.Patients
 {
     public interface IPatientOrderAppService : IAppService
     {
-        Task<ResultDto<PatientOrderDto>> CreateLastOrder(DateTime patientOrderDate);
+        Task<ResultDto<PatientNumberDto>> CreateLastOrder(DateTime patientOrderDate);
     }
 }

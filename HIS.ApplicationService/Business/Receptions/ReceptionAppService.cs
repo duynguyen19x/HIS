@@ -21,7 +21,7 @@ namespace HIS.ApplicationService.Business.Receptions
     public class ReceptionAppService : BaseAppService, IReceptionAppService
     {
         private readonly IRepository<Patient, Guid> _patientRepository;
-        private readonly IRepository<PatientOrder, Guid> _patientOrderRepository;
+        private readonly IRepository<PatientNumber, Guid> _patientOrderRepository;
         private readonly IRepository<MedicalRecord, Guid> _medicalRecordRepository;
         private readonly IRepository<Treatment, Guid> _treatmentRepository;
         private readonly IRepository<Reception, Guid> _receptionRepository;
@@ -34,7 +34,7 @@ namespace HIS.ApplicationService.Business.Receptions
 
         public ReceptionAppService(
             IRepository<Patient, Guid> patientRepository,
-            IRepository<PatientOrder, Guid> patientOrderRepository,
+            IRepository<PatientNumber, Guid> patientOrderRepository,
             IRepository<MedicalRecord, Guid> medicalRecordRepository,
             IRepository<Treatment, Guid> treatmentRepository,
             IRepository<Reception, Guid> receptionRepository,

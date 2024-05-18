@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace HIS.ApplicationService.Business.Patients.Dto
 {
-    public class PatientOrderDto : EntityDto<Guid?>
+    public class PatientNumberDto : EntityDto<Guid?>
     {
-        public DateTime PatientOrderDate { get; set; }
+        public DateTime PatientNumberDate { get; set; }
         public int SortOrder { get; set; }
     }
 }
