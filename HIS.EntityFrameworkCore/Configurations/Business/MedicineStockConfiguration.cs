@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
     {
         public void Configure(EntityTypeBuilder<ItemStock> builder)
         {
-            builder.ToTable("BUS_ItemStock");
+            builder.ToTable("DItemStock");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id);
