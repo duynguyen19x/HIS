@@ -4,6 +4,7 @@ using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Extensions;
 using HIS.EntityFrameworkCore.Entities;
+using HIS.Utilities.Sections;
 using Microsoft.EntityFrameworkCore;
 using System.Transactions;
 
@@ -14,12 +15,17 @@ namespace HIS.ApplicationService.Business.Patients
         private readonly IRepository<Patient, Guid> _patientRepository;
         private readonly IRepository<PatientOrder, Guid> _patientOrderRepository;
 
+        private readonly IPatientOrderAppService _patientOrderAppService;
+
         public PatientAppService(
             IRepository<Patient, Guid> patientRepository,
-            IRepository<PatientOrder, Guid> patientOrderRepository) 
+            IRepository<PatientOrder, Guid> patientOrderRepository,
+            PatientOrderAppService patientOrderAppService) 
         {
             _patientRepository = patientRepository;
             _patientOrderRepository = patientOrderRepository;
+
+            _patientOrderAppService = patientOrderAppService;
         }
 
         public virtual async Task<PagedResultDto<PatientDto>> GetAll(GetAllPatientInputDto input)
@@ -71,30 +77,54 @@ namespace HIS.ApplicationService.Business.Patients
         {
             if (Check.IsNullOrDefault(input.Id))
             {
-                return await CreateAsync(input);
+                return await Create(input);
             }
             else
             {
-                return await UpdateAsync(input);
+                return await Update(input);
             }    
         }
 
-        public virtual async Task<ResultDto<PatientDto>> CreateAsync(PatientDto input)
+        public virtual async Task<ResultDto<PatientDto>> Create(PatientDto input)
         {
             var result = new ResultDto<PatientDto>();
             using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
             {
                 try
                 {
+                    var createdDate = DateTime.Now;
+
                     input.Id = Guid.NewGuid();
-                    var entity = ObjectMapper.Map<Patient>(input);
-                    entity.CreatedDate = DateTime.Now;
 
-                    await _patientRepository.InsertAsync(entity);
+                    // chi nhánh
+                    if (Check.IsNullOrDefault(input.BranchID))
+                    {
+                        //input.BranchID = SessionExtensions.Login.Te
+                    }
+
+                    // số thứ tự bệnh nhân
+                    if (Check.IsNullOrDefault(input.PatientOrderID))
+                    {
+                        var patientOrderResult = await _patientOrderAppService.CreateLastOrder(createdDate);
+                        if (patientOrderResult.IsSucceeded)
+                        {
+                            input.PatientOrderID = patientOrderResult.Result.Id;
+                            input.PatientOrderDate = patientOrderResult.Result.PatientOrderDate;
+                            input.PatientOrderValue = patientOrderResult.Result.SortOrder;
+                        }    
+                    }
+
+                    // mã bệnh nhân
+                    if (Check.IsNullOrDefault(input.PatientCode))
+                    {
+                        // input.PatientCode = GetPatientCode();
+                    }    
+
+                    var patient = ObjectMapper.Map<Patient>(input);
+
+                    await _patientRepository.InsertAsync(patient);
                     unitOfWork.Complete();
-
-                    result.IsSucceeded = true;
-                    result.Result = input;
+                    result.Success(input);
                 }
                 catch (Exception ex)
                 {
@@ -104,7 +134,7 @@ namespace HIS.ApplicationService.Business.Patients
             return result;
         }
 
-        public virtual async Task<ResultDto<PatientDto>> UpdateAsync(PatientDto input)
+        public virtual async Task<ResultDto<PatientDto>> Update(PatientDto input)
         {
             var result = new ResultDto<PatientDto>();
             using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
@@ -148,5 +178,14 @@ namespace HIS.ApplicationService.Business.Patients
             return result;
         }
 
+
+
+        private string GetPatientCode(PatientOrder patientOrder)
+        {
+            var year = patientOrder.PatientOrderDate.Year % 1000;
+            if (year > 100)
+                year = year % 100;
+            return year.ToString().PadLeft(2, '0') + patientOrder.SortOrder.ToString().PadLeft(8, '0');
+        }
     }
 }

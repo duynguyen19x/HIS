@@ -12,7 +12,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// </summary>
     public class PatientOrder : Entity<Guid>
     {
-        public DateTime PatientNumberDate { get; set; } // ngày cấp phát
+        public DateTime PatientOrderDate { get; set; } // ngày cấp phát
         public int SortOrder { get; set; } // số thứ tự
     }
 }
