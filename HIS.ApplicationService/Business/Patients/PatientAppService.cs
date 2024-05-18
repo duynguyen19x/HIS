@@ -108,7 +108,7 @@ namespace HIS.ApplicationService.Business.Patients
                         var patientOrderResult = await _patientOrderAppService.CreateLastOrder(createdDate);
                         if (patientOrderResult.IsSucceeded)
                         {
-                            input.PatientOrderID = patientOrderResult.Result.Id;
+                            input.PatientOrderID = patientOrderResult.Result.Id.GetValueOrDefault();
                             input.PatientOrder = patientOrderResult.Result;
                         }    
                     }
@@ -116,6 +116,7 @@ namespace HIS.ApplicationService.Business.Patients
                     // mã bệnh nhân
                     if (Check.IsNullOrDefault(input.PatientCode))
                     {
+                        
                         // input.PatientCode = GetPatientCode();
                     }    
 
