@@ -79,21 +79,7 @@ namespace HIS.ApplicationService.Business.Receptions
                 try
                 {
 
-                    #region - xử lý dữ liệu
-
-                    var patientDto = ObjectMapper.Map<PatientDto>(input.MedicalRecord); 
-
-
-
-                    #endregion
-
                     #region - lưu
-
-                    var patientResult = await _patientAppService.CreateOrEdit(patientDto);
-                    if (!patientResult.IsSucceeded)
-                    {
-                        throw new Exception(patientResult.Message);
-                    }
 
                     var medicalRecordResult = await _medicalRecordAppService.CreateOrEdit(input.MedicalRecord);
                     if (!medicalRecordResult.IsSucceeded)

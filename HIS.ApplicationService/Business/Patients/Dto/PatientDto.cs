@@ -14,16 +14,18 @@ namespace HIS.ApplicationService.Business.Patients.Dto
 
         public string PatientName { get; set; }
 
-        public DateTime? BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; } 
 
         public int BirthYear { get; set; }
 
         public string BirthPlace { get; set; }
 
-        public Guid? BloodTypeID { get; set; }
+        public Guid? PatientNumberID { get; set; } // mã số thứ tự bệnh nhân
 
-        public Guid? BloodRhTypeID { get; set; }
+        public Guid? BloodRhTypeID { get; set; } 
 
+        public Guid? BloodTypeID { get; set; } 
+        
         public Guid? GenderID { get; set; }
 
         public Guid? CareerID { get; set; }
@@ -37,6 +39,24 @@ namespace HIS.ApplicationService.Business.Patients.Dto
         public Guid? ProvinceID { get; set; }
 
         public Guid? WardID { get; set; }
+
+        public string BloodRhTypeName { get; set; }
+
+        public string BloodTypeName { get; set; }
+
+        public string GenderName { get; set; }
+
+        public string CareerName { get; set; }
+
+        public string EthnicityName { get; set; }
+
+        public string ReligionName { get; set; }
+
+        public string CountryName { get; set; }
+
+        public string ProvinceName { get; set; }
+
+        public string DistrictName { get; set; }
 
         public string Address { get; set; }
 
@@ -67,8 +87,6 @@ namespace HIS.ApplicationService.Business.Patients.Dto
         public string ContactAddress { get; set; } // địa chỉ của người liên hệ
 
         public string Description { get; set; } // ghi chú
-
-        public Guid? PatientNumberID { get; set; } // mã số thứ tự bệnh nhân
 
         public PatientDto()
         {

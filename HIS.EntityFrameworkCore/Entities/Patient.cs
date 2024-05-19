@@ -7,7 +7,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// Thông tin bệnh nhân
     /// </summary>
     [Table("DPatient")]
-    public class Patient : AuditedEntity<Guid>
+    public class Patient : FullAuditedEntity<Guid>
     {
         public string PatientCode { get; set; }
 
@@ -19,7 +19,7 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public string BirthPlace { get; set; }
 
-        public Guid? PatientOrderID { get; set; } // mã số thứ tự bệnh nhân
+        public Guid? PatientNumberID { get; set; } // mã số thứ tự bệnh nhân
 
         public Guid? BloodTypeID { get; set; }
 
@@ -36,6 +36,8 @@ namespace HIS.EntityFrameworkCore.Entities
         public Guid? CountryID { get; set; }
 
         public Guid? ProvinceID { get; set; }
+
+        public Guid? DistrictID { get; set; }
 
         public Guid? WardID { get; set; }
 

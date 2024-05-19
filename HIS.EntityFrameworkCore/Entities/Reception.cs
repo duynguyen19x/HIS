@@ -1,6 +1,7 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Thông tin tiếp đón.
     /// </summary>
+    [Table("DReception")]
     public class Reception : AuditedEntity<Guid>
     {
         public Guid PatientID { get; set; }
@@ -41,6 +43,8 @@ namespace HIS.EntityFrameworkCore.Entities
         public Guid? ServiceID { get; set; } // dịch vụ khám
 
         public string ServiceName { get; set; } // tên dịch vụ khám
+
+        public string ServiceCode { get; set; } // mã dịch vụ khám
 
         public Guid? ExecuteDepartmentID { get; set; } // khoa thực hiện
 

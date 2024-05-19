@@ -10,13 +10,14 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Thông tin bệnh án
     /// </summary>
-    public class MedicalRecord : AuditedEntity<Guid>
+    public class MedicalRecord : FullAuditedEntity<Guid>
     {
         public Guid PatientID { get; set; }
         public string MedicalRecordCode { get; set; }
         public DateTime MedicalRecordDate { get; set; }
         public int MedicalRecordTypeID { get; set; }
         public int MedicalRecordStatusID { get; set; }
+        
         public Guid BranchID { get; set; }
         public Guid DepartmentID { get; set; }
         public Guid RoomID { get; set; }
@@ -70,6 +71,8 @@ namespace HIS.EntityFrameworkCore.Entities
         public bool? IsTransferInRightRoute { get; set; } // chuyển bệnh nhân đúng tuyến CMKT
 
         public string HospitalizationReason { get; set; } // lý do nhập viện
+
+        public int NumOrder { get; set; } // só thứ tự
         public string Description { get; set; }
         
     }

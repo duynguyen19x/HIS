@@ -17,20 +17,21 @@ namespace HIS.ApplicationService.Business.Patients.Dto
         public Guid? BloodRhTypeFilter { get; set; }
         public Guid? BloodTypeFilter { get; set; }
         public Guid? GenderFilter { get; set; }
+        public Guid? CareerFilter { get; set; }
         public Guid? EthnicityFilter { get; set; }
         public Guid? ReligionFilter { get; set; }
         public Guid? CountryFilter { get; set; }
         public Guid? ProvinceFilter { get; set; }
         public Guid? DistrictFilter { get; set; }
         public Guid? WardFilter { get; set; }
-        public Guid? CareerFilter { get; set; }
+        public string AddressFilter { get; set; }
+        public string PhoneNumberFilter { get; set; }
+        public string EmailFilter { get; set; }
         public string WorkPlaceFilter { get; set; }
         public string IdentificationNumberFilter { get; set; }
         public DateTime? MaxIssueDateFilter { get; set; }
         public DateTime? MinIssueDateFilter { get; set; }
         public string IssueByFilter { get; set; }
-        public string PhoneNumberFilter { get; set; }
-        public string EmailFilter { get; set; }
         public string ContactNameFilter { get; set; }
         public string ContactPhoneNumberFilter { get; set; }
         public string ContactAddressFilter { get; set; }

@@ -34,16 +34,30 @@ namespace HIS.ApplicationService.Business.Patients
             try
             {
                 var filter = _patientRepository.GetAll()
-                    .WhereIf(!string.IsNullOrEmpty(input.PatientCodeFilter), x => x.PatientCode.Contains(input.PatientCodeFilter))
-                    .WhereIf(!string.IsNullOrEmpty(input.PatientNameFilter), x => x.PatientName.Contains(input.PatientNameFilter))
-                    .WhereIf(input.MaxBirthDate != null, x => x.BirthDate <= input.MaxBirthDate)
-                    .WhereIf(input.MinBirthDate != null, x => x.BirthDate >= input.MinBirthDate)
-                    ;
+                    .WhereIf(!Check.IsNullOrDefault(input.PatientCodeFilter), x => x.PatientCode.Contains(input.PatientCodeFilter))
+                    .WhereIf(!Check.IsNullOrDefault(input.PatientNameFilter), x => x.PatientName.Contains(input.PatientNameFilter))
+                    .WhereIf(!Check.IsNullOrDefault(input.MaxBirthDate), x => x.BirthDate <= input.MaxBirthDate)
+                    .WhereIf(!Check.IsNullOrDefault(input.MinBirthDate), x => x.BirthDate >= input.MinBirthDate)
+                    .WhereIf(!Check.IsNullOrDefault(input.BirthPlaceFilter), x => x.BirthPlace != null && x.BirthPlace.Contains(input.BirthPlaceFilter))
+                    .WhereIf(!Check.IsNullOrDefault(input.BloodRhTypeFilter), x => x.BloodRhTypeID == input.BloodRhTypeFilter)
+                    .WhereIf(!Check.IsNullOrDefault(input.BloodTypeFilter), x => x.BloodTypeID == input.BloodTypeFilter)
+                    .WhereIf(!Check.IsNullOrDefault(input.GenderFilter), x => x.GenderID == input.GenderFilter)
+                    .WhereIf(!Check.IsNullOrDefault(input.EthnicityFilter), x => x.EthnicityID == input.EthnicityFilter)
+                    .WhereIf(!Check.IsNullOrDefault(input.ReligionFilter), x => x.ReligionID == input.ReligionFilter)
+                    .WhereIf(!Check.IsNullOrDefault(input.CountryFilter), x => x.CountryID == input.CountryFilter)
+                    .WhereIf(!Check.IsNullOrDefault(input.ProvinceFilter), x => x.ProvinceID == input.ProvinceFilter)
+                    .WhereIf(!Check.IsNullOrDefault(input.DistrictFilter), x => x.DistrictID == input.DistrictFilter)
+                    .WhereIf(!Check.IsNullOrDefault(input.WardFilter), x => x.WardID == input.WardFilter)
+                    .WhereIf(!Check.IsNullOrDefault(input.CareerFilter), x => x.CareerID == input.CareerFilter)
+                    .WhereIf(!Check.IsNullOrDefault(input.WorkPlaceFilter), x => x.WorkPlace != null && x.WorkPlace.Contains(input.WorkPlaceFilter))
+                    .WhereIf(!Check.IsNullOrDefault(input.AddressFilter), x => x.Address != null && x.Address.Contains(input.AddressFilter))
+                    .WhereIf(!Check.IsNullOrDefault(input.PhoneNumberFilter), x => x.PhoneNumber != null && x.PhoneNumber.Contains(input.PhoneNumberFilter))
+                    .WhereIf(!Check.IsNullOrDefault(input.EmailFilter), x => x.Email != null && x.Email.Contains(input.EmailFilter))
+                    .WhereIf(!Check.IsNullOrDefault(input.IdentificationNumberFilter), x => x.IdentificationNumber != null && x.IdentificationNumber.Contains(input.IdentificationNumberFilter))
+                    .WhereIf(!Check.IsNullOrDefault(input.IssueByFilter), x => x.IssueBy != null && x.IssueBy.Contains(input.IssueByFilter))
+                    .WhereIf(!Check.IsNullOrDefault(input.ContactNameFilter), x => x.ContactName != null && x.ContactName.Contains(input.ContactNameFilter));
 
-                if (Check.IsNullOrDefault(input.Sorting))
-                    input.Sorting = "Code";
-
-                var paged = filter.ApplySortingAndPaging(input);
+                var paged = filter.ApplySortingAndPaging(input, nameof(Patient.PatientCode));
 
                 result.TotalCount = await filter.CountAsync();
                 result.Result = ObjectMapper.Map<IList<PatientDto>>(paged.ToList());
@@ -93,6 +107,7 @@ namespace HIS.ApplicationService.Business.Patients
                 try
                 {
                     var createdDate = DateTime.Now;
+                    var numOrder = 0;
 
                     input.Id = Guid.NewGuid();
                     input.PatientName = input.PatientName.ToUpper();    
@@ -104,18 +119,22 @@ namespace HIS.ApplicationService.Business.Patients
                         if (patientOrderResult.IsSucceeded)
                         {
                             input.PatientNumberID = patientOrderResult.Result.Id;
+                            numOrder = patientOrderResult.Result.NumOrder;
                         }    
                     }
 
                     // mã bệnh nhân
                     if (Check.IsNullOrDefault(input.PatientCode))
-                    {
-                        input.PatientCode = GetPatientCode(createdDate, input.PatientNumberID.GetValueOrDefault());
+                    { 
+                        input.PatientCode = GetPatientCode(createdDate, numOrder);
                     }    
 
                     var patient = ObjectMapper.Map<Patient>(input);
+                    patient.CreatedDate = createdDate;
+                    patient.CreatedBy = SessionExtensions.Login.Id;
 
                     await _patientRepository.InsertAsync(patient);
+
                     unitOfWork.Complete();
                     result.Success(input);
                 }
@@ -173,13 +192,12 @@ namespace HIS.ApplicationService.Business.Patients
 
 
 
-        private string GetPatientCode(DateTime createdDate, Guid patientNumberID)
+        private string GetPatientCode(DateTime createdDate, int numOrder)
         {
             var year = createdDate.Year % 1000;
             if (year > 100)
                 year = year % 100;
-            // return year.ToString().PadLeft(2, '0') + numOrder.ToString().PadLeft(8, '0');
-            return string.Empty;
+            return year.ToString().PadLeft(2, '0') + numOrder.ToString().PadLeft(8, '0');
         }
     }
 }

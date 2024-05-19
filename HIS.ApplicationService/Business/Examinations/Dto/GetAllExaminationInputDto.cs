@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Core.Enums
+namespace HIS.ApplicationService.Business.Examinations.Dto
 {
-    public enum PatientRecordTypes
+    internal class GetAllExaminationInputDto
     {
-        NOITRU = 1,
-        NGOAITRU = 2,
-        DICHVU = 3
     }
 }

@@ -85,6 +85,16 @@ namespace HIS.Core.Extensions
             return query;
         }
 
+
+        public static IQueryable<TSource> ApplySortingAndPaging<TSource>(this IQueryable<TSource> query, IPagedAndSortedResultRequest input, string defaultSorting)
+        {
+            if (Check.IsNullOrDefault(input.Sorting))
+                input.Sorting = defaultSorting;
+
+            return query.SortBy(input).PageBy(input);
+        }
+
+
         public static IQueryable<TSource> ApplySortingAndPaging<TSource>(this IQueryable<TSource> query, IPagedAndSortedResultRequest input)
         {
             return query.SortBy(input).PageBy(input);

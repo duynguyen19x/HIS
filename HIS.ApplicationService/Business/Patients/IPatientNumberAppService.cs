@@ -12,5 +12,6 @@ namespace HIS.ApplicationService.Business.Patients
     public interface IPatientNumberAppService : IAppService
     {
         Task<ResultDto<PatientNumberDto>> CreateLastNumber(DateTime patientNumberDate);
+        //Task<ResultDto<PatientNumberDto>> Get(Guid id);
     }
 }

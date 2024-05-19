@@ -11,16 +11,16 @@ namespace HIS.ApplicationService.Business.MedicalRecords.Dto
 {
     public class MedicalRecordDto : EntityDto<Guid?>
     {
-        public Guid PatientID { get; set; }
-        public string MedicalRecordCode { get; set; }
         public DateTime MedicalRecordDate { get; set; }
+        public string MedicalRecordCode { get; set; }
         public int MedicalRecordTypeID { get; set; }
         public int MedicalRecordStatusID { get; set; }
         public Guid BranchID { get; set; }
         public Guid DepartmentID { get; set; }
         public Guid RoomID { get; set; }
         public Guid UserID { get; set; }
-        
+
+        public Guid? PatientID { get; set; }
         public string PatientCode { get; set; }
         public string PatientName { get; set; }
         public DateTime? BirthDate { get; set; }
