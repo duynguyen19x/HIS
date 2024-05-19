@@ -204,7 +204,7 @@ namespace HIS.ApplicationService.Business.Receptions
                     // xóa số thứ tự (cấu hình)
                     if (true)
                     {
-                        await _patientOrderRepository.DeleteAsync(x => x.Id == patient.PatientOrderID);
+                        await _patientOrderRepository.DeleteAsync(x => x.Id == patient.PatientNumberID);
                     }    
 
                     // log

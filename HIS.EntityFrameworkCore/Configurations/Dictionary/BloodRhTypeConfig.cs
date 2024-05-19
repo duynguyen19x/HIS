@@ -13,7 +13,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 
             builder.Property(x => x.BloodRhTypeCode).HasMaxLength(BloodRhTypeConst.BloodRhTypeCodeLength).IsRequired();
             builder.Property(x => x.BloodRhTypeName).HasMaxLength(BloodRhTypeConst.BloodRhTypeNameLength).IsRequired();
-            builder.Property(x => x.Description).HasMaxLength(BloodRhTypeConst.DescriptionLength).IsRequired();
+            builder.Property(x => x.Description).HasMaxLength(BloodRhTypeConst.DescriptionLength);
 
             var data = new List<BloodRhType>();
             data.Add(new BloodRhType() { Id = new Guid("C8444F53-6712-4726-9B86-714B789648BB"), BloodRhTypeCode = "Rh+", BloodRhTypeName = "Rh dương", SortOrder = 1 });

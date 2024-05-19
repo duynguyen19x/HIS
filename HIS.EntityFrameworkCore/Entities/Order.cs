@@ -1,6 +1,7 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,5 +46,11 @@ namespace HIS.EntityFrameworkCore.Entities
         public string IcdText { get; set; } // tên mã bệnh kèm theo
         public bool IsEmergency { get; set; } // cấp cứu
 
+
+        //[ForeignKey(nameof(BranchID))]
+        //public virtual Branch BranchFk { get; set; }
+
+        //[ForeignKey(nameof(DepartmentID))]
+        //public virtual Department DepartmentFk { get; set; }
     }
 }

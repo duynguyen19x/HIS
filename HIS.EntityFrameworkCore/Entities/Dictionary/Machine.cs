@@ -17,9 +17,9 @@ namespace HIS.EntityFrameworkCore.Entities
         public string UsageStandard { get; set; } //Định mức sử dụng
         public bool Inactive { get; set; }
 
-        [Ignore]
-        public Room Room { get; set; }
-        [Ignore]
-        public Department Department { get; set; }
+
+        public Room RoomFk { get; set; }
+
+        public Department DepartmentFk { get; set; }
     }
 }

@@ -13,7 +13,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 
             builder.Property(x => x.BloodTypeCode).HasMaxLength(BloodTypeConst.BloodTypeCodeLength).IsRequired();
             builder.Property(x => x.BloodTypeName).HasMaxLength(BloodTypeConst.BloodTypeNameLength).IsRequired();
-            builder.Property(x => x.Description).HasMaxLength(BloodTypeConst.DescriptionLength).IsRequired();
+            builder.Property(x => x.Description).HasMaxLength(BloodTypeConst.DescriptionLength);
 
 
             var data = new List<BloodType>();

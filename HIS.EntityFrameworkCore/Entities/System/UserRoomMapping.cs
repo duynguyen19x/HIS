@@ -6,7 +6,7 @@ namespace HIS.EntityFrameworkCore.Entities.System
     /// <summary>
     /// Người dùng vả phòng chức năng.
     /// </summary>
-    [Table("UserRoomMapping")]
+    [Table("SUserRoomMapping")]
     public class UserRoomMapping : Entity<Guid>
     {
         public virtual Guid UserId { get; set; }

@@ -26,6 +26,13 @@ namespace HIS.ApplicationService.Business.Receptions.Dto
         public string ChiefComplaint { get; set; } // lý do đến khám
         public string Description { get; set; } // ghi chú tiếp đón
 
+        public string PatientCode { get; set; }
+        public string PatientName { get; set; }
+        public DateTime? BirthDate { get; set; }
+        public int BirthYear { get; set; }
+        public string GenderName { get; set; }
+        public string Address { get; set; }
+
         //public Guid? ServiceID { get; set; } // dịch vụ khám
         //public string ServiceName { get; set; } // tên dịch vụ khám
         //public Guid? ExecuteDepartmentID { get; set; } // khoa thực hiện

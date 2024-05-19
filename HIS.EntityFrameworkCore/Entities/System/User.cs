@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HIS.EntityFrameworkCore.Entities.System
 {
-    [Table("SYSUser")]
+    [Table("SUser")]
     public class User : FullAuditedEntity<Guid>
     {
         public const string DefaultPassword = "123qwe";
