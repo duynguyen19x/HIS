@@ -19,6 +19,8 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public string BirthPlace { get; set; }
 
+        public Guid BranchID { get; set; } // chi nhánh làm việc
+
         public Guid? PatientNumberID { get; set; } // mã số thứ tự bệnh nhân
 
         public Guid? BloodTypeID { get; set; }

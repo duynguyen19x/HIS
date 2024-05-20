@@ -20,6 +20,8 @@ namespace HIS.ApplicationService.Business.Patients.Dto
 
         public string BirthPlace { get; set; }
 
+        public Guid BranchID { get; set; } // chi nhánh làm việc
+
         public Guid? PatientNumberID { get; set; } // mã số thứ tự bệnh nhân
 
         public Guid? BloodRhTypeID { get; set; } 

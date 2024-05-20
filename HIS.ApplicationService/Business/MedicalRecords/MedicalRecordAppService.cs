@@ -3,6 +3,7 @@ using HIS.ApplicationService.Business.Patients;
 using HIS.ApplicationService.Business.Patients.Dto;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
+using HIS.Core.Domain.Entities;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Extensions;
 using HIS.EntityFrameworkCore.Entities;
@@ -131,26 +132,11 @@ namespace HIS.ApplicationService.Business.MedicalRecords
             {
                 try
                 {
-                    var patient = ObjectMapper.Map<PatientDto>(input);
-                    var patientResult = await _patientAppService.CreateOrEdit(patient);
-                    if (patientResult.IsSucceeded)
-                    {
-                        patient = patientResult.Result;
-                    }
-                    else
-                    {
-                        throw new Exception(patientResult.Message);
-                    }
+                    var medicalRecord = await _medicalRecordRepository.GetAsync(input.Id.GetValueOrDefault());
 
-                    input.Id = Guid.NewGuid();
-                    input.PatientName = patient.PatientName;
-                    input.PatientID = patient.Id;
-
-                    var medicalRecord = ObjectMapper.Map<MedicalRecord>(input);
-
-                    await _medicalRecordRepository.InsertAsync(medicalRecord);
-
+                    ObjectMapper.Map(input, medicalRecord);
                     unitOfWork.Complete();
+
                     result.Success(input);
                 }
                 catch (Exception ex)
