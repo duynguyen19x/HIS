@@ -1,17 +1,13 @@
-﻿using HIS.ApplicationService.System.Permissions.Dto;
-using HIS.ApplicationService.System.Users.Dto;
-using HIS.ApplicationService.Systems.Roles.Dto;
+﻿using HIS.ApplicationService.System.Users.Dto;
 using HIS.ApplicationService.Systems.Users.Dto;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Extensions;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
+using HIS.EntityFrameworkCore.Entities;
 using HIS.EntityFrameworkCore.Entities.System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
-using Microsoft.IdentityModel.Tokens;
 using System.Data;
 
 namespace HIS.ApplicationService.System.Users

@@ -10,89 +10,89 @@ namespace HIS.ApplicationService.Business.Patients.Dto
 {
     public class PatientDto : EntityDto<Guid?>
     {
-        public virtual string Code { get; set; }
+        public string PatientCode { get; set; }
 
-        public virtual string Name { get; set; }
+        public string PatientName { get; set; }
 
-        public virtual string Description { get; set; }
+        public DateTime? BirthDate { get; set; } 
 
-        public virtual DateTime? BirthDate { get; set; }
+        public int BirthYear { get; set; }
 
-        public virtual int BirthYear { get; set; }
+        public string BirthPlace { get; set; }
 
-        public virtual string BirthPlace { get; set; }
+        public Guid BranchID { get; set; } // chi nhánh làm việc
 
-        public virtual Guid? GenderId { get; set; }
+        public Guid? PatientNumberID { get; set; } // mã số thứ tự bệnh nhân
 
-        public virtual string GenderName { get; set; }
+        public Guid? BloodRhTypeID { get; set; } 
 
-        public virtual Guid? EthnicId { get; set; }
+        public Guid? BloodTypeID { get; set; } 
+        
+        public Guid? GenderID { get; set; }
 
-        public virtual string EthnicName { get; set; }
+        public Guid? CareerID { get; set; }
 
-        public virtual Guid? ReligionId { get; set; }
+        public Guid? EthnicityID { get; set; }
 
-        public virtual string ReligionName { get; set; }
+        public Guid? ReligionID { get; set; }
 
-        public virtual Guid? CountryId { get; set; }
+        public Guid? CountryID { get; set; }
 
-        public virtual string CountryName { get; set; }
+        public Guid? ProvinceID { get; set; }
 
-        public virtual Guid? ProvinceId { get; set; }
+        public Guid? WardID { get; set; }
 
-        public virtual string ProvinceName { get; set; }
+        public string BloodRhTypeName { get; set; }
 
-        public virtual Guid? DistrictId { get; set; }
+        public string BloodTypeName { get; set; }
 
-        public virtual string DistrictName { get; set; }
+        public string GenderName { get; set; }
 
-        public virtual Guid? WardId { get; set; }
+        public string CareerName { get; set; }
 
-        public virtual string WardName { get; set; }
+        public string EthnicityName { get; set; }
 
-        public virtual string Address { get; set; }
+        public string ReligionName { get; set; }
 
-        public virtual Guid? CareerId { get; set; }
+        public string CountryName { get; set; }
 
-        public virtual string CareerName { get; set; }
+        public string ProvinceName { get; set; }
 
-        public virtual string WorkPlace { get; set; }
+        public string DistrictName { get; set; }
 
-        public virtual Guid? BloodTypeId { get; set; }
+        public string Address { get; set; }
 
-        public virtual string BloodTypeCode { get; set; }
+        public string PhoneNumber { get; set; }
 
-        public virtual Guid? BloodTypeRhId { get; set; }
+        public string Email { get; set; }
 
-        public virtual string BloodTypeRhCode { get; set; }
+        public string WorkPlace { get; set; }
 
-        public virtual string IdentificationNumber { get; set; }
+        public string IdentificationNumber { get; set; } // số cmnd, cccd của bệnh nhân
 
-        public virtual DateTime? IssueDate { get; set; }
+        public string IssueBy { get; set; } // nơi cấp cmnd, cccd
 
-        public virtual string IssueBy { get; set; }
+        public DateTime? IssueDate { get; set; } // ngày cấp cmnd, cccd
 
-        public virtual string Tel { get; set; }
+        public string ContactName { get; set; } // người liên hệ
 
-        public virtual string Mobile { get; set; }
+        public string ContactRelationshipName { get; set; } // tên mối quan hệ của người liên hệ và bệnh nhân
 
-        public virtual string Email { get; set; }
+        public string ContactIdentificationNumber { get; set; } // số cmnd, cccd của người liên hệ
 
+        public string ContactIssueBy { get; set; }
 
-        public virtual string ContactName { get; set; }
+        public DateTime? ContactIssueDate { get; set; }
 
-        public virtual string ContactType { get; set; }
+        public string ContactPhoneNumber { get; set; } // số điện thoại của người liên hệ
 
-        public virtual string ContactAddress { get; set; }
+        public string ContactAddress { get; set; } // địa chỉ của người liên hệ
 
-        public virtual string ContactTel { get; set; }
+        public string Description { get; set; } // ghi chú
 
-        public virtual string ContactMobile { get; set; }
-
-        public virtual string ContactIdentificationNumber { get; set; }
-
-        public virtual DateTime? ContactIssueDate { get; set; }
-
-        public virtual string ContactIssueBy { get; set; }
+        public PatientDto()
+        {
+            
+        }
     }
 }

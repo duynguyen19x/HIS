@@ -16,14 +16,14 @@ namespace HIS.EntityFrameworkCore.Entities
     [Table("SRelationship")]
     public class Relationship : AuditedEntity<Guid>
     {
-        [StringLength(SRelationshipConst.MaxRelationshipCodeLength, MinimumLength = SRelationshipConst.MinRelationshipCodeLength)]
+        [StringLength(RelationshipConst.MaxRelationshipCodeLength, MinimumLength = RelationshipConst.MinRelationshipCodeLength)]
         public string RelationshipCode { get; set; }
 
         [Required]
-        [StringLength(SRelationshipConst.MaxRelationshipNameLength, MinimumLength = SRelationshipConst.MinRelationshipNameLength)]
+        [StringLength(RelationshipConst.MaxRelationshipNameLength, MinimumLength = RelationshipConst.MinRelationshipNameLength)]
         public string RelationshipName { get; set; }
 
-        [StringLength(SRelationshipConst.MaxDescriptionLength, MinimumLength = SRelationshipConst.MinDescriptionLength)]
+        [StringLength(RelationshipConst.MaxDescriptionLength, MinimumLength = RelationshipConst.MinDescriptionLength)]
         public string Description { get; set; }
 
         public int SortOrder { get; set; }

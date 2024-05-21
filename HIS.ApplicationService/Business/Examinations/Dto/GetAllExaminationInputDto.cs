@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Constants
+namespace HIS.ApplicationService.Business.Examinations.Dto
 {
-    internal class DServiceRequestConst
+    internal class GetAllExaminationInputDto
     {
     }
 }

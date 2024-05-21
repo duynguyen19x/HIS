@@ -1,13 +1,7 @@
 ﻿using AutoMapper.Configuration.Annotations;
 using HIS.Core.Domain.Entities.Auditing;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionaries
+namespace HIS.EntityFrameworkCore.Entities
 {
     public class Machine : AuditedEntity<Guid>
     {
@@ -23,9 +17,9 @@ namespace HIS.EntityFrameworkCore.Entities.Dictionaries
         public string UsageStandard { get; set; } //Định mức sử dụng
         public bool Inactive { get; set; }
 
-        [Ignore]
-        public Room Room { get; set; }
-        [Ignore]
-        public Department Department { get; set; }
+
+        public Room RoomFk { get; set; }
+
+        public Department DepartmentFk { get; set; }
     }
 }

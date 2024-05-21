@@ -1,12 +1,6 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.Categories
 {

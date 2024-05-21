@@ -1,6 +1,6 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionaries
+namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// Nhóm loại bệnh án.

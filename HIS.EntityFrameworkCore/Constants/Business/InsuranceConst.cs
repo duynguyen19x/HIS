@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Constants
 {
-    public class DInsuranceConst
+    public class InsuranceConst
     {
         public const int MaxInsuranceCodeLength = 50;
         public const int MinInsuranceCodeLength = 0;

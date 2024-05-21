@@ -2,11 +2,12 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionaries
+namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// Nhóm máu
     /// </summary>
+    [Table("SBloodType")]
     public class BloodType : AuditedEntity<Guid>
     {
         public string BloodTypeCode { get; set; }

@@ -1,4 +1,6 @@
-﻿using HIS.ApplicationService.Business.Patients.Dto;
+﻿using HIS.ApplicationService.Business.MedicalRecords;
+using HIS.ApplicationService.Business.Patients;
+using HIS.ApplicationService.Business.Patients.Dto;
 using HIS.ApplicationService.Business.Receptions.Dto;
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
@@ -19,7 +21,7 @@ namespace HIS.ApplicationService.Business.Receptions
     public class ReceptionAppService : BaseAppService, IReceptionAppService
     {
         private readonly IRepository<Patient, Guid> _patientRepository;
-        private readonly IRepository<PatientOrder, Guid> _patientOrderRepository;
+        private readonly IRepository<PatientNumber, Guid> _patientOrderRepository;
         private readonly IRepository<MedicalRecord, Guid> _medicalRecordRepository;
         private readonly IRepository<Treatment, Guid> _treatmentRepository;
         private readonly IRepository<Reception, Guid> _receptionRepository;
@@ -27,15 +29,22 @@ namespace HIS.ApplicationService.Business.Receptions
         private readonly IRepository<ServiceRequest, Guid> _serviceRequestRepository;
         private readonly IRepository<Invoice, Guid> _invoiceRepository;
 
+        private readonly IPatientAppService _patientAppService;
+        private readonly IMedicalRecordAppService _medicalRecordAppService;
+
         public ReceptionAppService(
             IRepository<Patient, Guid> patientRepository,
-            IRepository<PatientOrder, Guid> patientOrderRepository,
+            IRepository<PatientNumber, Guid> patientOrderRepository,
             IRepository<MedicalRecord, Guid> medicalRecordRepository,
             IRepository<Treatment, Guid> treatmentRepository,
             IRepository<Reception, Guid> receptionRepository,
             IRepository<Order, Guid> orderRepository,
             IRepository<ServiceRequest, Guid> serviceRequestRepository,
-            IRepository<Invoice, Guid> invoiceRepository) 
+            IRepository<Invoice, Guid> invoiceRepository,
+
+            IPatientAppService patientAppService,
+            IMedicalRecordAppService medicalRecordAppService
+            ) 
         {
             _patientRepository = patientRepository;
             _patientOrderRepository = patientOrderRepository;
@@ -45,6 +54,9 @@ namespace HIS.ApplicationService.Business.Receptions
             _orderRepository = orderRepository;
             _serviceRequestRepository = serviceRequestRepository;
             _invoiceRepository = invoiceRepository;
+
+            _patientAppService = patientAppService;
+            _medicalRecordAppService = medicalRecordAppService;
         }
 
         public async Task<ResultDto<ReceptionDto>> CreateOrEdit(ReceptionDto input)
@@ -61,12 +73,99 @@ namespace HIS.ApplicationService.Business.Receptions
 
         public async Task<ResultDto<ReceptionDto>> Create(ReceptionDto input)
         {
-            throw new NotImplementedException();
+            var result = new ResultDto<ReceptionDto>();
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+            {
+                try
+                {
+                    input.Id = Guid.NewGuid();
+                    if (Check.IsNullOrDefault(input.ReceptionDate))
+                        input.ReceptionDate = DateTime.Now;
+
+                    #region - bệnh án
+
+                    var medicalRecordResult = await _medicalRecordAppService.CreateOrEdit(input.MedicalRecord);
+                    if (!medicalRecordResult.IsSucceeded)
+                    {
+                        throw new Exception(medicalRecordResult.Message);
+                    }
+
+                    #endregion
+
+                    #region - phiếu chỉ định
+
+                    
+
+                    #endregion
+
+                    var reception = ObjectMapper.Map<Reception>(input);
+
+                    await _receptionRepository.InsertAsync(reception);
+
+                    unitOfWork.Complete();
+                    result.Success(input);
+                }
+                catch (Exception ex)
+                {
+                    result.Exception(ex);
+                }
+            }
+
+            return result;
         }
 
         public async Task<ResultDto<ReceptionDto>> Update(ReceptionDto input)
         {
-            throw new NotImplementedException();
+            var result = new ResultDto<ReceptionDto>();
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+            {
+                try
+                {
+                    #region - check
+
+
+
+                    #endregion
+
+                    #region - xử lý dữ liệu
+
+                    var patient = ObjectMapper.Map<PatientDto>(input.MedicalRecord);
+                    patient.Id = input.MedicalRecord.PatientID;
+
+                    
+
+                    #endregion
+
+                    #region - lưu
+
+                    var patientResult = await _patientAppService.CreateOrEdit(patient);
+                    if (!patientResult.IsSucceeded)
+                    {
+                        throw new Exception(patientResult.Message);
+                    }
+
+                    var medicalRecordResult = await _medicalRecordAppService.CreateOrEdit(input.MedicalRecord);
+                    if (!medicalRecordResult.IsSucceeded)
+                    {
+                        throw new Exception(medicalRecordResult.Message);
+                    }
+
+                    #endregion
+
+                    #region - lưu log
+
+                    #endregion
+
+                    unitOfWork.Complete();
+                    result.Success(input);
+                }
+                catch (Exception ex)
+                {
+                    result.Exception(ex);
+                }
+            }
+
+            return result;
         }
 
         public async Task<ResultDto<ReceptionDto>> Delete(Guid id)
@@ -114,7 +213,7 @@ namespace HIS.ApplicationService.Business.Receptions
                     // xóa số thứ tự (cấu hình)
                     if (true)
                     {
-                        await _patientOrderRepository.DeleteAsync(x => x.Id == patient.PatientOrderID);
+                        await _patientOrderRepository.DeleteAsync(x => x.Id == patient.PatientNumberID);
                     }    
 
                     // log

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Constants
 {
-    public class DPatientConst
+    public class PatientConst
     {
         public const int PatientCodeLength = 50;
         public const int PatientNameLength = 255;

@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Constants
 {
-    public class SRelationshipConst
+    public class GenderConst
     {
-        public const int MaxRelationshipCodeLength = 50;
-        public const int MinRelationshipCodeLength = 0;
+        public const int MaxGenderCodeLength = 50;
+        public const int MinGenderCodeLength = 0;
 
-        public const int MaxRelationshipNameLength = 255;
-        public const int MinRelationshipNameLength = 0;
+        public const int MaxGenderNameLength = 255;
+        public const int MinGenderNameLength = 0;
 
         public const int MaxDescriptionLength = 255;
         public const int MinDescriptionLength = 0;
+
     }
 }

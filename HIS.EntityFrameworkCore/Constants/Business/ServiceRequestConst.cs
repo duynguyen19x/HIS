@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Constants
 {
-    public class DMedicalRecordConst
+    internal class ServiceRequestConst
     {
-        public const int MedicalRecordCodeLength = 50;
     }
 }

@@ -1,7 +1,4 @@
-﻿using AutoMapper.Configuration.Annotations;
-using HIS.Core.Domain.Entities.Auditing;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
+﻿using HIS.Core.Domain.Entities.Auditing;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,7 +7,7 @@ namespace HIS.EntityFrameworkCore.Entities.System
     /// <summary>
     /// Tùy chọn.
     /// </summary>
-    [Table("SYSOption")]
+    [Table("SOption")]
     public class Option : AuditedEntity<Guid>
     {
         [MaxLength(128)]

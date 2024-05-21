@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
     {
         public void Configure(EntityTypeBuilder<InOutStock> builder)
         {
-            builder.ToTable("BUS_InOutStock");
+            builder.ToTable("DInOutStock");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50);

@@ -1,63 +1,46 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
-using System;
-using System.Collections.Generic;
+using HIS.EntityFrameworkCore.Constants;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionaries
+namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
-    /// Sổ giấy chứng sinh.
+    /// Sổ giấy chứng sinh
     /// </summary>
-    [Table("DIBirthCertBook")]
+    [Table("SBirthCertBook")]
     public class BirthCertBook : AuditedEntity<Guid>
     {
-        /// <summary>
-        /// Mã sổ
-        /// </summary>
         [Required]
-        [MaxLength(50)]
-        public virtual string Code { get; set; }
+        [StringLength(BirthCertBookConst.MaxBirthCertBookCodeLength, MinimumLength = BirthCertBookConst.MinBirthCertBookCodeLength)]
+        public string Code { get; set; } // mã sổ
 
-        /// <summary>
-        /// Tên sổ
-        /// </summary>
         [Required]
-        [MaxLength(255)]
-        public virtual string Name { get; set; }
+        [StringLength(BirthCertBookConst.MaxBirthCertBookNameLength, MinimumLength = BirthCertBookConst.MinBirthCertBookNameLength)]
+        public string Name { get; set; } // tên sổ
 
         /// <summary>
         /// Tổng số giấy chứng sinh
         /// </summary>
         [Required]
-        public virtual int Total { get; set; }
+        public int Total { get; set; }
 
         /// <summary>
         /// Số bắt đầu
         /// </summary>
         [Required]
-        public virtual int StartNumOrder { get; set; }
+        public int StartNumOrder { get; set; }
 
-        public virtual int SortOrder { get; set; }
+        public int SortOrder { get; set; }
 
-        [MaxLength(255)]
-        public virtual string Description { get; set; }
+        [StringLength(BirthCertBookConst.MaxDescriptionLength, MinimumLength = BirthCertBookConst.MinDescriptionLength)]
+        public string Description { get; set; }
 
-        /// <summary>
-        /// Chi nhánh tạo sổ
-        /// </summary>
-        public virtual Guid BranchId { get; set; }
+        public bool Inactive { get; set; }
 
-        /// <summary>
-        /// Khóa
-        /// </summary>
-        public virtual bool Inactive { get; set; }
+        public Guid BranchID { get; set; }
 
-        [ForeignKey("BranchId")]
-        public virtual Branch BranchFk { get; set; }
+        [ForeignKey("BranchID")]
+        public virtual Branch BranchFK { get; set; }
     }
 }

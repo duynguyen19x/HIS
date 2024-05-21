@@ -1,5 +1,5 @@
 ﻿using HIS.Core.Enums;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<MedicalRecordType> builder)
         {
-            builder.ToTable("DIC_MedicalRecordType");
+            builder.ToTable("SMedicalRecordType");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.MedicalRecordTypeCode).HasMaxLength(20).IsRequired();
