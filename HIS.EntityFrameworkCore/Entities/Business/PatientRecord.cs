@@ -1,6 +1,4 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 

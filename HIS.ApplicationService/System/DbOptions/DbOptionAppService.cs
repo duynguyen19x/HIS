@@ -6,7 +6,7 @@ using HIS.Core.Domain.Repositories;
 using HIS.Core.Extensions;
 using HIS.Dtos.Systems.DbOption;
 using HIS.EntityFrameworkCore;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
+using HIS.EntityFrameworkCore.Entities;
 using HIS.EntityFrameworkCore.Entities.System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;

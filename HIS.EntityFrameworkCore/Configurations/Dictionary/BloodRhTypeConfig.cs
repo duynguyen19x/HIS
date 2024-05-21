@@ -1,5 +1,6 @@
-﻿using HIS.EntityFrameworkCore.Constants;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+﻿using HIS.Core.EntityFrameworkCore.Seed;
+using HIS.EntityFrameworkCore.Constants;
+using HIS.EntityFrameworkCore.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -11,13 +12,16 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
         {
             builder.ToTable("SBloodRhType");
 
-            builder.Property(x => x.BloodRhTypeCode).HasMaxLength(SBloodRhTypeConst.BloodRhTypeCodeLength).IsRequired();
-            builder.Property(x => x.BloodRhTypeName).HasMaxLength(SBloodRhTypeConst.BloodRhTypeNameLength).IsRequired();
-            builder.Property(x => x.Description).HasMaxLength(SBloodRhTypeConst.DescriptionLength).IsRequired();
+            builder.Property(x => x.BloodRhTypeCode).HasMaxLength(BloodRhTypeConst.BloodRhTypeCodeLength).IsRequired();
+            builder.Property(x => x.BloodRhTypeName).HasMaxLength(BloodRhTypeConst.BloodRhTypeNameLength).IsRequired();
+            builder.Property(x => x.Description).HasMaxLength(BloodRhTypeConst.DescriptionLength);
+
+            
 
             var data = new List<BloodRhType>();
-            data.Add(new BloodRhType() { Id = new Guid("C8444F53-6712-4726-9B86-714B789648BB"), BloodRhTypeCode = "Rh+", BloodRhTypeName = "Rh dương", SortOrder = 1 });
-            data.Add(new BloodRhType() { Id = new Guid("0569461C-35A7-46B5-B285-D158B6729DCC"), BloodRhTypeCode = "Rh-", BloodRhTypeName = "Rh âm", SortOrder = 2 });
+            data.Add(new BloodRhType() { Id = new Guid("C8444F53-6712-4726-9B86-714B789648BB"), BloodRhTypeCode = "Rh+", BloodRhTypeName = "Rh dương", SortOrder = 1, CreatedDate = new DateTime(2024, 1, 1) });
+            data.Add(new BloodRhType() { Id = new Guid("0569461C-35A7-46B5-B285-D158B6729DCC"), BloodRhTypeCode = "Rh-", BloodRhTypeName = "Rh âm", SortOrder = 2, CreatedDate = new DateTime(2024, 1, 1) });
+
             builder.HasData(data);
         }
     }

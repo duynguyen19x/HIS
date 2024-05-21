@@ -2,8 +2,11 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionaries
+namespace HIS.EntityFrameworkCore.Entities
 {
+    /// <summary>
+    /// Danh mục bệnh viện
+    /// </summary>
     [Table("SHospital")]
     public class Hospital : AuditedEntity<Guid>
     {

@@ -1,20 +1,12 @@
-﻿using HIS.Core.Authorization;
-using HIS.Core.Domain.Entities;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
-using System;
-using System.Collections.Generic;
+﻿using HIS.Core.Domain.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities.System
 {
     /// <summary>
     /// Người dùng vả phòng chức năng.
     /// </summary>
-    [Table("UserRoomMapping")]
+    [Table("SUserRoomMapping")]
     public class UserRoomMapping : Entity<Guid>
     {
         public virtual Guid UserId { get; set; }

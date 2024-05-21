@@ -17,7 +17,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
             builder.ToTable("DInvoice");
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.InvoiceCode).IsRequired().HasMaxLength(DInvoiceConst.InvoiceCodeLength);
+            builder.Property(x => x.InvoiceCode).IsRequired().HasMaxLength(InvoiceConst.InvoiceCodeLength);
         }
     }
 }

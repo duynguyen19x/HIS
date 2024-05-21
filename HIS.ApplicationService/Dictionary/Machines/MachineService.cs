@@ -1,7 +1,7 @@
 ﻿using HIS.Dtos.Dictionaries.Machines;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+using HIS.EntityFrameworkCore.Entities;
 using HIS.Core.Application.Services;
 using HIS.Core.Extensions;
 using System.Transactions;

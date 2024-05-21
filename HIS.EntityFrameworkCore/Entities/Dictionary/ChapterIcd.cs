@@ -1,7 +1,7 @@
 ﻿using HIS.Core.Domain.Entities;
 using System.ComponentModel;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionaries
+namespace HIS.EntityFrameworkCore.Entities
 {
     public class ChapterIcd : Entity<Guid>
     {

@@ -4,7 +4,7 @@ using HIS.Core.Domain.Repositories;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using HIS.Core.Application.Services;
 using HIS.ApplicationService.Dictionary.ServicePricePolicies.Dto;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
+using HIS.EntityFrameworkCore.Entities;
 
 namespace HIS.ApplicationService.Dictionary.ServicePricePolicies
 {

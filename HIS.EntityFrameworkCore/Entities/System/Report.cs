@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Entities.System
     /// <summary>
     /// Báo cáo.
     /// </summary>
-    [Table("SYSReport")]
+    [Table("SReport")]
     public class Report : AuditedEntity<string>
     {
         [MaxLength(255)]

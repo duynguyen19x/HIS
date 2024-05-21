@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations
     {
         public void Configure(EntityTypeBuilder<Item> builder)
         {
-            builder.ToTable("DIC_Item");
+            builder.ToTable("SItem");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50);

@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Constants
 {
-    public class DInvoiceConst
+    public class OrderConst
     {
-        public const int InvoiceCodeLength = 50;
+        public const int OrderCodeLength = 50;
+        public const int BarcodeLength = 50;
     }
 }

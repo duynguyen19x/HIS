@@ -1,6 +1,4 @@
-﻿using AutoMapper.Configuration.Annotations;
-using HIS.Core.Domain.Entities;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
+﻿using HIS.Core.Domain.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HIS.EntityFrameworkCore.Entities.System
@@ -8,7 +6,7 @@ namespace HIS.EntityFrameworkCore.Entities.System
     /// <summary>
     /// Người dùng và vai trò.
     /// </summary>
-    [Table("SYSUserRoleMapping")]
+    [Table("SUserRoleMapping")]
     public class UserRoleMapping : Entity<Guid>
     {
         public virtual Guid UserId { get; set; }

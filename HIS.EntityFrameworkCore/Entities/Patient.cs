@@ -1,11 +1,13 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// Thông tin bệnh nhân
     /// </summary>
-    public class Patient : AuditedEntity<Guid>
+    [Table("DPatient")]
+    public class Patient : FullAuditedEntity<Guid>
     {
         public string PatientCode { get; set; }
 
@@ -16,6 +18,10 @@ namespace HIS.EntityFrameworkCore.Entities
         public int BirthYear { get; set; }
 
         public string BirthPlace { get; set; }
+
+        public Guid BranchID { get; set; } // chi nhánh làm việc
+
+        public Guid? PatientNumberID { get; set; } // mã số thứ tự bệnh nhân
 
         public Guid? BloodTypeID { get; set; }
 
@@ -32,6 +38,8 @@ namespace HIS.EntityFrameworkCore.Entities
         public Guid? CountryID { get; set; }
 
         public Guid? ProvinceID { get; set; }
+
+        public Guid? DistrictID { get; set; }
 
         public Guid? WardID { get; set; }
 
@@ -65,8 +73,6 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public string Description { get; set; } // ghi chú
 
-        public Guid PatientOrderID { get; set; } // mã số thứ tự bệnh nhân
-
-        public Guid BranchID { get; set; } // chi nhánh làm việc
+        
     }
 }

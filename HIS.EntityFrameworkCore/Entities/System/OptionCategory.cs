@@ -12,7 +12,7 @@ namespace HIS.EntityFrameworkCore.Entities.System
     /// <summary>
     /// Nhóm tùy chọn.
     /// </summary>
-    [Table("SYSOptionCategory")]
+    [Table("SOptionCategory")]
     public class OptionCategory : Entity<int>
     {
         [MaxLength(128)]

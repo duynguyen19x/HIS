@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
     {
         public void Configure(EntityTypeBuilder<InOutStockType> builder)
         {
-            builder.ToTable("BUS_InOutStockType");
+            builder.ToTable("DInOutStockType");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();

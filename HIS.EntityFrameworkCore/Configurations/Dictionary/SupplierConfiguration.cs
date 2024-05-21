@@ -1,4 +1,4 @@
-﻿using HIS.EntityFrameworkCore.Entities.Dictionaries;
+﻿using HIS.EntityFrameworkCore.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<Supplier> builder)
         {
-            builder.ToTable("DIC_Supplier");
+            builder.ToTable("SSupplier");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50);

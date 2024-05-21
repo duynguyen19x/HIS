@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Dictionary
+namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// Loại bệnh nhân (đối tượng bệnh nhân).

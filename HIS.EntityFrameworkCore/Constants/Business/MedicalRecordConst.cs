@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.Core.Enums
+namespace HIS.EntityFrameworkCore.Constants
 {
-    public enum PatientRecordTypes
+    public class MedicalRecordConst
     {
-        NOITRU = 1,
-        NGOAITRU = 2,
-        DICHVU = 3
+        public const int MedicalRecordCodeLength = 50;
     }
 }

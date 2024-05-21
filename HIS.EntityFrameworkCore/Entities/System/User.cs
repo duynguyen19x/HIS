@@ -1,15 +1,10 @@
-﻿using AutoMapper.Configuration.Annotations;
-using HIS.Core.Domain.Entities;
-using HIS.Core.Domain.Entities.Auditing;
-using HIS.EntityFrameworkCore.Entities.Dictionaries;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
-using HIS.Utilities.Enums;
+﻿using HIS.Core.Domain.Entities.Auditing;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HIS.EntityFrameworkCore.Entities.System
 {
-    [Table("SYSUser")]
+    [Table("SUser")]
     public class User : FullAuditedEntity<Guid>
     {
         public const string DefaultPassword = "123qwe";
