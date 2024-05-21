@@ -88,8 +88,10 @@ namespace HIS.Core.EntityFrameworkCore
                         {
                             if (entry.Entity is ICreationAudited creation)
                             {
-                                creation.CreatedBy = userId;
-                                creation.CreatedDate = DateTime.Now;
+                                if (Check.IsNullOrDefault(creation.CreatedBy))
+                                    creation.CreatedBy = userId;
+                                if (Check.IsNullOrDefault(creation.CreatedDate))
+                                    creation.CreatedDate = DateTime.Now;
                             }    
                             break;
                         }
@@ -97,8 +99,10 @@ namespace HIS.Core.EntityFrameworkCore
                         {
                             if (entry.Entity is IAudited audited)
                             {
-                                audited.ModifiedBy = userId;
-                                audited.ModifiedDate = DateTime.Now;
+                                if (Check.IsNullOrDefault(audited.ModifiedBy))
+                                    audited.ModifiedBy = userId;
+                                if (Check.IsNullOrDefault(audited.ModifiedDate))
+                                    audited.ModifiedDate = DateTime.Now;
                             }
                             break;
                         }
@@ -111,7 +115,8 @@ namespace HIS.Core.EntityFrameworkCore
                                 delete.IsDeleted = true;
                                 if (Check.IsNullOrDefault(delete.DeletedBy)) // neu chua co audit thi them vao
                                     delete.DeletedBy = userId;
-                                delete.DeletedDate = DateTime.Now;
+                                if (Check.IsNullOrDefault(delete.DeletedDate))
+                                    delete.DeletedDate = DateTime.Now;
                             } 
                             break;
                         }

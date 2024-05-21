@@ -78,8 +78,11 @@ namespace HIS.ApplicationService.Business.Receptions
             {
                 try
                 {
+                    input.Id = Guid.NewGuid();
+                    if (Check.IsNullOrDefault(input.ReceptionDate))
+                        input.ReceptionDate = DateTime.Now;
 
-                    #region - lưu
+                    #region - bệnh án
 
                     var medicalRecordResult = await _medicalRecordAppService.CreateOrEdit(input.MedicalRecord);
                     if (!medicalRecordResult.IsSucceeded)
@@ -89,9 +92,15 @@ namespace HIS.ApplicationService.Business.Receptions
 
                     #endregion
 
-                    #region - lưu log
+                    #region - phiếu chỉ định
+
+                    
 
                     #endregion
+
+                    var reception = ObjectMapper.Map<Reception>(input);
+
+                    await _receptionRepository.InsertAsync(reception);
 
                     unitOfWork.Complete();
                     result.Success(input);

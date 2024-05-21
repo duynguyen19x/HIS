@@ -10,6 +10,7 @@ using HIS.EntityFrameworkCore.Entities.System;
 using HIS.EntityFrameworkCore.Views;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
+using Pomelo.EntityFrameworkCore.MySql.Query.ExpressionTranslators.Internal;
 
 namespace HIS.EntityFrameworkCore
 {
