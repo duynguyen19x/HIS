@@ -19,7 +19,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
 
             builder.Property(x => x.MedicalRecordCode).IsRequired().HasMaxLength(MedicalRecordConst.MedicalRecordCodeLength);
 
-            builder.HasOne<Patient>().WithMany().HasForeignKey(x => x.PatientID);
+            builder.HasOne<Patient>().WithMany().HasForeignKey(x => x.PatientId);
         }
     }
 }

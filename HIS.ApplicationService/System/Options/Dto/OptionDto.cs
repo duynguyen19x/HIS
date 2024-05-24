@@ -14,11 +14,11 @@ namespace HIS.ApplicationService.System.Options.Dto
 
         public string Name { get; set; }
 
-        public int OptionCategoryID { get; set; }
+        public int OptionCategoryId { get; set; }
 
-        public Guid? BranchID { get; set; }
+        public Guid? BranchId { get; set; }
 
-        public Guid? UserID { get; set; }
+        public Guid? UserId { get; set; }
 
         /// <summary>
         /// Giá trị

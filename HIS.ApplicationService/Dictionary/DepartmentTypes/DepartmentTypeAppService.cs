@@ -9,7 +9,7 @@ using System.Transactions;
 
 namespace HIS.ApplicationService.Dictionary.DepartmentTypes
 {
-    public class DepartmentTypeAppService : BaseAppService, IDepartmentTypeAppService
+    public class DepartmentTypeAppService : BaseAppService, IdepartmentTypeAppService
     {
         private readonly IRepository<DepartmentType, int> _departmentTypeRepository;
 

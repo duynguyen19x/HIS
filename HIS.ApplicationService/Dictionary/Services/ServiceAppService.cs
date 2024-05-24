@@ -133,7 +133,7 @@ namespace HIS.ApplicationService.Dictionary.Services
                                                        CeilingPrice = ser.CeilingPrice,
                                                        PaymentRate = ser.PaymentRate,
                                                        ExecutionTime = ser.ExecutionTime,
-                                                       ExecutionTimeString = ser.ExecutionTime == null ? null : ser.ExecutionTime.Value.ToString("dd/MM/yyyy"),
+                                                       //ExecutionTimeString = ser.ExecutionTime == null ? null : ser.ExecutionTime.Value.ToString("dd/MM/yyyy"),
                                                        PatientTypeCode = pa.Code,
                                                        PatientTypeName = pa.Name,
                                                        IsHeIn = ser.PatientTypeId == (int)HIS.Core.Enums.DIPatientObjectType.BH ? true : false,
@@ -157,6 +157,9 @@ namespace HIS.ApplicationService.Dictionary.Services
 
                     var sServiceResultIndexs = _serviceResultIndiceRepository.GetAll().Where(w => w.ServiceId == id).ToList();
                     var sServiceResultIndexDtos = ObjectMapper.Map<IList<ServiceResultIndiceDto>>(sServiceResultIndexs);
+
+                    sServicePricePolicyDtos.AddRange(sServicePricePolicyDtos);
+                    sServicePricePolicyDtos.AddRange(sServicePricePolicyDtos);
 
                     serviceDto = ObjectMapper.Map<ServiceDto>(service);
                     serviceDto.SServicePricePolicies = sServicePricePolicyDtos;
@@ -229,12 +232,12 @@ namespace HIS.ApplicationService.Dictionary.Services
 
                     if (input.SServicePricePolicies != null)
                     {
-                        foreach (var sServicePricePolicy in input.SServicePricePolicies)
-                        {
-                            sServicePricePolicy.ExecutionTime = string.IsNullOrEmpty(sServicePricePolicy.ExecutionTimeString) ? null : DateTime.ParseExact(sServicePricePolicy.ExecutionTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None);
-                        }
+                        //foreach (var sServicePricePolicy in input.SServicePricePolicies)
+                        //{
+                        //    sServicePricePolicy.ExecutionTime = string.IsNullOrEmpty(sServicePricePolicy.ExecutionTimeString) ? null : DateTime.ParseExact(sServicePricePolicy.ExecutionTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None);
+                        //}
 
-                        var sServicePricePolicys = ObjectMapper.Map<List<EntityFrameworkCore.Entities.Categories.Services.ServicePricePolicy>>(input.SServicePricePolicies);
+                        var sServicePricePolicys = ObjectMapper.Map<List<ServicePricePolicy>>(input.SServicePricePolicies);
                         foreach (var sServicePricePolicy in sServicePricePolicys)
                         {
                             sServicePricePolicy.Id = Guid.NewGuid();
@@ -324,10 +327,10 @@ namespace HIS.ApplicationService.Dictionary.Services
 
                         if (input.SServicePricePolicies != null)
                         {
-                            foreach (var sServicePricePolicy in input.SServicePricePolicies)
-                            {
-                                sServicePricePolicy.ExecutionTime = string.IsNullOrEmpty(sServicePricePolicy.ExecutionTimeString) ? null : DateTime.ParseExact(sServicePricePolicy.ExecutionTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None);
-                            }
+                            //foreach (var sServicePricePolicy in input.SServicePricePolicies)
+                            //{
+                            //    sServicePricePolicy.ExecutionTime = string.IsNullOrEmpty(sServicePricePolicy.ExecutionTimeString) ? null : DateTime.ParseExact(sServicePricePolicy.ExecutionTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None);
+                            //}
 
                             var sServicePricePolicys = ObjectMapper.Map<List<EntityFrameworkCore.Entities.Categories.Services.ServicePricePolicy>>(input.SServicePricePolicies);
                             foreach (var sServicePricePolicy in sServicePricePolicys)

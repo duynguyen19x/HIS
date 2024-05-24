@@ -9,7 +9,7 @@ using System.Transactions;
 
 namespace HIS.ApplicationService.Dictionary.Districts
 {
-    public class DistrictAppService : BaseAppService, IDistrictAppService
+    public class DistrictAppService : BaseAppService, IdistrictAppService
     {
         private readonly IRepository<District, Guid> _districtRepository;
 

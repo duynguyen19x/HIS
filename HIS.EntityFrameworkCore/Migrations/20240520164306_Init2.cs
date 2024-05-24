@@ -12,7 +12,7 @@ namespace HIS.EntityFrameworkCore.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<Guid>(
-                name: "BranchID",
+                name: "BranchId",
                 table: "DPatient",
                 type: "uniqueidentifier",
                 nullable: false,
@@ -3677,7 +3677,7 @@ namespace HIS.EntityFrameworkCore.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "BranchID",
+                name: "BranchId",
                 table: "DPatient");
 
             migrationBuilder.UpdateData(

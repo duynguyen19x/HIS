@@ -12,17 +12,17 @@ namespace HIS.EntityFrameworkCore.Entities
     /// </summary>
     public class ServiceRequest : AuditedEntity<Guid>
     {
-        public Guid OrderID { get; set; } // mã phiếu chỉ định dịch vụ
+        public Guid OrderId { get; set; } // mã phiếu chỉ định dịch vụ
 
-        public Guid MedicalRecordID { get; set; } // mã bệnh án
+        public Guid MedicalRecordId { get; set; } // mã bệnh án
 
-        public Guid TreatmentID { get; set; } // mã điều trị
+        public Guid TreatmentId { get; set; } // mã điều trị
 
-        public Guid BranchID { get; set; } // chi nhánh làm việc
+        public Guid BranchId { get; set; } // chi nhánh làm việc
 
-        public Guid? ParentID { get; set; } // mã cha 
+        public Guid? ParentId { get; set; } // mã cha 
 
-        public Guid? ServiceID { get; set; }
+        public Guid? ServiceId { get; set; }
 
         public string ServiceName { get; set; }
 
@@ -32,7 +32,7 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public string ServiceCodeBHYT { get; set; }
 
-        public Guid? UnitID { get; set; } // đơn vị tính
+        public Guid? UnitId { get; set; } // đơn vị tính
 
         public string UnitName { get; set; }
 

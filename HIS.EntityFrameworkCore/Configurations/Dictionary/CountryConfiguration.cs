@@ -108,7 +108,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
                 new Country() { Id = new Guid("FD0AC376-BF65-4BF8-9067-245691AA1827"), Code = "HR", MediCode = "147", Name = "Croatia", },
                 new Country() { Id = new Guid("C831FB16-910B-4939-804A-1052B8F8ADC1"), Code = "HT", MediCode = "172", Name = "Haiti", },
                 new Country() { Id = new Guid("1A52542A-E4E8-4514-B84F-D8F7A0CE8BF5"), Code = "HU", MediCode = "177", Name = "Hungary", },
-                new Country() { Id = new Guid("E3A2237C-9D57-462F-BAD8-7A78856303C8"), Code = "ID", MediCode = "180", Name = "Indonesia", },
+                new Country() { Id = new Guid("E3A2237C-9D57-462F-BAD8-7A78856303C8"), Code = "Id", MediCode = "180", Name = "Indonesia", },
                 new Country() { Id = new Guid("4E6E77AF-56D6-4314-AC68-C39713511D70"), Code = "IE", MediCode = "183", Name = "Ireland", },
                 new Country() { Id = new Guid("060539CD-D169-45C2-BEC2-28A91E41BCB3"), Code = "IL", MediCode = "184", Name = "Israel", },
                 new Country() { Id = new Guid("4BAB2495-C861-47E7-82E6-1806FD87B767"), Code = "IM", MediCode = "IM", Name = "Isle of man", },

@@ -133,7 +133,7 @@ namespace HIS.EntityFrameworkCore
             return Database.BeginTransaction();
         }
 
-        public virtual int NewID<TEntity>() where TEntity : class, IEntity<int>
+        public virtual int NewId<TEntity>() where TEntity : class, IEntity<int>
         {
             var dbSet = this.Set<TEntity>();
             var data = dbSet.DefaultIfEmpty().Max(x => x.Id);

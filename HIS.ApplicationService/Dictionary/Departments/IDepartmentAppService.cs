@@ -4,7 +4,7 @@ using HIS.Core.Application.Services.Dto;
 
 namespace HIS.ApplicationService.Dictionary.Departments
 {
-    public interface IDepartmentAppService : IAppService
+    public interface IdepartmentAppService : IAppService
     {
         Task<PagedResultDto<DepartmentDto>> GetAllAsync(GetAllDepartmentInputDto input);
 

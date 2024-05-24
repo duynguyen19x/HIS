@@ -14,10 +14,10 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.HasKey(x => x.Id);
             builder.Property(x => x.MedicalRecordTypeCode).HasMaxLength(20).IsRequired();
             builder.Property(x => x.MedicalRecordTypeName).HasMaxLength(128).IsRequired();
-            builder.Property(x => x.MedicalRecordTypeGroupID).IsRequired();
+            builder.Property(x => x.MedicalRecordTypeGroupId).IsRequired();
             builder.Property(x => x.Description).HasMaxLength(255);
 
-            builder.HasOne(t => t.MedicalRecordTypeGroup).WithMany().HasForeignKey(p => p.MedicalRecordTypeGroupID);
+            builder.HasOne(t => t.MedicalRecordTypeGroup).WithMany().HasForeignKey(p => p.MedicalRecordTypeGroupId);
 
             builder.HasData(
                 new MedicalRecordType((int)MedicalRecordTypes.KHAMBENH, "Khám Bệnh", (int)MedicalRecordTypeGroups.KHAMBENH, 1),

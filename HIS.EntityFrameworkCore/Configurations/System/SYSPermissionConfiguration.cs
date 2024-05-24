@@ -57,7 +57,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Systems
             branch.CreateChildPermission("DIBranch.Edit", "Sửa");
             branch.CreateChildPermission("DIBranch.Delete", "Xóa");
 
-            var department = dictionary.CreateChildPermission("DIDepartment", "Khoa");
+            var department = dictionary.CreateChildPermission("DIdepartment", "Khoa");
             department.CreateChildPermission("DIBranch.Use", "Sử dụng");
             department.CreateChildPermission("DIBranch.Create", "Thêm mới");
             department.CreateChildPermission("DIBranch.Edit", "Sửa");

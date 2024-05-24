@@ -59,14 +59,14 @@ namespace HIS.EntityFrameworkCore.Migrations
                 nullable: true);
 
             migrationBuilder.AddColumn<Guid>(
-                name: "DepartmentID",
+                name: "DepartmentId",
                 table: "DInvoice",
                 type: "uniqueidentifier",
                 nullable: false,
                 defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
 
             migrationBuilder.AddColumn<Guid>(
-                name: "InvoiceGroupID",
+                name: "InvoiceGroupId",
                 table: "DInvoice",
                 type: "uniqueidentifier",
                 nullable: false,
@@ -80,21 +80,21 @@ namespace HIS.EntityFrameworkCore.Migrations
                 defaultValue: false);
 
             migrationBuilder.AddColumn<Guid>(
-                name: "PaymentMethodID",
+                name: "PaymentMethodId",
                 table: "DInvoice",
                 type: "uniqueidentifier",
                 nullable: false,
                 defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
 
             migrationBuilder.AddColumn<Guid>(
-                name: "RoomID",
+                name: "RoomId",
                 table: "DInvoice",
                 type: "uniqueidentifier",
                 nullable: false,
                 defaultValue: new Guid("00000000-0000-0000-0000-000000000000"));
 
             migrationBuilder.AddColumn<Guid>(
-                name: "UserID",
+                name: "UserId",
                 table: "DInvoice",
                 type: "uniqueidentifier",
                 nullable: false,
@@ -3779,11 +3779,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                 table: "DInvoice");
 
             migrationBuilder.DropColumn(
-                name: "DepartmentID",
+                name: "DepartmentId",
                 table: "DInvoice");
 
             migrationBuilder.DropColumn(
-                name: "InvoiceGroupID",
+                name: "InvoiceGroupId",
                 table: "DInvoice");
 
             migrationBuilder.DropColumn(
@@ -3791,15 +3791,15 @@ namespace HIS.EntityFrameworkCore.Migrations
                 table: "DInvoice");
 
             migrationBuilder.DropColumn(
-                name: "PaymentMethodID",
+                name: "PaymentMethodId",
                 table: "DInvoice");
 
             migrationBuilder.DropColumn(
-                name: "RoomID",
+                name: "RoomId",
                 table: "DInvoice");
 
             migrationBuilder.DropColumn(
-                name: "UserID",
+                name: "UserId",
                 table: "DInvoice");
 
             migrationBuilder.RenameColumn(
