@@ -158,9 +158,6 @@ namespace HIS.ApplicationService.Dictionary.Services
                     var sServiceResultIndexs = _serviceResultIndiceRepository.GetAll().Where(w => w.ServiceId == id).ToList();
                     var sServiceResultIndexDtos = ObjectMapper.Map<IList<ServiceResultIndiceDto>>(sServiceResultIndexs);
 
-                    sServicePricePolicyDtos.AddRange(sServicePricePolicyDtos);
-                    sServicePricePolicyDtos.AddRange(sServicePricePolicyDtos);
-
                     serviceDto = ObjectMapper.Map<ServiceDto>(service);
                     serviceDto.SServicePricePolicies = sServicePricePolicyDtos;
                     serviceDto.SExecutionRooms = sExecutionRoomDtos;
