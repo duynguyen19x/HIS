@@ -16,25 +16,25 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public DateTime TreatmentDate { get; set; }
 
-        public int TreatmentTypeID { get; set; }
+        public int TreatmentTypeId { get; set; }
 
-        public int TreatmentStatusID { get; set; }
+        public int TreatmentStatusId { get; set; }
 
-        public Guid PatientID { get; set; } // mã bệnh nhân
+        public Guid PatientId { get; set; } // mã bệnh nhân
 
-        public Guid MedicalRecordID { get; set; } // mã hồ sơ bệnh án
+        public Guid MedicalRecordId { get; set; } // mã hồ sơ bệnh án
 
-        public Guid UserID { get; set; } // người tạo đợt điều trị
+        public Guid UserId { get; set; } // người tạo đợt điều trị
 
-        public Guid BranchID { get; set; } // chi nhánh làm việc
+        public Guid BranchId { get; set; } // chi nhánh làm việc
 
-        public Guid DepartmentID { get; set; }
+        public Guid DepartmentId { get; set; }
 
-        public Guid? RoomID { get; set; }
+        public Guid? RoomId { get; set; }
 
-        public Guid? ChamberID { get; set; }
+        public Guid? ChamberId { get; set; }
 
-        public Guid? BedID { get; set; }
+        public Guid? BedId { get; set; }
 
         public string IcdCode { get; set; } // chẩn đoán bệnh chính
 
@@ -76,8 +76,8 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public DateTime EndDate { get; set; } // ngày ra khoa
 
-        public int TreatmentEndTypeID { get; set; } // hình thức xử trí
+        public int TreatmentEndTypeId { get; set; } // hình thức xử trí
 
-        public int TreatmentResultID { get; set; } // kết quả điều trị
+        public int TreatmentResultId { get; set; } // kết quả điều trị
     }
 }

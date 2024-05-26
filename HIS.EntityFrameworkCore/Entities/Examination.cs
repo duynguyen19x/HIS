@@ -11,12 +11,12 @@ namespace HIS.EntityFrameworkCore.Entities
     public class Examination : AuditedEntity<Guid>
     {
         public DateTime ExaminationDate { get; set; }
-        public int ExaminationTypeID { get; set; }
-        public Guid BranchID { get; set; } // chi nhánh làm việc
-        public Guid MedicalRecordID { get; set; } // mã bệnh án
-        public Guid TreatmentID { get; set; } // mã điều trị
-        public Guid? OrderID { get; set; } // mã phiếu chỉ định (nếu là dịch vụ khám)
-        public Guid? ReceptionID { get; set; } // mã tiếp đón
+        public int ExaminationTypeId { get; set; }
+        public Guid BranchId { get; set; } // chi nhánh làm việc
+        public Guid MedicalRecordId { get; set; } // mã bệnh án
+        public Guid TreatmentId { get; set; } // mã điều trị
+        public Guid? OrderId { get; set; } // mã phiếu chỉ định (nếu là dịch vụ khám)
+        public Guid? ReceptionId { get; set; } // mã tiếp đón
 
         public string IcdCode { get; set; }
         public string IcdName { get; set; }

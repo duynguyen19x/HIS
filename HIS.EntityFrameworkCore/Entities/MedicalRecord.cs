@@ -12,31 +12,31 @@ namespace HIS.EntityFrameworkCore.Entities
     /// </summary>
     public class MedicalRecord : FullAuditedEntity<Guid>
     {
-        public Guid PatientID { get; set; }
+        public Guid PatientId { get; set; }
         public string MedicalRecordCode { get; set; }
         public DateTime MedicalRecordDate { get; set; }
-        public int MedicalRecordTypeID { get; set; }
-        public int MedicalRecordStatusID { get; set; }
+        public int MedicalRecordTypeId { get; set; }
+        public int MedicalRecordStatusId { get; set; }
         
-        public Guid BranchID { get; set; }
-        public Guid DepartmentID { get; set; }
-        public Guid RoomID { get; set; }
-        public Guid UserID { get; set; }
+        public Guid BranchId { get; set; }
+        public Guid DepartmentId { get; set; }
+        public Guid RoomId { get; set; }
+        public Guid UserId { get; set; }
 
         public string PatientCode { get; set; }
         public string PatientName { get; set; }
         public DateTime? BirthDate { get; set; }
         public int BirthYear { get; set; }
         public string BirthPlace { get; set; }
-        public Guid? BloodTypeID { get; set; }
-        public Guid? BloodRhTypeID { get; set; }
-        public Guid? GenderID { get; set; }
-        public Guid? CareerID { get; set; }
-        public Guid? EthnicityID { get; set; }
-        public Guid? ReligionID { get; set; }
-        public Guid? CountryID { get; set; }
-        public Guid? ProvinceID { get; set; }
-        public Guid? WardID { get; set; }
+        public Guid? BloodTypeId { get; set; }
+        public Guid? BloodRhTypeId { get; set; }
+        public Guid? GenderId { get; set; }
+        public Guid? CareerId { get; set; }
+        public Guid? EthnicityId { get; set; }
+        public Guid? ReligionId { get; set; }
+        public Guid? CountryId { get; set; }
+        public Guid? ProvinceId { get; set; }
+        public Guid? WardId { get; set; }
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
@@ -55,8 +55,8 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public DateTime ReceptionDate { get; set; }
         public string ChiefComplaint { get; set; } // lý do đến khám
-        public int PatientObjectTypeID { get; set; }
-        public int ReceptionObjectTypeID { get; set; }
+        public int PatientObjectTypeId { get; set; }
+        public int ReceptionObjectTypeId { get; set; }
         public bool IsPriority { get; set; }
         public bool IsTransferIn { get; set; }
         public string TransferInCode { get; set; }
@@ -66,14 +66,13 @@ namespace HIS.EntityFrameworkCore.Entities
         public DateTime? TransferInTimeTo { get; set; }
         public string TransferInIcdCode { get; set; }
         public string TransferInIcdName { get; set; }
-        public Guid? TransferInFormID { get; set; }
-        public Guid? TransferInReasonID { get; set; }
+        public Guid? TransferInFormId { get; set; }
+        public Guid? TransferInReasonId { get; set; }
         public bool? IsTransferInRightRoute { get; set; } // chuyển bệnh nhân đúng tuyến CMKT
 
         public string HospitalizationReason { get; set; } // lý do nhập viện
 
         public int NumOrder { get; set; } // só thứ tự
         public string Description { get; set; }
-        
     }
 }

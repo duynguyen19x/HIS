@@ -13,28 +13,28 @@ namespace HIS.ApplicationService.Business.MedicalRecords.Dto
     {
         public DateTime MedicalRecordDate { get; set; }
         public string MedicalRecordCode { get; set; }
-        public int MedicalRecordTypeID { get; set; }
-        public int MedicalRecordStatusID { get; set; }
-        public Guid BranchID { get; set; }
-        public Guid DepartmentID { get; set; }
-        public Guid RoomID { get; set; }
-        public Guid UserID { get; set; }
+        public int MedicalRecordTypeId { get; set; }
+        public int MedicalRecordStatusId { get; set; }
+        public Guid BranchId { get; set; }
+        public Guid DepartmentId { get; set; }
+        public Guid RoomId { get; set; }
+        public Guid UserId { get; set; }
 
-        public Guid? PatientID { get; set; }
+        public Guid? PatientId { get; set; }
         public string PatientCode { get; set; }
         public string PatientName { get; set; }
         public DateTime? BirthDate { get; set; }
         public int BirthYear { get; set; }
         public string BirthPlace { get; set; }
-        public Guid? BloodTypeID { get; set; }
-        public Guid? BloodRhTypeID { get; set; }
-        public Guid? GenderID { get; set; }
-        public Guid? CareerID { get; set; }
-        public Guid? EthnicityID { get; set; }
-        public Guid? ReligionID { get; set; }
-        public Guid? CountryID { get; set; }
-        public Guid? ProvinceID { get; set; }
-        public Guid? WardID { get; set; }
+        public Guid? BloodTypeId { get; set; }
+        public Guid? BloodRhTypeId { get; set; }
+        public Guid? GenderId { get; set; }
+        public Guid? CareerId { get; set; }
+        public Guid? EthnicityId { get; set; }
+        public Guid? ReligionId { get; set; }
+        public Guid? CountryId { get; set; }
+        public Guid? ProvinceId { get; set; }
+        public Guid? WardId { get; set; }
         public string Address { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
@@ -50,8 +50,6 @@ namespace HIS.ApplicationService.Business.MedicalRecords.Dto
         public string ContactPhoneNumber { get; set; } // số điện thoại của người liên hệ
         public string ContactAddress { get; set; } // địa chỉ của người liên hệ
         public string Description { get; set; } // ghi chú
-
-
 
         public MedicalRecordDto()
         {

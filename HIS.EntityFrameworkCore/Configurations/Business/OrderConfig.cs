@@ -21,14 +21,14 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
             //builder.Property(x => x.IcdSubCode).HasMaxLength(IcdConst.IcdSubCodeLength);
             //builder.Property(x => x.IcdText).HasMaxLength(IcdConst.IcdTextLength);
 
-            //builder.HasOne<MedicalRecord>().WithMany().HasForeignKey(x => x.MedicalRecordID);
-            //builder.HasOne<Treatment>().WithMany().HasForeignKey(x => x.TreatmentID);
-            //builder.HasOne<Reception>().WithMany().HasForeignKey(x => x.ReceptionID);
-            //builder.HasOne<Insurance>().WithMany().HasForeignKey(x => x.InsuranceID);
-            //builder.HasOne<User>().WithMany().HasForeignKey(x => x.UserID);
-            //builder.HasOne<Branch>().WithMany().HasForeignKey(x => x.BranchID);
-            //builder.HasOne<Department>().WithMany().HasForeignKey(x => x.DepartmentID);
-            //builder.HasOne<Room>().WithMany().HasForeignKey(x => x.RoomID);
+            //builder.HasOne<MedicalRecord>().WithMany().HasForeignKey(x => x.MedicalRecordId);
+            //builder.HasOne<Treatment>().WithMany().HasForeignKey(x => x.TreatmentId);
+            //builder.HasOne<Reception>().WithMany().HasForeignKey(x => x.ReceptionId);
+            //builder.HasOne<Insurance>().WithMany().HasForeignKey(x => x.InsuranceId);
+            //builder.HasOne<User>().WithMany().HasForeignKey(x => x.UserId);
+            //builder.HasOne<Branch>().WithMany().HasForeignKey(x => x.BranchId);
+            //builder.HasOne<Department>().WithMany().HasForeignKey(x => x.DepartmentId);
+            //builder.HasOne<Room>().WithMany().HasForeignKey(x => x.RoomId);
         }
     }
 }

@@ -5,7 +5,7 @@ using HIS.Dtos.Systems.DbOption;
 
 namespace HIS.ApplicationService.Systems.DbOptions
 {
-    public interface IDbOptionAppService : IAppService
+    public interface IdbOptionAppService : IAppService
     {
         Task<ResultDto<DbOptionDto>> CreateOrEdit(DbOptionDto input);
         Task<ResultDto<DbOptionDto>> Delete(Guid id);

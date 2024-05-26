@@ -14,33 +14,33 @@ namespace HIS.EntityFrameworkCore.Entities
     [Table("DReception")]
     public class Reception : AuditedEntity<Guid>
     {
-        public Guid MedicalRecordID { get; set; }
+        public Guid MedicalRecordId { get; set; }
 
-        public Guid TreatmentID { get; set; }
+        public Guid TreatmentId { get; set; }
 
         public DateTime ReceptionDate { get; set; }
 
-        public Guid UserID { get; set; }
+        public Guid UserId { get; set; }
 
-        public Guid BranchID { get; set; } // chi nhánh làm việc
+        public Guid BranchId { get; set; } // chi nhánh làm việc
 
-        public Guid DepartmentID { get; set; }
+        public Guid DepartmentId { get; set; }
 
-        public Guid RoomID { get; set; } // phòng tiếp đón
+        public Guid RoomId { get; set; } // phòng tiếp đón
 
         public string Gate { get; set; } // cửa
 
-        public Guid? ServiceID { get; set; } // dịch vụ yêu cầu
+        public Guid? ServiceId { get; set; } // dịch vụ yêu cầu
          
-        public Guid? ExecuteDepartmentID { get; set; } // khoa thực hiện yêu cầu
+        public Guid? ExecuteDepartmentId { get; set; } // khoa thực hiện yêu cầu
 
-        public Guid? ExecuteRoomID { get; set; } // phòng thực hiện yêu cầu
+        public Guid? ExecuteRoomId { get; set; } // phòng thực hiện yêu cầu
 
-        public Guid? ExecuteUserID { get; set; } // người thực hiện
+        public Guid? ExecuteUserId { get; set; } // người thực hiện
 
-        public int ReceptionObjectTypeID { get; set; } // đối tượng đăng ký khám
+        public int ReceptionObjectTypeId { get; set; } // đối tượng đăng ký khám
 
-        public int PatientObjectTypeID { get; set; } // đối tượng bệnh nhân
+        public int PatientObjectTypeId { get; set; } // đối tượng bệnh nhân
 
         public bool IsPriority { get; set; } // là BN ưu tiên
 

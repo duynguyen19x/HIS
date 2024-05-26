@@ -39,16 +39,16 @@ namespace HIS.ApplicationService.Business.Patients
                     .WhereIf(!Check.IsNullOrDefault(input.MaxBirthDate), x => x.BirthDate <= input.MaxBirthDate)
                     .WhereIf(!Check.IsNullOrDefault(input.MinBirthDate), x => x.BirthDate >= input.MinBirthDate)
                     .WhereIf(!Check.IsNullOrDefault(input.BirthPlaceFilter), x => x.BirthPlace != null && x.BirthPlace.Contains(input.BirthPlaceFilter))
-                    .WhereIf(!Check.IsNullOrDefault(input.BloodRhTypeFilter), x => x.BloodRhTypeID == input.BloodRhTypeFilter)
-                    .WhereIf(!Check.IsNullOrDefault(input.BloodTypeFilter), x => x.BloodTypeID == input.BloodTypeFilter)
-                    .WhereIf(!Check.IsNullOrDefault(input.GenderFilter), x => x.GenderID == input.GenderFilter)
-                    .WhereIf(!Check.IsNullOrDefault(input.EthnicityFilter), x => x.EthnicityID == input.EthnicityFilter)
-                    .WhereIf(!Check.IsNullOrDefault(input.ReligionFilter), x => x.ReligionID == input.ReligionFilter)
-                    .WhereIf(!Check.IsNullOrDefault(input.CountryFilter), x => x.CountryID == input.CountryFilter)
-                    .WhereIf(!Check.IsNullOrDefault(input.ProvinceFilter), x => x.ProvinceID == input.ProvinceFilter)
-                    .WhereIf(!Check.IsNullOrDefault(input.DistrictFilter), x => x.DistrictID == input.DistrictFilter)
-                    .WhereIf(!Check.IsNullOrDefault(input.WardFilter), x => x.WardID == input.WardFilter)
-                    .WhereIf(!Check.IsNullOrDefault(input.CareerFilter), x => x.CareerID == input.CareerFilter)
+                    .WhereIf(!Check.IsNullOrDefault(input.BloodRhTypeFilter), x => x.BloodRhTypeId == input.BloodRhTypeFilter)
+                    .WhereIf(!Check.IsNullOrDefault(input.BloodTypeFilter), x => x.BloodTypeId == input.BloodTypeFilter)
+                    .WhereIf(!Check.IsNullOrDefault(input.GenderFilter), x => x.GenderId == input.GenderFilter)
+                    .WhereIf(!Check.IsNullOrDefault(input.EthnicityFilter), x => x.EthnicityId == input.EthnicityFilter)
+                    .WhereIf(!Check.IsNullOrDefault(input.ReligionFilter), x => x.ReligionId == input.ReligionFilter)
+                    .WhereIf(!Check.IsNullOrDefault(input.CountryFilter), x => x.CountryId == input.CountryFilter)
+                    .WhereIf(!Check.IsNullOrDefault(input.ProvinceFilter), x => x.ProvinceId == input.ProvinceFilter)
+                    .WhereIf(!Check.IsNullOrDefault(input.DistrictFilter), x => x.DistrictId == input.DistrictFilter)
+                    .WhereIf(!Check.IsNullOrDefault(input.WardFilter), x => x.WardId == input.WardFilter)
+                    .WhereIf(!Check.IsNullOrDefault(input.CareerFilter), x => x.CareerId == input.CareerFilter)
                     .WhereIf(!Check.IsNullOrDefault(input.WorkPlaceFilter), x => x.WorkPlace != null && x.WorkPlace.Contains(input.WorkPlaceFilter))
                     .WhereIf(!Check.IsNullOrDefault(input.AddressFilter), x => x.Address != null && x.Address.Contains(input.AddressFilter))
                     .WhereIf(!Check.IsNullOrDefault(input.PhoneNumberFilter), x => x.PhoneNumber != null && x.PhoneNumber.Contains(input.PhoneNumberFilter))
@@ -113,12 +113,12 @@ namespace HIS.ApplicationService.Business.Patients
                     input.PatientName = input.PatientName.ToUpper();    
 
                     // số thứ tự bệnh nhân
-                    if (Check.IsNullOrDefault(input.PatientNumberID))
+                    if (Check.IsNullOrDefault(input.PatientNumberId))
                     {
                         var patientOrderResult = await _patientNumberAppService.CreateLastNumber(createdDate);
                         if (patientOrderResult.IsSucceeded)
                         {
-                            input.PatientNumberID = patientOrderResult.Result.Id;
+                            input.PatientNumberId = patientOrderResult.Result.Id;
                             numOrder = patientOrderResult.Result.NumOrder;
                         }    
                     }

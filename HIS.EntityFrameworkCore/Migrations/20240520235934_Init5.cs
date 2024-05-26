@@ -43,7 +43,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 nullable: true);
 
             migrationBuilder.AlterColumn<Guid>(
-                name: "ReceptionID",
+                name: "ReceptionId",
                 table: "DExamination",
                 type: "uniqueidentifier",
                 nullable: true,
@@ -51,7 +51,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 oldType: "uniqueidentifier");
 
             migrationBuilder.AlterColumn<Guid>(
-                name: "OrderID",
+                name: "OrderId",
                 table: "DExamination",
                 type: "uniqueidentifier",
                 nullable: true,
@@ -3968,7 +3968,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 table: "DExamination");
 
             migrationBuilder.AlterColumn<Guid>(
-                name: "ReceptionID",
+                name: "ReceptionId",
                 table: "DExamination",
                 type: "uniqueidentifier",
                 nullable: false,
@@ -3978,7 +3978,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<Guid>(
-                name: "OrderID",
+                name: "OrderId",
                 table: "DExamination",
                 type: "uniqueidentifier",
                 nullable: false,

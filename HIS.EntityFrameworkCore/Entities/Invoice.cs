@@ -16,23 +16,23 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public DateTime InvoiceDate { get; set; }
 
-        public int InvoiceTypeID { get; set; } // loại phiếu thu
+        public int InvoiceTypeId { get; set; } // loại phiếu thu
 
-        public Guid InvoiceGroupID { get; set; } // sổ phiếu thu
+        public Guid InvoiceGroupId { get; set; } // sổ phiếu thu
 
-        public Guid PaymentMethodID { get; set; } // hình thức thanh toán
+        public Guid PaymentMethodId { get; set; } // hình thức thanh toán
 
-        public Guid MedicalRecordID { get; set; }
+        public Guid MedicalRecordId { get; set; }
 
-        public Guid TreatmentID { get; set; }
+        public Guid TreatmentId { get; set; }
 
-        public Guid UserID { get; set; }
+        public Guid UserId { get; set; }
 
-        public Guid BranchID { get; set; }
+        public Guid BranchId { get; set; }
 
-        public Guid DepartmentID { get; set; }
+        public Guid DepartmentId { get; set; }
 
-        public Guid RoomID { get; set; }
+        public Guid RoomId { get; set; }
 
         public decimal Amount { get; set; }
 

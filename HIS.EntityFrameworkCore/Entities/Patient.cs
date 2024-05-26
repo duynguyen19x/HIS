@@ -19,29 +19,29 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public string BirthPlace { get; set; }
 
-        public Guid BranchID { get; set; } // chi nhánh làm việc
+        public Guid BranchId { get; set; } // chi nhánh làm việc
 
-        public Guid? PatientNumberID { get; set; } // mã số thứ tự bệnh nhân
+        public Guid? PatientNumberId { get; set; } // mã số thứ tự bệnh nhân
 
-        public Guid? BloodTypeID { get; set; }
+        public Guid? BloodTypeId { get; set; }
 
-        public Guid? BloodRhTypeID { get; set; }
+        public Guid? BloodRhTypeId { get; set; }
 
-        public Guid? GenderID { get; set; }
+        public Guid? GenderId { get; set; }
 
-        public Guid? CareerID { get; set; }
+        public Guid? CareerId { get; set; }
 
-        public Guid? EthnicityID { get; set; }
+        public Guid? EthnicityId { get; set; }
 
-        public Guid? ReligionID { get; set; }
+        public Guid? ReligionId { get; set; }
 
-        public Guid? CountryID { get; set; }
+        public Guid? CountryId { get; set; }
 
-        public Guid? ProvinceID { get; set; }
+        public Guid? ProvinceId { get; set; }
 
-        public Guid? DistrictID { get; set; }
+        public Guid? DistrictId { get; set; }
 
-        public Guid? WardID { get; set; }
+        public Guid? WardId { get; set; }
 
         public string Address { get; set; }
 

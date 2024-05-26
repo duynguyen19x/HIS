@@ -9,9 +9,9 @@ namespace HIS.BackendApi.Controllers.Systems.DbOption
     [ApiController]
     public class DbOptionController : ControllerBase
     {
-        private readonly IDbOptionAppService _iDbOptionAppService;
+        private readonly IdbOptionAppService _iDbOptionAppService;
 
-        public DbOptionController(IDbOptionAppService iDbOptionAppService)
+        public DbOptionController(IdbOptionAppService iDbOptionAppService)
         {
             _iDbOptionAppService = iDbOptionAppService;
         }
