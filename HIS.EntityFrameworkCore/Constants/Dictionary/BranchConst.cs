@@ -14,7 +14,7 @@ namespace HIS.EntityFrameworkCore.Constants
         public const int MaxBranchNameLength = 255;
         public const int MinBranchNameLength = 0;
 
-        public const int MaxMediOrgCodeLength = 255;
+        public const int MaxMediOrgCodeLength = 50;
         public const int MinMediOrgCodeLength = 0;
 
         public const int MaxMediOrgAcceptCodeLength = 4000;
