@@ -11,6 +11,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Phiếu chỉ định dịch vụ
     /// </summary>
+    [Table("DOrder")]
     public class Order : AuditedEntity<Guid>
     {
         public string OrderCode { get; set; } // mã phiếu chỉ định
@@ -86,5 +87,10 @@ namespace HIS.EntityFrameworkCore.Entities
         public bool IsEmergency { get; set; } // cấp cứu
 
         public bool IsPriority { get; set; } // ưu tiên
+
+        [ForeignKey(nameof(OrderTypeID))]
+        public virtual OrderType OrderTypeFk { get; set; }
+
+
     }
 }

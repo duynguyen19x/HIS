@@ -6,6 +6,7 @@ using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Items;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 using HIS.EntityFrameworkCore.Entities.System;
 using HIS.EntityFrameworkCore.Views;
 using Microsoft.EntityFrameworkCore;
@@ -58,6 +59,9 @@ namespace HIS.EntityFrameworkCore
         public DbSet<ExecutionRoom> ExecutionRoom { get; set; }
         public DbSet<Gender> Gender { get; set; }
         public DbSet<Hospital> Hospital { get; set; }
+        public DbSet<HospitalLevel> HospitalLevel { get; set; }
+        public DbSet<HospitalLine> HospitalLine { get; set; }
+        public DbSet<HospitalSpeciality> HospitalSpeciality { get; set; }
         public DbSet<Icd> Icd { get; set; }
         public DbSet<InvoiceGroup> InvoiceGroup { get; set; }
         public DbSet<InvoiceGroupBelongToUser> InvoiceGroupBelongToUser { get; set; }

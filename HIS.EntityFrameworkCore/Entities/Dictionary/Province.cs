@@ -13,7 +13,7 @@ namespace HIS.EntityFrameworkCore.Entities
     {
         [Required]
         [MaxLength(50)]
-        public virtual string Code { get; set; }
+        public string Code { get; set; }
 
         [Required]
         [MaxLength(255)]

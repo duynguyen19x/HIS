@@ -14,12 +14,12 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
             builder.ToTable("DOrder");
             builder.HasKey(x => x.Id);
 
-            builder.Property(x => x.OrderCode).IsRequired().HasMaxLength(OrderConst.OrderCodeLength);
-            builder.Property(x => x.Barcode).HasMaxLength(OrderConst.BarcodeLength);
-            builder.Property(x => x.IcdCode).HasMaxLength(IcdConst.IcdCodeLength);
-            builder.Property(x => x.IcdName).HasMaxLength(IcdConst.IcdNameLength);
-            builder.Property(x => x.IcdSubCode).HasMaxLength(IcdConst.IcdSubCodeLength);
-            builder.Property(x => x.IcdText).HasMaxLength(IcdConst.IcdTextLength);
+            //builder.Property(x => x.OrderCode).IsRequired().HasMaxLength(OrderConst.OrderCodeLength);
+            //builder.Property(x => x.Barcode).HasMaxLength(OrderConst.BarcodeLength);
+            //builder.Property(x => x.IcdCode).HasMaxLength(IcdConst.IcdCodeLength);
+            //builder.Property(x => x.IcdName).HasMaxLength(IcdConst.IcdNameLength);
+            //builder.Property(x => x.IcdSubCode).HasMaxLength(IcdConst.IcdSubCodeLength);
+            //builder.Property(x => x.IcdText).HasMaxLength(IcdConst.IcdTextLength);
 
             //builder.HasOne<MedicalRecord>().WithMany().HasForeignKey(x => x.MedicalRecordID);
             //builder.HasOne<Treatment>().WithMany().HasForeignKey(x => x.TreatmentID);

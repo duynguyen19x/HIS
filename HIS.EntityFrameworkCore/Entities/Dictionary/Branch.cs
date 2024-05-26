@@ -1,5 +1,7 @@
 ﻿using AutoMapper.Configuration.Annotations;
 using HIS.Core.Domain.Entities.Auditing;
+using HIS.EntityFrameworkCore.Constants;
+using HIS.EntityFrameworkCore.Entities.Dictionary;
 using HIS.EntityFrameworkCore.Entities.System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,124 +14,121 @@ namespace HIS.EntityFrameworkCore.Entities
     [Table("SBranch")]
     public class Branch : AuditedEntity<Guid>
     {
-        /// <summary>
-        /// Mã chi nhánh
-        /// </summary>
         [Required]
-        [MaxLength(50)]
-        public virtual string Code { get; set; }
+        [StringLength(BranchConst.MaxBranchCodeLength, MinimumLength = BranchConst.MinBranchCodeLength)]
+        public string BranchCode { get; set; }
 
-        /// <summary>
-        /// Tên chi nhánh
-        /// </summary>
         [Required]
-        [MaxLength(255)]
-        public virtual string Name { get; set; }
+        [StringLength(BranchConst.MaxBranchNameLength, MinimumLength = BranchConst.MinBranchNameLength)]
+        public string BranchName { get; set; }
 
         /// <summary>
         /// Mã khám chữa bệnh ban đầu
         /// </summary>
-        [MaxLength(255)]
-        public virtual string MediOrgCode { get; set; }
+        [StringLength(BranchConst.MaxMediOrgCodeLength, MinimumLength = BranchConst.MinMediOrgCodeLength)]
+        public string MediOrgCode { get; set; }
 
         /// <summary>
         /// Mã KCBBĐ đúng tuyến (ngăn cách bởi dấu ;)
         /// </summary>
-        [MaxLength(4000)]
-        public virtual string MediOrgAcceptCode { get; set; }
+        [StringLength(BranchConst.MaxMediOrgAcceptCodeLength, MinimumLength = BranchConst.MinMediOrgAcceptCodeLength)]
+        public string MediOrgAcceptCode { get; set; }
 
         /// <summary>
         /// Hạng bệnh viện (hạng I, II, III và đặc biệt)
         /// </summary>
-        [MaxLength(50)]
-        public virtual string Level { get; set; }
-
-        /// <summary>
-        /// Chuyên khoa
-        /// </summary>
-        [MaxLength(50)]
-        public virtual string Specialty { get; set; }
+        public Guid? HospitalLevelID { get; set; }
 
         /// <summary>
         /// Tuyến bệnh viện
         /// </summary>
-        [MaxLength(50)]
-        public virtual string Line { get; set; }
+        public Guid? HospitalLineID { get; set; }
+
+        /// <summary>
+        /// Chuyên khoa
+        /// </summary>
+        public Guid? HospitalSpecialityID { get; set; }
 
         /// <summary>
         /// Tên đơn vị quản lý (sở y tế/bộ y tế)
         /// </summary>
-        [MaxLength(50)]
-        public virtual string ParentOrganizationName { get; set; }
+        [StringLength(BranchConst.MaxParentOrganizationNameLength, MinimumLength = BranchConst.MinParentOrganizationNameLength)]
+        public string ParentOrganizationName { get; set; }
 
         /// <summary>
         /// Điện thoại
         /// </summary>
-        [MaxLength(50)]
-        public virtual string Tel { get; set; }
+        [StringLength(BranchConst.MaxPhoneNumberLength, MinimumLength = BranchConst.MinPhoneNumberLength)]
+        public string PhoneNumber { get; set; }
 
         /// <summary>
         /// Email
         /// </summary>
-        [MaxLength(50)]
-        public virtual string Email { get; set; }
+        [StringLength(BranchConst.MaxEmailLength, MinimumLength = BranchConst.MinEmailLength)]
+        public string Email { get; set; }
 
         /// <summary>
         /// Địa chỉ (số nhà, thôn, xóm)
         /// </summary>
-        [MaxLength(255)]
-        public virtual string Address { get; set; }
+        [StringLength(BranchConst.MaxAddressLength, MinimumLength = BranchConst.MinAddressLength)]
+        public string Address { get; set; }
 
         /// <summary>
         /// Tỉnh, thành phố
         /// </summary>
-        public virtual Guid? ProvinceId { get; set; }
+        public Guid? ProvinceID { get; set; }
 
         /// <summary>
         /// Quận, huyện
         /// </summary>
-        public virtual Guid? DistrictId { get; set; }
+        public Guid? DistrictID { get; set; }
 
         /// <summary>
         /// Xã, phường
         /// </summary>
-        public virtual Guid? WardId { get; set; }
+        public Guid? WardID { get; set; }
 
         /// <summary>
         /// Lãnh đạo
         /// </summary>
-        public virtual Guid? DirectorId { get; set; }
+        public Guid? DirectorID { get; set; }
 
         /// <summary>
         /// Ghi chú
         /// </summary>
-        [MaxLength(255)]
-        public virtual string Description { get; set; }
+        [StringLength(BranchConst.MaxDescriptionLength, MinimumLength = BranchConst.MinDescriptionLength)]
+        public string Description { get; set; }
 
         /// <summary>
         /// Số thứ tự hiển thị
         /// </summary>
-        public virtual int SortOrder { get; set; }
+        public int SortOrder { get; set; }
 
         /// <summary>
         /// Khóa
         /// </summary>
-        public virtual bool Inactive { get; set; }
+        public bool Inactive { get; set; }
 
-        [Ignore]
-        [ForeignKey("ProvinceId")]
+
+        [ForeignKey(nameof(HospitalLevelID))]
+        public virtual HospitalLevel HospitalLevelFk { get; set; }
+
+        [ForeignKey(nameof(HospitalLineID))]
+        public virtual HospitalLine HospitalLineFk { get; set; }
+
+        [ForeignKey(nameof(HospitalSpecialityID))]
+        public virtual HospitalSpeciality HospitalSpecialityFk { get; set; }
+
+        [ForeignKey(nameof(ProvinceID))]
         public virtual Province ProvinceFk { get; set; }
 
-        [Ignore]
-        [ForeignKey("DistrictId")]
+        [ForeignKey(nameof(DistrictID))]
         public virtual District DistrictFk { get; set; }
 
-        [Ignore]
-        [ForeignKey("WardId")]
+        [ForeignKey(nameof(WardID))]
         public virtual Ward WardFk { get; set; }
 
-        [Ignore]
-        [ForeignKey("DirectorId")]
+        [ForeignKey(nameof(DirectorID))]
         public virtual User DirectorFk { get; set; }
     }
 }

@@ -4,8 +4,10 @@ namespace HIS.Dtos.Dictionaries.Branchs
 {
     public class GetAllBranchInputDto : PagedAndSortedResultRequestDto
     {
-        public string CodeFilter { get; set; }
-        public string NameFilter { get; set; }
+        public string BranchCodeFilter { get; set; }
+
+        public string BranchNameFilter { get; set; }
+
         public bool? InactiveFilter { get; set; }
     }
 }
