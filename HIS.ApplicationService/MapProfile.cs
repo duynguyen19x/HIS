@@ -50,6 +50,9 @@ using HIS.ApplicationService.Dictionary.TransferForms.Dto;
 using HIS.ApplicationService.Dictionary.TransferReasons.Dto;
 using HIS.ApplicationService.Dictionary.RightRouteTypes.Dto;
 using HIS.ApplicationService.Business.Receptions.Dto;
+using HIS.ApplicationService.Dictionary.HospitalSpecialities.Dto;
+using HIS.ApplicationService.Dictionary.HospitalLevels.Dto;
+using HIS.ApplicationService.Dictionary.HospitalLines.Dto;
 
 namespace HIS.ApplicationService
 {
@@ -170,6 +173,10 @@ namespace HIS.ApplicationService
             CreateMap<DepartmentDto, Department>().ReverseMap();
             CreateMap<RoomTypeDto, RoomType>().ReverseMap();
             CreateMap<RoomDto, Room>().ReverseMap();
+
+            CreateMap<HospitalLevelDto, HospitalLevel>().ReverseMap();
+            CreateMap<HospitalLineDto, HospitalLine>().ReverseMap();
+            CreateMap<HospitalSpecialityDto, HospitalSpeciality>().ReverseMap();
             
             CreateMap<Ethnicity, EthnicDto>().ReverseMap();
             CreateMap<TransferForm, TransferFormDto>().ReverseMap();

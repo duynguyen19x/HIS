@@ -9,5 +9,8 @@ namespace HIS.ApplicationService.Dictionary.HospitalSpecialities.Dto
 {
     public class GetAllHospitalSpecialityInputDto : PagedAndSortedResultRequestDto
     {
+        public string HospitalSpecialityCodeFilter { get; set; }
+        public string HospitalSpecialityNameFilter { get; set; }
+        public bool? InactiveFilter { get; set; }
     }
 }

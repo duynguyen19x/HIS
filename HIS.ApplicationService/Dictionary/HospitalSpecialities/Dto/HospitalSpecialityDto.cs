@@ -11,15 +11,10 @@ namespace HIS.ApplicationService.Dictionary.HospitalSpecialities.Dto
 {
     public class HospitalSpecialityDto : EntityDto<Guid?>
     {
-        [Required]
-        [StringLength(HospitalSpecialityConst.MaxHospitalSpecialityCodeLength, MinimumLength = HospitalSpecialityConst.MinHospitalSpecialityCodeLength)]
         public string HospitalSpecialityCode { get; set; }
 
-        [Required]
-        [StringLength(HospitalSpecialityConst.MaxHospitalSpecialityNameLength, MinimumLength = HospitalSpecialityConst.MinHospitalSpecialityNameLength)]
         public string HospitalSpecialityName { get; set; }
 
-        [StringLength(HospitalSpecialityConst.MaxDescriptionLength, MinimumLength = HospitalSpecialityConst.MinDescriptionLength)]
         public string Description { get; set; }
 
         public bool Inactive { get; set; }

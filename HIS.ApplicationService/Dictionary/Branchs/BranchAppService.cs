@@ -8,8 +8,6 @@ using HIS.Core.Application.Services.Dto;
 using HIS.EntityFrameworkCore.Entities;
 using HIS.ApplicationService.Dictionary.Branchs.Dto;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
-using HIS.EntityFrameworkCore.Entities.System;
 
 namespace HIS.ApplicationService.Dictionary.Branchs
 {

@@ -1,7 +1,5 @@
-﻿using AutoMapper.Configuration.Annotations;
-using HIS.Core.Domain.Entities.Auditing;
+﻿using HIS.Core.Domain.Entities.Auditing;
 using HIS.EntityFrameworkCore.Constants;
-using HIS.EntityFrameworkCore.Entities.Dictionary;
 using HIS.EntityFrameworkCore.Entities.System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;

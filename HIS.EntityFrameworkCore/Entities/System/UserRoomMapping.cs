@@ -1,7 +1,7 @@
 ﻿using HIS.Core.Domain.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities.System
+namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// Người dùng vả phòng chức năng.
