@@ -18,9 +18,9 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public DateTime OrderDate { get; set; } // ngày y lệnh
 
-        public int OrderTypeId { get; set; }  // loại phiếu
+        public int OrderTypeID { get; set; }  // loại phiếu
 
-        public int OrderStatusId { get; set; } // trạng thái
+        public int OrderStatusID { get; set; } // trạng thái
 
         public int NumOrder { get; set; } // số thứ tự phiếu chỉ định theo ngày y lệnh và loại phiếu
 

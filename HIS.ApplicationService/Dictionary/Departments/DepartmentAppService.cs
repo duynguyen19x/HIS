@@ -11,7 +11,7 @@ using System.Transactions;
 
 namespace HIS.ApplicationService.Dictionary.Departments
 {
-    public class DepartmentAppService : BaseAppService, IdepartmentAppService
+    public class DepartmentAppService : BaseAppService, IDepartmentAppService
     {
         private readonly IRepository<Department, Guid> _departmentRepository;
         private readonly IRepository<DepartmentType, int> _departmentTypeRepository;
@@ -56,8 +56,8 @@ namespace HIS.ApplicationService.Dictionary.Departments
                                 DepartmentTypeCode = s1.Code,
                                 DepartmentTypeName = s1.Name,
                                 BranchId = o.BranchId,
-                                BranchCode = s2.Code,
-                                BranchName = s2.Name,
+                                BranchCode = s2.BranchCode,
+                                BranchName = s2.BranchName,
                                 ChiefId = o.ChiefId,
                                 Email = o.Email,
                                 Tel = o.Tel,
