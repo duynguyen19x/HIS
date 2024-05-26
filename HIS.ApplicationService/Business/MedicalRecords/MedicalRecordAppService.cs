@@ -36,12 +36,12 @@ namespace HIS.ApplicationService.Business.MedicalRecords
             try
             {
                 var filter = _medicalRecordRepository.GetAll()
-                    .WhereIf(!Check.IsNullOrDefault(input.PatientFilter), x => x.PatientID == input.PatientFilter)
+                    .WhereIf(!Check.IsNullOrDefault(input.PatientFilter), x => x.PatientId == input.PatientFilter)
                     .WhereIf(!Check.IsNullOrDefault(input.MaxMedicalRecordDateFilter), x => x.MedicalRecordDate <= input.MaxMedicalRecordDateFilter)
                     .WhereIf(!Check.IsNullOrDefault(input.MinMedicalRecordDateFilter), x => x.MedicalRecordDate >= input.MinMedicalRecordDateFilter)
                     .WhereIf(!Check.IsNullOrDefault(input.MedicalRecordCodeFilter), x => x.MedicalRecordCode != null && x.MedicalRecordCode.Contains(input.MedicalRecordCodeFilter))
-                    .WhereIf(!Check.IsNullOrDefault(input.MedicalRecordTypeFilter), x => x.MedicalRecordTypeID == input.MedicalRecordTypeFilter)
-                    .WhereIf(!Check.IsNullOrDefault(input.MedicalRecordStatusFilter), x => x.MedicalRecordStatusID == input.MedicalRecordStatusFilter);
+                    .WhereIf(!Check.IsNullOrDefault(input.MedicalRecordTypeFilter), x => x.MedicalRecordTypeId == input.MedicalRecordTypeFilter)
+                    .WhereIf(!Check.IsNullOrDefault(input.MedicalRecordStatusFilter), x => x.MedicalRecordStatusId == input.MedicalRecordStatusFilter);
 
                 var paged = filter.ApplySortingAndPaging(input, nameof(MedicalRecord.MedicalRecordCode));
 
@@ -108,7 +108,7 @@ namespace HIS.ApplicationService.Business.MedicalRecords
                     if (Check.IsNullOrDefault(input.Id))
                         input.Id = Guid.NewGuid();
                     input.PatientName = patient.PatientName;
-                    input.PatientID = patient.Id;
+                    input.PatientId = patient.Id;
 
                     var medicalRecord = ObjectMapper.Map<MedicalRecord>(input);
 
@@ -155,7 +155,7 @@ namespace HIS.ApplicationService.Business.MedicalRecords
                 try
                 {
                     var medicalRecord = _medicalRecordRepository.Get(id);
-                    if (medicalRecord.MedicalRecordStatusID > 0)
+                    if (medicalRecord.MedicalRecordStatusId > 0)
                     {
                         throw new Exception("Bệnh án đã kết thúc!");
                     }

@@ -31,7 +31,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("BranchID")
+                    b.Property<Guid>("BranchId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Code")
@@ -74,7 +74,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BranchID");
+                    b.HasIndex("BranchId");
 
                     b.ToTable("SBirthCertBook");
                 });
@@ -4617,7 +4617,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("e3a2237c-9d57-462f-bad8-7a78856303c8"),
-                            Code = "ID",
+                            Code = "Id",
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 412, DateTimeKind.Local).AddTicks(249),
                             Inactive = false,
                             MediCode = "180",
@@ -7381,7 +7381,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("BranchID")
+                    b.Property<Guid>("BranchId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CreatedBy")
@@ -7393,10 +7393,10 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime>("ExaminationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ExaminationTypeID")
+                    b.Property<int>("ExaminationTypeId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("MedicalRecordID")
+                    b.Property<Guid>("MedicalRecordId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("ModifiedBy")
@@ -7405,13 +7405,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("OrderID")
+                    b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ReceptionID")
+                    b.Property<Guid>("ReceptionId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("TreatmentID")
+                    b.Property<Guid>("TreatmentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -7721,7 +7721,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("FromDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("GenderID")
+                    b.Property<Guid?>("GenderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("HasBirthCertificate")
@@ -7735,7 +7735,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("Join5YearTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("LiveAreaID")
+                    b.Property<int>("LiveAreaId")
                         .HasColumnType("int");
 
                     b.Property<string>("MediOrgCode")
@@ -7746,7 +7746,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<Guid>("MedicalRecordID")
+                    b.Property<Guid>("MedicalRecordId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("ModifiedBy")
@@ -7755,14 +7755,14 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("PatientID")
+                    b.Property<Guid>("PatientId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PatientName")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<int>("RightRouteTypeID")
+                    b.Property<int>("RightRouteTypeId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ToDate")
@@ -7779,7 +7779,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("BranchID")
+                    b.Property<Guid>("BranchId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CreatedBy")
@@ -7796,10 +7796,10 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime>("InvoiceDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("InvoiceTypeID")
+                    b.Property<int>("InvoiceTypeId")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("MedicalRecordID")
+                    b.Property<Guid>("MedicalRecordId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("ModifiedBy")
@@ -7808,7 +7808,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("TreatmentID")
+                    b.Property<Guid>("TreatmentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -8135,16 +8135,16 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<int>("BirthYear")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("BloodRhTypeID")
+                    b.Property<Guid?>("BloodRhTypeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("BloodTypeID")
+                    b.Property<Guid?>("BloodTypeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("BranchID")
+                    b.Property<Guid>("BranchId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CareerID")
+                    b.Property<Guid?>("CareerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ChiefComplaint")
@@ -8171,7 +8171,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<string>("ContactRelationshipName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("CountryID")
+                    b.Property<Guid?>("CountryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CreatedBy")
@@ -8186,7 +8186,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("DepartmentID")
+                    b.Property<Guid>("DepartmentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
@@ -8195,10 +8195,10 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("EthnicityID")
+                    b.Property<Guid?>("EthnicityId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("GenderID")
+                    b.Property<Guid?>("GenderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("HospitalizationReason")
@@ -8233,10 +8233,10 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime>("MedicalRecordDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("MedicalRecordStatusID")
+                    b.Property<int>("MedicalRecordStatusId")
                         .HasColumnType("int");
 
-                    b.Property<int>("MedicalRecordTypeID")
+                    b.Property<int>("MedicalRecordTypeId")
                         .HasColumnType("int");
 
                     b.Property<Guid?>("ModifiedBy")
@@ -8251,37 +8251,37 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<string>("PatientCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("PatientID")
+                    b.Property<Guid>("PatientId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PatientName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PatientObjectTypeID")
+                    b.Property<int>("PatientObjectTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("ProvinceID")
+                    b.Property<Guid?>("ProvinceId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("ReceptionDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("ReceptionObjectTypeID")
+                    b.Property<int>("ReceptionObjectTypeId")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("ReligionID")
+                    b.Property<Guid?>("ReligionId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RoomID")
+                    b.Property<Guid>("RoomId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("TransferInCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("TransferInFormID")
+                    b.Property<Guid?>("TransferInFormId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("TransferInIcdCode")
@@ -8296,7 +8296,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<string>("TransferInMediOrgName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("TransferInReasonID")
+                    b.Property<Guid?>("TransferInReasonId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("TransferInTimeFrom")
@@ -8305,10 +8305,10 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("TransferInTimeTo")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("UserID")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("WardID")
+                    b.Property<Guid?>("WardId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("WorkPlace")
@@ -8318,7 +8318,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.HasIndex("PatientID");
+                    b.HasIndex("PatientId");
 
                     b.ToTable("DMedicalRecord", (string)null);
                 });
@@ -8349,7 +8349,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<int>("MedicalRecordTypeGroupID")
+                    b.Property<int>("MedicalRecordTypeGroupId")
                         .HasColumnType("int");
 
                     b.Property<string>("MedicalRecordTypeName")
@@ -8368,7 +8368,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MedicalRecordTypeGroupID");
+                    b.HasIndex("MedicalRecordTypeGroupId");
 
                     b.ToTable("SMedicalRecordType", (string)null);
 
@@ -8379,7 +8379,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3269),
                             Inactive = false,
                             MedicalRecordTypeCode = "100",
-                            MedicalRecordTypeGroupID = 1,
+                            MedicalRecordTypeGroupId = 1,
                             MedicalRecordTypeName = "Khám Bệnh",
                             SortOrder = 1
                         },
@@ -8389,7 +8389,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3278),
                             Inactive = false,
                             MedicalRecordTypeCode = "200",
-                            MedicalRecordTypeGroupID = 2,
+                            MedicalRecordTypeGroupId = 2,
                             MedicalRecordTypeName = "Bệnh Án Ngoại Trú (Chung)",
                             SortOrder = 1
                         },
@@ -8399,7 +8399,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3280),
                             Inactive = false,
                             MedicalRecordTypeCode = "201",
-                            MedicalRecordTypeGroupID = 2,
+                            MedicalRecordTypeGroupId = 2,
                             MedicalRecordTypeName = "Bệnh Án Ngoại Trú (Răng - Hàm - Mặt)",
                             SortOrder = 2
                         },
@@ -8409,7 +8409,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3281),
                             Inactive = false,
                             MedicalRecordTypeCode = "202",
-                            MedicalRecordTypeGroupID = 2,
+                            MedicalRecordTypeGroupId = 2,
                             MedicalRecordTypeName = "Bệnh Án Ngoại Trú (Tai - Mũi - Họng)",
                             SortOrder = 3
                         },
@@ -8419,7 +8419,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3283),
                             Inactive = false,
                             MedicalRecordTypeCode = "203",
-                            MedicalRecordTypeGroupID = 2,
+                            MedicalRecordTypeGroupId = 2,
                             MedicalRecordTypeName = "Bệnh Án Ngoại Trú (Y Học Cổ Truyền)",
                             SortOrder = 4
                         },
@@ -8429,7 +8429,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3284),
                             Inactive = false,
                             MedicalRecordTypeCode = "204",
-                            MedicalRecordTypeGroupID = 2,
+                            MedicalRecordTypeGroupId = 2,
                             MedicalRecordTypeName = "Bệnh Án Ngoại Trú (Mắt)",
                             SortOrder = 5
                         },
@@ -8439,7 +8439,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3285),
                             Inactive = false,
                             MedicalRecordTypeCode = "301",
-                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeGroupId = 3,
                             MedicalRecordTypeName = "Bệnh Án Nội Khoa",
                             SortOrder = 2
                         },
@@ -8449,7 +8449,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3287),
                             Inactive = false,
                             MedicalRecordTypeCode = "302",
-                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeGroupId = 3,
                             MedicalRecordTypeName = "Bệnh Án Nhi Khoa",
                             SortOrder = 3
                         },
@@ -8459,7 +8459,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3288),
                             Inactive = false,
                             MedicalRecordTypeCode = "303",
-                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeGroupId = 3,
                             MedicalRecordTypeName = "Bệnh Án Truyền Nhiễm",
                             SortOrder = 4
                         },
@@ -8469,7 +8469,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3290),
                             Inactive = false,
                             MedicalRecordTypeCode = "304",
-                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeGroupId = 3,
                             MedicalRecordTypeName = "Bệnh Án Phụ Khoa",
                             SortOrder = 5
                         },
@@ -8479,7 +8479,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3291),
                             Inactive = false,
                             MedicalRecordTypeCode = "305",
-                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeGroupId = 3,
                             MedicalRecordTypeName = "Bệnh Án Sản Khoa",
                             SortOrder = 6
                         },
@@ -8489,7 +8489,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3292),
                             Inactive = false,
                             MedicalRecordTypeCode = "306",
-                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeGroupId = 3,
                             MedicalRecordTypeName = "Bệnh Án Sơ Sinh",
                             SortOrder = 7
                         },
@@ -8499,7 +8499,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3300),
                             Inactive = false,
                             MedicalRecordTypeCode = "307",
-                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeGroupId = 3,
                             MedicalRecordTypeName = "Bệnh Án Tâm Thần",
                             SortOrder = 8
                         },
@@ -8509,7 +8509,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3301),
                             Inactive = false,
                             MedicalRecordTypeCode = "308",
-                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeGroupId = 3,
                             MedicalRecordTypeName = "Bệnh Án Da Liễu",
                             SortOrder = 9
                         },
@@ -8519,7 +8519,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3303),
                             Inactive = false,
                             MedicalRecordTypeCode = "309",
-                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeGroupId = 3,
                             MedicalRecordTypeName = "Bệnh Án Điều Dưỡng - Phục Hồi Chức Năng",
                             SortOrder = 10
                         },
@@ -8529,7 +8529,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3304),
                             Inactive = false,
                             MedicalRecordTypeCode = "310",
-                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeGroupId = 3,
                             MedicalRecordTypeName = "Bệnh Án Huyết Học - Truyền Máu",
                             SortOrder = 11
                         },
@@ -8539,7 +8539,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3305),
                             Inactive = false,
                             MedicalRecordTypeCode = "311",
-                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeGroupId = 3,
                             MedicalRecordTypeName = "Bệnh Án Ngoại Khoa",
                             SortOrder = 12
                         },
@@ -8549,7 +8549,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3307),
                             Inactive = false,
                             MedicalRecordTypeCode = "312",
-                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeGroupId = 3,
                             MedicalRecordTypeName = "Bệnh Án Bỏng",
                             SortOrder = 13
                         },
@@ -8559,7 +8559,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3308),
                             Inactive = false,
                             MedicalRecordTypeCode = "313",
-                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeGroupId = 3,
                             MedicalRecordTypeName = "Bệnh Án Ung Bướu",
                             SortOrder = 14
                         },
@@ -8569,7 +8569,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3310),
                             Inactive = false,
                             MedicalRecordTypeCode = "314",
-                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeGroupId = 3,
                             MedicalRecordTypeName = "Bệnh Án Răng-Hàm-Mặt",
                             SortOrder = 15
                         },
@@ -8579,7 +8579,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3311),
                             Inactive = false,
                             MedicalRecordTypeCode = "315",
-                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeGroupId = 3,
                             MedicalRecordTypeName = "Bệnh Án Tai-Mũi-Họng",
                             SortOrder = 16
                         },
@@ -8589,7 +8589,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             CreatedDate = new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3312),
                             Inactive = false,
                             MedicalRecordTypeCode = "316",
-                            MedicalRecordTypeGroupID = 3,
+                            MedicalRecordTypeGroupId = 3,
                             MedicalRecordTypeName = "Bệnh Án Mắt",
                             SortOrder = 17
                         });
@@ -8679,7 +8679,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<Guid>("BranchID")
+                    b.Property<Guid>("BranchId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CreatedBy")
@@ -8688,25 +8688,25 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("DepartmentID")
+                    b.Property<Guid>("DepartmentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("EndUserID")
+                    b.Property<Guid?>("EndUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("ExecuteDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("ExecuteDepartmentID")
+                    b.Property<Guid?>("ExecuteDepartmentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ExecuteRoomID")
+                    b.Property<Guid?>("ExecuteRoomId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ExecuteUserID")
+                    b.Property<Guid?>("ExecuteUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("IcdCode")
@@ -8725,13 +8725,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
 
-                    b.Property<Guid?>("InsuranceID")
+                    b.Property<Guid?>("InsuranceId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsEmergency")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("MedicalRecordID")
+                    b.Property<Guid>("MedicalRecordId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("ModifiedBy")
@@ -8751,43 +8751,43 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("OrderStatusID")
+                    b.Property<int>("OrderStatusId")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderTypeID")
+                    b.Property<int>("OrderTypeId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("ReceiveDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("ReceiveUserID")
+                    b.Property<Guid?>("ReceiveUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ReceptionID")
+                    b.Property<Guid?>("ReceptionId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("RoomID")
+                    b.Property<Guid>("RoomId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("SampleDepartmentID")
+                    b.Property<Guid?>("SampleDepartmentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("SampleEndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("SampleRoomID")
+                    b.Property<Guid?>("SampleRoomId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("SampleStartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("SampleUserID")
+                    b.Property<Guid?>("SampleUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("TreatmentID")
+                    b.Property<Guid>("TreatmentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UserID")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -8815,13 +8815,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<int>("BirthYear")
                         .HasColumnType("int");
 
-                    b.Property<Guid?>("BloodRhTypeID")
+                    b.Property<Guid?>("BloodRhTypeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("BloodTypeID")
+                    b.Property<Guid?>("BloodTypeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CareerID")
+                    b.Property<Guid?>("CareerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ContactAddress")
@@ -8850,7 +8850,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<Guid?>("CountryID")
+                    b.Property<Guid?>("CountryId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CreatedBy")
@@ -8869,17 +8869,17 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(400)
                         .HasColumnType("nvarchar(400)");
 
-                    b.Property<Guid?>("DistrictID")
+                    b.Property<Guid?>("DistrictId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Email")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<Guid?>("EthnicityID")
+                    b.Property<Guid?>("EthnicityId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("GenderID")
+                    b.Property<Guid?>("GenderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("IdentificationNumber")
@@ -8912,20 +8912,20 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<Guid?>("PatientNumberID")
+                    b.Property<Guid?>("PatientNumberId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PhoneNumber")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<Guid?>("ProvinceID")
+                    b.Property<Guid?>("ProvinceId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("ReligionID")
+                    b.Property<Guid?>("ReligionId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("WardID")
+                    b.Property<Guid?>("WardId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("WorkPlace")
@@ -8934,27 +8934,27 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BloodRhTypeID");
+                    b.HasIndex("BloodRhTypeId");
 
-                    b.HasIndex("BloodTypeID");
+                    b.HasIndex("BloodTypeId");
 
-                    b.HasIndex("CareerID");
+                    b.HasIndex("CareerId");
 
-                    b.HasIndex("CountryID");
+                    b.HasIndex("CountryId");
 
-                    b.HasIndex("EthnicityID");
+                    b.HasIndex("EthnicityId");
 
-                    b.HasIndex("GenderID");
+                    b.HasIndex("GenderId");
 
                     b.HasIndex("IsDeleted");
 
-                    b.HasIndex("PatientNumberID");
+                    b.HasIndex("PatientNumberId");
 
-                    b.HasIndex("ProvinceID");
+                    b.HasIndex("ProvinceId");
 
-                    b.HasIndex("ReligionID");
+                    b.HasIndex("ReligionId");
 
-                    b.HasIndex("WardID");
+                    b.HasIndex("WardId");
 
                     b.ToTable("DPatient", (string)null);
                 });
@@ -10349,7 +10349,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid>("BranchID")
+                    b.Property<Guid>("BranchId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CreatedBy")
@@ -10361,7 +10361,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<string>("Machine")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("MedicalRecordID")
+                    b.Property<Guid>("MedicalRecordId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("ModifiedBy")
@@ -10370,13 +10370,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("OrderID")
+                    b.Property<Guid>("OrderId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("OriginalPrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid?>("ParentID")
+                    b.Property<Guid?>("ParentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Price")
@@ -10394,7 +10394,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<string>("ServiceCodeBHYT")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("ServiceID")
+                    b.Property<Guid?>("ServiceId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ServiceName")
@@ -10412,13 +10412,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<string>("ServiceResultLH")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("TreatmentID")
+                    b.Property<Guid>("TreatmentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UnitCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("UnitID")
+                    b.Property<Guid?>("UnitId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UnitName")
@@ -12165,7 +12165,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Branch", "BranchFK")
                         .WithMany()
-                        .HasForeignKey("BranchID")
+                        .HasForeignKey("BranchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -12635,7 +12635,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Patient", null)
                         .WithMany()
-                        .HasForeignKey("PatientID")
+                        .HasForeignKey("PatientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -12644,7 +12644,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.MedicalRecordTypeGroup", "MedicalRecordTypeGroup")
                         .WithMany()
-                        .HasForeignKey("MedicalRecordTypeGroupID")
+                        .HasForeignKey("MedicalRecordTypeGroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -12655,43 +12655,43 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.BloodRhType", null)
                         .WithMany()
-                        .HasForeignKey("BloodRhTypeID");
+                        .HasForeignKey("BloodRhTypeId");
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.BloodType", null)
                         .WithMany()
-                        .HasForeignKey("BloodTypeID");
+                        .HasForeignKey("BloodTypeId");
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Career", null)
                         .WithMany()
-                        .HasForeignKey("CareerID");
+                        .HasForeignKey("CareerId");
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Country", null)
                         .WithMany()
-                        .HasForeignKey("CountryID");
+                        .HasForeignKey("CountryId");
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Ethnicity", null)
                         .WithMany()
-                        .HasForeignKey("EthnicityID");
+                        .HasForeignKey("EthnicityId");
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Gender", null)
                         .WithMany()
-                        .HasForeignKey("GenderID");
+                        .HasForeignKey("GenderId");
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.PatientNumber", null)
                         .WithMany()
-                        .HasForeignKey("PatientNumberID");
+                        .HasForeignKey("PatientNumberId");
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Province", null)
                         .WithMany()
-                        .HasForeignKey("ProvinceID");
+                        .HasForeignKey("ProvinceId");
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Religion", null)
                         .WithMany()
-                        .HasForeignKey("ReligionID");
+                        .HasForeignKey("ReligionId");
 
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Ward", null)
                         .WithMany()
-                        .HasForeignKey("WardID");
+                        .HasForeignKey("WardId");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Room", b =>

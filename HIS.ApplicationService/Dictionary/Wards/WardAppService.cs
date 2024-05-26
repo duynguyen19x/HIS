@@ -31,34 +31,32 @@ namespace HIS.ApplicationService.Dictionaries.Wards
             try
             {
                 var filter = _wardRepository.GetAll()
-                    .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), x => x.Code == input.CodeFilter)
-                    .WhereIf(!string.IsNullOrEmpty(input.NameFilter), x => x.Name == input.NameFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), x => x.WardCode == input.CodeFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.NameFilter), x => x.WardName == input.NameFilter)
                     .WhereIf(!string.IsNullOrEmpty(input.SearchCodeFilter), x => x.SearchCode == input.SearchCodeFilter)
-                    .WhereIf(input.DistrictFilter != null, x => x.DistrictId == input.DistrictFilter)
+                    .WhereIf(input.DistrictFilter != null, x => x.DistrictID == input.DistrictFilter)
                     .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
 
-                if (Check.IsNullOrDefault(input.Sorting))
-                    input.Sorting = "Code";
 
                 filter = filter.ApplySortingAndPaging(input);
 
                 var paged = from o in filter
-                            join o1 in _districtRepository.GetAll() on o.DistrictId equals o1.Id
-                            join o2 in _provinceRepository.GetAll() on o1.ProvinceId equals o2.Id
+                            join o1 in _districtRepository.GetAll() on o.DistrictID equals o1.Id
+                            join o2 in _provinceRepository.GetAll() on o1.ProvinceID equals o2.Id
                             select new WardDto()
                             {
                                 Id = o.Id,
-                                Code = o.Code,
-                                Name = o.Name,
+                                WardCode = o.WardCode,
+                                WardName = o.WardName,
                                 SearchCode = o.SearchCode,
                                 Description = o.Description,
                                 Inactive = o.Inactive,
-                                DistrictId = o1.Id,
-                                DistrictCode = o1.Code,
-                                DistrictName = o1.Name,
-                                ProvinceId = o2.Id,
-                                ProvinceCode = o1.Code,
-                                ProvinceName = o2.Name
+                                DistrictID = o1.Id,
+                                DistrictCode = o1.DistrictCode,
+                                DistrictName = o1.DistrictName,
+                                ProvinceID = o2.Id,
+                                ProvinceCode = o1.DistrictCode,
+                                ProvinceName = o2.ProvinceName
                             };
 
                 result.TotalCount = await filter.CountAsync();

@@ -14,7 +14,7 @@ using System.Transactions;
 
 namespace HIS.ApplicationService.Systems.DbOptions
 {
-    public class DbOptionAppService : BaseAppService, IDbOptionAppService
+    public class DbOptionAppService : BaseAppService, IdbOptionAppService
     {
         private readonly IBulkRepository<DbOption, Guid> _dbOptionRepository;
 

@@ -16,16 +16,16 @@ namespace HIS.EntityFrameworkCore.Entities
     [Table("DInsurance")]
     public class Insurance : AuditedEntity<Guid>
     {
-        public Guid MedicalRecordID { get; set; }
+        public Guid MedicalRecordId { get; set; }
 
-        public Guid PatientID { get; set; }
+        public Guid PatientId { get; set; }
 
         [StringLength(PatientConst.PatientNameLength)]
         public string PatientName { get; set; }
 
         public DateTime? BirthDate { get; set; }
 
-        public Guid? GenderID { get; set; }
+        public Guid? GenderId { get; set; }
 
         [Required]
         [StringLength(InsuranceConst.MaxInsuranceCodeLength, MinimumLength = InsuranceConst.MinInsuranceCodeLength)]
@@ -44,9 +44,9 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public DateTime? ToDate { get; set; } // hạn thẻ đến ngày
 
-        public int LiveAreaID { get; set; } // nơi sống
+        public int LiveAreaId { get; set; } // nơi sống
 
-        public int RightRouteTypeID { get; set; } // tuyến KCB
+        public int RightRouteTypeId { get; set; } // tuyến KCB
 
         public DateTime? Join5YearTime { get; set; } // ngày đủ 5 năm liên tục
 

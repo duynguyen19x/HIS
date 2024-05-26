@@ -18,7 +18,7 @@ namespace HIS.EntityFrameworkCore.Entities
         public string Description { get; set; }
         public int SortOrder { get; set; }
         public bool Inactive { get; set; }
-        public int MedicalRecordTypeGroupID { get; set; }
+        public int MedicalRecordTypeGroupId { get; set; }
 
         [Ignore]
         public virtual MedicalRecordTypeGroup MedicalRecordTypeGroup { get; set; }
@@ -29,7 +29,7 @@ namespace HIS.EntityFrameworkCore.Entities
             this.Id = id;
             this.MedicalRecordTypeCode = id.ToString();
             this.MedicalRecordTypeName = name;
-            this.MedicalRecordTypeGroupID = groupType;
+            this.MedicalRecordTypeGroupId = groupType;
             this.SortOrder = order;
         }
     }

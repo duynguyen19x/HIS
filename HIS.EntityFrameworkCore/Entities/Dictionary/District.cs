@@ -12,21 +12,21 @@ namespace HIS.EntityFrameworkCore.Entities
     {
         [Required]
         [MaxLength(50)]
-        public virtual string Code { get; set; }
+        public string DistrictCode { get; set; }
 
         [Required]
         [MaxLength(255)]
-        public virtual string Name { get; set; }
+        public string DistrictName { get; set; }
 
         [MaxLength(255)]
-        public virtual string Description { get; set; }
+        public string Description { get; set; }
 
-        public virtual bool Inactive { get; set; }
+        public bool Inactive { get; set; }
 
-        public virtual Guid ProvinceId { get; set; }
+        public Guid ProvinceID { get; set; }
 
-        [ForeignKey("ProvinceId")]
-        public Province ProvinceFk { get; set; }
+        [ForeignKey(nameof(ProvinceID))]
+        public virtual Province ProvinceFk { get; set; }
 
         public District() { }
     }

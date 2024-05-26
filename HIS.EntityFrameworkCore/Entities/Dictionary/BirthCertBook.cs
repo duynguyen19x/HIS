@@ -38,9 +38,9 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public bool Inactive { get; set; }
 
-        public Guid BranchID { get; set; }
+        public Guid BranchId { get; set; }
 
-        [ForeignKey("BranchID")]
+        [ForeignKey("BranchId")]
         public virtual Branch BranchFK { get; set; }
     }
 }

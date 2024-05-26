@@ -9,9 +9,9 @@ namespace HIS.EntityFrameworkCore.Entities
 {
     public class ServiceInvoice : AuditedEntity<Guid>
     {
-        public Guid InvoiceID { get; set; }
-        public Guid ServiceRequestID { get; set; }
-        public Guid ServiceID { get; set; }
-        public Guid BranchID { get; set; }
+        public Guid InvoiceId { get; set; }
+        public Guid ServiceRequestId { get; set; }
+        public Guid ServiceId { get; set; }
+        public Guid BranchId { get; set; }
     }
 }

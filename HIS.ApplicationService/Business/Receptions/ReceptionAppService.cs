@@ -130,7 +130,7 @@ namespace HIS.ApplicationService.Business.Receptions
                     #region - xử lý dữ liệu
 
                     var patient = ObjectMapper.Map<PatientDto>(input.MedicalRecord);
-                    patient.Id = input.MedicalRecord.PatientID;
+                    patient.Id = input.MedicalRecord.PatientId;
 
                     
 
@@ -182,10 +182,10 @@ namespace HIS.ApplicationService.Business.Receptions
                         throw new Exception("Dữ liệu tiếp đón không tồn tại!");
                     }    
 
-                    var medicalRecord = await _medicalRecordRepository.FirstOrDefaultAsync(reception.MedicalRecordID) ?? new MedicalRecord();
-                    if (medicalRecord.MedicalRecordStatusID == 0)
+                    var medicalRecord = await _medicalRecordRepository.FirstOrDefaultAsync(reception.MedicalRecordId) ?? new MedicalRecord();
+                    if (medicalRecord.MedicalRecordStatusId == 0)
                     {
-                        var invoices = await _invoiceRepository.GetAllListAsync(x => x.MedicalRecordID == medicalRecord.Id);
+                        var invoices = await _invoiceRepository.GetAllListAsync(x => x.MedicalRecordId == medicalRecord.Id);
                         if (Check.Any(invoices))
                             throw new Exception("Bệnh nhân đã có hóa đơn!");
                     }
@@ -194,26 +194,26 @@ namespace HIS.ApplicationService.Business.Receptions
                         throw new Exception("Bệnh án đang được xử lý!");
                     }
 
-                    //var treatments = await _treatmentRepository.GetAllListAsync(x => x.MedicalRecordID == medicalRecord.Id);
-                    //var orders = await _orderRepository.GetAllListAsync(x=>x.MedicalRecordID == medicalRecord.Id);
-                    //var serviceRequests = await _serviceRequestRepository.GetAllListAsync(x => x.MedicalRecordID == medicalRecord.Id);
+                    //var treatments = await _treatmentRepository.GetAllListAsync(x => x.MedicalRecordId == medicalRecord.Id);
+                    //var orders = await _orderRepository.GetAllListAsync(x=>x.MedicalRecordId == medicalRecord.Id);
+                    //var serviceRequests = await _serviceRequestRepository.GetAllListAsync(x => x.MedicalRecordId == medicalRecord.Id);
 
-                    var patient = await _patientRepository.FirstOrDefaultAsync(x => x.Id == medicalRecord.PatientID);
+                    var patient = await _patientRepository.FirstOrDefaultAsync(x => x.Id == medicalRecord.PatientId);
                     if (patient == null)
                     {
                         throw new Exception("Bệnh nhân không tồn tại!");
                     }
 
                     // handle
-                    await _serviceRequestRepository.DeleteAsync(x => x.MedicalRecordID == medicalRecord.Id);
-                    await _orderRepository.DeleteAsync(x => x.MedicalRecordID == medicalRecord.Id);
-                    await _treatmentRepository.DeleteAsync(x => x.MedicalRecordID == medicalRecord.Id);
+                    await _serviceRequestRepository.DeleteAsync(x => x.MedicalRecordId == medicalRecord.Id);
+                    await _orderRepository.DeleteAsync(x => x.MedicalRecordId == medicalRecord.Id);
+                    await _treatmentRepository.DeleteAsync(x => x.MedicalRecordId == medicalRecord.Id);
                     await _medicalRecordRepository.DeleteAsync(medicalRecord);
                     await _receptionRepository.DeleteAsync(reception);
                     // xóa số thứ tự (cấu hình)
                     if (true)
                     {
-                        await _patientOrderRepository.DeleteAsync(x => x.Id == patient.PatientNumberID);
+                        await _patientOrderRepository.DeleteAsync(x => x.Id == patient.PatientNumberId);
                     }    
 
                     // log
@@ -238,9 +238,9 @@ namespace HIS.ApplicationService.Business.Receptions
             var filter = _receptionRepository.GetAll()
                 .WhereIf(input.MaxReceptionDateFilter != null, x => x.ReceptionDate <= input.MaxReceptionDateFilter)
                 .WhereIf(input.MinReceptionDateFilter != null, x => x.ReceptionDate >= input.MinReceptionDateFilter)
-                .WhereIf(input.BranchFilter != null, x => x.BranchID == input.BranchFilter)
-                .WhereIf(input.DepartmentFilter != null, x => x.DepartmentID == input.DepartmentFilter)
-                .WhereIf(input.RoomFilter != null, x => x.RoomID == input.RoomFilter)
+                .WhereIf(input.BranchFilter != null, x => x.BranchId == input.BranchFilter)
+                .WhereIf(input.DepartmentFilter != null, x => x.DepartmentId == input.DepartmentFilter)
+                .WhereIf(input.RoomFilter != null, x => x.RoomId == input.RoomFilter)
                 .WhereIf(input.GateFilter != null, x => x.Gate == input.GateFilter);
 
             if (Check.IsNullOrDefault(input.Sorting))

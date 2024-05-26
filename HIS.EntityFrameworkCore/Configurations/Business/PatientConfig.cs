@@ -28,16 +28,16 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
             builder.Property(x => x.ContactAddress).HasMaxLength(PatientConst.ContactAddressLength);
             builder.Property(x => x.Description).HasMaxLength(PatientConst.DescriptionLength);
 
-            builder.HasOne<BloodType>().WithMany().HasForeignKey(x => x.BloodTypeID);
-            builder.HasOne<BloodRhType>().WithMany().HasForeignKey(x => x.BloodRhTypeID);
-            builder.HasOne<Gender>().WithMany().HasForeignKey(x => x.GenderID);
-            builder.HasOne<Career>().WithMany().HasForeignKey(x => x.CareerID);
-            builder.HasOne<Ethnicity>().WithMany().HasForeignKey(x => x.EthnicityID);
-            builder.HasOne<Religion>().WithMany().HasForeignKey(x => x.ReligionID);
-            builder.HasOne<Country>().WithMany().HasForeignKey(x => x.CountryID);
-            builder.HasOne<Province>().WithMany().HasForeignKey(x => x.ProvinceID);
-            builder.HasOne<Ward>().WithMany().HasForeignKey(x => x.WardID);
-            builder.HasOne<PatientNumber>().WithMany().HasForeignKey(x => x.PatientNumberID);
+            builder.HasOne<BloodType>().WithMany().HasForeignKey(x => x.BloodTypeId);
+            builder.HasOne<BloodRhType>().WithMany().HasForeignKey(x => x.BloodRhTypeId);
+            builder.HasOne<Gender>().WithMany().HasForeignKey(x => x.GenderId);
+            builder.HasOne<Career>().WithMany().HasForeignKey(x => x.CareerId);
+            builder.HasOne<Ethnicity>().WithMany().HasForeignKey(x => x.EthnicityId);
+            builder.HasOne<Religion>().WithMany().HasForeignKey(x => x.ReligionId);
+            builder.HasOne<Country>().WithMany().HasForeignKey(x => x.CountryId);
+            builder.HasOne<Province>().WithMany().HasForeignKey(x => x.ProvinceId);
+            builder.HasOne<Ward>().WithMany().HasForeignKey(x => x.WardId);
+            builder.HasOne<PatientNumber>().WithMany().HasForeignKey(x => x.PatientNumberId);
         }
     }
 }

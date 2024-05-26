@@ -19,12 +19,12 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ExaminationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ExaminationTypeID = table.Column<int>(type: "int", nullable: false),
-                    ReceptionID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MedicalRecordID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TreatmentID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OrderID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BranchID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ExaminationTypeId = table.Column<int>(type: "int", nullable: false),
+                    ReceptionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MedicalRecordId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TreatmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -55,19 +55,19 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MedicalRecordID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PatientID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MedicalRecordId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PatientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PatientName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    GenderID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    GenderId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     InsuranceCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     MediOrgCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     MediOrgName = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     Address = table.Column<string>(type: "nvarchar(512)", maxLength: 512, nullable: true),
                     FromDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ToDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    LiveAreaID = table.Column<int>(type: "int", nullable: false),
-                    RightRouteTypeID = table.Column<int>(type: "int", nullable: false),
+                    LiveAreaId = table.Column<int>(type: "int", nullable: false),
+                    RightRouteTypeId = table.Column<int>(type: "int", nullable: false),
                     Join5YearTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     FreeCoPaidTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     HasBirthCertificate = table.Column<bool>(type: "bit", nullable: false),
@@ -89,10 +89,10 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     InvoiceCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     InvoiceDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    InvoiceTypeID = table.Column<int>(type: "int", nullable: false),
-                    MedicalRecordID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TreatmentID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BranchID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    InvoiceTypeId = table.Column<int>(type: "int", nullable: false),
+                    MedicalRecordId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TreatmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -110,31 +110,31 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     OrderCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     OrderDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    OrderTypeID = table.Column<int>(type: "int", nullable: false),
-                    OrderStatusID = table.Column<int>(type: "int", nullable: false),
+                    OrderTypeId = table.Column<int>(type: "int", nullable: false),
+                    OrderStatusId = table.Column<int>(type: "int", nullable: false),
                     NumOrder = table.Column<int>(type: "int", nullable: false),
                     Barcode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    MedicalRecordID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TreatmentID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ReceptionID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    InsuranceID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    UserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BranchID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DepartmentID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RoomID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MedicalRecordId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TreatmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ReceptionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    InsuranceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RoomId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     SampleStartDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     SampleEndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    SampleUserID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    SampleDepartmentID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    SampleRoomID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    SampleUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    SampleDepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    SampleRoomId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ReceiveDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ReceiveUserID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ReceiveUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ExecuteDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ExecuteUserID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ExecuteDepartmentID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ExecuteRoomID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ExecuteUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ExecuteDepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ExecuteRoomId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    EndUserID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    EndUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IcdCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     IcdName = table.Column<string>(type: "nvarchar(400)", maxLength: 400, nullable: true),
                     IcdSubCode = table.Column<string>(type: "nvarchar(400)", maxLength: 400, nullable: true),
@@ -168,17 +168,17 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OrderID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    MedicalRecordID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    TreatmentID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    BranchID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ParentID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ServiceID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MedicalRecordId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TreatmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ParentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ServiceName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ServiceCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ServiceNameBHYT = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ServiceCodeBHYT = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UnitID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    UnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     UnitName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UnitCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OriginalPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
@@ -1068,7 +1068,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    MedicalRecordTypeGroupID = table.Column<int>(type: "int", nullable: false),
+                    MedicalRecordTypeGroupId = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -1078,8 +1078,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     table.PrimaryKey("PK_SMedicalRecordType", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_SMedicalRecordType_SMedicalRecordTypeGroup_MedicalRecordTypeGroupID",
-                        column: x => x.MedicalRecordTypeGroupID,
+                        name: "FK_SMedicalRecordType_SMedicalRecordTypeGroup_MedicalRecordTypeGroupId",
+                        column: x => x.MedicalRecordTypeGroupId,
                         principalTable: "SMedicalRecordTypeGroup",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -1507,17 +1507,17 @@ namespace HIS.EntityFrameworkCore.Migrations
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     BirthYear = table.Column<int>(type: "int", nullable: false),
                     BirthPlace = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    PatientNumberID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    BloodTypeID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    BloodRhTypeID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    GenderID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CareerID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    EthnicityID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ReligionID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CountryID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ProvinceID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    DistrictID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    WardID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    PatientNumberId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BloodTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BloodRhTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    GenderId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CareerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    EthnicityId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ReligionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CountryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ProvinceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DistrictId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    WardId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
@@ -1545,53 +1545,53 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     table.PrimaryKey("PK_DPatient", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DPatient_DPatientNumber_PatientNumberID",
-                        column: x => x.PatientNumberID,
+                        name: "FK_DPatient_DPatientNumber_PatientNumberId",
+                        column: x => x.PatientNumberId,
                         principalTable: "DPatientNumber",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_DPatient_SBloodRhType_BloodRhTypeID",
-                        column: x => x.BloodRhTypeID,
+                        name: "FK_DPatient_SBloodRhType_BloodRhTypeId",
+                        column: x => x.BloodRhTypeId,
                         principalTable: "SBloodRhType",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_DPatient_SBloodType_BloodTypeID",
-                        column: x => x.BloodTypeID,
+                        name: "FK_DPatient_SBloodType_BloodTypeId",
+                        column: x => x.BloodTypeId,
                         principalTable: "SBloodType",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_DPatient_SCareer_CareerID",
-                        column: x => x.CareerID,
+                        name: "FK_DPatient_SCareer_CareerId",
+                        column: x => x.CareerId,
                         principalTable: "SCareer",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_DPatient_SCountry_CountryID",
-                        column: x => x.CountryID,
+                        name: "FK_DPatient_SCountry_CountryId",
+                        column: x => x.CountryId,
                         principalTable: "SCountry",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_DPatient_SEthnicity_EthnicityID",
-                        column: x => x.EthnicityID,
+                        name: "FK_DPatient_SEthnicity_EthnicityId",
+                        column: x => x.EthnicityId,
                         principalTable: "SEthnicity",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_DPatient_SGender_GenderID",
-                        column: x => x.GenderID,
+                        name: "FK_DPatient_SGender_GenderId",
+                        column: x => x.GenderId,
                         principalTable: "SGender",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_DPatient_SProvince_ProvinceID",
-                        column: x => x.ProvinceID,
+                        name: "FK_DPatient_SProvince_ProvinceId",
+                        column: x => x.ProvinceId,
                         principalTable: "SProvince",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_DPatient_SReligion_ReligionID",
-                        column: x => x.ReligionID,
+                        name: "FK_DPatient_SReligion_ReligionId",
+                        column: x => x.ReligionId,
                         principalTable: "SReligion",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_DPatient_SWard_WardID",
-                        column: x => x.WardID,
+                        name: "FK_DPatient_SWard_WardId",
+                        column: x => x.WardId,
                         principalTable: "SWard",
                         principalColumn: "Id");
                 });
@@ -1796,29 +1796,29 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    PatientID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PatientId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     MedicalRecordCode = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     MedicalRecordDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    MedicalRecordTypeID = table.Column<int>(type: "int", nullable: false),
-                    MedicalRecordStatusID = table.Column<int>(type: "int", nullable: false),
-                    BranchID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    DepartmentID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RoomID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    MedicalRecordTypeId = table.Column<int>(type: "int", nullable: false),
+                    MedicalRecordStatusId = table.Column<int>(type: "int", nullable: false),
+                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RoomId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PatientCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PatientName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     BirthYear = table.Column<int>(type: "int", nullable: false),
                     BirthPlace = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    BloodTypeID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    BloodRhTypeID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    GenderID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CareerID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    EthnicityID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ReligionID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    CountryID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ProvinceID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    WardID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BloodTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    BloodRhTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    GenderId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CareerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    EthnicityId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ReligionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CountryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ProvinceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    WardId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -1835,8 +1835,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ContactAddress = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ReceptionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ChiefComplaint = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PatientObjectTypeID = table.Column<int>(type: "int", nullable: false),
-                    ReceptionObjectTypeID = table.Column<int>(type: "int", nullable: false),
+                    PatientObjectTypeId = table.Column<int>(type: "int", nullable: false),
+                    ReceptionObjectTypeId = table.Column<int>(type: "int", nullable: false),
                     IsPriority = table.Column<bool>(type: "bit", nullable: false),
                     IsTransferIn = table.Column<bool>(type: "bit", nullable: false),
                     TransferInCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -1846,8 +1846,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     TransferInTimeTo = table.Column<DateTime>(type: "datetime2", nullable: true),
                     TransferInIcdCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     TransferInIcdName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TransferInFormID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    TransferInReasonID = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    TransferInFormId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    TransferInReasonId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     IsTransferInRightRoute = table.Column<bool>(type: "bit", nullable: true),
                     HospitalizationReason = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NumOrder = table.Column<int>(type: "int", nullable: false),
@@ -1864,8 +1864,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     table.PrimaryKey("PK_DMedicalRecord", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DMedicalRecord_DPatient_PatientID",
-                        column: x => x.PatientID,
+                        name: "FK_DMedicalRecord_DPatient_PatientId",
+                        column: x => x.PatientId,
                         principalTable: "DPatient",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -2034,7 +2034,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     SortOrder = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
-                    BranchID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    BranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -2715,7 +2715,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     { new Guid("e180ff8a-4e49-4edd-9168-21b372b8d9b7"), "BG", null, new DateTime(2024, 5, 19, 17, 51, 48, 412, DateTimeKind.Local).AddTicks(37), null, false, "133", null, null, "Bulgaria", 0 },
                     { new Guid("e1fc9395-73b5-4fd6-8c31-37fef3a3e866"), "ZM", null, new DateTime(2024, 5, 19, 17, 51, 48, 412, DateTimeKind.Local).AddTicks(605), null, false, "294", null, null, "Zambia", 0 },
                     { new Guid("e369137c-1730-4809-88e4-e43031327233"), "BF", null, new DateTime(2024, 5, 19, 17, 51, 48, 412, DateTimeKind.Local).AddTicks(34), null, false, "134", null, null, "Burkina Faso", 0 },
-                    { new Guid("e3a2237c-9d57-462f-bad8-7a78856303c8"), "ID", null, new DateTime(2024, 5, 19, 17, 51, 48, 412, DateTimeKind.Local).AddTicks(249), null, false, "180", null, null, "Indonesia", 0 },
+                    { new Guid("e3a2237c-9d57-462f-bad8-7a78856303c8"), "Id", null, new DateTime(2024, 5, 19, 17, 51, 48, 412, DateTimeKind.Local).AddTicks(249), null, false, "180", null, null, "Indonesia", 0 },
                     { new Guid("e43c3f5c-e8d7-430a-9869-e61337bd4188"), "Z2", null, new DateTime(2024, 5, 19, 17, 51, 48, 412, DateTimeKind.Local).AddTicks(591), null, false, "Z2", null, null, "British Southern and Antarctic Territories", 0 },
                     { new Guid("e4acc3fd-7e2d-4927-b7e8-797cb8a29a86"), "GU", null, new DateTime(2024, 5, 19, 17, 51, 48, 412, DateTimeKind.Local).AddTicks(223), null, false, "GU", null, null, "Guam", 0 },
                     { new Guid("e4c05566-0c8d-42a4-a2e9-ad4d6d33b35f"), "AI", null, new DateTime(2024, 5, 19, 17, 51, 48, 411, DateTimeKind.Local).AddTicks(9995), null, false, "AI", null, null, "Anguilla", 0 },
@@ -3351,7 +3351,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             migrationBuilder.InsertData(
                 table: "SMedicalRecordType",
-                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "MedicalRecordTypeCode", "MedicalRecordTypeGroupID", "MedicalRecordTypeName", "ModifiedBy", "ModifiedDate", "SortOrder" },
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "Description", "Inactive", "MedicalRecordTypeCode", "MedicalRecordTypeGroupId", "MedicalRecordTypeName", "ModifiedBy", "ModifiedDate", "SortOrder" },
                 values: new object[,]
                 {
                     { 100, null, new DateTime(2024, 5, 19, 17, 51, 48, 415, DateTimeKind.Local).AddTicks(3269), null, false, "100", 1, "Khám Bệnh", null, null, 1 },
@@ -3523,39 +3523,39 @@ namespace HIS.EntityFrameworkCore.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DMedicalRecord_PatientID",
+                name: "IX_DMedicalRecord_PatientId",
                 table: "DMedicalRecord",
-                column: "PatientID");
+                column: "PatientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DPatient_BloodRhTypeID",
+                name: "IX_DPatient_BloodRhTypeId",
                 table: "DPatient",
-                column: "BloodRhTypeID");
+                column: "BloodRhTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DPatient_BloodTypeID",
+                name: "IX_DPatient_BloodTypeId",
                 table: "DPatient",
-                column: "BloodTypeID");
+                column: "BloodTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DPatient_CareerID",
+                name: "IX_DPatient_CareerId",
                 table: "DPatient",
-                column: "CareerID");
+                column: "CareerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DPatient_CountryID",
+                name: "IX_DPatient_CountryId",
                 table: "DPatient",
-                column: "CountryID");
+                column: "CountryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DPatient_EthnicityID",
+                name: "IX_DPatient_EthnicityId",
                 table: "DPatient",
-                column: "EthnicityID");
+                column: "EthnicityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DPatient_GenderID",
+                name: "IX_DPatient_GenderId",
                 table: "DPatient",
-                column: "GenderID");
+                column: "GenderId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DPatient_IsDeleted",
@@ -3563,24 +3563,24 @@ namespace HIS.EntityFrameworkCore.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DPatient_PatientNumberID",
+                name: "IX_DPatient_PatientNumberId",
                 table: "DPatient",
-                column: "PatientNumberID");
+                column: "PatientNumberId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DPatient_ProvinceID",
+                name: "IX_DPatient_ProvinceId",
                 table: "DPatient",
-                column: "ProvinceID");
+                column: "ProvinceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DPatient_ReligionID",
+                name: "IX_DPatient_ReligionId",
                 table: "DPatient",
-                column: "ReligionID");
+                column: "ReligionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DPatient_WardID",
+                name: "IX_DPatient_WardId",
                 table: "DPatient",
-                column: "WardID");
+                column: "WardId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DServiceRequestData_IsDeleted",
@@ -3683,9 +3683,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 column: "RoomId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SBirthCertBook_BranchID",
+                name: "IX_SBirthCertBook_BranchId",
                 table: "SBirthCertBook",
-                column: "BranchID");
+                column: "BranchId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SBranch_DirectorId",
@@ -3820,9 +3820,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 column: "UnitId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SMedicalRecordType_MedicalRecordTypeGroupID",
+                name: "IX_SMedicalRecordType_MedicalRecordTypeGroupId",
                 table: "SMedicalRecordType",
-                column: "MedicalRecordTypeGroupID");
+                column: "MedicalRecordTypeGroupId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SOption_BranchId",
@@ -4039,9 +4039,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 principalColumn: "Id");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_SBirthCertBook_SBranch_BranchID",
+                name: "FK_SBirthCertBook_SBranch_BranchId",
                 table: "SBirthCertBook",
-                column: "BranchID",
+                column: "BranchId",
                 principalTable: "SBranch",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);

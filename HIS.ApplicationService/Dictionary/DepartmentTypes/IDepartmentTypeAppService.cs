@@ -4,7 +4,7 @@ using HIS.Core.Application.Services.Dto;
 
 namespace HIS.ApplicationService.Dictionary.DepartmentTypes
 {
-    public interface IDepartmentTypeAppService : IAppService
+    public interface IdepartmentTypeAppService : IAppService
     {
         Task<ResultDto<DepartmentTypeDto>> CreateOrUpdateAsync(DepartmentTypeDto input);
         Task<ResultDto<DepartmentTypeDto>> DeleteAsync(int id);
