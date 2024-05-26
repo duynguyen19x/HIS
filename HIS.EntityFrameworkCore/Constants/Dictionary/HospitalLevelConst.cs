@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Constants.Dictionary
+namespace HIS.EntityFrameworkCore.Constants
 {
     public class HospitalLevelConst 
     {
