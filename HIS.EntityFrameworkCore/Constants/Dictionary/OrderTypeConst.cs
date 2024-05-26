@@ -13,5 +13,8 @@ namespace HIS.EntityFrameworkCore.Constants.Dictionary
 
         public const int MaxOrderTypeNameLength = 255;
         public const int MinOrderTypeNameLength = 0;
+
+        public const int MaxDescriptionLength = 255;
+        public const int MinDescriptionLength = 0;
     }
 }

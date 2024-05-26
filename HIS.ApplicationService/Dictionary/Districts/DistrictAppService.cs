@@ -9,7 +9,7 @@ using System.Transactions;
 
 namespace HIS.ApplicationService.Dictionary.Districts
 {
-    public class DistrictAppService : BaseAppService, IdistrictAppService
+    public class DistrictAppService : BaseAppService, IDistrictAppService
     {
         private readonly IRepository<District, Guid> _districtRepository;
 
@@ -24,12 +24,9 @@ namespace HIS.ApplicationService.Dictionary.Districts
             try
             {
                 var filter = _districtRepository.GetAll()
-                    .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), x => x.Code == input.CodeFilter)
-                    .WhereIf(!string.IsNullOrEmpty(input.NameFilter), x => x.Name == input.NameFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), x => x.DistrictCode == input.CodeFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.NameFilter), x => x.DistrictName == input.NameFilter)
                     .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
-
-                if (Check.IsNullOrDefault(input.Sorting))
-                    input.Sorting = "Code";
 
                 var paged = filter.ApplySortingAndPaging(input);
 

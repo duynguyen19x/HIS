@@ -12,18 +12,19 @@ namespace HIS.ApplicationService.Dictionary.Districts.Dto
 {
     public class DistrictDto : EntityDto<Guid?>
     {
-        public virtual string Code { get; set; }
+        public string DistrictCode { get; set; }
 
-        public virtual string Name { get; set; }
+        public string DistrictName { get; set; }
 
-        public virtual string Description { get; set; }
+        public string Description { get; set; }
 
-        public virtual bool Inactive { get; set; }
+        public bool Inactive { get; set; }
 
-        public virtual Guid ProvinceId { get; set; }
+        public Guid ProvinceID { get; set; }
 
-        public virtual string ProvinceCode { get; set; }
+        public string ProvinceName { get; set; }
 
-        public virtual string ProvinceName { get; set; }
+        public string ProvinceCode { get; set; }
+
     }
 }

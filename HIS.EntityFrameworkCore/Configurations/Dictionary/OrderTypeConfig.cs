@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionary
 {
-    internal class OrderTypeConfig : IEntityTypeConfiguration<OrderType>
+    public class OrderTypeConfig : IEntityTypeConfiguration<OrderType>
     {
         public void Configure(EntityTypeBuilder<OrderType> builder)
         {
@@ -29,7 +29,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionary
                 new OrderType(13, "SA", "Suất ăn"),
                 new OrderType(14, "NC", "Nợ cũ"),
                 new OrderType(15, "TIEM_CHUNG", "Phiếu Tiêm Chủng"),
-                new OrderType(15, "HH", "Hàng hóa"),
+                new OrderType(16, "HH", "Hàng hóa"),
                 new OrderType(1004, "TH_XN", "Thực hiện xét nghiệm"),
                 new OrderType(1005, "TH_HA", "Thực hiện chẩn đoán hình ảnh"),
                 new OrderType(1006, "TH_PT", "Thực hiện phẫu thuật"),

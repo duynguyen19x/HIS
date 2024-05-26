@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
 {
-    public class DIPatientObjectTypeConfiguration : IEntityTypeConfiguration<PatientObjectType>
+    public class PatientObjectTypeConfiguration : IEntityTypeConfiguration<PatientObjectType>
     {
         public void Configure(EntityTypeBuilder<PatientObjectType> builder)
         {

@@ -28,8 +28,9 @@ namespace HIS.EntityFrameworkCore.Entities
         [StringLength(HospitalSpecialityConst.MaxDescriptionLength, MinimumLength = HospitalSpecialityConst.MinDescriptionLength)]
         public string Description { get; set; }
 
-        public bool Inactive { get; set; }
-
         public int SortOrder { get; set; }
+
+        public bool Inactive { get; set; }
+        
     }
 }

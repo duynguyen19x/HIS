@@ -10,12 +10,12 @@ namespace HIS.Dtos.Dictionaries.Province
 {
     public class ProvinceDto : EntityDto<Guid?>
     {
-        public virtual string Code { get; set; }
+        public string ProvinceCode { get; set; }
 
-        public virtual string Name { get; set; }
+        public string ProvinceName { get; set; }
 
-        public virtual string Description { get; set; }
+        public string Description { get; set; }
 
-        public virtual bool Inactive { get; set; }
+        public bool Inactive { get; set; }
     }
 }

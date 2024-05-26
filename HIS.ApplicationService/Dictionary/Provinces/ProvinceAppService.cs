@@ -24,12 +24,9 @@ namespace HIS.ApplicationService.Dictionaries.Provinces
             try
             {
                 var filter = _provinceRepository.GetAll()
-                    .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), x => x.Code == input.CodeFilter)
-                    .WhereIf(!string.IsNullOrEmpty(input.NameFilter), x => x.Name == input.NameFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), x => x.ProvinceCode == input.CodeFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.NameFilter), x => x.ProvinceName == input.NameFilter)
                     .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
-
-                if (Check.IsNullOrDefault(input.Sorting))
-                    input.Sorting = "Code";
 
                 var paged = filter.ApplySortingAndPaging(input);
 

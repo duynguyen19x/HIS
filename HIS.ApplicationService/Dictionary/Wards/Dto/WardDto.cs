@@ -10,26 +10,28 @@ namespace HIS.Dtos.Dictionaries.Ward
 {
     public class WardDto : EntityDto<Guid?>
     {
-        public virtual string Code { get; set; }
+        public string WardCode { get; set; }
 
-        public virtual string Name { get; set; }
+        public string WardName { get; set; }
 
-        public virtual string SearchCode { get; set; } // viết tắt (T/H/X)
+        public string SearchCode { get; set; } // viết tắt (T/H/X)
 
-        public virtual string Description { get; set; } // ghi chú
+        public string Description { get; set; } // ghi chú
 
-        public virtual bool Inactive { get; set; } // khóa
+        public bool Inactive { get; set; } // khóa
 
-        public virtual Guid DistrictId { get; set; }
+        public Guid DistrictID { get; set; }
 
-        public virtual string DistrictCode { get; set; }
+        public string DistrictName { get; set; }
 
-        public virtual string DistrictName { get; set; }
+        public string DistrictCode { get; set; }
 
-        public virtual Guid ProvinceId { get; set; }
+        public Guid ProvinceID { get; set; }
 
-        public virtual string ProvinceCode { get; set; }
+        public string ProvinceName { get; set; }
 
-        public virtual string ProvinceName { get; set; }
+        public string ProvinceCode { get; set; }
+
+        
     }
 }

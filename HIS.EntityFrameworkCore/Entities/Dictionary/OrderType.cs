@@ -11,11 +11,18 @@ namespace HIS.EntityFrameworkCore.Entities
     [Table("SOrderType")]
     public class OrderType : Entity<int>
     {
+        [Required]
         [StringLength(OrderTypeConst.MaxOrderTypeCodeLength, MinimumLength = OrderTypeConst.MinOrderTypeCodeLength)]
         public string OrderTypeCode { get; set; }
 
+        [Required]
         [StringLength(OrderTypeConst.MaxOrderTypeNameLength, MinimumLength = OrderTypeConst.MinOrderTypeNameLength)]
         public string OrderTypeName { get; set; }
+
+        [StringLength(OrderTypeConst.MaxDescriptionLength, MinimumLength = OrderTypeConst.MinDescriptionLength)]
+        public string Description { get; set; }
+
+        public int SortOrder { get; set; }
 
         public bool Inactive { get; set; }
 
