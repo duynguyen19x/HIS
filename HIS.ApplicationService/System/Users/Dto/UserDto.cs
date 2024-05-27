@@ -10,6 +10,11 @@ namespace HIS.ApplicationService.Systems.Users.Dto
         public virtual string Username { get; set; }
 
         /// <summary>
+        /// Mật khẩu
+        /// </summary>
+        public virtual string Password { get; set; }
+
+        /// <summary>
         /// Tên người dùng
         /// </summary>
         public virtual string FirstName { get; set; }
