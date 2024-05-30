@@ -9,7 +9,7 @@ using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.System
+namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// Quyền hạn.

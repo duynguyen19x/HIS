@@ -10,9 +10,9 @@ namespace HIS.BackendApi.Controllers.Dictionaries
     [ApiController]
     public class DepartmentController : ControllerBase
     {
-        private readonly IdepartmentAppService _departmentService;
+        private readonly IDepartmentAppService _departmentService;
 
-        public DepartmentController(IdepartmentAppService departmentService)
+        public DepartmentController(IDepartmentAppService departmentService)
         {
             _departmentService = departmentService;
         }

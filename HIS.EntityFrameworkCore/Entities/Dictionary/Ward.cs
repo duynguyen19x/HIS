@@ -12,23 +12,23 @@ namespace HIS.EntityFrameworkCore.Entities
     {
         [Required]
         [MaxLength(50)]
-        public virtual string Code { get; set; } 
+        public string WardCode { get; set; } 
 
         [Required]
         [MaxLength(255)]
-        public virtual string Name { get; set; } 
+        public string WardName { get; set; } 
 
         [MaxLength(50)]
-        public virtual string SearchCode { get; set; } // viết tắt (T/H/X)
+        public string SearchCode { get; set; } // viết tắt (T/H/X)
 
         [MaxLength(255)]
-        public virtual string Description { get; set; } // ghi chú
+        public string Description { get; set; } // ghi chú
 
-        public virtual bool Inactive { get; set; } // khóa
+        public bool Inactive { get; set; } // khóa
 
-        public virtual Guid DistrictId { get; set; }
+        public Guid DistrictID { get; set; }
 
-        [ForeignKey("DistrictId")]
-        public District DistrictFk { get; set; }
+        [ForeignKey(nameof(DistrictID))]
+        public virtual District DistrictFk { get; set; }
     }
 }

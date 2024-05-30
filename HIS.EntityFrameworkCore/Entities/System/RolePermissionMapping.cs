@@ -3,7 +3,7 @@ using HIS.Core.Domain.Entities;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace HIS.EntityFrameworkCore.Entities.System
+namespace HIS.EntityFrameworkCore.Entities
 {
     /// <summary>
     /// Vai trò và quyền hạn.

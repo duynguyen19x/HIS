@@ -18,15 +18,15 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpGet("GetAll")]
-        public async Task<PagedResultDto<BranchDto>> GetAll([FromQuery] GetAllBranchInputDto input) => await _diBranchAppService.GetAllAsync(input);
+        public async Task<PagedResultDto<BranchDto>> GetAll([FromQuery] GetAllBranchInputDto input) => await _diBranchAppService.GetAll(input);
 
         [HttpGet("GetById")]
-        public async Task<ResultDto<BranchDto>> GetById(Guid id)  => await _diBranchAppService.GetAsync(id);
+        public async Task<ResultDto<BranchDto>> GetById(Guid id)  => await _diBranchAppService.Get(id);
 
         [HttpPost("CreateOrEdit")]
-        public async Task<ResultDto<BranchDto>> CreateOrEdit(BranchDto input) => await _diBranchAppService.CreateOrUpdateAsync(input);
+        public async Task<ResultDto<BranchDto>> CreateOrEdit(BranchDto input) => await _diBranchAppService.CreateOrEdit(input);
 
         [HttpDelete("Delete")]
-        public async Task<ResultDto<BranchDto>> Delete(Guid id) => await _diBranchAppService.DeleteAsync(id);
+        public async Task<ResultDto<BranchDto>> Delete(Guid id) => await _diBranchAppService.Delete(id);
     }
 }

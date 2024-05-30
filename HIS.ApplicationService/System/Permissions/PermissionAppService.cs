@@ -2,7 +2,7 @@
 using HIS.Core.Application.Services;
 using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
-using HIS.EntityFrameworkCore.Entities.System;
+using HIS.EntityFrameworkCore.Entities;
 
 namespace HIS.ApplicationService.System.Permissions
 {

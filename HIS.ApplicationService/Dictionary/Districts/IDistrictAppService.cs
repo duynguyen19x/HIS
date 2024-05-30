@@ -4,7 +4,7 @@ using HIS.Core.Application.Services.Dto;
 
 namespace HIS.ApplicationService.Dictionary.Districts
 {
-    public interface IdistrictAppService : IAppService
+    public interface IDistrictAppService : IAppService
     {
         Task<ResultDto<DistrictDto>> CreateOrEdit(DistrictDto input);
 

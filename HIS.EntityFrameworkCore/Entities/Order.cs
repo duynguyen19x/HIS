@@ -11,15 +11,16 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Phiếu chỉ định dịch vụ
     /// </summary>
+    [Table("DOrder")]
     public class Order : AuditedEntity<Guid>
     {
         public string OrderCode { get; set; } // mã phiếu chỉ định
 
         public DateTime OrderDate { get; set; } // ngày y lệnh
 
-        public int OrderTypeId { get; set; }  // loại phiếu
+        public int OrderTypeID { get; set; }  // loại phiếu
 
-        public int OrderStatusId { get; set; } // trạng thái
+        public int OrderStatusID { get; set; } // trạng thái
 
         public int NumOrder { get; set; } // số thứ tự phiếu chỉ định theo ngày y lệnh và loại phiếu
 
@@ -86,5 +87,10 @@ namespace HIS.EntityFrameworkCore.Entities
         public bool IsEmergency { get; set; } // cấp cứu
 
         public bool IsPriority { get; set; } // ưu tiên
+
+        [ForeignKey(nameof(OrderTypeID))]
+        public virtual OrderType OrderTypeFk { get; set; }
+
+
     }
 }
