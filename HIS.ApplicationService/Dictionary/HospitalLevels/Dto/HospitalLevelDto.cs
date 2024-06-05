@@ -1,5 +1,5 @@
 ﻿using HIS.Core.Application.Services.Dto;
-using HIS.EntityFrameworkCore.Constants.Dictionary;
+using HIS.EntityFrameworkCore.Constants;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
