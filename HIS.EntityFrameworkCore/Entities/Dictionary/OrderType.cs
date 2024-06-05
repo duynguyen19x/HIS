@@ -1,5 +1,5 @@
 ﻿using HIS.Core.Domain.Entities;
-using HIS.EntityFrameworkCore.Constants.Dictionary;
+using HIS.EntityFrameworkCore.Constants;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
