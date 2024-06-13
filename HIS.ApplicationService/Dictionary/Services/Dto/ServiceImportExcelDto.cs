@@ -2,12 +2,12 @@
 {
     public class ServiceImportExcelDto : ServiceDto
     {
-        public decimal HeInPrice { get; set; }
-        public decimal ServicePrice { get; set; }
-        public decimal PeoplePrice { get; set; }
+        public string PatientTypeCode { get; set; }
+        public decimal OldUnitPrice { get; set; }
+        public decimal NewUnitPrice { get; set; }
         public decimal PaymentRate { get; set; }
         public decimal CeilingPrice { get; set; }
-        public string ExecutionTimeString { get; set; }
+        public DateTime ExecutionTime { get; set; }
         public string ExecutionRoomCode { get; set; }
     }
 }
