@@ -443,7 +443,7 @@ namespace HIS.ApplicationService.Dictionary.Services
                         g.ServiceGroupHeInCode,
                         g.ServiceGroupCode,
                         g.SurgicalProcedureTypeCode,
-                        g.PatientTypeCode,
+                        //g.PatientTypeCode,
                         g.ExecutionRoomCode,
                     }).Select(s => new ServiceImportExcelDto()
                     {
@@ -457,7 +457,7 @@ namespace HIS.ApplicationService.Dictionary.Services
                         ServiceGroupHeInCode = s.Key.ServiceGroupHeInCode,
                         ServiceGroupCode = s.Key.ServiceGroupCode,
                         SurgicalProcedureTypeCode = s.Key.SurgicalProcedureTypeCode,
-                        PatientTypeCode = s.Key.PatientTypeCode,
+                        //PatientTypeCode = s.Key.PatientTypeCode,
                         ExecutionRoomCode = s.Key.ExecutionRoomCode,
                     }).ToList();
 
@@ -470,11 +470,11 @@ namespace HIS.ApplicationService.Dictionary.Services
                         {
                             Id = Guid.NewGuid(),
                             ServiceId = serviceDto.Id,
-                            OldUnitPrice = serviceImport.OldUnitPrice,
-                            PatientTypeCode = serviceImport.PatientTypeCode,
-                            PaymentRate = serviceImport.PaymentRate,
-                            CeilingPrice = serviceImport.CeilingPrice,
-                            ExecutionTime = serviceImport.ExecutionTime,
+                            OldUnitPrice = s.OldUnitPrice,
+                            PatientTypeCode = s.PatientTypeCode,
+                            PaymentRate = s.PaymentRate,
+                            CeilingPrice = s.CeilingPrice,
+                            ExecutionTime = s.ExecutionTime,
                         }).ToList();
 
                         serviceDto.SExecutionRooms = new List<ExecutionRoomDto>()
