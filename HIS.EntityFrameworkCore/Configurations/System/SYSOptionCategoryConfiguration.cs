@@ -9,12 +9,12 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Configurations.Systems
 {
-    public class SYSOptionCategoryConfiguration : IEntityTypeConfiguration<OptionCategory>
+    public class SYSOptionCategoryConfiguration : IEntityTypeConfiguration<DBOptionCategory>
     {
-        public void Configure(EntityTypeBuilder<OptionCategory> builder)
+        public void Configure(EntityTypeBuilder<DBOptionCategory> builder)
         {
             builder.HasData(
-                new OptionCategory { Id = 1, Name = "Tùy chọn chung", Description = "", SortOrder = 1 }
+                new DBOptionCategory { Id = 1, Name = "Tùy chọn chung", Description = "", SortOrder = 1 }
                 );
         }
     }

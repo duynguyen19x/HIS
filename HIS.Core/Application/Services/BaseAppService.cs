@@ -1,7 +1,7 @@
 ﻿using HIS.Core.Authorization;
 using HIS.Core.Domain.Uow;
+using HIS.Core.ObjectMapping;
 using HIS.Core.Runtime.Session;
-using IObjectMapper = HIS.Core.ObjectMapping.IObjectMapper;
 
 namespace HIS.Core.Application.Services
 {
