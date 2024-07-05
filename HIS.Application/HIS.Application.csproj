@@ -10,4 +10,11 @@
     <ProjectReference Include="..\HIS.EntityFrameworkCore\HIS.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Business\" />
+    <Folder Include="Authorization\" />
+    <Folder Include="Dictionary\" />
+    <Folder Include="System\" />
+  </ItemGroup>
+
 </Project>
