@@ -5,7 +5,6 @@ namespace HIS.EntityFrameworkCore.Views
 {
     public class ServiceRequestView : Entity<Guid>
     {
-        //public Guid Id { get; set; }
         public string ServiceRequestCode { get; set; }
         public long RequestTime { get; set; } // ngày chỉ định (tạo phiếu)
         public long UseTime { get; set; } // ngày y lệnh
@@ -19,7 +18,6 @@ namespace HIS.EntityFrameworkCore.Views
         public string IcdSubCode { get; set; } // bệnh kèm theo
         public string IcdText { get; set; } // danh sách bệnh kèm theo
         public int ServiceRequestTypeId { get; set; } // loại dịch vụ
-        public int ServiceRequestStatusId { get; set; } // trạng thái
         public Guid PatientRecordId { get; set; }
         public Guid MedicalRecordId { get; set; }
         public Guid? TreatmentId { get; set; }
