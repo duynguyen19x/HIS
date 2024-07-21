@@ -11,9 +11,9 @@ namespace HIS.EntityFrameworkCore.Configurations.Items
             builder.ToTable("SItemPricePolicy");
             builder.HasKey(x => x.Id);
 
-            builder.HasOne(t => t.PatientType).WithMany().HasForeignKey(pc => pc.PatientTypeId);
+            builder.HasOne(t => t.PatientTypeFK).WithMany().HasForeignKey(pc => pc.PatientTypeId);
 
-            builder.HasOne(t => t.Item)
+            builder.HasOne(t => t.ItemFK)
                 .WithMany()
                 .HasForeignKey(pc => pc.ItemId);
         }

@@ -200,7 +200,7 @@ namespace HIS.ApplicationService.Dictionaries.ItemTypes
                                      Id = medi.Id,
                                      CommodityType = medi.CommodityType,
                                      Code = medi.Code,
-                                     HeInCode = medi.HeInCode,
+                                     //HeInCode = medi.HeInCode,
                                      Name = medi.Name,
                                      SortOrder = medi.SortOrder,
                                      Description = medi.Description,

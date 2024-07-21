@@ -457,7 +457,6 @@ namespace HIS.ApplicationService.Dictionary.Services
                         ServiceGroupHeInCode = s.Key.ServiceGroupHeInCode,
                         ServiceGroupCode = s.Key.ServiceGroupCode,
                         SurgicalProcedureTypeCode = s.Key.SurgicalProcedureTypeCode,
-                        //PatientTypeCode = s.Key.PatientTypeCode,
                         ExecutionRoomCode = s.Key.ExecutionRoomCode,
                     }).ToList();
 

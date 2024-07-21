@@ -63,7 +63,7 @@
         /// </summary>
         ReturnCabinetStock,
         /// <summary>
-        /// Xuất bản cho khách hàng
+        /// Xuất bán cho khách hàng
         /// </summary>
         ReleaseToCustomers,
         /// <summary>
@@ -71,16 +71,12 @@
         /// </summary>
         ReturnFromCustomer,
         /// <summary>
-        /// Nhập VT từ NCC
+        /// Số dư đầu kỳ
         /// </summary>
-        ImportMaterialFromSupplier,
-        /// <summary>
-        /// Xuất VT trả NCC
-        /// </summary>
-        ExportMaterialFormSupplier,
+        OpeningBalance,
         /// <summary>
         /// Xuất khác
-        /// </summary>
+        /// </summary>,
         OtherIssue = 99,
     }
 }

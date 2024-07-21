@@ -122,8 +122,8 @@ namespace HIS.ApplicationService
                 .ReverseMap();
 
             CreateMap<ItemPricePolicyDto, ItemPricePolicy>()
-                .ForMember(dest => dest.Item, opt => opt.Ignore())
-                .ForMember(dest => dest.PatientType, opt => opt.Ignore())
+                .ForMember(dest => dest.ItemFK, opt => opt.Ignore())
+                .ForMember(dest => dest.PatientTypeFK, opt => opt.Ignore())
                 .ReverseMap();
 
             CreateMap<InOutStockDto, InOutStock>()

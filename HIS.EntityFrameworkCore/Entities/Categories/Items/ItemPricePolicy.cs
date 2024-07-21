@@ -36,8 +36,8 @@ namespace HIS.EntityFrameworkCore.Entities.Categories.Items
         /// </summary>
         public Guid? ItemId { get; set; }
 
-        public Item Item { get; set; }
+        public Item ItemFK { get; set; }
 
-        public PatientObjectType PatientType { get; set; }
+        public PatientObjectType PatientTypeFK { get; set; }
     }
 }
