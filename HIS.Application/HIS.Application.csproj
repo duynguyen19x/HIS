@@ -11,8 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Business\" />
-    <Folder Include="Authorization\" />
     <Folder Include="Dictionary\" />
     <Folder Include="System\" />
   </ItemGroup>
