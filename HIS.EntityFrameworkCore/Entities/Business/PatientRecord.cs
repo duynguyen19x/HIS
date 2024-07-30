@@ -7,7 +7,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
     /// <summary>
     /// Thông tin bệnh án
     /// </summary>
-    [Table("HISPatientRecord")]
+    [Table("DPatientRecord")]
     public class PatientRecord : FullAuditedEntity<Guid>
     {
         /// <summary>
@@ -186,8 +186,6 @@ namespace HIS.EntityFrameworkCore.Entities.Business
 
         [MaxLength(255)]
         public virtual string ContactIssueBy { get; set; }
-
-        
 
         #region - tiếp đón
 

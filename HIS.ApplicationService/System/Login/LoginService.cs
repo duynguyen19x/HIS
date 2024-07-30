@@ -1,7 +1,6 @@
 ﻿using HIS.Dtos.Systems.Login;
 using HIS.EntityFrameworkCore.Entities;
 using HIS.EntityFrameworkCore;
-using HIS.Utilities.Commons;
 using HIS.Utilities.Enums;
 using HIS.Utilities.Sections;
 using Microsoft.Extensions.Configuration;
@@ -11,6 +10,7 @@ using System.Security.Claims;
 using System.Text;
 using HIS.Core.Application.Services.Dto;
 using HIS.ApplicationService.Authorization.Dto;
+using HIS.Utilities.Commons;
 
 namespace HIS.ApplicationService.Systems.Login
 {

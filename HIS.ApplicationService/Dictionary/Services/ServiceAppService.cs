@@ -14,6 +14,7 @@ using HIS.ApplicationService.Dictionary.Services.Dto;
 using Microsoft.EntityFrameworkCore;
 using System.Transactions;
 using HIS.ApplicationService.Dictionary.ServicePricePolicies.Dto;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace HIS.ApplicationService.Dictionary.Services
 {
@@ -423,47 +424,57 @@ namespace HIS.ApplicationService.Dictionary.Services
                 {
                     var sServiceUnits = _unitRepository.GetAllList();
                     var sServiceGroupHeIns = _serviceGroupHeinRepository.GetAllList();
-                    var sServiceGroups = _serviceGroupRepository.GetAllList(); // Context.ServiceGroups.ToList();
-                    var sSurgicalProcedureTypes = _surgicalProcedureTypeRepository.GetAllList(); // Context.SurgicalProcedureTypes.ToList();
-                    var sPatientTypes = _patientObjectTypeRepository.GetAllList(); // Context.PatientTypes.ToList();
-                    var sRooms = _roomRepository.GetAllList(); // Context.Rooms.ToList();
+                    var sServiceGroups = _serviceGroupRepository.GetAllList();
+                    var sSurgicalProcedureTypes = _surgicalProcedureTypeRepository.GetAllList();
+                    var sPatientTypes = _patientObjectTypeRepository.GetAllList();
+                    var sRooms = _roomRepository.GetAllList();
 
                     var sServiceDtos = new List<ServiceDto>();
 
-                    foreach (var serviceImport in input)
+                    var inputGroups = input.GroupBy(g => new
+                    {
+                        g.Code,
+                        g.Name,
+                        g.HeInCode,
+                        g.HeInName,
+                        g.SortOrder,
+                        g.Inactive,
+                        g.ServiceUnitCode,
+                        g.ServiceGroupHeInCode,
+                        g.ServiceGroupCode,
+                        g.SurgicalProcedureTypeCode,
+                        //g.PatientTypeCode,
+                        g.ExecutionRoomCode,
+                    }).Select(s => new ServiceImportExcelDto()
+                    {
+                        Code = s.Key.Code,
+                        Name = s.Key.Name,
+                        HeInCode = s.Key.HeInCode,
+                        HeInName = s.Key.HeInName,
+                        SortOrder = s.Key.SortOrder,
+                        Inactive = s.Key.Inactive,
+                        ServiceUnitCode = s.Key.ServiceUnitCode,
+                        ServiceGroupHeInCode = s.Key.ServiceGroupHeInCode,
+                        ServiceGroupCode = s.Key.ServiceGroupCode,
+                        SurgicalProcedureTypeCode = s.Key.SurgicalProcedureTypeCode,
+                        ExecutionRoomCode = s.Key.ExecutionRoomCode,
+                    }).ToList();
+
+                    foreach (var serviceImport in inputGroups)
                     {
                         var serviceDto = (ServiceDto)serviceImport;
                         serviceDto.Id = Guid.NewGuid();
 
-                        serviceDto.SServicePricePolicies = new List<ServicePricePolicyDto>()
+                        serviceDto.SServicePricePolicies = input.Where(w => w.Code == serviceImport.Code).Select(s => new ServicePricePolicyDto()
                         {
-                            new ServicePricePolicyDto()
-                            {
-                                Id = Guid.NewGuid(),
-                                ServiceId = serviceDto.Id,
-                                OldUnitPrice = serviceImport.HeInPrice,
-                                PatientTypeCode = HIS.Core.Enums.DIPatientObjectType.BH.ToString(),
-                                PaymentRate = serviceImport.PaymentRate,
-                                CeilingPrice = serviceImport.CeilingPrice,
-                                ExecutionTime = string.IsNullOrEmpty( serviceImport.ExecutionTimeString) ? null : DateTime.ParseExact(serviceImport.ExecutionTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None),
-                            },
-                            new ServicePricePolicyDto()
-                            {
-                                Id = Guid.NewGuid(),
-                                ServiceId = serviceDto.Id,
-                                OldUnitPrice = serviceImport.ServicePrice,
-                                PatientTypeCode = HIS.Core.Enums.DIPatientObjectType.DV.ToString(),
-                                ExecutionTime = string.IsNullOrEmpty( serviceImport.ExecutionTimeString) ? null : DateTime.ParseExact(serviceImport.ExecutionTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None),
-                            },
-                            new ServicePricePolicyDto()
-                            {
-                                Id = Guid.NewGuid(),
-                                ServiceId = serviceDto.Id,
-                                OldUnitPrice = serviceImport.PeoplePrice,
-                                PatientTypeCode = HIS.Core.Enums.DIPatientObjectType.VP.ToString(),
-                                ExecutionTime = string.IsNullOrEmpty( serviceImport.ExecutionTimeString) ? null : DateTime.ParseExact(serviceImport.ExecutionTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None),
-                            }
-                        };
+                            Id = Guid.NewGuid(),
+                            ServiceId = serviceDto.Id,
+                            OldUnitPrice = s.OldUnitPrice,
+                            PatientTypeCode = s.PatientTypeCode,
+                            PaymentRate = s.PaymentRate,
+                            CeilingPrice = s.CeilingPrice,
+                            ExecutionTime = s.ExecutionTime,
+                        }).ToList();
 
                         serviceDto.SExecutionRooms = new List<ExecutionRoomDto>()
                         {
@@ -481,30 +492,30 @@ namespace HIS.ApplicationService.Dictionary.Services
                     }
 
                     var Services = (from serviceDto in sServiceDtos
-                                     join sServiceUnit in sServiceUnits on serviceDto.ServiceUnitCode equals sServiceUnit.Code
-                                     join sServiceGroupHeIn in sServiceGroupHeIns on serviceDto.ServiceGroupHeInCode equals sServiceGroupHeIn.Code
-                                     join sServiceGroup in sServiceGroups on serviceDto.ServiceGroupCode equals sServiceGroup.Code
-                                     join sSurgicalProcedureType in sSurgicalProcedureTypes on serviceDto.SurgicalProcedureTypeCode equals sSurgicalProcedureType.Code into sSurgicalProcedureTypeTems
-                                     from surg in sSurgicalProcedureTypeTems.DefaultIfEmpty()
-                                     select new EntityFrameworkCore.Entities.Categories.Service()
-                                     {
-                                         Id = serviceDto.Id.GetValueOrDefault(),
-                                         Code = serviceDto.Code,
-                                         Name = serviceDto.Name,
-                                         HeInCode = serviceDto.HeInCode,
-                                         HeInName = serviceDto.HeInName,
-                                         SortOrder = serviceDto.SortOrder,
-                                         Inactive = serviceDto.Inactive,
-                                         UnitId = sServiceUnit.Id,
-                                         ServiceGroupId = sServiceGroup.Id,
-                                         ServiceGroupHeInId = sServiceGroupHeIn.Id,
-                                         SurgicalProcedureTypeId = surg == null ? null : surg.Id,
-                                     }).ToList();
+                                    join sServiceUnit in sServiceUnits on serviceDto.ServiceUnitCode equals sServiceUnit.Code
+                                    join sServiceGroupHeIn in sServiceGroupHeIns on serviceDto.ServiceGroupHeInCode equals sServiceGroupHeIn.Code
+                                    join sServiceGroup in sServiceGroups on serviceDto.ServiceGroupCode equals sServiceGroup.Code
+                                    join sSurgicalProcedureType in sSurgicalProcedureTypes on serviceDto.SurgicalProcedureTypeCode equals sSurgicalProcedureType.Code into sSurgicalProcedureTypeTems
+                                    from surg in sSurgicalProcedureTypeTems.DefaultIfEmpty()
+                                    select new Service()
+                                    {
+                                        Id = serviceDto.Id.GetValueOrDefault(),
+                                        Code = serviceDto.Code,
+                                        Name = serviceDto.Name,
+                                        HeInCode = serviceDto.HeInCode,
+                                        HeInName = serviceDto.HeInName,
+                                        SortOrder = serviceDto.SortOrder,
+                                        Inactive = serviceDto.Inactive,
+                                        UnitId = sServiceUnit.Id,
+                                        ServiceGroupId = sServiceGroup.Id,
+                                        ServiceGroupHeInId = sServiceGroupHeIn.Id,
+                                        SurgicalProcedureTypeId = surg == null ? null : surg.Id,
+                                    }).ToList();
 
                     var servicePricePolicieDtos = sServiceDtos.SelectMany(s => s.SServicePricePolicies).ToList();
                     var servicePricePolicie = (from servicePricePolicy in servicePricePolicieDtos
                                                join sPatientType in sPatientTypes on servicePricePolicy.PatientTypeCode equals sPatientType.Code
-                                               select new EntityFrameworkCore.Entities.Categories.Services.ServicePricePolicy()
+                                               select new ServicePricePolicy()
                                                {
                                                    Id = servicePricePolicy.Id.GetValueOrDefault(),
                                                    PatientTypeId = sPatientType.Id,
@@ -527,9 +538,9 @@ namespace HIS.ApplicationService.Dictionary.Services
                                               IsMain = executionRoom.IsMain,
                                           }).ToList();
 
-                    await _serviceRepository.BulkInsertAsync(Services); //Context.Services.AddRange(Services);
-                    await _servicePricePolicyRepository.BulkInsertAsync(servicePricePolicie); //Context.ServicePricePolicies.AddRange(servicePricePolicie);
-                    await _executionRoomRepository.BulkInsertAsync(executionRooms); //Context.ExecutionRooms.AddRange(executionRooms);
+                    await _serviceRepository.BulkInsertAsync(Services);
+                    await _servicePricePolicyRepository.BulkInsertAsync(servicePricePolicie);
+                    await _executionRoomRepository.BulkInsertAsync(executionRooms);
 
                     await unitOfWork.CompleteAsync();
                     result.Success(true);

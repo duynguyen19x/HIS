@@ -12,7 +12,7 @@ namespace HIS.EntityFrameworkCore.Configurations
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50);
-            builder.Property(x => x.HeInCode).HasMaxLength(50);
+            //builder.Property(x => x.HeInCode).HasMaxLength(50);
             builder.Property(x => x.Name).HasMaxLength(512);
             builder.Property(x => x.Tutorial).HasMaxLength(512);
             builder.Property(x => x.Description).HasMaxLength(512);

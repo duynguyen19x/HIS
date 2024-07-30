@@ -10,8 +10,8 @@ namespace HIS.Dtos.Dictionaries.Items
         [Description("Mã thuốc")]
         public string Code { get; set; }
 
-        [Description("Mã BH")]
-        public string HeInCode { get; set; }
+        //[Description("Mã BH")]
+        //public string HeInCode { get; set; }
 
         [Description("Tên thuốc")]
         public string Name { get; set; }

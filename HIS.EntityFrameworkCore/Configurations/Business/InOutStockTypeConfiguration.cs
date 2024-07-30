@@ -32,8 +32,9 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
                 new InOutStockType() { Id = (int)InOutStockTypeTypes.IssueToReplenishCabinetStock, Code = "13", Name = "Xuất bù cơ số tủ trực", Inactive = false },
                 new InOutStockType() { Id = (int)InOutStockTypeTypes.AddToCabinetInventory, Code = "14", Name = "Bổ sung cơ số tủ trực", Inactive = false },
                 new InOutStockType() { Id = (int)InOutStockTypeTypes.ReturnCabinetStock, Code = "15", Name = "Hoàn trả cơ số tủ trực", Inactive = false },
-                new InOutStockType() { Id = (int)InOutStockTypeTypes.ReleaseToCustomers, Code = "16", Name = "Xuất bản cho khách hàng", Inactive = false },
+                new InOutStockType() { Id = (int)InOutStockTypeTypes.ReleaseToCustomers, Code = "16", Name = "Xuất bán cho khách hàng", Inactive = false },
                 new InOutStockType() { Id = (int)InOutStockTypeTypes.ReturnFromCustomer, Code = "17", Name = "Nhập trả từ khách hàng", Inactive = false },
+                new InOutStockType() { Id = (int)InOutStockTypeTypes.OpeningBalance, Code = "18", Name = "Nhập đầu kỳ", Inactive = false },
                 new InOutStockType() { Id = (int)InOutStockTypeTypes.OtherIssue, Code = "99", Name = "Xuất khác", Inactive = false }
             );
         }

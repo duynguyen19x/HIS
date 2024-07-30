@@ -8,8 +8,8 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public string ServiceRequestCode { get; set; }
         public long RequestTime { get; set; } // ngày chỉ định (tạo phiếu)
         public long UseTime { get; set; } // ngày y lệnh
-        public long StartTime { get; set; }
-        public long EndTime { get; set; }
+        public long StartTime { get; set; } // Ngày bắt đầu
+        public long EndTime { get; set; } // Ngày kết thúc
         public string Barcode { get; set; }
         public int NumOrder { get; set; } // số thứ tự chỉ định trong ngày (số thứ tự thực hiện)
         public bool IsPriority { get; set; } // ưu tiên

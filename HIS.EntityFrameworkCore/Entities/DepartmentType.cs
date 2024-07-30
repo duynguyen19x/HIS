@@ -1,5 +1,4 @@
 ﻿using HIS.Core.Domain.Entities;
-using HIS.Core.Domain.Entities.Auditing;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -9,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// Loại khoa.
     /// </summary>
     [Table("SDepartmentType")]
-    public class DepartmentType : AuditedEntity<int>
+    public class DepartmentType : Entity<int>
     {
         [Required]
         [MaxLength(50)]
