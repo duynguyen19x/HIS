@@ -1,10 +1,11 @@
 ﻿using HIS.Core.Domain.Entities;
+using HIS.Core.Domain.Entities.Auditing;
 using HIS.Utilities.Enums;
 using System.ComponentModel;
 
 namespace HIS.EntityFrameworkCore.Entities.Categories
 {
-    public class ItemGroup : Entity<Guid>
+    public class ItemGroup : AuditedEntity<Guid>
     {
         [Description("Mã nhóm thuốc")]
         public string Code { get; set; }

@@ -1,6 +1,8 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
+using HIS.EntityFrameworkCore.Constants;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -14,6 +16,7 @@ namespace HIS.EntityFrameworkCore.Entities
     [Table("DOrder")]
     public class Order : AuditedEntity<Guid>
     {
+        [StringLength(EntityConst.Length50)]
         public string OrderCode { get; set; } // mã phiếu chỉ định
 
         public DateTime OrderDate { get; set; } // ngày y lệnh
@@ -24,6 +27,7 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public int NumOrder { get; set; } // số thứ tự phiếu chỉ định theo ngày y lệnh và loại phiếu
 
+        [StringLength(EntityConst.Length50)]
         public string Barcode { get; set; }
 
         public Guid MedicalRecordId { get; set; } // mã bệnh án
@@ -68,20 +72,28 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public Guid? EndUserId { get; set; } // người trả kết quả
 
+        [StringLength(EntityConst.Length50)]
         public string IcdCode { get; set; } // mã chẩn đoán 
 
-        public string IcdName { get; set; } 
+        [StringLength(EntityConst.Length512)]
+        public string IcdName { get; set; }
 
-        public string IcdSubCode { get; set; } 
+        [StringLength(EntityConst.Length50)]
+        public string IcdSubCode { get; set; }
 
+        [StringLength(EntityConst.Length512)]
         public string IcdText { get; set; }
 
+        [StringLength(EntityConst.Length50)]
         public string TraditionalIcdCode { get; set; } // mã chẩn đoán theo BHYT
 
+        [StringLength(EntityConst.Length512)]
         public string TraditionalIcdName { get; set; }
 
+        [StringLength(EntityConst.Length50)]
         public string TraditionalIcdSubCode { get; set; }
 
+        [StringLength(EntityConst.Length512)]
         public string TraditionalIcdText { get; set; }
 
         public bool IsEmergency { get; set; } // cấp cứu

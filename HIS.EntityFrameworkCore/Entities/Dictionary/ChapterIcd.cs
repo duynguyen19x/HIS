@@ -1,9 +1,10 @@
 ﻿using HIS.Core.Domain.Entities;
+using HIS.Core.Domain.Entities.Auditing;
 using System.ComponentModel;
 
 namespace HIS.EntityFrameworkCore.Entities
 {
-    public class ChapterIcd : Entity<Guid>
+    public class ChapterIcd : AuditedEntity<Guid>
     {
         [Description("Code")]
         public string Code { get; set; }

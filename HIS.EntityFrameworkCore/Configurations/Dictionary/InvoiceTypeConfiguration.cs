@@ -15,10 +15,10 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionary
         {
             builder.HasData(new List<InvoiceType>
             {
-                new InvoiceType() { Id = 1, Code = "TT", Name = "Thu tiền", SortOrder = 1 },
-                new InvoiceType() { Id = 2, Code = "HT", Name = "Hoàn tiền", SortOrder = 2 },
-                new InvoiceType() { Id = 3, Code = "TU", Name = "Tạm ứng", SortOrder = 3 },
-                new InvoiceType() { Id = 4, Code = "HU", Name = "Hoàn ứng", SortOrder = 4 },
+                new InvoiceType() { CreatedDate = new DateTime(2024, 1, 1), Id = 1, Code = "TT", Name = "Thu tiền", SortOrder = 1 },
+                new InvoiceType() { CreatedDate = new DateTime(2024, 1, 1), Id = 2, Code = "HT", Name = "Hoàn tiền", SortOrder = 2 },
+                new InvoiceType() { CreatedDate = new DateTime(2024, 1, 1), Id = 3, Code = "TU", Name = "Tạm ứng", SortOrder = 3 },
+                new InvoiceType() { CreatedDate = new DateTime(2024, 1, 1), Id = 4, Code = "HU", Name = "Hoàn ứng", SortOrder = 4 },
             });
         }
     }

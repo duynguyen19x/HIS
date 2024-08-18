@@ -48,8 +48,6 @@ namespace HIS.ApplicationService.Dictionaries.Machines
                         MachineOrderType = input.MachineOrderType,
                         RoomId = input.RoomId,
                         DepartmentId = input.DepartmentId,
-                        CreationDate = input.CreationDate,
-                        Creator = input.Creator,
                         UsageStandard = input.UsageStandard,
                     };
                     await _machineRepository.InsertAsync(data);
@@ -83,8 +81,6 @@ namespace HIS.ApplicationService.Dictionaries.Machines
                         MachineOrderType = input.MachineOrderType,
                         RoomId = input.RoomId,
                         DepartmentId = input.DepartmentId,
-                        CreationDate = input.CreationDate,
-                        Creator = input.Creator,
                         UsageStandard = input.UsageStandard,
                     };
 
@@ -144,8 +140,6 @@ namespace HIS.ApplicationService.Dictionaries.Machines
                                      MachineOrderType = r.MachineOrderType,
                                      RoomId = r.RoomId,
                                      DepartmentId = r.DepartmentId,
-                                     CreationDate = r.CreationDate,
-                                     Creator = r.Creator,
                                      UsageStandard = r.UsageStandard,
                                  }).OrderBy(o => o.Code).ToList();
                 result.TotalCount = result.Result.Count;
@@ -177,8 +171,6 @@ namespace HIS.ApplicationService.Dictionaries.Machines
                     MachineOrderType = machine.MachineOrderType,
                     RoomId = machine.RoomId,
                     DepartmentId = machine.DepartmentId,
-                    CreationDate = machine.CreationDate,
-                    Creator = machine.Creator,
                     UsageStandard = machine.UsageStandard,
                 };
             }

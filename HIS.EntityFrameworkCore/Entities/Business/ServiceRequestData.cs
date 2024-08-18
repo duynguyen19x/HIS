@@ -6,7 +6,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
 {
     public class ServiceRequestData : FullAuditedEntity<Guid>
     {
-        public Guid ServiceRequestId { get; set; } // phiếu chỉ định
+        public Guid? ServiceRequestId { get; set; } // phiếu chỉ định
         public Guid? InsuranceId { get; set; } // bảo hiểm
         public Guid ServiceId { get; set; } // dịch vụ
         public string ServiceName { get; set; }

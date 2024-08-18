@@ -1,4 +1,5 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
+using HIS.EntityFrameworkCore.Constants;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,12 +11,12 @@ namespace HIS.EntityFrameworkCore.Entities
     [Table("SOption")]
     public class Option : AuditedEntity<Guid>
     {
-        [MaxLength(128)]
+        [MaxLength(EntityConst.Length128)]
         [Required]
         public string Code { get; set; }
 
         [Required]
-        [MaxLength(255)]
+        [MaxLength(EntityConst.Length512)]
         public string Name { get; set; }
 
         /// <summary>
@@ -36,6 +37,7 @@ namespace HIS.EntityFrameworkCore.Entities
         /// <summary>
         /// Giá trị
         /// </summary>
+        [MaxLength(EntityConst.Length512)]
         public string OptionValue { get; set; }
 
         /// <summary>
@@ -58,7 +60,7 @@ namespace HIS.EntityFrameworkCore.Entities
         /// </summary>
         public bool IsDefault { get; set; }
 
-        [MaxLength(512)]
+        [MaxLength(EntityConst.Length512)]
         public string Description { get; set; }
 
         public int SortOrder { get; set; }

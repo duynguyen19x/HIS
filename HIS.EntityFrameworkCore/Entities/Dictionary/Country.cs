@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// Quốc tịch.
     /// </summary>
     [Table("SCountry")]
-    public class Country : Entity<Guid>
+    public class Country : AuditedEntity<Guid>
     {
         [Required]
         [MaxLength(50)]

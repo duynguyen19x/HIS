@@ -519,8 +519,20 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasMaxLength(512)
@@ -535,6 +547,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "01",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Nhập hàng hóa từ nhà cung cấp"
                         },
@@ -542,6 +555,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "02",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Xuất hàng hóa trả nhà cung cấp"
                         },
@@ -549,6 +563,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 3,
                             Code = "03",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Nhập từ kho khác"
                         },
@@ -556,6 +571,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 4,
                             Code = "04",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Xuất trả kho khác"
                         },
@@ -563,6 +579,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 5,
                             Code = "05",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Nhập bù"
                         },
@@ -570,6 +587,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 6,
                             Code = "06",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Xuất thanh lý"
                         },
@@ -577,6 +595,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 7,
                             Code = "07",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Xuất kiểm nghiệm"
                         },
@@ -584,6 +603,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 8,
                             Code = "08",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Xuất hủy (Mất, hỏng, vỡ)"
                         },
@@ -591,6 +611,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 9,
                             Code = "09",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Xuất hao phí phòng khám"
                         },
@@ -598,6 +619,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 10,
                             Code = "10",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Xuất sử dụng phòng"
                         },
@@ -605,6 +627,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 11,
                             Code = "11",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Xuất sử dụng khoa"
                         },
@@ -612,6 +635,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 12,
                             Code = "12",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Nhập bù cơ số tủ trực"
                         },
@@ -619,6 +643,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 13,
                             Code = "13",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Xuất bù cơ số tủ trực"
                         },
@@ -626,6 +651,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 14,
                             Code = "14",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Bổ sung cơ số tủ trực"
                         },
@@ -633,6 +659,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 15,
                             Code = "15",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Hoàn trả cơ số tủ trực"
                         },
@@ -640,20 +667,31 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 16,
                             Code = "16",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
-                            Name = "Xuất bản cho khách hàng"
+                            Name = "Xuất bán cho khách hàng"
                         },
                         new
                         {
                             Id = 17,
                             Code = "17",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Nhập trả từ khách hàng"
                         },
                         new
                         {
+                            Id = 18,
+                            Code = "18",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Inactive = false,
+                            Name = "Nhập đầu kỳ"
+                        },
+                        new
+                        {
                             Id = 99,
                             Code = "99",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Xuất khác"
                         });
@@ -958,7 +996,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Barcode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
@@ -972,7 +1011,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("DeletedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("DepartmentId")
+                    b.Property<Guid?>("DepartmentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<long>("EndTime")
@@ -981,23 +1020,27 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("EndUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ExecuteDepartmentId")
+                    b.Property<Guid?>("ExecuteDepartmentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ExecuteRoomId")
+                    b.Property<Guid?>("ExecuteRoomId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("IcdCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("IcdName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<string>("IcdSubCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<string>("IcdText")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -1005,7 +1048,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<bool>("IsPriority")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("MedicalRecordId")
+                    b.Property<Guid?>("MedicalRecordId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("ModifiedBy")
@@ -1017,17 +1060,19 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<int>("NumOrder")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("PatientRecordId")
+                    b.Property<Guid?>("PatientRecordId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<long>("RequestTime")
                         .HasColumnType("bigint");
 
-                    b.Property<Guid>("RoomId")
+                    b.Property<Guid?>("RoomId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ServiceRequestCode")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<int>("ServiceRequestTypeId")
                         .HasColumnType("int");
@@ -1047,14 +1092,14 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<long>("UseTime")
                         .HasColumnType("bigint");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("ServiceRequests");
+                    b.ToTable("DServiceRequest", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.ServiceRequestData", b =>
@@ -1128,7 +1173,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
 
-                    b.Property<Guid>("ServiceRequestId")
+                    b.Property<Guid?>("ServiceRequestId")
+                        .IsRequired()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<long>("StartTime")
@@ -1418,10 +1464,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("DueDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("HeInCode")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<decimal?>("ImpPrice")
                         .HasColumnType("decimal(18,2)");
 
@@ -1524,11 +1566,23 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<int>("CommodityType")
                         .HasColumnType("int");
 
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsSystem")
                         .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasMaxLength(500)
@@ -1547,6 +1601,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("2fd41f93-ddb9-47dd-9833-4507ce71128c"),
                             Code = "TV",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Thuốc viên",
@@ -1557,6 +1612,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("ff9be71e-a958-4244-9df1-1582229c67d5"),
                             Code = "TU",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Thuốc uống",
@@ -1567,6 +1623,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("914ca65d-6579-4590-b963-fee8a743bae1"),
                             Code = "DC",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Dịch truyền",
@@ -1577,6 +1634,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("00be783e-d679-4f1c-9ae2-a4f4c79de0ef"),
                             Code = "TKSV",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Thuốc kháng sinh viên",
@@ -1587,6 +1645,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("c987b9d2-e599-49cc-99f3-d075d27cee7c"),
                             Code = "TDY",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Thuốc đông y",
@@ -1597,6 +1656,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("35df3868-8db6-440d-809f-f4c345d804a7"),
                             Code = "TS",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Thuốc siro",
@@ -1607,6 +1667,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("b5f03233-d733-4349-93df-db562b7d4376"),
                             Code = "THD",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Thuốc hỗn dịch",
@@ -1617,6 +1678,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("cc48bb40-fbf0-4054-818c-eb49545aaeea"),
                             Code = "TDN",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Thuốc dùng ngoài",
@@ -1627,6 +1689,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("8590ae3d-351c-4438-bfe5-3f69dcf97349"),
                             Code = "TB",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Thuốc bột",
@@ -1637,6 +1700,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("ddf105e8-6534-46e4-832b-598daa84c4d5"),
                             Code = "TGN",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Thuốc gây nghiện",
@@ -1647,6 +1711,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("2f5148cb-8adf-45ec-88ee-f84530cfa164"),
                             Code = "THTT",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Thuốc hướng tâm thần",
@@ -1657,6 +1722,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("e482e866-9243-49d8-8676-403377de353c"),
                             Code = "TKSO",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Thuốc kháng sinh ống",
@@ -1667,6 +1733,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("6375b8a1-b6e7-4724-a1b4-8cc3acc98e43"),
                             Code = "KCVI",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Khoáng chất và Vitamin",
@@ -1677,6 +1744,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("31d26ca7-2b5f-4dfd-b961-f3609e6a0b69"),
                             Code = "TCO",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Nhóm thuốc corticoid",
@@ -1687,6 +1755,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("cd5d7538-b1d2-448d-b6ff-c139c35f9dc7"),
                             Code = "TGTM",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Thuốc gây tê, mê",
@@ -1697,6 +1766,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("ae04abd7-d012-470d-9b8a-f38d9c5c94a8"),
                             Code = "TG",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Thuốc gói",
@@ -1707,6 +1777,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("e47ab5de-9ea5-4075-8da5-7ae9f36538e2"),
                             Code = "TUT",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Thuốc ung thư",
@@ -1717,6 +1788,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("a28fb46e-e9b9-410e-9c31-d8ebfd22015c"),
                             Code = "TKTT",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Thuốc kê tự túc",
@@ -1727,6 +1799,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("ea57a262-6647-4e88-880c-82bc4227e916"),
                             Code = "TNM",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Thuốc nhỏ mắt",
@@ -1737,6 +1810,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("3144745c-477c-4ce2-9c33-a38eb2153057"),
                             Code = "SP",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Sinh phẩm",
@@ -1747,6 +1821,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("25454ce7-bff0-4fd5-a47a-069554c1535a"),
                             Code = "VC",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Vaccine",
@@ -1757,6 +1832,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("9e144dff-29f6-47da-b7ed-b55abd1a2cd3"),
                             Code = "VTNT",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Vật tư nhà thuốc",
@@ -1767,6 +1843,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("05a24915-0bed-4f61-b53d-b5e52482e44c"),
                             Code = "TK",
                             CommodityType = 0,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Thuốc khác",
@@ -1777,6 +1854,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("c9c64187-bf8c-49f4-8b5b-2a04c9aafb5b"),
                             Code = "VTYT",
                             CommodityType = 1,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Vật tư y tế",
@@ -1787,6 +1865,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("18b82fb4-2ba8-4713-871f-3ba51c031b42"),
                             Code = "VTTH",
                             CommodityType = 1,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Vật tư tiêu hoa",
@@ -1797,6 +1876,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("891ad741-f6dc-48ee-be99-3e678b5e8f6c"),
                             Code = "VTTT",
                             CommodityType = 1,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Vật tư thay thế",
@@ -1807,6 +1887,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("58215bd0-ff85-45b4-90bb-4550f7e97838"),
                             Code = "VTHC",
                             CommodityType = 1,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Vật tư hóa chất",
@@ -1817,6 +1898,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("2a8c130b-8170-4776-b3bc-51eb9da01d35"),
                             Code = "VTNV",
                             CommodityType = 1,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Vật tư nẹp vít",
@@ -1827,6 +1909,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("077fe8b3-03d1-4c4c-b7be-5f7fb2015957"),
                             Code = "VTAC",
                             CommodityType = 1,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Vật tư ấn chỉ",
@@ -1837,6 +1920,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("a15b74b8-1a38-42de-b958-a62bbd5d8a02"),
                             Code = "VTTB",
                             CommodityType = 1,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Vật tư thiết bị y tế",
@@ -1847,6 +1931,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("d3ee2c41-ac9f-4356-8b76-a9b319929970"),
                             Code = "VTDC",
                             CommodityType = 1,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Vật tư dụng cụ",
@@ -1857,6 +1942,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("27988a81-eeab-41f0-a279-c774259ecdcf"),
                             Code = "VTCC",
                             CommodityType = 1,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Vật tư công cụ - dụng cụ",
@@ -1867,6 +1953,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("54eed868-2c02-46b3-acdf-e064a4ddb893"),
                             Code = "VTXH",
                             CommodityType = 1,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Vật tư xã hội hóa",
@@ -1877,6 +1964,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Id = new Guid("58291959-c2ca-45d6-b68d-ef81568fc163"),
                             Code = "VTXH",
                             CommodityType = 1,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsSystem = true,
                             Name = "Vật tư khác",
@@ -1894,8 +1982,20 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasMaxLength(500)
@@ -1913,6 +2013,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("05a24915-0bed-4f61-b53d-b5e52482e44c"),
                             Code = "1.01",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Uống",
                             SortOrder = 1
@@ -1921,6 +2022,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("03bd1fdc-d2b8-4969-a029-5022ca68f31e"),
                             Code = "1.02",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Ngậm",
                             SortOrder = 2
@@ -1929,6 +2031,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("a29889f5-4943-4520-85fa-441c3ea9e979"),
                             Code = "1.03",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Nhai",
                             SortOrder = 3
@@ -1937,6 +2040,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("a26814e4-da59-4317-a297-5ca089ef2dad"),
                             Code = "1.04",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Đặt dưới lưỡi",
                             SortOrder = 4
@@ -1945,6 +2049,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("5eada7db-843c-453b-8a44-3de2dacaa27b"),
                             Code = "1.05",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Ngậm dưới lưỡi",
                             SortOrder = 5
@@ -1953,6 +2058,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("6f90ecfe-4ede-4241-918b-b18245208f56"),
                             Code = "2.01",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tiêm bặp",
                             SortOrder = 6
@@ -1961,6 +2067,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("5ef14843-323d-4fe9-a424-46ca3120fca9"),
                             Code = "2.02",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tiêm dưới da",
                             SortOrder = 7
@@ -1969,6 +2076,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("5d6b6689-0dc3-4f11-94ef-02d288cce18a"),
                             Code = "2.03",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tiêm trong da",
                             SortOrder = 8
@@ -1977,6 +2085,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("cae9f723-e795-48d5-9730-f19edceaa5b6"),
                             Code = "2.04",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tiêm tĩnh mạch",
                             SortOrder = 9
@@ -1985,6 +2094,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("febb52a6-15bc-4e28-bc84-e928b43b126b"),
                             Code = "2.05",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tiêm truyền tĩnh mạch",
                             SortOrder = 10
@@ -1993,6 +2103,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("d075055e-4ed2-4d37-82ae-c9c20cb4f08f"),
                             Code = "2.06",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tiêm vào ổ khớp",
                             SortOrder = 11
@@ -2001,6 +2112,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("d36d932c-00db-451d-9a02-a401dbd89408"),
                             Code = "2.07",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tiêm nội nhãn cầu",
                             SortOrder = 12
@@ -2009,6 +2121,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e578f37b-9f1b-4098-8659-ac510ced491a"),
                             Code = "2.08",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tiêm trong dịch kích của mắt",
                             SortOrder = 13
@@ -2017,6 +2130,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("c6ffa735-8813-41ea-8984-5700dbee1ea7"),
                             Code = "2.09",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tiêm vào các khoang của cơ thế",
                             SortOrder = 14
@@ -2025,6 +2139,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("2f6e29a1-9a1f-44b0-8f9e-ea1c8716c23b"),
                             Code = "2.10",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tiêm",
                             SortOrder = 15
@@ -2033,6 +2148,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("65ca8fd8-fb9b-4dea-9c0e-c9a3b6b8fbd8"),
                             Code = "2.11",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tiêm động mạch khối u",
                             SortOrder = 16
@@ -2041,6 +2157,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("c0097373-f633-4bee-b670-2d2c35b5d172"),
                             Code = "2.12",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tiêm vào khoang tự nhiên",
                             SortOrder = 17
@@ -2049,6 +2166,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("13165217-8025-44e0-a92b-1f8318d56282"),
                             Code = "2.13",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tiêm vào khối u",
                             SortOrder = 18
@@ -2057,6 +2175,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("6edba7a9-20fe-49c0-9925-ba3b32ed32a0"),
                             Code = "2.14",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tiêm truyền tĩnh mạch",
                             SortOrder = 19
@@ -2065,6 +2184,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("41c24ffd-81f8-44f4-92f7-b3e5d418c8c7"),
                             Code = "2.15",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tiêm truyền",
                             SortOrder = 20
@@ -2073,6 +2193,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("2bd555b2-74ae-4b3f-9d27-de30e10bf16f"),
                             Code = "3.01",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Bôi",
                             SortOrder = 21
@@ -2081,6 +2202,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("75017c25-2ad7-4cce-b206-38735fd3584d"),
                             Code = "3.02",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Xoa ngoài",
                             SortOrder = 22
@@ -2089,6 +2211,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("71edc6f8-3db6-4375-9005-c5328627fa28"),
                             Code = "3.03",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Dán trên da",
                             SortOrder = 23
@@ -2097,6 +2220,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("5a807206-9aef-481d-87b6-88f464e6fd46"),
                             Code = "3.04",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Xịt ngoài da",
                             SortOrder = 24
@@ -2105,6 +2229,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("60f3158e-73f2-453f-af90-072b6b25c644"),
                             Code = "3.05",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Dùng ngoài",
                             SortOrder = 1
@@ -2113,6 +2238,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("cb51640d-bd7e-4cba-b64d-191d4162efa4"),
                             Code = "4.01",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Đặt âm đạo",
                             SortOrder = 25
@@ -2121,6 +2247,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("3df25942-afc9-4ed5-88b3-a0ff7b0ad968"),
                             Code = "4.02",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Đặt hậu môn",
                             SortOrder = 26
@@ -2129,6 +2256,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("49783593-80ca-4a9f-8ff9-5d359307498c"),
                             Code = "4.03",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Thụt hậu môn - trực tràng",
                             SortOrder = 27
@@ -2137,6 +2265,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("d558492b-6628-40ca-aadf-5dda7701681a"),
                             Code = "4.04",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Đặt",
                             SortOrder = 28
@@ -2145,6 +2274,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("7990c54f-dc34-4a62-a8da-201d22c1069d"),
                             Code = "4.05",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Đặt tử cung",
                             SortOrder = 29
@@ -2153,6 +2283,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("8f65d7cf-bbd9-44f4-b556-20472aa4a5f0"),
                             Code = "4.06",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Thụt",
                             SortOrder = 30
@@ -2161,6 +2292,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("229172a9-7464-4216-8b11-4e587e4c280c"),
                             Code = "5.01",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Phun mù",
                             SortOrder = 31
@@ -2169,6 +2301,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("6cdf2301-9621-4f73-9c62-f48ab80245c8"),
                             Code = "5.02",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Dạng hít",
                             SortOrder = 32
@@ -2177,6 +2310,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("0df82239-15dd-41ee-afc8-67cb51d5f3f6"),
                             Code = "5.03",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Bột hít",
                             SortOrder = 33
@@ -2185,6 +2319,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("ca37423b-25c7-4a84-a32d-8767bf14352b"),
                             Code = "5.04",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Xịt",
                             SortOrder = 34
@@ -2193,6 +2328,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("d81efde6-f750-4a66-adf3-a9092bb8ea9b"),
                             Code = "5.05",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Khí dung",
                             SortOrder = 35
@@ -2201,6 +2337,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("b12f310c-c12a-4f8f-a9bd-ddd38b4eebcf"),
                             Code = "5.06",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Đường hô hấp",
                             SortOrder = 36
@@ -2209,6 +2346,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("8d9cd0b1-2407-4cc3-9d94-314602e26508"),
                             Code = "5.07",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Xịt mũi",
                             SortOrder = 37
@@ -2217,6 +2355,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("0c8ba522-0e4b-40a0-9d93-936f5350853e"),
                             Code = "5.08",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Xịt họng",
                             SortOrder = 38
@@ -2225,6 +2364,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("7b3a86dc-9b0c-43f8-94a9-e4eec9916e30"),
                             Code = "5.09",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Thuốc mũi",
                             SortOrder = 39
@@ -2233,6 +2373,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("1ef26d8f-57d7-423c-a8c6-e3a20a249b37"),
                             Code = "6.01",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Nhỏ mũi",
                             SortOrder = 40
@@ -2241,6 +2382,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e485d3cc-5a96-48c9-9ed3-8725bb0136ef"),
                             Code = "6.02",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Nhỏ mắt",
                             SortOrder = 41
@@ -2249,6 +2391,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("379c8a46-145d-4956-af5d-2d48d9d55087"),
                             Code = "6.03",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tra mắt",
                             SortOrder = 42
@@ -2257,6 +2400,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("7d92b632-0ccf-4be5-a044-c3ee549fdb9f"),
                             Code = "6.04",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Nhỏ tai",
                             SortOrder = 43
@@ -2265,6 +2409,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("08f7b3c2-09da-4b4a-9c98-75c8562807ee"),
                             Code = "6.09",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Dung dịch",
                             SortOrder = 44
@@ -3242,8 +3387,20 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasMaxLength(500)
@@ -3261,6 +3418,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("ffa69c02-696f-4645-b72e-0f371b8cacfa"),
                             Code = "0",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Khác",
                             SortOrder = 1
@@ -3269,6 +3427,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("dd087168-fb8b-451f-bddd-56adff7a91b3"),
                             Code = "1",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "1.Bệnh nhiễm trùng và ký sinh trùng",
                             SortOrder = 2
@@ -3277,6 +3436,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("c81585c5-e57d-468f-99f2-1b403317ffd9"),
                             Code = "2",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "2.Bướu tân sinh",
                             SortOrder = 3
@@ -3285,6 +3445,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("c1747ec7-094e-4516-bd96-3e41327a317d"),
                             Code = "3",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "3.Bệnh của máu, cơ quan tạo máu và các rối loạn liên quan đến cơ chế miễn dịch",
                             SortOrder = 4
@@ -3293,6 +3454,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("0d2992cf-6fba-4871-97b3-a8a1229e86fd"),
                             Code = "4",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "4.Bệnh nội tiết, dinh dưỡng và chuyển hóa",
                             SortOrder = 5
@@ -3301,6 +3463,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e06c956c-1795-46a0-ba63-cb75f74ac431"),
                             Code = "5",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "5.Rối loạn tâm thần và hành vi",
                             SortOrder = 6
@@ -3309,6 +3472,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("4c8535f7-5852-435d-8b4d-66c198537fc4"),
                             Code = "6",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "6.Bệnh hệ thần kinh",
                             SortOrder = 7
@@ -3317,6 +3481,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("11baf250-7aed-4f3f-949b-82d8929d55ff"),
                             Code = "7",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "7.Bệnh mắt và phần phụ",
                             SortOrder = 8
@@ -3325,6 +3490,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("f3685b6e-8b27-4e8e-8a7d-b07ae695805f"),
                             Code = "8",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "8.Bệnh tai và xương chũm",
                             SortOrder = 9
@@ -3333,6 +3499,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("5a91f9a2-5a73-4dce-9a99-532c3b75518e"),
                             Code = "9",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "9.Bệnh tuần hoàn",
                             SortOrder = 10
@@ -3341,6 +3508,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("5ec5c91b-db70-491b-b1b5-a617d9a82549"),
                             Code = "10",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "10.Bệnh hô hấp",
                             SortOrder = 11
@@ -3349,6 +3517,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("6cd03dbd-dcbf-44d1-ab7a-3b32e71b3cb7"),
                             Code = "11",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "11.Bệnh tiêu hóa",
                             SortOrder = 12
@@ -3357,6 +3526,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("3a6de8c5-5bfd-4648-8225-42c79a224793"),
                             Code = "12",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "12.Bệnh da và mô dưới da",
                             SortOrder = 13
@@ -3365,6 +3535,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("f98e5ee7-4651-43fd-85fd-7e077785ad53"),
                             Code = "13",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "13.Bệnh của hệ xương khớp và mô liên kết",
                             SortOrder = 14
@@ -3373,6 +3544,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("93672f0e-4d83-4214-9576-d29113acea27"),
                             Code = "14",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "14.Bệnh hệ sinh dục - tiết niệu",
                             SortOrder = 15
@@ -3381,6 +3553,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("cb433c30-519a-40ad-aab8-479dfad013c3"),
                             Code = "15",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "15.Thai nghén, sinh đẻ và hậu sản",
                             SortOrder = 16
@@ -3389,6 +3562,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("bb4dd54d-2566-41be-a293-ed9398efeaa0"),
                             Code = "16",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "16.Bệnh lý xuất phát trong thời ký chu kỳ",
                             SortOrder = 17
@@ -3397,6 +3571,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("91c637c5-272c-488c-8489-98be3297d88e"),
                             Code = "17",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "17.Dị tật bẩm sinh, biến dạng và bất thường về nhiễm sắc thể",
                             SortOrder = 18
@@ -3405,6 +3580,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("5d500bff-32f6-46ee-ba7a-f89a43fdd5b1"),
                             Code = "18",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "18.Các triệu chứng, dấu hiệu và những biểu hiện lâm sàng bất thường, không phân loại ở phần khác",
                             SortOrder = 19
@@ -3413,6 +3589,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("dd240e2f-1434-4091-a691-12da1214424e"),
                             Code = "19",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "19.Vết thương, ngộ độc và hậu quả của một số nguyên nhân bên ngoài",
                             SortOrder = 20
@@ -3421,6 +3598,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("613e5901-9552-40f8-b865-f9fd6e91d7e8"),
                             Code = "20",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "20.Các nguyên nhân ngoại sinh của bệnh và tử vong",
                             SortOrder = 21
@@ -3429,6 +3607,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("08f6a2b3-d5e6-4fad-a022-5f29d0117801"),
                             Code = "21",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "21.Các yếu tố ảnh hưởng đến tình trạng sức khỏe và tiếp xúc dịch vụ y tế",
                             SortOrder = 22
@@ -3437,6 +3616,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("aaf07983-f9ed-43a5-8d9e-be42cdaa4044"),
                             Code = "22",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "22.Kháng các thuốc kháng sinh và chống ung thư",
                             SortOrder = 23
@@ -3445,6 +3625,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("134969e1-21e0-496c-8a7e-b40d5e52b4f4"),
                             Code = "23",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chương I. Bệnh nhiễm trùng và ký sinh trùng U50",
                             SortOrder = 24
@@ -3453,6 +3634,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("c27dbaeb-b11f-448b-bb63-be2f06d3e795"),
                             Code = "24",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chương II. Bướu tân sinh - U51",
                             SortOrder = 25
@@ -3461,6 +3643,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("f8811c3e-61e4-4344-b139-b583dc0d94a3"),
                             Code = "25",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chương III. Bệnh về máu, cơ quan tạo máu và các rối loạn liên quan đến cơ chế miễn dịch - U52",
                             SortOrder = 26
@@ -3469,6 +3652,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("30e5cab2-63d3-4b93-b430-042b04276e20"),
                             Code = "26",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chương IV. Bệnh nội tiết, dinh dưỡng và rối loạn chuyển hóa - U53",
                             SortOrder = 27
@@ -3477,6 +3661,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e71c20e6-9f6c-4998-8867-c29b3f0da643"),
                             Code = "27",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chương V. Bệnh rối loạn tâm thần và hành vi - U54",
                             SortOrder = 28
@@ -3485,6 +3670,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("f2b02143-9c76-4717-a9a5-711ce23bf81c"),
                             Code = "28",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chương VI. Bệnh hệ thần kinh - U55",
                             SortOrder = 29
@@ -3493,6 +3679,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("f21cf99c-f691-43eb-92c7-d9cd595fc1b2"),
                             Code = "29",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chương VII. Bệnh về mắt và phần phụ - U56",
                             SortOrder = 30
@@ -3501,6 +3688,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("b4d1c297-0f9c-41d4-9aa9-b211ecf0cbee"),
                             Code = "30",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chương VIII. Bệnh của tai xương chũm - U57",
                             SortOrder = 31
@@ -3509,6 +3697,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("a0570373-f0ce-4051-93e7-3285476367cb"),
                             Code = "31",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chương IX. Bệnh hệ tuần hoàn - U58",
                             SortOrder = 32
@@ -3517,6 +3706,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("08b63907-e7b9-4e6a-b075-706cca99f29c"),
                             Code = "32",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chương X. Bệnh hệ hô hấp U59",
                             SortOrder = 33
@@ -3525,6 +3715,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e96358f3-2f7c-4d6f-a4fa-0268039df244"),
                             Code = "33",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chương XI. Bệnh tiêu hóa - U60",
                             SortOrder = 34
@@ -3533,6 +3724,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("4104f31a-d1ad-4025-8756-4faddf40d453"),
                             Code = "34",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chương XII. Bệnh của da và mô dưới da - U61",
                             SortOrder = 35
@@ -3541,6 +3733,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("f9e407f1-0417-4067-9d25-dae91d19e1bf"),
                             Code = "35",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chương XIII. Bệnh của hệ xương khớp và mô liên kết - U62",
                             SortOrder = 36
@@ -3549,6 +3742,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("cd456287-b5aa-4d8c-b23d-7027c7676ce7"),
                             Code = "36",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chương XIV. Bệnh hệ sinh dục - Tiết niệu - U63",
                             SortOrder = 37
@@ -3557,6 +3751,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("a67315a8-8874-4a76-9d56-bb5103740e66"),
                             Code = "37",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chương XV. Thai nghén, sinh đẻ và hậu sản - U64",
                             SortOrder = 38
@@ -3565,6 +3760,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("0377427b-d6bd-4b58-99a9-d71789475bb2"),
                             Code = "38",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chương XVI. Dị tật bẩm, biến dạng và bất thường về nhiễm sắc thể - U65",
                             SortOrder = 39
@@ -3573,6 +3769,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("723b5a32-b7a2-4d46-9e19-c42d096839e2"),
                             Code = "39",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chương XVII. Các triệu chứng dấu hiệu và những biểu hiện lâm sàng bất thường, chưa được phân loại ở nơi khác - U66",
                             SortOrder = 40
@@ -3581,6 +3778,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("c3c34fe9-3d68-4f4c-98ab-abc10ec96ccc"),
                             Code = "40",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chương XVIII. Vết thương ngộ độc và hậu quả của một số nguyên nhân bên ngoài - U67",
                             SortOrder = 41
@@ -3638,7 +3836,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("6b24b562-1294-4537-a69a-26ac34c41521"),
                             Code = "AD",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3346),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "105",
                             Name = "Andorra",
@@ -3648,7 +3846,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("fb10ce71-e68a-4a70-bf7e-5edee9388d48"),
                             Code = "AE",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3360),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "137",
                             Name = "Các Tiểu Vương quốc Ả Rập Thống nhất",
@@ -3658,7 +3856,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("8592d87f-720b-48e7-82ee-e82d64cbf984"),
                             Code = "AG",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3363),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "108",
                             Name = "Antigua và Barbuda",
@@ -3668,7 +3866,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e4c05566-0c8d-42a4-a2e9-ad4d6d33b35f"),
                             Code = "AI",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3368),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "AI",
                             Name = "Anguilla",
@@ -3678,7 +3876,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("66533605-d826-4aec-9536-e4d30effefda"),
                             Code = "AL",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3372),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "103",
                             Name = "Albania",
@@ -3688,7 +3886,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("af3badc9-b6da-4eb0-8a42-ecf8dfd6ae19"),
                             Code = "AM",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3375),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "112",
                             Name = "Armenia",
@@ -3698,7 +3896,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("25b7ed9b-8bfd-4601-a4c5-a59dfe5a3fab"),
                             Code = "AN",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3380),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "AN",
                             Name = "Netherlands antilles",
@@ -3708,7 +3906,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("5701a860-793e-4660-9302-005b27d4348e"),
                             Code = "AO",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3383),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "106",
                             Name = "Angola",
@@ -3718,7 +3916,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9eb57842-f592-4080-affd-71b43f7d0517"),
                             Code = "AQ",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3386),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "AQ",
                             Name = "Antarctica",
@@ -3728,7 +3926,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("fd32d265-24dd-4073-a4b8-59e6358b59ed"),
                             Code = "AR",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3388),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "111",
                             Name = "Argentina",
@@ -3738,7 +3936,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("21668f2b-b3d0-4927-9d67-3f9eee4736d6"),
                             Code = "AS",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3391),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "AS",
                             Name = "Samoa thuộc Hoa Kỳ",
@@ -3748,7 +3946,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("6c408b50-b4be-4eca-a710-11a6d914cf4f"),
                             Code = "AT",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3394),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "109",
                             Name = "Áo",
@@ -3758,7 +3956,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("fc5a0c05-ebac-4906-8a9f-dddcdbcc0a9d"),
                             Code = "AU",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3397),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "284",
                             Name = "Úc",
@@ -3768,7 +3966,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e5837adb-d926-41f1-8434-73fed9db7504"),
                             Code = "AW",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3399),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "AW",
                             Name = "Aruba việt nam",
@@ -3778,7 +3976,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("1c3907c5-3cd4-4530-a28c-6d4acceec175"),
                             Code = "AZ",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3402),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "113",
                             Name = "Azerbaijan",
@@ -3788,7 +3986,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("45a0ebe0-51be-423b-8885-7a7bf06e6f95"),
                             Code = "BA",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3405),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "127",
                             Name = "Bosna và Hercegovina",
@@ -3798,7 +3996,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("332e0e9e-0182-47a0-b894-ade71da83708"),
                             Code = "BB",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3407),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "120",
                             Name = "Barbados",
@@ -3808,7 +4006,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("7f233816-fe94-4941-8125-b62c88410fa9"),
                             Code = "BD",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3410),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "119",
                             Name = "Bangladesh",
@@ -3818,7 +4016,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("720aaa71-3cc0-470f-b56c-472ac37a6574"),
                             Code = "BE",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3419),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "125",
                             Name = "Bỉ",
@@ -3828,7 +4026,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e369137c-1730-4809-88e4-e43031327233"),
                             Code = "BF",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3422),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "134",
                             Name = "Burkina Faso",
@@ -3838,7 +4036,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e180ff8a-4e49-4edd-9168-21b372b8d9b7"),
                             Code = "BG",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3430),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "133",
                             Name = "Bulgaria",
@@ -3848,7 +4046,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("1bd96043-4837-4ab4-8812-0230d7cdc37c"),
                             Code = "BH",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3433),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "117",
                             Name = "Bahrain",
@@ -3858,7 +4056,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("09127bf0-ff5d-4660-8fef-18b3107bf295"),
                             Code = "BI",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3435),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "135",
                             Name = "Burundi",
@@ -3868,7 +4066,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("fd235817-1607-4f4c-83c7-ff5bd0012896"),
                             Code = "BJ",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3449),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "123",
                             Name = "Benin",
@@ -3878,7 +4076,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("7b0c9a9c-e730-4b96-9372-e9ef8ab5339b"),
                             Code = "BM",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3466),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "BM",
                             Name = "Bermuda",
@@ -3888,7 +4086,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("c5c14db2-753f-4e28-88b5-3b9e502fa0c6"),
                             Code = "BN",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3469),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "132",
                             Name = "Brunei",
@@ -3898,7 +4096,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("aa745539-b444-49d2-ad13-14149f8a1645"),
                             Code = "BO",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3472),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "126",
                             Name = "Bolivia",
@@ -3908,7 +4106,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("1d374c8c-88c5-49ae-9c9c-0b2b362b1198"),
                             Code = "BR",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3477),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "131",
                             Name = "Brasil",
@@ -3918,7 +4116,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("8764ee96-c950-44cf-a1f4-7636126c671b"),
                             Code = "BS",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3479),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "116",
                             Name = "Bahamas",
@@ -3928,7 +4126,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("d94b5935-e6d2-4aa7-b9f7-d332badacd8d"),
                             Code = "BT",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3482),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "124",
                             Name = "Bhutan",
@@ -3938,7 +4136,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("5f4a7dfd-c3ed-4796-bde2-94199e595ef0"),
                             Code = "BV",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3485),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "BV",
                             Name = "Bouvet island",
@@ -3948,7 +4146,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("ddf4ecad-6f97-4bde-84fe-2b9dc51f0ffd"),
                             Code = "BW",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3488),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "128",
                             Name = "Botswana",
@@ -3958,7 +4156,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("53fdbb96-c808-4474-83bc-084e422a8b95"),
                             Code = "BY",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3490),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "121",
                             Name = "Belarus",
@@ -3968,7 +4166,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("76c42f0f-bfb2-4a11-b5a4-e854f74e72cd"),
                             Code = "BZ",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3493),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "122",
                             Name = "Belize",
@@ -3978,7 +4176,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("686b79de-db2f-4ccd-946c-1bef80cd503e"),
                             Code = "CA",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3496),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "140",
                             Name = "Canada",
@@ -3988,7 +4186,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("2facb682-01d5-4798-bf0a-928bd471ecb3"),
                             Code = "CC",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3499),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "CC",
                             Name = "Cocos (keeling) islands",
@@ -3998,7 +4196,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("484be820-41ff-4911-94c6-2d2969764ac4"),
                             Code = "CD",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3501),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "145",
                             Name = "Cộng hòa Dân chủ Congo",
@@ -4008,7 +4206,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("46651a82-3d63-4a24-baff-9bb1ee8ac492"),
                             Code = "CF",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3504),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "280",
                             Name = "Trung Phi",
@@ -4018,7 +4216,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("75de9dea-ef0f-4492-890a-f5af36cce7aa"),
                             Code = "CG",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3507),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "144",
                             Name = "Cộng hòa Congo",
@@ -4028,7 +4226,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("1df44627-4127-48c0-bbc7-2afc64cb75d2"),
                             Code = "CH",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3510),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "274",
                             Name = "Thụy Sĩ",
@@ -4038,7 +4236,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("4452efd3-9727-4c5c-9cc9-76f7270c673d"),
                             Code = "CI",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3522),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "130",
                             Name = "Bờ Biển Ngà",
@@ -4048,7 +4246,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("b4e019b1-042b-465c-baf9-60d525d9b85c"),
                             Code = "CK",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3525),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "CK",
                             Name = "Cook islands",
@@ -4058,7 +4256,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("067dbcfb-9729-4016-aa0f-526f43657542"),
                             Code = "CL",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3528),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "141",
                             Name = "Chile",
@@ -4068,7 +4266,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("f5874f17-6c1e-4c07-b8bf-41b76546f6f0"),
                             Code = "CM",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3530),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "138",
                             Name = "Cameroon",
@@ -4078,7 +4276,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("3de67d92-a46e-4113-bd12-2e89a48aa1f0"),
                             Code = "CN",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3533),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "279",
                             Name = "Trung Quốc",
@@ -4088,7 +4286,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("19b9d4e2-dd04-4d66-ba70-e71a800b8563"),
                             Code = "CO",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3536),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "142",
                             Name = "Colombia",
@@ -4098,7 +4296,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("d576474f-de6a-45fc-bd19-e18a2915f1a4"),
                             Code = "CR",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3539),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "146",
                             Name = "Costa Rica",
@@ -4108,7 +4306,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("be946a16-a1af-499c-9bd8-ca12a22fb69c"),
                             Code = "CU",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3543),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "149",
                             Name = "Cuba",
@@ -4118,7 +4316,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("93fc49be-bd23-41c3-8538-4b424a7806da"),
                             Code = "CV",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3545),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "CV",
                             Name = "Cape verde",
@@ -4128,7 +4326,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("02cd862f-7bf2-4dee-9d8d-869f67659eac"),
                             Code = "CX",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3548),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "CX",
                             Name = "Christmas island",
@@ -4138,7 +4336,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("7ef68b6d-2d6b-4688-95bc-d0fd79ffb6c5"),
                             Code = "CY",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3551),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "191",
                             Name = "Síp",
@@ -4148,7 +4346,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("23063395-5d36-41c9-9711-66722ab8849f"),
                             Code = "CZ",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3553),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "252",
                             Name = "Séc",
@@ -4158,7 +4356,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9d5769fe-b3ae-4697-9150-44674e8008ba"),
                             Code = "DE",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3556),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "155",
                             Name = "Đức",
@@ -4168,7 +4366,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("a1080c01-e5bb-4e3f-8784-f0678f1eff58"),
                             Code = "DJ",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3559),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "150",
                             Name = "Djibouti",
@@ -4178,7 +4376,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("502c14cb-18ea-461f-9bc0-9591b056284c"),
                             Code = "DK",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3562),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "153",
                             Name = "Đan Mạch",
@@ -4188,7 +4386,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("7bea406c-221d-45dd-aca6-a2ceb90741aa"),
                             Code = "DM",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3564),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "151",
                             Name = "Dominica",
@@ -4198,7 +4396,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("58d12ab1-4946-45f9-bef5-354e5803f357"),
                             Code = "DO",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3567),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "152",
                             Name = "Cộng hòa Dominicana",
@@ -4208,7 +4406,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e6e7518f-73eb-4010-b0cf-6dcc5c8f8e01"),
                             Code = "DZ",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3570),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "104",
                             Name = "Algérie",
@@ -4218,7 +4416,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("a3597652-cc84-40ff-b143-208ee8473e93"),
                             Code = "EA",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3573),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "154",
                             Name = "Đông Timor",
@@ -4228,7 +4426,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("c6f6287f-39f6-4470-ad46-ac539eef3052"),
                             Code = "EC",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3576),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "156",
                             Name = "Ecuador",
@@ -4238,7 +4436,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("abdfeb5b-a4b8-4ab1-b6b8-83f7fb72ec23"),
                             Code = "EE",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3579),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "159",
                             Name = "Estonia",
@@ -4248,7 +4446,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("8f800608-e254-418d-8163-78f71be4873f"),
                             Code = "EG",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3582),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "102",
                             Name = "Ai Cập",
@@ -4258,7 +4456,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("fe657d37-7960-4bb3-8f15-81666fca928d"),
                             Code = "EH",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3584),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "EH",
                             Name = "Western sahara",
@@ -4268,7 +4466,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("4dcd4bda-0da9-415d-8f7e-ecd5841ad250"),
                             Code = "ER",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3587),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "158",
                             Name = "Eritrea",
@@ -4278,7 +4476,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("5dc567de-1249-4aaa-9d49-04dcd3501220"),
                             Code = "ES",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3589),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "269",
                             Name = "Tây Ban Nha",
@@ -4288,7 +4486,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("ba7304bd-7e25-4731-a60f-10c13589c71a"),
                             Code = "ET",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3592),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "160",
                             Name = "Ethiopia",
@@ -4298,7 +4496,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("10a98338-7167-4e5b-b3e4-9515f63bb43d"),
                             Code = "FI",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3595),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "241",
                             Name = "Phần Lan",
@@ -4308,7 +4506,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("da333d92-e16c-4b49-b9d8-669df9032f82"),
                             Code = "FJ",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3599),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "161",
                             Name = "Fiji",
@@ -4318,7 +4516,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("f36eb030-510e-4ca0-b7c4-a1c1ef656dd6"),
                             Code = "FK",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3602),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "FK",
                             Name = "Falkland islands (malvinas)",
@@ -4328,7 +4526,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("c4065df0-2539-4046-bb77-7d699a072734"),
                             Code = "FM",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3604),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "214",
                             Name = "Micronesia",
@@ -4338,7 +4536,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("b83be42b-cde9-4dc3-a838-d8197d2c678f"),
                             Code = "FO",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3607),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "FO",
                             Name = "Faroe islands",
@@ -4348,7 +4546,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("226d663e-46ee-4ab2-b385-b062345debd9"),
                             Code = "FR",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3610),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "240",
                             Name = "Pháp",
@@ -4358,7 +4556,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("24c5f9fa-e493-43a1-9d2a-c6d25dc2ea89"),
                             Code = "FY",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3613),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "254",
                             Name = "Serbia",
@@ -4368,7 +4566,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("f1c02c7d-3154-4e55-817c-1e24f6eef729"),
                             Code = "GA",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3615),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "162",
                             Name = "Gabon",
@@ -4378,7 +4576,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e9455b51-bd57-482f-a979-5ecf6c8c4afd"),
                             Code = "GB",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3618),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "107",
                             Name = "Vương quốc Liên hiệp Anh và Bắc Ireland",
@@ -4388,7 +4586,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("573dec77-5908-42b2-b1a5-8a5ee8407dee"),
                             Code = "GD",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3620),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "165",
                             Name = "Grenada",
@@ -4398,7 +4596,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9ded845f-06a1-4651-8903-bc46f7978c84"),
                             Code = "GE",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3623),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "GE",
                             Name = "Georgia",
@@ -4408,7 +4606,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("212573b7-ec34-4844-b150-74f567de2c5d"),
                             Code = "GF",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3626),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "GF",
                             Name = "French guiana",
@@ -4418,7 +4616,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("d34d65e5-253f-4324-9aee-f74045802e47"),
                             Code = "GG",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3628),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "GG",
                             Name = "Guernsey",
@@ -4428,7 +4626,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("62b0c6c0-4a45-4f33-b35e-d184d815518e"),
                             Code = "GH",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3631),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "164",
                             Name = "Ghana",
@@ -4438,7 +4636,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("cdd52492-d981-4972-9f41-4b1774c002ee"),
                             Code = "GI",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3634),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "GI",
                             Name = "Gibraltar",
@@ -4448,7 +4646,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("f9375017-9897-4487-8916-c98d22fd05b9"),
                             Code = "GL",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3637),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "GL",
                             Name = "Greenland",
@@ -4458,7 +4656,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("347a0e24-276d-4a54-b92b-4b88b60179af"),
                             Code = "GM",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3640),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "163",
                             Name = "Gambia",
@@ -4468,7 +4666,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("25df127f-9fb7-4f1d-8a4f-484364e15f91"),
                             Code = "GN",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3642),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "170",
                             Name = "Guinea",
@@ -4478,7 +4676,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("98062645-5015-4d8c-886e-3fb70c247ada"),
                             Code = "GP",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3645),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "GP",
                             Name = "Guadeloupe",
@@ -4488,7 +4686,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("298cf3d9-cf13-401f-86b5-368d1c71ec77"),
                             Code = "GQ",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3647),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "169",
                             Name = "Guinea Xích Đạo",
@@ -4498,7 +4696,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("8a6a8442-1533-4bba-9a05-ed707122573e"),
                             Code = "GR",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3650),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "178",
                             Name = "Hy Lạp",
@@ -4508,7 +4706,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("3adb70b0-ae40-4ac0-8a27-15398cc79d49"),
                             Code = "GS",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3653),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "GS",
                             Name = "South georgia and the south sandwich islands",
@@ -4518,7 +4716,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("4dbc51c5-3faa-4e76-b0d5-a28df95c5c01"),
                             Code = "GT",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3655),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "167",
                             Name = "Guatemala",
@@ -4528,7 +4726,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e4acc3fd-7e2d-4927-b7e8-797cb8a29a86"),
                             Code = "GU",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3658),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "GU",
                             Name = "Guam",
@@ -4538,7 +4736,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("d892c6c0-bf86-4487-ab8b-5af35cc32a0c"),
                             Code = "GV",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3661),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "171",
                             Name = "Guyana",
@@ -4548,7 +4746,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("3dac050e-a2a6-469b-b0bb-def2e17544a5"),
                             Code = "GW",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3664),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "168",
                             Name = "Guinea-Bissau",
@@ -4558,7 +4756,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("d3c10501-b94f-4a0e-b871-80d4b3d7bbbb"),
                             Code = "HK",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3666),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "HK",
                             Name = "Hong kong",
@@ -4568,7 +4766,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("3edffd99-5e14-4466-9f3e-a72ab48711d7"),
                             Code = "HM",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3669),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "HM",
                             Name = "Heard and mc donald islands",
@@ -4578,7 +4776,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("d50a063a-82ef-4b56-858e-1a8794b32878"),
                             Code = "HN",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3678),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "176",
                             Name = "Honduras",
@@ -4588,7 +4786,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("fd0ac376-bf65-4bf8-9067-245691aa1827"),
                             Code = "HR",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3681),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "147",
                             Name = "Croatia",
@@ -4598,7 +4796,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("c831fb16-910b-4939-804a-1052b8f8adc1"),
                             Code = "HT",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3684),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "172",
                             Name = "Haiti",
@@ -4608,7 +4806,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("1a52542a-e4e8-4514-b84f-d8f7a0ce8bf5"),
                             Code = "HU",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3687),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "177",
                             Name = "Hungary",
@@ -4618,7 +4816,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e3a2237c-9d57-462f-bad8-7a78856303c8"),
                             Code = "Id",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3689),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "180",
                             Name = "Indonesia",
@@ -4628,7 +4826,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("4e6e77af-56d6-4314-ac68-c39713511d70"),
                             Code = "IE",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3692),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "183",
                             Name = "Ireland",
@@ -4638,7 +4836,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("060539cd-d169-45c2-bec2-28a91e41bcb3"),
                             Code = "IL",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3694),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "184",
                             Name = "Israel",
@@ -4648,7 +4846,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("4bab2495-c861-47e7-82e6-1806fd87b767"),
                             Code = "IM",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3697),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "IM",
                             Name = "Isle of man",
@@ -4658,7 +4856,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("edcecb3c-ffcb-451f-8e24-02a0bf6499ae"),
                             Code = "IN",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3700),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "115",
                             Name = "Cộng hòa Ấn Độ",
@@ -4668,7 +4866,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("d200b4b5-7435-41a9-be8b-b6a80e14120b"),
                             Code = "IO",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3702),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "IO",
                             Name = "British indian ocean territory",
@@ -4678,7 +4876,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("b16a509f-5c70-42b1-a05e-6d4426c721ca"),
                             Code = "IQ",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3705),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "182",
                             Name = "Iraq",
@@ -4688,7 +4886,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("58357a87-d3a9-4ea4-82ea-eb7775f1c568"),
                             Code = "IR",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3708),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "181",
                             Name = "Iran",
@@ -4698,7 +4896,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("10f310c4-857b-431b-934c-19ebc560571c"),
                             Code = "IS",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3710),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "179",
                             Name = "Iceland",
@@ -4708,7 +4906,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("aa3d56b9-f398-4be1-b8ae-9f8563101b6e"),
                             Code = "IT",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3713),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "292",
                             Name = "Ý",
@@ -4718,7 +4916,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("50202b21-f7c0-42eb-89bd-4470e82f3943"),
                             Code = "JE",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3716),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "JE",
                             Name = "Jersey",
@@ -4728,7 +4926,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("cbf1c521-494b-4981-9dc9-b6a1b229c01d"),
                             Code = "JM",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3718),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "185",
                             Name = "Jamaica",
@@ -4738,7 +4936,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("665d03c6-346e-43d8-ad21-31492b4382aa"),
                             Code = "JO",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3721),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "186",
                             Name = "Jordan",
@@ -4748,7 +4946,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9601fc62-41b1-44af-af8e-8a03c91c96b8"),
                             Code = "JP",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3724),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "232",
                             Name = "Nhật Bản",
@@ -4758,7 +4956,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("66400b32-893a-489c-a5e1-180d55fb20d4"),
                             Code = "KE",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3726),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "188",
                             Name = "Kenya",
@@ -4768,7 +4966,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("509f7d40-e740-472f-8a7a-84b5a527eb96"),
                             Code = "KG",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3729),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "192",
                             Name = "Kyrgyzstan",
@@ -4778,7 +4976,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("f468cb27-57fb-4b75-b3b7-70bb33ca2705"),
                             Code = "KH",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3732),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "139",
                             Name = "Campuchia",
@@ -4788,7 +4986,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("62947f31-4a3e-441b-a9d2-9642ce61de2f"),
                             Code = "KI",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3735),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "189",
                             Name = "Kiribati",
@@ -4798,7 +4996,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("7afaefc0-9aa8-4ba7-98ae-618682a5be7f"),
                             Code = "KM",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3737),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "143",
                             Name = "Comoros",
@@ -4808,7 +5006,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("506ddd2c-4f81-4d6d-806c-4c9e605bab3f"),
                             Code = "KN",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3740),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "246",
                             Name = "Saint Kitts và Nevis",
@@ -4818,7 +5016,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("07c04d8d-4e1c-4896-ba8a-7d8172562b37"),
                             Code = "KP",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3743),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "277",
                             Name = "Triều Tiên",
@@ -4828,7 +5026,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("39ef7fcd-b539-46be-90a6-bc3f6d1524d8"),
                             Code = "KR",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3746),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "174",
                             Name = "Hàn Quốc",
@@ -4838,7 +5036,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("90b2a6a0-bacd-4175-80e9-b8fde9233786"),
                             Code = "KW",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3749),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "190",
                             Name = "Kuwait",
@@ -4848,7 +5046,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("994cf06f-b833-4415-84e0-94f3847b6dd8"),
                             Code = "KY",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3751),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "KY",
                             Name = "Cayman islands",
@@ -4858,7 +5056,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("1cc02fda-f061-49ad-a4f1-ecb564a28c88"),
                             Code = "KZ",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3754),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "187",
                             Name = "Kazakhstan",
@@ -4868,7 +5066,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("18be6a2d-0cc9-4e57-9b95-0fd5e0999094"),
                             Code = "LA",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3756),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "193",
                             Name = "Lào",
@@ -4878,7 +5076,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("66169c75-2aa7-409a-a7b9-d8cfe6ac80c0"),
                             Code = "LB",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3759),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "196",
                             Name = "Li ban",
@@ -4888,7 +5086,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("2eab2085-d20b-4cc4-a85b-7567c9ce6ea9"),
                             Code = "LC",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3762),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "247",
                             Name = "Saint Lucia",
@@ -4898,7 +5096,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9412c9e0-c4fe-442f-8b13-ea064bf48703"),
                             Code = "LI",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3765),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "199",
                             Name = "Liechtenstein",
@@ -4908,7 +5106,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("affdf19e-5ed4-497a-97d0-0fc95a547785"),
                             Code = "LK",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3767),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "262",
                             Name = "Sri Lanka",
@@ -4918,7 +5116,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("54ca17f4-f6f7-4bcf-9809-8d45153c2271"),
                             Code = "LR",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3770),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "197",
                             Name = "Liberia",
@@ -4928,7 +5126,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("426516a2-46e9-4103-8b44-22b4a30b21ae"),
                             Code = "LS",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3773),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "195",
                             Name = "Lesotho",
@@ -4938,7 +5136,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("58486abc-86a6-4bb8-a610-eb0e4bdf0b73"),
                             Code = "LT",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3776),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "200",
                             Name = "Litva",
@@ -4948,7 +5146,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("f034e368-335c-4a9f-a039-b7ea83f8a315"),
                             Code = "LU",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3778),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "201",
                             Name = "Luxembourg",
@@ -4958,7 +5156,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("882c80ef-806d-4370-9fb1-f00a13a7a5c1"),
                             Code = "LV",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3781),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "194",
                             Name = "Latvia",
@@ -4968,7 +5166,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("f5fdcb6c-e0c5-4a57-adca-e743ba60ccee"),
                             Code = "LY",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3784),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "198",
                             Name = "Libya",
@@ -4978,7 +5176,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("1d41f179-ba78-41d6-8ecf-595c7d6de65a"),
                             Code = "MA",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3787),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "209",
                             Name = "Maroc",
@@ -4988,7 +5186,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("5b526a49-1694-4eb8-b602-4e150d12184d"),
                             Code = "MC",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3789),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "216",
                             Name = "Monaco",
@@ -4998,7 +5196,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("cc2a4d3b-bae2-4602-9d23-4d4d2d918699"),
                             Code = "MD",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3792),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "215",
                             Name = "Moldova",
@@ -5008,7 +5206,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("b1829e62-c3dd-4f65-8c41-fdbe26aedb93"),
                             Code = "MG",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3795),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "203",
                             Name = "Madagascar",
@@ -5018,7 +5216,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("bcb96598-0e05-4316-86d3-80413326555a"),
                             Code = "MH",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3797),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "210",
                             Name = "Quần đảo Marshall",
@@ -5028,7 +5226,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("b83926c4-6963-4f82-97f7-dffa6e87ea7d"),
                             Code = "MK",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3800),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "202",
                             Name = "Macedonia",
@@ -5038,7 +5236,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("b171e933-4b7d-46f5-802a-14c5c9234ed7"),
                             Code = "ML",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3803),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "207",
                             Name = "Mali",
@@ -5048,7 +5246,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("cf8c2ebc-2ed1-404c-875c-d2151d54ab9e"),
                             Code = "MM",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3805),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "220",
                             Name = "Myanma",
@@ -5058,7 +5256,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("fd21963c-7b5e-44a8-8d70-2edbda437946"),
                             Code = "MN",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3808),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "217",
                             Name = "Mông Cổ",
@@ -5068,7 +5266,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("6477d7a3-465e-4277-a4eb-ef09b13f5eca"),
                             Code = "MO",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3811),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "MO",
                             Name = "Macau",
@@ -5078,7 +5276,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("3af1daa8-65e1-4502-823d-3c8530608104"),
                             Code = "MP",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3814),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "MP",
                             Name = "Northern mariana islands",
@@ -5088,7 +5286,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("77365013-80d7-44d5-bd8d-472542cac431"),
                             Code = "MQ",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3816),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "MQ",
                             Name = "Martinique",
@@ -5098,7 +5296,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("aa4399ec-1ff3-4837-a68e-0df0720162cb"),
                             Code = "MR",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3819),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "211",
                             Name = "Mauritanie",
@@ -5108,7 +5306,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("d2ebac27-3463-40cb-9eb2-86e1da12a3ba"),
                             Code = "MS",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3822),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "MS",
                             Name = "Montserrat",
@@ -5118,7 +5316,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("78dcfd52-de7b-4c1d-9ded-0e5d3f7a8a35"),
                             Code = "MT",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3834),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "208",
                             Name = "Malta",
@@ -5128,7 +5326,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("f1218849-b5cf-43c8-b3c4-b1ff145f27fc"),
                             Code = "MU",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3837),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "212",
                             Name = "Mauritius",
@@ -5138,7 +5336,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("8a003437-323c-451c-b211-1886f79c25f1"),
                             Code = "MV",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3840),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "206",
                             Name = "Maldives",
@@ -5148,7 +5346,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("52595376-4b2b-4746-bb17-16f7ba234a33"),
                             Code = "MW",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3842),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "204",
                             Name = "Malawi",
@@ -5158,7 +5356,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("92b69f82-f3e2-4ea9-9d4b-1763b1a75dec"),
                             Code = "MX",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3845),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "213",
                             Name = "Mexico",
@@ -5168,7 +5366,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("22174cd0-7b2d-4c6b-bb6c-5273e63d28f0"),
                             Code = "MY",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3848),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "205",
                             Name = "Malaysia",
@@ -5178,7 +5376,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("4589f414-2018-4196-a42a-68fa60b41dae"),
                             Code = "MZ",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3850),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "219",
                             Name = "Mozambique",
@@ -5188,7 +5386,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("ee707e39-4195-426c-abf9-1ce21a771350"),
                             Code = "NA",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3853),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "221",
                             Name = "Namibia",
@@ -5198,7 +5396,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("f5f9c1ed-f4fb-4cff-aee3-2bcb0d8eed3e"),
                             Code = "NC",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3856),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "NC",
                             Name = "New Caledonia",
@@ -5208,7 +5406,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("264432ff-ba3d-4402-ae05-d3cbbdf7eef4"),
                             Code = "NE",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3859),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "229",
                             Name = "Niger",
@@ -5218,7 +5416,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("6d5a6761-432b-4bd2-9b04-5e01c421de23"),
                             Code = "NF",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3862),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "NF",
                             Name = "Norfolk Island",
@@ -5228,7 +5426,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9acb769e-d2de-479c-b66a-424ce710a036"),
                             Code = "NG",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3865),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "230",
                             Name = "Nigeria",
@@ -5238,7 +5436,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("2eb9de76-3d99-43a5-b17d-ba2f0e08c64a"),
                             Code = "NI",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3868),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "228",
                             Name = "Nicaragua",
@@ -5248,7 +5446,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("ab16a3ed-00cd-4445-8e7c-770b1965232e"),
                             Code = "NL",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3870),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "173",
                             Name = "Hà Lan",
@@ -5258,7 +5456,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("8ff51ea0-476b-4dec-8736-70cc36ea1d2c"),
                             Code = "NO",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3873),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "225",
                             Name = "Na Uy",
@@ -5268,7 +5466,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("2f4455d6-efee-4959-8dfd-6f7db81faadd"),
                             Code = "NP",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3876),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "226",
                             Name = "Nepal",
@@ -5278,7 +5476,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("1f0c0c80-dceb-47c4-9bfb-d9e2b29e8010"),
                             Code = "NR",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3879),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "224",
                             Name = "Nauru",
@@ -5288,7 +5486,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("50c044c3-6cd1-46ad-b10a-e879291806f2"),
                             Code = "NU",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3881),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "NU",
                             Name = "Niue",
@@ -5298,7 +5496,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("1bb67a2c-65b1-4437-b7db-61bb5c5c945a"),
                             Code = "NZ",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3884),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "227",
                             Name = "New Zealand",
@@ -5308,7 +5506,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("1137907c-6292-4973-8a6a-5a8a55216701"),
                             Code = "OM",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3887),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "233",
                             Name = "Oman",
@@ -5318,7 +5516,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("561d896e-c3c5-4dfc-b13c-790aa25fbd5d"),
                             Code = "PA",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3889),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "236",
                             Name = "Panama",
@@ -5328,7 +5526,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("5a68453d-81d4-4417-a579-33d6a1c27ea6"),
                             Code = "PE",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3892),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "239",
                             Name = "Peru",
@@ -5338,7 +5536,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("58776bc3-ee4b-44ae-ac9e-a501437bde2f"),
                             Code = "PF",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3894),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "PF",
                             Name = "French Polynesia",
@@ -5348,7 +5546,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("26d0e10a-43ea-4654-93be-00a21f60b760"),
                             Code = "PG",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3897),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "237",
                             Name = "Papua New Guinea",
@@ -5358,7 +5556,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("7a384197-d55e-44b8-b389-a65f17e74e1f"),
                             Code = "PH",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3900),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "242",
                             Name = "Philippines",
@@ -5368,7 +5566,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("5bd03273-5b23-4181-892c-397126e8da56"),
                             Code = "PK",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3903),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "234",
                             Name = "Pakistan",
@@ -5378,7 +5576,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("d1fef153-87bc-403a-9590-0ec4cc8d676e"),
                             Code = "PL",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3905),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "118",
                             Name = "Ba Lan",
@@ -5388,7 +5586,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("788693d2-4ac9-4f85-94bf-13d021bc000d"),
                             Code = "PM",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3908),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "PM",
                             Name = "St. Pierre and Miquelon",
@@ -5398,7 +5596,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("79bc1ba0-a0f6-4065-9783-9e01ade32cde"),
                             Code = "PN",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3911),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "PN",
                             Name = "Pitcairn",
@@ -5408,7 +5606,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("0d9bf5f6-20bb-4b4f-8c3e-0b7205eabe19"),
                             Code = "PR",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3914),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "PR",
                             Name = "Puerto Rico",
@@ -5418,7 +5616,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("0105cfd9-5265-4dcc-b2d8-790abecd5577"),
                             Code = "PS",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3916),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "PS",
                             Name = "Palestinian Authority",
@@ -5428,7 +5626,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("4b12f61e-5980-415f-a62b-b296753fd70d"),
                             Code = "PT",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3919),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "129",
                             Name = "Bồ Đào Nha",
@@ -5438,7 +5636,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("a3c5c224-a013-4e23-8655-641a0a76b38a"),
                             Code = "PW",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3922),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "235",
                             Name = "Palau",
@@ -5448,7 +5646,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("af9c2425-679e-4459-8c68-2d357f4f93e5"),
                             Code = "PY",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3925),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "238",
                             Name = "Paraguay",
@@ -5458,7 +5656,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("dd951a03-c803-4351-aac5-ed4ec9922bab"),
                             Code = "QA",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3928),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "243",
                             Name = "Qatar",
@@ -5468,7 +5666,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("6d2d2371-8785-4a7b-94ba-84c804b2b0a2"),
                             Code = "RE",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3930),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "RE",
                             Name = "Reunion",
@@ -5478,7 +5676,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("de0d7be8-8a87-4358-b93e-e809ab17f238"),
                             Code = "RO",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3933),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "244",
                             Name = "Romania",
@@ -5488,7 +5686,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("1c1e8f0d-fa36-4dd5-a349-51f8f8cf1e11"),
                             Code = "RU",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3936),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "231",
                             Name = "Nga",
@@ -5498,7 +5696,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("f21a86da-a1de-4023-93c9-3a23d315a8cd"),
                             Code = "RW",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3938),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "245",
                             Name = "Rwanda",
@@ -5508,7 +5706,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("33aeb885-ea5c-4343-8011-b1dccebdd65f"),
                             Code = "SA",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3941),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "110",
                             Name = "Ả Rập Saudi",
@@ -5518,7 +5716,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("7e27cb42-41fb-4b20-b26b-3c1ea9b4ff5c"),
                             Code = "SB",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3943),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "260",
                             Name = "Solomon",
@@ -5528,7 +5726,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("63c8621a-fc44-4abe-ba08-8d80520280cf"),
                             Code = "SC",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3946),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "255",
                             Name = "Seychelles",
@@ -5538,7 +5736,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("a30f588b-166d-4118-9d33-b8294e15ad44"),
                             Code = "SD",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3949),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "263",
                             Name = "Sudan",
@@ -5548,7 +5746,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("0f42743d-f2ae-4d4d-9e9c-6dcd785204ff"),
                             Code = "SE",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3951),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "273",
                             Name = "Thụy Điển",
@@ -5558,7 +5756,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("57c01cf1-7f20-4a6c-bec9-bcc9a3a039fe"),
                             Code = "SG",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3954),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "257",
                             Name = "Singapore",
@@ -5568,7 +5766,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("5300fbb8-1d3b-48c2-b251-c9daab165b94"),
                             Code = "SH",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3956),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "SH",
                             Name = "St. Helena",
@@ -5578,7 +5776,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("92aea1da-5cf2-40fa-92a2-cce297949451"),
                             Code = "SI",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3959),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "259",
                             Name = "Slovenia",
@@ -5588,7 +5786,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("99cfce62-6540-4525-97b8-9a2e62618e05"),
                             Code = "SJ",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3962),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "SJ",
                             Name = "Svalbard and Jan Mayen Islands",
@@ -5598,7 +5796,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("b6169a90-920f-425d-a275-82601862a220"),
                             Code = "SK",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3965),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "258",
                             Name = "Slovakia",
@@ -5608,7 +5806,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("45696681-b325-4d55-b4ea-56a920227907"),
                             Code = "SL",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3967),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "256",
                             Name = "Sierra Leone",
@@ -5618,7 +5816,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("4b7309a1-de33-4f43-a2ff-3f11e0e5869b"),
                             Code = "SM",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3970),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "250",
                             Name = "San Marino",
@@ -5628,7 +5826,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("cba207c9-9ee4-4a20-876b-ecb1160d0845"),
                             Code = "SN",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3972),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "253",
                             Name = "Sénégal",
@@ -5638,7 +5836,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("72d527d4-00df-4f9a-b0e1-e1fa84a4ba6d"),
                             Code = "SO",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3975),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "261",
                             Name = "Somalia",
@@ -5648,7 +5846,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("3671801a-1c88-4dc6-9e75-d766644c2af9"),
                             Code = "SR",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3983),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "264",
                             Name = "SuriCountryName",
@@ -5658,7 +5856,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("3f3e1d5e-ca7b-45ef-9e1e-f3c471e8894f"),
                             Code = "ST",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3985),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "251",
                             Name = "São Tomé và Príncipe",
@@ -5668,7 +5866,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e5439053-279d-4094-852d-0c2edc6992ed"),
                             Code = "SV",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3988),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "157",
                             Name = "El Salvador",
@@ -5678,7 +5876,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("44ff82d4-3356-4f71-9aa2-dc5f161537f0"),
                             Code = "SY",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3991),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "266",
                             Name = "Syria",
@@ -5688,7 +5886,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("8562fd7f-49aa-46cf-bbc9-71f7460c6ba7"),
                             Code = "SZ",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3994),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "265",
                             Name = "Swaziland",
@@ -5698,7 +5896,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("716a0688-0378-4941-af8f-c11dc4c45ac2"),
                             Code = "TC",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3997),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "TC",
                             Name = "Turks and Caicos Islands",
@@ -5708,7 +5906,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("36299397-b100-420b-bd1b-3f18eda310fa"),
                             Code = "TD",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(3999),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "270",
                             Name = "Tchad",
@@ -5718,7 +5916,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("2eead3fb-8c57-4699-a48d-b9eb2a781d23"),
                             Code = "TF",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4002),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "TF",
                             Name = "French Southern Territories",
@@ -5728,7 +5926,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("ba947c48-36fb-420b-b2d9-663fe308b18c"),
                             Code = "TG",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4005),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "275",
                             Name = "Togo",
@@ -5738,7 +5936,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("f07d3dde-aea1-4f0a-ba9d-310cda4fa6e9"),
                             Code = "TH",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4008),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "271",
                             Name = "Thái Lan",
@@ -5748,7 +5946,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("53b7d739-4b49-4a35-9d04-93520d79d105"),
                             Code = "TJ",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4010),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "267",
                             Name = "Tajikistan",
@@ -5758,7 +5956,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("5351587c-9713-44c9-9088-9626d01300c8"),
                             Code = "TK",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4013),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "TK",
                             Name = "Tokelau",
@@ -5768,7 +5966,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("6b8836aa-2476-4d82-98f1-0b7f56e66f7a"),
                             Code = "TL",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4016),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "TL",
                             Name = "Timor Leste",
@@ -5778,7 +5976,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("7af80a81-41e5-47de-abd3-7ce25f9c39b4"),
                             Code = "TM",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4018),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "282",
                             Name = "Turkmenistan",
@@ -5788,7 +5986,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("1cb83a16-11a1-438b-8fd9-22e661c5904a"),
                             Code = "TN",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4021),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "281",
                             Name = "Tunisia",
@@ -5798,7 +5996,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("05f8a24e-3764-41af-b79b-3e05da6964ad"),
                             Code = "TO",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4024),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "276",
                             Name = "Tonga",
@@ -5808,7 +6006,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("ee02aa87-f8dc-44ac-9ac9-830120f05656"),
                             Code = "TR",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4026),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "272",
                             Name = "Thổ Nhĩ Kỳ",
@@ -5818,7 +6016,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("36ddc306-adf0-4897-a200-6377ff0d9042"),
                             Code = "TT",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4029),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "278",
                             Name = "Trinidad và Tobago",
@@ -5828,7 +6026,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("f79baaf7-6191-4ba9-b38a-2f1b50d05598"),
                             Code = "TV",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4032),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "283",
                             Name = "Tuvalu",
@@ -5838,7 +6036,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("bf1bf333-4604-4974-838f-886100c006f3"),
                             Code = "TW",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4034),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "TW",
                             Name = "Đài Loan",
@@ -5848,7 +6046,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("ff78779a-45cd-4076-8c61-442a9a3873f2"),
                             Code = "TZ",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4037),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "268",
                             Name = "Tanzania",
@@ -5858,7 +6056,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("af24512b-01ae-4420-96cb-62051ede96cc"),
                             Code = "UA",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4040),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "286",
                             Name = "Ukraina",
@@ -5868,7 +6066,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("ad4ef5f1-e823-4ed4-9ad5-cec4a2cae6af"),
                             Code = "UG",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4042),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "285",
                             Name = "Uganda",
@@ -5878,7 +6076,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("05600686-62bc-4be9-b009-58ae6fac5dc2"),
                             Code = "UM",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4045),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "UM",
                             Name = "United States Minor Outlying Islands",
@@ -5888,7 +6086,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("97bc234b-7d4c-4870-801b-74f1998741be"),
                             Code = "US",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4048),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "175",
                             Name = "Hoa Kỳ",
@@ -5898,7 +6096,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("edb5a6e1-b084-4e46-87ab-22d38da9cf0a"),
                             Code = "UY",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4050),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "287",
                             Name = "Uruguay",
@@ -5908,7 +6106,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9ee7b166-4c6f-4136-8928-c6246c3e76d5"),
                             Code = "UZ",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4053),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "288",
                             Name = "Uzbekistan",
@@ -5918,7 +6116,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("1760cdb2-5d9e-4a4d-a422-9d2d54333b72"),
                             Code = "VA",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4056),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "290",
                             Name = "Thành Vatican",
@@ -5928,7 +6126,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("a1f120ed-4785-486e-b796-dd8cd569a415"),
                             Code = "VC",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4059),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "248",
                             Name = "Saint Vincent và Grenadines",
@@ -5938,7 +6136,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("a7a696de-3fd8-48c2-b87a-6464b222af87"),
                             Code = "VE",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4062),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "291",
                             Name = "Venezuela",
@@ -5948,7 +6146,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("539247ef-f9a9-4893-b250-2aa204a87640"),
                             Code = "VG",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4065),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "VG",
                             Name = "Virgin Islands (British)",
@@ -5958,7 +6156,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("fb67b422-6903-494e-945d-fa09f031b4f1"),
                             Code = "VI",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4068),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "VI",
                             Name = "Virgin Islands (U.S.)",
@@ -5968,7 +6166,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("0103bc86-7105-49c2-905a-cb83d3ee87c2"),
                             Code = "VN",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4070),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "000",
                             Name = "Việt Nam",
@@ -5978,7 +6176,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("3d9d9ca5-3356-48b3-b518-eb806a6128ee"),
                             Code = "VU",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4073),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "289",
                             Name = "Vanuatu",
@@ -5988,7 +6186,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("ffd3fabd-a5f1-4442-837b-d53b5d89272e"),
                             Code = "WF",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4076),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "WF",
                             Name = "Wallis and Futuna Islands",
@@ -5998,7 +6196,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("74c266fd-7287-4525-aca3-6bb66ddcf61f"),
                             Code = "WS",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4079),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "249",
                             Name = "Samoa",
@@ -6008,7 +6206,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("a695b824-cfc2-40a3-b5a1-35243a6e2116"),
                             Code = "YE",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4081),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "293",
                             Name = "Yemen",
@@ -6018,7 +6216,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("c7f500b0-be15-4ab8-ae5c-1db430d19b8c"),
                             Code = "YT",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4084),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "YT",
                             Name = "Mayotte",
@@ -6028,7 +6226,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("a1ba5be8-fef9-470a-a5f7-efcf7fc900a4"),
                             Code = "ME",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4087),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "218",
                             Name = "Montenegro",
@@ -6038,7 +6236,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("16bfb332-7ffe-4d31-a2a2-05e7cc250969"),
                             Code = "Z1",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4090),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "Z1",
                             Name = "Sovereign Military Order of Malta (SMOM)",
@@ -6048,7 +6246,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e43c3f5c-e8d7-430a-9869-e61337bd4188"),
                             Code = "Z2",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4093),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "Z2",
                             Name = "British Southern and Antarctic Territories",
@@ -6058,7 +6256,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("5d60e969-8387-42e4-b866-31dfb209f433"),
                             Code = "Z3",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4096),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "Z3",
                             Name = "England",
@@ -6068,7 +6266,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("20aa6e3b-0838-45fc-9769-161b291e5e24"),
                             Code = "Z4",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4098),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "Z4",
                             Name = "Scotland",
@@ -6078,7 +6276,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("d0357290-582a-47cd-984c-8815d38454be"),
                             Code = "Z5",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4101),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "Z5",
                             Name = "Northern Ireland",
@@ -6088,7 +6286,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("2e24284d-fe7b-477b-a3e9-23505ccbe379"),
                             Code = "Z6",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4104),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "Z6",
                             Name = "Great Britain (See United Kingdom)",
@@ -6098,7 +6296,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("c8766416-ed13-4631-a9c4-e89e782055c9"),
                             Code = "Z7",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4107),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "Z7",
                             Name = "Wales",
@@ -6108,7 +6306,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("59e93599-98e9-44de-b9d1-bbbf17c599bf"),
                             Code = "ZA",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4109),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "223",
                             Name = "Nam Phi",
@@ -6118,7 +6316,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e1fc9395-73b5-4fd6-8c31-37fef3a3e866"),
                             Code = "ZM",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4112),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "294",
                             Name = "Zambia",
@@ -6128,7 +6326,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("90ef0553-8520-4d57-ae3b-112ebf28b313"),
                             Code = "ZW",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4114),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "295",
                             Name = "Zimbabwe",
@@ -6138,7 +6336,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("39351753-1af5-4797-89e2-b97589db8d2e"),
                             Code = "AZ",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4117),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "114",
                             Name = "Cộng hòa Azerbaijan",
@@ -6148,7 +6346,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("dd79ead4-6e12-4cb8-aff5-8f00d8bf9e99"),
                             Code = "SD",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4120),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "222",
                             Name = "Nam Sudan",
@@ -6158,7 +6356,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("a8b38e56-d3ea-435f-907a-615ed7ced805"),
                             Code = "AF",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(4123),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "101",
                             Name = "Afghanistan",
@@ -6492,7 +6690,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "LS",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(8852),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Khoa lâm sàng",
                             SortOrder = 1
@@ -6501,7 +6699,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "CLS",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(8860),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Khoa cận lâm sàng",
                             SortOrder = 2
@@ -6510,7 +6708,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 3,
                             Code = "DUOC",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(8862),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Khoa dược",
                             SortOrder = 3
@@ -6519,7 +6717,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 4,
                             Code = "KHTH",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 618, DateTimeKind.Local).AddTicks(8865),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Kế hoạch tổng hợp",
                             SortOrder = 4
@@ -6561,12 +6759,12 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("ProvinceID")
+                    b.Property<Guid>("ProvinceId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProvinceID");
+                    b.HasIndex("ProvinceId");
 
                     b.ToTable("SDistrict");
 
@@ -6574,272 +6772,272 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(418),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "001",
                             DistrictName = "Quận Ba Đình",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(436),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "002",
                             DistrictName = "Quận Hoàn Kiếm",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("f3a6bcbb-8f93-49da-85e7-e9b07ed72986"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(440),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "003",
                             DistrictName = "Quận Tây Hồ",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("f3a6bcbb-8f93-49da-85e7-e9b07ed72987"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(445),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "004",
                             DistrictName = "Quận Long Biên",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("f3a6bcbb-8f93-49da-85e7-e9b07ed72988"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(449),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "005",
                             DistrictName = "Quận Cầu Giấy",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("f3a6bcbb-8f93-49da-85e7-e9b07ed72989"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(455),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "006",
                             DistrictName = "Quận Đống Đa",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("f3a6bcbb-8f93-49da-85e7-e9b07ed72980"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(458),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "007",
                             DistrictName = "Quận Hai Bà Trưng",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("c68ed451-7361-48a9-9f1e-9ad4c1b1bb58"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(462),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "008",
                             DistrictName = "Quận Hoàng Mai",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("5b59e188-c5c7-4beb-a7f1-03293b14d501"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(465),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "009",
                             DistrictName = "Quận Thanh Xuân",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("5b59e188-c5c7-4beb-a7f1-03293b14d502"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(470),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "016",
                             DistrictName = "Huyện Sóc Sơn",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("5b59e188-c5c7-4beb-a7f1-03293b14d503"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(473),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "017",
                             DistrictName = "Huyện Đông Anh",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("5b59e188-c5c7-4beb-a7f1-03293b14d504"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(476),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "018",
                             DistrictName = "Huyện Gia Lâm",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("5b59e188-c5c7-4beb-a7f1-03293b14d505"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(479),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "019",
                             DistrictName = "Quận Nam Từ Liêm",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("5b59e188-c5c7-4beb-a7f1-03293b14d506"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(482),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "020",
                             DistrictName = "Huyện Thanh Trì",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("5b59e188-c5c7-4beb-a7f1-03293b14d507"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(486),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "021",
                             DistrictName = "Quận Bắc Từ Liêm",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("5b59e188-c5c7-4beb-a7f1-03293b14d508"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(489),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "250",
                             DistrictName = "Huyện Mê Linh",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("5b59e188-c5c7-4beb-a7f1-03293b14d509"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(493),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "268",
                             DistrictName = "Quận Hà Đông",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("ef1439e7-3dfa-40d3-a8de-a0da87140b45"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(496),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "269",
                             DistrictName = "Thị xã Sơn Tây",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("ef1439e7-3dfa-40d3-a8de-a0da87140b46"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(500),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "271",
                             DistrictName = "Huyện Ba Vì",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("ef1439e7-3dfa-40d3-a8de-a0da87140b47"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(503),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "272",
                             DistrictName = "Huyện Phúc Thọ",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("ef1439e7-3dfa-40d3-a8de-a0da87140b48"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(506),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "273",
                             DistrictName = "Huyện Đan Phượng",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("ecdeb90d-8bc9-43ee-a233-d1fdc543b11b"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(509),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "274",
                             DistrictName = "Huyện Hoài Đức",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("12518ef2-bc95-4a4d-8991-727782426ba8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(513),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "275",
                             DistrictName = "Huyện Quốc Oai",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("5cf104df-c5e5-43bf-9aad-89eb8236092b"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(516),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "276",
                             DistrictName = "Huyện Thạch Thất",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("9f693f27-fe31-435b-be4e-0bb17dbaf8b7"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(519),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "277",
                             DistrictName = "Huyện Chương Mỹ",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("4d28238a-1d66-4dca-ae09-5104b16c5eef"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(522),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "278",
                             DistrictName = "Huyện Thanh Oai",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("a1f6effe-c174-4fc0-ad02-32b32ca51a20"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(526),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "279",
                             DistrictName = "Huyện Thường Tín",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("7a19295e-ddfc-4aaa-bee3-edb7c6aeddf6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(529),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "280",
                             DistrictName = "Huyện Phú Xuyên",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("010bc204-87e6-4e5f-9e82-79f5a0fc4d04"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(532),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "281",
                             DistrictName = "Huyện Ứng Hòa",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         },
                         new
                         {
                             Id = new Guid("506d29ff-5cba-4d14-a341-375ed320e229"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 619, DateTimeKind.Local).AddTicks(535),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictCode = "282",
                             DistrictName = "Huyện Mỹ Đức",
                             Inactive = false,
-                            ProvinceID = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
+                            ProvinceId = new Guid("889693ed-0453-4387-941b-d70dd4870dc5")
                         });
                 });
 
@@ -6854,6 +7052,12 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
@@ -6864,6 +7068,12 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<string>("MediCode")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -6882,6 +7092,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170901"),
                             Code = "01",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "13",
                             Name = "Ba na",
@@ -6891,6 +7102,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170902"),
                             Code = "02",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "49",
                             Name = "Bố y",
@@ -6900,6 +7112,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170903"),
                             Code = "03",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "52",
                             Name = "Brâu",
@@ -6909,6 +7122,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170904"),
                             Code = "04",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "17",
                             Name = "Chăm",
@@ -6918,6 +7132,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170905"),
                             Code = "05",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "32",
                             Name = "Chơ ro",
@@ -6927,6 +7142,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170906"),
                             Code = "06",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "36",
                             Name = "Chu ru",
@@ -6936,6 +7152,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170907"),
                             Code = "07",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "44",
                             Name = "Chứt",
@@ -6945,6 +7162,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170908"),
                             Code = "08",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "30",
                             Name = "Co",
@@ -6954,6 +7172,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170909"),
                             Code = "09",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "48",
                             Name = "Cống",
@@ -6963,6 +7182,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170910"),
                             Code = "10",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "16",
                             Name = "Cơ ho",
@@ -6972,6 +7192,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170911"),
                             Code = "11",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "47",
                             Name = "Cờ lao",
@@ -6981,6 +7202,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170912"),
                             Code = "12",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "9",
                             Name = "Dao",
@@ -6990,6 +7212,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170913"),
                             Code = "13",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "12",
                             Name = "Ê đê",
@@ -6999,6 +7222,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170914"),
                             Code = "14",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "10",
                             Name = "Gia rai",
@@ -7008,6 +7232,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170915"),
                             Code = "15",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "25",
                             Name = "Giấy",
@@ -7017,6 +7242,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170916"),
                             Code = "16",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "27",
                             Name = "Gié triêng",
@@ -7026,6 +7252,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170917"),
                             Code = "17",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "8",
                             Name = "H mông",
@@ -7035,6 +7262,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170918"),
                             Code = "18",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "19",
                             Name = "H rê",
@@ -7044,6 +7272,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170919"),
                             Code = "19",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "35",
                             Name = "Hà nhì",
@@ -7053,6 +7282,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170920"),
                             Code = "20",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "4",
                             Name = "Hoa",
@@ -7062,6 +7292,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170921"),
                             Code = "21",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "26",
                             Name = "K tu",
@@ -7071,6 +7302,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170922"),
                             Code = "22",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "33",
                             Name = "Kháng",
@@ -7080,6 +7312,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170923"),
                             Code = "23",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "5",
                             Name = "Khơ me",
@@ -7089,6 +7322,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170924"),
                             Code = "24",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "29",
                             Name = "Khơ mú",
@@ -7098,6 +7332,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170925"),
                             Code = "25",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "1",
                             Name = "Kinh",
@@ -7107,6 +7342,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170926"),
                             Code = "26",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "38",
                             Name = "La chí",
@@ -7116,6 +7352,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170927"),
                             Code = "27",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "39",
                             Name = "La ha",
@@ -7125,6 +7362,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170928"),
                             Code = "28",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "41",
                             Name = "La hù",
@@ -7134,6 +7372,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170929"),
                             Code = "29",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "37",
                             Name = "Lào",
@@ -7143,6 +7382,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170930"),
                             Code = "30",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "43",
                             Name = "Lô lô",
@@ -7152,6 +7392,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170931"),
                             Code = "31",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "42",
                             Name = "Lự",
@@ -7161,6 +7402,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170932"),
                             Code = "32",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "20",
                             Name = "M nông",
@@ -7170,6 +7412,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170933"),
                             Code = "33",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "28",
                             Name = "Mạ",
@@ -7179,6 +7422,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170934"),
                             Code = "34",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "45",
                             Name = "Mảng",
@@ -7188,6 +7432,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170935"),
                             Code = "35",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "6",
                             Name = "Mường",
@@ -7197,6 +7442,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170936"),
                             Code = "36",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "11",
                             Name = "Ngái",
@@ -7206,6 +7452,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170937"),
                             Code = "37",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "7",
                             Name = "Nùng",
@@ -7215,6 +7462,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170938"),
                             Code = "38",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "53",
                             Name = "Ơ đu",
@@ -7224,6 +7472,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170939"),
                             Code = "39",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "46",
                             Name = "Pà thén",
@@ -7233,6 +7482,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170940"),
                             Code = "40",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "40",
                             Name = "Phù lá",
@@ -7242,6 +7492,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170941"),
                             Code = "41",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "51",
                             Name = "Pu péo",
@@ -7251,6 +7502,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170942"),
                             Code = "42",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "21",
                             Name = "Rag lai",
@@ -7260,6 +7512,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170943"),
                             Code = "43",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "54",
                             Name = "Rơ man",
@@ -7269,6 +7522,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170944"),
                             Code = "44",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "15",
                             Name = "Sán chay",
@@ -7278,6 +7532,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170945"),
                             Code = "45",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "18",
                             Name = "Sán dìu",
@@ -7287,6 +7542,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170946"),
                             Code = "46",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "50",
                             Name = "Si la",
@@ -7296,6 +7552,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170947"),
                             Code = "47",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "31",
                             Name = "Tà ôi",
@@ -7305,6 +7562,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170948"),
                             Code = "48",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "2",
                             Name = "Tày",
@@ -7314,6 +7572,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170949"),
                             Code = "49",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "3",
                             Name = "Thái",
@@ -7323,6 +7582,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170950"),
                             Code = "50",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "24",
                             Name = "Thố",
@@ -7332,6 +7592,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170951"),
                             Code = "51",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "23",
                             Name = "Vân kiều",
@@ -7341,6 +7602,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170952"),
                             Code = "52",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "22",
                             Name = "X tiêng",
@@ -7350,6 +7612,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170953"),
                             Code = "53",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "34",
                             Name = "Xinh mun",
@@ -7359,6 +7622,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170954"),
                             Code = "54",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "14",
                             Name = "Xơ đăng",
@@ -7368,6 +7632,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9c01ca1a-fb5b-4620-a217-0046c3170999"),
                             Code = "99",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "55",
                             Name = "Nước ngoài",
@@ -7382,7 +7647,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("AllergyHistory")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<decimal?>("BloodPressureHight")
                         .HasColumnType("decimal(18,2)");
@@ -7394,7 +7660,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ChiefComplaint")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
@@ -7402,8 +7669,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Desciption")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Description")
+                        .HasMaxLength(1024)
+                        .HasColumnType("nvarchar(1024)");
 
                     b.Property<DateTime>("ExaminationDate")
                         .HasColumnType("datetime2");
@@ -7412,22 +7680,27 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("GeneralExam")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<decimal?>("Height")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("IcdCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("IcdName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<string>("IcdSubCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("IcdText")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<bool>("IsAllergy")
                         .HasColumnType("bit");
@@ -7445,10 +7718,12 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PartExam")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<string>("PathologicalProcess")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<decimal?>("Pulse")
                         .HasColumnType("decimal(18,2)");
@@ -7466,16 +7741,20 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("TraditionalIcdCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("TraditionalIcdName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<string>("TraditionalIcdSubCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("TraditionalIcdText")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<Guid>("TreatmentId")
                         .HasColumnType("uniqueidentifier");
@@ -7690,7 +7969,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("8f369537-85cf-493c-b525-dc84cdca4b85"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(4571),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalLevelCode = "DAC_BIET",
                             HospitalLevelName = "BV Hạng Đặc Biệt",
                             Inactive = false,
@@ -7699,7 +7978,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("d8bdec49-23de-49f1-a7d6-4b29af7aa81c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(4582),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalLevelCode = "HANG_1",
                             HospitalLevelName = "BV Hạng 1",
                             Inactive = false,
@@ -7708,7 +7987,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("45e9dce3-493f-47f0-96fe-752ff14a801b"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(4586),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalLevelCode = "HANG_2",
                             HospitalLevelName = "BV Hạng 2",
                             Inactive = false,
@@ -7717,7 +7996,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("8b85b2a9-6831-4eb8-8524-58f2541244b8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(4589),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalLevelCode = "HANG_3",
                             HospitalLevelName = "BV Hạng 3",
                             Inactive = false,
@@ -7726,7 +8005,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("ae68eb6c-2e65-4561-80be-74fc4e1b7be2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(4592),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalLevelCode = "HANG_4",
                             HospitalLevelName = "BV Hạng 4",
                             Inactive = false,
@@ -7780,7 +8059,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("fbc4742b-ae6b-4a97-baff-769e89d14928"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(6143),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalLineCode = "TRUNG_UONG",
                             HospitalLineName = "Tuyến trung ương",
                             Inactive = false,
@@ -7789,7 +8068,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("690e1bfc-182a-4c34-be21-11e31f49dd9a"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(6155),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalLineCode = "TINH",
                             HospitalLineName = "Tuyến tỉnh",
                             Inactive = false,
@@ -7798,7 +8077,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("684cd126-d475-4994-aaa6-858d45db2dd3"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(6159),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalLineCode = "HUYEN",
                             HospitalLineName = "Tuyến huyện",
                             Inactive = false,
@@ -7807,7 +8086,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("07ea16b0-1b0b-4c5f-ae49-53a6be1a0e62"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(6163),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalLineCode = "XA",
                             HospitalLineName = "Tuyến xã",
                             Inactive = false,
@@ -7816,7 +8095,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("38792889-79c3-4f8e-8ec5-cdd2648bdba3"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(6166),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalLineCode = "PHONGKHAM",
                             HospitalLineName = "Phòng khám",
                             Inactive = false,
@@ -7870,7 +8149,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("e54079cf-8c27-4869-8509-ee2fa37dd612"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(7734),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalSpecialityCode = "NOI_KHOA",
                             HospitalSpecialityName = "Chuyên khoa nội",
                             Inactive = false,
@@ -7879,7 +8158,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("d7311f7a-6da4-471b-bd65-7734b246b49b"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(7745),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalSpecialityCode = "NGOAI_KHOA",
                             HospitalSpecialityName = "Chuyên khoa ngoai",
                             Inactive = false,
@@ -7888,7 +8167,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("8ba05025-994d-4b5e-8715-964b1f3a13a5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(7752),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalSpecialityCode = "SAN",
                             HospitalSpecialityName = "Chuyên khoa sản - phụ khoa",
                             Inactive = false,
@@ -7897,7 +8176,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("fe219f91-5704-49e5-bfc7-f01e26f842bb"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(7755),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalSpecialityCode = "MAT",
                             HospitalSpecialityName = "Chuyên khoa mắt",
                             Inactive = false,
@@ -7906,7 +8185,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("681eaa40-0fb5-41a2-b846-6f48a6954ab2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(7758),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalSpecialityCode = "NHI",
                             HospitalSpecialityName = "Chuyên khoa nhi",
                             Inactive = false,
@@ -7915,7 +8194,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("b9d76b56-0eb7-4109-bbc4-c939f82229c7"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(7761),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalSpecialityCode = "RANG",
                             HospitalSpecialityName = "Chuyên khoa răng-hàm-mặt",
                             Inactive = false,
@@ -7924,7 +8203,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("5460ecf9-2c35-496b-81cc-5f6e633027be"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(7763),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalSpecialityCode = "TMH",
                             HospitalSpecialityName = "Chuyên khoa tai-mũi-họng",
                             Inactive = false,
@@ -7933,7 +8212,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("2a5cb6d0-17ee-48b4-8875-3ea49c6f576d"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(7766),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalSpecialityCode = "UNG_BUOU",
                             HospitalSpecialityName = "Chuyên khoa ung bướu",
                             Inactive = false,
@@ -7942,7 +8221,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("f46ab449-8cbc-4c26-a4e8-e342df9b8b8f"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(7769),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalSpecialityCode = "DONGY",
                             HospitalSpecialityName = "Chuyên khoa đông y",
                             Inactive = false,
@@ -7951,7 +8230,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("283089d3-57b6-40d6-9f86-e9221827850c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(7772),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalSpecialityCode = "DA_LIEU",
                             HospitalSpecialityName = "Chuyên khoa da liễu",
                             Inactive = false,
@@ -7960,7 +8239,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("3ce1c62f-07ef-4818-b9c4-6e31f3d2141f"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(7774),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalSpecialityCode = "BENHAN_BAN_CHAN",
                             HospitalSpecialityName = "Chuyên khoa đái tháo đường",
                             Inactive = false,
@@ -7969,7 +8248,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("84ed0b08-fea7-4cd2-b4fc-d7e9c4079ab1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(7777),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalSpecialityCode = "PK_NHO",
                             HospitalSpecialityName = "Phòng khám nhỏ",
                             Inactive = false,
@@ -7978,7 +8257,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("c3125b12-98d4-4e29-a3c5-35be114c726a"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(7779),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalSpecialityCode = "LAM_DICH_VU",
                             HospitalSpecialityName = "Làm dịch vụ",
                             Inactive = false,
@@ -7987,7 +8266,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("566bcb28-6b75-4b90-b411-6f8ef2929329"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(7782),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalSpecialityCode = "TIEM_CHUNG",
                             HospitalSpecialityName = "Tiêm chủng",
                             Inactive = false,
@@ -7996,7 +8275,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("abff0bdc-8bd4-4aa3-a391-c145cd042408"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(7784),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HospitalSpecialityCode = "YHCT",
                             HospitalSpecialityName = "Y học cổ truyền",
                             Inactive = false,
@@ -8290,21 +8569,23 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
 
                     b.Property<string>("InvSeries")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("InvTemplateNo")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("InvoiceTypeList")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
@@ -8400,7 +8681,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "TT",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(9385),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Thu tiền",
                             SortOrder = 1
@@ -8409,7 +8690,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "HT",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(9397),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Hoàn tiền",
                             SortOrder = 2
@@ -8418,7 +8699,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 3,
                             Code = "TU",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(9400),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tạm ứng",
                             SortOrder = 3
@@ -8427,7 +8708,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 4,
                             Code = "HU",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(9402),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Hoàn ứng",
                             SortOrder = 4
@@ -8485,7 +8766,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("b3eb4635-31ff-4e3f-b55f-a02150017bd7"),
                             Code = "K1",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 621, DateTimeKind.Local).AddTicks(5003),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "K1",
                             Name = "K1",
@@ -8495,7 +8776,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("ddb7f2cd-be11-495b-80c0-51295e2066b9"),
                             Code = "K2",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 621, DateTimeKind.Local).AddTicks(5021),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "K2",
                             Name = "K2",
@@ -8505,7 +8786,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("0a14bae0-eeb9-48b3-b49e-b3bb5b1492b1"),
                             Code = "K3",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 621, DateTimeKind.Local).AddTicks(5025),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MediCode = "K3",
                             Name = "K3",
@@ -8520,7 +8801,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
@@ -8528,17 +8810,12 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Creator")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<Guid?>("DepartmentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
@@ -8556,13 +8833,15 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<Guid?>("RoomId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UsageStandard")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.HasKey("Id");
 
@@ -8580,13 +8859,15 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("BirthPlace")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<int>("BirthYear")
                         .HasColumnType("int");
@@ -8604,28 +8885,35 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ChiefComplaint")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<string>("ContactAddress")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<string>("ContactIdentificationNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ContactIssueBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<DateTime?>("ContactIssueDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ContactName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<string>("ContactPhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ContactRelationshipName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<Guid?>("CountryId")
                         .HasColumnType("uniqueidentifier");
@@ -8646,10 +8934,12 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
 
                     b.Property<Guid?>("EthnicityId")
                         .HasColumnType("uniqueidentifier");
@@ -8658,10 +8948,12 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("HospitalizationReason")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<string>("IdentificationNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -8676,7 +8968,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("IssueBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<DateTime?>("IssueDate")
                         .HasColumnType("datetime2");
@@ -8705,19 +8998,22 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("PatientCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<Guid>("PatientId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PatientName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<int>("PatientObjectTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<Guid?>("ProvinceId")
                         .HasColumnType("uniqueidentifier");
@@ -8735,22 +9031,27 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("TransferInCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<Guid?>("TransferInFormId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("TransferInIcdCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("TransferInIcdName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<string>("TransferInMediOrgCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("TransferInMediOrgName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<Guid?>("TransferInReasonId")
                         .HasColumnType("uniqueidentifier");
@@ -8768,7 +9069,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("WorkPlace")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.HasKey("Id");
 
@@ -8832,7 +9134,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 100,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(968),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeCode = "100",
                             MedicalRecordTypeGroupId = 1,
@@ -8842,7 +9144,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 200,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(981),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeCode = "200",
                             MedicalRecordTypeGroupId = 2,
@@ -8852,7 +9154,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 201,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(983),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeCode = "201",
                             MedicalRecordTypeGroupId = 2,
@@ -8862,7 +9164,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 202,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(985),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeCode = "202",
                             MedicalRecordTypeGroupId = 2,
@@ -8872,7 +9174,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 203,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(987),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeCode = "203",
                             MedicalRecordTypeGroupId = 2,
@@ -8882,7 +9184,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 204,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(989),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeCode = "204",
                             MedicalRecordTypeGroupId = 2,
@@ -8892,7 +9194,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 301,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(990),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeCode = "301",
                             MedicalRecordTypeGroupId = 3,
@@ -8902,7 +9204,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 302,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(992),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeCode = "302",
                             MedicalRecordTypeGroupId = 3,
@@ -8912,7 +9214,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 303,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(994),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeCode = "303",
                             MedicalRecordTypeGroupId = 3,
@@ -8922,7 +9224,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 304,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(996),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeCode = "304",
                             MedicalRecordTypeGroupId = 3,
@@ -8932,7 +9234,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 305,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(997),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeCode = "305",
                             MedicalRecordTypeGroupId = 3,
@@ -8942,7 +9244,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 306,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(999),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeCode = "306",
                             MedicalRecordTypeGroupId = 3,
@@ -8952,7 +9254,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 307,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(1001),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeCode = "307",
                             MedicalRecordTypeGroupId = 3,
@@ -8962,7 +9264,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 308,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(1002),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeCode = "308",
                             MedicalRecordTypeGroupId = 3,
@@ -8972,7 +9274,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 309,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(1004),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeCode = "309",
                             MedicalRecordTypeGroupId = 3,
@@ -8982,7 +9284,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 310,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(1005),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeCode = "310",
                             MedicalRecordTypeGroupId = 3,
@@ -8992,7 +9294,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 311,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(1007),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeCode = "311",
                             MedicalRecordTypeGroupId = 3,
@@ -9002,7 +9304,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 312,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(1008),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeCode = "312",
                             MedicalRecordTypeGroupId = 3,
@@ -9012,7 +9314,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 313,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(1010),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeCode = "313",
                             MedicalRecordTypeGroupId = 3,
@@ -9022,7 +9324,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 314,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(1011),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeCode = "314",
                             MedicalRecordTypeGroupId = 3,
@@ -9032,7 +9334,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 315,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(1013),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeCode = "315",
                             MedicalRecordTypeGroupId = 3,
@@ -9042,7 +9344,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 316,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(1015),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeCode = "316",
                             MedicalRecordTypeGroupId = 3,
@@ -9099,7 +9401,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 621, DateTimeKind.Local).AddTicks(7416),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeGroupCode = "3",
                             MedicalRecordTypeGroupName = "Nội trú",
@@ -9108,7 +9410,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 621, DateTimeKind.Local).AddTicks(7434),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeGroupCode = "2",
                             MedicalRecordTypeGroupName = "Ngoại trú",
@@ -9117,7 +9419,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 621, DateTimeKind.Local).AddTicks(7436),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             MedicalRecordTypeGroupCode = "1",
                             MedicalRecordTypeGroupName = "Khám bệnh",
@@ -9166,14 +9468,15 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<int>("OptionCategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("OptionValue")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<int>("SortOrder")
                         .HasColumnType("int");
@@ -9236,7 +9539,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Barcode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<Guid>("BranchId")
                         .HasColumnType("uniqueidentifier");
@@ -9269,16 +9573,20 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("IcdCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("IcdName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<string>("IcdSubCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("IcdText")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<Guid?>("InsuranceId")
                         .HasColumnType("uniqueidentifier");
@@ -9302,7 +9610,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("OrderCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<DateTime>("OrderDate")
                         .HasColumnType("datetime2");
@@ -9341,16 +9650,20 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("TraditionalIcdCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("TraditionalIcdName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<string>("TraditionalIcdSubCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("TraditionalIcdText")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<Guid>("TreatmentId")
                         .HasColumnType("uniqueidentifier");
@@ -9373,12 +9686,24 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("OrderTypeCode")
                         .IsRequired()
@@ -9401,6 +9726,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 1,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             OrderTypeCode = "KB",
                             OrderTypeName = "Phiếu Khám Bệnh",
@@ -9409,6 +9735,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 2,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             OrderTypeCode = "KBKH",
                             OrderTypeName = "Phiếu Khám Bệnh Kết Hợp",
@@ -9417,6 +9744,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 3,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             OrderTypeCode = "DTKH",
                             OrderTypeName = "Phiếu Điều Trị Kết Hợp",
@@ -9425,6 +9753,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 4,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             OrderTypeCode = "XN",
                             OrderTypeName = "Phiếu Xét Nghiệm",
@@ -9433,6 +9762,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 5,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             OrderTypeCode = "HA",
                             OrderTypeName = "Phiếu Chẩn Đoán Hình Ảnh",
@@ -9441,6 +9771,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 6,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             OrderTypeCode = "PT",
                             OrderTypeName = "Phẫu thuật",
@@ -9449,6 +9780,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 7,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             OrderTypeCode = "CK",
                             OrderTypeName = "Phiếu Chuyên khoa",
@@ -9457,6 +9789,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 8,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             OrderTypeCode = "DV",
                             OrderTypeName = "Dịch vụ khác",
@@ -9465,6 +9798,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 9,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             OrderTypeCode = "TH",
                             OrderTypeName = "Đơn Thuốc",
@@ -9473,6 +9807,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 10,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             OrderTypeCode = "VT",
                             OrderTypeName = "Phiếu Vật tư",
@@ -9481,6 +9816,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 11,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             OrderTypeCode = "MAU",
                             OrderTypeName = "Máu",
@@ -9489,6 +9825,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 12,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             OrderTypeCode = "AV",
                             OrderTypeName = "Áo vàng",
@@ -9497,6 +9834,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 13,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             OrderTypeCode = "SA",
                             OrderTypeName = "Suất ăn",
@@ -9505,6 +9843,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 14,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             OrderTypeCode = "NC",
                             OrderTypeName = "Nợ cũ",
@@ -9513,6 +9852,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 15,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             OrderTypeCode = "TIEM_CHUNG",
                             OrderTypeName = "Phiếu Tiêm Chủng",
@@ -9521,6 +9861,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 16,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             OrderTypeCode = "HH",
                             OrderTypeName = "Hàng hóa",
@@ -9529,6 +9870,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 1004,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             OrderTypeCode = "TH_XN",
                             OrderTypeName = "Thực hiện xét nghiệm",
@@ -9537,6 +9879,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 1005,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             OrderTypeCode = "TH_HA",
                             OrderTypeName = "Thực hiện chẩn đoán hình ảnh",
@@ -9545,6 +9888,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 1006,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             OrderTypeCode = "TH_PT",
                             OrderTypeName = "Thực hiện phẫu thuật",
@@ -9553,6 +9897,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 1007,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             OrderTypeCode = "TH_CK",
                             OrderTypeName = "Thực hiện chuyên khoa",
@@ -9561,6 +9906,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = 1012,
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             OrderTypeCode = "TH_SA",
                             OrderTypeName = "Tổng hợp suất ăn",
@@ -9609,7 +9955,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ContactIssueBy")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(512)
+                        .HasColumnType("nvarchar(512)");
 
                     b.Property<DateTime?>("ContactIssueDate")
                         .HasColumnType("datetime2");
@@ -9801,7 +10148,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "BHYT",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(2722),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Bảo hiểm y tế",
                             SortOrder = 1
@@ -9810,7 +10157,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "VP",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(2731),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Viện phí",
                             SortOrder = 2
@@ -9819,7 +10166,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 3,
                             Code = "DV",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(2734),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Dịch vụ",
                             SortOrder = 3
@@ -9828,7 +10175,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 4,
                             Code = "NG",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(2736),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Người nước ngoài",
                             SortOrder = 4
@@ -9837,7 +10184,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 5,
                             Code = "MP",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(2739),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Miễn phí",
                             SortOrder = 5
@@ -9891,7 +10238,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("8bff9824-1df2-419e-88ab-e098a6fc4e7e"),
                             Code = "TM",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(4306),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tiền mặt",
                             SortOrder = 1
@@ -9900,7 +10247,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("dd39afc0-1de0-4287-a126-4dada6788508"),
                             Code = "CK",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(4323),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chuyển khoản",
                             SortOrder = 2
@@ -9909,7 +10256,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("0b348363-c888-4c9a-b145-c3389fdcca37"),
                             Code = "TM/CK",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(4326),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tiền mặt hoặc chuyển khoản",
                             SortOrder = 3
@@ -9986,7 +10333,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("889693ed-0453-4387-941b-d70dd4870dc5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5902),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "01",
                             ProvinceName = "Thành phố Hà Nội"
@@ -9994,7 +10341,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("e7fe23cb-4304-4fb0-90a5-9ff4da5048aa"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5916),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "02",
                             ProvinceName = "Tỉnh Hà Giang"
@@ -10002,7 +10349,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("f5d76f98-2024-4c60-81ad-577359cb69d1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5919),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "04",
                             ProvinceName = "Tỉnh Cao Bằng"
@@ -10010,7 +10357,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("8ed43986-0586-4742-8f89-a673c9f63756"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5922),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "06",
                             ProvinceName = "Tỉnh Bắc Kạn"
@@ -10018,7 +10365,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("38e1ffeb-7572-40c7-a716-cd880eb8d1ce"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5925),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "08",
                             ProvinceName = "Tỉnh Tuyên Quang"
@@ -10026,7 +10373,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("528fe36b-ac63-4f15-96f5-104ac221a155"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5927),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "10",
                             ProvinceName = "Tỉnh Lào Cai"
@@ -10034,7 +10381,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("52b17f24-a4a1-4cc6-88a0-c526ee8256c6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5930),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "11",
                             ProvinceName = "Tỉnh Điện Biên"
@@ -10042,7 +10389,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("4e6a7717-9e60-4bae-a2d4-d29dacd8af47"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5933),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "12",
                             ProvinceName = "Tỉnh Lai Châu"
@@ -10050,7 +10397,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("8eb57a8e-8281-41bb-a5ab-637dcac67177"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5935),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "14",
                             ProvinceName = "Tỉnh Sơn La"
@@ -10058,7 +10405,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("77e4b05d-6245-43ee-ba94-84faaece9018"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5938),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "15",
                             ProvinceName = "Tỉnh Yên Bái"
@@ -10066,7 +10413,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("003360aa-6adc-4e1c-8da9-fd1d1665729d"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5941),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "17",
                             ProvinceName = "Tỉnh Hoà Bình"
@@ -10074,7 +10421,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("927f685b-f766-4bf8-93ed-ae7aabc4071c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5943),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "19",
                             ProvinceName = "Tỉnh Thái Nguyên"
@@ -10082,7 +10429,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("c16dbbe1-bea2-413b-9216-5b547deac9f5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5945),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "20",
                             ProvinceName = "Tỉnh Lạng Sơn"
@@ -10090,7 +10437,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("37d13fe4-1fd2-4268-bbae-4ab301f634c5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5947),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "22",
                             ProvinceName = "Tỉnh Quảng Ninh"
@@ -10098,7 +10445,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("9c2a8569-d860-459d-8c3a-49966ea0038d"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5950),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "24",
                             ProvinceName = "Tỉnh Bắc Giang"
@@ -10106,7 +10453,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("a1f48dda-f1a3-473a-b4f7-6843312303f4"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5952),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "25",
                             ProvinceName = "Tỉnh Phú Thọ"
@@ -10114,7 +10461,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("7acbf3ec-7068-4007-a871-e0fee1ef28c5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5954),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "26",
                             ProvinceName = "Tỉnh Vĩnh Phúc"
@@ -10122,7 +10469,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("2d80dbcf-c7d5-4450-9847-e7e6f737f567"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5956),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "27",
                             ProvinceName = "Tỉnh Bắc Ninh"
@@ -10130,7 +10477,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("ed0a3763-3a96-46c5-8094-c47a4708e3cb"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5959),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "30",
                             ProvinceName = "Tỉnh Hải Dương"
@@ -10138,7 +10485,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("46ddf496-df97-40b4-9b23-bfd17357abbe"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5961),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "31",
                             ProvinceName = "Thành phố Hải Phòng"
@@ -10146,7 +10493,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("198417f7-e503-4435-bde2-7547487c943a"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5963),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "33",
                             ProvinceName = "Tỉnh Hưng Yên"
@@ -10154,7 +10501,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("1d8b3ff0-1bbd-4fa4-a4c8-1a4e2c394a55"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5965),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "34",
                             ProvinceName = "Tỉnh Thái Bình"
@@ -10162,7 +10509,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("0fdfd770-bee4-4dc4-9eb5-d86816bfc2bf"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5968),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "35",
                             ProvinceName = "Tỉnh Hà Nam"
@@ -10170,7 +10517,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("94dab20e-c05d-4aa9-93e9-82e972792756"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5970),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "36",
                             ProvinceName = "Tỉnh Nam Định"
@@ -10178,7 +10525,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("aee0f859-e3bd-41ae-be15-17060d5ad617"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5972),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "37",
                             ProvinceName = "Tỉnh Ninh Bình"
@@ -10186,7 +10533,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("b2cace92-0d42-4789-97c7-83ea3c3667c5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5975),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "38",
                             ProvinceName = "Tỉnh Thanh Hóa"
@@ -10194,7 +10541,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("ec0b077d-3957-4089-85f8-c1d6742aab19"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5977),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "40",
                             ProvinceName = "Tỉnh Nghệ An"
@@ -10202,7 +10549,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("b2035ac5-5e24-4a18-8587-62e65fd64697"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5980),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "42",
                             ProvinceName = "Tỉnh Hà Tĩnh"
@@ -10210,7 +10557,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("3035b967-95aa-46a5-be3f-b1f7bec1fd51"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5982),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "44",
                             ProvinceName = "Tỉnh Quảng Bình"
@@ -10218,7 +10565,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("8f0f2a47-34e4-4af3-811a-4d9c1fbf1cae"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5985),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "45",
                             ProvinceName = "Tỉnh Quảng Trị"
@@ -10226,7 +10573,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("0729fb2e-ae19-41f3-b948-b0f0c51fbf99"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5987),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "46",
                             ProvinceName = "Tỉnh Thừa Thiên Huế"
@@ -10234,7 +10581,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("40064e04-52c1-460d-b3d3-04f4e991f82c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5990),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "48",
                             ProvinceName = "Thành phố Đà Nẵng"
@@ -10242,7 +10589,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("3109e53a-812d-455e-a968-e86ff499d74d"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5992),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "49",
                             ProvinceName = "Tỉnh Quảng Nam"
@@ -10250,7 +10597,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("af97b966-5b74-4580-a948-c8a9df0a5fba"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5994),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "51",
                             ProvinceName = "Tỉnh Quảng Ngãi"
@@ -10258,7 +10605,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("7a3c3be6-fe62-42ab-9764-f8e62d7f5916"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5997),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "52",
                             ProvinceName = "Tỉnh Bình Định"
@@ -10266,7 +10613,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("c30f4992-257a-4abf-abb0-2ea4b36f247f"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(5999),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "54",
                             ProvinceName = "Tỉnh Phú Yên"
@@ -10274,7 +10621,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("5329306e-8290-4ca4-b110-0678c20752e0"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6001),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "56",
                             ProvinceName = "Tỉnh Khánh Hòa"
@@ -10282,7 +10629,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("68d199cc-b739-4d61-b412-40d2242f374d"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6003),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "58",
                             ProvinceName = "Tỉnh Ninh Thuận"
@@ -10290,7 +10637,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("33d6ec24-75ee-402e-b8d2-3296e90ea336"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6006),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "60",
                             ProvinceName = "Tỉnh Bình Thuận"
@@ -10298,7 +10645,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("3baaffd5-90a2-471f-8581-b5969184fcbe"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6008),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "62",
                             ProvinceName = "Tỉnh Kon Tum"
@@ -10306,7 +10653,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("b42cba39-912a-4400-84a5-fe15eb71766e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6010),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "64",
                             ProvinceName = "Tỉnh Gia Lai"
@@ -10314,7 +10661,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("64a15171-a037-45b4-a55d-08ee58ce687d"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6012),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "66",
                             ProvinceName = "Tỉnh Đắk Lắk"
@@ -10322,7 +10669,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("2c03541e-db56-4bcb-8012-52b0f130ca09"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6014),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "67",
                             ProvinceName = "Tỉnh Đắk Nông"
@@ -10330,7 +10677,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("395f3325-851f-41ee-b652-5002ce7cf547"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6016),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "68",
                             ProvinceName = "Tỉnh Lâm Đồng"
@@ -10338,7 +10685,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("839f0efb-168d-4110-a041-60b463ae48a1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6018),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "70",
                             ProvinceName = "Tỉnh Bình Phước"
@@ -10346,7 +10693,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("6f51a702-3c62-4a43-8042-9cf6e8bf3186"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6021),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "72",
                             ProvinceName = "Tỉnh Tây Ninh"
@@ -10354,7 +10701,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("ef981a1e-0af1-4b7f-9fd7-42de078e7d97"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6023),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "74",
                             ProvinceName = "Tỉnh Bình Dương"
@@ -10362,7 +10709,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("b6cf7563-f2be-4273-bcc7-58bb3cd4edec"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6026),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "75",
                             ProvinceName = "Tỉnh Đồng Nai"
@@ -10370,7 +10717,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("0b13943c-ead8-4e76-80b8-33b31828dd7a"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6028),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "77",
                             ProvinceName = "Tỉnh Bà Rịa - Vũng Tàu"
@@ -10378,7 +10725,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("7184c251-1c62-4b69-a63f-de49e85633f0"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6031),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "79",
                             ProvinceName = "Thành phố Hồ Chí Minh"
@@ -10386,7 +10733,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("9d49b503-ac5f-47f3-aaa2-8d18853bfba6"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6047),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "80",
                             ProvinceName = "Tỉnh Long An"
@@ -10394,7 +10741,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("f06e27bf-1470-4f7a-873f-f0dc77e405e4"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6050),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "82",
                             ProvinceName = "Tỉnh Tiền Giang"
@@ -10402,7 +10749,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("952aa342-c05d-46d3-8ffe-6a22d7512dc2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6052),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "83",
                             ProvinceName = "Tỉnh Bến Tre"
@@ -10410,7 +10757,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("702c3cf1-d0b3-4647-8d39-7549dd42f610"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6055),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "84",
                             ProvinceName = "Tỉnh Trà Vinh"
@@ -10418,7 +10765,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("e5a4e82b-b29d-4b47-a563-82977ea93346"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6057),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "86",
                             ProvinceName = "Tỉnh Vĩnh Long"
@@ -10426,7 +10773,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("fa11ad72-29b7-49f4-986d-fea0d53de210"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6060),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "87",
                             ProvinceName = "Tỉnh Đồng Tháp"
@@ -10434,7 +10781,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("72478add-ca26-4a9b-92bd-2b075006f36a"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6062),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "89",
                             ProvinceName = "Tỉnh An Giang"
@@ -10442,7 +10789,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("da06856d-9e6c-49f7-bbed-ca2a06ca81c1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6065),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "91",
                             ProvinceName = "Tỉnh Kiên Giang"
@@ -10450,7 +10797,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("619d7aee-4e6a-4993-9d7a-c6e32958851f"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6067),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "92",
                             ProvinceName = "Thành phố Cần Thơ"
@@ -10458,7 +10805,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("cd4eab40-92a3-4898-8a65-c67ccde721c0"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6069),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "93",
                             ProvinceName = "Tỉnh Hậu Giang"
@@ -10466,7 +10813,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("3fd18cc5-7204-42a9-a940-c5cf3128518f"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6071),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "94",
                             ProvinceName = "Tỉnh Sóc Trăng"
@@ -10474,7 +10821,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("b6bdda7d-b047-45a0-9d73-ffcb4e938e38"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6074),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "95",
                             ProvinceName = "Tỉnh Bạc Liêu"
@@ -10482,7 +10829,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("f2aac7ae-5a85-48fc-9166-d9ab6efb79ab"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(6076),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             ProvinceCode = "96",
                             ProvinceName = "Tỉnh Cà Mau"
@@ -10538,7 +10885,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "01",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 628, DateTimeKind.Local).AddTicks(3490),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Khám bệnh",
                             SortOrder = 1
@@ -10547,7 +10894,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "02",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 628, DateTimeKind.Local).AddTicks(3498),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Cấp cứu",
                             SortOrder = 2
@@ -10599,7 +10946,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f01"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 628, DateTimeKind.Local).AddTicks(5237),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             RelationshipCode = "01",
                             RelationshipName = "Bố đẻ",
@@ -10608,7 +10955,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f02"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 628, DateTimeKind.Local).AddTicks(5250),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             RelationshipCode = "02",
                             RelationshipName = "Mẹ đẻ",
@@ -10617,7 +10964,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f03"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 628, DateTimeKind.Local).AddTicks(5253),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             RelationshipCode = "03",
                             RelationshipName = "Bố nuôi",
@@ -10626,7 +10973,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f04"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 628, DateTimeKind.Local).AddTicks(5256),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             RelationshipCode = "04",
                             RelationshipName = "Mẹ nuôi",
@@ -10635,7 +10982,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f05"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 628, DateTimeKind.Local).AddTicks(5259),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             RelationshipCode = "05",
                             RelationshipName = "Anh ruột",
@@ -10644,7 +10991,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f06"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 628, DateTimeKind.Local).AddTicks(5262),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             RelationshipCode = "06",
                             RelationshipName = "Chị ruột",
@@ -10653,7 +11000,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f07"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 628, DateTimeKind.Local).AddTicks(5265),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             RelationshipCode = "07",
                             RelationshipName = "Em ruột",
@@ -10662,7 +11009,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f08"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 628, DateTimeKind.Local).AddTicks(5267),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             RelationshipCode = "08",
                             RelationshipName = "Ông",
@@ -10671,7 +11018,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f09"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 628, DateTimeKind.Local).AddTicks(5270),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             RelationshipCode = "09",
                             RelationshipName = "Bà",
@@ -10680,7 +11027,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f10"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 628, DateTimeKind.Local).AddTicks(5273),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             RelationshipCode = "10",
                             RelationshipName = "Vợ",
@@ -10689,7 +11036,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f11"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 628, DateTimeKind.Local).AddTicks(5275),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             RelationshipCode = "11",
                             RelationshipName = "Chồng",
@@ -10698,7 +11045,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f12"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 628, DateTimeKind.Local).AddTicks(5278),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             RelationshipCode = "12",
                             RelationshipName = "Con",
@@ -10707,7 +11054,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f13"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 628, DateTimeKind.Local).AddTicks(5280),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             RelationshipCode = "13",
                             RelationshipName = "Cháu",
@@ -10716,7 +11063,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f14"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 628, DateTimeKind.Local).AddTicks(5283),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             RelationshipCode = "14",
                             RelationshipName = "Bác, chú, cậu",
@@ -10725,7 +11072,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f15"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 628, DateTimeKind.Local).AddTicks(5285),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             RelationshipCode = "15",
                             RelationshipName = "Bác, cô, dì",
@@ -10734,7 +11081,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("dd0fb418-cd3f-40cd-8c12-7fda1cf56f99"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 628, DateTimeKind.Local).AddTicks(5288),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             RelationshipCode = "99",
                             RelationshipName = "Khác",
@@ -10918,7 +11265,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "01",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(9348),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Đúng tuyến",
                             SortOrder = 1
@@ -10927,7 +11274,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "02",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(9360),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Đúng tuyến (giới thiệu)",
                             SortOrder = 2
@@ -10936,7 +11283,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 3,
                             Code = "03",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(9363),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Đúng tuyến (giấy hẹn)",
                             SortOrder = 3
@@ -10945,7 +11292,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 4,
                             Code = "04",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(9366),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Đúng tuyến (cấp cứu)",
                             SortOrder = 4
@@ -10954,7 +11301,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 5,
                             Code = "05",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(9368),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Thông tuyến huyện",
                             SortOrder = 5
@@ -10963,7 +11310,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 6,
                             Code = "06",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(9373),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Trái tuyến",
                             SortOrder = 6
@@ -10972,7 +11319,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 7,
                             Code = "07",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 622, DateTimeKind.Local).AddTicks(9376),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Trái tuyến (thông tuyến tỉnh)",
                             SortOrder = 7
@@ -11153,7 +11500,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "TD",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 623, DateTimeKind.Local).AddTicks(925),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tiếp đón",
                             SortOrder = 1
@@ -11162,7 +11509,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "HC",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 623, DateTimeKind.Local).AddTicks(933),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Hành chính",
                             SortOrder = 2
@@ -11171,7 +11518,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 3,
                             Code = "KHAM",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 623, DateTimeKind.Local).AddTicks(935),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Khám bệnh",
                             SortOrder = 3
@@ -11180,7 +11527,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 4,
                             Code = "NT",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 623, DateTimeKind.Local).AddTicks(938),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Nội trú",
                             SortOrder = 4
@@ -11189,7 +11536,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 5,
                             Code = "NgT",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 623, DateTimeKind.Local).AddTicks(940),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Ngoại trú",
                             SortOrder = 5
@@ -11198,7 +11545,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 6,
                             Code = "XN",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 623, DateTimeKind.Local).AddTicks(943),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Xét nghiệm",
                             SortOrder = 6
@@ -11207,7 +11554,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 7,
                             Code = "CDHA",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 623, DateTimeKind.Local).AddTicks(945),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chẩn đoán hình ảnh",
                             SortOrder = 7
@@ -11216,7 +11563,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 8,
                             Code = "KHO-TONG",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 623, DateTimeKind.Local).AddTicks(947),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Kho tổng",
                             SortOrder = 8
@@ -11225,7 +11572,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 9,
                             Code = "KHO-NgT",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 623, DateTimeKind.Local).AddTicks(950),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Kho thuốc ngoại trú",
                             SortOrder = 9
@@ -11234,7 +11581,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 10,
                             Code = "KHO-NT",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 623, DateTimeKind.Local).AddTicks(952),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Kho thuốc nội trú",
                             SortOrder = 10
@@ -11243,7 +11590,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 11,
                             Code = "TT-TH",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 623, DateTimeKind.Local).AddTicks(954),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tủ trực thuốc",
                             SortOrder = 11
@@ -11252,7 +11599,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 12,
                             Code = "KHO-VTYT",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 623, DateTimeKind.Local).AddTicks(955),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Kho vật tự y tế",
                             SortOrder = 12
@@ -11261,7 +11608,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 13,
                             Code = "KHO-MAU",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 623, DateTimeKind.Local).AddTicks(957),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Kho máu",
                             SortOrder = 13
@@ -11270,7 +11617,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 14,
                             Code = "TT-VT",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 623, DateTimeKind.Local).AddTicks(959),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tủ trực VTYT",
                             SortOrder = 14
@@ -11279,7 +11626,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 15,
                             Code = "QLT",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 623, DateTimeKind.Local).AddTicks(961),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Quản lý thuốc",
                             SortOrder = 15
@@ -11288,103 +11635,11 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 16,
                             Code = "QLVT",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 623, DateTimeKind.Local).AddTicks(963),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Quản lý vật tư",
                             SortOrder = 16
                         });
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.ServiceRequest", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<Guid>("BranchId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CreatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsResultHight")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("IsResultLow")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Machine")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("MedicalRecordId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("ModifiedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("ModifiedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("OrderId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("OriginalPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<Guid?>("ParentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("Quantity")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("ResultDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ResultUnit")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ResultValue")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ServiceCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ServiceCodeBHYT")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("ServiceId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ServiceName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ServiceNameBHYT")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("TreatmentId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UnitCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("UnitId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("UnitName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("DServiceRequest", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Supplier", b =>
@@ -11526,7 +11781,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("faf04fde-6dc1-4d6a-b5d8-b9000bb4f6bd"),
                             Code = "1a",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 625, DateTimeKind.Local).AddTicks(69),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "1a: Chuyển người bệnh từ tuyến dưới lên tuyến trên liền kề",
                             SortOrder = 1
@@ -11535,7 +11790,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("b882e676-a760-4468-a687-600770326aac"),
                             Code = "1b",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 625, DateTimeKind.Local).AddTicks(107),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "1b: Chuyển người bệnh từ tuyến dưới lên tuyến trên không qua tuyến liền kề",
                             SortOrder = 2
@@ -11544,7 +11799,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("48cac582-b5f8-4f12-bb5b-5f35ca4fcac1"),
                             Code = "2",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 625, DateTimeKind.Local).AddTicks(111),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "2. Chuyển người bệnh từ tuyến trên về tuyến dưới",
                             SortOrder = 3
@@ -11553,7 +11808,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("32848bde-d01c-4d6b-b3a0-2104df2d801c"),
                             Code = "3",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 625, DateTimeKind.Local).AddTicks(114),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "3. Chuyển người bệnh giữa các cơ sở khám bệnh, chữa bệnh trong cùng tuyến",
                             SortOrder = 4
@@ -11607,7 +11862,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("d6fa811f-0ea0-4303-bb6c-6bdcb7d18970"),
                             Code = "4",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 626, DateTimeKind.Local).AddTicks(3634),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chuyển người bệnh đi các tuyến khi đủ điều kiện",
                             SortOrder = 1
@@ -11616,7 +11871,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("14f21e7e-54d2-40af-ab18-417468e1cadb"),
                             Code = "5",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 626, DateTimeKind.Local).AddTicks(3647),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chuyển theo yêu cầu của người bệnh hoặc đại diện hợp pháp của người bệnh",
                             SortOrder = 2
@@ -11677,7 +11932,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "CAPTOACHOVE",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 626, DateTimeKind.Local).AddTicks(5321),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsForInPatient = false,
                             IsForOutPatient = true,
@@ -11688,7 +11943,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "HEN",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 626, DateTimeKind.Local).AddTicks(5429),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = true,
@@ -11699,7 +11954,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 3,
                             Code = "CHUYEN_PHONGKHAM",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 626, DateTimeKind.Local).AddTicks(5433),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsForInPatient = false,
                             IsForOutPatient = true,
@@ -11710,7 +11965,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 4,
                             Code = "DTRI_NGOAITRU",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 626, DateTimeKind.Local).AddTicks(5437),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = true,
@@ -11721,7 +11976,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 5,
                             Code = "NHAPVIEN",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 626, DateTimeKind.Local).AddTicks(5440),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsForInPatient = false,
                             IsForOutPatient = true,
@@ -11732,7 +11987,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 6,
                             Code = "BOKHAM",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 626, DateTimeKind.Local).AddTicks(5444),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsForInPatient = false,
                             IsForOutPatient = true,
@@ -11743,7 +11998,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 7,
                             Code = "CHUYEN_KHOA",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 626, DateTimeKind.Local).AddTicks(5447),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = true,
@@ -11754,7 +12009,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 8,
                             Code = "RAVIEN",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 626, DateTimeKind.Local).AddTicks(5450),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = false,
@@ -11765,7 +12020,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 9,
                             Code = "XINVE",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 626, DateTimeKind.Local).AddTicks(5453),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = true,
@@ -11776,7 +12031,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 10,
                             Code = "DUAVE",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 626, DateTimeKind.Local).AddTicks(5456),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = true,
@@ -11787,7 +12042,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 11,
                             Code = "TRONVIEN",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 626, DateTimeKind.Local).AddTicks(5459),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = false,
@@ -11798,7 +12053,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 12,
                             Code = "CHUYEN_TUYEN",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 626, DateTimeKind.Local).AddTicks(5462),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = true,
@@ -11809,7 +12064,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 13,
                             Code = "TUVONG",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 626, DateTimeKind.Local).AddTicks(5465),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsForInPatient = true,
                             IsForOutPatient = true,
@@ -11820,7 +12075,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 99,
                             Code = "KHAC",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 626, DateTimeKind.Local).AddTicks(5468),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             IsForInPatient = false,
                             IsForOutPatient = false,
@@ -11877,7 +12132,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 1,
                             Code = "KHOI",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 626, DateTimeKind.Local).AddTicks(7079),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Khỏi",
                             SortOrder = 1
@@ -11886,7 +12141,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 2,
                             Code = "DO_GIAM",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 626, DateTimeKind.Local).AddTicks(7145),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Đỡ, giảm",
                             SortOrder = 2
@@ -11895,7 +12150,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 3,
                             Code = "KHONGTHAYDOI",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 626, DateTimeKind.Local).AddTicks(7149),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Không thay đổi",
                             SortOrder = 3
@@ -11904,7 +12159,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 4,
                             Code = "NANGHON",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 626, DateTimeKind.Local).AddTicks(7152),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Nặng hơn",
                             SortOrder = 4
@@ -11913,7 +12168,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 5,
                             Code = "TUVONG",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 626, DateTimeKind.Local).AddTicks(7155),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tử vong",
                             SortOrder = 5
@@ -11922,7 +12177,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = 99,
                             Code = "KHAC",
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 626, DateTimeKind.Local).AddTicks(7158),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Khác",
                             SortOrder = 6
@@ -11939,8 +12194,20 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<Guid?>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
+
+                    b.Property<Guid?>("ModifiedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("ModifiedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasMaxLength(500)
@@ -11961,6 +12228,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("c587599c-a6a6-454f-8e30-2a92dac6f588"),
                             Code = "VIEN",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Viên",
                             SortOrder = 1,
@@ -11970,6 +12238,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("6cc9258a-5f48-4c22-8cd6-61c0795f5405"),
                             Code = "LAN",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Lần",
                             SortOrder = 2,
@@ -11979,6 +12248,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("ae0ece26-bb4c-4b23-95cb-1a5d66114634"),
                             Code = "LO",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Lọ",
                             SortOrder = 3,
@@ -11988,6 +12258,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("da514a31-4dfc-4445-99bd-4ae29359ad48"),
                             Code = "TUYT",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tuýt",
                             SortOrder = 4,
@@ -11997,6 +12268,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("44ab6ffc-f1a9-47d0-90ab-9f09d767c286"),
                             Code = "ONG",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Ống",
                             SortOrder = 5,
@@ -12006,6 +12278,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("0762aebf-cbb8-4102-b923-a30df490f75d"),
                             Code = "6",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Hộp",
                             SortOrder = 6,
@@ -12015,6 +12288,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("7a0fed4a-e62a-4e9f-8e92-7332127ca248"),
                             Code = "TUB",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Tub",
                             SortOrder = 7,
@@ -12024,6 +12298,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9ff4f404-68bd-4780-99bc-1033227cbe3d"),
                             Code = "GOI",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Gói",
                             SortOrder = 8,
@@ -12033,6 +12308,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("2198d1c0-57fa-453f-b605-9cef55929067"),
                             Code = "CUON",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Cuộn",
                             SortOrder = 9,
@@ -12042,6 +12318,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("bf42cbf7-b5ac-4503-b73d-d91f4051fa8f"),
                             Code = "ML",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "ml",
                             SortOrder = 10,
@@ -12051,6 +12328,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("9e12370e-b3ce-4862-8e7d-83d8f7ec56d1"),
                             Code = "LIT",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Lít",
                             SortOrder = 11,
@@ -12060,6 +12338,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("3be8bc27-3940-451c-87f5-c062df716872"),
                             Code = "GAM",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Gam",
                             SortOrder = 12,
@@ -12069,6 +12348,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("cc8713c1-536a-4835-bd7e-187603566f95"),
                             Code = "KG",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Kg",
                             SortOrder = 13,
@@ -12078,6 +12358,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("49793db4-c0ce-43c1-b439-eacd554fa06e"),
                             Code = "MET",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Met",
                             SortOrder = 14,
@@ -12087,6 +12368,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("a7e37e54-47b8-4716-b493-b657d4981e35"),
                             Code = "MINI",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Minimet",
                             SortOrder = 15,
@@ -12096,6 +12378,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("fd96bad9-b254-4b37-8eb9-ada68fe7dada"),
                             Code = "CHAI",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chai",
                             SortOrder = 16,
@@ -12105,6 +12388,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("8d7a7b33-f2ed-4b4b-a869-3ad32fd9d192"),
                             Code = "TUI",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Túi",
                             SortOrder = 17,
@@ -12114,6 +12398,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e04b1f07-6f05-403e-ac09-b999cac0df3e"),
                             Code = "CAI",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Cái",
                             SortOrder = 18,
@@ -12123,6 +12408,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("e46826b4-76f9-4b32-84b3-b9730e732839"),
                             Code = "CHIEC",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chiếc",
                             SortOrder = 19,
@@ -12132,6 +12418,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("46ea45ff-ba5e-4f6f-bbc6-ebe65446efe8"),
                             Code = "GAM",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Gam",
                             SortOrder = 20,
@@ -12141,6 +12428,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("fc7acf3a-2c10-4200-9448-c3180c0a4400"),
                             Code = "MIENG",
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Miếng",
                             SortOrder = 21,
@@ -12237,7 +12525,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("3382be1c-2836-4246-99db-c4e1c781e868"),
                             AccessFailedCount = 0,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 634, DateTimeKind.Local).AddTicks(3864),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 455, DateTimeKind.Local).AddTicks(1054),
                             Email = "administrator@gmail.com",
                             FullName = "Admin",
                             Inactive = false,
@@ -12249,7 +12537,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("49ba7fd4-2edb-4482-a419-00c81f023f5c"),
                             AccessFailedCount = 0,
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 634, DateTimeKind.Local).AddTicks(4142),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 455, DateTimeKind.Local).AddTicks(1368),
                             Email = "administrator@gmail.com",
                             FullName = "ADMIN",
                             Inactive = false,
@@ -12352,7 +12640,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<Guid>("DistrictID")
+                    b.Property<Guid>("DistrictId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Inactive")
@@ -12380,7 +12668,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DistrictID");
+                    b.HasIndex("DistrictId");
 
                     b.ToTable("SWard");
 
@@ -12388,8 +12676,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("56c401ac-d00e-4bdf-ae5a-d2ff12b6a51d"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1131),
-                            DistrictID = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1025),
+                            DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDPX",
                             WardCode = "00001",
@@ -12398,8 +12686,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("56c401ac-d00e-4bdf-ae5a-d2ff12b6a52d"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1150),
-                            DistrictID = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1043),
+                            DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDTB",
                             WardCode = "00004",
@@ -12408,8 +12696,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("56c401ac-d00e-4bdf-ae5a-d2ff12b6a53d"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1155),
-                            DistrictID = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1047),
+                            DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDVP",
                             WardCode = "00006",
@@ -12418,8 +12706,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("56c401ac-d00e-4bdf-ae5a-d2ff12b6a54d"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1159),
-                            DistrictID = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1051),
+                            DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDCV",
                             WardCode = "00007",
@@ -12428,8 +12716,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("56c401ac-d00e-4bdf-ae5a-d2ff12b6a55d"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1162),
-                            DistrictID = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1054),
+                            DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDLG",
                             WardCode = "00008",
@@ -12438,8 +12726,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("56c401ac-d00e-4bdf-ae5a-d2ff12b6a56d"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1168),
-                            DistrictID = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1060),
+                            DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDNTT",
                             WardCode = "00010",
@@ -12448,8 +12736,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("56c401ac-d00e-4bdf-ae5a-d2ff12b6a57d"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1172),
-                            DistrictID = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1064),
+                            DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDQT",
                             WardCode = "00013",
@@ -12458,8 +12746,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("56c401ac-d00e-4bdf-ae5a-d2ff12b6a58d"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1176),
-                            DistrictID = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1068),
+                            DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDNH",
                             WardCode = "00016",
@@ -12468,8 +12756,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("c95d5e0e-7244-4f7f-bc1b-640eba36c54e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1179),
-                            DistrictID = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1071),
+                            DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDDB",
                             WardCode = "00019",
@@ -12478,8 +12766,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("d77c97d4-1e36-4c41-bd8f-f8e6209aeb0c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1183),
-                            DistrictID = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1076),
+                            DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDDC",
                             WardCode = "00022",
@@ -12488,8 +12776,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("e6b212d7-d687-4d63-82a5-18920238da18"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1187),
-                            DistrictID = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1080),
+                            DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDNK",
                             WardCode = "00025",
@@ -12498,8 +12786,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("f44abb45-6010-4b0e-a442-5dafbeb4f40c"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1190),
-                            DistrictID = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1083),
+                            DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDKM",
                             WardCode = "00028",
@@ -12508,8 +12796,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("910fa544-1584-4dfc-b450-4d230f0847a9"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1193),
-                            DistrictID = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1087),
+                            DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDGV",
                             WardCode = "00031",
@@ -12518,8 +12806,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("d0a93335-cd08-46e6-8cef-8de70d076ed0"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1196),
-                            DistrictID = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1090),
+                            DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDTC",
                             WardCode = "00034",
@@ -12528,8 +12816,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("8b10a136-54e8-464b-b6a8-3fb6028bee0e"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1199),
-                            DistrictID = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1093),
+                            DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKPT",
                             WardCode = "00037",
@@ -12538,8 +12826,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("4dd47dfb-9ca8-4ae6-b958-13edf873dc28"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1203),
-                            DistrictID = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1097),
+                            DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKDX",
                             WardCode = "00040",
@@ -12548,8 +12836,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("8a736b6f-0697-4486-9516-e30cc5c56b98"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1207),
-                            DistrictID = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1100),
+                            DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKHM",
                             WardCode = "00043",
@@ -12558,8 +12846,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("18f45f82-55c4-4809-97cf-65f779b926d1"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1211),
-                            DistrictID = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1105),
+                            DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKHB",
                             WardCode = "00046",
@@ -12568,8 +12856,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("18f45f82-55c4-4809-97cf-65f779b926d2"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1214),
-                            DistrictID = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1108),
+                            DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKHD",
                             WardCode = "00049",
@@ -12578,8 +12866,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("18f45f82-55c4-4809-97cf-65f779b926d3"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1218),
-                            DistrictID = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1111),
+                            DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKHB",
                             WardCode = "00052",
@@ -12588,8 +12876,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("18f45f82-55c4-4809-97cf-65f779b926d4"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1221),
-                            DistrictID = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1114),
+                            DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKCD",
                             WardCode = "00055",
@@ -12598,8 +12886,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("18f45f82-55c4-4809-97cf-65f779b926d5"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1224),
-                            DistrictID = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1118),
+                            DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKLTT",
                             WardCode = "00058",
@@ -12608,8 +12896,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("622ff091-9851-46e8-9716-c355c21d4369"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1237),
-                            DistrictID = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1121),
+                            DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKHB",
                             WardCode = "00061",
@@ -12618,8 +12906,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("7d55b7a9-b5ef-46e4-9a58-9b31e77108d8"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1240),
-                            DistrictID = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1124),
+                            DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKHG",
                             WardCode = "00064",
@@ -12628,8 +12916,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("b15d7c09-6930-43ce-bb4b-347740ed7096"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1243),
-                            DistrictID = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1128),
+                            DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKCG",
                             WardCode = "00067",
@@ -12638,8 +12926,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("8d55eb0d-5c0a-40d1-9684-409868c6f393"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1246),
-                            DistrictID = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1131),
+                            DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKHT",
                             WardCode = "00070",
@@ -12648,8 +12936,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("94ba5688-cf4d-454a-acc1-8fee10552375"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1250),
-                            DistrictID = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1134),
+                            DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKCN",
                             WardCode = "00073",
@@ -12658,8 +12946,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("26cd9859-9e70-4a42-9979-b7d9027c96fd"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1253),
-                            DistrictID = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1138),
+                            DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKHB",
                             WardCode = "00076",
@@ -12668,8 +12956,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("1594388c-53a1-4d34-81ab-40af3225936f"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1256),
-                            DistrictID = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1141),
+                            DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKTT",
                             WardCode = "00079",
@@ -12678,8 +12966,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("803d0bc0-278b-42e1-b1bc-623e09920f17"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1260),
-                            DistrictID = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1145),
+                            DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKTHD",
                             WardCode = "00082",
@@ -12688,8 +12976,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("eb2e1424-b66c-41ae-9c5c-57757eb1224b"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1263),
-                            DistrictID = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1148),
+                            DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKPCT",
                             WardCode = "00085",
@@ -12698,8 +12986,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("8dbd4edd-06ce-40a6-a791-16cf3922523a"),
-                            CreatedDate = new DateTime(2024, 7, 7, 21, 2, 42, 627, DateTimeKind.Local).AddTicks(1266),
-                            DistrictID = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
+                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1151),
+                            DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKHB",
                             WardCode = "00088",
@@ -13171,17 +13459,17 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Items.ItemPricePolicy", b =>
                 {
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Item", "Item")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Item", "ItemFK")
                         .WithMany()
                         .HasForeignKey("ItemId");
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.PatientObjectType", "PatientType")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.PatientObjectType", "PatientTypeFK")
                         .WithMany()
                         .HasForeignKey("PatientTypeId");
 
-                    b.Navigation("Item");
+                    b.Navigation("ItemFK");
 
-                    b.Navigation("PatientType");
+                    b.Navigation("PatientTypeFK");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Service", b =>
@@ -13275,7 +13563,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Province", "ProvinceFk")
                         .WithMany()
-                        .HasForeignKey("ProvinceID")
+                        .HasForeignKey("ProvinceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -13525,7 +13813,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.District", "DistrictFk")
                         .WithMany()
-                        .HasForeignKey("DistrictID")
+                        .HasForeignKey("DistrictId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

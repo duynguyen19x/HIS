@@ -17,9 +17,9 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
             builder.Property(x => x.Description).HasMaxLength(255);
 
             builder.HasData(
-                new MedicalRecordTypeGroup((int)MedicalRecordTypeGroups.DTRI_NOITRU, "Nội trú", 1),
-                new MedicalRecordTypeGroup((int)MedicalRecordTypeGroups.DTRI_NGOAITRU, "Ngoại trú", 2),
-                new MedicalRecordTypeGroup((int)MedicalRecordTypeGroups.KHAMBENH, "Khám bệnh", 3)
+                new MedicalRecordTypeGroup(new DateTime(2024, 1, 1), (int)MedicalRecordTypeGroups.DTRI_NOITRU, "Nội trú", 1),
+                new MedicalRecordTypeGroup(new DateTime(2024, 1, 1), (int)MedicalRecordTypeGroups.DTRI_NGOAITRU, "Ngoại trú", 2),
+                new MedicalRecordTypeGroup(new DateTime(2024, 1, 1), (int)MedicalRecordTypeGroups.KHAMBENH, "Khám bệnh", 3)
                 );
         }
     }

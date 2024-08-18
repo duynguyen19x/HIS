@@ -21,5 +21,14 @@ namespace HIS.EntityFrameworkCore.Entities
             this.MedicalRecordTypeGroupName = name;
             this.SortOrder = order;
         }
+
+        public MedicalRecordTypeGroup(DateTime createTime,  int id, string name, int order)
+        {
+            this.CreatedDate = createTime;
+            this.Id = id;
+            this.MedicalRecordTypeGroupCode = id.ToString();
+            this.MedicalRecordTypeGroupName = name;
+            this.SortOrder = order;
+        }
     }
 }
