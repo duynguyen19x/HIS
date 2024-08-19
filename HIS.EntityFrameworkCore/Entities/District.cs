@@ -23,9 +23,9 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public bool Inactive { get; set; }
 
-        public Guid ProvinceID { get; set; }
+        public Guid ProvinceId { get; set; }
 
-        [ForeignKey(nameof(ProvinceID))]
+        [ForeignKey(nameof(ProvinceId))]
         public virtual Province ProvinceFk { get; set; }
 
         public District() { }

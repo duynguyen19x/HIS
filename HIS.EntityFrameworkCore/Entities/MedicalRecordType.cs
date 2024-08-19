@@ -24,13 +24,14 @@ namespace HIS.EntityFrameworkCore.Entities
         public virtual MedicalRecordTypeGroup MedicalRecordTypeGroup { get; set; }
 
         public MedicalRecordType() { }
-        public MedicalRecordType(int id, string name, int groupType, int order)
+        public MedicalRecordType(int id, string name, int groupType, int order, DateTime? createTime = null)
         {
             this.Id = id;
             this.MedicalRecordTypeCode = id.ToString();
             this.MedicalRecordTypeName = name;
             this.MedicalRecordTypeGroupId = groupType;
             this.SortOrder = order;
+            this.CreatedDate = createTime;
         }
     }
 }

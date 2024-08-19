@@ -1,9 +1,10 @@
 ﻿using HIS.Core.Domain.Entities;
+using HIS.Core.Domain.Entities.Auditing;
 using System.ComponentModel;
 
 namespace HIS.EntityFrameworkCore.Entities.Categories
 {
-    public class ItemLine : Entity<Guid>
+    public class ItemLine : AuditedEntity<Guid>
     {
         [Description("Mã đường dùng thuốc")]
         public string Code { get; set; }

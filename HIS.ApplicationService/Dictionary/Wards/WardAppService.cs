@@ -34,15 +34,15 @@ namespace HIS.ApplicationService.Dictionaries.Wards
                     .WhereIf(!string.IsNullOrEmpty(input.CodeFilter), x => x.WardCode == input.CodeFilter)
                     .WhereIf(!string.IsNullOrEmpty(input.NameFilter), x => x.WardName == input.NameFilter)
                     .WhereIf(!string.IsNullOrEmpty(input.SearchCodeFilter), x => x.SearchCode == input.SearchCodeFilter)
-                    .WhereIf(input.DistrictFilter != null, x => x.DistrictID == input.DistrictFilter)
+                    .WhereIf(input.DistrictFilter != null, x => x.DistrictId == input.DistrictFilter)
                     .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
 
 
                 filter = filter.ApplySortingAndPaging(input);
 
                 var paged = from o in filter
-                            join o1 in _districtRepository.GetAll() on o.DistrictID equals o1.Id
-                            join o2 in _provinceRepository.GetAll() on o1.ProvinceID equals o2.Id
+                            join o1 in _districtRepository.GetAll() on o.DistrictId equals o1.Id
+                            join o2 in _provinceRepository.GetAll() on o1.ProvinceId equals o2.Id
                             select new WardDto()
                             {
                                 Id = o.Id,

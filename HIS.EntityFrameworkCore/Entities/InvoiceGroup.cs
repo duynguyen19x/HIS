@@ -1,4 +1,5 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
+using HIS.EntityFrameworkCore.Constants;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -38,20 +39,22 @@ namespace HIS.EntityFrameworkCore.Entities
         /// <summary>
         /// Mẫu số hóa đơn
         /// </summary>
+        [MaxLength(EntityConst.Length256)]
         public virtual string InvTemplateNo { get; set; }
 
         /// <summary>
         /// Ký hiệu hóa đơn
         /// </summary>
+        [MaxLength(EntityConst.Length256)]
         public virtual string InvSeries { get; set; }
 
         /// <summary>
         /// Danh sách loại phiếu thu, chi được phép sử dụng sổ.
         /// </summary>
-        [MaxLength(255)]
+        [MaxLength(EntityConst.Length256)]
         public virtual string InvoiceTypeList { get; set; }
 
-        [MaxLength(255)]
+        [MaxLength(EntityConst.Length512)]
         public virtual string Description { get; set; }
 
         public virtual int SortOrder { get; set; }

@@ -1,4 +1,5 @@
 ﻿using HIS.Core.Domain.Entities;
+using HIS.Core.Domain.Entities.Auditing;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// Dân tộc.
     /// </summary>
     [Table("SEthnicity")]
-    public class Ethnicity : Entity<Guid>
+    public class Ethnicity : AuditedEntity<Guid>
     {
         /// <summary>
         /// Mã dân tộc
@@ -31,20 +32,21 @@ namespace HIS.EntityFrameworkCore.Entities
         public virtual string MediCode { get; set; }
 
         [MaxLength(255)]
-        public virtual string Description { get; set; } 
+        public virtual string Description { get; set; }
 
-        public virtual int SortOrder { get; set; } 
+        public virtual int SortOrder { get; set; }
 
-        public virtual bool Inactive { get; set; } 
+        public virtual bool Inactive { get; set; }
 
         public Ethnicity() { }
-        public Ethnicity(Guid id, string code, string mohCode, string name, int sortOrder)
+        public Ethnicity(Guid id, string code, string mohCode, string name, int sortOrder, DateTime? createTime = null)
         {
             this.Id = id;
             this.Code = code;
             this.Name = name;
             this.MediCode = mohCode;
             this.SortOrder = sortOrder;
+            this.CreatedDate = createTime;
         }
     }
 }

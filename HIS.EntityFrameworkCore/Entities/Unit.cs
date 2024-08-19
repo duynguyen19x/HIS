@@ -1,4 +1,5 @@
 ﻿using HIS.Core.Domain.Entities;
+using HIS.Core.Domain.Entities.Auditing;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using System.ComponentModel;
 
@@ -7,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Đơn vị tính
     /// </summary>
-    public class Unit : Entity<Guid>
+    public class Unit : AuditedEntity<Guid>
     {
         [Description("Mã ĐVT")]
         public string Code { get; set; }

@@ -30,7 +30,7 @@ namespace HIS.ApplicationService.Business.Testings
             IRepository<ServiceRequestData, Guid> serviceRequestDataRepository,
             IRepository<ServiceResultData, Guid> serviceResultDataRepository,
             IRepository<ServiceResultIndice, Guid> serviceResultIndiceRepository,
-            IRepository<Service, Guid> serviceRepository) 
+            IRepository<Service, Guid> serviceRepository)
         {
             _serviceRequestRepository = serviceRequestRepository;
             _serviceRequestViewRepository = serviceRequestViewRepository;
@@ -50,14 +50,14 @@ namespace HIS.ApplicationService.Business.Testings
                     .WhereIf(input.StatusFilter != null, w => w.Status == input.StatusFilter)
                     .WhereIf(!GuidHelper.IsNullOrEmpty(input.ExecuteRoomIdFilter), w => w.ExecuteRoomId == input.ExecuteRoomIdFilter)
                     .WhereIf(!GuidHelper.IsNullOrEmpty(input.ExecuteDepartmentIdFilter), w => w.ExecuteDepartmentId == input.ExecuteDepartmentIdFilter)
-                    .WhereIf(input.RequestTimeFromFilter != null && input.RequestTimeFromFilter > 0, w => w.RequestTime >= input.RequestTimeFromFilter)
-                    .WhereIf(input.RequestTimeToFilter != null && input.RequestTimeToFilter > 0, w => w.RequestTime <= input.RequestTimeToFilter)
-                    .WhereIf(input.UseTimeFromFilter != null && input.UseTimeFromFilter > 0, w => w.UseTime >= input.UseTimeFromFilter)
-                    .WhereIf(input.UseTimeToFilter != null && input.UseTimeToFilter > 0, w => w.UseTime <= input.UseTimeToFilter)
-                    .WhereIf(input.StartTimeFromFilter != null && input.StartTimeFromFilter > 0, w => w.StartTime >= input.StartTimeFromFilter)
-                    .WhereIf(input.StartTimeToFilter != null && input.StartTimeToFilter > 0, w => w.StartTime <= input.StartTimeToFilter)
-                    .WhereIf(input.EndTimeFromFilter != null && input.EndTimeFromFilter > 0, w => w.EndTime >= input.EndTimeFromFilter)
-                    .WhereIf(input.EndTimeToFilter != null && input.EndTimeToFilter > 0, w => w.EndTime <= input.EndTimeToFilter)
+                    .WhereIf(Check.IsNotNullAndDefault(input.RequestTimeFromFilter), w => w.RequestTime >= input.RequestTimeFromFilter)
+                    .WhereIf(Check.IsNotNullAndDefault(input.RequestTimeToFilter), w => w.RequestTime <= input.RequestTimeToFilter)
+                    .WhereIf(Check.IsNotNullAndDefault(input.UseTimeFromFilter), w => w.UseTime >= input.UseTimeFromFilter)
+                    .WhereIf(Check.IsNotNullAndDefault(input.UseTimeToFilter), w => w.UseTime <= input.UseTimeToFilter)
+                    .WhereIf(Check.IsNotNullAndDefault(input.StartTimeFromFilter), w => w.StartTime >= input.StartTimeFromFilter)
+                    .WhereIf(Check.IsNotNullAndDefault(input.StartTimeToFilter), w => w.StartTime <= input.StartTimeToFilter)
+                    .WhereIf(Check.IsNotNullAndDefault(input.EndTimeFromFilter), w => w.EndTime >= input.EndTimeFromFilter)
+                    .WhereIf(Check.IsNotNullAndDefault(input.EndTimeToFilter), w => w.EndTime <= input.EndTimeToFilter)
                     .OrderBy(o => o.Status).ThenBy(t => t.UseTime).ToList();
 
                 pagedResults.Result = ObjectMapper.Map<List<ServiceRequestDto>>(serviceRequests);

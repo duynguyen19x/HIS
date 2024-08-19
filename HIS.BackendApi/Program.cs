@@ -62,7 +62,7 @@ void ConfigureService()
             ValidAudience = issuer,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ClockSkew = System.TimeSpan.Zero,
+            ClockSkew = TimeSpan.Zero,
             IssuerSigningKey = new SymmetricSecurityKey(signingKeyBytes)
         };
     });
@@ -105,7 +105,6 @@ void ConfigureService()
         });
     });
 
-
     builder.Services.AddDynamicWebApi();
 }
 
@@ -125,4 +124,5 @@ void Configure()
     app.MapControllers();
     //app.UseRouting();
     app.UseMiddleware<SessionMiddleware>();
+    app.UseMiddleware<UtcToLocalDateTimeMiddleware>();
 }

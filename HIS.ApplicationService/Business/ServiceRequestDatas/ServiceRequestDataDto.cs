@@ -5,9 +5,9 @@ namespace HIS.Dtos.Business.ServiceRequestDatas
 {
     public class ServiceRequestDataDto : EntityDto<Guid>
     {
-        public Guid ServiceRequestId { get; set; } // phiếu chỉ định
+        public Guid? ServiceRequestId { get; set; } // phiếu chỉ định
         public Guid? InsuranceId { get; set; } // bảo hiểm
-        public Guid ServiceId { get; set; } // dịch vụ
+        public Guid? ServiceId { get; set; } // dịch vụ
         public long StartTime { get; set; }
         public long EndTime { get; set; }
         public decimal Price { get; set; } // đơn giá

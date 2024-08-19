@@ -26,9 +26,9 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public bool Inactive { get; set; } // khóa
 
-        public Guid DistrictID { get; set; }
+        public Guid DistrictId { get; set; }
 
-        [ForeignKey(nameof(DistrictID))]
+        [ForeignKey(nameof(DistrictId))]
         public virtual District DistrictFk { get; set; }
     }
 }

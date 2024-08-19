@@ -1,4 +1,5 @@
 ﻿using HIS.Core.Domain.Entities;
+using HIS.Core.Domain.Entities.Auditing;
 using HIS.EntityFrameworkCore.Constants;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,7 +10,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// Loại phiếu
     /// </summary>
     [Table("SOrderType")]
-    public class OrderType : Entity<int>
+    public class OrderType : AuditedEntity<int>
     {
         [Required]
         [StringLength(OrderTypeConst.MaxOrderTypeCodeLength, MinimumLength = OrderTypeConst.MinOrderTypeCodeLength)]
@@ -28,11 +29,12 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public OrderType() { }
 
-        public OrderType(int id, string code, string name)
+        public OrderType(int id, string code, string name, DateTime? createTime = null)
         {
             Id = id;
             OrderTypeCode = code;
             OrderTypeName = name;
+            CreatedDate = createTime;
         }
     }
 }
