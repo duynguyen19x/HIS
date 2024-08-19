@@ -7,12 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\HIS.EntityFrameworkCore\HIS.EntityFrameworkCore.csproj" />
+    <Compile Remove="Dictionary\**" />
+    <Compile Remove="System\**" />
+    <EmbeddedResource Remove="Dictionary\**" />
+    <EmbeddedResource Remove="System\**" />
+    <None Remove="Dictionary\**" />
+    <None Remove="System\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Dictionary\" />
-    <Folder Include="System\" />
+    <ProjectReference Include="..\HIS.EntityFrameworkCore\HIS.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
 </Project>
