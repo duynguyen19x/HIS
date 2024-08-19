@@ -126,7 +126,7 @@ namespace HIS.EntityFrameworkCore
             builder.ApplyConfiguration();
 
             // Add View
-            builder.Entity<ServiceRequestView>().ToView("V_BUS_ServiceRequest");
+            builder.Entity<ServiceRequestView>().ToView("V_DServiceRequest");
         }
 
 

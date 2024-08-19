@@ -59,9 +59,9 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 
             try
             {
-                DateTime fromDateTime = DateTime.ParseExact(fromDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None);
+                DateTime fromDateTime = DateTime.ParseExact(fromDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None).ToLocalTime();
                 DateTime toDateTime = DateTime.ParseExact(toDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None);
-                fromDateTime = fromDateTime.ToLocalTime();
+
                 result.Result = (from inOutStock in _inOutStockRepository.GetAll() //Context.InOutStocks
 
                                  join imStock in _roomRepository.GetAll() on inOutStock.ImpStockId equals imStock.Id into imStockDefaults
