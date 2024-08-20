@@ -12,6 +12,8 @@ using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using System.Transactions;
+using Azure;
+using HIS.ApplicationService.Business.MedicalRecords.Dto;
 
 namespace HIS.ApplicationService.Business.Testings
 {

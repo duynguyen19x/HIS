@@ -19,7 +19,7 @@ namespace HIS.BackendApi.Controllers.Business.Pharmaceuticals
 
         [HttpGet("GetByStocks")]
         [Authorize]
-        public async Task<ListResultDto<InOutStockDto>> GetByStocks(Guid stockId, string fromDate, string toDate)
+        public async Task<ListResultDto<InOutStockDto>> GetByStocks(Guid stockId, DateTime fromDate, DateTime toDate)
         {
             return await _inOutStockService.GetByStocks(stockId, fromDate, toDate);
         }

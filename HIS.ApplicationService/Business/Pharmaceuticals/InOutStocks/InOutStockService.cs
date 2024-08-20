@@ -53,16 +53,13 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
             _roomRepository = roomRepository;
         }
 
-        public async Task<PagedResultDto<InOutStockDto>> GetByStocks(Guid stockId, string fromDate, string toDate)
+        public async Task<PagedResultDto<InOutStockDto>> GetByStocks(Guid stockId, DateTime fromDate, DateTime toDate)
         {
             var result = new PagedResultDto<InOutStockDto>();
 
             try
             {
-                DateTime fromDateTime = DateTime.ParseExact(fromDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None).ToLocalTime();
-                DateTime toDateTime = DateTime.ParseExact(toDate, "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None);
-
-                result.Result = (from inOutStock in _inOutStockRepository.GetAll() //Context.InOutStocks
+                result.Result = (from inOutStock in _inOutStockRepository.GetAll() 
 
                                  join imStock in _roomRepository.GetAll() on inOutStock.ImpStockId equals imStock.Id into imStockDefaults
                                  from imStockDefault in imStockDefaults.DefaultIfEmpty()
@@ -107,8 +104,8 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
                                      StockExpUserId = inOutStock.StockExpUserId,
                                      CommodityType = inOutStock.CommodityType,
                                  })
-                                 .WhereIf(fromDateTime != (DateTime)default, w => w.ReqTime >= fromDateTime)
-                                 .WhereIf(toDateTime != (DateTime)default, w => w.ReqTime <= toDateTime)
+                                 .WhereIf(fromDate != (DateTime)default, w => w.ReqTime >= fromDate)
+                                 .WhereIf(toDate != (DateTime)default, w => w.ReqTime <= toDate)
                                  .WhereIf(!GuidHelper.IsNullOrEmpty(stockId), w => w.ImpStockId == stockId || w.ExpStockId == stockId)
                                  .ToList();
             }

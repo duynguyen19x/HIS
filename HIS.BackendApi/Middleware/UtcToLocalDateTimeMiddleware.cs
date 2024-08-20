@@ -6,11 +6,11 @@ using System.Globalization;
 namespace HIS.BackendApi.Middleware
 {
 
-    public class UtcToLocalDateTimeMiddleware
+    public class UrlDateTimeConverter
     {
         private readonly RequestDelegate _next;
 
-        public UtcToLocalDateTimeMiddleware(RequestDelegate next)
+        public UrlDateTimeConverter(RequestDelegate next)
         {
             _next = next;
         }
@@ -36,6 +36,21 @@ namespace HIS.BackendApi.Middleware
             context.Request.QueryString = new QueryString(newQueryString);
 
             await _next(context);
+        }
+    }
+
+    public class BodyDateTimeConverter : JsonConverter<DateTime>
+    {
+        private const string DateTimeFormat = "yyyy-MM-dd HH:mm:ss";//"yyyy-MM-ddTHH:mm:ss.fffK";
+
+        public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            return DateTime.Parse(reader.GetString()).ToLocalTime();
+        }
+
+        public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
+        {
+            writer.WriteStringValue(value.ToLocalTime().ToString(DateTimeFormat));
         }
     }
 }

@@ -4,6 +4,7 @@ using HIS.ApplicationService.Dictionary.Rooms.Dto;
 using HIS.Core.Application.Services.Dto;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json.Serialization;
 
 namespace HIS.BackendApi.Controllers.Dictionary
 {
@@ -21,7 +22,7 @@ namespace HIS.BackendApi.Controllers.Dictionary
         [HttpGet("GetAll")]
         public async Task<PagedResultDto<RightRouteTypeDto>> GetAll([FromQuery] GetAllRightRouteTypeInputDto input)
         {
-            return await _rightRouteTypeAppService.GetAll(input);
+            return await _rightRouteTypeAppService.GetAll(input); 
         }
     }
 }

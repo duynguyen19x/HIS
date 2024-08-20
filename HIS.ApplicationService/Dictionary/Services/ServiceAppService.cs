@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Transactions;
 using HIS.ApplicationService.Dictionary.ServicePricePolicies.Dto;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Text.Json.Serialization;
 
 namespace HIS.ApplicationService.Dictionary.Services
 {
@@ -224,17 +225,12 @@ namespace HIS.ApplicationService.Dictionary.Services
                     var timeNow = DateTime.Now;
                     input.Id = Guid.NewGuid();
 
-                    var data = ObjectMapper.Map<EntityFrameworkCore.Entities.Categories.Service>(input);
+                    var data = ObjectMapper.Map<Service>(input);
                     data.CreatedDate = timeNow;
                     await _serviceRepository.InsertAsync(data);
 
                     if (input.SServicePricePolicies != null)
                     {
-                        //foreach (var sServicePricePolicy in input.SServicePricePolicies)
-                        //{
-                        //    sServicePricePolicy.ExecutionTime = string.IsNullOrEmpty(sServicePricePolicy.ExecutionTimeString) ? null : DateTime.ParseExact(sServicePricePolicy.ExecutionTimeString, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None);
-                        //}
-
                         var sServicePricePolicys = ObjectMapper.Map<List<ServicePricePolicy>>(input.SServicePricePolicies);
                         foreach (var sServicePricePolicy in sServicePricePolicys)
                         {
@@ -244,7 +240,6 @@ namespace HIS.ApplicationService.Dictionary.Services
                         }
 
                         await _servicePricePolicyRepository.BulkInsertAsync(sServicePricePolicys);
-                        //Context.ServicePricePolicies.AddRange(sServicePricePolicys);
                     }
 
                     if (!GuidHelper.IsNullOrEmpty(input.ServiceGroupHeInId))
@@ -263,7 +258,6 @@ namespace HIS.ApplicationService.Dictionary.Services
                             }
 
                             await _executionRoomRepository.BulkInsertAsync(executionRooms);
-                            //Context.ExecutionRooms.AddRange(executionRooms);
                         }
                     }
 
@@ -279,7 +273,6 @@ namespace HIS.ApplicationService.Dictionary.Services
                         }
 
                         await _serviceResultIndiceRepository.BulkInsertAsync(serviceResultIndices);
-                        //Context.ServiceResultIndices.AddRange(serviceResultIndices);
                     }
 
                     await unitOfWork.CompleteAsync();

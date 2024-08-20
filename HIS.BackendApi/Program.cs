@@ -1,4 +1,4 @@
-using HIS.ApplicationService;
+﻿using HIS.ApplicationService;
 using HIS.BackendApi.Middleware;
 using HIS.Core.Authorization;
 using HIS.Core.Domain.Repositories;
@@ -12,9 +12,15 @@ using HIS.EntityFrameworkCore.Authorization;
 using HIS.EntityFrameworkCore.EntityFrameworkCore.Repositories;
 using HIS.EntityFrameworkCore.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Globalization;
+using System.Text.Json.Serialization;
+using System.Text.Json;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Primitives;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigureService();
@@ -41,6 +47,13 @@ void ConfigureService()
     builder.Services.AddSingleton(typeof(IAppSession), typeof(AppSession));
     builder.Services.AddSingleton(typeof(IPermissionChecker), typeof(PermissionChecker));
     builder.Services.AddService();
+
+    builder.Services.AddControllers().AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new BodyDateTimeConverter()); // Thêm DateTimeConverter
+        options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+        options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+    });
 
     string issuer = builder.Configuration.GetValue<string>("Tokens:Issuer");
     string signingKey = builder.Configuration.GetValue<string>("Tokens:Key");
@@ -124,5 +137,5 @@ void Configure()
     app.MapControllers();
     //app.UseRouting();
     app.UseMiddleware<SessionMiddleware>();
-    app.UseMiddleware<UtcToLocalDateTimeMiddleware>();
+    app.UseMiddleware<UrlDateTimeConverter>();
 }
