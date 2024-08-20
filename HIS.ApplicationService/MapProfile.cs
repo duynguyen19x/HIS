@@ -163,6 +163,7 @@ namespace HIS.ApplicationService
             CreateMap<PatientRecord, PatientRecordDto>().ReverseMap();
 
             CreateMap<ServiceRequestDto, ServiceRequestView>().ReverseMap();
+            CreateMap<ServiceRequestView, ServiceRequestDto>().ReverseMap();
 
             #endregion
 

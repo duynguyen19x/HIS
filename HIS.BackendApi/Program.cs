@@ -21,6 +21,7 @@ using System.Text.Json.Serialization;
 using System.Text.Json;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Primitives;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigureService();
@@ -35,6 +36,12 @@ void ConfigureService()
     {
         builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
     }));
+
+    //var mappingConfig = new MapperConfiguration(mc =>
+    //{
+    //    mc.AddProfile(new MapProfile());
+    //});
+    //mappingConfig.CreateMapper();
 
     builder.Services.AddAutoMapper(typeof(MapProfile));
     builder.Services.AddScoped(typeof(IDbContextProvider<>), typeof(EfCoreDbContextProvider<>));
