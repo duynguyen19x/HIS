@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business
 {
-    public class ServiceResultDataConfiguration : IEntityTypeConfiguration<ServiceResultData>
+    public class ServiceRequestDetailResultConfiguration : IEntityTypeConfiguration<ServiceRequestDetailResult>
     {
-        public void Configure(EntityTypeBuilder<ServiceResultData> builder)
+        public void Configure(EntityTypeBuilder<ServiceRequestDetailResult> builder)
         {
-            builder.ToTable("DServiceResultData");
+            builder.ToTable("DServiceRequestDetailResults");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Result).HasMaxLength(128);

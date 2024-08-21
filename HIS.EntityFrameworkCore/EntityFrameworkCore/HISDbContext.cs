@@ -105,8 +105,8 @@ namespace HIS.EntityFrameworkCore
         public DbSet<PatientRecord> PatientRecord { get; set; }
         
         public DbSet<Entities.Business.ServiceRequest> ServiceRequests { get; set; }
-        public DbSet<ServiceRequestData> ServiceRequestDatas { get; set; }
-        public DbSet<ServiceResultData> ServiceResultDatas { get; set; }
+        public DbSet<ServiceRequestDetail> ServiceRequestDatas { get; set; }
+        public DbSet<ServiceRequestDetailResult> ServiceResultDatas { get; set; }
 
         public DbSet<InOutStockType> InOutStockTypes { get; set; }
         public DbSet<ItemStock> ItemStocks { get; set; }

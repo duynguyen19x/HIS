@@ -13,7 +13,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Thông tin bảo hiểm
     /// </summary>
-    [Table("DInsurance")]
+    [Table("DInsurances")]
     public class Insurance : AuditedEntity<Guid>
     {
         public Guid MedicalRecordId { get; set; }

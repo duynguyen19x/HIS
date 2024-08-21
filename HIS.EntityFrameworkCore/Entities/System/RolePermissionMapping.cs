@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Vai trò và quyền hạn.
     /// </summary>
-    [Table("SRolePermissionMapping")]
+    [Table("SRolePermissionMappings")]
     public class RolePermissionMapping : Entity<Guid>
     {
         public Guid RoleId { get; set; }

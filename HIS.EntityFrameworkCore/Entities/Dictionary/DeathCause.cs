@@ -7,7 +7,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Nguyên nhân tử vong.
     /// </summary>
-    [Table("SDeathCause")]
+    [Table("SDeathCauses")]
     public class DeathCause : AuditedEntity<Guid>
     {
         [Required]

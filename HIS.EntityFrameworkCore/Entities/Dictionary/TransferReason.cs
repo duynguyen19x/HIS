@@ -12,7 +12,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Lý do chuyển viện.
     /// </summary>
-    [Table("STransferReason")]
+    [Table("STransferReasons")]
     public class TransferReason : AuditedEntity<Guid>
     {
         [MaxLength(50)]

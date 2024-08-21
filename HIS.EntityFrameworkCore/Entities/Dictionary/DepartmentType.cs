@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Loại khoa.
     /// </summary>
-    [Table("SDepartmentType")]
+    [Table("SDepartmentTypes")]
     public class DepartmentType : AuditedEntity<int>
     {
         [Required]

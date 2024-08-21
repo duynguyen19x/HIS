@@ -13,7 +13,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Phiếu chỉ định dịch vụ
     /// </summary>
-    [Table("DOrder")]
+    [Table("DOrders")]
     public class Order : AuditedEntity<Guid>
     {
         [StringLength(EntityConst.Length50)]

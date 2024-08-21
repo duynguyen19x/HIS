@@ -7,7 +7,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Sổ giấy báo tử.
     /// </summary>
-    [Table("SDeathCertBook")]
+    [Table("SDeathCertBooks")]
     public class DeathCertBook : AuditedEntity<Guid>
     {
         /// <summary>

@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Tỉnh, thành phố.
     /// </summary>
-    [Table("SProvince")]
+    [Table("SProvinces")]
     public class Province : AuditedEntity<Guid>
     {
         [Required]

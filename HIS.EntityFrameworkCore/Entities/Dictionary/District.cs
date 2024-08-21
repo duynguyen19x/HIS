@@ -7,7 +7,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Quận, huyện
     /// </summary>
-    [Table("SDistrict")]
+    [Table("SDistricts")]
     public class District : AuditedEntity<Guid>
     {
         [Required]

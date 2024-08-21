@@ -7,7 +7,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Vai trò.
     /// </summary>
-    [Table("SRole")]
+    [Table("SRoles")]
     public class Role : AuditedEntity<Guid>
     {
         [Required]

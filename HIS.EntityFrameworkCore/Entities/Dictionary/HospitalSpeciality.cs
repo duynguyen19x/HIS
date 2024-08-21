@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Chuyên khoa
     /// </summary>
-    [Table("SHospitalSpeciality")]
+    [Table("SHospitalSpecialities")]
     public class HospitalSpeciality : AuditedEntity<Guid>
     {
         [Required]

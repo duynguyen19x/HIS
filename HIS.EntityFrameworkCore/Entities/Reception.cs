@@ -11,7 +11,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Thông tin tiếp đón.
     /// </summary>
-    [Table("DReception")]
+    [Table("DReceptions")]
     public class Reception : AuditedEntity<Guid>
     {
         public Guid MedicalRecordId { get; set; }

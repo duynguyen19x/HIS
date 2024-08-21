@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<BloodType> builder)
         {
-            builder.ToTable("SBloodType");
+            builder.ToTable("SBloodTypes");
 
             builder.Property(x => x.BloodTypeCode).HasMaxLength(BloodTypeConst.BloodTypeCodeLength).IsRequired();
             builder.Property(x => x.BloodTypeName).HasMaxLength(BloodTypeConst.BloodTypeNameLength).IsRequired();

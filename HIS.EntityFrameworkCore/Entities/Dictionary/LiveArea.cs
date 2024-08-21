@@ -12,7 +12,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Nơi sống (khu vực: I, II, III)
     /// </summary>
-    [Table("SLiveArea")]
+    [Table("SLiveAreas")]
     public class LiveArea : AuditedEntity<Guid>
     {
         [MaxLength(50)]

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HIS.EntityFrameworkCore.Entities
 {
-    [Table("SUserToken")]
+    [Table("SUserTokens")]
     public class UserToken : Entity<Guid>
     {
         public Guid? UserId { get; set; }

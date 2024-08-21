@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
     {
         public void Configure(EntityTypeBuilder<Patient> builder)
         {
-            builder.ToTable("DPatient");
+            builder.ToTable("DPatients");
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.PatientCode).IsRequired().HasMaxLength(PatientConst.PatientCodeLength);

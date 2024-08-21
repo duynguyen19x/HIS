@@ -73,7 +73,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("BranchId");
 
-                    b.ToTable("SBirthCertBook");
+                    b.ToTable("SBirthCertBooks");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.BloodRhType", b =>
@@ -116,7 +116,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SBloodRhType", (string)null);
+                    b.ToTable("SBloodRhTypes", (string)null);
 
                     b.HasData(
                         new
@@ -179,7 +179,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SBloodType", (string)null);
+                    b.ToTable("SBloodTypes", (string)null);
 
                     b.HasData(
                         new
@@ -321,7 +321,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("WardID");
 
-                    b.ToTable("SBranch");
+                    b.ToTable("SBranchs");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.InOutStock", b =>
@@ -460,7 +460,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("DInOutStock", (string)null);
+                    b.ToTable("DInOutStocks", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.InOutStockItem", b =>
@@ -504,7 +504,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("ItemTypeId");
 
-                    b.ToTable("DInOutStockItem", (string)null);
+                    b.ToTable("DInOutStockItems", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.InOutStockType", b =>
@@ -540,7 +540,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DInOutStockType", (string)null);
+                    b.ToTable("DInOutStockTypes", (string)null);
 
                     b.HasData(
                         new
@@ -744,7 +744,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("StockId");
 
-                    b.ToTable("DItemStock", (string)null);
+                    b.ToTable("DItemStocks", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.PatientRecord", b =>
@@ -986,7 +986,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("WardId");
 
-                    b.ToTable("DPatientRecord");
+                    b.ToTable("DPatientRecords");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.ServiceRequest", b =>
@@ -1014,8 +1014,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("DepartmentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<long>("EndTime")
-                        .HasColumnType("bigint");
+                    b.Property<DateTime?>("EndTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid?>("EndUserId")
                         .HasColumnType("uniqueidentifier");
@@ -1063,8 +1063,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("PatientRecordId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<long>("RequestTime")
-                        .HasColumnType("bigint");
+                    b.Property<DateTime?>("RequestTime")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid?>("RoomId")
                         .HasColumnType("uniqueidentifier");
@@ -1077,8 +1078,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<int>("ServiceRequestTypeId")
                         .HasColumnType("int");
 
-                    b.Property<long>("StartTime")
-                        .HasColumnType("bigint");
+                    b.Property<DateTime?>("StartTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid?>("StartUserId")
                         .HasColumnType("uniqueidentifier");
@@ -1089,8 +1090,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("TreatmentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<long>("UseTime")
-                        .HasColumnType("bigint");
+                    b.Property<DateTime?>("UseTime")
+                        .IsRequired()
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
@@ -1099,10 +1101,10 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("DServiceRequest", (string)null);
+                    b.ToTable("DServiceRequests", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.ServiceRequestData", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.ServiceRequestDetail", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1130,8 +1132,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<decimal>("DiscountAmount")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<long>("EndTime")
-                        .HasColumnType("bigint");
+                    b.Property<DateTime?>("EndTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid?>("InsuranceId")
                         .HasColumnType("uniqueidentifier");
@@ -1163,8 +1165,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("SampleRoomId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<long>("SampleTime")
-                        .HasColumnType("bigint");
+                    b.Property<DateTime?>("SampleTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("ServiceId")
                         .HasColumnType("uniqueidentifier");
@@ -1177,8 +1179,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .IsRequired()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<long>("StartTime")
-                        .HasColumnType("bigint");
+                    b.Property<DateTime?>("StartTime")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
@@ -1188,10 +1190,10 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("ServiceRequestId");
 
-                    b.ToTable("DServiceRequestData", (string)null);
+                    b.ToTable("DServiceRequestDetails", (string)null);
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.ServiceResultData", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.ServiceRequestDetailResult", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -1230,7 +1232,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("ServiceResultIndiceId");
 
-                    b.ToTable("DServiceResultData", (string)null);
+                    b.ToTable("DServiceRequestDetailResults", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Career", b =>
@@ -1273,7 +1275,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SCareer");
+                    b.ToTable("SCareers");
 
                     b.HasData(
                         new
@@ -1550,7 +1552,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("UnitId");
 
-                    b.ToTable("SItem", (string)null);
+                    b.ToTable("SItems", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.ItemGroup", b =>
@@ -1593,7 +1595,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SItemGroup", (string)null);
+                    b.ToTable("SItemGroups", (string)null);
 
                     b.HasData(
                         new
@@ -2006,7 +2008,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SItemLine", (string)null);
+                    b.ToTable("SItemLines", (string)null);
 
                     b.HasData(
                         new
@@ -2618,7 +2620,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("UnitId");
 
-                    b.ToTable("SItemType", (string)null);
+                    b.ToTable("SItemTypes", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Items.ItemPricePolicy", b =>
@@ -2677,7 +2679,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("PatientTypeId");
 
-                    b.ToTable("SItemPricePolicy", (string)null);
+                    b.ToTable("SItemPricePolicies", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Service", b =>
@@ -2753,7 +2755,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("UnitId");
 
-                    b.ToTable("SService", (string)null);
+                    b.ToTable("SServices", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.ServiceGroup", b =>
@@ -2778,7 +2780,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SServiceGroup", (string)null);
+                    b.ToTable("SServiceGroups", (string)null);
 
                     b.HasData(
                         new
@@ -3029,7 +3031,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SServiceGroupHeIn", (string)null);
+                    b.ToTable("SServiceGroupHeIns", (string)null);
 
                     b.HasData(
                         new
@@ -3242,7 +3244,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("ServiceId");
 
-                    b.ToTable("SServicePricePolicy", (string)null);
+                    b.ToTable("SServicePricePolicies", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.ServiceResultIndice", b =>
@@ -3292,7 +3294,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("ServiceId");
 
-                    b.ToTable("SServiceResultIndice", (string)null);
+                    b.ToTable("SServiceResultIndices", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Categories.Services.SurgicalProcedureType", b =>
@@ -3316,7 +3318,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SSurgicalProcedureType", (string)null);
+                    b.ToTable("SSurgicalProcedureTypes", (string)null);
 
                     b.HasData(
                         new
@@ -3411,7 +3413,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SChapterIcd", (string)null);
+                    b.ToTable("SChapterIcds", (string)null);
 
                     b.HasData(
                         new
@@ -3829,7 +3831,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SCountry");
+                    b.ToTable("SCountries");
 
                     b.HasData(
                         new
@@ -6404,7 +6406,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SDeathCause");
+                    b.ToTable("SDeathCauses");
 
                     b.HasData(
                         new
@@ -6487,7 +6489,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("BranchId");
 
-                    b.ToTable("SDeathCertBook");
+                    b.ToTable("SDeathCertBooks");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.DeathWithin", b =>
@@ -6530,7 +6532,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SDeathWithin");
+                    b.ToTable("SDeathWithins");
 
                     b.HasData(
                         new
@@ -6638,7 +6640,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("DepartmentTypeId");
 
-                    b.ToTable("SDepartment");
+                    b.ToTable("SDepartments");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.DepartmentType", b =>
@@ -6683,7 +6685,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SDepartmentType");
+                    b.ToTable("SDepartmentTypes");
 
                     b.HasData(
                         new
@@ -6766,7 +6768,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("ProvinceId");
 
-                    b.ToTable("SDistrict");
+                    b.ToTable("SDistricts");
 
                     b.HasData(
                         new
@@ -7085,7 +7087,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SEthnicity");
+                    b.ToTable("SEthnicities");
 
                     b.HasData(
                         new
@@ -7764,7 +7766,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DExamination", (string)null);
+                    b.ToTable("DExaminations", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.ExecutionRoom", b =>
@@ -7788,7 +7790,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("ServiceId");
 
-                    b.ToTable("SExecutionRoom", (string)null);
+                    b.ToTable("SExecutionRooms", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Gender", b =>
@@ -7831,7 +7833,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SGender");
+                    b.ToTable("SGenders");
 
                     b.HasData(
                         new
@@ -7920,7 +7922,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SHospital");
+                    b.ToTable("SHospitals");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.HospitalLevel", b =>
@@ -7963,7 +7965,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SHospitalLevel");
+                    b.ToTable("SHospitalLevels");
 
                     b.HasData(
                         new
@@ -8053,7 +8055,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SHospitalLine");
+                    b.ToTable("SHospitalLines");
 
                     b.HasData(
                         new
@@ -8143,7 +8145,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SHospitalSpeciality");
+                    b.ToTable("SHospitalSpecialities");
 
                     b.HasData(
                         new
@@ -8397,7 +8399,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("ChapterIcdId");
 
-                    b.ToTable("SIcd10");
+                    b.ToTable("SIcds");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Insurance", b =>
@@ -8478,7 +8480,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DInsurance", (string)null);
+                    b.ToTable("DInsurances", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Invoice", b =>
@@ -8548,7 +8550,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DInvoice", (string)null);
+                    b.ToTable("DInvoices", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.InvoiceGroup", b =>
@@ -8612,7 +8614,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SInvoiceGroup");
+                    b.ToTable("SInvoiceGroups");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.InvoiceGroupBelongToUser", b =>
@@ -8629,7 +8631,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SInvoiceGroupBelongToUser");
+                    b.ToTable("SInvoiceGroupBelongToUsers");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.InvoiceType", b =>
@@ -8674,7 +8676,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SInvoiceType");
+                    b.ToTable("SInvoiceTypes");
 
                     b.HasData(
                         new
@@ -8759,7 +8761,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SLiveArea");
+                    b.ToTable("SLiveAreas");
 
                     b.HasData(
                         new
@@ -9078,7 +9080,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("PatientId");
 
-                    b.ToTable("DMedicalRecord", (string)null);
+                    b.ToTable("DMedicalRecords", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.MedicalRecordType", b =>
@@ -9128,7 +9130,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("MedicalRecordTypeGroupId");
 
-                    b.ToTable("SMedicalRecordType", (string)null);
+                    b.ToTable("SMedicalRecordTypes", (string)null);
 
                     b.HasData(
                         new
@@ -9395,7 +9397,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SMedicalRecordTypeGroup", (string)null);
+                    b.ToTable("SMedicalRecordTypeGroups", (string)null);
 
                     b.HasData(
                         new
@@ -9495,7 +9497,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("SOption");
+                    b.ToTable("SOptions");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.OptionCategory", b =>
@@ -9520,7 +9522,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SOptionCategory");
+                    b.ToTable("SOptionCategorys");
 
                     b.HasData(
                         new
@@ -9675,7 +9677,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("OrderTypeID");
 
-                    b.ToTable("DOrder", (string)null);
+                    b.ToTable("DOrders", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.OrderType", b =>
@@ -9720,7 +9722,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SOrderType");
+                    b.ToTable("SOrderTypes");
 
                     b.HasData(
                         new
@@ -10079,7 +10081,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("WardId");
 
-                    b.ToTable("DPatient", (string)null);
+                    b.ToTable("DPatients", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.PatientNumber", b =>
@@ -10096,7 +10098,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("DPatientNumber", (string)null);
+                    b.ToTable("DPatientNumbers", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.PatientObjectType", b =>
@@ -10141,7 +10143,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SPatientObjectType");
+                    b.ToTable("SPatientObjectTypes");
 
                     b.HasData(
                         new
@@ -10231,7 +10233,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SPaymentMethod");
+                    b.ToTable("SPaymentMethods");
 
                     b.HasData(
                         new
@@ -10287,7 +10289,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SPermission");
+                    b.ToTable("SPermissions");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Province", b =>
@@ -10327,7 +10329,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SProvince");
+                    b.ToTable("SProvinces");
 
                     b.HasData(
                         new
@@ -10878,7 +10880,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SReceptionObjectType");
+                    b.ToTable("SReceptionObjectTypes");
 
                     b.HasData(
                         new
@@ -10940,7 +10942,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SRelationship");
+                    b.ToTable("SRelationships");
 
                     b.HasData(
                         new
@@ -11129,7 +11131,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SReligion");
+                    b.ToTable("SReligions");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Report", b =>
@@ -11176,7 +11178,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("ReportCategoryId");
 
-                    b.ToTable("SReport");
+                    b.ToTable("SReports");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.ReportCategory", b =>
@@ -11213,7 +11215,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SReportCategory");
+                    b.ToTable("SReportCategories");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.RightRouteType", b =>
@@ -11258,7 +11260,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SRightRouteType");
+                    b.ToTable("SRightRouteTypes");
 
                     b.HasData(
                         new
@@ -11369,7 +11371,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SRole");
+                    b.ToTable("SRoles");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.RolePermissionMapping", b =>
@@ -11391,7 +11393,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("SRolePermissionMapping");
+                    b.ToTable("SRolePermissionMappings");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Room", b =>
@@ -11448,7 +11450,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("RoomTypeId");
 
-                    b.ToTable("SRoom");
+                    b.ToTable("SRooms");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.RoomType", b =>
@@ -11493,7 +11495,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SRoomType");
+                    b.ToTable("SRoomTypes");
 
                     b.HasData(
                         new
@@ -11699,7 +11701,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("SSupplier", (string)null);
+                    b.ToTable("SSuppliers", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.System.DbOption", b =>
@@ -11731,7 +11733,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SDbOption", (string)null);
+                    b.ToTable("SDbOptions", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.TransferForm", b =>
@@ -11774,7 +11776,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("STransferForm");
+                    b.ToTable("STransferForms");
 
                     b.HasData(
                         new
@@ -11855,7 +11857,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("STransferReason");
+                    b.ToTable("STransferReasons");
 
                     b.HasData(
                         new
@@ -11925,7 +11927,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("STreatmentEndType");
+                    b.ToTable("STreatmentEndTypes");
 
                     b.HasData(
                         new
@@ -12125,7 +12127,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("STreatmentResult");
+                    b.ToTable("STreatmentResults");
 
                     b.HasData(
                         new
@@ -12221,7 +12223,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("SUnit", (string)null);
+                    b.ToTable("SUnits", (string)null);
 
                     b.HasData(
                         new
@@ -12518,14 +12520,14 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("SUser");
+                    b.ToTable("SUsers");
 
                     b.HasData(
                         new
                         {
                             Id = new Guid("3382be1c-2836-4246-99db-c4e1c781e868"),
                             AccessFailedCount = 0,
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 455, DateTimeKind.Local).AddTicks(1054),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "administrator@gmail.com",
                             FullName = "Admin",
                             Inactive = false,
@@ -12537,7 +12539,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         {
                             Id = new Guid("49ba7fd4-2edb-4482-a419-00c81f023f5c"),
                             AccessFailedCount = 0,
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 455, DateTimeKind.Local).AddTicks(1368),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "administrator@gmail.com",
                             FullName = "ADMIN",
                             Inactive = false,
@@ -12565,7 +12567,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("SUserRoleMapping");
+                    b.ToTable("SUserRoleMappings");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.UserRoomMapping", b =>
@@ -12586,7 +12588,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("SUserRoomMapping");
+                    b.ToTable("SUserRoomMappings");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.UserToken", b =>
@@ -12621,7 +12623,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("SYS_Token", (string)null);
+                    b.ToTable("SYSTokens", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Ward", b =>
@@ -12670,13 +12672,13 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.HasIndex("DistrictId");
 
-                    b.ToTable("SWard");
+                    b.ToTable("SWards");
 
                     b.HasData(
                         new
                         {
                             Id = new Guid("56c401ac-d00e-4bdf-ae5a-d2ff12b6a51d"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1025),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDPX",
@@ -12686,7 +12688,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("56c401ac-d00e-4bdf-ae5a-d2ff12b6a52d"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1043),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDTB",
@@ -12696,7 +12698,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("56c401ac-d00e-4bdf-ae5a-d2ff12b6a53d"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1047),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDVP",
@@ -12706,7 +12708,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("56c401ac-d00e-4bdf-ae5a-d2ff12b6a54d"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1051),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDCV",
@@ -12716,7 +12718,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("56c401ac-d00e-4bdf-ae5a-d2ff12b6a55d"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1054),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDLG",
@@ -12726,7 +12728,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("56c401ac-d00e-4bdf-ae5a-d2ff12b6a56d"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1060),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDNTT",
@@ -12736,7 +12738,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("56c401ac-d00e-4bdf-ae5a-d2ff12b6a57d"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1064),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDQT",
@@ -12746,7 +12748,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("56c401ac-d00e-4bdf-ae5a-d2ff12b6a58d"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1068),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDNH",
@@ -12756,7 +12758,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("c95d5e0e-7244-4f7f-bc1b-640eba36c54e"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1071),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDDB",
@@ -12766,7 +12768,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("d77c97d4-1e36-4c41-bd8f-f8e6209aeb0c"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1076),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDDC",
@@ -12776,7 +12778,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("e6b212d7-d687-4d63-82a5-18920238da18"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1080),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDNK",
@@ -12786,7 +12788,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("f44abb45-6010-4b0e-a442-5dafbeb4f40c"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1083),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDKM",
@@ -12796,7 +12798,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("910fa544-1584-4dfc-b450-4d230f0847a9"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1087),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDGV",
@@ -12806,7 +12808,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("d0a93335-cd08-46e6-8cef-8de70d076ed0"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1090),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("fdbacab7-ca1b-4765-b95d-84fac353a648"),
                             Inactive = false,
                             SearchCode = "HNBDTC",
@@ -12816,7 +12818,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("8b10a136-54e8-464b-b6a8-3fb6028bee0e"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1093),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKPT",
@@ -12826,7 +12828,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("4dd47dfb-9ca8-4ae6-b958-13edf873dc28"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1097),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKDX",
@@ -12836,7 +12838,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("8a736b6f-0697-4486-9516-e30cc5c56b98"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1100),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKHM",
@@ -12846,7 +12848,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("18f45f82-55c4-4809-97cf-65f779b926d1"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1105),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKHB",
@@ -12856,7 +12858,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("18f45f82-55c4-4809-97cf-65f779b926d2"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1108),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKHD",
@@ -12866,7 +12868,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("18f45f82-55c4-4809-97cf-65f779b926d3"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1111),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKHB",
@@ -12876,7 +12878,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("18f45f82-55c4-4809-97cf-65f779b926d4"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1114),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKCD",
@@ -12886,7 +12888,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("18f45f82-55c4-4809-97cf-65f779b926d5"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1118),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKLTT",
@@ -12896,7 +12898,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("622ff091-9851-46e8-9716-c355c21d4369"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1121),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKHB",
@@ -12906,7 +12908,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("7d55b7a9-b5ef-46e4-9a58-9b31e77108d8"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1124),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKHG",
@@ -12916,7 +12918,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("b15d7c09-6930-43ce-bb4b-347740ed7096"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1128),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKCG",
@@ -12926,7 +12928,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("8d55eb0d-5c0a-40d1-9684-409868c6f393"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1131),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKHT",
@@ -12936,7 +12938,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("94ba5688-cf4d-454a-acc1-8fee10552375"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1134),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKCN",
@@ -12946,7 +12948,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("26cd9859-9e70-4a42-9979-b7d9027c96fd"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1138),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKHB",
@@ -12956,7 +12958,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("1594388c-53a1-4d34-81ab-40af3225936f"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1141),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKTT",
@@ -12966,7 +12968,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("803d0bc0-278b-42e1-b1bc-623e09920f17"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1145),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKTHD",
@@ -12976,7 +12978,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("eb2e1424-b66c-41ae-9c5c-57757eb1224b"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1148),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKPCT",
@@ -12986,7 +12988,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         new
                         {
                             Id = new Guid("8dbd4edd-06ce-40a6-a791-16cf3922523a"),
-                            CreatedDate = new DateTime(2024, 8, 18, 14, 39, 51, 448, DateTimeKind.Local).AddTicks(1151),
+                            CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DistrictId = new Guid("33a82ea4-7aeb-4d08-9ca9-2cb5f06adefb"),
                             Inactive = false,
                             SearchCode = "HNHKHB",
@@ -13006,14 +13008,14 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<string>("DepartmentCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("DepartmentId")
+                    b.Property<Guid?>("DepartmentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("DepartmentName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("EndTime")
-                        .HasColumnType("bigint");
+                    b.Property<DateTime?>("EndTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("EndUserCode")
                         .HasColumnType("nvarchar(max)");
@@ -13024,13 +13026,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<string>("EndUserName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ExecuteDepartmentId")
+                    b.Property<Guid?>("ExecuteDepartmentId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ExecuteRoomCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ExecuteRoomId")
+                    b.Property<Guid?>("ExecuteRoomId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ExecuteRoomName")
@@ -13051,7 +13053,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<bool>("IsPriority")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("MedicalRecordId")
+                    b.Property<Guid?>("MedicalRecordId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("NumOrder")
@@ -13063,16 +13065,16 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<string>("PatientName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("PatientRecordId")
+                    b.Property<Guid?>("PatientRecordId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<long>("RequestTime")
-                        .HasColumnType("bigint");
+                    b.Property<DateTime?>("RequestTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("RoomCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("RoomId")
+                    b.Property<Guid?>("RoomId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("RoomName")
@@ -13084,8 +13086,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<int>("ServiceRequestTypeId")
                         .HasColumnType("int");
 
-                    b.Property<long>("StartTime")
-                        .HasColumnType("bigint");
+                    b.Property<DateTime?>("StartTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("StartUserCode")
                         .HasColumnType("nvarchar(max)");
@@ -13102,13 +13104,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("TreatmentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<long>("UseTime")
-                        .HasColumnType("bigint");
+                    b.Property<DateTime?>("UseTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("UserCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("UserName")
@@ -13118,7 +13120,7 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.ToTable((string)null);
 
-                    b.ToView("V_BUS_ServiceRequest", (string)null);
+                    b.ToView("V_DServiceRequest", (string)null);
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.BirthCertBook", b =>
@@ -13357,7 +13359,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("WardFk");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.ServiceRequestData", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.ServiceRequestDetail", b =>
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Service", "Service")
                         .WithMany()
@@ -13376,13 +13378,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Navigation("ServiceRequest");
                 });
 
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.ServiceResultData", b =>
+            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Business.ServiceRequestDetailResult", b =>
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.Categories.Service", "Service")
                         .WithMany()
                         .HasForeignKey("ServiceId");
 
-                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.ServiceRequestData", "ServiceRequestData")
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Business.ServiceRequestDetail", "ServiceRequestData")
                         .WithMany()
                         .HasForeignKey("ServiceRequestDataId");
 

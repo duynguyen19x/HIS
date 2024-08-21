@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities
 {
-    [Table("SInvoiceGroupBelongToUser")]
+    [Table("SInvoiceGroupBelongToUsers")]
     public class InvoiceGroupBelongToUser : Entity<Guid>
     {
         public virtual Guid InvoiceGroupId { get; set; }

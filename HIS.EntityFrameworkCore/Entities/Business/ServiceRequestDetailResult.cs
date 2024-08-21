@@ -6,7 +6,7 @@ using HIS.Utilities.Enums;
 
 namespace HIS.EntityFrameworkCore.Entities.Business
 {
-    public class ServiceResultData : Entity<Guid>
+    public class ServiceRequestDetailResult : Entity<Guid>
     {
         public Guid? ServiceResultIndiceId { get; set; }
 
@@ -26,7 +26,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public Service Service { get; set; }
 
         [Ignore]
-        public ServiceRequestData ServiceRequestData { get; set; }
+        public ServiceRequestDetail ServiceRequestData { get; set; }
 
         [Ignore]
         public ServiceRequest ServiceRequests { get; set; }

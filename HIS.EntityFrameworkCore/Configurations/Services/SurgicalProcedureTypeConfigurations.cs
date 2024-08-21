@@ -10,7 +10,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Services
     {
         public void Configure(EntityTypeBuilder<SurgicalProcedureType> builder)
         {
-            builder.ToTable("SSurgicalProcedureType");
+            builder.ToTable("SSurgicalProcedureTypes");
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedOnAdd();
 

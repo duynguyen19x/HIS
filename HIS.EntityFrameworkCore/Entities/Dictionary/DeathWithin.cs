@@ -7,7 +7,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Thời gian tử vong.
     /// </summary>
-    [Table("SDeathWithin")]
+    [Table("SDeathWithins")]
     public class DeathWithin : AuditedEntity<Guid>
     {
         [Required]

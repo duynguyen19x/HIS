@@ -3,7 +3,7 @@ using HIS.Utilities.Enums;
 
 namespace HIS.Dtos.Business.ServiceResultDatas
 {
-    public class ServiceResultDataDto : EntityDto<Guid>
+    public class ServiceRequestDetailResultDto : EntityDto<Guid>
     {
         public Guid? ServiceResultIndiceId { get; set; }
 

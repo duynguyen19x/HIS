@@ -11,7 +11,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
     {
         public void Configure(EntityTypeBuilder<Order> builder)
         {
-            builder.ToTable("DOrder");
+            builder.ToTable("DOrders");
             builder.HasKey(x => x.Id);
 
             //builder.Property(x => x.OrderCode).IsRequired().HasMaxLength(OrderConst.OrderCodeLength);

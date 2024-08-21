@@ -7,7 +7,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Nhóm máu Rh
     /// </summary>
-    [Table("SBloodRhType")]
+    [Table("SBloodRhTypes")]
     public class BloodRhType : AuditedEntity<Guid>
     {
         public string BloodRhTypeCode { get; set; }

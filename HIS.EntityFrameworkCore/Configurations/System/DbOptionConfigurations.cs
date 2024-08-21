@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Systems
     {
         public void Configure(EntityTypeBuilder<DbOption> builder)
         {
-            builder.ToTable("SDbOption");
+            builder.ToTable("SDbOptions");
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.DbOptionId).HasMaxLength(128);

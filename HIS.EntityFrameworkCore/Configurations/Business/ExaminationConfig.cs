@@ -13,7 +13,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
     {
         public void Configure(EntityTypeBuilder<Examination> builder)
         {
-            builder.ToTable("DExamination");
+            builder.ToTable("DExaminations");
             builder.HasKey(x => x.Id);
         }
     }

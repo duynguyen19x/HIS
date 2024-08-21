@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Khoa.
     /// </summary>
-    [Table("SDepartment")]
+    [Table("SDepartments")]
     public class Department : AuditedEntity<Guid>
     {
         /// <summary>

@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Giới tính.
     /// </summary>
-    [Table("SGender")]
+    [Table("SGenders")]
     public class Gender : AuditedEntity<Guid>
     {
         [Required]

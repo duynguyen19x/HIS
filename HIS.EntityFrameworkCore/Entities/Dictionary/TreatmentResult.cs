@@ -7,7 +7,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Kết quả điều trị.
     /// </summary>
-    [Table("STreatmentResult")]
+    [Table("STreatmentResults")]
     public class TreatmentResult : AuditedEntity<int>
     {
         [MaxLength(50)]

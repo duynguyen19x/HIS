@@ -4,16 +4,16 @@ using HIS.EntityFrameworkCore.Entities.Categories;
 
 namespace HIS.EntityFrameworkCore.Entities.Business
 {
-    public class ServiceRequestData : FullAuditedEntity<Guid>
+    public class ServiceRequestDetail : FullAuditedEntity<Guid>
     {
         public Guid? ServiceRequestId { get; set; } // phiếu chỉ định
         public Guid? InsuranceId { get; set; } // bảo hiểm
         public Guid ServiceId { get; set; } // dịch vụ
         public string ServiceName { get; set; }
-        public long StartTime { get; set; } // thời gian bắt đầu thực hiện
-        public long EndTime { get; set; } // thời gian kết thúc
+        public DateTime? StartTime { get; set; } // thời gian bắt đầu thực hiện
+        public DateTime? EndTime { get; set; } // thời gian kết thúc
         public bool IsSampled { get; set; } // lấy mẫu bệnh phẩm
-        public long SampleTime { get; set; } // thời gian lấy mẫu bệnh phẩm
+        public DateTime? SampleTime { get; set; } // thời gian lấy mẫu bệnh phẩm
         public Guid? SampleRoomId { get; set; } // phòng lấy mẫu bệnh phẩm
         public decimal OriginalPrice { get; set; }
         public decimal Price { get; set; } // đơn giá
@@ -30,6 +30,6 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public virtual Service Service { get; set; }
 
 
-        public ServiceRequestData() { }
+        public ServiceRequestDetail() { }
     }
 }
