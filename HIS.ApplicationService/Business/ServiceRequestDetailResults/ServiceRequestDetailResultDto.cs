@@ -9,7 +9,7 @@ namespace HIS.Dtos.Business.ServiceResultDatas
 
         public Guid? ServiceRequestId { get; set; }
 
-        public Guid? ServiceRequestDataId { get; set; }
+        public Guid? ServiceRequestDetailId { get; set; }
 
         public Guid? ServiceId { get; set; }
 

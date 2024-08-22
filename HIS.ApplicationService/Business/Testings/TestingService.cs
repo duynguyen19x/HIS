@@ -106,13 +106,13 @@ namespace HIS.ApplicationService.Business.Testings
             if (isDetail)
             {
                 var serviceRequestDataIds = listResultDto.Result.Select(s => (Guid?)s.Id).ToList();
-                var serviceResultDatas = (await GetServiceResultDataByServiceRequestDataIds(serviceRequestDataIds, genderType)).Result;
+                var serviceResultDatas = (await GetServiceResultDataByServiceRequestDetailIds(serviceRequestDataIds, genderType)).Result;
 
                 if (serviceResultDatas != null)
                 {
                     foreach (var result in listResultDto.Result)
                     {
-                        result.ServiceResultDatas = serviceResultDatas.Where(w => w.ServiceRequestDataId == result.Id).ToList();
+                        result.ServiceResultDatas = serviceResultDatas.Where(w => w.ServiceRequestDetailId == result.Id).ToList();
                     }
                 }
             }
@@ -120,7 +120,7 @@ namespace HIS.ApplicationService.Business.Testings
             return await Task.FromResult(listResultDto);
         }
 
-        public async Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceResultDataByServiceRequestDataId(Guid serviceRequestDataId, GenderTypes genderType)
+        public async Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceResultDataByServiceRequestDetailId(Guid serviceRequestDetailId, GenderTypes genderType)
         {
             var listResultDto = new ListResultDto<ServiceRequestDetailResultDto>();
 
@@ -128,13 +128,13 @@ namespace HIS.ApplicationService.Business.Testings
                                     join service in _serviceRepository.GetAll() on serviceResultData.ServiceId equals service.Id
                                     join serviceResultIndice in _serviceResultIndiceRepository.GetAll() on serviceResultData.ServiceResultIndiceId equals serviceResultIndice.Id
 
-                                    where serviceResultData.ServiceRequestDataId == serviceRequestDataId
+                                    where serviceResultData.ServiceRequestDetailId == serviceRequestDetailId
 
                                     select new ServiceRequestDetailResultDto()
                                     {
                                         Id = serviceResultIndice.Id,
                                         ServiceResultIndiceId = serviceResultData.ServiceResultIndiceId,
-                                        ServiceRequestDataId = serviceResultData.ServiceRequestDataId,
+                                        ServiceRequestDetailId = serviceResultData.ServiceRequestDetailId,
                                         ServiceId = serviceResultData.ServiceId,
                                         Result = serviceResultData.Result,
                                         NormalRange = !string.IsNullOrEmpty(serviceResultIndice.Normal) ? serviceResultIndice.Normal : (genderType == GenderTypes.Female ? string.Format("{0} - {1} {2}", serviceResultIndice.FemaleFrom, serviceResultIndice.FemaleTo, serviceResultIndice.Unit) : string.Format("{0} - {1} {2}", serviceResultIndice.MaleFrom, serviceResultIndice.MaleTo, serviceResultIndice.Unit)),
@@ -151,7 +151,7 @@ namespace HIS.ApplicationService.Business.Testings
             return await Task.FromResult(listResultDto);
         }
 
-        public async Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceResultDataByServiceRequestDataIds(List<Guid?> serviceRequestDataIds, GenderTypes genderType)
+        public async Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceResultDataByServiceRequestDetailIds(List<Guid?> serviceRequestDetailIds, GenderTypes genderType)
         {
             var listResultDto = new ListResultDto<ServiceRequestDetailResultDto>();
 
@@ -159,13 +159,13 @@ namespace HIS.ApplicationService.Business.Testings
                                     join service in _serviceRepository.GetAll() on serviceResultData.ServiceId equals service.Id
                                     join serviceResultIndice in _serviceResultIndiceRepository.GetAll() on serviceResultData.ServiceResultIndiceId equals serviceResultIndice.Id
 
-                                    where serviceRequestDataIds.Contains(serviceResultData.ServiceRequestDataId)
+                                    where serviceRequestDetailIds.Contains(serviceResultData.ServiceRequestDetailId)
 
                                     select new ServiceRequestDetailResultDto()
                                     {
                                         Id = serviceResultIndice.Id,
                                         ServiceResultIndiceId = serviceResultData.ServiceResultIndiceId,
-                                        ServiceRequestDataId = serviceResultData.ServiceRequestDataId,
+                                        ServiceRequestDetailId = serviceResultData.ServiceRequestDetailId,
                                         ServiceId = serviceResultData.ServiceId,
                                         Result = serviceResultData.Result,
                                         NormalRange = !string.IsNullOrEmpty(serviceResultIndice.Normal) ? serviceResultIndice.Normal : (genderType == GenderTypes.Female ? string.Format("{0} - {1} {2}", serviceResultIndice.FemaleFrom, serviceResultIndice.FemaleTo, serviceResultIndice.Unit) : string.Format("{0} - {1} {2}", serviceResultIndice.MaleFrom, serviceResultIndice.MaleTo, serviceResultIndice.Unit)),
@@ -187,7 +187,7 @@ namespace HIS.ApplicationService.Business.Testings
             var listResultDto = new ListResultDto<ServiceRequestDetailResultDto>();
 
             listResultDto.Result = (from serviceRequestData in _serviceRequestDataRepository.GetAll() // Context.ServiceRequestDatas
-                                    join serviceResultData in _serviceResultDataRepository.GetAll() on serviceRequestData.Id equals serviceResultData.ServiceRequestDataId
+                                    join serviceResultData in _serviceResultDataRepository.GetAll() on serviceRequestData.Id equals serviceResultData.ServiceRequestDetailId
                                     join service in _serviceRepository.GetAll() on serviceResultData.ServiceId equals service.Id
                                     join serviceResultIndice in _serviceResultIndiceRepository.GetAll() on serviceResultData.ServiceResultIndiceId equals serviceResultIndice.Id
 
@@ -197,7 +197,7 @@ namespace HIS.ApplicationService.Business.Testings
                                     {
                                         Id = serviceResultIndice.Id,
                                         ServiceResultIndiceId = serviceResultData.ServiceResultIndiceId,
-                                        ServiceRequestDataId = serviceResultData.ServiceRequestDataId,
+                                        ServiceRequestDetailId = serviceResultData.ServiceRequestDetailId,
                                         ServiceRequestId = serviceRequestData.ServiceRequestId,
                                         ServiceId = serviceResultData.ServiceId,
                                         Result = serviceResultData.Result,
@@ -213,7 +213,7 @@ namespace HIS.ApplicationService.Business.Testings
                                     }).ToList();
 
             listResultDto.Result = (from serviceRequestData in _serviceRequestDataRepository.GetAll() // Context.ServiceRequestDatas
-                                    join serviceResultData in _serviceResultDataRepository.GetAll() on serviceRequestData.Id equals serviceResultData.ServiceRequestDataId
+                                    join serviceResultData in _serviceResultDataRepository.GetAll() on serviceRequestData.Id equals serviceResultData.ServiceRequestDetailId
                                     join service in _serviceRepository.GetAll() on serviceResultData.ServiceId equals service.Id
                                     join serviceResultIndice in _serviceResultIndiceRepository.GetAll() on serviceResultData.ServiceResultIndiceId equals serviceResultIndice.Id
 
@@ -223,7 +223,7 @@ namespace HIS.ApplicationService.Business.Testings
                                     {
                                         Id = serviceResultIndice.Id,
                                         ServiceResultIndiceId = serviceResultData.ServiceResultIndiceId,
-                                        ServiceRequestDataId = serviceResultData.ServiceRequestDataId,
+                                        ServiceRequestDetailId = serviceResultData.ServiceRequestDetailId,
                                         ServiceRequestId = serviceRequestData.ServiceRequestId,
                                         ServiceId = serviceResultData.ServiceId,
                                         Result = serviceResultData.Result,

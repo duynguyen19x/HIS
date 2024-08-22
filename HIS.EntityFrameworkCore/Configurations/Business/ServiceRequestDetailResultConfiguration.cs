@@ -16,7 +16,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
 
             builder.HasOne(e => e.Service).WithMany().HasForeignKey(e => e.ServiceId);
             builder.HasOne(e => e.ServiceResultIndice).WithMany().HasForeignKey(e => e.ServiceResultIndiceId);
-            builder.HasOne(e => e.ServiceRequestData).WithMany().HasForeignKey(e => e.ServiceRequestDataId);
+            builder.HasOne(e => e.ServiceRequestData).WithMany().HasForeignKey(e => e.ServiceRequestDetailId);
             builder.HasOne(e => e.ServiceRequests).WithMany().HasForeignKey(e => e.ServiceRequestId);
         }
     }

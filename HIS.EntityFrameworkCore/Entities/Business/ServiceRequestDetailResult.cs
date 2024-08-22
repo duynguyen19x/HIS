@@ -10,7 +10,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
     {
         public Guid? ServiceResultIndiceId { get; set; }
 
-        public Guid? ServiceRequestDataId { get; set; }
+        public Guid? ServiceRequestDetailId { get; set; }
 
         public Guid? ServiceRequestId { get; set; }
 

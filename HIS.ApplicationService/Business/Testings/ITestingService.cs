@@ -10,7 +10,7 @@ namespace HIS.ApplicationService.Business.Testings
     {
         Task<PagedResultDto<ServiceRequestDto>> GetAll(GetAllServiceRequestInputDto input);
         Task<ListResultDto<ServiceRequestDetailDto>> GetServiceRequestDataByServiceRequestId(Guid serviceRequestId, GenderTypes genderType, bool isDetail = true);
-        Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceResultDataByServiceRequestDataId(Guid serviceRequestDataId, GenderTypes genderType);
+        Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceResultDataByServiceRequestDetailId(Guid serviceRequestDataId, GenderTypes genderType);
         Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceResultDataByServiceRequestId(Guid serviceRequestId, GenderTypes genderType);
 
         Task<ResultDto<ServiceRequestDto>> UpdateTestingStatus(ServiceRequestDto input);
