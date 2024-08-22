@@ -23,7 +23,7 @@ namespace HIS.EntityFrameworkCore
         public DbSet<DbOption> DbOptions { get; set; }
 
         public DbSet<Option> Option { get; set; }
-        public DbSet<DBOptionCategory> OptionCategory { get; set; }
+        public DbSet<OptionCategory> OptionCategory { get; set; }
         public DbSet<Report> Report { get; set; }
         public DbSet<ReportCategory> ReportCategory { get; set; }
         public DbSet<User> User { get; set; }

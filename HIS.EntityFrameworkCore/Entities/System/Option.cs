@@ -66,7 +66,7 @@ namespace HIS.EntityFrameworkCore.Entities
         public int SortOrder { get; set; }
 
         [ForeignKey(nameof(OptionCategoryId))]
-        public virtual DBOptionCategory OptionCategoryFk { get; set; }
+        public virtual OptionCategory OptionCategoryFk { get; set; }
 
         [ForeignKey(nameof(BranchId))]
         public virtual Branch BranchFk { get; set; }
