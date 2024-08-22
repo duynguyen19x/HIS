@@ -6,7 +6,7 @@ namespace HIS.ApplicationService.Business.Pharmaceuticals.InOutStocks
 {
     public interface IInOutStockService : IAppService
     {
-        Task<PagedResultDto<InOutStockDto>> GetByStocks(Guid stockId, string fromDate, string toDate);
+        Task<PagedResultDto<InOutStockDto>> GetByStocks(Guid stockId, DateTime fromDate, DateTime toDate);
 
         Task<ResultDto<InOutStockDto>> ImportFromSupplierGetById(Guid id);
         Task<ResultDto<InOutStockDto>> ImportFromSupplierCanceled(InOutStockDto input);

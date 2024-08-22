@@ -6,7 +6,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Người dùng và vai trò.
     /// </summary>
-    [Table("SUserRoleMapping")]
+    [Table("SUserRoleMappings")]
     public class UserRoleMapping : Entity<Guid>
     {
         public virtual Guid UserId { get; set; }

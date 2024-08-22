@@ -12,7 +12,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Loại phiếu thu.
     /// </summary>
-    [Table("SInvoiceType")]
+    [Table("SInvoiceTypes")]
     public class InvoiceType : AuditedEntity<int>
     {
         [MaxLength(50)]

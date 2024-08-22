@@ -14,7 +14,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Quyền hạn.
     /// </summary>
-    [Table("SPermission")]
+    [Table("SPermissions")]
     public class Permission : Entity<string>
     {
         private readonly List<Permission> _children;

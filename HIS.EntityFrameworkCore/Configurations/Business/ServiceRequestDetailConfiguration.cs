@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace HIS.EntityFrameworkCore.Configurations.Business
 {
-    public class ServiceRequestDataConfiguration : IEntityTypeConfiguration<ServiceRequestData>
+    public class ServiceRequestDetailConfiguration : IEntityTypeConfiguration<ServiceRequestDetail>
     {
-        public void Configure(EntityTypeBuilder<ServiceRequestData> builder)
+        public void Configure(EntityTypeBuilder<ServiceRequestDetail> builder)
         {
-            builder.ToTable("DServiceRequestData");
+            builder.ToTable("DServiceRequestDetails");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.ServiceRequestId).IsRequired();

@@ -12,7 +12,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Phương thức thanh toán.
     /// </summary>
-    [Table("SPaymentMethod")]
+    [Table("SPaymentMethods")]
     public class PaymentMethod : AuditedEntity<Guid>
     {
         [Required]

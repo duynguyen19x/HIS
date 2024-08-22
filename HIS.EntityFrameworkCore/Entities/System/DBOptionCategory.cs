@@ -12,8 +12,8 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Nhóm tùy chọn.
     /// </summary>
-    [Table("SOptionCategory")]
-    public class DBOptionCategory : Entity<int>
+    [Table("SOptionCategorys")]
+    public class OptionCategory : Entity<int>
     {
         [MaxLength(128)]
         [Required]

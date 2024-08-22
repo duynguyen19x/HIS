@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Configurations
     {
         public void Configure(EntityTypeBuilder<ItemGroup> builder)
         {
-            builder.ToTable("SItemGroup");
+            builder.ToTable("SItemGroups");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Code).HasMaxLength(50);

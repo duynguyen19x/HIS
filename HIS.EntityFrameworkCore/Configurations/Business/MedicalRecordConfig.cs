@@ -14,7 +14,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Business
     {
         public void Configure(EntityTypeBuilder<MedicalRecord> builder)
         {
-            builder.ToTable("DMedicalRecord");
+            builder.ToTable("DMedicalRecords");
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.MedicalRecordCode).IsRequired().HasMaxLength(MedicalRecordConst.MedicalRecordCodeLength);

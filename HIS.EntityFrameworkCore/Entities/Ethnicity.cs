@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Dân tộc.
     /// </summary>
-    [Table("SEthnicity")]
+    [Table("SEthnicities")]
     public class Ethnicity : AuditedEntity<Guid>
     {
         /// <summary>

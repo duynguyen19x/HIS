@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Sổ giấy chứng sinh
     /// </summary>
-    [Table("SBirthCertBook")]
+    [Table("SBirthCertBooks")]
     public class BirthCertBook : AuditedEntity<Guid>
     {
         [Required]

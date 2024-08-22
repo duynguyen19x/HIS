@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Chi nhánh.
     /// </summary>
-    [Table("SBranch")]
+    [Table("SBranchs")]
     public class Branch : AuditedEntity<Guid>
     {
         [Required]

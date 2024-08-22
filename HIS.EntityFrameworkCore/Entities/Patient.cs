@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Thông tin bệnh nhân
     /// </summary>
-    [Table("DPatient")]
+    [Table("DPatients")]
     public class Patient : FullAuditedEntity<Guid>
     {
         [MaxLength(EntityConst.Length50)]

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HIS.EntityFrameworkCore.Entities
 {
-    [Table("DMedicalRecordNumber")]
+    [Table("DMedicalRecordNumbers")]
     public class MedicalRecordNumber : Entity<Guid>
     {
         [Required]

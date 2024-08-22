@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<ChapterIcd> builder)
         {
-            builder.ToTable("SChapterIcd");
+            builder.ToTable("SChapterIcds");
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Code).HasMaxLength(50);

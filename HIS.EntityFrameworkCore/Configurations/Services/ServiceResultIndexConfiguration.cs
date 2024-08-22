@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Services
     {
         public void Configure(EntityTypeBuilder<ServiceResultIndice> builder)
         {
-            builder.ToTable("SServiceResultIndice");
+            builder.ToTable("SServiceResultIndices");
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Code).HasMaxLength(50);

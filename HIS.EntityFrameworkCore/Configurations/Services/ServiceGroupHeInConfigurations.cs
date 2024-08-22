@@ -10,7 +10,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Services
     {
         public void Configure(EntityTypeBuilder<ServiceGroupHeIn> builder)
         {
-            builder.ToTable("SServiceGroupHeIn");
+            builder.ToTable("SServiceGroupHeIns");
             builder.HasKey(x => x.Id);
 
             builder.Property(x => x.Code).HasMaxLength(50);

@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Items
     {
         public void Configure(EntityTypeBuilder<ItemPricePolicy> builder)
         {
-            builder.ToTable("SItemPricePolicy");
+            builder.ToTable("SItemPricePolicies");
             builder.HasKey(x => x.Id);
 
             builder.HasOne(t => t.PatientTypeFK).WithMany().HasForeignKey(pc => pc.PatientTypeId);

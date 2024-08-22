@@ -9,7 +9,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Loại phiếu
     /// </summary>
-    [Table("SOrderType")]
+    [Table("SOrderTypes")]
     public class OrderType : AuditedEntity<int>
     {
         [Required]

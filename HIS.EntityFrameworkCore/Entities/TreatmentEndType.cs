@@ -7,7 +7,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Hình thức xử trí.
     /// </summary>
-    [Table("STreatmentEndType")]
+    [Table("STreatmentEndTypes")]
     public class TreatmentEndType : AuditedEntity<int>
     {
         [MaxLength(50)]

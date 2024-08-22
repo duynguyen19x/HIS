@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HIS.EntityFrameworkCore.Entities.Business
+namespace HIS.EntityFrameworkCore.Constants
 {
     public class IcdConst
     {

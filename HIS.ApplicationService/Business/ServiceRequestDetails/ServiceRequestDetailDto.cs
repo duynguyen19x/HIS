@@ -3,13 +3,14 @@ using HIS.Dtos.Business.ServiceResultDatas;
 
 namespace HIS.Dtos.Business.ServiceRequestDatas
 {
-    public class ServiceRequestDataDto : EntityDto<Guid>
+    public class ServiceRequestDetailDto : EntityDto<Guid>
     {
         public Guid? ServiceRequestId { get; set; } // phiếu chỉ định
         public Guid? InsuranceId { get; set; } // bảo hiểm
         public Guid? ServiceId { get; set; } // dịch vụ
-        public long StartTime { get; set; }
-        public long EndTime { get; set; }
+        public DateTime? StartTime { get; set; }
+        public DateTime? EndTime { get; set; }
+        public DateTime? SampleTime { get; set; } // thời gian lấy mẫu bệnh phẩm
         public decimal Price { get; set; } // đơn giá
         public decimal Quantity { get; set; } // số lượng
         public decimal Amount { get; set; } // thành tiền
@@ -21,6 +22,6 @@ namespace HIS.Dtos.Business.ServiceRequestDatas
         public string ServiceCode { get; set; }
         public string ServiceName { get; set; }
 
-        public IList<ServiceResultDataDto> ServiceResultDatas { get; set; }
+        public IList<ServiceRequestDetailResultDto> ServiceResultDatas { get; set; }
     }
 }

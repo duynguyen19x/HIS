@@ -12,7 +12,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Số thứ tự bệnh nhân (theo năm)
     /// </summary>
-    [Table("DPatientNumber")]
+    [Table("DPatientNumbers")]
     public class PatientNumber : Entity<Guid>
     {
         [Required]

@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Configurations
     {
         public void Configure(EntityTypeBuilder<UserToken> builder)
         {
-            builder.ToTable("SYS_Token");
+            builder.ToTable("SYSTokens");
 
             builder.HasKey(x => x.Id);
 

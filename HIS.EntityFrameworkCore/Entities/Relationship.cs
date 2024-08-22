@@ -13,7 +13,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Mối quan hệ gia đình
     /// </summary>
-    [Table("SRelationship")]
+    [Table("SRelationships")]
     public class Relationship : AuditedEntity<Guid>
     {
         [StringLength(RelationshipConst.MaxRelationshipCodeLength, MinimumLength = RelationshipConst.MinRelationshipCodeLength)]

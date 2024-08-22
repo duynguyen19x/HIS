@@ -27,19 +27,19 @@ namespace HIS.BackendApi.Controllers.Business.Testings
         }
 
         [HttpGet("GetServiceRequestDataByServiceRequestId")]
-        public async Task<ListResultDto<ServiceRequestDataDto>> GetServiceRequestDataByServiceRequestId(Guid serviceRequestId, GenderTypes genderType, bool isDetail = true)
+        public async Task<ListResultDto<ServiceRequestDetailDto>> GetServiceRequestDataByServiceRequestId(Guid serviceRequestId, GenderTypes genderType, bool isDetail = true)
         {
             return await _testingService.GetServiceRequestDataByServiceRequestId(serviceRequestId, genderType, isDetail);
         }
 
         [HttpGet("GetServiceResultDataDtoByServiceRequestDataId")]
-        public async Task<ListResultDto<ServiceResultDataDto>> GetServiceResultDataDtoByServiceRequestDataId(Guid serviceRequestDataId, GenderTypes genderType)
+        public async Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceResultDataDtoByServiceRequestDataId(Guid serviceRequestDataId, GenderTypes genderType)
         {
             return await _testingService.GetServiceResultDataByServiceRequestDataId(serviceRequestDataId, genderType);
         }
 
         [HttpGet("GetServiceResultDataByServiceRequestId")]
-        public async Task<ListResultDto<ServiceResultDataDto>> GetServiceResultDataByServiceRequestId(Guid serviceRequestId, GenderTypes genderType)
+        public async Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceResultDataByServiceRequestId(Guid serviceRequestId, GenderTypes genderType)
         {
             return await _testingService.GetServiceResultDataByServiceRequestId(serviceRequestId, genderType);
         }

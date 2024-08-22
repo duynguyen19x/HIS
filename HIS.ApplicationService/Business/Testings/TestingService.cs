@@ -12,6 +12,8 @@ using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using System.Transactions;
+using Azure;
+using HIS.ApplicationService.Business.MedicalRecords.Dto;
 
 namespace HIS.ApplicationService.Business.Testings
 {
@@ -19,16 +21,16 @@ namespace HIS.ApplicationService.Business.Testings
     {
         private readonly IRepository<ServiceRequest, Guid> _serviceRequestRepository;
         private readonly IRepository<ServiceRequestView, Guid> _serviceRequestViewRepository;
-        private readonly IRepository<ServiceRequestData, Guid> _serviceRequestDataRepository;
-        private readonly IRepository<ServiceResultData, Guid> _serviceResultDataRepository;
+        private readonly IRepository<ServiceRequestDetail, Guid> _serviceRequestDataRepository;
+        private readonly IRepository<ServiceRequestDetailResult, Guid> _serviceResultDataRepository;
         private readonly IRepository<ServiceResultIndice, Guid> _serviceResultIndiceRepository;
         private readonly IRepository<Service, Guid> _serviceRepository;
 
         public TestingService(
             IRepository<ServiceRequest, Guid> serviceRequestRepository,
             IRepository<ServiceRequestView, Guid> serviceRequestViewRepository,
-            IRepository<ServiceRequestData, Guid> serviceRequestDataRepository,
-            IRepository<ServiceResultData, Guid> serviceResultDataRepository,
+            IRepository<ServiceRequestDetail, Guid> serviceRequestDataRepository,
+            IRepository<ServiceRequestDetailResult, Guid> serviceResultDataRepository,
             IRepository<ServiceResultIndice, Guid> serviceResultIndiceRepository,
             IRepository<Service, Guid> serviceRepository)
         {
@@ -71,16 +73,16 @@ namespace HIS.ApplicationService.Business.Testings
             return await Task.FromResult(pagedResults);
         }
 
-        public async Task<ListResultDto<ServiceRequestDataDto>> GetServiceRequestDataByServiceRequestId(Guid serviceRequestId, GenderTypes genderType, bool isDetail = true)
+        public async Task<ListResultDto<ServiceRequestDetailDto>> GetServiceRequestDataByServiceRequestId(Guid serviceRequestId, GenderTypes genderType, bool isDetail = true)
         {
-            var listResultDto = new ListResultDto<ServiceRequestDataDto>();
+            var listResultDto = new ListResultDto<ServiceRequestDetailDto>();
 
             listResultDto.Result = (from serviceRequest in _serviceRequestDataRepository.GetAll()
                                     join service in _serviceRepository.GetAll() on serviceRequest.ServiceId equals service.Id
 
                                     where serviceRequest.ServiceRequestId == serviceRequestId
 
-                                    select new ServiceRequestDataDto()
+                                    select new ServiceRequestDetailDto()
                                     {
                                         Id = serviceRequest.Id,
                                         ServiceRequestId = serviceRequest.ServiceRequestId,
@@ -88,6 +90,7 @@ namespace HIS.ApplicationService.Business.Testings
                                         ServiceId = serviceRequest.ServiceId,
                                         StartTime = serviceRequest.StartTime,
                                         EndTime = serviceRequest.EndTime,
+                                        SampleTime = serviceRequest.SampleTime,
                                         Price = serviceRequest.Price,
                                         Quantity = serviceRequest.Quantity,
                                         Amount = serviceRequest.Amount,
@@ -117,9 +120,9 @@ namespace HIS.ApplicationService.Business.Testings
             return await Task.FromResult(listResultDto);
         }
 
-        public async Task<ListResultDto<ServiceResultDataDto>> GetServiceResultDataByServiceRequestDataId(Guid serviceRequestDataId, GenderTypes genderType)
+        public async Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceResultDataByServiceRequestDataId(Guid serviceRequestDataId, GenderTypes genderType)
         {
-            var listResultDto = new ListResultDto<ServiceResultDataDto>();
+            var listResultDto = new ListResultDto<ServiceRequestDetailResultDto>();
 
             listResultDto.Result = (from serviceResultData in _serviceResultDataRepository.GetAll() // Context.ServiceResultDatas
                                     join service in _serviceRepository.GetAll() on serviceResultData.ServiceId equals service.Id
@@ -127,7 +130,7 @@ namespace HIS.ApplicationService.Business.Testings
 
                                     where serviceResultData.ServiceRequestDataId == serviceRequestDataId
 
-                                    select new ServiceResultDataDto()
+                                    select new ServiceRequestDetailResultDto()
                                     {
                                         Id = serviceResultIndice.Id,
                                         ServiceResultIndiceId = serviceResultData.ServiceResultIndiceId,
@@ -148,9 +151,9 @@ namespace HIS.ApplicationService.Business.Testings
             return await Task.FromResult(listResultDto);
         }
 
-        public async Task<ListResultDto<ServiceResultDataDto>> GetServiceResultDataByServiceRequestDataIds(List<Guid?> serviceRequestDataIds, GenderTypes genderType)
+        public async Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceResultDataByServiceRequestDataIds(List<Guid?> serviceRequestDataIds, GenderTypes genderType)
         {
-            var listResultDto = new ListResultDto<ServiceResultDataDto>();
+            var listResultDto = new ListResultDto<ServiceRequestDetailResultDto>();
 
             listResultDto.Result = (from serviceResultData in _serviceResultDataRepository.GetAll() //Context.ServiceResultDatas
                                     join service in _serviceRepository.GetAll() on serviceResultData.ServiceId equals service.Id
@@ -158,7 +161,7 @@ namespace HIS.ApplicationService.Business.Testings
 
                                     where serviceRequestDataIds.Contains(serviceResultData.ServiceRequestDataId)
 
-                                    select new ServiceResultDataDto()
+                                    select new ServiceRequestDetailResultDto()
                                     {
                                         Id = serviceResultIndice.Id,
                                         ServiceResultIndiceId = serviceResultData.ServiceResultIndiceId,
@@ -179,9 +182,9 @@ namespace HIS.ApplicationService.Business.Testings
             return await Task.FromResult(listResultDto);
         }
 
-        public async Task<ListResultDto<ServiceResultDataDto>> GetServiceResultDataByServiceRequestId(Guid serviceRequestId, GenderTypes genderType)
+        public async Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceResultDataByServiceRequestId(Guid serviceRequestId, GenderTypes genderType)
         {
-            var listResultDto = new ListResultDto<ServiceResultDataDto>();
+            var listResultDto = new ListResultDto<ServiceRequestDetailResultDto>();
 
             listResultDto.Result = (from serviceRequestData in _serviceRequestDataRepository.GetAll() // Context.ServiceRequestDatas
                                     join serviceResultData in _serviceResultDataRepository.GetAll() on serviceRequestData.Id equals serviceResultData.ServiceRequestDataId
@@ -190,7 +193,33 @@ namespace HIS.ApplicationService.Business.Testings
 
                                     where serviceRequestData.ServiceRequestId == serviceRequestId
 
-                                    select new ServiceResultDataDto()
+                                    select new ServiceRequestDetailResultDto()
+                                    {
+                                        Id = serviceResultIndice.Id,
+                                        ServiceResultIndiceId = serviceResultData.ServiceResultIndiceId,
+                                        ServiceRequestDataId = serviceResultData.ServiceRequestDataId,
+                                        ServiceRequestId = serviceRequestData.ServiceRequestId,
+                                        ServiceId = serviceResultData.ServiceId,
+                                        Result = serviceResultData.Result,
+                                        NormalRange = !string.IsNullOrEmpty(serviceResultIndice.Normal) ? serviceResultIndice.Normal : (genderType == GenderTypes.Female ? string.Format("{0} - {1} {2}", serviceResultIndice.FemaleFrom, serviceResultIndice.FemaleTo, serviceResultIndice.Unit) : string.Format("{0} - {1} {2}", serviceResultIndice.MaleFrom, serviceResultIndice.MaleTo, serviceResultIndice.Unit)),
+                                        TestingMachine = serviceResultData.TestingMachine,
+                                        ResultType = serviceResultData.ResultType,
+                                        IsNumber = string.IsNullOrEmpty(serviceResultIndice.Normal) ? true : false,
+                                        ServiceCode = service.Code,
+                                        ServiceName = service.Name,
+                                        ServiceResultIndiceCode = serviceResultIndice.Code,
+                                        ServiceResultIndiceName = serviceResultIndice.Name,
+                                        ServiceResultIndiceUnit = serviceResultIndice.Unit,
+                                    }).ToList();
+
+            listResultDto.Result = (from serviceRequestData in _serviceRequestDataRepository.GetAll() // Context.ServiceRequestDatas
+                                    join serviceResultData in _serviceResultDataRepository.GetAll() on serviceRequestData.Id equals serviceResultData.ServiceRequestDataId
+                                    join service in _serviceRepository.GetAll() on serviceResultData.ServiceId equals service.Id
+                                    join serviceResultIndice in _serviceResultIndiceRepository.GetAll() on serviceResultData.ServiceResultIndiceId equals serviceResultIndice.Id
+
+                                    where serviceRequestData.ServiceRequestId == serviceRequestId
+
+                                    select new ServiceRequestDetailResultDto()
                                     {
                                         Id = serviceResultIndice.Id,
                                         ServiceResultIndiceId = serviceResultData.ServiceResultIndiceId,

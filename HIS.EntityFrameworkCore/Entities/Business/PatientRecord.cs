@@ -7,7 +7,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
     /// <summary>
     /// Thông tin bệnh án
     /// </summary>
-    [Table("DPatientRecord")]
+    [Table("DPatientRecords")]
     public class PatientRecord : FullAuditedEntity<Guid>
     {
         /// <summary>

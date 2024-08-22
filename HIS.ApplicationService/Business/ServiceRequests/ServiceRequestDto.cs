@@ -8,10 +8,11 @@ namespace HIS.Dtos.Business.ServiceRequests
     public class ServiceRequestDto : EntityDto<Guid?>
     {
         public string ServiceRequestCode { get; set; }
-        public long RequestTime { get; set; } // ngày chỉ định (tạo phiếu)
-        public long UseTime { get; set; } // ngày y lệnh
-        public long StartTime { get; set; } // Ngày bắt đầu
-        public long EndTime { get; set; } // Ngày kết thúc
+        public DateTime? RequestTime { get; set; } // ngày chỉ định (tạo phiếu)
+        public DateTime? UseTime { get; set; } // ngày y lệnh
+        public DateTime? SampleTime { get; set; } // thời gian lấy mẫu bệnh phẩm
+        public DateTime? StartTime { get; set; } // Ngày bắt đầu
+        public DateTime? EndTime { get; set; } // Ngày kết thúc
         public string Barcode { get; set; }
         public int NumOrder { get; set; } // số thứ tự chỉ định trong ngày (số thứ tự thực hiện)
         public bool IsPriority { get; set; } // ưu tiên
@@ -55,7 +56,7 @@ namespace HIS.Dtos.Business.ServiceRequests
         public string EndUserCode { get; set; }
         public string EndUserName { get; set; }
 
-        public IList<ServiceRequestDataDto> ServiceRequestDatas { get; set; }
-        public IList<ServiceResultDataDto> ServiceResultDatas { get; set; }
+        public IList<ServiceRequestDetailDto> ServiceRequestDatas { get; set; }
+        public IList<ServiceRequestDetailResultDto> ServiceResultDatas { get; set; }
     }
 }

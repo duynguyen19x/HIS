@@ -7,7 +7,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Nhóm báo cáo.
     /// </summary>
-    [Table("SReportCategory")]
+    [Table("SReportCategories")]
     public class ReportCategory : AuditedEntity<int>
     {
         [MaxLength(255)]

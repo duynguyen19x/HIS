@@ -12,7 +12,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Loại bệnh nhân (đối tượng bệnh nhân).
     /// </summary>
-    [Table("SPatientObjectType")]
+    [Table("SPatientObjectTypes")]
     public class PatientObjectType : AuditedEntity<int>
     {
         [MaxLength(50)]

@@ -7,7 +7,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Phòng thực hiện
     /// </summary>
-    [Table("SExecutionRoom")]
+    [Table("SExecutionRooms")]
     public class ExecutionRoom : Entity<Guid>
     {
         public Guid? ServiceId { get; set; }

@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Hạng bệnh viện
     /// </summary>
-    [Table("SHospitalLevel")]
+    [Table("SHospitalLevels")]
     public class HospitalLevel : AuditedEntity<Guid>
     {
         [Required]

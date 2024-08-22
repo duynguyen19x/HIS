@@ -8,7 +8,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// <summary>
     /// Tùy chọn.
     /// </summary>
-    [Table("SOption")]
+    [Table("SOptions")]
     public class Option : AuditedEntity<Guid>
     {
         [MaxLength(EntityConst.Length128)]

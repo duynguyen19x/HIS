@@ -10,7 +10,7 @@ namespace HIS.EntityFrameworkCore.Configurations.Dictionaries
     {
         public void Configure(EntityTypeBuilder<BloodRhType> builder)
         {
-            builder.ToTable("SBloodRhType");
+            builder.ToTable("SBloodRhTypes");
 
             builder.Property(x => x.BloodRhTypeCode).HasMaxLength(BloodRhTypeConst.BloodRhTypeCodeLength).IsRequired();
             builder.Property(x => x.BloodRhTypeName).HasMaxLength(BloodRhTypeConst.BloodRhTypeNameLength).IsRequired();
