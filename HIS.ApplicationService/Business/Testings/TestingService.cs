@@ -244,6 +244,8 @@ namespace HIS.ApplicationService.Business.Testings
                     var serviceRequest = _serviceRequestRepository.FirstOrDefault(f => f.Id == input.Id);
                     if (serviceRequest != null)
                     {
+                        serviceRequest.Status = input.Status;
+
                         switch (input.Status)
                         {
                             case ServiceRequestStatusTypes.NotExecuted:
