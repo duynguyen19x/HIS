@@ -56,7 +56,7 @@ namespace HIS.Dtos.Business.ServiceRequests
         public string EndUserCode { get; set; }
         public string EndUserName { get; set; }
 
-        public IList<ServiceRequestDetailDto> ServiceRequestDatas { get; set; }
-        public IList<ServiceRequestDetailResultDto> ServiceResultDatas { get; set; }
+        public IList<ServiceRequestDetailDto> ServiceRequestDetails { get; set; }
+        public IList<ServiceRequestDetailResultDto> ServiceRequestDetailResults { get; set; }
     }
 }

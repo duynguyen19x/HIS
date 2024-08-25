@@ -26,28 +26,34 @@ namespace HIS.BackendApi.Controllers.Business.Testings
             return await _testingService.GetAll(input);
         }
 
-        [HttpGet("GetServiceRequestDataByServiceRequestId")]
-        public async Task<ListResultDto<ServiceRequestDetailDto>> GetServiceRequestDataByServiceRequestId(Guid serviceRequestId, GenderTypes genderType, bool isDetail = true)
+        [HttpGet("GetServiceRequestDetailRequesByServiceRequestId")]
+        public async Task<ListResultDto<ServiceRequestDetailDto>> GetServiceRequestDetailRequesByServiceRequestId(Guid serviceRequestId, GenderTypes genderType, bool isDetail = true)
         {
-            return await _testingService.GetServiceRequestDataByServiceRequestId(serviceRequestId, genderType, isDetail);
+            return await _testingService.GetServiceRequestDetailRequesByServiceRequestId(serviceRequestId, genderType, isDetail);
         }
 
-        [HttpGet("GetServiceResultDataDtoByServiceRequestDataId")]
-        public async Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceResultDataDtoByServiceRequestDataId(Guid serviceRequestDataId, GenderTypes genderType)
+        [HttpGet("GetServiceRequestDetailResultByServiceRequestDetailId")]
+        public async Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceRequestDetailResultByServiceRequestDetailId(Guid serviceRequestDataId, GenderTypes genderType)
         {
-            return await _testingService.GetServiceResultDataByServiceRequestDetailId(serviceRequestDataId, genderType);
+            return await _testingService.GetServiceRequestDetailResultByServiceRequestDetailId(serviceRequestDataId, genderType);
         }
 
-        [HttpGet("GetServiceResultDataByServiceRequestId")]
-        public async Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceResultDataByServiceRequestId(Guid serviceRequestId, GenderTypes genderType)
+        [HttpGet("GetServiceRequestDetailResultByServiceRequestId")]
+        public async Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceRequestDetailResultByServiceRequestId(Guid serviceRequestId, GenderTypes genderType)
         {
-            return await _testingService.GetServiceResultDataByServiceRequestId(serviceRequestId, genderType);
+            return await _testingService.GetServiceRequestDetailResultByServiceRequestId(serviceRequestId, genderType);
         }
 
         [HttpPost("UpdateTestingStatus")]
         public async Task<ResultDto<ServiceRequestDto>> UpdateTestingStatus(ServiceRequestDto input)
         {
             return await _testingService.UpdateTestingStatus(input);
+        }
+
+        [HttpPost("UpdateTestingCancelStatus")]
+        public async Task<ResultDto<ServiceRequestDto>> UpdateTestingCancelStatus(ServiceRequestDto input)
+        {
+            return await _testingService.UpdateTestingCancelStatus(input);
         }
     }
 }

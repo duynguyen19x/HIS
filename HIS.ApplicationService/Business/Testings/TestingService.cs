@@ -14,6 +14,8 @@ using HIS.EntityFrameworkCore.Entities.Categories.Services;
 using System.Transactions;
 using Azure;
 using HIS.ApplicationService.Business.MedicalRecords.Dto;
+using HIS.EntityFrameworkCore.Entities;
+using HIS.Utilities.Sections;
 
 namespace HIS.ApplicationService.Business.Testings
 {
@@ -21,8 +23,8 @@ namespace HIS.ApplicationService.Business.Testings
     {
         private readonly IRepository<ServiceRequest, Guid> _serviceRequestRepository;
         private readonly IRepository<ServiceRequestView, Guid> _serviceRequestViewRepository;
-        private readonly IRepository<ServiceRequestDetail, Guid> _serviceRequestDataRepository;
-        private readonly IRepository<ServiceRequestDetailResult, Guid> _serviceResultDataRepository;
+        private readonly IRepository<ServiceRequestDetail, Guid> _serviceRequestDetailRepository;
+        private readonly IRepository<ServiceRequestDetailResult, Guid> _serviceRequestDetailResultRepository;
         private readonly IRepository<ServiceResultIndice, Guid> _serviceResultIndiceRepository;
         private readonly IRepository<Service, Guid> _serviceRepository;
 
@@ -36,8 +38,8 @@ namespace HIS.ApplicationService.Business.Testings
         {
             _serviceRequestRepository = serviceRequestRepository;
             _serviceRequestViewRepository = serviceRequestViewRepository;
-            _serviceRequestDataRepository = serviceRequestDataRepository;
-            _serviceResultDataRepository = serviceResultDataRepository;
+            _serviceRequestDetailRepository = serviceRequestDataRepository;
+            _serviceRequestDetailResultRepository = serviceResultDataRepository;
             _serviceResultIndiceRepository = serviceResultIndiceRepository;
             _serviceRepository = serviceRepository;
         }
@@ -73,11 +75,11 @@ namespace HIS.ApplicationService.Business.Testings
             return await Task.FromResult(pagedResults);
         }
 
-        public async Task<ListResultDto<ServiceRequestDetailDto>> GetServiceRequestDataByServiceRequestId(Guid serviceRequestId, GenderTypes genderType, bool isDetail = true)
+        public async Task<ListResultDto<ServiceRequestDetailDto>> GetServiceRequestDetailRequesByServiceRequestId(Guid serviceRequestId, GenderTypes genderType, bool isDetail = true)
         {
             var listResultDto = new ListResultDto<ServiceRequestDetailDto>();
 
-            listResultDto.Result = (from serviceRequest in _serviceRequestDataRepository.GetAll()
+            listResultDto.Result = (from serviceRequest in _serviceRequestDetailRepository.GetAll()
                                     join service in _serviceRepository.GetAll() on serviceRequest.ServiceId equals service.Id
 
                                     where serviceRequest.ServiceRequestId == serviceRequestId
@@ -120,11 +122,11 @@ namespace HIS.ApplicationService.Business.Testings
             return await Task.FromResult(listResultDto);
         }
 
-        public async Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceResultDataByServiceRequestDetailId(Guid serviceRequestDetailId, GenderTypes genderType)
+        public async Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceRequestDetailResultByServiceRequestDetailId(Guid serviceRequestDetailId, GenderTypes genderType)
         {
             var listResultDto = new ListResultDto<ServiceRequestDetailResultDto>();
 
-            listResultDto.Result = (from serviceResultData in _serviceResultDataRepository.GetAll() // Context.ServiceResultDatas
+            listResultDto.Result = (from serviceResultData in _serviceRequestDetailResultRepository.GetAll() // Context.ServiceResultDatas
                                     join service in _serviceRepository.GetAll() on serviceResultData.ServiceId equals service.Id
                                     join serviceResultIndice in _serviceResultIndiceRepository.GetAll() on serviceResultData.ServiceResultIndiceId equals serviceResultIndice.Id
 
@@ -155,7 +157,7 @@ namespace HIS.ApplicationService.Business.Testings
         {
             var listResultDto = new ListResultDto<ServiceRequestDetailResultDto>();
 
-            listResultDto.Result = (from serviceResultData in _serviceResultDataRepository.GetAll() //Context.ServiceResultDatas
+            listResultDto.Result = (from serviceResultData in _serviceRequestDetailResultRepository.GetAll() //Context.ServiceResultDatas
                                     join service in _serviceRepository.GetAll() on serviceResultData.ServiceId equals service.Id
                                     join serviceResultIndice in _serviceResultIndiceRepository.GetAll() on serviceResultData.ServiceResultIndiceId equals serviceResultIndice.Id
 
@@ -182,38 +184,12 @@ namespace HIS.ApplicationService.Business.Testings
             return await Task.FromResult(listResultDto);
         }
 
-        public async Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceResultDataByServiceRequestId(Guid serviceRequestId, GenderTypes genderType)
+        public async Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceRequestDetailResultByServiceRequestId(Guid serviceRequestId, GenderTypes genderType)
         {
             var listResultDto = new ListResultDto<ServiceRequestDetailResultDto>();
 
-            listResultDto.Result = (from serviceRequestData in _serviceRequestDataRepository.GetAll() // Context.ServiceRequestDatas
-                                    join serviceResultData in _serviceResultDataRepository.GetAll() on serviceRequestData.Id equals serviceResultData.ServiceRequestDetailId
-                                    join service in _serviceRepository.GetAll() on serviceResultData.ServiceId equals service.Id
-                                    join serviceResultIndice in _serviceResultIndiceRepository.GetAll() on serviceResultData.ServiceResultIndiceId equals serviceResultIndice.Id
-
-                                    where serviceRequestData.ServiceRequestId == serviceRequestId
-
-                                    select new ServiceRequestDetailResultDto()
-                                    {
-                                        Id = serviceResultIndice.Id,
-                                        ServiceResultIndiceId = serviceResultData.ServiceResultIndiceId,
-                                        ServiceRequestDetailId = serviceResultData.ServiceRequestDetailId,
-                                        ServiceRequestId = serviceRequestData.ServiceRequestId,
-                                        ServiceId = serviceResultData.ServiceId,
-                                        Result = serviceResultData.Result,
-                                        NormalRange = !string.IsNullOrEmpty(serviceResultIndice.Normal) ? serviceResultIndice.Normal : (genderType == GenderTypes.Female ? string.Format("{0} - {1} {2}", serviceResultIndice.FemaleFrom, serviceResultIndice.FemaleTo, serviceResultIndice.Unit) : string.Format("{0} - {1} {2}", serviceResultIndice.MaleFrom, serviceResultIndice.MaleTo, serviceResultIndice.Unit)),
-                                        TestingMachine = serviceResultData.TestingMachine,
-                                        ResultType = serviceResultData.ResultType,
-                                        IsNumber = string.IsNullOrEmpty(serviceResultIndice.Normal) ? true : false,
-                                        ServiceCode = service.Code,
-                                        ServiceName = service.Name,
-                                        ServiceResultIndiceCode = serviceResultIndice.Code,
-                                        ServiceResultIndiceName = serviceResultIndice.Name,
-                                        ServiceResultIndiceUnit = serviceResultIndice.Unit,
-                                    }).ToList();
-
-            listResultDto.Result = (from serviceRequestData in _serviceRequestDataRepository.GetAll() // Context.ServiceRequestDatas
-                                    join serviceResultData in _serviceResultDataRepository.GetAll() on serviceRequestData.Id equals serviceResultData.ServiceRequestDetailId
+            listResultDto.Result = (from serviceRequestData in _serviceRequestDetailRepository.GetAll() // Context.ServiceRequestDatas
+                                    join serviceResultData in _serviceRequestDetailResultRepository.GetAll() on serviceRequestData.Id equals serviceResultData.ServiceRequestDetailId
                                     join service in _serviceRepository.GetAll() on serviceResultData.ServiceId equals service.Id
                                     join serviceResultIndice in _serviceResultIndiceRepository.GetAll() on serviceResultData.ServiceResultIndiceId equals serviceResultIndice.Id
 
@@ -251,6 +227,10 @@ namespace HIS.ApplicationService.Business.Testings
             return await Task.FromResult(result);
         }
 
+        /// <summary>
+        /// Cập nhật trạng thái cho phiếu chỉ định
+        /// </summary>
+        /// <param name="input"></param>
         public async Task<ResultDto<ServiceRequestDto>> UpdateTestingStatus(ServiceRequestDto input)
         {
             var result = new ResultDto<ServiceRequestDto>();
@@ -259,45 +239,42 @@ namespace HIS.ApplicationService.Business.Testings
             {
                 try
                 {
-                    switch (input.Status)
-                    {
-                        case ServiceRequestStatusTypes.NotExecuted:
-                            break;
-                        case ServiceRequestStatusTypes.Cancel:
-                            break;
-                        case ServiceRequestStatusTypes.AddNew:
-                            break;
-                        case ServiceRequestStatusTypes.Request:
-                            {
-                                var serviceRequest = _serviceRequestRepository.FirstOrDefault(f => f.Id == input.Id);
-                                if (serviceRequest != null)
-                                {
-                                    // Cập nhật lại ngày Lấy mẫu bệnh phẩm, Bắt đầu xử lý, Trả kết quả = null
-                                }
-                            }
-                            break;
-                        case ServiceRequestStatusTypes.CollectingSpecimen:
-                            {
-                                var serviceRequest = _serviceRequestRepository.FirstOrDefault(f => f.Id == input.Id);
-                                if (serviceRequest != null)
-                                {
-                                    // Cập nhật lại ngày Lấy mẫu bệnh phẩm, Bắt đầu xử lý, Trả kết quả
-                                }
-                            }
-                            break;
-                        case ServiceRequestStatusTypes.StartProcessing:
-                            break;
-                        case ServiceRequestStatusTypes.ProvideResults:
-                            {
-                                var serviceRequest = _serviceRequestRepository.FirstOrDefault(f => f.Id == input.Id);
-                                if (serviceRequest != null)
-                                {
-                                    // Cập nhật lại ngày Lấy mẫu bệnh phẩm, Bắt đầu xử lý, Trả kết quả
+                    var timeNow = DateTime.Now;
 
-                                    var serviceResultDatas = _serviceResultDataRepository.GetAll().Where(w => w.ServiceRequestId == input.Id).ToList();
+                    var serviceRequest = _serviceRequestRepository.FirstOrDefault(f => f.Id == input.Id);
+                    if (serviceRequest != null)
+                    {
+                        switch (input.Status)
+                        {
+                            case ServiceRequestStatusTypes.NotExecuted:
+                                break;
+                            case ServiceRequestStatusTypes.Cancel:
+                                break;
+                            case ServiceRequestStatusTypes.AddNew:
+                                break;
+                            case ServiceRequestStatusTypes.Request:
+                                break;
+                            case ServiceRequestStatusTypes.CollectingSpecimen:
+                                {
+                                    serviceRequest.StartTime = timeNow;
+                                    serviceRequest.StartUserId = SessionExtensions.Login.Id;
+                                }
+                                break;
+                            case ServiceRequestStatusTypes.StartProcessing:
+                                {
+                                    serviceRequest.StartTime = timeNow;
+                                    serviceRequest.StartUserId = SessionExtensions.Login.Id;
+                                }
+                                break;
+                            case ServiceRequestStatusTypes.ProvideResults:
+                                {
+                                    serviceRequest.EndTime = timeNow;
+                                    serviceRequest.EndUserId = SessionExtensions.Login.Id;
+
+                                    var serviceResultDatas = _serviceRequestDetailResultRepository.GetAll().Where(w => w.ServiceRequestId == input.Id).ToList();
                                     foreach (var resultData in serviceResultDatas)
                                     {
-                                        var resultDataDto = input.ServiceResultDatas.FirstOrDefault(f => f.Id == resultData.Id);
+                                        var resultDataDto = input.ServiceRequestDetailResults.FirstOrDefault(f => f.Id == resultData.Id);
                                         if (resultDataDto != null)
                                         {
                                             resultData.Result = resultDataDto.Result;
@@ -305,15 +282,87 @@ namespace HIS.ApplicationService.Business.Testings
                                         }
                                     }
                                 }
-                            }
-                            break;
-                        case ServiceRequestStatusTypes.Other:
-                            break;
-                        default:
-                            break;
-                    }
+                                break;
+                            case ServiceRequestStatusTypes.Other:
+                                break;
+                            default:
+                                break;
+                        }
 
-                    await unitOfWork.CompleteAsync();
+                        await unitOfWork.CompleteAsync();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    result.Exception(ex);
+                }
+            }
+
+            return await Task.FromResult(result);
+        }
+
+        /// <summary>
+        /// Cập nhật trạng thái cho phiếu chỉ định (hủy phiếu, hủy tiếp nhận bệnh phẩm, hủy thực hiện, hủy trả kết quả)
+        /// </summary>
+        /// <param name="input"></param>
+        public async Task<ResultDto<ServiceRequestDto>> UpdateTestingCancelStatus(ServiceRequestDto input)
+        {
+            var result = new ResultDto<ServiceRequestDto>();
+
+            using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))
+            {
+                try
+                {
+                    var timeNow = DateTime.Now;
+
+                    var serviceRequest = _serviceRequestRepository.FirstOrDefault(f => f.Id == input.Id);
+                    if (serviceRequest != null)
+                    {
+                        switch (input.Status)
+                        {
+                            case ServiceRequestStatusTypes.NotExecuted:
+                                break;
+                            case ServiceRequestStatusTypes.Cancel:
+                                break;
+                            case ServiceRequestStatusTypes.AddNew:
+                                break;
+                            case ServiceRequestStatusTypes.Request:
+                                {
+                                    serviceRequest.RequestTime = timeNow;
+                                    serviceRequest.UserId = null;
+                                    serviceRequest.Status = ServiceRequestStatusTypes.Request;
+                                }
+                                break;
+                            case ServiceRequestStatusTypes.CollectingSpecimen:
+                                {
+                                    serviceRequest.SampleTime = timeNow;
+                                    serviceRequest.SampleUserId = null;
+                                    serviceRequest.Status = ServiceRequestStatusTypes.Request;
+                                }
+                                break;
+                            case ServiceRequestStatusTypes.SampleReceiving:
+                                {
+                                    serviceRequest.SampleReceivingTime = timeNow;
+                                    serviceRequest.SampleReceivingUserId = null;
+                                    serviceRequest.Status = ServiceRequestStatusTypes.CollectingSpecimen;
+                                }
+                                break;
+                            case ServiceRequestStatusTypes.StartProcessing:
+                                {
+                                    serviceRequest.StartTime = timeNow;
+                                    serviceRequest.StartUserId = null;
+                                    serviceRequest.Status = ServiceRequestStatusTypes.SampleReceiving;
+                                }
+                                break;
+                            case ServiceRequestStatusTypes.ProvideResults:
+                                {
+                                    serviceRequest.EndTime = timeNow;
+                                    serviceRequest.EndUserId = null;
+                                    serviceRequest.Status = ServiceRequestStatusTypes.StartProcessing;
+                                }
+                                break;
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {

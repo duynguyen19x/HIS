@@ -1,21 +1,18 @@
-﻿using HIS.Dtos.Dictionaries.ExecutionRoom;
-using HIS.Dtos.Dictionaries.ServiceResultIndex;
-using HIS.EntityFrameworkCore.Entities.Categories.Services;
-using HIS.EntityFrameworkCore.Entities;
-using HIS.Utilities.Helpers;
-using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
-using System.Globalization;
-using HIS.Core.Application.Services.Dto;
-using HIS.Core.Extensions;
-using HIS.Core.Domain.Repositories;
-using HIS.EntityFrameworkCore.Entities.Categories;
-using HIS.Core.Application.Services;
+﻿using HIS.ApplicationService.Dictionary.ServicePricePolicies.Dto;
 using HIS.ApplicationService.Dictionary.Services.Dto;
+using HIS.Core.Application.Services;
+using HIS.Core.Application.Services.Dto;
+using HIS.Core.Domain.Repositories;
+using HIS.Core.Extensions;
+using HIS.Dtos.Dictionaries.ExecutionRoom;
+using HIS.Dtos.Dictionaries.ServiceResultIndex;
+using HIS.EntityFrameworkCore.Entities;
+using HIS.EntityFrameworkCore.Entities.Categories;
+using HIS.EntityFrameworkCore.Entities.Categories.Services;
+using HIS.Utilities.Helpers;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using System.Transactions;
-using HIS.ApplicationService.Dictionary.ServicePricePolicies.Dto;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Text.Json.Serialization;
 
 namespace HIS.ApplicationService.Dictionary.Services
 {
@@ -505,20 +502,20 @@ namespace HIS.ApplicationService.Dictionary.Services
                                         SurgicalProcedureTypeId = surg == null ? null : surg.Id,
                                     }).ToList();
 
-                    var servicePricePolicieDtos = sServiceDtos.SelectMany(s => s.SServicePricePolicies).ToList();
-                    var servicePricePolicie = (from servicePricePolicy in servicePricePolicieDtos
-                                               join sPatientType in sPatientTypes on servicePricePolicy.PatientTypeCode equals sPatientType.Code
-                                               select new ServicePricePolicy()
-                                               {
-                                                   Id = servicePricePolicy.Id.GetValueOrDefault(),
-                                                   PatientTypeId = sPatientType.Id,
-                                                   ServiceId = servicePricePolicy.ServiceId,
-                                                   OldUnitPrice = servicePricePolicy.OldUnitPrice,
-                                                   NewUnitPrice = servicePricePolicy.NewUnitPrice,
-                                                   PaymentRate = servicePricePolicy.PaymentRate,
-                                                   CeilingPrice = servicePricePolicy.CeilingPrice,
-                                                   ExecutionTime = servicePricePolicy.ExecutionTime,
-                                               }).ToList();
+                    var servicePricePoliciesDtos = sServiceDtos.SelectMany(s => s.SServicePricePolicies).ToList();
+                    var servicePricePolicies = (from servicePricePolicy in servicePricePoliciesDtos
+                                                join sPatientType in sPatientTypes on servicePricePolicy.PatientTypeCode equals sPatientType.Code
+                                                select new ServicePricePolicy()
+                                                {
+                                                    Id = servicePricePolicy.Id.GetValueOrDefault(),
+                                                    PatientTypeId = sPatientType.Id,
+                                                    ServiceId = servicePricePolicy.ServiceId,
+                                                    OldUnitPrice = servicePricePolicy.OldUnitPrice,
+                                                    NewUnitPrice = servicePricePolicy.NewUnitPrice,
+                                                    PaymentRate = servicePricePolicy.PaymentRate,
+                                                    CeilingPrice = servicePricePolicy.CeilingPrice,
+                                                    ExecutionTime = servicePricePolicy.ExecutionTime,
+                                                }).ToList();
 
                     var executionRoomDtos = sServiceDtos.SelectMany(s => s.SExecutionRooms).ToList();
                     var executionRooms = (from executionRoom in executionRoomDtos
@@ -532,7 +529,7 @@ namespace HIS.ApplicationService.Dictionary.Services
                                           }).ToList();
 
                     await _serviceRepository.BulkInsertAsync(Services);
-                    await _servicePricePolicyRepository.BulkInsertAsync(servicePricePolicie);
+                    await _servicePricePolicyRepository.BulkInsertAsync(servicePricePolicies);
                     await _executionRoomRepository.BulkInsertAsync(executionRooms);
 
                     await unitOfWork.CompleteAsync();
@@ -575,7 +572,7 @@ namespace HIS.ApplicationService.Dictionary.Services
                                                    Normal = resultIndex.Normal,
                                                }).ToList();
 
-                    await _serviceResultIndiceRepository.BulkInsertAsync(serviceResultIndexs); //Context.ServiceResultIndices.AddRange(serviceResultIndexs);
+                    await _serviceResultIndiceRepository.BulkInsertAsync(serviceResultIndexs); 
 
                     await unitOfWork.CompleteAsync();
                     result.Success(true);

@@ -9,10 +9,11 @@ namespace HIS.ApplicationService.Business.Testings
     public interface ITestingService
     {
         Task<PagedResultDto<ServiceRequestDto>> GetAll(GetAllServiceRequestInputDto input);
-        Task<ListResultDto<ServiceRequestDetailDto>> GetServiceRequestDataByServiceRequestId(Guid serviceRequestId, GenderTypes genderType, bool isDetail = true);
-        Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceResultDataByServiceRequestDetailId(Guid serviceRequestDataId, GenderTypes genderType);
-        Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceResultDataByServiceRequestId(Guid serviceRequestId, GenderTypes genderType);
+        Task<ListResultDto<ServiceRequestDetailDto>> GetServiceRequestDetailRequesByServiceRequestId(Guid serviceRequestId, GenderTypes genderType, bool isDetail = true);
+        Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceRequestDetailResultByServiceRequestDetailId(Guid serviceRequestDataId, GenderTypes genderType);
+        Task<ListResultDto<ServiceRequestDetailResultDto>> GetServiceRequestDetailResultByServiceRequestId(Guid serviceRequestId, GenderTypes genderType);
 
         Task<ResultDto<ServiceRequestDto>> UpdateTestingStatus(ServiceRequestDto input);
+        Task<ResultDto<ServiceRequestDto>> UpdateTestingCancelStatus(ServiceRequestDto input);
     }
 }

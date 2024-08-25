@@ -8,6 +8,8 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public string ServiceRequestCode { get; set; }
         public DateTime? RequestTime { get; set; } // ngày chỉ định (tạo phiếu)
         public DateTime? UseTime { get; set; } // ngày y lệnh
+        public DateTime? SampleTime { get; set; } // thời gian lấy mẫu bệnh phẩm
+        public DateTime? SampleReceivingTime { get; set; } // thời gian tiếp nhận mẫu
         public DateTime? StartTime { get; set; } // Ngày bắt đầu
         public DateTime? EndTime { get; set; } // Ngày kết thúc
         public string Barcode { get; set; }
@@ -24,6 +26,8 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         public Guid? DepartmentId { get; set; } // khoa chỉ định
         public Guid? RoomId { get; set; } // phòng chỉ định
         public Guid? UserId { get; set; } // người chỉ định
+        public Guid? SampleUserId { get; set; } // người lấy mẫu
+        public Guid? SampleReceivingUserId { get; set; } // người tiếp nhận mẫu
         public Guid? StartUserId { get; set; } // người bắt đầu
         public Guid? EndUserId { get; set; } // người kết thúc (trả kết quả)
         public Guid? ExecuteDepartmentId { get; set; } // khoa thực hiện

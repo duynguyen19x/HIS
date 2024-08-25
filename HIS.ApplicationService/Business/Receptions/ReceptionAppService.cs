@@ -7,14 +7,9 @@ using HIS.Core.Application.Services.Dto;
 using HIS.Core.Domain.Repositories;
 using HIS.Core.Extensions;
 using HIS.EntityFrameworkCore.Entities;
+using HIS.EntityFrameworkCore.Entities.Business;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace HIS.ApplicationService.Business.Receptions
 {
