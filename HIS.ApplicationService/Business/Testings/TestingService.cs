@@ -1,21 +1,18 @@
-﻿using HIS.Dtos.Business.ServiceRequestDatas;
+﻿using HIS.Core.Application.Services;
+using HIS.Core.Application.Services.Dto;
+using HIS.Core.Domain.Repositories;
+using HIS.Core.Extensions;
+using HIS.Dtos.Business.ServiceRequestDatas;
 using HIS.Dtos.Business.ServiceRequests;
 using HIS.Dtos.Business.ServiceResultDatas;
-using HIS.Utilities.Enums;
-using HIS.Utilities.Helpers;
-using HIS.Core.Application.Services.Dto;
-using HIS.Core.Extensions;
-using HIS.Core.Application.Services;
-using HIS.EntityFrameworkCore.Views;
-using HIS.Core.Domain.Repositories;
 using HIS.EntityFrameworkCore.Entities.Business;
 using HIS.EntityFrameworkCore.Entities.Categories;
 using HIS.EntityFrameworkCore.Entities.Categories.Services;
-using System.Transactions;
-using Azure;
-using HIS.ApplicationService.Business.MedicalRecords.Dto;
-using HIS.EntityFrameworkCore.Entities;
+using HIS.EntityFrameworkCore.Views;
+using HIS.Utilities.Enums;
+using HIS.Utilities.Helpers;
 using HIS.Utilities.Sections;
+using System.Transactions;
 
 namespace HIS.ApplicationService.Business.Testings
 {
@@ -75,7 +72,7 @@ namespace HIS.ApplicationService.Business.Testings
             return await Task.FromResult(pagedResults);
         }
 
-        public async Task<ListResultDto<ServiceRequestDetailDto>> GetServiceRequestDetailRequesByServiceRequestId(Guid serviceRequestId, GenderTypes genderType, bool isDetail = true)
+        public async Task<ListResultDto<ServiceRequestDetailDto>> GetServiceRequestDetailByServiceRequestId(Guid serviceRequestId, GenderTypes genderType, bool isDetail = true)
         {
             var listResultDto = new ListResultDto<ServiceRequestDetailDto>();
 
@@ -217,12 +214,17 @@ namespace HIS.ApplicationService.Business.Testings
             return await Task.FromResult(listResultDto);
         }
 
-        public async Task<ResultDto<ServiceRequestDto>> GetServiceRequestById(Guid id)
+        public async Task<ResultDto<ServiceRequestDto>> GetServiceRequestById(Guid serviceRequestId, GenderTypes gender, bool isDetail = true)
         {
             var result = new ResultDto<ServiceRequestDto>();
 
-            var serviceRequestView = _serviceRequestViewRepository.FirstOrDefault(f => f.Id == id);
+            var serviceRequestView = _serviceRequestViewRepository.FirstOrDefault(f => f.Id == serviceRequestId);
             result.Result = ObjectMapper.Map<ServiceRequestDto>(serviceRequestView);
+
+            if (isDetail && serviceRequestView != null)
+            {
+                result.Result.ServiceRequestDetailResults = (await GetServiceRequestDetailResultByServiceRequestId(serviceRequestId, gender)).Result;
+            }
 
             return await Task.FromResult(result);
         }

@@ -26,10 +26,16 @@ namespace HIS.BackendApi.Controllers.Business.Testings
             return await _testingService.GetAll(input);
         }
 
-        [HttpGet("GetServiceRequestDetailRequesByServiceRequestId")]
-        public async Task<ListResultDto<ServiceRequestDetailDto>> GetServiceRequestDetailRequesByServiceRequestId(Guid serviceRequestId, GenderTypes genderType, bool isDetail = true)
+        [HttpGet("GetServiceRequestById")]
+        public async Task<ResultDto<ServiceRequestDto>> GetServiceRequestById(Guid serviceRequestId, GenderTypes gender, bool isDetail = true)
         {
-            return await _testingService.GetServiceRequestDetailRequesByServiceRequestId(serviceRequestId, genderType, isDetail);
+            return await _testingService.GetServiceRequestById(serviceRequestId, gender, isDetail);
+        }
+
+        [HttpGet("GetServiceRequestDetailByServiceRequestId")]
+        public async Task<ListResultDto<ServiceRequestDetailDto>> GetServiceRequestDetailByServiceRequestId(Guid serviceRequestId, GenderTypes genderType, bool isDetail = true)
+        {
+            return await _testingService.GetServiceRequestDetailByServiceRequestId(serviceRequestId, genderType, isDetail);
         }
 
         [HttpGet("GetServiceRequestDetailResultByServiceRequestDetailId")]
