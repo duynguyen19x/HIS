@@ -14,9 +14,9 @@ namespace HIS.ApplicationService.Dictionary.Genders
 {
     public class GenderAppService : BaseAppService, IGenderAppService
     {
-        private readonly IRepository<Gender, Guid> _genderRepository;
+        private readonly IRepository<Gender, int> _genderRepository;
 
-        public GenderAppService(IRepository<Gender, Guid> genderRepository)
+        public GenderAppService(IRepository<Gender, int> genderRepository)
         {
             _genderRepository = genderRepository;
         }
@@ -48,7 +48,7 @@ namespace HIS.ApplicationService.Dictionary.Genders
             return result;
         }
 
-        public virtual async Task<ResultDto<GenderDto>> GetById(Guid id)
+        public virtual async Task<ResultDto<GenderDto>> GetById(int id)
         {
             var result = new ResultDto<GenderDto>();
             try
@@ -68,13 +68,9 @@ namespace HIS.ApplicationService.Dictionary.Genders
         public virtual async Task<ResultDto<GenderDto>> CreateOrEdit(GenderDto input)
         {
             if (Check.IsNullOrDefault(input.Id))
-            {
                 return await Create(input);
-            }
             else
-            {
                 return await Update(input);
-            }
         }
 
         public virtual async Task<ResultDto<GenderDto>> Create(GenderDto input)
@@ -84,9 +80,7 @@ namespace HIS.ApplicationService.Dictionary.Genders
             {
                 try
                 {
-                    input.Id = Guid.NewGuid();
                     var entity = ObjectMapper.Map<Gender>(input);
-
                     await _genderRepository.InsertAsync(entity);
 
                     unitOfWork.Complete();
@@ -122,7 +116,7 @@ namespace HIS.ApplicationService.Dictionary.Genders
             return result;
         }
 
-        public virtual async Task<ResultDto<GenderDto>> Delete(Guid id)
+        public virtual async Task<ResultDto<GenderDto>> Delete(int id)
         {
             var result = new ResultDto<GenderDto>();
             using (var unitOfWork = UnitOfWorkManager.Begin(TransactionScopeOption.RequiresNew))

@@ -127,14 +127,13 @@ namespace HIS.ApplicationService.Systems.Login
                         Email = request.Email,
                         FirstName = request.FirstName,
                         LastName = request.LastName,
-                        //Address = request.Address,
-                        //Dob = request.Dob,
-                        //UseType = request.UseType,
-                        //Status = request.Status,
-                        //GenderId = request.GenderId,
-                        //ProvinceId = request.ProvinceId,
-                        //DistrictId = request.District,
-                        //WardId = request.WardsId,
+                        Address = request.Address,
+                        BirthDate = request.BirthDate,
+                        UseType = request.UseType,
+                        GenderId = request.GenderId,
+                        ProvinceId = request.ProvinceId,
+                        DistrictId = request.District,
+                        WardId = request.WardsId,
                     };
                     var result = Context.User.Add(userSave);
                     if (result != null)

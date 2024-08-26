@@ -63,7 +63,7 @@ namespace HIS.ApplicationService.Business.PatientRecords.Dto
         /// <summary>
         /// Giới tính
         /// </summary>
-        public virtual Guid? GenderId { get; set; }
+        public virtual int? GenderId { get; set; }
 
         /// <summary>
         /// Dân tộc

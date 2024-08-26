@@ -9,9 +9,9 @@ namespace HIS.ApplicationService.Dictionary.Branchs.Dto
     /// </summary>
     public class BranchDto : EntityDto<Guid?>
     {
-        public string BranchCode { get; set; }
+        public string Code { get; set; }
 
-        public string BranchName { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Mã khám chữa bệnh ban đầu

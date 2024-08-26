@@ -10,7 +10,7 @@ namespace HIS.EntityFrameworkCore.Entities
     /// Giới tính.
     /// </summary>
     [Table("SGenders")]
-    public class Gender : AuditedEntity<Guid>
+    public class Gender : AuditedEntity<int>
     {
         [Required]
         [StringLength(GenderConst.MaxGenderCodeLength, MinimumLength = GenderConst.MinGenderCodeLength)]

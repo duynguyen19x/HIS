@@ -1,4 +1,5 @@
 ﻿using HIS.Core.Domain.Entities.Auditing;
+using HIS.Utilities.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -41,15 +42,27 @@ namespace HIS.EntityFrameworkCore.Entities
         [Required]
         public virtual string FullName { get; set; }
 
+        /// <summary>
+        /// Thư điện tử
+        /// </summary>
         [MaxLength(255)]
         public virtual string Email { get; set; }
 
+        /// <summary>
+        /// Điện thoại
+        /// </summary>
         [MaxLength(50)]
         public virtual string Tel { get; set; }
 
+        /// <summary>
+        /// Điện thoại di động
+        /// </summary>
         [MaxLength(50)]
         public virtual string Mobile { get; set; }
 
+        /// <summary>
+        /// Diễn giải
+        /// </summary>
         [MaxLength(255)]
         public virtual string Description { get; set; }
 
@@ -73,38 +86,33 @@ namespace HIS.EntityFrameworkCore.Entities
         /// </summary>
         public virtual bool Inactive { get; set; }
 
+        public string Address { get; set; }
+
+        public DateTime? BirthDate { get; set; }
+
+        public UseTypes UseType { get; set; }
+
+        public int? GenderId { get; set; }
+
+        public Guid? ProvinceId { get; set; }
+
+        public Guid? DistrictId { get; set; }
+
+        public Guid? WardId { get; set; }
+
         [ForeignKey(nameof(BranchId))]
         public virtual Branch BranchFk { get; set; }
 
-        //public string UserName { get; set; }
+        [ForeignKey(nameof(GenderId))]
+        public virtual Gender GenderFk { get; set; }
 
-        //public string Password { get; set; }
+        [ForeignKey(nameof(ProvinceId))]
+        public virtual Province ProvinceFk { get; set; }
 
-        //public string PhoneNumber { get; set; }
+        [ForeignKey(nameof(DistrictId))]
+        public virtual Province DistrictFk { get; set; }
 
-        //public string Email { get; set; }
-
-        //public string FirstName { get; set; }
-
-        //public string LastName { get; set; }
-
-        //public string Address { get; set; }
-
-        //public DateTime? Dob { get; set; }
-
-        //public UseTypes UseType { get; set; }
-
-        //public UserStatusTypes Status { get; set; }
-
-        //public Guid? GenderId { get; set; }
-
-        //public Guid? ProvinceId { get; set; }
-
-        //public Guid? DistrictId { get; set; }
-
-        //public Guid? WardId { get; set; }
-
-        //public IList<UserRole> UserRoles { get; set; }
-        public virtual IList<UserToken> UserTokens { get; set; }
+        [ForeignKey(nameof(WardId))]
+        public virtual Province WardFk { get; set; }
     }
 }

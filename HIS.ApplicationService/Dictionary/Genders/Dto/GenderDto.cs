@@ -2,7 +2,7 @@
 
 namespace HIS.ApplicationService.Dictionary.Genders.Dto
 {
-    public class GenderDto : EntityDto<Guid?>
+    public class GenderDto : EntityDto<int?>
     {
         public string Code { get; set; }
 

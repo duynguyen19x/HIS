@@ -16,7 +16,7 @@ namespace HIS.ApplicationService.Business.Patients.Dto
         public string BirthPlaceFilter { get; set; }
         public Guid? BloodRhTypeFilter { get; set; }
         public Guid? BloodTypeFilter { get; set; }
-        public Guid? GenderFilter { get; set; }
+        public int? GenderFilter { get; set; }
         public Guid? CareerFilter { get; set; }
         public Guid? EthnicityFilter { get; set; }
         public Guid? ReligionFilter { get; set; }

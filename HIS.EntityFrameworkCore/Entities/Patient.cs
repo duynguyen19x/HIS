@@ -32,7 +32,7 @@ namespace HIS.EntityFrameworkCore.Entities
 
         public Guid? BloodRhTypeId { get; set; }
 
-        public Guid? GenderId { get; set; }
+        public int? GenderId { get; set; }
 
         public Guid? CareerId { get; set; }
 
@@ -90,7 +90,5 @@ namespace HIS.EntityFrameworkCore.Entities
 
         [MaxLength(EntityConst.Length512)]
         public string Description { get; set; } // ghi chú
-
-        
     }
 }

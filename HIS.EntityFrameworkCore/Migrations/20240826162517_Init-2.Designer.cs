@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HIS.EntityFrameworkCore.Migrations
 {
     [DbContext(typeof(HISDbContext))]
-    [Migration("20240825063445_Init3")]
-    partial class Init3
+    [Migration("20240826162517_Init-2")]
+    partial class Init2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -233,15 +233,10 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
-                    b.Property<string>("BranchCode")
+                    b.Property<string>("Code")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("BranchName")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
 
                     b.Property<Guid?>("CreatedBy")
                         .HasColumnType("uniqueidentifier");
@@ -288,6 +283,11 @@ namespace HIS.EntityFrameworkCore.Migrations
 
                     b.Property<DateTime?>("ModifiedDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
 
                     b.Property<string>("ParentOrganizationName")
                         .HasMaxLength(255)
@@ -850,8 +850,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("EthnicId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("GenderId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("GenderId")
+                        .HasColumnType("int");
 
                     b.Property<string>("HospitalizationReason")
                         .HasMaxLength(512)
@@ -7810,9 +7810,11 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.Gender", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Code")
                         .IsRequired()
@@ -7853,16 +7855,16 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"),
+                            Id = 3,
                             Code = "KXD",
                             CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
                             Name = "Chưa xác định",
-                            SortOrder = 0
+                            SortOrder = 3
                         },
                         new
                         {
-                            Id = new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"),
+                            Id = 1,
                             Code = "NAM",
                             CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
@@ -7871,7 +7873,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e9497984-d355-41af-b917-091500956be9"),
+                            Id = 2,
                             Code = "NU",
                             CreatedDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Inactive = false,
@@ -10019,8 +10021,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<Guid?>("EthnicityId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("GenderId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("GenderId")
+                        .HasColumnType("int");
 
                     b.Property<string>("IdentificationNumber")
                         .HasMaxLength(50)
@@ -12462,6 +12464,12 @@ namespace HIS.EntityFrameworkCore.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("BirthDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<Guid?>("BranchId")
                         .HasColumnType("uniqueidentifier");
 
@@ -12481,6 +12489,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<Guid?>("DistrictId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Email")
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
@@ -12493,6 +12504,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
+
+                    b.Property<int?>("GenderId")
+                        .HasColumnType("int");
 
                     b.Property<bool>("Inactive")
                         .HasColumnType("bit");
@@ -12521,19 +12535,36 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("nvarchar(255)");
 
+                    b.Property<Guid?>("ProvinceId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Tel")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("UseType")
+                        .HasColumnType("int");
 
                     b.Property<string>("Username")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<Guid?>("WardId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BranchId");
 
+                    b.HasIndex("DistrictId");
+
+                    b.HasIndex("GenderId");
+
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("ProvinceId");
+
+                    b.HasIndex("WardId");
 
                     b.ToTable("SUsers");
 
@@ -12548,6 +12579,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Inactive = false,
                             IsDeleted = false,
                             Password = "79956B61E1B250869A6716CE37EFD6E6",
+                            UseType = 0,
                             Username = "Administrator"
                         },
                         new
@@ -12560,6 +12592,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                             Inactive = false,
                             IsDeleted = false,
                             Password = "46F94C8DE14FB36680850768FF1B7F2A",
+                            UseType = 0,
                             Username = "ADMIN"
                         });
                 });
@@ -13776,7 +13809,31 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .WithMany()
                         .HasForeignKey("BranchId");
 
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Province", "DistrictFk")
+                        .WithMany()
+                        .HasForeignKey("DistrictId");
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Gender", "GenderFk")
+                        .WithMany()
+                        .HasForeignKey("GenderId");
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Province", "ProvinceFk")
+                        .WithMany()
+                        .HasForeignKey("ProvinceId");
+
+                    b.HasOne("HIS.EntityFrameworkCore.Entities.Province", "WardFk")
+                        .WithMany()
+                        .HasForeignKey("WardId");
+
                     b.Navigation("BranchFk");
+
+                    b.Navigation("DistrictFk");
+
+                    b.Navigation("GenderFk");
+
+                    b.Navigation("ProvinceFk");
+
+                    b.Navigation("WardFk");
                 });
 
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.UserRoleMapping", b =>
@@ -13820,7 +13877,7 @@ namespace HIS.EntityFrameworkCore.Migrations
             modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.UserToken", b =>
                 {
                     b.HasOne("HIS.EntityFrameworkCore.Entities.User", "UserFk")
-                        .WithMany("UserTokens")
+                        .WithMany()
                         .HasForeignKey("UserId");
 
                     b.Navigation("UserFk");
@@ -13835,11 +13892,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                         .IsRequired();
 
                     b.Navigation("DistrictFk");
-                });
-
-            modelBuilder.Entity("HIS.EntityFrameworkCore.Entities.User", b =>
-                {
-                    b.Navigation("UserTokens");
                 });
 #pragma warning restore 612, 618
         }

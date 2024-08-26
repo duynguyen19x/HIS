@@ -28,7 +28,7 @@ namespace HIS.ApplicationService.Business.Patients.Dto
 
         public Guid? BloodTypeId { get; set; } 
         
-        public Guid? GenderId { get; set; }
+        public int? GenderId { get; set; }
 
         public Guid? CareerId { get; set; }
 

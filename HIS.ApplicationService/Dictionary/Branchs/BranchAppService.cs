@@ -48,8 +48,8 @@ namespace HIS.ApplicationService.Dictionary.Branchs
             try
             {
                 var branchFilter = _branchRepository.GetAll()
-                    .WhereIf(!string.IsNullOrEmpty(input.BranchCodeFilter), x => x.BranchCode == input.BranchCodeFilter)
-                    .WhereIf(!string.IsNullOrEmpty(input.BranchNameFilter), x => x.BranchName == input.BranchNameFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.BranchCodeFilter), x => x.Code == input.BranchCodeFilter)
+                    .WhereIf(!string.IsNullOrEmpty(input.BranchNameFilter), x => x.Name == input.BranchNameFilter)
                     .WhereIf(input.InactiveFilter != null, x => x.Inactive == input.InactiveFilter);
 
                 var filter = from o in branchFilter
@@ -78,8 +78,8 @@ namespace HIS.ApplicationService.Dictionary.Branchs
                              select new BranchDto()
                              {
                                  Id = o.Id,
-                                 BranchCode = o.BranchCode,
-                                 BranchName = o.BranchName,
+                                 Code = o.Code,
+                                 Name = o.Name,
                                  MediOrgCode = o.MediOrgCode,
                                  MediOrgAcceptCode = o.MediOrgAcceptCode,
                                  HospitalLevelID = o.HospitalLevelID,

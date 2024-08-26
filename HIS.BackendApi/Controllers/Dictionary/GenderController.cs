@@ -1,6 +1,5 @@
 ﻿using HIS.ApplicationService.Dictionary.Genders;
 using HIS.ApplicationService.Dictionary.Genders.Dto;
-using HIS.ApplicationService.Dictionary.Hospitals.Dto;
 using HIS.Core.Application.Services.Dto;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,7 +23,7 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpGet("GetById")]
-        public async Task<ResultDto<GenderDto>> GetById(Guid id)
+        public async Task<ResultDto<GenderDto>> GetById(int id)
         {
             return await _genderAppService.GetById(id);
         }
@@ -36,7 +35,7 @@ namespace HIS.BackendApi.Controllers.Dictionaries
         }
 
         [HttpDelete("Delete")]
-        public async Task<ResultDto<GenderDto>> Delete(Guid id)
+        public async Task<ResultDto<GenderDto>> Delete(int id)
         {
             return await _genderAppService.Delete(id);
         }

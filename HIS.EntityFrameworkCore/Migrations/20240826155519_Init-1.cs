@@ -160,6 +160,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     ServiceRequestCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
                     RequestTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UseTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SampleTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    SampleReceivingTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     StartTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     EndTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Barcode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
@@ -176,6 +178,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                     DepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     RoomId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    SampleUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    SampleReceivingUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     StartUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     EndUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ExecuteDepartmentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -397,7 +401,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SGenders",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Code = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
@@ -1625,7 +1630,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     BirthYear = table.Column<int>(type: "int", nullable: false),
                     BirthPlace = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
-                    GenderId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    GenderId = table.Column<int>(type: "int", nullable: true),
                     EthnicId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ReligionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CountryId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -1743,7 +1748,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                     PatientNumberId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     BloodTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     BloodRhTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    GenderId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    GenderId = table.Column<int>(type: "int", nullable: true),
                     CareerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     EthnicityId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ReligionId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -1870,7 +1875,7 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ServiceResultIndiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    ServiceRequestDataId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    ServiceRequestDetailId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ServiceRequestId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ServiceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     Result = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: true),
@@ -1881,8 +1886,8 @@ namespace HIS.EntityFrameworkCore.Migrations
                 {
                     table.PrimaryKey("PK_DServiceRequestDetailResults", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DServiceRequestDetailResults_DServiceRequestDetails_ServiceRequestDataId",
-                        column: x => x.ServiceRequestDataId,
+                        name: "FK_DServiceRequestDetailResults_DServiceRequestDetails_ServiceRequestDetailId",
+                        column: x => x.ServiceRequestDetailId,
                         principalTable: "DServiceRequestDetails",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -2259,6 +2264,13 @@ namespace HIS.EntityFrameworkCore.Migrations
                     LastWorkingBranchId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     AccessFailedCount = table.Column<int>(type: "int", nullable: false),
                     Inactive = table.Column<bool>(type: "bit", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    BirthDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UseType = table.Column<int>(type: "int", nullable: false),
+                    GenderId = table.Column<int>(type: "int", nullable: true),
+                    ProvinceId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    DistrictId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    WardId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -2274,6 +2286,26 @@ namespace HIS.EntityFrameworkCore.Migrations
                         name: "FK_SUsers_SBranchs_BranchId",
                         column: x => x.BranchId,
                         principalTable: "SBranchs",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_SUsers_SGenders_GenderId",
+                        column: x => x.GenderId,
+                        principalTable: "SGenders",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_SUsers_SProvinces_DistrictId",
+                        column: x => x.DistrictId,
+                        principalTable: "SProvinces",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_SUsers_SProvinces_ProvinceId",
+                        column: x => x.ProvinceId,
+                        principalTable: "SProvinces",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_SUsers_SProvinces_WardId",
+                        column: x => x.WardId,
+                        principalTable: "SProvinces",
                         principalColumn: "Id");
                 });
 
@@ -2970,9 +3002,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "Inactive", "ModifiedBy", "ModifiedDate", "Name", "SortOrder" },
                 values: new object[,]
                 {
-                    { new Guid("97ac7fd8-edfa-4243-97fc-98468f492df1"), "KXD", null, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Chưa xác định", 0 },
-                    { new Guid("e9497984-d355-41af-b917-091500956be9"), "NU", null, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Nữ", 2 },
-                    { new Guid("fc153433-bf89-4e95-8523-df3d8cec8676"), "NAM", null, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Nam", 1 }
+                    { 1, "NAM", null, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Nam", 1 },
+                    { 2, "NU", null, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Nữ", 2 },
+                    { 3, "KXD", null, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, false, null, null, "Chưa xác định", 3 }
                 });
 
             migrationBuilder.InsertData(
@@ -3499,11 +3531,11 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             migrationBuilder.InsertData(
                 table: "SUsers",
-                columns: new[] { "Id", "AccessFailedCount", "BranchId", "CreatedBy", "CreatedDate", "DeletedBy", "DeletedDate", "Description", "Email", "FirstName", "FullName", "Inactive", "IsDeleted", "LastName", "LastWorkingBranchId", "Mobile", "ModifiedBy", "ModifiedDate", "Password", "Tel", "Username" },
+                columns: new[] { "Id", "AccessFailedCount", "Address", "BirthDate", "BranchId", "CreatedBy", "CreatedDate", "DeletedBy", "DeletedDate", "Description", "DistrictId", "Email", "FirstName", "FullName", "GenderId", "Inactive", "IsDeleted", "LastName", "LastWorkingBranchId", "Mobile", "ModifiedBy", "ModifiedDate", "Password", "ProvinceId", "Tel", "UseType", "Username", "WardId" },
                 values: new object[,]
                 {
-                    { new Guid("3382be1c-2836-4246-99db-c4e1c781e868"), 0, null, null, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "administrator@gmail.com", null, "Admin", false, false, null, null, null, null, null, "79956B61E1B250869A6716CE37EFD6E6", null, "Administrator" },
-                    { new Guid("49ba7fd4-2edb-4482-a419-00c81f023f5c"), 0, null, null, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, "administrator@gmail.com", null, "ADMIN", false, false, null, null, null, null, null, "46F94C8DE14FB36680850768FF1B7F2A", null, "ADMIN" }
+                    { new Guid("3382be1c-2836-4246-99db-c4e1c781e868"), 0, null, null, null, null, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, null, "administrator@gmail.com", null, "Admin", null, false, false, null, null, null, null, null, "79956B61E1B250869A6716CE37EFD6E6", null, null, 0, "Administrator", null },
+                    { new Guid("49ba7fd4-2edb-4482-a419-00c81f023f5c"), 0, null, null, null, null, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, null, null, "administrator@gmail.com", null, "ADMIN", null, false, false, null, null, null, null, null, "46F94C8DE14FB36680850768FF1B7F2A", null, null, 0, "ADMIN", null }
                 });
 
             migrationBuilder.InsertData(
@@ -3842,9 +3874,9 @@ namespace HIS.EntityFrameworkCore.Migrations
                 column: "ServiceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DServiceRequestDetailResults_ServiceRequestDataId",
+                name: "IX_DServiceRequestDetailResults_ServiceRequestDetailId",
                 table: "DServiceRequestDetailResults",
-                column: "ServiceRequestDataId");
+                column: "ServiceRequestDetailId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DServiceRequestDetailResults_ServiceRequestId",
@@ -4154,9 +4186,29 @@ namespace HIS.EntityFrameworkCore.Migrations
                 column: "BranchId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_SUsers_DistrictId",
+                table: "SUsers",
+                column: "DistrictId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SUsers_GenderId",
+                table: "SUsers",
+                column: "GenderId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SUsers_IsDeleted",
                 table: "SUsers",
                 column: "IsDeleted");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SUsers_ProvinceId",
+                table: "SUsers",
+                column: "ProvinceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_SUsers_WardId",
+                table: "SUsers",
+                column: "WardId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_SWards_DistrictId",
@@ -4499,9 +4551,6 @@ namespace HIS.EntityFrameworkCore.Migrations
                 name: "SEthnicities");
 
             migrationBuilder.DropTable(
-                name: "SGenders");
-
-            migrationBuilder.DropTable(
                 name: "SReligions");
 
             migrationBuilder.DropTable(
@@ -4512,6 +4561,9 @@ namespace HIS.EntityFrameworkCore.Migrations
 
             migrationBuilder.DropTable(
                 name: "SBranchs");
+
+            migrationBuilder.DropTable(
+                name: "SGenders");
 
             migrationBuilder.DropTable(
                 name: "SHospitalLevels");

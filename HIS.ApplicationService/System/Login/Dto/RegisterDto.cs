@@ -17,10 +17,10 @@ namespace HIS.Dtos.Systems.Login
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
-        public DateTime? Dob { get; set; }
+        public DateTime? BirthDate { get; set; }
         public UseTypes UseType { get; set; }
         public UserStatusTypes Status { get; set; }
-        public Guid? GenderId { get; set; }
+        public int? GenderId { get; set; }
         public Guid? ProvinceId { get; set; }
         public Guid? District { get; set; }
         public Guid? WardsId { get; set; }

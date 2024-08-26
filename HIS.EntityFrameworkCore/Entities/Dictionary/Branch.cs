@@ -14,11 +14,11 @@ namespace HIS.EntityFrameworkCore.Entities
     {
         [Required]
         [StringLength(BranchConst.MaxBranchCodeLength, MinimumLength = BranchConst.MinBranchCodeLength)]
-        public string BranchCode { get; set; }
+        public string Code { get; set; }
 
         [Required]
         [StringLength(BranchConst.MaxBranchNameLength, MinimumLength = BranchConst.MinBranchNameLength)]
-        public string BranchName { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Mã khám chữa bệnh ban đầu

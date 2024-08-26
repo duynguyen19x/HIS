@@ -70,7 +70,7 @@ namespace HIS.EntityFrameworkCore.Entities.Business
         /// <summary>
         /// Giới tính
         /// </summary>
-        public virtual Guid? GenderId { get; set; }
+        public virtual int? GenderId { get; set; }
 
         /// <summary>
         /// Dân tộc
