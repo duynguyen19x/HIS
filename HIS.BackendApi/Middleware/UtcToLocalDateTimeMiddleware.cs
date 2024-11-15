@@ -2,6 +2,10 @@
 using System.Text.Json;
 using System.ComponentModel;
 using System.Globalization;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using System.Text;
 
 namespace HIS.BackendApi.Middleware
 {
@@ -51,6 +55,45 @@ namespace HIS.BackendApi.Middleware
         public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
         {
             writer.WriteStringValue(value.ToLocalTime().ToString(DateTimeFormat));
+        }
+    }
+
+    public class DateTimeModelBinderProvider : IModelBinderProvider
+    {
+        public IModelBinder GetBinder(ModelBinderProviderContext context)
+        {
+            if (context.Metadata.ModelType == typeof(DateTime) || context.Metadata.ModelType == typeof(DateTime?))
+            {
+                return new BinderTypeModelBinder(typeof(DateTimeModelBinder));
+            }
+
+            return null;
+        }
+    }
+
+    public class DateTimeInputFormatter : TextInputFormatter
+    {
+        public DateTimeInputFormatter()
+        {
+            SupportedMediaTypes.Add("application/json");
+            SupportedEncodings.Add(Encoding.UTF8);
+            SupportedEncodings.Add(Encoding.Unicode);
+        }
+
+        protected override bool CanReadType(Type type)
+        {
+            return type == typeof(DateTime) || type == typeof(DateTime?);
+        }
+
+        public override async Task<InputFormatterResult> ReadRequestBodyAsync(InputFormatterContext context, Encoding encoding)
+        {
+            using var reader = new StreamReader(context.HttpContext.Request.Body, encoding);
+            var dateAsString = await reader.ReadToEndAsync();
+            if (DateTime.TryParse(dateAsString, null, DateTimeStyles.AssumeLocal, out var date))
+            {
+                return await InputFormatterResult.SuccessAsync(date);
+            }
+            return await InputFormatterResult.FailureAsync();
         }
     }
 }
