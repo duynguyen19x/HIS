@@ -53,16 +53,16 @@ void ConfigureService()
 
     builder.Services.AddControllers().AddJsonOptions(options =>
     {
-        //options.JsonSerializerOptions.Converters.Add(new BodyDateTimeConverter()); // Thêm DateTimeConverter
+        options.JsonSerializerOptions.Converters.Add(new BodyDateTimeConverter()); // Thêm DateTimeConverter
         options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
         options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
     });
 
-    builder.Services.AddControllers(options =>
-    {
-        options.InputFormatters.Insert(0, new DateTimeInputFormatter());
-        options.ModelBinderProviders.Insert(0, new DateTimeModelBinderProvider());
-    });
+    //builder.Services.AddControllers(options =>
+    //{
+    //    options.InputFormatters.Insert(0, new DateTimeInputFormatter());
+    //    options.ModelBinderProviders.Insert(0, new DateTimeModelBinderProvider());
+    //});
 
     string issuer = builder.Configuration.GetValue<string>("Tokens:Issuer");
     string signingKey = builder.Configuration.GetValue<string>("Tokens:Key");
@@ -146,5 +146,5 @@ void Configure()
     app.MapControllers();
     //app.UseRouting();
     app.UseMiddleware<SessionMiddleware>();
-    //app.UseMiddleware<UrlDateTimeConverter>();
+    app.UseMiddleware<UrlDateTimeConverter>();
 }
