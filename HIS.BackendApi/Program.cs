@@ -22,6 +22,8 @@ using System.Text.Json;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Primitives;
 using AutoMapper;
+using Microsoft.Extensions.Options;
+using HIS.EntityFrameworkCore.Entities.Categories;
 
 var builder = WebApplication.CreateBuilder(args);
 ConfigureService();
@@ -36,12 +38,6 @@ void ConfigureService()
     {
         builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
     }));
-
-    //var mappingConfig = new MapperConfiguration(mc =>
-    //{
-    //    mc.AddProfile(new MapProfile());
-    //});
-    //mappingConfig.CreateMapper();
 
     builder.Services.AddAutoMapper(typeof(MapProfile));
     builder.Services.AddScoped(typeof(IDbContextProvider<>), typeof(EfCoreDbContextProvider<>));
@@ -61,6 +57,12 @@ void ConfigureService()
         options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
         options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
     });
+
+    //builder.Services.AddControllers(options =>
+    //{
+    //    options.InputFormatters.Insert(0, new DateTimeInputFormatter());
+    //    options.ModelBinderProviders.Insert(0, new DateTimeModelBinderProvider());
+    //});
 
     string issuer = builder.Configuration.GetValue<string>("Tokens:Issuer");
     string signingKey = builder.Configuration.GetValue<string>("Tokens:Key");
@@ -131,11 +133,11 @@ void ConfigureService()
 void Configure()
 {
     // Configure the HTTP request pipeline.
-    if (app.Environment.IsDevelopment())
-    {
-        app.UseSwagger();
-        app.UseSwaggerUI();
-    }
+    //if (app.Environment.IsDevelopment())
+    //{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+    //}
 
     app.UseCors("CorsPolicy");
     app.UseAuthentication();
